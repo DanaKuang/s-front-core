@@ -1,0 +1,115 @@
+# Author: liubin
+# Create Date: 2017-06-21
+# Description: view
+#
+# 接口控制格式 参数说明
+# login: 登陆模块
+# index: 首页模块
+# httpmethod: 请求类型
+# routepath: 请求接口
+# authorized: 是否已授权
+# description: 接口描述
+# enableroute: 是否已废弃
+# responetype: 接口返回格式
+# staticfile: 文件名称
+#
+login:                                      # 登录
+  - httpmethod: 'get'
+    routepath: '/login'
+    description: '登陆页面'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'login.html'
+home:                                       # 首页
+  - httpmethod: 'get'                       # KPI
+    routepath: '/view/home/kpi'
+    description: 'kpi'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/kpi/kpi.html'
+  - httpmethod: 'get'                       # 主题查询[规格]
+    routepath: '/view/home/theme/spec'
+    description: 'theme'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/theme/spec.html'
+  - httpmethod: 'get'                       # 主题查询[地域]
+    routepath: '/view/home/theme/region'
+    description: 'theme'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/theme/region.html'
+  - httpmethod: 'get'                       # 多维查询
+    routepath: '/view/home/multi'
+    description: 'multidimension'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/multi/multi.html'
+  - httpmethod: 'get'                       # 报表导出
+    routepath: '/view/home/report'
+    description: 'report'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/report/report.html'
+  - httpmethod: 'get'                       # 履约报表
+    routepath: '/view/home/agree'
+    description: 'agree'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/agree/agree.html'
+  - httpmethod: 'get'                       # 回访报表
+    routepath: '/view/home/visit'
+    description: 'visit'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/visit/visit.html'
+  - httpmethod: 'get'                       # 回访报表
+    routepath: '/view/home/materiel/gift'
+    description: 'visit'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'home/materiel/gift.html'
+activity:
+  - httpmethod: 'get'                       # 活动管理
+    routepath: '/view/activity/acts/manageActs'
+    description: '活动页面'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'activity/acts/manageActs.html'
+  - httpmethod: 'get'                       # 实物奖品领奖明细
+    routepath: '/view/activity/acts/mPrizeGotHistory'
+    description: '实物奖品领奖明细'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'activity/acts/mPrizeGotHistory.html'
+  - httpmethod: 'get'                       # 虚拟奖品领奖明细
+    routepath: '/view/activity/acts/vPrizeGotHistory'
+    description: '虚拟奖品领奖明细'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'activity/acts/vPrizeGotHistory.html'
+  - httpmethod: 'get'                       # 积分领奖明细
+    routepath: '/view/activity/acts/integralHistory'
+    description: '积分领奖明细'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'activity/acts/integralHistory.html'
+product:
+  - httpmethod: 'get'                       # 礼品管理
+    routepath: '/view/product/materiel/gift'
+    description: 'gift'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'product/materiel/gift.html'
+  - httpmethod: 'get'                       # 红包管理
+    routepath: '/view/product/materiel/packet'
+    description: 'packet'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'product/materiel/packet.html'
+  - httpmethod: 'get'                       # 供应商管理
+    routepath: '/view/product/supply'
+    description: 'packet'
+    enableroute: 1
+    responetype: 'html'
+    staticfile: 'product/supply/supply.html'

@@ -1,0 +1,451 @@
+.clearfix {
+    *zoom: 1
+}
+
+.clearfix:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "";
+}
+
+.lf {
+    float: left;
+}
+
+.rf {
+    float: right;
+}
+
+.gift_title:before {
+    content: '';
+    background: #6E80FF;
+    display: block;
+    float: left;
+    width: 7px;
+    height: 16.8px;
+    line-height: 16.8px;
+    margin-right: 7px;
+}
+
+.gift_title {
+    font-size: 16.8px;
+    line-height: 18px;
+    padding: 25.2px 0 14px 1px;
+}
+
+.build_gift {
+    width: 112px;
+    height: 28px;
+    line-height: 28px;
+    background-color: #6E80FF;
+    font-size: 17.5px;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 16.8px;
+    margin-top: 20px;
+    margin-right: 35px;
+}
+
+.table_sec {
+    padding-top: 13px;
+}
+
+.nav div {
+    border-left: 1px solid #8A8A8A;
+    border-top: 1px solid #8A8A8A;
+    border-right: 1px solid #8A8A8A;
+    text-align: center;
+    font-size: 14.7px;
+    line-height: 35px;
+    width: 98px;
+    position: relative;
+}
+
+.nav div:first-child {
+    border-top-left-radius: 5px;
+    border-right: 0px;
+}
+
+.nav div:last-child {
+    border-top-right-radius: 5px;
+    border-left-color: #4B4B4B;
+}
+
+.select_active {
+    background-color: #FFFFFF;
+}
+
+.select_active:after {
+    content: '';
+    width: 100%;
+    display: block;
+    background-color: #FFFFFF;
+    padding-top: 1px;
+    position: absolute;
+    left: 0;
+}
+
+.no_active {
+    background-color: #F8FBFF;
+}
+
+.select_sec, .packet_select_sec {
+    padding-bottom: 15px;
+    border-left: 1px solid #A0A0A0;
+    border-top: 1px solid #A0A0A0;
+    border-right: 1px solid #A0A0A0;
+    padding-top: 28px;
+    width: 100%;
+}
+
+.select_sec div {
+    float: left;
+    margin-left: 56px;
+    margin-bottom: 14px;
+}
+
+.select_sec div label {
+    font-size: 14.7px;
+    width: 60px;
+    line-height: 28px;
+    margin-right: 16.8px;
+    text-align: right;
+}
+
+.select_sec div select {
+    font-size: 14.7px;
+    width: 154px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.ser_btn, .rest_btn {
+    width: 112px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16.8px;
+    border: 1px solid #888888;
+    border-radius: 14px;
+}
+
+.table {
+    border: 1px solid #A0A0A0;
+    font-size: 14px;
+}
+
+.table tr th, .table tr td {
+    border: 1px solid #A0A0A0;
+}
+.table tr td span:hover{
+    cursor: pointer;
+}
+.table tr:nth-of-type(even) {
+    background-color: #F8FBFF;
+}
+
+.footer_sec {
+    margin-top: 21px;
+}
+
+.total_info {
+    font-size: 11px;
+    color: #8A8A8A;
+}
+
+.tcdPageCode {
+    /*padding: 15px 20px;*/
+    text-align: left;
+    color: #ccc;
+}
+
+.tcdPageCode a {
+    display: inline-block;
+    /*color: #428bca;*/
+    color: #8A8A8A;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    /*border: 1px solid #ddd;*/
+    border: 1px solid #6E80FF;
+    margin: 0 2px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode a:hover {
+    /*text-decoration: none;*/
+    /*border: 1px solid #428bca;*/
+}
+
+.tcdPageCode span.current {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #6E80FF;
+    border: 1px solid #6E80FF;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode span.disabled {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #8A8A8A;
+    background: #f2f2f2;
+    border: 1px solid #8A8A8A;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/*红包管理*/
+.packet_select_sec div {
+    float: left;
+    margin-left: 21px;
+    margin-bottom: 14px;
+}
+
+.packet_select_sec div label {
+    font-size: 14.7px;
+    /*width: 60px;*/
+    line-height: 28px;
+    margin-right: 14px;
+    text-align: right;
+}
+
+.packet_select_sec div select {
+    font-size: 14.7px;
+    width: 154px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.packet_select_sec .ser_btn, .packet_select_sec .rest_btn {
+    width: 112px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16.8px;
+    border: 1px solid #888888;
+    border-radius: 14px;
+}
+
+/*供应商管理*/
+.supply_select_sec {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.supply_select_sec div {
+    float: left;
+    margin-right: 30px;
+}
+
+.supply_select_sec div:last-child {
+    margin-right: 0px;
+}
+
+.supply_select_sec div label {
+    font-size: 14.7px;
+    line-height: 28px;
+    margin-right: 14px;
+    text-align: right;
+}
+
+.supply_select_sec div select {
+    font-size: 14.7px;
+    width: 105px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.supply_select_sec div input {
+    font-size: 14.7px;
+    width: 160px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #888888;
+}
+
+.supply_select_sec .ser_btn, .supply_select_sec .rest_btn {
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16.8px;
+    border: 1px solid #888888;
+    border-radius: 14px;
+}
+.ser_btn:hover, .rest_btn:hover{
+    cursor: pointer;
+}
+
+.file_col {
+    color: #6E80FF;
+}
+
+/*新建礼品*/
+.form_sec div {
+    margin-bottom: 5px;
+}
+
+.form_sec div label {
+    font-size: 15px;
+    text-align: right;
+    line-height: 35px;
+    color: #515151;
+    width: 105px;
+    margin-right: 14px;
+}
+
+.form_sec div label span {
+    color: #FF4444;
+}
+
+.form_sec div input[type='text']{
+    border: 1px solid #D2D2D2;
+    width: 320px;
+    height: 35px;
+    font-size: 15px;
+}
+
+.form_sec div select {
+    width: 180px;
+    height: 35px;
+}
+
+.form_sec div p {
+    margin-left: 125px;
+    font-size: 12px;
+    color: #ACACAC;
+}
+
+.select_file {
+    width: 84px;
+    height: 84px;
+    border: 1px solid #D2D2D2;
+    font-size: 28px;
+    text-align: center;
+    line-height: 84px;
+    display: inline-block;
+}
+.opera_sec{
+    padding-top: 20px;
+}
+.opera_sec div {
+    width: 140px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 18px;
+    -webkit-border-radius: 18px;
+    display: inline-block;
+}
+
+.opera_sec .opera_confirm {
+    color: #FFFFFF;
+    background-color: #6E80FF;
+    margin-left: 125px;
+    margin-right: 42px;
+}
+
+.opera_sec .opera_cancel {
+    color: #6E80FF;
+    border: 1px solid #6E80FF;
+}
+
+/*新建红包*/
+.form_sec div .yuan_unit{
+    font-size: 15px;
+    color: #515151;
+    padding-left: 14px;
+}
+/*新建供应商*/
+.form_sec div .get_file{
+    width: 95px;
+    height: 42px;
+    border: 1px solid #D2D2D2;
+    font-size: 15px;
+    text-align: center;
+    line-height: 42px;
+    display: inline-block;
+    background-color: #F8FBFF;
+}
+
+.form_sec div .radio_sel,.form_sec div .checkbox_sel{
+    display: inline-block;
+    font-size: 15px;
+    margin-right: 28px;
+}
+
+.form_sec div .radio_sel input[type='radio'],.form_sec div .checkbox_sel input[type='checkbox']{
+    width: 14px;
+    height: 14px;
+    vertical-align: top;
+    margin-right: 10px;
+}
+.radio_sel input[type='radio']:hover,.checkbox_sel input[type='checkbox']:hover{
+    cursor: pointer;
+}
+
+.form_sec div #warn_tel{
+    width: 180px;
+    height: 35px;
+}
+/*弹框开始*/
+body{
+    height: 100%;
+}
+.z_num{
+    z-index: 10;
+}
+.box_tit{
+    background-color: #6E80FF;
+    font-size: 17px;
+    color: #FFFFFF;
+    line-height: 28px;
+    border-top-left-radius: 6px;
+    border-top-right-radius:6px ;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius:6px ;
+    padding: 5px 7px 5px 14px;
+}
+.box_cont{
+    font-size: 16px;
+    text-align: center;
+    padding: 62px 0;
+    border-bottom: 1px solid #CECECE;
+}
+.box_cont input{
+    width: 100px;
+    margin-right: 10px;
+}
+.box_btn{
+    padding: 12px 0;
+}
+.box_btn div{
+    width: 50%;
+    font-size: 15px;
+    text-align: center;
+}
+.box_btn div:hover{
+    cursor: pointer;
+}
+.box_btn .box_btn_conf{
+    color: #6E80FF;
+    border-right: 1px solid #CECECE;
+}
+.box_btn .box_btn_cancel{
+    color: #CECECE;
+}

@@ -1,0 +1,299 @@
+<!--
+/**
+ * Author: zhaobaoli
+ * Create Date: 2017-07-17
+ * Description: materiel
+ */
+-->
+<link rel="stylesheet" href="../../../assets/style/gift.css">
+<div class="animated fadeInRight" ng-controller="GiftCtrl">
+    <div class="container-fluid z_num" ng-if="true">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="title_top clearfix">
+                    <div class="gift_title lf">
+                        物料管理&nbsp;&gt;礼品管理
+                    </div>
+                    <div class="build_gift rf">+&nbsp;新建礼品</div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <!--<h4>履约报表待开发中。。。</h4>-->
+                        <div class="table_sec">
+                            <div class="nav clearfix">
+                                <div class="lf no_active">礼品库</div>
+                                <div class="lf select_active">流水明细</div>
+                            </div>
+                            <div class="select_sec clearfix">
+                                <div>
+                                    <label for="">筛选礼品</label>
+                                    <select>
+                                        <option value="volvo">礼品ID/名称</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">礼品类型</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">供应商</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div class="ser_btn">搜索</div>
+                                <div>
+                                    <label for="">适用品牌</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">适用规格</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">适用状态</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div class="rest_btn">重置</div>
+                            </div>
+                        </div>
+                        <table class="table" ng-if="true">
+                            <tr>
+                                <th>礼品ID</th>
+                                <th>礼品名称</th>
+                                <th>礼品图片</th>
+                                <th>礼品类型</th>
+                                <th>供应商</th>
+                                <th>适用品牌</th>
+                                <th>适用规格</th>
+                                <th>市面金额<br/>(元)</th>
+                                <th>剩余库存<br/>(件)</th>
+                                <th>使用状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>洗漱套装</td>
+                                <td>aaa</td>
+                                <td>实物礼品</td>
+                                <td>扫天下</td>
+                                <td>全部</td>
+                                <td>全部</td>
+                                <td>159</td>
+                                <td>79220</td>
+                                <td>已启用</td>
+                                <td>
+                                    <span>编辑</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".add_box">增库</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".disabled_box">停用</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>洗漱套装</td>
+                                <td>aaa</td>
+                                <td>实物礼品</td>
+                                <td>扫天下</td>
+                                <td>全部</td>
+                                <td>全部</td>
+                                <td>159</td>
+                                <td>79220</td>
+                                <td>已启用</td>
+                                <td>
+                                    <span>编辑</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".add_box">增库</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".disabled_box">停用</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table" ng-if="false">
+                            <tr>
+                                <th>礼品ID</th>
+                                <th>礼品名称</th>
+                                <th>礼品类型</th>
+                                <th>供应商</th>
+                                <th>适用品牌</th>
+                                <th>适用规格</th>
+                                <th>动作</th>
+                                <th>活动ID</th>
+                                <th>数量(件)</th>
+                                <th>更新时间</th>
+                                <th>更新人</th>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>洗漱套装</td>
+                                <td>实物礼品</td>
+                                <td>扫天下</td>
+                                <td>全部</td>
+                                <td>全部</td>
+                                <td>新建</td>
+                                <td>134560</td>
+                                <td>600</td>
+                                <td>2017-08-09 20:42</td>
+                                <td>Duang White</td>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>洗漱套装</td>
+                                <td>实物礼品</td>
+                                <td>扫天下</td>
+                                <td>全部</td>
+                                <td>全部</td>
+                                <td>新建</td>
+                                <td>134560</td>
+                                <td>600</td>
+                                <td>2017-08-09 20:42</td>
+                                <td>Duang White</td>
+                            </tr>
+                        </table>
+                        <div class="footer_sec clearfix">
+                            <div class="total_info lf">
+                                总共<span>205</span>条记录，当前页共<span>10条记录</span>
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid z_num" ng-if="false">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title_top">
+                    <div class="gift_title">
+                        物料管理&nbsp;&gt;礼品管理&nbsp;&gt;新建礼品
+                    </div>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="form_sec">
+                            <div>
+                                <label for="">礼品名称<span>*</span></label>
+                                <input type="text" placeholder="">
+                            </div>
+                            <div>
+                                <label for="">礼品类型<span>*</span></label>
+                                <select>
+                                    <option value="volvo">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">供应商<span>*</span></label>
+                                <select>
+                                    <option value="volvo">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">适用品牌<span>*</span></label>
+                                <select>
+                                    <option value="volvo1">请选择</option>
+                                    <option value="volvo2">请选择2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">适用规格<span>*</span></label>
+                                <select>
+                                    <option value="volvo">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">市面价值（元）</label>
+                                <input type="text" placeholder="">
+                            </div>
+                            <div>
+                                <label for="">礼品图片</label>
+                                <div class="select_file">+</div><br/>
+                                <p>图片规格要求：建议尺寸xxx,xxx</p>
+                            </div>
+                            <div>
+                                <label for="">库存（件）<span>*</span></label>
+                                <input type="text" placeholder=""><br/>
+                                <p>库存数量保存后不可手动减库存，请谨慎输入</p>
+                            </div>
+                            <div>
+                                <label for="">库存阀值</label>
+                                <input type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="opera_sec">
+                            <div class="opera_confirm">保存</div>
+                            <div class="opera_cancel">取消</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<button type="button" class="btn btn-primary" data-toggle="modal"  data-target=".bs-example-modal-sm">Small modal</button>-->
+
+<div class="modal fade disabled_box" tabindex="-1" role="dialog" aria-labelledby="disabled_btn">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="box_sec">
+                <div class="box_tit">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="modal-title" id="disabled_btn">操作提示</div>
+                </div>
+                <div class="box_cont">停用后，新增活动将不能使用该礼品</div>
+                <div class="box_btn clearfix">
+                    <div class="box_btn_conf lf">确定</div>
+                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--增库弹框-->
+<div class="modal fade add_box" tabindex="-1" role="dialog" aria-labelledby="add_btn">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="box_sec">
+                <div class="box_tit">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="modal-title" id="add_btn">增库</div>
+                </div>
+                <div class="box_cont">
+                    <label>增加库存：</label>
+                    <input type="text"><span>元</span>
+                </div>
+                <div class="box_btn clearfix">
+                    <div class="box_btn_conf lf">确定</div>
+                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Large modal -->
+<script src="statics/assets/libs/jquery.page.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".tcdPageCode").createPage({
+            pageCount:10,
+            current:1,
+            backFn:function(p){
+//            alert(p);
+            }
+        });
+    })
+
+</script>

@@ -1,0 +1,157 @@
+<!--
+/**
+ * Author: Kuang
+ * Create Date: 2017-07-18
+ * Description: 活动管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/panel.css">
+<link rel="stylesheet" href="statics/assets/style/manageActs.css">
+<div ng-controller="manageActsCtrl">
+	<div class="animated fadeInRight">
+		<div class="container-fluid">
+			<div class="ui-content-box row">
+				<div class="col-md-12">
+					<div class="ui-panel-title">
+						<button type="submit" id="createActivity" class="btn btn-default float-right rt" data-toggle="modal" data-target=".create-activity-modal">+新建活动</button>
+						<div class="lft">
+							<i class="hot"></i>
+							<span>活动模板管理</span>
+						</div>
+					</div>
+					<div class="ui-panel-box panel">
+
+						<!-- 操作区 -->
+						<div class="panel-body operation">
+							<div class="col-md-10 col-sm-12 col-xs-6 lft flex">
+								<div class="l flex-item">
+									<div class="category t">
+										<label for="category">活动类型</label>
+										<select class="form-item" name="" id="category">
+											<option value="">全部</option>
+											<option value="">九宫格</option>
+											<option value="">刮刮卡</option>
+											<option value="">大转盘</option>
+										</select>
+									</div>
+									<div class="norms b">
+										<label for="status">活动状态</label>
+										<select class="form-item" name="" id="status">
+											<option value="">全部</option>
+											<option value="">已停用</option>
+											<option value="">已启用</option>
+											<option value="">已终止</option>
+										</select>
+									</div>
+								</div>
+								<div class="m flex-item">
+									<div class="status t">
+										<label for="norms">品牌选择</label>
+										<select class="form-item" name="" id="norms">
+											<option value="">全部</option>
+											<option value="">品牌1</option>
+											<option value="">品牌2</option>
+											<option value="">品牌3</option>
+										</select>
+									</div>
+									<div class="location b">
+										<label for="norms">规格选择</label>
+										<select class="form-item" name="" id="norms">
+											<option value="">全部</option>
+											<option value="">规格1</option>
+											<option value="">规格2</option>
+											<option value="">规格3</option>
+										</select>
+									</div>
+								</div>
+								<div class="r flex-item">
+									<div class="duration t">
+										<label for="location">地区</label>
+										<select class="form-item" name="" id="location">
+											<option value="">全国</option>
+											<option value="">北京</option>
+											<option value="">上海</option>
+										</select>
+									</div>
+									<div class="keywords b">
+										<label for="keywords">关键字</label>
+										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-6 col-xs-6 rt">
+								<button type="submit" id="search" class="btn btn-default search" >搜索</button>
+								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset" >重置</button>
+							</div>
+							<div class="col-md-10 col-sm-12 col-xs-12 time t float-left">
+								<label for="duration">活动时段</label>
+								<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item"> &nbsp;&nbsp;至&nbsp;&nbsp;
+								<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item">
+							</div>
+						</div>
+
+						<!-- 列表展示区 -->
+						<sa-activitylist conf="activitylistConf"></sa-activitylist>
+
+						<!-- 分页区 -->
+						<div class="pagination-wrap">
+							<!-- 分页指令 -->
+							<sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- 新建活动 模态框 -->
+	<div class="modal fade create-activity-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">选择活动模板<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<!-- 活动模板 -->
+		    	<sa-actsample conf="createActModalConf" id="createSampleWrap" class="flex"></sa-actsample>
+		    </div>
+		    <div class="modal-footer">后续模板敬请期待</div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 启用活动 -->
+	<div class="modal fade bs-example-modal-sm start-activity-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">提示：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	确定要启用该活动吗？
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        	<button type="button" class="btn btn-primary">确定</button>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 终止活动 -->
+	<div class="modal fade bs-example-modal-sm end-activity-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">提示：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	确定要终止该活动吗？
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        	<button type="button" class="btn btn-primary">确定</button>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+	
+	<!-- 容纳所有配置弹窗的div -->
+	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
+	
+</div>
+

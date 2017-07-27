@@ -1,0 +1,54 @@
+{
+  "grid":{
+    "left": "-5%",
+    "top": "-5%",
+    "width":"38%",
+    "height":"38%"
+  },
+  "tooltip" : {
+    "formatter": "{a}:{c}"
+  },
+  "series" : [
+    {
+      "name": "",
+      "type": "gauge",
+      "startAngle":205,
+      "endAngle":-25,
+      "min": 0,
+      "max": "",
+      "splitNumber": 5,
+      "radius": "50%",
+      "axisLine": {
+        "lineStyle": {
+          "width": 10,
+          "color":[[0.2,"#1FDBBA"],[0.8,"#71B3F0"],[1,"#FB9705"]]
+        }
+      },
+      "pointer":{"width":3,"height":"20%"},
+      "axisTick": {
+        "length": 15,
+        "lineStyle": {
+          "color": "auto"
+        }
+      },
+      "splitLine": {
+        "length": 20,
+        "lineStyle": {
+          "color": "auto"
+        }
+      },
+      "title" : {
+        "offsetCenter":[0,50],
+        "textStyle": {
+          "fontWeight": "bolder",
+          "fontSize": 12,
+          "fontStyle": "normal"
+        }
+      },
+      "detail" : {
+        "show":false
+      },
+      "data":[{"value": "", "name": "扫码次数\n\n时间段内总共产生的扫码次数，包含重复扫码的情况"}]
+    }
+  ]
+}

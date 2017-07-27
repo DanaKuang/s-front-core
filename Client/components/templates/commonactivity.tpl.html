@@ -1,0 +1,47 @@
+<div>
+	<div class="pop-header">
+		<p class="pop-title float-left">新建活动 > {{pageName}}</p>
+		<sa-popback></sa-popback>
+	</div>
+	<div class="ui-panel-box panel border-box">
+		<div class="pop-inner">
+			<!-- 配置 -->
+			<div class="configuration float-left">
+				<!-- 基本信息 -->
+				<div class="basic config-item">
+					<h6>基本信息</h6>
+					<sa-basicInfo conf="basicInfoConf"></sa-basicInfo>
+				</div>
+				<!-- 参与设置 -->
+				<div class="participate-relate config-item">
+					<h6>参与设置</h6>
+					<sa-participateInfo conf="participateInfoConf"></sa-participateInfo>
+				</div>
+				<!-- 投放设置 -->
+				<div class="launch-relate config-item">
+					<h6>投放设置</h6>
+					<sa-launchInfo conf="launchInfoConf"></sa-launchInfo>
+				</div>
+				<!-- 中奖设置 -->
+				<div class="prize-relate config-item">
+					<h6>中奖设置</h6>
+					<sa-setPrize conf="setPrizeConf"></sa-setPrize>
+				</div>
+				<!-- 按钮区 -->
+				<div class="btn-area">
+					<input type="checkbox"><label for="">是否启用本活动（勾选并保存后该活动将生效，不勾选则为停用状态）</label><br>
+					<button type="submit" id="submitPrize" class="btn btn-default submit-prize f-btn" ng-click="updateActivity()">保存</button>
+					<button class="btn btn-default cancel-prize f-btn">取消</button>
+				</div>
+			</div>
+
+			<!-- 预览 -->
+			<div class="preview float-left">
+				<p>九宫格活动样式</p>
+				<div class="image">
+					<img src="../../../../assets/image/jggpreview.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

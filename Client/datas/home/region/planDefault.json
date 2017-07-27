@@ -1,0 +1,82 @@
+{
+  "促销计划": {
+    "name": "促销计划",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "data": []
+  },
+  "抽奖次数": {
+    "name": "抽奖次数",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "data":[]
+  },
+  "中奖数量": {
+    "name": "中奖数量",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "data":[]
+  },
+  "实发数量": {
+    "name": "实发数量",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "data": []
+  }
+}

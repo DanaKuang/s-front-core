@@ -1,0 +1,38 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show":false,
+    "data":["扫码次数"]
+  },
+  "visualMap": {
+    "show":false,
+    "min": 0,
+    "max": 1000,
+    "left": "left",
+    "top": "bottom",
+    "text": ["高","低"],
+    "calculable": true,
+    "inRange":{
+      "color":["#58E1ff","#4d51ff"]
+    }
+  },
+  "series": [
+    {
+      "name": "扫码次数",
+      "type": "map",
+      "mapType": "china",
+      "roam": true,
+      "label": {
+        "normal": {
+          "show": true
+        },
+        "emphasis": {
+          "show": true
+        }
+      },
+      "data":[]
+    }
+  ]
+}

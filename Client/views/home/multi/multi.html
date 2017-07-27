@@ -1,0 +1,88 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-07-18
+ * Description: multi
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/multi.css">
+<!--html-->
+<div ng-controller="MultiCtrl">
+  <div class="animated fadeInRight">
+    <div class="container-fluid">
+      <div class="row">
+        <!--box-->
+        <div class="ui-content-multi col-md-12">
+          <!--常用查询-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <p>常用指标查询</p>
+              <div class="ui-radio-group radio">
+                <label class="radio-inline"><input type="radio" name="searchGroup" checked>玉溪昨日全国活动指标</label>
+                <label class="radio-inline"><input type="radio" name="searchGroup">云烟上周本省活动指标</label>
+                <label class="radio-inline"><input type="radio" name="searchGroup">红塔山上月重点销区活动指标</label>
+              </div>
+            </div>
+          </div>
+          <!--常用查询-->
+          <div class="ui-search-panel panel rate">
+            <div class="panel-body">
+              <p ng-click="shidden=!shidden" ng-class="{'active':!shidden}">查询条件选择<i></i></p><hr>
+              <div ng-style="{display: shidden?'block':'none'}">
+                <div sa-multisearch conf="msConf"></div>
+                <!-- 按钮区 -->
+                <div class="ui-btn-group">
+                  <button type="button" class="btn btn-default" ng-click="showSearch=true;mSearch();">查询</button>
+                  <button type="button" class="btn btn-default" ng-click="mSave();">保存</button>
+                  <button type="button" class="btn btn-default" ng-click="mLoad();">载入</button>
+                  <button type="button" class="btn btn-default" ng-click="mHistory();">历史</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--表格数据-->
+          <div class="panel rate" ng-show="showSearch">
+            <div class="panel-body">
+              <!-- table -->
+              <ul class="ui-nav-table-panel nav nav-pills">
+                <li class="active"><a href="#scanTarget" data-toggle="tab">扫码数据</a></li>
+                <li class=""><a href="#targetTarget" data-toggle="tab">指标数据</a></li>
+                <li class=""><a href="#packetTarget" data-toggle="tab">现金红包数据</a></li>
+                <li class=""><a href="#realTarget" data-toggle="tab">实物奖励数据</a></li>
+              </ul>
+              <div class="tab-content">
+                <!--扫码数据-->
+                <div class="tab-pane fade in active" id="scanTarget">
+                  <div sa-common-table conf="scanConf"></div>
+                </div>
+                <!--指标数据-->
+                <div class="tab-pane fade in" id="targetTarget">
+                  <div sa-common-table conf="targetConf"></div>
+                </div>
+                <!--现金红包数据-->
+                <div class="tab-pane fade in" id="packetTarget">
+                  <div sa-common-table conf="packetConf"></div>
+                </div>
+                <!--实物奖励数据-->
+                <div class="tab-pane fade in" id="realTarget">
+                  <div sa-common-table conf="realConf"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+  <!-- temp modal -->
+  <div sa-modal conf="tempModalConf">
+    <div sa-list conf="tempListConf"></div>
+  </div>
+  <!-- history modal-->
+  <div sa-modal conf="histModalConf">
+    <div sa-list conf="histListConf"></div>
+  </div>
+  <!-- modal end -->
+</div>

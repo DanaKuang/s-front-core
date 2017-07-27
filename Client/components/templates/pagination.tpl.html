@@ -1,0 +1,31 @@
+<div>
+    <a href="javascript:;" ng-click="changePage($event, 0)">首页</a>
+    <a ng-click="prev($event, cur)" data-cur="{{cur}}">&#9668;</a>
+
+    <!-- 1 总页码小，不需要省略号 -->
+    <span ng-if="page.length <= step * 2 + 6 && cur <= page.length" data-cur="{{cur}}">
+        <a ng-repeat="item in page" ng-class="{'current':$index===cur}" ng-click="changePage($event, item)">{{$index + 1}}</a>
+    </span>
+    <!-- 2 总页面大，尾部显示省略号 -->
+    <span ng-if="page.length > step * 2 + 6  && cur <= step * 2" data-cur="{{cur}}">
+        <a ng-repeat="item in page" ng-if="$index < 9" ng-class="{'current':$index===cur}" ng-click="changePage($event, item)">{{$index + 1}}</a>
+        <i>...</i>
+        <a ng-class="{'current':$index===cur}" ng-click="changePage($event, page.length - 1)">{{page.length}}</a>
+    </span>
+    <!-- 3 总页面大，头尾均显示省略号-->
+    <span ng-if="page.length > step * 2 + 6 && cur <= page.length - step * 2 - 1 && cur > step * 2" data-cur="{{cur}}">
+        <a ng-class="{'current':$index===cur}" ng-click="changePage($event, 1)">1</a>
+        <i>...</i>
+        <a ng-repeat="item in page" ng-if="$index > cur - step && $index < cur + step + 1" ng-class="{'current':$index===cur}" ng-click="changePage($event, item)">{{$index + 1}}</a>
+        <i>...</i>
+        <a ng-class="{'current':$index === cur}" ng-click="changePage($event, page.length)">{{page.length}}</a>
+    </span>
+    <!-- 4 总页面大，头部显示省略号-->
+    <span ng-if="page.length > step * 2 + 6 && cur > page.length - step * 2 - 1" data-cur="{{cur}}">
+        <a ng-class="{'current':$index===cur}" ng-click="changePage($event, 0)">1</a>
+        <i>...</i>
+        <a ng-repeat="item in page" ng-if="$index > page.length - step * 2 - 1" ng-class="{'current':$index===cur}" ng-click="changePage($event, item)">{{$index + 1}}</a>
+    </span>
+    <a ng-click="next($event, cur)" data-cur="{{cur}}">&#9658;</a>
+    <a href="javascript:;" ng-click="changePage($event, page.length - 1)">尾页</a>
+</div>

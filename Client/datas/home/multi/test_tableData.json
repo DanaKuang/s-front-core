@@ -1,0 +1,47 @@
+{
+    "rows": [{
+        "id": 0,
+        "startTime": "2017-06-23",
+        "endTime": "2017-06-23",
+        "productBrand": "白沙",
+        "productName": "精品三代",
+        "productPack": "包",
+        "saleZone": "重点销区",
+        "provinceName": "山东",
+        "cityName": "菏泽",
+        "commonname": "1000"
+    }, {
+        "id": 1,
+        "startTime": "2017-06-23",
+        "endTime": "2017-06-23",
+        "productBrand": "白沙",
+        "productName": "精品三代",
+        "productPack": "包",
+        "saleZone": "重点销区",
+        "provinceName": "山东",
+        "cityName": "菏泽",
+        "commonname": "1000"
+    }, {
+        "id": 2,
+        "startTime": "2017-06-23",
+        "endTime": "2017-06-23",
+        "productBrand": "白沙",
+        "productName": "精品三代",
+        "productPack": "包",
+        "saleZone": "重点销区",
+        "provinceName": "山东",
+        "cityName": "菏泽",
+        "commonname": "1000"
+    }, {
+        "id": 3,
+        "startTime": "2017-06-23",
+        "endTime": "2017-06-23",
+        "productBrand": "白沙",
+        "productName": "精品三代",
+        "productPack": "包",
+        "saleZone": "重点销区",
+        "provinceName": "山东",
+        "cityName": "菏泽",
+        "commonname": "1000"
+    }]
+}

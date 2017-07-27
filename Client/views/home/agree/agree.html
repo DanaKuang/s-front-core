@@ -1,0 +1,162 @@
+<!--
+/**
+ * Author: {author}
+ * Create Date; 2017-07-11
+ * Description: visit
+ */
+-->
+
+<div class="animated fadeInRight" ng-controller="AgreeCtrl">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!--title-->
+        <div class="ui-panel-title agree_top">
+          <i class="place"></i><span>履约报表</span>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="tab_nav clearfix">
+                <div ng-class="bool ? 'tab_active' :''" ng-click = "Tabs(true)">异业资源发放明细</div>
+                <div ng-class="bool ? '' : 'tab_active'" ng-click = "Tabs(false)">现金奖品发放明细</div>
+            </div>
+            <div class="res_search" ng-show="bool">
+              <div class="res_tel">
+                <label>手机号：</label>
+                <input type="text" placeholder="">
+              </div>
+              <div class="res_award">
+                <label for="">奖品：</label>
+                <input type="text" placeholder="">
+              </div>
+              <div class="res_city">
+                <label for="">城市：</label>
+                <input type="text" placeholder="">
+              </div>
+              <div class="agree-date res-start">
+                <label>开始时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="agree-date res-end">
+                <label>结束时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="search_btn res_btn">查询</div>
+            </div>
+            <div class="gift_search res_search" ng-show="!bool">
+              <div class="gift_select">
+                <label for="">品牌：</label>
+                <select>
+                  <!--<option value="玉溪">玉溪</option>-->
+                  <!--<option value="黄鹤楼">黄鹤楼</option>-->
+                </select>
+              </div>
+              <div class="gift_bag">
+                <label>种类：</label>
+                <select>
+                  <option value="条">条</option>
+                  <option value="包">包</option>
+                </select>
+              </div>
+              <div class="gift_tel">
+                <label>手机号：</label>
+                <input type="text"  />
+              </div>
+              <div class="gift_city">
+                <label>城市：</label>
+                <input type="text" />
+              </div>
+
+              <div class="agree-date gift_start">
+                <label>开始时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="agree-date gift_end">
+                <label>结束时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="search_btn gift_btn">查询</div>
+            </div>
+            <table class="table res_table" ng-show="bool">
+              <thead style="border: 1px solid #A0A0A0">
+              <tr>
+                <th>手机号</th>
+                <th>奖品（金额）</th>
+                <th>城市</th>
+                <th>日期</th>
+              </tr>
+              </thead>
+              <tbody></tbody>
+              <!--<tr>-->
+                <!--<td>13417664414</td>-->
+                <!--<td>PPTV聚力会员（20元）</td>-->
+                <!--<td>陕西西安</td>-->
+                <!--<td>2017/2/9 11:14:56</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td>13417664414</td>-->
+                <!--<td>PPTV聚力会员（20元）</td>-->
+                <!--<td>陕西西安</td>-->
+                <!--<td>2017/2/9 11:14:56</td>-->
+              <!--</tr>-->
+            </table>
+            <table class="table gift_table" ng-show="!bool">
+              <thead style="border: 1px solid #A0A0A0">
+              <tr>
+                <th>品牌</th>
+                <th>手机号</th>
+                <th>城市</th>
+                <th>日期</th>
+                <th>单份红包面额</th>
+                <th>中奖数量</th>
+                <th>金额</th>
+              </tr>
+              </thead>
+              <tbody></tbody>
+              <!--<tr>-->
+                <!--<td>玉溪</td>-->
+                <!--<td>13417664414</td>-->
+                <!--<td>陕西西安</td>-->
+                <!--<td>2017/2/9 11:14:56</td>-->
+                <!--<td>1</td>-->
+                <!--<td>1</td>-->
+                <!--<td>1</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td>玉溪</td>-->
+                <!--<td>13417664414</td>-->
+                <!--<td>陕西西安</td>-->
+                <!--<td>2017/2/9 11:14:56</td>-->
+                <!--<td>1</td>-->
+                <!--<td>1</td>-->
+                <!--<td>1</td>-->
+              <!--</tr>-->
+            </table>
+            <div class="footer_sec clearfix">
+              <!--<div class="total_info lf">-->
+                <!--总共<span>205</span>条记录，当前页共<span>10条记录</span>-->
+              <!--</div>-->
+              <div class="page_sec rf">
+                <div class="tcdPageCode"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="statics/assets/libs/jquery.page.js"></script>
+</div>

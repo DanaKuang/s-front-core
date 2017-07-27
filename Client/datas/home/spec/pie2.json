@@ -1,0 +1,48 @@
+{
+  "title": {
+    "text": "实物\n奖品",
+    "x": "center",
+    "y": "center"
+  },
+  "color":["#FCBA28", "#FBDC29","#F86052","#21C7D5"],
+  "series": [
+    {
+      "name":"奖品分布",
+      "type":"pie",
+      "radius": ["30%","70%"],
+      "avoidLabelOverlap": false,
+      "label": {
+        "normal": {
+          "show": true,
+          "position": "outside",
+          "formatter":"{c}"
+        }
+      },
+      "labelLine": {
+        "normal": {
+          "show": true
+        }
+      },
+      "data":[]
+    },
+    {
+      "name":"奖品分布",
+      "type":"pie",
+      "radius": ["30%","70%"],
+      "avoidLabelOverlap": false,
+      "label": {
+        "normal": {
+          "show": true,
+          "position": "inside",
+          "formatter":"{b}"
+        }
+      },
+      "labelLine": {
+        "normal": {
+          "show": true
+        }
+      },
+      "data":[]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+    "caption": "",
+    "id": "kpilist",
+    "tableCls": "table-bordered",
+    "columns": [{
+        "name": "brand",
+        "label": "规格",
+        "sortable": false,
+        "align": "center",
+        "colspan": 2
+    }, {
+        "name": "scantimes",
+        "label": "扫码次数",
+        "sortable": true,
+        "align": "center"
+    }, {
+        "name": "scanUsers",
+        "label": "扫码人数",
+        "sortable": true,
+        "align": "center"
+    }, {
+        "name": "scanCodes",
+        "label": "扫码烟包数",
+        "sortable": true,
+        "align": "center"
+    }, {
+        "name": "drawTimes",
+        "label": "抽奖次数",
+        "sortable": true,
+        "align": "center"
+    }],
+    "rows": [],
+    "paging": {
+        "curPnum": 1,
+        "pageSize": 0,
+        "totalSize": 0,
+        "align": "center",
+        "api": "/api/tztx/dataportal/data/getSpecificationKPI"
+    },
+    "tblUrl": "/api/tztx/dataportal/data/getSpecificationKPI",
+    "checkType": "checkbox",
+    "rowClick": false,
+    "hasSearch": false,
+    "srhFormId": "srhForm"
+}

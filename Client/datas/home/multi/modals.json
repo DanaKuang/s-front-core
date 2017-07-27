@@ -1,0 +1,40 @@
+{
+    "tempModal": {
+        "modalid": "tempModalId",
+        "header": {
+            "title": "模  版  选  择",
+            "icon": "icon-close",
+            "cls": "text-header"
+        },
+        "body": {
+            "html": ""
+        },
+        "footer": false,
+        "style": ""
+    },
+    "histModal": {
+        "modalid": "histModalId",
+        "header": {
+            "title": "历  史  选  择",
+            "icon": "icon-close",
+            "cls": "text-header"
+        },
+        "body": {
+            "html": ""
+        },
+        "footer": false,
+        "style": ""
+    },
+    "tempList": {
+        "cls": "ui-temp-list",
+        "type": "radio",
+        "name": "tempGroup",
+        "list": []
+    },
+    "histList": {
+        "cls": "ui-hist-list",
+        "type": "radio",
+        "name": "histGroup",
+        "list": []
+    }
+}

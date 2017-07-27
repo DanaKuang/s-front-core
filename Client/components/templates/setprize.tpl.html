@@ -1,0 +1,125 @@
+<div>
+	<!-- 首抽 -->
+	<div class="first-draw">
+		<input type="checkbox" class="first-draw-cbox"><span>首抽必中</span>
+		<!-- 首抽中奖设置 -->
+		<div class="first-draw-prize-wrap">
+			<h6>首抽用户设置</h6>
+			<div class="draw-prize-wrap">
+				<div class="prize-config border-box">
+					<div class="configuration-item">
+						<input type="text" id="">
+					</div>
+					<div class="configuration-item radio-wrap" id="threetabshow">
+						<div class="radio-group">
+							<input checked="true" type="radio" name="common-first-radio" value="礼品" id="礼品"><label for="礼品">礼品</label>
+						</div>
+						<div class="radio-group">
+							<input type="radio" name="common-first-radio" value="微信红包" id="微信红包"><label for="微信红包">微信红包</label>
+						</div>
+						<div class="radio-group">
+							<input type="radio" name="common-first-radio" value="积分" id="积分"><label for="积分">积分</label>
+						</div>
+					</div>
+					<div class="radio-res-wrap">
+						<!-- 礼品 -->
+						<div class="gift radio-res">
+							<div class="configuration-item">
+								<button class="btn btn-default add-prize">+选择产品</button>
+								<div class="prize-img-preview">
+									<img src="" alt="">
+								</div>
+							</div>
+							<div class="configuration-item">
+								<input type="number" id="">
+								<button class="btn btn-default add-inventory">增库</button>
+								<div class="present-integral">
+									<input type="checkbox"><label for="">同时赠送积分</label>
+									<input type="number">积分
+								</div>
+							</div>
+						</div>
+
+						<!-- 微信红包 -->
+						<div class="hb radio-res hidden">
+							<div class="configuration-item">
+								<button class="btn btn-default add-prize">+选择红包模板</button>
+								<div class="random-hb">
+									<input type="radio" name="randomorfixed"><label for="">随机金额</label>
+									<input type="text">元 —— <input type="text">元
+								</div>
+								<div class="fixed-hb">
+									<input type="radio" name="randomorfixed"><label for="">固定金额</label>
+									<input type="text">元
+								</div>
+							</div>
+							<div class="configuration-item">
+								<input type="number" id="">
+								<button class="btn btn-default add-inventory">增库</button>
+								<div class="present-integral">
+									<input type="checkbox"><label for="">同时赠送积分</label>
+									<input type="number">积分
+								</div>
+							</div>
+						</div>
+
+						<!-- 积分 -->
+						<div class="jf radio-res hidden">
+							<div class="configuration-item">
+								<input type="text">
+							</div>
+							<div class="configuration-item">
+								<input type="number" id="">
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn">+新增奖项</button>
+		</div>
+	</div>
+	<!-- 非首抽 -->
+	<div class="non-first-draw">
+		<h6>非首抽用户设置</h6>
+		<!-- 非首抽中奖设置 -->
+		<div class="non-first-draw-wrap">
+			<div class="draw-prize-wrap">
+				<div class="prize-config border-box">
+					<div class="configuration-item">
+						<input type="text">
+					</div>
+					<div class="configuration-item">
+						<input type="text" id="">
+					</div>
+					<div class="configuration-item radio-wrap">
+						<div class="radio-group">
+							<input checked="true" type="radio" name="common-non-first-radio" value="礼品"><label for="">礼品</label>
+						</div>
+						<div class="radio-group">
+							<input type="radio" name="common-non-first-radio" value="微信红包"><label for="">微信红包</label>
+						</div>
+						<div class="radio-group">
+							<input type="radio" name="common-non-first-radio" value="积分"><label for="">积分</label>
+						</div>
+					</div>
+					<div class="configuration-item">
+						<button class="btn btn-default add-prize">+选择产品</button>
+						<div class="prize-img-preview">
+							<img src="" alt="">
+						</div>
+					</div>
+					<div class="configuration-item">
+						<input type="number" id="">
+						<button class="btn btn-default add-inventory">增库</button>
+						<div class="present-integral">
+							<input type="checkbox"><label for="">同时赠送积分</label>
+							<input type="number">积分
+						</div>
+					</div>
+				</div>
+			</div>
+			<button type="submit" id="createFirstDrawPrize" class="btn btn-default creat-prize-btn">+新增奖项</button>
+		</div>
+	</div>
+</div>

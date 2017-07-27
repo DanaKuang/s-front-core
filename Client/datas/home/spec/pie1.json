@@ -1,0 +1,50 @@
+{
+  "title": {
+    "text": "现金\n红包",
+    "x": "center",
+    "y": "center",
+    "textStyle":{
+      "color":"#7C7C7C"
+    }
+  },
+  "color":["#FCBA28", "#FBDC29","#F86052","#DE3092","#00B1D3","#52D0F6"],
+  "series": [
+    {
+      "name":"奖品分布",
+      "type":"pie",
+      "radius": ["30%","70%"],
+      "avoidLabelOverlap": false,
+      "label": {
+        "normal": {
+          "show": true,
+          "position": "outside",
+          "formatter":"{c}"
+        }
+      },
+      "labelLine": {
+        "normal": {
+          "show": true
+        }
+      },
+      "data":[]
+    }, {
+      "name":"奖品分布",
+      "type":"pie",
+      "radius": ["30%","70%"],
+      "avoidLabelOverlap": false,
+      "label": {
+        "normal": {
+          "show": true,
+          "position": "inside",
+          "formatter":"{b}"
+        }
+      },
+      "labelLine": {
+        "normal": {
+          "show": true
+        }
+      },
+      "data":[]
+    }
+  ]
+}

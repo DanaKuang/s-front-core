@@ -1,0 +1,39 @@
+{
+    "actsample": [
+    	{
+    		"image": "/statics/assets/image/zp.png",
+    		"text": "幸运大转盘",
+    		"type": "common"
+    	},
+        {
+            "image": "/statics/assets/image/jgg.png",
+            "text": "九宫格",
+            "type": "common"
+        },
+    	{
+    		"image": "/statics/assets/image/ggk.png",
+    		"text": "刮刮卡",
+    		"type": "common"
+    	},
+    	{
+    		"image": "/statics/assets/image/redpack.png",
+    		"text": "微信红包",
+    		"type": "redpack"
+    	},
+    	{
+    		"image": "/statics/assets/image/wj.png",
+    		"text": "问卷",
+    		"type": "questionnaire"
+    	},
+    	{
+    		"image": "/statics/assets/image/egg.png",
+    		"text": "彩蛋",
+    		"type": "surprise"
+    	},
+    	{
+    		"image": "/statics/assets/image/fesitival.png",
+    		"text": "节日专享",
+    		"type": "surprise"
+    	}
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "caption": "",
+    "id": "kpilist",
+    "tableCls": "table-bordered",
+    "columns": [{
+        "name": "province",
+        "label": "地市",
+        "sortable": false,
+        "align": "center",
+        "colspan": 2,
+        "icon": true
+    }, {
+        "name": "saleType",
+        "label": "所属销区",
+        "sortable": false,
+        "align": "center"
+    }, {
+        "name": "scantimes",
+        "label": "扫码次数",
+        "sortable": true,
+        "align": "center"
+    }, {
+        "name": "scanUsers",
+        "label": "扫码人数",
+        "sortable": true,
+        "align": "center"
+    }, {
+        "name": "scanCodes",
+        "label": "扫码烟包数",
+        "sortable": true,
+        "align": "center"
+    }],
+    "rows": [],
+    "paging": {
+        "curPnum": 1,
+        "pageSize": 0,
+        "totalSize": 0,
+        "align": "center",
+        "api": "/api/tztx/dataportal/data/getProvinceKPI"
+    },
+    "tblUrl": "/api/tztx/dataportal/data/getProvinceKPI",
+    "childUrl": "/api/tztx/dataportal/data/getCityKPI",
+    "checkType": "checkbox",
+    "rowClick": false,
+    "hasSearch": false,
+    "srhFormId": "srhForm"
+}

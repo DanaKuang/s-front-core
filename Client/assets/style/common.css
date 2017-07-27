@@ -1,0 +1,95 @@
+* {
+  -webkit-tap-highlight-color: transparent
+}
+body, div, h1, h2, h3, h4, h5, h6, html, img, li, ol, p, ul {
+  margin: 0;
+  padding: 0
+}
+body {
+  font-family: STHeiti, Helvetica Neue, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  outline: 0;
+}
+li, ol, ul {
+  list-style: none
+}
+address, em, i {
+  font-style: normal
+}
+button, input {
+  // border: 0 none;
+  outline: none
+}
+input[type=button], input[type=submit] {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+input, textarea {
+  // -webkit-appearance: none;
+  -webkit-user-modify: read-write-plaintext-only
+}
+a, img {
+  -webkit-touch-callout: none
+}
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0
+}
+.btn.active:focus, .btn:active:focus, .btn:focus, a:focus {
+  outline: 0
+}
+body, html {
+  height: 100%
+}
+body {
+  background: #d9e0e7;
+  font-size: 12px;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #707478
+}
+.ie8 body {
+  font-family: Arial, sans-serif
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  color: #242a30
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  font-size: 60%;
+  font-weight: 300;
+  color: #7c7f83
+}
+a {
+  transition: color .1s ease-in-out;
+  -o-transition: color .1s ease-in-out;
+  -ms-transition: color .1s ease-in-out;
+  -moz-transition: color .1s ease-in-out;
+  -webkit-transition: color .1s ease-in-out
+}
+label {
+  color: #242a30
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal.in .modal-dialog {
+  margin: 0 auto;
+  transform: translateY(-50%);
+  top: 50%;
+}

@@ -1,0 +1,82 @@
+{
+  "扫码次数": {
+    "name": "扫码次数",
+    "type": "line",
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "data": []
+  },
+  "有效扫码数": {
+    "name": "有效扫码数",
+    "type": "line",
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "data": []
+  },
+  "抽奖次数": {
+    "name": "抽奖次数",
+    "type": "line",
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "data": []
+  },
+  "奖品领取": {
+    "name": "奖品领取",
+    "type": "line",
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "data": []
+  }
+}

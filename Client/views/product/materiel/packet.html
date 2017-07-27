@@ -1,0 +1,236 @@
+<!--
+/**
+ * Author: zhaobaoli
+ * Create Date: 2017-07-17
+ * Description: materiel
+ */
+-->
+<link rel="stylesheet" href="../../../assets/style/gift.css">
+<div class="animated fadeInRight" ng-controller="PacketCtrl">
+    <div class="container-fluid" ng-if="true">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="title_top clearfix">
+                    <div class="gift_title lf">
+                        物料管理&nbsp;&gt;红包管理
+                    </div>
+                    <div class="build_gift rf">去充值</div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <!--<h4>履约报表待开发中。。。</h4>-->
+                        <div class="table_sec">
+                            <div class="nav clearfix">
+                                <div class="lf select_active">红包池</div>
+                                <div class="lf no_active">流水明细</div>
+                            </div>
+                            <div class="packet_select_sec clearfix">
+                                <div>
+                                    <label for="">供应商</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">适用品牌</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div ng-if="false">
+                                    <label for="">使用状态</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div ng-if="true">
+                                    <label for="">动作</label>
+                                    <select>
+                                        <option value="volvo">全部</option>
+                                    </select>
+                                </div>
+                                <div class="ser_btn">搜索</div>
+                                <div class="rest_btn">重置</div>
+                            </div>
+                        </div>
+                        <table class="table" ng-if="true">
+                            <tr>
+                                <th>ID</th>
+                                <th>供应商</th>
+                                <th>适用品牌</th>
+                                <th>红包池(元)</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>扫天下</td>
+                                <td>帝豪</td>
+                                <td>50.00</td>
+                                <td>已启用</td>
+                                <td>
+                                    <span data-toggle="modal" data-target=".packet_add_box">增库</span>&nbsp;
+                                    <span>编辑</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".packet_disabled_box">停用</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>扫天下</td>
+                                <td>帝豪</td>
+                                <td>50.00</td>
+                                <td>已启用</td>
+                                <td>
+                                    <span data-toggle="modal" data-target=".packet_add_box">增库</span>&nbsp;
+                                    <span>编辑</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".packet_disabled_box">停用</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>扫天下</td>
+                                <td>帝豪</td>
+                                <td>50.00</td>
+                                <td>已启用</td>
+                                <td>
+                                    <span data-toggle="modal" data-target=".packet_add_box">增库</span>&nbsp;
+                                    <span>编辑</span>&nbsp;
+                                    <span data-toggle="modal" data-target=".packet_disabled_box">停用</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table" ng-if="false">
+                            <tr>
+                                <th>ID</th>
+                                <th>供应商</th>
+                                <th>适用品牌</th>
+                                <th>动作</th>
+                                <th>活动ID</th>
+                                <th>红包额度(元)</th>
+                                <th>更新时间</th>
+                                <th>更新人</th>
+                            </tr>
+                            <tr>
+                                <td>134560</td>
+                                <td>扫天下</td>
+                                <td>帝豪</td>
+                                <td>新建</td>
+                                <td>134560</td>
+                                <td>50.00</td>
+                                <td>2017-08-09</td>
+                                <td>Duang White</td>
+                            </tr>
+                        </table>
+                        <div class="footer_sec clearfix">
+                            <div class="total_info lf">
+                                总共<span>205</span>条记录，当前页共<span>10条记录</span>
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" ng-if="false">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title_top">
+                    <div class="gift_title">
+                        物料管理&nbsp;&gt;红包管理&nbsp;&gt;新建红包
+                    </div>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="form_sec">
+                            <div>
+                                <label for="">供应商<span>*</span></label>
+                                <select>
+                                    <option value="volvo">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">适用品牌<span>*</span></label>
+                                <select>
+                                    <option value="volvo">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">资金<span>*</span></label>
+                                <input style="width: 180px;" type="text" placeholder=""><span class="yuan_unit">元</span><br/>
+                                <p>库存数量保存后不可手动减库存，请谨慎输入</p>
+                            </div>
+                            <div>
+                                <label for="">资金转账凭证</label>
+                                <div class="select_file">+</div><br/>
+                            </div>
+                        </div>
+                        <div class="opera_sec">
+                            <div class="opera_confirm">保存</div>
+                            <div class="opera_cancel">取消</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--红包池增库弹框-->
+<div class="modal fade packet_add_box" tabindex="-1" role="dialog" aria-labelledby="packet_add_btn">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="box_sec">
+                <div class="box_tit">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="modal-title" id="packet_add_btn">红包池增库</div>
+                </div>
+                <div class="box_cont">
+                    <label>增库红包额度：</label>
+                    <input type="text" placeholder="￥0.00"><span>元</span>
+                </div>
+                <div class="box_btn clearfix">
+                    <div class="box_btn_conf lf">确定</div>
+                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--红包停用弹窗-->
+<div class="modal fade packet_disabled_box" tabindex="-1" role="dialog" aria-labelledby="packet_disabled_btn">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="box_sec">
+                <div class="box_tit">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="modal-title" id="packet_disabled_btn">操作提示</div>
+                </div>
+                <div class="box_cont">停用后，新增活动将不能使用该红包池</div>
+                <div class="box_btn clearfix">
+                    <div class="box_btn_conf lf">确定</div>
+                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="statics/assets/libs/jquery.page.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".tcdPageCode").createPage({
+            pageCount:10,
+            current:1,
+            backFn:function(p){
+//            alert(p);
+            }
+        });
+    })
+</script>

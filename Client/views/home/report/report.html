@@ -1,0 +1,263 @@
+<!---->
+
+<div class="animated fadeInRight" ng-controller="ReportCtrl">
+  <div class="container-fluid region-margin">
+    <div class="row">
+      <div class="col-md-12">
+      <div class="ui-panel-title report">
+        <i class="report-icon"></i><span>固定报表列表</span>
+      </div>
+      <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report_wrap">
+              <ul>
+                <li>
+                  <span>序号</span>
+                  <span>
+                    列表名称</span>
+                </li>
+                <li>
+                  <span>1</span>
+                  <span ng-click="tabs(1)">
+                    <u>中奖用户地域情况</u></span>
+                </li>
+                <li>
+                  <span>2</span>
+                  <span ng-click="tabs(2)">
+                    <u>扫码用户区域情况</u>
+                  </span>
+                </li>
+                <li>
+                  <span>3</span>
+                  <span ng-click="tabs(3)">
+                    <u>日报汇总表</u>
+                  </span>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>中奖用户地域情况</span>
+          <div ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="report-gui">
+                <label>规格：</label>
+                <select>
+                  <!--<option value="玉溪">玉溪</option>-->
+                  <!--<option value="芙蓉王硬细支（盒）">芙蓉王硬细支（盒）</option>-->
+                </select>
+              </div>
+              <button class="btn btn-sm btn-default" ng-click="search($event,1)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default" ng-click="down(1)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top: 1px solid #A0A0A0;">
+              <tr>
+                <th colspan="2" rowspan="2">{{obj.activityName}}</th>
+                <th colspan="10">{{obj.statTime}}</th>
+              </tr>
+              <tr>
+                <th colspan="10" style="background: white">中奖情况</th>
+              </tr>
+              <tr>
+                <th>省份</th>
+                <th>地市</th>
+                <th>1元现金红包</th>
+                <th>3元现金红包</th>
+                <th>5元现金红包</th>
+                <th>8元现金红包</th>
+                <th>18元现金红包</th>
+                <th>88元现金红包</th>
+                <th>苏泊尔电热水壶</th>
+                <th>小米移动电源</th>
+                <th>芙蓉王洗漱套装</th>
+                <th>虎牌保温杯</th>
+              </tr>
+              </thead>
+              <tbody id="win_table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>扫码用户地域情况</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="report-gui">
+                <label>规格：</label>
+                <select>
+                  <!--<option value="条">条</option>-->
+                  <!--<option value="包">包</option>-->
+                </select>
+              </div>
+              <button class="btn btn-sm btn-default" ng-click="search($event,2)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default" ng-click="down(2)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top: 1px solid #A0A0A0;">
+              <tr>
+                <th colspan="2" rowspan="2">{{obj.activityName}}</th>
+                <th colspan="6">{{obj.statTime}}</th>
+                <th colspan="6">{{obj.statTime}}</th>
+              </tr>
+              <tr>
+                <th colspan="6" style="background: white">条&nbsp;扫码情况</th>
+                <th colspan="6" style="background: white">包&nbsp;扫码情况</th>
+              </tr>
+              <tr>
+                <th>省份</th>
+                <th>地市</th>
+                <th>扫码次数</th>
+                <th>有效扫码次数</th>
+                <th>扫码人数(按天去重)</th>
+                <th>抽奖次数</th>
+                <th>中奖人次</th>
+                <th>中奖人数(按天去重)</th>
+                <th>扫码次数</th>
+                <th>有效扫码次数</th>
+                <th>扫码人数(按天去重)</th>
+                <th>抽奖次数</th>
+                <th>中奖人次</th>
+                <th>中奖人数(按天去重)</th>
+              </tr>
+              </thead>
+              <tbody id="user_table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>日报汇总表</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <button class="btn btn-sm btn-default" ng-click="search($event,3)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default" ng-click="down(3)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top:1px solid #a0a0a0">
+              <tr>
+                <th rowspan="3">品牌</th>
+                <th colspan="7">{{summar.statTime}}</th>
+                <th colspan="6">{{summar.statTime}}</th>
+                <th colspan="7">{{summar.statTime}}</th>
+              </tr>
+              <tr>
+                <th colspan="7" style="background: white">扫码情况</th>
+                <th colspan="6" style="background: white">现金红包（单位：个）</th>
+                <th colspan="8" style="background: white">实物红包（单位：个）</th>
+              </tr>
+              <tr>
+                <th>扫码次数</th>
+                <th>有效扫码次数</th>
+                <th>抽奖次数</th>
+                <th>中奖人次</th>
+                <th>中奖率</th>
+                <th>红包发放金额</th>
+                <th>累计发放金额</th>
+                <th>1元红包</th>
+                <th>3元红包</th>
+                <th>5元红包</th>
+                <th>8元红包</th>
+                <th>18元红包</th>
+                <th>88元红包</th>
+                <th>虎牌保温杯</th>
+                <th>飞利浦剃须刀</th>
+                <th>小米移动电源</th>
+                <th>芙蓉王商务洗漱套装</th>
+                <th>新秀丽双肩包</th>
+                <th>双立人指甲剪</th>
+                <th>苏泊尔电热水壶</th>
+              </tr>
+              </thead>
+              <tbody id="summary_table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

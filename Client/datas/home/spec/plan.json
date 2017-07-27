@@ -1,0 +1,23 @@
+{
+  "grid":{
+    "left":"30",
+    "top":20
+  },
+  "tooltip": {
+    "formatter":"{a}:{c}"
+  },
+  "xAxis": {
+    "type":"category",
+    "boundaryGap":false,
+    "data": [],
+    "axisLabel":{
+      "interval": 0
+    }
+  },
+  "yAxis": {
+    "axisLabel": {
+      "show": false
+    }
+  },
+  "series":[]
+}
