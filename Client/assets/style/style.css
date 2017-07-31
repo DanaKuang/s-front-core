@@ -253,7 +253,7 @@ body {
   top: 12px;
 }
 .ui-navbar-left li.active .fa-report {
-  content: url('../image/i-report-act.jpg');
+  content: url('../image/i-report-act.png');
   width: 16px;
   height: 16px;
   top: 12px;
@@ -265,13 +265,13 @@ body {
   top: 12px;
 }
 .ui-navbar-left li.active .fa-agree {
-  content: url('../image/i-agree-active.jpg');
+  content: url('../image/i-agree-active.png');
   width: 16px;
   height: 16px;
   top: 12px;
 }
 .ui-navbar-left li.active .fa-visit {
-  content: url('../image/i-agree-active.jpg');
+  content: url('../image/i-agree-active.png');
   width: 16px;
   height: 16px;
   top: 12px;
@@ -283,7 +283,7 @@ body {
   top: 12px;
 }
 .ui-navbar-left li.active .fa-visit {
-  content: url('../image/i-visit-act.jpg');
+  content: url('../image/i-visit-act.png');
   width: 16px;
   height: 16px;
   top: 12px;
@@ -354,20 +354,20 @@ body {
 .ui-map-content-box {
   position: relative;
   background-color: #3e4162;
-  height: 280px;
+  height: 400px;
 }
 
 .ui-map-box {
   position: relative;
   width: 100%;
-  height: 280px;
+  height: 400px;
   /* border: 1px solid #ddd; */
   float: left;
 }
 
 .ui-scan-box {
   position: absolute;
-  width: 180px;
+  width: 220px;
   height: 280px;
   right: 0;
   padding: 20px 0;
@@ -476,7 +476,7 @@ body {
 .ui-kpi-ragion-0 {
   background: #515db3;
   /* writing-mode: tb-rl; */
-  width: 45px;
+  width: 100px;
   color: #fff;
 }
 .ui-kpi-row-0 {
@@ -712,7 +712,7 @@ body {
 
 .hours-title>span:nth-of-type(2) {
   display: inline-block;
-  width: 88%;
+  width: 80%;
   height: 2px;
   margin-left: 10px;
   vertical-align: middle;
@@ -816,18 +816,18 @@ input[type="checkbox"]:checked + .checkbox{
   position: relative;
 }
 #pie1-chart,#pie2-chart{
-  height: 110%;
+  height: 80%;
 }
 
-.spec-pie-wrap>.col-md-6 .spec-back{
-  width: 100px;
-  height: 100px;
-  background: url("../image/spec-back.png") no-repeat center;
-  background-size: 100px 100px;
-  position: absolute;
-  left: 41%;
-  top: 41%;
-}
+/*.spec-pie-wrap>.col-md-6 .spec-back{*/
+  /*width: 100px;*/
+  /*height: 100px;*/
+  /*background: url("../image/spec-back.png") no-repeat center;*/
+  /*background-size: 100px 100px;*/
+  /*position: absolute;*/
+  /*left: 41%;*/
+  /*top: 41%;*/
+/*}*/
 
 /*==============================end spec================================*/
 
@@ -858,7 +858,7 @@ input[type="checkbox"]:checked + .checkbox{
   width: 17px;
 }
 .ui-navbar-left li.active .fa-report {
-  content: url('../image/i-report-act.jpg');
+  content: url('../image/i-report-act.png');
   width: 16px;
   height: 16px;
   top: 12px;
@@ -888,7 +888,7 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .tab_nav div{
   float: left;
-  font-size: 20px;
+  font-size: 14px;
   padding-bottom: 4px;
 }
 .tab_nav div:hover{
@@ -906,18 +906,18 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .res_search>div,.gift_search>div,.report-search>div {
   float: left;
-  margin-right: 19px;
+  margin-right: 5px;
   margin-bottom: 15px;
 }
 .res_search div label,.gift_search div label,
 .report-search div label {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 28px;
 }
 
 .res_search div input,.report-search div input {
   font-size: 16px;
-  width:133px;
+  width:120px;
   height: 28px;
   line-height: 28px;
 }
@@ -939,7 +939,7 @@ input[type="checkbox"]:checked + .checkbox{
   user-select:none;
 }
 .gift_search div select,.report-search div select {
-  font-size: 16px;
+  font-size: 14px;
   width: 133px;
   height: 28px;
   line-height: 28px;
@@ -1055,10 +1055,17 @@ input[type="checkbox"]:checked + .checkbox{
   cursor: pointer;
 }
 
+.gray_btn {
+  background-color: #f0f0f0 !important;
+  cursor: default !important;
+}
+
 .visit_table .visit-list li:hover{
   background: #D0D0D0;
 }
-
+.xiao {
+  display: none;
+}
 /*==============================end visit================================*/
 /*==============================start report================================*/
 .report-table .panel-body {

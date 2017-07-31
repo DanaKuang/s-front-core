@@ -19,6 +19,7 @@ login:                                      # 登录
     description: '登陆页面'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'login.html'
 home:                                       # 首页
   - httpmethod: 'get'                       # KPI
@@ -26,48 +27,56 @@ home:                                       # 首页
     description: 'kpi'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/kpi/kpi.html'
   - httpmethod: 'get'                       # 主题查询[规格]
     routepath: '/view/home/theme/spec'
     description: 'theme'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/theme/spec.html'
   - httpmethod: 'get'                       # 主题查询[地域]
     routepath: '/view/home/theme/region'
     description: 'theme'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/theme/region.html'
   - httpmethod: 'get'                       # 多维查询
     routepath: '/view/home/multi'
     description: 'multidimension'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/multi/multi.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/report/report.html'
   - httpmethod: 'get'                       # 履约报表
     routepath: '/view/home/agree'
     description: 'agree'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/agree/agree.html'
   - httpmethod: 'get'                       # 回访报表
     routepath: '/view/home/visit'
     description: 'visit'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/visit/visit.html'
   - httpmethod: 'get'                       # 回访报表
     routepath: '/view/home/materiel/gift'
     description: 'visit'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'home/materiel/gift.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
@@ -75,24 +84,28 @@ activity:
     description: '活动页面'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'activity/acts/manageActs.html'
   - httpmethod: 'get'                       # 实物奖品领奖明细
     routepath: '/view/activity/acts/mPrizeGotHistory'
     description: '实物奖品领奖明细'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'activity/acts/mPrizeGotHistory.html'
   - httpmethod: 'get'                       # 虚拟奖品领奖明细
     routepath: '/view/activity/acts/vPrizeGotHistory'
     description: '虚拟奖品领奖明细'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'activity/acts/vPrizeGotHistory.html'
   - httpmethod: 'get'                       # 积分领奖明细
     routepath: '/view/activity/acts/integralHistory'
     description: '积分领奖明细'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
 product:
   - httpmethod: 'get'                       # 礼品管理
@@ -100,16 +113,19 @@ product:
     description: 'gift'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'product/materiel/gift.html'
   - httpmethod: 'get'                       # 红包管理
     routepath: '/view/product/materiel/packet'
     description: 'packet'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'product/materiel/packet.html'
   - httpmethod: 'get'                       # 供应商管理
     routepath: '/view/product/supply'
     description: 'packet'
     enableroute: 1
     responetype: 'html'
+    gatewaytype: 0
     staticfile: 'product/supply/supply.html'

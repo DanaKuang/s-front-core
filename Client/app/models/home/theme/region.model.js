@@ -10,9 +10,9 @@ define([], function () {
     ServiceName: 'regionViewModel',
     ServiceContent: ['request', function (request) {
       this.$model = function () {
-        var stattime = new Date().getFullYear()+"-"+(new Date().getMonth()+1)   +"-"+(new Date().getDate()-1);
-        var Default =  {"provinceName":"北京","statTime":"2017-07-17","statType":"month"}
-        var hourDefault =  {"provinceName":"北京","statTime":"2017-7-17","statType":"day","flag":1}
+        var stattime = new Date().getFullYear()+"-"+(new Date().getMonth()+1)   +"-"+new Date().getDate();
+        var Default =  {"provinceName":"湖南省","statTime":stattime,"statType":"day"}
+        var hourDefault =  {"provinceName":"湖南省","statTime":stattime,"statType":"day","flag":1}
         var GAUGE_JSON_URL = '/statics/home/region/gauge.json';         //仪表盘
         var HOURS_JSON_URL = '/statics/home/region/hoursChart.json';     //扫码次数时刻趋势
         var DEFAULT_JSON_URL = '/statics/home/region/planDefault.json';     //扫码次数时刻趋势折线图基本配置
@@ -47,6 +47,7 @@ define([], function () {
         }
         this.$hourTrend = function(params){
           var params = params || hourDefault;
+          params.flag = 1;
           return request.$Search(hourTrend,params,true);
         }
         this.$getScanData = function(options){

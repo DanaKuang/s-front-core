@@ -12,14 +12,22 @@ define([], function () {
         ServiceContent: ['$scope', 'setDateConf', function ($scope, setDateConf) {
             var $model = $scope.$model;
             setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
-            $(".date").find("input").val(stattime);
+            setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
+            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+            var regionMonth = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1)
+            $(".region-day").find("input").val(stattime);
+            $(".region-month").find("input").val(regionMonth);
             //省份下拉列表
             (function () {
                 $model.$getProvince().then(function (res) {
                     var res = res.data || [];
                     for (var i = 0; i < res.length; i++) {
-                        $(".region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
+                        if(res[i].provinceName === "湖南省"){
+                            $(".region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
+                        }else {
+                            $(".region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
+
+                        }
                     }
                 })
             })();
@@ -32,6 +40,8 @@ define([], function () {
                     }
                 })
             })();
+
+            //日期改变时
             $(".ui-search").change(function () {
                 var Value = $(this).siblings(".region").val();
                 $(".region-search-r").each(function (i) {
@@ -46,7 +56,7 @@ define([], function () {
                 })
                 if ($(this).val() === "month") {
                     $("#month").attr("selected", "selected");
-                    $(".region-search-r").eq(0).show();
+                    $(".region-search-r").eq(2).show();
                 } else if ($(this).val() === "day") {
                     $("#day").attr("selected", "selected");
                     $(".region-search-r").eq(0).show();
@@ -57,15 +67,15 @@ define([], function () {
             });
             $scope.search = function ($event) {
                 var that = $event.target;
-                var reg = /(省|市|区)/;
+                // var reg = /(省|市|区)/;
                 var params = {
-                    "provinceName": $(that).siblings(".region").val().replace(reg, ""),
+                    "provinceName": $(that).siblings(".region").val(),
                     "statTime": $(that).siblings().hasClass("date") ?
                         ($(that).siblings(".date").data().date ? $(that).siblings(".date").data().date : $(that).siblings(".date").find("input").val())
                         : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
                     "statType": $(that).siblings(".ui-search").val()
                 }
-                console.log(params);
+               // console.log(params);
                 public(params)
             };
 
@@ -93,19 +103,19 @@ define([], function () {
                     firChart.series[0].name = "扫码次数";
                     secChart.series[0].name = "扫码包数";
                     thrChart.series[0].name = "扫码人数";
-                    firChart.series[0].data[0].name = "扫码次数\n\n时间段内总共产生的扫码次数，包含重复扫码的情况";
-                    secChart.series[0].data[0].name = "扫码包数\n\n时间段内总共产生的扫码次数，包含重复扫码的情况";
-                    thrChart.series[0].data[0].name = "扫码人数\n\n时间段内扫码用户去重后总人数";
+                    firChart.series[0].data[0].name = "扫码次数（单位：万）\n\n扫码总次数(包含重复扫码的情况)";
+                    secChart.series[0].data[0].name = "扫码烟包数（单位：万）\n\n扫码总条数和总包数(不包含重复扫码的情况)";
+                    thrChart.series[0].data[0].name = "扫码人数（单位：万）\n\n时间段内扫码用户去重后总人数";
                     // console.log(firChart);
                     // console.log(secChart);
                     $model.$getScanData(params).then(function (res) {
                         var data = res.data[0] || {};
-                        firChart.series[0].data[0].value = data.scanPv;
-                        firChart.series[0].max = data.scanAvgPv * 2;
-                        secChart.series[0].data[0].value = data.scanUv;
-                        secChart.series[0].max = data.scanAvgUv * 2;
-                        thrChart.series[0].data[0].value = data.scanCode;
-                        thrChart.series[0].max = data.scanAvgCode * 2;
+                        firChart.series[0].data[0].value = data.scanPv/10000;
+                        firChart.series[0].max =(data.scanAvgPv * 2/10000).toFixed(1);
+                        secChart.series[0].data[0].value = data.scanCode/10000;
+                        secChart.series[0].max = (data.scanAvgCode * 2/10000).toFixed(1);
+                        thrChart.series[0].data[0].value = data.scanUv/10000;
+                        thrChart.series[0].max = (data.scanAvgUv * 2/10000).toFixed(1);
                         firstChart.setOption(firChart, true);
                         secondChart.setOption(secChart, true);
                         thirdChart.setOption(thrChart, true);
@@ -162,9 +172,17 @@ define([], function () {
                             }
                         }
                         for (var i = 0; i < res.length; i++) {
-                            option.xAxis.data.push(res[i].statTime)
+                            //判断是周还是日月
+                            var x = res[i].statTime || res[i].weekNo
+                            option.xAxis.data.push(x)
                         }
-                        seriesArr[0] = obj["促销计划"];
+                        //页面几个复选框选中展示几条
+                        $(".plan input").each(function () {
+                            if ($(this).is(":checked")) {
+                                seriesArr.push(obj[$(this)[0].name]);
+                            }
+                        })
+                        //seriesArr[0] = obj["促销计划"];
                         myChart.setOption(option, true);
                     })
                     option.series = seriesArr;
@@ -185,8 +203,8 @@ define([], function () {
                     var myChart = echarts.init(document.getElementById("bag-chart"));
                     var option = $model.$bagchart.data;
                     var obj = {
-                        "包": {
-                            "name": "包  ",
+                        "盒": {
+                            "name": "盒",
                             "type": "line",
                             "lineStyle": {
                                 "normal": {
@@ -236,7 +254,7 @@ define([], function () {
                         for (x in obj) {
                             for (var i = 0; i < res.length; i++) {
                                 switch (x) {
-                                    case "包":
+                                    case "盒":
                                         obj[x].data.push(res[i].scanCode);
                                         break;
                                     default :
@@ -246,9 +264,17 @@ define([], function () {
                             }
                         }
                         for (var i = 0; i < res.length; i++) {
-                            option.xAxis.data.push(res[i].statTime)
+                            //判断是周还是日月
+                            var x = res[i].statTime || res[i].weekNo;
+                            option.xAxis.data.push(x)
                         }
-                        seriesArr[0] = obj["包"];
+                        //页面几个复选框选中展示几条
+                        $(".bag input").each(function () {
+                            //console.log($(this)[0].name);
+                            if ($(this).is(":checked")) {
+                                seriesArr.push(obj[$(this)[0].name]);
+                            }
+                        })
                         option.series = seriesArr;
                         myChart.setOption(option, true);
                     })
@@ -265,7 +291,7 @@ define([], function () {
                     })
                 })();
 
-                //各规格扫码次数
+                //前十规格扫码次数
                 (function () {
                     var myChart = echarts.init(document.getElementById("name-chart"));
                     // var data = [1200, 1994, 2000, 3304, 2090, 2330, 2220];
@@ -274,12 +300,12 @@ define([], function () {
                     option.xAxis[0].data = [];
                     $model.$scanTimes(params).then(function (res) {
                         var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-                            option.xAxis[0].data.push(res[i].productName)
-                            option.series[0].data.push(res[i].scanPv)
+                        if(!(res.toString() === [].toString())){
+                            for (var i = 0; i < 10; i++) {
+                                option.xAxis[0].data.push(res[i].productName)
+                                option.series[0].data.push(res[i].scanPv)
+                            };
                         }
-                        // console.log(res.data);
-                        // console.log(option);
                         myChart.setOption(option, true);
                     })
                     // option.series[0].data = data;

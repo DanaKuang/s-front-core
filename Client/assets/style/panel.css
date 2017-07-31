@@ -4,7 +4,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
 }
-input[type="text"], select {
+input[type="text"], select, input[type="number"], input[type="url"] {
  	padding: 5px;
  	background: transparent;
   border-width: 1px;
@@ -93,7 +93,10 @@ select {
 	font-weight: normal;
 	font-size: 13px;
 }
-.operation .lft label {
+.operation li.active a label {
+	color: #fff!important;
+}
+.operation .lft .label {
 	position: absolute;
 	top: 5px;
 	left: -70px;
@@ -120,7 +123,7 @@ select {
 } 
 .form-item {
 	width: 170px;
-	height: 26px;
+	height: 26px!important;
 }
 .operation .rt {
 	margin-top: 5px;
@@ -131,6 +134,7 @@ select {
 .lft-b label {
 	left: -4px;
 }
+
 
 /*table*/
 .oper-btn-wrap {
@@ -165,6 +169,9 @@ select {
 .panel>.panel-body+.table, .panel>.panel-body+.table-responsive, .panel>.table+.panel-body, .panel>.table-responsive+.panel-body {
 	border-bottom: 1px solid #ddd;
 }
+.table {
+	border-top: 1px solid #A0A0A0!important;
+}
 /*分页*/
 .pagination-wrap {
 	overflow: hidden;
@@ -174,7 +181,7 @@ select {
 	margin-right: 10px;
 	margin-top: 10px;
 }
-#pagination a, #pagination i {
+.pagination a, #pagination i {
     display: inline-block;
     vertical-align: middle;
     width: 22px;
@@ -188,7 +195,7 @@ select {
          -o-user-select: none;
             user-select: none;
 }
-#pagination a {
+.pagination a {
     margin: 0 2px 0 2px;
     border-radius: 4px;
     border: 1px solid #E3E3E3;
@@ -202,10 +209,10 @@ select {
     background-image:      -o-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image:         linear-gradient(top, #F3F3F3, #D7D7D7);
 }
-#pagination i {
+.pagination i {
     margin: 0 3px 0 3px;
 }
-#pagination a.current {
+.pagination a.current {
     border: 1px solid #E9E9E9;
     box-shadow: 0 1px 1px #999;
     background-color: #DFDFDF;
@@ -214,4 +221,8 @@ select {
     background-image:     -ms-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image:      -o-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image:         linear-gradient(top, #D0D0D0, #EBEBEB);
+}
+.create-realProduct-modal img {
+	width: 40px!important;
+	height: 40px!important;
 }

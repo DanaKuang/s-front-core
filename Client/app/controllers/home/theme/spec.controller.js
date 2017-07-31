@@ -9,17 +9,24 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'SpecCtrl',
     ViewModelName: 'specViewModel',
-    ServiceContent: ['$scope', 'setDateConf', function ($scope,setDateConf) {
+    ServiceContent: ['$scope','$timeout', 'setDateConf', function ($scope,$timeout,setDateConf) {
       var $model = $scope.$model;
       setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
-      var stattime = new Date().getFullYear()+"-"+"0"+(new Date().getMonth()+1)+"-"+(new Date().getDate()-1);
-      $(".date").find("input").val(stattime);
+      setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
+      var stattime = new Date().getFullYear()+"-"+"0"+(new Date().getMonth()+1)+"-"+ new Date().getDate();
+      var specMonth = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1);
+      $(".spec-day").find("input").val(stattime);
+      $(".spec-month").find("input").val(specMonth);
       //规格下拉列表
       (function () {
         $model.$getProduct().then(function (res) {
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
-            $(".region").append("<option value="+res[i].productId+">"+res[i].productName+"</option>")
+            if(res[i].name ==="盒-芙蓉王（硬细支）"){
+              $(".region").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
+            }else {
+              $(".region").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
+            }
           }
         })
       })();
@@ -32,6 +39,7 @@ define([], function () {
           }
         })
       })();
+      //选择周，月，日
       $(".ui-search").change(function () {
         var Value = $(this).siblings(".region").val();
         $(".region-search-r").each(function (i) {
@@ -46,7 +54,7 @@ define([], function () {
         })
         if($(this).val()==="month"){
           $("#month").attr("selected","selected");
-          $(".region-search-r").eq(0).show();
+          $(".region-search-r").eq(2).show();
         }else if($(this).val() === "day"){
           $("#day").attr("selected","selected");
           $(".region-search-r").eq(0).show();
@@ -55,26 +63,62 @@ define([], function () {
           $(".region-search-r").eq(1).show();
         }
       });
+      
+      //查询
       $scope.search = function($event){
         var that = $event.target;
         var reg = /(省|市|区)/;
         var params = {
-          "productId":$(that).siblings(".region").val().replace(reg,""),
+          "productSn":$(that).siblings(".region").val().replace(reg,""),
           "statTime":$(that).siblings(). hasClass("date") ?
               ($(that).siblings(".date").data().date ? $(that).siblings(".date").data().date : $(that).siblings(".date").find("input").val())
               : $(that).siblings(".week").val().substr(10,10).replace(/\./g,"-"),
           "statType":$(that).siblings(".ui-search").val()
+        };
+        if($(that).siblings(".ui-search").val() === "day") {
+          $timeout(function () {
+            $scope.spec = {
+              "daycount" : "本日扫码次数",
+              "dayactive" : "本日活跃用户",
+              "daybag" : "本日扫码烟包数",
+              "dayreduce" : "本日新增扫码用户数"
+            }
+          },0)
+        }else if($(that).siblings(".ui-search").val() === "week") {
+          $timeout(function () {
+            $scope.spec = {
+              "daycount" : "本周扫码次数",
+              "dayactive" : "本周活跃用户",
+              "daybag" : "本周扫码烟包数",
+              "dayreduce" : "本周新增扫码用户数"
+            }
+          },0)
+        }else if($(that).siblings(".ui-search").val() === "month") {
+          $timeout(function () {
+            $scope.spec = {
+              "daycount" : "本月扫码次数",
+              "dayactive" : "本月活跃用户",
+              "daybag" : "本月扫码烟包数",
+              "dayreduce" : "本月新增扫码用户数"
+            }
+          },0)
         }
-        public(params)
+        public(params);
       };
 
+      
+      //页面执行函数
       function public (param) {
         (function () {
           $scope.spec = {
             "count": 0,
             "active": 0,
             "bag": 0,
-            "reduce": 0
+            "reduce": 0,
+            "daycount" : "本日扫码次数",
+            "dayactive" : "本日活跃用户",
+            "daybag" : "本日扫码烟包数",
+            "dayreduce" : "本日新增扫码用户数"
           };
           $model.$specfication(param).then(function (res) {
             var data = res.data[0] || {};
@@ -89,13 +133,13 @@ define([], function () {
         (function () {
           var myChart = echarts.init(document.getElementById("hours-chart"));
           var option = $model.$hourchart.data;
-          $model.$hourTrend().then(function (res) {
+          $model.$hourTrend(param).then(function (res) {
             var res = res.data || [];
             option.series[0].data = [];
             option.xAxis.data = [];
            for(var i = 0;i<res.length;i++){
              option.series[0].data.push(res[i].scanPv);
-             option.xAxis.data.push(res[i].statHour)
+             option.xAxis.data.push(res[i].statHour);
            }
             myChart.setOption(option,true);
           })
@@ -132,9 +176,17 @@ define([], function () {
               }
             }
             for (var i = 0; i < res.length; i++) {
-              option.xAxis.data.push(res[i].statTime)
+              var x = res[i].statTime || res[i].weekNo;
+              option.xAxis.data.push(x);
             }
-            seriesArr[0] = obj["促销计划"];
+            //页面几个复选框选中展示几条
+            $(".plan input").each(function () {
+              //console.log($(this)[0].name);
+              if ($(this).is(":checked")) {
+                seriesArr.push(obj[$(this)[0].name]);
+              }
+            })
+            //seriesArr[0] = obj["促销计划"];
             option.series = seriesArr;
             myChart.setOption(option,true);
           })
@@ -159,15 +211,20 @@ define([], function () {
           var mapChart = echarts.init(document.getElementById("map-chart"));
           var option = $model.$citychart.data;
           var mapOption = $model.$mapchart.data;
+           var reg = /(省|市|区)/;
           $model.$getMap(param).then(function (res) {
             mapOption.series[0].data = [];
             for (var i = 0; i < res.data.length; i++) {
+              if(res.data[i].provinceName === "内蒙区"){
+                res.data[i].provinceName = "内蒙古"
+              }
               var obj = {
                 "value": res.data[i].scanPv,
-                "name": res.data[i].provinceName
+                "name": res.data[i].provinceName.replace(reg,"")
               }
               mapOption.series[0].data.push(obj)
             }
+            //console.log(mapOption);
             mapChart.setOption(mapOption);
           })
           $model.$City(param).then(function (res) {
@@ -181,7 +238,7 @@ define([], function () {
           })
         })();
 
-        //抽奖次数时间趋势
+        //扫码趋势分析
         (function () {
           var myChart = echarts.init(document.getElementById("award-chart"));
           var option = $model.$awardchart.data
@@ -212,9 +269,17 @@ define([], function () {
               }
             }
             for (var i = 0; i < res.length; i++) {
-              option.xAxis.data.push(res[i].statTime)
+              var x = res[i].statTime || res[i].weekNo
+              option.xAxis.data.push(x)
             }
-            seriesArr[0] = obj["扫码次数"];
+
+            //页面几个复选框选中展示几条
+            $(".award input").each(function () {
+              if ($(this).is(":checked")) {
+                seriesArr.push(obj[$(this)[0].name]);
+              }
+            })
+            //seriesArr[0] = obj["扫码次数"];
             option.series = seriesArr;
             myChart.setOption(option,true);
           })
@@ -230,53 +295,99 @@ define([], function () {
           })
         })();
         //奖品分布
+        // (function () {
+        //   var myChart = echarts.init(document.getElementById("pie1-chart"));
+        //   var pieChart = echarts.init(document.getElementById("pie2-chart"));
+        //   var option = $model.$pie1chart.data;
+        //   var pieOption = $model.$pie2chart.data;
+        //
+        //   $model.$money(param, 1).then(function (res) {
+        //     var res = res.data || [];
+        //     for(var i = 0;i<option.series.length;i++){
+        //       option.series[i].data = [];
+        //     }
+        //     for (var i = 0; i < res.length; i++) {
+        //       var obj = {
+        //         "value": res[i].awardPayPv,
+        //         "name": res[i].awardName
+        //       }
+        //       option.series[0].data.push(obj);
+        //       option.series[1].data.push(obj);
+        //     }
+        //     // console.log(option);
+        //     myChart.setOption(option,true);
+        //     // console.log(res.data);
+        //   })
+        //   $model.$thing(param).then(function (res) {
+        //     var res = res.data || [];
+        //     for(var i = 0;i<option.series.length;i++){
+        //       pieOption.series[i].data = [];
+        //     }
+        //     for (var i = 0; i < res.length; i++) {
+        //       var obj = {
+        //         "value": res[i].awardPayPv,
+        //         "name": res[i].awardName
+        //       }
+        //       pieOption.series[0].data.push(obj);
+        //       pieOption.series[1].data.push(obj);
+        //     }
+        //     pieChart.setOption(pieOption,true);
+        //     // console.log(res.data);
+        //   })
+        //
+        //   // pieOption.series[0].data = pieData;
+        //   // pieOption.series[1].data = pieData;
+        //   // myChart.setOption(option);
+        //   // pieChart.setOption(pieOption);
+        // })();
+        //奖品分布
         (function () {
           var myChart = echarts.init(document.getElementById("pie1-chart"));
           var pieChart = echarts.init(document.getElementById("pie2-chart"));
-          var option = $model.$pie1chart.data;
-          var pieOption = $model.$pie2chart.data;
-
+          var option = $model.$fenbu.data;
+          var jiangoption = _.cloneDeep(option);
+          jiangoption.title.text = "现金红包";
+          var shioption = _.cloneDeep(option);
+          shioption.title.text = "实物奖品";
+          jiangoption.series[0].data = [];
+          jiangoption.yAxis.data = [];
+          shioption.series[0].data = [];
+          shioption.yAxis.data = [];
           $model.$money(param, 1).then(function (res) {
             var res = res.data || [];
-            for(var i = 0;i<option.series.length;i++){
-              option.series[i].data = [];
+            for(var i=0;i<res.length;i++){
+              jiangoption.series[0].data.push(res[i].awardPayPv);
+              jiangoption.yAxis.data.push(res[i].awardName)
             }
-            for (var i = 0; i < res.length; i++) {
-              var obj = {
-                "value": res[i].awardPayPv,
-                "name": res[i].awardName
-              }
-              option.series[0].data.push(obj);
-              option.series[1].data.push(obj);
-            }
-            // console.log(option);
-            myChart.setOption(option,true);
-            // console.log(res.data);
+            myChart.setOption(jiangoption,true);
           })
           $model.$thing(param).then(function (res) {
             var res = res.data || [];
-            for(var i = 0;i<option.series.length;i++){
-              pieOption.series[i].data = [];
-            }
             for (var i = 0; i < res.length; i++) {
-              var obj = {
-                "value": res[i].awardPayPv,
-                "name": res[i].awardName
-              }
-              pieOption.series[0].data.push(obj);
-              pieOption.series[1].data.push(obj);
-            }
-            pieChart.setOption(pieOption,true);
-            // console.log(res.data);
-          })
+              shioption.series[0].data.push(res[i].awardPayPv);
+              shioption.yAxis.data.push(res[i].awardName);
+            };
+            pieChart.setOption(shioption,true);
+          });
+          //   for (var i = 0; i < res.length; i++) {
+          //     var obj = {
+          //       "value": res[i].awardPayPv,
+          //       "name": res[i].awardName
+          //     }
+          //     pieOption.series[0].data.push(obj);
+          //     pieOption.series[1].data.push(obj);
+          //   }
+          //   pieChart.setOption(pieOption,true);
+          //   // console.log(res.data);
+          // })
 
           // pieOption.series[0].data = pieData;
           // pieOption.series[1].data = pieData;
-          // myChart.setOption(option);
-          // pieChart.setOption(pieOption);
+          //  myChart.setOption(option);
+          //  pieChart.setOption(option);
         })();
       }
-      public ();
+       public ();
     }]
   };
 

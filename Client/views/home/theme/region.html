@@ -20,12 +20,12 @@
             <!--搜索-->
             <div class="region-search-r">
               <select class="ui-search" placeholder="请选择">
-                  <option value="month" id="month" selected>月</option>
-                  <option value="week">周</option>
-                  <option value="day" id="day">日</option>
+                <option value="day" id="day" selected>日</option>
+                <option value="week">周</option>
+                <option value="month">月</option>
               </select>
               <!--月、周、日-->
-              <div class="ui-total-date input-append date">
+              <div class="ui-total-date input-append date region-day">
                   <input size="16" type="text" value="" readonly />
                   <span class="add-on"><i class="icon-th"></i></span>
               </div>
@@ -36,14 +36,30 @@
             </div>
             <div class="region-search-r" style="display: none">
               <select class="ui-search" placeholder="请选择">
-                <option value="month">月</option>
-                <option value="week" id="week" selected>周</option>
                 <option value="day" >日</option>
+                <option value="week" id="week" selected>周</option>
+                <option value="month">月</option>
               </select>
               <!--月、周、日-->
               <select class="week">
               </select>
               <select class="region"  autocomplete="off">
+              </select>
+              <!--search-->
+              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
+            </div>
+            <div class="region-search-r" style="display: none">
+              <select class="ui-search" placeholder="请选择">
+                <option value="day">日</option>
+                <option value="week">周</option>
+                <option value="month" id="month" selected>月</option>
+              </select>
+              <!--月、周、日-->
+              <div class="ui-total-date input-append date region-month">
+                <input size="16" type="text" value={{month}} readonly />
+                <span class="add-on"><i class="icon-th"></i></span>
+              </div>
+              <select class="region" autocomplete="off">
               </select>
               <!--search-->
               <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
@@ -64,16 +80,16 @@
                 <i></i>
                 <span>扫码次数时刻趋势</span>
                 <span></span><br />
-                <span>（单位; 次）</span>
+                <span>（单位：次）</span>
               </div>
               <div id="hours-chart"></div>
             </div>
             <div class="region-hours-wrap region-plan-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>扫码次数时间趋势</span>
+                <span>促销效果趋势分析</span>
                 <span></span><br />
-                <span>（单位：次）</span>
+                <span>（单位：次/个）</span>
               </div>
               <div class="region-select-wrap">
                 <div class="checkboxouter plan">
@@ -82,17 +98,17 @@
                   <span>促销计划</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="抽奖次数" />
+                  <input type="checkbox" name="抽奖次数" checked/>
                   <label class="checkbox"></label>
                   <span>抽奖次数</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="中奖数量"/>
+                  <input type="checkbox" name="中奖数量" checked/>
                   <label class="checkbox"></label>
                   <span>中奖数量</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="实发数量"/>
+                  <input type="checkbox" name="实发数量" checked/>
                   <label class="checkbox"></label>
                   <span>实发数量</span>
                 </div>
@@ -102,18 +118,18 @@
             <div class="region-hours-wrap region-bag-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>扫码包数时间趋势</span>
+                <span>扫码烟包数时间趋势</span>
                 <span></span><br />
-                <span>（单位：次）</span>
+                <span>（单位：盒/条）</span>
               </div>
               <div class="region-select-wrap">
                 <div class="checkboxouter bag">
-                  <input type="checkbox" name="包" checked/>
+                  <input type="checkbox" name="盒" checked/>
                   <label class="checkbox"></label>
-                  <span>包</span>
+                  <span>盒</span>
                 </div>
                 <div class="checkboxouter bag">
-                  <input type="checkbox" name="条" />
+                  <input type="checkbox" name="条" checked/>
                   <label class="checkbox"></label>
                   <span>条</span>
                 </div>
@@ -123,7 +139,7 @@
             <div class="region-hours-wrap region-name-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>各规格扫码次数</span>
+                <span>前十规格扫码次数</span>
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>

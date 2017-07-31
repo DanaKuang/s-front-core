@@ -88,6 +88,9 @@ label {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.modal {
+  height: 100%;
+}
 .modal.in .modal-dialog {
   margin: 0 auto;
   transform: translateY(-50%);

@@ -43,7 +43,7 @@ define([], function () {
         // 标签属性的tblUrl设置优先 考虑同1分json多个地方共用
         var tblUrl = attrs.tblUrl || (scope.conf && scope.conf.tblUrl);
 
-        util.uiExtend(scope, defaults, attrs, scope.conf || {}, ['isAutoSize']);
+        util.uiExtend(scope, defaults, attrs, scope.conf || {}, ['tableCls', 'columns', 'rows', 'paging', 'srhFormId', 'rid', 'width', 'isAutoSize', 'isSortable', 'isHide', 'rowDetail']);
 
         // 监听渲染完成
         scope.$on('renderOK', function() {
@@ -90,7 +90,7 @@ define([], function () {
         //conf整个改变 则更新模板的数据
         scope.$watch('conf', function() {
             util.uiExtend(scope, defaults, attrs, scope.conf, ['tableCls', 'columns', 'rows', 'paging', 'srhFormId', 'rid', 'width', 'isAutoSize', 'isSortable', 'isHide', 'rowDetail']);
-        });
+        }, true);
         scope.inifConf = angular.copy(scope.conf);
     }
     return defineObj;

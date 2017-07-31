@@ -22,71 +22,57 @@
 					<div class="ui-panel-box panel">
 
 						<!-- 操作区 -->
-						<div class="panel-body operation">
+						<div class="panel-body operation multi">
 							<div class="col-md-10 col-sm-12 col-xs-6 lft flex">
 								<div class="l flex-item">
 									<div class="category t">
-										<label for="category">活动类型</label>
-										<select class="form-item" name="" id="category">
+										<label for="category" class="label">活动类型</label>
+										<select class="form-item" id="category" ng-model="categoryVal" val="{{categoryVal}}">
 											<option value="">全部</option>
-											<option value="">九宫格</option>
-											<option value="">刮刮卡</option>
-											<option value="">大转盘</option>
+											<option ng-repeat="item in actsampleList" value="{{item.code}}">{{item.name}}</option>
 										</select>
 									</div>
 									<div class="norms b">
-										<label for="status">活动状态</label>
-										<select class="form-item" name="" id="status">
+										<label for="status" class="label">活动状态</label>
+										<select class="form-item" name="" id="status" ng-model="statusVal" val="{{statusVal}}">
 											<option value="">全部</option>
-											<option value="">已停用</option>
-											<option value="">已启用</option>
-											<option value="">已终止</option>
+											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
 										</select>
 									</div>
 								</div>
 								<div class="m flex-item">
 									<div class="status t">
-										<label for="norms">品牌选择</label>
-										<select class="form-item" name="" id="norms">
-											<option value="">全部</option>
-											<option value="">品牌1</option>
-											<option value="">品牌2</option>
-											<option value="">品牌3</option>
+										<label for="norms" class="label">品牌选择</label>
+										<select class="form-item select" name="" id="norms" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple="multiple">
+											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
 										</select>
 									</div>
 									<div class="location b">
-										<label for="norms">规格选择</label>
-										<select class="form-item" name="" id="norms">
-											<option value="">全部</option>
-											<option value="">规格1</option>
-											<option value="">规格2</option>
-											<option value="">规格3</option>
+										<label for="norms" class="label">规格选择</label>
+										<select class="form-item select" name="" id="norms" ng-model="selectSpeci" value="{{selectSpeci}}" multiple="multiple">
+											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 										</select>
 									</div>
 								</div>
 								<div class="r flex-item">
 									<div class="duration t">
-										<label for="location">地区</label>
-										<select class="form-item" name="" id="location">
-											<option value="">全国</option>
-											<option value="">北京</option>
-											<option value="">上海</option>
-										</select>
+										<label for="location" class="label">地区</label>
+										<select class="form-item select" name="" id="location" ng-model="allarea" value="{{allarea}}" multiple="multiple"></select>
 									</div>
 									<div class="keywords b">
-										<label for="keywords">关键字</label>
-										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写">
+										<label for="keywords" class="label">关键字</label>
+										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval" value="{{keysval}}">
 									</div>
 								</div>
 							</div>
 							<div class="col-md-2 col-sm-6 col-xs-6 rt">
-								<button type="submit" id="search" class="btn btn-default search" >搜索</button>
-								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset" >重置</button>
+								<button type="submit" id="search" class="btn btn-default search" ng-click="search($event)">搜索</button>
+								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset">重置</button>
 							</div>
 							<div class="col-md-10 col-sm-12 col-xs-12 time t float-left">
-								<label for="duration">活动时段</label>
-								<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item"> &nbsp;&nbsp;至&nbsp;&nbsp;
-								<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item">
+								<label for="duration" class="label">活动时段</label>
+								<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> &nbsp;&nbsp;至&nbsp;&nbsp;
+								<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
 							</div>
 						</div>
 
@@ -111,7 +97,7 @@
 	    	<div class="modal-header">选择活动模板<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
 		    <div class="modal-body">
 		    	<!-- 活动模板 -->
-		    	<sa-actsample conf="createActModalConf" id="createSampleWrap" class="flex"></sa-actsample>
+		    	<sa-actsample conf="createActModalConf" id="createSampleWrap"></sa-actsample>
 		    </div>
 		    <div class="modal-footer">后续模板敬请期待</div>
 	    </div>					    	
@@ -145,6 +131,78 @@
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         	<button type="button" class="btn btn-primary">确定</button>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 选择礼品模板 -->
+	<div class="modal fade create-realProduct-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">选择礼品<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<!-- 选择礼品列表 -->
+		    	<sa-realproduct conf="realproductConf"></sa-realproduct>
+		    	<!-- 分页区 -->
+					<div class="pagination-wrap">
+						<!-- 分页指令 -->
+						<sa-pagination conf="paginationInnerConf" class="pagination"></sa-pagination>
+					</div>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 选择红包模板 -->
+	<div class="modal fade create-hbProduct-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">选择红包<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<!-- 选择红包列表 -->
+		    	<sa-hbproduct conf="hbproductConf"></sa-hbproduct>
+		    	<!-- 分页区 -->
+					<div class="pagination-wrap">
+						<!-- 分页指令 -->
+						<sa-pagination conf="paginationhbInnerConf" class="pagination"></sa-pagination>
+					</div>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 礼品增库 -->
+	<div class="modal fade add-giftstock-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<div class="input-wrap">
+		    		<label for="">增库数量</label><input type="number" ng-model="giftnumber" value="{{giftnumber}}">
+		    	</div>
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        	<button type="button" class="btn btn-primary" ng-click="confirmGiftStock($event)">确定</button>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
+
+	<!-- 红包增库 -->
+	<div class="modal fade add-hbstock-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<div class="input-wrap">
+		    		<label for="">增加金额</label><input type="number" ng-model="hbnumber" value="{{hbnumber}}">
+		    	</div>
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        	<button type="button" class="btn btn-primary" ng-click="confirmHbStock($event)">确定</button>
 		    </div>
 	    </div>					    	
 	  </div>

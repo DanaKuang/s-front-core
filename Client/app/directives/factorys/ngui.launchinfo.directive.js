@@ -9,7 +9,10 @@ define([], function () {
 
     var launchinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
-            tpl: '/launchinfo.tpl.html'
+            tpl: '/launchinfo.tpl.html',
+            selectCompanyVal: '',
+            selectBrandVal: '',
+            selectSpecificationVal: ''
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -25,13 +28,29 @@ define([], function () {
 
         function linkFn (scope, element, attrs) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectCompanyVal', 'selectBrandVal', 'selectSpecificationVal']);
 
             // 监视conf变化更新 launchinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectCompanyVal', 'selectBrandVal','selectSpecificationVal']);
             }, true);
+
+            scope.$watch('selectCompanyVal', function (n, o, s) {
+                if (n !== o) {
+                    scope.$emit('supplierCode', event, {supplierCode: scope.selectCompanyVal});
+                }
+            })
+
+            scope.$watch('selectBrandVal', function (n, o, s) {
+                if (n !== o) {
+                    var productListArr = [];
+                    n.forEach(function(n, index){
+                        productListArr[index] = {brandCode: n}
+                    })
+                    scope.$emit('brandCode', event, productListArr);
+                }
+            })
 
             $("#selectDurationStart").datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:ss', 
@@ -56,10 +75,6 @@ define([], function () {
                 minView: 2,
                 forceParse: 0
             });
-
-            scope.changeRadio = function () {
-                 console.log(scope.whichday)
-            }
 
         }
 

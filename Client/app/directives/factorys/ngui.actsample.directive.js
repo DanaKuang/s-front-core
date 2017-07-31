@@ -33,13 +33,12 @@ define([], function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['actsampleList', 'type']);
 
-                if (scope.conf) {
-                    scope.actsampleList = scope.conf.data;
-                }
+                scope.actsampleList = scope.conf && scope.conf.data;
             }, true);
             
             scope.newActSample = function(e, type) {
                 var typeData = {type: type};
+                scope.type = type;
                 scope.$emit('typefromActSample', event, typeData);
                 $('.modal-content .close').trigger('click');
             }

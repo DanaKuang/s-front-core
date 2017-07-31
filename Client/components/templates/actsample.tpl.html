@@ -1,6 +1,8 @@
 <div>
-	<div class="flex-item" ng-repeat="item in actsampleList">
-		<img ng-src="{{item.extUrl}}" data-type="{{item.code}}" ng-click="newActSample($events, item.code)" alt="">
-		<p class="text-center">{{item.name}}</p>
+	<div class="sample-list flex">
+		<div class="flex-item" ng-repeat="item in actsampleList" ng-click="newActSample($events, item.code)">
+			<img ng-src="{{item.extUrl}}" alt="">
+			<p class="text-center">{{item.name}}</p>
+		</div>
 	</div>
 </div>

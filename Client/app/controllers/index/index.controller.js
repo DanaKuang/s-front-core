@@ -12,15 +12,24 @@ define([], function () {
     ServiceContent: ['$scope', 'mainViewModel', function ($scope, $model) {
       // 定义模型
 
-      // menu模型数值绑定
-      // $model.getMenuJson().then(function (res) {
-      //   $scope.menuConf = res.data;
-      // });
-
       // nav模型数值绑定
       $model.getNavJson().then(function (res) {
         $scope.navConf = res.data;
       });
+
+      // 获取数据
+      $model.getNav().then(function (res) {
+        var data = res.data || {};
+
+        // $scope.navConf =
+
+      });
+
+      // $model.getMenu({
+      //   parentCode: "0"
+      // }).then(function (res) {
+      //   console.log(res.data);
+      // });
     }]
   };
 

@@ -96,6 +96,7 @@
 .ui-search-block .hours {
     width: 40px;
     top: -2px;
+    margin: 0 5px;
 }
 .ui-search-block .date {
     width: 20%;
@@ -105,7 +106,7 @@
 .ui-search-block >div >label {
     position: relative;
     height: 50px;
-    width: 60px;
+    width: 80px;
     line-height: 50px;
     font-size: 12px;
     color: #8a8a8a;
@@ -164,7 +165,13 @@
 }
 .ui-temp-list,
 .ui-hist-list {
-    padding: 10px 20px;
+    margin: 0 0 30px 30px;
+    padding: 20px 0 0 10px;
+    max-height: 300px;
+    overflow: auto;
+}
+.modal-body {
+    padding: 0;
 }
 .ui-temp-list li,
 .ui-hist-list li {
@@ -211,7 +218,7 @@ button.multiselect {
     white-space: nowrap;
 }
 .ui-result-list {
-    width: calc(100% - 60px);
+    width: calc(100% - 80px);
     float: right;
 }
 .ui-result-list li {

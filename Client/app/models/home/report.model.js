@@ -13,7 +13,8 @@ define([], function () {
         var winUser = '/api/tztx/dataportal/fixatreport/getWinUseProvData' //中奖用户地域
         var userPro = '/api/tztx/dataportal/fixatreport/getScanUseProvData' //扫码用户区域
         var summaryData = '/api/tztx/dataportal/fixatreport/getDailySummaryData' //日报
-        var getProduct = '/api/tztx/dataportal/statistics/getProductOfNoNuit'  //规格
+        var getProductNo = '/api/tztx/dataportal/statistics/getProductOfNoNuit'  //扫码规格
+        var getProduct = '/api/tztx/dataportal/statistics/getProduct'  //扫码规格
 
         this.$winUser = function (params) {
           return request.$Search(winUser,params,true);
@@ -23,6 +24,9 @@ define([], function () {
         }
         this.$summaryData = function (params) {
           return request.$Search(summaryData,params,true);
+        }
+        this.$getProductNo = function () {
+          return request.$Search(getProductNo,{},true);
         }
         this.$getProduct = function () {
           return request.$Search(getProduct,{},true);

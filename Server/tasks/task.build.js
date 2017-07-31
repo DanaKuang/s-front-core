@@ -1,17 +1,18 @@
 /**
  * Author: liubin
  * Create Date: 2017-06-21
- * Description: build
+ * Description: 一键打包
  */
 /**
  * [exports description]
  * @return {[type]} [description]
  */
-module.exports = function () {
+module.exports = function (callback) {
     'use strict';
     var Q = require('q');
     var del = require('del');
     var gulp = require('gulp');
+    var path = require('path');
     var zip = require('gulp-zip');
     var rjs = require('gulp-requirejs');
     var uglify = require('gulp-uglify');
@@ -23,7 +24,7 @@ module.exports = function () {
     var pngquant = require('imagemin-pngquant');
     var minifyJson = require('gulp-jsonminify');
     var minifyHtml = require('gulp-minify-html');
-    var zipfile = 'saas-front-' + dateFormat(new Date(), "yyyy-mm-dd-HH-MM-ss") + '.zip';
+    var zipfile = 'data-front-' + dateFormat(new Date(), "yyyy-mm-dd-HH-MM-ss") + '.zip';
 
     // 第一步 删除目标文件夹
     var firstStep = function () {
@@ -45,7 +46,7 @@ module.exports = function () {
         process.stdout.write(colors.blue('\x20\x20\x20 copy !logs/*\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 copy !bower_components/*\n'));
         gulp.src(['./**', '!bower_components/**/*', '!logs/**/*', '!doc/**/*'])
-            .pipe(gulp.dest('dist/sass-front/Client'))
+            .pipe(gulp.dest('dist/data-front/Client'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 copy js successfully!\n'));
                 deferred.resolve(true);
@@ -61,11 +62,11 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('03)：app -> \n'));
         rjs({
-            baseUrl: process.cwd() + '/dist/sass-front/Client/app',
+            baseUrl: process.cwd() + '/dist/data-front/Client/app',
             name: "app",
             out: "app.min.js"
         }).pipe(uglify())
-        .pipe(gulp.dest(process.cwd() + '/dist/sass-front/Client/app'));
+        .pipe(gulp.dest(process.cwd() + '/dist/data-front/Client/app'));
         process.stdout.write(colors.blue('\x20\x20\x20 uglify app successfully!\n'));
         return true;
     };
@@ -75,19 +76,19 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.blue('\x20\x20\x20 del !app.min, app/* \n'));
         del([
-            'dist/sass-front/Client/app/controllers',
-            'dist/sass-front/Client/app/directives',
-            'dist/sass-front/Client/app/services',
-            'dist/sass-front/Client/app/filters',
-            'dist/sass-front/Client/app/models',
-            'dist/sass-front/Client/app/app.js',
+            'dist/data-front/Client/app/controllers',
+            'dist/data-front/Client/app/directives',
+            'dist/data-front/Client/app/services',
+            'dist/data-front/Client/app/filters',
+            'dist/data-front/Client/app/models',
+            'dist/data-front/Client/app/app.js',
         ], {force: true}, function (error, stdout, stderr) {
-            gulp.src('dist/sass-front/Client/app/app.min.js')
+            gulp.src('dist/data-front/Client/app/app.min.js')
                 .pipe(rename('app.js'))
-                .pipe(gulp.dest('dist/sass-front/Client/app'))
+                .pipe(gulp.dest('dist/data-front/Client/app'))
                 .on('finish', function () {
                     process.stdout.write(colors.blue('\x20\x20\x20 del app/* successfully!\n'));
-                    del(['dist/sass-front/Client/app/app.min.js'], {force: true}, function (error, stdout, stderr) {
+                    del(['dist/data-front/Client/app/app.min.js'], {force: true}, function (error, stdout, stderr) {
                         process.stdout.write(colors.blue('\x20\x20\x20 del app.min successfully!\n'));
                         deferred.resolve(true);
                     });
@@ -104,13 +105,13 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('04)：templates -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify template html \n'));
-        gulp.src('dist/sass-front/Client/components/templates/**.tpl.html')
+        gulp.src('dist/data-front/Client/components/templates/**.tpl.html')
             .pipe(minifyHtml({
                 empty: true,
                 spare: true,
                 quotes: true
             }))
-            .pipe(gulp.dest('dist/sass-front/Client/components/templates'))
+            .pipe(gulp.dest('dist/data-front/Client/components/templates'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify template html successfully!\n'));
                 deferred.resolve(true);
@@ -127,13 +128,13 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('05)：views -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify views html \n'));
-        gulp.src('dist/sass-front/Client/views/**/**.html')
+        gulp.src('dist/data-front/Client/views/**/**.html')
             .pipe(minifyHtml({
                 empty: true,
                 spare: true,
                 quotes: true
             }))
-            .pipe(gulp.dest('dist/sass-front/Client/views/'))
+            .pipe(gulp.dest('dist/data-front/Client/views/'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify views html successfully!\n'));
                 deferred.resolve(true);
@@ -150,9 +151,9 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('06)：data -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify data json \n'));
-        gulp.src('dist/sass-front/Client/datas/**/**.json')
+        gulp.src('dist/data-front/Client/datas/**/**.json')
             .pipe(minifyJson())
-            .pipe(gulp.dest('dist/sass-front/Client/datas/'))
+            .pipe(gulp.dest('dist/data-front/Client/datas/'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify json successfully!\n'));
                 deferred.resolve(true);
@@ -169,7 +170,7 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('07)：images -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify images \n'));
-        gulp.src('dist/sass-front/Client/assets/image/*.{png,jpg,gif,ico}')
+        gulp.src('dist/data-front/Client/assets/image/*.{png,jpg,gif,ico}')
             .pipe(imagemin({
                 optimizationLevel: 7,   //类型：Number  默认：3  取值范围：0-7（优化等级）
                 progressive: true,      //类型：Boolean 默认：false 无损压缩jpg图片
@@ -180,7 +181,7 @@ module.exports = function () {
                 }],                     //不要移除svg的viewbox属性
                 use: [pngquant()]       //使用pngquant深度压缩png图片的imagemin插件
             }))
-            .pipe(gulp.dest('dist/sass-front/Client/assets/image'))
+            .pipe(gulp.dest('dist/data-front/Client/assets/image'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify images successfully!\n'));
                 deferred.resolve(true);
@@ -197,14 +198,14 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('08)：css -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify css \n'));
-        gulp.src('dist/sass-front/Client/assets/style/*.css')
+        gulp.src('dist/data-front/Client/assets/style/*.css')
             .pipe(minifyCss({
                 advanced: true,           //类型：Boolean 默认：true [是否开启高级优化（合并选择器等）]
                 compatibility: 'ie8',     //保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]
                 keepBreaks: false,        //类型：Boolean 默认：false [是否保留换行]
                 keepSpecialComments: '*'  //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀
             }))
-            .pipe(gulp.dest('dist/sass-front/Client/assets/style'))
+            .pipe(gulp.dest('dist/data-front/Client/assets/style'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify css successfully!\n'));
                 deferred.resolve(true);
@@ -221,9 +222,9 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('09)：libs -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify libs \n'));
-        gulp.src('dist/sass-front/Client/assets/libs/*.js')
+        gulp.src('dist/data-front/Client/assets/libs/*.js')
             .pipe(uglify())
-            .pipe(gulp.dest('dist/sass-front/Client/assets/libs'))
+            .pipe(gulp.dest('dist/data-front/Client/assets/libs'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify libs successfully!\n'));
                 deferred.resolve(true);
@@ -241,13 +242,13 @@ module.exports = function () {
         process.stdout.write(colors.green('10)：login/index -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify login/index html \n'));
         // index 压缩后 include问题，暂时未解决
-        gulp.src('dist/sass-front/Client/login.html')
+        gulp.src('dist/data-front/Client/login.html')
             .pipe(minifyHtml({
                 empty: true,
                 spare: true,
                 quotes: true
             }))
-            .pipe(gulp.dest('dist/sass-front/Client'))
+            .pipe(gulp.dest('dist/data-front/Client'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify login/index html successfully!\n'));
                 deferred.resolve(true);
@@ -265,7 +266,7 @@ module.exports = function () {
         process.stdout.write(colors.green('11)：Server -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 copy Server \n'));
         gulp.src(['../Server/**', '!../Server/node_modules/**/*', '!../Server/README.md'])
-            .pipe(gulp.dest('dist/sass-front/Server'))
+            .pipe(gulp.dest('dist/data-front/Server'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 copy Server successfully!\n'));
                 deferred.resolve(true);
@@ -282,9 +283,9 @@ module.exports = function () {
         var deferred = Q.defer();
         process.stdout.write(colors.green('12)：Server -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify js \n'));
-        gulp.src('dist/sass-front/Server/**/*.js')
+        gulp.src('dist/data-front/Server/**/*.js')
             .pipe(uglify())
-            .pipe(gulp.dest('dist/sass-front/Server'))
+            .pipe(gulp.dest('dist/data-front/Server'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 minify Server successfully!\n'));
                 deferred.resolve(true);
@@ -303,20 +304,26 @@ module.exports = function () {
         process.stdout.write(colors.blue('\x20\x20\x20 zip packing... \n'));
         gulp.src([
             'dist/**',
-            '!dist/sass-front/Client/doc/**/*',
-            '!dist/sass-front/Client/logs/**/*',
-            '!dist/sass-front/Client/bower_components/**/*',
-            '!dist/sass-front/Server/README.md',
-            '!dist/sass-front/Server/node_modules/**/*'
+            '!dist/data-front/Client/doc/**/*',
+            '!dist/data-front/Client/logs/**/*',
+            '!dist/data-front/Client/bower_components/**/*',
+            '!dist/data-front/Server/README.md',
+            '!dist/data-front/Server/node_modules/**/*'
         ])
         .pipe(zip(zipfile))
         .pipe(gulp.dest('dist'))
         .on('finish', function () {
             process.stdout.write(colors.blue('\x20\x20\x20 zip packed successfully!\n'));
-            del('dist/sass-front', {force: true}, function (error, stdout, stderr) {
-                process.stdout.write(colors.blue('\x20\x20\x20 del sass-front successfully!\n'));
-                process.stdout.write(colors.green('\x20\x20\x20 BUILD SUCCESSFULLY!\n'));
-                deferred.resolve(true);
+            // 觉得删除不好，保留
+            // del('dist/data-front', {force: true}, function (error, stdout, stderr) {
+            //     process.stdout.write(colors.blue('\x20\x20\x20 del data-front successfully!\n'));
+            //     process.stdout.write(colors.green('\x20\x20\x20 BUILD SUCCESSFULLY!\n'));
+            //     deferred.resolve(true);
+            // });
+            deferred.resolve(true);
+            !!callback && callback({
+                filepath: path.join(process.cwd(), '/dist/'+zipfile),
+                filename: zipfile
             });
         })
         .on('error', function () {

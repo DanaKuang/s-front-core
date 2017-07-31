@@ -10,22 +10,22 @@ define([], function () {
     ServiceName: 'specViewModel',
     ServiceContent: ['request', function (request) {
       this.$model = function () {
-        var stattime = new Date().getFullYear()+"-"+(new Date().getMonth()+1)   +"-"+(new Date().getDate()-1);
+        var stattime = new Date().getFullYear()+"-"+(new Date().getMonth()+1)   +"-"+new Date().getDate();
         var Default =  {
-          "productId":"SP-U2K9C926D7V6",
-          "statTime":"2017-07-17",
-          "statType":"month"
+          "productSn":"6901028201711",
+          "statTime":stattime,
+          "statType":"day"
         };
         var awardDefault =  {
-          "productId":"111",
-          "statTime":"2017-07-17",
+          "productSn":"6901028201711",
+          "statTime":stattime,
           "statType":"day",
           "awardFlag":2
         };
         var hourDefault =  {
-          "provinceId":"111",
-          "statTime":"2017-07-17",
-          "statType":"month",
+          "productSn":"6901028201711",
+          "statTime":stattime,
+          "statType":"day",
           "flag":2
         };
 
@@ -38,11 +38,12 @@ define([], function () {
         var MAP_JSON_URL = '/statics/home/spec/map.json'             //地图
         var CHINA_JSON_URL = '/statics/home/kpi/china.json';         // 地图JSON
         var DRAW_JSON_URL = '/statics/home/spec/draw.json';         // 奖品领取
-        var PIE1_JSON_URL = '/statics/home/spec/pie1.json';         // 奖品分布
-        var PIE2_JSON_URL = '/statics/home/spec/pie2.json';         // 奖品分布
+        // var PIE1_JSON_URL = '/statics/home/spec/pie1.json';         // 奖品分布
+        // var PIE2_JSON_URL = '/statics/home/spec/pie2.json';         // 奖品分布
+        var fenBu_JSON_URL = '/statics/home/spec/fenbu.json';
 
 
-        var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //省份下拉列表
+        var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格
         var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';  //周下拉列表
         var specification = "/api/tztx/dataportal/statistics/specificationKPI"  //新增扫码人数
         var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';  //时刻分析图
@@ -65,8 +66,9 @@ define([], function () {
         this.$draw = request.$Query(DRAW_JSON_URL);
         this.$mapchart = request.$Query(MAP_JSON_URL);
         this.$chinaJson = request.$Query(CHINA_JSON_URL);
-        this.$pie1chart = request.$Query(PIE1_JSON_URL);
-        this.$pie2chart = request.$Query(PIE2_JSON_URL);
+        // this.$pie1chart = request.$Query(PIE1_JSON_URL);
+        // this.$pie1chart = request.$Query(PIE1_JSON_URL);
+         this.$fenbu = request.$Query(fenBu_JSON_URL);
 
         this.$getProduct = function(){
           return request.$Search(getProduct,{},true);
@@ -76,12 +78,13 @@ define([], function () {
         }
         this.$specfication = function (params) {
           var option = params || Default;
-          console.log(option);
+          //console.log(option);
           return request.$Search(specification,option,true);
         }
         this.$hourTrend = function(params){
-          var params = params || hourDefault;
-          return request.$Search(hourTrend,params,true);
+          var option = _.cloneDeep(params) || hourDefault;
+          option.flag = 2;
+          return request.$Search(hourTrend,option,true);
         }
         this.$getMap = function (params) {
           var option = params || Default;
@@ -100,16 +103,16 @@ define([], function () {
           return request.$Search(drawTimes,option,true);
         }
         this.$money = function (params,flag) {
-          var option = params || awardDefault;
+          var option = _.cloneDeep(params) || awardDefault;
           if(flag){
-            option.awardFlag = 1;
+            option.awardFlag = 2;
           }
           return request.$Search(getAward,option,true);
         }
         this.$thing = function (params,flag) {
-          var option = params || awardDefault;
+          var option = _.cloneDeep(params) || awardDefault;
           if(!flag){
-            option.awardFlag = 2;
+            option.awardFlag = 1;
           }
           return request.$Search(getAward,option,true);
         }

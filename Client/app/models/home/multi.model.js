@@ -31,10 +31,10 @@ define([], function () {
         var SAVE_HISTORY_API = "/api/tztx/dataportal/statistics/saveQueryRecord"; // 保存查询接口
 
         // 查询
-        var GET_BRAND_DATA = "/api/tztx/dataportal/statistics/getBrand";          // 获取品牌
-        var GET_PRODUCT_DATA = "/api/tztx/dataportal/statistics/getProduct";      // 获取规格
-        var GET_CITY_DATA = "/api/tztx/dataportal/statistics/getCitysByProvince"; // 获取市
-        var GET_PROVINCE_DATA = "/api/tztx/dataportal/statistics/getProvince";    // 获取省
+        var GET_BRAND_DATA = "/api/tztx/dataportal/statistics/getBrand";            // 获取品牌
+        var GET_PRODUCT_DATA = "/api/tztx/dataportal/statistics/getProductOfNoNuit";// 获取规格
+        var GET_CITY_DATA = "/api/tztx/dataportal/statistics/getCitysByProvince";   // 获取市
+        var GET_PROVINCE_DATA = "/api/tztx/dataportal/statistics/getProvince";      // 获取省
 
         this.$modals = request.$Query(MODALS_JSON);
 
@@ -52,9 +52,13 @@ define([], function () {
         // 获取品牌
         this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
         // 根据品牌获取规格
-        this.$product = request.$Search(GET_PRODUCT_DATA, {}, true);
+        this.getProduct = function (params) {
+          return request.$Search(GET_PRODUCT_DATA, params, true);
+        };
         // 获取省
-        this.$province = request.$Search(GET_PROVINCE_DATA, {}, true);
+        this.getProvince = function (params) {
+          return request.$Search(GET_PROVINCE_DATA, params, true);
+        };
         // 根据省获取市
         this.getCity = function (params) {
           return request.$Search(GET_CITY_DATA, params, true);

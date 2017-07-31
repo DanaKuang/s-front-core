@@ -20,12 +20,12 @@
             <!--搜索-->
             <div class="region-search-r spec-search">
               <select class="ui-search" placeholder="请选择">
-                <option value="month" id="month" selected>月</option>
+                <option value="day" id="day" selected>日</option>
                 <option value="week">周</option>
-                <option value="day" id="day">日</option>
+                <option value="month">月</option>
               </select>
               <!--月、周、日-->
-              <div class="ui-total-date input-append date">
+              <div class="ui-total-date input-append date spec-day">
                 <input size="16" type="text" value="" readonly />
                 <span class="add-on"><i class="icon-th"></i></span>
               </div>
@@ -36,9 +36,9 @@
             </div>
             <div class="region-search-r spec-search" style="display: none">
               <select class="ui-search" placeholder="请选择">
-                <option value="month">月</option>
-                <option value="week" id="week" selected>周</option>
                 <option value="day" >日</option>
+                <option value="week" id="week" selected>周</option>
+                <option value="month">月</option>
               </select>
               <!--月、周、日-->
               <select class="week">
@@ -48,17 +48,33 @@
               <!--search-->
               <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
             </div>
+            <div class="region-search-r spec-search" style="display: none">
+              <select class="ui-search" placeholder="请选择">
+                <option value="day">日</option>
+                <option value="week">周</option>
+                <option value="month" id="month" selected>月</option>
+              </select>
+              <!--月、周、日-->
+              <div class="ui-total-date input-append date spec-month">
+                <input size="16" type="text" value="" readonly />
+                <span class="add-on"><i class="icon-th"></i></span>
+              </div>
+              <select class="region spec" autocomplete="off">
+              </select>
+              <!--search-->
+              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
+            </div>
             <div class="spec-wrap">
               <div class="col-md-4">
                 <img src="../../../assets/image/yuxi.jpg" class="img" />
               </div>
               <div class="col-md-4">
-                <span class="count">本日扫码次数：<i>{{spec.count}}</i>次</span><br />
-                <span class="active">本日活跃用户：<i>{{spec.active}}</i>人</span><br />
+                <span class="count">{{spec.daycount}}：<i>{{spec.count}}</i>次</span><br />
+                <span class="active">{{spec.dayactive}}：<i>{{spec.active}}</i>人</span><br />
               </div>
               <div class="col-md-4">
-                <span class="bag">本日扫码包数：<i>{{spec.bag}}</i>次</span><br />
-                <span class="reduce">本月新增扫码数：<i>{{spec.reduce}}</i>人</span><br />
+                <span class="bag">{{spec.daybag}}：<i>{{spec.bag}}</i>次</span><br />
+                <span class="reduce">{{spec.dayreduce}}：<i>{{spec.reduce}}</i>人</span><br />
               </div>
             </div>
             <div class="region-hours-wrap">
@@ -73,7 +89,7 @@
             <div class="region-hours-wrap spec-plan-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>扫码次数时间趋势</span>
+                <span>促销效果趋势分析</span>
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
@@ -84,17 +100,17 @@
                   <span>促销计划</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="抽奖次数" />
+                  <input type="checkbox" name="抽奖次数" checked/>
                   <label class="checkbox"></label>
                   <span>抽奖次数</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="中奖数量"/>
+                  <input type="checkbox" name="中奖数量" checked/>
                   <label class="checkbox"></label>
                   <span>中奖数量</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="实发数量"/>
+                  <input type="checkbox" name="实发数量" checked/>
                   <label class="checkbox"></label>
                   <span>实发数量</span>
                 </div>
@@ -114,7 +130,7 @@
             <div class="region-hours-wrap spec-award-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>扫码次数时间趋势</span>
+                <span>扫码趋势分析</span>
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
@@ -125,17 +141,17 @@
                   <span>扫码次数</span>
                 </div>
                 <div class="checkboxouter award">
-                  <input type="checkbox" name="有效扫码数" />
+                  <input type="checkbox" name="有效扫码数" checked/>
                   <label class="checkbox"></label>
                   <span>有效扫码数</span>
                 </div>
                 <div class="checkboxouter award">
-                  <input type="checkbox" name="抽奖次数" />
+                  <input type="checkbox" name="抽奖次数" checked/>
                   <label class="checkbox"></label>
                   <span>抽奖次数</span>
                 </div>
                 <div class="checkboxouter award">
-                  <input type="checkbox" name="奖品领取"/>
+                  <input type="checkbox" name="奖品领取" checked/>
                   <label class="checkbox"></label>
                   <span>奖品领取</span>
                 </div>
@@ -150,14 +166,28 @@
                 <span>（单位：个）</span>
               </div>
               <div class="col-md-6">
-                <div class="spec-back"></div>
                 <div id="pie1-chart"></div>
               </div>
               <div class="col-md-6">
-                <div class="spec-back"></div>
                 <div id="pie2-chart"></div>
               </div>
             </div>
+            <!--<div class="region-hours-wrap spec-pie-wrap">-->
+              <!--<div class="hours-title">-->
+                <!--<i></i>-->
+                <!--<span>奖品分布</span>-->
+                <!--<span></span><br />-->
+                <!--<span>（单位：个）</span>-->
+              <!--</div>-->
+              <!--<div class="col-md-6">-->
+                <!--<div class="spec-back"></div>-->
+                <!--<div id="pie1-chart"></div>-->
+              <!--</div>-->
+              <!--<div class="col-md-6">-->
+                <!--<div class="spec-back"></div>-->
+                <!--<div id="pie2-chart"></div>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
         </div>
       </div>

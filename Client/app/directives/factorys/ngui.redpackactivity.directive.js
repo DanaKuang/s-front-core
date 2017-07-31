@@ -32,9 +32,8 @@ define([], function () {
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['commonActivity']);
             }, true);
 
-            $('.pop-back').on('click', function(){
-                $(this).parents('.pop').addClass('hidden');
-            })
+            var allconfigtemplateScope = angular.element('.pop').scope();
+            scope.pageName = allconfigtemplateScope.pageName;
 
         }
 

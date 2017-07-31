@@ -16,7 +16,7 @@
       "endAngle":-25,
       "min": 0,
       "max": "",
-      "splitNumber": 5,
+      "splitNumber": 2,
       "radius": "50%",
       "axisLine": {
         "lineStyle": {

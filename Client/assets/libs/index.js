@@ -10,13 +10,17 @@ requirejs.config({
   baseUrl: '/statics',
   waitSeconds: 0,
   paths: {
+    jquery: [
+      'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
+      'bower_components/jquery/dist/jquery'
+    ],
     lodash: [
       'https://cdn.bootcss.com/lodash.js/3.10.1/lodash.min',
       'bower_components/lodash/lodash'
     ],
-    jquery: [
-      'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
-      'bower_components/jquery/dist/jquery'
+    d3: [
+      'https://cdn.bootcss.com/d3/4.9.1/d3.min',
+      'bower_components/d3/d3'
     ],
     bootstrap: [
       'https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
@@ -32,7 +36,7 @@ requirejs.config({
     ],
     // echarts: 'bower_components/echarts/dist/echarts',
     angular: [
-      'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
+      // 'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
       'bower_components/angular/angular'
     ],
     angularCookies: [
@@ -43,18 +47,17 @@ requirejs.config({
       'https://cdn.bootcss.com/angular.js/1.3.20/angular-animate.min',
       'bower_components/angular-animate/angular-animate'
     ],
-    d3: [
-      'https://cdn.bootcss.com/d3/4.9.1/d3.min',
-      'bower_components/d3/d3'
-    ],
     app: 'app/app'
   },
   shim: {
+    jquery: {
+      exports: '$'
+    },
     lodash: {
       exports: '_'
     },
-    jquery: {
-      exports: '$'
+    d3: {
+      exports: 'd3'
     },
     bootstrap: {
       deps: ['jquery']
@@ -66,6 +69,7 @@ requirejs.config({
       deps: ['jquery']
     },
     angular: {
+      deps: ['jquery'],
       exports: 'angular'
     },
     // echarts: {
@@ -77,9 +81,6 @@ requirejs.config({
     angularAnimate: {
       deps: ['angular']
     },
-    d3: {
-      exports: 'd3'
-    },
     app: {
       deps: [
         'datetimepicker'
@@ -87,16 +88,16 @@ requirejs.config({
     }
   },
   deps: [
-    'lodash',
     'jquery',
+    'lodash',
+    'd3',
     'bootstrap',
     'datetimepicker',
     'bootstrapMultiselect',
     // 'echarts',
     'angular',
     'angularCookies',
-    'angularAnimate',
-    'd3'
+    'angularAnimate'
   ],
   callback: function() {
     require(['app']); //引导应用初始化

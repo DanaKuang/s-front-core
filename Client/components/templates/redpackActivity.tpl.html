@@ -1,6 +1,6 @@
 <div>
 	<div class="pop-header">
-		<p class="pop-title float-left">新建活动 > 微信红包</p>
+		<p class="pop-title float-left">新建活动 > {{pageName}}</p>
 		<sa-popback></sa-popback>
 	</div>
 	<div class="ui-panel-box panel border-box">
@@ -10,152 +10,22 @@
 				<!-- 基本信息 -->
 				<div class="basic config-item">
 					<h6>基本信息</h6>
-					<div class="activity-name configuration-item">
-						<input type="text" id="activityName" placeholder="请输入活动名称">
-					</div>
-					<div class="file-instructions configuration-item">
-						<input type="file" multiple id="fileInstructions">
-					</div>
-					<div class="activity-priority configuration-item">
-						<input type="text" id="activityPriority" placeholder="请指明活动优先级">
-					</div>
+					<sa-basicInfo conf="basicInfoConf"></sa-basicInfo>
 				</div>
 				<!-- 参与设置 -->
 				<div class="participate-relate config-item">
 					<h6>参与设置</h6>
-					<div class="participate-integral configuration-item">
-						<input type="text" id="pariticipateIntegral">
-					</div>
-					<div class="per-person-day configuration-item">
-						<input type="text" id="perPersonDay">
-					</div>
-					<div class="per-person configuration-item">
-						<input type="text" id="perPerson">
-					</div>
+					<sa-participateInfo conf="participateInfoConf"></sa-participateInfo>
 				</div>
 				<!-- 投放设置 -->
 				<div class="launch-relate config-item">
 					<h6>投放设置</h6>
-					<div class="select-company configuration-item">
-						<select id="selectCompany">
-							<option value="">全部</option>
-							<option value="">南昌</option>
-						</select>
-					</div>
-					<div class="select-brand configuration-item">
-						<select id="selectBrand">
-							<option value="">全部</option>
-							<option value="">南昌</option>
-						</select>
-					</div>
-					<div class="select-specification configuration-item">
-						<select type="text" id="selectSpecification">
-							<option value="">全部</option>
-							<option value="">南昌</option>
-						</select>
-					</div>
-					<div class="select-area configuration-item">
-						<select id="selectArea">
-							<option value="">全部</option>
-							<option value="">南昌</option>
-						</select>
-					</div>
-					<div class="select-duration configuration-item">
-						<input id="selectDurationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime"> &nbsp;&nbsp;至&nbsp;&nbsp;
-						<input id="selectDurationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime">
-						<div class="remark">
-							<input type="radio" name="timeduartion"><label for="">仅选择此时段<strong>工作日</strong></label>
-							<input type="radio" name="timeduartion"><label for="">仅选择此时段<strong>节假日</strong></label>
-							<input type="radio" name="timeduartion"><label for="">均包括</label>
-						</div>
-					</div>
+					<sa-launchInfo conf="launchInfoConf"></sa-launchInfo>
 				</div>
 				<!-- 中奖设置 -->
 				<div class="prize-relate config-item">
 					<h6>中奖设置</h6>
-					<!-- 首抽 -->
-					<div class="first-draw">
-						<input type="checkbox" class="first-draw-cbox"><span>首抽必中</span>
-						<!-- 首抽中奖设置 -->
-						<div class="first-draw-prize-wrap">
-							<h6>首抽用户设置</h6>
-							<div class="draw-prize-wrap">
-								<div class="prize-config border-box">
-									<div class="configuration-item">
-										<input type="text" id="">
-									</div>
-									<div class="configuration-item radio-wrap">
-										<div class="radio-group">
-											<input checked="true" type="radio" name="redpack-only" value="微信红包"><label for="">微信红包</label>
-										</div>
-									</div>
-									<div class="configuration-item">
-										<button class="btn btn-default add-prize">+选择红包模板</button>
-										<div class="random-hb">
-											<input type="radio" name="randomorfixed"><label for="">随机金额</label>
-											<input type="text">元 —— <input type="text">元
-										</div>
-										<div class="fixed-hb">
-											<input type="radio" name="randomorfixed"><label for="">固定金额</label>
-											<input type="text">元
-										</div>
-									</div>
-									<div class="configuration-item">
-										<input type="number" id="">
-										<button class="btn btn-default add-inventory">增库</button>
-										<div class="present-integral">
-											<input type="checkbox"><label for="">同时赠送积分</label>
-											<input type="number">积分
-										</div>
-									</div>
-								</div>
-							</div>
-							<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn">+新增奖项</button>
-						</div>
-					</div>
-					<!-- 非首抽 -->
-					<div class="non-first-draw">
-						<h6>非首抽用户设置</h6>
-						<!-- 非首抽中奖设置 -->
-						<div class="non-first-draw-wrap">
-							<div class="draw-prize-wrap">
-								<div class="prize-config border-box">
-									<div class="configuration-item">
-										<input type="text">
-									</div>
-									<div class="configuration-item">
-										<input type="text" id="">
-									</div>
-									<div class="configuration-item radio-wrap">
-										<div class="radio-group">
-											<input checked="checked" type="radio" name="first-radio" value="微信红包"><label for="">微信红包</label>
-										</div>
-									</div>
-									<div class="configuration-item">
-										<button class="btn btn-default add-prize">+选择红包模板</button>
-										<div class="random-hb">
-											<input type="radio" name="randomorfixed"><label for="">随机金额</label>
-											<input type="text">元 —— <input type="text">元
-										</div>
-										<div class="fixed-hb">
-											<input type="radio" name="randomorfixed"><label for="">固定金额</label>
-											<input type="text">元
-										</div>
-									</div>
-									<div class="configuration-item">
-										<input type="number" id="">
-										<button class="btn btn-default add-inventory">增库</button>
-										<div class="present-integral">
-											<input type="checkbox"><label for="">同时赠送积分</label>
-											<input type="number">积分
-										</div>
-									</div>
-								</div>
-							</div>
-							<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn">+新增奖项</button>
-						</div>
-					</div>
-
+					<sa-hbsetprize conf="hbsetprizeConf"></sa-hbsetprize>
 				</div>
 				<!-- 按钮区 -->
 				<div class="btn-area">

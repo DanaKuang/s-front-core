@@ -13,7 +13,7 @@ define([], function () {
         dateSearch.dateConf = function (type, ele) {
             var format = '',
                 minView = '';
-            format = (type == 'month'?'yyyy-MM':(type == 'year'?'yyyy':'yyyy-mm-dd'));
+            format = (type == 'month'?'yyyy-mm':(type == 'year'?'yyyy':'yyyy-mm-dd'));
             minView = (type == 'month' ? 2 : (type == 'year' ? 3 : 2));
             $(ele).find('.date').datetimepicker({
                 language:  'zh-CN',  //日期

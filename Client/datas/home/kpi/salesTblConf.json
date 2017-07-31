@@ -40,6 +40,7 @@
     },
     "tblUrl": "/api/tztx/dataportal/data/getProvinceKPI",
     "childUrl": "/api/tztx/dataportal/data/getCityKPI",
+    "mediaType": true,
     "checkType": "checkbox",
     "rowClick": false,
     "hasSearch": false,

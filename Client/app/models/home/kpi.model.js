@@ -11,7 +11,7 @@ define([], function () {
     ServiceContent: ['request', '$filter', function (request, $filter) {
       this.$model = function () {
         var historyParams = {
-          'provinceName': '湖北',
+          'provinceName': '',
           'statTime': $filter("date")((+new Date - 60*60*24*1000), 'yyyy-MM-dd'),
           'statType': 'day'
         };
@@ -44,11 +44,11 @@ define([], function () {
         this.$sfConf = request.$Query(SF_JSON_CONF);
 
         this.$mapData = request.$Search(MAPDATA_JSON_URL);                        // 地图数据
-        this.$salesData = request.$Search(PROVINCE_JSON_URL, {key:'scantimes'});
-        this.$formatData = request.$Search(SPECIFIC_JSON_URL, {key: 'scantimes'});
-        this.$fscanData = request.$Search(FIRSTTIME_JSON_URL);
+        this.$salesData = request.$Search(PROVINCE_JSON_URL, {key:'scantimes'}, true);
+        // this.$formatData = request.$Search(SPECIFIC_JSON_URL, {key: 'scantimes'});
+        // this.$fscanData = request.$Search(FIRSTTIME_JSON_URL);
 
-        this.$historyScan = request.$Search(HISTORY_JSON_URL, historyParams, true);
+        // this.$historyScan = request.$Search(HISTORY_JSON_URL, historyParams, true);
 
         // 请求数据封装成函数，实时调用
         // 获取实时扫码数
@@ -73,11 +73,15 @@ define([], function () {
         };
         // 省份指标
         this.getProvinceKPI = function () {
-          return request.$Search(PROVINCE_JSON_URL);
+          return request.$Search(PROVINCE_JSON_URL, {key: 'scantimes'}, true);
         };
         // 规格指标
         this.getSpecificationKPI = function () {
-          return request.$Search(SPECIFIC_JSON_URL);
+          return request.$Search(SPECIFIC_JSON_URL, {key: 'scantimes'}, true);
+        };
+        // 首扫
+        this.getFirstscanKPI = function (params) {
+          return request.$Search(FIRSTTIME_JSON_URL, params, true);
         };
         // 城市列表
         this.getCityKPI = function () {

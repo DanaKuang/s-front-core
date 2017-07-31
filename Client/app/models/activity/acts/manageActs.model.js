@@ -18,33 +18,59 @@ define([], function () {
 
             //定义资源
             var $model = this;
-            // 活动列表
-            var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
             // 模板列表
             var GET_ACT_SAMPLE_LIST = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
+            // 活动列表
+            var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
+            // 活动状态
+            var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/common/queryDimDataStatus';
+            // 所有品牌
+            var GET_ALL_BRANDS = '/api/tztx/saas/saotx/brand/queryBrands';
             // 模板列表对应的配置弹窗
             var GET_TEMPLATE_SPECIFIC = '/api/tztx/saas/saotx/template/template_common_list';
-            // 厂家
-
-            // 品牌
-
-            // 规格
-
+            // 供应商
+            var GET_SUPPLIER_COMPANY = '/api/tztx/saas/saotx/common/querySupplier';
+            // 根据供应商选择品牌
+            var GET_BRAND_LIST = '/api/tztx/saas/saotx/common/queryBrand'
+            // 根据品牌选择规格
+            var GET_PRODUCT_LIST = '/api/tztx/saas/saotx/common/queryProduct';
             // 地区
             var GET_TIER_AREA = '/api/tztx/saas/saotx/common/queryRegionByParentCode';
-            var GET_AREA_LIST = '/api/tztx/saas/saotx/common/queryAllRegion';
+
+            // 礼品、红包选择模板
+            var GET_PRODUCT_CHOOSE_LIST = '/api/tztx/saas/saotx/product/queryMetraList';
+
+            // 礼品增库
+            var ADD_GIFT_STOCK = '/api/tztx/saas/saotx/poolGift/addPool';
+
+            // 红包增库
+            var ADD_HB_STOCK = '/api/tztx/saas/saotx/poolRedpack/addPool';
+
+            // 文件上传到阿里云服务器
+            var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/common/commonUpload';
 
             // 新增活动
             var ADD_NEW_ACTIVITY = '/api/tztx/saas/saotx/activity/update';
 
-            // 获取活动列表、页码
+
+            // 模板列表
+            $model.getActSampleList = function () {
+                return request.$Search(GET_ACT_SAMPLE_LIST)
+            }
+
+            // 活动状态
+            $model.getActivityStatus = function () {
+                return request.$Search(GET_ACTIVITY_STATUS)
+            }
+
+            // 活动列表、页码
             $model.getActivityList = function (data) {
                 return request.$Search(GET_ACTIVITY_LIST, data)
             }
 
-            // 获取活动模板，是九宫格、大转盘、还是刮刮卡...
-            $model.getActSampleList = function () {
-                return request.$Search(GET_ACT_SAMPLE_LIST)
+            // 所有品牌
+            $model.getAllBrands = function () {
+                return request.$Search(GET_ALL_BRANDS);
             }
 
             // 获取模板对应的配置页面
@@ -53,18 +79,43 @@ define([], function () {
             }
 
             // 获取厂家
+            $model.getSupplierCompany = function () {
+                return request.$Search(GET_SUPPLIER_COMPANY)
+            }
 
-            // 获取品牌
+            // 根据供应商，获取品牌
+            $model.getBrandList = function (data) {
+                return request.$Search(GET_BRAND_LIST, data)
+            }
 
-            // 获取规格
+            // 根据品牌，获取规格
+            $model.getProductList = function (data) {
+                return request.$Search(GET_PRODUCT_LIST, data)
+            }
 
             // 获取地区
             $model.getTierArea = function (data) {
                 return request.$Search(GET_TIER_AREA, data);
             }
 
-            $model.getAreaList = function () {
-                return request.$Search(GET_AREA_LIST)
+            // 礼品/红包选择列表
+            $model.getProductChooseList = function (data) {
+                return request.$Search(GET_PRODUCT_CHOOSE_LIST, data);
+            }
+
+            // 文件上传
+            $model.uploadfiletoaly = function (data) {
+                return request.$Search(UPLOAD_FILE_ALY, data);
+            }
+
+            // 礼品增库
+            $model.addgiftstock = function (data) {
+                return request.$Search(ADD_GIFT_STOCK, data)
+            }
+
+            // 红包增库
+            $model.addhbstock = function (data) {
+                return request.$Search(ADD_HB_STOCK, data);
             }
 
             // 新增活动

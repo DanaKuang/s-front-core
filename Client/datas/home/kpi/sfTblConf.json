@@ -11,17 +11,17 @@
             "align": "center"
         }, {
             "name": "A",
-            "label": "重点销区",
+            "label": "堡垒型",
             "colspan": 2,
             "align": "center"
         }, {
             "name": "B",
-            "label": "发展销区",
+            "label": "发展型",
             "colspan": 2,
             "align": "center"
         }, {
             "name": "C",
-            "label": "普通销区",
+            "label": "潜力型",
             "colspan": 2,
             "align": "center"
         }],
@@ -31,17 +31,12 @@
             "align": "center",
             "ishide": true
         }, {
-            "name": "A_scanFirstTime",
-            "label": "首扫时间",
-            "sortable": false,
-            "align": "center"
-        }, {
             "name": "A_orderFirstTime",
             "label": "首订单时间",
             "sortable": false,
             "align": "center"
         }, {
-            "name": "B_scanFirstTime",
+            "name": "A_scanFirstTime",
             "label": "首扫时间",
             "sortable": false,
             "align": "center"
@@ -51,13 +46,18 @@
             "sortable": false,
             "align": "center"
         }, {
-            "name": "C_scanFirstTime",
+            "name": "B_scanFirstTime",
             "label": "首扫时间",
             "sortable": false,
             "align": "center"
         }, {
             "name": "C_orderFirstTime",
             "label": "首订单时间",
+            "sortable": false,
+            "align": "center"
+        }, {
+            "name": "C_scanFirstTime",
+            "label": "首扫时间",
             "sortable": false,
             "align": "center"
         }]

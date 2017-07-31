@@ -32,13 +32,15 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl']);
-
                 // 一开始进入页面的时候scope.conf是undefined
-                if (scope.conf) {
-                    var data = scope.conf.data[0];
-                    scope.confUrl = data.confUrl;
-                    scope.pageName = data.pageName;
-                }
+                scope.confUrl = scope.conf && scope.conf.data[0].confUrl;
+                scope.pageName = scope.conf && scope.conf.data[0].pageName;
+                // 上下两种方式都行
+                // if (scope.conf) {
+                //     var data = scope.conf.data[0];
+                //     scope.confUrl = data.confUrl;
+                //     scope.pageName = data.pageName;
+                // }
             }, true);
 
         }

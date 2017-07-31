@@ -5,7 +5,7 @@
  * Description: kpi
  */
 -->
-
+<link rel="stylesheet" href="statics/assets/style/panel.css">
 <div class="animated fadeInRight" ng-controller="KPICtrl">
   <div class="container-fluid">
     <div class="ui-content-box row">
@@ -31,17 +31,17 @@
                 <!--当日扫码次数-->
                 <div class="ui-scan-times ui-scan-detail">
                   <p>当日扫码总次数：<span id="scan_day">0</span><em>&nbsp;次</em></p>
-                  <p>当日扫码总次数：<span id="scan_day_rate"></span><em>%</em><i class="up"></i></p>
+                  <!-- <p>当日扫码总次数环比：<span id="scan_day_rate"></span><em>%</em><i class="up"></i></p> -->
                 </div>
                 <!--当日扫码总数-->
                 <div class="ui-scan-total ui-scan-detail">
                   <p>当日扫码总人数：<span id="scan_user">0</span><em>&nbsp;人</em></p>
-                  <p>当日扫码总人数：<span id="scan_user_rate"></span><em>%</em><i class="up"></i></p>
+                  <!-- <p>当日扫码总人数环比：<span id="scan_user_rate"></span><em>%</em><i class="up"></i></p> -->
                 </div>
                 <!--当日扫码次数环比-->
                 <div class="ui-scan-rate ui-scan-detail">
-                  <p>当日扫码次数环比：<span id="scan_code">0</span><em>&nbsp;包</em></p>
-                  <p>当日扫码总人数：<span id="scan_code_rate"></span><em>%</em><i class="down"></i></p>
+                  <p>当日扫码总烟包数：<span id="scan_code">0</span><em>&nbsp;包</em></p>
+                  <!-- <p>当日扫码次数环比：<span id="scan_code_rate"></span><em>%</em><i class="down"></i></p> -->
                 </div>
 
               </div>
@@ -59,9 +59,9 @@
         </div>
         <div class="panel rate">
           <ul class="ui-nav-table-panel nav nav-pills">
-            <li class="active"><a href="#salesTarget" data-toggle="tab">销区指标</a></li>
-            <li class=""><a href="#formatTarget" data-toggle="tab">规格指标</a></li>
-            <li class=""><a href="#sfTarget" data-toggle="tab">销区与规格</a></li>
+            <li class="active"><a href="#salesTarget" ng-click="reProvinceKPI();" data-toggle="tab">销区指标</a></li>
+            <li class=""><a href="#formatTarget" ng-click="reSpecificationKPI();" data-toggle="tab">规格指标</a></li>
+            <li class=""><a href="#sfTarget" ng-click="reFirstscanKPI();" data-toggle="tab">销区与规格</a></li>
           </ul>
           <div class="tab-content">
             <!--销区指标-->

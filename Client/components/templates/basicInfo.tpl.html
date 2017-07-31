@@ -3,9 +3,21 @@
 		<input type="text" ng-model="nameVaule" value="{{nameVaule}}" placeholder="请输入活动名称">
 	</div>
 	<div class="file-instructions configuration-item">
-		<input type="file" multiple id="fileInstructions">
+		<input type="file" multiple onchange="angular.element(this).scope().change()">
 	</div>
-	<div class="activity-priority configuration-item">
+	<!-- 彩蛋、节假日没有优先级这一项 -->
+	<div class="activity-priority configuration-item" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
 		<input type="number" ng-model="namePriority" value="{{namePriority}}" placeholder="请指明活动优先级，用数字表示">
+	</div>
+	<!-- 节假日 活动链接 -->
+	<div class="url-name configuration-item" ng-if="confUrl === 'holiday'">
+		<input type="url" ng-model="urlVaule" value="{{urlVaule}}" placeholder="请输入活动链接">
+	</div>
+	<!-- 彩蛋、节假日 （弹窗图设置、弹窗文案设置）-->
+	<div class="popimage configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+		<input type="file" onchange="angular.element(this).scope().change()">
+	</div>
+	<div class="poptext configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+		<input type="file" onchange="angular.element(this).scope().change()">
 	</div>
 </div>

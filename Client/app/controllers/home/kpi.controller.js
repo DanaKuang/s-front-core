@@ -36,36 +36,36 @@ define([], function () {
           $model.getScanTime().then(function (res) {
             var res = res.data || {};
             var st = res.scanTimes_of_day || 0;
-            var hst = $model.$historyScan.data[0] || {};
-            var rt = rate(hst.scanPv, st);
-            var f = hst.scanPv > st ? 'down' : 'up';
+            // var hst = $model.$historyScan.data[0] || {};
+            // var rt = rate(hst.scanPv, st);
+            // var f = hst.scanPv > st ? 'down' : 'up';
             $("#scan_day").html(st);
-            $("#scan_day_rate").html(rt).siblings('i').attr('class', f);
+            // $("#scan_day_rate").html(rt).siblings('i').attr('class', f);
           });
           // 当日扫码人数
           $model.getScanUser().then(function (res) {
-            var res = res.data || [];
+            var res = res.data || {};
             var su = res.scanUsers_of_day || 0;
-            var hsu = $model.$historyScan.data[0] || {};
-            var rt = rate(hsu.scanUv, su);
-            var f = hsu.scanUv > su ? 'down' : 'up';
+            // var hsu = $model.$historyScan.data[0] || {};
+            // var rt = rate(hsu.scanUv, su);
+            // var f = hsu.scanUv > su ? 'down' : 'up';
             $("#scan_user").html(su);
-            $("#scan_user_rate").html(rt).siblings('i').attr('class', f);
+            // $("#scan_user_rate").html(rt).siblings('i').attr('class', f);
           });
           // 当日扫码烟包数
           $model.getScanCode().then(function (res) {
             var res = res.data || {};
             var sc = res.scanCodes_of_day || 0;
-            var hsc = $model.$historyScan.data[0] || {};
-            var rt = rate(hsc.scanCode, sc);
-            var f = hsc.scanCode > sc ? 'down' : 'up';
+            // var hsc = $model.$historyScan.data[0] || {};
+            // var rt = rate(hsc.scanCode, sc);
+            // var f = hsc.scanCode > sc ? 'down' : 'up';
             $("#scan_code").html(sc);
-            $("#scan_code_rate").html(rt).siblings('i').attr('class', f);
+            // $("#scan_code_rate").html(rt).siblings('i').attr('class', f);
           });
           // top10
           $model.getTopTen().then(function (res) {
             var res = res.data || [];
-            $("#scan_top").html(res.join('、'));
+            $("#scan_top").html(_.compact(res).join('、'));
           });
         }, Interval_common);
         // 记录1
@@ -76,32 +76,32 @@ define([], function () {
       (function () {
         var $wrap = $("#scroll_data");
         var wrapper = null;
+        var newData = "";
         Interval_2 = setInterval(function () {
           $model.getScrollData().then(function (res) {
             var data = res.data || [];
-            var result = [];
-            data.forEach(function (d) {
-              result.push('<li>'+d+'</li>');
-            });
-            $wrap.html(result.join(''));
             clearInterval(wrapper);
+            $wrap.html(_.map(data, function (d) {
+              return '<li>'+d+'</li>';
+            }).join(''));
             wrapper = setInterval(function() {
-                if ($wrap.children().length <= 1) {
-                    clearInterval(wrapper);
-                    wrapper = null;
-                    return;
-                }
-                // 不可放置于函数起始处,li:first取值是变化的
-                var $li = $wrap.find('li:first');
-                var _h = $li.height();
-                $li.css('visibility','hidden')
-                   .animate({ marginTop: -_h + 'px' }, 600, function() {
-                    // 隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
-                    $li.css({'marginTop': 0, 'visibility': 'visible'}).appendTo($wrap);
-                });
+              if ($wrap.children().length <= 1) {
+                clearInterval(wrapper);
+                wrapper = null;
+                return;
+              }
+              // 不可放置于函数起始处,li:first取值是变化的
+              var $li = $wrap.find('li:first');
+              var _h = $li.height();
+              $li.css('visibility','hidden')
+                 .animate({ marginTop: -_h + 'px' }, 600, function() {
+                  // 隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
+                  $li.css({'marginTop': 0, 'visibility': 'visible'}).appendTo($wrap);
+              });
             }, Interval_common);
           });
         }, Interval_scroll_I);
+
         // 记录2
         window.IntervalArr.push(Interval_2);
       })();
@@ -131,7 +131,38 @@ define([], function () {
                     }).slice(0, 10));
 
         var symbolSize = function (val) {
-            return val[2] / 10;
+            var size = 10;
+            if (val[2] <= 100) {
+              size = 5;
+            }
+            if (val[2] > 100 && val[2] <= 500) {
+              size = 10;
+            }
+            if (val[2] > 500 && val[2] <= 1000) {
+              size = 15;
+            }
+            if (val[2] > 1000 && val[2] <= 1500) {
+              size = 20;
+            }
+            if (val[2] > 1500 && val[2] <= 2000) {
+              size = 25;
+            }
+            if (val[2] > 2000 && val[2] <= 2500) {
+              size = 30;
+            }
+            if (val[2] > 2500 && val[2] <= 3000) {
+              size = 35;
+            }
+            if (val[2] > 3000 && val[2] <= 3500) {
+              size = 40;
+            }
+            if (val[2] > 3500 && val[2] <= 4000) {
+              size = 45;
+            }
+            if (val[2] > 4000) {
+              size = 50;
+            }
+            return size;
         };
 
         // 自定义tooltip
@@ -177,18 +208,40 @@ define([], function () {
         var salesTbl = $model.$salesConf.data;
         salesTbl.rows = formatFilter.salesTable(salesData);
         $scope.salesConf = salesTbl;
+        // 销区指标
+        $scope.reProvinceKPI = function () {
+          $model.getProvinceKPI().then(function (res) {
+            var salesData = res.data || [];
+            var salesTbl = $model.$salesConf.data;
+            salesTbl.rows = formatFilter.salesTable(salesData);
+            $scope.salesConf = salesTbl;
+            $scope.$apply();
+          });
+        };
+
+        // 销区规格
+        $scope.reSpecificationKPI = function () {
+          $model.getSpecificationKPI().then(function (res) {
+            var formatData = res.data || [];
+            var formatTbl = $model.$formatConf.data;
+            formatTbl.rows = formatFilter.formatTable(formatData);
+            $scope.formatConf = formatTbl;
+            $scope.$apply();
+          });
+        };
 
         // 规格指标
-        var formatData = $model.$formatData.data;
-        var formatTbl = $model.$formatConf.data;
-        formatTbl.rows = formatFilter.formatTable(formatData);
-        $scope.formatConf = formatTbl;
+        $scope.reFirstscanKPI = function () {
+          $model.getFirstscanKPI({page:1,pageSize:300})
+            .then(function (res) {
+              var sfData = res.data || [];
+              var sfTbl = $model.$sfConf.data;
+              sfTbl.rows = formatFilter.sfTable(sfData);
+              $scope.sfConf = sfTbl;
+              $scope.$apply();
+          });
+        };
 
-        // 销区与规格
-        var sfData = $model.$fscanData.data;
-        var sfTbl = $model.$sfConf.data;
-        sfTbl.rows = formatFilter.sfTable(sfData);
-        $scope.sfConf = sfTbl;
       })();
     }]
   };

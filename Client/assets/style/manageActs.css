@@ -4,7 +4,6 @@
  * Description: manageActs.css
  */
 
-
 /*新建活动模态框*/
 .create-activity-modal .modal-body {
 	overflow: hidden;
@@ -58,7 +57,7 @@
 	right: 0;
 	padding: 25px 30px;
 	background: #d9e0e7;
-	z-index: 1070;
+	z-index: 1040;
 }
 .pop-header {
 	color: #515151;
@@ -103,7 +102,7 @@
 	margin-left: 130px;
 }
 
-.basic input[type="text"], .basic input[type="number"], .participate-relate input[type="text"] {
+.basic input[type="text"], .basic input[type="number"], .basic input[type="url"], .participate-relate input[type="text"] {
 	width: 400px;
 }
 
@@ -121,10 +120,75 @@
 	top: 2px;
 	left: 15px;
 }
-.basic .configuration-item:nth-of-type(3):before {
+.common-pop .basic .configuration-item:nth-of-type(3):before {
 	content: '活动优先级';
 	top: 6px;
 	left: 50px;
+}
+.holiday-pop .basic .configuration-item:nth-of-type(3):before {
+	content: '活动链接';
+	top: 6px;
+	left: 62px;
+}
+.holiday-pop .basic .configuration-item:nth-of-type(4):before, 
+.surprise-pop .basic .configuration-item:nth-of-type(3):before {
+	content: '弹窗图设置';
+	top: 2px;
+	left: 50px;
+}
+.holiday-pop .basic .configuration-item:nth-of-type(5):before, .surprise-pop .basic .configuration-item:nth-of-type(4):before {
+	content: '弹窗图文案设置';
+	top: 2px;
+	left: 26px;
+}
+.draw-prize select {
+	margin-left: 72px;
+	width: 453px;
+}
+.draw-prize .select-duration:before {
+	content: '中奖时段';
+	top: 6px;
+  left: 5px;
+}
+.draw-prize .draw-area:before {
+	content: '中奖地区';
+	top: 6px;
+  left: 5px;
+}
+.draw-prize .draw-area button.dropdown-toggle {
+	width: 453px!important;
+	padding: 5px;
+  background: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(210, 210, 210);
+  border-radius: 0px;
+  height: 29px;
+  text-align: left;
+}
+.draw-prize .btn-group {
+	margin-left: 72px;
+}
+.draw-prize .plus:before {
+	content: '附加条件';
+	top: 6px;
+  left: 5px;
+}
+.draw-prize .plus input[type="checkbox"] {
+	margin-left: 72px;
+  margin-top: 8px;
+}
+.draw-prize .plus select {
+	margin-top: 5px;
+}
+.draw-prize .chance:before {
+	content: '中奖概率';
+	top: 6px;
+  left: 5px;
+}
+.draw-prize .chance input {
+	margin-left: 72px;
+	width: 453px;
 }
 .activity-priority:after {
 	content: '提示：数值越大活动越靠前显示，最小数值为0';
@@ -163,9 +227,9 @@
 }
 
 .launch-relate .configuration-item:nth-of-type(1):before {
-	content: '选择厂家';
+	content: '选择供应商';
 	top: 6px;
-	left: 5px
+	left: -6px
 }
 .launch-relate .configuration-item:nth-of-type(2):before {
 	content: '选择品牌';
@@ -237,7 +301,6 @@
 	margin-right: 10px;
 }
 
-
 input[type="checkbox"] {
 	margin-right: 6px!important;
 	-webkit-appearance: checkbox;
@@ -260,7 +323,13 @@ input[type="checkbox"] {
 	margin-left: 50px;
 }
 .draw-prize-wrap {
+	position: relative;
 	width: 482px;
+}
+.draw-prize-wrap .close {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }
 .prize-config {
 	margin-top: 10px;
@@ -281,11 +350,44 @@ input[type="checkbox"] {
 .prize-config .configuration-item:nth-of-type(2):before {
 	content: '奖品类型';
 }
+.common-pop .prize-config .configuration-item:nth-of-type(2):before {
+	content: '奖品类型(三选一)';
+	width: 50px;
+	text-align: center;
+	top: 0;
+}
+.circle-money-tick {
+	display: inline-block;
+	cursor: pointer;
+}
+.circle-tick {
+	text-indent: 5px;
+	cursor: pointer;
+}
+.circle-tick .circle, .circle-money-tick .circle {
+	display: inline-block;
+	margin-right: 8px;
+	vertical-align: -6%;
+	width: 12px;
+	height: 12px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	border-radius: 50%;
+	border: 1px solid #d2d2d2;
+}
+.circle-tick.active .circle {
+	background: #7c8af4;
+}
+.circle-money-tick.active .circle {
+	background: #7c8af4;
+}
 .gift .configuration-item:nth-of-type(1):before {
 	content: '选择礼品';
 }
 .gift .configuration-item:nth-of-type(2):before {
-	content: '奖品数量';
+	content: '奖品数量'!important;
+	top: 6px!important;
 }
 .hb .configuration-item:nth-of-type(1):before {
 	content: '选择模板';
@@ -333,16 +435,22 @@ input[type="checkbox"] {
   transform: scale(0.85);
 }
 .non-first-draw-wrap .configuration-item:nth-of-type(2):before {
-	content: '奖项名称';
+	content: '奖项名称'!important;
 }
 .non-first-draw-wrap .configuration-item:nth-of-type(2) {
 	margin-top: 40px;
 }
 .non-first-draw-wrap .configuration-item:nth-of-type(3):before {
-	content: '奖品类型';
+	content: '奖品类型(三选一)';
+	width: 50px;
+	text-align: center;
+	top: 0;
 }
-.non-first-draw-wrap .configuration-item:nth-of-type(4):before {
-	content: '选择礼品';
+.common-pop .non-first-draw-wrap .configuration-item:nth-of-type(3):before {
+	content: '奖品类型(三选一)';
+	width: 50px;
+	text-align: center;
+	top: 0;
 }
 .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(4):before {
 	content: '选择模板';
@@ -373,6 +481,40 @@ input[type="checkbox"] {
 }
 .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(5):after {
 	content: '元';
+}
+.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):before {
+	content: '选择礼品';
+}
+.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):after {
+	content: ''
+}
+.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):after {
+	content: ''
+}
+.non-first-draw-wrap .hb .configuration-item:nth-of-type(1):after {
+	content: ''
+}
+.non-first-draw-wrap .jf .configuration-item:nth-of-type(1):after {
+	content: ''
+}
+.non-first-draw-wrap .gift .configuration-item:nth-of-type(2), .non-first-draw-wrap .hb .configuration-item:nth-of-type(2), .non-first-draw-wrap .jf .configuration-item:nth-of-type(2) {
+	margin-top: 0;
+}
+.non-first-draw-wrap .gift .configuration-item:nth-of-type(2):before {
+	content: '奖品数量'!important;
+	top: 6px!important;
+}
+.non-first-draw-wrap .hb .configuration-item:nth-of-type(1):before {
+	content: '选择模板';
+}
+.non-first-draw-wrap .hb .configuration-item:nth-of-type(2):before {
+	content: '红包总额';
+}
+.non-first-draw-wrap .jf .configuration-item:nth-of-type(1):before {
+  content: '赠送积分';
+}
+.non-first-draw-wrap .jf .configuration-item:nth-of-type(2):before {
+  content: '奖品数量';
 }
 input[type="radio"] {
 	margin-top: 8px!important;
@@ -490,4 +632,87 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	margin-top: 6px!important;
 	margin-left: 5px!important;
 	margin-right: 5px!important;
+}
+
+/*multi-select */
+.launch-relate .btn-group {
+	margin-left: 72px;
+}
+.launch-relate .btn-group button, .operation .btn-group button {
+	padding: 5px;
+  background: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(210, 210, 210);
+  border-radius: 0px;
+  height: 29px;
+  text-align: left;
+}
+.launch-relate .btn-group button, .launch-relate .btn-group ul, .operation .btn-group button, .operation .btn-group ul {
+	/*width: 453px;*/
+	-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.launch-relate .open>.dropdown-menu, .operation .open>.dropdown-menu, .draw-prize .open>.dropdown-menu {
+	max-height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/*选择礼品*/
+.create-realProduct-modal .choose, .create-hbProduct-modal .choose {
+	cursor: pointer;
+	color: #7c8af4;
+}
+.create-realProduct-modal .choose:hover, .create-hbProduct-modal .choose:hover {
+	color: indianred;
+}
+
+.ready-set {
+	margin-bottom: 10px;
+}
+.create-prize-btn {
+	height: 29px;
+	line-height: 16px;
+	color: #fff;
+  background: #6e80ff;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+}
+
+/*增库弹框*/
+.add-stock-pop .modal-body {
+	text-align: center;
+	font-size: 16px;
+}
+.add-stock-pop .modal-body input {
+	height: 40px;
+	width: 300px;
+}
+.add-stock-pop .modal-body .input-wrap {
+	position: relative;
+	width: 400px;
+	margin: 0 auto;
+}
+.add-stock-pop .modal-body .input-wrap label {
+	margin-right: 10px;
+}
+.add-stock-pop .modal-body .input-wrap input {
+	text-align: center;
+}
+.add-stock-pop .modal-body .input-wrap:after {
+	position: absolute;
+	content: '件';
+	right: 22px;
+	top: 10px;
+}
+.add-hbstock-pop .modal-body .input-wrap:after {
+	position: absolute;
+	content: '元';
+	right: 22px;
+	top: 10px;
 }

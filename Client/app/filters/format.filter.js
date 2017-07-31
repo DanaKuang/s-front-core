@@ -36,11 +36,11 @@ define([], function () {
       // 规格表格
       function formatTable (data) {
         var result = [];
-        var typeArr = _.groupBy(data, 'specification'); // 按照规格
+        var typeArr = _.groupBy(data, 'brand'); // 按照规格
         var typeKey = _.keys(typeArr);
 
         _.each(typeKey, function (type) {
-          var arr = {'specification': '', 'data':'', 'sum':''};
+          var arr = {'brand': '', 'data':'', 'sum':''};
           var sum = {'scantimes':0,'scanUsers':0,'scanCodes':0,'drawTimes':0};
           sum.scantimes = _.sum(typeArr[type], 'scantimes');
           sum.scanUsers = _.sum(typeArr[type], 'scanUsers');

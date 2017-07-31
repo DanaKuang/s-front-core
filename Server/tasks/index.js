@@ -12,6 +12,7 @@ module.exports = function () {
     'build': require('./task.build'),       // 文件打包
     'commit': require('./task.commit'),     // 文件打包
     'destroy': require('./task.destroy'),   // **
+    'publish': require('./task.publish'),   // 打包发布
     'default': require('./task.default')    // 默认启用项目
   }
 }

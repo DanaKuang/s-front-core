@@ -43,42 +43,42 @@
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "scanPv",
         "label": "扫码次数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "effectScanPv",
         "label": "有效扫码数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "scanUv",
         "label": "扫码用户数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "newScanUv",
         "label": "新增扫码用户数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "drawPv",
         "label": "中奖人次",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "drawUv",
         "label": "中奖用户数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacketCost",
         "label": "红包总额",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "salePromotionCost",
         "label": "促销品总额",
         "sortable": true,
         "align": "center"

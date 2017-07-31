@@ -43,52 +43,52 @@
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "activeCost",
         "label": "活动成本",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "saomalv",
         "label": "扫码率",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "zhongjianglv",
         "label": "中奖率",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "zhongjiangmian",
         "label": "中奖面",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "rjyouxiaosaomacishu",
         "label": "人均有效扫码次数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "rjzhongjiangcishu",
         "label": "人均中奖次数",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "juncicuxiaochengben",
         "label": "次均促销成本",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "rjcuxiaochengben",
         "label": "人均促销成本",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "juncicuxiaolidu",
         "label": "次均促销力度",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "lingshoufeixiaobi",
         "label": "零售费效比",
         "sortable": true,
         "align": "center"

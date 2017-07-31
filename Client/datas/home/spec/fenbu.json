@@ -1,0 +1,53 @@
+{
+  "title": {
+    "text": ""
+  },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "grid": {
+    "left": "3%",
+    "right": "4%",
+    "bottom": "3%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "value",
+    "boundaryGap": [0, 0.03],
+    "axisLabel": {
+      "show": false
+    }
+  },
+  "yAxis": {
+    "type": "category",
+    "data": [],
+    "axisTick": {
+      "alignWithLabel": true
+    }
+  },
+  "series": [
+    {
+      "name": "2011年",
+      "type": "bar",
+      "barWidth":20,
+      "data": [],
+      "label":{
+        "normal":{
+          "show":true,
+          "position":"right",
+          "textStyle":{
+            "color":"black"
+          }
+        }
+      },
+      "itemStyle":{
+        "normal":{
+          "color":"#76D7F7"
+        }
+      }
+    }
+  ]
+}

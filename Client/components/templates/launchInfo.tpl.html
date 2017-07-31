@@ -1,37 +1,27 @@
-<div>
+<div class="ui-search-block multi">
 	<div class="select-company configuration-item">
 		<select ng-model="selectCompanyVal" value="{{selectCompanyVal}}">
-			<option value="">全部</option>
-			<option value="nc">南昌</option>
-			<option value="bj">北京</option>
+			<option value="" selected="selected">请先选择供应商</option>
+			<option ng-repeat="item in company" value="{{item.supplierCode}}">{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-brand configuration-item">
-		<select ng-model="selectBrandVal" value="{{selectBrandVal}}">
-			<option value="">全部</option>
-			<option value="">南昌</option>
-			<option value="">杭州</option>
+		<select ng-model="selectBrandVal" value="{{selectBrandVal}}" multiple="multiple" class="select">
+			<option ng-repeat="item in brand" value="{{item.brandCode}}">{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-specification configuration-item">
-		<select type="text" id="selectSpecification">
-			<option value="">全部</option>
-			<option value="">南昌</option>
-			<option value="">深圳</option>
+		<select ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" multiple="multiple" class="select">
+			<option ng-repeat="item in specification" value="{{item.productCode}}">{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-area configuration-item">
-		<select ng-model="selectAreaVal" value="{{selectAreaVal}}">
-			<option value="">全部</option>
-			<option value="">南昌</option>
-			<option value="">上海</option>
-			<option value="">深圳</option>
-		</select>
+		<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select"></select>
 	</div>
 	<div class="select-duration configuration-item">
 		<input id="selectDurationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime" ng-model="selectDurationStart" value="{{selectDurationStart}}"> &nbsp;&nbsp;至&nbsp;&nbsp;
 		<input id="selectDurationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime" ng-model="selectDurationEnd" value="{{selectDurationEnd}}">
-		<div class="remark" ng-click="changeRadio()">
+		<div class="remark">
 			<input type="radio" name="timeduartion" value='weekday' ng-model="whichday"><label for="">仅选择此时段<strong>工作日</strong></label>
 			<input type="radio" name="timeduartion" value='holiday' ng-model="whichday"><label for="">仅选择此时段<strong>节假日</strong></label>
 			<input type="radio" name="timeduartion" value='both' ng-model="whichday"><label for="">均包括</label>

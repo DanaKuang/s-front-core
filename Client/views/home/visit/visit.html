@@ -5,8 +5,8 @@
  * Description: visit
  */
 -->
-
-<div class="animated fadeInRight" ng-controller="VisitCtrl">
+<div ng-controller="VisitCtrl">
+<div class="animated fadeInRight">
   <div class="container-fluid region-margin">
     <div class="row">
       <div class="col-md-12 visit_wrap">
@@ -46,31 +46,14 @@
               <thead style="border: 1px solid #A0A0A0">
               <tr>
                 <th>手机号</th>
-                <th>微信号</th>
-                <th>时间</th>
+                <th>微信昵称</th>
+                <th>领奖时间</th>
                 <th>城市</th>
                 <th>奖品（金额）</th>
                 <th>标签</th>
               </tr>
               </thead>
               <tbody>
-              <!--<tr ng-repeat="x in obj">-->
-                <!--<td class="mobile">{{x.mobile}}</td>-->
-                <!--<td class="wechat">{{x.wechatName}}</td>-->
-                <!--<td class="stat_time">{{x.statTime}}</td>-->
-                <!--<td>{{x.cityName}}</td>-->
-                <!--<td class="award">{{x.awardName}}</td>-->
-                <!--<td>-->
-                  <!--{{x.feedbackStatus}}-->
-                  <!--<span class="arrow" ng-click="show($event)"></span>-->
-                  <!--<ul class="visit-list">-->
-                    <!--<li ng-click="verify($event)">待核实</li>-->
-                    <!--<li ng-click="verify($event)">已核实</li>-->
-                    <!--<li ng-click="verify($event)">不属实</li>-->
-                    <!--<li ng-click="verify($event)">联系不上</li>-->
-                  <!--</ul>-->
-                <!--</td>-->
-              <!--</tr>-->
               </tbody>
             </table>
             <div class="footer_sec clearfix">
@@ -87,4 +70,24 @@
     </div>
   </div>
   <script src="statics/assets/libs/jquery.page.js"></script>
+</div>
+  <!--模态框-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">操作提示！！！</h4>
+        </div>
+        <div class="modal-body">
+          您确认是否需要更改此用户状态？
+          <span style="color: red">(一经确认无法修改)</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+          <button type="button" class="btn btn-primary" ng-click="sure()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

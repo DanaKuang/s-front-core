@@ -17,11 +17,28 @@ define([], function () {
             $(".date").find("input").val(stattime);
             //页面默认加载配置
             $scope.obj = {
-                "statTime": "2017-07-11",
-                "activityName": "芙蓉王硬细支（盒）"
+                "statTime": stattime,
+                "activityName": "盒-芙蓉王（硬细支）",
+                "productSn": "",
+            };
+            $scope.saoobj = {
+                "statTime": stattime,
+                "activityName": "芙蓉王（硬细支）"
             };
             $scope.summar = {
-                "statTime": "2017-07-19"
+                "statTime": stattime
+            }
+            //页面切换
+            $scope.tabs = function (index) {
+                $(".region-margin").hide();
+                $(".region-margin").eq(index).show();
+                if (index === 1) {
+                    gloabl.getProduct();
+                } else if (index === 2) {
+                    gloabl.getProductNo();
+                } else if (index === 3) {
+                    gloabl.summaryData($scope.summar);
+                }
             }
             var gloabl = {
                 //中奖用户
@@ -46,25 +63,50 @@ define([], function () {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
                         for (var i = 0; i < res.length; i++) {
-                            $("#summary_table").append("<tr class='bg' ><td>" + res[i].diaplayName + "</td><td>" + res[i].c1 + "</td><td>" + res[i].c2 + "</td><td>" + res[i].c3 + "</td><td>" + res[i].c4 + "</td><td>" + res[i].c5 + "</td><td>" + res[i].c6 + "</td><td>" + res[i].c7 + "</td><td>" + res[i].c8 + "</td><td>" + res[i].c9 + "</td><td>" + res[i].c10 + "</td><td>" + res[i].c11 + "</td><td>" + res[i].c12 + "</td><td>" + res[i].c13 + "</td><td>" + res[i].c14 + "</td><td>" + res[i].c15 + "</td><td>" + res[i].c16 + "</td><td>" + res[i].c17 + "</td><td>" + res[i].c18 + "</td><td>" + res[i].c19 + "</td><td>" + res[i].c20 + "</td></tr>")
+                            $("#summary_table").append("<tr class='bg' ><td>" + res[i].diaplayName + "</td><td>" + res[i].c1 + "</td><td>" + res[i].c2 + "</td><td>" + res[i].c3 + "</td><td>" + res[i].c4 + "</td><td>" + (res[i].c5*100).toFixed(2) + "%</td><td>" + res[i].c6 + "</td><td>" + res[i].c7 + "</td><td>" + res[i].c8 + "</td><td>" + res[i].c9 + "</td><td>" + res[i].c10 + "</td><td>" + res[i].c11 + "</td><td>" + res[i].c12 + "</td><td>" + res[i].c13 + "</td><td>" + res[i].c14 + "</td><td>" + res[i].c15 + "</td><td>" + res[i].c16 + "</td><td>" + res[i].c17 + "</td><td>" + res[i].c18 + "</td><td>" + res[i].c19 + "</td><td>" + res[i].c20 + "</td></tr>")
                         }
                     })
                 },
-                //规格
+                //扫码规格
+                "getProductNo": function () {
+                    $model.$getProductNo().then(function (res) {
+                        $(".report-gui").find("select").html("");
+                        var res = res.data || [];
+                        for (var i = 0; i < res.length; i++) {
+                            if(res[i].name ==="芙蓉王（硬细支）"){
+                                $(".report-gui").find("select").append("<option value=" + res[i].name + " selected>" + res[i].name + "</option>")
+                            }else {
+                                $(".report-gui").find("select").append("<option value=" + res[i].name + ">" + res[i].name + "</option>")
+                            }
+                        }
+                        $scope.saoobj.activityName = $(".report-gui").find("select").val();
+                        //console.log($scope.saoobj);
+                        gloabl.userPro($scope.saoobj);
+                    })
+                },
+                //中奖规格
                 "getProduct": function () {
                     $model.$getProduct().then(function (res) {
                         $(".report-gui").find("select").html("");
                         var res = res.data || [];
                         for (var i = 0; i < res.length; i++) {
-                            $(".report-gui").find("select").append("<option value=" + res[i].productName + ">" + res[i].productName + "</option>")
+                            if(res[i].name ==="盒-芙蓉王（硬细支）"){
+                                $(".report-gui").find("select").append("<option value=" + res[i].name + " data-sn=" + res[i].sn + " selected>" + res[i].name + "</option>")
+                            }else{
+                                $(".report-gui").find("select").append("<option value=" + res[i].name + " data-sn=" + res[i].sn + ">" + res[i].name + "</option>")
+                            }
                         }
+                        $scope.obj.activityName = $(".report-gui").find("select").val();
+                        $scope.obj.productSn = $(".report-gui").find("select option:selected").attr("data-sn");
+                        //console.log($scope.obj);
+                        gloabl.winUser($scope.obj);
                     })
                 },
                 //显示所有数据 n 几列  p 省份  y 城市
                 "showall": function (data, id, n, p, y) {
                     //分类身份
                     var list = _.groupBy(data, p);
-                   // console.log(list);
+                    // console.log(list);
                     //初始化表单行数，从0开始
                     var rownum = 0;
                     for (x in list) {
@@ -109,21 +151,6 @@ define([], function () {
                         }
                         ;
                     }
-                },
-            }
-
-            //页面切换
-            $scope.tabs = function (index) {
-                $(".region-margin").hide();
-                $(".region-margin").eq(index).show();
-                if (index === 1) {
-                    gloabl.winUser($scope.obj);
-                    gloabl.getProduct();
-                } else if (index === 2) {
-                    gloabl.userPro($scope.obj);
-                    gloabl.getProduct();
-                } else if (index === 3) {
-                    gloabl.summaryData($scope.summar);
                 }
             }
             //点击按钮的返回
@@ -135,15 +162,22 @@ define([], function () {
             //查询按钮
             $scope.search = function ($event) {
                 var that = $event.target;
-                $scope.obj = {
-                    "activityName": $(that).siblings(".report-gui").find("select").val(),
-                    "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
-                        $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
-                }
                 if (arguments[1] === 1) {
+                    $scope.obj = {
+                        "activityName": $(that).siblings(".report-gui").find("select").val(),
+                        "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
+                            $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
+                        "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
+                    }
+                    //console.log($scope.obj);
                     gloabl.winUser($scope.obj);
                 } else if (arguments[1] === 2) {
-                    gloabl.userPro($scope.obj);
+                    $scope.saoobj = {
+                        "activityName": $(that).siblings(".report-gui").find("select").val(),
+                        "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
+                            $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
+                    }
+                    gloabl.userPro($scope.saoobj);
                 } else if (arguments[1] === 3) {
                     $scope.summar = {
                         "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
@@ -159,18 +193,18 @@ define([], function () {
                 if (a === 1) {
                     var statTime = $scope.obj.statTime;
                     var activityName = $scope.obj.activityName;
-                    window.location.href = 'http://172.16.1.109:8080/dataportal/fixatreport/importExcelWinUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
+                    var productSn = $scope.obj.productSn;
+                    window.location.href = '/fixatreport/importExcelWinUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName)) + '&productSn=' + productSn;
                 } else if (a === 2) {
-                    var statTime = $scope.obj.statTime;
-                    var activityName = $scope.obj.activityName;
-                    window.location.href = 'http://172.16.1.109:8080/dataportal/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
+                    var statTime = $scope.saoobj.statTime;
+                    var activityName = $scope.saoobj.activityName;
+                    window.location.href = '/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
                 } else if (a === 3) {
                     var statTime = $scope.summar.statTime;
                     // console.log(statTime);
-                    window.location.href = 'http://172.16.1.109:8080/dataportal/fixatreport/importExcelDailySummData?staTime='+statTime
+                    window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
                 }
             }
-
 
         }]
     };

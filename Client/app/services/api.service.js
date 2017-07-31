@@ -62,7 +62,7 @@ define([], function () {
     ServiceType: 'factory',
     ServiceName: 'mAjax',
     ServiceContent: ['$q', 'request', 'util', function ($q, request, util) {
-      return function(configs, params) {
+      return function(configs, params, mediaType) {
         var defers = [];
         angular.forEach(configs, function(conf, i) {
             var df = $q.defer();
@@ -71,7 +71,7 @@ define([], function () {
                 conf.data = params;
             }
             if (conf.method.toLowerCase() == "post") {
-                request.$Update(conf.url, conf.data, null, function(data, status, headers, config) {
+                request.$Update(conf.url, conf.data, mediaType, function(data, status, headers, config) {
                     if (status === 200) {
                         df.resolve(data);
                     } else {
@@ -81,7 +81,7 @@ define([], function () {
                     df.reject(data);
                 });
             } else {
-                request.$Query(conf.url, conf.data, null, function(data, status, headers, config) {
+                request.$Query(conf.url, conf.data, mediaType, function(data, status, headers, config) {
                     if (status === 200) {
                         df.resolve(data);
                     } else {

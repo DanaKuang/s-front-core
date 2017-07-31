@@ -22,7 +22,11 @@
     node main.js bulid         ## 打包工程
     node main.js init          ## 初始化项目
     node main.js commit [log]  ## 将代码提交到gitlab
+    node main.js publish       ## 一键发布[可能有些不灵活]
     node main.js destroy       ## 你懂的？
 ## TIPS
     如需修改请联系相关开发人员评估
+## 白话
+    我知道接手项目的大神肯定会骂我，为什么这么写，是不是傻x！
+    我也不好反驳，如果你有更好的改善方式，那更好了。
 ## END

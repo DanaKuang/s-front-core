@@ -8,17 +8,17 @@
             "icon": "kpi",
             "noDataApi": true,
             "hash": "#/view/home/kpi",
-            "text": "KPI指标一览"
+            "text": "KPI指标总览"
         },{
             "icon": "theme",
             "text": "主题查询",
             "noDataApi": true,
             "hash": "",
             "dropdown": [{
-              "text": "地域分析",
+              "text": "地域查询",
               "hash": "#/view/home/theme/region"
             }, {
-              "text": "规格分析",
+              "text": "规格查询",
               "hash": "#/view/home/theme/spec"
             }]
         },{

@@ -20,7 +20,7 @@ define([], function () {
             productPack: '',                         // 包装
             ppArray: [],                             // 包装数组
             saleZone: '',                            // 销区
-            szArray: ['重点销区','发展销区','普通销区'], // 销区数组
+            szArray: [],                             // 销区数组
             provinceName: '',                        // 省
             prNArray: [],                            // 省数组
             cityName: '',                            // 市
@@ -99,7 +99,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: "2013-02-14"
+                startDate: ""
             }).on('change', function (e) {
                 var startTime = e.target.value;
                 var endTime = scope.endTime;
@@ -114,7 +114,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: "2013-02-14"
+                startDate: ""
             }).on('change', function (e) {
                 var endTime = e.target.value;
                 var startTime = scope.startTime;
@@ -125,16 +125,61 @@ define([], function () {
             });
 
             // 监控变化
-            scope.$watch('productBrand + productName + productPack + saleZone + provinceName + cityName', function(n, o, s) {
+            scope.$watch('startTime + startHour + endTime + endHour + productBrand + productName + productPack + saleZone + provinceName + cityName', function(n, o, s) {
+                function f (arr) {
+                    return _.map(arr, function (a) {
+                        return a.split('_')[0];
+                    }).join(',');
+                }
                 if (n !== o) {
                     var $ar = [];
+                    s.startTime && $ar.push('<li>'+s.startTime+'_'+s.startHour+'<i class="close" name="startTime"></i></li>');
+                    s.endTime && $ar.push('<li>'+s.endTime+'_'+s.endHour+'<i class="close" name="endTime"></i></li>');
                     s.productBrand.length && $ar.push('<li>'+s.productBrand.join(',')+'<i class="close" name="productBrand"></i></li>');
                     s.productName.length  && $ar.push('<li>'+s.productName.join(',')+'<i class="close" name="productName"></i></li>');
                     s.productPack.length  && $ar.push('<li>'+s.productPack.join(',')+'<i class="close" name="productPack"></i></li>');
-                    s.saleZone.length     && $ar.push('<li>'+s.saleZone.join(',')+'<i class="close" name="saleZone"></i></li>');
+                    s.saleZone.length     && $ar.push('<li>'+f(s.saleZone)+'<i class="close" name="saleZone"></i></li>');
                     s.provinceName.length && $ar.push('<li>'+s.provinceName.join(',')+'<i class="close" name="provinceName"></i></li>');
                     s.cityName.length     && $ar.push('<li>'+s.cityName.join(',')+'<i class="close" name="cityName"></i></li>');
                     $li.html($ar.join(''));
+                }
+            });
+
+            // 只做一件事 监控值的变化 去初始化multiselect 很耗性能
+            scope.$watch('productBrand', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='productBrand']");
+                    $select.multiselect('select', n);
+                }
+            });
+            scope.$watch('productName', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='productName']");
+                    $select.multiselect('select', n);
+                }
+            });
+            scope.$watch('productPack', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='productPack']");
+                    $select.multiselect('select', n);
+                }
+            });
+            scope.$watch('saleZone', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='saleZone']");
+                    $select.multiselect('select', n);
+                }
+            });
+            scope.$watch('provinceName', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='provinceName']");
+                    $select.multiselect('select', n);
+                }
+            });
+            scope.$watch('cityName', function (n, o) {
+                if (n !== o) {
+                    var $select = $(".multi [name='cityName']");
+                    $select.multiselect('select', n);
                 }
             });
 

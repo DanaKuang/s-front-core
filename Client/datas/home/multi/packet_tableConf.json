@@ -43,32 +43,32 @@
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket1Cnt",
         "label": "1元红包",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket3Cnt",
         "label": "3元红包",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket5Cnt",
         "label": "5元红包",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket8Cnt",
         "label": "8元红包",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket18Cnt",
         "label": "18元红包",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "commonname",
+        "name": "redpacket88Cnt",
         "label": "88元红包",
         "sortable": true,
         "align": "center"

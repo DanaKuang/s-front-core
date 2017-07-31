@@ -3,7 +3,7 @@
     "id": "kpilist",
     "tableCls": "table-bordered",
     "columns": [{
-        "name": "brand",
+        "name": "specification",
         "label": "规格",
         "sortable": false,
         "align": "center",
@@ -39,6 +39,7 @@
     },
     "tblUrl": "/api/tztx/dataportal/data/getSpecificationKPI",
     "checkType": "checkbox",
+    "mediaType": true,
     "rowClick": false,
     "hasSearch": false,
     "srhFormId": "srhForm"

@@ -1,0 +1,169 @@
+<div id="surprisesetprize">
+	<!-- 非首抽 -->
+	<div class="first-draw gotoset" id="none_first_draw">
+		<!-- 非首抽中奖设置 -->
+		<div class="first-draw-prize-wrap" ng-click="close($event)">
+			<div class="ready-set" ng-click="changeTab($event)">
+				<div class="draw-prize-wrap">
+					<div class="prize-config border-box">
+						<div class="configuration-item">
+							<input type="text">
+						</div>
+						<div class="configuration-item">
+							<input type="text" id="">
+						</div>
+						<div class="configuration-item radio-wrap">
+							<div class="radio-group">
+								<div class="circle-tick active"><i class="circle"></i>礼品</div>
+							</div>
+							<div class="radio-group">
+								<div class="circle-tick"><i class="circle"></i>微信红包</div>
+							</div>
+							<div class="radio-group">
+								<div class="circle-tick"><i class="circle"></i>积分</div>
+							</div>
+						</div>
+						<div class="radio-res-wrap">
+							<!-- 礼品 -->
+							<div class="gift radio-res">
+								<div class="configuration-item">
+									<button class="btn btn-default add-prize show-product-list" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
+									<div class="prize-img-preview">
+										<img src="" alt="">
+									</div>
+								</div>
+								<div class="configuration-item">
+									<input type="number" id="">
+									<div class="present-integral">
+										<input type="checkbox"><label for="">同时赠送积分</label>
+										<input type="number">积分
+									</div>
+								</div>
+							</div>
+
+							<!-- 微信红包 -->
+							<div class="hb radio-res hidden">
+								<div class="configuration-item">
+									<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+									<div class="hb-two-one">
+										<div class="random-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>随机金额
+											</div>
+											<input type="text">元 —— <input type="text">元
+										</div>
+										<div class="fixed-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>固定金额
+											</div>
+											<input type="text">元
+										</div>
+									</div>
+								</div>
+								<div class="configuration-item">
+									<input type="number" id="">
+									<div class="present-integral">
+										<input type="checkbox"><label for="">同时赠送积分</label>
+										<input type="number">积分
+									</div>
+								</div>
+							</div>
+
+							<!-- 积分 -->
+							<div class="jf radio-res hidden">
+								<div class="configuration-item">
+									<input type="text">
+								</div>
+								<div class="configuration-item">
+									<input type="number" id="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<i class="close">×</i>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-default create-prize-btn" ng-click="createNewPrize($event)">+新增奖项</button>
+		</div>
+	</div>
+	<script type="text/html" id="non-special-prize">
+		<div class="draw-prize-wrap">
+			<div class="prize-config border-box">
+				<div class="configuration-item">
+					<input type="text">
+				</div>
+				<div class="configuration-item">
+					<input type="text" id="">
+				</div>
+				<div class="configuration-item radio-wrap">
+					<div class="radio-group">
+						<div class="circle-tick active"><i class="circle"></i>礼品</div>
+					</div>
+					<div class="radio-group">
+						<div class="circle-tick"><i class="circle"></i>微信红包</div>
+					</div>
+					<div class="radio-group">
+						<div class="circle-tick"><i class="circle"></i>积分</div>
+					</div>
+				</div>
+				<div class="radio-res-wrap">
+					<!-- 礼品 -->
+					<div class="gift radio-res">
+						<div class="configuration-item">
+							<button class="btn btn-default add-prize show-product-list" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
+							<div class="prize-img-preview">
+								<img src="" alt="">
+							</div>
+						</div>
+						<div class="configuration-item">
+							<input type="number" id="">
+							<div class="present-integral">
+								<input type="checkbox"><label for="">同时赠送积分</label>
+								<input type="number">积分
+							</div>
+						</div>
+					</div>
+
+					<!-- 微信红包 -->
+					<div class="hb radio-res hidden">
+						<div class="configuration-item">
+							<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+							<div class="hb-two-one">
+								<div class="random-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>随机金额
+									</div>
+									<input type="text">元 —— <input type="text">元
+								</div>
+								<div class="fixed-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>固定金额
+									</div>
+									<input type="text">元
+								</div>
+							</div>
+						</div>
+						<div class="configuration-item">
+							<input type="number" id="">
+							<div class="present-integral">
+								<input type="checkbox"><label for="">同时赠送积分</label>
+								<input type="number">积分
+							</div>
+						</div>
+					</div>
+
+					<!-- 积分 -->
+					<div class="jf radio-res hidden">
+						<div class="configuration-item">
+							<input type="text">
+						</div>
+						<div class="configuration-item">
+							<input type="number" id="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<i class="close">×</i>
+		</div>
+	</script>
+</div>

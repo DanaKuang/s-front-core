@@ -63,7 +63,7 @@ define([], function () {
           var tblUrl = scope.paging.api || "";
           angular.extend({key:''}, conf);
           var mConf = parseUrl(tblUrl, conf)
-          mAjax(mConf).then(function(data) {
+          mAjax(mConf, null, scope.conf.mediaType).then(function(data) {
               var fdata = scope.conf,
                   bdata = data[0] || [];
               fdata.byAjax = true;
@@ -119,7 +119,7 @@ define([], function () {
           }
           var ele = $i.closest('tr');
           var mConf = parseUrl(childUrl, {'provName': city});
-          mAjax(mConf).then(function (data) {
+          mAjax(mConf, null, scope.conf.mediaType).then(function (data) {
             var childArr = [];
             _.each(data[0], function (d) {
               var tr = '<tr class="ui-child-city-'+city+'">';

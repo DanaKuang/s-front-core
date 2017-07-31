@@ -36,9 +36,10 @@ module.exports.register = function (express, routes) {
       var viewmatch = new RegExp(config.viewroot, 'i');
       var rootfilter = new RegExp(config.rootfilter, 'i');
       var baseURL = 'http://'; //
-      baseURL += config.gateway.host; // 请求ip
+      var gatewaytype = route.gatewaytype || 0;
+      baseURL += config.gateway[gatewaytype].host; // 请求ip
       baseURL += ':';
-      baseURL += config.gateway.port; // 请求端口号
+      baseURL += config.gateway[gatewaytype].port; // 请求端口号
 
       route.proxy = false;
       // 去掉url后带的参数

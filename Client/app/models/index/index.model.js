@@ -14,12 +14,23 @@ define([], function () {
       var GET_MENU_TOPBAR = "/statics/index/menu.json";
       var GET_NAV_JSON = "/statics/index/nav.json";
 
-      // $model.getMenuJson = function () {
-      //   return request.$Query(GET_MENU_TOPBAR);
-      // };
+      var GET_NAV_DATA = "/api/tztx/saas/saotx/menu/user_list_moudle";
+      var GET_MENU_DATA = "/api/tztx/saas/saotx/menu/user_list_menu";
+
       $model.getNavJson = function () {
         return request.$Query(GET_NAV_JSON);
       };
+
+      // 顶部导航
+      $model.getNav = function () {
+        return request.$Search(GET_NAV_DATA);
+      };
+
+      // 左侧菜单
+      $model.getMenu = function (params) {
+        return request.$Search(GET_MENU_DATA, params)
+      };
+
     }]
   };
 

@@ -14,7 +14,7 @@ define([], function () {
             totalCount: 0,
             size: 0,
             curPage: 1,
-            pageNumber: 0
+            pageNumber: 1
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -38,7 +38,7 @@ define([], function () {
 
                 // 一开始进入页面的时候scope.conf是undefined
                 if (scope.conf) {
-                    var data = scope.conf.data.data;
+                    var data = scope.conf.data;
                     var page = data.page;
                     scope.list = data.list;
                     scope.totalCount = page.count;

@@ -131,6 +131,9 @@
     var $remm = $('[name="remmber"]');
     var $logi = $('[name="login"]');
 
+    // 退出清空session记录
+    sessionStorage.removeItem('menuIdx');
+    sessionStorage.removeItem('hash');
     // 绑定事件及初始化
     $name.val(localStorage.getItem('username') || "");
     $word.val("");

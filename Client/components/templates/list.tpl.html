@@ -1,1 +1,13 @@
-<div><ul class="{{cls}} ui-list-data"><li ng-repeat="l in list" ng-init="data = l"><label for="" class="ui-list-label"><input ng-if="type" type="{{type}}" name="{{name}}" ng-click="initList(l)" ng-checked="l.checked"></label><div class="ui-list-content"><label ng-if="l.title">{{l.title}}</label><p>{{l.temp}}</p></div></li></ul></div>
+<div>
+    <ul class="{{cls}} ui-list-data">
+        <li ng-repeat="l in list">
+            <label for="" class="ui-list-label">
+                <input ng-if="type" type="{{type}}" name="{{name}}" ng-click="initList(l)" ng-checked="l.checked">
+            </label>
+            <div class="ui-list-content">
+                <label ng-if="l.title">{{l.title}}</label>
+                <p>{{l.startTime||""}}{{l.endTime?'+'+l.endTime:''}}{{l.productBrand?'+'+l.productBrand:''}}{{l.productName?'+'+l.productName:''}}{{l.productPack?l.productPack:''}}{{l.saleZone?'+'+l.saleZone:''}}{{l.provinceName?'+'+l.provinceName:''}}{{l.cityName?'+'+l.cityName:''}}</p>
+            </div>
+        </li>
+    </ul>
+</div>

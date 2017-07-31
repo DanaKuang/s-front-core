@@ -18,13 +18,14 @@ module.exports = function () {
   process.stdout.write(colors.green('********************************************\n'));
   process.stdout.write(colors.green('Usage:                                      \n'));
   process.stdout.write(colors.green('       node main.js [default] [build] [help]\n\n'));
-  process.stdout.write(colors.green('       [init] [commit] [destroy]            \n\n'));
+  process.stdout.write(colors.green('       [init] [commit] [publish] [destroy]  \n\n'));
   process.stdout.write(colors.green('Options:                                    \n'));
   process.stdout.write(colors.green('       build        use gulp to build this project.\n'));
   process.stdout.write(colors.green('       default      run this project.\n'));
   process.stdout.write(colors.green('       help         how to use this project.\n'));
   process.stdout.write(colors.green('       commit [log] commit code by git to gitlab.\n'));
   process.stdout.write(colors.green('       init         init this project.\n\n'));
+  process.stdout.write(colors.green('       publish      publish this project.\n\n'));
   process.stdout.write(colors.green('       destroy      *************************\n\n'));
   process.stdout.write(colors.green('tips:                                       \n'));
   process.stdout.write(colors.green('       bugs, Thanks![liubin@saotx.cn]\n'));

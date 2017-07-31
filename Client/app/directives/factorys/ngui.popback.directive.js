@@ -34,7 +34,8 @@ define([], function () {
 
             $('.pop-back').on('click', function(){
                 // 这里必须刷新，不然接口不刷新
-                location.reload();
+                // location.reload();
+                $(this).parents('.pop').addClass('hidden');
             })
         }
 

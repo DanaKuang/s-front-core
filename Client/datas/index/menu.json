@@ -10,10 +10,10 @@
     "noDataApi": true,
     "hash": "",
     "dropdown": [{
-      "text": "地域分析",
+      "text": "地域查询",
       "hash": "#/view/home/theme/region"
     }, {
-      "text": "规格分析",
+      "text": "规格查询",
       "hash": "#/view/home/theme/spec"
     }]
   },{
