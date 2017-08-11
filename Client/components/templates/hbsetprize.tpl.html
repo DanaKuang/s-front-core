@@ -1,51 +1,68 @@
-<div id="sethbPrize">
+<div id="sethbPrize" class="sethbprize">
 	<!-- 首抽 -->
 	<div class="first-draw gotoset">
-		<input type="checkbox" class="first-draw-cbox" ng-model="myVar" ng-init="myVar = false"><span>首抽必中</span>
+		<input type="checkbox" class="first-draw-cbox" ng-model="myVar" ng-init="myVar = false" ng-disabled="disabled"><span>首抽必中</span>
 		<!-- 首抽中奖设置 -->
-		<div class="first-draw-prize-wrap" ng-if="myVar" ng-click="close($event)">
+		<div class="first-draw-prize-wrap" ng-show="myVar" ng-click="close($event)">
 			<h6>首抽用户设置</h6>
 			<div class="ready-set" ng-click="changeTab($event)">
 				<div class="draw-prize-wrap">
 					<div class="prize-config border-box">
 						<div class="configuration-item">
-							<input type="text" id="">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
+							<input type="text" class="prizename" ng-disabled="disabled">
 						</div>
 						<div class="configuration-item radio-wrap">
 							<div class="radio-group">
-								<input checked="true" type="radio" name="redpack-only" value="微信红包"><label for="">微信红包</label>
+								<input checked="true" type="radio" value="微信红包" class="active" ng-disabled="disabled"><label for="">微信红包</label>
 							</div>
 						</div>
-						<div class="configuration-item">
-							<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
-							<div class="hb-two-one">
-								<div class="random-hb hb-money-wrap">
-									<div class="circle-money-tick">
-										<i class="circle"></i>随机金额
+						<div class="radio-res-wrap">
+							<div class="hb hb-res">
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
+									<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+									<div class="hb-two-one">
+										<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
+										<div class="random-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>随机金额
+											</div>
+											<input type="number" class="min" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元 —— <input type="number" class="max" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+										</div>
+										<div class="fixed-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>固定金额
+											</div>
+											<input type="number" class="fixed" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+										</div>
 									</div>
-									<input type="text">元 —— <input type="text">元
 								</div>
-								<div class="fixed-hb hb-money-wrap">
-									<div class="circle-money-tick">
-										<i class="circle"></i>固定金额
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
+									<input type="number" class="money" placeholder="请填写奖金总数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+									<button class="btn btn-default add-inventory add-hb-stock" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
+								</div>
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包数量</small>
+									<input type="number" class="hbnumber" placeholder="请填写红包数量" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+									<div class="present-integral">
+										<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
+										<input type="number" class="score" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">积分
 									</div>
-									<input type="text">元
 								</div>
-							</div>
-						</div>
-						<div class="configuration-item">
-							<input type="number" id="">
-							<button class="btn btn-default add-inventory" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
-							<div class="present-integral">
-								<input type="checkbox"><label for="">同时赠送积分</label>
-								<input type="number">积分
 							</div>
 						</div>
 					</div>
 					<i class="close">×</i>
+					<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 				</div>
 			</div>
-			<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn" ng-click="createNewPrize($event)">+新增奖项</button>
+			<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn" ng-click="createNewPrize($event)" ng-disabled="disabled">+新增奖项</button>
 		</div>
 	</div>
 	<!-- 非首抽 -->
@@ -57,127 +74,182 @@
 				<div class="draw-prize-wrap">
 					<div class="prize-config border-box">
 						<div class="configuration-item">
-							<input type="text">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-chance hidden">请设置奖项概率</small>
+							<input type="number" ng-disabled="disabled" class="chance" placeholder="请输入数字" ng-keyup="setChance($event)">%
 						</div>
 						<div class="configuration-item">
-							<input type="text" id="">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
+							<input type="text" class="prizename" ng-disabled="disabled" maxlength="30">
 						</div>
 						<div class="configuration-item radio-wrap">
 							<div class="radio-group">
-								<input checked="checked" type="radio" name="first-radio" value="微信红包"><label for="">微信红包</label>
+								<input checked="checked" type="radio" class="active" value="微信红包" ng-disabled="disabled"><label for="">微信红包</label>
 							</div>
 						</div>
-						<div class="configuration-item">
-							<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
-							<div class="hb-two-one">
-								<div class="random-hb hb-money-wrap">
-									<div class="circle-money-tick">
-										<i class="circle"></i>随机金额
+						<div class="radio-res-wrap">
+							<div class="hb hb-res">
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
+									<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+									<div class="hb-two-one">
+										<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
+										<div class="random-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>随机金额
+											</div>
+											<input type="number" class="min" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元 —— <input type="number" class="max" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+										</div>
+										<div class="fixed-hb hb-money-wrap">
+											<div class="circle-money-tick">
+												<i class="circle"></i>固定金额
+											</div>
+											<input type="number" class="fixed" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+										</div>
 									</div>
-									<input type="text">元 —— <input type="text">元
 								</div>
-								<div class="fixed-hb hb-money-wrap">
-									<div class="circle-money-tick">
-										<i class="circle"></i>固定金额
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
+									<input type="number" class="money" placeholder="请填写奖金总数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+								</div>
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
+									<input type="number" class="hbnumber" placeholder="请填写红包个数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+									<div class="present-integral">
+										<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
+										<input type="number" class="score" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">积分
 									</div>
-									<input type="text">元
 								</div>
-							</div>
-						</div>
-						<div class="configuration-item">
-							<input type="number" id="">
-							<div class="present-integral">
-								<input type="checkbox"><label for="">同时赠送积分</label>
-								<input type="number">积分
 							</div>
 						</div>
 					</div>
 					<i class="close">×</i>
+					<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 				</div>
 			</div>
-			<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn" ng-click="createNewPrize($event)">+新增奖项</button>
+			<button type="submit" id="createFisrtDrawPrize" class="btn btn-default creat-prize-btn" ng-click="createNewPrize($event)" ng-disabled="disabled">+新增奖项</button>
 		</div>
 	</div>
 	<script type="text/html" id="special-prize">
 		<div class="draw-prize-wrap">
 			<div class="prize-config border-box">
 				<div class="configuration-item">
-					<input type="text" id="">
+					<b>*</b>
+					<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
+					<input type="text" class="prizename" ng-disabled="disabled">
 				</div>
 				<div class="configuration-item radio-wrap">
 					<div class="radio-group">
-						<input checked="true" type="radio" name="redpack-only" value="微信红包"><label for="">微信红包</label>
+						<input checked="true" type="radio" value="微信红包" class="active" ng-disabled="disabled"><label for="">微信红包</label>
 					</div>
 				</div>
-				<div class="configuration-item">
-					<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
-					<div class="hb-two-one">
-						<div class="random-hb hb-money-wrap">
-							<div class="circle-money-tick">
-								<i class="circle"></i>随机金额
+				<div class="radio-res-wrap">
+					<div class="hb hb-res">
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
+							<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+							<div class="hb-two-one">
+								<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
+								<div class="random-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>随机金额
+									</div>
+									<input type="number" class="min" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元 —— <input type="number" class="max" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+								</div>
+								<div class="fixed-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>固定金额
+									</div>
+									<input type="number" class="fixed" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+								</div>
 							</div>
-							<input type="text">元 —— <input type="text">元
 						</div>
-						<div class="fixed-hb hb-money-wrap">
-							<div class="circle-money-tick">
-								<i class="circle"></i>固定金额
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
+							<input type="number" class="money" placeholder="请填写奖金总数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+							<button class="btn btn-default add-inventory add-hb-stock" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
+						</div>
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包数量</small>
+							<input type="number" class="hbnumber" placeholder="请填写红包数量" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+							<div class="present-integral">
+								<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
+								<input type="number" class="score" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">积分
 							</div>
-							<input type="text">元
 						</div>
-					</div>
-				</div>
-				<div class="configuration-item">
-					<input type="number" id="">
-					<button class="btn btn-default add-inventory" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
-					<div class="present-integral">
-						<input type="checkbox"><label for="">同时赠送积分</label>
-						<input type="number">积分
 					</div>
 				</div>
 			</div>
 			<i class="close">×</i>
+			<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 		</div>
 	</script>
 	<script type="text/html" id="non-special-prize">
 		<div class="draw-prize-wrap">
 			<div class="prize-config border-box">
 				<div class="configuration-item">
-					<input type="text">
+					<b>*</b>
+					<small class="wrong-tip wrong-tip-chance hidden">请设置奖项概率</small>
+					<input type="number" ng-disabled="disabled" class="chance" placeholder="请输入数字" ng-keyup="setChance($event)">%
 				</div>
 				<div class="configuration-item">
-					<input type="text" id="">
+					<b>*</b>
+					<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
+					<input type="text" class="prizename" ng-disabled="disabled" maxlength="30">
 				</div>
 				<div class="configuration-item radio-wrap">
 					<div class="radio-group">
-						<input checked="checked" type="radio" name="first-radio" value="微信红包"><label for="">微信红包</label>
+						<input checked="checked" type="radio" class="active" value="微信红包" ng-disabled="disabled"><label for="">微信红包</label>
 					</div>
 				</div>
-				<div class="configuration-item">
-					<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
-					<div class="hb-two-one">
-						<div class="random-hb hb-money-wrap">
-							<div class="circle-money-tick">
-								<i class="circle"></i>随机金额
+				<div class="radio-res-wrap">
+					<div class="hb hb-res">
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
+							<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+							<div class="hb-two-one">
+								<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
+								<div class="random-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>随机金额
+									</div>
+									<input type="number" class="min" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元 —— <input type="number" class="max" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+								</div>
+								<div class="fixed-hb hb-money-wrap">
+									<div class="circle-money-tick">
+										<i class="circle"></i>固定金额
+									</div>
+									<input type="number" class="fixed" readonly="true" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">元
+								</div>
 							</div>
-							<input type="text">元 —— <input type="text">元
 						</div>
-						<div class="fixed-hb hb-money-wrap">
-							<div class="circle-money-tick">
-								<i class="circle"></i>固定金额
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
+							<input type="number" class="money" placeholder="请填写奖金总数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+						</div>
+						<div class="configuration-item">
+							<b>*</b>
+							<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
+							<input type="number" class="hbnumber" placeholder="请填写红包个数" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">
+							<div class="present-integral">
+								<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
+								<input type="number" class="score" ng-disabled="disabled" ng-keyup="notminusnotzero($event)">积分
 							</div>
-							<input type="text">元
 						</div>
-					</div>
-				</div>
-				<div class="configuration-item">
-					<input type="number" id="">
-					<div class="present-integral">
-						<input type="checkbox"><label for="">同时赠送积分</label>
-						<input type="number">积分
 					</div>
 				</div>
 			</div>
 			<i class="close">×</i>
+			<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 		</div>
 	</script>
 </div>

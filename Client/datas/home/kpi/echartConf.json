@@ -47,7 +47,7 @@
             "type": "scatter",
             "coordinateSystem": "geo",
             "data": "",
-            "symbolSize": "",
+            "symbolSize": 5,
             "label": {
                 "normal": {
                     "formatter": "{b}",
@@ -65,11 +65,11 @@
             }
         },
         {
-            "name": "扫码前10",
+            "name": "扫码前60-90",
             "type": "effectScatter",
             "coordinateSystem": "geo",
             "data": "",
-            "symbolSize": "",
+            "symbolSize": 6,
             "showEffectOn": "render",
             "rippleEffect": {
                 "brushType": "stroke"
@@ -79,13 +79,67 @@
                 "normal": {
                     "formatter": "{b}",
                     "position": "right",
-                    "show": true
+                    "show": false
                 }
             },
             "itemStyle": {
                 "normal": {
-                    "color": "#52b0ff",
-                    "shadowBlur": 10,
+                    "color": "#27f849",
+                    "shadowBlur": 15,
+                    "shadowColor": "#333"
+                }
+            },
+            "zlevel": 1
+        },
+        {
+            "name": "扫码前30-60",
+            "type": "effectScatter",
+            "coordinateSystem": "geo",
+            "data": "",
+            "symbolSize": 7,
+            "showEffectOn": "render",
+            "rippleEffect": {
+                "brushType": "stroke"
+            },
+            "hoverAnimation": true,
+            "label": {
+                "normal": {
+                    "formatter": "{b}",
+                    "position": "right",
+                    "show": false
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": "#f6f827",
+                    "shadowBlur": 15,
+                    "shadowColor": "#333"
+                }
+            },
+            "zlevel": 1
+        },
+        {
+            "name": "扫码前30",
+            "type": "effectScatter",
+            "coordinateSystem": "geo",
+            "data": "",
+            "symbolSize": 8,
+            "showEffectOn": "render",
+            "rippleEffect": {
+                "brushType": "stroke"
+            },
+            "hoverAnimation": true,
+            "label": {
+                "normal": {
+                    "formatter": "{b}",
+                    "position": "right",
+                    "show": false
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": "#f13030",
+                    "shadowBlur": 15,
                     "shadowColor": "#333"
                 }
             },

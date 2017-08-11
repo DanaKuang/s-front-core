@@ -9,11 +9,11 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'AgreeCtrl',
     ViewModelName: 'agreeViewModel',
-    ServiceContent: ['$scope','setDateConf', function ($scope,setDateConf) {
+    ServiceContent: ['$scope','setDateConf','dayFilter', function ($scope,setDateConf,dayFilter) {
       setDateConf.init($(".agree-date"), 'day');
 
       //设置input的默认时间
-      var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+      var stattime = dayFilter.yesterday("date");
       $(".date").find("input").val(stattime);
       var $model = $scope.$model;
       $scope.bool = false;
@@ -37,7 +37,7 @@ define([], function () {
         "productName":"芙蓉王",
         "type":"盒",
         "cityName":""
-      }
+      };
       var prize = _.cloneDeep(prizeCount);
       prize.page = 1;
       prize.pageSize = 10;
@@ -50,10 +50,10 @@ define([], function () {
           global.othersCou(countDeafault);
         } else {
           global.getPrize(prize);
-          global.getBrand();
-          global.prizeCou(prizeCount)
+          // global.getBrand();
+          global.prizeCou(prizeCount);
         }
-      }
+      };
 
       //执行的函数
       var global = {

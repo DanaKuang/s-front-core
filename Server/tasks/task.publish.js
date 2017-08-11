@@ -112,16 +112,26 @@ module.exports = function () {
         center.exec('scp -r '+ips[0].dist+'/data-front'+' '+ips[1].host+':'+ips[1].dist)
         .then(function (result) {
             process.stdout.write(colors.blue('\x20\x20\x20 copy successfully!\n'));
+            deferred.resolve(file);
+        });
+        return deferred.promise;
+    };
+
+    // 第六步 删除打包文件
+    var sixthStep = function (file) {
+        var deferred = Q.defer();
+        process.stdout.write(colors.green('6、del: \n'));
+        center.exec('rm -rf '+file.filename+' '+'data-front/').then(function (result) {
+            process.stdout.write(colors.blue('\x20\x20\x20 del successfully!\n'));
             deferred.resolve(true);
         });
         return deferred.promise;
     };
 
-    // 第六步 部署成功
-    var sixthStep = function () {
+    // 第七步 成功提示
+    var seventhStep = function () {
         var deferred = Q.defer();
-        process.stdout.write(colors.green('\x20publish successfully!\n'));
-        center.dispose();
+        process.stdout.write(colors.green('\x20PUBLISH SUCCESSFULLY!\n'));
         deferred.resolve(true);
         return deferred.promise;
     };
@@ -138,6 +148,7 @@ module.exports = function () {
     .then(forthStep)
     .then(fifthStep)
     .then(sixthStep)
+    .then(seventhStep)
     .catch(error_catch)
     .done();
 };

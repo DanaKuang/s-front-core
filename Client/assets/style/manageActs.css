@@ -5,6 +5,9 @@
  */
 
 /*新建活动模态框*/
+.ui-panel-title {
+	margin-top: 30px;
+}
 .create-activity-modal .modal-body {
 	overflow: hidden;
 }
@@ -47,6 +50,12 @@
 /*启用、终止模态框*/
 .end-activity-modal .modal-header, .start-activity-modal .modal-header {
 	border: 0 none!important;
+}
+.snslist, .arealist {
+	max-width: 200px;
+	overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /*通用活动新建*/
@@ -97,53 +106,102 @@
 	margin-bottom: 15px;
 	width: 100%;
 }
-
+.basicinfo .configuration-item b {
+	position: absolute;
+	left: 110px;
+  top: 5px;
+  color: red;
+  font-size: 18px;
+}
+.wrong-tip {
+	color: red;
+	font-size: 12px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 2px 6px;
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+  background: #fff;
+}
+.basicinfo .configuration-item .wrong-tip {
+  position: absolute;
+	left: 395px;
+	top: 7px;
+}
+.basicinfo label {
+	position: absolute;
+	top: 6px;
+	left: 60px;
+	color: #707478;
+	font-weight: normal;
+}
+.basicinfo .configuration-image b {
+	top: 0;
+}
+.basic .normfile {
+	left: 14px;
+	top: 1px;
+}
+.basic .activityfileimage {
+	top: 1px;
+}
+.basic .priority {
+	left: 51px;
+}
+.basic .popimagefile {
+	left: 48px;
+	top: 1px;
+}
+.basic .poptextfile {
+	left: 37px;
+	top: 1px;
+}
+.participate-relate {
+	margin-top: 60px;
+}
 .basic input, .participate-relate input {
 	margin-left: 130px;
 }
 
-.basic input[type="text"], .basic input[type="number"], .basic input[type="url"], .participate-relate input[type="text"] {
+.basic input[type="text"], .basic input[type="number"], .basic input[type="url"], .participate-relate input[type="number"] {
 	width: 400px;
+}
+
+.basicinfo textarea {
+	margin-left: 130px;
+	resize: none;
+	border-width: 1px;
+  border-style: solid;
+  border-color: rgb(210, 210, 210);
+  width: 400px;
+  height: 100px;
+  margin-top: 6px;
+  padding: 4px 6px;
 }
 
 .configuration-item:before {
 	content: '';
 	position: absolute;
 }
-.basic .configuration-item:nth-of-type(1):before {
-	content: '活动名称';
-	top: 6px;
-	left: 60px
-}
-.basic .configuration-item:nth-of-type(2):before {
-	content: '规范性文件及说明';
-	top: 2px;
-	left: 15px;
-}
-.common-pop .basic .configuration-item:nth-of-type(3):before {
-	content: '活动优先级';
-	top: 6px;
-	left: 50px;
-}
-.holiday-pop .basic .configuration-item:nth-of-type(3):before {
-	content: '活动链接';
-	top: 6px;
-	left: 62px;
-}
-.holiday-pop .basic .configuration-item:nth-of-type(4):before, 
-.surprise-pop .basic .configuration-item:nth-of-type(3):before {
-	content: '弹窗图设置';
-	top: 2px;
-	left: 50px;
-}
-.holiday-pop .basic .configuration-item:nth-of-type(5):before, .surprise-pop .basic .configuration-item:nth-of-type(4):before {
-	content: '弹窗图文案设置';
-	top: 2px;
-	left: 26px;
-}
+
 .draw-prize select {
 	margin-left: 72px;
 	width: 453px;
+}
+.draw-prize .configuration-item i {
+  position: absolute;
+  left: 55px;
+  top: 5px;
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+.draw-prize .configuration-item .wrong-tip {
+	position: absolute;
+  left: 395px;
+  top: 7px;
+  z-index: 1;
+  color: red;
+  font-size: 12px;
 }
 .draw-prize .select-duration:before {
 	content: '中奖时段';
@@ -188,7 +246,7 @@
 }
 .draw-prize .chance input {
 	margin-left: 72px;
-	width: 453px;
+	width: 445px;
 }
 .activity-priority:after {
 	content: '提示：数值越大活动越靠前显示，最小数值为0';
@@ -221,38 +279,59 @@
 .launch-relate {
 	padding: 5px;
 }
+.launch-relate .configuration-item small {
+	position: absolute;
+	left: 55px;
+  top: 5px;
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+.launch-relate .configuration-item .wrong-tip small {
+	font-weight: normal;
+}
+.launch-relate .configuration-item .wrong-tip {
+	position: absolute;
+	left: 395px;
+	top: 7px;
+	color: red;
+	font-size: 12px;
+}
 .launch-relate select {
 	margin-left: 72px;
 	width: 453px;
 }
-
-.launch-relate .configuration-item:nth-of-type(1):before {
+.launch-relate select.hours, .draw-prize select.hours {
+	margin-left: 0;
+	width: 60px;
+}
+.draw-prize select.hours:first-of-type {
+	margin-left: 72px;
+}
+/*.launch-relate .configuration-item:nth-of-type(1):before {
 	content: '选择供应商';
 	top: 6px;
 	left: -6px
-}
-.launch-relate .configuration-item:nth-of-type(2):before {
+}*/
+.launch-relate .configuration-item:nth-of-type(1):before {
 	content: '选择品牌';
 	top: 6px;
 	left: 5px;
 }
-.launch-relate .configuration-item:nth-of-type(3):before {
+.launch-relate .configuration-item:nth-of-type(2):before {
 	content: '选择规格';
 	top: 5px;
 	left: 5px;
 }
-.launch-relate .configuration-item:nth-of-type(4):before {
+.launch-relate .configuration-item:nth-of-type(3):before {
 	content: '地区';
 	top: 6px;
 	left: 27px;
 }
-.launch-relate .configuration-item:nth-of-type(5):before {
+.launch-relate .configuration-item:nth-of-type(4):before {
 	content: '活动时段';
 	top: 6px;
 	left: 5px;
-}
-.launch-relate .configuration-item:nth-of-type(5) input[type="text"] {
-	width: 200.5px;
 }
 .surprise-pop .launch-relate .configuration-item:nth-of-type(6):before {
 	content: '中奖条件';
@@ -294,11 +373,14 @@
 }
 .select-duration .form_datetime:first-of-type {
 	margin-left: 72px;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 .select-duration .form_datetime:last-of-type {
 	margin-left: 10px;
-	margin-right: 10px;
+	margin-right: 5px;
+}
+.select-duration .form_datetime {
+	width: 203px!important;
 }
 
 input[type="checkbox"] {
@@ -326,6 +408,21 @@ input[type="checkbox"] {
 	position: relative;
 	width: 482px;
 }
+.draw-prize-wrap b {
+	color: red;
+  font-size: 18px;
+}
+.basic .draw-prize-wrap b {
+	position: absolute;
+ 	left: 55px;
+  top: 5px;
+}
+.draw-prize-wrap .wrong-tip {
+	position: absolute;
+  top: 25px;
+  left: 100%;
+  width: 300px;
+}
 .draw-prize-wrap .close {
 	position: absolute;
 	top: 5px;
@@ -350,6 +447,9 @@ input[type="checkbox"] {
 .prize-config .configuration-item:nth-of-type(2):before {
 	content: '奖品类型';
 }
+.redpack-pop .hb-res .configuration-item:nth-of-type(2):before {
+	content: '红包总额'!important;
+} 
 .common-pop .prize-config .configuration-item:nth-of-type(2):before {
 	content: '奖品类型(三选一)';
 	width: 50px;
@@ -393,7 +493,8 @@ input[type="checkbox"] {
 	content: '选择模板';
 }
 .hb .configuration-item:nth-of-type(2):before {
-	content: '红包总额';
+	content: '红包总额'!important;
+	top: 6px!important;
 }
 .hb .configuration-item:nth-of-type(2):after {
 	content: '元';
@@ -405,11 +506,12 @@ input[type="checkbox"] {
 	content: '赠送积分';
 } 
 .jf .configuration-item:nth-of-type(2):before {
-	content: '奖品数量';
+	content: '奖品数量'!important;
+	top: 6px!important;
 }
 .redpack-pop .first-draw-prize-wrap .configuration-item:nth-of-type(3):before {
 	content: '选择模板';
-}
+} 
 .redpack-pop .first-draw-prize-wrap .configuration-item:nth-of-type(4):before {
 	content: '红包总额';
 }
@@ -423,9 +525,15 @@ input[type="checkbox"] {
 .non-first-draw-wrap .configuration-item:nth-of-type(1):before {
 	content: '中奖概率';
 }
+.surprise-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):before {
+	content: '奖品名称';
+}
+.redpack-pop .hb-res .configuration-item:nth-of-type(1):before {
+	content: '红包模板'!important;
+}
 .non-first-draw-wrap .configuration-item:nth-of-type(1):after {
 	position: absolute;
-	content: '提示：以上中奖概率控制的为一等奖，二等奖，三等奖，四等奖整体中奖概率，谢谢参与奖项的中奖概率为100%（中奖概率设置值）。';
+	content: '提示：以上中奖概率控制除参与奖外所设奖项的整体中奖概率，参与奖项的中奖概率为100%（中奖概率设置值）。';
 	left: 20px;
   bottom: -36px;
   font-size: 12px;
@@ -434,8 +542,15 @@ input[type="checkbox"] {
   -ms-transform: scale(0.85);
   transform: scale(0.85);
 }
+.surprise-pop .non-first-draw-wrap .configuration-item:nth-of-type(2):before {
+	content: '奖品类型(三选一)'!important;
+	width: 50px;
+	text-align: center;
+	top: 0!important;
+}
 .non-first-draw-wrap .configuration-item:nth-of-type(2):before {
 	content: '奖项名称'!important;
+	top: 6px!important;
 }
 .non-first-draw-wrap .configuration-item:nth-of-type(2) {
 	margin-top: 40px;
@@ -446,7 +561,20 @@ input[type="checkbox"] {
 	text-align: center;
 	top: 0;
 }
+.redpack-pop .non-first-draw-wrap .prize-config .configuration-item:nth-of-type(3):before {
+	content: '奖品类型'!important;
+	top: 6px!important;
+}
+.redpack-pop .non-first-draw-wrap .prize-config .hb-res .configuration-item:nth-of-type(3):before { 
+	content: '红包个数'!important; 
+}
 .common-pop .non-first-draw-wrap .configuration-item:nth-of-type(3):before {
+	content: '奖品类型(三选一)';
+	width: 50px;
+	text-align: center;
+	top: 0;
+}
+.holiday-pop .radio-wrap:before, .surprise-pop .radio-wrap:before {
 	content: '奖品类型(三选一)';
 	width: 50px;
 	text-align: center;
@@ -460,6 +588,9 @@ input[type="checkbox"] {
 }
 .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(5):before {
 	content: '红包总额';
+}
+.hb-two-one {
+	position: relative;
 }
 .prize-config input[type="number"] {
 	margin-left: 50px;
@@ -508,13 +639,18 @@ input[type="checkbox"] {
 	content: '选择模板';
 }
 .non-first-draw-wrap .hb .configuration-item:nth-of-type(2):before {
-	content: '红包总额';
+	content: '红包总额'!important;
+}
+.hb .configuration-item:nth-of-type(3):before {
+	content: '红包个数'!important;
+	top: 6px!important;	
 }
 .non-first-draw-wrap .jf .configuration-item:nth-of-type(1):before {
   content: '赠送积分';
 }
 .non-first-draw-wrap .jf .configuration-item:nth-of-type(2):before {
-  content: '奖品数量';
+  content: '奖品数量'!important;
+  top: 6px!important;
 }
 input[type="radio"] {
 	margin-top: 8px!important;
@@ -564,6 +700,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	width: 80px;
 	height: 80px;
 	border: 1px solid #d2d2d2;
+	text-align: center;
 }
 .prize-img-preview:before {
 	content: '暂无产品';
@@ -572,8 +709,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	left: 17px;
 }
 .prize-img-preview img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50%;
+	margin-left: -50%;
 	max-width: 100%;
-	vertical-align: middle;
+	max-height: 100%;
 }
 .add-inventory {
 	width: 75px;
@@ -621,13 +763,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .random-hb, .fixed-hb {
 	margin-left: 50px;
 }
-.random-hb input[type="text"] {
+.random-hb input[type="number"] {
 	width: 103.5px!important;
 	margin-top: 6px!important;
 	margin-left: 5px!important;
 	margin-right: 5px!important;
 }
-.fixed-hb input[type="text"] {
+.fixed-hb input[type="number"] {
 	width: 260px!important;
 	margin-top: 6px!important;
 	margin-left: 5px!important;
@@ -672,6 +814,11 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 
 .ready-set {
 	margin-bottom: 10px;
+}
+.ready-set b {
+	position: absolute;
+	left: 38px;
+	top: 4px;
 }
 .create-prize-btn {
 	height: 29px;

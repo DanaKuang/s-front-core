@@ -10,25 +10,6 @@ define([], function () {
     ServiceName: 'specViewModel',
     ServiceContent: ['request', function (request) {
       this.$model = function () {
-        var stattime = new Date().getFullYear()+"-"+(new Date().getMonth()+1)   +"-"+new Date().getDate();
-        var Default =  {
-          "productSn":"6901028201711",
-          "statTime":stattime,
-          "statType":"day"
-        };
-        var awardDefault =  {
-          "productSn":"6901028201711",
-          "statTime":stattime,
-          "statType":"day",
-          "awardFlag":2
-        };
-        var hourDefault =  {
-          "productSn":"6901028201711",
-          "statTime":stattime,
-          "statType":"day",
-          "flag":2
-        };
-
         
         var HOURS_JSON_URL = '/statics/home/spec/hourCharts.json';   //扫码次数时刻趋势
         var PLAN_JSON_URL = '/statics/home/spec/plan.json'           //扫码次数时间趋势
@@ -77,40 +58,34 @@ define([], function () {
           return request.$Search(getWeeks,{},true);
         }
         this.$specfication = function (params) {
-          var option = params || Default;
-          //console.log(option);
-          return request.$Search(specification,option,true);
+          return request.$Search(specification,params,true);
         }
         this.$hourTrend = function(params){
-          var option = _.cloneDeep(params) || hourDefault;
+          var option = _.cloneDeep(params);
           option.flag = 2;
           return request.$Search(hourTrend,option,true);
         }
         this.$getMap = function (params) {
-          var option = params || Default;
-          return request.$Search(getMap,option,true);
+          return request.$Search(getMap,params,true);
         }
         this.$City = function (params) {
-          var option = params || Default;
-          return request.$Search(City,option,true);
+          return request.$Search(City,params,true);
         }
         this.$timesTrendOfSpec = function (params) {
-          var option = params || Default;
-          return request.$Search(timesTrendOfSpec,option,true);
+          return request.$Search(timesTrendOfSpec,params,true);
         }
         this.$drawTimes = function (params) {
-          var option = params || Default;
-          return request.$Search(drawTimes,option,true);
+          return request.$Search(drawTimes,params,true);
         }
         this.$money = function (params,flag) {
-          var option = _.cloneDeep(params) || awardDefault;
+          var option = _.cloneDeep(params);
           if(flag){
             option.awardFlag = 2;
           }
           return request.$Search(getAward,option,true);
         }
         this.$thing = function (params,flag) {
-          var option = _.cloneDeep(params) || awardDefault;
+          var option = _.cloneDeep(params);
           if(!flag){
             option.awardFlag = 1;
           }

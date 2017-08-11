@@ -49,6 +49,10 @@
     margin-right: 35px;
 }
 
+.build_gift:hover{
+    cursor: pointer;
+}
+
 .table_sec {
     padding-top: 13px;
 }
@@ -77,6 +81,9 @@
 .select_active {
     background-color: #FFFFFF;
 }
+.select_active:hover{
+    cursor: pointer;
+}
 
 .select_active:after {
     content: '';
@@ -91,7 +98,9 @@
 .no_active {
     background-color: #F8FBFF;
 }
-
+.no_active:hover{
+    cursor: pointer;
+}
 .select_sec, .packet_select_sec {
     padding-bottom: 15px;
     border-left: 1px solid #A0A0A0;
@@ -210,8 +219,8 @@
 
 /*红包管理*/
 .packet_select_sec div {
-    float: left;
-    margin-left: 21px;
+    /*float: left;*/
+    /*margin-left: 21px;*/
     margin-bottom: 14px;
 }
 
@@ -239,7 +248,13 @@
     border: 1px solid #888888;
     border-radius: 14px;
 }
-
+.col4_ser_margin{
+    margin-left: 15px;
+    margin-right: 100px;
+}
+.col1_ser_margin{
+    margin-right: 12px;
+}
 /*供应商管理*/
 .supply_select_sec {
     margin-bottom: 30px;
@@ -247,8 +262,8 @@
 }
 
 .supply_select_sec div {
-    float: left;
-    margin-right: 30px;
+    /*float: left;*/
+    /*margin-right: 30px;*/
 }
 
 .supply_select_sec div:last-child {
@@ -258,20 +273,20 @@
 .supply_select_sec div label {
     font-size: 14.7px;
     line-height: 28px;
-    margin-right: 14px;
+    /*margin-right: 14px;*/
     text-align: right;
 }
 
 .supply_select_sec div select {
     font-size: 14.7px;
-    width: 105px;
+    width: 80px;
     height: 28px;
     line-height: 28px;
 }
 
 .supply_select_sec div input {
     font-size: 14.7px;
-    width: 160px;
+    width: 130px;
     height: 28px;
     line-height: 28px;
     border: 1px solid #888888;
@@ -285,13 +300,26 @@
     font-size: 16.8px;
     border: 1px solid #888888;
     border-radius: 14px;
+    /*margin-top: 10px;*/
+}
+.supply_select_sec .ser_btn{
+    margin-right: 15px;
 }
 .ser_btn:hover, .rest_btn:hover{
     cursor: pointer;
+    background-color: #F8FBFF
 }
-
+.upload_warn{
+    margin-left: 125px;
+    margin-top: 30px;
+    font-size: 18px;
+    color: #FF4444;
+}
 .file_col {
     color: #6E80FF;
+}
+.file_col:hover{
+    cursor: pointer;
 }
 
 /*新建礼品*/
@@ -322,6 +350,7 @@
 .form_sec div select {
     width: 180px;
     height: 35px;
+    font-size: 16px;
 }
 
 .form_sec div p {
@@ -329,7 +358,9 @@
     font-size: 12px;
     color: #ACACAC;
 }
-
+#giftName,#marketValue,#stock,#stockThresh,#linkUrl{
+    width: 364px;
+}
 .select_file {
     width: 84px;
     height: 84px;
@@ -338,9 +369,13 @@
     text-align: center;
     line-height: 84px;
     display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #F8FBFF;
 }
 .opera_sec{
-    padding-top: 20px;
+    padding-top: 30px;
 }
 .opera_sec div {
     width: 140px;
@@ -351,6 +386,9 @@
     border-radius: 18px;
     -webkit-border-radius: 18px;
     display: inline-block;
+}
+.opera_sec div:hover{
+    cursor: pointer;
 }
 
 .opera_sec .opera_confirm {
@@ -376,13 +414,59 @@
     width: 95px;
     height: 42px;
     border: 1px solid #D2D2D2;
+    /*font-size: 15px;
+    text-align: center;
+    line-height: 42px;
+    display: inline-block;
+    background-color: #F8FBFF;*/
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 8px 0;
+}
+#registerFile,#contractFile,#performanceFile{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    height: 100%;
+}
+.choice_file{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /*z-index: 30;*/
+    height: 100%;
     font-size: 15px;
     text-align: center;
     line-height: 42px;
     display: inline-block;
     background-color: #F8FBFF;
+    display: inline-block;
 }
-
+.form_sec .get_file:hover{
+    cursor: pointer;
+}
+#regis_warn,#contract_warn,#performance_warn{
+    color: #ACACAC;
+    font-size: 10px;
+}
+#supply_warn,#compliance_warn{
+    color: #ff3300;
+    font-size: 10px;
+}
+#compliance_warn{
+    display: none;
+}
+#registerName,#contractName,#performanceName,#transferName{
+    color: #6E80FF;
+    font-size: 20px;
+    margin: 20px;
+    vertical-align:middle;
+}
 .form_sec div .radio_sel,.form_sec div .checkbox_sel{
     display: inline-block;
     font-size: 15px;
@@ -448,4 +532,74 @@ body{
 }
 .box_btn .box_btn_cancel{
     color: #CECECE;
+}
+.box_btn .enabled_btn{
+    color: #6E80FF;
+    margin: 0 auto;
+}
+.no_search{
+    text-align: center;
+    margin: 0 auto;
+    padding: 50px 0;
+    font-size: 20px;
+}
+#transfer,#giftImg{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    height: 100%;
+}
+.transfer_sec{
+    position: relative;
+    margin-left: 122px;
+    margin-top: -30px;
+    width: 84px;
+    height: 84px;
+}
+#transferName{
+    margin-left: 220px;
+    display: inline-block;
+    margin-top: -90px;
+}
+#transfer_warn{
+    margin-top: -15px;
+    color: #ACACAC;
+}
+
+.select_supply,.select_brand,.entry_capital,.select_specift{
+    color: #ff3300;
+    font-size: 10px;
+    margin-left: 10px;
+    display: none;
+}
+.gift_name_warn,.category_warn,.gift_supply_warn,.apply_brand_warn,.apply_specift_warn,.market_value_warn,.stock_warn,.stockThresh_warn{
+    color: #ff3300;
+    font-size: 15px;
+    margin-left: 10px;
+    display: none;
+}
+.add_stock_warn{
+    color: #ff3300;
+    font-size: 13px;
+    margin-left: 10px;
+    display: none;
+}
+#giftImgName{
+    color: #6E80FF;
+    font-size: 20px;
+    position: absolute;
+    margin-left: 230px;
+    margin-top: -60px;
+}
+.gift_img img{
+    height: 50px;
+}
+#selectGiftName{
+    font-size: 14.7px;
+    width: 154px;
+    height: 28px;
+    line-height: 28px;
 }

@@ -1,0 +1,113 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-08-02
+ * Description: pathdetail
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.track.css">
+<!--html-->
+<div class="animated fadeInRight" ng-controller="pathdetialCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="ui-content-path col-md-12">
+                <!--title-->
+                <div class="ui-path-title">
+                    <i class="path"></i><span>页面路径转化信息</span>
+                </div>
+                <!--查询-->
+                <div class="panel rate">
+                    <!--查询-->
+                    <div class="panel-body">
+                        <form class="ui-form-search">
+                            <div sa-pathsearch conf="pathConf"></div>
+                        </form>
+                    </div>
+                    <!--转化-->
+                    <div class="panel-body">
+                        <div class="ui-min-height col-md-4">
+                            <div class="ui-title">来源页面</div>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>页面名称</th>
+                                        <th>导流次数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in fromOutData">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{d.webSourceName}}</td>
+                                        <td>{{d.activePv}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ui-min-height col-md-4">
+                            <div class="ui-title-head">抵达次数:&nbsp;{{visitin}}</div>
+                            <div class="ui-trans-visit">
+                                <div class="head"></div>
+                                <div class="rate">路径转化率&nbsp;{{visitrate}}</div>
+                                <div class="foot"></div>
+                            </div>
+                            <div class="ui-title-foot">跳出次数:&nbsp;{{visitout}}</div>
+                        </div>
+                        <div class="ui-min-height col-md-4">
+                            <div class="ui-title">流出页面</div>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>页面名称</th>
+                                        <th>流量导入次数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in fromInData">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{d.webName}}</td>
+                                        <td>{{d.activePv}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--统计-->
+                    <div class="panel-body">
+                        <div class="form-inline col-md-12">
+                            <div style="margin-right:10px;float:left;" class="ui-title">事件点击统计</div><hr>
+                        </div>
+                        <div class="ui-min-height col-md-4">
+                            <img src="{{pageimg}}" class="ui-page-img">
+                        </div>
+                        <div class="ui-min-height col-md-8">
+                            <div class="form-group col-md-9 ui-target-date"><label>日期:</label>&nbsp;&nbsp;{{startTime}}&nbsp;——&nbsp;{{endTime}}</div>
+                            <!--2017-08-07暂时隐藏-->
+                            <div class="form-group col-md-3" style="display:none;">不同日期对比>></div>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>事件目标名称</td>
+                                        <td>日均点击次数</td>
+                                        <td>日均点击人数</td>
+                                        <td>页面点击热度</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in targetData">
+                                        <td>{{d.eventName}}</td>
+                                        <td>{{d.activePv}}</td>
+                                        <td>{{d.activeUv}}</td>
+                                        <td>{{d.hot}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

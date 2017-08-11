@@ -9,9 +9,9 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'VisitCtrl',
         ViewModelName: 'visitViewModel',
-        ServiceContent: ['$scope', 'setDateConf', '$timeout', function ($scope, setDateConf, $timeout) {
+        ServiceContent: ['$scope', 'setDateConf', '$timeout','dayFilter',function ($scope, setDateConf, $timeout,dayFilter) {
             setDateConf.init($(".agree-date"), 'day');
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+            var stattime = dayFilter.yesterday("date");
             $(".date").find("input").val(stattime);
             var $model = $scope.$model;
             //页面默认加载配置
@@ -97,7 +97,6 @@ define([], function () {
             var global = {
                 //回访记录
                 "getFeed": function (params) {
-                    console.log(1);
                     $model.$getFeed(params).then(function (res) {
                         $(".visit_table tbody").html("");
                         var res = res.data || [];

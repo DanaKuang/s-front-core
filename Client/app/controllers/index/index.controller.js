@@ -4,34 +4,39 @@
  * Description: index
  */
 
-define([], function () {
-  var MainCtrl = {
-    ServiceType: "controller",
-    ServiceName: "MainCtrl",
-    ViewModelName: 'mainViewModel',
-    ServiceContent: ['$scope', 'mainViewModel', function ($scope, $model) {
-      // 定义模型
+define([], function() {
+    var MainCtrl = {
+        ServiceType: "controller",
+        ServiceName: "MainCtrl",
+        ViewModelName: 'mainViewModel',
+        ServiceContent: ['$scope', 'mainViewModel', 'menuFilter', function($scope, $model, menuFilter) {
 
-      // nav模型数值绑定
-      $model.getNavJson().then(function (res) {
-        $scope.navConf = res.data;
-      });
+            // nav模型数值绑定
+            // $model.getNavJson().then(function (res) {
+            //      $scope.navConf = res.data;
+            // });
 
-      // 获取数据
-      $model.getNav().then(function (res) {
-        var data = res.data || {};
+            // 获取数据
+            $model.getNav().then(function(res) {
+                var data = res.data || {};
+                $scope.navConf = {
+                    nav: menuFilter.nav(data.data)
+                };
+            });
 
-        // $scope.navConf =
-
-      });
-
-      // $model.getMenu({
-      //   parentCode: "0"
-      // }).then(function (res) {
-      //   console.log(res.data);
-      // });
-    }]
-  };
+            // 获取menu
+            $scope.$on('navchangeready', function(e, v) {
+                $model.getMenu({
+                    parentCode: v.menuCode || "index"
+                }).then(function(res) {
+                    var menu = res.data || {};
+                    $scope.menuConf = {
+                        tabs: menuFilter.menu(menu.data)
+                    };
+                });
+            });
+        }]
+    };
 
   return MainCtrl;
 });

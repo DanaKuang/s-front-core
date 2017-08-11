@@ -25,10 +25,9 @@ define([], function () {
       // 右侧数据
       (function () {
         // 计算环比
-        function rate (o, n) {
+        function fixData (o) {
           o = Number(o);
-          n = Number(n);
-          return '' + (((n-o)/n)*100).toFixed(2);
+          return Math.round(o/10000);
         }
 
         Interval_1 = setInterval(function() {
@@ -36,31 +35,28 @@ define([], function () {
           $model.getScanTime().then(function (res) {
             var res = res.data || {};
             var st = res.scanTimes_of_day || 0;
-            // var hst = $model.$historyScan.data[0] || {};
-            // var rt = rate(hst.scanPv, st);
-            // var f = hst.scanPv > st ? 'down' : 'up';
+            var hst = $model.$historyScan.data[0] || {};
+            var rt = fixData(hst.scanTotalPv || 0);
             $("#scan_day").html(st);
-            // $("#scan_day_rate").html(rt).siblings('i').attr('class', f);
+            $("#scan_day_rate").html(rt);
           });
           // 当日扫码人数
           $model.getScanUser().then(function (res) {
             var res = res.data || {};
             var su = res.scanUsers_of_day || 0;
-            // var hsu = $model.$historyScan.data[0] || {};
-            // var rt = rate(hsu.scanUv, su);
-            // var f = hsu.scanUv > su ? 'down' : 'up';
+            var hsu = $model.$historyScan.data[0] || {};
+            var rt = fixData(hsu.scanTotalUv || 0);
             $("#scan_user").html(su);
-            // $("#scan_user_rate").html(rt).siblings('i').attr('class', f);
+            $("#scan_user_rate").html(rt);
           });
           // 当日扫码烟包数
           $model.getScanCode().then(function (res) {
             var res = res.data || {};
             var sc = res.scanCodes_of_day || 0;
-            // var hsc = $model.$historyScan.data[0] || {};
-            // var rt = rate(hsc.scanCode, sc);
-            // var f = hsc.scanCode > sc ? 'down' : 'up';
+            var hsc = $model.$historyScan.data[0] || {};
+            var rt = fixData(hsc.scanTotalCode || 0);
             $("#scan_code").html(sc);
-            // $("#scan_code_rate").html(rt).siblings('i').attr('class', f);
+            $("#scan_code_rate").html(rt);
           });
           // top10
           $model.getTopTen().then(function (res) {
@@ -77,11 +73,12 @@ define([], function () {
         var $wrap = $("#scroll_data");
         var wrapper = null;
         var newData = "";
+        var animateli = true;
         Interval_2 = setInterval(function () {
           $model.getScrollData().then(function (res) {
             var data = res.data || [];
             clearInterval(wrapper);
-            $wrap.html(_.map(data, function (d) {
+            animateli && $wrap.html(_.map(data, function (d) {
               return '<li>'+d+'</li>';
             }).join(''));
             wrapper = setInterval(function() {
@@ -93,10 +90,12 @@ define([], function () {
               // 不可放置于函数起始处,li:first取值是变化的
               var $li = $wrap.find('li:first');
               var _h = $li.height();
+              animateli = false;
               $li.css('visibility','hidden')
-                 .animate({ marginTop: -_h + 'px' }, 600, function() {
-                  // 隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
-                  $li.css({'marginTop': 0, 'visibility': 'visible'}).appendTo($wrap);
+                 .animate({ marginTop: -_h + 'px' }, 400, function() {
+                    animateli = true;
+                    // 隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
+                    $li.css({'marginTop': 0, 'visibility': 'visible'}).appendTo($wrap);
               });
             }, Interval_common);
           });
@@ -126,75 +125,56 @@ define([], function () {
             return res;
         };
 
-        var top_10 = convertData(data.sort(function (a, b) {
-                        return b.scantimes - a.scantimes;
-                    }).slice(0, 10));
+        var sortData = convertData(data.sort(function (a, b) {
+            return b.scantimes - a.scantimes;
+        }));
 
-        var symbolSize = function (val) {
-            var size = 10;
-            if (val[2] <= 100) {
-              size = 5;
-            }
-            if (val[2] > 100 && val[2] <= 500) {
-              size = 10;
-            }
-            if (val[2] > 500 && val[2] <= 1000) {
-              size = 15;
-            }
-            if (val[2] > 1000 && val[2] <= 1500) {
-              size = 20;
-            }
-            if (val[2] > 1500 && val[2] <= 2000) {
-              size = 25;
-            }
-            if (val[2] > 2000 && val[2] <= 2500) {
-              size = 30;
-            }
-            if (val[2] > 2500 && val[2] <= 3000) {
-              size = 35;
-            }
-            if (val[2] > 3000 && val[2] <= 3500) {
-              size = 40;
-            }
-            if (val[2] > 3500 && val[2] <= 4000) {
-              size = 45;
-            }
-            if (val[2] > 4000) {
-              size = 50;
-            }
-            return size;
-        };
+        var top0_30 = sortData.slice(0, 30);
+        var top30_60 = sortData.slice(30, 60);
+        var top60_90 = sortData.slice(60, 90);
+
+        // var symbolSize = function (val) {
+        //     return 15;
+        // };
 
         // 自定义tooltip
         option.tooltip.formatter = function (params) {
             return params.name + '扫码量: ' + params.value[2] + '次';
         }
         // 所有点
-        option.series[0].data = convertData(data);
-        option.series[0].symbolSize = symbolSize
+        option.series[0].data = sortData;
+        // option.series[0].symbolSize = symbolSize
 
-        // top 10点
-        option.series[1].data = top_10;
-        option.series[1].symbolSize = symbolSize
+        // top 60-90点
+        option.series[1].data = top60_90;
+
+        // top 30-60点
+        option.series[2].data = top30_60;
+
+        // top 30点
+        option.series[3].data = top0_30;
+        // option.series[1].symbolSize = symbolSize
+
+
 
         myChart.setOption(option);
-        myChart.on('click', function (params) {
-          event.stopPropagation();
-          if (params.componentType !== 'series') return;
-          console.log('echart 点击事件。');
-          console.log(params);
-        });
 
         // 实时调用接口
         Interval_3 = setInterval(function () {
           $model.getMapData().then(function (res) {
             var data = res.data || [];
             var option = myChart.getOption();
-            option.series[0].data = convertData(data);
-            option.series[1].data = convertData(data.sort(function (a, b) {
+            sortData = convertData(data.sort(function (a, b) {
                 return b.scantimes - a.scantimes;
-            }).slice(0, 10));
-            myChart.setOption(option)
+            }));
+            top0_30 = sortData.slice(0, 30);
+            top30_60 = sortData.slice(30, 60);
+            top60_90 = sortData.slice(60, 90);
+            option.series[0].data = sortData;
+            option.series[1].data = top60_90;
+            option.series[2].data = top30_60;
+            option.series[3].data = top0_30;
+            myChart.setOption(option);
           });
         }, Interval_common);
         // 记录3

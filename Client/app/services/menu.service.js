@@ -20,7 +20,10 @@ define([], function() {
                         document.documentElement.body.clientHeight ||
                         document.body.clientHeight;
                     // 50 顶部nav高度
-                    $rootScope.windowHeight = '' + (height - 50) + 'px';
+                    // $rootScope.windowHeight = '' + (height - 50) + 'px';
+                    $(".ui-view-container").css({
+                        height: '' + (height - 50) + 'px'
+                    });
                 }
                 setContent();
                 // 延时
@@ -31,9 +34,9 @@ define([], function() {
                     }, 100)
                 }
                 // 监听浏览器窗口变化
-                window.onresize = function() {
+                $(window).resize(function() {
                     throttle(setContent);
-                }
+                });
             };
         }]
     };

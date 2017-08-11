@@ -37,7 +37,7 @@ define([], function () {
       // 跳转到登陆
       this.logout = function () {
         sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('loginId');
+        sessionStorage.removeItem('access_loginId');
         location.href = "/login";
       }
     }]

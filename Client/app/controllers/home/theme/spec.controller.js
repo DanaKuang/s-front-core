@@ -9,14 +9,23 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'SpecCtrl',
     ViewModelName: 'specViewModel',
-    ServiceContent: ['$scope','$timeout', 'setDateConf', function ($scope,$timeout,setDateConf) {
+    ServiceContent: ['$scope','$timeout', 'setDateConf','dayFilter', function ($scope,$timeout,setDateConf,dayFilter) {
       var $model = $scope.$model;
       setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
       setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
-      var stattime = new Date().getFullYear()+"-"+"0"+(new Date().getMonth()+1)+"-"+ new Date().getDate();
-      var specMonth = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1);
+      // var Dates = new Date(new Date()-24*60*60*1000);
+      var amonth = (new Date().getMonth() + 1)<10 ? '0'+ (new Date().getMonth() + 1):(new Date().getMonth() + 1);
+      // var aday = Dates.getDate()<10 ? '0' + Dates.getDate() : Dates.getDate();
+      var stattime = dayFilter.yesterday("date");
+      var specMonth = new Date().getFullYear() + "-" + amonth;
       $(".spec-day").find("input").val(stattime);
       $(".spec-month").find("input").val(specMonth);
+      //设置默认值
+      var Default =  {
+        "productSn":"6901028201711",
+        "statTime":stattime,
+        "statType":"day"
+      };
       //规格下拉列表
       (function () {
         $model.$getProduct().then(function (res) {
@@ -63,7 +72,7 @@ define([], function () {
           $(".region-search-r").eq(1).show();
         }
       });
-      
+
       //查询
       $scope.search = function($event){
         var that = $event.target;
@@ -106,7 +115,7 @@ define([], function () {
         public(params);
       };
 
-      
+
       //页面执行函数
       function public (param) {
         (function () {
@@ -122,11 +131,11 @@ define([], function () {
           };
           $model.$specfication(param).then(function (res) {
             var data = res.data[0] || {};
-            $(".count i").html(data.scanPv || 0);
-            $(".active i").html(data.activeUv || 0);
-            $(".bag i").html(data.scanCode || 0);
-            $(".reduce i").html(data.scanAddUv || 0);
-            $(".img").attr("src",data.image)
+            $(".region-margin .count i").html(data.scanPv || 0);
+            $(".region-margin .active i").html(data.activeUv || 0);
+            $(".region-margin .bag i").html(data.scanCode || 0);
+            $(".region-margin .reduce i").html(data.scanAddUv || 0);
+            $(".region-margin .img").attr("src",data.image)
           });
         })();
         //扫码次数时刻趋势
@@ -295,52 +304,6 @@ define([], function () {
           })
         })();
         //奖品分布
-        // (function () {
-        //   var myChart = echarts.init(document.getElementById("pie1-chart"));
-        //   var pieChart = echarts.init(document.getElementById("pie2-chart"));
-        //   var option = $model.$pie1chart.data;
-        //   var pieOption = $model.$pie2chart.data;
-        //
-        //   $model.$money(param, 1).then(function (res) {
-        //     var res = res.data || [];
-        //     for(var i = 0;i<option.series.length;i++){
-        //       option.series[i].data = [];
-        //     }
-        //     for (var i = 0; i < res.length; i++) {
-        //       var obj = {
-        //         "value": res[i].awardPayPv,
-        //         "name": res[i].awardName
-        //       }
-        //       option.series[0].data.push(obj);
-        //       option.series[1].data.push(obj);
-        //     }
-        //     // console.log(option);
-        //     myChart.setOption(option,true);
-        //     // console.log(res.data);
-        //   })
-        //   $model.$thing(param).then(function (res) {
-        //     var res = res.data || [];
-        //     for(var i = 0;i<option.series.length;i++){
-        //       pieOption.series[i].data = [];
-        //     }
-        //     for (var i = 0; i < res.length; i++) {
-        //       var obj = {
-        //         "value": res[i].awardPayPv,
-        //         "name": res[i].awardName
-        //       }
-        //       pieOption.series[0].data.push(obj);
-        //       pieOption.series[1].data.push(obj);
-        //     }
-        //     pieChart.setOption(pieOption,true);
-        //     // console.log(res.data);
-        //   })
-        //
-        //   // pieOption.series[0].data = pieData;
-        //   // pieOption.series[1].data = pieData;
-        //   // myChart.setOption(option);
-        //   // pieChart.setOption(pieOption);
-        // })();
-        //奖品分布
         (function () {
           var myChart = echarts.init(document.getElementById("pie1-chart"));
           var pieChart = echarts.init(document.getElementById("pie2-chart"));
@@ -369,25 +332,9 @@ define([], function () {
             };
             pieChart.setOption(shioption,true);
           });
-          //   for (var i = 0; i < res.length; i++) {
-          //     var obj = {
-          //       "value": res[i].awardPayPv,
-          //       "name": res[i].awardName
-          //     }
-          //     pieOption.series[0].data.push(obj);
-          //     pieOption.series[1].data.push(obj);
-          //   }
-          //   pieChart.setOption(pieOption,true);
-          //   // console.log(res.data);
-          // })
-
-          // pieOption.series[0].data = pieData;
-          // pieOption.series[1].data = pieData;
-          //  myChart.setOption(option);
-          //  pieChart.setOption(option);
         })();
       }
-       public ();
+       public (Default);
     }]
   };
 

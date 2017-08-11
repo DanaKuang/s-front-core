@@ -59,6 +59,7 @@ function setEnv (options) {
   config.apiroute = mergeRoute(config.apiroute);
   config.homepage = path.join(config.apppath, config.homepage);
   config.loginpage = path.join(config.apppath, config.loginpage);
+  config.findpage = path.join(config.apppath, config.findpage);
   config.viewpath = path.join(config.apppath, config.viewpath);
   config.favicon = path.join(config.apppath, config.favicon);
   config.log4js.filename = config.log4js.logpath + '/' + config.log4js.logfile;
@@ -76,11 +77,11 @@ function setEnv (options) {
  * @return {[type]}         [description]
  */
 function usePlugins (app, plugins, config) {
-  if (!plugins) {
+  if (plugins) {
     if (!Array.isArray(plugins)) {
       plugins = [plugins];
     }
-    plugins.foreach(function (func) {
+    plugins.forEach(function (func) {
       app.use(func(config));
     });
   }
@@ -111,14 +112,14 @@ function setLogger (options) {
   return log4;
 }
 
-function startServer (options) {
+function startServer (app, options) {
   var serverURL = 'http://' + app.get('host') + ':' + app.get('port');
 
   app.listen(app.get('port'));
-  process.stdout.write(colors.green.underline('server run at: %s', serverURL));
+  process.stdout.write(colors.green.underline('server run at: ', serverURL));
   process.stdout.write('\n');
-  if (options.openBrowser) {
-      options.openBrowser(serverURL);
+  if (options.autoOpenBrower) {
+      options.openBrower(serverURL);
   }
 }
 
@@ -149,7 +150,7 @@ module.exports.init = function (config, plugins) {
   }
 
   //开发环境打印日志
-  if (config.runmode === 'dev') {
+  if (config.runmode === 'test') {
     app.use(logger('dev'));
   }
 
@@ -185,6 +186,7 @@ module.exports.init = function (config, plugins) {
     req.config = config;
     req.homepage = config.homepage;
     req.loginpage = config.loginpage;
+    req.findpage = config.findpage;
     // 根据token授权
     req.authorized = !!req.headers.token;// || !!req.cookies.token;
     next();

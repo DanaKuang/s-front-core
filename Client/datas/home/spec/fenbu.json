@@ -30,7 +30,6 @@
   },
   "series": [
     {
-      "name": "2011年",
       "type": "bar",
       "barWidth":20,
       "data": [],

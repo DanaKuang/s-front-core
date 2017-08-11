@@ -1,18 +1,24 @@
 <div>
     <div class="ui-navbar-header navbar-header">
-        <a class="ui-navbar-logo" href="#">橙&nbsp;&nbsp;杏</a>
+        <img src="statics/assets/image/logo.png" class="ui-navbar-logo">
     </div>
     <div class="navbar-collapse collapse">
         <ul class="ui-navbar-title nav navbar-nav navbar-left">
-            <li ng-repeat="n in nav" ng-class="{'active':$index==activeId}" ng-click="changeNav($event, n);" data-hash="{{n.hash}}" class="{{style}}">
-                <a href="javascript:void(0)">{{n.text}}</a>
+            <li ng-repeat="n in nav" ng-class="{'active':$index==activeId}" ng-click="changeNav($event, n);" data-hash="{{n.menuCode}}" class="{{style}}">
+                <a href="javascript:void(0)">{{n.menuName}}</a>
                 <span>|</span>
             </li>
         </ul>
     </div>
-    <div class="ui-navbar-user">
-        <a href="" class="glyphicon">
-            <i class="fa fa-person"></i>
+    <!--user-->
+    <div class="dropdown glyphicon ui-navbar-user">
+        <i class="fa fa-person"></i>
+        <a id="userDetail" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            张三<span class="caret"></span>
         </a>
+        <ul class="dropdown-menu" aria-labelledby="userDetail">
+            <li ng-click="changePassword()">修改密码</li>
+            <li ng-click="webLogout()">安全退出</li>
+        </ul>
     </div>
 </div>

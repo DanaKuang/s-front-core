@@ -6,8 +6,9 @@
  */
 -->
 <link rel="stylesheet" href="../../../assets/style/gift.css">
-<div class="animated fadeInRight" ng-controller="GiftCtrl">
-    <div class="container-fluid z_num" ng-if="true">
+<div ng-controller="GiftCtrl">
+<div class="animated fadeInRight">
+    <div class="container-fluid z_num" ng-show="showTables">
         <div class="row">
             <div class="col-md-12">
                 <!--title-->
@@ -15,151 +16,148 @@
                     <div class="gift_title lf">
                         物料管理&nbsp;&gt;礼品管理
                     </div>
-                    <div class="build_gift rf">+&nbsp;新建礼品</div>
+                    <div class="build_gift rf" ng-click="createGift()">+&nbsp;新建礼品</div>
                 </div>
                 <!--box-->
                 <div class="panel rate">
                     <div class="panel-body">
-                        <!--<h4>履约报表待开发中。。。</h4>-->
                         <div class="table_sec">
                             <div class="nav clearfix">
-                                <div class="lf no_active">礼品库</div>
-                                <div class="lf select_active">流水明细</div>
+                                <div class="lf" ng-class="{true:'select_active',false:'no_active'}[showGiftList]" ng-click="changeShowState()">礼品库</div>
+                                <div class="lf" ng-class="{true:'select_active',false:'no_active'}[!showGiftList]" ng-click="changeShowState()">流水明细</div>
                             </div>
                             <div class="select_sec clearfix">
                                 <div>
-                                    <label for="">筛选礼品</label>
-                                    <select>
-                                        <option value="volvo">礼品ID/名称</option>
+                                    <label for="selectGiftName">筛选礼品</label>
+                                    <input id="selectGiftName" type="text" placeholder="礼品名称">
+                                </div>
+                                <div>
+                                    <label for="selectTopCategory">一级类目</label>
+                                    <select id="selectTopCategory">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="">礼品类型</label>
-                                    <select>
-                                        <option value="volvo">全部</option>
+                                    <label for="selectSupply">供应商</label>
+                                    <select id="selectSupply">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="ser_btn" ng-click="searchData()">搜索</div>
+                                <div>
+                                    <label for="selectBrand">适用品牌</label>
+                                    <select id="selectBrand">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="brandItem in brandList"
+                                                value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="">供应商</label>
-                                    <select>
-                                        <option value="volvo">全部</option>
+                                    <label for="selectSpecift">适用规格</label>
+                                    <select id="selectSpecift">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="speciftItem in selectSpeciftList"
+                                                value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                     </select>
                                 </div>
-                                <div class="ser_btn">搜索</div>
-                                <div>
-                                    <label for="">适用品牌</label>
-                                    <select>
-                                        <option value="volvo">全部</option>
+                                <div ng-show="showGiftList">
+                                    <label for="giftStatus">使用状态</label>
+                                    <select id="giftStatus">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="statusItem in dataStatusList"
+                                                value="{{statusItem.code}}">{{statusItem.name}}</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label for="">适用规格</label>
-                                    <select>
-                                        <option value="volvo">全部</option>
+                                <div ng-show="!showGiftList">
+                                    <label for="selectActive">动作</label>
+                                    <select id="selectActive">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="activeItem in activeValueList" value="{{activeItem.code}}">{{activeItem.name}}</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label for="">适用状态</label>
-                                    <select>
-                                        <option value="volvo">全部</option>
-                                    </select>
-                                </div>
-                                <div class="rest_btn">重置</div>
+                                <div class="rest_btn" ng-click="resetData()">重置</div>
                             </div>
                         </div>
-                        <table class="table" ng-if="true">
+                        <table class="table" ng-show="showGiftList">
                             <tr>
-                                <th>礼品ID</th>
+                                <th>序号</th>
                                 <th>礼品名称</th>
                                 <th>礼品图片</th>
-                                <th>礼品类型</th>
+                                <th>一级类目</th>
                                 <th>供应商</th>
                                 <th>适用品牌</th>
                                 <th>适用规格</th>
-                                <th>市面金额<br/>(元)</th>
-                                <th>剩余库存<br/>(件)</th>
+                                <th>市面金额(元)</th>
+                                <th>剩余库存(件)</th>
                                 <th>使用状态</th>
                                 <th>操作</th>
                             </tr>
-                            <tr>
-                                <td>134560</td>
-                                <td>洗漱套装</td>
-                                <td>aaa</td>
-                                <td>实物礼品</td>
-                                <td>扫天下</td>
-                                <td>全部</td>
-                                <td>全部</td>
-                                <td>159</td>
-                                <td>79220</td>
-                                <td>已启用</td>
+                            <tr ng-repeat="giftItem in giftList" ng-if="!noSearchData">
+                                <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
+                                <td>{{giftItem.name}}</td>
+                                <td class="gift_img" ng-if="giftItem.giftUrl != ''">
+                                    <a href="{{giftItem.giftUrl}}"><img src="{{giftItem.giftPic}}" /></a>
+                                </td>
+                                <td class="gift_img" ng-if="giftItem.giftUrl == ''">
+                                    <a href="javascript:"><img src="{{giftItem.giftPic}}" /></a>
+                                </td>
+                                <td ng-if="giftItem.giftClass == 1">实物</td>
+                                <td ng-if="giftItem.giftClass == 2">虚拟</td>
+                                <td>{{giftItem.supplierName}}</td>
+                                <td>{{giftItem.brandNames}}</td>
+                                <td>{{giftItem.unitNames}}</td>
+                                <td>{{giftItem.marketMoney}}</td>
+                                <td>{{giftItem.stock}}</td>
+                                <td ng-if="giftItem.status == 1">已启用</td>
+                                <td ng-if="giftItem.status == 0">已停用</td>
                                 <td>
-                                    <span>编辑</span>&nbsp;
-                                    <span data-toggle="modal" data-target=".add_box">增库</span>&nbsp;
-                                    <span data-toggle="modal" data-target=".disabled_box">停用</span>
+                                    <span ng-click="editGiftItem(giftItem)">编辑</span>&nbsp;
+                                    <span data-toggle="modal" ng-click="addGiftPool(giftItem)">增库</span>&nbsp;
+                                    <span data-toggle="modal" ng-if="giftItem.status == 1"
+                                          ng-click="stopStatus(giftItem)">停用</span>
+                                    <span data-toggle="modal" ng-if="giftItem.status == 0"
+                                          ng-click="useStatus(giftItem)">启用</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>134560</td>
-                                <td>洗漱套装</td>
-                                <td>aaa</td>
-                                <td>实物礼品</td>
-                                <td>扫天下</td>
-                                <td>全部</td>
-                                <td>全部</td>
-                                <td>159</td>
-                                <td>79220</td>
-                                <td>已启用</td>
-                                <td>
-                                    <span>编辑</span>&nbsp;
-                                    <span data-toggle="modal" data-target=".add_box">增库</span>&nbsp;
-                                    <span data-toggle="modal" data-target=".disabled_box">停用</span>
-                                </td>
-                            </tr>
+                            <tr ng-if="noSearchData"><td colspan="11">未搜索到符合条件的相关信息</td></tr>
                         </table>
-                        <table class="table" ng-if="false">
+                        <table class="table" ng-show="!showGiftList">
                             <tr>
-                                <th>礼品ID</th>
+                                <th>序号</th>
                                 <th>礼品名称</th>
-                                <th>礼品类型</th>
+                                <th>一级类目</th>
                                 <th>供应商</th>
                                 <th>适用品牌</th>
                                 <th>适用规格</th>
                                 <th>动作</th>
-                                <th>活动ID</th>
+                                <th>活动名称</th>
                                 <th>数量(件)</th>
                                 <th>更新时间</th>
                                 <th>更新人</th>
                             </tr>
-                            <tr>
-                                <td>134560</td>
-                                <td>洗漱套装</td>
-                                <td>实物礼品</td>
-                                <td>扫天下</td>
-                                <td>全部</td>
-                                <td>全部</td>
-                                <td>新建</td>
-                                <td>134560</td>
-                                <td>600</td>
-                                <td>2017-08-09 20:42</td>
-                                <td>Duang White</td>
+                            <tr ng-if="!noSearchLog" ng-repeat="detailItem in detailList">
+                                <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
+                                <td>{{detailItem.businessName}}</td>
+                                <td>{{detailItem.businessType}}</td>
+                                <td>{{detailItem.supplierName}}</td>
+                                <td>{{detailItem.brandNames}}</td>
+                                <td>{{detailItem.prodUnitsNames}}</td>
+                                <td>{{detailItem.operName}}</td>
+                                <td>{{detailItem.activityName != null ? detailItem.activityName : '-'}}</td>
+                                <td>{{detailItem.operNum}}</td>
+                                <td>{{detailItem.ctime | date:'yyyy-MM-dd'}}</td>
+                                <td>{{detailItem.creatorName}}</td>
                             </tr>
-                            <tr>
-                                <td>134560</td>
-                                <td>洗漱套装</td>
-                                <td>实物礼品</td>
-                                <td>扫天下</td>
-                                <td>全部</td>
-                                <td>全部</td>
-                                <td>新建</td>
-                                <td>134560</td>
-                                <td>600</td>
-                                <td>2017-08-09 20:42</td>
-                                <td>Duang White</td>
-                            </tr>
+                            <tr ng-if="noSearchLog"><td colspan="11">未搜索到符合条件的相关信息</td></tr>
                         </table>
                         <div class="footer_sec clearfix">
                             <div class="total_info lf">
-                                总共<span>205</span>条记录，当前页共<span>10条记录</span>
+                                总共<span>{{totalCount}}</span>条记录，当前页共
+                                <span ng-if="showGiftList">{{giftList.length}}</span>
+                                <span ng-if="!showGiftList">{{detailList.length}}</span>
+                                条记录
                             </div>
                             <div class="page_sec rf">
                                 <div class="tcdPageCode"></div>
@@ -170,68 +168,96 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid z_num" ng-if="false">
+    <div class="container-fluid z_num" ng-show="!showTables">
         <div class="row">
             <div class="col-md-12">
                 <div class="title_top">
                     <div class="gift_title">
-                        物料管理&nbsp;&gt;礼品管理&nbsp;&gt;新建礼品
+                        物料管理&nbsp;&gt;礼品管理&nbsp;&gt;<span ng-if="addGift">新建礼品</span><span ng-if="!addGift">编辑礼品</span>
                     </div>
                 </div>
                 <div class="panel rate">
                     <div class="panel-body">
                         <div class="form_sec">
                             <div>
-                                <label for="">礼品名称<span>*</span></label>
-                                <input type="text" placeholder="">
+                                <label for="giftName">礼品名称<span>*</span></label>
+                                <input id="giftName" type="text" placeholder="" >
+                                <span class="gift_name_warn">礼品名称不能为空</span>
                             </div>
                             <div>
-                                <label for="">礼品类型<span>*</span></label>
-                                <select>
-                                    <option value="volvo">请选择</option>
+                                <label for="oneCategory">礼品类型<span>*</span></label>
+                                <select id="oneCategory">
+                                    <option value="">选择一级类目</option>
+                                    <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
                                 </select>
-                            </div>
-                            <div>
-                                <label for="">供应商<span>*</span></label>
-                                <select>
-                                    <option value="volvo">请选择</option>
+                                <select id="secondCategory">
+                                    <option value="">选择二级类目</option>
+                                    <option ng-repeat="secCateItem in secondCategoryList" value="{{secCateItem.code}}">{{secCateItem.name}}</option>
                                 </select>
+                                <span class="category_warn"></span>
                             </div>
                             <div>
-                                <label for="">适用品牌<span>*</span></label>
-                                <select>
-                                    <option value="volvo1">请选择</option>
-                                    <option value="volvo2">请选择2</option>
+                                <label for="enableSupply">供应商<span>*</span></label>
+                                <select id="enableSupply">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="enableItem in enableSupplyList"
+                                            value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
                                 </select>
+                                <span class="gift_supply_warn">供应商不能为空</span>
                             </div>
                             <div>
-                                <label for="">适用规格<span>*</span></label>
-                                <select>
-                                    <option value="volvo">请选择</option>
+                                <label for="brand">适用品牌<span>*</span></label>
+                                <select id="brand">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="brandItem in brandList"
+                                            value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                 </select>
+                                <span class="apply_brand_warn">适用品牌不能为空</span>
                             </div>
                             <div>
-                                <label for="">市面价值（元）</label>
-                                <input type="text" placeholder="">
+                                <label for="applySpecift">适用规格<span>*</span></label>
+                                <select id="applySpecift">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="speciftItem in speciftList"
+                                            value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                                </select>
+                                <span class="apply_specift_warn">适用规格不能为空</span>
                             </div>
                             <div>
-                                <label for="">礼品图片</label>
-                                <div class="select_file">+</div><br/>
-                                <p>图片规格要求：建议尺寸xxx,xxx</p>
+                                <label for="marketValue">市面价值（元）</label>
+                                <input id="marketValue" type="text" placeholder="">
+                                <span class="market_value_warn"></span>
                             </div>
                             <div>
-                                <label for="">库存（件）<span>*</span></label>
-                                <input type="text" placeholder=""><br/>
+                                <label for="giftImg">礼品图片</label>
+                                <div class="transfer_sec">
+                                    <input type="file" id="giftImg">
+                                    <div class="select_file">+</div>
+                                </div>
+                                <span id="giftImgName"></span>
+                                <p class="gift_img_warn">图片规格要求：建议尺寸330*330</p>
+                            </div>
+                            <div>
+                                <label for="stock">库存（件）<span>*</span></label>
+                                <input id="stock" type="text" ng-disabled="!addGift" placeholder="">
+                                <span class="stock_warn">请输入大于0的整数</span>
+                                <br/>
                                 <p>库存数量保存后不可手动减库存，请谨慎输入</p>
                             </div>
                             <div>
-                                <label for="">库存阀值</label>
-                                <input type="text" placeholder="">
+                                <label for="stockThresh">库存阀值</label>
+                                <input id="stockThresh" type="text" placeholder="">
+                                <span class="stockThresh_warn">库存阀值不可高于库存</span>
+                                <p>库存阀值不可高于库存</p>
+                            </div>
+                            <div>
+                                <label for="linkUrl">链接URL</label>
+                                <input id="linkUrl" type="text" placeholder="">
                             </div>
                         </div>
                         <div class="opera_sec">
-                            <div class="opera_confirm">保存</div>
-                            <div class="opera_cancel">取消</div>
+                            <div class="opera_confirm" ng-click="saveGiftData()">保存</div>
+                            <div class="opera_cancel" ng-click="cancelCreateGift()">取消</div>
                         </div>
                     </div>
                 </div>
@@ -239,61 +265,110 @@
         </div>
     </div>
 </div>
-<!--<button type="button" class="btn btn-primary" data-toggle="modal"  data-target=".bs-example-modal-sm">Small modal</button>-->
-
-<div class="modal fade disabled_box" tabindex="-1" role="dialog" aria-labelledby="disabled_btn">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="box_sec">
-                <div class="box_tit">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <div class="modal-title" id="disabled_btn">操作提示</div>
-                </div>
-                <div class="box_cont">停用后，新增活动将不能使用该礼品</div>
-                <div class="box_btn clearfix">
-                    <div class="box_btn_conf lf">确定</div>
-                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--增库弹框-->
-<div class="modal fade add_box" tabindex="-1" role="dialog" aria-labelledby="add_btn">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="box_sec">
-                <div class="box_tit">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <div class="modal-title" id="add_btn">增库</div>
-                </div>
-                <div class="box_cont">
-                    <label>增加库存：</label>
-                    <input type="text"><span>元</span>
-                </div>
-                <div class="box_btn clearfix">
-                    <div class="box_btn_conf lf">确定</div>
-                    <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+    <!--停用弹框提醒-->
+    <div class="modal fade disabled_gift_box" tabindex="-1" role="dialog" aria-labelledby="disabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="disabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">停用后，新增活动将不能使用该礼品</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmStopStatus(operateGiftItem)">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--增库弹框-->
+    <div class="modal fade add_pool_box" tabindex="-1" role="dialog" aria-labelledby="add_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span ng-click="cancelAddGiftStock()">×</span>
+                            <!--aria-hidden="true"-->
+                        </button>
+                        <div class="modal-title" id="add_btn">增库</div>
+                    </div>
+                    <div class="box_cont">
+                        <label>增加库存：</label>
+                        <input type="text" id="addGiftStock"><span>件</span>
+                        <p class="add_stock_warn">请输入大于0的整数</p>
+                    </div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmAddPool(operateGiftItem)">确定</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelAddGiftStock()">取消</div>
+                        <!--data-dismiss="modal"-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--更新状态操作成功弹窗-->
+    <div class="modal fade gift_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_enabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">操作成功</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--更新状态操作失败弹窗-->
+    <div class="modal fade gift_error_box" tabindex="-1" role="dialog" aria-labelledby="supply_error_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_error_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">操作失败</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--不能增库提醒弹窗-->
+    <div class="modal fade not_add_pool_box" tabindex="-1" role="dialog" aria-labelledby="not_add_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="not_add_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料供应商“{{operateGiftItem.supplierName}}”已停用，无法执行增库操作</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">我知道了</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="statics/assets/libs/jquery.page.js"></script>
 </div>
-<!-- Large modal -->
-<script src="statics/assets/libs/jquery.page.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $(".tcdPageCode").createPage({
-            pageCount:10,
-            current:1,
-            backFn:function(p){
-//            alert(p);
-            }
-        });
-    })
 
-</script>
+

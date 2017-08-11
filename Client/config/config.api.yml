@@ -54,7 +54,6 @@ menu:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
-index:                                      # 首页
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/login/user_detail'
     authorized: 1
@@ -62,6 +61,7 @@ index:                                      # 首页
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+index:                                      # 首页
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/data/dayScanTimes'
     authorized: 1
@@ -84,7 +84,7 @@ index:                                      # 首页
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getScanData'
+    routepath: '/api/tztx/dataportal/statistics/getHistoryScanData'
     authorized: 1
     description: '历史扫码数据'
     enableroute: 1
@@ -338,7 +338,6 @@ report:
     authorized: 1
     description: '日报汇总表数据'
     enableroute: 1
-    gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getProductOfNoNuit'
@@ -439,109 +438,476 @@ multi:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+track:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/activity/getPvData'
+    authorized: 1
+    description: '活动PVUV'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/activity/getPvDataOfMin'
+    authorized: 1
+    description: '活动按分钟获取PVUV'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/activity/getProvincePvData'
+    authorized: 1
+    description: '活动按省份获取PVUV'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/activity/getCityPvData'
+    authorized: 1
+    description: '活动按城市获取PVUV'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/activity/getDetailPvData'
+    authorized: 1
+    description: '活动详细PVUV'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getActyDownBox'
+    authorized: 1
+    description: '活动下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getBrandOfActivity'
+    authorized: 1
+    description: '品牌下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getActyProductDownBox'
+    authorized: 1
+    description: '规格下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getTrendData'
+    authorized: 1
+    description: '趋势分析数据'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getProvinceData'
+    authorized: 1
+    description: '地域分析-省'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getTerminalData'
+    authorized: 1
+    description: '终端分析'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getCityData'
+    authorized: 1
+    description: '地域分析（城市）'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getSourcePageData'
+    authorized: 1
+    description: '页面流入'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getRedirectPageData'
+    authorized: 1
+    description: '页面流出'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getEventData'
+    authorized: 1
+    description: '页面事件分析'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getPagePathByActivityId'
+    authorized: 1
+    description: '页面流失统计'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getPageByActivityId'
+    authorized: 1
+    description: '获取活动页面'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+retailer:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopTotalFamily'
+    authorized: 1
+    description: '累计零售户'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopActiyFamily'
+    authorized: 1
+    description: '参与活动零售户'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopNewFamily'
+    authorized: 1
+    description: '新增零售户'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopGrowthTrend'
+    authorized: 1
+    description: '零售户增长趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopBizFormatPie'
+    authorized: 1
+    description: '零售户业态分布'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopGrowthTrendById'
+    authorized: 1
+    description: '零售户店铺折线图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopInoutProvPie'
+    authorized: 1
+    description: '省外分布'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopInoutCityPie'
+    authorized: 1
+    description: '城乡分布'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopDownBox'
+    authorized: 1
+    description: '下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/activity/list'
     authorized: 1
     description: '活动列表查询接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/activity/update'
     authorized: 1
     description: '活动增加接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryDimActivatyForm'
     authorized: 1
     description: '查询活动形式维度信息'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/template/template_common_list'
     authorized: 1
     description: '公用模板列表接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryRegionByParentCode'
     authorized: 1
     description: '根据父地区编码查询数据'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryAllRegion'
     authorized: 1
     description: '查询所有地区数据'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/querySupplier'
     authorized: 1
     description: '根据厂商获取供应商接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryBrand'
     authorized: 1
     description: '根据供应商获取品牌接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryProduct'
     authorized: 1
     description: '根据品牌获取规格接口'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryDimDataStatus'
     authorized: 1
     description: '查询活动状态'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/brand/queryBrands'
     authorized: 1
     description: '查询所有品牌'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/product/queryMetraList'
     authorized: 1
     description: '根据条件分页查询物料（礼品、红包）列表'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/commonUpload'
+    routepath: '/api/tztx/saas/saotx/attach/commonAliUpload'
     authorized: 1
-    description: '文件上传到阿里云服务器'
+    description: '文件上传到阿里云服务器,并且是让外网可以看到的附件'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/attach/commonUploadFiles'
+    authorized: 1
+    description: '文件上传到本地服务器存储的，是不需要外网大家访问的'
+    enableroute: 1
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/poolGift/addPool'
     authorized: 1
     description: '礼品增库'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/poolRedpack/addPool'
     authorized: 1
     description: '红包增库'
     enableroute: 1
-    gatewaytype: 0
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/modifyStatus'
+    authorized: 1
+    description: '更改活动状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/detail'
+    authorized: 1
+    description: '编辑活动'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/order/queryOrderList'
+    authorized: 1
+    description: '根据查询条件分页查询订单列表（实物、虚拟中奖查询）'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/order/detailByCode'
+    authorized: 1
+    description: '根据订单编号查询中奖信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryOrderStatus'
+    authorized: 1
+    description: '查询发货状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+supply:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/supplier/queryList'
+    authorized: 1
+    description: '供应商列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/supplier/saveOrUpdate'
+    authorized: 1
+    description: '供应商新增或修改'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/supplier/modifySupplierStatus'
+    authorized: 1
+    description: '修改供应商状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/saotx/common/querySupplierCompliance'
+    authorized: 1
+    description: '合规评估维度值'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/attach/commonUploadFiles'
+    authorized: 1
+    description: '文件上传'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/supplier/querySupplierByCode'
+    authorized: 1
+    description: '根据供应商编码查询供应商的详细数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimAwardType'
+    authorized: 1
+    description: '查询奖励类型维度信息。1-实物；2-红包；3-卡券；4-积分'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    authorized: 1
+    description: '获取品牌'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolRedpack/saveOrUpdate'
+    authorized: 1
+    description: '新增或修改红包池对象数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/queryMetraList'
+    authorized: 1
+    description: '查询物料（礼品、红包）列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimDataStatus'
+    authorized: 1
+    description: '获取数据状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolRedpack/addPool'
+    authorized: 1
+    description: '红包池增库'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolRedpack/modifyStatus'
+    authorized: 1
+    description: '修改红包数据状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryProduct'
+    authorized: 1
+    description: '根据品牌查询规格信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/metraOper/queryList'
+    authorized: 1
+    description: '查询物料（礼品、红包）流水明细列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryLogOper'
+    authorized: 1
+    description: '查询物料日志操作动作类型维度接口'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolGift/saveOrUpdate'
+    authorized: 1
+    description: '新增或修改礼品对象数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/attach/commonAliUpload'
+    authorized: 1
+    description: '上传文件到阿里云服务器'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolGift/modifyStatus'
+    authorized: 1
+    description: '修改礼品的数据状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolGift/addPool'
+    authorized: 1
+    description: '礼品增库'
+    enableroute: 1
+    gatewaytype: 1
     responetype: 'json'

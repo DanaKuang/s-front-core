@@ -8,21 +8,19 @@ define([], function () {
         ServiceType: "factory",
         ServiceName: "menuFilter",
         ServiceContent: ['$filter', function ($filter) {
-            function menuFormat (data) {
+            function nav (data) {
                 data = data || [];
-                var result = [], keyValue = "", keys = "";
-                keyValue = _.groupBy(data, 'parentCode');
-                keys = _.keys(keyValue);
-                result = keyValue['0'];
-                _.each(result, function (k, v) {
-
-                });
-
-                return result;
+                return _.groupBy(data, 'parentCode')['0'];
+            }
+            // 菜单
+            function menu (data) {
+                data = data || [];
+                return data;
             }
             return angular.extend({
                 __filter__: $filter,
-                menuFormat: menuFormat
+                nav: nav,
+                menu: menu
             });
         }]
     }

@@ -34,5 +34,9 @@ module.exports.register = function (express, config) {
   router.get('/login', function(req, res) {
       res.render(config.loginpage);
   });
+  //找回密码
+  router.get('/find', function(req, res) {
+      res.render(config.findpage);
+  });
   return router;
 }

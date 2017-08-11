@@ -1,0 +1,113 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-08-02
+ * Description: dayanalysis
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.track.css">
+<!--html-->
+<div class="animated fadeInRight" ng-controller="realtimeCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="ui-content-realtime col-md-12">
+                <div class="ui-realtime-title">
+                    <i class="realtime"></i><span>活动实时跟踪</span>
+                </div>
+                <!--查询-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline ui-form-search col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">活动名称</label>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="activityId" ng-model="activityId">
+                                    <option ng-repeat="act in activity" value="{{act.activityId}}">{{act.activityName}}</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-click="realSearch()">查询</button>
+                        </form>
+                    </div>
+                </div>
+                <!--内容-->
+                <div class="panel rate">
+                    <!--当前在线-->
+                    <div class="panel-body">
+                        <!--展示-->
+                        <div class="ui-min-height col-md-4">
+                            <div class="ui-turn-content">
+                                <div class="ui-turn-box">
+                                    <p class="ui-title"><span>当前在线</span><span><em id="turnto">30</em>秒后自动刷新</span></p>
+                                    <p>{{daytime}}</p>
+                                </div>
+                                <p>今日活动页面点击量：<em>{{dayPv}}</em>(次)</p>
+                                <p>今日活动参与人数：<em>{{dayUv}}</em>(人)</p>
+                            </div>
+                        </div>
+                        <!--折线图-->
+                        <div class="ui-min-height col-md-8">
+                            <div id="axisMap" class="ui-axis-box"></div>
+                        </div>
+                    </div>
+                    <!--实时访问地域分布-->
+                    <div class="panel-body">
+                        <div class="ui-title col-md-12 form-group">实时访问地域分布</div>
+                        <!--地图-->
+                        <div class="ui-min-height col-md-6">
+                            <div id="baiduMap" class="ui-map-box"></div>
+                        </div>
+                        <!--表格-->
+                        <div class="ui-min-height col-md-6">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>地市</th>
+                                        <th>今日活动页面点击量</th>
+                                        <th>今日活动参与人数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in rows">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{r.city}}</td>
+                                        <td>{{r.pv}}</td>
+                                        <td>{{r.uv}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--访问明细-->
+                    <div class="panel-body">
+                        <div class="ui-title col-md-12 form-group">访问明细</div>
+                        <div class="ui-min-height col-md-12">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>访问时间</th>
+                                        <th>访客地域</th>
+                                        <th>活动类型</th>
+                                        <th>微信昵称</th>
+                                        <th>手机号</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in detail">
+                                        <td>{{d.ts}}</td>
+                                        <td>{{d.province}}</td>
+                                        <td>{{d.tl}}</td>
+                                        <td>{{d.wechatName}}</td>
+                                        <td>{{d.telphone}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

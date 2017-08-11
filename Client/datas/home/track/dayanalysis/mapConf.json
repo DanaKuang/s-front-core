@@ -1,0 +1,73 @@
+{
+    "color": ["#44c2ed"],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "position": "top",
+        "formatter": "",
+        "backgroundColor": "#fff",
+        "borderColor": "#44c2ed",
+        "borderWidth": 1,
+        "textStyle": {
+            "color": "#6e6d6d"
+        }
+    },
+    "visualMap": {
+        "show": false
+    },
+    "geo": {
+        "map": "china",
+        "roam": false,
+        "top": 10,
+        "bottom": 10,
+        "label": {
+            "normal": {
+                "show": true,
+                "textStyle": {
+                    "color": "rgba(0,0,0,0.4)"
+                }
+            }
+        },
+        "itemStyle": {
+            "normal":{
+                "borderColor": "rgba(0, 0, 0, 0.2)"
+            },
+            "emphasis":{
+                "areaColor": null,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 0,
+                "shadowBlur": 20,
+                "borderWidth": 0,
+                "shadowColor": "rgba(0, 0, 0, 0.5)"
+            }
+        }
+    },
+    "series" : [{
+       "type": "scatter",
+       "coordinateSystem": "geo",
+       "data": "",
+       "symbolSize": 20,
+       "symbol": "",
+       "symbolRotate": 35,
+       "label": {
+           "normal": {
+               "formatter": "{b}",
+               "position": "right",
+               "show": false
+           },
+           "emphasis": {
+               "show": true
+           }
+       },
+       "itemStyle": {
+          "normal": {
+              "color": "#44c2ed"
+          }
+       }
+    }, {
+        "name": "访问量",
+        "type": "map",
+        "geoIndex": 0,
+        "data":[]
+    }]
+}

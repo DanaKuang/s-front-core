@@ -31,7 +31,7 @@ requirejs.config({
       'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker'
     ],
     bootstrapMultiselect: [
-      'https://cdn.bootcss.com/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min',
+      // 'https://cdn.bootcss.com/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min',
       'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect'
     ],
     // echarts: 'bower_components/echarts/dist/echarts',
@@ -46,6 +46,10 @@ requirejs.config({
     angularAnimate: [
       'https://cdn.bootcss.com/angular.js/1.3.20/angular-animate.min',
       'bower_components/angular-animate/angular-animate'
+    ],
+    angularFileUpload: [
+      'https://cdn.bootcss.com/angular-file-upload/2.5.0/angular-file-upload.min',
+      'bower_components/angular-file-upload/dist/angular-file-upload.min'
     ],
     app: 'app/app'
   },
@@ -81,6 +85,9 @@ requirejs.config({
     angularAnimate: {
       deps: ['angular']
     },
+    angularFileUpload: {
+      deps: ['angular']
+    },
     app: {
       deps: [
         'datetimepicker'
@@ -97,7 +104,8 @@ requirejs.config({
     // 'echarts',
     'angular',
     'angularCookies',
-    'angularAnimate'
+    'angularAnimate',
+    'angularFileUpload'
   ],
   callback: function() {
     require(['app']); //引导应用初始化

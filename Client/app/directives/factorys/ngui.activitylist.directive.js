@@ -47,6 +47,29 @@ define([], function () {
                     scope.pageNumber = page.pageNumber;
                 }
             }, true);
+
+            // 启用
+            scope.startActivity = function (e) {
+                var data = {
+                    activityCode: e.target.dataset.activitycode,
+                    status: e.target.dataset.status
+                }
+                scope.$emit('startActivity', event, data);
+            }
+
+            // 停用
+            scope.terminateActivity = function (e) {
+                var data = {
+                    activityCode: e.target.dataset.activitycode,
+                    status: e.target.dataset.status
+                }
+                scope.$emit('terminateActivity', event, data);
+            }
+
+            // 编辑
+            scope.editActivity = function (e) {
+                scope.$emit('editActivity', event, {activityCode: e.target.dataset.activitycode})
+            }
         }
         return defineObj;
     }

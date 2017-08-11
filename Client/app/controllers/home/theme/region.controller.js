@@ -9,14 +9,17 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'RegionCtrl',
         ViewModelName: 'regionViewModel',
-        ServiceContent: ['$scope', 'setDateConf', function ($scope, setDateConf) {
+        ServiceContent: ['$scope', 'setDateConf','dayFilter', function ($scope, setDateConf,dayFilter) {
             var $model = $scope.$model;
             setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
             setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
-            var regionMonth = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1)
+            var amonth = (new Date().getMonth() + 1)<10 ? '0'+ (new Date().getMonth() + 1):(new Date().getMonth() + 1);
+            var stattime = dayFilter.yesterday("date");
+            var regionMonth = new Date().getFullYear() + "-"  + amonth;
             $(".region-day").find("input").val(stattime);
             $(".region-month").find("input").val(regionMonth);
+            //设置默认值
+            var Default =  {"provinceName":"湖南省","statTime":stattime,"statType":"day"};
             //省份下拉列表
             (function () {
                 $model.$getProvince().then(function (res) {
@@ -65,6 +68,7 @@ define([], function () {
                     $(".region-search-r").eq(1).show();
                 }
             });
+            //查询
             $scope.search = function ($event) {
                 var that = $event.target;
                 // var reg = /(省|市|区)/;
@@ -328,7 +332,7 @@ define([], function () {
                 })();
             }
 
-            public();
+            public(Default);
 
         }]
     };

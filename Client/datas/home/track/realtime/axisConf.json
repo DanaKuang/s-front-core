@@ -1,0 +1,47 @@
+{
+    "title": {
+        "text": "最近30分钟访问情况",
+        "left": "center",
+        "textStyle": {
+            "color": "#3d467d",
+            "fontSize": 12
+        }
+    },
+    "tooltip": {
+        "trigger": "axis"
+    },
+    "legend": {
+        "bottom": 0,
+        "data":["活动页面点击量（PV）","活动参与人数（UV）"]
+    },
+    "grid": {
+        "left": "5%",
+        "right": "5%",
+        "bottom": "10%",
+        "containLabel": true
+    },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {
+                "show": false
+            }
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": []
+    },
+    "yAxis": {
+        "type": "value"
+    },
+    "series": [{
+        "name": "活动页面点击量（PV）",
+        "type": "line",
+        "data": []
+    }, {
+        "name": "活动参与人数（UV）",
+        "type": "line",
+        "data": []
+    }]
+}

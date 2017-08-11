@@ -9,11 +9,11 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'ReportCtrl',
         ViewModelName: 'reportViewModel',
-        ServiceContent: ['$scope', 'setDateConf', function ($scope, setDateConf) {
+        ServiceContent: ['$scope', 'setDateConf','dayFilter', function ($scope, setDateConf,dayFilter) {
             var $model = $scope.$model;
             setDateConf.init($(".agree-date"), "day");
             //设置input的默认时间
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+            var stattime = dayFilter.yesterday("date");
             $(".date").find("input").val(stattime);
             //页面默认加载配置
             $scope.obj = {

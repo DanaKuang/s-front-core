@@ -8,7 +8,7 @@ define([], function () {
       ServiceContent: ['$injector', '$q', function($injector, $cookies, $q) {
           var clearSession = function () {
             sessionStorage.removeItem("access_token");
-            sessionStorage.removeItem("loginId");
+            sessionStorage.removeItem("access_loginId");
             location.href = '/login';
           }
           // 登出
@@ -19,7 +19,7 @@ define([], function () {
                   method: 'post',
                   headers: {
                       'token': sessionStorage.getItem('access_token') || "",
-                      'loginId': sessionStorage.getItem('loginId') || ""
+                      'loginId': sessionStorage.getItem('access_loginId') || ""
                   }
               });
           };
@@ -31,7 +31,7 @@ define([], function () {
                   config.headers.client = location.host;
                   config.headers.domain = location.hostname;
                   config.headers.token = sessionStorage.getItem('access_token');
-                  config.headers.loginId = sessionStorage.getItem('loginId');
+                  config.headers.loginId = sessionStorage.getItem('access_loginId');
                   config.requestTimestamp = +new Date;
                   return config;
               },

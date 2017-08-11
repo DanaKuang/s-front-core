@@ -27,6 +27,26 @@
             "hash": "#/view/home/multi",
             "text": "多维查询"
         },{
+            "icon": "track",
+            "noDataApi": true,
+            "hash": "",
+            "dropdown": [{
+                "text": "活动实时跟踪",
+                "hash": "#/view/home/realtime"
+            },{
+                "text": "活动日常分析",
+                "hash": "#/view/home/dayanalysis"
+            },{
+                "text": "页面路径转化信息",
+                "hash": "#/view/home/pathdetail"
+            }],
+            "text": "活动追踪"
+        },{
+            "icon": "retailer",
+            "noDataApi": true,
+            "hash": "#/view/home/retailer",
+            "text": "零售户"
+        },{
             "icon": "report",
             "noDataApi": true,
             "hash": "#/view/home/report",
@@ -54,7 +74,7 @@
             "text": "物料管理",
             "dropdown": [
                 {
-                    "text": "礼包管理",
+                    "text": "礼品管理",
                     "hash": "#/view/product/materiel/gift"
                 }, {
                     "text": "红包管理",
@@ -90,22 +110,6 @@
                 "text": "积分领奖明细",
                 "hash": "#/view/activity/acts/integralHistory"
             }]
-        },{
-            "icon": "visit",
-            "noDataApi": true,
-            "hash": "#/view/home/visit",
-            "text": "物料管理"
-        }]
-    },{
-        "hash": "retailer",
-        "text": "零售户",
-        "icon": "",
-        "active": "",
-        "tabs": [{
-            "icon": "visit",
-            "noDataApi": true,
-            "hash": "#/view/home/visit",
-            "text": "回访报表"
         }]
     }]
 }

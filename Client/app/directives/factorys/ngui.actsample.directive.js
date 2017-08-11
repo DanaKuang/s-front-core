@@ -37,7 +37,9 @@ define([], function () {
             }, true);
             
             scope.newActSample = function(e, type) {
-                var typeData = {type: type};
+                var typeData = {
+                    type: type
+                };
                 scope.type = type;
                 scope.$emit('typefromActSample', event, typeData);
                 $('.modal-content .close').trigger('click');

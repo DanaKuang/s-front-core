@@ -9,11 +9,7 @@ module.exports = function () {
 
   var colors = require('colors/safe');
   var watch = __dirname + '/task.watch.js';
-  var easyMonitor = require('easy-monitor');
   var content = require('child_process').fork(watch);
-
-  // 监控
-  easyMonitor("saas service platform");
 
   // 线程重启函数
   var reStart = function (msg) {

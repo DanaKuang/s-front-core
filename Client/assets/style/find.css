@@ -1,0 +1,61 @@
+/**
+ * Author: liubin
+ * Ceate Date: 2017-08-08
+ * Description: 找回密码
+ */
+.ui-find-box {
+    padding: 50px;
+    height: 100%
+}
+.ui-find-box .title {
+    font-size: 14px;
+    border-left: 5px solid #44c2ed;
+    margin-top: 10px;
+}
+.ui-find-box .panel-body {
+    height: 100%;
+}
+.ui-find-box .panel {
+    height: calc(100% - 50px);
+}
+.ui-find-form {
+    position: relative;
+    width: 450px;
+    height: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+}
+.ui-find-form .ui-button,
+.ui-find-form .ui-button:focus,
+.ui-find-form .ui-button:active,
+.ui-find-form .ui-button:hover {
+    margin: 0 175px;
+    width: 100px;
+    height: 34px;
+    border-radius: 17px;
+    background: #515db3;
+    color: #fff;
+    border-color: #515db3;
+}
+.ui-find-form .ui-validate,
+.ui-find-form .ui-validate:focus,
+.ui-find-form .ui-validate:active,
+.ui-find-form .ui-validate:hover {
+    width: 100px;
+    height: 34px;
+    border-radius: 17px;
+    background: #fff;
+    color: #515db3;
+    border-color: #515db3;
+    padding: 0;
+    text-align: center;
+}
+.has-error .ui-help {
+    display: block;
+}
+.ui-help {
+    display: none;
+}
+
+

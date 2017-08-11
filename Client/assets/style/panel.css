@@ -1,4 +1,10 @@
 /*通用*/
+.ui-panel-title {
+	margin-top: 30px;
+}
+.multiselect-container>li.multiselect-group label {
+	width: 100%;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
@@ -15,6 +21,7 @@ input[type="text"], select, input[type="number"], input[type="url"] {
 }
 tbody td {
 	font-size: 12px!important;
+	vertical-align: middle!important;
 }
 select {
 	-webkit-appearance: button;
@@ -123,7 +130,6 @@ select {
 } 
 .form-item {
 	width: 170px;
-	height: 26px!important;
 }
 .operation .rt {
 	margin-top: 5px;

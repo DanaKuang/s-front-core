@@ -46,12 +46,20 @@ define([], function () {
             // 红包增库
             var ADD_HB_STOCK = '/api/tztx/saas/saotx/poolRedpack/addPool';
 
-            // 文件上传到阿里云服务器
-            var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/common/commonUpload';
+            // 文件上传到阿里云服务器,并且是让外网可以看到的附件
+            var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/attach/commonAliUpload';
+
+            // 文件上传到阿里云服务器,不需要外网看到
+            var UPLOAD_FILE_ALY_PRIVATE = '/api/tztx/saas/saotx/attach/commonUploadFiles';
 
             // 新增活动
             var ADD_NEW_ACTIVITY = '/api/tztx/saas/saotx/activity/update';
 
+            // 更改活动状态
+            var CHANGE_ACTIVITY_STATUS = '/api/tztx/saas/saotx/activity/modifyStatus';
+
+            // 编辑活动
+            var EDIT_ACTIVITY = '/api/tztx/saas/saotx/activity/detail';
 
             // 模板列表
             $model.getActSampleList = function () {
@@ -105,7 +113,9 @@ define([], function () {
 
             // 文件上传
             $model.uploadfiletoaly = function (data) {
-                return request.$Search(UPLOAD_FILE_ALY, data);
+                return request.$Search(UPLOAD_FILE_ALY, data, {
+                    'ContentType': 'multipart/form-data'
+                });
             }
 
             // 礼品增库
@@ -121,6 +131,16 @@ define([], function () {
             // 新增活动
             $model.addNewActivity = function (data) {
                 return request.$Search(ADD_NEW_ACTIVITY, data)
+            }
+
+            // 更改活动状态
+            $model.changeActivityStatus = function (data) {
+                return request.$Search(CHANGE_ACTIVITY_STATUS, data);
+            }
+
+            // 编辑活动
+            $model.editActivity = function (data) {
+                return request.$Search(EDIT_ACTIVITY, data);
             }
 
         }]

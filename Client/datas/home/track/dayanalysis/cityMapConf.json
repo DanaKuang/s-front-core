@@ -1,0 +1,63 @@
+{
+    "color": ["#6baee5", "#ff9c43"],
+    "title": {
+        "text": "",
+        "left": "center",
+        "textStyle": {
+            "color": "#ddd",
+            "frontSize": 12
+        }
+    },
+    "tooltip": {
+        "trigger": "axis"
+    },
+    "legend": {},
+    "grid": {
+        "left": "5%",
+        "right": "5%",
+        "bottom": "10%",
+        "containLabel": true
+    },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {
+                "show": false
+            }
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": []
+    },
+    "yAxis": {
+        "type": "value"
+    },
+    "series": [{
+        "name": "",
+        "type": "line",
+        "label":{
+            "normal":{
+                "show":true,
+                "position":"top",
+                "textStyle":{
+                    "color":"#b8ded3"
+                }
+            }
+        },
+        "data": []
+    }, {
+        "name": "",
+        "type": "line",
+        "label": {
+            "normal": {
+                "show": true,
+                "position": "top",
+                "textStyle": {
+                    "color": "#ff9c43"
+                }
+            }
+        },
+        "data": []
+    }]
+}

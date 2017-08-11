@@ -49,9 +49,9 @@
         this.w = $(window).width();
         this.h = $(window).height();
         this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
-        this.color = random > .2 ? "#3da3ee" : "#313c1c";
+        this.color = random > .2 ? "#6eecff" : "#313c1c";
         this.radius = random > .8 ? Math.random() * 2 : this.radius;
-        this.color = random > .8 ? "#7DFFF2" : this.color;
+        this.color = random > .8 ? "#446cff" : this.color;
 
         // this.color  = random > .1 ? "#ffae00" : "#f0ff00" // Alien
         this.variantx1 = Math.random() * 300;
@@ -104,7 +104,7 @@
 
     function clear() {
       canvas.globalAlpha = 0.05;
-      canvas.fillStyle = '#000';
+      canvas.fillStyle = '#1a1b38';
       canvas.fillRect(0, 0, tela.width, tela.height);
       canvas.globalAlpha = 1;
     }
@@ -182,7 +182,7 @@
           if (res.message == 'success') {
             var data = res.data || {};
             sessionStorage.setItem('access_token', data.token);
-            sessionStorage.setItem('loginId', data.loginId);
+            sessionStorage.setItem('access_loginId', data.loginId);
             location.href = "/";
           } else {
             alert(res.message);

@@ -24,6 +24,11 @@
     node main.js commit [log]  ## 将代码提交到gitlab
     node main.js publish       ## 一键发布[可能有些不灵活]
     node main.js destroy       ## 你懂的？
+## 功能新增
+    废弃掉服务器性能监控，本地可以使用，需改配置文件。
+    新加入文件监控功能，监控config文件变化，重启服务。
+    此功能下一步会加入karma模块，实现前端测试。
+    前景一片光芒。
 ## TIPS
     如需修改请联系相关开发人员评估
 ## 白话

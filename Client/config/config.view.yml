@@ -21,6 +21,13 @@ login:                                      # 登录
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'login.html'
+  - httpmethod: 'get'                       # 找回密码
+    routepath: '/find'
+    description: '登陆页面'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'find.html'
 home:                                       # 首页
   - httpmethod: 'get'                       # KPI
     routepath: '/view/home/kpi'
@@ -50,6 +57,34 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/multi/multi.html'
+  - httpmethod: 'get'                       # 活动实时跟踪
+    routepath: '/view/home/realtime'
+    description: 'realtime'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/track/realtime.html'
+  - httpmethod: 'get'                       # 活动日常分析
+    routepath: '/view/home/dayanalysis'
+    description: 'dayanalysis'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/track/dayanalysis.html'
+  - httpmethod: 'get'                       # 页面路径转化信息
+    routepath: '/view/home/pathdetail'
+    description: 'pathdetail'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/track/pathdetail.html'
+  - httpmethod: 'get'                       # 零售户
+    routepath: '/view/home/retailer'
+    description: 'retailer'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/retailer/retailer.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'

@@ -1,0 +1,50 @@
+{
+    "color": ["#44c2ed","#ff8b23"],
+    "title": {
+        "text": "",
+        "left": "center",
+        "textStyle": {
+            "color": "#ddd",
+            "frontSize": 12
+        }
+    },
+    "tooltip": {
+        "trigger": "axis"
+    },
+    "legend": {
+        "data":["累计零售户", "新增零售户"]
+    },
+    "grid": {
+        "left": "5%",
+        "right": "5%",
+        "bottom": "10%",
+        "containLabel": true
+    },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {
+                "show": false
+            }
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "axisTick": {
+            "alignWithLabel": true
+        },
+        "data": []
+    },
+    "yAxis": {
+        "type": "value"
+    },
+    "series": [{
+        "name": "累计零售户",
+        "type": "bar",
+        "barWidth": "40%",
+        "data": []
+    },{
+        "name": "新增零售户",
+        "type": "line",
+        "data": []
+    }]
+}

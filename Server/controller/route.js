@@ -41,7 +41,7 @@ module.exports.register = function (express, routes) {
       baseURL += ':';
       baseURL += config.gateway[gatewaytype].port; // 请求端口号
 
-      route.proxy = false;
+      route.proxy = config.proxyturnto || 0;
       // 去掉url后带的参数
       route.url = req.url.split('?')[0];
       // 请求文件类型

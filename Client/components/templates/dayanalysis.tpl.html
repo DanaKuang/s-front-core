@@ -1,0 +1,41 @@
+<div>
+    <form class="ui-daily-search">
+        <div class="form-inline form-group col-md-12">
+            <label>日期</label>
+            <div class="inline-block">
+                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+            </div>&nbsp;&nbsp;
+            <label class="checkbox">
+                <input type="checkbox" ng-model="checked" ng-change="fixDateInput(checked)">&nbsp;&nbsp;对比&nbsp;&nbsp;
+            </label>&nbsp;&nbsp;
+            <div class="inline-block" ng-show="checked">
+                <input type="input" name="b_startTime" ng-model="b_startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="input" name="b_endTime" ng-model="b_endTime" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="ui-form-select form-inline form-group col-md-12">
+            <div class="col-md-3">
+                <label for="">品牌</label>
+                <select class="form-control multiple" name="productBrand" ng-model="productBrand">
+                    <option ng-repeat="pb in pbArray" value="{{pb.productBrand}}">{{pb.productBrand}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="">规格</label>
+                <select class="form-control multiple" name="productName" ng-model="productName" multiple="multiple">
+                    <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productName}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="">活动名称</label>
+                <select class="form-control" ng-model="activity">
+                    <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" ng-click="daySearch()">查询</button>
+            </div>
+        </div>
+    </form>
+</div>

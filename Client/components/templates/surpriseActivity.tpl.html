@@ -21,22 +21,33 @@
 				<div class="draw-prize config-item">
 					<h6>中奖设置</h6>
 					<div class="select-duration configuration-item">
-						<input id="drawDurationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime" ng-model="selectDurationStart" value="{{selectDurationStart}}"> &nbsp;&nbsp;至&nbsp;&nbsp;
-						<input id="drawDurationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime" ng-model="selectDurationEnd" value="{{selectDurationEnd}}">
+						<i>*</i>
+						<small class="wrong-tip hidden">请选择中奖时间段</small>
+				    <select class="hours" name="startHour" ng-model="startHour" ng-disabled="disabled">
+				      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
+				    </select>&nbsp;时&nbsp;&nbsp;~&nbsp;&nbsp;
+				    <select class="hours" name="endHour" ng-model="endHour" ng-disabled="disabled">
+				      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
+				    </select>&nbsp;时
 					</div>
 					<div class="draw-area configuration-item">
-						<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select"></select>
+						<i>*</i>
+						<small class="wrong-tip hidden">请选择中奖地区</small>
+						<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select" ng-disabled="disabled"></select>
 					</div>
 					<div class="plus configuration-item">
-						<input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true"><span>设置</span>
-						<select name="" id="" ng-if="myPlus">
+						<i>*</i>
+						<small class="wrong-tip hidden">若设置请选择附加条件，不设置请填写中奖概率</small>
+						<input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled"><span>设置</span>
+						<select name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
 							<option value="">请选择附加条件</option>
-							<option value="">1</option>
-							<option value="">2</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
 						</select>
+						<div class="wrong-tip hidden">请完善中奖信息设置，确保红星标识处已填写！</div>
 					</div>
-					<div class="chance configuration-item" ng-if="!myPlus">
-						<input type="number" placeholder="请填写中奖概率">
+					<div class="chance configuration-item" ng-show="!myPlus">
+						<input type="number" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-disabled="disabled">%
 					</div>
 				</div>
 				<!-- 投放设置 -->
@@ -50,11 +61,7 @@
 					<sa-surprisesetprize conf="surpriseprizeConf"></sa-surprisesetprize>
 				</div>
 				<!-- 按钮区 -->
-				<div class="btn-area">
-					<input type="checkbox"><label for="">是否启用本活动（勾选并保存后该活动将生效，不勾选则为停用状态）</label><br>
-					<button type="submit" id="submitPrize" class="btn btn-default submit-prize f-btn">保存</button>
-					<button class="btn btn-default cancel-prize f-btn">取消</button>
-				</div>
+				<sa-finalcreate conf="finalcreateConf"></sa-finalcreate>
 			</div>
 
 			<!-- 预览 -->

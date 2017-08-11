@@ -88,7 +88,8 @@ input::-webkit-input-placeholder {
 
 .ui-wrapper {
     position: absolute;
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
     height: 260px;
     left: 50%;
     top: 50%;
@@ -170,7 +171,7 @@ input::-webkit-input-placeholder {
 }
 .ui-checkbox a {
     position: relative;
-    float: left;
+    float: right;
     margin-left: 3px;
     color: #fff;
     text-decoration: underline;
@@ -187,7 +188,8 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 .ui-login-form >button[disabled] {
-  background: #ddd;
+  background: #6e80ff;
+  opacity: .2;
 }
 #drag{
     position: relative;

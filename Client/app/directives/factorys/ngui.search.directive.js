@@ -14,13 +14,15 @@ define([], function () {
             var format = '',
                 minView = '';
             format = (type == 'month'?'yyyy-mm':(type == 'year'?'yyyy':'yyyy-mm-dd'));
-            minView = (type == 'month' ? 2 : (type == 'year' ? 3 : 2));
+            startView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
+            minView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
             $(ele).find('.date').datetimepicker({
                 language:  'zh-CN',  //日期
                 format: format,
                 autoclose: true,
                 todayBtn: true,
-                minView: minView,
+                minView:minView,
+                startView: startView,
                 endDate: dateFormatFilter.date(new Date()),
                 pickerPosition: "bottom-left"
             });

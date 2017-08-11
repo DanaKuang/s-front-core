@@ -34,7 +34,7 @@
 									</div>
 									<div class="norms b">
 										<label for="status" class="label">活动状态</label>
-										<select class="form-item" name="" id="status" ng-model="statusVal" val="{{statusVal}}">
+										<select class="form-item" name="" id="status" ng-model="statusVal" value="{{statusVal}}">
 											<option value="">全部</option>
 											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
 										</select>
@@ -55,7 +55,7 @@
 									</div>
 								</div>
 								<div class="r flex-item">
-									<div class="duration t">
+									<div class="area t">
 										<label for="location" class="label">地区</label>
 										<select class="form-item select" name="" id="location" ng-model="allarea" value="{{allarea}}" multiple="multiple"></select>
 									</div>
@@ -210,6 +210,22 @@
 	
 	<!-- 容纳所有配置弹窗的div -->
 	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
+
+	<!-- 活动创建成功 -->
+	<div class="modal fade createSuccess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">提示</div>
+		    <div class="modal-body">
+		    	<p class="text-center" style="font-size: 16px; margin-bottom: 20px;">创建成功</p>
+		    	<sa-successshowlist conf="successshowlistConf"></sa-successshowlist>
+		    </div>
+		    <div class="modal-footer">
+        	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="iknow($event)">知道了</button>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>
 	
 </div>
 

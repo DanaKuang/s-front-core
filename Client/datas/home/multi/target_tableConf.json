@@ -74,7 +74,7 @@
         "align": "center"
     }, {
         "name": "juncicuxiaochengben",
-        "label": "次均促销成本",
+        "label": "均次促销成本",
         "sortable": true,
         "align": "center"
     }, {
@@ -84,7 +84,7 @@
         "align": "center"
     }, {
         "name": "juncicuxiaolidu",
-        "label": "次均促销力度",
+        "label": "均次促销力度",
         "sortable": true,
         "align": "center"
     }, {

@@ -1,0 +1,77 @@
+/**
+ * Author: liubin
+ * Create Date: 2017-08-05
+ * Description: css
+ */
+.ui-detail-box {
+    display: flex;
+    justify-content: space-around;
+}
+.ui-panel-title .retailer {
+    background: url('../image/i-retailer-title.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    height: 14px;
+    width: 16px;
+}
+.ui-detail-box >div {
+    height: 80px;
+    width: 200px;
+    border: 1px solid #ddd;
+}
+.ui-panel-title {
+    position: relative;
+    margin: 20px 0 5px 0;
+    font-size: 16px;
+}
+.ui-retailer-search .btn-primary {
+    width: 90px;
+    border-radius: 15px;
+    padding: 0;
+}
+.ui-retailer-search select {
+    min-width: 100px;
+    margin-right: 50px;
+}
+.ui-detail-box .box {
+    height: 80px;
+    display: inline-block;
+    width: calc(100% - 70px);
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 10px;
+    float: left;
+}
+.ui-detail-box img {
+    height: 50px;
+    width: 50px;
+    margin: 15px 0;
+    float: left;
+}
+.ui-detail-box em {
+    font-size: 26px;
+    color: #44c2ed;
+}
+.ui-min-height {
+    min-height: 240px;
+}
+.ui-map-box {
+    height: 300px;
+}
+.panel-body .title {
+    font-size: 18px;
+    color: #3d467d;
+    line-height: 40px;
+}
+.ui-city-block {
+    position: absolute;
+    z-index: 100;
+    margin-left: 48px;
+}
+.ui-city-block select {
+    display: inline-block;
+    width: 100px;
+}

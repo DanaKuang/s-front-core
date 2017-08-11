@@ -2,14 +2,21 @@ def:                                             # 默认环境配置
   runmode: 'dev'                                 # 开发环境
   homepage: 'index.html'                         # 首页
   loginpage: 'login.html'                        # 登陆
+  findpage: 'find.html'                          # 找回密码
   viewpath: 'views'                              # 页面路径
   viewengine: 'html'                             # 文件格式
   favicon: 'favicon.ico'                         # favicon
   apiroot: '^/api/tztx'                          # 接口配置
-  rootfilter: '/(dataportal|saas)'               # 接口过滤
   viewroot: '^/view'                             # 视图配置
   staticroot: '^/statics'                        # 静态资源请求根目录
-  autoOpenBrower: 0                              # 是否自动打开浏览器
+  autoOpenBrower: 1                              # 是否自动打开浏览器
+  easyMonitor: 1                                 # 是否开启前端性能监控
+  proxyturnto: 0                                 # 是否开启代理模式
+  proxyTarget:
+    host: 'proxy.hmtx.cc'                        # 代理地址
+    port: 80                                     # 代理端口号
+    account: ''                                  # 账号
+    password: ''                                 # 密码
   staticpath:
     - path: 'app'                                # root
     - path: 'bower_components'                   # 前端第三方JS框架文件路径
@@ -24,12 +31,12 @@ def:                                             # 默认环境配置
     createtime: '2017-06-21'                     # 创建时间
     appname: 'SAAS服务平台'                       # 应用名称
   log4js:                                        # log4js插件
-    level: 'ALL'                                 # 级别
+    level: 'INFO'                                # 级别
     type: 'dateFile'                             # 配置日志输出方式
     logpath: 'logs'                              # 日志文件路径
     logfile: 'access'                            # 基本日志文件名称
     pattern: '-yyyy-MM-dd--hh.log'               # 日志文件后缀格式
-dev:                                             # 开发环境配置
+test:                                            # 测试环境配置
   server:                                        # 配置Web
     port: 9091                                   # Web端口
     host: '127.0.0.1'                            # IP地址
@@ -38,6 +45,20 @@ dev:                                             # 开发环境配置
       host: 'datatest.taozuike.com'              # 请求IP地址
     - port: 80                                   # 请求端口号
       host: 'portal.v2.taozuike.com'             # 请求IP地址
+  rootfilter: '/(dataportal|saas)'               # 接口过滤
+  showerror: 1                                   # 控制异常信息抛出
+  debugger: 1                                    # 是否控制台打印信息
+  viewcache: 0                                   # 控制视图缓存
+dev:                                             # 线上环境
+  server:                                        # 配置Web
+    port: 9091                                   # Web端口
+    host: '127.0.0.1'                            # IP地址
+  gateway:                                       # 配置请求IP地址
+    - port: 9090                                 # 请求端口号
+      host: '127.0.0.1'                          # 请求IP地址
+    - port: 10090                                # 请求端口号
+      host: '172.17.15.161'                      # 请求IP地址
+  rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存

@@ -39,7 +39,9 @@ define([], function () {
             var mulScope = angular.element('#seach_scope').scope();
 
             $(".ui-search-block.multi select").multiselect({
-                nonSelectedText: '请选择'
+                nonSelectedText: '请选择',
+                allSelectedText: '全选',
+                nSelectedText: '已选择'
             });
             var $product = $("[name='productName']");
             var $proName = $("[name='provinceName']");
@@ -108,7 +110,7 @@ define([], function () {
                 productBrand: "白沙",
                 productName: "",
                 productPack: "",
-                saleZone: "",
+                saleZone: "堡垒型_A",
                 provinceName: "",
                 cityName: ""
             }) : initSearchScope({
@@ -118,7 +120,7 @@ define([], function () {
                 productName: "",
                 productPack: "",
                 saleZone: "",
-                provinceName: "湖南",
+                provinceName: "湖南省",
                 cityName: ""
             });
             $scope.mSearch();
@@ -164,6 +166,15 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+                        s.juncicuxiaochengben = transRate(s.juncicuxiaochengben);
+                        s.juncicuxiaolidu = transRate(s.juncicuxiaolidu);
+                        s.lingshoufeixiaobi = transRate(s.lingshoufeixiaobi);
+                        s.saomalv = transRate(s.saomalv);
+                        s.zhongjianglv = transRate(s.zhongjianglv);
+                        s.rjyouxiaosaomacishu = transNum(s.rjyouxiaosaomacishu);
+                        s.zhongjiangmian = transNum(s.zhongjiangmian);
+                        s.rjzhongjiangcishu = transNum(s.rjzhongjiangcishu);
+                        s.rjcuxiaochengben = transNum(s.rjcuxiaochengben);
                     });
                     $scope.targetConf.rows = tScope.rows = res.data || [];
                     tScope.$apply();
@@ -270,6 +281,21 @@ define([], function () {
             mulScope.saleZone = d.saleZone && d.saleZone.split(',');
             mulScope.provinceName = d.provinceName && d.provinceName.split(',');
             mulScope.cityName = d.cityName && d.cityName.split(',')
+        }
+
+        // 百分比转化
+        function transRate (rate) {
+            if (!rate) return '0%';
+            rate = Number(rate);
+            rate = (rate * 100).toFixed(2);
+            return '' + rate + '%';
+        }
+
+        // 保留两位小数
+        function transNum (num) {
+            if (!num) return num;
+            num = Number(num);
+            return num.toFixed(2);
         }
     }]
   };

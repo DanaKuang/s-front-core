@@ -4,7 +4,7 @@
     "tableCls": "table-bordered",
     "columns": [{
         "name": "province",
-        "label": "地市",
+        "label": "省市",
         "sortable": false,
         "align": "center",
         "colspan": 2,

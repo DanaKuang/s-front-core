@@ -29,7 +29,8 @@
     "smalot-bootstrap-datetimepicker": "2.3.4",
     "d3": "^4.9.1",
     "animate.css": "^3.5.2",
-    "bootstrap-multiselect": "^0.9.13"
+    "bootstrap-multiselect": "^0.9.13",
+    "angular-file-upload": "^2.5.0"
   },
   "repository": {
     "type": "git",

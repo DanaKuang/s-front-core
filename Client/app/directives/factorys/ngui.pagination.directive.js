@@ -17,7 +17,10 @@ define([], function () {
             size: 0,
             curPage: 0,
             pageNumber: 1,
-            activity_page_data: {}
+            activity_page_data: {
+                currentPageNumber: 1, 
+                pageSize: 15
+            }
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -55,11 +58,11 @@ define([], function () {
                     }
                 }
             }, true);
-        
 
             // nav切换事件绑定
             // 初始的时候
-            scope.$emit('frompagechange', event, scope.activity_page_data);
+            var data = _.cloneDeep(scope.activity_page_data);
+            scope.$emit('frompagechange', event, data);
 
             scope.changePage = function (e, n) {
                 scope.cur = (+n);
@@ -98,7 +101,6 @@ define([], function () {
                 scope.changePage(e, n)
             }
         }
-
         return defineObj;
     }
 

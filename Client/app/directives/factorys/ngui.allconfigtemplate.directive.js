@@ -9,9 +9,11 @@ define([], function () {
 
     var allconfigtemplateFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
-            tpl: '/allConfigTemplate.tpl.html',
+            tpl: '/allconfigtemplate.tpl.html',
             confUrl: '',
-            pageName: ''
+            pageName: '',
+            pageCode: '',
+            activityCode: ''
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -26,21 +28,31 @@ define([], function () {
         };
 
         function linkFn (scope, element, attrs) {
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'pageName', 'pageCode', 'activityCode']);
 
             // 监视conf变化更新page
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'pageName', 'pageCode', 'activityCode']);
                 // 一开始进入页面的时候scope.conf是undefined
-                scope.confUrl = scope.conf && scope.conf.data[0].confUrl;
-                scope.pageName = scope.conf && scope.conf.data[0].pageName;
-                // 上下两种方式都行
-                // if (scope.conf) {
-                //     var data = scope.conf.data[0];
-                //     scope.confUrl = data.confUrl;
-                //     scope.pageName = data.pageName;
-                // }
+
+                // 两种进来方式，一种是新建活动，一种是编辑活动。
+                if (scope.conf) {
+                    var data = scope.conf.data;
+                    if (Array.isArray(data)) {
+                        // 新建活动
+                        scope.confUrl = data[0].confUrl;
+                        scope.pageName = data[0].pageName;
+                        scope.pageCode = data[0].pageCode;
+                    } else {
+                        // 编辑活动
+                        scope.confUrl = data.confUrl;
+                        scope.pageName = data.pageExt.pageName;
+                        scope.pageCode = data.pageExt.pageCode;
+                        scope.activityCode = data.activity.activityCode;
+                    }
+                }
+                
             }, true);
 
         }

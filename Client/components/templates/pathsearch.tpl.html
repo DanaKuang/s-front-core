@@ -1,0 +1,43 @@
+<div>
+    <form class="ui-path-search">
+        <div class="form-inline form-group col-md-12">
+            <div class="inline-block col-md-6">
+                <label>日期</label>
+                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+            </div>
+            <div class="col-md-3">
+                <label for="">品牌</label>
+                <select class="form-control multiple" name="productBrand" ng-model="productBrand">
+                    <option value="">请选择</option>
+                    <option ng-repeat="pb in pbArray" value="{{pb.productBrand}}">{{pb.productBrand}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="">规格</label>
+                <select class="form-control multiple" name="productName" ng-model="productName" multiple="multiple">
+                    <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="ui-form-select form-inline form-group col-md-12">
+            <div class="col-md-3">
+                <label for="">活动名称</label>
+                <select class="form-control multiple" name="activityId" ng-model="activityId">
+                    <option value="">请选择</option>
+                    <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="">页面名称</label>
+                <select class="form-control multiple" name="pagename" ng-model="pagename">
+                    <option value="">请选择</option>
+                    <option ng-repeat="pg in pgArray" value="{{pg.page_code}}">{{pg.page_name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" ng-click="pathSearch()">查询</button>
+            </div>
+        </div>
+    </form>
+</div>

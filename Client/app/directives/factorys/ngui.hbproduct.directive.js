@@ -57,7 +57,7 @@ define([], function () {
                 if (firstornot) {
                     // 特殊项里的设置
                     var osJQobject = $('.first-draw').find('.ready-set').children().eq(chooseNum);
-                    var osJSobject = osJqobject[0];
+                    var osJSobject = osJQobject[0];
                 } else {
                     // 非特殊奖项里的设置
                     var osJQobject = $('.non-first-draw').find('.ready-set').children().eq(chooseNum);

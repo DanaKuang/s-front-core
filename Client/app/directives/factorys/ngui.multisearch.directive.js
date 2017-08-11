@@ -3,6 +3,7 @@
  * Create Date: 2017-07-24
  * Desciption: multisearch
  * Array.from(Array(24),(v, i)=>i)
+ * Array.from(Array(24),function(v, i){return i;}) IE不支持，好坑from
  */
 define([], function () {
     var nguimultisearch = angular.module('ngui.multisearch', []);
@@ -12,7 +13,7 @@ define([], function () {
             tpl: '/multisearch.tpl.html',
             startTime: '',                           // 开始时间
             endTime: '',                             // 结束时间
-            hours: Array.from(Array(24),function(v, i){return i;}),  // 小时
+            hours: _.map(Array(24),function(v, i){return i;}),  // 小时
             productBrand: '',                        // 品牌
             pbArray: [],                             // 品牌数组
             productName: '',                         // 规格

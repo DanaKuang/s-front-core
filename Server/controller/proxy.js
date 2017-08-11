@@ -5,14 +5,27 @@
  */
 var fs = require('fs');
 var u = require('util');
+var http = require('http');
 var request = require('request');
 
 // 代理请求
 function proxyAPI (req, res, route) {
   var timeout = route.requesttimeout;
   // process.stdout.write(u.inspect(req));
+
   if (route.proxy) {
-    req.pipe(request[route.httpmethod](req.url, timeout=timeout)).pipe(res);
+      var proxyObj = req.proxyTarget || {};
+      var auth = new Buffer(proxyObj.account + ':' + proxyObj.password).toString('base64');
+
+      req.pipe(http.request({
+          host: proxyObj.host,
+          port: proxyObj.port || 80,
+          method: req.method || 'POST',
+          path: req.url,
+          headers:{
+              'Proxy-Authorization':'Basic '+auth
+          }
+      })).pipe(res);
   } else {
     req.pipe(request[route.httpmethod](req.url, timeout=timeout)).pipe(res);
     // var STATUS_5xx = /^5\d{2}/i;

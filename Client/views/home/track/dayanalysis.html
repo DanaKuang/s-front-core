@@ -1,0 +1,96 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-08-02
+ * Description: dayanalysis
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.track.css">
+<!--html-->
+<div class="animated fadeInRight" ng-controller="dayanalysisCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="ui-content-daily col-md-12">
+                <div class="ui-daily-title">
+                    <i class="daily"></i><span>活动日常分析</span>
+                </div>
+                <!--查询-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="form-inline form-group col-md-12">筛选条件</div>
+                        <div sa-daysearch conf="dayConf"></div>
+                    </div>
+                </div>
+                <!--内容-->
+                <div class="panel rate">
+                    <!--趋势分析-->
+                    <div class="panel-body">
+                        <div class="form-inline col-md-12">
+                            <div style="margin-right:10px;float:left;">趋势分析</div><hr>
+                        </div>
+                        <!--趋势-->
+                        <div class="ui-min-height col-md-12">
+                            <div class="ui-radio-group radio">
+                                <label class="radio-inline"><input type="radio" name="searchGroup" ng-click="setDef(0);">平均访问深度</label>
+                                <label class="radio-inline"><input type="radio" name="searchGroup" ng-click="setDef(1);">浏览量（PV）</label>
+                                <label class="radio-inline"><input type="radio" name="searchGroup" ng-click="setDef(2);">访客数（UV）</label>
+                            </div>
+                            <div id="dayMap" class="ui-common-box"></div>
+                        </div>
+                    </div>
+                    <!--地域分析-->
+                    <div class="panel-body">
+                        <div class="form-inline col-md-12">地域分析</div>
+                        <!--地图-->
+                        <div class="ui-min-height col-md-6">
+                            <div id="baiduMap" class="ui-common-box"></div>
+                        </div>
+                        <!--地市-->
+                        <div class="ui-min-height col-md-6">
+                            <div class="ui-city-block">
+                                <label class="control-label">城市选择</label>
+                                <select class="form-control" ng-model="cityName" ng-change="setCityMap(cityName)">
+                                    <option ng-repeat="city in cityArr">{{city.cityName}}</option>
+                                </select>
+                            </div>
+                            <div class="ui-radio-group pvuv">
+                                <label class="radio-inline"><input type="radio" name="pvUvGroup" ng-click="setPvUv(0);">PV</label>
+                                <label class="radio-inline"><input type="radio" name="pvUvGroup" ng-click="setPvUv(1);">UV</label>
+                            </div>
+                            <div id="cityMap" class="ui-common-box"></div>
+                        </div>
+                    </div>
+                    <!--终端分析-->
+                    <div class="panel-body">
+                        <div class="form-inline col-md-12">终端分析</div>
+                        <!--左图-->
+                        <div class="ui-min-height col-md-6">
+                            <div id="pie_left" class="ui-common-box"></div>
+                        </div>
+                        <!--右图-->
+                        <div class="ui-min-height col-md-6">
+                            <div id="pie_right" class="ui-common-box"></div>
+                        </div>
+                    </div>
+                    <!--浏览轨迹-->
+                    <div class="panel-body">
+                        <div class="form-inline col-md-10">浏览轨迹</div>
+                        <div class="form-inline col-md-2" onclick="$('[data-hash=\'#/view/home/pathdetail\']').trigger('click')">更多路径转化信息>></div>
+                        <!--转化-->
+                        <div class="ui-min-height col-md-12">
+                            <div class="ui-transform-box">
+                                <div class="ui-transform-content" ng-repeat="page in pages">
+                                    <div class="page">{{page.name}}</div>
+                                    <div class="content">
+                                        <div class="bgpage" style="width:{{page.width}}px">日均访问人数{{page.visit}}<div class="rate" ng-if="$index !== pages.length-1">访客转化率:{{page.rate}}</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

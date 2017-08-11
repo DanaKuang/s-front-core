@@ -1,0 +1,95 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-08-06
+ * Description: retailer
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.retailer.css">
+<!--html-->
+<div class="animated fadeInRight" ng-controller="retailerCtrl">
+    <div class="container-fluid">
+        <div class="ui-retailer-box row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title retailer">
+                    <i class="retailer"></i><span>零售户发展情况概览</span>
+                </div>
+                <!--search-->
+                <div class="ui-retailer-search panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline form-group col-md-12">
+                            <select class="form-control" ng-model="type">
+                                <option value="day">日</option>
+                                <option value="week">周</option>
+                                <option value="month">月</option>
+                            </select>
+                            <div class="inline-block">
+                                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                            </div>&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary" ng-click="retailerSearch()">查询</button>
+                        </form>
+                    </div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="ui-detail-box">
+                            <div>
+                                <div class="box"><em>{{addUser}}</em>家<br>累计零售户</div>
+                                <img src="statics/assets/image/i-total.png">
+                            </div>
+                            <div>
+                                <div class="box"><em>{{joinUser}}</em>家<br>参与活动零售户</div>
+                                <img src="statics/assets/image/i-join.png">
+                            </div>
+                            <div>
+                                <div class="box"><em>{{newUser}}</em>家<br>新增零售户</div>
+                                <img src="statics/assets/image/i-new.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!--零售户增长趋势-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">零售户增长趋势</div>
+                        <div class="ui-min-height col-md-12">
+                            <div id="growMap" class="ui-map-box"></div>
+                        </div>
+                    </div>
+                    <!--零售户业态分布-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">零售户业态分布</div>
+                        <div class="ui-min-height col-md-12">
+                            <div class="col-md-6">
+                                <div id="distMap" class="ui-map-box"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ui-city-block">
+                                    <select class="form-control" ng-model="cityName" ng-change="setCityMap(cityName)">
+                                        <option ng-repeat="ct in cityArr" value="{{ct.bizCode}}" ng-select="$index==0">{{ct.bizName}}</option>
+                                    </select>
+                                </div>
+                                <div id="distGrowMap" class="ui-map-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--零售户省内外分布-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-6">零售户省内外分布</div>
+                        <div class="title form-inline form-group col-md-6">零售户城乡分布</div>
+                        <div class="ui-min-height col-md-12">
+                            <div class="col-md-6">
+                                <div id="leftPieMap" class="ui-map-box"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="rightPieMap" class="ui-map-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -242,7 +242,7 @@ module.exports = function (callback) {
         process.stdout.write(colors.green('10)：login/index -> \n'));
         process.stdout.write(colors.blue('\x20\x20\x20 minify login/index html \n'));
         // index 压缩后 include问题，暂时未解决
-        gulp.src('dist/data-front/Client/login.html')
+        gulp.src(['dist/data-front/Client/*.html', '!dist/data-front/Client/index.html'])
             .pipe(minifyHtml({
                 empty: true,
                 spare: true,

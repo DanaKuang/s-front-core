@@ -44,16 +44,20 @@ define([], function () {
                       option.data = r.join('&');
                     }
                   } else {
-                    option.data = _.clone(data);
+                    option.data = data;
+                    option.headers = angular.extend(option.headers, def);
                   }
 
                   return $http(option)
                           .success(success || function() {})
-                          .error(function(res) {
+                          .error(fail || function() {})
+                          .then(function(res) {
+                            var code = res.data || {};
                             // session过期或错误
-                            if (res.ret === '100405') {
+                            if (code.ret === '100405') {
                               authorization.logout();
                             }
+                            return res;
                           });
               };
           }

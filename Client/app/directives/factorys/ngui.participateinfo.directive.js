@@ -25,14 +25,57 @@ define([], function () {
 
         function linkFn (scope, element, attrs) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nameIntegral', 'namePerPersonDay', 'namePerPerson']);
 
             // 监视conf变化更新 basicinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nameIntegral', 'namePerPersonDay', 'namePerPerson']);
             }, true);
 
+            var that_scope = angular.element('.all-template-config-wrap').scope();
+            // 判断是否从编辑活动过来
+            if (that_scope.activityCode) {
+                scope.disabled = true;
+                var activity = that_scope.conf.data.activity;
+                var pre = that_scope.conf.data.preList[0];
+                if (pre.payType === '2') {
+                    // 参与消耗积分
+                    scope.nameIntegral = pre.num;
+                }
+                scope.namePerPersonDay = activity.dayLimit;
+                scope.namePerPerson = activity.allLimit;
+            }
+
+            // 开头不为0的数字校验
+            scope.verify = function (e) {
+                var val = e.target.value;
+                if (val) {
+                    if (val < 0) {
+                        e.target.value = 0;
+                    }
+                    e.target.value = deletezero(val)
+                }
+            }
+
+            function deletezero(str) {
+                if (str.length > 1) {
+                    if (str[0] === '0') {
+                        str = str.substr(1);
+                        deletezero(str)
+                    } else {
+                        return str
+                    }
+                } else {
+                    return str
+                }
+            }
+
+            $('input[type="number"]').on('input', function (e) {
+                if (e.target.value > 10) {
+                    e.target.value = e.target.value.slice(0, 10)
+                }
+            })
         }
 
         return defineObj;

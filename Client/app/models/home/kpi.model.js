@@ -11,9 +11,7 @@ define([], function () {
     ServiceContent: ['request', '$filter', function (request, $filter) {
       this.$model = function () {
         var historyParams = {
-          'provinceName': '',
-          'statTime': $filter("date")((+new Date - 60*60*24*1000), 'yyyy-MM-dd'),
-          'statType': 'day'
+          'statTime': $filter("date")((+new Date - 60*60*24*1000), 'yyyy-MM-dd')
         };
         var CHINA_JSON_URL = '/statics/home/kpi/china.json';           // 地图JSON
         var ECHART_JSON_CONF = '/statics/home/kpi/echartConf.json';    // echart配置
@@ -25,7 +23,7 @@ define([], function () {
         var TIME_JSON_URL = '/api/tztx/dataportal/data/dayScanTimes';             // 当日扫码次数
         var USER_JSON_URL = '/api/tztx/dataportal/data/dayScanUsers';             // 当日扫码人数
         var CODE_JSON_URL = '/api/tztx/dataportal/data/dayScanCodes';             // 当日扫码烟包数
-        var HISTORY_JSON_URL = '/api/tztx/dataportal/statistics/getScanData';     // 历史扫码数据
+        var HISTORY_JSON_URL = '/api/tztx/dataportal/statistics/getHistoryScanData';     // 历史扫码数据
 
         var SCORLL_JSON_URL = '/api/tztx/dataportal/data/rollingData';            // 实时滚动数据
         var TOP10_JSON_URL = '/api/tztx/dataportal/data/topTen';                  // TOP10数据
@@ -48,7 +46,7 @@ define([], function () {
         // this.$formatData = request.$Search(SPECIFIC_JSON_URL, {key: 'scantimes'});
         // this.$fscanData = request.$Search(FIRSTTIME_JSON_URL);
 
-        // this.$historyScan = request.$Search(HISTORY_JSON_URL, historyParams, true);
+        this.$historyScan = request.$Search(HISTORY_JSON_URL, historyParams, true);
 
         // 请求数据封装成函数，实时调用
         // 获取实时扫码数
