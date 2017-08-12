@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
+<link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
+<div ng-controller="achievementCtrl">
+	<div class="animated fadeInRight">
+	  <div class="container-fluid">
+	    <div class="row">
+	      <div class="col-md-12">
+			<div class="manage-right">
+      <div class="manage-top">
+        <span class="fl"></span>
+        <div class="fl">零售户>零售户业绩</div>
+      </div>
+      <div class="manage-bottom">
+             <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">零售户业绩列表</a></li>
+          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">零售户业绩排名</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="tab-input">
+                <input type="text" placeholder="烟草证号\门店名\联系人姓名\联系人手机号" id="input1">
+               <div class="time" id="timeNow">
+                  <div>时间区间</div>
+                  <input name="时间" id="timeStart1"  class="form_datetime dateTime" placeholder="2017-8-1">
+                  <div>至</div>
+                  <input name="时间" id="timeEnd1" class="form_datetime dateTime" placeholder="2017-8-2">
+                </div>
+                <select name="" id="pay">
+                  <option value="">扫码单位</option>
+                  <option value="">盒</option>
+                  <option value="">条</option>
+                </select>
+                <select name="" id="is-return">
+                  <option value="">有返现</option>
+                  <option value="">有</option>
+                  <option value="">无</option>
+                </select>
+                <div class="seacher" id="achievement-seacher"><a href="javascript:">查询</a></div>
+            </div>
+            <div class="tab-table ">
+              <table>
+                <thead>
+                  <tr>
+                    <td>烟草专卖证号</td>
+                    <td>门店名</td>
+                    <td>联系人姓名</td>
+                    <td>联系人电话</td>
+                    <td>消费者微信名</td>
+                    <td>扫码时间（店码）</td>
+                    <td>扫码时间（烟码）</td>
+                    <td>扫码单位</td>
+                    <td>返现金额</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="ty in detailData">
+                    <td>{{ty.sellerId}}</td>
+                    <td>{{ty.shopName}}</td>
+                    <td>{{ty.contactName}}</td>
+                    <td>{{ty.contactPhone}}</td>
+                    <td>{{ty.consumerOpenId}}</td>
+                    <!-- <td>{{ty.licenceNo}}</td> -->
+                    <td>{{ty.cousumerScTime}}</td>
+                    <td>{{ty.cousumerScTime}}</td>
+                    <td>{{ty.unit}}</td>
+                    <td>{{ty.fxAmount}}</td>
+                  </tr>           
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+          <div class="tab-input">
+              <div class="time">
+                <div>时间区间</div>
+                <input name="时间" id="timeStart2"  class="form_datetime dateTime" placeholder="2017-8-1">
+                <div>至</div>
+                <input name="时间" id="timeEnd2"  class="form_datetime dateTime" placeholder="2017-8-2">
+              </div>
+              <div class="seacher" id="seacherId"><a href="javascript:">全部导出</a></div>
+          </div>
+          <div class="tab-table">
+            <table class="table spacil-table" id="actable">
+              <thead>
+                <tr>
+                  <td>排名</td>
+                  <td>门店号</td>
+                  <td>烟草证专卖号</td>
+                  <td>联系人姓名</td>
+                  <td>联系人电话</td>
+                  <td>累计扫码次数</td>
+                  <td>累计业绩金额</td>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr ng-repeat="tp in staticData">
+                    <td>{{tp.num}}</td>
+                    <td>{{tp.shopName}}</td>
+                    <td>{{tp.licenceNo}}</td>
+                    <td>{{tp.contactName}}</td>
+                    <td>{{tp.contactPhone}}</td>
+                    <td>{{tp.totalNum}}</td>
+                    <td>{{tp.fxAmount}}</td>
+                  </tr>   
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-list">
+        <div class="lists">
+          <ul>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          </ul>
+          <p><i>......</i>第<span>10</span>页&nbsp;&nbsp;共<span class="last-span">500</span>页</p>
+        </div>
+        <div class="go">go</div>
+        <p class="count">当前显示<i>1-20</i>条&nbsp;&nbsp;共有<span class="numble">100000</span>个零售户</p>
+      		</div>	
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  <script>
+    function getLocalTime(nS) {  
+            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');  
+     }
+  </script>
+</div>

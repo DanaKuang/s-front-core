@@ -1,0 +1,93 @@
+<!--
+/**
+ * Author: {author}
+ * Create Date; 2017-07-11
+ * Description: visit
+ */
+-->
+<div ng-controller="VisitCtrl">
+<div class="animated fadeInRight">
+  <div class="container-fluid region-margin">
+    <div class="row">
+      <div class="col-md-12 visit_wrap">
+        <!--title-->
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>回访报表</span>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="res_search">
+              <div class="visit_award">
+                <label>奖品：</label>
+                <input type="text" placeholder="">
+              </div>
+              <div class="visit_city">
+                <label>城市：</label>
+                <input type="text" placeholder="">
+              </div>
+              <div class="agree-date visit_start">
+                <label>开始时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="agree-date visit_end">
+                <label>结束时间</label>
+                <div class="ui-total-date input-append date">
+                  <input size="16" type="text" value="" readonly />
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
+              <div class="search_btn visit_btn" ng-click="search($event)">查询</div>
+            </div>
+            <table class="table visit_table">
+              <thead style="border: 1px solid #A0A0A0">
+              <tr>
+                <th>手机号</th>
+                <th>微信昵称</th>
+                <th>领奖时间</th>
+                <th>城市</th>
+                <th>奖品（金额）</th>
+                <th>标签</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            <div class="footer_sec clearfix">
+              <!--<div class="total_info lf">-->
+              <!--总共<span>205</span>条记录，当前页共<span>10条记录</span>-->
+              <!--</div>-->
+              <div class="page_sec rf">
+                <div class="tcdPageCode"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="statics/assets/libs/jquery.page.js"></script>
+</div>
+  <!--模态框-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">操作提示！！！</h4>
+        </div>
+        <div class="modal-body">
+          您确认是否需要更改此用户状态？
+          <span style="color: red">(一经确认无法修改)</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+          <button type="button" class="btn btn-primary" ng-click="sure()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

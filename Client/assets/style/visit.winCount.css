@@ -1,0 +1,211 @@
+#winCount-content {
+  overflow: hidden;
+}
+.row{
+  margin: 0;
+  padding:15px;
+}
+.tables th, .tables td { 
+  text-align: center;
+  vertical-align: middle!important;
+}
+.form_div{
+    padding-left: 0px;
+} 
+.form_div label{
+  margin:0 10px;
+  font-size: 22px;
+  font-family: "PingFangSC","Medium";
+   
+}
+.form_div select{
+ width: 194px;
+ }
+#winCount-bottom .form-inline  #exampleInputName4{
+  margin-right: 0px;
+  width: 100px;
+}
+#winCount-bottom {
+  height: 100%;
+  margin-top: 20px;
+  background-color: #fff;
+}
+@media (min-width: 768px) {
+  #winCount-bottom .form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  #winCount-bottom .form-inline .form-control {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-decoration: none;
+    vertical-align: middle;
+    font-size: 22px;
+    font-family: "PingFangSC","Medium";
+    color: #707070;
+
+  }
+  #winCount-bottom .form-inline #form-control12 {
+    width: 96px;
+  }
+  #searchButton {
+    width: 120px;
+    height: 40px;
+    border-radius: 35px;
+    background-color: #6E80FF;
+    font-size: 22px;
+    color: #fff;
+    
+  }
+  #searchButton:hover,#searchButton:active,#searchButton:focus {
+    border:none;
+    outline: none;
+  }
+    #winCount-bottom .form-inline .form-control-static {
+    display: inline-block;
+  }
+    #winCount-bottom .form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+    #winCount-bottom .form-inline .input-group .input-group-addon,
+    #winCount-bottom .form-inline .input-group .input-group-btn,
+    #winCount-bottom .form-inline .input-group .form-control {
+    width: auto;
+  }
+    #winCount-bottom .form-inline .input-group > .form-control {
+    width: 100%;
+  }
+    #winCount-bottom .form-inline .control-label {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+    #winCount-bottom .form-inline .radio,
+    #winCount-bottom .form-inline .checkbox {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+    #winCount-bottom .form-inline .radio label,
+    #winCount-bottom .form-inline .checkbox label {
+    padding-left: 0;
+  }
+    #winCount-bottom .form-inline .radio input[type="radio"],
+ #winCount-bottom  .form-inline .checkbox input[type="checkbox"] {
+    position: relative;
+    margin-left: 0;
+  }
+  #winCount-bottom .form-inline .has-feedback .form-control-feedback {
+    top: 0;
+  }
+}
+.winCount-head {
+    height: 64px;
+    padding-top: 32px;
+    padding-left: 79px;
+}
+.winCount-head span {
+    display: block;
+    width: 10px;
+    height: 26px;
+    float: left;
+    margin-top: 6px;
+    background-color: #737CF3
+
+}
+.winCount-head div {
+    font-family: "PingFangSC","Medium";
+    font-size:  24px;
+    color: #515151;
+    float: left;
+    margin-left: 10px;
+}
+.winCount-bottom .bottom-list {
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 18px;
+}
+.winCount-bottom .bottom-list .lists {
+
+    /*background-color: red;*/
+    width: 460px;
+    height: 20px;
+    margin-left: 20px;
+    background: url("../images/anniu7.png") no-repeat center;
+    background-size: 460px 20px;
+    float: left;
+}
+.winCount-bottom .bottom-list .lists ul {
+    margin-left: 40px;
+}
+
+.winCount-bottom .bottom-list .lists ul {
+    float: left;
+}
+.winCount-bottom .bottom-list .lists ul li {
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.winCount-bottom .bottom-list  .lists ul li a {
+    text-decoration: none;
+    color: #3395F6;
+    /*font-size:20px;*/
+    
+}
+.winCount-bottom .bottom-list p {
+    /*font-size:20px;*/
+    float: left;
+    transform: translateY(-7px);
+    
+}
+.winCount-bottom .bottom-list p i {
+    color: #3395F6;
+    font-weight: bold;
+}
+.winCount-bottom .bottom-list p span {
+    display:inline-block;
+    border: 1px solid #3395F6;
+    text-align: center;
+    line-height: 32px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 50px;
+    height: 32px;
+    color: #3395F6;
+}
+.winCount-bottom .bottom-list p .last-span {
+    border: none;
+}
+.winCount-bottom .bottom-list .go {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+    background-color: #3395F6;
+    color: #fff;
+    /*font-size: 20px;*/
+    text-align: center;
+    line-height: 24px;
+    float: left;
+    margin-left: 10px;
+   
+}
+.winCount-bottom .bottom-list .go a {
+  color: #fff;
+  text-decoration: none;
+}
+.winCount-bottom .bottom-list .count {
+    float: right;
+    margin-right: 50px;
+}
+.winCount-bottom .bottom-list .count i {
+     font-weight: normal;
+}
+.winCount-bottom .bottom-list .count .numble {
+     border: none;
+     margin-right: 20px;
+}

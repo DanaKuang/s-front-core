@@ -1,0 +1,213 @@
+/*  .row{
+    margin:15px 0;
+  }*/
+  .orderModel{
+    width: 520px;
+    height: 254px;
+    border-radius: 20px;
+  }
+  .orderModel .modal-content{
+    /*height: 335px;*/
+    border-radius: 20px;
+  }
+  .orderModel .header{
+    height: 40px;
+    background-color: blue;
+    background-color: #3AC1EE;
+  }
+ .orderModel .header h4{
+    line-height: 5px;
+    font-family: "Microsoft YaHei","PingFangSC Medium";
+    font-size: 22px;
+    color: #fff;
+ }
+ #closeBtn {
+  height: 40px;
+ }
+ .orderModel .header button {
+    width: 26px;
+    height: 26px;
+    opacity: 1;
+    transform: translateY(-4px);
+ }
+ textarea  {
+  
+  width: 465px;
+  height: 214px;
+ }
+
+ .orderModel .header button span{
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+  border:2px solid #fff;
+  border-radius: 13px;
+ }
+ .orderModel .body{
+  padding: 0px 30px;
+ }
+ .orderModel .body select{}
+ .orderModel .body .marginBo{
+  margin-bottom: 10px;
+ }
+ /*.orderModel .body .progress{
+      margin: 0 15px 30px 15px;
+ }*/
+ #timeStart1,#timeStart2 {
+  background: url("../image/copy.png") no-repeat center;
+  background-position: 183px 14px;
+  border: 1px solid #555;
+  width: 211px;
+  height: 36px;
+ /* margin-top: 26px;*/
+  /*margin-left: 6px;*/
+  /*margin-bottom: 19px;*/
+  padding-left: 16px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  font-size:  20px;
+ }
+ #timeStart2 {
+  margin-top: 0px;
+  width: 280px;
+  background-image: none;
+ }
+
+ #timeStart,#timeEnd  {
+  /*background-position: 183px 22px;*/
+  border: 1px solid #555;
+  width: 120px;
+  text-align: center;
+  height: 35px;
+  margin-left: 16px;
+  margin-right: 6px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  font-size:  18px;
+ }
+
+ #look {
+    width: 118px;
+    height:36px;
+    border:1px solid #3AC1EE;
+    border-radius: 18px;
+    background-color: #3AC1EE;
+    text-align: center;
+    line-height: 36px;
+    font-size: 18px;
+    position: relative;
+    zoom: 1;
+ }
+ #look  a {
+    color: #fff;
+    text-decoration: none;
+
+ }
+ #look input {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  cursor: pointer;
+ }
+ .progressMake {
+  height: 80px;
+  border: none;
+  background-color: #fff;
+ }
+ .progressMake div {
+    width: 443px;
+    height: 120px;
+}
+ 
+ .text-center  .btn {
+  line-height: 23px;
+   width: 90px;
+   height: 34px;
+   border-radius: 17px;
+   font-size: 22px;
+   font-family: "Microsoft YaHei","PingFangSC Medium";
+   color: #fff;
+   border:none;
+   background-color: #3AC1EE;
+ }
+ #button {
+  text-decoration: none;
+  border: none;
+ }
+ #button:focus {
+  outline: none;
+ }
+ form .row .time input {
+  float: left;
+ }
+ form .row .time div {
+    float: left;
+    font-size: 22px;
+    font-family: "Microsoft YaHei","PingFangSC Medium";
+ }
+
+ form .row .down {
+  width: 120px;
+  height: 35px;
+  float: left;
+  background-color: #3AC1EE;
+  border-radius: 22px;
+  text-align: center;
+  margin-top: 12px;
+  margin-left: 10px;
+  line-height: 35px;
+
+ }
+
+
+ #first .time input,#second .time input,#third .time input {
+  width: 290px;
+  height: 35px;
+  border: 1px solid #555;
+  font-size: 18px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  background-image: none;
+  margin-top: 12px;
+ }
+form .row .down  a {
+  width: 120px;
+  height: 35px;
+  float: left;
+  display: block;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  color: #fff;
+}
+#shen-though,#shen-back {
+  float: left;
+  background-color: #3AC1EE;
+  width: 100px;
+  height: 34px;
+  font-size: 22px;
+  border-radius: 15px;
+  cursor: pointer;
+  color: #fff;
+  line-height: 34px;
+  text-align: center;
+  margin: 0 auto;
+  margin: 0 62px;
+}
+#though-check {
+  height:30px;
+  text-align:center;
+  color:red;
+  font-size:20px;
+  float: left;
+  width: 100%;
+  margin-top: 15px;
+  display: none;
+}
+#content-text {
+  display: none;
+}

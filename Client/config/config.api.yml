@@ -911,3 +911,144 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+visitManage:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/select/list'
+    authorized: 1
+    description: '零售户查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/region/province'
+    authorized: 1
+    description: '省'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/region/city'
+    authorized: 1
+    description: '市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/region/district'
+    authorized: 1
+    description: '区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/income/statis'
+    authorized: 1
+    description: '业绩'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'  
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/income/detail'
+    authorized: 1
+    description: '排名'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/order/select/list'
+    authorized: 1
+    description: '二维码'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/select/detail'
+    authorized: 1
+    description: '商户详情'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/select/fxlist'
+    authorized: 1
+    description: '返现查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/select/tx'
+    authorized: 1
+    description: '提现记录'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/select/ucount'
+    authorized: 1
+    description: '扫码用户'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/seller/award'
+    authorized: 1
+    description: '客户返现设置'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/qr'
+    authorized: 1
+    description: '免费二维码设置'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/seller/consumer'
+    authorized: 1
+    description: '店码-盒码关联间隔设置'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/introduction'
+    authorized: 1
+    description: '活动介绍设置'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/select'
+    authorized: 1
+    description: '设置查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/approval'
+    authorized: 1
+    description: '审核'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/qr/his'
+    authorized: 1
+    description: '二维码设置历史记录'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/seller-manager/export/print/qr'
+    authorized: 1
+    description: '二维码订单导出'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'  
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/import/tracking/info'
+    authorized: 1
+    description: '订单物流信息导入'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
