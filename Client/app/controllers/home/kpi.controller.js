@@ -11,6 +11,7 @@ define([], function () {
     ViewModelName: 'kpiViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'formatFilter', function ($scope, dateFormatFilter, formatFilter) {
       var $model = $scope.$model;
+      var echarts = require('echarts');
       var Interval_1,                     // 右侧栏实时对象
           Interval_2,                     // 滚动定时对象
           Interval_3,                     // map定时对象

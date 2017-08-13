@@ -22,7 +22,7 @@
 					<h6>中奖设置</h6>
 					<div class="select-duration configuration-item">
 						<i>*</i>
-						<small class="wrong-tip hidden">请选择中奖时间段</small>
+						<small class="wrong-tip hidden">请选择可参与的抽奖时间段</small>
 				    <select class="hours" name="startHour" ng-model="startHour" ng-disabled="disabled">
 				      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
 				    </select>&nbsp;时&nbsp;&nbsp;~&nbsp;&nbsp;

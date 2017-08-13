@@ -9,8 +9,8 @@ def:                                             # 默认环境配置
   apiroot: '^/api/tztx'                          # 接口配置
   viewroot: '^/view'                             # 视图配置
   staticroot: '^/statics'                        # 静态资源请求根目录
-  autoOpenBrower: 1                              # 是否自动打开浏览器
-  easyMonitor: 1                                 # 是否开启前端性能监控
+  autoOpenBrower: 0                              # 是否自动打开浏览器
+  easyMonitor: 0                                 # 是否开启前端性能监控
   proxyturnto: 0                                 # 是否开启代理模式
   proxyTarget:
     host: 'proxy.hmtx.cc'                        # 代理地址
@@ -45,6 +45,8 @@ test:                                            # 测试环境配置
       host: 'datatest.taozuike.com'              # 请求IP地址
     - port: 80                                   # 请求端口号
       host: 'portal.v2.taozuike.com'             # 请求IP地址
+    - port: 80                                   # 请求端口号
+      host: 'seller.hmtx.cc'                     # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
@@ -58,6 +60,8 @@ dev:                                             # 线上环境
       host: '127.0.0.1'                          # 请求IP地址
     - port: 10090                                # 请求端口号
       host: '172.17.15.161'                      # 请求IP地址
+    - port: 9096                                 # 请求端口号
+      host: '172.17.15.164'                      # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息

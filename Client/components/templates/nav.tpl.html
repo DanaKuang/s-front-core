@@ -13,9 +13,9 @@
     <!--user-->
     <div class="dropdown glyphicon ui-navbar-user">
         <i class="fa fa-person"></i>
-        <a id="userDetail" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            张三<span class="caret"></span>
-        </a>
+        <div type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div title="{{account}}">{{account}}</div><span class="caret"></span>
+        </div>
         <ul class="dropdown-menu" aria-labelledby="userDetail">
             <li ng-click="changePassword()">修改密码</li>
             <li ng-click="webLogout()">安全退出</li>

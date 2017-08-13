@@ -79,6 +79,10 @@
 								</div>
 							</div>
 						</div>
+						<div class="operBtnWrap">
+							<button class="push-out operBtn btn btn-default" ng-click="export($event)">导出搜索结果</button>
+							<div class="pull-in"><button class="operBtn btn btn-default">导入物流信息</button><input type="file" onchange="angular.element(this).scope().change()"></div>
+						</div>
 
 						<!-- 列表展示区 -->
 						<sa-prizegotlist conf="prizegotlistConf"></sa-prizegotlist>

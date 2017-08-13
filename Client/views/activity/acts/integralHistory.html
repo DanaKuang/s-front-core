@@ -71,6 +71,10 @@
 								<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
 							</div>
 						</div>
+						<div class="operBtnWrap">
+							<button class="push-out operBtn btn btn-default" ng-click="export($event)">导出搜索结果</button>
+							<div class="pull-in"><button class="operBtn btn btn-default">导入物流信息</button><input type="file" onchange="angular.element(this).scope().change()"></div>
+						</div>
 
 						<!-- 列表展示区 -->
 						<sa-vprizegotlist conf="vprizegotlistConf"></sa-vprizegotlist>

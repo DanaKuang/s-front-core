@@ -50,7 +50,7 @@ define([], function () {
 
             $(".ui-path-search select.multiple").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全选',
+                allSelectedText: '全部',
                 nSelectedText: '已选择'
             });
             var $prBrand = $("[name='productBrand']");

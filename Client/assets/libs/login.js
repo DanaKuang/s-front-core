@@ -183,6 +183,7 @@
             var data = res.data || {};
             sessionStorage.setItem('access_token', data.token);
             sessionStorage.setItem('access_loginId', data.loginId);
+            sessionStorage.setItem('account', postData.account);
             location.href = "/";
           } else {
             alert(res.message);

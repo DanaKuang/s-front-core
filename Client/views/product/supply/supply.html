@@ -84,10 +84,10 @@
                                         {{dataItem.performanceFileName !='' ? dataItem.performanceFileName : '-'}}
                                     </td>
                                     <td>{{dataItem.examineYears != 'undefined' ? dataItem.examineYears : '-'}}</td>
-                                    <td ng-if="dataItem.status == 0">停用</td>
-                                    <td ng-if="dataItem.status == 1">启用</td>
+                                    <td ng-if="dataItem.status == 0">已停用</td>
+                                    <td ng-if="dataItem.status == 1">已启用</td>
                                     <td>
-                                        <span ng-click="editSupply(dataItem.supplierCode)">编辑</span>&nbsp;
+                                        <span ng-click="editSupply(dataItem)">编辑</span>&nbsp;
                                         <span data-toggle="modal" ng-if="dataItem.status == 1"
                                               ng-click="disabledStatus(dataItem)">停用</span>
                                         <!--data-target=".supply_disabled_box"-->
@@ -238,6 +238,25 @@
                         <div class="modal-title" id="supply_error_btn">操作提示</div>
                     </div>
                     <div class="box_cont">操作失败</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--保存时供应商名称相同提示-->
+    <div class="modal fade same_supply_box" tabindex="-1" role="dialog" aria-labelledby="same_supply_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="same_supply_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">供应商“{{sameSupplyName}}”已存在，请修改信息后保存</div>
                     <div class="box_btn">
                         <div class="enabled_btn" data-dismiss="modal">确定</div>
                     </div>

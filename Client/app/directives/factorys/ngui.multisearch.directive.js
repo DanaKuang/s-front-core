@@ -134,8 +134,8 @@ define([], function () {
                 }
                 if (n !== o) {
                     var $ar = [];
-                    s.startTime && $ar.push('<li>'+s.startTime+'_'+s.startHour+'<i class="close" name="startTime"></i></li>');
-                    s.endTime && $ar.push('<li>'+s.endTime+'_'+s.endHour+'<i class="close" name="endTime"></i></li>');
+                    s.startTime && $ar.push('<li>'+s.startTime+'_'+s.startHour+':00:00'+'<i class="close" name="startTime"></i></li>');
+                    s.endTime && $ar.push('<li>'+s.endTime+'_'+s.endHour+':00:00'+'<i class="close" name="endTime"></i></li>');
                     s.productBrand.length && $ar.push('<li>'+s.productBrand.join(',')+'<i class="close" name="productBrand"></i></li>');
                     s.productName.length  && $ar.push('<li>'+s.productName.join(',')+'<i class="close" name="productName"></i></li>');
                     s.productPack.length  && $ar.push('<li>'+s.productPack.join(',')+'<i class="close" name="productPack"></i></li>');
@@ -188,6 +188,10 @@ define([], function () {
             $li.on('click', 'li>i.close', function (e) {
                 var name = e.target.attributes.name.value;
                 scope[name] = '';
+                name == 'startTime' ?
+                (scope.startHour = '') :
+                name == 'endTime' ?
+                (scope.endHour = '') : '';
                 scope.$apply();
             });
         }

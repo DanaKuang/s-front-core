@@ -20,7 +20,8 @@ define([], function() {
             $model.getNav().then(function(res) {
                 var data = res.data || {};
                 $scope.navConf = {
-                    nav: menuFilter.nav(data.data)
+                    nav: menuFilter.nav(data.data),
+                    account: sessionStorage.account || ""
                 };
             });
 
@@ -35,6 +36,11 @@ define([], function() {
                     };
                 });
             });
+
+            // 页面渲染完成
+            setTimeout(function () {
+                $("#menu_left").metisMenu();
+            }, 2000);
         }]
     };
 

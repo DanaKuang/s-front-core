@@ -95,7 +95,7 @@ define([], function () {
             }
 
             $('input[name="startTime"]').datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:ss', 
+                format: 'yyyy-mm-dd hh:ii:00', 
                 language: 'zh-CN',
                 todayBtn:  1,
                 autoclose: 1,
@@ -111,7 +111,7 @@ define([], function () {
             });
           
             $('input[name="endTime"]').datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:ss', 
+                format: 'yyyy-mm-dd hh:ii:00', 
                 language: 'zh-CN',
                 todayBtn:  1,
                 autoclose: 1,

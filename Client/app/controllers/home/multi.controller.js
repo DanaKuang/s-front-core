@@ -40,7 +40,7 @@ define([], function () {
 
             $(".ui-search-block.multi select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全选',
+                allSelectedText: '全部',
                 nSelectedText: '已选择'
             });
             var $product = $("[name='productName']");
@@ -57,6 +57,7 @@ define([], function () {
                     $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
                         return val.label = val.value = val.name;
                     }));
+                    $product.multiselect('select', mulScope.productName);
                     $product.multiselect('refresh');
                 });
             });
@@ -71,6 +72,7 @@ define([], function () {
                     $proName.multiselect('dataprovider', _.forEach(res.data, function(val) {
                         return val.label = val.value = val.provinceName;
                     }));
+                    $proName.multiselect('select', mulScope.provinceName);
                     $proName.multiselect('refresh');
                 });
             });
@@ -85,6 +87,7 @@ define([], function () {
                     $citName.multiselect('dataprovider', _.forEach(res.data, function(val) {
                         return val.label = val.value = val.cityName;
                     }));
+                    $citName.multiselect('select', mulScope.cityName);
                     $citName.multiselect('refresh');
                 });
             });
@@ -141,8 +144,8 @@ define([], function () {
                 ctime: +new Date
             };
             var dyParam = {
-                startTime: mulScope.startTime + '_' + (mulScope.startHour || '00'),
-                endTime: mulScope.endTime + '_' + (mulScope.endHour || '00'),
+                startTime: mulScope.startTime && (mulScope.startTime + '_' + (mulScope.startHour || '00')) || "",
+                endTime: mulScope.endTime && (mulScope.endTime + '_' + (mulScope.endHour || '00')) || "",
                 productBrand: mulScope.productBrand && mulScope.productBrand.join(','),
                 productName: (mulScope.productName && mulScope.productName.join(',')) || "所有",
                 productPack: mulScope.productPack && mulScope.productPack.join(','),
@@ -210,8 +213,8 @@ define([], function () {
         $scope.mSave = function () {
             var mulScope = angular.element('#seach_scope').scope();
             $model.saveSearch({
-                startTime: mulScope.startTime + '_' + (mulScope.startHour || '00'),
-                endTime: mulScope.endTime + '_' + (mulScope.endHour || '00'),
+                startTime: mulScope.startTime && (mulScope.startTime + '_' + (mulScope.startHour || '00')) || "",
+                endTime: mulScope.endTime && (mulScope.endTime + '_' + (mulScope.endHour || '00')) || "",
                 productBrand: mulScope.productBrand && mulScope.productBrand.join(','),
                 productName: (mulScope.productName && mulScope.productName.join(',')) || "所有",
                 productPack: mulScope.productPack && mulScope.productPack.join(','),

@@ -24,6 +24,7 @@ define([], function () {
             var contractFileName = '';
             var performanceAttach = '';  //绩效文件
             var performanceFileName = '';
+            $scope.sameSupplyName = '';
             $scope.curSupplyItem = null;  //需要操作的供应商
             //合规评估维度值
             $model.getComment().then(function(res){
@@ -170,6 +171,8 @@ define([], function () {
                     }else {
                         $('.tel_warn').css('color','#ACACAC').html('供应商物料出现预警时，发送信息至此号码进行提示');
                     }
+                }else{
+                    $('.tel_warn').css('color','#ACACAC').html('供应商物料出现预警时，发送信息至此号码进行提示');
                 }
                 var sendSupplyData = {
                     'name' : supplyName, //供应商名称
@@ -183,12 +186,19 @@ define([], function () {
                     'examineYears': examineYears,//年审
                     'mobile': warnTel// 接收手机号
                 };
+                if(!$scope.createState){
+                    sendSupplyData.id = $scope.curSupplyItem.id;
+                }
                 $model.saveOrUpdateData(sendSupplyData).then(function(resData){
-                    if(resData.status == 200){
+                    if(resData.data.ret == 200000){
                         getSupplyData({currentPageNumber : 1,pageSize : $scope.pageSize});
                         $scope.showList = !$scope.showList;
                         $scope.$apply();
                         clearCreateSupply();
+                    }else{
+                        $scope.sameSupplyName = supplyName;
+                        $scope.$apply();
+                        $('.same_supply_box').modal('show');
                     }
                 })
 
@@ -198,10 +208,13 @@ define([], function () {
                 $('#supplyName').val('');
                 $('#registerFile').val('');
                 $('#registerName').html('');
+                $('#regis_warn').html('文件大小不能超过50M');
                 $('#contractFile').val('');
                 $('#contractName').html('');
+                $('#contract_warn').html('文件大小不能超过50M');
                 $('#performanceFile').val('');
                 $('#performanceName').html('');
+                $('#performance_warn').html('文件大小不能超过50M');
                 $("input[type='radio']").each(function(){
                     $(this)[0].checked = false;
                 });
@@ -212,44 +225,39 @@ define([], function () {
 
             }
             //编辑供应商
-            $scope.editSupply = function(supplyId){
-                $model.querySupplierByCode({supplierCode:supplyId}).then(function(res){
-                    if(res.status == 200){
-                        $scope.showList = false;
-                        $scope.createState = false;
-                        $scope.$apply();
-                        var supplyObj = res.data.data;
+            $scope.editSupply = function(dataItem){
+                $scope.showList = false;
+                $scope.createState = false;
+                $scope.curSupplyItem = dataItem;
 
-                        $('#supplyName').val(supplyObj.name);
-                        $('#registerName').html(supplyObj.registFileName);
-                        registFileName = supplyObj.registFileName;
-                        registAttach = supplyObj.registAttach;
-                        $('#contractName').html(supplyObj.contractFileName);
-                        contractFileName = supplyObj.contractFileName;
-                        contractAttach = supplyObj.contractAttach;
-                        var curentCompliance = supplyObj.compliance;
-                        $("input[type='radio']").each(function(){
-                            var curRadioObj = $(this)[0];
-                            if(curentCompliance == curRadioObj.value){
-                                curRadioObj.checked = true;
-                            }
-                        });
-                        $('#performanceName').html(supplyObj.performanceFileName);
-                        performanceAttach = supplyObj.performanceAttach;
-                        performanceFileName = supplyObj.performanceFileName;
-                        var curExamineYears = supplyObj.examineYears;
-                        if(curExamineYears != "undefined"){
-                            $("input[type='checkbox']").each(function(){
-                                var curCheckboxObj = $(this)[0];
-                                if(curExamineYears == curCheckboxObj.value){
-                                    curCheckboxObj.checked = true;
-                                }
-                            });
-                        }
-                        $('#performanceName').html(supplyObj.performanceFileName);
-                        $('#warn_tel').val(supplyObj.mobile);
+                $('#supplyName').val(dataItem.name);
+                $('#registerName').html(dataItem.registFileName);
+                registFileName = dataItem.registFileName;
+                registAttach = dataItem.registAttach;
+                $('#contractName').html(dataItem.contractFileName);
+                contractFileName = dataItem.contractFileName;
+                contractAttach = dataItem.contractAttach;
+                var curentCompliance = dataItem.compliance;
+                $("input[type='radio']").each(function(){
+                    var curRadioObj = $(this)[0];
+                    if(curentCompliance == curRadioObj.value){
+                        curRadioObj.checked = true;
                     }
-                })
+                });
+                $('#performanceName').html(dataItem.performanceFileName);
+                performanceAttach = dataItem.performanceAttach;
+                performanceFileName = dataItem.performanceFileName;
+                var curExamineYears = dataItem.examineYears;
+                if(curExamineYears != "undefined"){
+                    $("input[type='checkbox']").each(function(){
+                        var curCheckboxObj = $(this)[0];
+                        if(curExamineYears == curCheckboxObj.value){
+                            curCheckboxObj.checked = true;
+                        }
+                    });
+                }
+                $('#performanceName').html(dataItem.performanceFileName);
+                $('#warn_tel').val(dataItem.mobile);
             };
 
             //重置操作
@@ -259,6 +267,11 @@ define([], function () {
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
+                getSupplyData({
+                    currentPageNumber : 1,
+                    pageSize : $scope.pageSize
+                });
+
             };
             //搜索操作
             $scope.searchSupply = function(){
@@ -430,28 +443,35 @@ define([], function () {
 
             //下载文件
             $scope.downloadFile = function(attachCode){
-                if(attachCode != ''){
-                    //window.location.href = '/api/tztx/saas/saotx/attach/commonDownload?attachCode='+attachCode;
-                    $.ajax({
-                        type:"GET",
-                        url:"/api/tztx/saas/saotx/attach/commonDownload",
-                        data:{attachCode:attachCode},
-                        dataType:"json",
-                        headers: {
-                            loginId : sessionStorage.access_loginId ,
-                            token : sessionStorage.access_token
-                        },
-                        success:function(data){
-                            /*if(data!=null){
-                                alert("url="+data);
-                                window.location.href = data;
-                            }else{
-                                alert("资源获取失败！");
-                            }*/
+                if(attachCode != '' && attachCode != null){
+                    var url = "/api/tztx/saas/saotx/attach/commonDownload";
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
+                    formData.append('attachCode', attachCode);
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                    xhr.open('POST', url, true);
+                    xhr.responseType = "blob";
+                    xhr.responseType = "arraybuffer"
+                    xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
+                    xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
+                    xhr.onload = function(res) {
+                        if (this.status == 200) {
+                            var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                            var respHeader = xhr.getResponseHeader("Content-Disposition");
+                            var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+                            if (window.navigator.msSaveOrOpenBlob) {
+                                navigator.msSaveBlob(blob, fileName);
+                            } else {
+                                var link = document.createElement('a');
+                                link.href = window.URL.createObjectURL(blob);
+                                link.download = fileName;
+                                link.click();
+                                window.URL.revokeObjectURL(link.href);
+                            }
                         }
-                    });
+                    };
+                    xhr.send(formData);
                 }
-
             }
 
         }]

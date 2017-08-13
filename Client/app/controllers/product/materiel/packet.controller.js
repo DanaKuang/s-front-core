@@ -45,8 +45,7 @@ define([], function () {
                 $('allSupply').val('');
                 var pageObj = {
                     currentPageNumber : 1,
-                    pageSize : $scope.pageSize,
-                    metraType : 'redpack'
+                    pageSize : $scope.pageSize
                 };
                 if($scope.showPacketList){
                     pageObj.metraType = 'redpack';
@@ -60,6 +59,19 @@ define([], function () {
             $scope.createPacket = function(){
                 $scope.addPocket = true;
                 $scope.showTables = !$scope.showTables;
+                //获取新建时启用状态的供应商列表
+                if($scope.addPocket){
+                    var createSupply = {
+                        pageSize : '-1',
+                        status : 1
+                    };
+                    $model.getSupplyList(createSupply).then(function(res){
+                        if(res.status == 200){
+                            $scope.enableSupplyList = res.data.data.list;
+                            $scope.$apply();
+                        }
+                    });
+                }
             };
             //取消新建红包
             $scope.cancelCreatePacket = function(){
@@ -67,17 +79,6 @@ define([], function () {
                 $scope.showTables = !$scope.showTables;
             };
 
-            //获取新建时启用状态的供应商列表
-            var createSupply = {
-                pageSize : '-1',
-                status : 1
-            };
-            $model.getSupplyList(createSupply).then(function(res){
-                if(res.status == 200){
-                    $scope.enableSupplyList = res.data.data.list;
-                    $scope.$apply();
-                }
-            });
 
             //取对应品牌
             $model.getBrandList().then(function(res){
@@ -228,7 +229,7 @@ define([], function () {
                     transferVoucherAttach : transferVoucherAttach
                 };
                 //判断是否为编辑
-                if($scope.operateItemPacket != null){
+                if(!$scope.addPocket){
                     packetData.id = $scope.operateItemPacket.id;
                 }
                 //保存数据
@@ -384,6 +385,16 @@ define([], function () {
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
+                var pageObj = {
+                    currentPageNumber : 1,
+                    pageSize : $scope.pageSize
+                };
+                if($scope.showPacketList){
+                    pageObj.metraType = 'redpack';
+                }else{
+                    pageObj.logType = 'redpack';
+                }
+                getDataList(pageObj);
             };
 
             //编辑红包池信息
@@ -391,14 +402,27 @@ define([], function () {
                 console.log('开始编辑了');
                 console.log(itemPacket);
                 $scope.addPocket = false;
-                //$scope.editPacketId = itemPacket.id;
                 $scope.operateItemPacket = itemPacket;
-                $("#supply option").each(function(){
-                    var curSupplyOptionObj = $(this)[0];
-                    if(itemPacket.supplierCode == curSupplyOptionObj.value){
-                        curSupplyOptionObj.selected = true;
-                    }
-                });
+                if(!$scope.addPocket){
+                    var createSupply = {
+                        pageSize : '-1'
+                    };
+                    $model.getSupplyList(createSupply).then(function(res){
+                        if(res.status == 200){
+                            $scope.enableSupplyList = res.data.data.list;
+                            $scope.$apply();
+                        }
+                        $("#supply option").each(function(){
+                            var curSupplyOptionObj = $(this)[0];
+                            if(itemPacket.supplierCode == curSupplyOptionObj.value){
+                                curSupplyOptionObj.selected = true;
+                            }
+                        });
+                    });
+                }
+                //$scope.editPacketId = itemPacket.id;
+
+
                 $("#brand option").each(function(){
                     var curBrandOptionObj = $(this)[0];
                     if(itemPacket.brandCodes == curBrandOptionObj.value){
@@ -424,24 +448,32 @@ define([], function () {
                     addNum : poolMoney
                 };
                 $model.addPacketPool(addPoolObj).then(function(res){
-                    console.log('增加红包库');
-                    console.log(res);
-                    if(res.status == 200){
-                        $('#poolMoney').val('');
-                        $('.packet_add_box').modal('hide');
+                    $('#poolMoney').val('');
+                    $('.packet_add_box').modal('hide');
+                    if(res.data.ret == 200000){
                         var curPageObj = {
                             currentPageNumber : $scope.currentPageNumber,
                             pageSize : $scope.pageSize,
                             metraType : 'redpack'
                         };
                         getDataList(curPageObj);
+                    }else{
+                        $('.supply_error_box').modal('show');
                     }
                 });
             };
             //红包增库
             $scope.addPacketPool = function(itemPacket){
-                $('.packet_add_box').modal('show');
                 $scope.operateItemPacket = itemPacket;
+                if(itemPacket.supplierStatus == 1){
+                    if(itemPacket.status == 1){
+                        $('.packet_add_box').modal('show');
+                    }else{
+                        $('.packet_stop_box').modal('show');
+                    }
+                }else{
+                    $('.supply_stop_box').modal('show');
+                }
 
             };
             //红包停用状态

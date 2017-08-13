@@ -28,6 +28,8 @@
     width: 150px !important;
     margin: 0 10px;
     height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .ui-form-search .btn-primary,
 .ui-daily-search .btn-primary {
@@ -85,8 +87,8 @@
     height: 14px;
     width: 14px;
 }
-.ui-daily-search >div {
-    margin: 20px 0;
+.ui-daily-search .inline-block {
+    margin: 10px 20px 10px 0;
 }
 .ui-daily-search label {
     margin-right: 15px;
@@ -95,6 +97,9 @@
     font-size: 18px;
     color: #3d467d;
     line-height: 40px;
+}
+.ui-path-search .inline-block {
+    margin-right: 20px;
 }
 .ui-path-search label {
     margin-right: 15px;

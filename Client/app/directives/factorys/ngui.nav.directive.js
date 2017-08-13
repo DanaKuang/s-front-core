@@ -11,6 +11,7 @@ define([], function () {
     var defaults = { //默认配置
         tpl: '/nav.tpl.html',
         nav: [], //选项卡数组
+        account: "刘彬",
         activeId: 0 // 默认标记第一个active
     };
     var defineObj = { //指令定义对象
@@ -27,12 +28,12 @@ define([], function () {
 
     // link
     function linkFn (scope, element, attrs) {
-        util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nav', 'style', 'activeId']);
+        util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nav', 'style', 'account', 'activeId']);
 
         // 监视conf变化更新nav
         scope.$watch('conf', function () {
             // 属性赋值
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nav', 'style', 'activeId']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['nav', 'style', 'account', 'activeId']);
             scope.nav.length && scope.changeNav({}, sessionStorage.navCode ? {
                 menuCode: sessionStorage.navCode
             } : scope.nav[0]);

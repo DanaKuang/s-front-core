@@ -11,7 +11,7 @@ define([], function () {
     	ViewModelName: 'manageActsModel',
     	ServiceContent: ['$rootScope', '$scope', 'manageActsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
       		$("#durationStart").datetimepicker({
-		      	format: 'yyyy-mm-dd hh:ii:ss', 
+		      	format: 'yyyy-mm-dd hh:ii:00', 
 		      	language: 'zh-CN',
 		        todayBtn:  1,
 		        autoclose: 1,
@@ -26,7 +26,7 @@ define([], function () {
           });
       
       		$("#durationEnd").datetimepicker({
-		      	format: 'yyyy-mm-dd hh:ii:ss', 
+		      	format: 'yyyy-mm-dd hh:ii:00', 
             language: 'zh-CN',
             todayBtn:  1,
             autoclose: 1,
@@ -82,27 +82,25 @@ define([], function () {
           })
 
           // 操作面板，根据品牌获取规格
-          var brandListArrObj = {};
           $scope.$watch('selectAllBrands', function(n, o, s) {
             if (n !== o) {
               $scope.selectAllBrands = n;
+              var brandListArrObj = {};
               brandListArrObj.brandCode = n;
               $model.getProductList(brandListArrObj).then(function (res) {
                 $scope.speci = res.data.data;
                 $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speci, function(v){
-                  v.label = v.name;
+                  v.label = v.allName;
                   v.value = v.sn;
                 }));
                 $('[ng-model="selectAllBrands"]').multiselect('refresh');
               })
             }
           })
-
-          var productListArrObj = [];
+          
           $scope.$watch('selectSpeci', function (n, o, s) {
             if (n !== o) {
               $scope.selectSpeci = n;
-              productListArrObj.sns = n;
             }
           })
 
@@ -123,8 +121,8 @@ define([], function () {
             var data = {
               activityForm: $scope.categoryVal || '',
               status: $scope.statusVal || '',
-              brandCode: brandListArrObj || [],
-              sn: productListArrObj || [],
+              brands: $scope.selectAllBrands || [],
+              sns: $scope.selectSpeci || [],
               areaCodes: $scope.allarea || [],
               keys: $scope.keysval || '',
               currentPageNumber: 1,
@@ -268,7 +266,7 @@ define([], function () {
                 var selectBrandScope = angular.element('.select-specification').scope();
                 selectBrandScope.specification = res.data.data;
                 $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                    v.label = v.name;
+                    v.label = v.allName;
                     v.value = v.sn;
                 }));
                 $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
@@ -313,7 +311,7 @@ define([], function () {
               var selectBrandScope = angular.element('.select-specification').scope();
               selectBrandScope.specification = res.data.data;
               $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.name;
+                  v.label = v.allName;
                   v.value = v.sn;
               }));
               $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
@@ -453,13 +451,19 @@ define([], function () {
           })
           $scope.confirmGiftStock = function () {
             var addNum = {addNum: $scope.giftnumber};
-            var data = Object.assign(addNum, giftaddstockid);
+            var data = {
+              addNum: $scope.giftnumber,
+              id: giftaddstockid.id
+            };
             if (!giftaddstockid.id) {
               alert('请先选择礼品');
               $('.modal-content .close').trigger('click');
               return
             }
             $model.addgiftstock(data).then(function(res) {
+              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(giftaddstockid.index).find('.number').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
+              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(giftaddstockid.index).find('.number').val(add_val);
               $('.modal-content .close').trigger('click');
             })
           } 
@@ -471,13 +475,19 @@ define([], function () {
           })
           $scope.confirmHbStock = function () {
             var addNum = {addNum: $scope.hbnumber};
-            var data = Object.assign(addNum, hbaddstockid);
+            var data = {
+              addNum: $scope.hbnumber,
+              id: hbaddstockid.id
+            };
             if (!hbaddstockid.id) {
               alert('请先选择红包');
               $('.modal-content .close').trigger('click');
               return
             }
             $model.addhbstock(data).then(function(res) {
+              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
+              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
               $('.modal-content .close').trigger('click');
             })
           }

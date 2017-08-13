@@ -121,6 +121,9 @@ define([], function () {
 
             // 新增奖品
             $('#surprisesetprize').on('click', '.create-prize-btn', function (e) {
+                if (scope.disabled) {
+                    return
+                }
                 var add_dom =  $('#non-special-prize').html();
                 $(e.target).prev('.ready-set').append(add_dom)
             })
@@ -204,7 +207,7 @@ define([], function () {
                         }
                     }
                 } else {
-                    e.target.value = 0
+                    e.target.value = ''
                 }
             }
 

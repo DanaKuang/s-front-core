@@ -7,10 +7,10 @@
 			<input type="text" ng-model="nameVaule" value="{{nameVaule}}" placeholder="请输入活动名称，不能少于5个字，最多30个字" minlength="5" maxlength="30" ng-readonly="disabled" ng-keyup="namekeyup($event)">
 		</div>
 		<div class="activity-intro configuration-item">
-		 	<label for="">活动说明</label>
+		 	<label for="">活动描述</label>
 			<b>*</b>
-			<small class="wrong-tip hidden">请输入活动说明，100字以内</small>
-			<input type="text" ng-model="introValue" value="{{introValue}}" placeholder="请输入活动名称，50个字以内" maxlength="50" ng-readonly="disabled">
+			<small class="wrong-tip hidden">请输入活动描述，100字以内</small>
+			<input type="text" ng-model="descValue" value="{{descValue}}" placeholder="请输入活动名称，50个字以内" maxlength="50" ng-readonly="disabled">
 		</div>
 		<div class="file-instructions configuration-item">
 			<label for="" class="normfile">规范性文件及说明</label>
@@ -25,8 +25,8 @@
 		</div>
 		<div class="configuration-item activity-desc">
 			<b>*</b>
-			<small class="wrong-tip hidden">请输入活动描述，100字以内</small>
-			<label for="">活动描述</label><textarea class="border-box" name="" id="" ng-model="descValue" value="{{descValue}}" placeholder="请输入活动描述" ng-readonly="disabled" maxlength="300"></textarea>
+			<small class="wrong-tip hidden">请输入活动规则，100字以内</small>
+			<label for="">活动规则</label><textarea class="border-box" ng-model="introValue" value="{{introValue}}" placeholder="请输入活动规则" ng-readonly="disabled" maxlength="300"></textarea>
 		</div>
 		<div class="configuration-item configuration-image">
 			<b>*</b>

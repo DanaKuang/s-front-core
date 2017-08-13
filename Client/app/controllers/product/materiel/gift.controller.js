@@ -33,6 +33,19 @@ define([], function () {
             $scope.createGift = function(){
                 $scope.addGift = true;
                 $scope.showTables = !$scope.showTables;
+                if($scope.addGift){
+                    //获取新建时启用状态的供应商列表
+                    var createSupply = {
+                        pageSize : '-1',
+                        status : 1
+                    };
+                    $model.getSupplyList(createSupply).then(function(res){
+                        if(res.data.ret == 200000){
+                            $scope.enableSupplyList = res.data.data.list;
+                            $scope.$apply();
+                        }
+                    });
+                }
             };
             //礼品库/流水明细切换
             $scope.changeShowState = function(){
@@ -54,17 +67,7 @@ define([], function () {
                 }
                 getDataList(pageObj);
             };
-            //获取新建时启用状态的供应商列表
-            var createSupply = {
-                pageSize : '-1',
-                status : 1
-            };
-            $model.getSupplyList(createSupply).then(function(res){
-                if(res.status == 200){
-                    $scope.enableSupplyList = res.data.data.list;
-                    $scope.$apply();
-                }
-            });
+
             //获取全部供应商列表
             $model.getSupplyList({pageSize:'-1'}).then(function(res){
                 if(res.status == 200){
@@ -138,6 +141,16 @@ define([], function () {
                     SelectArr[i].options[0].selected = true;
                 }
                 $('#selectGiftName').val('');
+                var pageObj = {
+                    currentPageNumber : 1,
+                    pageSize : $scope.pageSize
+                };
+                if($scope.showGiftList){
+                    pageObj.metraType = 'gift';
+                }else{
+                    pageObj.logType = 'gift';
+                }
+                getDataList(pageObj)
             };
             //搜索数据
             $scope.searchData = function(){
@@ -372,6 +385,8 @@ define([], function () {
                 if($scope.showGiftList){
                     //显示红包池信息
                     $model.getGiftList(pageObj).then(function(res){
+                        console.log('获取礼品库信息');
+                        console.log(res);
                         if(res.status == 200){
                             var giftObj = res.data.data;
                             if(giftObj.list != null){
@@ -486,11 +501,17 @@ define([], function () {
             };
             //增库操作
             $scope.addGiftPool = function(giftItem){
+                console.log("开始增库了。。。。");
+                console.log(giftItem);
                 $scope.operateGiftItem = giftItem;
-                if(giftItem.status == 0){
-                    $('.not_add_pool_box').modal('show');
+                if(giftItem.supplierStatus == 1){
+                    if(giftItem.status == 1){
+                        $('.add_pool_box').modal('show');
+                    }else{
+                        $('.gift_stop_box').modal('show');
+                    }
                 }else{
-                    $('.add_pool_box').modal('show');
+                    $('.supply_stop_box').modal('show');
                 }
             };
             //确定礼品增库
@@ -555,13 +576,28 @@ define([], function () {
                         });
                     });
                 }
-                //供应商
-                $("#enableSupply option").each(function(){
-                    var curEnableSupplyObj = $(this)[0];
-                    if(giftItem.supplierCode == curEnableSupplyObj.value){
-                        curEnableSupplyObj.selected = true;
-                    }
-                });
+                //编辑状态
+                if(!$scope.addGift){
+                    var createSupply = {
+                        pageSize : '-1'
+                    };
+                    $model.getSupplyList(createSupply).then(function(res){
+                        console.log('获取供应商');
+                        console.log(res);
+                        if(res.data.ret == 200000){
+                            $scope.enableSupplyList = res.data.data.list;
+                            $scope.$apply();
+                            //供应商
+                            $("#enableSupply option").each(function(){
+                                var curEnableSupplyObj = $(this)[0];
+                                if(giftItem.supplierCode == curEnableSupplyObj.value){
+                                    curEnableSupplyObj.selected = true;
+                                }
+                            });
+                        }
+                    });
+                }
+
                 //品牌
                 $("#brand option").each(function(){
                     var curBrandObj = $(this)[0];

@@ -15,7 +15,7 @@ define([], function () {
             pageName: '',
             accessUrl: '',
             attachCode: '',
-            namePriority: 0
+            namePriority: 1
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -46,7 +46,7 @@ define([], function () {
                     scope.disabled = true;
                     var activity = that_scope.conf.data.activity;
                     scope.nameVaule = activity.activityName;
-                    scope.namePriority = that_scope.conf.data.activity.idx || 0;
+                    scope.namePriority = that_scope.conf.data.activity.idx || 1;
                     scope.descValue = activity.activityDec;
                     scope.introValue = activity.activityDoc;
                     scope.accessUrl = activity.activityEntrance;
@@ -93,13 +93,13 @@ define([], function () {
                    if (numReg.test(val)) {
                         if (val > 500) {
                             scope.namePriority = e.target.value = deletezero('500')
-                        } else if (val < 0) {
-                             scope.namePriority = e.target.value = deletezero('0')
+                        } else if (val < 1) {
+                             scope.namePriority = e.target.value = deletezero('1')
                         } else {
                              scope.namePriority = e.target.value = deletezero(val);
                         }
                     } else {
-                         scope.namePriority = e.target.value = deletezero('0');
+                         scope.namePriority = e.target.value = deletezero('1');
                     }
                 }
             }

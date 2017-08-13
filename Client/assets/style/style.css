@@ -124,7 +124,7 @@ body {
   font-size: 14px;
   color: #44c2ed;
   text-align: center;
-  width: 100px;
+  width: 110px;
 }
 .ui-navbar-user li {
   height: 30px;
@@ -132,8 +132,24 @@ body {
   text-align: center;
   cursor: pointer;
 }
-.ui-navbar-user a {
+.ui-navbar-user >div {
+    width: 60px;
+    margin: 0 20px 0 10px;
+    float: right;
+}
+.ui-navbar-user >div >div{
   cursor: pointer;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 50px;
+}
+.ui-navbar-user span {
+  float: right;
+  position: relative;
+  top: 25px;
 }
 .ui-navbar-user li:hover {
   background: #44c2ed;
@@ -178,7 +194,7 @@ body {
 .ui-navbar-left .open li {
   padding-left: 20px;
 }
-.ui-navbar-left li.open .sa {
+.ui-navbar-left li.active .sa {
   transform: rotateZ(90deg);
 }
 .ui-navbar-left >ul >li.active {

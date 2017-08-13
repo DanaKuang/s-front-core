@@ -27,7 +27,13 @@ define([], function () {
       var GET_ORDER_STATUS = '/api/tztx/saas/saotx/common/queryOrderStatus';
 
       // 活动状态
-      var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/common/queryDimDataStatus';
+      var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/activity/queryDimDataStatus';
+
+      // 导出领奖明细
+      var EXPORT_PRIZE_HISTORY = '/api/tztx/saas/saotx/order/exportOrder';
+
+      // 导入领奖明细
+      var IMPORT_PRIZE_DETAILS = '/api/tztx/saas/saotx/order/readOrderData';
 
       // 领奖明细
       $model.getprizelist = function (data) {
@@ -62,6 +68,16 @@ define([], function () {
       // 查询活动该状态
       $model.getActivityStatus = function () {
           return request.$Search(GET_ACTIVITY_STATUS)
+      }
+
+      // 导出领奖明细
+      $model.exportPrizeHistory = function (data) {
+        return request.$Search(EXPORT_PRIZE_HISTORY, data)
+      }
+
+      // 导入领奖明细
+      $model.importPrizeDetail = function () {
+        return request.$Search(IMPORT_PRIZE_DETAILS)
       }
     
     }]

@@ -16,7 +16,7 @@
                     <div class="gift_title lf">
                         物料管理&nbsp;&gt;红包管理
                     </div>
-                    <div class="build_gift rf" ng-click="createPacket()">新增红包池</div>
+                    <div class="build_gift rf" ng-click="createPacket()">新建红包池</div>
                     <!--<div class="build_gift rf" ng-show="!showPacketList">去充值</div>-->
                 </div>
                 <!--box-->
@@ -145,7 +145,7 @@
             <div class="col-md-12">
                 <div class="title_top">
                     <div class="gift_title">
-                        物料管理&nbsp;&gt;红包管理&nbsp;&gt;<span ng-if="addPocket">新建红包</span><span ng-if="!addPocket">编辑红包</span>
+                        物料管理&nbsp;&gt;红包管理&nbsp;&gt;<span ng-if="addPocket">新建红包池</span><span ng-if="!addPocket">编辑红包池</span>
                     </div>
                 </div>
                 <div class="panel rate">
@@ -153,7 +153,7 @@
                         <div class="form_sec">
                             <div>
                                 <label for="supply">供应商<span>*</span></label>
-                                <select id="supply" ng-disabled = '!addPocket'>
+                                <select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
                                             value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
@@ -162,7 +162,7 @@
                             </div>
                             <div>
                                 <label for="brand">适用品牌<span>*</span></label>
-                                <select id="brand" ng-disabled = '!addPocket'>
+                                <select id="brand" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="brandItem in brandList"
                                             value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
@@ -171,7 +171,7 @@
                             </div>
                             <div>
                                 <label for="specift">适用规格<span>*</span></label>
-                                <select id="specift" ng-disabled = '!addPocket'>
+                                <select id="specift" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option ng-if = '!addPocket' value="operateItemPacket.units" checked>{{operateItemPacket.unitNames}}</option>
                                     <option ng-if ='addPocket' value="">请选择</option>
                                     <option ng-if ='addPocket' ng-repeat="speciftItem in speciftList"
@@ -181,12 +181,11 @@
                             </div>
                             <div>
                                 <label for="capital">资金<span>*</span></label>
-                                <input style="width: 180px;" type="text" placeholder="" id="capital">
+                                <input style="width: 180px;" type="text" placeholder="" id="capital" ng-disabled = '!addPocket'>
                                 <span class="yuan_unit">元</span>
                                 <span class="entry_capital">请输入资金</span>
                                 <br/>
-                                <!--<p>库存数量保存后不可手动减库存，请谨慎输入</p>-->
-
+                                <p ng-show="addPocket">保存成功后资金数额不可手动更改，请谨慎操作</p>
                             </div>
                             <div>
                                 <label for="transfer">资金转账凭证</label>
@@ -304,6 +303,44 @@
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmAddExistPool(exitPacketData)">确定</div>
                         <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--供应商停用时不能增库提醒弹窗-->
+    <div class="modal fade supply_stop_box" tabindex="-1" role="dialog" aria-labelledby="supply_stop_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_stop_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料供应商“{{operateItemPacket.supplierName}}”已停用，无法执行增库操作</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">我知道了</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--红包停用时不能增库提醒弹窗-->
+    <div class="modal fade packet_stop_box" tabindex="-1" role="dialog" aria-labelledby="packet_stop_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="packet_stop_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料已停用，无法执行增库操作</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
                     </div>
                 </div>
             </div>

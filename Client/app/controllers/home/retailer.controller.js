@@ -10,6 +10,7 @@ define([], function () {
         ServiceName: 'retailerCtrl',
         ViewModelName: 'retailerViewModel',
         ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
+            var echarts = require('echarts');
             var $model = $scope.$model;
             // 增长折线图
             var growEchart = echarts.init(document.getElementById('growMap'));

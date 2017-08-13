@@ -204,7 +204,7 @@
   font-size: 12px;
 }
 .draw-prize .select-duration:before {
-	content: '中奖时段';
+	content: '可参与抽奖时间';
 	top: 6px;
   left: 5px;
 }

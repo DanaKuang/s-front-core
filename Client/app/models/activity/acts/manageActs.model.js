@@ -23,7 +23,8 @@ define([], function () {
             // 活动列表
             var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
             // 活动状态
-            var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/common/queryDimDataStatus';
+            var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/activity/queryDimDataStatus';
+
             // 所有品牌
             var GET_ALL_BRANDS = '/api/tztx/saas/saotx/brand/queryBrands';
             // 模板列表对应的配置弹窗

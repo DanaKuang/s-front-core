@@ -24,7 +24,7 @@ define([], function () {
       var GET_ORDER_DETAIL = '/api/tztx/saas/saotx/order/detailByCode';
 
       // 活动状态
-      var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/common/queryDimDataStatus';
+      var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/activity/queryDimDataStatus';
 
       // 领奖明细
       $model.getprizelist = function (data) {

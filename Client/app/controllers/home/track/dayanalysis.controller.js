@@ -10,6 +10,7 @@ define([], function () {
         ServiceName: 'dayanalysisCtrl',
         ViewModelName: 'dayanalysisViewModel',
         ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
+            var echarts = require('echarts');
             var $model = $scope.$model;
             // 百度地图json
             var chinaJson = $model.$chinaJson.data;
@@ -49,7 +50,7 @@ define([], function () {
 
             // 搜索
             function daySearch () {
-                var sScope = angular.element('.ui-form-select').scope();
+                var sScope = angular.element('.ui-daily-search').scope();
                 console.log(sScope);
                 var params = {
                     productBrand: sScope.productBrand || "所有",
@@ -100,11 +101,11 @@ define([], function () {
 
             // 初始化select
             $(document).ready(function () {
-                var sScope = angular.element('.ui-form-select').scope();
-                var $select = $(".ui-form-select select");
+                var sScope = angular.element('.ui-daily-search').scope();
+                var $select = $(".ui-daily-search select");
                 $select.multiselect({
                     nonSelectedText: '请选择',
-                    allSelectedText: '全选',
+                    allSelectedText: '全部',
                     nSelectedText: '已选择'
                 });
                 var $prBrand = $("[name='productBrand']");
@@ -209,19 +210,19 @@ define([], function () {
                     }) || [];
                     mapEchart.setOption(option);
                 });
-                // 地图点击事件
-                mapEchart.on('click', function (e) {
-                    if (e.componentType === 'series') {
-                        $model.getCityName({
-                            provinceName: e.name + '省'
-                        }).then(function (res) {
-                            $scope.cityArr = [{cityName:"请选择"}].concat(res.data || []);
-                            $scope.cityName = $scope.cityArr[0].cityName || "";
-                            $scope.$apply();
-                        });
-                    }
-                });
             }
+            // 地图点击事件
+            mapEchart.on('click', function (e) {
+                if (e.componentType === 'series') {
+                    $model.getCityName({
+                        provinceName: e.name + '省'
+                    }).then(function (res) {
+                        $scope.cityArr = [{cityName:"请选择"}].concat(res.data || []);
+                        $scope.cityName = $scope.cityArr[0].cityName || "";
+                        $scope.$apply();
+                    });
+                }
+            });
 
             // 初始化 城市折线图
             function initCityMap (params_f, params_s) {

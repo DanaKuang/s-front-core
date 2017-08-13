@@ -309,7 +309,7 @@ define([], function () {
                             var caidanAwardInner = {};
                             caidanAwardInner.sduration = _drawPrizeScope.startHour;
                             caidanAwardInner.eduration = _drawPrizeScope.endHour;
-                            caidanAwardInner.adcodes = _drawPrizeScope.drawAreaVal ? _drawPrizeScope.drawAreaVal.join(',') : '' || '';
+                            caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
                             if (_drawPrizeScope.myPlus) {
                                 caidanAwardInner.condition = _drawPrizeScope.plusval;
                                 var index = $('[ng-model="plusval"]')[0].selectedIndex;

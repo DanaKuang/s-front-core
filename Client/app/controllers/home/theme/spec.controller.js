@@ -10,6 +10,7 @@ define([], function () {
     ServiceName: 'SpecCtrl',
     ViewModelName: 'specViewModel',
     ServiceContent: ['$scope','$timeout', 'setDateConf','dayFilter', function ($scope,$timeout,setDateConf,dayFilter) {
+      var echarts = require('echarts');
       var $model = $scope.$model;
       setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
       setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');

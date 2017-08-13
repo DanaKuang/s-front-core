@@ -10,6 +10,7 @@ define([], function () {
         ServiceName: 'RegionCtrl',
         ViewModelName: 'regionViewModel',
         ServiceContent: ['$scope', 'setDateConf','dayFilter', function ($scope, setDateConf,dayFilter) {
+            var echarts = require('echarts');
             var $model = $scope.$model;
             setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
             setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
@@ -105,7 +106,7 @@ define([], function () {
                     };
 
                     firChart.series[0].name = "扫码次数";
-                    secChart.series[0].name = "扫码包数";
+                    secChart.series[0].name = "扫码烟包数";
                     thrChart.series[0].name = "扫码人数";
                     firChart.series[0].data[0].name = "扫码次数（单位：万）\n\n扫码总次数(包含重复扫码的情况)";
                     secChart.series[0].data[0].name = "扫码烟包数（单位：万）\n\n扫码总条数和总包数(不包含重复扫码的情况)";

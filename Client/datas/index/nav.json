@@ -111,31 +111,5 @@
                 "hash": "#/view/activity/acts/integralHistory"
             }]
         }]
-    },{
-        "hash": "retailer",
-        "text": "零售户",
-        "icon": "",
-        "active": "",
-        "tabs": [{
-            "icon": "reward",
-            "noDataApi": true,
-            "hash": "#/view/visit/reward",
-            "text": "零售户奖励设置"
-        },{
-            "icon": "manage",
-            "noDataApi": true,
-            "hash": "#/view/visit/manage",
-            "text": "零售户管理"
-        },{
-            "icon": "achievement",
-            "noDataApi": true,
-            "hash": "#/view/visit/achievement",
-            "text": "零售户业绩"
-        },{
-           "icon": "winCount",
-            "noDataApi": true,
-            "hash": "#/view/visit/winCount",
-            "text": "零售户获奖统计" 
-        }]
     }]
 }

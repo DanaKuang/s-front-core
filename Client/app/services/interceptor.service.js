@@ -5,7 +5,7 @@ define([], function () {
   var interceptor = {
       ServiceType: 'factory',
       ServiceName: 'httpInterceptor',
-      ServiceContent: ['$injector', '$q', function($injector, $cookies, $q) {
+      ServiceContent: ['$injector', '$q', function($injector, $q) {
           var clearSession = function () {
             sessionStorage.removeItem("access_token");
             sessionStorage.removeItem("access_loginId");

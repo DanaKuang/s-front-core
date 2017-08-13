@@ -12,7 +12,7 @@ define([], function () {
     ServiceContent: ['$rootScope', '$scope', 'mPrizeGotHistoryModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
       
        $("#durationStart").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:ss', 
+        format: 'yyyy-mm-dd hh:ii:00', 
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -27,7 +27,7 @@ define([], function () {
       });
   
       $("#durationEnd").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:ss', 
+        format: 'yyyy-mm-dd hh:ii:00', 
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -77,27 +77,25 @@ define([], function () {
       })
 
       // 操作面板，根据品牌获取规格
-      var brandListArrObj = {};
-        $scope.$watch('selectAllBrands', function(n, o, s) {
-          if (n !== o) {
-            $scope.selectAllBrands = n;
-            brandListArrObj.brandCode = n;
-            $model.getProductList(brandListArrObj).then(function (res) {
-              $scope.speci = res.data.data;
-              $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speci, function(v){
-                v.label = v.name;
-                v.value = v.sn;
-              }));
-              $('[ng-model="selectAllBrands"]').multiselect('refresh');
-            })
-          }
-        })
+      $scope.$watch('selectAllBrands', function(n, o, s) {
+        if (n !== o) {
+          $scope.selectAllBrands = n;
+          var brandListArrObj = {};
+          brandListArrObj.brandCode = n;
+          $model.getProductList(brandListArrObj).then(function (res) {
+            $scope.speci = res.data.data;
+            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speci, function(v){
+              v.label = v.name;
+              v.value = v.sn;
+            }));
+            $('[ng-model="selectAllBrands"]').multiselect('refresh');
+          })
+        }
+      })
 
-        var productListArrObj = [];
         $scope.$watch('selectSpeci', function (n, o, s) {
           if (n !== o) {
             $scope.selectSpeci = n;
-            productListArrObj.sns = n;
           }
         })
 
@@ -146,8 +144,8 @@ define([], function () {
       $scope.search = function (e) {
         var data = {
           orderCode: $scope.orderCode || '',
-          brandCode: brandListArrObj || [],
-          sn: productListArrObj || [],
+          brandCodeArr: $scope.selectAllBrands || [],
+          unitArr: $scope.selectSpeci || [],
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
           realThing: 0,
@@ -193,6 +191,81 @@ define([], function () {
       		$scope.vorderdetailConf = res.data;
       	})
       })
+
+      // 导出奖品明细
+      $scope.export = function (e) {
+        var data = {
+          orderCode: $scope.orderCode || '',
+          brandCodeArr: $scope.selectAllBrands || [],
+          sn: $scope.selectSpeci || [],
+          areaCodes: $scope.allarea || [],
+          keys: $scope.keysval || '',
+          realThing: 1,
+          status: $scope.statusVal || '', //活动状态
+          orderStatus: $scope.orderstatus || '',
+          stime: $scope.startTime || '',
+          etime: $scope.endTime || ''
+        };
+        var url = "/api/tztx/saas/saotx/order/exportOrder";
+
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData();
+        for(var attr in data) {
+            formData.append(attr, data[attr]);
+        }
+        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        xhr.open('POST', url, true);
+        xhr.responseType = "blob";
+        xhr.responseType = "arraybuffer"
+        xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
+        xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
+        xhr.onload = function(res) {
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                var respHeader = xhr.getResponseHeader("Content-Disposition");
+                var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+                if (window.navigator.msSaveOrOpenBlob) {
+                    navigator.msSaveBlob(blob, fileName);
+                } else {
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = fileName;
+                    link.click();
+                    window.URL.revokeObjectURL(link.href);
+                }
+            }
+        }
+        xhr.send(formData);
+      }
+
+      // 导入奖品明细
+      $scope.change = function () {
+        // importPrizeDetail
+        var files = event.target.files[0];
+        var formData = new FormData();
+        formData.append('file', files);
+        $.ajax({
+          url: '/api/tztx/saas/saotx/order/readOrderData',
+          type: 'POST',
+          cache: false,
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: {
+              ContentType: "multipart/form-data",
+              loginId : sessionStorage.access_loginId,
+              token : sessionStorage.access_token
+          }
+        }).done(function (res) {
+          if (res.message === 'success') {
+            alert('文件导入成功');
+            return
+          }
+        }).fail(function (res) {
+          alert('文件只能导入excle格式，此次导入失败，请重试');
+          return
+        })
+      }
 
     }]
   };

@@ -10,6 +10,7 @@ define([], function () {
     ServiceName: 'realtimeCtrl',
     ViewModelName: 'realtimeViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, DF, dayFilter) {
+        var echarts = require('echarts');
         var $model = $scope.$model;
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson)
@@ -31,6 +32,7 @@ define([], function () {
         // 活动下拉
         $scope.activity = $model.$activity.data || [{activityName: '无数据',activityId: ''}];
         $scope.activityId = $scope.activity[0].activityId;
+
         // 倒计时
         function initInterval() {
             DEFAULT = 30;
@@ -53,7 +55,7 @@ define([], function () {
                 setRealTime(ACTIVEID);
                 setAxisMap(ACTIVEID);
                 setBaiduMap(ACTIVEID);
-                setTable(ACTIVEID);
+                setTableData(ACTIVEID);
                 setDetail(ACTIVEID);
             }
         };
@@ -105,21 +107,29 @@ define([], function () {
             });
         }
 
-        // 设置表格数据
-        function setTable (actId) {
-            mapEchart.on('click', function (e) {
-                if (e.seriesName === 'categoryA') {
-                    $model.getCityPv({
-                        activityId: actId,
-                        provName: e.name || ""
-                    }).then(function (res) {
-                        $scope.rows = res.data || [];
-                        $scope.$apply();
-                    });
-                }
-
+        // 设置表格数据默认值
+        function setTableData (actId) {
+            $model.getCityPv({
+                activityId: actId,
+                provName: "湖南"
+            }).then(function (res) {
+                $scope.rows = res.data || [];
+                $scope.$apply();
             });
         }
+
+        // 设置表格数据
+        mapEchart.on('click', function (e) {
+            if (e.componentType === 'series') {
+                $model.getCityPv({
+                    activityId: ACTIVEID,
+                    provName: e.name || ""
+                }).then(function (res) {
+                    $scope.rows = res.data || [];
+                    $scope.$apply();
+                });
+            }
+        });
 
         // 设置表格详情
         function setDetail (actId) {

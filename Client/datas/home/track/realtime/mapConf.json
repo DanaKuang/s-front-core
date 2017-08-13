@@ -2,7 +2,6 @@
     "tooltip": {
         "show": true,
         "trigger": "item",
-        "triggerOn": "click",
         "position": "top",
         "formatter": "",
         "backgroundColor": "#fff",
@@ -14,7 +13,7 @@
     },
     "visualMap": {
         "min": 0,
-        "max": 50000,
+        "max": 5000,
         "left": "left",
         "text": ["高","低"],
         "seriesIndex": [1],
@@ -27,8 +26,8 @@
     "geo": {
         "map": "china",
         "roam": false,
-        "left": 0,
-        "right": 0,
+        "left": 10,
+        "right": 10,
         "label": {
             "normal": {
                 "show": true,
@@ -74,7 +73,7 @@
            }
        }
     }, {
-        "name": "categoryA",
+        "name": "访问量",
         "type": "map",
         "geoIndex": 0,
         "data":[]

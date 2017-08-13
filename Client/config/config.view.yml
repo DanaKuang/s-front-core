@@ -164,7 +164,7 @@ product:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'product/supply/supply.html'
-visit:
+visitManage:
   - httpmethod: 'get'                       # 零售户管理
     routepath: '/view/visit/manage'
     description: 'manage'
