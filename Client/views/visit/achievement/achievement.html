@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
 <link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
 <div ng-controller="achievementCtrl">
-	<div class="animated fadeInRight">
-	  <div class="container-fluid">
-	    <div class="row">
-	      <div class="col-md-12">
-			<div class="manage-right">
+  <div class="animated fadeInRight">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+      <div class="manage-right">
       <div class="manage-top">
         <span class="fl"></span>
         <div class="fl">零售户>零售户业绩</div>
@@ -32,7 +32,7 @@
                   <option value="">盒</option>
                   <option value="">条</option>
                 </select>
-                <select name="" id="is-return">
+                <select name="" id="isReturn">
                   <option value="">有返现</option>
                   <option value="">有</option>
                   <option value="">无</option>
@@ -108,27 +108,17 @@
             </table>
           </div>
         </div>
-      </div>
-      <div class="bottom-list">
-        <div class="lists">
-          <ul>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">6</a></li>
-          <li><a href="#">7</a></li>
-          </ul>
-          <p><i>......</i>第<span>10</span>页&nbsp;&nbsp;共<span class="last-span">500</span>页</p>
+      </div> 
+          <div class="page_sec rf" style="margin-top:21px;">
+              <div class="tcdPageCode"></div>
+          </div>
         </div>
-        <div class="go">go</div>
-        <p class="count">当前显示<i>1-20</i>条&nbsp;&nbsp;共有<span class="numble">100000</span>个零售户</p>
-      		</div>	
-	      </div>
-	    </div>
-	  </div>
-	</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="statics/assets/libs/jquery.page.js"></script>
+</div>
   <script>
     function getLocalTime(nS) {  
             return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');  

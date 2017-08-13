@@ -52,65 +52,96 @@ define([], function () {
 		    }).on("click",function(){
 		        $("#timeEnd2").datetimepicker("setStartDate",$("#timeStart2").val());
 		    });
-		    //零售户列表
-		    $("#manage-list").off().on('click', function (e) {
-		    	var search = $("#input1").val();
+		    //零售户管理-->零售户列表
+			$("#manage-list").off().on('click', function(){
+				var startTime = $("#timeStart2").val();
+				var endTime = $("#timeEnd2").val();
+				var search = $("#input1").val();
+				// console.log($("#cityId option:selected").val())
 		    	var timeStart = strToTimestamp($("#timeStart1").val());
 		    	var timeEnd = strToTimestamp($("#timeEnd1").val());
-		    	$model.getTblData({
-		    		search: '',
+				var manageList = {
+					search: '',
 		    		pageNum: 1,
-		    		pageSize: 10,
-		    		addrCity: addrCity,
+		    		pageSize: 2,
+		    		addrCity: $("#cityId option:selected").val() || '',
 		    		appStartTime: timeStart,
 		    		appEndTime:timeEnd
-			    }).then(function (res) {
-			    	for(var i=0;i<res.data.data.length;i++){
+			 	};
+                $model.getTblData(manageList).then(function(res) {
+                	for(var i=0;i<res.data.data.length;i++){
 				    	res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
-				    	// if(res.data.data[i].authStatus==1){
-				    	// 	res.data.data[i].authStatus = "审核通过";
-				    	// }else if(res.data.data[i].authStatus==2){
-				    	// 	res.data.data[i].authStatus = "审核不通过";
-				    	// }
+				    	if(res.data.data[i].authStatus==1){
+				    		res.data.data[i].authStatus = "审核通过";
+				    	}else if(res.data.data[i].authStatus==2){
+				    		res.data.data[i].authStatus = "审核不通过";
+				    	}
 				    }
-
-			    	$scope.listData = res.data.data || [];
-			    	$scope.$apply();
-			    });
-		    });
+					$scope.listData = res.data.data || [];
+					$scope.$apply();
+					var pageCount = Math.ceil(res.data.totalNum/manageList.pageSize);					
+					$(".tcdPageCode").remove();
+                    $(".rf").append("<div class='tcdPageCode'></div>");
+                    $(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current: manageList.pageNum,
+						backFn: function(p) {   
+                            manageList.pageNum =p;
+			                $model.getTblData(manageList).then(function(res) {
+			                	for(var i=0;i<res.data.data.length;i++){
+							    	res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
+							    	if(res.data.data[i].authStatus==1){
+							    		res.data.data[i].authStatus = "审核通过";
+							    	}else if(res.data.data[i].authStatus==2){
+							    		res.data.data[i].authStatus = "审核不通过";
+							    	}
+							    }
+								$scope.listData = res.data.data || [];
+								$scope.$apply();
+							});
+						}
+					});
+				});
+			});
+	
 		    //零用户管理->零售户二维码
-		    $("#manage-erwei").off().on('click', function (e) {
-		     	var timeStart2 = $("#timeStart2").val();
+			$("#manage-erwei").off().on('click', function(){
+				var timeStart2 = $("#timeStart2").val();
 			    var timeEnd2 = $("#timeEnd2").val();
 			    var search = $("#input2").val();
-			    var isPay = $("#is-pay option:selected").text();
-			    if(isPay=="未支付"){
-			    	isPay=0;
-			    }else {
-			    	isPay=1;
-			    }
-			    var orderStatus = $("#send option:selected").text();
-			    if(orderStatus=="未发货"){
-			    	orderStatus=5;
-			    }else {
-			    	orderStatus=1;
-			    }
-		    	$model.getTbErwei({
-		    		search: '',
+				var manageErwei = {
+					search: '',
 		    		pageNum: 1,
-		    		pageSize: 10,
-		    		isPay:isPay,
-		    		orderStatus:orderStatus,
-		    		startTime: strToTimestamp(timeStart2),
-			    	endTime: strToTimestamp(timeEnd2)
-			    }).then(function (res) {
-			    	for(var i=0;i<res.data.data.length;i++){
+		    		pageSize: 3,
+		    		addrCity: addrCity || '',
+		    		startTime: strToTimestamp(timeStart2) || '',
+			    	endTime: strToTimestamp(timeEnd2) || ''
+			 	}
+                $model.getTbErwei(manageErwei).then(function(res) {
+					for(var i=0;i<res.data.data.length;i++){
 				    	res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
 				    }
 			    	$scope.erweiData = res.data.data || [];
 			    	$scope.$apply();
-			    });
-		    });
+					var pageCount = Math.ceil(res.data.totalNum/manageErwei.pageSize);					
+					$(".tcdPageCode").remove();
+                    $(".rf").append("<div class='tcdPageCode'></div>");
+                    $(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current: manageErwei.pageNum,
+						backFn: function(p) {     
+                            manageErwei.pageNum =p;
+							$model.getTbErwei(manageErwei).then(function(res) {
+								for(var i=0;i<res.data.data.length;i++){
+							    	res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
+							    }
+						    	$scope.erweiData = res.data.data || [];
+						    	$scope.$apply();
+							});
+						}
+					});
+				});
+			});
 		     //点击切换页面
 		    $scope.myVar = true;
 		    $scope.toggle = function() {
@@ -155,8 +186,8 @@ define([], function () {
 		     		$("#back-reason").text(str + $("#refuse-reason").val());
 		     	})
 		    }
-		    // 省市区
-		    var addrCity=0;
+		    // 省市区 
+		   var addrCity=0;
 		   $scope.province = $model.$province.data;
 		   $("#provinceId").change(function (e) {
 		   		$model.getCity({
@@ -165,6 +196,7 @@ define([], function () {
 		   			$scope.city = res.data;
 		   			$scope.$apply();
 		   			addrCity = res.data[0].code;
+		   			// console.log(addrCity)
 		   		});
 		   });
 		   
@@ -269,64 +301,117 @@ define([], function () {
 			}).on("click",function(){
 			     $("#timeEnd333").datetimepicker("setStartDate",$("#timeStart333").val());
 			});
-			$("#return").off().on('click', function (e) {
-			      	var unit = $("#manage-unit option:selected").text();
-			      	var isFx = $("#manage-isfx option:selected").text();
-			      	
-			      	if(isFx=="有"){
-			      		isFx=1;
-			      	} else {
-			      		isFx=0;
-			      	}
-			      	alert(isFx);
-			      	var startTime = strToTimestamp($("#timeStart111").val());
-					var endTime = strToTimestamp($("#timeEnd111").val());
-			    	$model.getReturn({
-			    		pageNum: 1,
-			    		pageSize: 10,
-			    		unit: unit || [],
-			    		isFx: isFx,
-			    		startTime: startTime,
-			    		endTime: endTime,
-			    		sellerId:3000037
-				    }).then(function (res) {
-				    	//将时间戳变为日期
-				    	for(var i=0;i<res.data.data.length;i++){
+			//扫码返现
+			$("#return").off().on('click', function(){
+				var unit = $("#manage-unit option:selected").text();
+			    var isFx = $("#manage-isfx option:selected").text();			      	
+			    if(isFx=="有"){
+			      	isFx=1;
+			    } else {
+			      	isFx=0;
+			    }
+			    var startTime = strToTimestamp($("#timeStart111").val());
+				var endTime = strToTimestamp($("#timeEnd111").val());
+				var returnNum = {
+					pageNum: 1,
+			    	pageSize: 20,
+			    	unit: unit || '',
+			    	isFx: isFx || '',
+			    	startTime: startTime,
+			    	endTime: endTime,
+			    	sellerId:3000037
+			 	}
+                $model.getReturn(returnNum).then(function(res) {
+					//将时间戳变为日期
+				    for(var i=0;i<res.data.data.length;i++){
 				    		res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
 				    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);	
-				    	}
-				    	// console.log(res.data.data[0].zjTime)
-				    	$scope.returnData = res.data.data || [];
-				    	$scope.$apply();
-				    });
+				    }
+				    $scope.returnData = res.data.data || [];
+				    $scope.$apply();
+					var pageCount = Math.ceil(res.data.totalNum/returnNum.pageSize);					
+					$(".tcdPageCode").remove();
+                    $(".rf").append("<div class='tcdPageCode'></div>");
+                    $(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current: returnNum.pageNum,
+						backFn: function(p) {     
+                            returnNum.pageNum = p;
+							$model.getReturn(returnNum).then(function(res) {
+								 for(var i=0;i<res.data.data.length;i++){
+							    		res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
+							    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);	
+							    }
+							    $scope.returnData = res.data.data || [];
+							    $scope.$apply();
+							});
+						}
+					});
+				});
 			});
-			      
-			$("#tixian").off().on('click', function (e) {
-			    	var timeEnd333=$("#timeEnd333").val();
-			    	var timeStart333=$("#timeStart333").val();
-			    	$model.getTixian({
-			    		pageNum: 1,
-			    		pageSize: 10,
-			    		startTime: strToTimestamp(timeStart333),
-			    		endTime: strToTimestamp(timeEnd333),
-			    		sellerId:3000044
-				    }).then(function (res) {
-				    	for(var i=0;i<res.data.data.length;i++){
+			    
+			//提现记录  
+			$("#tixian").off().on('click', function(){
+				var timeEnd333=$("#timeEnd333").val();
+			    var timeStart333=$("#timeStart333").val();
+				var tixianNum = {
+					pageNum: 1,
+			    	pageSize: 20,
+			    	startTime: strToTimestamp(timeStart333),
+			    	endTime: strToTimestamp(timeEnd333),
+			    	sellerId:3000044
+			 	}
+                $model.getTixian(tixianNum).then(function(res) {
+					//将时间戳变为日期
+				    for(var i=0;i<res.data.data.length;i++){
 				    		res.data.data[i].txTime=getLocalTime(res.data.data[i].txTime);
 				    	}
-				    	$scope.tixianData = res.data.data || [];
-				    	$scope.$apply();
-				    });
+				    $scope.tixianData = res.data.data || [];
+				    $scope.$apply();
+					var pageCount = Math.ceil(res.data.totalNum/tixianNum.pageSize);					
+					$(".tcdPageCode").remove();
+                    $(".rf").append("<div class='tcdPageCode'></div>");
+                    $(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current: tixianNum.pageNum,
+						backFn: function(p) {     
+                            tixianNum.pageNum = p;
+							$model.getTixian(returnNum).then(function(res) {
+								 for(var i=0;i<res.data.data.length;i++){
+						    		res.data.data[i].txTime=getLocalTime(res.data.data[i].txTime);
+						    	}
+						    	$scope.tixianData = res.data.data || [];
+						    	$scope.$apply();
+							});
+						}
+					});
+				});
 			});
-			$("#count").off().on('click', function (e) {
-			    	$model.getCount({
-			    		pageNum: 1,
-			    		pageSize: 10,
-			    		sellerId:3000037
-				    }).then(function (res) {
-				    	$scope.countData = res.data.data || [];
-				    	$scope.$apply();
-				    });
+			//扫码用户
+			$("#count").off().on('click', function(){
+				var countNum = {
+					pageNum: 1,
+			    	pageSize: 20,
+			    	sellerId:3000044
+			 	}
+                $model.getCount(countNum).then(function(res) {
+				    $scope.countData = res.data.data || [];
+				    $scope.$apply();
+					var pageCount = Math.ceil(res.data.totalNum/countNum.pageSize);					
+					$(".tcdPageCode").remove();
+                    $(".rf").append("<div class='tcdPageCode'></div>");
+                    $(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current: countNum.pageNum,
+						backFn: function(p) {     
+                            tixianNum.pageNum = p;
+							$model.getCount(countNum).then(function(res) {
+								$scope.countData = res.data.data || [];
+				    			$scope.$apply();
+							});
+						}
+					});
+				});
 			});
 			// 订单下载模块
 			$("#timeStart").datetimepicker({
