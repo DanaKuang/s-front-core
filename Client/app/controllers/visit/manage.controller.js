@@ -12,7 +12,7 @@ define([], function () {
 	    ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
 	    	var $model = $scope.$model;
 	    	//设置input的默认时间
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
             var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
             $("#timeStart1").val(stattime);
             $("#timeStart2").val(stattime);
@@ -24,7 +24,7 @@ define([], function () {
 		        language: 'zh-CN',
 		        autoclose:true
 		    }).on("click",function(){
-		        $("#timeStart1").datetimepicker("setEndDate",$("#timeStart2").val());
+		        $("#timeStart1").datetimepicker("setEndDate",$("#timeEnd1").val());
 		    });
 		    $("#timeEnd1").datetimepicker({
 		        format: 'yyyy-mm-dd',
@@ -41,7 +41,7 @@ define([], function () {
 		        language: 'zh-CN',
 		        autoclose:true
 		    }).on("click",function(){
-		        $("#timeStart2").datetimepicker("setEndDate",$("#timeStart2").val());
+		        $("#timeStart2").datetimepicker("setEndDate",$("#timeEnd2").val());
 		    });
 		    $("#timeEnd2").datetimepicker({
 		        format: 'yyyy-mm-dd',
@@ -54,19 +54,18 @@ define([], function () {
 		    });
 		    //零售户管理-->零售户列表
 			$("#manage-list").off().on('click', function(){
-				var startTime = $("#timeStart2").val();
-				var endTime = $("#timeEnd2").val();
 				var search = $("#input1").val();
 				// console.log($("#cityId option:selected").val())
-		    	var timeStart = strToTimestamp($("#timeStart1").val());
-		    	var timeEnd = strToTimestamp($("#timeEnd1").val());
+		    	var timeStart1 = $("#timeStart1").val();
+			    var timeEnd1 = $("#timeEnd1").val();
+			    var search = $("#input2").val();
 				var manageList = {
 					search: '',
 		    		pageNum: 1,
-		    		pageSize: 2,
+		    		pageSize: 3,
 		    		addrCity: $("#cityId option:selected").val() || '',
-		    		appStartTime: timeStart,
-		    		appEndTime:timeEnd
+		    		startTime: strToTimestamp(timeStart1) || '',
+			    	endTime: strToTimestamp(timeEnd1) || ''
 			 	};
                 $model.getTblData(manageList).then(function(res) {
                 	for(var i=0;i<res.data.data.length;i++){
@@ -103,7 +102,6 @@ define([], function () {
 					});
 				});
 			});
-	
 		    //零用户管理->零售户二维码
 			$("#manage-erwei").off().on('click', function(){
 				var timeStart2 = $("#timeStart2").val();
@@ -113,7 +111,7 @@ define([], function () {
 					search: '',
 		    		pageNum: 1,
 		    		pageSize: 3,
-		    		addrCity: addrCity || '',
+		    		addrCity: $("#cityId option:selected").val() || '',
 		    		startTime: strToTimestamp(timeStart2) || '',
 			    	endTime: strToTimestamp(timeEnd2) || ''
 			 	}
@@ -173,10 +171,12 @@ define([], function () {
 		    }
 		    ////商品详情-->审核驳回
 		     $scope.secondBack=function(){
+		     	// $("#though-check").css("display","none");
 		     	$(".goods-back").attr({"data-toggle":"modal","data-target":"#myModal"});
 		     	$("#shen-though").css("display","none");
 		     	$("#shen-back").css("display","none");
 		     	$("#content-text").css("display","block");
+		     	$("#modal-content").css("height","280px");
 		     	$("#refuse-reason").change(function(){
 		     		var mydate = new Date();
 				    var str = "" + mydate.getFullYear() + "年";
@@ -187,7 +187,6 @@ define([], function () {
 		     	})
 		    }
 		    // 省市区 
-		   var addrCity=0;
 		   $scope.province = $model.$province.data;
 		   $("#provinceId").change(function (e) {
 		   		$model.getCity({
@@ -195,8 +194,6 @@ define([], function () {
 		   		}).then(function (res) {
 		   			$scope.city = res.data;
 		   			$scope.$apply();
-		   			addrCity = res.data[0].code;
-		   			// console.log(addrCity)
 		   		});
 		   });
 		   
@@ -213,6 +210,7 @@ define([], function () {
 		   	$scope.shenThough=function(){
 		   		$scope.authResult = 1;
 		   		$("#though-check").css("display","block");
+		   		$("#modal-content").css("height","124px");
 		   		$("#content-text").css("display","none");
 			    $model.getApproval({
 			    	authResult: $scope.authResult,
@@ -224,9 +222,15 @@ define([], function () {
 					$scope.$apply();
 				});
 		   	}
+		   	$scope.thoughClose=function(){
+		   		$("#though-check").css("display","none");
+		   		$("#modal-content").css("height","90px");
+		   	}
 		   	$scope.shenBack=function(){
 		   		$("#content-text").css("display","block");
 		   		$("#though-check").css("display","none");
+		   		$("#refuse-reason").css("height","186px")
+		   		$("#modal-content").css("height","325px");
 		   		$scope.authResult = 2;
 		   		$scope.failReason = $("#refuse-reason").val();
 			    $model.getApproval({
@@ -242,7 +246,7 @@ define([], function () {
 		   	
 		   // 零售户详情
 		   //设置input的默认时间
-	        var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+	        var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
 	        var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
 	        $("#timeStart111").val(stattime);
 	        $("#timeStart222").val(stattime);
@@ -250,14 +254,14 @@ define([], function () {
 	        $("#timeEnd111").val(endtime);
 	        $("#timeEnd222").val(endtime);
 	        $("#timeEnd333").val(endtime);
-		         $("#timeStart111").datetimepicker({
-				      format: 'yyyy-mm-dd',
+		    $("#timeStart111").datetimepicker({
+				       format: 'yyyy-mm-dd',
 				       minView:'month',
 				       language: 'zh-CN',
 				       autoclose:true
-				 }).on("click",function(){
-				       $("#timeStart111").datetimepicker("setEndDate",$("#timeEnd111").val());
-				 });
+			}).on("click",function(){
+					   $("#timeStart111").datetimepicker("setEndDate",$("#timeEnd111").val());
+			});
 			$("#timeEnd111").datetimepicker({
 			          format: 'yyyy-mm-dd',
 			          minView:'month',
@@ -426,7 +430,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeEnd").datetimepicker("setStartDate",$("#timeStart").val());
 		    });
@@ -434,7 +439,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeStart11").datetimepicker("setEndDate",$("#timeStart11").val());
 		    });
@@ -442,7 +448,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeStart22").datetimepicker("setEndDate",$("#timeStart22").val());
 		    });
@@ -450,7 +457,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeStart33").datetimepicker("setEndDate",$("#timeStart33").val());
 		    });
@@ -459,7 +467,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeStart1111").datetimepicker("setEndDate",$("#timeStart1111").val());
 		    });
@@ -467,7 +476,8 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true
+		        autoclose:true,
+		        endDate:new Date()
 		    }).on("click",function(){
 		        $("#timeStart2222").datetimepicker("setStartDate",$("#timeStart2222").val());
 		    });

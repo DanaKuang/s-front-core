@@ -1,0 +1,25 @@
+[2017-08-14 14:01:44.200] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-14 14:01:44 uncaughtException: getaddrinfo ENOENT seller.hmtx.cc:80
+[2017-08-14 14:01:44.203] [ERROR] E:\sass\saas-front-core\Client\logs - Error: getaddrinfo ENOENT seller.hmtx.cc:80
+    at Object.exports._errnoException (util.js:1020:11)
+    at errnoException (dns.js:33:15)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+[2017-08-14 14:01:44.206] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-14 14:01:44 uncaughtException: getaddrinfo ENOENT seller.hmtx.cc:80
+[2017-08-14 14:01:44.207] [ERROR] E:\sass\saas-front-core\Client\logs - Error: getaddrinfo ENOENT seller.hmtx.cc:80
+    at Object.exports._errnoException (util.js:1020:11)
+    at errnoException (dns.js:33:15)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+[2017-08-14 14:01:52.483] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-14 14:01:52 uncaughtException: getaddrinfo ENOENT portal.v2.taozuike.com:80
+[2017-08-14 14:01:52.483] [ERROR] E:\sass\saas-front-core\Client\logs - Error: getaddrinfo ENOENT portal.v2.taozuike.com:80
+    at Object.exports._errnoException (util.js:1020:11)
+    at errnoException (dns.js:33:15)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+[2017-08-14 14:01:52.621] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-14 14:01:52 uncaughtException: getaddrinfo ENOENT seller.hmtx.cc:80
+[2017-08-14 14:01:52.623] [ERROR] E:\sass\saas-front-core\Client\logs - Error: getaddrinfo ENOENT seller.hmtx.cc:80
+    at Object.exports._errnoException (util.js:1020:11)
+    at errnoException (dns.js:33:15)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+[2017-08-14 14:01:52.624] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-14 14:01:52 uncaughtException: getaddrinfo ENOENT seller.hmtx.cc:80
+[2017-08-14 14:01:52.625] [ERROR] E:\sass\saas-front-core\Client\logs - Error: getaddrinfo ENOENT seller.hmtx.cc:80
+    at Object.exports._errnoException (util.js:1020:11)
+    at errnoException (dns.js:33:15)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)

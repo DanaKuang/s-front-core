@@ -7,7 +7,7 @@
     border-radius: 20px;
   }
   .orderModel .modal-content{
-    /*height: 335px;*/
+    height: 267px;
     border-radius: 20px;
   }
   .orderModel .header{
@@ -18,35 +18,37 @@
  .orderModel .header h4{
     line-height: 5px;
     font-family: "Microsoft YaHei","PingFangSC Medium";
-    font-size: 22px;
+    font-size: 18px;
     color: #fff;
  }
  #closeBtn {
   height: 40px;
  }
  .orderModel .header button {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     opacity: 1;
-    transform: translateY(-4px);
+    margin-right: 18px;
+    transform: translateY(-8px);
+
  }
  textarea  {
-  
   width: 465px;
   height: 214px;
+  margin-top: 10px;
  }
 
  .orderModel .header button span{
   display: inline-block;
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
+  width: 22px;
+  height: 22px;
+  line-height: 18px;
   text-align: center;
   color: #fff;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: normal;
   border:2px solid #fff;
-  border-radius: 13px;
+  border-radius: 11px;
  }
  .orderModel .body{
   padding: 0px 30px;
@@ -71,6 +73,20 @@
   font-family: "Microsoft YaHei","PingFangSC Medium";
   font-size:  20px;
  }
+ #timeStart1111,#timeStart2222 {
+  background: url("../image/copy.png") no-repeat center;
+  background-position: 183px 10px;
+  border: 1px solid #555;
+  width: 211px;
+  height: 30px;
+  margin-top: 26px;
+  padding-left: 16px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  font-size:  16px;
+ }
+ #timeStart2222 {
+  background-image: none;
+ }
  #timeStart2 {
   margin-top: 0px;
   width: 280px;
@@ -82,13 +98,15 @@
   border: 1px solid #555;
   width: 120px;
   text-align: center;
-  height: 35px;
-  margin-left: 16px;
-  margin-right: 6px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-family: "Microsoft YaHei","PingFangSC Medium";
-  font-size:  18px;
+  font-size:  16px;
  }
-
+#timeRow {
+  margin-top: 20px;
+}
  #look {
     width: 118px;
     height:36px;
@@ -125,11 +143,11 @@
 }
  
  .text-center  .btn {
-  line-height: 23px;
+   line-height: 20px;
    width: 90px;
-   height: 34px;
-   border-radius: 17px;
-   font-size: 22px;
+   height: 30px;
+   border-radius: 15px;
+   font-size: 18px;
    font-family: "Microsoft YaHei","PingFangSC Medium";
    color: #fff;
    border:none;
@@ -147,40 +165,41 @@
  }
  form .row .time div {
     float: left;
-    font-size: 22px;
+    font-size: 18px;
+    margin-top: 2px;
     font-family: "Microsoft YaHei","PingFangSC Medium";
  }
 
  form .row .down {
   width: 120px;
-  height: 35px;
+  height: 30px;
   float: left;
   background-color: #3AC1EE;
   border-radius: 22px;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 20px;
   margin-left: 10px;
-  line-height: 35px;
+  line-height: 30px;
 
  }
 
 
  #first .time input,#second .time input,#third .time input {
   width: 290px;
-  height: 35px;
+  height: 30px;
   border: 1px solid #555;
-  font-size: 18px;
+  font-size: 16px;
+  margin-top: 20px;
   font-family: "Microsoft YaHei","PingFangSC Medium";
   background-image: none;
-  margin-top: 12px;
  }
 form .row .down  a {
   width: 120px;
-  height: 35px;
+  height: 30px;
   float: left;
   display: block;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-family: "Microsoft YaHei","PingFangSC Medium";
   color: #fff;
 }
@@ -188,15 +207,16 @@ form .row .down  a {
   float: left;
   background-color: #3AC1EE;
   width: 100px;
-  height: 34px;
-  font-size: 22px;
+  height: 30px;
+  font-size: 16px;
   border-radius: 15px;
   cursor: pointer;
   color: #fff;
-  line-height: 34px;
+  line-height: 30px;
   text-align: center;
   margin: 0 auto;
   margin: 0 62px;
+  margin-top: 10px;
 }
 #though-check {
   height:30px;
@@ -210,4 +230,7 @@ form .row .down  a {
 }
 #content-text {
   display: none;
+}
+#modal-content {
+  height: 90px;
 }

@@ -34,12 +34,18 @@
                             <input type="text" placeholder="烟草证号\门店名\联系人姓名\联系人手机号" id="input1">
                             <form >  
                               <select id="provinceId" ng-model="provinceCode">
+                                  <option value="">请选择省</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
                               </select>
                               <select name="" id="cityId" ng-model="cityCode">
+                                  <option value="">请选择市</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
                               </select>
                               <select name="" id="areaId" ng-model="areaCode">
+                                  <option value="">请选择区</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
                               </select>  
                             </form> 
@@ -51,6 +57,7 @@
                             </div>
                             <select name="" id="pay">
                               <option value="">状态</option>
+                              <option value="">全部</option>
                               <option value="">申请</option>
                               <option value="">审核通过</option>
                               <option value="">审核未通过</option>
@@ -181,10 +188,10 @@
   <!-- 审核 -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog orderModel" role="document">
-        <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-content" style="overflow: hidden;" id="modal-content">
           <div class="modal-header header">
             <div id="closeBtn">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>X</span></button>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span id="thoughClose" ng-click="thoughClose();">X</span></button>
               <h4 class="modal-title text-center">审核结果</h4>
             </div>
            
@@ -450,13 +457,13 @@
           </div>
           <div class="modal-body body">
           <form>
-            <div class="row">
-               <div class="time">
+            <div class="row" id="timeRow">
+                <div class="time">
                   <div>时间区间</div>
                   <input name="时间" id="timeStart"  class="form_datetime dateTime" placeholder="2017-8-1">
                   <div>至</div>
                   <input name="时间" id="timeEnd" class="form_datetime dateTime" placeholder="2017-8-2">
-              </div>
+                </div>
             </div>
             <div class="row" id="first">
               <div class="time">
@@ -503,20 +510,9 @@
                 </div>
                 <div class="col-md-3">
                     <form id='myupload' action='/api/tztx/seller-manager/import/tracking/info' method='post' enctype='multipart/form-data'>
-                      <div class="demo">
-                      <div class="btn">
-                          <span>添加附件</span>
-                          <input id="fileupload" type="file" name="file1">
+                      <div>浏览
+                        <input id="fileupload" type="file" name="file1" value="浏览">
                       </div>
-                      <div class="progress">
-                          <span class="bar"></span><span class="percent">0%</span>
-                      </div>
-                      <!-- 显示已上传的文件名 -->
-                      <div class="files"></div>
-                      <!-- 显示已上传的图片-->
-                      <div class="showimg"></div>
-                      </div>
-                      <input type="submit" onclick="gosubmit2()"/>
                     </form>
                 </div>
                 <div id=""></div>
@@ -525,7 +521,7 @@
           </div>
         </div>
       </div>
-  </div>
+
   <script src="statics/assets/libs/jquery.page.js"></script>
   <script src="statics/assets/libs/jqmeter.min.js"></script> 
   <!-- <script src="statics/assets/libs/jquery.form-min.js"></script> -->

@@ -142,14 +142,14 @@
 .reward-bottom .ifFree,.reward-bottom .numble,.reward-bottom .spaceTime {
 	margin-left: 326px;
 }
-.reward-bottom .openButton {
+.reward-bottom .openButton1 {
 	width: 120px;
 	border-right: none;
 	transform: translateX(7px);
 	background-color: #fff;
 	border-radius: 15px 0 0 15px;
 }
-.reward-bottom .closeButton {
+.reward-bottom .closeButton1 {
 	width: 120px;
 	background-color: #6db1fb;
 	opacity: 1;

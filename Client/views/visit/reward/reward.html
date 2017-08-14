@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
 <link rel="stylesheet" href="statics/assets/style/visit.reward.css"/>
-
 <div ng-controller="rewardCtrl">
   <div class="animated fadeInRight">
     <div class="container-fluid" id="content-reward">
@@ -22,7 +21,6 @@
                     </div>
                     <i></i>
                     <p class="erwei">零售户二维码打印设置</p>
-                    <a href="javascript:" class="freestore" id="freestore">查看免费记录</a>
                     <div>
                       二维码打印费：
                       <input type="text" id="copyMoney" placeholder="请输入金额" value="{{select.qr.qrExpenses}}">
@@ -30,8 +28,8 @@
                     <div class="yunfei">含运费和税费</div>
                     <div class="ifFree">
                       是否免费：
-                      <button class="openButton">开启</button>
-                      <button class="closeButton">关闭</button>
+                      <button class="openButton1" ng-click="openSet();">开启</button>
+                      <button class="closeButton1" ng-click="closeSet();">关闭</button>
                     </div>
                     <div class="numble">
                       免费数量：
@@ -57,22 +55,25 @@
         </div>
       </div>
     </div>
-    <div id="aaa" >
-      <a href="javascript:" id="pleaseColse">关闭</a>
-      <div id="bbb"></div>
   </div>
-  </div>
-
   <script>
 
     $("#moneyPer").blur(function(){
       var value=$(this).val();
-        var flag=isNaN(value)?true:false;
-        if(flag==true){
+      var flag=isNaN(value)?true:false;
+      if(flag==true){
           $(this).val("请您输入正确的百分比").css("color","red");
-        } else {
-          $(this).css("color","#000");
-        }
+      }else{
+          value=parseInt(value);
+          // alert(value);
+          if(value>100 || value<0){
+            flag=true;
+            $(this).val("请您输入1-100之间的数").css("color","red");
+          }else{
+            $(this).css("color","#000");
+          }
+          
+      }
     });
     $("#copyMoney").change(function(){
       var value=$(this).val();
