@@ -171,6 +171,9 @@
     font-size: 14px;
     margin-left: 20px;
 }
+.tab-content  .tab-pane .tab-input #input2 {
+    width: 280px;
+}
 .tab-content  .tab-pane .tab-input  #timeStart1 {
     width: 81px;
     padding: 0 3px;
@@ -361,7 +364,7 @@
      border: none;
      margin-right: 20px;
 }
-#pay,#is-pay {
+#authStatus,#is-pay {
     padding: 0;
 }
 #send {

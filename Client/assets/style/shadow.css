@@ -104,8 +104,12 @@
   font-family: "Microsoft YaHei","PingFangSC Medium";
   font-size:  16px;
  }
+ #timeStart {
+  width: 200px;
+ }
 #timeRow {
   margin-top: 20px;
+  position: relative;
 }
  #look {
     width: 118px;
@@ -171,16 +175,28 @@
  }
 
  form .row .down {
-  width: 120px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  width: 220px;
   height: 30px;
-  float: left;
+  float: right;
   background-color: #3AC1EE;
   border-radius: 22px;
   text-align: center;
-  margin-top: 20px;
-  margin-left: 10px;
+  margin-top: 35px;
+  margin-right: 124px;
   line-height: 30px;
 
+ }
+ #down-content {
+  width: 247px;
+  height: 30px;
+  margin-top: 20px;
+  border:1px solid #555;
+  font-size: 16px;
+  text-align: center;
+  line-height: 30px;
  }
 
 
@@ -193,7 +209,7 @@
   font-family: "Microsoft YaHei","PingFangSC Medium";
   background-image: none;
  }
-form .row .down  a {
+/*form .row .down  a {
   width: 120px;
   height: 30px;
   float: left;
@@ -202,7 +218,7 @@ form .row .down  a {
   font-size: 16px;
   font-family: "Microsoft YaHei","PingFangSC Medium";
   color: #fff;
-}
+}*/
 #shen-though,#shen-back {
   float: left;
   background-color: #3AC1EE;
@@ -218,7 +234,7 @@ form .row .down  a {
   margin: 0 62px;
   margin-top: 10px;
 }
-#though-check {
+#though-check,#though-backDown {
   height:30px;
   text-align:center;
   color:red;
@@ -234,3 +250,35 @@ form .row .down  a {
 #modal-content {
   height: 90px;
 }
+#seacherbtn {
+  top: -20px;
+  right: 30px;
+  width: 120px;
+  height: 30px;
+  float: left;
+  background-color: #3AC1EE;
+  border-radius: 22px;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  line-height: 30px;
+  position: absolute;
+}
+#seacherbtn a {
+
+  width: 120px;
+  height: 30px;
+  float: left;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: "Microsoft YaHei","PingFangSC Medium";
+  color: #fff;
+  cursor: pointer;
+ }
+ #profileList .fr a {
+  cursor: pointer;
+ }
+ #fileDownBox {
+  height: 100px;
+ }

@@ -16,7 +16,7 @@
                     <p class="return">客户返现设置</p>
                     <div class="money-magin">
                       客户返现比例：
-                      <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent}}">%
+                      <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent*100}}">%
                     <a class="save" href="javascript:" id="award">保存</a>
                     </div>
                     <i></i>
@@ -57,22 +57,21 @@
     </div>
   </div>
   <script>
-
+    function isInteger(obj) {
+     return obj%1 === 0
+    }
     $("#moneyPer").blur(function(){
       var value=$(this).val();
       var flag=isNaN(value)?true:false;
       if(flag==true){
           $(this).val("请您输入正确的百分比").css("color","red");
       }else{
-          value=parseInt(value);
-          // alert(value);
-          if(value>100 || value<0){
-            flag=true;
-            $(this).val("请您输入0-100之间的数").css("color","red");
+          var isIntegerFlag = isInteger(value);
+          if(!isIntegerFlag || value>100 || value<0){
+            $(this).val("请您输入0-100之间的整数").css("color","red");
           }else{
             $(this).css("color","#000");
-          }
-          
+          }   
       }
     });
     $("#copyMoney").change(function(){
