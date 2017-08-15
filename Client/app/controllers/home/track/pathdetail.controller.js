@@ -49,6 +49,10 @@ define([], function () {
             initFormData(params);
             // 初始化pageEvent
             initPageEvent(params);
+
+            // 图片
+            $scope.pageimg = 'statics/assets/image/orange/'+(pScope.activityId)+'.jpg';
+            $scope.$apply();
         }
 
         // 初始化select

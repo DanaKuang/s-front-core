@@ -38,6 +38,7 @@ define([], function () {
             // 后端数据
             var brand_back_data = $model.$brand.data || [];
             brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
+            brand_back_data = [{productBrand:"所有"}].concat(brand_back_data);
             var act_back_data = $model.$activity.data || [];
             act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 

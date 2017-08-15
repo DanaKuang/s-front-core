@@ -106,6 +106,7 @@
 }
 .ui-path-search .inline-block {
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 .ui-path-search label {
     margin-right: 15px;
@@ -227,7 +228,7 @@ button.multiselect {
     line-height: 40px;
 }
 .ui-page-img {
-    height: 400px;
+    height: 500px;
     width: 300px;
     margin: 0 auto;
 }
