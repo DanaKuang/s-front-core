@@ -1,5 +1,4 @@
 {
-    "color": ["#44c2ed"],
     "tooltip": {
         "show": true,
         "trigger": "item",
@@ -13,7 +12,16 @@
         }
     },
     "visualMap": {
-        "show": false
+        "min": 0,
+        "max": 5000,
+        "left": "left",
+        "text": ["高","低"],
+        "seriesIndex": [1],
+        "inRange": {
+            "color": ["#e0ffff", "#006edd"]
+        },
+        "padding": 0,
+        "calculable" : true
     },
     "geo": {
         "map": "china",
@@ -61,7 +69,7 @@
        },
        "itemStyle": {
           "normal": {
-              "color": "#44c2ed"
+              "color": "#F06C00"
           }
        }
     }, {

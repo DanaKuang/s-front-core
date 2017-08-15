@@ -24,6 +24,12 @@
     line-height: 50px;
     font-size: 12px;
 }
+.ui-form-search .form-group {
+    margin-right: 15px;
+}
+.ui-form-search button.multiselect {
+    max-width: 300px !important;
+}
 .ui-form-search select {
     width: 150px !important;
     margin: 0 10px;

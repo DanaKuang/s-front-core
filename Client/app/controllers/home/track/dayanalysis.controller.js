@@ -236,7 +236,7 @@ define([], function () {
                     provinceName: name + '省'
                 }).then(function (res) {
                     $scope.cityArr = res.data || [];
-                    $scope.cityName = $scope.cityArr[0].cityName || "";
+                    $scope.cityName = name == "湖南" ? "长沙" : $scope.cityArr[0].cityName;
                     $scope.$apply();
                 });
             }
