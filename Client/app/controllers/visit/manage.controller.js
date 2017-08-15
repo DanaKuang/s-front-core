@@ -386,8 +386,8 @@ define([], function () {
 			    	endTime: endTime,
 			    	sellerId:$scope.sellerId
 			 	};
-			 	alert($("#fx-page>span:first").text());
-                alert($("#fx-page>span:last").text());
+			 	//alert($("#fx-page>span:first").text());
+                //alert($("#fx-page>span:last").text());
                 $model.getFxlist(returnNum).then(function(res) {
 					//将时间戳变为日期
 				    for(var i=0;i<res.data.data.length;i++){
