@@ -53,6 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center; 
+  transform: translateY(-15px);
 }
 .smake-image img {
   display: block;

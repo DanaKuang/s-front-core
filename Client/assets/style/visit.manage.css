@@ -96,7 +96,7 @@
     right: 200px;
 }
 .tab-content #timeStart2 {
-    width: 75px;
+    width: 81px;
     height: 30px;
     font-size: 14px;
     padding-left: 0;
@@ -159,7 +159,7 @@
     margin-bottom: 40px;
 }
 .tab-content  .tab-pane .tab-input #input1 {
-    width: 253px;
+    width: 280px;
 }
 .tab-content  .tab-pane .tab-input input {
     padding-left: 2px;
@@ -171,15 +171,18 @@
     font-size: 14px;
     margin-left: 20px;
 }
+.tab-content  .tab-pane .tab-input #input2 {
+    width: 280px;
+}
 .tab-content  .tab-pane .tab-input  #timeStart1 {
-    width: 75px;
+    width: 81px;
     padding: 0 3px;
     font-size: 14px;
     margin-left: 3px;
     height: 30px;
 }
 .tab-content  .tab-pane .tab-input  .dateTime{
-    width: 75px;
+    width: 81px;
     padding: 0 3px;
     font-size: 14px;
     margin-left: 3px;
@@ -210,7 +213,7 @@
     width: 90px;
     height: 30px;
     float: right;
-    margin-right: 64px;
+    margin-right: 45px;
     background-color: #6E80FF;
     border: 1px solid #6E80FF;
     border-radius: 15px;
@@ -361,7 +364,7 @@
      border: none;
      margin-right: 20px;
 }
-#pay,#is-pay {
+#authStatus,#is-pay {
     padding: 0;
 }
 #send {

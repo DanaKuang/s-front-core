@@ -27,15 +27,15 @@
                   <div>至</div>
                   <input name="时间" id="timeEnd1" class="form_datetime dateTime" placeholder="2017-8-2">
                 </div>
-                <select name="" id="pay">
+                <!-- <select name="" id="pay">
                   <option value="">扫码单位</option>
                   <option value="">盒</option>
                   <option value="">条</option>
-                </select>
+                </select> -->
                 <select name="" id="isReturn">
-                  <option value="">有返现</option>
-                  <option value="">有</option>
-                  <option value="">无</option>
+                  <option value="">有无返现</option>
+                  <option value="1">有返现</option>
+                  <option value="0">无返现</option>
                 </select>
                 <div class="seacher" id="achievement-seacher"><a href="javascript:">查询</a></div>
             </div>
@@ -48,25 +48,23 @@
                     <td>联系人姓名</td>
                     <td>联系人电话</td>
                     <td>消费者微信名</td>
-                    <td>扫码时间（店码）</td>
-                    <td>扫码时间（烟码）</td>
+                    <td>返现时间</td>
                     <td>扫码单位</td>
                     <td>返现金额</td>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="ty in detailData">
-                    <td>{{ty.sellerId}}</td>
+                    <td>{{ty.licenceNo}}</td>
                     <td>{{ty.shopName}}</td>
                     <td>{{ty.contactName}}</td>
                     <td>{{ty.contactPhone}}</td>
                     <td>{{ty.consumerOpenId}}</td>
                     <!-- <td>{{ty.licenceNo}}</td> -->
                     <td>{{ty.cousumerScTime}}</td>
-                    <td>{{ty.cousumerScTime}}</td>
                     <td>{{ty.unit}}</td>
                     <td>{{ty.fxAmount}}</td>
-                  </tr>           
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -79,7 +77,7 @@
                 <div>至</div>
                 <input name="时间" id="timeEnd2"  class="form_datetime dateTime" placeholder="2017-8-2">
               </div>
-              <div class="seacher" id="seacherId"><a href="javascript:">全部导出</a></div>
+              <div class="seacher"  id="seacherId"><a href="javascript:">查询</a></div>
           </div>
           <div class="tab-table">
             <table class="table spacil-table" id="actable">
@@ -96,19 +94,19 @@
               </thead>
               <tbody>
                  <tr ng-repeat="tp in staticData">
-                    <td>{{tp.num}}</td>
+                    <td></td>
                     <td>{{tp.shopName}}</td>
                     <td>{{tp.licenceNo}}</td>
                     <td>{{tp.contactName}}</td>
                     <td>{{tp.contactPhone}}</td>
-                    <td>{{tp.totalNum}}</td>
+                    <td>{{tp.num}}</td>
                     <td>{{tp.fxAmount}}</td>
-                  </tr>   
+                  </tr>
               </tbody>
             </table>
           </div>
         </div>
-      </div> 
+      </div>
           <div class="page_sec rf" style="margin-top:21px;">
               <div class="tcdPageCode"></div>
           </div>
@@ -116,12 +114,12 @@
       </div>
     </div>
   </div>
-  
+
   <script src="statics/assets/libs/jquery.page.js"></script>
 </div>
   <script>
-    function getLocalTime(nS) {  
-            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');  
+    function getLocalTime(nS) { 
+            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' '); 
      }
   </script>
 </div>
