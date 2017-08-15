@@ -47,6 +47,7 @@ test:                                            # 测试环境配置
       host: 'portal.v2.taozuike.com'             # 请求IP地址
     - port: 80                                   # 请求端口号
       host: 'seller.hmtx.cc'                     # 请求IP地址
+      # host: '172.16.1.172'                     # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
