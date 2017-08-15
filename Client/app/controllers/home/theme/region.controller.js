@@ -305,9 +305,12 @@ define([], function () {
                     option.xAxis[0].data = [];
                     $model.$scanTimes(params).then(function (res) {
                         var res = res.data || [];
+                        var Length = res.length>10? 10:res.length;
                         if(!(res.toString() === [].toString())){
-                            for (var i = 0; i < 10; i++) {
+                            for (var i = 0; i < Length; i++) {
                                 option.xAxis[0].data.push(res[i].productName)
+                                
+                                
                                 option.series[0].data.push(res[i].scanPv)
                             };
                         }
