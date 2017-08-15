@@ -6,7 +6,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'PacketCtrl',
         ViewModelName: 'packetViewModel',
-        ServiceContent: ['$scope', function ($scope) {
+        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
             console.log('agree controller is under control.');
             var $model = $scope.$model;
 
@@ -89,8 +89,6 @@ define([], function () {
             });
             //获取操作动作维度值
             $model.getQueryLog().then(function(res){
-                console.log('获取操作动作维度值');
-                console.log(res);
                 if(res.status == 200){
                     $scope.activeLogList = res.data.data;
                     $scope.$apply();
@@ -129,8 +127,6 @@ define([], function () {
                             $('#transferName').html(fileSuccessData.filename);
                         }
                     }).fail(function(res) {
-                        console.log('上传失败时');
-                        console.log(res);
                         $('#transfer_warn').html('文件上传失败');
                     });
                 }
@@ -271,16 +267,15 @@ define([], function () {
             }
             //获取红包池列表
             function getDataList(pageObj){
-                console.log('获取数据');
-                console.log($scope.showPacketList);
                 if($scope.showPacketList){
                     //显示红包池信息
                     $model.getPacketList(pageObj).then(function(res){
-                        console.log('获取红包池列表');
-                        console.log(res);
                         if(res.status == 200){
                             var packetObj = res.data.data;
                             if(packetObj.list != null){
+                                for(var i=0;i<packetObj.list.length;i++){
+                                    packetObj.list[i].showSupplierName = limitlengthFilter.limitLength(packetObj.list[i].supplierName);
+                                }
                                 $scope.noSearchData = false;
                                 $scope.packetList = packetObj.list;
                                 $scope.totalPage = packetObj.page.pageNumber;
@@ -298,7 +293,6 @@ define([], function () {
                                 $scope.$apply();
                                 createPageTools(pageObj);
                             }else{
-                                console.log('数据为空时');
                                 $scope.noSearchData = true;
                                 $scope.totalPage = 0;
                                 $scope.totalCount = 0;
@@ -313,6 +307,10 @@ define([], function () {
                         if(res.status == 200){
                             var detailObj = res.data.data;
                             if(detailObj.list != null){
+                                for(var i=0;i<detailObj.list.length;i++){
+                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName);
+                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName);
+                                }
                                 $scope.noSearchLog = false;
                                 $scope.detailList = detailObj.list;
                                 $scope.totalPage = detailObj.page.pageNumber;
@@ -351,8 +349,6 @@ define([], function () {
             });
             //获取数据状态
             $model.getDataStatus().then(function(res){
-                //console.log('获取数据状态');
-                //console.log(res);
                 if(res.status == 200){
                     $scope.dataStatusList = res.data.data;
                     $scope.$apply();
@@ -399,8 +395,6 @@ define([], function () {
 
             //编辑红包池信息
             $scope.editItemPacket = function(itemPacket){
-                console.log('开始编辑了');
-                console.log(itemPacket);
                 $scope.addPocket = false;
                 $scope.operateItemPacket = itemPacket;
                 if(!$scope.addPocket){
@@ -496,16 +490,16 @@ define([], function () {
                 $model.modifyPacketStatus(disableObj).then(function(res){
                     if(res.status == 200){
                         $('.supply_success_box').modal('show');
-                        successTimer = setTimeout(function(){
-                            $('.supply_success_box').modal('hide');
-                            clearTimeout(successTimer);
-                        },3000);
                         var curPageObj = {
                             currentPageNumber : $scope.currentPageNumber,
                             pageSize : $scope.pageSize,
                             metraType : 'redpack'
                         };
                         getDataList(curPageObj);
+                        successTimer = setTimeout(function(){
+                            $('.supply_success_box').modal('hide');
+                            clearTimeout(successTimer);
+                        },3000);
                     }else {
                         $('.supply_error_box').modal('show');
                         errorTimer = setTimeout(function(){

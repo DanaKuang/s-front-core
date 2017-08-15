@@ -12,21 +12,19 @@ define([], function () {
 	    ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
 	    	var $model = $scope.$model;
 	    	//设置input的默认时间
-	    	var allpage;
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
+            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
             var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
             $("#timeStart1").val(stattime);
             $("#timeStart2").val(stattime);
             $("#timeEnd1").val(endtime);
             $("#timeEnd2").val(endtime);
-            $("#timeStart").val(endtime);
 	    	$("#timeStart1").datetimepicker({
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
 		        autoclose:true
 		    }).on("click",function(){
-		        $("#timeStart1").datetimepicker("setEndDate",$("#timeEnd1").val());
+		        $("#timeStart1").datetimepicker("setEndDate",$("#timeStart2").val());
 		    });
 		    $("#timeEnd1").datetimepicker({
 		        format: 'yyyy-mm-dd',
@@ -43,7 +41,7 @@ define([], function () {
 		        language: 'zh-CN',
 		        autoclose:true
 		    }).on("click",function(){
-		        $("#timeStart2").datetimepicker("setEndDate",$("#timeEnd2").val());
+		        $("#timeStart2").datetimepicker("setEndDate",$("#timeStart2").val());
 		    });
 		    $("#timeEnd2").datetimepicker({
 		        format: 'yyyy-mm-dd',
@@ -56,64 +54,47 @@ define([], function () {
 		    });
 		    //零售户管理-->零售户列表
 			$("#manage-list").off().on('click', function(){
+				var startTime = $("#timeStart2").val();
+				var endTime = $("#timeEnd2").val();
 				var search = $("#input1").val();
-				// console.log($("#cityId option:seleted").val())
-				var provinceId = $("#provinceId").val();
-				var cityId = $("#cityId").val();
-				var areaId = $("#areaId").val();
-		    	var timeStart1 = $("#timeStart1").val();
-			    var timeEnd1 = $("#timeEnd1").val();
-			    var authStatus = $("#authStatus").val();
+				// console.log($("#cityId option:selected").val())
+		    	var timeStart = strToTimestamp($("#timeStart1").val());
+		    	var timeEnd = strToTimestamp($("#timeEnd1").val());
 				var manageList = {
-					search: search,
+					search: '',
 		    		pageNum: 1,
-		    		pageSize: 10,
-		    		addrCity: cityId,
-		    		addrArea:areaId,
-		    		addrProvince: provinceId,
-		    		authStatus:authStatus,
-		    		appStartTime: strToTimestamp(timeStart1) || '',
-			    	appEndTime: strToTimestamp(timeEnd1) || ''
+		    		pageSize: 2,
+		    		addrCity: $("#cityId option:selected").val() || '',
+		    		appStartTime: timeStart,
+		    		appEndTime:timeEnd
 			 	};
-                var arr=['食杂店', '便利店', '超市', '商场', '烟酒商店', '娱乐服务', '其他'];
                 $model.getTblData(manageList).then(function(res) {
                 	for(var i=0;i<res.data.data.length;i++){
 				    	res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
 				    	if(res.data.data[i].authStatus==1){
-				    		res.data.data[i].authStatus = "待审核";
-				    		res.data.data[i].isShow= false;
-				    	}else if(res.data.data[i].authStatus==2){
 				    		res.data.data[i].authStatus = "审核通过";
-				    		res.data.data[i].isShow= true;
-				    	}else if(res.data.data[i].authStatus==3){
-				    		res.data.data[i].authStatus = "审核未通过";
-				    		res.data.data[i].isShow= false;
+				    	}else if(res.data.data[i].authStatus==2){
+				    		res.data.data[i].authStatus = "审核不通过";
 				    	}
-				    	var commercial = res.data.data[i].commercial;
-				    	res.data.data[i].commercial = arr[commercial-1];
 				    }
 					$scope.listData = res.data.data || [];
 					$scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/manageList.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/manageList.pageSize);
 					$(".tcdPageCode").remove();
                     $(".rf").append("<div class='tcdPageCode'></div>");
                     $(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: manageList.pageNum,
-						backFn: function(p) {   
+						backFn: function(p) {
                             manageList.pageNum =p;
 			                $model.getTblData(manageList).then(function(res) {
 			                	for(var i=0;i<res.data.data.length;i++){
 							    	res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
 							    	if(res.data.data[i].authStatus==1){
-							    		res.data.data[i].authStatus = "待审核";
-							    	}else if(res.data.data[i].authStatus==2){
 							    		res.data.data[i].authStatus = "审核通过";
-							    	}else if(res.data.data[i].authStatus==3){
-							    		res.data.data[i].authStatus = "审核未通过";
+							    	}else if(res.data.data[i].authStatus==2){
+							    		res.data.data[i].authStatus = "审核不通过";
 							    	}
-							    	var commercial = res.data.data[i].commercial;
-				    				res.data.data[i].commercial = arr[commercial-1];
 							    }
 								$scope.listData = res.data.data || [];
 								$scope.$apply();
@@ -122,51 +103,36 @@ define([], function () {
 					});
 				});
 			});
-			$('#tab1[data-toggle="tab"]').on('show.bs.tab',function(e){
-            	$("#manage-list").trigger('click');
-            });
-			$("#manage-list").trigger('click');
 
-			$scope.aaa = function(tr){
-				$("#sellerId").val(tr.sellerId);
-			}
 		    //零用户管理->零售户二维码
 			$("#manage-erwei").off().on('click', function(){
 				var timeStart2 = $("#timeStart2").val();
 			    var timeEnd2 = $("#timeEnd2").val();
-			    var isDispatch = $("#send").val();
+			    var search = $("#input2").val();
 				var manageErwei = {
-					search: $("#input2").val(),
+					search: '',
 		    		pageNum: 1,
 		    		pageSize: 3,
-		    		isDispatch:isDispatch,
-		    		// orderStatus:orderStatus,
-		    		isPay:$("#is-pay").val(),
+		    		addrCity: addrCity || '',
 		    		startTime: strToTimestamp(timeStart2) || '',
 			    	endTime: strToTimestamp(timeEnd2) || ''
 			 	}
-			 	var authStatusArr=["","认证中","已认证","认证失败"];
-			 	var orderStatusArr=["","待支付","待处理","已发货","已收货","已取消","已处理"]
                 $model.getTbErwei(manageErwei).then(function(res) {
 					for(var i=0;i<res.data.data.length;i++){
 				    	res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-				    	res.data.data[i].authStatus = authStatusArr[res.data.data[i].authStatus];
-				    	res.data.data[i].orderStatus = orderStatusArr[res.data.data[i].orderStatus];
 				    }
 			    	$scope.erweiData = res.data.data || [];
 			    	$scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/manageErwei.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/manageErwei.pageSize);
 					$(".tcdPageCode").remove();
                     $(".rf").append("<div class='tcdPageCode'></div>");
                     $(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: manageErwei.pageNum,
-						backFn: function(p) {     
+						backFn: function(p) {
                             manageErwei.pageNum =p;
 							$model.getTbErwei(manageErwei).then(function(res) {
 								for(var i=0;i<res.data.data.length;i++){
-							    	res.data.data[i].authStatus = authStatusArr[res.data.data[i].authStatus];
-							    	res.data.data[i].orderStatus = orderStatusArr[res.data.data[i].orderStatus];
 							    	res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
 							    }
 						    	$scope.erweiData = res.data.data || [];
@@ -176,40 +142,26 @@ define([], function () {
 					});
 				});
 			});
-            //页面加载的时候加载数据
-            $('#tab2[data-toggle="tab"]').on('show.bs.tab',function(e){
-            	$("#manage-erwei").trigger('click');
-            });
-            $('#tabFx[data-toggle="tab"]').on('show.bs.tab',function(e){
-            	$("#return").trigger("click");
-            });
-            $('#tabSao[data-toggle="tab"]').on('show.bs.tab',function(e){
-            	$("#count").trigger("click");
-            });
-            $('#tabTx[data-toggle="tab"]').on('show.bs.tab',function(e){
-            	$("#tixian").trigger("click");
-            });
-		    //点击切换页面
+		     //点击切换页面
 		    $scope.myVar = true;
-		    $scope.showDetail = function(tr) {
+		    $scope.toggle = function() {
 		        $scope.myVar = !$scope.myVar;
-		        $scope.sellerId =tr.sellerId;
-		        $("#return").trigger("click");
+		        // sellerId
 		        $model.getDetail({
-		    		sellerId:tr.sellerId
+		    		sellerId:3000044
 			    }).then(function (res) {
 			    	res.data.data.sellerInfo.applyTime = getLocalTime(res.data.data.sellerInfo.applyTime);
 			    	res.data.data.sellerInfo.lastUpdateTime = getLocalTime(res.data.data.sellerInfo.lastUpdateTime);
 			    	var authStatus= parseInt(res.data.data.sellerInfo.authStatus);
 			    	if( authStatus== 1){
-			    		authStatus = "待审核";
-			    	}else if(authStatus == 2){
 			    		authStatus = "审核通过";
-			    	}else if(authStatus == 3){
+			    	}else if(authStatus == 2){
 			    		authStatus = "审核未通过";
+			    	}else if(authStatus == 3){
+			    		authStatus = "在审核";
 			    	}
 			    	res.data.data.sellerInfo.authStatus =authStatus;
-			    	$scope.detailData = res.data.data.sellerInfo || [];
+			    	$scope.detailData = res.data.data || [];
 			    	$scope.$apply();
 			    });
 		    };
@@ -217,29 +169,25 @@ define([], function () {
 		    $scope.secondThough=function(){
 		    	alert("恭喜您审核已经通过");
 		    	$("#authStatus").text("审核通过");
+		    	console.log($("#authStatus").text())
 		    }
 		    ////商品详情-->审核驳回
 		     $scope.secondBack=function(){
-		     	// $("#though-check").css("display","none");
 		     	$(".goods-back").attr({"data-toggle":"modal","data-target":"#myModal"});
 		     	$("#shen-though").css("display","none");
 		     	$("#shen-back").css("display","none");
 		     	$("#content-text").css("display","block");
-		     	$("#modal-content").css("height","280px");
-		     	$("#refuse-reason").css("height","186px");
 		     	$("#refuse-reason").change(function(){
 		     		var mydate = new Date();
 				    var str = "" + mydate.getFullYear() + "年";
 				    str += (mydate.getMonth()+1) + "月";
 				    str += mydate.getDate() + "日";
 		     		$("#reason-box").append("<p id='back-reason' 'class'='col-ms-12'><p>");
-		     		$("#back-reason").append("<li>"+str+"&nbsp;&nbsp;&nbsp;&nbsp;"+$('#refuse-reason').val()+"</li>");
-		     		if($("#back-reason").find("li").length>=3){
-		     			$("#back-reason li:first").remove();
-		     		}
+		     		$("#back-reason").text(str + $("#refuse-reason").val());
 		     	})
 		    }
-		    // 省市区 
+		    // 省市区
+		   var addrCity=0;
 		   $scope.province = $model.$province.data;
 		   $("#provinceId").change(function (e) {
 		   		$model.getCity({
@@ -247,73 +195,54 @@ define([], function () {
 		   		}).then(function (res) {
 		   			$scope.city = res.data;
 		   			$scope.$apply();
+		   			addrCity = res.data[0].code;
+		   			// console.log(addrCity)
 		   		});
-		   }); 
+		   });
+
 		   $("#cityId").change(function (e) {
 		   		$model.getArea({
 		   			parentCode: e.target.value || ''
 		   		}).then(function (res) {
 		   			$scope.area = res.data;
-		   			$scope.$apply();	
+		   			$scope.$apply();
 		   		});
 		   });
 		   //审核
-		   	$scope.shenThough = function(authResult){
+		   	$scope.authResult = 1;
+		   	$scope.shenThough=function(){
 		   		$scope.authResult = 1;
-		   		$("#modal-content").css("height","124px");
+		   		$("#though-check").css("display","block");
 		   		$("#content-text").css("display","none");
-		   		var sellerId=$("#sellerId").val();
 			    $model.getApproval({
-			    	authResult: authResult,
+			    	authResult: $scope.authResult,
 			    	failReason: '',
 			    	note: '',
-			    	sellerId:sellerId
+			    	sellerId:3000050
 				}).then(function (res) {
 					$scope.approvalData = res.data.data || [];
 					$scope.$apply();
-					if(res.data.ok = true){
-						$("#though-backDown").css("display","none");
-						$("#though-check").css("display","block");
-					}else {
-						$("#though-check").css("display","node");
-						$("#though-backDown").css("display","block");
-					};
 				});
-		   	}
-		   	$scope.thoughClose=function(){
-		   		$("#though-check").css("display","none");
-		   		$("#modal-content").css("height","90px");
 		   	}
 		   	$scope.shenBack=function(){
 		   		$("#content-text").css("display","block");
 		   		$("#though-check").css("display","none");
-		   		$("#refuse-reason").css("height","186px")
-		   		$("#modal-content").css("height","325px");
-		  
-		   	}
-		   	//审核驳回理由
-		   	$scope.backReason=function(){
-		   		alert(111);
 		   		$scope.authResult = 2;
-		   		var sellerId=$("#sellerId").val();
-		   		var failReason=$("#refuse-reason").val();
+		   		$scope.failReason = $("#refuse-reason").val();
 			    $model.getApproval({
-			    	authResult: 2,
-			    	failReason: failReason,
+			    	authResult: $scope.authResult,
+			    	failReason: $scope.failReason,
 			    	note: '',
-			    	sellerId:sellerId
+			    	sellerId:3000050
 				}).then(function (res) {
 					$scope.approvalData = res.data.data || [];
 					$scope.$apply();
 				});
-		   	} 	
+		   	}
+
 		   // 零售户详情
-		   //返回零售户列表
-		   	$scope.goBack = function(){
-			  window.history.back()
-			}
 		   //设置input的默认时间
-	        var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
+	        var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
 	        var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
 	        $("#timeStart111").val(stattime);
 	        $("#timeStart222").val(stattime);
@@ -321,14 +250,14 @@ define([], function () {
 	        $("#timeEnd111").val(endtime);
 	        $("#timeEnd222").val(endtime);
 	        $("#timeEnd333").val(endtime);
-		    $("#timeStart111").datetimepicker({
-				       format: 'yyyy-mm-dd',
+		         $("#timeStart111").datetimepicker({
+				      format: 'yyyy-mm-dd',
 				       minView:'month',
 				       language: 'zh-CN',
 				       autoclose:true
-			}).on("click",function(){
-					   $("#timeStart111").datetimepicker("setEndDate",$("#timeEnd111").val());
-			});
+				 }).on("click",function(){
+				       $("#timeStart111").datetimepicker("setEndDate",$("#timeEnd111").val());
+				 });
 			$("#timeEnd111").datetimepicker({
 			          format: 'yyyy-mm-dd',
 			          minView:'month',
@@ -374,43 +303,44 @@ define([], function () {
 			});
 			//扫码返现
 			$("#return").off().on('click', function(){
-				var unit = $("#manage-unit").val();
-			    var isFx = $("#manage-isfx").val();		      				    
+				var unit = $("#manage-unit option:selected").text();
+			    var isFx = $("#manage-isfx option:selected").text();
+			    if(isFx=="有"){
+			      	isFx=1;
+			    } else {
+			      	isFx=0;
+			    }
 			    var startTime = strToTimestamp($("#timeStart111").val());
 				var endTime = strToTimestamp($("#timeEnd111").val());
 				var returnNum = {
 					pageNum: 1,
-			    	pageSize: 2,
-			    	isFx: isFx,
+			    	pageSize: 20,
+			    	unit: unit || '',
+			    	isFx: isFx || '',
 			    	startTime: startTime,
 			    	endTime: endTime,
-			    	sellerId:$scope.sellerId
-			 	};
-			 	//alert($("#fx-page>span:first").text());
-                //alert($("#fx-page>span:last").text());
-                $model.getFxlist(returnNum).then(function(res) {
+			    	sellerId:3000037
+			 	}
+                $model.getReturn(returnNum).then(function(res) {
 					//将时间戳变为日期
 				    for(var i=0;i<res.data.data.length;i++){
 				    		res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-				    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);	
+				    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);
 				    }
 				    $scope.returnData = res.data.data || [];
 				    $scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/returnNum.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/returnNum.pageSize);
 					$(".tcdPageCode").remove();
                     $(".rf").append("<div class='tcdPageCode'></div>");
-                    //创建分页同时数据再次加载
-
                     $(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: returnNum.pageNum,
-						backFn: function(p) {     
+						backFn: function(p) {
                             returnNum.pageNum = p;
-                            
-							$model.getFxlist(returnNum).then(function(res) {
+							$model.getReturn(returnNum).then(function(res) {
 								 for(var i=0;i<res.data.data.length;i++){
 							    		res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-							    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);	
+							    		res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);
 							    }
 							    $scope.returnData = res.data.data || [];
 							    $scope.$apply();
@@ -419,17 +349,17 @@ define([], function () {
 					});
 				});
 			});
-			    
-			//提现记录  
+
+			//提现记录
 			$("#tixian").off().on('click', function(){
 				var timeEnd333=$("#timeEnd333").val();
 			    var timeStart333=$("#timeStart333").val();
 				var tixianNum = {
 					pageNum: 1,
-			    	pageSize: 2,
+			    	pageSize: 20,
 			    	startTime: strToTimestamp(timeStart333),
 			    	endTime: strToTimestamp(timeEnd333),
-			    	sellerId:$scope.sellerId
+			    	sellerId:3000044
 			 	}
                 $model.getTixian(tixianNum).then(function(res) {
 					//将时间戳变为日期
@@ -438,16 +368,16 @@ define([], function () {
 				    	}
 				    $scope.tixianData = res.data.data || [];
 				    $scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/tixianNum.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/tixianNum.pageSize);
 					$(".tcdPageCode").remove();
                     $(".rf").append("<div class='tcdPageCode'></div>");
                     $(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: tixianNum.pageNum,
-						backFn: function(p) {     
+						backFn: function(p) {
                             tixianNum.pageNum = p;
-							$model.getTixian(tixianNum).then(function(res) {
-								for(var i=0;i<res.data.data.length;i++){
+							$model.getTixian(returnNum).then(function(res) {
+								 for(var i=0;i<res.data.data.length;i++){
 						    		res.data.data[i].txTime=getLocalTime(res.data.data[i].txTime);
 						    	}
 						    	$scope.tixianData = res.data.data || [];
@@ -461,24 +391,21 @@ define([], function () {
 			$("#count").off().on('click', function(){
 				var countNum = {
 					pageNum: 1,
-			    	pageSize: 2,
-			    	sellerId:$scope.sellerId
+			    	pageSize: 20,
+			    	sellerId:3000044
 			 	}
                 $model.getCount(countNum).then(function(res) {
-                	for(var i=0;i<res.data.data.length;i++){
-						res.data.data[i].lastScanTime=getLocalTime(res.data.data[i].lastScanTime);		
-					}
 				    $scope.countData = res.data.data || [];
 				    $scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/countNum.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/countNum.pageSize);
 					$(".tcdPageCode").remove();
                     $(".rf").append("<div class='tcdPageCode'></div>");
                     $(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: countNum.pageNum,
-						backFn: function(p) {     
-                            	countNum.pageNum = p;
-								$model.getCount(countNum).then(function(res) {
+						backFn: function(p) {
+                            tixianNum.pageNum = p;
+							$model.getCount(countNum).then(function(res) {
 								$scope.countData = res.data.data || [];
 				    			$scope.$apply();
 							});
@@ -491,24 +418,48 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true,
-		        endDate:new Date()
+		        autoclose:true
 		    }).on("click",function(){
 		        $("#timeStart").datetimepicker("setEndDate",$("#timeEnd").val());
 		    });
-		    $scope.seacherbtn = function(){
-		    	var timeStart= $("#timeStart").val();
-		    	$("#third").show();
-		    	$(".down").text($("#timeStart").val()+"日订单下载");
-		    	$("#fileDownBox").css("height","180px");
-		    }
+		    $("#timeEnd").datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        minView:'month',
+		        language: 'zh-CN',
+		        autoclose:true
+		    }).on("click",function(){
+		        $("#timeEnd").datetimepicker("setStartDate",$("#timeStart").val());
+		    });
+		    $("#timeStart11").datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        minView:'month',
+		        language: 'zh-CN',
+		        autoclose:true
+		    }).on("click",function(){
+		        $("#timeStart11").datetimepicker("setEndDate",$("#timeStart11").val());
+		    });
+		    $("#timeStart22").datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        minView:'month',
+		        language: 'zh-CN',
+		        autoclose:true
+		    }).on("click",function(){
+		        $("#timeStart22").datetimepicker("setEndDate",$("#timeStart22").val());
+		    });
+		    $("#timeStart33").datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        minView:'month',
+		        language: 'zh-CN',
+		        autoclose:true
+		    }).on("click",function(){
+		        $("#timeStart33").datetimepicker("setEndDate",$("#timeStart33").val());
+		    });
 		    //上传订单文件
 		    $("#timeStart1111").datetimepicker({
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true,
-		        endDate:new Date()
+		        autoclose:true
 		    }).on("click",function(){
 		        $("#timeStart1111").datetimepicker("setEndDate",$("#timeStart1111").val());
 		    });
@@ -516,8 +467,7 @@ define([], function () {
 		        format: 'yyyy-mm-dd',
 		        minView:'month',
 		        language: 'zh-CN',
-		        autoclose:true,
-		        endDate:new Date()
+		        autoclose:true
 		    }).on("click",function(){
 		        $("#timeStart2222").datetimepicker("setStartDate",$("#timeStart2222").val());
 		    });
@@ -529,70 +479,53 @@ define([], function () {
 		        height:'40px',
 		        bgColor:'#ECEDF0',
 		        barColor:'lightgreen'
-		    });  
+		    });
 		    // 二维码订单导出
 			$(".down").click(function (e) {
-				var startTime = strToTimestamp($("#timeStart").val())
-				var endTime = startTime+86400000;
-				var url = '/seller-manager/export/print/qr';
-				endTime && (url += '?endTime=' + endTime);
-				startTime &&(url += '&startTime=' +startTime);
+				var search = $("#timeStart11").val();
+				var timeEnd = $("#timeEnd").val();
+				var timeStart = $("#timeStart").val();
+				var url = '/api/tztx/seller-manager/export/print/qr?';
+				search && (url += 'search=' + strToTimestamp(search) + '&');
+				timeEnd && (url += 'endTime=' + strToTimestamp(timeEnd) + '&');
+				timeStart && (url += 'startTime=' + strToTimestamp(timeStart));
 				window.open(url);
 			});
 			// 文件上传
-			// $('#fileupload').change(function(){
-			//     var performanceFile = $('#fileupload')[0].files[0];
-			//     //fileLimit
-			//     if(performanceFile != undefined){
-			//         if(performanceFile.size > fileLimit){
-			//             $('#performance_warn').html('文件大小超过50M，不能上传！');
-			//             return;
-			//         }
-			//         $('#performance_warn').html('文件上传中...');
-			//         var formData = new FormData();
-			//         formData.append('file',performanceFile);
-			//         $.ajax({
-			//             url: '/api/tztx/seller-manager/import/tracking/info',
-			//             type: 'POST',
-			//             cache: false,
-			//             data: formData,
-			//             processData: false,
-			//             contentType: false,
-			//             headers: {
-			//                 ContentType: "multipart/form-data",
-			//                 loginId : sessionStorage.access_loginId ,
-			//                 token : sessionStorage.access_token
-			//             }
-			//         }).done(function(res) {
-			//             performanceAttach = res.data.attachCode;
-			//             performanceFileName = res.data.filename;
-			//             $('#performanceName').html(res.data.filename);
-			//             $('#performance_warn').html('文件上传成功！');
+			$('#fileupload').change(function(){
+			    var performanceFile = $('#fileupload')[0].files[0];
+			    //fileLimit
+			    if(performanceFile != undefined){
+			        if(performanceFile.size > fileLimit){
+			            $('#performance_warn').html('文件大小超过50M，不能上传！');
+			            return;
+			        }
+			        $('#performance_warn').html('文件上传中...');
+			        var formData = new FormData();
+			        formData.append('file',performanceFile);
+			        $.ajax({
+			            url: '/api/tztx/seller-manager/import/tracking/info',
+			            type: 'POST',
+			            cache: false,
+			            data: formData,
+			            processData: false,
+			            contentType: false,
+			            headers: {
+			                ContentType: "multipart/form-data",
+			                loginId : sessionStorage.access_loginId ,
+			                token : sessionStorage.access_token
+			            }
+			        }).done(function(res) {
+			            performanceAttach = res.data.attachCode;
+			            performanceFileName = res.data.filename;
+			            $('#performanceName').html(res.data.filename);
+			            $('#performance_warn').html('文件上传成功！');
 
-			//         }).fail(function(res) {
-			//             $('#performance_warn').html('文件上传失败！');
-			//         });
-			//     }
-			// });
-			//创建分页
-			function createPage3(n){
-			 	if (n === 1) {
-                        $(".tcdPageCode").remove();
-                } else {          
-					if ($(".tcdPageCode").createPage) {
-	                    $(".tcdPageCode").remove();
-	                    $(".rf").append("<div class='tcdPageCode'></div>");
-                	}
-                }
-                $(".tcdPageCode").createPage({
-                    pageCount: n,
-                    current: Defalut3.page,
-                    backFn: function (page) {
-                        Defalut3.page = page;
-                        searchFun(Defalut3);
-                    }
-                });
-			}
+			        }).fail(function(res) {
+			            $('#performance_warn').html('文件上传失败！');
+			        });
+			    }
+			});
 	    }]
 	};
 	return manageCtrl;

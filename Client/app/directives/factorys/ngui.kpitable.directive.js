@@ -118,7 +118,7 @@ define([], function () {
             $i.addClass('open');
           }
           var ele = $i.closest('tr');
-          var mConf = parseUrl(childUrl, {'provName': city});
+          var mConf = parseUrl(childUrl, {'provName': city,'key':'scantimes'});
           mAjax(mConf, null, scope.conf.mediaType).then(function (data) {
             var childArr = [];
             _.each(data[0], function (d) {

@@ -110,6 +110,8 @@ define([], function () {
                 clearInterval(int);
                 int = null;
               });
+              // 清空datetimepicker
+              $(".datetimepicker").remove();
           });
           // 监听路由解析完成事件
           $rootScope.$on('$routeChangeSuccess', function(evt, current, previous) {

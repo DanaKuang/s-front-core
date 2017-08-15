@@ -29,9 +29,23 @@ define([], function () {
         }
         mapEchart.setOption(mapConf);
 
+        var act_back_data = $model.$activity.data || [];
+        act_back_data = act_back_data.length ? act_back_data : [{activityName: '无数据',activityId: ''}];
         // 活动下拉
-        $scope.activity = $model.$activity.data || [{activityName: '无数据',activityId: ''}];
-        $scope.activityId = $scope.activity[0].activityId;
+        $scope.activity = act_back_data;
+        $scope.activityId = "ACT-6UKN15V5DZ2" || act_back_data[0].activityId;
+
+        // 单选
+        $(document).ready(function () {
+            var $product = $('[name="activityId"]');
+            $product.multiselect({
+                nonSelectedText: '请选择',
+                allSelectedText: '全部',
+                nSelectedText: '已选择'
+            });
+            $product.multiselect('select', $scope.activityId);
+            $product.multiselect('refresh');
+        });
 
         // 倒计时
         function initInterval() {
@@ -46,6 +60,8 @@ define([], function () {
                 }
                 $("#turnto").html(DEFAULT);
             }, 1000);
+            // 可能存放多个，没关系
+            window.IntervalArr.push(INTERVAL);
         }
         // 查询入口
         $scope.realSearch = function () {
@@ -85,9 +101,9 @@ define([], function () {
                         data: _.pluck(res.data, 'time').reverse()
                     }],
                     series: [{
-                        data: _.pluck(res.data, 'pv')
+                        data: _.pluck(res.data, 'pv').reverse()
                     }, {
-                        data: _.pluck(res.data, 'uv')
+                        data: _.pluck(res.data, 'uv').reverse()
                     }]
                 });
             });
@@ -140,8 +156,6 @@ define([], function () {
                 $scope.$apply();
             });
         }
-
-        window.IntervalArr.push(INTERVAL);
     }]
   };
 

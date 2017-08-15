@@ -35,16 +35,22 @@ define([], function () {
             var pieRightConf = $model.$pieRightConf.data;
             pieRightEchart.setOption(pieRightConf);
 
+            // 后端数据
+            var brand_back_data = $model.$brand.data || [];
+            brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
+            var act_back_data = $model.$activity.data || [];
+            act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
+
             // 初始化搜索配置
             $scope.dayConf = {
-                startTime: "2017-08-04" || dateFormatFilter.date(+new Date),
-                endTime: "2017-08-04" || dateFormatFilter.date(+new Date),
-                pbArray: $model.$brand.data || [{productBrand: ""}],
-                productBrand: "芙蓉王" || $model.$brand.data[0].productBrand || "",
+                startTime: dateFormatFilter.date(+new Date),
+                endTime: dateFormatFilter.date(+new Date),
+                pbArray: brand_back_data,
+                productBrand: "芙蓉王" || brand_back_data[0].productBrand || "",
                 pnArray: [],
                 productName: "",
-                acArray: $model.$activity.data || [{activityName: "无数据", activityId: ""}],
-                activity: 'ACT-2E7J6228B48' || $model.$activity.data[0].activityId || "",
+                acArray: act_back_data,
+                activity: "ACT-2E7J6228B48" || act_back_data[0].activityId || "",
                 daySearch: daySearch
             };
 
@@ -56,7 +62,6 @@ define([], function () {
                     productBrand: sScope.productBrand || "所有",
                     productSn: sScope.productName && sScope.productName.join(',') || "99999999",
                     activityId: sScope.activity || "",
-                    cityName: $scope.cityName || "合计",
                     timeType: sScope.startTime == sScope.endTime ? "hour" : "day"
                 };
                 // 初始化折线图
@@ -85,6 +90,9 @@ define([], function () {
                         endTime: sScope.b_endTime || ""
                     }, params));
                 };
+                // 默认值
+                clickOfMap("湖南");
+                $scope.setCityMap($scope.cityName||"长沙");
                 // 初始化饼图
                 initPieMap(angular.extend({
                     startTime: sScope.startTime || "",
@@ -110,6 +118,7 @@ define([], function () {
                 });
                 var $prBrand = $("[name='productBrand']");
                 var $product = $("[name='productName']");
+                var $activity = $("[name='activity']");
                 // 品牌
                 $prBrand.multiselect('select', sScope.productBrand);
                 $prBrand.multiselect('refresh');
@@ -128,6 +137,9 @@ define([], function () {
                         $product.multiselect('refresh');
                     });
                 });
+                // 活动
+                $activity.multiselect('select', sScope.activity);
+                $activity.multiselect('refresh');
                 // 默认值
                 daySearch();
             });
@@ -148,13 +160,13 @@ define([], function () {
                     if (!!params_s.startTime) {
                         $model.getDayMap(params_s).then(function (second) {
                             $model.dayMapData.second = second.data || [];
-                            $scope.setDef(0);
+                            $scope.setDef(1);
                         });
                     } else {
                         // 非对比数据
-                        $scope.setDef(0);
+                        $scope.setDef(1);
                     }
-                    $('[name="searchGroup"]')[0].checked = true;
+                    $('[name="searchGroup"]')[1].checked = true;
                 });
                 // 点击事件
                 $scope.setDef = function (n) {
@@ -214,15 +226,20 @@ define([], function () {
             // 地图点击事件
             mapEchart.on('click', function (e) {
                 if (e.componentType === 'series') {
-                    $model.getCityName({
-                        provinceName: e.name + '省'
-                    }).then(function (res) {
-                        $scope.cityArr = [{cityName:"请选择"}].concat(res.data || []);
-                        $scope.cityName = $scope.cityArr[0].cityName || "";
-                        $scope.$apply();
-                    });
+                    clickOfMap(e.name);
                 }
             });
+
+            // 地图点击事件
+            function clickOfMap (name) {
+                $model.getCityName({
+                    provinceName: name + '省'
+                }).then(function (res) {
+                    $scope.cityArr = res.data || [];
+                    $scope.cityName = $scope.cityArr[0].cityName || "";
+                    $scope.$apply();
+                });
+            }
 
             // 初始化 城市折线图
             function initCityMap (params_f, params_s) {

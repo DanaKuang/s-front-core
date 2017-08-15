@@ -1,0 +1,72 @@
+[2017-08-14 19:54:20.628] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:20.629] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:20.630] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: socket hang up
+[2017-08-14 19:54:20.631] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-14 19:54:20.634] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:20.634] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:20.635] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:20.635] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:20.637] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: socket hang up
+[2017-08-14 19:54:20.637] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-14 19:54:20.637] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: socket hang up
+[2017-08-14 19:54:20.637] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-14 19:54:20.638] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:20.638] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:20.638] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: socket hang up
+[2017-08-14 19:54:20.639] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-14 19:54:20.704] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:20.704] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:20.704] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:20 uncaughtException: socket hang up
+[2017-08-14 19:54:20.705] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-14 19:54:23.590] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:23 uncaughtException: connect ECONNREFUSED 127.0.0.1:9090
+[2017-08-14 19:54:23.590] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ECONNREFUSED 127.0.0.1:9090
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-14 19:54:23.591] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 19:54:23 uncaughtException: socket hang up
+[2017-08-14 19:54:23.592] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)

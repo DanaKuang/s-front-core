@@ -77,6 +77,9 @@ define([], function () {
 
                 $(document).ready(function () {
                     $(".draw-area .select").multiselect({
+                        nonSelectedText: '请选择',
+                        allSelectedText: '全部',
+                        nSelectedText: '已选择',
                         includeSelectAllOption: true,
                         selectAllText: '全部',
                         selectAllValue: 'all',
@@ -127,9 +130,7 @@ define([], function () {
                 } else {
                     e.target.value = 0;
                 }
-                
             }
-
         }
 
         return defineObj;

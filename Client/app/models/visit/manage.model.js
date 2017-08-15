@@ -15,12 +15,12 @@ define([], function () {
                 var APPROVAL_JSON_DATA = '/api/tztx/seller-manager/seller/approval';
                 // 二维码订单导出
                 //数据详情零售户
-                var FXLIST_JSON_DATA = '/api/tztx/seller-manager/seller/select/fxlist';
+                var RETURN_JSON_DATA = '/api/tztx/seller-manager/seller/select/fxlist';
                 var TIXIAN_JSON_DATA = '/api/tztx/seller-manager/seller/select/tx';
                 var UCOUNT_JSON_DATA = '/api/tztx/seller-manager/seller/select/ucount';
                 var DETAIL_JSON_DATA = '/api/tztx/seller-manager/seller/select/detail';
                 //订单物流信息导入
-                // var INFO_JSON_DATA = '/api/tztx/seller-manager/import/tracking/info';
+                var INFO_JSON_DATA = '/api/tztx/seller-manager/import/tracking/info';
     			// 获取表格数据
     			this.getTblData = function (params) {
     				return request.$Search(SEARCH_JSON_DATA, params);
@@ -29,7 +29,7 @@ define([], function () {
                     return request.$Search(ERWEI_JSON_DATA, params);
                 };
                 this.$province = request.$Search(PROVINCE_JSON_DATA);
-                // this.$info = request.$Search(INFO_JSON_DATA);
+                this.$info = request.$Search(INFO_JSON_DATA);
                 this.getCity = function (params) {
                     return request.$Search(CITY_JSON_DATA, params);
                 };
@@ -50,9 +50,6 @@ define([], function () {
                 };
                 this.getCount = function (params) {
                     return request.$Search(UCOUNT_JSON_DATA, params);
-                };
-                this.getFxlist = function (params) {
-                    return request.$Search(FXLIST_JSON_DATA, params);
                 };
                 // this.getDetail = request.$Search(DETAIL_JSON_DATA);
                 this.getDetail = function (params) {

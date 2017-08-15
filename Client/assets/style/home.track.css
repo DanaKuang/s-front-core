@@ -112,6 +112,8 @@
 }
 
 .ui-form-select .multiselect-container,
+.ui-daily-search .multiselect-container,
+.ui-form-search .multiselect-container,
 .ui-path-search .multiselect-container {
     max-height: 200px;
     overflow: auto;

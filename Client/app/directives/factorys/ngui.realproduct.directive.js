@@ -69,7 +69,7 @@ define([], function () {
                 osJSobject.dataset.giftType = item.giftType;
 
                 osJQobject.find('.prize-img-preview img').attr('src', item.giftPic)
-
+                osJQobject.find('.prize-img-preview .mask').addClass('hidden');
                 $('.modal-content .close').trigger('click');
             }
 

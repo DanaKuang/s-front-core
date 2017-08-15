@@ -57,7 +57,7 @@
     padding-top: 13px;
 }
 
-.nav div {
+.change_nav div {
     border-left: 1px solid #8A8A8A;
     border-top: 1px solid #8A8A8A;
     border-right: 1px solid #8A8A8A;
@@ -68,12 +68,12 @@
     position: relative;
 }
 
-.nav div:first-child {
+.change_nav div:first-child {
     border-top-left-radius: 5px;
     border-right: 0px;
 }
 
-.nav div:last-child {
+.change_nav div:last-child {
     border-top-right-radius: 5px;
     border-left-color: #4B4B4B;
 }
@@ -111,8 +111,8 @@
 }
 
 .select_sec div {
-    float: left;
-    margin-left: 56px;
+    /*float: left;*/
+    /*margin-left: 56px;*/
     margin-bottom: 14px;
 }
 
@@ -120,19 +120,22 @@
     font-size: 14.7px;
     width: 60px;
     line-height: 28px;
-    margin-right: 16.8px;
+    /*margin-right: 16.8px;*/
+    margin-right: 3%;
     text-align: right;
 }
 
 .select_sec div select {
     font-size: 14.7px;
-    width: 154px;
+    /*width: 154px;*/
+    width: 60%;
     height: 28px;
     line-height: 28px;
 }
 
 .ser_btn, .rest_btn {
-    width: 112px;
+    /*width: 112px;*/
+    width: 60%;
     height: 28px;
     line-height: 28px;
     text-align: center;
@@ -228,32 +231,40 @@
     font-size: 14.7px;
     /*width: 60px;*/
     line-height: 28px;
-    margin-right: 14px;
+    /*margin-right: 14px;*/
+    margin-right: 3%;
     text-align: right;
 }
 
 .packet_select_sec div select {
     font-size: 14.7px;
-    width: 154px;
+    /*width: 154px;*/
+    width: 60%;
     height: 28px;
     line-height: 28px;
 }
 
 .packet_select_sec .ser_btn, .packet_select_sec .rest_btn {
-    width: 112px;
+    /*width: 112px;*/
+    width: 80%;
     height: 28px;
     line-height: 28px;
     text-align: center;
     font-size: 16.8px;
     border: 1px solid #888888;
     border-radius: 14px;
+    margin: 0 auto;
 }
+
 .col4_ser_margin{
     margin-left: 15px;
     margin-right: 100px;
 }
-.col1_ser_margin{
-    margin-right: 12px;
+.packet_margin{
+    margin-right: 50%;
+}
+.packet_fr{
+    float: right;
 }
 /*供应商管理*/
 .supply_select_sec {
@@ -279,21 +290,24 @@
 
 .supply_select_sec div select {
     font-size: 14.7px;
-    width: 80px;
+    /*width: 80px;*/
+    width: 70%;
     height: 28px;
     line-height: 28px;
 }
 
 .supply_select_sec div input {
     font-size: 14.7px;
-    width: 130px;
+    /*width: 130px;*/
+    width: 60%;
     height: 28px;
     line-height: 28px;
     border: 1px solid #888888;
 }
 
 .supply_select_sec .ser_btn, .supply_select_sec .rest_btn {
-    width: 100px;
+    /*width: 100px;*/
+    width: 120%;
     height: 28px;
     line-height: 28px;
     text-align: center;
@@ -307,7 +321,8 @@
 }
 .ser_btn:hover, .rest_btn:hover{
     cursor: pointer;
-    background-color: #F8FBFF
+    background-color: #7c8af4;
+    color: #FFFFFF;
 }
 .upload_warn{
     margin-left: 125px;
@@ -600,7 +615,8 @@ body{
 }
 #selectGiftName{
     font-size: 14.7px;
-    width: 154px;
+    /*width: 154px;*/
+    width: 60%;
     height: 28px;
     line-height: 28px;
 }

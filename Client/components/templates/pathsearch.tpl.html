@@ -9,7 +9,6 @@
             <div class="inline-block">
                 <label for="">品牌</label>
                 <select class="form-control multiple" name="productBrand" ng-model="productBrand">
-                    <option value="">请选择</option>
                     <option ng-repeat="pb in pbArray" value="{{pb.productBrand}}">{{pb.productBrand}}</option>
                 </select>
             </div>
@@ -22,14 +21,12 @@
             <div class="inline-block">
                 <label for="">活动名称</label>
                 <select class="form-control multiple" name="activityId" ng-model="activityId">
-                    <option value="">请选择</option>
                     <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
                 </select>
             </div>
             <div class="inline-block">
                 <label for="">页面名称</label>
                 <select class="form-control multiple" name="pagename" ng-model="pagename">
-                    <option value="">请选择</option>
                     <option ng-repeat="pg in pgArray" value="{{pg.page_code}}">{{pg.page_name}}</option>
                 </select>
             </div>

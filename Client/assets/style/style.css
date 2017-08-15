@@ -93,11 +93,8 @@ body {
   color: #fff;
   font-size: 26px;
 }
-.navbar-collapse {
-  margin-right: 50px;
-}
 .navbar-collapse ul {
-  padding: 0 30px;
+  padding-left: 30px;
 }
 .navbar-collapse ul li {
   margin: 0 15px;
@@ -116,10 +113,8 @@ body {
   background-color: #7c8af4;
 }
 .ui-navbar-user {
-  position: absolute;
-  right: 0;
-  top: 0;
-  line-height: 50px;
+  position: relative;
+  float: right !important;
   height: 50px;
   font-size: 14px;
   color: #44c2ed;
@@ -145,27 +140,37 @@ body {
   white-space: nowrap;
   display: inline-block;
   width: 50px;
+  line-height: 46px;
 }
 .ui-navbar-user span {
   float: right;
   position: relative;
-  top: 25px;
+  top: 24px !important;
+  right: 0 !important;
+}
+.ui-navbar-user ul {
+  padding-left: 0;
 }
 .ui-navbar-user li:hover {
   background: #44c2ed;
   color: #fff;
 }
 .ui-navbar-user .dropdown-menu {
+  right: 0;
   min-width: 90px;
   background: #3d467d;
 }
+.navbar-toggle .icon-bar {
+  background: #fff;
+}
 .ui-navbar-toggle {
   position: absolute;
-  right: 50px;
+  right: 0px;
+  top: 0;
   color: #333;
 }
 .ui-navbar-toggle .icon-bar {
-  background-color: #fff;
+  background-color: #ddd;
 }
 .ui-navbar-left {
   position: fixed;
@@ -194,7 +199,7 @@ body {
 .ui-navbar-left .open li {
   padding-left: 20px;
 }
-.ui-navbar-left li.active .sa {
+.ui-navbar-left li.open .sa {
   transform: rotateZ(90deg);
 }
 .ui-navbar-left >ul >li.active {
@@ -224,6 +229,9 @@ body {
 .ui-navbar-left ul li a {
   color: #8a8a8a;
 }
+.ui-navbar-title {
+  width: calc(100% - 200px);
+}
 .ui-navbar-title a {
   color: #fff;
 }
@@ -244,8 +252,8 @@ body {
 }
 .ui-navbar-title span {
   position: absolute;
-  top: 18px;
-  right: -18px;
+  top: 17px;
+  right: -15px;
 }
 
 .ui-navbar-left .fa-kpi {
@@ -412,7 +420,7 @@ body {
   width: 20px;
   height: 20px;
   position: relative;
-  top: 5px;
+  top: 15px;
 }
 .panel:hover {
   box-shadow: 0 0 10px rgba(0, 0, 1, .3);

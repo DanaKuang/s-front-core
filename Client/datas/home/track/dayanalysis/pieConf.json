@@ -1,7 +1,7 @@
 {
     "tooltip": {
         "trigger": "item",
-        "formatter": "{a} <br/>{b}: {c} ({d}%)"
+        "formatter": "{a} <br/>{b}({d}%)"
     },
     "legend": {},
     "color": ["#23baec","#ffce23","#77d7f7","#ff8b23"],

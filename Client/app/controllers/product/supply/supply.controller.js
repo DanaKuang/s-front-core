@@ -6,7 +6,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'SupplyCtrl',
         ViewModelName: 'supplyViewModel',
-        ServiceContent: ['$scope', function ($scope) {
+        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
             //console.log('Supply controller is under control.');
 
             var $model = $scope.$model;
@@ -31,6 +31,13 @@ define([], function () {
                 var assmengData = res.data || [];
                 if(assmengData.message == 'success'){
                     $scope.assmentData = assmengData.data;
+                    $scope.$apply();
+                }
+            });
+            //获取数据状态
+            $model.getDataStatus().then(function(res){
+                if(res.status == 200){
+                    $scope.dataStatusList = res.data.data;
                     $scope.$apply();
                 }
             });
@@ -77,6 +84,12 @@ define([], function () {
                         $scope.noSearch = false;
                         var dataObj = res.data.data;
                         if(dataObj.list != null && dataObj.list.length > 0 && dataObj.list != undefined){
+                            for(var i=0;i<dataObj.list.length;i++){
+                                dataObj.list[i].showName = limitlengthFilter.limitLength(dataObj.list[i].name);
+                                dataObj.list[i].showRegistFileName = limitlengthFilter.limitLength(dataObj.list[i].registFileName);
+                                dataObj.list[i].showContractFileName = limitlengthFilter.limitLength(dataObj.list[i].contractFileName);
+                                dataObj.list[i].showPerformanceFileName = limitlengthFilter.limitLength(dataObj.list[i].performanceFileName);
+                            }
                             $scope.supplyLists = dataObj.list;
                             $scope.totalPage = dataObj.page.pageNumber;
                             $scope.totalCount = dataObj.page.count;

@@ -210,9 +210,35 @@
         var maxWidth = $d.width() - handler.width();  //能滑动的最大间距
 
         //鼠标按下时候的x轴的位置
+        handler.on('touchstart', function(e){
+            isMove = true;
+            x = e.targetTouches[0].pageX - parseInt(handler.css('left'), 10);
+        });
+
+        //鼠标指针在上下文移动时，移动距离大于0小于最大间距，滑块x轴位置等于鼠标移动距离
+        $(document).on('touchmove', function(e){
+            var _x = e.targetTouches[0].pageX - x;
+            if(isMove){
+                if(_x > 0 && _x <= maxWidth){
+                    handler.css({'left': _x});
+                    drag_bg.css({'width': _x});
+                }else if(_x > maxWidth){  //鼠标指针移动距离达到最大时清空事件
+                    dragOk();
+                }
+            }
+        }).on('touchend', function(e){
+            isMove = false;
+            var _x = e.changedTouches[0].pageX - x;
+            if(_x < maxWidth){ //鼠标松开时，如果没有达到最大距离位置，滑块就返回初始位置
+                handler.css({'left': 0});
+                drag_bg.css({'width': 0});
+            }
+        });
+
+        //鼠标按下时候的x轴的位置
         handler.mousedown(function(e){
             isMove = true;
-            x = e.pageX - parseInt(handler.css('left'), 10);
+            x = e.pageX  - parseInt(handler.css('left'), 10);
         });
 
         //鼠标指针在上下文移动时，移动距离大于0小于最大间距，滑块x轴位置等于鼠标移动距离

@@ -1,0 +1,75 @@
+[2017-08-15 13:06:54.031] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53606)
+[2017-08-15 13:06:54.039] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53606)
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at connect (net.js:880:16)
+    at net.js:1009:7
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+[2017-08-15 13:06:54.041] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: socket hang up
+[2017-08-15 13:06:54.042] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 13:06:54.083] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53607)
+[2017-08-15 13:06:54.083] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53607)
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at connect (net.js:880:16)
+    at net.js:1009:7
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+[2017-08-15 13:06:54.084] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: socket hang up
+[2017-08-15 13:06:54.085] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 13:06:54.090] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53609)
+[2017-08-15 13:06:54.090] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53609)
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at connect (net.js:880:16)
+    at net.js:1009:7
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+[2017-08-15 13:06:54.092] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: socket hang up
+[2017-08-15 13:06:54.093] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 13:06:54.093] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53610)
+[2017-08-15 13:06:54.094] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53610)
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at connect (net.js:880:16)
+    at net.js:1009:7
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+[2017-08-15 13:06:54.094] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: socket hang up
+[2017-08-15 13:06:54.094] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 13:06:54.103] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53611)
+[2017-08-15 13:06:54.103] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: connect ENETDOWN 59.110.91.170:80 - Local (172.16.1.251:53611)
+    at Object.exports._errnoException (util.js:1018:11)
+    at exports._exceptionWithHostPort (util.js:1041:20)
+    at connect (net.js:880:16)
+    at net.js:1009:7
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+[2017-08-15 13:06:54.103] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 13:06:54 uncaughtException: socket hang up
+[2017-08-15 13:06:54.104] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)

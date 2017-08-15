@@ -1,0 +1,8 @@
+[2017-08-14 18:48:36.650] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 18:48:36 uncaughtException: getaddrinfo ENOTFOUND portal.test.taozuike.com portal.test.taozuike.com:80
+[2017-08-14 18:48:36.652] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: getaddrinfo ENOTFOUND portal.test.taozuike.com portal.test.taozuike.com:80
+    at errnoException (dns.js:28:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+[2017-08-14 18:49:32.884] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-14 18:49:32 uncaughtException: getaddrinfo ENOTFOUND portal.test.taozuike.com portal.test.taozuike.com:80
+[2017-08-14 18:49:32.886] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: getaddrinfo ENOTFOUND portal.test.taozuike.com portal.test.taozuike.com:80
+    at errnoException (dns.js:28:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)

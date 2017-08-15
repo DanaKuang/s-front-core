@@ -12,16 +12,23 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
 
+        // 后端数据
+        var brand_back_data = $model.$brand.data || [];
+        brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
+        var act_back_data = $model.$activity.data || [];
+        act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
+
         // 默认配置
         $scope.pathConf = {
-            startTime: "2017-08-04" || dateFormatFilter.date(+new Date),
-            endTime: "2017-08-04" || dateFormatFilter.date(+new Date),
-            pbArray: $model.$brand.data || [{productBrand: ""}],
-            productBrand: "芙蓉王" || $model.$brand.data[0].productBrand || "",
+            startTime: dateFormatFilter.date(+new Date),
+            endTime: dateFormatFilter.date(+new Date),
+            pbArray: brand_back_data,
+            productBrand: brand_back_data[0].productBrand || "",
             pnArray: [],
-            acArray: $model.$activity.data || [{activityName: "无数据", activityId: ""}],
-            activity: 'ACT-2E7J6228B48' || $model.$activity.data[0].activityId || "",
+            acArray: act_back_data,
+            activityId: "ACT-C7MTZ3P6197" || act_back_data[0].activityId || "",
             pgArray: [],
+            pagename: "",
             pathSearch: pathSearch
         };
 
@@ -32,10 +39,10 @@ define([], function () {
             var params = {
                 productBrand: pScope.productBrand || "所有",
                 productSn: pScope.productName && pScope.productName.join(',') || "99999999",
-                activityId: pScope.activity || "",
+                activityId: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
-                webId: "1001" || pScope.pagename || "",
+                webId: pScope.pagename || "",
                 startTime: pScope.startTime || "",
                 endTime: pScope.endTime || ""
             };
@@ -61,7 +68,7 @@ define([], function () {
             $prBrand.multiselect('select', pScope.productBrand);
             $prBrand.multiselect('refresh');
             // 活动名称
-            $activity.multiselect('select', pScope.activity);
+            $activity.multiselect('select', pScope.activityId);
             $activity.multiselect('refresh');
             // 规格
             $product.next().off().on('click', function (e) {
@@ -79,17 +86,17 @@ define([], function () {
                 });
             });
             // 活动页面
-            $pagename.next().off().on('click', function (e) {
+            $pagename.next().children('.multiselect').off().on('click', function (e) {
                 $model.getActPage({
-                    webId: pScope.activityId
+                    activityId: pScope.activityId
                 }).then(function (res) {
                     pScope.pgArray = res.data || [];
                     pScope.$apply();
-                    $pagename.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                    $pagename.multiselect("destroy").multiselect('dataprovider', _.forEach(res.data, function(val) {
                         val.label = val.page_name;
                         val.value = val.page_code;
                     }));
-                    $product.multiselect('select', pScope.activityId);
+                    $pagename.multiselect('select', pScope.webId || pScope.pgArray[0].page_code);
                     $pagename.multiselect('refresh');
                 });
             });

@@ -34,16 +34,12 @@ requirejs.config({
       'https://cdn.bootcss.com/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min',
       'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect'
     ],
-    metisMenu: [
-      // 'https://cdn.bootcss.com/metisMenu/2.7.0/metisMenu.min',
-      'bower_components/metisMenu/dist/metisMenu'
-    ],
     echarts: [
-      'https://cdn.bootcss.com/echarts/3.6.2/echarts.min',
+      // 'https://cdn.bootcss.com/echarts/3.6.2/echarts.min',
       'bower_components/echarts/dist/echarts'
     ],
     angular: [
-      'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
+      // 'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
       'bower_components/angular/angular'
     ],
     angularAnimate: [
@@ -75,9 +71,6 @@ requirejs.config({
     bootstrapMultiselect: {
       deps: ['jquery']
     },
-    metisMenu: {
-      deps: ['jquery']
-    },
     angular: {
       deps: ['jquery'],
       exports: 'angular'
@@ -104,7 +97,6 @@ requirejs.config({
     'bootstrap',
     'datetimepicker',
     'bootstrapMultiselect',
-    'metisMenu',
     'echarts',
     'angular',
     'angularAnimate',

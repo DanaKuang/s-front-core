@@ -1,0 +1,54 @@
+[2017-08-15 14:14:28.057] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:14:28 uncaughtException: socket hang up
+[2017-08-15 14:14:28.061] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketOnEnd (_http_client.js:345:23)
+    at emitNone (events.js:91:20)
+    at Socket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:80:11)
+    at process._tickCallback (internal/process/next_tick.js:104:9)
+[2017-08-15 14:14:28.063] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:14:28 uncaughtException: socket hang up
+[2017-08-15 14:14:28.063] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 14:14:47.530] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:14:47 uncaughtException: socket hang up
+[2017-08-15 14:14:47.530] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketOnEnd (_http_client.js:345:23)
+    at emitNone (events.js:91:20)
+    at Socket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:80:11)
+    at process._tickCallback (internal/process/next_tick.js:104:9)
+[2017-08-15 14:14:47.530] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:14:47 uncaughtException: socket hang up
+[2017-08-15 14:14:47.531] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 14:26:08.706] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:26:08 uncaughtException: read ETIMEDOUT
+[2017-08-15 14:26:08.707] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: read ETIMEDOUT
+    at exports._errnoException (util.js:1018:11)
+    at TCP.onread (net.js:568:26)
+[2017-08-15 14:26:08.708] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:26:08 uncaughtException: socket hang up
+[2017-08-15 14:26:08.708] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 14:34:50.758] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:34:50 uncaughtException: read ETIMEDOUT
+[2017-08-15 14:34:50.758] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: read ETIMEDOUT
+    at exports._errnoException (util.js:1018:11)
+    at TCP.onread (net.js:568:26)
+[2017-08-15 14:34:50.759] [ERROR] /Users/data/projects/sass-front/Client/logs - 2017-8-15 14:34:50 uncaughtException: socket hang up
+[2017-08-15 14:34:50.759] [ERROR] /Users/data/projects/sass-front/Client/logs - Error: socket hang up
+    at createHangUpError (_http_client.js:253:15)
+    at Socket.socketCloseListener (_http_client.js:285:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
