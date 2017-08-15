@@ -94,7 +94,6 @@ define([], function () {
             // 活动页面
             $pagename.next().children('.multiselect').off().on('click', function (e) {
                 $model.getActPage({
-                    // productBrand: pScope.activityId
                     activityId: pScope.activityId
                 }).then(function (res) {
                     pScope.pgArray = res.data || [];
