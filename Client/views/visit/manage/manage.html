@@ -24,8 +24,8 @@
                     </div>
                   <div class="manage-bottom">
                     <ul class="nav nav-tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#homeList" aria-controls="home" role="tab" data-toggle="tab">零售户列表</a></li>
-                      <li role="presentation"><a href="#profileList" aria-controls="profile" role="tab" data-toggle="tab">零售户二维码</a></li>
+                      <li role="presentation" class="active"><a id="tab1" href="#homeList" aria-controls="home" role="tab" data-toggle="tab">零售户列表</a></li>
+                      <li role="presentation"><a href="#profileList" aria-controls="profile" id="tab2" role="tab" data-toggle="tab">零售户二维码</a></li>
 
                     </ul>
                     <div class="tab-content">
@@ -34,12 +34,18 @@
                             <input type="text" placeholder="烟草证号\门店名\联系人姓名\联系人手机号" id="input1">
                             <form >
                               <select id="provinceId" ng-model="provinceCode">
+                                  <option value="">请选择省</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
                               </select>
                               <select name="" id="cityId" ng-model="cityCode">
+                                  <option value="">请选择市</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
                               </select>
                               <select name="" id="areaId" ng-model="areaCode">
+                                  <option value="">请选择区</option>
+                                  <option value="">全部</option>
                                   <option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
                               </select>
                             </form>
@@ -49,12 +55,11 @@
                               <div>至</div>
                               <input name="时间" id="timeEnd1" class="form_datetime dateTime" placeholder="2017-8-2">
                             </div>
-                            <select name="" id="pay">
+                            <select name="authStatus" id="authStatus">
                               <option value="">状态</option>
-                              <option value="">申请</option>
-                              <option value="">审核通过</option>
-                              <option value="">审核未通过</option>
-                              <option value="">再申请</option>
+                              <option value="1">待审核</option>
+                              <option value="2">审核通过</option>
+                              <option value="3">审核未通过</option>
                             </select>
                             <div class="seacher" id="manage-list"><a href="javascript:">查询</a></div>
                         </div>
@@ -91,9 +96,8 @@
                                 <td>{{tr.applyTime}}</td>
                                 <td>{{tr.authStatus}}</td>
                                 <td>
-                                  <a  class="sava-shen" data-toggle="modal" data-target="#myModal">审核</a>
-
-                                  <a href="javascript:"  ng-click="toggle();">商户详情</a>
+                                  <a  class="sava-shen" data-toggle="modal" data-target="#myModal" ng-click="aaa(tr)" ng-hide="{{tr.isShow}}">审核</a>
+                                  <a  ng-click="showDetail(tr)">商户详情</a>
                                 </td>
                               </tr>
                             </tbody>
@@ -102,7 +106,7 @@
                       </div>
                       <div role="tabpanel" class="tab-pane" id="profileList">
                         <div class="fr">
-                          <a href="javascript:" data-toggle="modal" data-target="#myModalDown">下载订单文件</a>
+                          <a data-toggle="modal" data-target="#myModalDown">下载订单文件</a>
                         </div>
                         <div class="fr" id="loadFileContent">
                           <a href="javascript:"  data-toggle="modal" data-target="#myModalFile">上传订单文件</a>
@@ -117,13 +121,13 @@
                             </div>
                             <select name="" id="send">
                               <option value="">发货状态</option>
-                              <option value="">未发货</option>
-                              <option value="">已发货</option>
+                              <option value="0">未发货</option>
+                              <option value="1">已发货</option>
                             </select>
                             <select name="" id="is-pay">
                               <option value="">支付状态</option>
-                              <option value="">未支付</option>
-                              <option value="">已支付</option>
+                              <option value="0">未支付</option>
+                              <option value="1">已支付</option>
                             </select>
                             <div class="seacher" id="manage-erwei"><a href="javascript:">查询</a></div>
                         </div>
@@ -148,16 +152,16 @@
                               <tr ng-repeat="tm in erweiData">
                                 <td>{{tm.sellerId}}</td>
                                 <td>{{tm.shopName}}</td>
-                                <td>{{tm.order_id}}</td>
+                                <td>{{tm.orderId}}</td>
                                 <td>{{tm.contactName}}</td>
                                 <td>{{tm.contactPhone}}</td>
-                                <td>{{tm.areaName}}</td>
+                                <td>{{tm.provinceName+tm.cityName+tm.areaName+tm.addrDetail}}</td>
                                 <td>{{tm.ctime}}</td>
-                                <td>{{tm.shopName}}</td>
-                                <td>{{tm.isPay}}</td>
+                                <td>{{tm.amout+"元"}}</td>
+                                <td>{{tm.authStatus}}</td>
                                 <td>{{tm.orderStatus}}</td>
                                 <td>
-                                  <a href="javascript:" ng-click="toggle();">商户详情</a>
+                                  <a href="javascript:" ng-click="showDetail(tm);">商户详情</a>
                                 </td>
 
                               </tr>
@@ -181,24 +185,26 @@
   <!-- 审核 -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog orderModel" role="document">
-        <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-content" style="overflow: hidden;" id="modal-content">
           <div class="modal-header header">
             <div id="closeBtn">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>X</span></button>
+              <input type="hidden" id="sellerId">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span id="thoughClose" ng-click="thoughClose();">X</span></button>
               <h4 class="modal-title text-center">审核结果</h4>
             </div>
 
           </div>
           <div class="modal-body body" id="modal-body-text" >
-            <div id="shen-though" ng-click="shenThough();">通过</div>
+            <div id="shen-though" ng-click="shenThough(1);">通过</div>
             <div id="shen-back" ng-click="shenBack();">不通过</div>
             <div id="though-check">恭喜您已经通过审核！</div>
+            <div id="though-backDown">审核失败！</div>
             <form id="content-text" >
               <textarea name=""  cols="30" rows="10" id="refuse-reason">
 
               </textarea>
               <div class="col-md-12 text-center">
-                <button type="button" class="btn btn-primary" id="button">完成</button>
+                <button type="button" class="btn btn-primary" id="button" ng-click="backReason();">完成</button>
               </div>
             </form>
           </div>
@@ -215,62 +221,63 @@
               <div class="manage-top">
                 <span class="fl"></span>
                 <div class="fl">零售户&gt;零售户管理</div>
+                <input type="button" value="返回" ng-click="goBack()">
               </div>
               <div class="commodity_con goods-content">
-                <div class="row commodity_div " ng-repeat="rt in detailData">
+                <div class="row commodity_div " >
                   <div class="col-md-2 smake-image">
-                    <img src="{{rt.licenceImg}}" alt="" />
+                    <img src="{{detailData.licenceImg}}" alt="" />
                   </div>
                   <div class="col-md-3 " id="content-right-first">
                     <span class="span1">门店名称:</span>
-                    <span class="span2">{{rt.shopName}}</span>
+                    <span class="span2">{{detailData.shopName}}</span>
                     <span class="span1">联系人电话：</span>
-                    <span class="span2">{{rt.contactPhone}}</span>
+                    <span class="span2">{{detailData.contactPhone}}</span>
                     <span class="span1">门店地址：</span>
-                    <span class="span2">{{rt.addrDetail}}</span>
+                    <span class="span2">{{detailData.addrDetail}}</span>
                     <span class="span1">申请时间:</span>
-                    <span class="span2"> {{rt.applyTime}}</span>
+                    <span class="span2"> {{detailData.applyTime}}</span>
                   </div>
                   <div class="col-md-3" id="content-right-second">
                     <span class="span1">烟草专卖证号：</span>
-                    <span class="span2">{{rt.sellerId}}</span>
+                    <span class="span2">{{detailData.sellerId}}</span>
                     <span class="span1">联系人电话：</span>
-                    <span class="span2">{{rt.contactPhone}}</span>
+                    <span class="span2">{{detailData.contactPhone}}</span>
                     <span class="span1">微信号：</span>
-                    <span class="span2">{{rt.licenceNo}}</span>
+                    <span class="span2">{{detailData.licenceNo}}</span>
                     <span class="span1">审核时间：</span>
-                    <span class="span2">{{rt.lastUpdateTime}}</span>
+                    <span class="span2">{{detailData.lastUpdateTime}}</span>
                   </div>
                   <div class="col-md-3" id="content-right-third">
                     <span class="span1">经营人姓名：</span>
-                    <span class="span2">{{rt.ownerName}}</span>
+                    <span class="span2">{{detailData.ownerName}}</span>
                     <span class="span1">联系人openID：</span>
-                    <span class="span2">{{rt.licenceNo}}</span>
+                    <span class="span2">{{detailData.licenceNo}}</span>
                     <span class="span1">账户余额：</span>
-                    <span class="span2">{{rt.commercial}}</span>
+                    <span class="span2">{{detailData.commercial}}</span>
                     <span class="span1" >审核状态：</span>
-                    <span class="span2" id="authStatus">{{rt.authStatus}}</span>
+                    <span class="span2" id="authStatus">{{detailData.authStatus}}</span>
                   </div>
-                  <button type="button" ng-click="secondThough();" class="btn btn-primary goods-though">审核通过</button>
-                  <button type="button" class="btn btn-primary  goods-back" ng-click="secondBack();">审核驳回</button>
+                  <!-- <button type="button" ng-click="secondThough();" class="btn btn-primary goods-though">审核通过</button>
+                  <button type="button" class="btn btn-primary  goods-back" ng-click="secondBack();">审核驳回</button> -->
                 </div>
-                <div class="row reason_div">
+               <!--  <div class="row reason_div">
                   <i class="line"></i>
                   <span class="bg-info reason_title">驳回理由</span>
                   <div id="reason-box"></div>
-                </div>
+                </div> -->
               </div>
               <div class="row commodity_nav">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active">
-                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">扫码返现</a>
+                    <a href="#home" id="tabFx" aria-controls="home" role="tab" data-toggle="tab">扫码返现</a>
                   </li>
-                  <li role="presentation">
-                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">扫码用户</a>
+                  <li role="presentation" >
+                    <a href="#profile" id="tabSao" aria-controls="profile" role="tab" data-toggle="tab">扫码用户</a>
                   </li>
-                  <li role="presentation">
-                    <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">提现记录</a>
+                  <li role="presentation" >
+                    <a href="#messages" id="tabTx" aria-controls="messages" role="tab" data-toggle="tab">提现记录</a>
                   </li>
                 </ul>
                 <!-- Tab panes -->
@@ -286,14 +293,14 @@
                           <input name="时间" id="timeEnd111" class="form_datetime form-control dateTime"
                           placeholder="2017-8-1" />
                           <select class="form-control" id="manage-unit">
-                            <option>扫码单位</option>
-                            <option>盒</option>
-                            <option>条</option>
+                            <option value="">扫码单位</option>
+                            <option value="盒">盒</option>
+                            <option value="条">条</option>
                           </select>
                           <select class="form-control" id="manage-isfx">
-                            <option>有返还</option>
-                            <option>有</option>
-                            <option>无</option>
+                            <option value="">有无返还</option>
+                            <option value="1">有</option>
+                            <option value="0">无</option>
                           </select>
                           <button id="return" type="button" class="btn btn-primary">查询</button>
                         </div>
@@ -322,9 +329,9 @@
                       </table>
                     </div>
                     <div class="footer_sec clearfix">
-                      <div class="total_info lf">总共
-                        <span>205</span>条记录，当前页共
-                        <span>10条记录</span>
+                      <div class="total_info lf" id="fx-page">总共
+                        <span>1</span>条记录，当前页共
+                        <span>100</span>条记录
                       </div>
                       <div class="page_sec rf">
                         <div class="tcdPageCode">
@@ -379,8 +386,8 @@
                     </div>
                     <div class="footer_sec clearfix">
                       <div class="total_info lf">总共
-                        <span>205</span>条记录，当前页共
-                        <span>10条记录</span>
+                        <span></span>条记录，当前页共
+                        <span>条记录</span>
                       </div>
                       <div class="page_sec rf">
                         <div class="tcdPageCode">
@@ -422,9 +429,9 @@
                     </div>
                     <div class="footer_sec clearfix">
                       <div class="total_info lf">总共
-                        <span>205
+                        <span>
                         </span>条记录，当前页共
-                        <span>10条记录</span>
+                        <span>条记录</span>
                       </div>
                       <div class="page_sec rf">
                         <div class="tcdPageCode"></div>
@@ -440,8 +447,8 @@
   </div>
   <!-- 下载订单文件 -->
   <div class="modal fade" id="myModalDown" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog orderModel" role="document">
-        <div class="modal-content" style="overflow: hidden;">
+      <div class="modal-dialog orderModel" role="document" >
+        <div class="modal-content" style="overflow: hidden;" id="fileDownBox">
           <div class="modal-header header">
             <div>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>X</span></button>
@@ -450,31 +457,15 @@
           </div>
           <div class="modal-body body">
           <form>
-            <div class="row">
-               <div class="time">
-                  <div>时间区间</div>
+            <div class="row" id="timeRow">
+                <div class="time">
+                  <div>时间</div>
                   <input name="时间" id="timeStart"  class="form_datetime dateTime" placeholder="2017-8-1">
-                  <div>至</div>
-                  <input name="时间" id="timeEnd" class="form_datetime dateTime" placeholder="2017-8-2">
-              </div>
-            </div>
-            <div class="row" id="first">
-              <div class="time">
-                 <input name="时间" id="timeStart11"  class="form_datetime dateTime" placeholder="2017-8-1日订单">
-              </div>
-              <div class="down"><a href="javascript:">下载</a></div>
-            </div>
-            <div class="row" id="second">
-              <div class="time">
-                 <input name="时间" id="timeStart22"  class="form_datetime dateTime" placeholder="2017-8-2日订单">
-              </div>
-              <div class="down"><a href="#">下载</a></div>
+                </div>
+                <div id="seacherbtn" ng-click="seacherbtn();"><a>查询</a></div>
             </div>
             <div class="row" id="third">
-              <div class="time">
-                 <input name="时间" id="timeStart33"  class="form_datetime dateTime" placeholder="2017-8-3日订单">
-              </div>
-              <div class="down"><a href="#">下载</a></div>
+              <div class="down"></div>
             </div>
           </form>
           </div>
@@ -484,7 +475,7 @@
   <!-- 上传订单文件 -->
   <div class="modal fade" id="myModalFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog orderModel" role="document">
-        <div class="modal-content" id="file-content" style="overflow: hidden;">
+        <div class="modal-content" style="overflow: hidden;">
           <div class="modal-header header">
             <div>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>X</span></button>
@@ -495,44 +486,18 @@
               <div class="row">
                 <div class="col-md-12">
                     <form id='myupload' action='/seller-manager/import/tracking/info' method='post' enctype='multipart/form-data' target="_blank">
-                      <div id="request-box" class="fileUpload">
-                          请选择需要上传的文件
-                          <input id="fileupload" type="file" name="file" value="浏览">
+                      <div>
+                        <input id="fileupload" type="file" name="file" value="浏览">
+                        <button>提交</button>
                       </div>
-                      <button id="fileButton">提交</button>
-                <div class="col-md-4 marginBo">
-                  <input name="时间" id="timeStart1111"  class="form_datetime dateTime" placeholder="2017-8-1">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8 marginBo">
-                  <input name="时间" id="timeStart2222"  class="form_datetime dateTime" placeholder="2017-8-1日订单">
-                </div>
-                <div class="col-md-3">
-                    <form id='myupload' action='/api/tztx/seller-manager/import/tracking/info' method='post' enctype='multipart/form-data'>
-                      <div class="demo">
-                      <div class="btn">
-                          <span>添加附件</span>
-                          <input id="fileupload" type="file" name="file1">
-                      </div>
-                      <div class="progress">
-                          <span class="bar"></span><span class="percent">0%</span>
-                      </div>
-                      <!-- 显示已上传的文件名 -->
-                      <div class="files"></div>
-                      <!-- 显示已上传的图片-->
-                      <div class="showimg"></div>
-                      </div>
-                      <input type="submit" onclick="gosubmit2()"/>
                     </form>
                 </div>
-                <div id=""></div>
               </div>
             </form>
           </div>
         </div>
       </div>
-  </div>
+
   <script src="statics/assets/libs/jquery.page.js"></script>
   <script src="statics/assets/libs/jqmeter.min.js"></script>
   <!-- <script src="statics/assets/libs/jquery.form-min.js"></script> -->
