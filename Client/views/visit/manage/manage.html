@@ -475,7 +475,7 @@
   <!-- 上传订单文件 -->
   <div class="modal fade" id="myModalFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog orderModel" role="document">
-        <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-content" id="file-content" style="overflow: hidden;">
           <div class="modal-header header">
             <div>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>X</span></button>
@@ -486,10 +486,11 @@
               <div class="row">
                 <div class="col-md-12">
                     <form id='myupload' action='/seller-manager/import/tracking/info' method='post' enctype='multipart/form-data' target="_blank">
-                      <div>
-                        <input id="fileupload" type="file" name="file" value="浏览">
-                        <button>提交</button>
+                      <div id="request-box" class="fileUpload">
+                          请选择需要上传的文件
+                          <input id="fileupload" type="file" name="file" value="浏览">
                       </div>
+                      <button id="fileButton">提交</button>
                     </form>
                 </div>
               </div>

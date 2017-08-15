@@ -282,3 +282,54 @@
  #fileDownBox {
   height: 100px;
  }
+ #file-content {
+  height: 106px;
+ }
+ #request-box {
+  margin-top: 20px;
+ }
+ .fileUpload {
+  font-size: 16px;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  background: #3AC1EE;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+  display: inline-block;
+  zoom: 1;
+  text-decoration: none;
+
+}
+
+.fileUpload  input {
+  position: absolute;
+  /*font-size: 100px;*/
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  cursor: pointer
+}
+
+.fileUpload:hover {
+  color: #fff;
+  background: #3AC1EE;
+  border-color: #ccc;
+  text-decoration: none
+}
+#fileButton {
+  height: 30px;
+  background-color: #3AC1EE;
+  width: 100px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 15px;
+  top: 21px;
+  right: 33px;
+  position: absolute;
+}
