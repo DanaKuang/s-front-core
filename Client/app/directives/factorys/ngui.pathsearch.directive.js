@@ -11,10 +11,10 @@ define([], function () {
             tpl: '/pathsearch.tpl.html',
             startTime: '',                           // 开始时间
             endTime: '',                             // 结束时间
-            productBrand: '',                        // 品牌
-            pbArray: [],                             // 品牌数组
-            productName: '',                         // 规格
-            pnArray: [],                             // 规格数组
+            // productBrand: '',                        // 品牌
+            // pbArray: [],                             // 品牌数组
+            // productName: '',                         // 规格
+            // pnArray: [],                             // 规格数组
             activityId: '',                            // 活动
             acArray: [],                             // 活动数组
             pgArray: [],                             // 页面
@@ -42,10 +42,10 @@ define([], function () {
                 [
                     'startTime',
                     'endTime',
-                    'productBrand',
-                    'pbArray',
-                    'productName',
-                    'pnArray',
+                    // 'productBrand',
+                    // 'pbArray',
+                    // 'productName',
+                    // 'pnArray',
                     'activityId',
                     'acArray',
                     'pgArray',
@@ -59,10 +59,10 @@ define([], function () {
                 [
                     'startTime',
                     'endTime',
-                    'productBrand',
-                    'pbArray',
-                    'productName',
-                    'pnArray',
+                    // 'productBrand',
+                    // 'pbArray',
+                    // 'productName',
+                    // 'pnArray',
                     'activityId',
                     'acArray',
                     'pgArray',

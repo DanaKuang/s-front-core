@@ -16,6 +16,12 @@
         </div>
         <div class="form-inline form-group col-md-12">
             <div class="inline-block">
+                <label for="">活动名称</label>
+                <select class="form-control" ng-model="activity" name="activity">
+                    <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
+                </select>
+            </div>
+            <div class="inline-block">
                 <label for="">品牌</label>
                 <select class="form-control multiple" name="productBrand" ng-model="productBrand">
                     <option ng-repeat="pb in pbArray" value="{{pb.productBrand}}">{{pb.productBrand}}</option>
@@ -25,12 +31,6 @@
                 <label for="">规格</label>
                 <select class="form-control multiple" name="productName" ng-model="productName" multiple="multiple">
                     <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productName}}</option>
-                </select>
-            </div>
-            <div class="inline-block">
-                <label for="">活动名称</label>
-                <select class="form-control" ng-model="activity" name="activity">
-                    <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
                 </select>
             </div>
             <div class="inline-block">

@@ -13,8 +13,8 @@ define([], function () {
         var $model = $scope.$model;
 
         // 后端数据
-        var brand_back_data = $model.$brand.data || [];
-        brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
+        // var brand_back_data = $model.$brand.data || [];
+        // brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
         var act_back_data = $model.$activity.data || [];
         act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 
@@ -22,9 +22,9 @@ define([], function () {
         $scope.pathConf = {
             startTime: dateFormatFilter.date(+new Date),
             endTime: dateFormatFilter.date(+new Date),
-            pbArray: brand_back_data,
-            productBrand: brand_back_data[0].productBrand || "",
-            pnArray: [],
+            // pbArray: brand_back_data,
+            // productBrand: brand_back_data[0].productBrand || "",
+            // pnArray: [],
             acArray: act_back_data,
             activityId: "ACT-C7MTZ3P6197" || act_back_data[0].activityId || "",
             pgArray: [],
@@ -37,8 +37,8 @@ define([], function () {
             var pScope = angular.element('.ui-path-search').scope();
             console.log(pScope);
             var params = {
-                productBrand: pScope.productBrand || "所有",
-                productSn: pScope.productName && pScope.productName.join(',') || "99999999",
+                // productBrand: pScope.productBrand || "所有",
+                // productSn: pScope.productName && pScope.productName.join(',') || "99999999",
                 activityId: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
@@ -58,33 +58,34 @@ define([], function () {
             $(".ui-path-search select.multiple").multiselect({
                 nonSelectedText: '请选择',
                 allSelectedText: '全部',
-                nSelectedText: '已选择'
+                nSelectedText: '已选择',
+                enableFiltering: true,
             });
-            var $prBrand = $("[name='productBrand']");
-            var $product = $("[name='productName']");
+            // var $prBrand = $("[name='productBrand']");
+            // var $product = $("[name='productName']");
             var $activity = $("[name='activityId']");
             var $pagename = $("[name='pagename']");
             // 品牌
-            $prBrand.multiselect('select', pScope.productBrand);
-            $prBrand.multiselect('refresh');
+            // $prBrand.multiselect('select', pScope.productBrand);
+            // $prBrand.multiselect('refresh');
             // 活动名称
             $activity.multiselect('select', pScope.activityId);
             $activity.multiselect('refresh');
             // 规格
-            $product.next().off().on('click', function (e) {
-                $model.getProduct({
-                    productBrand: pScope.productBrand
-                }).then(function (res) {
-                    pScope.pnArray = res.data || [];
-                    pScope.$apply();
-                    $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
-                        val.label = val.productName;
-                        val.value = val.sn;
-                    }));
-                    $product.multiselect('select', pScope.productName);
-                    $product.multiselect('refresh');
-                });
-            });
+            // $product.next().off().on('click', function (e) {
+            //     $model.getProduct({
+            //         productBrand: pScope.productBrand
+            //     }).then(function (res) {
+            //         pScope.pnArray = res.data || [];
+            //         pScope.$apply();
+            //         $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
+            //             val.label = val.productName;
+            //             val.value = val.sn;
+            //         }));
+            //         $product.multiselect('select', pScope.productName);
+            //         $product.multiselect('refresh');
+            //     });
+            // });
             // 活动页面
             $pagename.next().children('.multiselect').off().on('click', function (e) {
                 $model.getActPage({
@@ -96,7 +97,7 @@ define([], function () {
                         val.label = val.page_name;
                         val.value = val.page_code;
                     }));
-                    $pagename.multiselect('select', pScope.webId || pScope.pgArray[0].page_code);
+                    $pagename.multiselect('select', pScope.pagename || pScope.pgArray[0].page_code);
                     $pagename.multiselect('refresh');
                 });
             });

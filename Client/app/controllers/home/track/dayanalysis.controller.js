@@ -312,8 +312,6 @@ define([], function () {
 
             // 初始化转化率
             function initRateMap (params) {
-                var rate = 687/770;
-                var base = 500;
                 $model.getPageData(params).then(function (res) {
                     $scope.pages = a_f.filterPage(res.data);
                     $scope.$apply();

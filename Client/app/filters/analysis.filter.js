@@ -46,7 +46,7 @@ define([], function () {
                 var basePv = 0;
                 return _.map(data.reverse(), function (d, i) {
                     var rate = basePv && d.activePv/basePv;
-                    var baseWdith = 500;
+                    var baseWdith = 400;
                     basePv = d.activePv;
                     for (var j=0;j<data.length-i;j++) {
                         baseWdith *= baseRate;

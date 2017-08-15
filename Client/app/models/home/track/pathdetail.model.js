@@ -26,11 +26,11 @@ define([], function () {
                     return request.$Search(GET_PAGEID_DATA, params, true);
                 };
                 // 获取品牌
-                this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
+                // this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
                 // 根据品牌获取规格
-                this.getProduct = function (params) {
-                    return request.$Search(GET_PRODUCT_DATA, params, true);
-                };
+                // this.getProduct = function (params) {
+                //     return request.$Search(GET_PRODUCT_DATA, params, true);
+                // };
                 // 获取页面流入
                 this.getPageIn = function (params) {
                     return request.$Search(GET_PAGEIN_DATA, params, true);

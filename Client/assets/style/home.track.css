@@ -21,7 +21,7 @@
 }
 .ui-form-search {
     height: 50px;
-    line-height: 50px;
+    // line-height: 50px;
     font-size: 12px;
 }
 .ui-form-search .form-group {
@@ -169,17 +169,20 @@ button.multiselect {
 .ui-transform-content .page {
     display: inline-block;
     height: 100%;
-    width: 100px;
+    width: 150px;
     line-height: 40px;
     float: left;
     text-align: center;
     font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .ui-transform-content .content {
     position: relative;
     display: inline-block;
     height: 100%;
-    width: 600px;
+    width: 500px;
     color: #fff;
     float: left;
 }
@@ -261,7 +264,7 @@ button.multiselect {
     background-size: contain;
     width: 50px;
     height: 50px;
-    transform: rotateZ(150deg);
+    transform: rotateY(150deg);
     left: 0;
     top: -10px;
 }
