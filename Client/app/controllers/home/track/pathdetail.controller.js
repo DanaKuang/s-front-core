@@ -39,10 +39,10 @@ define([], function () {
             var params = {
                 // productBrand: pScope.productBrand || "所有",
                 // productSn: pScope.productName && pScope.productName.join(',') || "99999999",
-                activityId: pScope.activityId || "",
+                productBrand: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
-                webId: pScope.pagename || "",
+                sn: pScope.pagename || "",
                 startTime: pScope.startTime || "",
                 endTime: pScope.endTime || ""
             };
@@ -89,7 +89,7 @@ define([], function () {
             // 活动页面
             $pagename.next().children('.multiselect').off().on('click', function (e) {
                 $model.getActPage({
-                    activityId: pScope.activityId
+                    productBrand: pScope.activityId
                 }).then(function (res) {
                     pScope.pgArray = res.data || [];
                     pScope.$apply();
@@ -101,6 +101,7 @@ define([], function () {
                     $pagename.multiselect('refresh');
                 });
             });
+            $pagename.next().children('.multiselect').trigger('click');
             // 默认值入口
             pathSearch();
         });
