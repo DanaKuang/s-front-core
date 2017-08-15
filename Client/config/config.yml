@@ -9,8 +9,8 @@ def:                                             # 默认环境配置
   apiroot: '^/api/tztx'                          # 接口配置
   viewroot: '^/view'                             # 视图配置
   staticroot: '^/statics'                        # 静态资源请求根目录
-  autoOpenBrower: 1                              # 是否自动打开浏览器
-  easyMonitor: 1                                 # 是否开启前端性能监控
+  autoOpenBrower: 0                              # 是否自动打开浏览器
+  easyMonitor: 0                                 # 是否开启前端性能监控
   proxyturnto: 0                                 # 是否开启代理模式
   proxyTarget:
     host: 'proxy.hmtx.cc'                        # 代理地址
@@ -52,7 +52,7 @@ test:                                            # 测试环境配置
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存
-dev:                                             # 开发环境配置
+dev:                                             # 线上环境
   server:                                        # 配置Web
     port: 9091                                   # Web端口
     host: '127.0.0.1'                            # IP地址
@@ -63,6 +63,7 @@ dev:                                             # 开发环境配置
       host: '172.17.15.161'                      # 请求IP地址
     - port: 9096                                 # 请求端口号
       host: '172.17.15.164'                      # 请求IP地址
+  rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存

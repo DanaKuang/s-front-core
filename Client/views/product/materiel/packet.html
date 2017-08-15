@@ -23,52 +23,62 @@
                 <div class="panel rate">
                     <div class="panel-body">
                         <div class="table_sec">
-                            <div class="nav clearfix">
+                            <div class="change_nav clearfix">
                                 <div class="lf" ng-click="changeShowState()"
                                      ng-class="{true:'select_active',false:'no_active'}[showPacketList]">红包池</div>
                                 <div class="lf" ng-click="changeShowState()"
                                      ng-class="{true:'select_active',false:'no_active'}[!showPacketList]">流水明细</div>
                             </div>
                             <div class="packet_select_sec clearfix">
-                                <div ng-class="{true:'col-md-4 col-sm-4 col-xs-4',false:'col-md-3 col-sm-3 col-xs-3'}[showPacketList]">
+                                <div class="col-md-3 col-sm-3">
                                     <label for="allSupply">&nbsp;&nbsp;&nbsp;供应商</label>
                                     <select id="allSupply">
                                         <option value="">全部</option>
                                         <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
                                     </select>
                                 </div>
-                                <div ng-class="{true:'col-md-4 col-sm-4 col-xs-4',false:'col-md-3 col-sm-3 col-xs-3'}[showPacketList]">
+                                <div class="col-md-3 col-sm-3">
                                     <label for="allBrand">适用品牌</label>
                                     <select id="allBrand">
                                         <option value="">全部</option>
                                         <option ng-repeat="brandItem in brandList" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                     </select>
                                 </div>
-                                <div ng-show="showPacketList" class="col-md-4 col-sm-4 col-xs-4">
+                                <div ng-show="showPacketList" class="col-md-3 col-sm-3">
                                     <label for="allSpecift">适用规格</label>
                                     <select id="allSpecift">
                                         <option value="">全部</option>
                                         <option ng-repeat="speciftItem in allSpeciftList" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                     </select>
                                 </div>
-                                <div ng-show="showPacketList" class="col-md-4 col-sm-4 col-xs-4">
+                                <div ng-show="showPacketList" class="col-md-3 col-sm-3">
                                     <label for="dataStatus">使用状态</label>
                                     <select id="dataStatus">
                                         <option value="">全部</option>
                                         <option ng-repeat="statusItem in dataStatusList" value="{{statusItem.code}}">{{statusItem.name}}</option>
                                     </select>
                                 </div>
-                                <div ng-show="!showPacketList" class="col-md-3 col-sm-3 col-xs-3">
+                                <div ng-show="!showPacketList" class="col-md-2 col-sm-2">
                                     <label for="activeLog">动作</label>
                                     <select id="activeLog">
                                         <option value="">全部</option>
                                         <option ng-repeat="logItem in activeLogList" value="{{logItem.code}}">{{logItem.name}}</option>
                                     </select>
                                 </div>
-                                <div class="ser_btn" ng-class="{true:'col-md-4 col-sm-4 col-xs-4 col4_ser_margin',false:'col-md-1 col-sm-1 col-xs-1 col1_ser_margin'}[showPacketList]"
-                                     ng-click="searchData()">搜索</div>
-                                <div class="rest_btn" ng-class="{true:'col-md-4 col-sm-4 col-xs-4',false:'col-md-1 col-sm-1 col-xs-1'}[showPacketList]"
-                                     ng-click="resetData()">重置</div>
+
+                                <div ng-show="showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="rest_btn" style="width: 100%" ng-click="resetData()">重置</div>
+                                </div>
+                                <div ng-show="showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="ser_btn" style="width: 100%" ng-click="searchData()">搜索</div>
+                                </div>
+                                <div ng-show="!showPacketList" class="col-md-2 col-sm-2">
+                                    <div class="ser_btn" ng-click="searchData()">搜索</div>
+                                </div>
+                                <div ng-show="!showPacketList" class="col-md-2 col-sm-2">
+                                    <div class="rest_btn" ng-click="resetData()">重置</div>
+                                </div>
+
                             </div>
                         </div>
                         <table class="table" ng-show="showPacketList" >
@@ -83,7 +93,7 @@
                             </tr>
                             <tr ng-repeat="packetItem in packetList" ng-if="!noSearchData">
                                 <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                                <td>{{packetItem.supplierName}}</td>
+                                <td title="{{packetItem.supplierName}}">{{packetItem.showSupplierName}}</td>
                                 <td>{{packetItem.brandNames}}</td>
                                 <td>{{packetItem.unitNames}}</td>
                                 <td>{{packetItem.moneyPool}}</td>
@@ -115,10 +125,12 @@
                             </tr>
                             <tr ng-repeat="detailItem in detailList" ng-if="!noSearchLog">
                                 <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                                <td>{{detailItem.supplierName}}</td>
+                                <td title="{{detailItem.supplierName}}">{{detailItem.showSupplierName}}</td>
                                 <td>{{detailItem.brandNames}}</td>
                                 <td>{{detailItem.operName}}</td>
-                                <td>{{detailItem.activityName != null ? detailItem.activityName : '-'}}</td>
+                                <td title="{{detailItem.activityName}}">
+                                    {{detailItem.activityName != null ? detailItem.showActivityName : '-'}}
+                                </td>
                                 <td>{{detailItem.operNum}}</td>
                                 <td>{{detailItem.ctime | date:'yyyy-MM-dd'}}</td>
                                 <td>{{detailItem.creatorName}}</td>

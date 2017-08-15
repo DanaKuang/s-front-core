@@ -70,6 +70,11 @@ define([], function () {
             scope.editActivity = function (e) {
                 scope.$emit('editActivity', event, {activityCode: e.target.dataset.activitycode})
             }
+
+            // 停用-查看
+            scope.lookupActivity = function (e) {
+                scope.$emit('lookupActivity', event, {activityCode: e.target.dataset.activitycode})
+            }
         }
         return defineObj;
     }

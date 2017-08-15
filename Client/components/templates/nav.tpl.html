@@ -8,17 +8,22 @@
                 <a href="javascript:void(0)">{{n.menuName}}</a>
                 <span>|</span>
             </li>
+            <li class="ui-navbar-user dropdown glyphicon">
+                <i class="fa fa-person"></i>
+                <div type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div title="{{account}}">{{account}}</div><span class="caret"></span>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="userDetail">
+                    <li ng-click="changePassword()">修改密码</li>
+                    <li ng-click="webLogout()">安全退出</li>
+                </ul>
+            </li>
         </ul>
     </div>
-    <!--user-->
-    <div class="dropdown glyphicon ui-navbar-user">
-        <i class="fa fa-person"></i>
-        <div type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div title="{{account}}">{{account}}</div><span class="caret"></span>
-        </div>
-        <ul class="dropdown-menu" aria-labelledby="userDetail">
-            <li ng-click="changePassword()">修改密码</li>
-            <li ng-click="webLogout()">安全退出</li>
-        </ul>
-    </div>
+    <button type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">导航栏</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
 </div>

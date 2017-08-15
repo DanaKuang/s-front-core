@@ -22,31 +22,33 @@
                 <div class="panel rate">
                     <div class="panel-body">
                         <div class="table_sec">
-                            <div class="nav clearfix">
+                            <div class="change_nav clearfix">
                                 <div class="lf" ng-class="{true:'select_active',false:'no_active'}[showGiftList]" ng-click="changeShowState()">礼品库</div>
                                 <div class="lf" ng-class="{true:'select_active',false:'no_active'}[!showGiftList]" ng-click="changeShowState()">流水明细</div>
                             </div>
                             <div class="select_sec clearfix">
-                                <div>
+                                <div class="col-md-3 col-sm-3">
                                     <label for="selectGiftName">筛选礼品</label>
                                     <input id="selectGiftName" type="text" placeholder="礼品名称">
                                 </div>
-                                <div>
+                                <div class="col-md-3 col-sm-3">
                                     <label for="selectTopCategory">一级类目</label>
                                     <select id="selectTopCategory">
                                         <option value="">全部</option>
                                         <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
                                     </select>
                                 </div>
-                                <div>
+                                <div class="col-md-3 col-sm-3">
                                     <label for="selectSupply">供应商</label>
                                     <select id="selectSupply">
                                         <option value="">全部</option>
                                         <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
                                     </select>
                                 </div>
-                                <div class="ser_btn" ng-click="searchData()">搜索</div>
-                                <div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="ser_btn"  ng-click="searchData()">搜索</div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
                                     <label for="selectBrand">适用品牌</label>
                                     <select id="selectBrand">
                                         <option value="">全部</option>
@@ -54,7 +56,7 @@
                                                 value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                     </select>
                                 </div>
-                                <div>
+                                <div class="col-md-3 col-sm-3">
                                     <label for="selectSpecift">适用规格</label>
                                     <select id="selectSpecift">
                                         <option value="">全部</option>
@@ -62,7 +64,7 @@
                                                 value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                     </select>
                                 </div>
-                                <div ng-show="showGiftList">
+                                <div ng-show="showGiftList" class="col-md-3 col-sm-3">
                                     <label for="giftStatus">使用状态</label>
                                     <select id="giftStatus">
                                         <option value="">全部</option>
@@ -70,14 +72,16 @@
                                                 value="{{statusItem.code}}">{{statusItem.name}}</option>
                                     </select>
                                 </div>
-                                <div ng-show="!showGiftList">
+                                <div ng-show="!showGiftList" class="col-md-3 col-sm-3">
                                     <label for="selectActive">动作</label>
                                     <select id="selectActive">
                                         <option value="">全部</option>
                                         <option ng-repeat="activeItem in activeValueList" value="{{activeItem.code}}">{{activeItem.name}}</option>
                                     </select>
                                 </div>
-                                <div class="rest_btn" ng-click="resetData()">重置</div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="rest_btn" ng-click="resetData()">重置</div>
+                                </div>
                             </div>
                         </div>
                         <table class="table" ng-show="showGiftList">
@@ -96,7 +100,7 @@
                             </tr>
                             <tr ng-repeat="giftItem in giftList" ng-if="!noSearchData">
                                 <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                                <td>{{giftItem.name}}</td>
+                                <td title="{{giftItem.name}}">{{giftItem.showName}}</td>
                                 <td class="gift_img">
                                     <a href="{{giftItem.giftUrl != '' ? giftItem.giftUrl : 'javascript:'}}">
                                         <img ng-if="giftItem.giftPic != ''" src="{{giftItem.giftPic}}" />
@@ -105,7 +109,7 @@
                                 </td>
                                 <td ng-if="giftItem.giftClass == 1">实物</td>
                                 <td ng-if="giftItem.giftClass == 2">虚拟</td>
-                                <td>{{giftItem.supplierName}}</td>
+                                <td title="{{giftItem.supplierName}}">{{giftItem.showSupplierName}}</td>
                                 <td>{{giftItem.brandNames}}</td>
                                 <td>{{giftItem.unitNames}}</td>
                                 <td ng-if="giftItem.marketMoney != null">{{giftItem.marketMoney}}</td>
@@ -140,13 +144,15 @@
                             </tr>
                             <tr ng-if="!noSearchLog" ng-repeat="detailItem in detailList">
                                 <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                                <td>{{detailItem.businessName}}</td>
+                                <td title="{{detailItem.businessName}}">{{detailItem.showBusinessName}}</td>
                                 <td>{{detailItem.businessType}}</td>
-                                <td>{{detailItem.supplierName}}</td>
+                                <td title="{{detailItem.supplierName}}">{{detailItem.showSupplierName}}</td>
                                 <td>{{detailItem.brandNames}}</td>
                                 <td>{{detailItem.prodUnitsNames}}</td>
                                 <td>{{detailItem.operName}}</td>
-                                <td>{{detailItem.activityName != null ? detailItem.activityName : '-'}}</td>
+                                <td title="{{detailItem.activityName}}">
+                                    {{detailItem.activityName != null ? detailItem.showActivityName : '-'}}
+                                </td>
                                 <td>{{detailItem.operNum}}</td>
                                 <td>{{detailItem.ctime | date:'yyyy-MM-dd'}}</td>
                                 <td>{{detailItem.creatorName}}</td>
@@ -230,7 +236,7 @@
                                 <span class="market_value_warn"></span>
                             </div>
                             <div>
-                                <label for="giftImg">礼品图片</label>
+                                <label for="giftImg">礼品图片<span>*</span></label>
                                 <div class="transfer_sec">
                                     <input type="file" id="giftImg">
                                     <div class="select_file">+</div>

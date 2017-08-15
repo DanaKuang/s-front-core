@@ -15,7 +15,7 @@ define([], function () {
             pbArray: [],                             // 品牌数组
             productName: '',                         // 规格
             pnArray: [],                             // 规格数组
-            activity: '',                            // 活动
+            activityId: '',                            // 活动
             acArray: [],                             // 活动数组
             pgArray: [],                             // 页面
             pagename: '',                            // 页面名称
@@ -46,7 +46,7 @@ define([], function () {
                     'pbArray',
                     'productName',
                     'pnArray',
-                    'activity',
+                    'activityId',
                     'acArray',
                     'pgArray',
                     'pagename',
@@ -63,7 +63,7 @@ define([], function () {
                     'pbArray',
                     'productName',
                     'pnArray',
-                    'activity',
+                    'activityId',
                     'acArray',
                     'pgArray',
                     'pagename',

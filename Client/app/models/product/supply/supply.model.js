@@ -18,6 +18,7 @@ define([], function () {
         var modifySupplierStatusUrl = '/api/tztx/saas/saotx/supplier/modifySupplierStatus'; //修改供应商状态
         var fileUploadUrl = '/api/tztx/saas/saotx/attach/commonUploadFiles'; //文件上传
         var querySupplierUrl = '/api/tztx/saas/saotx/supplier/querySupplierByCode';//根据供应商编码查询供应商的详细数据
+        var dataStatusUrl  = '/api/tztx/saas/saotx/common/queryDimDataStatus'; //获取数据状态
 
         
         this.getComment = function () {
@@ -37,6 +38,9 @@ define([], function () {
         };
         this.querySupplierByCode = function(params){
           return request.$Search(querySupplierUrl,params);
+        };
+        this.getDataStatus = function (){
+          return request.$Search(dataStatusUrl);
         };
 
       };

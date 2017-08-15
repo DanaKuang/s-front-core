@@ -286,7 +286,7 @@ define([], function () {
             //页面几个复选框选中展示几条
             $(".award input").each(function () {
               if ($(this).is(":checked")) {
-                seriesArr.push(obj[$(this)[0].name]);
+                seriesArr.push(obj[$(this)[0].name] || {type:'line'});
               }
             })
             //seriesArr[0] = obj["扫码次数"];
@@ -297,7 +297,7 @@ define([], function () {
             seriesArr.length = 0;
             $(".award input").each(function () {
               if ($(this).is(":checked")) {
-                seriesArr.push(obj[$(this)[0].name]);
+                seriesArr.push(obj[$(this)[0].name] || {type:'line'});
               }
             })
             myChart.clear();

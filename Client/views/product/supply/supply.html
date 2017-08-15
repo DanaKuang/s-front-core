@@ -25,39 +25,40 @@
                         <div class="panel-body">
                             <div class="table_sec">
                                 <div class="supply_select_sec clearfix">
-                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="col-md-3 col-sm-3">
                                         <label for="selectName">筛选供应商</label>
                                         <input type="text" placeholder="供应商名称" id="selectName">
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <div class="col-md-3 col-sm-3">
                                         <label for="assMent">合规评估</label>
-                                        <select id="assMent">
+                                        <select id="assMent" style="width: 50%;">
                                             <option value="">全部</option>
                                             <!--<option ng-repeat="item in assmentData" value="{{item.code}}">{{item.name}}</option>-->
                                             <option ng-repeat="x in assmentData" value="{{x.code}}">{{x.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <div class="col-md-2 col-sm-2">
                                         <label for="selectStatus">状态</label>
                                         <select id="selectStatus">
                                             <option value="">全部</option>
-                                            <option value="1">启用</option>
-                                            <option value="0">停用</option>
+                                            <option ng-repeat="statusItem in dataStatusList"
+                                                    value="{{statusItem.code}}">{{statusItem.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <div class="col-md-2 col-sm-2">
                                         <label for="yearLimit">年审</label>
                                         <select id="yearLimit">
                                             <option value="">全部</option>
                                             <option value="2017">2017</option>
                                         </select>
                                     </div>
-                                    <div class="ser_btn col-md-1 col-sm-1 col-xs-1" ng-click="searchSupply()">
-                                        搜索
+                                    <div class="col-md-1 col-sm-2">
+                                        <div class="ser_btn" ng-click="searchSupply()">搜索</div>
                                     </div>
-                                    <div class="rest_btn col-md-1 col-sm-1 col-xs-1" ng-click="resetValue()">
-                                        重置
+                                    <div class="col-md-1 col-sm-1">
+                                        <div class="rest_btn" ng-click="resetValue()">重置</div>
                                     </div>
+
                                 </div>
                             </div>
                             <table class="table" ng-if="!noSearch">
@@ -74,14 +75,19 @@
                                 </tr>
                                 <tr ng-repeat="dataItem in supplyLists">
                                     <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                                    <td>{{dataItem.name}}</td>
-                                    <td class="file_col" ng-click="downloadFile(dataItem.registAttach)">{{dataItem.registFileName}}</td>
-                                    <td class="file_col" ng-click="downloadFile(dataItem.contractAttach)">{{dataItem.contractFileName}}</td>
+                                    <td title="{{dataItem.name}}">{{dataItem.showName}}</td>
+                                    <td class="file_col" title="{{dataItem.registFileName}}" ng-click="downloadFile(dataItem.registAttach)">
+                                        {{dataItem.showRegistFileName}}
+                                    </td>
+                                    <td class="file_col" title="{{dataItem.contractFileName}}" ng-click="downloadFile(dataItem.contractAttach)">
+                                        {{dataItem.showContractFileName}}
+                                    </td>
                                     <td ng-if="dataItem.compliance == 1">合格</td>
                                     <td ng-if="dataItem.compliance == 2">不合格</td>
                                     <td ng-if="dataItem.compliance == 3">待评审</td>
-                                    <td ng-click="downloadFile(dataItem.performanceAttach)" ng-class="{true:'file_col'}[dataItem.performanceFileName !='']">
-                                        {{dataItem.performanceFileName !='' ? dataItem.performanceFileName : '-'}}
+                                    <td ng-click="downloadFile(dataItem.performanceAttach)" title="{{dataItem.performanceFileName}}"
+                                        ng-class="{true:'file_col'}[dataItem.performanceFileName !='']">
+                                        {{dataItem.performanceFileName !='' ? dataItem.showPerformanceFileName : '-'}}
                                     </td>
                                     <td>{{dataItem.examineYears != 'undefined' ? dataItem.examineYears : '-'}}</td>
                                     <td ng-if="dataItem.status == 0">已停用</td>

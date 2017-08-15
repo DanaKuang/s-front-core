@@ -6,7 +6,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'GiftCtrl',
         ViewModelName: 'giftViewModel',
-        ServiceContent: ['$scope', function ($scope) {
+        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
 
             var $model = $scope.$model;
             //初始化显示列表
@@ -204,7 +204,7 @@ define([], function () {
                             var fileSuccessData = res.data;
                             giftPicAttach = fileSuccessData.attachCode; //图片编码
                             giftPicUrl = fileSuccessData.accessUrl; //图片保存地址
-                            $('#giftImgName').html(fileSuccessData.filename);
+                            $('#giftImgName').css('color','#666').html(fileSuccessData.filename);
                         }
                     }).fail(function(res) {
                         $('.gift_img_warn').html('文件上传失败');
@@ -295,7 +295,13 @@ define([], function () {
                         return;
                     }
                 }
-
+                //礼品图片
+                if(giftPicAttach == ''){
+                    $('#giftImgName').css('color','#ff3300').html('礼品图片不能为空');
+                    return;
+                }else{
+                    $('#giftImgName').css('color','#666').html('');
+                }
                 //库存
                 var stockVal = $('#stock').val();
                 var regNum = /^\+?[1-9][0-9]*$/;
@@ -390,6 +396,10 @@ define([], function () {
                         if(res.status == 200){
                             var giftObj = res.data.data;
                             if(giftObj.list != null){
+                                for(var i=0;i<giftObj.list.length;i++){
+                                    giftObj.list[i].showName = limitlengthFilter.limitLength(giftObj.list[i].name);
+                                    giftObj.list[i].showSupplierName = limitlengthFilter.limitLength(giftObj.list[i].supplierName);
+                                }
                                 $scope.noSearchData = false;
                                 $scope.giftList = giftObj.list;
                                 $scope.totalPage = giftObj.page.pageNumber;
@@ -421,6 +431,11 @@ define([], function () {
                         if(res.status == 200){
                             var detailObj = res.data.data;
                             if(detailObj.list != null){
+                                for(var i=0;i<detailObj.list.length;i++){
+                                    detailObj.list[i].showBusinessName = limitlengthFilter.limitLength(detailObj.list[i].businessName);
+                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName);
+                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName);
+                                }
                                 $scope.noSearchLog = false;
                                 $scope.detailList = detailObj.list;
                                 $scope.totalPage = detailObj.page.pageNumber;

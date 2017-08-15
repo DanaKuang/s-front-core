@@ -145,7 +145,7 @@
 	top: 1px;
 }
 .basic .priority {
-	left: 51px;
+	left: 49px;
 }
 .basic .popimagefile {
 	left: 48px;
@@ -204,7 +204,7 @@
   font-size: 12px;
 }
 .draw-prize .select-duration:before {
-	content: '可参与抽奖时间';
+	content: '中奖时间';
 	top: 6px;
   left: 5px;
 }
@@ -531,7 +531,8 @@ input[type="checkbox"] {
 .redpack-pop .hb-res .configuration-item:nth-of-type(1):before {
 	content: '红包模板'!important;
 }
-.non-first-draw-wrap .configuration-item:nth-of-type(1):after {
+
+.common-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after, .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after {
 	position: absolute;
 	content: '提示：以上中奖概率控制除参与奖外所设奖项的整体中奖概率，参与奖项的中奖概率为100%（中奖概率设置值）。';
 	left: 20px;
@@ -548,11 +549,14 @@ input[type="checkbox"] {
 	text-align: center;
 	top: 0!important;
 }
+.surprise-pop .non-first-draw-wrap .hb .configuration-item:nth-of-type(2):before {
+	top: 6px!important;
+}
 .non-first-draw-wrap .configuration-item:nth-of-type(2):before {
 	content: '奖项名称'!important;
 	top: 6px!important;
 }
-.non-first-draw-wrap .configuration-item:nth-of-type(2) {
+.common-pop .non-first-draw-wrap .configuration-item:nth-of-type(2), .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(2) {
 	margin-top: 40px;
 }
 .non-first-draw-wrap .configuration-item:nth-of-type(3):before {
@@ -702,8 +706,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	border: 1px solid #d2d2d2;
 	text-align: center;
 }
-.prize-img-preview:before {
-	content: '暂无产品';
+.prize-img-preview .mask {
 	position: absolute;
 	top: 30px;
 	left: 17px;
@@ -712,8 +715,10 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-top: -50%;
-	margin-left: -50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -862,4 +867,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	content: '元';
 	right: 22px;
 	top: 10px;
+}
+
+.detail-wrap {
+	width: 60%;
+	margin: 0 auto;
+	font-size: 14px;
+}
+.detail-wrap p {
+	line-height: 2;
 }

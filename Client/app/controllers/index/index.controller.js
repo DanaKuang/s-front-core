@@ -36,11 +36,6 @@ define([], function() {
                     };
                 });
             });
-
-            // 页面渲染完成
-            setTimeout(function () {
-                $("#menu_left").metisMenu();
-            }, 2000);
         }]
     };
 

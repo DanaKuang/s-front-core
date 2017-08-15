@@ -26,9 +26,15 @@ define([], function () {
       // 右侧数据
       (function () {
         // 计算环比
-        function fixData (o) {
-          o = Number(o);
-          return Math.round(o/10000);
+        function fixData (o, v) {
+          var result = 0;
+          o = o || 0; v = v || 0;
+          o = Number(o); v = Number(v);
+          result = o + v;
+          if (result > 10000) {
+            result = ''+Math.round(result/10000)+'万';
+          }
+          return result;
         }
 
         Interval_1 = setInterval(function() {
@@ -37,7 +43,7 @@ define([], function () {
             var res = res.data || {};
             var st = res.scanTimes_of_day || 0;
             var hst = $model.$historyScan.data[0] || {};
-            var rt = fixData(hst.scanTotalPv || 0);
+            var rt = fixData(hst.scanTotalPv, st);
             $("#scan_day").html(st);
             $("#scan_day_rate").html(rt);
           });
@@ -46,7 +52,7 @@ define([], function () {
             var res = res.data || {};
             var su = res.scanUsers_of_day || 0;
             var hsu = $model.$historyScan.data[0] || {};
-            var rt = fixData(hsu.scanTotalUv || 0);
+            var rt = fixData(hsu.scanTotalUv, su);
             $("#scan_user").html(su);
             $("#scan_user_rate").html(rt);
           });
@@ -55,7 +61,7 @@ define([], function () {
             var res = res.data || {};
             var sc = res.scanCodes_of_day || 0;
             var hsc = $model.$historyScan.data[0] || {};
-            var rt = fixData(hsc.scanTotalCode || 0);
+            var rt = fixData(hsc.scanTotalCode, sc);
             $("#scan_code").html(sc);
             $("#scan_code_rate").html(rt);
           });
@@ -196,7 +202,8 @@ define([], function () {
             var salesTbl = $model.$salesConf.data;
             salesTbl.rows = formatFilter.salesTable(salesData);
             $scope.salesConf = salesTbl;
-            $scope.$apply();
+            angular.element("#salesTarget table").scope().$apply();
+            // $scope.$apply();
           });
         };
 
@@ -207,7 +214,8 @@ define([], function () {
             var formatTbl = $model.$formatConf.data;
             formatTbl.rows = formatFilter.formatTable(formatData);
             $scope.formatConf = formatTbl;
-            $scope.$apply();
+            angular.element("#formatTarget table").scope().$apply();
+            // $scope.$apply();
           });
         };
 
@@ -219,7 +227,8 @@ define([], function () {
               var sfTbl = $model.$sfConf.data;
               sfTbl.rows = formatFilter.sfTable(sfData);
               $scope.sfConf = sfTbl;
-              $scope.$apply();
+              angular.element("#sfTarget table").scope().$apply();
+              // $scope.$apply();
           });
         };
 

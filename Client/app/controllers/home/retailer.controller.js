@@ -63,14 +63,17 @@ define([], function () {
                 }
             });
 
+            // 后端数据
+            var drop_back_data = $model.$dropShop.data || [];
+            drop_back_data = drop_back_data.length ? drop_back_data : [{bizCode:""}];
             // 查询
             $scope = angular.extend($scope, {
                 type: 'day',
                 retailerSearch: initSearch,
-                cityArr: $model.$dropShop.data || [],
-                cityName: $model.$dropShop.data[0].bizCode,
-                endTime: "2017-08-04" || dateFormatFilter.date(+new Date),
-                startTime: "2017-08-04" || dateFormatFilter.date(+new Date)
+                cityArr: drop_back_data,
+                cityName: drop_back_data[0].bizCode,
+                endTime: dateFormatFilter.date(+new Date),
+                startTime: dateFormatFilter.date(+new Date)
             });
 
             // 初始化

@@ -19,9 +19,6 @@ var favicon = require('serve-favicon');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 
-// 实例化
-var app = express();
-
 /**
  * [mergeRoute description]
  * @param  {[type]} routes [description]
@@ -130,8 +127,10 @@ function startServer (app, options) {
  * @return {[type]}         [description]
  */
 module.exports.init = function (config, plugins) {
-  config = setEnv(config);   // 设置环境变量
-  usePlugins(app, plugins, config);  //使用中间件
+
+  var app = express();                // 实例化对象
+  config = setEnv(config);            // 设置环境变量
+  usePlugins(app, plugins, config);   // 使用中间件
 
   //设置环境变量
   app.set('env', config.runmode);

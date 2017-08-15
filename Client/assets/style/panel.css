@@ -5,6 +5,9 @@
 .multiselect-container>li.multiselect-group label {
 	width: 100%;
 }
+.multiselect-container .active label {
+	color: #fff!important;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;

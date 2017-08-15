@@ -62,6 +62,9 @@ define([], function () {
             // 编辑活动
             var EDIT_ACTIVITY = '/api/tztx/saas/saotx/activity/detail';
 
+            // 查看活动
+            var LOOK_ACTIVITY = '/api/tztx/saas/saotx/activity/detail';
+
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
@@ -142,6 +145,11 @@ define([], function () {
             // 编辑活动
             $model.editActivity = function (data) {
                 return request.$Search(EDIT_ACTIVITY, data);
+            }
+
+            // 查看活动
+            $model.lookActivity = function (data) {
+                return request.$Search(LOOK_ACTIVITY, data);
             }
 
         }]

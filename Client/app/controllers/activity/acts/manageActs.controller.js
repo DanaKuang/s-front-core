@@ -32,12 +32,12 @@ define([], function () {
             autoclose: 1,
             todayHighlight: 1
       		}).on('change', function (e) {
-              var endTime = e.target.value;
-              var startTime = $scope.startTime;
-              if (startTime > endTime) {
-                  $scope.startTime = '';
-                  $scope.$apply();
-              }
+            var endTime = e.target.value;
+            var startTime = $scope.startTime;
+            if (startTime > endTime) {
+                $scope.startTime = '';
+                $scope.$apply();
+            }
           });
 
           // 获取活动类型/活动模板
@@ -62,6 +62,9 @@ define([], function () {
           // 获取所有品牌
           $(document).ready(function () {
             $(".operation.multi .select").multiselect({
+              nonSelectedText: '请选择',
+              allSelectedText: '全部',
+              nSelectedText: '已选择',
               includeSelectAllOption: true,
               selectAllText: '全部',
               selectAllValue: 'all',
@@ -72,13 +75,15 @@ define([], function () {
             });
           });
 
-          $model.getAllBrands().then(function(res) {
-            $scope.allBrands = res.data.data;
-            $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
-                v.label = v.name;
-                v.value = v.brandCode;
-            }));
-            $('[ng-model="selectAllBrands"]').multiselect('refresh');
+          $('.select-brand-name').on('click', function () {
+            $model.getAllBrands().then(function(res) {
+              $scope.allBrands = res.data.data;
+              $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
+                  v.label = v.name;
+                  v.value = v.brandCode;
+              }));
+              $('[ng-model="selectAllBrands"]').multiselect('refresh');
+            })
           })
 
           // 操作面板，根据品牌获取规格
@@ -93,7 +98,7 @@ define([], function () {
                   v.label = v.allName;
                   v.value = v.sn;
                 }));
-                $('[ng-model="selectAllBrands"]').multiselect('refresh');
+                $('[ng-model="selectSpeci"]').multiselect('refresh');
               })
             }
           })
@@ -203,6 +208,13 @@ define([], function () {
               }
             })
           })
+
+          // 查看活动
+          $scope.$on('lookupActivity', function (e, v, f) {
+            $model.lookActivity(f).then(function(res){
+              $scope.lookupConf = res.data;
+            })
+          })
           
           // 获取模板对应的配置页面
           $scope.$on('typefromActSample', function (e,v,f) {
@@ -238,6 +250,9 @@ define([], function () {
           function getLaunchInfo() {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
+                nonSelectedText: '请选择',
+                allSelectedText: '全部',
+                nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
                 selectAllValue: 'all',
@@ -278,6 +293,9 @@ define([], function () {
           function getAlreadySelectedLaunchInfo(selectedData) {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
+                nonSelectedText: '请选择',
+                allSelectedText: '全部',
+                nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
                 selectAllValue: 'all',
@@ -503,7 +521,7 @@ define([], function () {
                   location.reload();
                 }
               } else {
-                alert('活动创建失败');
+                alert(res.message);
               }
             })
           })
