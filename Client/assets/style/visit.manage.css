@@ -249,7 +249,7 @@
     background-color: #ECEDF0;
 }
 #panel-body {
-    padding: 0;
+    /*padding: 0;*/
 }
 .tab-content  .tab-pane .spacil-table {
     border-top: 1px solid #555;
