@@ -1,0 +1,264 @@
+[2017-08-15 02:00:30.791] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:30 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:00:30.795] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:00:30.796] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:30 uncaughtException: socket hang up
+[2017-08-15 02:00:30.796] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:00:30.797] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:30 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:00:30.798] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:00:30.800] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:30 uncaughtException: socket hang up
+[2017-08-15 02:00:30.800] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:00:49.621] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:49 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:00:49.622] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:00:49.623] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:49 uncaughtException: socket hang up
+[2017-08-15 02:00:49.623] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:00:49.631] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:49 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:00:49.632] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:00:49.633] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:00:49 uncaughtException: socket hang up
+[2017-08-15 02:00:49.633] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:01:18.080] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:18 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:01:18.082] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:01:18.084] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:18 uncaughtException: socket hang up
+[2017-08-15 02:01:18.085] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:01:18.086] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:18 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:01:18.087] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:01:18.088] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:18 uncaughtException: socket hang up
+[2017-08-15 02:01:18.088] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:01:53.308] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:53 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:01:53.309] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:01:53.310] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:53 uncaughtException: socket hang up
+[2017-08-15 02:01:53.310] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:01:53.338] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:53 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:01:53.339] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:01:53.340] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:01:53 uncaughtException: socket hang up
+[2017-08-15 02:01:53.340] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:02:02.633] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:02 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:02:02.635] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:02:02.635] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:02 uncaughtException: socket hang up
+[2017-08-15 02:02:02.636] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:02:02.637] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:02 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:02:02.637] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:02:02.638] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:02 uncaughtException: socket hang up
+[2017-08-15 02:02:02.640] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:02:17.744] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:17 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:02:17.745] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:02:17.746] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:17 uncaughtException: socket hang up
+[2017-08-15 02:02:17.747] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:02:17.748] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:17 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:02:17.749] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:02:17.750] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:02:17 uncaughtException: socket hang up
+[2017-08-15 02:02:17.750] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:03:09.273] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:09 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:03:09.275] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:03:09.275] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:09 uncaughtException: socket hang up
+[2017-08-15 02:03:09.276] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:03:09.280] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:09 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:03:09.280] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:03:09.281] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:09 uncaughtException: socket hang up
+[2017-08-15 02:03:09.288] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:03:22.374] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:22 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:03:22.375] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:03:22.376] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:22 uncaughtException: socket hang up
+[2017-08-15 02:03:22.376] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:03:22.382] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:22 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:03:22.383] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:03:22.385] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:03:22 uncaughtException: socket hang up
+[2017-08-15 02:03:22.386] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:04:19.251] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:04:19 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:04:19.253] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:04:19.254] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:04:19 uncaughtException: socket hang up
+[2017-08-15 02:04:19.255] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:04:19.256] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:04:19 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:04:19.257] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:04:19.258] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:04:19 uncaughtException: socket hang up
+[2017-08-15 02:04:19.258] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:05:09.497] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:05:09 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:05:09.498] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:05:09.499] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:05:09 uncaughtException: socket hang up
+[2017-08-15 02:05:09.499] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:05:09.511] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:05:09 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:05:09.511] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:05:09.513] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:05:09 uncaughtException: socket hang up
+[2017-08-15 02:05:09.514] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:06:00.839] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:06:00 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:06:00.840] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:06:00.840] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:06:00 uncaughtException: socket hang up
+[2017-08-15 02:06:00.842] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
+[2017-08-15 02:06:00.853] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:06:00 uncaughtException: connect ETIMEDOUT 172.16.1.172:8080
+[2017-08-15 02:06:00.853] [ERROR] E:\sass\saas-front-core\Client\logs - Error: connect ETIMEDOUT 172.16.1.172:8080
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1086:14)
+[2017-08-15 02:06:00.854] [ERROR] E:\sass\saas-front-core\Client\logs - 2017-8-15 02:06:00 uncaughtException: socket hang up
+[2017-08-15 02:06:00.855] [ERROR] E:\sass\saas-front-core\Client\logs - Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at Socket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at Socket.emit (events.js:188:7)
+    at TCP._handle.close [as _onclose] (net.js:497:12)
