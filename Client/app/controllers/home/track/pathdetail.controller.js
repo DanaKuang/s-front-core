@@ -40,7 +40,7 @@ define([], function () {
                 // productBrand: pScope.productBrand || "所有",
                 // productSn: pScope.productName && pScope.productName.join(',') || "99999999",
                 // productBrand: pScope.activityId || "",
-                activityId: pScope.productBrand || "所有",
+                activityId: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
                 sn: pScope.pagename || "",
