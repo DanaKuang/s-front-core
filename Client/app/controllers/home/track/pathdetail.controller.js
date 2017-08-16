@@ -39,7 +39,8 @@ define([], function () {
             var params = {
                 // productBrand: pScope.productBrand || "所有",
                 // productSn: pScope.productName && pScope.productName.join(',') || "99999999",
-                productBrand: pScope.activityId || "",
+                // productBrand: pScope.activityId || "",
+                activityId: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
                 sn: pScope.pagename || "",
@@ -92,7 +93,7 @@ define([], function () {
             // 活动页面
             $pagename.next().children('.multiselect').off().on('click', function (e) {
                 $model.getActPage({
-                    productBrand: pScope.activityId
+                    activityId: pScope.activityId
                 }).then(function (res) {
                     pScope.pgArray = res.data || [];
                     pScope.$apply();
