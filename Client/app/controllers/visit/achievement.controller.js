@@ -58,30 +58,53 @@ define([], function() {
 				var endTime = $("#timeEnd2").val();
 				var seacherId = {
 					pageNum: 1,
-					pageSize: 2,
+					pageSize: 10,
 					startTime: strToTimestamp(startTime),
-					endTime: strToTimestamp(endTime)
-			 	}
-                $model.getTblStatic(seacherId).then(function(res) {
+					endTime: strToTimestamp(endTime)+86400000
+				}
+				$model.getTblStatic(seacherId).then(function(res) {
 					$scope.staticData = res.data.data || [];
 					$scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/seacherId.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/seacherId.pageSize);
+					$("#pageCount").text(res.data.totalNum);
+					if(seacherId.pageSize<=res.data.totalNum){
+						$("#pageSize").text(seacherId.pageSize);
+					}else{
+						$("#pageSize").text(res.data.totalNum);
+					}
+
 					$(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
+					$(".rf").append("<div class='tcdPageCode'></div>");
+					$(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: seacherId.pageNum,
-						backFn: function(p) {     
-                            seacherId.pageNum =p;
+						backFn: function(p) {
+							seacherId.pageNum =p;
 							$model.getTblStatic(seacherId).then(function(res) {
 								$scope.staticData = res.data.data || [];
 								$scope.$apply();
+								$("#pageCount").text(res.data.totalNum);
+								if(seacherId.pageSize<=res.data.totalNum){
+									if(seacherId.pageNum==pageCount){
+										$("#pageSize").text(res.data.totalNum%seacherId.pageSize);
+									}else{
+										$("#pageSize").text(seacherId.pageSize);
+									}
+
+								}else{
+									$("#pageSize").text(res.data.totalNum);
+								}
 							});
 						}
 					});
 				});
 			});
-			$("#seacherId").trigger("click");
+			$('#tab2[data-toggle="tab"]').on('show.bs.tab',function(e){
+				$("#seacherId").trigger('click');
+			});
+			$('#tab1[data-toggle="tab"]').on('show.bs.tab',function(e){
+				$("#achievement-seacher").trigger('click');
+			});
 			//零售户业绩列表
 			$("#achievement-seacher").off().on('click', function(){
 				var search = $("#input1").val();
@@ -92,34 +115,53 @@ define([], function() {
 					search: search,
 					isFx:isFx,
 					startTime:strToTimestamp(startTime),
-					endTime:strToTimestamp(endTime),
+					endTime:strToTimestamp(endTime)+86400000,
 					pageNum:1,
-					pageSize:2
-			 	}
-                $model.getTblDetail(yjParam).then(function(res) {
+					pageSize:10
+				}
+				$model.getTblDetail(yjParam).then(function(res) {
 					for(var i = 0; i < res.data.data.length; i++) {
 
 						res.data.data[i].cousumerScTime = getLocalTime(res.data.data[i].cousumerScTime);
 					}
 					$scope.detailData = res.data.data || [];
 					$scope.$apply();
-					var pageCount = Math.ceil(res.data.totalNum/yjParam.pageSize);					
+					var pageCount = Math.ceil(res.data.totalNum/yjParam.pageSize);
 					$(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
+					$("#pageCount").text(res.data.totalNum);
+					if(yjParam.pageSize<=res.data.totalNum){
+						$("#pageSize").text(yjParam.pageSize);
+					}else{
+						$("#pageSize").text(res.data.totalNum);
+					}
+
+					// alert(yjParam.pageSize);
+					$(".rf").append("<div class='tcdPageCode'></div>");
+					$(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current: yjParam.pageNum,
-						backFn: function(p) {     
-                            yjParam.pageNum =p;
+						backFn: function(p) {
+							yjParam.pageNum =p;
 							$model.getTblDetail(yjParam).then(function(res) {
 								for(var i = 0; i < res.data.data.length; i++) {
 									if(res.data.data[i].cousumerScTime){
 										res.data.data[i].cousumerScTime = getLocalTime(res.data.data[i].cousumerScTime);
 									};
-									
+
 								}
 								$scope.detailData = res.data.data || [];
 								$scope.$apply();
+								$("#pageCount").text(res.data.totalNum);
+								if(yjParam.pageSize<=res.data.totalNum){
+									if(yjParam.pageNum==pageCount){
+										$("#pageSize").text(res.data.totalNum%yjParam.pageSize);
+									}else{
+										$("#pageSize").text(yjParam.pageSize);
+									}
+
+								}else{
+									$("#pageSize").text(res.data.totalNum);
+								}
 							});
 						}
 					});
