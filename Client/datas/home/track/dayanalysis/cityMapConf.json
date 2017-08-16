@@ -9,7 +9,8 @@
         }
     },
     "tooltip": {
-        "trigger": "axis"
+        "trigger": "item",
+        "formatter": "{a} <br/>{c}"
     },
     "legend": {},
     "grid": {

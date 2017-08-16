@@ -177,36 +177,39 @@ define([], function () {
                 };
                 // 初始化平均
                 function initAverage (data) {
-                    option.series[0].name = '平均访问深度';
+                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
                     option.series[0].data = _.pluck(data.first, 'avgVistDepth');
                     option.series[1] = {};
+                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].type = 'line';
+                    option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].name = '平均访问深度';
-                        option.series[1].type = 'line';
                         option.series[1].data = _.pluck(data.second, 'avgVistDepth');
                     }
                     dayEchart.setOption(option);
                 }
                 // 初始化PV
                 function initPv (data) {
-                    option.series[0].name = '浏览量（PV）';
+                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
                     option.series[0].data = _.pluck(data.first, 'activePv');
                     option.series[1] = {};
+                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].type = 'line';
+                    option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].name = '浏览量（PV）';
-                        option.series[1].type = 'line';
                         option.series[1].data = _.pluck(data.second, 'activePv');
                     }
                     dayEchart.setOption(option);
                 }
                 // 初始化Uv
                 function initUv (data) {
-                    option.series[0].name = '访客数（UV）';
+                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
                     option.series[0].data = _.pluck(data.first, 'activeUv');
                     option.series[1] = {};
+                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].type = 'line';
+                    option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].name = '访客数（UV）';
-                        option.series[1].type = 'line';
                         option.series[1].data = _.pluck(data.second, 'activeUv');
                     }
                     dayEchart.setOption(option);
@@ -273,22 +276,24 @@ define([], function () {
                 };
                 // 初始化PV
                 function initPv (data) {
-                    option.series[0].name = 'PV';
+                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
                     option.series[0].data = _.pluck(data.first, 'activePv');
                     option.series[1] = {};
+                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].name = 'PV';
                         option.series[1].data = _.pluck(data.second, 'activePv');
                     }
                     cityEchart.setOption(option);
                 }
                 // 初始化Uv
                 function initUv (data) {
-                    option.series[0].name = 'UV';
+                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
                     option.series[0].data = _.pluck(data.first, 'activeUv');
                     option.series[1] = {};
+                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].name = 'UV';
                         option.series[1].data = _.pluck(data.second, 'activeUv');
                     }
                     cityEchart.setOption(option);
