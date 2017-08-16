@@ -9,8 +9,7 @@
         }
     },
     "tooltip": {
-        "trigger": "item",
-        "formatter": "{a} <br/>{c}"
+        "trigger": "item"
     },
     "legend": {
         "data":[]

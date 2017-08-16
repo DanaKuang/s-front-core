@@ -18,6 +18,9 @@ define([], function () {
             // 日分析折线图
             var dayEchart = echarts.init(document.getElementById("dayMap"));
             var dayMapConf = $model.$dayMapConf.data;
+            dayMapConf.tooltip.formatter = function (params) {
+                return params.seriesName + params.value;
+            }
             dayEchart.setOption(dayMapConf);
             // 地域分析
             var mapEchart = echarts.init(document.getElementById("baiduMap"));
@@ -26,6 +29,9 @@ define([], function () {
             // 城市折线图
             var cityEchart = echarts.init(document.getElementById("cityMap"));
             var cityMapConf = $model.$cityMapConf.data;
+            cityMapConf.tooltip.formatter = function (params) {
+                return params.seriesName + params.value;
+            }
             cityEchart.setOption(cityMapConf);
             // 饼图
             var pieLeftEchart = echarts.init(document.getElementById("pie_left"));
@@ -177,10 +183,10 @@ define([], function () {
                 };
                 // 初始化平均
                 function initAverage (data) {
-                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
+                    option.series[0].name = params_f.startTime+'～'+params_f.endTime+'<br/>平均访问深度：';
                     option.series[0].data = _.pluck(data.first, 'avgVistDepth').map(function(v){return v.toFixed(2)});
                     option.series[1] = {};
-                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].name = params_s.startTime+'～'+params_s.endTime+'<br/>平均访问深度：';
                     option.series[1].type = 'line';
                     option.series[1].data = [];
                     if (!!data.second) {
@@ -190,10 +196,10 @@ define([], function () {
                 }
                 // 初始化PV
                 function initPv (data) {
-                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
+                    option.series[0].name = params_f.startTime+'～'+params_f.endTime+'<br/>浏览量（PV）：';
                     option.series[0].data = _.pluck(data.first, 'activePv');
                     option.series[1] = {};
-                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].name = params_s.startTime+'～'+params_s.endTime+'<br/>浏览量（PV）：';
                     option.series[1].type = 'line';
                     option.series[1].data = [];
                     if (!!data.second) {
@@ -203,10 +209,11 @@ define([], function () {
                 }
                 // 初始化Uv
                 function initUv (data) {
-                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
+                    option.tooltip.formatter = "{a} <br/>访客量（UV）：{c}";
+                    option.series[0].name = params_f.startTime+'～'+params_f.endTime+'<br/>访客量（UV）：';
                     option.series[0].data = _.pluck(data.first, 'activeUv');
                     option.series[1] = {};
-                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].name = params_s.startTime+'～'+params_s.endTime+'<br/>访客量（UV）：';
                     option.series[1].type = 'line';
                     option.series[1].data = [];
                     if (!!data.second) {
@@ -276,22 +283,22 @@ define([], function () {
                 };
                 // 初始化PV
                 function initPv (data) {
-                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
+                    option.series[0].name = params_f.startTime+'～'+params_f.endTime+'<br/>浏览量（PV）：';
                     option.series[0].data = _.pluck(data.first, 'activePv');
                     option.series[1] = {};
-                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].name = params_s.startTime+'～'+params_s.endTime;
                     option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].data = _.pluck(data.second, 'activePv');
+                        option.series[1].data = _.pluck(data.second, 'activePv')+'<br/>浏览量（PV）：';
                     }
                     cityEchart.setOption(option);
                 }
                 // 初始化Uv
                 function initUv (data) {
-                    option.series[0].name = params_f.startTime+'--'+params_f.endTime;
+                    option.series[0].name = params_f.startTime+'～'+params_f.endTime+'<br/>访客量（UV）：';
                     option.series[0].data = _.pluck(data.first, 'activeUv');
                     option.series[1] = {};
-                    option.series[1].name = params_s.startTime+'--'+params_s.endTime;
+                    option.series[1].name = params_s.startTime+'～'+params_s.endTime+'<br/>访客量（UV）：';
                     option.series[1].data = [];
                     if (!!data.second) {
                         option.series[1].data = _.pluck(data.second, 'activeUv');
