@@ -1,0 +1,80 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-06-28
+ * Description: kpi
+ */
+-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.kpi.css">
+<div class="animated fadeInRight" ng-controller="KPIHenanCtrl">
+  <div class="container-fluid">
+    <div class="ui-content-box row">
+      <!--总体指标展示-->
+      <div class="col-md-12">
+        <div class="ui-panel-title hot">
+          <i class="hot"></i><span>总体指标展示</span>
+        </div>
+        <div class="ui-panel-box panel rate">
+          <div class="panel-body">
+            <p class="ui-scan-city">扫码次数当前10城市</p>
+            <p class="ui-scan-hot-city ellipsis" id="scan_top">{{scan.top}}</p>
+            <div class="ui-map-content-box">
+              <!--地图-->
+              <div id="baiduMap" class="ui-map-box"></div>
+              <!--底部实时数据-->
+              <div class="ui-real-time">
+                <p>实时数据</p>
+                <ul class="ui-real-time-data" id="scroll_data"></ul>
+              </div>
+              <!--右侧实时数据-->
+              <div class="ui-scan-box">
+                <!--当日扫码次数-->
+                <div class="ui-scan-times ui-scan-detail">
+                  <p>当日扫码总次数：<span id="scan_day">0</span><em>&nbsp;次</em></p>
+                  <p>历史扫码总次数：<span id="scan_day_rate">0</span><em>&nbsp;次</em></p>
+                </div>
+                <!--当日扫码总数-->
+                <div class="ui-scan-total ui-scan-detail">
+                  <p>当日扫码总人数：<span id="scan_user">0</span><em>&nbsp;人</em></p>
+                  <p>历史扫码总人数：<span id="scan_user_rate">0</span><em>&nbsp;人</em></p>
+                </div>
+                <!--当日扫码次数环比-->
+                <div class="ui-scan-rate ui-scan-detail">
+                  <p>当日扫码总烟包数：<span id="scan_code">0</span><em>&nbsp;包</em></p>
+                  <p>历史扫码总烟包数：<span id="scan_code_rate">0</span><em>&nbsp;包</em></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--table-->
+    <div class="ui-table-box row">
+      <div class="col-md-12">
+        <div class="ui-panel-title">
+          <i class="total"></i><span>指标一览表</span>
+        </div>
+        <div class="panel rate">
+          <ul class="ui-nav-table-panel nav nav-pills">
+            <li class="active"><a href="#salesTarget" ng-click="reProvinceKPI();" data-toggle="tab">销区指标</a></li>
+            <li class=""><a href="#formatTarget" ng-click="reSpecificationKPI();" data-toggle="tab">规格指标</a></li>
+          </ul>
+          <div class="tab-content">
+            <!--销区指标-->
+            <div class="tab-pane fade in active" id="salesTarget">
+              <div sa-kpi-table conf="salesConf"></div>
+            </div>
+            <!--规格指标-->
+            <div class="tab-pane fade in" id="formatTarget">
+              <div sa-kpi-table conf="formatConf"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end table-->
+  </div>
+</div>

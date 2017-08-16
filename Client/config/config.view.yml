@@ -36,6 +36,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/kpi/kpi.html'
+  - httpmethod: 'get'                       # KPI
+    routepath: '/view/home/henan-kpi'
+    description: 'kpi'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/kpi/kpi-henan.html'
   - httpmethod: 'get'                       # 主题查询[规格]
     routepath: '/view/home/theme/spec'
     description: 'theme'

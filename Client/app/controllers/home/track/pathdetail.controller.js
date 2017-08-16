@@ -64,6 +64,25 @@ define([], function () {
                 allSelectedText: '全部',
                 nSelectedText: '已选择',
                 enableFiltering: true,
+                onChange: function (e) {
+                    $model.getActPage({
+                        activityId: pScope.activityId
+                    }).then(function (res) {
+                        pScope.pgArray = res.data || [];
+                        pScope.$apply();
+                        $pagename.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                            val.label = val.page_name;
+                            val.value = val.page_code;
+                        }));
+                        $pagename.multiselect('select', pScope.pgArray[0].page_code);
+                        $pagename.multiselect('refresh');
+                    });
+                }
+            });
+            $(".ui-path-search select.multiple-radio").multiselect({
+                nonSelectedText: '请选择',
+                allSelectedText: '全部',
+                nSelectedText: '已选择'
             });
             // var $prBrand = $("[name='productBrand']");
             // var $product = $("[name='productName']");
@@ -91,21 +110,18 @@ define([], function () {
             //     });
             // });
             // 活动页面
-            $pagename.next().children('.multiselect').off().on('click', function (e) {
-                $model.getActPage({
-                    activityId: pScope.activityId
-                }).then(function (res) {
-                    pScope.pgArray = res.data || [];
-                    pScope.$apply();
-                    $pagename.multiselect("destroy").multiselect('dataprovider', _.forEach(res.data, function(val) {
-                        val.label = val.page_name;
-                        val.value = val.page_code;
-                    }));
-                    $pagename.multiselect('select', pScope.pagename || pScope.pgArray[0].page_code);
-                    $pagename.multiselect('refresh');
-                });
+            $model.getActPage({
+                activityId: pScope.activityId
+            }).then(function (res) {
+                pScope.pgArray = res.data || [];
+                pScope.$apply();
+                $pagename.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                    val.label = val.page_name;
+                    val.value = val.page_code;
+                }));
+                $pagename.multiselect('select', pScope.pagename || pScope.pgArray[0].page_code);
+                $pagename.multiselect('refresh');
             });
-            $pagename.next().children('.multiselect').trigger('click');
             // 默认值入口
             pathSearch();
         });

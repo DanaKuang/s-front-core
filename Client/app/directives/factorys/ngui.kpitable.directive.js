@@ -140,7 +140,7 @@ define([], function () {
         //conf整个改变 则更新模板的数据
         scope.$watch('conf', function() {
             util.uiExtend(scope, defaults, attrs, scope.conf, ['tableCls', 'columns', 'rows', 'paging', 'srhFormId', 'rid', 'width', 'isAutoSize', 'isSortable', 'isHide', 'rowDetail']);
-        });
+        }, true);
         scope.initConf = angular.copy(scope.conf);
     }
     return defineObj;
