@@ -52,7 +52,6 @@ define([], function () {
 
             // 图片
             $scope.pageimg = 'statics/assets/image/orange/'+(pScope.activityId)+'.jpg';
-            $scope.$apply();
         }
 
         // 初始化select
