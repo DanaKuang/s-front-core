@@ -178,13 +178,13 @@ define([], function () {
                 // 初始化平均
                 function initAverage (data) {
                     option.series[0].name = params_f.startTime+'--'+params_f.endTime;
-                    option.series[0].data = _.pluck(data.first, 'avgVistDepth');
+                    option.series[0].data = _.pluck(data.first, 'avgVistDepth').map(function(v){return v.toFixed(2)});
                     option.series[1] = {};
                     option.series[1].name = params_s.startTime+'--'+params_s.endTime;
                     option.series[1].type = 'line';
                     option.series[1].data = [];
                     if (!!data.second) {
-                        option.series[1].data = _.pluck(data.second, 'avgVistDepth');
+                        option.series[1].data = _.pluck(data.second, 'avgVistDepth').map(function(v){return v.toFixed(2)});
                     }
                     dayEchart.setOption(option);
                 }
