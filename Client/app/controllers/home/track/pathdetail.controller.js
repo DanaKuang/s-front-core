@@ -43,7 +43,7 @@ define([], function () {
                 activityId: pScope.activityId || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
-                sn: pScope.pagename || "",
+                webId: pScope.pagename || "",
                 startTime: pScope.startTime || "",
                 endTime: pScope.endTime || ""
             };
