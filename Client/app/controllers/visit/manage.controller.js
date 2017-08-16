@@ -91,6 +91,13 @@ define([], function () {
 						}
 						var commercial = res.data.data[i].commercial;
 						res.data.data[i].commercial = arr[commercial-1];
+						var district= parseInt(res.data.data[i].district);
+						if(district==1){
+							district ="城镇";
+						}else if(district==2){
+							district ="乡村";
+						}
+						res.data.data[i].district =district;
 					}
 					$scope.listData = res.data.data || [];
 					$scope.$apply();
@@ -111,15 +118,32 @@ define([], function () {
 							$model.getTblData(manageList).then(function(res) {
 								for(var i=0;i<res.data.data.length;i++){
 									res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
+									// if(res.data.data[i].authStatus==1){
+									// 	res.data.data[i].authStatus = "待审核";
+									// }else if(res.data.data[i].authStatus==2){
+									// 	res.data.data[i].authStatus = "审核通过";
+									// }else if(res.data.data[i].authStatus==3){
+									// 	res.data.data[i].authStatus = "审核未通过";
+									// }
 									if(res.data.data[i].authStatus==1){
 										res.data.data[i].authStatus = "待审核";
+										res.data.data[i].isShow= false;
 									}else if(res.data.data[i].authStatus==2){
 										res.data.data[i].authStatus = "审核通过";
+										res.data.data[i].isShow= true;
 									}else if(res.data.data[i].authStatus==3){
 										res.data.data[i].authStatus = "审核未通过";
+										res.data.data[i].isShow= false;
 									}
 									var commercial = res.data.data[i].commercial;
 									res.data.data[i].commercial = arr[commercial-1];
+									var district= parseInt(res.data.data[i].district);
+									if(district==1){
+										district ="城镇";
+									}else if(district==2){
+										district ="乡村";
+									}
+									res.data.data[i].district =district;
 								}
 								$scope.listData = res.data.data || [];
 								$scope.$apply();
@@ -255,7 +279,10 @@ define([], function () {
 					res.data.data.sellerInfo.commercial = arr[res.data.data.sellerInfo.commercial-1];
 					res.data.data.sellerInfo.authStatus = authStatus;
 					res.data.data.sellerInfo.district = district;
-					$scope.detailData = res.data.data.sellerInfo || [];
+					$scope.sellerInfo = res.data.data.sellerInfo || [];
+					$scope.walletInfo = res.data.data.walletInfo || [];
+					$scope.wxinfo = res.data.data.wxinfo || [];
+
 					$scope.$apply();
 				});
 			};
