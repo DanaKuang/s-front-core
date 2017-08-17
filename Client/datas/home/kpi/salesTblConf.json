@@ -18,16 +18,19 @@
         "name": "scantimes",
         "label": "扫码次数",
         "sortable": true,
+        "tooltip": "从当天零点开始到当前，产生的扫码的实时数值，包含重复扫码的情况",
         "align": "center"
     }, {
         "name": "scanUsers",
         "label": "扫码人数",
         "sortable": true,
+        "tooltip": "从当天零点开始到当前，参与扫码活动用户数的实时数值，对当天的扫码用户的id进行了去重处理",
         "align": "center"
     }, {
         "name": "scanCodes",
         "label": "扫码烟包数",
         "sortable": true,
+        "tooltip": "从当天零点开始到当前，产生的扫码总烟包数的实时数值，去除当天重复扫码后的扫码数",
         "align": "center"
     }],
     "rows": [],

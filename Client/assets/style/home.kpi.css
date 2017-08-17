@@ -59,6 +59,10 @@
   padding: 20px 0;
 }
 
+.ui-scan-box p {
+  cursor: pointer;
+}
+
 .ui-scan-city {
   font-size: 14px;
   color: #515151;

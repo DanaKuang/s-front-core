@@ -37,6 +37,11 @@ define([], function () {
           return result;
         }
 
+        // tooltip
+        $(document).ready(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+
         Interval_1 = setInterval(function() {
           // 获取扫码次数
           $model.getScanTime().then(function (res) {
@@ -203,6 +208,7 @@ define([], function () {
             salesTbl.rows = formatFilter.salesTable(salesData);
             $scope.salesConf = salesTbl;
             $scope.$apply();
+            $('[data-toggle="tooltip"]').tooltip();
           });
         };
 
@@ -214,6 +220,7 @@ define([], function () {
             formatTbl.rows = formatFilter.formatTable(formatData);
             $scope.formatConf = formatTbl;
             $scope.$apply();
+            $('[data-toggle="tooltip"]').tooltip();
           });
         };
 
@@ -226,6 +233,7 @@ define([], function () {
               sfTbl.rows = formatFilter.sfTable(sfData);
               $scope.sfConf = sfTbl;
               $scope.$apply();
+              $('[data-toggle="tooltip"]').tooltip();
           });
         };
 
