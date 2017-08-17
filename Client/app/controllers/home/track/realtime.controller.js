@@ -119,6 +119,7 @@ define([], function () {
                     d.name = d.province;
                     d.value = Number(d.pv) + Number(d.uv);
                 }) || [];
+                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value;
                 mapEchart.setOption(opts);
             });
         }

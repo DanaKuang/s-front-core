@@ -231,6 +231,7 @@ define([], function () {
                         d.name = d.provinceName;
                         d.value = Number(d.activePv) + Number(d.activeUv);
                     }) || [];
+                    option.visualMap[0].max = _.max(option.series[1].data, function (v) {return v.value}).value;
                     mapEchart.setOption(option);
                 });
             }
