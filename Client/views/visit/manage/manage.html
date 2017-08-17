@@ -82,7 +82,7 @@
                                                         <tr>
                                                             <th>烟草专卖照片</th>
                                                             <th>烟草专卖号</th>
-                                                            <th>门店名称</th>
+                                                            <th style="width:100px;">门店名称</th>
                                                             <th style="width:100px;">门店地址</th>
                                                             <th>经营人姓名</th>
                                                             <th>区域</th>
@@ -103,7 +103,7 @@
                                                             <td>{{tr.shopName}}</td>
                                                             <td>{{tr.addrDetail}}</td>
                                                             <td>{{tr.ownerName}}</td>
-                                                            <td>{{tr.addrArea}}</td>
+                                                            <td>{{tr.district}}</td>
                                                             <td>{{tr.commercial }}</td>
                                                             <td>{{tr.contactName}}</td>
                                                             <td>{{tr.contactPhone}}</td>
@@ -113,7 +113,6 @@
                                                                 <a class="sava-shen" data-toggle="modal"
                                                                    data-target="#myModal" ng-click="aaa(tr)"
                                                                    ng-hide="{{tr.isShow}}">审核</a><br/>
-
                                                                 <a ng-click="showDetail(tr)">商户详情</a>
                                                             </td>
                                                         </tr>
@@ -177,7 +176,7 @@
                                                             <td>{{tm.contactName}}</td>
                                                             <td>{{tm.contactPhone}}</td>
                                                             <td>
-                                                                {{tm.provinceName+tm.cityName+tm.areaName+tm.addrDetail}}
+                                                                {{tm.provinceName+"省"+tm.cityName+"市"+tm.areaName+"县"+tm.addrDetail}}
                                                             </td>
                                                             <td>{{tm.ctime}}</td>
                                                             <td>{{tm.amout+"元"}}</td>
@@ -263,36 +262,36 @@
                                 </div>
                                 <div class="col-md-3 " id="content-right-first">
                                     <span class="span1">门店名称:</span>
-                                    <span class="span2" style="vertical-align: top;">{{detailData.shopName}}</span>
+                                    <span class="span2" style="vertical-align: top;">{{sellerInfo.shopName}}</span>
                                     <span class="span1">门店地址:</span>
-                                    <span class="span2" style="vertical-align: top;">{{detailData.addrProvince+detailData.addrCity+detailData.addrArea+detailData.addrDetail}}</span>
+                                    <span class="span2" style="vertical-align: top;">{{sellerInfo.addrProvinceName+sellerInfo.addrCityName+"市"+sellerInfo.addrAreaNmae+sellerInfo.addrDetail}}</span>
                                     <span class="span1">微信名:</span>
-                                    <span class="span2">{{}}</span>
+                                    <span class="span2">{{wxinfo.nickname}}</span>
                                     <span class="span1">申请时间:</span>
-                                    <span class="span2"> {{detailData.applyTime}}</span>
+                                    <span class="span2"> {{sellerInfo.applyTime}}</span>
                                     <span class="span1">账户余额:</span>
-                                    <span class="span2">{{}}</span>
+                                    <span class="span2">{{walletInfo.balance}}</span>
                                 </div>
                                 <div class="col-md-3" id="content-right-second">
                                     <span class="span1">烟草专卖证号:</span>
-                                    <span class="span2">{{detailData.licenceNo}}</span>
+                                    <span class="span2">{{sellerInfo.licenceNo}}</span>
                                     <span class="span1">联系人姓名:</span>
-                                    <span class="span2">{{detailData.contactName}}</span>
+                                    <span class="span2">{{sellerInfo.contactName}}</span>
                                     <span class="span1">区域:</span>
-                                    <span class="span2">{{detailData.district}}</span>
+                                    <span class="span2">{{sellerInfo.district}}</span>
                                     <span class="span1">审核时间:</span>
-                                    <span class="span2">{{detailData.lastUpdateTime}}</span>
+                                    <span class="span2">{{sellerInfo.lastUpdateTime}}</span>
 
                                 </div>
                                 <div class="col-md-3" id="content-right-third">
                                     <span class="span1">经营人姓名:</span>
-                                    <span class="span2">{{detailData.ownerName}}</span>
+                                    <span class="span2">{{sellerInfo.ownerName}}</span>
                                     <span class="span1">联系人电话:</span>
-                                    <span class="span2">{{detailData.contactPhone}}</span>
+                                    <span class="span2">{{sellerInfo.contactPhone}}</span>
                                     <span class="span1">业态:</span>
-                                    <span class="span2"> {{detailData.commercial}}</span>
+                                    <span class="span2"> {{sellerInfo.commercial}}</span>
                                     <span class="span1">审核状态:</span>
-                                    <span class="span2" id="authStatus">{{detailData.authStatus}}</span>
+                                    <span class="span2" id="authStatus">{{sellerInfo.authStatus}}</span>
 
                                 </div>
                                 <!-- <button type="button" ng-click="secondThough();" class="btn btn-primary goods-though">审核通过</button>

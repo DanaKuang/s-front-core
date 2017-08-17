@@ -31,11 +31,11 @@
                                             <input name="时间" id="timeEnd1" class="form_datetime dateTime"
                                                    placeholder="2017-8-2">
                                         </div>
-                                        <!-- <select name="" id="pay">
-                                          <option value="">扫码单位</option>
-                                          <option value="">盒</option>
-                                          <option value="">条</option>
-                                        </select> -->
+                                        <select name="" id="pay">
+                                            <option value="">扫码单位</option>
+                                            <option value="1">盒</option>
+                                            <option value="2">条</option>
+                                        </select>
                                         <select name="" id="isReturn">
                                             <option value="">有无返现</option>
                                             <option value="1">有返现</option>
@@ -63,10 +63,9 @@
                                                 <td>{{ty.shopName}}</td>
                                                 <td>{{ty.contactName}}</td>
                                                 <td>{{ty.contactPhone}}</td>
-                                                <td>{{ty.consumerOpenId}}</td>
-                                                <!-- <td>{{ty.licenceNo}}</td> -->
+                                                <td>{{ty.nickname}}</td>
                                                 <td>{{ty.cousumerScTime}}</td>
-                                                <td>{{ty.unit}}</td>
+                                                <td>{{ty.unitName}}</td>
                                                 <td>{{ty.fxAmount}}</td>
                                             </tr>
                                             </tbody>

@@ -1,9 +1,8 @@
 .manage-box {
     width: 100%;
     overflow: hidden;
-    font-family: "Microsoft yahei", "PingFangSC Medium";
+    font-family: "Microsoft yahei","PingFangSC Medium";
 }
-
 /*#container-fluid {
    padding-right:0;
    padding-left:0;
@@ -12,36 +11,30 @@
     height: 100%;
     /*background-color: #F1F1F1;*/
 }
-
 #imgBox {
     width: 130px;
     height: 100px;
 }
-
 #smokeImg {
     width: 120px;
     height: 90px;
     text-align: center;
 }
-
-#cityId, #areaId, #provinceId {
+#cityId,#areaId,#provinceId {
     width: 80px;
     font-size: 14px;
     padding: 0;
     margin: 0 0 0 5px;
 }
-
 .manage-top {
     height: 36px;
     margin-top: 22px;
     margin-left: 20px;
 
 }
-
 #manage-top {
     padding: 0;
 }
-
 .manage-top span {
 
     display: block;
@@ -50,28 +43,23 @@
     background-color: #737CF3
 
 }
-
 .manage-top div {
-    font-size: 14px;
+    font-size:  14px;
     color: #515151;
     margin-left: 10px;
 }
-
 .manage-bottom {
     width: 100%;
     height: 100%;
     background-color: #fff;
     margin-bottom: 20px;
 }
-
 .manage-bottom .nav-tabs {
     border: none;
 }
-
 .manage-bottom .nav-tabs li {
     margin-left: 20px;
 }
-
 /*.manage-bottom .nav-tabs div {
     margin-top: 20px;
     width: 130px;
@@ -84,12 +72,11 @@
     background-color: #6E80FF;
     text-align: center;
 
- 
+
 }*/
 #profileList {
     position: relative;
 }
-
 .manage-bottom .tab-content #profileList .fr {
     position: absolute;
     right: 50px;
@@ -105,11 +92,9 @@
     background-color: #6E80FF;
     text-align: center;
 }
-
-.manage-bottom .tab-content #profileList #loadFileContent {
+.manage-bottom .tab-content #profileList  #loadFileContent {
     right: 200px;
 }
-
 .tab-content #timeStart2 {
     width: 81px;
     height: 30px;
@@ -117,136 +102,115 @@
     padding-left: 0;
     font-style: 14px;
 }
-
-#profile .tab-content .tab-pane .tab-input select {
+#profile .tab-content  .tab-pane .tab-input select {
     padding: 0;
     margin: 0;
 }
-
-.manage-bottom .tab-content .tab-pane .tab-table {
+.manage-bottom .tab-content  .tab-pane .tab-table {
     height: 100%;
 }
-
 .manage-bottom .nav-tabs ul {
     margin-top: 20px;
 }
-
 .manage-bottom .tab-content #profileList .fr a {
     text-decoration: none;
-    color: #fff;
+    color:#fff;
     line-height: 30px;
 }
-
 .manage-bottom .nav-tabs > li > a {
     color: #515151;
     font-size: 16px;
     margin-right: 10px;
 }
-
 .manage-bottom .nav-tabs > li > a:hover {
     border-bottom: 3px solid #676CD0;
 }
-
 .manage-bottom .nav-tabs > li.active > a,
 .manage-bottom .nav-tabs > li.active > a:hover,
 .manage-bottom .nav-tabs > li.active > a:focus {
-    color: #676CD0;
+    color:  #676CD0;
     cursor: default;
     border: none;
     background-color: #fff;
     border-bottom: 3px solid #676CD0;
 }
-
 .manage-bottom .tab-content {
     margin-top: 30px;
     font-size: 14px;
 }
 
-.tab-content .tab-pane .tab-input .time {
+.tab-content  .tab-pane .tab-input .time {
     float: left;
     margin-left: 10px;
 }
-
 #timeNow {
-    margin-left: 120px;
-}
-
-.tab-content .tab-pane .tab-input #seacherId {
-    float: left;
     margin-left: 20px;
 }
 
-.tab-content .tab-pane .tab-input .time div {
+.tab-content  .tab-pane .tab-input #seacherId {
+    float: left;
+    margin-left: 20px;
+}
+.tab-content  .tab-pane .tab-input .time div {
     float: left;
     margin-left: 5px;
     margin-top: 4px;
     font-size: 14px;
     margin-bottom: 40px;
 }
-
-.tab-content .tab-pane .tab-input #input1 {
+.tab-content  .tab-pane .tab-input #input1 {
     width: 280px;
 }
-
-.tab-content .tab-pane .tab-input input {
+.tab-content  .tab-pane .tab-input input {
     padding-left: 2px;
     width: 230px;
     float: left;
-    border: 1px solid #555;
-    box-sizing: content-box;
+    border:1px solid #555;
+    box-sizing:content-box;
     height: 30px;
     font-size: 14px;
     margin-left: 20px;
 }
-
-.tab-content .tab-pane .tab-input #input2 {
+.tab-content  .tab-pane .tab-input #input2 {
     width: 280px;
 }
-
-.tab-content .tab-pane .tab-input #timeStart1 {
+.tab-content  .tab-pane .tab-input  #timeStart1 {
     width: 81px;
     padding: 0 3px;
     font-size: 14px;
     margin-left: 3px;
     height: 30px;
 }
-
-.tab-content .tab-pane .tab-input .dateTime {
+.tab-content  .tab-pane .tab-input  .dateTime{
     width: 81px;
     padding: 0 3px;
     font-size: 14px;
     margin-left: 3px;
-    font-family: "Microsoft yahei", "PingFangSC Medium";
+    font-family: "Microsoft yahei","PingFangSC Medium";
 }
-
-.tab-content .tab-pane .tab-input form {
+.tab-content  .tab-pane .tab-input form {
     float: left;
 }
-
-.tab-content .tab-pane .tab-input #s1, #s2, #s3 {
+.tab-content  .tab-pane .tab-input #s1,#s2,#s3 {
     width: 46px;
 }
-
 .tab-content .tab-pane .tab-table table th, table td {
     font-size: 14px;
 }
-
-.manage-bottom .nav > li > a:focus, .manage-bottom .nav > li > a:hover {
+.manage-bottom .nav>li>a:focus,.manage-bottom .nav>li>a:hover {
     background-color: #fff;
 }
-
-.manage-bottom .nav-tabs > li > a {
-    border: none;
+.manage-bottom .nav-tabs>li>a  {
+    border:none;
 }
-
-.tab-content .tab-pane .tab-input select {
+.tab-content  .tab-pane .tab-input select {
     width: 80px;
     margin-left: 5px;
-    height: 30px;
+    height: 32px;
     font-size: 14px;
+    border:1px solid #555;
 }
-
-.tab-content .tab-pane .tab-input .seacher {
+.tab-content  .tab-pane .tab-input .seacher {
     width: 90px;
     height: 30px;
     float: right;
@@ -257,91 +221,77 @@
     text-align: center;
     line-height: 30px;
 }
-
-.tab-table .table #manage-test {
+.tab-table .table  #manage-test {
     border-color: none;
     background-color: none;
 }
-
-.tab-table .btn-group-lg > .btn, .btn-lg {
+.tab-table .btn-group-lg>.btn, .btn-lg {
     padding: 0;
     font-size: 16px;
     background-color: none;
     border-radius: 0;
     border-color: none;
 }
-
-.tab-content .tab-pane .tab-input .seacher a {
+.tab-content  .tab-pane .tab-input .seacher  a {
     color: #fff;
     text-decoration: none;
 }
-
 /*#home .tab-content .table tr th{
     font-size: 14px;
 }*/
-.tab-content .tab-pane .tab-table {
-    padding-left: 20px;
-    padding-right: 20px;
+.tab-content  .tab-pane .tab-table  {
+    padding-left:20px;
+    padding-right:20px;
     width: 100%;
 
 }
-
 #manage-tap {
     border: 0;
     background-color: #ECEDF0;
 }
-
 #panel-body {
     /*padding: 0;*/
 }
-
-.tab-content .tab-pane .spacil-table {
+.tab-content  .tab-pane .spacil-table {
     border-top: 1px solid #555;
 }
-
-.tab-content .tab-pane .tab-table table {
+.tab-content  .tab-pane .tab-table table {
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
 
 }
-
 .tab-table tr td a {
     color: blue;
     cursor: pointer;
 }
-
-.tab-content .tab-pane .tab-table table thead {
+.tab-content  .tab-pane .tab-table table thead {
     background-color: #EEF7FE;
 
 }
-
-.tab-content .tab-pane .tab-table table thead tr {
+.tab-content  .tab-pane .tab-table table thead tr {
     height: 50px;
     font-size: 14px;
-    color: #3A3939;
+    color:#3A3939;
     font-weight: bold;
 }
-
-.tab-content .tab-pane .tab-table table th {
-    border: 1px solid #555;
-    text-align: center;
-    font-size: 14px;
-}
-
-.tab-content .tab-pane .tab-table table td {
-    border: 1px solid #555;
+.tab-content  .tab-pane .tab-table table th {
+    border:1px solid #555;
     text-align: center;
     font-size: 14px;
     vertical-align: middle;
 }
-
+.tab-content  .tab-pane .tab-table table td {
+    border:1px solid #555;
+    text-align: center;
+    font-size: 14px;
+    vertical-align: middle;
+}
 .manage-bottom .bottom-list {
     height: 50px;
     width: 100%;
     margin-top: 20px;
 }
-
 .manage-bottom .bottom-list .lists {
     width: 453px;
     height: 20px;
@@ -350,7 +300,6 @@
     background-size: 453px 13px;
     float: left;
 }
-
 .manage-bottom .bottom-list .lists ul {
     margin-left: 50px;
 }
@@ -358,7 +307,6 @@
 .manage-bottom .bottom-list .lists ul {
     float: left;
 }
-
 .manage-bottom .bottom-list .lists ul li {
     width: 20px;
     height: 20px;
@@ -366,27 +314,23 @@
     text-align: center;
     float: left;
 }
-
-.manage-bottom .bottom-list .lists ul li a {
+.manage-bottom .bottom-list  .lists ul li a {
     text-decoration: none;
     color: #3395F6;
-    font-size: 14px;
+    font-size:14px;
 }
-
 .manage-bottom .bottom-list p {
-    font-size: 14px;
+    font-size:14px;
     transform: translateY(-7px);
     float: left;
 
 }
-
 .manage-bottom .bottom-list p i {
     color: #3395F6;
     font-weight: bold;
 }
-
 .manage-bottom .bottom-list p span {
-    display: inline-block;
+    display:inline-block;
     border: 1px solid #3395F6;
     text-align: center;
     line-height: 32px;
@@ -396,11 +340,9 @@
     height: 32px;
     color: #3395F6;
 }
-
 .manage-bottom .bottom-list p .last-span {
     border: none;
 }
-
 .manage-bottom .bottom-list .go {
     height: 22px;
     width: 22px;
@@ -414,39 +356,31 @@
     margin-left: 10px;
 
 }
-
 .manage-bottom .bottom-list .count {
     float: right;
     margin-right: 50px;
 }
-
 .manage-bottom .bottom-list .count i {
     font-weight: normal;
 }
-
 .manage-bottom .bottom-list .count .numble {
     border: none;
     margin-right: 20px;
 }
-
-#authStatus, #is-pay {
+#authStatus,#is-pay {
     padding: 0;
 }
-
 #send {
     padding: 0;
 }
-
-#detailsPage {
+#detailsPage{
     padding-left: 15px;
     padding-right: 15px;
 }
-
 #commodity_nav {
     padding-left: 30px;
     padding-right: 30px;
 }
-
 .fileUpload {
     padding: 4px 10px;
     height: 30px;
@@ -464,8 +398,7 @@
     text-decoration: none;
     font-size: 14px;
 }
-
-.fileUpload input {
+.fileUpload  input {
     position: absolute;
     font-size: 100px;
     right: 0;
@@ -474,16 +407,14 @@
     /*filter: alpha(opacity=0);*/
     cursor: pointer
 }
-
 .fileUpload:hover {
     color: #fff;
     background: #3AC1EE;
     text-decoration: none
 }
-
 #fileButton {
     float: right;
-    height: 30px;
+    height:30px;
     background: #3AC1EE;
     border: 1px solid #3AC1EE;
     border-radius: 15px;
@@ -493,11 +424,9 @@
     color: #fff;
     font-size: 14px;
 }
-
 #file-modal-content {
     height: 110px;
 }
-
-#pageSize, #pageCount, #pageSize1, #pageSize2, #pageSize3, #pageAmout, #pageAmout1, #pageAmout2 {
+#pageSize,#pageCount,#pageSize1,#pageSize2,#pageSize3,#pageAmout,#pageAmout1,#pageAmout2 {
     color: blue;
 }

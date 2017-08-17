@@ -58,7 +58,7 @@ define([], function() {
 				var endTime = $("#timeEnd2").val();
 				var seacherId = {
 					pageNum: 1,
-					pageSize: 10,
+					pageSize: 20,
 					startTime: strToTimestamp(startTime),
 					endTime: strToTimestamp(endTime)+86400000
 				}
@@ -114,10 +114,11 @@ define([], function() {
 				var yjParam = {
 					search: search,
 					isFx:isFx,
+					unit:$("#pay").val(),
 					startTime:strToTimestamp(startTime),
 					endTime:strToTimestamp(endTime)+86400000,
 					pageNum:1,
-					pageSize:10
+					pageSize:20
 				}
 				$model.getTblDetail(yjParam).then(function(res) {
 					for(var i = 0; i < res.data.data.length; i++) {
