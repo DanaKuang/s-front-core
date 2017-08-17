@@ -74,7 +74,8 @@ define([], function () {
                             val.label = val.page_name;
                             val.value = val.page_code;
                         }));
-                        $pagename.multiselect('select', (pScope.pgArray[0] && pScope.pgArray[0].page_code) || "");
+                        pScope.pagename = (pScope.pgArray[0] && pScope.pgArray[0].page_code) || "";
+                        $pagename.multiselect('select', pScope.pagename);
                         $pagename.multiselect('refresh');
                     });
                 }
