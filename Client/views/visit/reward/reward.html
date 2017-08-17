@@ -1,110 +1,111 @@
 <link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
 <link rel="stylesheet" href="statics/assets/style/visit.reward.css"/>
 <div ng-controller="rewardCtrl">
-  <div class="animated fadeInRight">
-    <div class="container-fluid" id="content-reward">
-      <div class="row">
-        <div class="col-md-12">
-           <div class="reward-box">
-            <div class="reward-right">
-              <div class="reward-top">
-                <span class="fl"></span>
-                <div class="fl">零售户>零售户激励设置</div>
-              </div>
-              <div class="reward-bottom">
-                <form action="">
-                    <p class="return">客户返现设置</p>
-                    <div class="money-magin">
-                      客户返现比例：
-                      <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent*100}}">%
-                    <a class="save" href="javascript:" id="award">保存</a>
+    <div class="animated fadeInRight">
+        <div class="container-fluid" id="content-reward">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="reward-box">
+                        <div class="reward-right">
+                            <div class="reward-top">
+                                <span class="fl"></span>
+                                <div class="fl">零售户>零售户激励设置</div>
+                            </div>
+                            <div class="reward-bottom">
+                                <form action="">
+                                    <p class="return">客户返现设置</p>
+                                    <div class="money-magin">
+                                        客户返现比例：
+                                        <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent*100}}">%
+                                        <a class="save" href="javascript:" id="award">保存</a>
+                                    </div>
+                                    <i></i>
+                                    <p class="erwei">零售户二维码打印设置</p>
+                                    <div>
+                                        二维码打印费：
+                                        <input type="text" id="copyMoney" placeholder="请输入金额" value="{{select.qr.qrExpenses}}">
+                                    </div>
+                                    <div class="yunfei">含运费和税费</div>
+                                    <div class="ifFree">
+                                        是否免费：
+                                        <div class="openButton1" ng-click="openSet();">开启</div>
+                                        <div class="closeButton1" ng-click="closeSet();">关闭</div>
+                                    </div>
+                                    <div class="numble">
+                                        免费数量：
+                                        <input type="text" id="free-numble" placeholder="请输入数量" value="{{select.qr.qrFreeNum}}">
+                                    </div>
+                                    <a class="save" id="numbleSave" href="javascript:">保存</a>
+                                    <i></i>
+                                    <p>店码-盒码关联间隔设置</p>
+                                    <div class="spaceTime">
+                                        间隔时间：
+                                        <input type="text" id="time-space"
+                                               value="{{select.consumer_seller_threshold}}">分钟
+                                        <a class="save" id="consumerSave" href="javascript:">保存</a>
+                                    </div>
+                                    <i></i>
+                                    <p class="active">客户活动介绍</p>
+                                    <textarea name="" id="textintro" cols="30" rows="10">{{select.ac.introduction}}</textarea>
+                                    <button class="save" id="intrSave">保存</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <i></i>
-                    <p class="erwei">零售户二维码打印设置</p>
-                    <div>
-                      二维码打印费：
-                      <input type="text" id="copyMoney" placeholder="请输入金额" value="{{select.qr.qrExpenses}}">
-                    </div>
-                    <div class="yunfei">含运费和税费</div>
-                    <div class="ifFree">
-                      是否免费：
-                      <button class="openButton1" ng-click="openSet();">开启</button>
-                      <button class="closeButton1" ng-click="closeSet();">关闭</button>
-                    </div>
-                    <div class="numble">
-                      免费数量：
-                      <input type="text" id="free-numble" placeholder="请输入数量" value="{{select.qr.qrFreeNum}}">
-                    </div>
-                    <a class="save" id="numbleSave" href="javascript:">保存</a>
-                    <i></i>
-                    <p>店码-盒码关联间隔设置</p>
-                    <div class="spaceTime">
-                      间隔时间：
-                      <input type="text" id="time-space"
-                       value="{{select.consumer_seller_threshold}}">分钟
-                      <a class="save" id="consumerSave" href="javascript:">保存</a>
-                    </div>
-                    <i></i>
-                    <p class="active">客户活动介绍</p>
-                    <textarea name="" id="textintro" cols="30" rows="10">{{select.ac.introduction}}</textarea>
-                    <button class="save" id="intrSave">保存</button>
-                </form>
-              </div>
+                </div>
             </div>
-           </div>
         </div>
-      </div>
     </div>
-  </div>
-  <script>
-    function isInteger(obj) {
-     return obj%1 === 0
-    }
-    $("#moneyPer").blur(function(){
-      var value=$(this).val();
-      var flag=isNaN(value)?true:false;
-      if(flag==true){
-          $(this).val("请您输入正确的百分比").css("color","red");
-      }else{
-          var isIntegerFlag = isInteger(value);
-          if(!isIntegerFlag || value>100 || value<0){
-            $(this).val("请您输入0-100之间的整数").css("color","red");
-          }else{
-            $(this).css("color","#000");
-          }
-      }
-    });
-    $("#copyMoney").change(function(){
-      var value=$(this).val();
-        var flag=isNaN(value)?true:false;
-        if(flag==true){
-          $(this).val("您请输入正确的金额").css("color","red");
+    <script>
+        function isInteger(obj) {
+            return obj%1 === 0
+        }
+        $("#moneyPer").blur(function(){
+            var value=$(this).val();
+            var flag=isNaN(value)?true:false;
+            if(flag==true){
+                $(this).val("请您输入正确的百分比").css("color","red");
+            }else{
+                var isIntegerFlag = isInteger(value);
+                if(!isIntegerFlag || value>100 || value<0){
+                    $(this).val("请您输入0-100之间的整数").css("color","red");
+                }else{
+                    $(this).css("color","#000");
+                }
+            }
+        });
+        $("#copyMoney").change(function(){
+            var value=$(this).val();
+            var flag=isNaN(value)?true:false;
+            if(flag==true){
+                $(this).val("您请输入正确的金额").css("color","red");
 
-        } else {
-          $(this).css("color","#000");
-        }
-    })
-    $("#free-numble").change(function(){
-      var value=$(this).val();
-      var flag=isNaN(value)?true:false;
-        if(flag==true){
-          $(this).val("您请输入正确的数量").css("color","red");
+            } else {
+                $(this).css("color","#000");
+            }
+        })
+        $("#free-numble").change(function(){
+            var value=$(this).val();
+            var flag=isNaN(value)?true:false;
+            if(flag==true){
+                $(this).val("您请输入正确的数量").css("color","red");
 
-        } else {
-          $(this).css("color","#000");
+            } else {
+                $(this).css("color","#000");
+            }
+        })
+        $("#time-space").change(function(){
+            var value=$(this).val();
+            var flag=isNaN(value)?true:false;
+            if(flag==true){
+                $(this).val("您请输入正确的时间间隔").css("color","red");
+            } else {
+                $(this).css("color","#000");
+            }
+        });
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
         }
-    })
-    $("#time-space").change(function(){
-      var value=$(this).val();
-      var flag=isNaN(value)?true:false;
-        if(flag==true){
-          $(this).val("您请输入正确的时间间隔").css("color","red");
-        } else {
-          $(this).css("color","#000");
-        }
-    });
-    function getLocalTime(nS) { 
-       return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' '); 
-  }
-  </script>
+
+    </script>
 </div>

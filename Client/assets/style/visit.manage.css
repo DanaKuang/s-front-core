@@ -159,7 +159,7 @@
     margin-bottom: 40px;
 }
 .tab-content  .tab-pane .tab-input #input1 {
-    width: 280px;
+    width: 305px;
 }
 .tab-content  .tab-pane .tab-input input {
     padding-left: 2px;
@@ -430,3 +430,4 @@
 #pageSize,#pageCount,#pageSize1,#pageSize2,#pageSize3,#pageAmout,#pageAmout1,#pageAmout2 {
     color: blue;
 }
+

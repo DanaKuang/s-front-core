@@ -9,6 +9,7 @@
 <link href="statics/assets/style/detail.css" rel="stylesheet">
 <link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
 <link rel="stylesheet" href="statics/assets/style/shadow.css"/>
+<link rel="stylesheet" href="statics/assets/style/lanrenzhijia.css"/>
 <div ng-controller="manageCtrl">
     <div class="animated fadeInRight" ng-show="myVar">
         <div>
@@ -35,7 +36,8 @@
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="homeList">
                                                 <div class="tab-input">
-                                                    <input type="text" placeholder="烟草证号\门店名\联系人姓名\联系人手机号" id="input1">
+                                                    <input type="text" placeholder="烟草证号\经营人姓名\联系人姓名\联系人手机号"
+                                                           id="input1">
                                                     <form>
                                                         <select id="provinceId" ng-model="provinceCode">
                                                             <option value="">请选择省</option>
@@ -96,8 +98,10 @@
                                                         </thead>
                                                         <tbody>
                                                         <tr ng-repeat="tr in listData">
-                                                            <td id="imgBox"><img class="smokeImg" id="smokeImg"
-                                                                                 src="{{tr.licenceImg}}" alt="">
+                                                            <td id="imgBox" class="imgBox">
+                                                                <img class="smokeImg" id="smokeImg"
+                                                                     src="{{tr.licenceImg}}" alt=""
+                                                                     ng-click="showBig();">
                                                             </td>
                                                             <td>{{tr.licenceNo}}</td>
                                                             <td>{{tr.shopName}}</td>
@@ -258,13 +262,13 @@
                         <div class="commodity_con goods-content">
                             <div class="row commodity_div ">
                                 <div class="col-md-2 smake-image">
-                                    <img src="{{detailData.licenceImg}}" alt=""/>
+                                    <img src="{{sellerInfo.licenceImg}}" alt=""/>
                                 </div>
                                 <div class="col-md-3 " id="content-right-first">
                                     <span class="span1">门店名称:</span>
-                                    <span class="span2" style="vertical-align: top;">{{sellerInfo.shopName}}</span>
+                                    <span class="span2">{{sellerInfo.shopName}}</span>
                                     <span class="span1">门店地址:</span>
-                                    <span class="span2" style="vertical-align: top;">{{sellerInfo.addrProvinceName+sellerInfo.addrCityName+"市"+sellerInfo.addrAreaNmae+sellerInfo.addrDetail}}</span>
+                                    <span class="span2">{{sellerInfo.addrProvinceName+sellerInfo.addrCityName+"市"+sellerInfo.addrAreaNmae+sellerInfo.addrDetail}}</span>
                                     <span class="span1">微信名:</span>
                                     <span class="span2">{{wxinfo.nickname}}</span>
                                     <span class="span1">申请时间:</span>
@@ -334,8 +338,8 @@
                                                        placeholder="2017-8-1"/>
                                                 <select class="form-control" id="manage-unit">
                                                     <option value="">扫码单位</option>
-                                                    <option value="盒">盒</option>
-                                                    <option value="条">条</option>
+                                                    <option value="1">盒</option>
+                                                    <option value="2">条</option>
                                                 </select>
                                                 <select class="form-control" id="manage-isfx">
                                                     <option value="">有无返还</option>
@@ -359,7 +363,7 @@
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="rt in returnData">
-                                                <td>{{rt.sellerId}}</td>
+                                                <td>{{}}</td>
                                                 <td>{{rt.zjTime}}</td>
                                                 <td>{{rt.ctime}}</td>
                                                 <td>{{rt.unit}}</td>
@@ -380,31 +384,29 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="profile">
-                                    <div class="row">
-                                        <form class="form-inline form_div">
-                                            <div class="form-group goods-top">
-                                                <label for="exampleInputName1" class="label1">
-                                                    时间区间
-                                                </label>
-                                                <input name="时间" id="timeStart222"
-                                                       class="form_datetime form-control dateTime"
-                                                       placeholder="2017-8-1"/>
-                                                <label for="exampleInputName2">
-                                                    至
-                                                </label>
-                                                <input name="时间" id="timeEnd222"
-                                                       class="form_datetime form-control dateTime"
-                                                       placeholder="2017-8-1"/>
-                                                <select class="form-control">
-                                                    <option>扫码单位</option>
-                                                    <option>条</option>
-                                                    <option>盒</option>
-                                                </select>
-                                                <button type="button" id="count" class="btn btn-primary">查询</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-12 goods-bottom">
+                                    <!-- <div class="row">
+                                      <form class="form-inline form_div">
+                                        <div class="form-group goods-top">
+                                          <label for="exampleInputName1" class="label1">
+                                            时间区间
+                                          </label>
+                                          <input name="时间" id="timeStart222" class="form_datetime form-control dateTime"
+                                          placeholder="2017-8-1" />
+                                          <label for="exampleInputName2">
+                                            至
+                                          </label>
+                                          <input name="时间" id="timeEnd222" class="form_datetime form-control dateTime"
+                                          placeholder="2017-8-1" />
+                                          <select class="form-control">
+                                            <option>扫码单位</option>
+                                            <option>条</option>
+                                            <option>盒</option>
+                                          </select>
+                                          <button type="button" id="count" class="btn btn-primary">查询</button>
+                                        </div>
+                                      </form>
+                                    </div> -->
+                                    <div class="col-md-12 goods-bottom" id="goods-bottom">
                                         <table class="table table-bordered table-striped table-hover tables">
                                             <thead class="bg-success">
                                             <tr>
@@ -418,7 +420,7 @@
                                             <tbody>
                                             <tr ng-repeat="co in countData">
                                                 <td>{{co.openId}}</td>
-                                                <td>{{co.openId}}</td>
+                                                <td>{{}}</td>
                                                 <td>{{co.scanNum}}</td>
                                                 <td>{{co.smokeNum}}</td>
                                                 <td>{{co.lastScanTime}}</td>
@@ -457,15 +459,15 @@
                                         <table class="table table-bordered table-striped table-hover tables">
                                             <thead class="bg-success">
                                             <tr>
-                                                <th>消费金额</th>
+                                                <th>提现金额</th>
                                                 <th>余额</th>
                                                 <th>提现时间</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="tx in tixianData">
-                                                <td>{{tx.txAmount}}</td>
                                                 <td>{{tx.isFinish}}</td>
+                                                <td>{{tx.txAmount}}</td>
                                                 <td>{{tx.txTime}}</td>
                                             </tr>
                                             </tbody>
@@ -547,7 +549,7 @@
 
         <script src="statics/assets/libs/jquery.page.js"></script>
         <script src="statics/assets/libs/jqmeter.min.js"></script>
-        <!-- <script src="statics/assets/libs/jquery.form-min.js"></script> -->
+        <script src="statics/assets/libs/common.js"></script>
         <script>
             function getLocalTime(nS) {
                 return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/, ' ');
@@ -559,6 +561,7 @@
             function openwin() {
                 window.open("", "", "width=200,height=200")
             }
+
         </script>
     </div>
 </div>

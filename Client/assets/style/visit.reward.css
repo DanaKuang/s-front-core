@@ -96,13 +96,13 @@
 .reward-bottom form .money-magin  a {
     margin-left: 233px;
 }
-.reward-bottom form  button {
-    margin:20px 0 20px;
-    border: 1px solid #555;
-    color: #585858;
-    height: 36px;
+/*.reward-bottom form  button {
+	margin:20px 0 20px;
+	border: 1px solid #555;
+	color: #585858;
+	height: 36px;
 
-}
+}*/
 .reward-bottom form textarea {
     padding-top: 10px;
     padding-left: 20px;
@@ -141,18 +141,29 @@
 .reward-bottom .ifFree,.reward-bottom .numble,.reward-bottom .spaceTime {
     margin-left: 326px;
 }
-.reward-bottom .openButton1 {
+.reward-bottom .openButton1,.reward-bottom .closeButton1 {
+    text-align: center;
+    line-height: 36px;
+    display: inline-block;
     width: 120px;
+    cursor: pointer;
+    margin:20px 0 20px;
+    border: 1px solid #555;
+    height: 36px;
+}
+.reward-bottom .openButton1 {
     border-right: none;
     transform: translateX(7px);
     background-color: #6db1fb;
     border-radius: 15px 0 0 15px;
+    color: #585858;
+
 }
 .reward-bottom .closeButton1 {
-    width: 120px;
     background-color: #fff;
     opacity: 1;
     border-radius: 0 15px 15px 0;
+    color: #585858;
 }
 #aaa {
     position: relative;
