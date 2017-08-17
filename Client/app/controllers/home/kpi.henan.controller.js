@@ -202,8 +202,7 @@ define([], function () {
             var salesTbl = $model.$salesConf.data;
             salesTbl.rows = formatFilter.salesTable(salesData);
             $scope.salesConf = salesTbl;
-            angular.element("#salesTarget table").scope().$apply();
-            // $scope.$apply();
+            $scope.$apply();
           });
         };
 
@@ -214,8 +213,7 @@ define([], function () {
             var formatTbl = $model.$formatConf.data;
             formatTbl.rows = formatFilter.formatTable(formatData);
             $scope.formatConf = formatTbl;
-            angular.element("#formatTarget table").scope().$apply();
-            // $scope.$apply();
+            $scope.$apply();
           });
         };
 

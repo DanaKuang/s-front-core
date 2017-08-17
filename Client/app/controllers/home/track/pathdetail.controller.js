@@ -64,9 +64,9 @@ define([], function () {
                 allSelectedText: '全部',
                 nSelectedText: '已选择',
                 enableFiltering: true,
-                onChange: function (e) {
+                onChange: function (opt) {
                     $model.getActPage({
-                        activityId: pScope.activityId
+                        activityId: opt[0].value || event.target.value || ""
                     }).then(function (res) {
                         pScope.pgArray = res.data || [];
                         pScope.$apply();
@@ -74,7 +74,7 @@ define([], function () {
                             val.label = val.page_name;
                             val.value = val.page_code;
                         }));
-                        $pagename.multiselect('select', pScope.pgArray[0].page_code);
+                        $pagename.multiselect('select', (pScope.pgArray[0] && pScope.pgArray[0].page_code) || "");
                         $pagename.multiselect('refresh');
                     });
                 }
@@ -119,7 +119,7 @@ define([], function () {
                     val.label = val.page_name;
                     val.value = val.page_code;
                 }));
-                $pagename.multiselect('select', pScope.pagename || pScope.pgArray[0].page_code);
+                $pagename.multiselect('select', pScope.pagename || (pScope.pgArray[0] && pScope.pgArray[0].page_code) || "");
                 $pagename.multiselect('refresh');
             });
             // 默认值入口
