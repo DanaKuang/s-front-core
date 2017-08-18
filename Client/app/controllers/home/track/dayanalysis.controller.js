@@ -42,9 +42,9 @@ define([], function () {
             pieRightEchart.setOption(pieRightConf);
 
             // 后端数据
-            var brand_back_data = $model.$brand.data || [];
-            brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
-            brand_back_data = [{productBrand:"所有"}].concat(brand_back_data);
+            // var brand_back_data = $model.$brand.data || [];
+            // brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
+            // brand_back_data = [{productBrand:"所有"}].concat(brand_back_data);
             var act_back_data = $model.$activity.data || [];
             act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 
@@ -52,10 +52,10 @@ define([], function () {
             $scope.dayConf = {
                 startTime: dateFormatFilter.date(+new Date),
                 endTime: dateFormatFilter.date(+new Date),
-                pbArray: brand_back_data,
-                productBrand: "芙蓉王" || brand_back_data[0].productBrand || "",
-                pnArray: [],
-                productName: "",
+                // pbArray: brand_back_data,
+                // productBrand: "芙蓉王" || brand_back_data[0].productBrand || "",
+                // pnArray: [],
+                // productName: "",
                 acArray: act_back_data,
                 activity: "ACT-2E7J6228B48" || act_back_data[0].activityId || "",
                 daySearch: daySearch
@@ -66,8 +66,8 @@ define([], function () {
                 var sScope = angular.element('.ui-daily-search').scope();
                 console.log(sScope);
                 var params = {
-                    productBrand: sScope.productBrand || "所有",
-                    productSn: sScope.productName && sScope.productName.join(',') || "99999999",
+                    // productBrand: sScope.productBrand || "所有",
+                    // productSn: sScope.productName && sScope.productName.join(',') || "99999999",
                     activityId: sScope.activity || "",
                     timeType: sScope.startTime == sScope.endTime ? "hour" : "day"
                 };
@@ -123,27 +123,27 @@ define([], function () {
                     allSelectedText: '全部',
                     nSelectedText: '已选择'
                 });
-                var $prBrand = $("[name='productBrand']");
-                var $product = $("[name='productName']");
+                // var $prBrand = $("[name='productBrand']");
+                // var $product = $("[name='productName']");
                 var $activity = $("[name='activity']");
                 // 品牌
-                $prBrand.multiselect('select', sScope.productBrand);
-                $prBrand.multiselect('refresh');
+                // $prBrand.multiselect('select', sScope.productBrand);
+                // $prBrand.multiselect('refresh');
                 // 规格
-                $product.next().off().on('click', function (e) {
-                    $model.getProduct({
-                        productBrand: sScope.productBrand
-                    }).then(function (res) {
-                        sScope.pnArray = res.data || [];
-                        sScope.$apply();
-                        $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
-                            val.label = val.productName;
-                            val.value = val.sn;
-                        }));
-                        $product.multiselect('select', sScope.productName);
-                        $product.multiselect('refresh');
-                    });
-                });
+                // $product.next().off().on('click', function (e) {
+                //     $model.getProduct({
+                //         productBrand: sScope.productBrand
+                //     }).then(function (res) {
+                //         sScope.pnArray = res.data || [];
+                //         sScope.$apply();
+                //         $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                //             val.label = val.productName;
+                //             val.value = val.sn;
+                //         }));
+                //         $product.multiselect('select', sScope.productName);
+                //         $product.multiselect('refresh');
+                //     });
+                // });
                 // 活动
                 $activity.multiselect('select', sScope.activity);
                 $activity.multiselect('refresh');

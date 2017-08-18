@@ -26,6 +26,8 @@ define([], function () {
       // 首页较特殊 页面切换清楚所有的定时器
       window.IntervalArr = [];
 
+      // 历史数据
+      var historyScanData = $model.$historyScan.data || [];
       // 右侧数据
       (function () {
         // 计算环比
@@ -50,7 +52,7 @@ define([], function () {
           $model.getScanTime().then(function (res) {
             var res = res.data || {};
             var st = res.scanTimes_of_day || 0;
-            var hst = $model.$historyScan.data[0] || {};
+            var hst = historyScanData[0] || {};
             var rt = fixData(hst.scanTotalPv, st);
             $("#scan_day").html(st);
             $("#scan_day_rate").html(rt);
@@ -59,7 +61,7 @@ define([], function () {
           $model.getScanUser().then(function (res) {
             var res = res.data || {};
             var su = res.scanUsers_of_day || 0;
-            var hsu = $model.$historyScan.data[0] || {};
+            var hsu = historyScanData[0] || {};
             var rt = fixData(hsu.scanTotalUv, su);
             $("#scan_user").html(su);
             $("#scan_user_rate").html(rt);
@@ -68,7 +70,7 @@ define([], function () {
           $model.getScanCode().then(function (res) {
             var res = res.data || {};
             var sc = res.scanCodes_of_day || 0;
-            var hsc = $model.$historyScan.data[0] || {};
+            var hsc = historyScanData[0] || {};
             var rt = fixData(hsc.scanTotalCode, sc);
             $("#scan_code").html(sc);
             $("#scan_code_rate").html(rt);
