@@ -38,6 +38,13 @@ module.exports = function () {
             user: '',
             dist: '/opt/webapps',
             privateKey: ''
+        },
+        174: {
+            host: '172.17.15.174',
+            port: 22,
+            user: '',
+            dist: '/opt/webapps',
+            privateKey: ''
         }
     };
     if (!!process.argv[3] && SERVER[process.argv[3]]){
@@ -47,6 +54,7 @@ module.exports = function () {
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 161\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 172\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 173\n'));
+        process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 174\n'));
         return;
     }
     var center = new node_ssh();

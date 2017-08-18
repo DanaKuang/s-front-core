@@ -75,3 +75,10 @@
     display: inline-block;
     width: 100px;
 }
+
+.ui-detail-search .inline-block {
+    margin: 5px 5px 5px 0;
+}
+.ui-detail-search .inline-block label {
+    margin-right: 5px;
+}

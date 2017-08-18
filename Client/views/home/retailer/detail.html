@@ -1,0 +1,112 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-08-18
+ * Description: detail
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.retailer.css">
+<!--html-->
+<div class="animated fadeInRight" ng-controller="detailCtrl">
+    <div class="container-fluid">
+        <div class="ui-retailer-box row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title retailer">
+                    <i class="retailer"></i><span>零售户明细查询</span>
+                </div>
+                <!--search-->
+                <div class="ui-detail-search panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline form-group col-md-12">
+                            <div class="form-inline form-group">
+                                <!--日期-->
+                                <div class="inline-block">
+                                    <label>日期</label>
+                                    <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                    <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                                </div>
+                                <!--品牌-->
+                                <div class="inline-block">
+                                    <label for="">品牌</label>
+                                    <select class="form-control multiple" name="productBrand" ng-model="productBrand">
+                                        <option ng-repeat="pb in pbArray" value="{{pb.productBrand}}">{{pb.productBrand}}</option>
+                                    </select>
+                                </div>
+                                <!--规格-->
+                                <div class="inline-block">
+                                    <label for="">规格</label>
+                                    <select class="form-control multiple" name="productName" ng-model="productName" multiple="multiple">
+                                        <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productName}}</option>
+                                    </select>
+                                </div>
+                                <!--城市-->
+                                <div class="inline-block">
+                                    <label for="">城市</label>
+                                    <select class="form-control" ng-model="cityName" name="cityName">
+                                        <option ng-repeat="ca in cityArr" value="{{ac.cityId}}">{{ca.cityName}}</option>
+                                    </select>
+                                </div>
+                                <!--零售户类型-->
+                                <div class="inline-block">
+                                    <label for="">零售户类型</label>
+                                    <select class="form-control" ng-model="retailerType" name="retailerType">
+                                        <option ng-repeat="type in typeArr" value="{{type}}">{{type}}</option>
+                                    </select>
+                                </div>
+                                <!--零售户名称-->
+                                <div class="inline-block">
+                                    <label for="">零售户名称</label>
+                                    <select class="form-control" ng-model="retailerName" name="retailerName">
+                                        <option ng-repeat="name in nameArr" value="{{name}}">{{name}}</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary" ng-click="detailSearch()">查询</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="ui-detail-box">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>名称</th>
+                                        <th>零售户类型</th>
+                                        <th>城市</th>
+                                        <th>品牌</th>
+                                        <th>规格</th>
+                                        <th>返回金额</th>
+                                        <th>扫码人数</th>
+                                        <th>复购人数</th>
+                                        <th>烟码扫码数量</th>
+                                        <th>店码扫码总数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in listArr">
+                                        <td>{{item.datetime}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.city}}</td>
+                                        <td>{{item.productBrand}}</td>
+                                        <td>{{item.productName}}</td>
+                                        <td>{{item.money}}</td>
+                                        <td>{{item.scanUv}}</td>
+                                        <td>{{item.scanUv}}</td>
+                                        <td>{{item.scanNum}}</td>
+                                        <td>{{item.scanTotal}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
