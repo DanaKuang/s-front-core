@@ -11,11 +11,11 @@
     height: 100%;
     /*background-color: #F1F1F1;*/
 }
-#imgBox {
+.imgBox {
     width: 130px;
     height: 100px;
 }
-#smokeImg {
+.smokeImg {
     width: 120px;
     height: 90px;
     text-align: center;
@@ -382,15 +382,9 @@
     padding-right: 30px;
 }
 .fileUpload {
-    padding: 4px 10px;
     height: 30px;
     line-height: 21px;
-    position: relative;
     cursor: pointer;
-    color: #fff;
-    background: #3AC1EE;
-    border: 1px solid #3AC1EE;
-    border-radius: 15px;
     overflow: hidden;
     display: inline-block;
     zoom: 1;
@@ -399,17 +393,9 @@
     font-size: 14px;
 }
 .fileUpload  input {
-    position: absolute;
-    font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-    /*filter: alpha(opacity=0);*/
     cursor: pointer
 }
 .fileUpload:hover {
-    color: #fff;
-    background: #3AC1EE;
     text-decoration: none
 }
 #fileButton {
@@ -424,10 +410,27 @@
     color: #fff;
     font-size: 14px;
 }
+#myModalImg  .modal-dialog {
+    top: 25%;
+}
 #file-modal-content {
     height: 110px;
+}
+#file-modal-content1 {
+    /*height: 500px;*/
+    width: 700px;
+    border-radius: 0px;
+}
+#file-modal-content1  .body {
+    padding: 0px;
+}
+#bigImg {
+    display: block;
+    /*height: 500px;*/
+    width: 700px;
+    margin-top: 0px;
+
 }
 #pageSize,#pageCount,#pageSize1,#pageSize2,#pageSize3,#pageAmout,#pageAmout1,#pageAmout2 {
     color: blue;
 }
-

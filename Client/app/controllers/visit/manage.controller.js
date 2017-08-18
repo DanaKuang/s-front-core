@@ -155,6 +155,17 @@ define([], function () {
                     });
                 });
             });
+            // 图片放大功能
+            $scope.showBig=function(licenceImg){
+                var img = new Image();
+                // 改变图片的src
+                img.src = licenceImg;
+                var Height=0.5*img.height
+                var Width=0.5*img.width
+                $("#bigImg").css({"height":Height+"px","width":Width+"px"});
+                $("#file-modal-content1").css({"height":Height+"px","width":Width+"px"});
+                $("#bigImg").attr('src',licenceImg);
+            }
             $('#tab1[data-toggle="tab"]').on('show.bs.tab',function(e){
                 $("#manage-list").trigger('click');
             });
@@ -241,7 +252,6 @@ define([], function () {
                 $("#tixian").trigger("click");
             });
             //点击切换页面
-
             $scope.myVar = true;
             $scope.showDetail = function(tr) {
                 $scope.myVar = !$scope.myVar;
@@ -355,6 +365,14 @@ define([], function () {
                 $("#refuse-reason").css("height","186px")
                 $("#modal-content").css("height","325px");
 
+            }
+            //点击提交按钮关闭文件上传模态框
+            $scope.fileButton =function(){
+                $('#myModalFile').modal('hide');
+            }
+            //点击下载按钮关闭文件上传模态框
+            $scope.downButton =function(){
+                $('#myModalDown').modal('hide');
             }
             //审核驳回理由
             $scope.backReason=function(){
@@ -667,8 +685,8 @@ define([], function () {
                 var startTime = strToTimestamp($("#timeStart").val())
                 var endTime = startTime+86400000;
                 var url = 'https://retailer.taozuike.com/seller-manager/export/print/qr';
-                endTime && (url += '?endTime=' + endTime);
-                startTime &&(url += '&startTime=' +startTime);
+                startTime &&(url += '?startTime=' +startTime);
+                endTime && (url += '&endTime=' + endTime);
                 window.open(url);
             });
             //创建分页
@@ -690,6 +708,7 @@ define([], function () {
                     }
                 });
             }
+
 
 
         }]
