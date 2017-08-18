@@ -666,7 +666,7 @@ define([], function () {
             $(".down").click(function (e) {
                 var startTime = strToTimestamp($("#timeStart").val())
                 var endTime = startTime+86400000;
-                var url = '/seller-manager/export/print/qr';
+                var url = 'https://retailer.taozuike.com/seller-manager/export/print/qr';
                 endTime && (url += '?endTime=' + endTime);
                 startTime &&(url += '&startTime=' +startTime);
                 window.open(url);
