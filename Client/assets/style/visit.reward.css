@@ -45,6 +45,7 @@
     font-family: "Microsoft yahei","PingFangSC Medium";
     color: #9D9D9D;
     margin-bottom: 40px;
+    padding-bottom: 20px;
 }
 .reward-bottom form p {
     font-family: "Microsoft yahei","PingFangSC Medium";
@@ -103,6 +104,10 @@
 	height: 36px;
 
 }*/
+#intrSave {
+    display: block;
+    margin-left: 528px;
+}
 .reward-bottom form textarea {
     padding-top: 10px;
     padding-left: 20px;
@@ -110,7 +115,6 @@
     width: 400px;
     height: 160px;
     text-indent: 2em;
-    float: left;
     margin-top: 16px;
     margin-left: 8px;
 }
@@ -127,7 +131,7 @@
 }
 .reward-bottom .save {
     display: inline-block;
-    margin-left: 535px;
+    margin-left: 528px;
     width: 100px;
     height: 30px;
     text-align: center;
@@ -178,7 +182,6 @@
 #pleaseColse {
     position: absolute;
     right: 10px;
-    /*top: 15px;*/
     color:#fff;
 }
 #aaa p{
