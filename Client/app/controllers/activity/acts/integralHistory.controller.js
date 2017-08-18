@@ -10,9 +10,9 @@ define([], function () {
     ServiceName: 'integralHistoryCtrl',
     ViewModelName: 'integralHistoryModel',
     ServiceContent: ['$rootScope', '$scope', 'mPrizeGotHistoryModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
-      
+
     	$("#durationStart").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00', 
+        format: 'yyyy-mm-dd hh:ii:00',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -25,9 +25,9 @@ define([], function () {
               $scope.$apply();
           }
       });
-  
+
       $("#durationEnd").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00', 
+        format: 'yyyy-mm-dd hh:ii:00',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -118,7 +118,7 @@ define([], function () {
             if (provinceArr.length != 0) {
               provinceArr.forEach(function (n ,index) {
                 var group = {
-                    label: n.shortName, 
+                    label: n.shortName,
                     value: n.code,
                     children: []
                 };
@@ -174,7 +174,7 @@ define([], function () {
         $scope.startTime = '';
         $scope.endTime = '';
         $model.getprizelist({
-          currentPageNumber:1, 
+          currentPageNumber:1,
           pageSize: 10,
           realThing: 0,
           awardType: 6
@@ -268,7 +268,7 @@ define([], function () {
           return
         })
       }
-      
+
     }]
   };
 

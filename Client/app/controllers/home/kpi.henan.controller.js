@@ -23,6 +23,9 @@ define([], function () {
       // 首页较特殊 页面切换清楚所有的定时器
       window.IntervalArr = [];
 
+      $('.ui-map-box').css({
+        height: '' + $(document).height()-250 + 'px'
+      });
       // 右侧数据
       (function () {
         // 计算环比

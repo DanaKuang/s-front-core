@@ -98,7 +98,7 @@
                                                         </thead>
                                                         <tbody>
                                                         <tr ng-repeat="tr in listData">
-                                                            <td id="imgBox" class="imgBox">
+                                                            <td id="imgBox_{{$index}}" class="imgBox">
                                                                 <img class="smokeImg" id="smokeImg"
                                                                      src="{{tr.licenceImg}}" alt=""
                                                                      ng-click="showBig();">

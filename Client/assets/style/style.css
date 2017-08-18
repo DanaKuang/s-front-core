@@ -119,7 +119,7 @@ body {
   font-size: 14px;
   color: #44c2ed;
   text-align: center;
-  width: 110px;
+  width: 90px;
 }
 .ui-navbar-user li {
   height: 30px;
@@ -129,7 +129,7 @@ body {
 }
 .ui-navbar-user >div {
     width: 60px;
-    margin: 0 20px 0 10px;
+    margin: 0 10px 0 0;
     float: right;
 }
 .ui-navbar-user >div >div{
@@ -421,6 +421,7 @@ body {
   height: 20px;
   position: relative;
   top: 15px;
+  float: left;
 }
 .panel:hover {
   box-shadow: 0 0 10px rgba(0, 0, 1, .3);

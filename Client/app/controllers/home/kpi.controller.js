@@ -20,6 +20,9 @@ define([], function () {
           Interval_scroll_I = 9000,       // 滚工区接口刷新
           Interval_table_I = 60*60*1000;  // 表格一小时刷新
 
+      $('.ui-map-box').css({
+        height: '' + $(document).height()-250 + 'px'
+      });
       // 首页较特殊 页面切换清楚所有的定时器
       window.IntervalArr = [];
 
