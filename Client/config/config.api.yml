@@ -84,6 +84,13 @@ index:                                      # 首页
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getHistoryScanUv'
+    authorized: 1
+    description: '河南历史扫码数据'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getHistoryScanData'
     authorized: 1
     description: '历史扫码数据'

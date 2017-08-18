@@ -8,7 +8,7 @@ define([], function () {
   var KPIHenanCtrl = {
     ServiceType: "controller",
     ServiceName: "KPIHenanCtrl",
-    ViewModelName: 'kpiViewModel',
+    ViewModelName: 'kpiHenanViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'formatFilter', function ($scope, dateFormatFilter, formatFilter) {
       var $model = $scope.$model;
       var echarts = require('echarts');
