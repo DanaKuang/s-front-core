@@ -86,12 +86,12 @@ home:                                       # 首页
     gatewaytype: 0
     staticfile: 'home/track/pathdetail.html'
   - httpmethod: 'get'                       # 零售户
-    routepath: '/view/home/retailer/retailer'
+    routepath: '/view/home/retailer/overview'
     description: 'retailer'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'home/retailer/retailer.html'
+    staticfile: 'home/retailer/overview.html'
   - httpmethod: 'get'                       # 零售户详情
     routepath: '/view/home/retailer/detail'
     description: 'retailer'
