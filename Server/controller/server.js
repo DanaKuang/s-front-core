@@ -149,7 +149,7 @@ module.exports.init = function (config, plugins) {
   }
 
   //开发环境打印日志
-  if (config.runmode === 'test') {
+  if (config.runmode === 'local') {
     app.use(logger('dev'));
   }
 

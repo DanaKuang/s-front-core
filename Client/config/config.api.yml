@@ -629,6 +629,20 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getRetailuserDetail'
+    authorized: 1
+    description: '零售户明细表格数据'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getSellerByNameDownbox'
+    authorized: 1
+    description: '获取零售户名称'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/activity/list'

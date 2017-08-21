@@ -12,7 +12,7 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
             var $model = $scope.$model || {};
             // 日期
-            $('[name="startTime"]').datetimepicker({
+            $('[name="beginTime"]').datetimepicker({
                 language: "zh-CN",
                 format: "yyyy-mm-dd",
                 autoclose: true,
@@ -35,31 +35,31 @@ define([], function () {
                 startDate: ""
             }).on('change', function (e) {
                 var et = e.target.value || '';
-                var st = $scope.startTime || '';
+                var st = $scope.beginTime || '';
                 if (et < st) {
-                    $scope.startTime = '';
+                    $scope.beginTime = '';
                 }
             });
 
             // 后端数据
-            var drop_back_data = $model.$dropShop.data || [];
-            drop_back_data = drop_back_data.length ? drop_back_data : [{bizCode:""}];
+            var bizArr_back_data = $model.$dropShop.data || [];
+            var pbArray_back_data = $model.$brand.data || [];
+            bizArr_back_data = bizArr_back_data.length ? bizArr_back_data : [{bizCode:"",bizName:"无数据"}];
+            pbArray_back_data = pbArray_back_data.length ? pbArray_back_data : [{productBrand:"无数据"}];
 
             // 查询默认值
             $scope = angular.extend($scope, {
                 detailSearch: initSearch,
-                startTime: dateFormatFilter.date(+new Date),
+                beginTime: dateFormatFilter.date(+new Date),
                 endTime: dateFormatFilter.date(+new Date),
-                pbArray: [],
-                productBrand: "" || $scope.productBrand || "",
-                cityArr: drop_back_data,
-                cityName: drop_back_data[0].bizCode,
+                pbArray: pbArray_back_data,
+                productBrand: "" || pbArray_back_data[0].productBrand || "",
+                cityName: "",
                 pnArray: [],
-                productName: "" || $scope.productName || "",
-                typeArr: [],
-                retailerType: "" || $scope.retailerType || "",
-                nameArr: [],
-                retailerName: "" || $scope.retailerName || ""
+                productSn: "" || $scope.productSn || "",
+                bizArr: bizArr_back_data,
+                bizCode: "" || bizArr_back_data[0].bizCode || "",
+                shopName: "" || ""
             });
 
             // 初始化
@@ -68,16 +68,18 @@ define([], function () {
             // 初始化查询
             function initSearch () {
                 $model.getTableData({
-                    statType: $scope.type || "",
-                    beginTime: $scope.startTime || "",
+                    beginTime: $scope.beginTime || "",
                     endTime: $scope.endTime || "",
                     productBrand: $scope.productBrand || "",
                     cityName: $scope.cityName || "",
-                    productName: $scope.productName || "",
-                    retailerType: $scope.retailerType || "",
-                    retailerName: $scope.retailerName || ""
+                    productSn: $scope.productSn || "",
+                    bizCode: $scope.bizCode || "",
+                    shopName: $scope.shopName || ""
                 }).then(function (res) {
-                    $scope.listArr = res.data || [];
+                    var data = res.data || [];
+                    $scope.listArr = _.each(data, function (d) {
+                        d.customerShould = (d.customerShould && d.customerShould.toFixed(2)) || 0;
+                    });
                     $scope.$apply();
                 });
             }
@@ -91,23 +93,23 @@ define([], function () {
                     nSelectedText: '已选择'
                 });
                 var $prBrand = $("[name='productBrand']");
-                var $product = $("[name='productName']");
+                var $productSn = $("[name='productSn']");
                 // 品牌
                 $prBrand.multiselect('select', $scope.productBrand);
                 $prBrand.multiselect('refresh');
                 // 规格
-                $product.next().off().on('click', function (e) {
+                $productSn.next().off().on('click', function (e) {
                     $model.getProduct({
                         productBrand: $scope.productBrand
                     }).then(function (res) {
                         $scope.pnArray = res.data || [];
                         $scope.$apply();
-                        $product.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                        $productSn.multiselect('dataprovider', _.forEach(res.data, function(val) {
                             val.label = val.productName;
                             val.value = val.sn;
                         }));
-                        $product.multiselect('select', $scope.productName);
-                        $product.multiselect('refresh');
+                        $productSn.multiselect('select', $scope.productName);
+                        $productSn.multiselect('refresh');
                     });
                 });
             });
