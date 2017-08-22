@@ -89,7 +89,7 @@ define([], function () {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本日扫码次数",
-              "dayactive" : "本日活跃用户",
+              "dayactive" : "本日连续月活用户",
               "daybag" : "本日扫码烟包数",
               "dayreduce" : "本日新增扫码用户数"
             }
@@ -179,7 +179,7 @@ define([], function () {
                   case "中奖数量":
                     obj[x].data.push(res[i].drawResultPv);
                     break;
-                  case "实发数量":
+                  case "领取数量":
                     obj[x].data.push(res[i].awardPayPv);
                     break;
                 }

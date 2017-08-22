@@ -170,7 +170,7 @@ define([], function () {
                                     case "中奖数量":
                                         obj[x].data.push(res[i].drawResultPv);
                                         break;
-                                    case "实发数量":
+                                    case "领取数量":
                                         obj[x].data.push(res[i].awardPayPv);
                                         break;
                                 }
@@ -305,7 +305,7 @@ define([], function () {
                     option.xAxis[0].data = [];
                     $model.$scanTimes(params).then(function (res) {
                         var res = res.data || [];
-                        var Length = res.length>10? 10:res.length;
+                        var Length = res.length>15? 15:res.length;
                         if(!(res.toString() === [].toString())){
                             for (var i = 0; i < Length; i++) {
                                 option.xAxis[0].data.push(res[i].productName)
