@@ -233,7 +233,7 @@ select {
 
 .table tr th {
 	font-size: 1.2em!important;
-	vertical-align: middle;
+	vertical-align: middle!important;
 }
 
 .table tr td {

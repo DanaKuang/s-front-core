@@ -59,7 +59,7 @@ define([], function () {
         $(".operation.multi .select").multiselect({
           includeSelectAllOption: true,
           nonSelectedText: '请选择',
-          allSelectedText: '全部',
+          selectAllText: '全部',
           nSelectedText: '已选择',
           selectAllValue: 'all',
           enableFiltering: true,
