@@ -197,7 +197,7 @@ define([], function () {
                     var url = "/fixatreport/importExcelWinUseProvData";
                     var xhr = new XMLHttpRequest();
                     var formData = new FormData();
-                    formData.append('statTime', statTime);
+                    formData.append('staTime', statTime);
                     formData.append('activityName', activityName);
                     formData.append('productSn', productSn);                    
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -230,7 +230,7 @@ define([], function () {
                     var url = "/fixatreport/importExcelScanUseProvData";
                     var xhr = new XMLHttpRequest();
                     var formData = new FormData();
-                    formData.append('statTime', statTime);
+                    formData.append('staTime', statTime);
                     formData.append('activityName', activityName);
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                     xhr.open('POST', url, true);
@@ -261,7 +261,7 @@ define([], function () {
                     var url = "/fixatreport/importExcelDailySummData";
                     var xhr = new XMLHttpRequest();
                     var formData = new FormData();
-                    formData.append('statTime', statTime);
+                    formData.append('staTime', statTime);
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                     xhr.open('POST', url, true);
                     xhr.responseType = "blob";
