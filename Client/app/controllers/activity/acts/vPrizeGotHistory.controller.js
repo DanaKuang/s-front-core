@@ -58,10 +58,12 @@ define([], function () {
       $(document).ready(function () {
         $(".operation.multi .select").multiselect({
           includeSelectAllOption: true,
-          selectAllText: '全部',
+          nonSelectedText: '请选择',
+          allSelectedText: '全部',
+          nSelectedText: '已选择',
           selectAllValue: 'all',
           enableFiltering: true,
-          buttonWidth: '170px',
+          buttonWidth: '100%',
           maxHeight: '200px',
           numberDisplayed: 1
         });

@@ -15,7 +15,7 @@
 			</thead>
 			<tbody>
 				<tr class="show-list" ng-repeat="(idx, item) in list">
-					<td>{{item.id}}</td>
+					<td>{{idx + 1}}</td>
 					<td>{{item.activityName}}</td>
 					<td class="snslist">{{item.sn}}</td>
 					<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{
