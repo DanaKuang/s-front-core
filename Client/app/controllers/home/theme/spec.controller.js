@@ -27,19 +27,38 @@ define([], function () {
         "statTime":stattime,
         "statType":"day"
       };
-      //规格下拉列表
-      (function () {
-        $model.$getProduct().then(function (res) {
+
+      (function(){
+        $model.$getBrand().then(function(res){
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
-            if(res[i].name ==="盒-芙蓉王（硬细支）"){
-              $(".region").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
+            if(res[i].productBrand ==="芙蓉王"){
+              $(".brand").append("<option value="+res[i].productBrand+" selected>"+res[i].productBrand+"</option>")
             }else {
-              $(".region").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
+              $(".brand").append("<option value="+res[i].productBrand+">"+res[i].productBrand+"</option>")
+            }
+          };
+          getProduct({productBrand:$(".brand").val()})
+        })
+      })();
+      //品牌与规格联动
+      $(".brand").change(function(){
+        getProduct({productBrand:$(".brand").val()})
+      })
+      //规格下拉列表
+      function getProduct(params) {
+        $model.$getProduct(params).then(function (res) {
+          var res = res.data || [];
+          $(".region.spec").html("");
+          for(var i=0;i<res.length;i++){
+            if(res[i].name ==="盒-芙蓉王（硬细支）"){
+              $(".region.spec").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
+            }else {
+              $(".region.spec").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
             }
           }
         })
-      })();
+      };
       //周下拉列表
       (function () {
         $model.$getWeeks().then(function (res) {
