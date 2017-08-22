@@ -66,10 +66,9 @@ define([], function () {
               allSelectedText: '全部',
               nSelectedText: '已选择',
               includeSelectAllOption: true,
-              selectAllText: '全部',
               selectAllValue: 'all',
               enableFiltering: true,
-              buttonWidth: '170px',
+              buttonWidth: '100%',
               maxHeight: '200px',
               numberDisplayed: 1
             });

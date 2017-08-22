@@ -785,6 +785,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .launch-relate .btn-group {
 	margin-left: 72px;
 }
+
 .launch-relate .btn-group button, .operation .btn-group button {
 	padding: 5px;
   background: transparent;
@@ -795,6 +796,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
   height: 29px;
   text-align: left;
 }
+
 .launch-relate .btn-group button, .launch-relate .btn-group ul, .operation .btn-group button, .operation .btn-group ul {
 	/*width: 453px;*/
 	-webkit-box-sizing: border-box;
@@ -870,10 +872,14 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 .detail-wrap {
-	width: 60%;
+	width: 80%;
 	margin: 0 auto;
 	font-size: 14px;
 }
 .detail-wrap p {
+	color: #6e80ff;
 	line-height: 2;
+}
+.detail-wrap p span {
+	color: #707478;
 }

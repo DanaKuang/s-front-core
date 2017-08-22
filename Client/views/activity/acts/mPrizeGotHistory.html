@@ -34,6 +34,12 @@
 											<option ng-repeat="item in orderstatuslist" value="{{item.code}}">{{item.name}}</option>
 										</select>
 									</div>
+									<div class="duration bb">
+										<label for="duration" class="label">领奖时段</label>
+										<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> 
+										<p style="text-align:center; margin: 2px auto;">&nbsp;&nbsp;至&nbsp;&nbsp;</p>
+										<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
+									</div>
 								</div>
 								<div class="m flex-item">
 									<div class="status t">
@@ -47,6 +53,10 @@
 										<select class="form-item select" name="" id="norms" ng-model="selectSpeci" value="{{selectSpeci}}" multiple="multiple">
 											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 										</select>
+									</div>
+									<div class="keywords bb">
+										<label for="keywords" class="label">关键字</label>
+										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval" value="{{keysval}}">
 									</div>
 								</div>
 								<div class="r flex-item">
@@ -66,17 +76,6 @@
 							<div class="col-md-2 col-sm-6 col-xs-6 rt">
 								<button type="submit" class="btn btn-default search" ng-click="search($event)">搜索</button>
 								<button ng-click="reset()" type="submit" class="btn btn-default reset" >重置</button>
-							</div>
-							<div class="col-md-10 col-sm-12 col-xs-6 lft flex bottom">
-								<div class="l flex-item">
-									<label for="duration" class="label">领奖时段</label>
-									<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> &nbsp;&nbsp;至&nbsp;&nbsp;
-									<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
-								</div>
-								<div class="r flex-item">
-									<label for="keywords" class="label">关键字</label>
-									<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval" value="{{keysval}}">
-								</div>
 							</div>
 						</div>
 						<div class="operBtnWrap">
