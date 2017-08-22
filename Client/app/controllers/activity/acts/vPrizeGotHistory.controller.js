@@ -59,7 +59,7 @@ define([], function () {
         $(".operation.multi .select").multiselect({
           includeSelectAllOption: true,
           nonSelectedText: '请选择',
-          allSelectedText: '全部',
+          selectAllText: '全部',
           nSelectedText: '已选择',
           selectAllValue: 'all',
           enableFiltering: true,
@@ -202,7 +202,7 @@ define([], function () {
           sn: $scope.selectSpeci || [],
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
-          realThing: 1,
+          realThing: 0,
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime || '',

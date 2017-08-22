@@ -103,7 +103,7 @@ select {
 	position: relative;
 	margin-bottom: 10px;
 }
-.operation label {
+.operation .label {
 	color: #707070;
 	font-weight: normal;
 	font-size: 1.2em;
@@ -121,7 +121,7 @@ select {
 }
 .search, .reset {
 	line-height: 100%;
-	width: 10em;
+	width: 8em;
 	height: 2em;
 	border: 1px solid #eee;
 	-webkit-border-radius: 20px;
@@ -172,7 +172,7 @@ select {
 	.operation>.flex .flex-item {
 		width: 20em;
 	}
-	.operation label {
+	.operation .label {
 		left: -80px!important;
 		font-size: 1em!important;
 	}
@@ -190,7 +190,7 @@ select {
 }
 @media screen and (max-width: 1280px) {
 	.panel-body, .manageacts {
-		min-width: 1060px;
+		min-width: 1030px;
 	}
 	.operation>.flex {
 		font-size: 8px;
@@ -208,19 +208,19 @@ select {
 
 /*table*/
 @media screen and (min-width: 1721px) {
-	table {
+	.table {
 		font-size: 16px;
 	}
 }
 
 @media screen and (min-width: 1281px) and (max-width: 1720px) {
-	table {
+	.table {
 		font-size: 10px;
 	}
 }
 
 @media screen and (max-width: 1280px) {
-	table {
+	.table {
 		font-size: 8px;
 	}
 }
@@ -231,11 +231,12 @@ select {
 	}
 }
 
-table tr th {
+.table tr th {
 	font-size: 1.2em!important;
+	vertical-align: middle!important;
 }
 
-table tr td {
+.table tr td {
 	font-size: 1.1em!important;
 }
 

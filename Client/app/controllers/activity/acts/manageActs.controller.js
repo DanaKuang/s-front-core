@@ -63,7 +63,7 @@ define([], function () {
           $(document).ready(function () {
             $(".operation.multi .select").multiselect({
               nonSelectedText: '请选择',
-              allSelectedText: '全部',
+              selectAllText: '全部',
               nSelectedText: '已选择',
               includeSelectAllOption: true,
               selectAllValue: 'all',
@@ -250,7 +250,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
@@ -293,7 +292,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
