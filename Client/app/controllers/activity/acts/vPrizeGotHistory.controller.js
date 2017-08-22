@@ -202,7 +202,7 @@ define([], function () {
           sn: $scope.selectSpeci || [],
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
-          realThing: 1,
+          realThing: 0,
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime || '',
