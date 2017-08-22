@@ -438,6 +438,11 @@ body {
 .region-margin {
     margin-top: 25px;
 }
+
+.region-describle {
+  line-height: 30px;
+  font-size: 15px;
+}
 .date input{
   border: none;
 }

@@ -61,12 +61,15 @@ define([], function () {
                 if ($(this).val() === "month") {
                     $("#month").attr("selected", "selected");
                     $(".region-search-r").eq(2).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推两月（不包括本月）的均值")
                 } else if ($(this).val() === "day") {
                     $("#day").attr("selected", "selected");
                     $(".region-search-r").eq(0).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推7天（包括当天）的均值")                    
                 } else {
                     $("#week").attr("selected", "selected");
                     $(".region-search-r").eq(1).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推四周（不包括本周）的均值")                                        
                 }
             });
             //查询
