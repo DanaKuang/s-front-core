@@ -64,6 +64,7 @@
               <!--search-->
               <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
             </div>
+            <div class="region-describle">仪表盘中间值确定方式：往前推7天（包括当天）的均值</div>
             <div class="region-gauge">
               <div class="col-md-4">
                 <div id="gauge-first"></div>
@@ -108,9 +109,9 @@
                   <span>中奖数量</span>
                 </div>
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="实发数量" checked/>
+                  <input type="checkbox" name="领取数量" checked/>
                   <label class="checkbox"></label>
-                  <span>实发数量</span>
+                  <span>领取数量</span>
                 </div>
               </div>
               <div id="plan-chart"></div>
@@ -139,7 +140,7 @@
             <div class="region-hours-wrap region-name-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>前十规格扫码次数</span>
+                <span>前十五规格扫码次数</span>
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>

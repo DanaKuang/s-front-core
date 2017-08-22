@@ -99,6 +99,7 @@ define([], function () {
                 "getFeed": function (params) {
                     $model.$getFeed(params).then(function (res) {
                         $(".visit_table tbody").html("");
+                        var template = [];
                         var res = res.data || [];
                         for (var i = 0; i < res.length; i++) {
                             var feedback = res[i].feedbackStatus;
@@ -119,16 +120,17 @@ define([], function () {
                             if (res[i].wechatName === null) {
                                 res[i].wechatName = "";
                             };
-                            $(".visit_table tbody").append(
+                           template.push(
                                 "<tr> " +
-                                "<td class='mobile'>" + res[i].mobile + "</td> <td class='wechat'>" +
+                                "<td class='mobile'>" + res[i].mobile + "<td class='orderId'>"+res[i].orderId+"</td></td> <td class='wechat'>" +
                                 res[i].wechatName + "</td> <td class='stat_time'>" +
                                 res[i].statTime + "</td> <td class='cityName'>" +
                                 res[i].cityName + "</td> <td class='award'>" +
                                 res[i].awardName + "</td> <td data-id=" + res[i].id + "> " +
                                 feedback +
                                 " <span class='" + Class + "'></span> <ul class='visit-list'> <li data-toggle='modal' data-target='#myModal'>待核实</li> <li data-toggle='modal' data-target='#myModal'>已核实</li> <li data-toggle='modal' data-target='#myModal'>不属实</li> <li data-toggle='modal' data-target='#myModal'>联系不上</li></ul></td></tr>");
-                        }
+                        };
+                        $(".visit_table tbody").append(template.join(" "))
                         $(".visit_btn").removeClass("gray_btn");
                     })
                 },

@@ -19,22 +19,13 @@
       "show": false
     }
   },
-  "dataZoom": [
-    {
-      "type": "inside",
-      "show": true,
-      "start":0,
-      "end": 50,
-      "zoomLock":true
-    }
-  ],
   "series": [
     {
       "name": "扫码次数",
       "type": "line",
       "label":{
         "normal":{
-          "show":true
+          "show":false
           }
       },
       "lineStyle":{

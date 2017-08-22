@@ -13,6 +13,11 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
 }
+.multiselect-selected-text {
+	color: #707070;
+	font-size: 0.9em;
+}
+
 input[type="text"], select, input[type="number"], input[type="url"] {
  	padding: 5px;
  	background: transparent;
@@ -94,14 +99,14 @@ select {
 	align-content: space-around;
 	flex-flow: row wrap;
 }
-.operation .lft .t, .operation .lft .b {
+.operation .lft .t, .operation .lft .b, .operation .lft .bb {
 	position: relative;
 	margin-bottom: 10px;
 }
-.operation label {
+.operation .label {
 	color: #707070;
 	font-weight: normal;
-	font-size: 13px;
+	font-size: 1.2em;
 }
 .operation li.active a label {
 	color: #fff!important;
@@ -115,10 +120,9 @@ select {
 	margin-bottom: 10px;
 }
 .search, .reset {
-	margin-left: 10px;
 	line-height: 100%;
-	width: 100px;
-	height: 26px;
+	width: 8em;
+	height: 2em;
 	border: 1px solid #eee;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
@@ -126,14 +130,17 @@ select {
 	-webkit-appearance: none;
 	background: transparent;
 }
+.operation button:[type="button"] {
+	height: 29px;
+}
 .search:hover, .reset:hover {
 	background: #6e80ff;
 	color: #fff;
 	cursor: pointer;
 } 
-.form-item {
+/*.form-item {
 	width: 170px;
-}
+}*/
 .operation .rt {
 	margin-top: 5px;
 }
@@ -144,8 +151,95 @@ select {
 	left: -4px;
 }
 
+.operation>.flex .flex-item {
+	align-self: flex-start;
+	flex-wrap: nowrap;
+}
+
+@media screen and (min-width: 1750px) {
+	.search, .reset {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.search {
+		margin-bottom: 0!important;
+	}
+} 
+@media screen and (min-width: 1721px) {
+	.operation>.flex {
+		font-size: 16px;
+	}
+	.operation>.flex .flex-item {
+		width: 20em;
+	}
+	.operation .label {
+		left: -80px!important;
+		font-size: 1em!important;
+	}
+}
+@media screen and (min-width: 1281px) and (max-width: 1720px) {
+	.panel-body, .manageacts {
+		min-width: 1220px;
+	}
+	.operation>.flex {
+		font-size: 10px;
+	}
+	.operation>.flex .flex-item {
+		width: 20em;
+	}
+}
+@media screen and (max-width: 1280px) {
+	.panel-body, .manageacts {
+		min-width: 1030px;
+	}
+	.operation>.flex {
+		font-size: 8px;
+	}
+	.operation>.flex .flex-item {
+		width: 15em;
+	}
+}
+.operation>.flex .flex-item>.t, .operation>.flex .flex-item>.b {
+	width: 100%;
+}
+.operation>.flex .flex-item>.t select, .operation>.flex .flex-item>.b select, .operation>.flex .flex-item input {
+	width: 100%;
+}
 
 /*table*/
+@media screen and (min-width: 1721px) {
+	.table {
+		font-size: 16px;
+	}
+}
+
+@media screen and (min-width: 1281px) and (max-width: 1720px) {
+	.table {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.table {
+		font-size: 8px;
+	}
+}
+
+@media screen and (min-width: 1721px) {
+	.launch-relate .btn-group button, .operation .btn-group button {
+		height: 34px!important;
+	}
+}
+
+.table tr th {
+	font-size: 1.2em!important;
+	vertical-align: middle!important;
+}
+
+.table tr td {
+	font-size: 1.1em!important;
+}
+
 .oper-btn-wrap {
 	overflow: hidden;
 	margin: 0 auto;
@@ -163,9 +257,9 @@ select {
 	margin-top: 10px;
 }
 .form_datetime {
-	margin-left: 10px;
 	margin-right: 10px;
-	width: 170px;
+	/*width: 170px;*/
+	width: 100%;
 	background: rgb(248, 248, 248);
  	border: 1px solid #999;
  	border-radius: 5px;

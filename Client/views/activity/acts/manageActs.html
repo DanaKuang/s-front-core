@@ -7,7 +7,7 @@
 -->
 <link rel="stylesheet" href="statics/assets/style/panel.css">
 <link rel="stylesheet" href="statics/assets/style/manageActs.css">
-<div ng-controller="manageActsCtrl">
+<div ng-controller="manageActsCtrl" class="manageacts">
 	<div class="animated fadeInRight">
 		<div class="container-fluid">
 			<div class="ui-content-box row">
@@ -23,7 +23,7 @@
 
 						<!-- 操作区 -->
 						<div class="panel-body operation multi">
-							<div class="col-md-10 col-sm-12 col-xs-6 lft flex">
+							<div class="col-md-10 col-sm-12 col-xs-6 lft flex ">
 								<div class="l flex-item">
 									<div class="category t">
 										<label for="category" class="label">活动类型</label>
@@ -38,6 +38,12 @@
 											<option value="">全部</option>
 											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
 										</select>
+									</div>
+									<div class="duration bb">
+										<label for="duration" class="label">活动时段</label>
+										<input id="durationStart" size="16" type="text" value="" placeholder="年-月-日(开始时间)" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> 
+										<p style="text-align:center; margin: 2px auto;">&nbsp;&nbsp;至&nbsp;&nbsp;</p>
+										<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
 									</div>
 								</div>
 								<div class="m flex-item">
@@ -70,9 +76,7 @@
 								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset">重置</button>
 							</div>
 							<div class="col-md-10 col-sm-12 col-xs-12 time t float-left">
-								<label for="duration" class="label">活动时段</label>
-								<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> &nbsp;&nbsp;至&nbsp;&nbsp;
-								<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
+								
 							</div>
 						</div>
 

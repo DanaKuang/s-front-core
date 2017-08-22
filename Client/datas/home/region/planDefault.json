@@ -59,8 +59,8 @@
     },
     "data":[]
   },
-  "实发数量": {
-    "name": "实发数量",
+  "领取数量": {
+    "name": "领取数量",
     "type": "line",
     "lineStyle": {
       "normal": {
