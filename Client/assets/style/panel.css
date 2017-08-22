@@ -121,7 +121,7 @@ select {
 }
 .search, .reset {
 	line-height: 100%;
-	width: 10em;
+	width: 8em;
 	height: 2em;
 	border: 1px solid #eee;
 	-webkit-border-radius: 20px;
@@ -190,7 +190,7 @@ select {
 }
 @media screen and (max-width: 1280px) {
 	.panel-body, .manageacts {
-		min-width: 1060px;
+		min-width: 1030px;
 	}
 	.operation>.flex {
 		font-size: 8px;
