@@ -172,7 +172,7 @@ select {
 	.operation>.flex .flex-item {
 		width: 20em;
 	}
-	.operation label {
+	.operation .label {
 		left: -80px!important;
 		font-size: 1em!important;
 	}
