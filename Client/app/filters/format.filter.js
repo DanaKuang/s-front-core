@@ -127,7 +127,5 @@ define([], function () {
       return this.__filter__("date")(value, 'HH:mm');
     }
   };
-
-
   return [formatFilter, dateFormatFilter]
 });
