@@ -7,7 +7,7 @@
 define([], function () {
     var surprisesetprize = angular.module('ngui.surprisesetprize', []);
 
-    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, numberFormat, decimalFormat, util) {
         var defaults = { //默认配置
             tpl: '/surprisesetprize.tpl.html',
             chooseNum: 0,
@@ -191,5 +191,5 @@ define([], function () {
         return defineObj;
     }
 
-    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', surprisesetprizeFn]);
+    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', surprisesetprizeFn]);
 })
