@@ -27,9 +27,10 @@
                                     </div>
                                     <div class="yunfei">含运费和税费</div>
                                     <div class="ifFree">
-                                        是否免费：
-                                        <div class="openButton1" ng-click="openSet();">开启</div>
-                                        <div class="closeButton1" ng-click="closeSet();">关闭</div>
+                                        是否免费:
+                                        <div class="openButton1" ng-click="qrFreeSwitch()" ng-mouseover="mouser()">当前开启</div>
+                                        &nbsp;&nbsp;注:点击按钮可改变开关状态
+                                        <!--<div class="closeButton1" ng-click="closeSet();">关闭</div>-->
                                     </div>
                                     <div class="numble">
                                         免费数量：
@@ -57,6 +58,12 @@
                 </div>
             </div>
         </div>
+
+        <div sa-modal conf="tempModalConf">
+            123232
+        </div>
+
+
     </div>
     <script>
         function isInteger(obj) {

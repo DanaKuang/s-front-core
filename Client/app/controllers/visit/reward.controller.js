@@ -29,20 +29,37 @@ define([], function () {
                 });
             });
             //开启关闭按钮
+            var index =0;
+            //$scope.openSet = function () {
+            //    $(".openButton1").css("backgroundColor", "#30A13E");
+            //    $(".closeButton1").css("backgroundColor", "#fff");
+            //    $(".closeButton1").hide();
+            //    index = 1;
+            //    $("#free-numble").removeAttr("disabled");
+            //};
+            //$scope.closeSet = function () {
+            //    $(".closeButton1").css("backgroundColor", "#30A13E");
+            //    $(".openButton1").css("backgroundColor", "#fff");
+            //    $(".openButton1").hide();
+            //    index = 0;
+            //    $("#free-numble").attr("disabled", "disabled").hide();
+            //
+            //};
 
-            var index;
-            $scope.openSet = function () {
-                $(".openButton1").css("backgroundColor", "#6db1fb");
-                $(".closeButton1").css("backgroundColor", "#fff")
-                index = 1;
-                $("#free-numble").removeAttr("disabled");
+            $scope.qrFreeSwitch = function(){
+                if(index==0){
+                    index = 1;
+                    $(".openButton1").html('<span style="color:#ffffff">免费开启</span>');
+                    $(".openButton1").css("backgroundColor", "#30A13E");
+                    $("#free-numble").removeAttr("disabled");
+                }else {
+                    index=0;
+                    $(".openButton1").html('<span style="color:#000000">免费关闭</span>');
+                    $(".openButton1").css("backgroundColor", "#778899");
+                    $("#free-numble").attr("disabled", "disabled");
+                }
             };
-            $scope.closeSet = function () {
-                $(".closeButton1").css("backgroundColor", "#6db1fb");
-                $(".openButton1").css("backgroundColor", "#fff")
-                index = 0;
-                $("#free-numble").attr("disabled", "disabled");
-            }
+
             //免费二维码设置
             $("#numbleSave").off().on('click', function (e) {
                 var freeNum = $(".numble input").val();
@@ -57,11 +74,17 @@ define([], function () {
                 });
             });
             $scope.select = $model.$select.data.data;
-            if ($scope.select.qr.isFree == 0) {
-                $scope.closeSet();
-            } else if ($scope.select.qr.isFree == 1) {
-                $scope.openSet();
+            if(!$scope.select.qr.isFree){
+                index =1;
+            }else{
+                index=0;
             }
+            $scope.qrFreeSwitch();
+            //if ($scope.select.qr.isFree == 0) {
+            //    $scope.qrFreeSwitch();
+            //} else if ($scope.select.qr.isFree == 1) {
+            //    $scope.qrFreeSwitch();
+            //}
             //店码-盒码关联间隔设置
             $("#consumerSave").off().on('click', function (e) {
                 var time = $(".spaceTime input").val();
