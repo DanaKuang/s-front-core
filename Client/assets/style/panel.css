@@ -177,7 +177,7 @@ select {
 		font-size: 1em!important;
 	}
 }
-@media screen and (min-width: 1281px) and (max-width: 1720px) {
+@media screen and (min-width: 1501px) and (max-width: 1720px) {
 	.panel-body, .manageacts {
 		min-width: 1220px;
 	}
@@ -185,10 +185,10 @@ select {
 		font-size: 10px;
 	}
 	.operation>.flex .flex-item {
-		width: 20em;
+		width: 18em;
 	}
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1500px) {
 	.panel-body, .manageacts {
 		min-width: 1030px;
 	}
