@@ -196,6 +196,7 @@ define([], function () {
                         "activityName":$scope.obj.activityName,
                         "productSn":$scope.obj.productSn
                     }
+                    var url ="/fixatreport/importExcelWinUseProvData";
                     // var statTime = $scope.obj.statTime;
                     // var activityName = $scope.obj.activityName;
                     // var productSn = $scope.obj.productSn;
@@ -205,6 +206,7 @@ define([], function () {
                         "statTime":$scope.saoobj.statTime,
                         "activityName":$scope.saoobj.activityName
                     }
+                    var url ="/fixatreport/importExcelScanUseProvData";
                     // var statTime = $scope.saoobj.statTime;
                     // var activityName = $scope.saoobj.activityName;
                     // window.location.href = '/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
@@ -212,10 +214,10 @@ define([], function () {
                     var data = {
                         "statTime":$scope.summar.statTime
                     }
+                    var url ="/fixatreport/importExcelDailySummData";                    
                     // var statTime = $scope.summar.statTime;
                     // window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
                 }
-                var url ="/fixatreport/importExcelDailySummData";
                 var xhr = new XMLHttpRequest();
                 var formData = new FormData();
                 for(var attr in data) {
