@@ -63,13 +63,12 @@ define([], function () {
           $(document).ready(function () {
             $(".operation.multi .select").multiselect({
               nonSelectedText: '请选择',
-              allSelectedText: '全部',
+              selectAllText: '全部',
               nSelectedText: '已选择',
               includeSelectAllOption: true,
-              selectAllText: '全部',
               selectAllValue: 'all',
               enableFiltering: true,
-              buttonWidth: '170px',
+              buttonWidth: '100%',
               maxHeight: '200px',
               numberDisplayed: 1
             });
@@ -251,7 +250,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
@@ -294,7 +292,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',

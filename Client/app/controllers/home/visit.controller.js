@@ -18,7 +18,13 @@ define([], function () {
             var deafaultCou = {
                 "startTime": stattime,
                 "awardName": "",
-                "cityName": ""
+                "cityName": "",
+                "feedbackStatus":"",
+                "productId":"",
+                "productBrand":"",
+                "mobile":"",
+                "endTime":stattime,
+                "orderId":""
             };
             var Deafault = _.cloneDeep(deafaultCou);
             Deafault.page = 1;
@@ -26,6 +32,31 @@ define([], function () {
             var allpage;  //计算总页数
             var up = {};  //更新数据
 
+
+            //品牌
+            (function(){
+                $model.$getBrand().then(function(res){
+                    var res = res.data || [];
+                    for(var i=0;i<res.length;i++){
+                        $("#visit_brand").append("<option value="+res[i].productBrand+">"+res[i].productBrand+"</option>")
+                    };
+                    getProduct({productBrand:$("#visit_brand").val()})
+                  })
+            })();
+            $("#visit_brand").change(function(){
+                getProduct({productBrand:$("#visit_brand").val()})
+              })
+            //规格下拉列表
+            function getProduct(params) {
+                $model.$getProduct(params).then(function (res) {
+                    var res = res.data || [];
+                    $("#visit_product").html("");
+                    $("#visit_product").append("<option value=''>全部</option>");                    
+                    for(var i=0;i<res.length;i++){
+                        $("#visit_product").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
+                    };
+                })
+            };
             //箭头点击
             $(".visit_table tbody").on("click", "span", function () {
                 $(".visit-list").hide();
@@ -35,7 +66,9 @@ define([], function () {
             $(".visit_table tbody").on("click", "li", function () {
                 up = {
                     "id": $(this).parent().parent().attr("data-id"),
-                    "feedbackStatus": ""
+                    "feedbackStatus": "",
+                    "checkPerson":sessionStorage.getItem("account"),
+                    "checkTime":dayFilter.today("datetime")
                 }
                 if ($(this).text() === "待核实") {
                     up.feedbackStatus = 1;
@@ -45,8 +78,7 @@ define([], function () {
                     up.feedbackStatus = 3;
                 } else if ($(this).text() === "联系不上") {
                     up.feedbackStatus = 4;
-                }
-                ;
+                };
                 // console.log(up);
                 $(".visit-list").hide();
                 //global.getFeed(Deafault);
@@ -84,7 +116,13 @@ define([], function () {
                         "awardName": $(".visit_award input").val(),
                         "cityName": $(".visit_city input").val(),
                         "endTime": $(".visit_end").find(".date").data().date ?
-                            $(".visit_end").find(".date").data().date : $(that).siblings(".visit_end").find("input").val()
+                            $(".visit_end").find(".date").data().date : $(that).siblings(".visit_end").find("input").val(),
+                        "mobile":$(".visit_mobile input").val(),
+                        "feedbackStatus":$("#visit_label").val(),
+                        "productId":$("#visit_product").val(),
+                        "productBrand":$("#visit_brand").val(),
+                        "orderId":$(".visit_order").val()
+
                     };
                     Deafault = _.cloneDeep(deafaultCou)
                     Deafault.page = 1;
@@ -99,6 +137,7 @@ define([], function () {
                 "getFeed": function (params) {
                     $model.$getFeed(params).then(function (res) {
                         $(".visit_table tbody").html("");
+                        var template = [];
                         var res = res.data || [];
                         for (var i = 0; i < res.length; i++) {
                             var feedback = res[i].feedbackStatus;
@@ -119,16 +158,17 @@ define([], function () {
                             if (res[i].wechatName === null) {
                                 res[i].wechatName = "";
                             };
-                            $(".visit_table tbody").append(
+                           template.push(
                                 "<tr> " +
-                                "<td class='mobile'>" + res[i].mobile + "</td> <td class='wechat'>" +
+                                "<td class='mobile'>" + res[i].mobile + "<td class='orderId'>"+res[i].orderId+"</td></td> <td class='wechat'>" +
                                 res[i].wechatName + "</td> <td class='stat_time'>" +
                                 res[i].statTime + "</td> <td class='cityName'>" +
                                 res[i].cityName + "</td> <td class='award'>" +
                                 res[i].awardName + "</td> <td data-id=" + res[i].id + "> " +
                                 feedback +
                                 " <span class='" + Class + "'></span> <ul class='visit-list'> <li data-toggle='modal' data-target='#myModal'>待核实</li> <li data-toggle='modal' data-target='#myModal'>已核实</li> <li data-toggle='modal' data-target='#myModal'>不属实</li> <li data-toggle='modal' data-target='#myModal'>联系不上</li></ul></td></tr>");
-                        }
+                        };
+                        $(".visit_table tbody").append(template.join(" "))
                         $(".visit_btn").removeClass("gray_btn");
                     })
                 },

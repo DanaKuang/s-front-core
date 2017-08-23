@@ -18,7 +18,7 @@
                                         客户返现比例：
                                         <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent*100}}">%
                                     </div>
-                                    <a class="save" href="javascript:" id="award">保存</a>
+                                    <!--<a class="save" href="javascript:" id="award">保存</a>-->
                                     <i></i>
                                     <p class="erwei">零售户二维码打印设置</p>
                                     <div>
@@ -27,27 +27,30 @@
                                     </div>
                                     <div class="yunfei">含运费和税费</div>
                                     <div class="ifFree">
-                                        是否免费：
-                                        <div class="openButton1" ng-click="openSet();">开启</div>
-                                        <div class="closeButton1" ng-click="closeSet();">关闭</div>
+                                        是否免费:
+                                        <div class="openButton1" ng-click="qrFreeSwitch()" ng-mouseover="mouser()">当前开启</div>
+                                        &nbsp;&nbsp;注:点击按钮可改变开关状态
+                                        <!--<div class="closeButton1" ng-click="closeSet();">关闭</div>-->
                                     </div>
                                     <div class="numble">
                                         免费数量：
                                         <input type="text" id="free-numble" placeholder="请输入数量" value="{{select.qr.qrFreeNum}}">
                                     </div>
-                                    <a class="save" id="numbleSave" href="javascript:">保存</a>
+                                    <!--<a class="save" id="numbleSave" href="javascript:">保存</a>-->
                                     <i></i>
-                                    <p>店码-盒码关联间隔设置</p>
+                                    <p>店铺-消费者关联有效时间设置</p>
                                     <div class="spaceTime">
-                                        间隔时间：
+                                        有效时间:
                                         <input type="text" id="time-space"
                                                value="{{select.consumer_seller_threshold}}">分钟
                                     </div>
-                                    <a class="save" id="consumerSave" href="javascript:">保存</a>
+                                    <!--<a class="save" id="consumerSave" href="javascript:">保存</a>-->
                                     <i></i>
                                     <p class="active">客户活动介绍</p>
                                     <textarea name="" id="textintro" cols="30" rows="10">{{select.ac.introduction}}</textarea>
-                                    <a class="save" id="intrSave" href="javascript:">保存</a>
+                                    <!--<a class="save" id="intrSave" href="javascript:">保存</a>-->
+
+                                    <a class="save" id ="saveAllBut">保存更改</a>
                                 </form>
                             </div>
                         </div>
@@ -55,54 +58,60 @@
                 </div>
             </div>
         </div>
+
+        <div sa-modal conf="tempModalConf">
+            123232
+        </div>
+
+
     </div>
     <script>
         function isInteger(obj) {
             return obj%1 === 0
         }
-        $("#moneyPer").blur(function(){
-            var value=$(this).val();
-            var flag=isNaN(value)?true:false;
-            if(flag==true){
-                $(this).val("请您输入正确的百分比").css("color","red");
-            }else{
-                var isIntegerFlag = isInteger(value);
-                if(!isIntegerFlag || value>100 || value<0){
-                    $(this).val("请您输入0-100之间的整数").css("color","red");
-                }else{
-                    $(this).css("color","#000");
-                }
-            }
-        });
-        $("#copyMoney").change(function(){
-            var value=$(this).val();
-            var flag=isNaN(value)?true:false;
-            if(flag==true){
-                $(this).val("您请输入正确的金额").css("color","red");
-
-            } else {
-                $(this).css("color","#000");
-            }
-        })
-        $("#free-numble").change(function(){
-            var value=$(this).val();
-            var flag=isNaN(value)?true:false;
-            if(flag==true){
-                $(this).val("您请输入正确的数量").css("color","red");
-
-            } else {
-                $(this).css("color","#000");
-            }
-        })
-        $("#time-space").change(function(){
-            var value=$(this).val();
-            var flag=isNaN(value)?true:false;
-            if(flag==true){
-                $(this).val("您请输入正确的时间间隔").css("color","red");
-            } else {
-                $(this).css("color","#000");
-            }
-        });
+//        $("#moneyPer").blur(function(){
+//            var value=$(this).val();
+//            var flag=isNaN(value)?true:false;
+//            if(flag==true){
+//                $(this).val("请您输入正确的百分比").css("color","red");
+//            }else{
+//                var isIntegerFlag = isInteger(value);
+//                if(!isIntegerFlag || value>100 || value<0){
+//                    $(this).val("请您输入0-100之间的整数").css("color","red");
+//                }else{
+//                    $(this).css("color","#000");
+//                }
+//            }
+//        });
+//        $("#copyMoney").change(function(){
+//            var value=$(this).val();
+//            var flag=isNaN(value)?true:false;
+//            if(flag==true){
+//                $(this).val("您请输入正确的金额").css("color","red");
+//
+//            } else {
+//                $(this).css("color","#000");
+//            }
+//        });
+//        $("#free-numble").change(function(){
+//            var value=$(this).val();
+//            var flag=isNaN(value)?true:false;
+//            if(flag==true){
+//                $(this).val("您请输入正确的数量").css("color","red");
+//
+//            } else {
+//                $(this).css("color","#000");
+//            }
+//        });
+//        $("#time-space").change(function(){
+//            var value=$(this).val();
+//            var flag=isNaN(value)?true:false;
+//            if(flag==true){
+//                $(this).val("您请输入正确的时间间隔").css("color","red");
+//            } else {
+//                $(this).css("color","#000");
+//            }
+//        });
         function getLocalTime(nS) {
             return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
         }

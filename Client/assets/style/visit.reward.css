@@ -156,10 +156,9 @@
     height: 36px;
 }
 .reward-bottom .openButton1 {
-    border-right: none;
     transform: translateX(7px);
-    background-color: #6db1fb;
-    border-radius: 15px 0 0 15px;
+    background-color: #30A13E;
+    border-radius: 15px 15px 15px 15px;
     color: #585858;
 
 }

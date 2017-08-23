@@ -24,6 +24,7 @@ define([], function () {
         var fenBu_JSON_URL = '/statics/home/spec/fenbu.json';
 
 
+        var getBrand = "/api/tztx/dataportal/statistics/getBrand"; // 品牌接口        
         var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格
         var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';  //周下拉列表
         var specification = "/api/tztx/dataportal/statistics/specificationKPI"  //新增扫码人数
@@ -49,10 +50,13 @@ define([], function () {
         this.$chinaJson = request.$Query(CHINA_JSON_URL);
         // this.$pie1chart = request.$Query(PIE1_JSON_URL);
         // this.$pie1chart = request.$Query(PIE1_JSON_URL);
-         this.$fenbu = request.$Query(fenBu_JSON_URL);
-
-        this.$getProduct = function(){
-          return request.$Search(getProduct,{},true);
+        this.$fenbu = request.$Query(fenBu_JSON_URL);
+        
+        this.$getBrand = function() {
+          return request.$Search(getBrand,{},true);
+        },
+        this.$getProduct = function(params){
+          return request.$Search(getProduct,params,true);
         }
         this.$getWeeks = function(){
           return request.$Search(getWeeks,{},true);
