@@ -44,8 +44,8 @@ define([], function () {
             // 后端数据
             var bizArr_back_data = $model.$dropShop.data || [];
             var pbArray_back_data = $model.$brand.data || [];
-            bizArr_back_data = bizArr_back_data.length ? bizArr_back_data : [{bizCode:"",bizName:"无数据"}];
-            pbArray_back_data = pbArray_back_data.length ? pbArray_back_data : [{productBrand:"无数据"}];
+            bizArr_back_data = bizArr_back_data.length ? bizArr_back_data : [{bizCode:"",bizName:""}];
+            pbArray_back_data = pbArray_back_data.length ? pbArray_back_data : [{productBrand:""}];
 
             // 查询默认值
             $scope = angular.extend($scope, {
