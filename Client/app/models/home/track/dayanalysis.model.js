@@ -15,6 +15,7 @@ define([], function () {
                 var MAP_JSON_CONF = '/statics/home/track/dayanalysis/mapConf.json';         // 地图配置
                 var CITYMAP_JSON_CONF = '/statics/home/track/dayanalysis/cityMapConf.json'; // 城市配置
                 var PIE_JSON_CONF = "/statics/home/track/dayanalysis/pieConf.json";         // 饼图配置
+                var DEF_MAP_DATA = "/statics/home/track/dayanalysis/defMap.json";          // 默认数据
 
                 var GET_ACTIVITY_DATA = "/api/tztx/dataportal/actAnalysis/getActyDownBox";      // 获取活动名称
                 var GET_BRAND_DATA = "/api/tztx/dataportal/actAnalysis/getBrandOfActivity";     // 获取品牌
@@ -28,6 +29,7 @@ define([], function () {
                 var GET_PAGE_TRANS_DATA = "/api/tztx/dataportal/actAnalysis/getPagePathByActivityId"; // 页面流失统计
 
                 this.$chinaJson = request.$Query(CHINA_JSON_URL);
+                this.$defMap = request.$Query(DEF_MAP_DATA);
                 // 地图、折线图配置、饼图
                 this.$dayMapConf = request.$Query(DAYMAP_JSON_CONF);          // 日常折线图
                 this.$cityMapConf = request.$Query(CITYMAP_JSON_CONF);        // 城市折线图
