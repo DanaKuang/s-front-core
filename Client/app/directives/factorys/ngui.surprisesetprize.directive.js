@@ -7,7 +7,7 @@
 define([], function () {
     var surprisesetprize = angular.module('ngui.surprisesetprize', []);
 
-    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, numberFormat, decimalFormat, util) {
+    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/surprisesetprize.tpl.html',
             chooseNum: 0,
@@ -177,9 +177,12 @@ define([], function () {
                 }
             }
 
-            // 设置中奖概率
-            scope.setChance = function (event) {
+            scope.hbprice = function (event) {
                 decimalFormat.decimalnumber(event);
+            }
+
+            scope.parseFloat = function (event) {
+                event.target.value = parseFloat(event.target.value);
             }
 
             scope.notminusnotzero = function (event) {

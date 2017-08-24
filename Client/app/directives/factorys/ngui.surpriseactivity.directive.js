@@ -7,7 +7,7 @@
 define([], function () {
     var surpriseactivity = angular.module('ngui.surpriseactivity', []);
 
-    var surpriseactivityFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var surpriseactivityFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/surpriseactivity.tpl.html',
             confUrl: '',
@@ -118,23 +118,17 @@ define([], function () {
             })
 
             // 设置中奖概率
-            var numReg = /^\d+$/;
-            scope.setChance = function (e) {
-                var val = e.target.value;
-                if (numReg.test(val)) {
-                    if (val < 0) {
-                        e.target.value = 0;
-                    } else if (val > 100) {
-                        e.target.value = 100;
-                    }
-                } else {
-                    e.target.value = 0;
-                }
+            scope.setChance = function (event) {
+                decimalFormat.decimalnumber(event);
+            }
+
+            scope.parseFloat = function (event) {
+                event.target.value = parseFloat(event.target.value);
             }
         }
 
         return defineObj;
     }
 
-    surpriseactivity.directive('saSurpriseactivity', ['$rootScope', '$http', '$compile', '$timeout', 'util', surpriseactivityFn]);
+    surpriseactivity.directive('saSurpriseactivity', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', surpriseactivityFn]);
 })

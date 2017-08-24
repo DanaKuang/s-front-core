@@ -245,9 +245,16 @@ define([], function () {
                 scope.$emit('hbaddstockid', event, data)
             })
 
-            // 设置中奖概率
             scope.setChance = function (event) {
                 decimalFormat.decimalnumber(event);
+            }
+
+            scope.hbprice = function (event) {
+                decimalFormat.decimalnumber(event);
+            }
+
+            scope.parseFloat = function (event) {
+                event.target.value = parseFloat(event.target.value);
             }
 
             scope.notminusnotzero = function (event) {

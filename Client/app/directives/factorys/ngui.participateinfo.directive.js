@@ -7,7 +7,7 @@
 define([], function () {
     var participateinfo = angular.module('ngui.participateinfo', []);
 
-    var participateinfoFn = function ($rootScope, $http, $compile, $timeout, numberFormat, decimalFormat, util) {
+    var participateinfoFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/participateinfo.tpl.html'
         };
