@@ -137,7 +137,7 @@ define([], function () {
                 });
                 // 转换率
                 $scope.visitin && $scope.visitout &&
-                ($scope.visitrate = transRate($scope.visitin, $scope.visitout));
+                ($scope.visitrate = transRate($scope.visitout, $scope.visitin));
                 $scope.$apply();
             });
             // 页面流出
@@ -148,7 +148,7 @@ define([], function () {
                 });
                 // 转换率
                 $scope.visitin && $scope.visitout &&
-                ($scope.visitrate = transRate($scope.visitin, $scope.visitout));
+                ($scope.visitrate = transRate($scope.visitout, $scope.visitin));
                 $scope.$apply();
             });
 

@@ -105,19 +105,19 @@ define([], function () {
                         return $filter('date')(value, 'yyyy-MM-dd HH:mm:ss');
                     },
                     date: function (value) {
-                        return $filter("date")(value, 'yyyy-MM-dd');
+                        return $filter('date')(value, 'yyyy-MM-dd');
                     },
                     year_month: function (value) {
-                        return $filter("date")(value, 'yyyy-MM');
+                        return $filter('date')(value, 'yyyy-MM');
                     },
                     year: function (value) {
-                        return $filter("date")(value, 'yyyy');
+                        return $filter('date')(value, 'yyyy');
                     },
                     month: function (value) {
-                        return $filter("date")(value, 'MM');
+                        return $filter('date')(value, 'MM');
                     },
                     hours_minute: function (value) {
-                        return $filter("date")(value, 'HH:mm');
+                        return $filter('date')(value, 'HH:mm');
                     }
                 }
             }

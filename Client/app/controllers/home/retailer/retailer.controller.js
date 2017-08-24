@@ -82,10 +82,20 @@ define([], function () {
             // 初始化查询
             function initSearch () {
                 var params = {
-                    statType: $scope.type || "",
+                    statType: $scope.type || ""
+                };
+                params = params.statType == 'week' ?
+                angular.extend({
+                    weekStaTime: $scope.startTime || "",
+                    weekEndTime: $scope.endTime || ""
+                }, params) : (params.statType == 'month' ?
+                angular.extend({
+                    monStaTime: $scope.startTime || "",
+                    monEndTime: $scope.endTime || ""
+                }, params) : angular.extend({
                     beginTime: $scope.startTime || "",
                     endTime: $scope.endTime || ""
-                };
+                }, params));
                 // 初始化图表
                 initContent(params);
                 initGrow(params);
@@ -132,7 +142,9 @@ define([], function () {
                     res.data = res.data || [];
                     growEchart.setOption({
                         xAxis: [{
-                            data: _.pluck(res.data, 'statTime')
+                            data: params.weekStaTime ? _.map(_.pluck(res.data, 'weekNo'), function (d) {
+                                return d.replace(new Date().getFullYear(), new Date().getFullYear()+'第')+'周';
+                            }) : _.pluck(res.data, 'statTime')
                         }],
                         series: [{
                             data: _.pluck(res.data, 'arriveNum')
@@ -169,7 +181,9 @@ define([], function () {
                     res.data = res.data || {};
                     dgEchart.setOption({
                         xAxis: [{
-                            data: _.pluck(res.data, 'statTime')
+                            data: params.weekStaTime ? _.map(_.pluck(res.data, 'weekNo'), function (d) {
+                                return d.replace(new Date().getFullYear(), new Date().getFullYear()+'第')+'周';
+                            }) : _.pluck(res.data, 'statTime')
                         }],
                         series: [{
                             data: _.pluck(res.data, 'arriveNum')

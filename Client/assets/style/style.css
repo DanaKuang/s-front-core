@@ -814,6 +814,12 @@ input[type="checkbox"]:checked + .checkbox{
   height: 28px;
   line-height: 28px;
 }
+
+.res_search div select {
+  height: 28px;
+  line-height: 28px;
+  font-size: 16px;
+}
 .res_search .agree-date input{
   width: 98px;
 }

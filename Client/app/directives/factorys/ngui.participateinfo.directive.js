@@ -7,7 +7,7 @@
 define([], function () {
     var participateinfo = angular.module('ngui.participateinfo', []);
 
-    var participateinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var participateinfoFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/participateinfo.tpl.html'
         };
@@ -48,27 +48,8 @@ define([], function () {
             }
 
             // 开头不为0的数字校验
-            scope.verify = function (e) {
-                var val = e.target.value;
-                if (val) {
-                    if (val < 0) {
-                        e.target.value = 0;
-                    }
-                    e.target.value = deletezero(val)
-                }
-            }
-
-            function deletezero(str) {
-                if (str.length > 1) {
-                    if (str[0] === '0') {
-                        str = str.substr(1);
-                        deletezero(str)
-                    } else {
-                        return str
-                    }
-                } else {
-                    return str
-                }
+            scope.verify = function (event) {
+                numberFormat.notminusnotzero(event)
             }
 
             $('input[type="number"]').on('input', function (e) {
@@ -81,5 +62,5 @@ define([], function () {
         return defineObj;
     }
 
-    participateinfo.directive('saParticipateinfo', ['$rootScope', '$http', '$compile', '$timeout', 'util', participateinfoFn]);
+    participateinfo.directive('saParticipateinfo', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', participateinfoFn]);
 })

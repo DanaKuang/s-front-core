@@ -7,7 +7,7 @@
 define([], function () {
     var hbsetprize = angular.module('ngui.hbsetprize', []);
 
-    var hbsetprizeFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var hbsetprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/hbsetprize.tpl.html',
             chooseNum: 0,
@@ -156,53 +156,28 @@ define([], function () {
                 }
             }
 
-            // 设置中奖概率
-            var numReg = /^\d+$/;
-            scope.setChance = function (e) {
-                var val = e.target.value;
-                if (numReg.test(val)) {
-                    if (val < 0) {
-                        e.target.value = 0;
-                    } else if (val > 100) {
-                        e.target.value = 100;
-                    }
-                } else {
-                    e.target.value = 0;
-                }
-                
+            scope.setChance = function (event) {
+                decimalFormat.decimalnumber(event);
             }
 
-            // 非多个0，非负数的数字校验
-            scope.notminusnotzero = function (e) {
-                var val = e.target.value;
-                if (numReg.test(val)) {
-                    if (val) {
-                        if (val < 0) {
-                            e.target.value = 0
-                        } else {
-                            e.target.value = deletezero(val);
-                        }
-                    }
+            scope.hbprice = function (event) {
+                decimalFormat.decimalnumber(event);
+            }
+
+            scope.parseFloat = function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
                 } else {
-                    e.target.value = 0
+                    event.target.value == ''
                 }
             }
 
-            function deletezero(str) {
-                if (str.length > 1) {
-                    if (str[0] === '0') {
-                        str = str.substr(1);
-                        deletezero(str)
-                    } else {
-                        return str
-                    }
-                } else {
-                    return str
-                }
+            scope.notminusnotzero = function (event) {
+                numberFormat.notminusnotzero(event)
             }
         }
         return defineObj;
     }
 
-    hbsetprize.directive('saHbsetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', hbsetprizeFn]);
+    hbsetprize.directive('saHbsetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', hbsetprizeFn]);
 })

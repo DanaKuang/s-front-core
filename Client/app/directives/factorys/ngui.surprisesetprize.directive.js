@@ -7,7 +7,7 @@
 define([], function () {
     var surprisesetprize = angular.module('ngui.surprisesetprize', []);
 
-    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/surprisesetprize.tpl.html',
             chooseNum: 0,
@@ -177,51 +177,21 @@ define([], function () {
                 }
             }
 
-            // 设置中奖概率
-            var numReg = /^\d+$/;
-            scope.setChance = function (e) {
-                if (scope.disabled) {
-                    return
-                }
-                var val = e.target.value;
-                if (val < 0) {
-                    e.target.value = 0;
-                } else if (val > 100) {
-                    e.target.value = 100;
-                }
-            }
 
-            // 非多个0，非负数的数字校验
-            var numReg = /^\d+$/;
-            scope.notminusnotzero = function (e) {
-                if (scope.disabled) {
-                    return
-                }
-                var val = e.target.value;
-                if (numReg.test(val)) {
-                    if (val) {
-                        if (val < 0) {
-                            e.target.value = 0
-                        } else {
-                            e.target.value = deletezero(val);
-                        }
-                    }
-                } else {
-                    e.target.value = ''
-                }
-            }
+            $('#surprisesetprize').on('keyup', '.hbdecimal', function (event) {
+                hbpriceFormat.hbpricenumber(event);
+            })
 
-            function deletezero(str) {
-                if (str.length > 1) {
-                    if (str[0] === '0') {
-                        str = str.substr(1);
-                        deletezero(str)
-                    } else {
-                        return str
-                    }
+            $('#surprisesetprize').on('blur', '.decimal, .hbdecimal', function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
                 } else {
-                    return str
+                    event.target.value == ''
                 }
+            })
+
+            scope.notminusnotzero = function (event) {
+                numberFormat.notminusnotzero(event)
             }
 
         }
@@ -229,5 +199,5 @@ define([], function () {
         return defineObj;
     }
 
-    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', surprisesetprizeFn]);
+    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', surprisesetprizeFn]);
 })
