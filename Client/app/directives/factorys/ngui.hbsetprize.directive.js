@@ -165,7 +165,11 @@ define([], function () {
             }
 
             scope.parseFloat = function (event) {
-                event.target.value = parseFloat(event.target.value);
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
+                } else {
+                    event.target.value == ''
+                }
             }
 
             scope.notminusnotzero = function (event) {

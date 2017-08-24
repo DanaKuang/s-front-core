@@ -60,20 +60,20 @@
 											<div class="circle-money-tick active">
 												<i class="circle"></i>随机金额
 											</div>
-											<input type="text" class="min" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元 —— <input type="text" class="max" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+											<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
 										</div>
 										<div class="fixed-hb hb-money-wrap">
 											<div class="circle-money-tick">
 												<i class="circle"></i>固定金额
 											</div>
-											<input type="text" class="fixed" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+											<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
 										</div>
 									</div>
 								</div>
 								<div class="configuration-item">
 									<b>*</b>
 									<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
-									<input type="text" class="money" placeholder="请填写奖金总数" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">
+									<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10">
 									<button class="btn btn-default add-inventory add-hb-stock" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
 								</div>
 								<div class="configuration-item">
@@ -120,7 +120,7 @@
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-chance hidden">请设置奖项概率</small>
-							<input type="text" class="chance" placeholder="请输入数字" ng-keyup="setChance($event)" ng-blur="parseFloat($event)">%
+							<input type="text" class="chance decimal" placeholder="请输入数字">%
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
@@ -173,20 +173,20 @@
 											<div class="circle-money-tick active">
 												<i class="circle"></i>随机金额
 											</div>
-											<input type="text" class="min" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元 —— <input type="text" class="max" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+											<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
 										</div>
 										<div class="fixed-hb hb-money-wrap">
 											<div class="circle-money-tick">
 												<i class="circle"></i>固定金额
 											</div>
-											<input type="text" class="fixed" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+											<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
 										</div>
 									</div>
 								</div>
 								<div class="configuration-item">
 									<b>*</b>
 									<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
-									<input type="text" class="money" placeholder="请填写奖金总数" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">
+									<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10">
 								</div>
 								<div class="configuration-item">
 									<b>*</b>
@@ -276,20 +276,20 @@
 									<div class="circle-money-tick active">
 										<i class="circle"></i>随机金额
 									</div>
-									<input type="text" class="min" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元 —— <input type="text" class="max" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+									<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
 								</div>
 								<div class="fixed-hb hb-money-wrap">
 									<div class="circle-money-tick">
 										<i class="circle"></i>固定金额
 									</div>
-									<input type="text" class="fixed" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+									<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
 								</div>
 							</div>
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
-							<input type="text" class="money" placeholder="请填写奖金总数" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">
+							<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10">
 							<button class="btn btn-default add-inventory add-hb-stock" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
 						</div>
 						<div class="configuration-item">
@@ -330,7 +330,7 @@
 				<div class="configuration-item">
 					<b>*</b>
 					<small class="wrong-tip wrong-tip-chance hidden">请设置奖项概率</small>
-					<input type="text" class="chance" placeholder="请输入数字" ng-keyup="setChance($event)" ng-blur="parseFloat($event)">%
+					<input type="text" class="chance decimal" placeholder="请输入数字">%
 				</div>
 				<div class="configuration-item">
 					<b>*</b>
@@ -383,20 +383,20 @@
 									<div class="circle-money-tick active">
 										<i class="circle"></i>随机金额
 									</div>
-									<input type="text" class="min" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元 —— <input type="text" class="max" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+									<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
 								</div>
 								<div class="fixed-hb hb-money-wrap">
 									<div class="circle-money-tick">
 										<i class="circle"></i>固定金额
 									</div>
-									<input type="text" class="fixed" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+									<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
 								</div>
 							</div>
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
-							<input type="text" class="money" placeholder="请填写奖金总数" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">
+							<input type="text" class="money hbdecimal" placeholder="请填写奖金总数"  maxlength="10">
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
@@ -466,20 +466,20 @@
 						<div class="circle-money-tick active">
 							<i class="circle"></i>随机金额
 						</div>
-						<input type="text" class="min" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元 —— <input type="text" class="max" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+						<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
 					</div>
 					<div class="fixed-hb hb-money-wrap">
 						<div class="circle-money-tick">
 							<i class="circle"></i>固定金额
 						</div>
-						<input type="text" class="fixed" readonly="true" placeholder="请输入数字" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">元
+						<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
 					</div>
 				</div>
 			</div>
 			<div class="configuration-item">
 				<b>*</b>
 				<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
-				<input type="text" class="money" placeholder="请填写奖金总数" ng-keyup="hbprice($event)" ng-blur="parseFloat($event)" maxlength="10">
+				<input type="text" class="money hbdecimal" placeholder="请填写奖金总数"  maxlength="10">
 				<button class="btn btn-default add-inventory add-hb-stock" data-toggle="modal" data-target=".add-hbstock-pop">增库</button>
 			</div>
 			<div class="configuration-item">

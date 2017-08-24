@@ -7,7 +7,7 @@
 define([], function () {
     var surpriseactivity = angular.module('ngui.surpriseactivity', []);
 
-    var surpriseactivityFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
+    var surpriseactivityFn = function ($rootScope, $http, $compile, $timeout, util, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/surpriseactivity.tpl.html',
             confUrl: '',
@@ -123,12 +123,16 @@ define([], function () {
             }
 
             scope.parseFloat = function (event) {
-                event.target.value = parseFloat(event.target.value);
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
+                } else {
+                    event.target.value == ''
+                }
             }
         }
 
         return defineObj;
     }
 
-    surpriseactivity.directive('saSurpriseactivity', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', surpriseactivityFn]);
+    surpriseactivity.directive('saSurpriseactivity', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'decimalFormat', surpriseactivityFn]);
 })

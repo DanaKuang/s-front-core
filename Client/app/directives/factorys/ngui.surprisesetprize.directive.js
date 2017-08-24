@@ -7,7 +7,7 @@
 define([], function () {
     var surprisesetprize = angular.module('ngui.surprisesetprize', []);
 
-    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
+    var surprisesetprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/surprisesetprize.tpl.html',
             chooseNum: 0,
@@ -177,13 +177,18 @@ define([], function () {
                 }
             }
 
-            scope.hbprice = function (event) {
-                decimalFormat.decimalnumber(event);
-            }
 
-            scope.parseFloat = function (event) {
-                event.target.value = parseFloat(event.target.value);
-            }
+            $('#surprisesetprize').on('keyup', '.hbdecimal', function (event) {
+                hbpriceFormat.hbpricenumber(event);
+            })
+
+            $('#surprisesetprize').on('blur', '.decimal, .hbdecimal', function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
+                } else {
+                    event.target.value == ''
+                }
+            })
 
             scope.notminusnotzero = function (event) {
                 numberFormat.notminusnotzero(event)
@@ -194,5 +199,5 @@ define([], function () {
         return defineObj;
     }
 
-    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', surprisesetprizeFn]);
+    surprisesetprize.directive('saSurprisesetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', surprisesetprizeFn]);
 })
