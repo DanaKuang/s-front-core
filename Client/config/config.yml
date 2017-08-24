@@ -1,5 +1,5 @@
 def:                                             # 默认环境配置
-  runmode: 'local'                                 # 开发环境 #local #test #dev
+  runmode: 'test'                                 # 开发环境 #local #test #dev
   homepage: 'index.html'                         # 首页
   loginpage: 'login.html'                        # 登陆
   findpage: 'find.html'                          # 找回密码
