@@ -20,7 +20,7 @@ define([], function () {
 	            if (val < 0) {
 	              event.target.value = 0;
 	            } else if (val > 100) {
-								e.target.value = 100;
+								event.target.value = 100;
 	            } else {
 	              event.target.value = parseFloat(val);
 	            }
