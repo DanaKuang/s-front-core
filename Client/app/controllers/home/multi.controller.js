@@ -287,7 +287,7 @@ define([], function () {
         // 历史
         $scope.mHistory = function () {
             $model.getHisData({
-                userId: "hunan",
+                userId: sessionStorage.getItem("account"),
                 opType: "2"
             }).then(function (res) {
                 $scope.histListConf.list = res.data || [];
