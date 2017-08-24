@@ -155,7 +155,7 @@ define([], function () {
             $(".region-margin .active i").html(data.activeUv || 0);
             $(".region-margin .bag i").html(data.scanCode || 0);
             $(".region-margin .reduce i").html(data.scanAddUv || 0);
-            $(".region-margin .img").attr("src",data.image)
+            $(".region-margin .img").attr("src",data.image || "")
           });
         })();
         //扫码次数时刻趋势
