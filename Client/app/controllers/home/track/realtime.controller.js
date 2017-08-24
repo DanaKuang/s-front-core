@@ -128,7 +128,7 @@ define([], function () {
         function setTableData (actId) {
             $model.getCityPv({
                 activityId: actId,
-                provName: "湖南"
+                provName: sessionStorage.getItem("account")==="henan"?"河南":"湖南"
             }).then(function (res) {
                 $scope.rows = res.data || [];
                 $scope.$apply();
