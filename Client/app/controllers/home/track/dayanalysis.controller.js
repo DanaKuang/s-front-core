@@ -26,7 +26,8 @@ define([], function () {
             var mapEchart = echarts.init(document.getElementById("baiduMap"));
             var mapConf = $model.$mapConf.data;
             mapConf.tooltip.formatter = function (params) {
-                return "访问量："+params.data.activePv+"</br>"+"用户数："+params.data.activeUv;
+                var data = params.data || {};
+                return "日均访问量："+data.activePv+"</br>"+"日均用户数："+data.activeUv;
             }
             mapEchart.setOption(mapConf);
             // 城市折线图

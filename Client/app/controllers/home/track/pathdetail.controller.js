@@ -26,7 +26,7 @@ define([], function () {
             // productBrand: brand_back_data[0].productBrand || "",
             // pnArray: [],
             acArray: act_back_data,
-            activityId: "ACT-C7MTZ3P6197" || act_back_data[0].activityId || "",
+            activityId: act_back_data[0].activityId || "",
             pgArray: [],
             pagename: "",
             pathSearch: pathSearch
