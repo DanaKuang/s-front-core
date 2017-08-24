@@ -22,7 +22,25 @@ define([], function () {
         $scope.packetConf = $model.$packet.data;
         $scope.realConf = $model.$real.data;
         $scope.scanConf = $model.$scan.data;
-        $scope.targetConf = $model.$target.data;
+        $scope.targetConf = $model.$target.data
+
+
+        if(sessionStorage.getItem("account")==="henan"){
+            $scope.jin = {
+                world:"昨日黄金叶全国指标",
+                bao:"昨日黄金叶华东分中心活动指标",
+                city:"昨日黄金叶烟台活动指标"
+            }
+        } else if(sessionStorage.getItem("account")==="hunan"){
+            $scope.jin = {
+                world:"昨日芙蓉王全国活动指标",
+                bao:"昨日白沙堡垒活动指标",
+                city:"昨日芙蓉王湖南活动指标"
+            }
+        };
+
+
+
 
         // 默认配置
         $scope.msConf = {
@@ -31,11 +49,27 @@ define([], function () {
             ppArray: ['盒','条'],
             prNArray: [],
             cnArray: [],
-            szArray: [{v:'堡垒型',k:'A'},{v:'发展型',k:'B'},{v:'潜力型',k:'C'}],
+            szArray: [],
+            //szArray: [{v:'堡垒型',k:'A'},{v:'发展型',k:'B'},{v:'潜力型',k:'C'}],
             result: []
         };
 
         $(document).ready(function () {
+            $($model.$getZone.data).each(function(index,n){
+                $scope.msConf.szArray.push({v:n.zoneName,k:n.zoneCode});
+                $scope.$apply();           
+            });
+            // console.log( $scope.msConf.szArray)
+            // //销区
+            // (function(){
+            //     $model.$getZone().then(function(res){
+            //         data = res.data;
+            //         console.log(data);
+            //         $(data).each(function(index,n){
+            //             $scope.msConf.szArray
+            //         })
+            //     });
+            // })();
             var mulScope = angular.element('#seach_scope').scope();
 
             $(".ui-search-block.multi select").multiselect({
@@ -101,7 +135,7 @@ define([], function () {
             v == 0 ? initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: "芙蓉王",
+                productBrand: sessionStorage.getItem("account")==="hunan"?"芙蓉王":"黄金叶",
                 productName: "",
                 productPack: "",
                 saleZone: "",
@@ -110,20 +144,20 @@ define([], function () {
             }) : v == 1 ? initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: "白沙",
+                productBrand: sessionStorage.getItem("account")==="hunan"?"白沙":"黄金叶",
                 productName: "",
                 productPack: "",
-                saleZone: "堡垒型_A",
+                saleZone: sessionStorage.getItem("account")==="hunan"?"堡垒型_A":"华东分中心",
                 provinceName: "",
                 cityName: ""
             }) : initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: "芙蓉王",
+                productBrand: sessionStorage.getItem("account")==="hunan"?"芙蓉王":"黄金叶",
                 productName: "",
                 productPack: "",
                 saleZone: "",
-                provinceName: "湖南省",
+                provinceName: sessionStorage.getItem("account")==="hunan"?"湖南省":"烟台",
                 cityName: ""
             });
             $scope.mSearch();
@@ -139,7 +173,7 @@ define([], function () {
             var rScope = angular.element('#realTarget #common_table').scope();
             var sZFilter = {A: '堡垒型',B: '发展型',C: '潜力型',Q:'全国',O:'其他'};
             var staticParam = {
-                userId: "hunan",
+                userId: sessionStorage.getItem("account"),
                 opType: "2",
                 ctime: +new Date
             };
