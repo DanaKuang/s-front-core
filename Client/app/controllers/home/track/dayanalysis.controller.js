@@ -25,6 +25,9 @@ define([], function () {
             // 地域分析
             var mapEchart = echarts.init(document.getElementById("baiduMap"));
             var mapConf = $model.$mapConf.data;
+            mapConf.tooltip.formatter = function (params) {
+                return "访问量："+params.data.activePv+"</br>"+"用户数："+params.data.activeUv;
+            }
             mapEchart.setOption(mapConf);
             // 城市折线图
             var cityEchart = echarts.init(document.getElementById("cityMap"));
@@ -57,7 +60,7 @@ define([], function () {
                 // pnArray: [],
                 // productName: "",
                 acArray: act_back_data,
-                activity: "ACT-2E7J6228B48" || act_back_data[0].activityId || "",
+                activity: act_back_data[0].activityId || "",
                 daySearch: daySearch
             };
 
@@ -83,7 +86,9 @@ define([], function () {
                 initBaiDuMap(angular.extend({
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params));
+                }, params, {
+                    timeType: "day"
+                }));
 
                 // 初始化城市
                 $scope.setCityMap = function (cityName) {
@@ -104,13 +109,17 @@ define([], function () {
                 initPieMap(angular.extend({
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params));
+                }, params, {
+                    timeType: "day"
+                }));
                 // 页面流失统计
                 initRateMap(angular.extend({
                     webId: "1001",
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params));
+                }, params, {
+                    timeType: "day"
+                }));
             }
 
 
@@ -227,11 +236,14 @@ define([], function () {
             function initBaiDuMap (params) {
                 var option = mapEchart.getOption();
                 $model.getMapData(params).then(function (res) {
-                    option.series[1].data =  _.each(res.data, function (d) {
+                    var data = res.data || [];
+                    data = data.length ? data : $model.$defMap.data.def;
+                    option.series[1].data =  _.each(data, function (d) {
                         d.name = d.provinceName;
-                        d.value = Number(d.activePv) + Number(d.activeUv);
+                        d.value = d.activePv;
                     }) || [];
                     option.visualMap[0].max = _.max(option.series[1].data, function (v) {return v.value}).value;
+                    option.visualMap[0].max = option.visualMap[0].max ? option.visualMap[0].max : 5000;
                     mapEchart.setOption(option);
                 });
             }
@@ -247,8 +259,9 @@ define([], function () {
                 $model.getCityName({
                     provinceName: name + '省'
                 }).then(function (res) {
-                    $scope.cityArr = res.data || [];
-                    $scope.cityName = name == "湖南" ? "长沙" : $scope.cityArr[0].cityName;
+                    var backArray = res.data || [];
+                    $scope.cityArr = backArray.length ? backArray : [{cityName:''}];
+                    $scope.cityName = name == "湖南" ? "长沙" : backArray[0].cityName;
                     $scope.$apply();
                 });
             }
