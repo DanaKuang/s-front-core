@@ -47,7 +47,7 @@
 						<div class="wrong-tip hidden">请完善中奖信息设置，确保红星标识处已填写！</div>
 					</div>
 					<div class="chance configuration-item" ng-show="!myPlus">
-						<input type="number" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-disabled="disabled">%
+						<input type="text" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-blur="parseFloat($event)" ng-disabled="disabled">%
 					</div>
 				</div>
 				<!-- 投放设置 -->

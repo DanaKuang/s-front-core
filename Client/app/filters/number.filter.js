@@ -6,14 +6,16 @@
 
 define([], function () {
 	// 均不可输入负数，前面不可为0
- 	// 非负可输入小数
+
+ 	// 概率，正整数/小数，不得大于100
   var decimalFormat = {
       ServiceType: "factory",
       ServiceName: "decimalFormat",
       ServiceContent: ['$filter', function ($filter) {
       	function decimalnumber () {
       		var $target = $(event.target);
-      		var numReg =  /^[1-9]{1,}.\d{1,}$|^0.\d{1,}$|^\d+/;　//匹配正整数和浮点数
+      		var numReg = /^[1-9]{1}\d*\.\d{1,}$|^0\.\d{1,}$|^\d+$|^\d+\.$/;
+      		//匹配正整数和浮点数
       		var val = $target.val();
 	        if (numReg.test(val)) {
 	          if (val) {
@@ -22,11 +24,11 @@ define([], function () {
 	            } else if (val > 100) {
 								event.target.value = 100;
 	            } else {
-	              event.target.value = parseFloat(val);
+	            	event.target.value = val;
 	            }
 	          }
 	        } else {
-	            event.target.value = ''
+	        	event.target.value = '';
 	        }
       	}
 
@@ -34,6 +36,35 @@ define([], function () {
       		decimalnumber: decimalnumber
       	}
       }]
+  }
+
+  // 红包，正整数/小数
+  var hbpriceFormat = {
+    ServiceType: "factory",
+    ServiceName: "hbpriceFormat",
+    ServiceContent: ['$filter', function ($filter) {
+      function hbpricenumber () {
+        var $target = $(event.target);
+        var numReg = /^[1-9]{1}\d*\.\d{1,}$|^0\.\d{1,}$|^\d+$|^\d+\.$/;
+        //匹配正整数和浮点数
+        var val = $target.val();
+        if (numReg.test(val)) {
+          if (val) {
+            if (val < 0) {
+              event.target.value = 0;
+            } else {
+              event.target.value = val;
+            }
+          }
+        } else {
+          event.target.value = '';
+        }
+      }
+
+      return {
+        hbpricenumber: hbpricenumber
+      }
+    }]
   }
 
   // 整数
@@ -78,5 +109,5 @@ define([], function () {
 	  }
 	}
 
-  return [decimalFormat, numberFormat];
+  return [decimalFormat, hbpriceFormat, numberFormat];
 });

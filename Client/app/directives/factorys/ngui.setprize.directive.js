@@ -7,7 +7,7 @@
 define([], function () {
     var setprize = angular.module('ngui.setprize', []);
 
-    var setprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, decimalFormat) {
+    var setprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/setprize.tpl.html',
             chooseNum: 0,
@@ -245,19 +245,28 @@ define([], function () {
                 scope.$emit('hbaddstockid', event, data)
             })
 
-            // 设置中奖概率
-            scope.setChance = function (event) {
+            $('#setprize').on('keyup', '.decimal', function (event) {
                 decimalFormat.decimalnumber(event);
-            }
+            })
+
+            $('#setprize').on('keyup', '.hbdecimal', function (event) {
+                hbpriceFormat.hbpricenumber(event);
+            })
+
+            $('#setprize').on('blur', '.decimal, .hbdecimal', function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
+                } else {
+                    event.target.value == ''
+                }
+            })
 
             scope.notminusnotzero = function (event) {
                 numberFormat.notminusnotzero(event)
             }
-
         }
-
         return defineObj;
     }
 
-    setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'decimalFormat', setprizeFn]);
+    setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', setprizeFn]);
 })
