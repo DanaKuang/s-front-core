@@ -20,13 +20,14 @@ define([], function () {
             $(".region-day").find("input").val(stattime);
             $(".region-month").find("input").val(regionMonth);
             //设置默认值
-            var Default =  {"provinceName":"湖南省","statTime":stattime,"statType":"day"};
+            var Default =  {"provinceName":sessionStorage.getItem("account")==="henan"?"河南省":"湖南省","statTime":stattime,"statType":"day"};
             //省份下拉列表
             (function () {
                 $model.$getProvince().then(function (res) {
                     var res = res.data || [];
+                    var provinceName = sessionStorage.getItem("account")==="henan"?"河南省":"湖南省"
                     for (var i = 0; i < res.length; i++) {
-                        if(res[i].provinceName === "湖南省"){
+                        if(res[i].provinceName === provinceName){
                             $(".region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
                         }else {
                             $(".region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")

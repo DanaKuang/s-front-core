@@ -270,6 +270,9 @@ define([], function () {
                     v.value = v.brandCode;
                 }));
                 $('[ng-model="selectBrandVal"]').multiselect('refresh');
+                // 给一个默认的初始值
+                var default_val = $('[ng-model="selectBrandVal"]').find('option:first').val();
+                selectCompanyScope.selectBrandVal = default_val;
               })
             })
 
@@ -283,6 +286,9 @@ define([], function () {
                     v.value = v.sn;
                 }));
                 $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+                // 给一个默认的初始值
+                var default_val = $('[ng-model="selectSpecificationVal"]').find('option:first').val();
+                selectBrandScope.selectSpecificationVal = default_val;
               })
             })
           }

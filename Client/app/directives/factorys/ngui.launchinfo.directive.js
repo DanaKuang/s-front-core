@@ -34,7 +34,7 @@ define([], function () {
             // 监视conf变化更新 launchinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['hours']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours']);
             }, true);
 
             // scope.$watch('selectCompanyVal', function (n, o, s) {
@@ -129,11 +129,17 @@ define([], function () {
             scope.whichday = $('.remark').find('input[type="radio"]:checked').val();
 
             scope.$watch('selectBrandVal', function (n, o, s) {
-                if (n !== o) {
+                if (n !== '') {
                     var brandListArrObj = {};
                     brandListArrObj.brandCode = n;
                     scope.$emit('brandCode', event, brandListArrObj);
                 }
+            })
+
+            scope.$watch('selectSpecificationVal', function (n, o, s) {
+                scope.$emit('specificationnotempty', event, {
+                    canchoose: true
+                });
             })
 
             $('.select-brand').one('click', function() {
