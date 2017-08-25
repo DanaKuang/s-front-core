@@ -145,7 +145,7 @@ define([], function () {
             "bag": 0,
             "reduce": 0,
             "daycount" : "本日扫码次数",
-            "dayactive" : "本日活跃用户",
+            "dayactive" : "本日连续月活用户",
             "daybag" : "本日扫码烟包数",
             "dayreduce" : "本日新增扫码用户数"
           };
