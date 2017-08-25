@@ -1,5 +1,5 @@
 def:                                             # 默认环境配置
-  runmode: 'local'                                 # 开发环境 #local #test #dev
+  runmode: 'local'                                 # 开发环境 local test dev
   homepage: 'index.html'                         # 首页
   loginpage: 'login.html'                        # 登陆
   findpage: 'find.html'                          # 找回密码
@@ -36,7 +36,7 @@ def:                                             # 默认环境配置
     logpath: 'logs'                              # 日志文件路径
     logfile: 'access'                            # 基本日志文件名称
     pattern: '-yyyy-MM-dd--hh.log'               # 日志文件后缀格式
-local:                                            # 测试环境配置
+local:                                           # 测试环境配置
   server:                                        # 配置Web
     port: 9091                                   # Web端口
     host: '127.0.0.1'                            # IP地址
@@ -46,7 +46,7 @@ local:                                            # 测试环境配置
     - port: 80                                   # 请求端口号
       host: 'portal.v2.taozuike.com'             # 请求IP地址
     - port: 80                                   # 请求端口号
-      host: 'seller.hmtx.cc'                     # 请求IP地址
+      host: 'retailer.taozuike.com'                     # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
@@ -59,7 +59,7 @@ test:                                            # 测试环境配置
     - port: 9090                                 # 请求端口号
       host: '127.0.0.1'                          # 请求IP地址
     - port: 10090                                # 请求端口号
-      host: '172.17.15.174'                      # 请求IP地址
+      host: '127.0.0.1'                          # 请求IP地址
     - port: 9096                                 # 请求端口号
       host: '172.17.15.164'                      # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
