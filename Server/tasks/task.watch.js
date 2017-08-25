@@ -65,7 +65,10 @@ var third = function(plugins) {
 var forth = function() {
     var deferred = Q.defer();
     // TODO
-    gulp.watch(['./config/**/*.yml'], function(event) {
+    gulp.watch([
+        './config/**/*.yml',
+        './app/**/*.js'
+    ], function(event) {
         process.stdout.write(colors.green('\x20\x20CHNAGED FILE: [' + event.path + ']\n'));
         process.stdout.write(colors.green('\x20\x20 server is restarting...\n'));
         process.send('restart'); //重启服务器
