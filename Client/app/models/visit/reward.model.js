@@ -11,7 +11,15 @@ define([], function () {
                 var CONSUMER_JSON_DATA = '/api/tztx/seller-manager/setting/seller/consumer';
                 var SELECT_JSON_DATA = '/api/tztx/seller-manager/setting/select';
                 // 二维码设置历史记录
-    			var HIS_JSON_DATA = '/api/tztx/seller-manager/setting/qr/his';                
+                var HIS_JSON_DATA = '/api/tztx/seller-manager/setting/qr/his';
+                // 获取表格数据
+                this.getIntroduction = function (params) {
+                    return request.$Search(INTRODUCTION_JSON_DATA, params);
+                };
+                this.getAward = function (params) {
+                    return request.$Search(AWARD_JSON_DATA, params);
+                };
+    			var HIS_JSON_DATA = '/api/tztx/seller-manager/setting/qr/his';
     			// 获取表格数据
                 this.getIntroduction = function (params) {
                     return request.$Search(INTRODUCTION_JSON_DATA, params);
@@ -27,8 +35,8 @@ define([], function () {
                 };
                 this.$his = request.$Search(HIS_JSON_DATA);
                 this.$select = request.$Search(SELECT_JSON_DATA);
-    		};
-    	}]
-	};
-	return rewardModel;
-})
+            };
+        }]
+    };
+    return rewardModel;
+});

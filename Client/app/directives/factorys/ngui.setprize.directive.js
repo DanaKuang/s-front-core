@@ -126,7 +126,6 @@ define([], function () {
                         })
                     }
                 }
-
             }
 
             // 产品模板列表
@@ -135,18 +134,25 @@ define([], function () {
                     return
                 }
                 var that_scope = angular.element('.select-brand').scope();
-                var data = {
-                    metraType: 'gift',
-                    // supplierCode: that_scope.selectCompanyVal,
-                    brandCodes: that_scope.selectBrandVal,//品牌编码。支持多个，使用英文逗号分隔,
-                    businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
-                    status: 1,//礼品、红包池状态。0-停用；1-正常,
-                    hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
-                }
-                scope.$emit('fromActivityConfigtoChooseProduct', event, data);
+                if (that_scope.selectSpecificationVal != '') {
+                    $(e.target).next().trigger('click');
+                    var data = {
+                        metraType: 'gift',
+                        // supplierCode: that_scope.selectCompanyVal,
+                        brandCodes: that_scope.selectBrandVal,//品牌编码。支持多个，使用英文逗号分隔,
+                        unitCodes: that_scope.selectSpecificationVal,
+                        businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
+                        status: 1,//礼品、红包池状态。0-停用；1-正常,
+                        hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                    }
+                    scope.$emit('fromActivityConfigtoChooseProduct', event, data);
 
-                scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
-                scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                    scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
+                    scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                } else {
+                    alert('请先选择投放的品牌和规格！')
+                }
+                
             })
 
             // 红包模板列表
@@ -155,17 +161,23 @@ define([], function () {
                     return
                 }
                 var that_scope = angular.element('.select-brand').scope();
-                var data = {
-                    metraType: 'redpack',
-                    // supplierCode: that_scope.selectCompanyVal,
-                    brandCodes: that_scope.selectBrandVal,//
-                    status: 1,//礼品、红包池状态。0-停用；1-正常,
-                    hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
-                }
-                scope.$emit('fromActivityConfigtoChooseHb', event, data);
+                if (that_scope.selectSpecificationVal != '') {
+                    $(e.target).next().trigger('click');
+                    var data = {
+                        metraType: 'redpack',
+                        // supplierCode: that_scope.selectCompanyVal,
+                        brandCodes: that_scope.selectBrandVal,//
+                        unitCodes: that_scope.selectSpecificationVal,
+                        status: 1,//礼品、红包池状态。0-停用；1-正常,
+                        hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                    }
+                    scope.$emit('fromActivityConfigtoChooseHb', event, data);
 
-                scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
-                scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                    scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
+                    scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                } else {
+                    alert('请先选择投放的品牌和规格！')
+                }
             })
 
             // 新增奖品
