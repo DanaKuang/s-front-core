@@ -29,14 +29,14 @@
                                         <label for="selectName">筛选供应商</label>
                                         <input type="text" placeholder="供应商名称" id="selectName">
                                     </div>
-                                    <div class="col-md-3 col-sm-3">
+                                    <!--<div class="col-md-3 col-sm-3">
                                         <label for="assMent">合规评估</label>
                                         <select id="assMent" style="width: 50%;">
                                             <option value="">全部</option>
-                                            <!--<option ng-repeat="item in assmentData" value="{{item.code}}">{{item.name}}</option>-->
+                                            &lt;!&ndash;<option ng-repeat="item in assmentData" value="{{item.code}}">{{item.name}}</option>&ndash;&gt;
                                             <option ng-repeat="x in assmentData" value="{{x.code}}">{{x.name}}</option>
                                         </select>
-                                    </div>
+                                    </div>-->
                                     <div class="col-md-2 col-sm-2">
                                         <label for="selectStatus">状态</label>
                                         <select id="selectStatus">
@@ -45,14 +45,14 @@
                                                     value="{{statusItem.code}}">{{statusItem.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-sm-2">
+                                    <!--<div class="col-md-2 col-sm-2">
                                         <label for="yearLimit">年审</label>
                                         <select id="yearLimit">
                                             <option value="">全部</option>
                                             <option value="2017">2017</option>
                                         </select>
-                                    </div>
-                                    <div class="col-md-1 col-sm-2">
+                                    </div>-->
+                                    <div class="col-md-1 col-sm-1">
                                         <div class="ser_btn" ng-click="searchSupply()">搜索</div>
                                     </div>
                                     <div class="col-md-1 col-sm-1">
@@ -67,9 +67,9 @@
                                     <th>供应商名称</th>
                                     <th>登记文件</th>
                                     <th>合同管理</th>
-                                    <th>合规评估</th>
+                                    <!--<th>合规评估</th>-->
                                     <th>绩效</th>
-                                    <th>年审</th>
+                                    <!--<th>年审</th>-->
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -82,14 +82,14 @@
                                     <td class="file_col" title="{{dataItem.contractFileName}}" ng-click="downloadFile(dataItem.contractAttach)">
                                         {{dataItem.showContractFileName}}
                                     </td>
-                                    <td ng-if="dataItem.compliance == 1">合格</td>
-                                    <td ng-if="dataItem.compliance == 2">不合格</td>
-                                    <td ng-if="dataItem.compliance == 3">待评审</td>
+                                    <!--<td ng-if="dataItem.compliance == 1">合格</td>-->
+                                    <!--<td ng-if="dataItem.compliance == 2">不合格</td>-->
+                                    <!--<td ng-if="dataItem.compliance == 3">待评审</td>-->
                                     <td ng-click="downloadFile(dataItem.performanceAttach)" title="{{dataItem.performanceFileName}}"
                                         ng-class="{true:'file_col'}[dataItem.performanceFileName !='']">
                                         {{dataItem.performanceFileName !='' ? dataItem.showPerformanceFileName : '-'}}
                                     </td>
-                                    <td>{{dataItem.examineYears != 'undefined' ? dataItem.examineYears : '-'}}</td>
+                                    <!--<td>{{dataItem.examineYears != 'undefined' ? dataItem.examineYears : '-'}}</td>-->
                                     <td ng-if="dataItem.status == 0">已停用</td>
                                     <td ng-if="dataItem.status == 1">已启用</td>
                                     <td>
@@ -129,12 +129,12 @@
                         <div class="panel-body">
                             <div class="form_sec">
                                 <div>
-                                    <label>供应商名称<span>*</span></label>
+                                    <label class="label_title" for="supplyName">供应商名称<span>*</span></label>
                                     <input type="text" placeholder="请输入供应商名称" id="supplyName">
                                     <p id="supply_warn" ng-show="showWarnSupply">供应商名称不能为空</p>
                                 </div>
                                 <div>
-                                    <label for="registerFile">登记文件<span>*</span></label>
+                                    <label class="label_title" for="registerFile">登记文件<span>*</span></label>
                                     <div class="get_file" ng-show="createState">
                                         <input type="file" id="registerFile">
                                         <div class="choice_file">选取文件</div>
@@ -143,7 +143,7 @@
                                     <p id="regis_warn" ng-show="createState">文件大小不能超过50M</p>
                                 </div>
                                 <div>
-                                    <label for="contractFile">合同管理<span>*</span></label>
+                                    <label class="label_title" for="contractFile">合同管理<span>*</span></label>
                                     <div class="get_file" ng-show="createState">
                                         <input type="file" id="contractFile">
                                         <div class="choice_file">选取文件</div>
@@ -151,17 +151,16 @@
                                     <span id="contractName"></span>
                                     <p id="contract_warn" ng-show="createState">文件大小不能超过50M</p>
                                 </div>
-                                <div>
-                                    <label>合格评估<span>*</span></label>
+                                <!--<div>
+                                    <label class="label_title">合格评估<span>*</span></label>
                                     <div class="radio_sel" ng-repeat="radioItem in assmentData">
                                         <input name="{{radioItem.cateCode}}" type="radio" value="{{radioItem.code}}"
                                                 ng-model="radioValue"/>{{radioItem.name}}
                                     </div>
                                     <p id="compliance_warn">请选择合格评估状态</p>
-                                    <!--ng-checked="$index==0"-->
-                                </div>
+                                </div>-->
                                 <div>
-                                    <label for="performanceFile">绩效</label>
+                                    <label class="label_title" for="performanceFile">绩效</label>
                                     <!--<div class="get_file">选取文件</div>-->
                                     <div class="get_file">
                                         <input type="file" id="performanceFile">
@@ -170,14 +169,14 @@
                                     <span id="performanceName"></span>
                                     <p id="performance_warn">文件大小不能超过50M</p>
                                 </div>
-                                <div>
-                                    <label>年审</label>
+                                <!--<div>
+                                    <label class="label_title">年审</label>
                                     <div class="checkbox_sel">
                                         <input name="audit" type="checkbox" value="2017"/>2017
                                     </div>
-                                </div>
+                                </div>-->
                                 <div>
-                                    <label for="warn_tel">预警手机</label>
+                                    <label class="label_title" for="warn_tel">预警手机</label>
                                     <input id="warn_tel" type="text" placeholder=""><br/>
                                     <p class="tel_warn">供应商物料出现预警时，发送信息至此号码进行提示</p>
                                 </div>
@@ -265,6 +264,26 @@
                     <div class="box_cont">供应商“{{sameSupplyName}}”已存在，请修改信息后保存</div>
                     <div class="box_btn">
                         <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--取消时弹框-->
+    <div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="cancel_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">信息未保存，确认现在返回吗？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
                     </div>
                 </div>
             </div>

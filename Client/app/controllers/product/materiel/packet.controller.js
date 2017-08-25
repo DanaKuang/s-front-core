@@ -38,7 +38,7 @@ define([], function () {
             $scope.changeShowState = function(){
                 $scope.showPacketList = !$scope.showPacketList;
                 //清空搜索条件
-                var SelectArr = $("select");
+                var SelectArr = $(".packet_select_sec select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
@@ -75,16 +75,29 @@ define([], function () {
             };
             //取消新建红包
             $scope.cancelCreatePacket = function(){
+                $('.cancel_box').modal('show');
+            };
+            //确认取消
+            $scope.confirmCancel = function(){
+                $('.cancel_box').modal('hide');
                 clearCreatPacket();
                 $scope.showTables = !$scope.showTables;
             };
-
 
             //取对应品牌
             $model.getBrandList().then(function(res){
                 if(res.status == 200){
                     $scope.brandList = res.data.data;
                     $scope.$apply();
+                    $("select#brand").multiselect({
+                        nonSelectedText: '请选择',
+                        allSelectedText: '全部',
+                        nSelectedText: '已选择',
+                        selectAll:true,
+                        selectAllText: '全部',
+                        selectAllValue: 'all',
+                        buttonWidth: '180px'
+                    });
                 }
             });
             //获取操作动作维度值
@@ -133,17 +146,25 @@ define([], function () {
             });
             //清空新建红包列表
             function clearCreatPacket(){
+                //清空红包名称
+                $('#packetName').val('');
                 //清空供应商选择
                 var supplyOption = $("#supply");
                 supplyOption[0].options[0].selected = true;
                 //清空品牌
-                var brandOption = $("#brand");
-                brandOption[0].options[0].selected = true;
+                $scope.selectAllBrands = '';  //清空适用品牌
+                $('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
+                //var brandOption = $("#brand");
+                //brandOption[0].options[0].selected = true;
                 //清空规格
-                var speciftOption = $("#specift");
-                speciftOption[0].options[0].selected = true;
+                $scope.selectSpeci = '';     //清空适用规格
+                $('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
+                //var speciftOption = $("#specift");
+                //speciftOption[0].options[0].selected = true;
                 //清空资金
                 $('#capital').val('');
+                //清空物料阀值
+                $('#packerThresh').val('');
                 //清空资金转账凭证
                 $('#transfer').val('');
                 $('#transferName').html('');
@@ -151,7 +172,7 @@ define([], function () {
                 $scope.operateItemPacket = null;
             }
             //监听品牌选择信息
-            $('#brand').change(function(){
+            /*$('#brand').change(function(){
                 var curBrandValue = $(this).val();
                 $model.getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
                     if(res.status == 200){
@@ -159,6 +180,40 @@ define([], function () {
                         $scope.$apply();
                     }
                 });
+            });*/
+            $(document).ready(function () {
+                $("select.multi").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    selectAll:true,
+                    selectAllText: '全部',
+                    selectAllValue: 'all',
+                    buttonWidth: '180px'
+                });
+            });
+            //监听品牌选择信息
+            $scope.$watch('selectAllBrands', function(n, o, s) {
+                if (n !== o) {
+                    $scope.selectAllBrands = n;
+                    var brandListArrObj = {};
+                    brandListArrObj.brandCode = n;
+                    $model.getSpeciftByBrand(brandListArrObj).then(function (res) {
+                        if(res.data.ret == "200000"){
+                            $scope.speciftList = res.data.data;
+                            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftList, function(v){
+                                v.label = v.allName;
+                                v.value = v.sn;
+                            }));
+                            $('[ng-model="selectSpeci"]').multiselect('refresh');
+                        }
+                    })
+                }
+            });
+            $scope.$watch('selectSpeci', function (n, o, s) {
+                if (n !== o) {
+                    $scope.selectSpeci = n;
+                }
             });
             //监听搜索框品牌选择信息
             $('#allBrand').change(function(){
@@ -172,6 +227,14 @@ define([], function () {
             });
             //保存红包信息
             $scope.savePacketInfo = function(){
+                //红包池名称
+                var packetName = $('#packetName').val();
+                if(packetName == ''){
+                    $('.packet_name').show();
+                    return;
+                }else{
+                    $('.packet_name').hide();
+                }
                 //选择供应商
                 var supplyVal = $('#supply').val();
                 if(supplyVal == ''){
@@ -182,27 +245,32 @@ define([], function () {
                 }
                 //选择品牌
                 var brandVal = $('#brand').val();
-                if(brandVal == ''){
+                //var brandValue = brandObj.val();
+                var brandNames = $('.brand_names .multiselect').attr('title');
+                if(brandVal == '' || brandVal.length == 0){
                     $('.select_brand').show();
                     return;
                 }else{
+                    brandVal = brandVal.join(',');
                     $('.select_brand').hide();
                 }
                 //选择规格
                 var speciftVal = $('#specift').val();
-                if(speciftVal == ''){
+                var speciftNames = $('.specift_names .multiselect').attr('title');
+                if(speciftVal == '' || speciftVal.length == 0){
                     $('.select_specift').show();
                     return;
                 }else{
+                    speciftVal = speciftVal.join(',');
                     $('.select_specift').hide();
                 }
                 //资金
+                var regNum = /^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/;
                 var capitalVal = $('#capital').val();
                 if(capitalVal == ''){
                     $('.entry_capital').show();
                     return;
                 }else{
-                    var regNum = /^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/;
                     if(regNum.test(capitalVal)){
                         var numStr = capitalVal.toString().indexOf('.');
                         if(numStr > -1){
@@ -214,13 +282,40 @@ define([], function () {
                         return;
                     }
                 }
+                //红包阀值
+                var packerThresh = $('#packerThresh').val();
+                if(packerThresh != ''){
+                    if(regNum.test(packerThresh)){
+                        var packerThreshStr = packerThresh.toString().indexOf('.');
+                        if(packerThreshStr > -1){
+                            packerThresh = Number(packerThresh.toString().match(/^\d+(?:\.\d{0,2})?/));
+                        }
+                        $('.packet_thresh').hide();
+                    }else {
+                        $('.packet_thresh').show();
+                        return;
+                    }
+                }
+                //新建时红包阀值不能大于库存
+                if($scope.addPocket){
+                    if(parseFloat(capitalVal) < parseFloat(packerThresh)){
+                        $('.packet_thresh').html('库存阀值不可高于红包池资金额度').show();
+                        return;
+                    }else{
+                        $('.packet_thresh').hide();
+                    }
+                }
                 var packetData = {
+                    name: packetName,
                     supplierCode : supplyVal,
                     brandCodes : brandVal,
-                    brandNames : $('#brand').find("option:selected").text(),
+                    //brandNames : $('#brand').find("option:selected").text(),
+                    brandNames : brandNames,
                     units : speciftVal,
-                    unitNames: $('#specift').find("option:selected").text(),
+                    //unitNames: $('#specift').find("option:selected").text(),
+                    unitNames: speciftNames,
                     moneyPool : capitalVal,
+                    poolWarning: packerThresh,
                     transferVoucherFilename : transferVoucherFilename,
                     transferVoucherAttach : transferVoucherAttach
                 };
@@ -228,6 +323,7 @@ define([], function () {
                 if(!$scope.addPocket){
                     packetData.id = $scope.operateItemPacket.id;
                 }
+
                 //保存数据
                 $model.savePacketData(packetData).then(function(res){
                     if(res.status == 200){
@@ -236,11 +332,14 @@ define([], function () {
                             getDataList(initPage);
                             clearCreatPacket();
                             $scope.$apply();
-                        }else{
-                            $('.save_exist_box').modal('show');
+                        }else if(res.data.ret == "400401"){
+                            $('.packet_name').html("此红包池名称已经存在").show();
+                            /*$('.save_exist_box').modal('show');
                             $scope.addExistPacketCapitalVal = capitalVal;
                             $scope.exitPacketData = res.data.data;
-                            $scope.$apply();
+                            $scope.$apply();*/
+                        }else{
+                            $('.supply_error_box').modal('show');
                         }
                     }
                 });
@@ -274,7 +373,10 @@ define([], function () {
                             var packetObj = res.data.data;
                             if(packetObj.list != null){
                                 for(var i=0;i<packetObj.list.length;i++){
+                                    packetObj.list[i].showPacketName = limitlengthFilter.limitLength(packetObj.list[i].name);
                                     packetObj.list[i].showSupplierName = limitlengthFilter.limitLength(packetObj.list[i].supplierName);
+                                    packetObj.list[i].showBrandNames = limitlengthFilter.limitLength(packetObj.list[i].brandNames,5);
+                                    packetObj.list[i].showUnitNames = limitlengthFilter.limitLength(packetObj.list[i].unitNames,5);
                                 }
                                 $scope.noSearchData = false;
                                 $scope.packetList = packetObj.list;
@@ -308,8 +410,11 @@ define([], function () {
                             var detailObj = res.data.data;
                             if(detailObj.list != null){
                                 for(var i=0;i<detailObj.list.length;i++){
-                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName);
-                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName);
+                                    detailObj.list[i].showBusinessName = limitlengthFilter.limitLength(detailObj.list[i].businessName,6);
+                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName,6);
+                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName,6);
+                                    detailObj.list[i].showBrandNames = limitlengthFilter.limitLength(detailObj.list[i].brandNames,5);
+                                    detailObj.list[i].showProdUnitsNames = limitlengthFilter.limitLength(detailObj.list[i].prodUnitsNames,5);
                                 }
                                 $scope.noSearchLog = false;
                                 $scope.detailList = detailObj.list;
@@ -358,13 +463,14 @@ define([], function () {
             //搜索数据
             $scope.searchData = function(){
                 var searchData = {
+                    keys: $('#allPacketName').val(),
                     supplierCode: $('#allSupply option:selected').val(),
                     brandCodes : $('#allBrand option:selected').val(),
+                    unitCodes:  $('#allSpecift option:selected').val(),
                     currentPageNumber : 1,
                     pageSize : $scope.pageSize
                 };
                 if($scope.showPacketList){
-                    searchData.unitCodes = $('#allSpecift option:selected').val();
                     searchData.status = $('#dataStatus option:selected').val();
                     searchData.metraType = 'redpack';
                 }else{
@@ -414,17 +520,38 @@ define([], function () {
                         });
                     });
                 }
-                //$scope.editPacketId = itemPacket.id;
-
-
-                $("#brand option").each(function(){
+                //品牌
+                /*$("#brand option").each(function(){
                     var curBrandOptionObj = $(this)[0];
                     if(itemPacket.brandCodes == curBrandOptionObj.value){
                         curBrandOptionObj.selected = true;
                     }
-                });
+                });*/
+                var brandValArr = itemPacket.brandCodes.split(',');
+                $('[ng-model="selectAllBrands"]').multiselect().val(brandValArr).multiselect("refresh");
+                $('.brand_names .multiselect').attr('title',itemPacket.brandNames);
+                //适用规格
+                if(itemPacket.brandCodes != '' && itemPacket.brandCodes != null){
+                    $model.getSpeciftByBrand({brandCode: itemPacket.brandCodes}).then(function(res){
+                        if(res.data.ret == 200000){
+                            $scope.speciftList = res.data.data;
+                            $scope.$apply();
+                            var speciftValArr = itemPacket.units.split(',');
+                            $('[ng-model="selectSpeci"]').multiselect().val(speciftValArr).multiselect("refresh");
+                            $('.specift_names .multiselect').attr('title',itemPacket.unitNames);
+                        }
+                        /*$("#specift option").each(function(){
+                            var packetSpeciftObj = $(this)[0];
+                            if(itemPacket.units == packetSpeciftObj.value){
+                                packetSpeciftObj.selected = true;
+                            }
+                        });*/
+                    });
+                }
 
+                $('#packetName').val(itemPacket.name);
                 $('#capital').val(itemPacket.moneyPool);
+                $('#packerThresh').val(itemPacket.poolWarning);
                 transferVoucherAttach = itemPacket.transferVoucherAttach;
                 transferVoucherFilename = itemPacket.transferVoucherFilename;
                 $('#transferName').html(itemPacket.transferVoucherFilename);

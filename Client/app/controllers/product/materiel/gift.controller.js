@@ -7,7 +7,7 @@ define([], function () {
         ServiceName: 'GiftCtrl',
         ViewModelName: 'giftViewModel',
         ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
-
+            //$('.add_cami_box').modal('show');
             var $model = $scope.$model;
             //初始化显示列表
             $scope.showTables = true;
@@ -19,6 +19,13 @@ define([], function () {
             $scope.noSearchData = false;  //未搜索到礼品信息
             $scope.noSearchLog = false;   //未搜索到礼品流水
             $scope.addGift = true;  //新增礼品标识
+            var addCamiAttach = ''; //新增卡密文件
+            var camiAttach = '';  //卡密文件
+            var camiFileName = '';
+            $scope.startTime = ''; //礼品有效期起始时间
+            $scope.endTime = '';
+            $scope.effectDays = -1; //礼品有效期标识
+
             //初始化分页信息
             $scope.pageSize = 15; //每页显示多少条
             $scope.currentPageNumber = 1; //当前页数
@@ -45,13 +52,18 @@ define([], function () {
                             $scope.$apply();
                         }
                     });
+                    if($scope.effectDays == 0){
+                        $('.time_validity').css('display','inline-block');
+                    }else{
+                        $('.time_validity').css('display','none');
+                    }
                 }
             };
             //礼品库/流水明细切换
             $scope.changeShowState = function(){
                 $scope.showGiftList = !$scope.showGiftList;
                 //清空搜索条件
-                var SelectArr = $("select");
+                var SelectArr = $(".select_sec select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
@@ -80,18 +92,83 @@ define([], function () {
                 if(res.status == 200){
                     $scope.brandList = res.data.data;
                     $scope.$apply();
+                    $("select#brand").multiselect({
+                        nonSelectedText: '请选择',
+                        allSelectedText: '全部',
+                        nSelectedText: '已选择',
+                        selectAll:true,
+                        selectAllText: '全部',
+                        selectAllValue: 'all',
+                        buttonWidth: '180px'
+                    });
                 }
             });
+
+            $(document).ready(function () {
+                 $("select.multi").multiselect({
+                     nonSelectedText: '请选择',
+                     allSelectedText: '全部',
+                     nSelectedText: '已选择',
+                     selectAll:true,
+                     selectAllText: '全部',
+                     selectAllValue: 'all',
+                     buttonWidth: '180px'
+                 });
+             });
+            /*$('#brand').on('click', function () {
+                $model.getBrandList().then(function(res){
+                    if(res.status == 200){
+                        $scope.brandList = res.data.data;
+                        $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.brandList, function(v){
+                            v.label = v.name;
+                            v.value = v.brandCode;
+                        }));
+                        $('[ng-model="selectAllBrands"]').multiselect('refresh');
+                    }
+                })
+            });*/
             //监听品牌选择信息
-            $('#brand').change(function(){
+            $scope.$watch('selectAllBrands', function(n, o, s) {
+                if (n !== o) {
+                    $scope.selectAllBrands = n;
+                    var brandListArrObj = {};
+                    brandListArrObj.brandCode = n;
+                    $model.getSpeciftByBrand(brandListArrObj).then(function (res) {
+                        if(res.data.ret == "200000"){
+                            $scope.speciftList = res.data.data;
+                            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftList, function(v){
+                                v.label = v.allName;
+                                v.value = v.sn;
+                            }));
+                            $('[ng-model="selectSpeci"]').multiselect('refresh');
+                        }
+                    })
+                }
+            });
+            $scope.$watch('selectSpeci', function (n, o, s) {
+                if (n !== o) {
+                    $scope.selectSpeci = n;
+                }
+            });
+            /*$('#brand').change(function(){
                 var curBrandValue = $(this).val();
+                console.log(curBrandValue);
                 $model.getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
                     if(res.status == 200){
                         $scope.speciftList = res.data.data;
                         $scope.$apply();
+                        $("select#applySpecift").multiselect({
+                            nonSelectedText: '请选择',
+                            allSelectedText: '全部',
+                            nSelectedText: '已选择',
+                            selectAll:true,
+                            selectAllText: '全部',
+                            selectAllValue: 'all',
+                            buttonWidth: '180px'
+                        });
                     }
                 });
-            });
+            });*/
             //监听搜索品牌选择信息
             $('#selectBrand').change(function(){
                 var curBrandValue = $(this).val();
@@ -175,8 +252,13 @@ define([], function () {
             };
             //取消新建红包
             $scope.cancelCreateGift = function(){
-                $scope.showTables = !$scope.showTables;
+                $('.cancel_box').modal('show');
+            };
+            //确认取消
+            $scope.confirmCancel = function(){
+                $('.cancel_box').modal('hide');
                 clearCreatGift();
+                $scope.showTables = !$scope.showTables;
             };
 
             //礼品图片上传
@@ -214,10 +296,13 @@ define([], function () {
 
             //清空新建礼品列表
             function clearCreatGift(){
-                var SelectArr = $("select");
+                /*var SelectArr = $("select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
-                }
+                }*/
+                $('#oneCategory')[0].options[0].selected = true;
+                $('#secondCategory')[0].options[0].selected = true;
+                $('#enableSupply')[0].options[0].selected = true;
                 $('#giftName').val(''); //清空供应商名称
                 //清空图片上传
                 $('#giftImg').val('');
@@ -227,6 +312,19 @@ define([], function () {
                 $('#stock').val('');  //清空库存
                 $('#stockThresh').val('');  //清空库存阀值
                 $('#linkUrl').val('');  //清空链接URL
+                $scope.effectDays = -1; //礼品有效期
+                $scope.startTime = '';
+                $scope.endTime = '';
+                $scope.selectAllBrands = '';  //清空适用品牌
+                $scope.selectSpeci = '';     //清空适用规格
+                $('#giftBrief').val('');    //清空礼品描述
+                camiAttach = '';  //清空卡密文件信息
+                camiFileName = '';
+                $('#camiCreateName').html('');
+                $('.cami_file_warn').html('仅当新建礼品为卡密类虚拟礼品时，需上传csv/excel格式卡密文件');
+                $('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
+                //$('[ng-model="selectSpeci"]').multiselect('refresh');
+                $('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
             }
 
             //保存礼品信息
@@ -266,19 +364,23 @@ define([], function () {
                 //获取适用品牌
                 var brandObj = $('#brand');
                 var brandValue = brandObj.val();
-                if(brandValue == ''){
+                var brandNames = $('.brand_names .multiselect').attr('title');
+                if(brandValue == '' || brandValue.length == 0){
                     $('.apply_brand_warn').show();
                     return;
                 }else{
+                    brandValue = brandValue.join(',');
                     $('.apply_brand_warn').hide();
                 }
                 //获取适用规格
                 var applySpeciftObj = $('#applySpecift');
                 var applySpeciftValue = applySpeciftObj.val();
-                if(applySpeciftValue == ''){
+                var speciftNames = $('.specift_names .multiselect').attr('title');
+                if(applySpeciftValue == '' || applySpeciftValue.length == 0){
                     $('.apply_specift_warn').show();
                     return;
                 }else{
+                    applySpeciftValue = applySpeciftValue.join(',');
                     $('.apply_specift_warn').hide();
                 }
                 //市面价值
@@ -321,6 +423,18 @@ define([], function () {
                 }
                 //链接url
                 var linkUrlVal = $('#linkUrl').val();
+                //礼品有效期
+                var camiValidity = $("input[type='radio']:checked").val();
+                if(camiValidity == 0){
+                    var camiStartTime = $scope.startTime;
+                    var camiEndTime = $scope.endTime;
+                    if(camiStartTime == '' || camiEndTime == ''){
+                        $('.cami_validity_warn').css('color','#ff3300').html('起始日期/终止日期不可为空');
+                        return;
+                    }
+                }
+                //礼品描述
+                var giftBriefInfo = $('#giftBrief').val();
 
                 //开始保存数据
                 var giftDataObj = {
@@ -329,16 +443,26 @@ define([], function () {
                     giftType : secCateValue,
                     supplierCode : enableSupplyValue,
                     brandCodes : brandValue,
-                    brandNames : brandObj.find("option:selected").text(),
+                    //brandNames : brandObj.find("option:selected").text(),
+                    brandNames : brandNames,
                     units : applySpeciftValue,
-                    unitNames : applySpeciftObj.find("option:selected").text(),
+                    //unitNames : applySpeciftObj.find("option:selected").text(),
+                    unitNames : speciftNames,
                     marketMoney : marketValue,
                     giftPicAttach : giftPicAttach,
                     giftPic : giftPicUrl,
                     stock : stockVal,
                     stockWarning : stockThreshValue,
-                    giftUrl : linkUrlVal
+                    giftUrl : linkUrlVal,
+                    effectDays : camiValidity,
+                    cardsAttach : camiAttach,
+                    memo : giftBriefInfo
                 };
+
+                if(giftDataObj.effectDays == 0){
+                    giftDataObj.stimeStr = $scope.startTime+ ' 00:00:00';
+                    giftDataObj.etimeStr = $scope.endTime+ ' 00:00:00';
+                }
 
                 //判断是否是编辑
                 if(!$scope.addGift){
@@ -346,8 +470,6 @@ define([], function () {
                 }
 
                 $model.saveOrUpdateData(giftDataObj).then(function(res){
-                    console.log('保存数据');
-                    console.log(res);
                     if(res.data.ret == 200000){
                         //$scope.secondCategoryList = res.data.data;
                         $scope.showGiftList = true;
@@ -389,16 +511,16 @@ define([], function () {
             //获取红包池列表
             function getDataList(pageObj){
                 if($scope.showGiftList){
-                    //显示红包池信息
+                    //显示礼品池信息
                     $model.getGiftList(pageObj).then(function(res){
-                        console.log('获取礼品库信息');
-                        console.log(res);
                         if(res.status == 200){
                             var giftObj = res.data.data;
                             if(giftObj.list != null){
                                 for(var i=0;i<giftObj.list.length;i++){
-                                    giftObj.list[i].showName = limitlengthFilter.limitLength(giftObj.list[i].name);
-                                    giftObj.list[i].showSupplierName = limitlengthFilter.limitLength(giftObj.list[i].supplierName);
+                                    giftObj.list[i].showName = limitlengthFilter.limitLength(giftObj.list[i].name,5);
+                                    giftObj.list[i].showSupplierName = limitlengthFilter.limitLength(giftObj.list[i].supplierName,5);
+                                    giftObj.list[i].showBrandNames = limitlengthFilter.limitLength(giftObj.list[i].brandNames,5);
+                                    giftObj.list[i].showUnitNames = limitlengthFilter.limitLength(giftObj.list[i].unitNames,5);
                                 }
                                 $scope.noSearchData = false;
                                 $scope.giftList = giftObj.list;
@@ -432,9 +554,11 @@ define([], function () {
                             var detailObj = res.data.data;
                             if(detailObj.list != null){
                                 for(var i=0;i<detailObj.list.length;i++){
-                                    detailObj.list[i].showBusinessName = limitlengthFilter.limitLength(detailObj.list[i].businessName);
-                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName);
-                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName);
+                                    detailObj.list[i].showBusinessName = limitlengthFilter.limitLength(detailObj.list[i].businessName,6);
+                                    detailObj.list[i].showSupplierName = limitlengthFilter.limitLength(detailObj.list[i].supplierName,6);
+                                    detailObj.list[i].showActivityName = limitlengthFilter.limitLength(detailObj.list[i].activityName,6);
+                                    detailObj.list[i].showBrandNames = limitlengthFilter.limitLength(detailObj.list[i].brandNames,5);
+                                    detailObj.list[i].showProdUnitsNames = limitlengthFilter.limitLength(detailObj.list[i].prodUnitsNames,5);
                                 }
                                 $scope.noSearchLog = false;
                                 $scope.detailList = detailObj.list;
@@ -516,12 +640,15 @@ define([], function () {
             };
             //增库操作
             $scope.addGiftPool = function(giftItem){
-                console.log("开始增库了。。。。");
-                console.log(giftItem);
                 $scope.operateGiftItem = giftItem;
                 if(giftItem.supplierStatus == 1){
                     if(giftItem.status == 1){
-                        $('.add_pool_box').modal('show');
+                        //$('.add_pool_box').modal('show');
+                        if(giftItem.hasCards == 1){
+                            $('.add_cami_box').modal('show');
+                        }else{
+                            $('.add_pool_box').modal('show');
+                        }
                     }else{
                         $('.gift_stop_box').modal('show');
                     }
@@ -531,23 +658,54 @@ define([], function () {
             };
             //确定礼品增库
             $scope.confirmAddPool = function(operateGiftItem){
-                var giftStock = $('#addGiftStock').val();
                 var regStock = /^\+?[1-9][0-9]*$/;
-                if(!regStock.test(giftStock)){
-                    $('.add_stock_warn').show();
-                    return;
-                }else{
-                    $('.add_stock_warn').hide();
-                }
                 var addPoolObj = {
+                    id : operateGiftItem.id
+                };
+                if(operateGiftItem.hasCards == 1){
+                    var addGiftStock = $('#addGiftCamiStock').val();
+                    if(!regStock.test(addGiftStock)){
+                        $('.add_cami_box .add_stock_warn').css({'display':'inline-block','margin-left':'10px'});
+                        return;
+                    }else{
+                        addPoolObj.addNum = addGiftStock;
+                        if(addCamiAttach != ''){
+                            addPoolObj.cardsAttach = addCamiAttach;
+                        }
+                        $('.add_cami_box .add_stock_warn').css({'display':'none','margin-left':'-133px'});
+                    }
+                }else{
+                    var giftStock = $('#addGiftStock').val();
+                    if(!regStock.test(giftStock)){
+                        $('.add_pool_box .add_stock_warn').show();
+                        return;
+                    }else{
+                        addPoolObj.addNum = giftStock;
+                        $('.add_pool_box .add_stock_warn').hide();
+                    }
+                }
+
+                /*var addPoolObj = {
                     id : operateGiftItem.id,
                     addNum : giftStock
                 };
+                if(addCamiAttach != ''){
+                    addPoolObj.cardsAttach = addCamiAttach;
+                }*/
                 $model.addGiftPool(addPoolObj).then(function(res){
                     if(res.data.ret == "200000"){
-                        $('.add_pool_box').modal('hide');
-                        $('.add_stock_warn').hide();
-                        $('#addGiftStock').val('');
+                        if(operateGiftItem.hasCards == 1){
+                            $('.add_cami_box').modal('hide');
+                            $('.add_cami_box .add_stock_warn').css({'display':'none','margin-left':'-133px'});
+                            $('#addGiftCamiStock').val('');
+                            $('.cami_explain').css('margin-left','135px').html('请确保增库物料与原物料有效期相同');
+                            $('.cami_name').html('');
+                            addCamiAttach = '';
+                        }else{
+                            $('.add_pool_box').modal('hide');
+                            $('.add_pool_box .add_stock_warn').hide();
+                            $('#addGiftStock').val('');
+                        }
                         var curPageObj = {
                             currentPageNumber : $scope.currentPageNumber,
                             pageSize : $scope.pageSize,
@@ -559,10 +717,26 @@ define([], function () {
             };
             //取消增加礼品库
             $scope.cancelAddGiftStock = function(){
-                $('.add_pool_box').modal('hide');
+                /*$('.add_pool_box').modal('hide');
                 $('.add_stock_warn').hide();
-                $('#addGiftStock').val('');
+                $('#addGiftStock').val('');*/
+                if($scope.operateGiftItem.hasCards == 1){
+                    $('.add_cami_box').modal('hide');
+                    $('.add_cami_box .add_stock_warn').css({'display':'none','margin-left':'-133px'});
+                    $('#addGiftCamiStock').val('');
+                    $('.cami_name').html('');
+                    $('.cami_explain').css('margin-left','135px').html('请确保增库物料与原物料有效期相同');
+                    addCamiAttach = '';
+                }else{
+                    $('.add_pool_box').modal('hide');
+                    $('.add_pool_box .add_stock_warn').hide();
+                    $('#addGiftStock').val('');
+                }
             };
+            //时间格式化
+            function timesFormatStr(times){
+                return times.getFullYear() + "-" + (times.getMonth() + 1) + "-" + times.getDate();
+            }
             //编辑礼品
             $scope.editGiftItem = function(giftItem){
                 $scope.addGift = false;
@@ -597,8 +771,6 @@ define([], function () {
                         pageSize : '-1'
                     };
                     $model.getSupplyList(createSupply).then(function(res){
-                        console.log('获取供应商');
-                        console.log(res);
                         if(res.data.ret == 200000){
                             $scope.enableSupplyList = res.data.data.list;
                             $scope.$apply();
@@ -614,25 +786,33 @@ define([], function () {
                 }
 
                 //品牌
-                $("#brand option").each(function(){
+                /*$("#brand option").each(function(){
                     var curBrandObj = $(this)[0];
                     if(giftItem.brandCodes == curBrandObj.value){
                         curBrandObj.selected = true;
                     }
-                });
+                });*/
+                //$('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
+                //$('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
+                var brandValArr = giftItem.brandCodes.split(',');
+                $('[ng-model="selectAllBrands"]').multiselect().val(brandValArr).multiselect("refresh");
+                $('.brand_names .multiselect').attr('title',giftItem.brandNames);
                 //适用规格
                 if(giftItem.brandCodes != '' && giftItem.brandCodes != null){
                     $model.getSpeciftByBrand({brandCode: giftItem.brandCodes}).then(function(res){
                         if(res.status == 200){
                             $scope.speciftList = res.data.data;
                             $scope.$apply();
+                            var speciftValArr = giftItem.units.split(',');
+                            $('[ng-model="selectSpeci"]').multiselect().val(speciftValArr).multiselect("refresh");
+                            $('.specift_names .multiselect').attr('title',giftItem.unitNames);
                         }
-                        $("#applySpecift option").each(function(){
+                        /*$("#applySpecift option").each(function(){
                             var applySpeciftObj = $(this)[0];
                             if(giftItem.units == applySpeciftObj.value){
                                 applySpeciftObj.selected = true;
                             }
-                        });
+                        });*/
                     });
                 }
                 //市值
@@ -647,11 +827,153 @@ define([], function () {
                 $('#stockThresh').val(giftItem.stockWarning);
                 //链接URL
                 $('#linkUrl').val(giftItem.giftUrl);
-
-
-
+                //礼品有效期  effectDays
+                $scope.effectDays = giftItem.effectDays;
+                if($scope.effectDays == 0){
+                    $('.time_validity').css('display','inline-block');
+                    var stimeStr = new Date(giftItem.stime);
+                    var etimeStr = new Date(giftItem.etime);
+                    $scope.startTime = timesFormatStr(stimeStr);
+                    $scope.endTime = timesFormatStr(etimeStr);
+                }else{
+                    $('.time_validity').css('display','none');
+                }
+                //卡密文件
+                //camiAttach = giftItem.cardsAttach;
+                if(giftItem.hasCards == 1){
+                    $('#camiCreateName').html('已上传卡密文件');
+                }
+                //礼品描述
+                $('#giftBrief').val(giftItem.memo);
                 $scope.showTables = !$scope.showTables;
-            }
+            };
+            //监听有效期选中事件
+            $("input:radio").click(function(){
+                var cutVal = $(this).val();
+                if(cutVal == 0){
+                    $('.time_validity').css('display','inline-block');
+                }else{
+                    $('.time_validity').css('display','none');
+                }
+
+            });
+            var fileTypeArr = ['xlsx','xls','csv'];
+            //卡密文件上传
+            $('#camiCreateFile').change(function(){
+                var camiFile = $('#camiCreateFile')[0].files[0];
+                //fileLimit 52428800  type fileExt(xlsx,xls,csv)
+                if(camiFile != undefined){
+                    var curFileName = camiFile.name;
+                    var fileType = curFileName.substring(curFileName.lastIndexOf('.')+1,curFileName.length);
+                    if(fileTypeArr.indexOf(fileType) == -1){
+                        $('#camiCreateName').css('color','#ff3300').html('此文件格式不符，请上传csv/excel格式文件');
+                        return;
+                    }
+                    if(camiFile.size > 10485760){
+                        $('#camiCreateName').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        return;
+                    }
+                    $('.cami_file_warn').html('文件上传中...');
+                    var formData = new FormData();
+                    formData.append('file',camiFile);
+                    $.ajax({
+                        url: '/api/tztx/saas/saotx/attach/commonUploadFiles',
+                        type: 'POST',
+                        cache: false,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            ContentType: "multipart/form-data",
+                            loginId : sessionStorage.access_loginId ,
+                            token : sessionStorage.access_token
+                        }
+                    }).done(function(res) {
+                        camiAttach = res.data.attachCode;
+                        camiFileName = res.data.filename;
+                        $('#camiCreateName').css('color','#666').html(res.data.filename);
+                        $('.cami_file_warn').html('文件上传成功！');
+
+                    }).fail(function(res) {
+                        $('.cami_file_warn').html('文件上传失败！');
+                    });
+                }
+            });
+            //增库卡密文件上传
+            $('#addPoolCamiFile').change(function(){
+                var addCamiFile = $('#addPoolCamiFile')[0].files[0];
+                //fileLimit 52428800  type fileExt(xlsx,xls,csv)
+                if(addCamiFile != undefined){
+                    var curAddFileName = addCamiFile.name;
+                    var addFileType = curAddFileName.substring(curAddFileName.lastIndexOf('.')+1,curAddFileName.length);
+                    if(fileTypeArr.indexOf(addFileType) == -1){
+                        $('.cami_name').css({'color':'#ff3300','font-size':'14px'}).html('此文件格式不符，请上传csv/excel格式文件');
+                        return;
+                    }
+                    if(addCamiFile.size > 10485760){
+                        $('.cami_name').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        return;
+                    }
+                    $('.cami_explain').html('文件上传中...');
+                    var formData = new FormData();
+                    formData.append('file',addCamiFile);
+                    $.ajax({
+                        url: '/api/tztx/saas/saotx/attach/commonUploadFiles',
+                        type: 'POST',
+                        cache: false,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            ContentType: "multipart/form-data",
+                            loginId : sessionStorage.access_loginId ,
+                            token : sessionStorage.access_token
+                        }
+                    }).done(function(res) {
+                        addCamiAttach = res.data.attachCode;
+                        //camiFileName = res.data.filename;
+                        $('.cami_name').css('color','#666').html(res.data.filename);
+                        $('.cami_explain').html('文件上传成功！');
+
+                    }).fail(function(res) {
+                        $('.cami_explain').html('文件上传失败！');
+                    });
+                }
+            });
+
+            var todayDate = new Date();
+            $("#startDate").datetimepicker({
+                format: 'yyyy-mm-dd',
+                language : 'zh-CN',
+                startDate: todayDate,
+                minView : 2,
+                todayBtn : true,
+                autoclose : true,
+                todayHighlight: true
+            }).on('change', function (e) {
+                var startTime = e.target.value;
+                var endTime = $scope.endTime;
+                if (endTime < startTime) {
+                    $scope.endTime = '';
+                    $scope.$apply();
+                }
+            });
+            $("#endDate").datetimepicker({
+                format: 'yyyy-mm-dd',
+                language : 'zh-CN',
+                startDate: todayDate,
+                minView : 2,
+                todayBtn : true,
+                autoclose : true,
+                todayHighlight: true
+            }).on('change', function (e) {
+                var endTime = e.target.value;
+                var startTime = $scope.startTime;
+                if (startTime > endTime) {
+                    $scope.startTime = '';
+                    $scope.$apply();
+                }
+            });
 
         }]
     };

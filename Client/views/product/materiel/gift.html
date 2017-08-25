@@ -93,8 +93,9 @@
                                 <th>供应商</th>
                                 <th>适用品牌</th>
                                 <th>适用规格</th>
-                                <th>市面金额(元)</th>
+                                <!--<th>市面金额(元)</th>-->
                                 <th>剩余库存(件)</th>
+                                <th>有效期</th>
                                 <th>使用状态</th>
                                 <th>操作</th>
                             </tr>
@@ -103,18 +104,21 @@
                                 <td title="{{giftItem.name}}">{{giftItem.showName}}</td>
                                 <td class="gift_img">
                                     <a href="{{giftItem.giftUrl != '' ? giftItem.giftUrl : 'javascript:'}}">
-                                        <img ng-if="giftItem.giftPic != ''" src="{{giftItem.giftPic}}" />
+                                        <img ng-if="giftItem.giftPic != ''" src="{{giftItem.giftPic}}"/>
                                         <span ng-if="giftItem.giftPic == ''">-</span>
                                     </a>
                                 </td>
                                 <td ng-if="giftItem.giftClass == 1">实物</td>
                                 <td ng-if="giftItem.giftClass == 2">虚拟</td>
                                 <td title="{{giftItem.supplierName}}">{{giftItem.showSupplierName}}</td>
-                                <td>{{giftItem.brandNames}}</td>
-                                <td>{{giftItem.unitNames}}</td>
-                                <td ng-if="giftItem.marketMoney != null">{{giftItem.marketMoney}}</td>
-                                <td ng-if="giftItem.marketMoney == null">-</td>
+                                <td title="{{giftItem.brandNames}}">{{giftItem.showBrandNames}}</td>
+                                <td title="{{giftItem.unitNames}}">{{giftItem.showUnitNames}}</td>
+                                <!--<td ng-if="giftItem.marketMoney != null">{{giftItem.marketMoney}}</td>-->
+                                <!--<td ng-if="giftItem.marketMoney == null">-</td>-->
                                 <td>{{giftItem.stock}}</td>
+                                <td ng-if="giftItem.effectDays == -1">长期有效</td>
+                                <td ng-if="giftItem.effectDays == 0">{{giftItem.stime|date:'yyyy.MM.dd'}}-{{giftItem.etime|date:'yyyy.MM.dd'}}</td>
+                                <td ng-if="giftItem.effectDays == 1">-</td>
                                 <td ng-if="giftItem.status == 1">已启用</td>
                                 <td ng-if="giftItem.status == 0">已停用</td>
                                 <td>
@@ -147,8 +151,8 @@
                                 <td title="{{detailItem.businessName}}">{{detailItem.showBusinessName}}</td>
                                 <td>{{detailItem.businessType}}</td>
                                 <td title="{{detailItem.supplierName}}">{{detailItem.showSupplierName}}</td>
-                                <td>{{detailItem.brandNames}}</td>
-                                <td>{{detailItem.prodUnitsNames}}</td>
+                                <td title="{{detailItem.brandNames}}">{{detailItem.showBrandNames}}</td>
+                                <td title="{{detailItem.prodUnitsNames}}">{{detailItem.showProdUnitsNames}}</td>
                                 <td>{{detailItem.operName}}</td>
                                 <td title="{{detailItem.activityName}}">
                                     {{detailItem.activityName != null ? detailItem.showActivityName : '-'}}
@@ -187,12 +191,12 @@
                     <div class="panel-body">
                         <div class="form_sec">
                             <div>
-                                <label for="giftName">礼品名称<span>*</span></label>
+                                <label class="label_title" for="giftName">礼品名称<span>*</span></label>
                                 <input id="giftName" type="text" placeholder="" >
                                 <span class="gift_name_warn">礼品名称不能为空</span>
                             </div>
                             <div>
-                                <label for="oneCategory">礼品类型<span>*</span></label>
+                                <label class="label_title" for="oneCategory">礼品类型<span>*</span></label>
                                 <select id="oneCategory">
                                     <option value="">选择一级类目</option>
                                     <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
@@ -204,7 +208,7 @@
                                 <span class="category_warn"></span>
                             </div>
                             <div>
-                                <label for="enableSupply">供应商<span>*</span></label>
+                                <label class="label_title" for="enableSupply">供应商<span>*</span></label>
                                 <select id="enableSupply" ng-disabled="!addGift" ng-class="{true:'disabled_color'}[!addGift]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
@@ -212,31 +216,29 @@
                                 </select>
                                 <span class="gift_supply_warn">供应商不能为空</span>
                             </div>
-                            <div>
-                                <label for="brand">适用品牌<span>*</span></label>
-                                <select id="brand">
-                                    <option value="">请选择</option>
-                                    <option ng-repeat="brandItem in brandList"
-                                            value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
+                            <div class="brand_names">
+                                <label class="label_title" for="brand">适用品牌<span>*</span></label>
+                                <select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
+                                    <!--<option value="">请选择</option>-->
+                                    <option ng-repeat="brandItem in brandList" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                 </select>
                                 <span class="apply_brand_warn">适用品牌不能为空</span>
                             </div>
-                            <div>
-                                <label for="applySpecift">适用规格<span>*</span></label>
-                                <select id="applySpecift">
-                                    <option value="">请选择</option>
-                                    <option ng-repeat="speciftItem in speciftList"
-                                            value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                            <div class="specift_names">
+                                <label class="label_title" for="applySpecift">适用规格<span>*</span></label>
+                                <select id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                    <!--<option value="">请选择</option>-->
+                                    <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                 </select>
                                 <span class="apply_specift_warn">适用规格不能为空</span>
                             </div>
                             <div>
-                                <label for="marketValue">市面价值（元）</label>
+                                <label class="label_title" for="marketValue">市面价值（元）</label>
                                 <input id="marketValue" type="text" placeholder="">
                                 <span class="market_value_warn"></span>
                             </div>
                             <div>
-                                <label for="giftImg">礼品图片<span>*</span></label>
+                                <label class="label_title" for="giftImg">礼品图片<span>*</span></label>
                                 <div class="transfer_sec">
                                     <input type="file" id="giftImg">
                                     <div class="select_file">+</div>
@@ -245,21 +247,48 @@
                                 <p class="gift_img_warn">图片规格要求：建议尺寸330*330</p>
                             </div>
                             <div>
-                                <label for="stock">库存（件）<span>*</span></label>
+                                <label class="label_title" for="stock">库存（件）<span>*</span></label>
                                 <input id="stock" type="text" ng-disabled="!addGift" placeholder="">
                                 <span class="stock_warn">请输入大于0的整数</span>
                                 <br/>
                                 <p>库存数量保存后不可手动减库存，请谨慎输入</p>
                             </div>
                             <div>
-                                <label for="stockThresh">库存阀值</label>
+                                <label class="label_title" for="stockThresh">库存阀值</label>
                                 <input id="stockThresh" type="text" placeholder="">
                                 <span class="stockThresh_warn">库存阀值不可高于库存</span>
                                 <p>库存阀值不可高于库存</p>
                             </div>
                             <div>
-                                <label for="linkUrl">链接URL</label>
+                                <label class="label_title" for="linkUrl">链接URL</label>
                                 <input id="linkUrl" type="text" placeholder="">
+                            </div>
+                            <div>
+                                <label class="label_title">礼品有效期<span>*</span></label>
+                                <div class="time_period">
+                                    <input type="radio" value="-1" name="timePeriod" ng-checked="effectDays == -1">长期有效
+                                    <input type="radio" value="0" name="timePeriod" style="margin-left: 45px"ng-checked="effectDays == 0">自定义&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="time_validity">
+                                        <input id="startDate" size="16" type="text" value="" placeholder="年-月-日" style="width: 163px;"  ng-model="startTime" value="{{startTime}}">&nbsp;——
+                                        <input id="endDate" size="16" type="text" value="" placeholder="年-月-日" style="width: 163px;" ng-model="endTime" value="{{endTime}}">
+                                    </div>
+                                </div>
+                                <p class="cami_validity_warn">礼品有效期设置后不可更改，请谨慎操作</p>
+                            </div>
+                            <div>
+                                <label class="label_title" for="camiCreateFile">卡密文件</label>
+                                <div class="cami_create">
+                                    <input type="file" id="camiCreateFile">
+                                    <div class="select_cami_file">选择文件</div>
+                                </div>
+                                <span id="camiCreateName"></span>
+                                <p class="cami_file_warn">仅当新建礼品为卡密类虚拟礼品时，需上传csv/excel格式卡密文件</p>
+                            </div>
+                            <div>
+                                <label class="label_title" for="giftBrief">礼品描述</label>
+                                <div class="gift_brief_sec">
+                                    <textarea name="" id="giftBrief" cols="49" rows="8"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="opera_sec">
@@ -308,6 +337,39 @@
                         <label>增加库存：</label>
                         <input type="text" id="addGiftStock" maxlength="5"><span>件</span>
                         <p class="add_stock_warn">请输入大于0的整数</p>
+                    </div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmAddPool(operateGiftItem)">确定</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelAddGiftStock()">取消</div>
+                        <!--data-dismiss="modal"-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--增库弹框包含卡密文件-->
+    <div class="modal fade add_cami_box" tabindex="-1" role="dialog" aria-labelledby="add_cami_btn">
+        <div class="modal-dialog" role="document" style="width:460px;">
+            <div class="modal-content">
+                <div class="box_sec" >
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span ng-click="cancelAddGiftStock()">×</span>
+                            <!--aria-hidden="true"-->
+                        </button>
+                        <div class="modal-title" id="add_cami_btn">增库</div>
+                    </div>
+                    <div class="cami_box_cont">
+                        <label class="cami_stock_label">增加库存：</label>
+                        <input type="text" id="addGiftCamiStock" maxlength="5"><span>件</span>
+                        <p class="add_stock_warn">请输入大于0的整数</p><br>
+                        <label for="addPoolCamiFile" class="cami_label">附加卡密文件:</label>
+                        <div class="cami_file_sec">
+                            <input type="file" id="addPoolCamiFile" style="display: inline">
+                            <div class="select_cami_file">选择文件</div>
+                        </div>
+                        <div class="cami_name"></div>
+                        <p class="cami_explain">请确保增库物料与原物料有效期相同</p>
                     </div>
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmAddPool(operateGiftItem)">确定</div>
@@ -389,6 +451,26 @@
                     <div class="box_cont">此物料已停用，无法执行增库操作</div>
                     <div class="box_btn">
                         <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--取消时弹框-->
+    <div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="cancel_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">信息未保存，确认现在返回吗？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
                     </div>
                 </div>
             </div>
