@@ -302,14 +302,14 @@ define([], function () {
                 numberFormat.notminusnotzero(event)
             }
 
-            // // 勾选积分池
-            // $('#setprize').on('click', '.tickcheckbox', function (e) {
-            //     if ($(e.target).prop('checked')) {
-            //         $(e.target).siblings('.sendscore').removeClass('hidden')
-            //     } else {
-            //         $(e.target).siblings('.sendscore').addClass('hidden')
-            //     }
-            // })
+            // 勾选积分池
+            $('#setprize').on('click', '.tickcheckbox', function (e) {
+                if ($(e.target).prop('checked')) {
+                    $(e.target).siblings('.sendscore').removeClass('hidden')
+                } else {
+                    $(e.target).siblings('.sendscore').addClass('hidden')
+                }
+            })
         }
         return defineObj;
     }
