@@ -200,6 +200,8 @@ define([], function () {
                             commonAwardInner.commonMinred = '';
                             commonAwardInner.commonBigred = '';
                             commonAwardInner.commonAwardScores = '';
+                            // commonAwardInner.giveScore
+                            // commonAwardInner.intergalPool
 
                             var n = non_first_arr.eq(n);
 
@@ -248,6 +250,8 @@ define([], function () {
                                 var send_scores = radio_res_item.find('.tickcheckbox');
                                 if (send_scores.prop('checked')) {
                                     commonAwardInner.commonAwardScores = radio_res_item.find('.score').val();
+                                    commonAwardInner.giveScore = 1;
+                                    commonAwardInner.intergalPool = n[0].dataset.integralPool;
                                 } else {
                                     commonAwardInner.commonAwardScores = 0;
                                 }

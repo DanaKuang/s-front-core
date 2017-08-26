@@ -1,7 +1,10 @@
 <div>
 	<div class="btn-area">
-		<input type="checkbox" class="online" ng-disabled="disabled"><label for="">是否启用本活动（勾选并保存后该活动将生效，不勾选则为停用状态）</label><br>
-		<button type="submit" id="submitPrize" class="btn btn-default submit-prize f-btn" ng-click="updateActivity()" data-toggle="modal">保存</button>
+		<input type="checkbox" class="online" ng-disabled="disabled"><label for="">是否启用本活动（勾选并保存后该活动将生效，不勾选则为待启用状态）</label><br>
+		<div class="submit-wrap">
+			<button type="submit" id="submitPrize" class="btn btn-default f-btn" ng-click="updateActivity()">保存</button>
+			<button type="submit" class="btn btn-default submit-prize" data-toggle="modal" data-target=".createSuccess">保存</button>
+		</div>
 		<button class="btn btn-default cancel-prize f-btn" ng-click="cancelActivityBuild($event)">取消</button>
 	</div>
 </div>

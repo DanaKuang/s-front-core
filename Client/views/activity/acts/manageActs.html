@@ -176,6 +176,24 @@
 	  </div>
 	</div>
 
+	<!-- 积分池模板 -->
+	<div class="modal fade create-jfProduct-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">选择积分<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+		    <div class="modal-body">
+		    	<!-- 选择红包列表 -->
+		    	<sa-jfproduct conf="jfproductConf"></sa-jfproduct>
+		    	<!-- 分页区 -->
+					<div class="pagination-wrap">
+						<!-- 分页指令 -->
+						<sa-pagination conf="paginationjfInnerConf" class="pagination"></sa-pagination>
+					</div>
+		    </div>
+	    </div>					    	
+	  </div>
+	</div>	
+
 	<!-- 礼品增库 -->
 	<div class="modal fade add-giftstock-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">

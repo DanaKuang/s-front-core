@@ -456,6 +456,16 @@ define([], function () {
             })
           })
 
+          // 积分池列表
+          var fromActivityConfigtoChooseJF = {};
+          $scope.$on('fromActivityConfigtoChooseJF', function (e, v, f) {
+            fromActivityConfigtoChooseJF = f;
+            $model.getProductChooseList(f).then(function (res) {
+              $scope.jfproductConf = res.data;
+              $scope.paginationjfInnerConf = res.data;
+            })
+          })
+
           // 礼品列表选择翻页,红包选择翻页
           $scope.$on('frominnerpagechange', function(e, v, f) {
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
@@ -518,8 +528,9 @@ define([], function () {
             $model.addNewActivity(f).then(function(res){
               if (res.data.ret === '200000') {
                 $scope.successshowlistConf = res.data;
-                $('.createSuccess').addClass('in').css('display', 'block');
-                $('body').append('<div class="modal-backdrop fade in"></div>');
+                $('.submit-prize').trigger('click');
+                // $('.createSuccess').addClass('in').css('display', 'block');
+                // $('body').append('<div class="modal-backdrop fade in"></div>');
                 $scope.iknow = function (e) {
                   location.reload();
                 }

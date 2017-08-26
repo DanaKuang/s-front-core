@@ -47,7 +47,13 @@
 									<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 									<div class="present-integral">
 										<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										<div class="sendscore hidden">
+											<div class="choose-list">
+												<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+												<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+											</div>
+											<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										</div>
 									</div>
 								</div>
 							</div>
@@ -89,7 +95,13 @@
 									<input type="text" class="hbnumber" placeholder="请填写红包数量" ng-keyup="notminusnotzero($event)" maxlength="10">
 									<div class="present-integral">
 										<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										<div class="sendscore hidden">
+											<div class="choose-list">
+												<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+												<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+											</div>
+											<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										</div>
 									</div>
 								</div>
 							</div>
@@ -165,8 +177,14 @@
 									<small class="wrong-tip wrong-tip-num hidden">请设置奖品的发放数量</small>
 									<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 									<div class="present-integral">
-										<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
+										<div class="sendscore hidden">
+											<div class="choose-list">
+												<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+												<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+											</div>
+											<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										</div>
 									</div>
 								</div>
 							</div>
@@ -207,7 +225,13 @@
 									<input type="text" class="hbnumber" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 									<div class="present-integral">
 										<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										<div class="sendscore hidden">
+											<div class="choose-list">
+												<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+												<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+											</div>
+											<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+										</div>
 									</div>
 								</div>
 							</div>
@@ -275,7 +299,13 @@
 							<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-								<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								<div class="sendscore hidden">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+									</div>
+									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								</div>
 							</div>
 						</div>
 					</div>
@@ -317,7 +347,13 @@
 							<input type="text" class="hbnumber" placeholder="请填写红包数量" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-								<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								<div class="sendscore hidden">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+									</div>
+									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								</div>
 							</div>
 						</div>
 					</div>
@@ -388,7 +424,13 @@
 							<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-								<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								<div class="sendscore hidden">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+									</div>
+									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								</div>
 							</div>
 						</div>
 					</div>
@@ -429,7 +471,13 @@
 							<input type="text" class="hbnumber" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-								<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								<div class="sendscore hidden">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+									</div>
+									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+								</div>
 							</div>
 						</div>
 					</div>
@@ -476,7 +524,13 @@
 				<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 				<div class="present-integral">
 					<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-					<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					<div class="sendscore hidden">
+						<div class="choose-list">
+							<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+							<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+						</div>
+						<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					</div>
 				</div>
 			</div>
 		</div>
@@ -519,7 +573,13 @@
 				<input type="text" class="hbnumber" placeholder="请填写红包数量" ng-keyup="notminusnotzero($event)" maxlength="10">
 				<div class="present-integral">
 					<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
-					<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					<div class="sendscore hidden">
+						<div class="choose-list">
+							<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+							<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+						</div>
+						<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					</div>
 				</div>
 			</div>
 		</div>
@@ -538,7 +598,13 @@
 				<input type="text" class="number" placeholder="请输入数字" disabled>
 				<div class="present-integral">
 					<input type="checkbox" class="tickcheckbox" disabled><label for="">同时赠送积分</label>
-					<input type="text" class="score" placeholder="请输入数字" disabled>积分
+					<div class="sendscore hidden">
+						<div class="choose-list">
+							<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+							<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+						</div>
+						<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					</div>
 				</div>
 			</div>
 		</div>
@@ -570,7 +636,13 @@
 				<input type="text" class="hbnumber" placeholder="请填写奖金数量" disabled>
 				<div class="present-integral">
 					<input type="checkbox" class="tickcheckbox" disabled><label for="">同时赠送积分</label>
-					<input type="text" class="score" placeholder="请输入数字" disabled>积分
+					<div class="sendscore hidden">
+						<div class="choose-list">
+							<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+							<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+						</div>
+						<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+					</div>
 				</div>
 			</div>
 		</div>
