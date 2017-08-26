@@ -161,6 +161,7 @@ define([], function () {
                                         // 积分
                                         specialAwardInner.specialAwardTypes = 6;
                                         specialAwardInner.specialAwardScores = radio_res_item.find('.score').val();
+                                        specialAwardInner.specialAwards = radio_res_item.data('integralPool');
                                     }
                                 }
 
@@ -279,6 +280,7 @@ define([], function () {
                                     // 积分
                                     commonAwardInner.commonAwardTypes = 6;
                                     commonAwardInner.commonAwardScores = radio_res_item.find('.score').val();
+                                    commonAwardInner.specialAwards = radio_res_item.data('integralPool');
                                 }
                             }
 
