@@ -214,7 +214,7 @@ define([], function () {
             }
 
             // 勾选积分池
-            $('#setprize').on('click', '.tickcheckbox', function (e) {
+            $('#surprisesetprize').on('click', '.tickcheckbox', function (e) {
               if ($(e.target).prop('checked')) {
                   $(e.target).siblings('.sendscore').removeClass('hidden')
               } else {
