@@ -45,6 +45,7 @@ define([], function () {
 
                 var specialgifthtml = $('#specialgifthtml').html();
                 var specialhbhtml = $('#specialhbhtml').html();
+                var specialjfhtml = $('#specialjfhtml').html();
 
                 if (dcList) {
                     if (dcList.COMMON && dcList.COMMON.length > 0) {

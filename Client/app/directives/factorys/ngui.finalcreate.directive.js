@@ -168,6 +168,8 @@ define([], function () {
                                     var send_scores = radio_res_item.find('.tickcheckbox');
                                     if (send_scores.prop('checked')) {
                                         specialAwardInner.specialAwardScores = radio_res_item.find('.score').val() || 0;
+                                        specialAwardInner.giveScore = 1;
+                                        specialAwardInner.intergalPool = n[0].dataset.integralPool;
                                     } else {
                                         specialAwardInner.specialAwardScores = 0;
                                     }

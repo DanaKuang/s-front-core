@@ -109,6 +109,12 @@
 							<!-- 积分 -->
 							<div class="jf radio-res hidden">
 								<div class="configuration-item">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+									</div>									
+								</div>
+								<div class="configuration-item">
 									<b>*</b>
 									<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
@@ -239,6 +245,12 @@
 							<!-- 积分 -->
 							<div class="jf radio-res hidden">
 								<div class="configuration-item">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+									</div>									
+								</div>
+								<div class="configuration-item">
 									<b>*</b>
 									<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
@@ -360,6 +372,12 @@
 
 					<!-- 积分 -->
 					<div class="jf radio-res hidden">
+						<div class="configuration-item">
+							<div class="choose-list">
+								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+								<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+							</div>									
+						</div>
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
@@ -485,6 +503,12 @@
 					<!-- 积分 -->
 					<div class="jf radio-res hidden">
 						<div class="configuration-item">
+							<div class="choose-list">
+								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+								<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+							</div>									
+						</div>
+						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 							<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
@@ -585,6 +609,23 @@
 		</div>
 	</script>
 
+	<script type="text/html" id="specialjfhtml">
+		<div class="jf radio-res hidden">
+			<div class="configuration-item">
+				<div class="choose-list">
+					<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+					<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+				</div>									
+			</div>
+			<div class="configuration-item">
+				<input type="text" class="score" placeholder="请输入数字" disabled>
+			</div>
+			<div class="configuration-item">
+				<input type="text" class="number" placeholder="请输入数字" disabled>
+			</div>
+		</div>
+	</script>
+
 	<script type="text/html" id="gifthtml">
 		<div class="gift radio-res hidden">
 			<div class="configuration-item">
@@ -650,6 +691,12 @@
 
 	<script type="text/html" id="jfhtml">
 		<div class="jf radio-res hidden">
+			<div class="configuration-item">
+				<div class="choose-list">
+					<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+					<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+				</div>									
+			</div>
 			<div class="configuration-item">
 				<input type="text" class="score" placeholder="请输入数字" disabled>
 			</div>
