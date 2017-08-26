@@ -61,6 +61,41 @@ define([], function () {
 
                 bigVerify()
                 function bigVerify() {
+                    // 彩蛋奖品
+                    if (_drawPrizeScope) {
+                        var caidanerror = false;
+                        var caidanAward = [];
+                        processCaidanDraw();
+                        function processCaidanDraw() {
+                            var caidanAwardInner = {};
+                            caidanAwardInner.sduration = _drawPrizeScope.startHour;
+                            caidanAwardInner.eduration = _drawPrizeScope.endHour;
+                            caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+                            if (_drawPrizeScope.myPlus) {
+                                caidanAwardInner.condition = _drawPrizeScope.plusval;
+                                var index = $('[ng-model="plusval"]')[0].selectedIndex;
+                                caidanAwardInner.conditionName = $('[ng-model="plusval"] option').eq(index).text();
+                                if (!caidanAwardInner.condition) {
+                                    caidanerror = true;
+                                    $('.plus').children('.wrong-tip').removeClass('hidden');
+                                }
+                            } else {
+                                caidanAwardInner.probability = _drawPrizeScope.drawChance;
+                                if (!caidanAwardInner.probability) {
+                                    caidanerror = true;
+                                    $('.plus').children('.wrong-tip').removeClass('hidden');
+                                }
+                            }
+                            if (!caidanAwardInner.sduration || !caidanAwardInner.eduration || !caidanAwardInner.adcodes) {
+                                caidanerror = true;
+                                $('.plus').children('.wrong-tip').removeClass('hidden');
+                            }
+
+                            // 所有中奖条件已填才能push
+                            caidanAward.push(JSON.stringify(caidanAwardInner));
+                        }
+                    }
+
                     // 若勾选特殊奖品
                     if (_setPrizeScope.myVar) {
                         // 勾选了首抽必中
@@ -304,40 +339,6 @@ define([], function () {
                         }) 
                     }
 
-                    // 彩蛋奖品
-                    if (_drawPrizeScope) {
-                        var caidanerror = false;
-                        var caidanAward = [];
-                        processCaidanDraw();
-                        function processCaidanDraw() {
-                            var caidanAwardInner = {};
-                            caidanAwardInner.sduration = _drawPrizeScope.startHour;
-                            caidanAwardInner.eduration = _drawPrizeScope.endHour;
-                            caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
-                            if (_drawPrizeScope.myPlus) {
-                                caidanAwardInner.condition = _drawPrizeScope.plusval;
-                                var index = $('[ng-model="plusval"]')[0].selectedIndex;
-                                caidanAwardInner.conditionName = $('[ng-model="plusval"] option').eq(index).text();
-                                if (!caidanAwardInner.condition) {
-                                    caidanerror = true;
-                                    $('.plus').children('.wrong-tip').removeClass('hidden');
-                                }
-                            } else {
-                                caidanAwardInner.probability = _drawPrizeScope.drawChance;
-                                if (!caidanAwardInner.probability) {
-                                    caidanerror = true;
-                                    $('.plus').children('.wrong-tip').removeClass('hidden');
-                                }
-                            }
-                            if (!caidanAwardInner.sduration || !caidanAwardInner.eduration || !caidanAwardInner.adcodes) {
-                                caidanerror = true;
-                                $('.plus').children('.wrong-tip').removeClass('hidden');
-                            }
-
-                            // 所有中奖条件已填才能push
-                            caidanAward.push(JSON.stringify(caidanAwardInner));
-                        }
-                    }
 
                     // 最后整合成提交对象
                     var fromSonScope = {

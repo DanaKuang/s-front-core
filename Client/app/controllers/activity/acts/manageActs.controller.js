@@ -522,6 +522,15 @@ define([], function () {
               $('.modal-content .close').trigger('click');
             })
           }
+
+          // 勾选积分池
+          $('#setprize').on('click', '.tickcheckbox', function (e) {
+              if ($(e.target).prop('checked')) {
+                  $(e.target).siblings('.sendscore').removeClass('hidden')
+              } else {
+                  $(e.target).siblings('.sendscore').addClass('hidden')
+              }
+          })
           
           // 新增活动
           $scope.$on('fromcommonactivity', function(e,v,f){
