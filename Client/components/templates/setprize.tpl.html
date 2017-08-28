@@ -4,7 +4,7 @@
 		<input type="checkbox" class="first-draw-cbox" ng-model="myVar" ng-init="myVar = false" ng-disabled="disabled"><span>首抽必中</span>
 		<!-- 首抽中奖设置 -->
 		<div class="first-draw-prize-wrap" ng-show="myVar" ng-click="close($event)">
-			<h6>首抽用户设置</h6>
+			<h6>拉新用户奖池</h6>
 			<div class="ready-set" ng-click="changeTab($event)">
 				<div class="draw-prize-wrap">
 					<div class="prize-config border-box">
@@ -32,7 +32,7 @@
 									<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-product-list">+选择产品</button>
-										<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 									</div>
 									
 									<div class="prize-img-preview">
@@ -136,7 +136,7 @@
 	</div>
 	<!-- 非首抽 -->
 	<div class="non-first-draw gotoset" id="none_first_draw">
-		<h6>非首抽用户设置</h6>
+		<h6>常规奖池</h6>
 		<!-- 非首抽中奖设置 -->
 		<div class="non-first-draw-wrap" ng-click="close($event)">
 			<div class="ready-set" ng-click="changeTab($event)">
@@ -171,7 +171,7 @@
 									<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-product-list">+选择产品</button>
-										<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 									</div>
 									<div class="prize-img-preview">
 										<div class="mask">暂无产品</div>
@@ -297,7 +297,7 @@
 							<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-product-list">+选择产品</button>
-								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 							</div>
 							<div class="prize-img-preview">
 								<div class="mask">暂无产品</div>
@@ -429,7 +429,7 @@
 							<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-product-list">+选择产品</button>
-								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 							</div>
 							<div class="prize-img-preview">
 							  <div class="mask">暂无产品</div>
@@ -534,7 +534,7 @@
 				<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 				<div class="choose-list">
 					<button class="fake-choose-button add-prize show-product-list">+选择产品</button>
-					<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+					<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 				</div>
 				<div class="prize-img-preview">
 				  <div class="mask">暂无产品</div>
@@ -629,7 +629,7 @@
 	<script type="text/html" id="gifthtml">
 		<div class="gift radio-res hidden">
 			<div class="configuration-item">
-				<button class="btn btn-default add-prize show-product-list" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="canchoose">+选择产品</button>
+				<button class="btn btn-default add-prize show-product-list" data-toggle="modal" data-target=".create-realProduct-modal">+选择产品</button>
 				<div class="prize-img-preview">
 				  <div class="mask">暂无产品</div>
 					<img src="" alt="">
@@ -654,7 +654,7 @@
 	<script type="text/html" id="hbhtml">
 		<div class="hb radio-res hidden">
 			<div class="configuration-item">
-				<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="canchoose">+选择红包模板</button>
+				<button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
 				<div class="hb-two-one">
 					<div class="random-hb hb-money-wrap">
 						<div class="circle-money-tick">

@@ -249,7 +249,7 @@
 	width: 445px;
 }
 .activity-priority:after {
-	content: '提示：数值越大活动越靠前显示，最小数值为0';
+	content: '提示：数值越大活动越靠前显示，最小数值为1';
   position: absolute;
   bottom: -20px;
   left: 86px;
