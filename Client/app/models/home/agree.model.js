@@ -17,6 +17,8 @@ define([], function () {
         var getBrand = "/api/tztx/dataportal/statistics/getBrand"; // 品牌接口
         var otherCount = "api/tztx/dataportal/statistics/getOtherResouceCount"; // 异业分页
         var prizeCount = "/api/tztx/dataportal/statistics/getPrizeCount"; // 奖品分页
+        var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格        
+        
 
         this.$others = function(params) {
           return request.$Search(getOtherResouce,params,true);
@@ -32,6 +34,9 @@ define([], function () {
         }
         this.$prizeCount = function(params) {
           return request.$Search(prizeCount,params,true);
+        }
+        this.$getProduct = function(params){
+          return request.$Search(getProduct,params,true);
         }
       };
     }]

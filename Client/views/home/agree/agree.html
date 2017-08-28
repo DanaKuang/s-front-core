@@ -17,24 +17,36 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="tab_nav clearfix">
+            <!-- <div class="tab_nav clearfix">
                 <div ng-class="bool ? 'tab_active' :''" ng-click = "Tabs(true)">异业资源发放明细</div>
                 <div ng-class="bool ? '' : 'tab_active'" ng-click = "Tabs(false)">现金奖品发放明细</div>
-            </div>
-            <div class="res_search" ng-show="bool">
+            </div> -->
+            <!-- 活动名称，品牌，规格，奖品类别、抽检状态、抽检人             -->
+            <div class="res_search">
               <div class="res_tel">
-                <label>手机号：</label>
+                <label>活动名称：</label>
                 <input type="text" placeholder="">
               </div>
+              <div class="agree_brand">
+                  <label>品牌：</label>
+                  <select id="agree_brand">
+                    <option value="">全部</option>
+                  </select>
+                </div>
+                <div class="agree_product">
+                  <label>规格：</label>
+                  <select id="agree_product">
+                  </select>
+                </div>
               <div class="res_award">
-                <label>奖品：</label>
+                <label>奖品类名：</label>
                 <input type="text" placeholder="">
               </div>
               <div class="res_city">
                 <label>城市：</label>
                 <input type="text" placeholder="">
               </div>
-              <div class="agree-date res-start">
+              <!-- <div class="agree-date res-start">
                 <label>开始时间</label>
                 <div class="ui-total-date input-append date">
                   <input size="16" type="text" value="" readonly />
@@ -47,41 +59,41 @@
                   <input size="16" type="text" value="" readonly />
                   <span class="add-on"><i class="icon-th"></i></span>
                 </div>
-              </div>
+              </div> -->
               <div class="search_btn res_btn">查询</div>
             </div>
-            <div class="gift_search res_search" ng-show="!bool">
-              <div class="gift_select">
+            <!-- <div class="gift_search res_search" ng-show="!bool"> -->
+              <!-- <div class="gift_select">
                 <label>品牌：</label>
                 <select>
-                  <!--<option value="玉溪">玉溪</option>-->
-                  <!--<option value="黄鹤楼">黄鹤楼</option>-->
+                  <option value="玉溪">玉溪</option>
+                  <option value="黄鹤楼">黄鹤楼</option>
                 </select>
-              </div>
-              <div class="gift_bag">
+              </div> -->
+              <!-- <div class="gift_bag">
                 <label>种类：</label>
                 <select>
                   <option value="盒">盒</option>
                   <option value="条">条</option>
                 </select>
-              </div>
-              <div class="gift_tel">
+              </div> -->
+              <!-- <div class="gift_tel">
                 <label>手机号：</label>
                 <input type="text"  />
               </div>
               <div class="gift_city">
                 <label>城市：</label>
                 <input type="text" />
-              </div>
+              </div> -->
 
-              <div class="agree-date gift_start">
+              <!-- <div class="agree-date gift_start">
                 <label>开始时间</label>
                 <div class="ui-total-date input-append date">
                   <input size="16" type="text" value="" readonly />
                   <span class="add-on"><i class="icon-th"></i></span>
                 </div>
-              </div>
-              <div class="agree-date gift_end">
+              </div> -->
+              <!-- <div class="agree-date gift_end">
                 <label>结束时间</label>
                 <div class="ui-total-date input-append date">
                   <input size="16" type="text" value="" readonly />
@@ -89,8 +101,8 @@
                 </div>
               </div>
               <div class="search_btn gift_btn">查询</div>
-            </div>
-            <table class="table res_table" ng-show="bool">
+            </div> -->
+            <table class="table res_table">
               <thead style="border: 1px solid #A0A0A0">
               <tr>
                 <th>手机号</th>
@@ -101,7 +113,7 @@
               </thead>
               <tbody></tbody>
             </table>
-            <table class="table gift_table" ng-show="!bool">
+            <!-- <table class="table gift_table" ng-show="!bool">
               <thead style="border: 1px solid #A0A0A0">
               <tr>
                 <th>手机号</th>
@@ -115,7 +127,7 @@
               </tr>
               </thead>
               <tbody></tbody>
-            </table>
+            </table> -->
             <div class="footer_sec clearfix">
               <!--<div class="total_info lf">-->
                 <!--总共<span>205</span>条记录，当前页共<span>10条记录</span>-->
