@@ -134,7 +134,9 @@ define([], function () {
 
             // 新增活动
             $model.addNewActivity = function (data) {
-                return request.$Search(ADD_NEW_ACTIVITY, data)
+                return request.$Search(ADD_NEW_ACTIVITY, data, {
+                    'Content-Type': 'application/json'
+                })
             }
 
             // 更改活动状态

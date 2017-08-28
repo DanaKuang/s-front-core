@@ -525,6 +525,7 @@ define([], function () {
           
           // 新增活动
           $scope.$on('fromcommonactivity', function(e,v,f){
+            f = JSON.stringify(f);
             $model.addNewActivity(f).then(function(res){
               if (res.data.ret === '200000') {
                 $scope.successshowlistConf = res.data;

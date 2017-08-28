@@ -59,26 +59,166 @@ define([], function () {
                 var _setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
                 var _drawPrizeScope = angular.element('.draw-prize').scope(); // 彩蛋的 中奖设置
 
-                // 奖项设置里面最终要传的两个数组
-                var specialAward = [];
-                var commonAward = [];
-                var specialerror = false, commonerror = false, finalerror = false;
+                var activityAwards = [],
+                    specialerror = false,
+                    commonerror = false,
+                    finalerror = false;
             
                 // 彩蛋奖品
                 if (_drawPrizeScope) {
                     var caidanerror = false;
                     var caidanAward = [];
                     processCaidanDraw(_drawPrizeScope, caidanAward, caidanerror);
+                    // 彩蛋的中奖fn
+                    function processCaidanDraw(_drawPrizeScope, caidanAward, caidanerror) {
+                        var caidanAwardInner = {};
+                        caidanAwardInner.sduration = _drawPrizeScope.startHour;
+                        caidanAwardInner.eduration = _drawPrizeScope.endHour;
+                        caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+                        if (_drawPrizeScope.myPlus) {
+                            caidanAwardInner.condition = _drawPrizeScope.plusval;
+                            var index = $('[ng-model="plusval"]')[0].selectedIndex;
+                            caidanAwardInner.conditionName = $('[ng-model="plusval"] option').eq(index).text();
+                            if (!caidanAwardInner.condition) {
+                                caidanerror = true;
+                                $('.plus').children('.wrong-tip').removeClass('hidden');
+                            }
+                        } else {
+                            caidanAwardInner.probability = _drawPrizeScope.drawChance;
+                            if (!caidanAwardInner.probability) {
+                                caidanerror = true;
+                                $('.plus').children('.wrong-tip').removeClass('hidden');
+                            }
+                        }
+                        if (!caidanAwardInner.sduration || !caidanAwardInner.eduration || !caidanAwardInner.adcodes) {
+                            caidanerror = true;
+                            $('.plus').children('.wrong-tip').removeClass('hidden');
+                        }
+
+                        // 所有中奖条件已填才能push
+                        caidanAward.push(JSON.stringify(caidanAwardInner));
+                        return {
+                            caidanerror: caidanerror,
+                            caidanAward: caidanAward
+                        }
+                    }
                 }
 
-                // 若勾选特殊奖品
                 if (_setPrizeScope.myVar) {
                     // 特殊
-                    setPrize(false)
+                    setPrize('special')
                 }
-
                 // 普通奖品必需填写
-                setPrize(true)
+                setPrize('common')
+                // 特殊 & 普通奖项设置fn
+                function setPrize(tag) {
+                    if (tag === 'special') {
+                        // 特殊奖品
+                        var prizeDomList = $('.first-draw-prize-wrap').find('.ready-set').children();
+                    } else {
+                        // 普通奖品
+                        var prizeDomList = $('.non-first-draw-wrap').find('.ready-set').children();
+                    }
+
+                    var prizeDomList_len = prizeDomList.length;
+                    var prizeDomList_arr = Array.apply(0, Array(prizeDomList_len)).map(function(item, index){
+                        return index
+                    })
+
+                    if (tag === 'special') {
+                        // 特殊奖品
+                        processPrizeArr(prizeDomList_arr, prizeDomList, true)
+                    } else {
+                        // 普通奖品
+                        processPrizeArr(prizeDomList_arr, prizeDomList, false)
+                    }
+                }
+                // 具体-处理奖项数组
+                function processPrizeArr(prizeDomList_arr, prizeDomList, specialBool) {
+                    prizeDomList_arr.forEach(function (n, index) {
+                        var item = prizeDomList.eq(n);
+
+                        if (item.parents('.sethbprize').length != 0) {
+                            // 微信红包专属活动
+                            var radio_res_item = item.find('.hb-res');
+                        } else {
+                            // 通用3选1
+                            var num = item.find('.radio-wrap').find('.active').parent().index();
+                            var radio_res_item = item.find('.radio-res-wrap').children().eq(num);
+                        }
+
+                        var ActivityPageAward = {};
+
+                        if (specialBool) {
+                            ActivityPageAward.special = 1;
+                        } else {
+                            ActivityPageAward.special = 0;
+                        }
+                        ActivityPageAward.probability = item.find('.chance').val() || ''; //特殊奖品没有概率设置
+                        ActivityPageAward.prizeName = item.find('.prizename').val() || '';
+                        ActivityPageAward.multiChoose = 0; //目前暂定都为单选奖品
+
+                        ActivityPageAward.details = [] //具体奖品数组，目前是单选
+                        ActivityPageAward.details.poolId = item[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
+                        ActivityPageAward.details.awardName = item[0].dataset.name || '';
+                        ActivityPageAward.details.awardPicUrl = item[0].dataset.giftPic || '';
+                        ActivityPageAward.details.awardNums = radio_res_item.find('.number').val();
+                        ActivityPageAward.details.score = radio_res_item.find('.score').val() || 0;
+
+                        // 红包总金额，最小、最大
+                        if (radio_res_item.hasClass('hb')) {
+                            ActivityPageAward.details.awardType = 3;
+                            ActivityPageAward.details.redTotalMoney = radio_res_item.find('.money').val();
+
+                            if (radio_res_item.find('.circle-money-tick.active').parent().hasClass('random-hb')) {
+                                ActivityPageAward.details.minred = radio_res_item.find('.min').val();
+                                ActivityPageAward.details.bigred = radio_res_item.find('.max').val();
+                            } else {
+                                ActivityPageAward.details.minred = ActivityPageAward.details.bigred = radio_res_item.find('.fixed').val();
+                            }    
+                        } else {
+                            if (radio_res_item.hasClass('gift')) {
+                                // 礼品
+                                ActivityPageAward.details.awardType = item[0].dataset.giftType;
+                            } else {
+                                // 积分
+                                ActivityPageAward.details.awardType = 6;
+                                ActivityPageAward.details.poolId = radio_res_item.data('integralPool');
+                            }
+                        }
+
+                        if (radio_res_item.hasClass('gift') || radio_res_item.hasClass('hb')) {
+                            var send_scores = radio_res_item.find('.tickcheckbox');
+                            if (send_scores.prop('checked')) {
+                                ActivityPageAward.details.giveScore = 1;
+                                ActivityPageAward.details.integralPool = item[0].dataset.integralPool;
+                            }
+                        }
+
+                        // 校验错误
+                        if (!ActivityPageAward.prizeName || !ActivityPageAward.details.awardType || !ActivityPageAward.details.awardNums) {
+                            ActivityPageAward.special ? specialerror = true : commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+
+                        if (send_scores.prop('checked') && !ActivityPageAward.details.integralPool) {
+                            ActivityPageAward.special ? specialerror = true : commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+
+                        if (radio_res_item.find('.hbnumber').length != 0 && !ActivityPageAward.details.redTotalMoney) {
+                            ActivityPageAward.special ? specialerror = true : commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+
+                        if (ActivityPageAward.special == 0 && !ActivityPageAward.probability) {
+                            commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+
+                        activityAwards.push(ActivityPageAward);  
+                    })
+                }
 
                 // 最后整合成提交对象
                 var fromSonScope = {
@@ -105,14 +245,18 @@ define([], function () {
                     stime: _launchScope.startTime || '',
                     etime: _launchScope.endTime || '',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
-                    specialAwardStr: specialAward.toString() || '',
-                    commonAwardStr: commonAward.toString() || '',
+                    // specialAwardStr: specialAward.toString() || '',
+                    // commonAwardStr: commonAward.toString() || '',
+                    activityAwards: activityAwards,
                     caidanConfigStr: _drawPrizeScope ? caidanAward.toString() : '',
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
 
-                checkEmpty();
-                function checkEmpty() {
+                console.log(fromSonScope);
+
+                checkEmpty(fromSonScope)
+                // final校验 & 提交
+                function checkEmpty(fromSonScope,finalerror) {
                     for (var s in fromSonScope) {
                         // attachUrl, specialAwardStr 这两个可以为空
                         if (s == 'name' && fromSonScope[s] == '' ) {
@@ -147,7 +291,6 @@ define([], function () {
                             }
                         }
                         
-
                         if (s == 'areaCodes' && fromSonScope[s].length == 0) {
                             // 地区没选
                             finalerror = true;
@@ -173,7 +316,7 @@ define([], function () {
                         if (s == 'etime' && fromSonScope[s] == '') {
                             // 结束时间没选
                             finalerror = true;
-                             $('.select-duration .wrong-tip').removeClass('hidden');
+                            $('.select-duration .wrong-tip').removeClass('hidden');
                         }
                     }
 
@@ -200,295 +343,6 @@ define([], function () {
                     }
                 }
             } 
-
-            // 彩蛋的中奖fn
-            function processCaidanDraw(_drawPrizeScope, caidanAward, caidanerror) {
-                var caidanAwardInner = {};
-                caidanAwardInner.sduration = _drawPrizeScope.startHour;
-                caidanAwardInner.eduration = _drawPrizeScope.endHour;
-                caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
-                if (_drawPrizeScope.myPlus) {
-                    caidanAwardInner.condition = _drawPrizeScope.plusval;
-                    var index = $('[ng-model="plusval"]')[0].selectedIndex;
-                    caidanAwardInner.conditionName = $('[ng-model="plusval"] option').eq(index).text();
-                    if (!caidanAwardInner.condition) {
-                        caidanerror = true;
-                        $('.plus').children('.wrong-tip').removeClass('hidden');
-                    }
-                } else {
-                    caidanAwardInner.probability = _drawPrizeScope.drawChance;
-                    if (!caidanAwardInner.probability) {
-                        caidanerror = true;
-                        $('.plus').children('.wrong-tip').removeClass('hidden');
-                    }
-                }
-                if (!caidanAwardInner.sduration || !caidanAwardInner.eduration || !caidanAwardInner.adcodes) {
-                    caidanerror = true;
-                    $('.plus').children('.wrong-tip').removeClass('hidden');
-                }
-
-                // 所有中奖条件已填才能push
-                caidanAward.push(JSON.stringify(caidanAwardInner));
-                return {
-                    caidanerror: caidanerror,
-                    caidanAward: caidanAward
-                }
-            }
-
-            // 特殊 & 普通奖项设置fn
-            function setPrize(common) {
-                if (!common) {
-                    // 特殊奖品
-                    var prizelist = $('.first-draw-prize-wrap').find('.ready-set').children();
-                } else {
-                    // 普通奖品
-                    var prizelist = $('.non-first-draw-wrap').find('.ready-set').children();
-                }
-
-                var prizelist_len = prizelist.length;
-                var prizelist_arr = Array.apply(0, Array(prizelist_len)).map(function(item, index){
-                    return index
-                })
-
-                if (!common) {
-                    // 特殊奖品
-                    processSpecial(prizelist_arr);
-                } else {
-                    // 普通奖品
-                    processCommon(prizelist_arr)
-                }
-            }
-
-            // 处理special奖项
-            function processSpecial(trans_arr) {
-                trans_arr.forEach(function(n, index) {
-                    var specialAwardInner = {};
-                    specialAwardInner.specialAwards = '';
-                    specialAwardInner.specialAwardTypes = '';
-                    specialAwardInner.specialAwardName = '';
-                    specialAwardInner.prizeName = '';
-                    specialAwardInner.specialAwardPics = '';
-                    specialAwardInner.specialAwardNums = '';
-                    specialAwardInner.specialRedTotalMoney = '';
-                    specialAwardInner.specialRedNum = '';
-                    specialAwardInner.specialMinred = '';
-                    specialAwardInner.specialBigred = '';
-                    specialAwardInner.specialAwardScores = '';
-
-                    var n = first_arr.eq(n);
-
-                    specialAwardInner.specialAwards = n[0].dataset.id;
-                    specialAwardInner.prizeName = n.find('.prizename').val() || '';
-                    specialAwardInner.specialAwardPics = n[0].dataset.giftPic || '';
-                    specialAwardInner.specialAwardName = n[0].dataset.name || '';
-
-                    if (n.parents('.sethbprize').length != 0) {
-                        // 微信红包专属活动
-                        var radio_res_item = n.find('.hb-res');
-                    } else {
-                        // 通用3选1
-                        var num = n.find('.radio-wrap').find('.active').parent().index();
-                        var radio_res_item = n.find('.radio-res-wrap').children().eq(num);
-                    }
-
-                    // 红包总金额，最小、最大
-                    if (radio_res_item.hasClass('hb')) {
-                        specialAwardInner.specialAwardTypes = 3;
-                        specialAwardInner.specialRedTotalMoney = radio_res_item.find('.money').val();
-
-                        specialAwardInner.specialRedNum = radio_res_item.find('.hbnumber').val();
-
-                        if (radio_res_item.find('.circle-money-tick.active').parent().hasClass('random-hb')) {
-                            specialAwardInner.specialMinred = radio_res_item.find('.min').val();
-                            specialAwardInner.specialBigred = radio_res_item.find('.max').val();
-                        } else {
-                            specialAwardInner.specialMinred = radio_res_item.find('.fixed').val();
-                            specialAwardInner.specialBigred = radio_res_item.find('.fixed').val();
-                        }    
-                    } else {
-                        specialAwardInner.specialAwardNums = radio_res_item.find('.number').val();
-                        if (radio_res_item.hasClass('gift')) {
-                            // 礼品
-                            specialAwardInner.specialAwardTypes = n[0].dataset.giftType;
-                        } else {
-                            // 积分
-                            specialAwardInner.specialAwardTypes = 6;
-                            specialAwardInner.specialAwardScores = radio_res_item.find('.score').val();
-                            specialAwardInner.specialAwards = radio_res_item.data('integralPool');
-                        }
-                    }
-
-                    if (radio_res_item.hasClass('gift') || radio_res_item.hasClass('hb')) {
-                        var send_scores = radio_res_item.find('.tickcheckbox');
-                        if (send_scores.prop('checked')) {
-                            specialAwardInner.specialAwardScores = radio_res_item.find('.score').val() || 0;
-                            specialAwardInner.giveScore = 1;
-                            specialAwardInner.integralPool = n[0].dataset.integralPool;
-                        } else {
-                            specialAwardInner.specialAwardScores = 0;
-                        }
-                    }
-
-                    // 校验错误
-                    if (!specialAwardInner.prizeName || !specialAwardInner.specialAwardTypes) {
-                        if (!specialAwardInner.prizeName) {
-                        }
-                        specialerror = true;
-                        n.children('.wrong-tip').removeClass('hidden');
-                    }
-
-                    // 校验模板有没有选择，目前除了积分之外都要选择
-                    if (specialAwardInner.specialAwardTypes != 6) {
-                        if (!specialAwardInner.specialAwards) {
-                            specialerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    }
-
-                    if (radio_res_item.find('.hbnumber').length != 0) {
-                        if (!specialAwardInner.specialRedNum) {
-                            specialerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        } 
-                        if (!specialAwardInner.specialRedTotalMoney) {
-                            specialerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    } else {
-                        if (!specialAwardInner.specialAwardNums) {
-                            specialerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    }
-
-                    // 无错则push
-                    specialAward.push(JSON.stringify(specialAwardInner))
-                })
-            }
-
-            // 处理common奖项
-            function processCommon(trans_arr) {
-                trans_arr.forEach(function (n, index) {
-                    var commonAwardInner = {};
-                    commonAwardInner.chance = '';
-                    commonAwardInner.commonAwards = '';
-                    commonAwardInner.commonAwardTypes = '';
-                    commonAwardInner.commonAwardName = '';
-                    commonAwardInner.prizeName = '';
-                    commonAwardInner.commonAwardPics = '';
-                    commonAwardInner.commonAwardNums = '';
-                    commonAwardInner.commonRedTotalMoney = '';
-                    commonAwardInner.commonRedNum = '';
-                    commonAwardInner.commonMinred = '';
-                    commonAwardInner.commonBigred = '';
-                    commonAwardInner.commonAwardScores = '';
-                    // commonAwardInner.giveScore
-                    // commonAwardInner.integralPool
-
-                    var n = non_first_arr.eq(n);
-
-                    commonAwardInner.commonAwards = n[0].dataset.id || '';
-                    commonAwardInner.commonAwardPics = n[0].dataset.giftPic || '';
-                    commonAwardInner.commonAwardName = n[0].dataset.name || '';
-                    commonAwardInner.prizeName = n.find('.prizename').val();
-                    commonAwardInner.chance = n.find('.chance').val();
-
-                    if (n.parents('.sethbprize').length != 0) {
-                        // 微信红包专属活动
-                        var radio_res_item = n.find('.hb-res');
-                    } else {
-                        // 通用3选1
-                        var num = n.find('.radio-wrap').find('.active').parent().index();
-                        var radio_res_item = n.find('.radio-res-wrap').children().eq(num);
-                    }
-
-                    // 红包总金额，最小、最大
-                    if (radio_res_item.hasClass('hb')) {
-                        commonAwardInner.commonRedTotalMoney = radio_res_item.find('.money').val();
-                        commonAwardInner.commonAwardTypes = 3;
-                        commonAwardInner.commonRedNum = radio_res_item.find('.hbnumber').val();
-
-                        if (radio_res_item.find('.circle-money-tick.active').parent().hasClass('random-hb')) {
-                            commonAwardInner.commonMinred = radio_res_item.find('.min').val();
-                            commonAwardInner.commonBigred = radio_res_item.find('.max').val();
-                        } else {
-                            commonAwardInner.commonMinred = radio_res_item.find('.fixed').val();
-                            commonAwardInner.commonBigred = radio_res_item.find('.fixed').val();
-                        }
-                    } else {
-                        // 奖品数量
-                        commonAwardInner.commonAwardNums = radio_res_item.find('.number').val();
-                        if (radio_res_item.hasClass('gift')) {
-                            commonAwardInner.commonAwardTypes = n[0].dataset.giftType;
-                        } else {
-                            // 积分
-                            commonAwardInner.commonAwardTypes = 6;
-                            commonAwardInner.commonAwardScores = radio_res_item.find('.score').val();
-                            commonAwardInner.specialAwards = radio_res_item.data('integralPool');
-                        }
-                    }
-
-                    if (radio_res_item.hasClass('gift') || radio_res_item.hasClass('hb')) {
-                        // 赠送积分
-                        var send_scores = radio_res_item.find('.tickcheckbox');
-                        if (send_scores.prop('checked')) {
-                            commonAwardInner.commonAwardScores = radio_res_item.find('.score').val();
-                            commonAwardInner.giveScore = 1;
-                            commonAwardInner.integralPool = n[0].dataset.integralPool;
-                        } else {
-                            commonAwardInner.commonAwardScores = 0;
-                        }
-                    } 
-
-                    // 校验错误
-                    if (!_drawPrizeScope) {
-                        if (!commonAwardInner.prizeName || !commonAwardInner.chance || !commonAwardInner.commonAwardTypes) {
-                            commonerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    } else {
-                        if (!commonAwardInner.prizeName || !commonAwardInner.commonAwardTypes) {
-                            commonerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    }
-
-                    // 校验模板有没有选择，目前除了积分之外都要选择
-                    if (commonAwardInner.commonAwardTypes != 6) {
-                        if (!commonAwardInner.commonAwards) {
-                            commonerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    }
-
-                    if (radio_res_item.find('.hbnumber').length != 0) {
-                        if (!commonAwardInner.commonRedNum) {
-                             commonerror = true;
-                             n.children('.wrong-tip').removeClass('hidden');
-                        } 
-                        if (!commonAwardInner.commonRedTotalMoney) {
-                             commonerror = true;
-                             n.children('.wrong-tip').removeClass('hidden');
-                        }
-                        // 每份金额未填
-                        if (!commonAwardInner.commonMinred || !commonAwardInner.commonBigred) {
-                            commonerror = true;
-                            n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    } else {
-                        if (!commonAwardInner.commonAwardNums) {
-                             commonerror = true;
-                             n.children('.wrong-tip').removeClass('hidden');
-                        }
-                    }
-
-                    // 校验通过则push
-                    commonAward.push(JSON.stringify(commonAwardInner))
-                }) 
-            }
-
-            // empty校验
-
         }
 
         return defineObj;
