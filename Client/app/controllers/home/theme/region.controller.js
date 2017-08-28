@@ -28,9 +28,9 @@ define([], function () {
                     var provinceName = sessionStorage.getItem("account")==="henan"?"河南省":"湖南省"
                     for (var i = 0; i < res.length; i++) {
                         if(res[i].provinceName === provinceName){
-                            $(".region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
+                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
                         }else {
-                            $(".region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
+                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
 
                         }
                     }
