@@ -8,14 +8,14 @@
 	<div class="select-brand configuration-item">
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放品牌</small>
-		<select ng-model="selectBrandVal" multiple="multiple" class="select">
+		<select ng-model="selectBrandVal" class="select">
 			<option ng-repeat="item in brand" value="{{item.brandCode}}">{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-specification configuration-item">
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放规格</small>
-		<select ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" multiple="multiple" class="select">
+		<select ng-model="selectSpecificationVal" class="select">
 			<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
 		</select>
 	</div>

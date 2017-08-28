@@ -14,15 +14,6 @@
       "interval": 0
     }
   },
-  "dataZoom": [
-    {
-      "type": "inside",
-      "show": true,
-      "start":0,
-      "end": 30,
-      "zoomLock":true
-    }
-  ],
   "yAxis" : {
     "type" : "value",
     "axisLabel": {
@@ -40,7 +31,7 @@
       },
       "label":{
         "normal":{
-          "show":true
+          "show":false
         }
       },
       "itemStyle":{

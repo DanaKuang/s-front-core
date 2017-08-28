@@ -51,6 +51,7 @@
     5）在服务器上解压文件包，命令：`unzip -o ./sass-front.zip`；
     6）如果之前node已经跑起来，记得kill掉：`kill -9 [pid]`；
     7）cd到项目Client目录下执行命令：`nohup node main.js default >/dev/null 2>&1 &`，回车。
+    8) ps aux | grep node   or    ps -ef | grep node
 ## TIPS
     如果对Angular不熟悉，可以不使用指令编写页面，先试用原生H5和jQuery编写，随后统一封装。
 ## 问题

@@ -58,10 +58,12 @@ define([], function () {
       $(document).ready(function () {
         $(".operation.multi .select").multiselect({
           includeSelectAllOption: true,
+          nonSelectedText: '请选择',
           selectAllText: '全部',
+          nSelectedText: '已选择',
           selectAllValue: 'all',
           enableFiltering: true,
-          buttonWidth: '170px',
+          buttonWidth: '100%',
           maxHeight: '200px',
           numberDisplayed: 1
         });
@@ -200,7 +202,7 @@ define([], function () {
           sn: $scope.selectSpeci || [],
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
-          realThing: 1,
+          realThing: 0,
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime || '',

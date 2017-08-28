@@ -191,19 +191,61 @@ define([], function () {
                 // var pathName=window.document.location.pathname;
                 // var ctxName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
                 if (a === 1) {
-                    var statTime = $scope.obj.statTime;
-                    var activityName = $scope.obj.activityName;
-                    var productSn = $scope.obj.productSn;
-                    window.location.href = '/fixatreport/importExcelWinUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName)) + '&productSn=' + productSn;
+                    var data = {
+                        "statTime":$scope.obj.statTime,
+                        "activityName":$scope.obj.activityName,
+                        "productSn":$scope.obj.productSn
+                    }
+                    var url ="/fixatreport/importExcelWinUseProvData";
+                    // var statTime = $scope.obj.statTime;
+                    // var activityName = $scope.obj.activityName;
+                    // var productSn = $scope.obj.productSn;
+                    // window.location.href = '/fixatreport/importExcelWinUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName)) + '&productSn=' + productSn;
                 } else if (a === 2) {
-                    var statTime = $scope.saoobj.statTime;
-                    var activityName = $scope.saoobj.activityName;
-                    window.location.href = '/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
+                    var data = {
+                        "statTime":$scope.saoobj.statTime,
+                        "activityName":$scope.saoobj.activityName
+                    }
+                    var url ="/fixatreport/importExcelScanUseProvData";
+                    // var statTime = $scope.saoobj.statTime;
+                    // var activityName = $scope.saoobj.activityName;
+                    // window.location.href = '/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
                 } else if (a === 3) {
-                    var statTime = $scope.summar.statTime;
-                    // console.log(statTime);
-                    window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
+                    var data = {
+                        "statTime":$scope.summar.statTime
+                    }
+                    var url ="/fixatreport/importExcelDailySummData";                    
+                    // var statTime = $scope.summar.statTime;
+                    // window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
                 }
+                var xhr = new XMLHttpRequest();
+                var formData = new FormData();
+                for(var attr in data) {
+                        formData.append(attr, data[attr]);
+                }
+                xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                xhr.open('POST', url, true);
+                xhr.responseType = "blob";
+                xhr.responseType = "arraybuffer"
+                xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
+                xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
+                xhr.onload = function(res) {
+                if (this.status == 200) {
+                    var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                    var respHeader = xhr.getResponseHeader("Content-Disposition");
+                    var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+                    if (window.navigator.msSaveOrOpenBlob) {
+                        navigator.msSaveBlob(blob, fileName);
+                    } else {
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = fileName;
+                        link.click();
+                        window.URL.revokeObjectURL(link.href);
+                    }
+                }
+            }
+                xhr.send(formData);
             }
 
         }]

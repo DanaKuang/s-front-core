@@ -33,7 +33,7 @@ define([], function () {
         act_back_data = act_back_data.length ? act_back_data : [{activityName: '无数据',activityId: ''}];
         // 活动下拉
         $scope.activity = act_back_data;
-        $scope.activityId = "ACT-6UKN15V5DZ2" || act_back_data[0].activityId;
+        $scope.activityId = act_back_data[0].activityId;
 
         // 单选
         $(document).ready(function () {
@@ -128,7 +128,7 @@ define([], function () {
         function setTableData (actId) {
             $model.getCityPv({
                 activityId: actId,
-                provName: "湖南"
+                provName: sessionStorage.getItem("account")==="henan"?"河南":"湖南"
             }).then(function (res) {
                 $scope.rows = res.data || [];
                 $scope.$apply();

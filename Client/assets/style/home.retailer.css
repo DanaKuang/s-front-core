@@ -26,7 +26,8 @@
     margin: 20px 0 5px 0;
     font-size: 16px;
 }
-.ui-retailer-search .btn-primary {
+.ui-retailer-search .btn-primary,
+.ui-detail-search .btn-primary {
     width: 90px;
     border-radius: 15px;
     padding: 0;
@@ -81,4 +82,9 @@
 }
 .ui-detail-search .inline-block label {
     margin-right: 5px;
+}
+.ui-table-title {
+    color: #3d467d;
+    margin-bottom: 10px;
+    font-size: 16px;
 }

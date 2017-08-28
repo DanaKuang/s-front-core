@@ -63,13 +63,12 @@ define([], function () {
           $(document).ready(function () {
             $(".operation.multi .select").multiselect({
               nonSelectedText: '请选择',
-              allSelectedText: '全部',
+              selectAllText: '全部',
               nSelectedText: '已选择',
               includeSelectAllOption: true,
-              selectAllText: '全部',
               selectAllValue: 'all',
               enableFiltering: true,
-              buttonWidth: '170px',
+              buttonWidth: '100%',
               maxHeight: '200px',
               numberDisplayed: 1
             });
@@ -251,7 +250,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
@@ -272,6 +270,9 @@ define([], function () {
                     v.value = v.brandCode;
                 }));
                 $('[ng-model="selectBrandVal"]').multiselect('refresh');
+                // 给一个默认的初始值
+                var default_val = $('[ng-model="selectBrandVal"]').find('option:first').val();
+                selectCompanyScope.selectBrandVal = default_val;
               })
             })
 
@@ -285,6 +286,9 @@ define([], function () {
                     v.value = v.sn;
                 }));
                 $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+                // 给一个默认的初始值
+                var default_val = $('[ng-model="selectSpecificationVal"]').find('option:first').val();
+                selectBrandScope.selectSpecificationVal = default_val;
               })
             })
           }
@@ -294,7 +298,6 @@ define([], function () {
             $(document).ready(function () {
               $(".ui-search-block.multi .select").multiselect({
                 nonSelectedText: '请选择',
-                allSelectedText: '全部',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
@@ -453,6 +456,16 @@ define([], function () {
             })
           })
 
+          // 积分池列表
+          var fromActivityConfigtoChooseJF = {};
+          $scope.$on('fromActivityConfigtoChooseJF', function (e, v, f) {
+            fromActivityConfigtoChooseJF = f;
+            $model.getProductChooseList(f).then(function (res) {
+              $scope.jfproductConf = res.data;
+              $scope.paginationjfInnerConf = res.data;
+            })
+          })
+
           // 礼品列表选择翻页,红包选择翻页
           $scope.$on('frominnerpagechange', function(e, v, f) {
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
@@ -515,8 +528,9 @@ define([], function () {
             $model.addNewActivity(f).then(function(res){
               if (res.data.ret === '200000') {
                 $scope.successshowlistConf = res.data;
-                $('.createSuccess').addClass('in').css('display', 'block');
-                $('body').append('<div class="modal-backdrop fade in"></div>');
+                $('.submit-prize').trigger('click');
+                // $('.createSuccess').addClass('in').css('display', 'block');
+                // $('body').append('<div class="modal-backdrop fade in"></div>');
                 $scope.iknow = function (e) {
                   location.reload();
                 }

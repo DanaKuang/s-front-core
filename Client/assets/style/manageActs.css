@@ -433,6 +433,9 @@ input[type="checkbox"] {
 	padding: 15px 30px 10px;
 	border: 1px solid #d2d2d2;
 }
+.prize-config .chance {
+	width: 340px!important;
+}
 .prize-config .configuration-item input[type="text"] {
 	margin-left: 50px;
 	width: 360px;
@@ -485,6 +488,9 @@ input[type="checkbox"] {
 .gift .configuration-item:nth-of-type(1):before {
 	content: '选择礼品';
 }
+.jf .configuration-item:nth-of-type(1):before {
+	content: '选择积分';
+}
 .gift .configuration-item:nth-of-type(2):before {
 	content: '奖品数量'!important;
 	top: 6px!important;
@@ -499,13 +505,13 @@ input[type="checkbox"] {
 .hb .configuration-item:nth-of-type(2):after {
 	content: '元';
 	position: absolute;
-	right: 100px;
+	right: 115px;
 	top: 7px;
 }
-.jf .configuration-item:nth-of-type(1):before {
+.jf .configuration-item:nth-of-type(2):before {
 	content: '赠送积分';
 } 
-.jf .configuration-item:nth-of-type(2):before {
+.jf .configuration-item:nth-of-type(3):before {
 	content: '奖品数量'!important;
 	top: 6px!important;
 }
@@ -520,6 +526,9 @@ input[type="checkbox"] {
 	position: absolute;
 	right: 100px;
 	top: 7px;
+}
+.first-draw-prize-wrap .number {
+	width: 256px!important;
 }
 /*非首抽*/
 .non-first-draw-wrap .configuration-item:nth-of-type(1):before {
@@ -623,9 +632,6 @@ input[type="checkbox"] {
 .non-first-draw-wrap .gift .configuration-item:nth-of-type(1):after {
 	content: ''
 }
-.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):after {
-	content: ''
-}
 .non-first-draw-wrap .hb .configuration-item:nth-of-type(1):after {
 	content: ''
 }
@@ -676,12 +682,43 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	margin-top: 10px;
 	margin-left: 50px;
 }
-.present-integral input[type="number"] {
-	margin-right: 8px;
- 	margin-left: 10px;
-	width: 220px;
+.present-integral .tickcheckbox {
+	margin-top: 10px;
 }
-.prize-config .add-prize {
+.sendscore {
+	display: inline-block;
+}
+.present-integral .score {
+	margin-right: 8px!important;
+ 	margin-left: 10px!important;
+	width: 130px!important;
+}
+.present-integral button {
+  height: 29px;
+  line-height: 12px;
+  border: 1px solid #6e80ff;
+  border-radius: 0;
+  color: #6e80ff;
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+}
+.choose-list {
+	position: relative;
+	display: inline-block;
+}
+.choose-list button:last-of-type {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	opacity: 0;
+	width: 10px;
+}
+.present-integral .choose-list button:first-of-type {
+	margin-left: 0;
+}
+.prize-config .add-prize, .choose-list .btn-default {
 	margin-left: 50px;
 	height: 29px;
 	line-height: 12px;
@@ -690,6 +727,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	color: #6e80ff;
 	font-size: 12px;
 	cursor: pointer;
+	background: transparent;
 }
 .prize-config .configuration-item .radio-group {
 	display: inline-block;
@@ -738,6 +776,9 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .btn-area {
 	text-align: center;
 }
+.submit-wrap {
+	display: inline-block;
+}
 .f-btn {
 	margin: 20px 30px 0;
   height: 26px;
@@ -768,23 +809,29 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .random-hb, .fixed-hb {
 	margin-left: 50px;
 }
-.random-hb input[type="number"] {
+.random-hb .min, .random-hb .max {
 	width: 103.5px!important;
 	margin-top: 6px!important;
 	margin-left: 5px!important;
 	margin-right: 5px!important;
 }
-.fixed-hb input[type="number"] {
+.fixed-hb .fixed {
 	width: 260px!important;
 	margin-top: 6px!important;
 	margin-left: 5px!important;
 	margin-right: 5px!important;
 }
-
+.hb .money {
+	width: 260px!important;
+}
+.hb .hbnumber {
+	width: 260px!important;
+}
 /*multi-select */
 .launch-relate .btn-group {
 	margin-left: 72px;
 }
+
 .launch-relate .btn-group button, .operation .btn-group button {
 	padding: 5px;
   background: transparent;
@@ -795,6 +842,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
   height: 29px;
   text-align: left;
 }
+
 .launch-relate .btn-group button, .launch-relate .btn-group ul, .operation .btn-group button, .operation .btn-group ul {
 	/*width: 453px;*/
 	-webkit-box-sizing: border-box;
@@ -809,7 +857,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 /*选择礼品*/
-.create-realProduct-modal .choose, .create-hbProduct-modal .choose {
+.create-realProduct-modal .choose, .create-hbProduct-modal .choose, .create-jfProduct-modal .choose {
 	cursor: pointer;
 	color: #7c8af4;
 }
@@ -870,10 +918,27 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 .detail-wrap {
-	width: 60%;
+	width: 80%;
 	margin: 0 auto;
 	font-size: 14px;
 }
 .detail-wrap p {
+	color: #6e80ff;
 	line-height: 2;
+}
+.detail-wrap p span {
+	color: #707478;
+}
+
+/*投放设置 单选*/
+.select-brand .multiselect-container>li>a>label, .select-specification .multiselect-container>li>a>label {
+	padding: 0 20px 0 40px;
+}
+.select-brand .multiselect-container>li>a>label.radio, .select-specification .multiselect-container>li>a>label.radio {
+	line-height: 2.4;
+}
+
+/*保存活动*/
+.submit-prize {
+	opacity: 0;
 }

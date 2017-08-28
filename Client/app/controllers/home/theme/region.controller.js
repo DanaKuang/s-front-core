@@ -20,16 +20,17 @@ define([], function () {
             $(".region-day").find("input").val(stattime);
             $(".region-month").find("input").val(regionMonth);
             //设置默认值
-            var Default =  {"provinceName":"湖南省","statTime":stattime,"statType":"day"};
+            var Default =  {"provinceName":sessionStorage.getItem("account")==="henan"?"河南省":"湖南省","statTime":stattime,"statType":"day"};
             //省份下拉列表
             (function () {
                 $model.$getProvince().then(function (res) {
                     var res = res.data || [];
+                    var provinceName = sessionStorage.getItem("account")==="henan"?"河南省":"湖南省"
                     for (var i = 0; i < res.length; i++) {
-                        if(res[i].provinceName === "湖南省"){
-                            $(".region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
+                        if(res[i].provinceName === provinceName){
+                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
                         }else {
-                            $(".region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
+                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
 
                         }
                     }
@@ -61,12 +62,15 @@ define([], function () {
                 if ($(this).val() === "month") {
                     $("#month").attr("selected", "selected");
                     $(".region-search-r").eq(2).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推两月（不包括本月）的均值")
                 } else if ($(this).val() === "day") {
                     $("#day").attr("selected", "selected");
                     $(".region-search-r").eq(0).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推7天（包括当天）的均值")                    
                 } else {
                     $("#week").attr("selected", "selected");
                     $(".region-search-r").eq(1).show();
+                    $(".region-describle").text("仪表盘中间值确定方式：往前推四周（不包括本周）的均值")                                        
                 }
             });
             //查询
@@ -170,7 +174,7 @@ define([], function () {
                                     case "中奖数量":
                                         obj[x].data.push(res[i].drawResultPv);
                                         break;
-                                    case "实发数量":
+                                    case "领取数量":
                                         obj[x].data.push(res[i].awardPayPv);
                                         break;
                                 }
@@ -305,7 +309,7 @@ define([], function () {
                     option.xAxis[0].data = [];
                     $model.$scanTimes(params).then(function (res) {
                         var res = res.data || [];
-                        var Length = res.length>10? 10:res.length;
+                        var Length = res.length>15? 15:res.length;
                         if(!(res.toString() === [].toString())){
                             for (var i = 0; i < Length; i++) {
                                 option.xAxis[0].data.push(res[i].productName)

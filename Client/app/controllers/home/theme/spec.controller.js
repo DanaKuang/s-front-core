@@ -27,19 +27,38 @@ define([], function () {
         "statTime":stattime,
         "statType":"day"
       };
-      //规格下拉列表
-      (function () {
-        $model.$getProduct().then(function (res) {
+
+      (function(){
+        $model.$getBrand().then(function(res){
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
-            if(res[i].name ==="盒-芙蓉王（硬细支）"){
-              $(".region").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
+            if(res[i].productBrand ==="芙蓉王"){
+              $(".brand").append("<option value="+res[i].productBrand+" selected>"+res[i].productBrand+"</option>")
             }else {
-              $(".region").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
+              $(".brand").append("<option value="+res[i].productBrand+">"+res[i].productBrand+"</option>")
+            }
+          };
+          getProduct({productBrand:$(".brand").val()})
+        })
+      })();
+      //品牌与规格联动
+      $(".brand").change(function(){
+        getProduct({productBrand:$(".brand").val()})
+      })
+      //规格下拉列表
+      function getProduct(params) {
+        $model.$getProduct(params).then(function (res) {
+          var res = res.data || [];
+          $(".region.spec").html("");
+          for(var i=0;i<res.length;i++){
+            if(res[i].name ==="盒-芙蓉王（硬细支）"){
+              $(".region.spec").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
+            }else {
+              $(".region.spec").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
             }
           }
         })
-      })();
+      };
       //周下拉列表
       (function () {
         $model.$getWeeks().then(function (res) {
@@ -89,7 +108,7 @@ define([], function () {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本日扫码次数",
-              "dayactive" : "本日活跃用户",
+              "dayactive" : "本日连续月活用户",
               "daybag" : "本日扫码烟包数",
               "dayreduce" : "本日新增扫码用户数"
             }
@@ -126,7 +145,7 @@ define([], function () {
             "bag": 0,
             "reduce": 0,
             "daycount" : "本日扫码次数",
-            "dayactive" : "本日活跃用户",
+            "dayactive" : "本日连续月活用户",
             "daybag" : "本日扫码烟包数",
             "dayreduce" : "本日新增扫码用户数"
           };
@@ -136,7 +155,7 @@ define([], function () {
             $(".region-margin .active i").html(data.activeUv || 0);
             $(".region-margin .bag i").html(data.scanCode || 0);
             $(".region-margin .reduce i").html(data.scanAddUv || 0);
-            $(".region-margin .img").attr("src",data.image)
+            $(".region-margin .img").attr("src",data.image || "")
           });
         })();
         //扫码次数时刻趋势
@@ -179,7 +198,7 @@ define([], function () {
                   case "中奖数量":
                     obj[x].data.push(res[i].drawResultPv);
                     break;
-                  case "实发数量":
+                  case "领取数量":
                     obj[x].data.push(res[i].awardPayPv);
                     break;
                 }

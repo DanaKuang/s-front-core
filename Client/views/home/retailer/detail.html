@@ -24,7 +24,7 @@
                                 <!--日期-->
                                 <div class="inline-block">
                                     <label>日期</label>
-                                    <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                    <input type="input" name="beginTime" ng-model="beginTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
                                     <input type="input" name="endTime" ng-model="endTime" class="form-control date">
                                 </div>
                                 <!--品牌-->
@@ -37,30 +37,26 @@
                                 <!--规格-->
                                 <div class="inline-block">
                                     <label for="">规格</label>
-                                    <select class="form-control multiple" name="productName" ng-model="productName" multiple="multiple">
-                                        <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productName}}</option>
+                                    <select class="form-control multiple" name="productSn" ng-model="productSn" multiple="multiple">
+                                        <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productSn}}</option>
                                     </select>
                                 </div>
                                 <!--城市-->
                                 <div class="inline-block">
                                     <label for="">城市</label>
-                                    <select class="form-control" ng-model="cityName" name="cityName">
-                                        <option ng-repeat="ca in cityArr" value="{{ac.cityId}}">{{ca.cityName}}</option>
-                                    </select>
+                                    <input type="text" name="cityName" ng-model="cityName" class="form-control">
                                 </div>
-                                <!--零售户类型-->
+                                <!--业态-->
                                 <div class="inline-block">
-                                    <label for="">零售户类型</label>
-                                    <select class="form-control" ng-model="retailerType" name="retailerType">
-                                        <option ng-repeat="type in typeArr" value="{{type}}">{{type}}</option>
+                                    <label for="">业态</label>
+                                    <select class="form-control" ng-model="bizCode" name="bizCode">
+                                        <option ng-repeat="code in bizArr" value="{{code.bizCode}}">{{code.bizName}}</option>
                                     </select>
                                 </div>
                                 <!--零售户名称-->
                                 <div class="inline-block">
                                     <label for="">零售户名称</label>
-                                    <select class="form-control" ng-model="retailerName" name="retailerName">
-                                        <option ng-repeat="name in nameArr" value="{{name}}">{{name}}</option>
-                                    </select>
+                                    <input type="text" name="shopName" ng-model="shopName" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-primary" ng-click="detailSearch()">查询</button>
                             </div>
@@ -70,6 +66,7 @@
                 <!--box-->
                 <div class="panel rate">
                     <div class="panel-body">
+                        <div class="ui-table-title">零售户明细查询</div>
                         <div class="ui-detail-box">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -89,17 +86,17 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="item in listArr">
-                                        <td>{{item.datetime}}</td>
-                                        <td>{{item.name}}</td>
-                                        <td>{{item.type}}</td>
-                                        <td>{{item.city}}</td>
+                                        <td>{{item.statTime}}</td>
+                                        <td>{{item.shopName}}</td>
+                                        <td>{{item.bizName}}</td>
+                                        <td>{{item.cityName}}</td>
                                         <td>{{item.productBrand}}</td>
                                         <td>{{item.productName}}</td>
-                                        <td>{{item.money}}</td>
-                                        <td>{{item.scanUv}}</td>
-                                        <td>{{item.scanUv}}</td>
-                                        <td>{{item.scanNum}}</td>
-                                        <td>{{item.scanTotal}}</td>
+                                        <td>{{item.customerShould}}</td>
+                                        <td>{{item.scanCustomer}}</td>
+                                        <td>{{item.repeatCustomer}}</td>
+                                        <td>{{item.scanCodeNum}}</td>
+                                        <td>{{item.scanSellerNum}}</td>
                                     </tr>
                                 </tbody>
                             </table>

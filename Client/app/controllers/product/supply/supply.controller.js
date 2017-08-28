@@ -135,8 +135,13 @@ define([], function () {
 
             //取消操作
             $scope.cancelOpe = function(){
-                $scope.showList = !$scope.showList;
+                $('.cancel_box').modal('show');
+            };
+            //确认取消
+            $scope.confirmCancel = function(){
+                $('.cancel_box').modal('hide');
                 clearCreateSupply();
+                $scope.showList = !$scope.showList;
             };
             //供应商名称不能为空显示
             $scope.showWarnSupply = false;
@@ -151,29 +156,29 @@ define([], function () {
                     $scope.showWarnSupply = false;
                 }
                 if(registAttach == ''){
-                    $('#regis_warn').css('color','#ff3300');
-                    $('#regis_warn').html('登记文件不能为空');
+                    $('#regis_warn').css('color','#ff3300').html('登记文件不能为空');
+                    //$('#regis_warn').html('登记文件不能为空');
                     return;
                 }
                 if(contractAttach == ''){
-                    $('#contract_warn').css('color','#ff3300');
-                    $('#contract_warn').html('合同管理不能为空');
+                    $('#contract_warn').css('color','#ff3300').html('合同管理不能为空');
+                    //$('#contract_warn').html('合同管理不能为空');
                     return;
                 }
                 //合格评估状态
-                var compliance = $("input[type='radio']:checked").val();
+                /*var compliance = $("input[type='radio']:checked").val();
                 if(compliance == undefined){
                     $('#compliance_warn').show();
                     return;
                 }else{
                     $('#compliance_warn').hide();
-                }
+                }*/
 
                 //年审
-                var examineYears = $("input[type='checkbox']:checked").val();
+                /*var examineYears = $("input[type='checkbox']:checked").val();
                 if(examineYears == undefined){
                     examineYears == '';
-                }
+                }*/
                 //预警手机
                 var warnTel = $('#warn_tel').val();
                 if(warnTel != ''){
@@ -193,10 +198,10 @@ define([], function () {
                     'registFileName': registFileName,
                     'contractAttach' :  contractAttach,//合同文件
                     'contractFileName': contractFileName,
-                    'compliance': compliance, //合规评估
+                    //'compliance': compliance, //合规评估
                     'performanceAttach' : performanceAttach, //绩效文件
                     'performanceFileName' : performanceFileName,
-                    'examineYears': examineYears,//年审
+                    //'examineYears': examineYears,//年审
                     'mobile': warnTel// 接收手机号
                 };
                 if(!$scope.createState){
@@ -250,17 +255,19 @@ define([], function () {
                 $('#contractName').html(dataItem.contractFileName);
                 contractFileName = dataItem.contractFileName;
                 contractAttach = dataItem.contractAttach;
-                var curentCompliance = dataItem.compliance;
+                //隐藏合格评估
+                /*var curentCompliance = dataItem.compliance;
                 $("input[type='radio']").each(function(){
                     var curRadioObj = $(this)[0];
                     if(curentCompliance == curRadioObj.value){
                         curRadioObj.checked = true;
                     }
-                });
+                });*/
                 $('#performanceName').html(dataItem.performanceFileName);
                 performanceAttach = dataItem.performanceAttach;
                 performanceFileName = dataItem.performanceFileName;
-                var curExamineYears = dataItem.examineYears;
+                //隐藏年审
+                /*var curExamineYears = dataItem.examineYears;
                 if(curExamineYears != "undefined"){
                     $("input[type='checkbox']").each(function(){
                         var curCheckboxObj = $(this)[0];
@@ -268,7 +275,7 @@ define([], function () {
                             curCheckboxObj.checked = true;
                         }
                     });
-                }
+                }*/
                 $('#performanceName').html(dataItem.performanceFileName);
                 $('#warn_tel').val(dataItem.mobile);
             };
@@ -290,8 +297,8 @@ define([], function () {
             $scope.searchSupply = function(){
                 var searchObj = {
                     keys : $('#selectName').val(),
-                    compliance : $('#assMent option:selected').val(),
-                    examineYears : $('#yearLimit option:selected').val(),
+                    //compliance : $('#assMent option:selected').val(),
+                    //examineYears : $('#yearLimit option:selected').val(),
                     status : $('#selectStatus option:selected').val(),
                     currentPageNumber : 1,
                     pageSize : $scope.pageSize
@@ -350,11 +357,11 @@ define([], function () {
                 //fileLimit
                 if(registerFile != undefined){
                     if(registerFile.size > fileLimit){
-                        $('#regis_warn').html('文件大小超过50M，不能上传！');
+                        $('#regis_warn').html('上传文件大小不可超过50MB');
                         return;
                     }
-                    $('#regis_warn').css('color','#cdcdcd');
-                    $('#regis_warn').html('文件上传中...');
+                    $('#regis_warn').css('color','#cdcdcd').html('文件上传中...');
+                    //$('#regis_warn').html('文件上传中...');
                     var formData = new FormData();
                     formData.append('file',registerFile);
                     $.ajax({
@@ -387,7 +394,7 @@ define([], function () {
                 //fileLimit
                 if(contractFile != undefined){
                     if(contractFile.size > fileLimit){
-                        $('#contract_warn').html('文件大小超过50M，不能上传！');
+                        $('#contract_warn').html('上传文件大小不可超过50MB');
                         return;
                     }
                     $('#contract_warn').css('color','#cdcdcd');
@@ -424,7 +431,7 @@ define([], function () {
                 //fileLimit
                 if(performanceFile != undefined){
                     if(performanceFile.size > fileLimit){
-                        $('#performance_warn').html('文件大小超过50M，不能上传！');
+                        $('#performance_warn').html('上传文件大小不可超过50MB');
                         return;
                     }
                     $('#performance_warn').html('文件上传中...');
@@ -464,7 +471,7 @@ define([], function () {
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                     xhr.open('POST', url, true);
                     xhr.responseType = "blob";
-                    xhr.responseType = "arraybuffer"
+                    xhr.responseType = "arraybuffer";
                     xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
                     xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
                     xhr.onload = function(res) {

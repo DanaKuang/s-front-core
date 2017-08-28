@@ -88,10 +88,9 @@ define([], function () {
                 var endTime = scope.endTime;
                 var b_startTime = scope.b_startTime;
                 if (startTime > endTime) {
-                    scope.endTime = '';
-                    scope.b_endTime = '';
+                    scope.endTime = startTime;
+                    endTime = startTime;
                     scope.$apply();
-                    return;
                 }
                 if (!b_startTime || !startTime || !endTime) {
                     scope.b_startTime = '';
@@ -116,10 +115,9 @@ define([], function () {
                 var startTime = scope.startTime;
                 var b_startTime = scope.b_startTime;
                 if (startTime > endTime) {
-                    scope.startTime = '';
-                    scope.b_endTime = '';
+                    scope.startTime = endTime;
+                    startTime = endTime;
                     scope.$apply();
-                    return;
                 }
                 if (!b_startTime || !startTime || !endTime) {
                     scope.b_startTime = '';

@@ -7,7 +7,7 @@
 define([], function () {
     var setprize = angular.module('ngui.setprize', []);
 
-    var setprizeFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var setprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
         var defaults = { //默认配置
             tpl: '/setprize.tpl.html',
             chooseNum: 0,
@@ -45,6 +45,7 @@ define([], function () {
 
                 var specialgifthtml = $('#specialgifthtml').html();
                 var specialhbhtml = $('#specialhbhtml').html();
+                var specialjfhtml = $('#specialjfhtml').html();
 
                 if (dcList) {
                     if (dcList.COMMON && dcList.COMMON.length > 0) {
@@ -126,7 +127,6 @@ define([], function () {
                         })
                     }
                 }
-
             }
 
             // 产品模板列表
@@ -135,18 +135,25 @@ define([], function () {
                     return
                 }
                 var that_scope = angular.element('.select-brand').scope();
-                var data = {
-                    metraType: 'gift',
-                    // supplierCode: that_scope.selectCompanyVal,
-                    brandCodes: that_scope.selectBrandVal,//品牌编码。支持多个，使用英文逗号分隔,
-                    businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
-                    status: 1,//礼品、红包池状态。0-停用；1-正常,
-                    hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
-                }
-                scope.$emit('fromActivityConfigtoChooseProduct', event, data);
+                if (that_scope.selectSpecificationVal != '') {
+                    $(e.target).next().trigger('click');
+                    var data = {
+                        metraType: 'gift',
+                        // supplierCode: that_scope.selectCompanyVal,
+                        brandCodes: that_scope.selectBrandVal,//品牌编码。支持多个，使用英文逗号分隔,
+                        unitCodes: that_scope.selectSpecificationVal,
+                        // businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
+                        status: 1,//礼品、红包池状态。0-停用；1-正常,
+                        hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                    }
+                    scope.$emit('fromActivityConfigtoChooseProduct', event, data);
 
-                scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
-                scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                    scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
+                    scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                } else {
+                    alert('请先选择投放的品牌和规格！')
+                }
+                
             })
 
             // 红包模板列表
@@ -155,17 +162,48 @@ define([], function () {
                     return
                 }
                 var that_scope = angular.element('.select-brand').scope();
-                var data = {
-                    metraType: 'redpack',
-                    // supplierCode: that_scope.selectCompanyVal,
-                    brandCodes: that_scope.selectBrandVal,//
-                    status: 1,//礼品、红包池状态。0-停用；1-正常,
-                    hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
-                }
-                scope.$emit('fromActivityConfigtoChooseHb', event, data);
+                if (that_scope.selectSpecificationVal != '') {
+                    $(e.target).next().trigger('click');
+                    var data = {
+                        metraType: 'redpack',
+                        // supplierCode: that_scope.selectCompanyVal,
+                        brandCodes: that_scope.selectBrandVal,//
+                        unitCodes: that_scope.selectSpecificationVal,
+                        status: 1,//礼品、红包池状态。0-停用；1-正常,
+                        hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                    }
+                    scope.$emit('fromActivityConfigtoChooseHb', event, data);
 
-                scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
-                scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                    scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
+                    scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                } else {
+                    alert('请先选择投放的品牌和规格！')
+                }
+            })
+
+            // 积分模板列表
+            $('#setprize').on('click', '.show-jf-list', function (e) {
+                if (scope.disabled) {
+                    return
+                }
+                var that_scope = angular.element('.select-brand').scope();
+                if (that_scope.selectSpecificationVal != '') {
+                    $(e.target).next().trigger('click');
+                    var data = {
+                        metraType: 'integral',
+                        // supplierCode: that_scope.selectCompanyVal,
+                        brandCodes: that_scope.selectBrandVal,//
+                        unitCodes: that_scope.selectSpecificationVal,
+                        status: 1,//礼品、红包池状态。0-停用；1-正常,
+                        hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                    }
+                    scope.$emit('fromActivityConfigtoChooseJF', event, data);
+
+                    scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
+                    scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                } else {
+                    alert('请先选择投放的品牌和规格！')
+                }
             })
 
             // 新增奖品
@@ -245,51 +283,37 @@ define([], function () {
                 scope.$emit('hbaddstockid', event, data)
             })
 
-            // 设置中奖概率
-            scope.setChance = function (e) {
-                var val = e.target.value;
-                if (val < 0) {
-                    e.target.value = 0;
-                } else if (val > 100) {
-                    e.target.value = 100;
-                }
-            }
+            $('#setprize').on('keyup', '.decimal', function (event) {
+                decimalFormat.decimalnumber(event);
+            })
 
-            // 非多个0，非负数的数字校验
-            var numReg = /^\d+$/;
-            scope.notminusnotzero = function (e) {
-                var $target = $(e.target);
-                var val = $target.val();
-                if (numReg.test(val)) {
-                    if (val) {
-                        if (val < 0) {
-                            e.target.value = 0
-                        } else {
-                            e.target.value = deletezero(val);
-                        }
-                    }
+            $('#setprize').on('keyup', '.hbdecimal', function (event) {
+                hbpriceFormat.hbpricenumber(event);
+            })
+
+            $('#setprize').on('blur', '.decimal, .hbdecimal', function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
                 } else {
-                    e.target.value = ''
+                    event.target.value == ''
                 }
+            })
+
+            scope.notminusnotzero = function (event) {
+                numberFormat.notminusnotzero(event)
             }
 
-            function deletezero(str) {
-                if (str.length > 1) {
-                    if (str[0] === '0') {
-                        str = str.substr(1);
-                        deletezero(str)
-                    } else {
-                        return str
-                    }
+            // 勾选积分池
+            $('#setprize').on('click', '.tickcheckbox', function (e) {
+                if ($(e.target).prop('checked')) {
+                    $(e.target).siblings('.sendscore').removeClass('hidden')
                 } else {
-                    return str
+                    $(e.target).siblings('.sendscore').addClass('hidden')
                 }
-            }
-
+            })
         }
-
         return defineObj;
     }
 
-    setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', setprizeFn]);
+    setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', setprizeFn]);
 })

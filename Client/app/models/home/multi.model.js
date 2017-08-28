@@ -35,6 +35,7 @@ define([], function () {
         var GET_PRODUCT_DATA = "/api/tztx/dataportal/statistics/getProductOfNoNuit";// 获取规格
         var GET_CITY_DATA = "/api/tztx/dataportal/statistics/getCitysByProvince";   // 获取市
         var GET_PROVINCE_DATA = "/api/tztx/dataportal/statistics/getProvince";      // 获取省
+        var GET_SALE_ZONE = "/api/tztx/dataportal/statistics/getSaleZone";          //销区
 
         this.$modals = request.$Query(MODALS_JSON);
 
@@ -51,6 +52,10 @@ define([], function () {
 
         // 获取品牌
         this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
+
+        //获取销区
+        this.$getZone =  request.$Search(GET_SALE_ZONE,{},true);
+     
         // 根据品牌获取规格
         this.getProduct = function (params) {
           return request.$Search(GET_PRODUCT_DATA, params, true);
@@ -95,6 +100,7 @@ define([], function () {
         this.getTarget = function (params) {
           return request.$Search(TARGET_TABLE_DATA, params, true);
         };
+
 
       };
     }]
