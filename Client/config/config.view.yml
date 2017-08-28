@@ -171,9 +171,16 @@ product:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'product/materiel/packet.html'
+  - httpmethod: 'get'                       # 积分管理
+    routepath: '/view/product/materiel/integration'
+    description: 'integration'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'product/materiel/integration.html'  
   - httpmethod: 'get'                       # 供应商管理
     routepath: '/view/product/supply'
-    description: 'packet'
+    description: 'supply'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0

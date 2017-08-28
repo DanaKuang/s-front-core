@@ -1,0 +1,385 @@
+<!--
+/**
+ * Author: zhaobaoli
+ * Create Date: 2017-07-17
+ * Description: materiel
+ */
+-->
+<link rel="stylesheet" href="../../../assets/style/integration.css">
+<div ng-controller="IntegrationCtrl">
+<div class="animated fadeInRight">
+    <div class="container-fluid" ng-show="showTables">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="title_top clearfix">
+                    <div class="gift_title lf">
+                        物料管理&nbsp;&gt;积分管理
+                    </div>
+                    <div class="build_gift rf" ng-click="createPacket()">新建积分池</div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="table_sec">
+                            <div class="change_nav clearfix">
+                                <div class="lf" ng-click="changeShowState()"
+                                     ng-class="{true:'select_active',false:'no_active'}[showPacketList]">积分池</div>
+                                <div class="lf" ng-click="changeShowState()"
+                                     ng-class="{true:'select_active',false:'no_active'}[!showPacketList]">流水明细</div>
+                            </div>
+                            <div class="packet_select_sec clearfix">
+                                <div class="col-md-3 col-sm-3">
+                                    <label for="allJiFenChi">&nbsp;&nbsp;筛选信息</label>
+                                    <input type="text" id="allJiFenChi" class="allJiFenChi" placeholder="积分池名称"/>
+
+                                </div>
+                                 <div ng-show="!showPacketList" class="col-md-3 col-sm-3">
+                                    <label for="allSupply">&nbsp;&nbsp;&nbsp;供应商</label>
+                                    <select id="allSupply">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <label for="allBrand">适用品牌</label>
+                                    <select id="allBrand">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="brandItem in brandList" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
+                                    </select>
+                                </div>
+                                <div ng-show="showPacketList" class="col-md-3 col-sm-3">
+                                    <label for="allSpecift">适用规格</label>
+                                    <select id="allSpecift">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="speciftItem in allSpeciftList" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                                    </select>
+                                </div>
+                                <div ng-show="showPacketList" class="col-md-3 col-sm-3">
+                                    <label for="dataStatus">使用状态</label>
+                                    <select id="dataStatus">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="statusItem in dataStatusList" value="{{statusItem.code}}">{{statusItem.name}}</option>
+                                    </select>
+                                </div>
+                               
+                                <div ng-show="!showPacketList" class="col-md-2 col-sm-2">
+                                    <label for="activeLog">动作</label>
+                                    <select id="activeLog">
+                                        <option value="">全部</option>
+                                        <option ng-repeat="logItem in activeLogList" value="{{logItem.code}}">{{logItem.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div ng-show="showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="rest_btn" style="width: 100%" ng-click="resetData()">重置</div>
+                                </div>
+                                <div ng-show="showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="ser_btn" style="width: 100%" ng-click="searchData()">搜索</div>
+                                </div>
+                               
+                                <div ng-show="!showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="rest_btn" ng-click="resetData()">重置</div>
+                                </div>
+								 <div ng-show="!showPacketList" class="col-md-2 col-sm-2 packet_fr">
+                                    <div class="ser_btn" ng-click="searchData()">搜索</div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table" ng-show="showPacketList" >
+                            <tr>
+                                <th>序号</th>
+                                <th>积分池名称</th>
+                                <th>适用品牌</th>
+                                <th>适用规格</th>
+                                <th>积分数量</th>
+                                <th>使用状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="packetItem in packetList" ng-if="!noSearchData">
+                                <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
+                                <td title="{{packetItem.name}}">{{packetItem.name}}</td>
+                                <td>{{packetItem.brandNames}}</td>
+                                <td>{{packetItem.unitNames}}</td>
+                                <td>{{packetItem.poolNum}}</td>
+                                <td ng-if="packetItem.status == 1">已启用</td>
+                                <td ng-if="packetItem.status == 0">已停用</td>
+                                <td>
+                                    <span data-toggle="modal" ng-click="addPacketPool(packetItem)">增库</span>&nbsp;
+                                    <!--data-target=".packet_add_box"-->
+                                    <span ng-click="editItemPacket(packetItem)">编辑</span>&nbsp;
+                                    <span ng-if="packetItem.status == 1" data-toggle="modal"
+                                          ng-click="stopStatus(packetItem)">停用</span>
+                                    <!--data-target=".packet_disabled_box"-->
+                                    <span ng-if="packetItem.status == 0" data-toggle="modal"
+                                          ng-click="useStatus(packetItem)">启用</span>
+                                </td>
+                            </tr>
+                            <tr ng-if="noSearchData"><td colspan="7">未搜索到符合条件的相关信息</td></tr>
+                        </table>
+                        <table class="table" ng-show="!showPacketList">
+                            <tr>
+                                <th>序号</th>
+                                <th>积分池名称</th>
+                                <th>适用品牌</th>
+                                <th>适用规格</th>
+                                <th>动作</th>
+                                <th>活动ID</th>
+                                <th>流水积分</th>
+                                <th>更新时间</th>
+                                <th>更新人</th>
+                            </tr>
+                            <tr ng-repeat="detailItem in detailList" ng-if="!noSearchLog">
+                                <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
+                                <td title="{{detailItem.businessName}}">{{detailItem.businessName}}</td>
+                                <td>{{detailItem.brandNames}}</td>
+                                <td>{{detailItem.prodUnitsNames}}</td>
+                                <td>{{detailItem.operName}}</td>
+                                <!--<td>{{detailItem.activityCode}}</td>-->
+                                <td title="{{detailItem.activityCode}}">
+                                    {{detailItem.activityCode != null ? detailItem.showActivityCode : '-'}}
+                                </td>
+                                <td>{{detailItem.operNum}}</td>
+                                <td>{{detailItem.ctime | date:'yyyy-MM-dd'}}</td>
+                                <!--<td>{{detailItem.creatorName}}</td>-->
+                                <td>{{detailItem.creatorName}}</td>
+                            </tr>
+                            <tr ng-if="noSearchLog"><td colspan="8">未搜索到符合条件的相关信息</td></tr>
+                        </table>
+                        <div class="footer_sec clearfix">
+                            <div class="total_info lf">
+                                总共<span>{{totalCount}}</span>条记录，当前页共
+                                <span ng-show="showPacketList">{{packetList.length}}</span>
+                                <span ng-show="!showPacketList">{{detailList.length}}</span>条记录
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" ng-show="!showTables">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title_top">
+                    <div class="gift_title">
+                        物料管理&nbsp;&gt;积分管理&nbsp;&gt;<span ng-if="addPocket">新建积分池</span><span ng-if="!addPocket">编辑积分池</span>
+                    </div>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="form_sec">
+                        	<div>
+                                <label for="JiFenChi">积分池名称<span>*</span></label>
+                                <input type="text" placeholder="" id="JiFenChi" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]"/>
+                                <!--ng-disabled = '!addPocket'-->
+                                <span class="select_JiFenChi">请选择积分池名称</span>
+                            </div>
+                            <div>
+                                <label for="supply">供应商<span>*</span></label>
+                                <select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="enableItem in enableSupplyList"
+                                            value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
+                                </select>
+                                <span class="select_supply">请选择供应商</span>
+                            </div>
+                            <div>
+                                <label for="brand">适用品牌<span>*</span></label>
+                                <select id="brand" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="brandItem in brandList"
+                                            value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
+                                </select>
+                                <span class="select_brand">请选择适用品牌</span>
+                            </div>
+                            <div>
+                                <label for="specift">适用规格<span>*</span></label>
+                                <select id="specift" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
+                                    <option ng-if = '!addPocket' value="operateItemPacket.units" checked>{{operateItemPacket.unitNames}}</option>
+                                    <option ng-if ='addPocket' value="">请选择</option>
+                                    <option ng-if ='addPocket' ng-repeat="speciftItem in speciftList"
+                                            value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                                </select>
+                                <span class="select_specift">请选择适用规格</span>
+                            </div>
+                            <div>
+                                <label for="capital">积分数量<span>*</span></label>
+                                <input  type="text" placeholder="" id="capital" ng-disabled = '!addPocket'>
+                                <!--<span class="yuan_unit">元</span>-->
+                                <span class="entry_capital">请输入资金</span>
+                                <br/>
+                                <p ng-show="addPocket">保存成功后积分数量不可手动更改，请谨慎操作</p>
+                            </div>
+                            <div>
+                                <label for="capital_Ku">库存阀值</label>
+                                <input  type="text" placeholder="" id="capital_Ku" ng-disabled = '!addPocket'>                             
+                            </div>
+                            <div>
+                                <label for="transfer" style="line-height:70px;">凭证文件</label>
+                                <div class="transfer_sec">
+                                    <input type="file" id="transfer">
+                                    <!--<div class="select_file"></div><br/>-->
+                                    <button class="select_file">选取文件</button>
+                                </div>
+                                  <div id="regis_warn"></div>
+                                <span id="transferName"></span>
+                                <p id="transfer_warn"></p>
+                            </div>
+                        </div>
+                        <div class="opera_sec">
+                            <div class="opera_confirm" ng-click="savePacketInfo()">保存</div>
+                            <div class="opera_cancel" ng-click="cancelCreatePacket()">取消</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--积分池增库弹框-->
+    <div class="modal fade packet_add_box" tabindex="-1" role="dialog" aria-labelledby="packet_add_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="packet_add_btn">积分池增库</div>
+                    </div>
+                    <div class="box_cont">
+                        <label>增库积分额度：</label>
+                        <input type="text" placeholder="0.00" id="poolMoney">
+                    </div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmAddPool(operateItemPacket)">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--积分停用弹窗-->
+    <div class="modal fade packet_disabled_box" tabindex="-1" role="dialog" aria-labelledby="packet_disabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="packet_disabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">停用后，新增活动将不能使用该积分池</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmStopStatus(operateItemPacket)">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--更新状态操作成功弹窗-->
+    <div class="modal fade supply_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_enabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">操作成功</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--更新状态操作失败弹窗-->
+    <div class="modal fade supply_error_box" tabindex="-1" role="dialog" aria-labelledby="supply_error_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_error_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">操作失败</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增积分供应商对应规格已存在弹框-->
+    <div class="modal fade save_exist_box" tabindex="-1" role="dialog" aria-labelledby="save_exist_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="save_exist_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">供应商{{exitPacketData.supplierName}}对规格{{exitPacketData.unitNames}}的积分池已建立，点击确认将此笔积分合入原有积分池</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmAddExistPool(exitPacketData)">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--供应商停用时不能增库提醒弹窗-->
+    <div class="modal fade supply_stop_box" tabindex="-1" role="dialog" aria-labelledby="supply_stop_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_stop_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料供应商“{{operateItemPacket.supplierName}}”已停用，无法执行增库操作</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">我知道了</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--integral停用时不能增库提醒弹窗-->
+    <div class="modal fade packet_stop_box" tabindex="-1" role="dialog" aria-labelledby="packet_stop_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="packet_stop_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料已停用，无法执行增库操作</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="statics/assets/libs/jquery.page.js"></script>
+</div>
+
+

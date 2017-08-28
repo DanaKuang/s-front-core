@@ -939,6 +939,34 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolIntegral/queryList'
+    authorized: 1
+    description: '积分列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolIntegral/saveOrUpdate'
+    authorized: 1
+    description: '新增或修改积分池对象数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolIntegral/addPool'
+    authorized: 1
+    description: '红包池增库'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolIntegral/modifyStatus'
+    authorized: 1
+    description: '修改红包数据状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'       
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
