@@ -115,11 +115,13 @@ define([], function () {
                 activityId: actId
             }).then(function (res) {
                 var opts = mapEchart.getOption();
-                opts.series[1].data = _.each(res.data, function (d) {
+                var data = res.data || [];
+                data = data.length ? data : $model.$defMap.data.def;
+                opts.series[1].data = _.each(data, function (d) {
                     d.name = d.province;
-                    d.value = Number(d.pv) + Number(d.uv);
+                    d.value = d.pv;
                 }) || [];
-                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value;
+                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
                 mapEchart.setOption(opts);
             });
         }
