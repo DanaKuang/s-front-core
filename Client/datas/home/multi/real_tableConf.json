@@ -43,33 +43,13 @@
         "sortable": true,
         "align": "center"
     }, {
-        "name": "cupTigerCnt",
-        "label": "虎牌保温杯",
+        "name": "awardName",
+        "label": "奖品名称",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "shaverPhilipsCnt",
-        "label": "飞利浦剃须刀",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "portableSourceXiaomiCnt",
-        "label": "小米移动电源",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "washYuxiCnt",
-        "label": "芙蓉王商务洗漱套装",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "backpageXinxiuliCnt",
-        "label": "新秀丽双肩包",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "nailCutterShuanglirenCnt",
-        "label": "双立人指甲剪",
+        "name": "awardCnt",
+        "label": "奖品数量",
         "sortable": true,
         "align": "center"
     }],
