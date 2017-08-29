@@ -35,11 +35,11 @@ requirejs.config({
       'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect'
     ],
     echarts: [
-      // 'https://cdn.bootcss.com/echarts/3.6.2/echarts.min',
+      'https://cdn.bootcss.com/echarts/3.6.2/echarts.min',
       'bower_components/echarts/dist/echarts'
     ],
     angular: [
-      // 'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
+      'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
       'bower_components/angular/angular'
     ],
     angularAnimate: [
