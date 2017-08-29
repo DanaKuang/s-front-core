@@ -22,16 +22,18 @@ define([], function () {
         // "startTime":stattime,
         // "endTime":stattime,
         // "reportId":"1",
-        "productName":"",
-        "mobile":"",
-        "cityName":""
+        "productBrand": "",
+        "productSn": "",
+        "awardType": "",
+        "activityName": "",
+        "checkPerson": "",
+        "checkStatus": $(".res_status select").val()
       }
       var Deafault = _.cloneDeep(countDeafault);
       Deafault.page = 1;
       Deafault.pageSize = 10;
       var allpage; //计算总页数
-      $("#agree_brand").change(function(){
-        console.log($("#agree_brand").val());
+      $("#agree_brand").change(function() {
         global.getProduct({productBrand:$("#agree_brand").val()})
       })      
       // var prizeCount = {
@@ -62,14 +64,38 @@ define([], function () {
       //执行的函数
       var global = {
         //异业
-        "other" : function (params) {
-          $model.$others(params).then(function (res) {
+        // "other" : function (params) {
+        //   $model.$others(params).then(function (res) {
+        //     var res = res.data || [];
+        //     $(".res_table tbody").html("");
+        //     for(var i = 0;i<res.length;i++){
+        //       $(".res_table tbody").append( "<tr><td>"+res[i].mobile+"</td><td>"+res[i].productName+"</td> <td>"+res[i].cityName+"</td> <td>"+res[i].statTime+"</td> </tr>")
+        //     }
+        //     $(".res_btn").removeClass("gray_btn");
+        //   })
+        // },
+        //履约表格
+        "getPerformAppoint" : function (params) {
+          $model.$getPerformAppoint(params).then(function (res) {
             var res = res.data || [];
-            $(".res_table tbody").html("");
-            for(var i = 0;i<res.length;i++){
-              $(".res_table tbody").append( "<tr><td>"+res[i].mobile+"</td><td>"+res[i].productName+"</td> <td>"+res[i].cityName+"</td> <td>"+res[i].statTime+"</td> </tr>")
-            }
             $(".res_btn").removeClass("gray_btn");
+          $(res).each(function(index,n){
+            if (n.checkStatus == "1") {
+              n.checkStatus = "待核实";
+          } else if (n.checkStatus == "2") {
+            n.checkStatus = "已核实";
+          } else if (n.checkStatus == "3") {
+            n.checkStatus = "不属实";
+          } else if (n.checkStatus == "4") {
+            n.checkStatus = "联系不上";
+          }
+          })
+            $scope.table = res;
+            $scope.$apply();
+            // for(var i = 0;i<res.length;i++){
+            //   $(".res_table tbody").append( "<tr><td>"+res[i].mobile+"</td><td>"+res[i].productName+"</td> <td>"+res[i].cityName+"</td> <td>"+res[i].statTime+"</td> </tr>")
+            // }
+            // $(".res_btn").removeClass("gray_btn");
           })
         },
         //现金分发
@@ -84,8 +110,15 @@ define([], function () {
         // })
         // },
         //计算异业的总页数
-        "othersCou": function (params) {
-          $model.$othersCount(params).then(function (res) {
+        // "othersCou": function (params) {
+        //   $model.$othersCount(params).then(function (res) {
+        //     allpage = Math.ceil(res.data.Count/10);
+        //     global.createPage();
+        //   })
+        // },
+        //计算履约报表页数
+        "getPerformAppointCount": function (params) {
+          $model.$getPerformAppointCount(params).then(function (res) {
             allpage = Math.ceil(res.data.Count/10);
             global.createPage();
           })
@@ -125,6 +158,19 @@ define([], function () {
             };
         })
         },
+        //奖品类别
+        "getAwardType": function(){
+          $model.$getAwardType().then(function(res){
+            var res = res.data || [];
+            $(res).each(function(index,n){
+              $(".res_award select").append("<option value="+n.awardTypeId+">"+n.awardTypeName+"</option>")              
+            })
+            Deafault.awardType = $(".res_award select").val();
+            countDeafault.awardType = $(".res_award select").val();
+            global.getPerformAppoint(Deafault);
+            global.getPerformAppointCount(countDeafault);
+          })
+        },
         //创建分页
         "createPage" : function () {
           if(allpage === 0){
@@ -156,20 +202,18 @@ define([], function () {
           countDeafault = {};
           Deafault = {};
           countDeafault = {
-            "startTime": $(".res-start").find(".date").data().date ?
-                $(".res-start").find(".date").data().date : $(this).siblings(".res-start").find("input").val(),
-            "endTime": $(".res-end").find(".date").data().date ?
-                $(".res-end").find(".date").data().date : $(this).siblings(".res-end").find("input").val(),
-            "reportId": "1",
-            "productName": $(".res_award").find("input").val(),
-            "mobile": $(".res_tel").find("input").val(),
-            "cityName": $(".res_city").find("input").val()
+            "productBrand": $(".agree_brand select").val(),
+            "productSn": $(".agree_product select").val(),
+            "awardType": $(".res_award select").val(),
+            "activityName": $(".res_tel input").val(),
+            "checkPerson": $(".res_person input").val(),
+            "checkStatus": $(".res_status select").val()
           }
           Deafault = _.cloneDeep(countDeafault);
           Deafault.page = 1;
           Deafault.pageSize = 10;
-          global.other(Deafault);
-          global.othersCou(countDeafault);
+          global.getPerformAppoint(Deafault);
+          global.getPerformAppointCount(countDeafault);
         }
         // console.log(options);
       })
@@ -195,9 +239,9 @@ define([], function () {
       //     global.prizeCou(prizeCount);
       //   }
       // })
-      global.other(Deafault);
+            
       global.getBrand();
-      global.othersCou(countDeafault);
+      global.getAwardType();
 
     }]
   };
