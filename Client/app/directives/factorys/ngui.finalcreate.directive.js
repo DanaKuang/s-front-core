@@ -184,7 +184,7 @@ define([], function () {
                             } else {
                                 // 积分
                                 ActivityPageAward.details[0].awardType = 6;
-                                ActivityPageAward.details[0].poolId = radio_res_item.data('integralPool');
+                                ActivityPageAward.details[0].poolId = item.data('integral-pool');
                             }
                         }
 
@@ -192,22 +192,23 @@ define([], function () {
                             var send_scores = radio_res_item.find('.tickcheckbox');
                             if (send_scores.prop('checked')) {
                                 ActivityPageAward.details[0].giveScore = 1;
-                                ActivityPageAward.details[0].integralPool = item[0].dataset.integralPool;
+                                ActivityPageAward.details[0].integralPool = item.data('integral-pool');
                             }
                         }
 
                         // 校验错误
-                        if (!ActivityPageAward.prizeName || !ActivityPageAward.details[0].awardType || !ActivityPageAward.details[0].awardNums) {
+                        if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.prizeName || !ActivityPageAward.details[0].poolId) {
+                            ActivityPageAward.special ? specialerror = true : commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+                        
+
+                        if (send_scores && send_scores.prop('checked') && !ActivityPageAward.details[0].integralPool) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
 
-                        if (send_scores.prop('checked') && !ActivityPageAward.details[0].integralPool) {
-                            ActivityPageAward.special ? specialerror = true : commonerror = true;
-                            item.children('.wrong-tip').removeClass('hidden');
-                        }
-
-                        if (radio_res_item.find('.hbnumber').length != 0 && !ActivityPageAward.details[0].redTotalMoney) {
+                        if (radio_res_item.hasClass('hb') && !ActivityPageAward.details[0].redTotalMoney) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
@@ -251,8 +252,6 @@ define([], function () {
                     caidanConfigStr: _drawPrizeScope ? caidanAward.toString() : '',
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
-
-                console.log(fromSonScope);
 
                 checkEmpty(fromSonScope)
                 // final校验 & 提交
