@@ -16,7 +16,7 @@
         </div>
         <!--box-->
         <div class="panel rate">
-          <div class="panel-body">
+          <div class="panel-body" style="overflow-x:scroll">
             <!-- <div class="tab_nav clearfix">
                 <div ng-class="bool ? 'tab_active' :''" ng-click = "Tabs(true)">异业资源发放明细</div>
                 <div ng-class="bool ? '' : 'tab_active'" ng-click = "Tabs(false)">现金奖品发放明细</div>
@@ -39,12 +39,22 @@
                   </select>
                 </div>
               <div class="res_award">
-                <label>奖品类名：</label>
-                <input type="text" placeholder="">
+                <label>奖品类别：</label>
+                <select></select>
               </div>
-              <div class="res_city">
-                <label>城市：</label>
-                <input type="text" placeholder="">
+              <div class="res_status">
+                <label>抽检状态：</label>
+                <select>
+                  <option value="">全部</option>
+                  <option value="1">待核实</option>
+                  <option value="2">已核实</option>
+                  <option value="3">不属实</option>
+                  <option value="4">联系不上</option>                  
+                </select>
+              </div>
+              <div class="res_person">
+                  <label>抽检人：</label>
+                  <input type="text" />
               </div>
               <!-- <div class="agree-date res-start">
                 <label>开始时间</label>
@@ -105,13 +115,44 @@
             <table class="table res_table">
               <thead style="border: 1px solid #A0A0A0">
               <tr>
+                <th>订单号</th>
+                <th>活动名称</th>
+                <th>产品规格</th>
+                <th>奖品类别</th>
+                <th>奖品名称</th>
+                <th>数量</th>
+                <th>小计金额</th>
+                <th>会员ID</th>
                 <th>手机号</th>
-                <th>奖品（金额）</th>
-                <th>城市</th>
-                <th>日期</th>
+                <th>第三方ID</th>
+                <th>用户所属地区</th>
+                <th>领取时间</th>
+                <th>订单状态</th>
+                <th>抽检状态</th>
+                <th>抽检时间</th>
+                <th>抽检人</th>  
               </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                  <tr ng-repeat="x in table">
+                      <td>{{x.orderId}}</td>
+                      <td>{{x.activityName}}</td>
+                      <td>{{x.productName}}</td>
+                      <td>{{x.awardType}}</td>
+                      <td>{{x.awardName}}</td>
+                      <td>{{x.awardCnt}}</td>
+                      <td>{{x.awardFee}}</td>
+                      <td>{{x.userId}}</td>
+                      <td>{{x.mobileNo}}</td>
+                      <td>{{x.opendId}}</td>
+                      <td>{{x.cityName}}</th>
+                      <td>{{x.acceptTime}}</td>
+                      <td>{{x.orderStatus}}</td>
+                      <td>{{x.checkStatus}}</td>
+                      <td>{{x.checkTime}}</td>
+                      <td>{{x.checkPerson}}</td>  
+                    </tr>
+              </tbody>
             </table>
             <!-- <table class="table gift_table" ng-show="!bool">
               <thead style="border: 1px solid #A0A0A0">
