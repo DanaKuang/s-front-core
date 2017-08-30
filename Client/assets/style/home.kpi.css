@@ -270,8 +270,9 @@
   width: 12px;
   height: 7px;
   cursor: pointer;
-  right: 30px;
-  top: 15px;
+  right: 25px;
+  transform: translateY(-50%);
+  top: 50%;
 }
 .ui-td-icon.open {
   position: absolute;
@@ -283,7 +284,9 @@
   height: 7px;
   cursor: pointer;
   right: 30px;
-  top: 15px;
+  right: 25px;
+  transform: translateY(-50%);
+  top: 50%;
 }
 
 /** end KPI
