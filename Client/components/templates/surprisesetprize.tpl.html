@@ -87,7 +87,7 @@
 								<div class="configuration-item">
 									<b>*</b>
 									<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
-									<input type="text" class="hbnumber" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
+									<input type="text" class="number" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 									<div class="present-integral">
 										<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 										<div class="sendscore hidden">
@@ -104,8 +104,14 @@
 							<!-- 积分 -->
 							<div class="jf radio-res hidden">
 								<div class="configuration-item">
+									<div class="choose-list">
+										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+									</div>									
+								</div>
+								<div class="configuration-item">
 									<b>*</b>
-									<small class="wrong-tip wrong-tip-score hidden">请填写积分数额</small>
+									<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 								</div>
 								<div class="configuration-item">
@@ -207,7 +213,7 @@
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
-							<input type="text" class="hbnumber" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
+							<input type="text" class="number" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 								<div class="sendscore hidden">
@@ -224,8 +230,14 @@
 					<!-- 积分 -->
 					<div class="jf radio-res hidden">
 						<div class="configuration-item">
+							<div class="choose-list">
+								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+								<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+							</div>									
+						</div>
+						<div class="configuration-item">
 							<b>*</b>
-							<small class="wrong-tip wrong-tip-score hidden">请填写积分数额</small>
+							<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 							<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 						</div>
 						<div class="configuration-item">
@@ -290,7 +302,7 @@
 				<input type="text" class="money" placeholder="请填写奖金总数" disabled>
 			</div>
 			<div class="configuration-item">
-				<input type="text" class="hbnumber" placeholder="请填写奖金数量" disabled>
+				<input type="text" class="number" placeholder="请填写奖金数量" disabled>
 				<div class="present-integral">
 					<input type="checkbox" class="tickcheckbox" disabled><label for="">同时赠送积分</label>
 					<div class="sendscore hidden">
@@ -308,10 +320,20 @@
 	<script type="text/html" id="jfhtml">
 		<div class="jf radio-res hidden">
 			<div class="configuration-item">
-				<input type="text" class="score" placeholder="请输入数字" disabled>
+				<div class="choose-list">
+					<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+					<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+				</div>									
 			</div>
 			<div class="configuration-item">
-				<input type="text" class="number" placeholder="请输入数字" disabled>
+				<b>*</b>
+				<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
+				<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+			</div>
+			<div class="configuration-item">
+				<b>*</b>
+				<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
+				<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 			</div>
 		</div>
 	</script>
