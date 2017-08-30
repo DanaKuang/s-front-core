@@ -27,6 +27,12 @@
                                     <option value="month">月</option>
                                 </select>
                             </div>
+                            <!--day-->
+                            <div class="inline-block" ng-show="type=='day'">
+                                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                            </div>
+                            <!--week-->
                             <div class="inline-block" ng-show="type=='week'">
                                 <select class="form-control" name="weekStaTime" ng-model="weekStaTime">
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
@@ -35,9 +41,10 @@
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
                                 </select>
                             </div>
-                            <div class="inline-block" ng-show="type!=='week'">
-                                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
-                                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                            <!--month-->
+                            <div class="inline-block" ng-show="type=='month'">
+                                <input type="input" name="monStaTime" ng-model="monStaTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                <input type="input" name="monEndTime" ng-model="monEndTime" class="form-control date">
                             </div>
                             <button type="submit" class="btn btn-primary" ng-click="retailerSearch()">查询</button>
                         </form>
