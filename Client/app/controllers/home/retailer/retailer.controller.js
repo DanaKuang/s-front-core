@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'retailerCtrl',
         ViewModelName: 'retailerViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
             var echarts = require('echarts');
             var $model = $scope.$model;
             // 增长折线图
@@ -66,14 +66,20 @@ define([], function () {
             // 后端数据
             var drop_back_data = $model.$dropShop.data || [];
             drop_back_data = drop_back_data.length ? drop_back_data : [{bizCode:""}];
+            var weekArray = $model.$week.data || [];
+            weekArray = weekArray.length ? weekArray : [{weekNo:'无数据'}];
+            // 周
+            $scope.weekArray = $model.$week.data || [];
+            $scope.weekStaTime = weekArray[0].weekNo || "";
+            $scope.weekEndTime = weekArray[0].weekNo || "";
             // 查询
             $scope = angular.extend($scope, {
                 type: 'day',
                 retailerSearch: initSearch,
                 cityArr: drop_back_data,
                 cityName: drop_back_data[0].bizCode,
-                endTime: dateFormatFilter.date(+new Date),
-                startTime: dateFormatFilter.date(+new Date)
+                endTime: dayFilter.yesterday('date'),
+                startTime: dayFilter.yesterday('date')
             });
 
             // 初始化
@@ -84,10 +90,21 @@ define([], function () {
                 var params = {
                     statType: $scope.type || ""
                 };
+                // 不知道该写啥
+                var weekStaTime = $scope.weekStaTime || "";
+                weekStaTime = weekStaTime.slice(weekStaTime.indexOf('(')+1, weekStaTime.indexOf(')'));
+                weekStaTime = weekStaTime.split('~') || [];
+                weekStaTime = weekStaTime[0] || "";
+
+                var weekEndTime = $scope.weekEndTime || "";
+                weekEndTime = weekEndTime.slice(weekEndTime.indexOf('(')+1, weekEndTime.indexOf(')'));
+                weekEndTime = weekEndTime.split('~') || [];
+                weekEndTime = weekEndTime[1] || "";
+
                 params = params.statType == 'week' ?
                 angular.extend({
-                    weekStaTime: $scope.startTime || "",
-                    weekEndTime: $scope.endTime || ""
+                    weekStaTime: weekStaTime.replace(/\./g, '-') || "",
+                    weekEndTime: weekEndTime.replace(/\./g, '-') || ""
                 }, params) : (params.statType == 'month' ?
                 angular.extend({
                     monStaTime: $scope.startTime || "",
@@ -227,6 +244,16 @@ define([], function () {
                     });
                 });
             }
+
+            // 搜索
+            $(document).ready(function () {
+                var $multi = $(".ui-retailer-search select");
+                $multi.multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择'
+                });
+            });
 
         }]
     };

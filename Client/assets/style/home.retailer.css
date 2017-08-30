@@ -36,6 +36,10 @@
     min-width: 100px;
     margin-right: 50px;
 }
+.ui-retailer-search .multiselect-container {
+    max-height: 200px;
+    overflow: auto;
+}
 .ui-detail-box .box {
     height: 80px;
     display: inline-block;

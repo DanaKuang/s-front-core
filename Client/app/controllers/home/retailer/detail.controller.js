@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'detailCtrl',
         ViewModelName: 'detailViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
             var $model = $scope.$model || {};
             // 日期
             $('[name="beginTime"]').datetimepicker({
@@ -50,8 +50,8 @@ define([], function () {
             // 查询默认值
             $scope = angular.extend($scope, {
                 detailSearch: initSearch,
-                beginTime: dateFormatFilter.date(+new Date),
-                endTime: dateFormatFilter.date(+new Date),
+                beginTime: dayFilter.yesterday('date'),
+                endTime: dayFilter.yesterday('date'),
                 pbArray: pbArray_back_data,
                 productBrand: "" || pbArray_back_data[0].productBrand || "",
                 cityName: "",
@@ -72,7 +72,7 @@ define([], function () {
                     endTime: $scope.endTime || "",
                     productBrand: $scope.productBrand || "",
                     cityName: $scope.cityName || "",
-                    productSn: $scope.productSn || "",
+                    productSn: ($scope.productSn && $scope.productSn.join(',')) || "",
                     bizCode: $scope.bizCode || "",
                     shopName: $scope.shopName || ""
                 }).then(function (res) {
@@ -108,7 +108,7 @@ define([], function () {
                             val.label = val.productName;
                             val.value = val.sn;
                         }));
-                        $productSn.multiselect('select', $scope.productName);
+                        $productSn.multiselect('select', $scope.productSn);
                         $productSn.multiselect('refresh');
                     });
                 });
