@@ -112,11 +112,11 @@ define([], function () {
             $('#transfer').change(function(){
                 var transferFile = $('#transfer')[0].files[0];
                 if(transferFile != undefined){
-                    if(transferFile.size > fileLimit){
-                        //$('#regis_warn').html('文件大小超过50M，不能上传！');
+                    if(transferFile.size > 10485760){
+                        $('#transfer_warn').css('color','#ff3300').html('文件大小超过10M，不能上传！');
                         return;
                     }
-                    $('#transfer_warn').html('文件上传中...');
+                    $('#transfer_warn').css('color','#ACACAC').html('文件上传中...');
                     var formData = new FormData();
                     formData.append('file',transferFile);
                     $.ajax({
@@ -133,14 +133,14 @@ define([], function () {
                         }
                     }).done(function(res) {
                         if(res.ret == 200000){
-                            $('#transfer_warn').html('文件上传成功');
+                            $('#transfer_warn').css('color','#ACACAC').html('文件上传成功');
                             var fileSuccessData = res.data;
                             transferVoucherFilename = fileSuccessData.filename;
                             transferVoucherAttach = fileSuccessData.attachCode;
                             $('#transferName').html(fileSuccessData.filename);
                         }
                     }).fail(function(res) {
-                        $('#transfer_warn').html('文件上传失败');
+                        $('#transfer_warn').css('color','#ACACAC').html('文件上传失败');
                     });
                 }
             });
@@ -168,8 +168,14 @@ define([], function () {
                 //清空资金转账凭证
                 $('#transfer').val('');
                 $('#transferName').html('');
-                $('#transfer_warn').html('');
+                $('#transfer_warn').css('color','#ACACAC').html('');
                 $scope.operateItemPacket = null;
+                //隐藏警告信息
+                $('.packet_name').hide();
+                $('.select_supply').hide();
+                $('.select_brand').hide();
+                $('.select_specift').hide();
+                $('.entry_capital').hide();
             }
             //监听品牌选择信息
             /*$('#brand').change(function(){
@@ -483,7 +489,7 @@ define([], function () {
 
             //重置功能
             $scope.resetData = function(){
-                var SelectArr = $("select");
+                var SelectArr = $(".packet_select_sec select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
@@ -560,9 +566,16 @@ define([], function () {
             //确定红包增库
             $scope.confirmAddPool = function(operateItemPacket){
                 var poolMoney = $('#poolMoney').val();
-                var numStr = poolMoney.toString().indexOf('.');
-                if(numStr > -1){
-                    poolMoney = Number(poolMoney.toString().match(/^\d+(?:\.\d{0,2})?/));
+                var regNum = /^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/;
+                if(regNum.test(poolMoney)){
+                    var numStr = poolMoney.toString().indexOf('.');
+                    if(numStr > -1){
+                        poolMoney = Number(poolMoney.toString().match(/^\d+(?:\.\d{0,2})?/));
+                    }
+                    $('.add_pool_warn').css('visibility','hidden');
+                }else {
+                    $('.add_pool_warn').css('visibility','visible');
+                    return;
                 }
                 var addPoolObj = {
                     id : operateItemPacket.id,
