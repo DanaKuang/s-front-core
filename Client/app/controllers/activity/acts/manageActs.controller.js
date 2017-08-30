@@ -529,6 +529,10 @@ define([], function () {
               if (res.data.ret === '200000') {
                 $scope.successshowlistConf = res.data;
                 $('.submit-prize').trigger('click');
+                $('.createSuccess').modal({
+                  keyboard: false,
+                  backdrop: false
+                });
                 $scope.iknow = function (e) {
                   location.reload();
                 }

@@ -246,7 +246,7 @@ define([], function () {
                     etime: _launchScope.endTime || '',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: activityAwards,
-                    caidanConfig: _drawPrizeScope ? caidanAward : '',
+                    caidanConfig: _drawPrizeScope ? caidanAward : null,
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
 
