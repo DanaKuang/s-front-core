@@ -721,3 +721,13 @@ textarea {
 .cami_stock_label{
     margin-left: 50px;
 }
+.add_pool_warn{
+    color: #ff3300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 145px;
+    visibility : hidden;
+}
+.warn_color{
+    color: #ff3300
+}

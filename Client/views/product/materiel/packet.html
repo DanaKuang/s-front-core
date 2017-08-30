@@ -243,6 +243,7 @@
                     <div class="box_cont">
                         <label>增库红包额度：</label>
                         <input type="text" placeholder="￥0.00" id="poolMoney"><span>元</span>
+                        <p class="add_pool_warn">请输入大于0的数字</p>
                     </div>
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmAddPool(operateItemPacket)">确定</div>
@@ -360,7 +361,7 @@
                         </button>
                         <div class="modal-title" id="packet_stop_btn">操作提示</div>
                     </div>
-                    <div class="box_cont">此物料已停用，无法执行增库操作</div>
+                    <div class="box_cont">此红包池已停用，无法执行增库操作</div>
                     <div class="box_btn">
                         <div class="enabled_btn" data-dismiss="modal">确定</div>
                     </div>

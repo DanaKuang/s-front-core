@@ -110,12 +110,13 @@
                                 </td>
                                 <td ng-if="giftItem.giftClass == 1">实物</td>
                                 <td ng-if="giftItem.giftClass == 2">虚拟</td>
+                                <td ng-if="giftItem.giftClass == 888">大礼包</td>
                                 <td title="{{giftItem.supplierName}}">{{giftItem.showSupplierName}}</td>
                                 <td title="{{giftItem.brandNames}}">{{giftItem.showBrandNames}}</td>
                                 <td title="{{giftItem.unitNames}}">{{giftItem.showUnitNames}}</td>
                                 <!--<td ng-if="giftItem.marketMoney != null">{{giftItem.marketMoney}}</td>-->
                                 <!--<td ng-if="giftItem.marketMoney == null">-</td>-->
-                                <td>{{giftItem.stock}}</td>
+                                <td ng-class="{true:'warn_color'}[giftItem.stock==0]">{{giftItem.stock}}</td>
                                 <td ng-if="giftItem.effectDays == -1">长期有效</td>
                                 <td ng-if="giftItem.effectDays == 0">{{giftItem.stime|date:'yyyy.MM.dd'}}-{{giftItem.etime|date:'yyyy.MM.dd'}}</td>
                                 <td ng-if="giftItem.effectDays == 1">-</td>
@@ -266,11 +267,13 @@
                             <div>
                                 <label class="label_title">礼品有效期<span>*</span></label>
                                 <div class="time_period">
-                                    <input type="radio" value="-1" name="timePeriod" ng-checked="effectDays == -1">长期有效
-                                    <input type="radio" value="0" name="timePeriod" style="margin-left: 45px"ng-checked="effectDays == 0">自定义&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" value="-1" name="timePeriod" ng-checked="effectDays == -1" ng-disabled="!addGift">长期有效
+                                    <input type="radio" value="0" name="timePeriod" style="margin-left: 45px;" ng-checked="effectDays == 0" ng-disabled="!addGift">自定义&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="time_validity">
-                                        <input id="startDate" size="16" type="text" value="" placeholder="年-月-日" style="width: 163px;"  ng-model="startTime" value="{{startTime}}">&nbsp;——
-                                        <input id="endDate" size="16" type="text" value="" placeholder="年-月-日" style="width: 163px;" ng-model="endTime" value="{{endTime}}">
+                                        <input id="startDate" size="16" type="text" value="" placeholder="年-月-日"
+                                               style="width: 163px;"  ng-model="startTime" value="{{startTime}}" ng-disabled="!addGift">&nbsp;——
+                                        <input id="endDate" size="16" type="text" value="" placeholder="年-月-日" style="width: 163px;"
+                                               ng-model="endTime" value="{{endTime}}" ng-disabled="!addGift">
                                     </div>
                                 </div>
                                 <p class="cami_validity_warn">礼品有效期设置后不可更改，请谨慎操作</p>
@@ -278,7 +281,7 @@
                             <div>
                                 <label class="label_title" for="camiCreateFile">卡密文件</label>
                                 <div class="cami_create">
-                                    <input type="file" id="camiCreateFile">
+                                    <input type="file" id="camiCreateFile" ng-disabled="!addGift">
                                     <div class="select_cami_file">选择文件</div>
                                 </div>
                                 <span id="camiCreateName"></span>
@@ -471,6 +474,25 @@
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
                         <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--已过有效期不能增库提醒弹窗-->
+    <div class="modal fade expiration_date_box" tabindex="-1" role="dialog" aria-labelledby="expiration_date_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="expiration_date_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">此物料已过有效期，无法重新启用</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">我知道了</div>
                     </div>
                 </div>
             </div>

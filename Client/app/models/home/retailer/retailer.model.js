@@ -17,6 +17,7 @@ define([], function () {
                 var LP_MAP_CONF = "/statics/home/retailer/lpMapConf.json";      //左侧饼图
                 var RP_MAP_CONF = "/statics/home/retailer/rpMapConf.json";      //右侧饼图
 
+                var GET_WEEK_DATA = "/api/tztx/dataportal/statistics/getWeeks"                      // 周
                 var GET_TOTAL_DATA = "/api/tztx/dataportal/shopKeeper/getShopTotalFamily";          // 累计零售户
                 var GET_ACTIVITY_DATA = "/api/tztx/dataportal/shopKeeper/getShopActiyFamily";       // 参与活动零售户
                 var GET_NEW_DATA = "/api/tztx/dataportal/shopKeeper/getShopNewFamily";              // 新增零售户
@@ -34,6 +35,7 @@ define([], function () {
                 this.$lpMapConf = request.$Query(LP_MAP_CONF);
                 this.$rpMapConf = request.$Query(RP_MAP_CONF);
 
+                this.$week = request.$Search(GET_WEEK_DATA, {}, true);
                 this.$dropShop = request.$Search(GET_CITY_DROPDOWN, {}, true);
                 // 累计零售户
                 this.getTotal = function (params) {

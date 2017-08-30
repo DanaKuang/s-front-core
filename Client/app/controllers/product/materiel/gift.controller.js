@@ -6,7 +6,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'GiftCtrl',
         ViewModelName: 'giftViewModel',
-        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
+        ServiceContent: ['$scope','limitlengthFilter', 'dateFormatFilter', function ($scope,limitlengthFilter,dateFormatFilter) {
             //$('.add_cami_box').modal('show');
             var $model = $scope.$model;
             //初始化显示列表
@@ -67,7 +67,7 @@ define([], function () {
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
-                $('selectGiftName').val('');
+                $('#selectGiftName').val('');
                 var pageObj = {
                     currentPageNumber : 1,
                     pageSize : $scope.pageSize
@@ -323,7 +323,6 @@ define([], function () {
                 $('#camiCreateName').html('');
                 $('.cami_file_warn').html('仅当新建礼品为卡密类虚拟礼品时，需上传csv/excel格式卡密文件');
                 $('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
-                //$('[ng-model="selectSpeci"]').multiselect('refresh');
                 $('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
             }
 
@@ -461,7 +460,7 @@ define([], function () {
 
                 if(giftDataObj.effectDays == 0){
                     giftDataObj.stimeStr = $scope.startTime+ ' 00:00:00';
-                    giftDataObj.etimeStr = $scope.endTime+ ' 00:00:00';
+                    giftDataObj.etimeStr = $scope.endTime+ ' 23:59:59';
                 }
 
                 //判断是否是编辑
@@ -513,7 +512,7 @@ define([], function () {
                 if($scope.showGiftList){
                     //显示礼品池信息
                     $model.getGiftList(pageObj).then(function(res){
-                        if(res.status == 200){
+                        if(res.data.ret == 200000){
                             var giftObj = res.data.data;
                             if(giftObj.list != null){
                                 for(var i=0;i<giftObj.list.length;i++){
@@ -596,7 +595,18 @@ define([], function () {
                 var errorTimer = null;
                 var stateNum = 0;
                 if(itemObj.status == 0){
-                    stateNum = 1;
+                    if(itemObj.effectDays == -1){
+                        stateNum = 1;
+                    }else if(itemObj.effectDays == 0){
+                        var curentTime = new Date().getTime();
+                        if(curentTime > itemObj.etime){
+                            $('.expiration_date_box').modal('show');
+                            return;
+                        }else{
+                            stateNum = 1;
+                        }
+                    }
+
                 }
                 var disableObj = {
                     id : itemObj.id,
@@ -739,6 +749,8 @@ define([], function () {
             }
             //编辑礼品
             $scope.editGiftItem = function(giftItem){
+                console.log('编辑礼品');
+                console.log(giftItem);
                 $scope.addGift = false;
                 $scope.operateGiftItem = giftItem;
                 //礼品名称
@@ -841,7 +853,7 @@ define([], function () {
                 //卡密文件
                 //camiAttach = giftItem.cardsAttach;
                 if(giftItem.hasCards == 1){
-                    $('#camiCreateName').html('已上传卡密文件');
+                    $('#camiCreateName').html('已成功上传卡密文件');
                 }
                 //礼品描述
                 $('#giftBrief').val(giftItem.memo);
@@ -852,8 +864,10 @@ define([], function () {
                 var cutVal = $(this).val();
                 if(cutVal == 0){
                     $('.time_validity').css('display','inline-block');
+                    $scope.effectDays = 0;
                 }else{
                     $('.time_validity').css('display','none');
+                    $scope.effectDays = -1;
                 }
 
             });
