@@ -529,13 +529,11 @@ define([], function () {
               if (res.data.ret === '200000') {
                 $scope.successshowlistConf = res.data;
                 $('.submit-prize').trigger('click');
-                // $('.createSuccess').addClass('in').css('display', 'block');
-                // $('body').append('<div class="modal-backdrop fade in"></div>');
                 $scope.iknow = function (e) {
                   location.reload();
                 }
               } else {
-                alert(res.message);
+                alert(res.data.message);
               }
             })
           })

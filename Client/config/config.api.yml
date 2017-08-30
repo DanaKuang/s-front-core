@@ -708,7 +708,7 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/queryRegionByParentCode'
+    routepath: '/api/tztx/saas/admin/user/queryRightRegion'
     authorized: 1
     description: '根据父地区编码查询数据'
     enableroute: 1
