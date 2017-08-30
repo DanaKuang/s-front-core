@@ -11,11 +11,15 @@ define([], function () {
     ViewModelName: 'pathdetailViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
+        var pageUrl = 'http://test.hmtx.cc/nscan_data.html?sn=';
 
         // 后端数据
         // var brand_back_data = $model.$brand.data || [];
         // brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
         var act_back_data = $model.$activity.data || [];
+        _.each(act_back_data, function (d) {
+            d.activityId += '_'+d.sn;
+        });
         act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 
         // 默认配置
@@ -35,12 +39,12 @@ define([], function () {
         // 查询入口
         function pathSearch () {
             var pScope = angular.element('.ui-path-search').scope();
-            console.log(pScope);
+            var act_sn = pScope.activityId.split('_') || "";
             var params = {
                 // productBrand: pScope.productBrand || "所有",
                 // productSn: pScope.productName && pScope.productName.join(',') || "99999999",
                 // productBrand: pScope.activityId || "",
-                activityId: pScope.activityId || "",
+                activityId: act_sn[0] || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
                 webId: pScope.pagename || "1000",
@@ -52,7 +56,7 @@ define([], function () {
             initPageEvent(params);
 
             // 图片
-            $scope.pageimg = 'statics/assets/image/orange/'+(pScope.activityId)+'.jpg';
+            $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
         }
 
         // 初始化select
@@ -65,8 +69,11 @@ define([], function () {
                 nSelectedText: '已选择',
                 enableFiltering: true,
                 onChange: function (opt) {
+                    var act_sn = opt[0].value || event.target.value || "";
+                    act_sn = act_sn.split('_');
+                    $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
                     $model.getActPage({
-                        activityId: opt[0].value || event.target.value || ""
+                        activityId: act_sn[0]
                     }).then(function (res) {
                         pScope.pgArray = res.data || [];
                         pScope.$apply();
@@ -112,7 +119,7 @@ define([], function () {
             // });
             // 活动页面
             $model.getActPage({
-                activityId: pScope.activityId
+                activityId: pScope.activityId.split('_')[0]
             }).then(function (res) {
                 pScope.pgArray = res.data || [];
                 pScope.$apply();

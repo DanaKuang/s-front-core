@@ -228,6 +228,7 @@
   vertical-align: middle;
   text-align: center;
    // border-color: #a0a0a0;
+  position: relative;
 }
 .table-bordered>thead>tr>td,
 .table-bordered>thead>tr>th {
@@ -261,7 +262,7 @@
   /* transition: transform .2s; */
 }
 .ui-td-icon {
-  position: relative;
+  position: absolute;
   // content: url('../image/i-close.png');
   display: inline-block;
   background: url('../image/i-close.png') no-repeat;
@@ -269,9 +270,11 @@
   width: 12px;
   height: 7px;
   cursor: pointer;
+  right: 30px;
+  top: 15px;
 }
 .ui-td-icon.open {
-  position: relative;
+  position: absolute;
   // content: url('../image/i-open.png');
   display: inline-block;
   background: url('../image/i-open.png') no-repeat;
@@ -279,6 +282,8 @@
   width: 12px;
   height: 7px;
   cursor: pointer;
+  right: 30px;
+  top: 15px;
 }
 
 /** end KPI

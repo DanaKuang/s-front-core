@@ -158,55 +158,57 @@ define([], function () {
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.multiChoose = 0; //目前暂定都为单选奖品
 
-                        ActivityPageAward.details = [] //具体奖品数组，目前是单选
-                        ActivityPageAward.details.poolId = item[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
-                        ActivityPageAward.details.awardName = item[0].dataset.name || '';
-                        ActivityPageAward.details.awardPicUrl = item[0].dataset.giftPic || '';
-                        ActivityPageAward.details.awardNums = radio_res_item.find('.number').val();
-                        ActivityPageAward.details.score = radio_res_item.find('.score').val() || 0;
+                        ActivityPageAward.details = []; //具体奖品数组，目前是单选
+                        ActivityPageAward.details[0] = {};
+                        ActivityPageAward.details[0].poolId = item[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
+                        ActivityPageAward.details[0].awardName = item[0].dataset.name || '';
+                        ActivityPageAward.details[0].awardPicUrl = item[0].dataset.giftPic || '';
+                        ActivityPageAward.details[0].awardNums = radio_res_item.find('.number').val();
+                        ActivityPageAward.details[0].score = radio_res_item.find('.score').val() || 0;
 
                         // 红包总金额，最小、最大
                         if (radio_res_item.hasClass('hb')) {
-                            ActivityPageAward.details.awardType = 3;
-                            ActivityPageAward.details.redTotalMoney = radio_res_item.find('.money').val();
+                            ActivityPageAward.details[0].awardType = 3;
+                            ActivityPageAward.details[0].redTotalMoney = radio_res_item.find('.money').val();
 
                             if (radio_res_item.find('.circle-money-tick.active').parent().hasClass('random-hb')) {
-                                ActivityPageAward.details.minred = radio_res_item.find('.min').val();
-                                ActivityPageAward.details.bigred = radio_res_item.find('.max').val();
+                                ActivityPageAward.details[0].minred = radio_res_item.find('.min').val();
+                                ActivityPageAward.details[0].bigred = radio_res_item.find('.max').val();
                             } else {
-                                ActivityPageAward.details.minred = ActivityPageAward.details.bigred = radio_res_item.find('.fixed').val();
+                                ActivityPageAward.details[0].minred = ActivityPageAward.details[0].bigred = radio_res_item.find('.fixed').val();
                             }    
                         } else {
                             if (radio_res_item.hasClass('gift')) {
                                 // 礼品
-                                ActivityPageAward.details.awardType = item[0].dataset.giftType;
+                                ActivityPageAward.details[0].awardType = item[0].dataset.giftType;
                             } else {
                                 // 积分
-                                ActivityPageAward.details.awardType = 6;
-                                ActivityPageAward.details.poolId = radio_res_item.data('integralPool');
+                                ActivityPageAward.details[0].awardType = 6;
+                                ActivityPageAward.details[0].poolId = item.data('integral-pool');
                             }
                         }
 
                         if (radio_res_item.hasClass('gift') || radio_res_item.hasClass('hb')) {
                             var send_scores = radio_res_item.find('.tickcheckbox');
                             if (send_scores.prop('checked')) {
-                                ActivityPageAward.details.giveScore = 1;
-                                ActivityPageAward.details.integralPool = item[0].dataset.integralPool;
+                                ActivityPageAward.details[0].giveScore = 1;
+                                ActivityPageAward.details[0].integralPool = item.data('integral-pool');
                             }
                         }
 
                         // 校验错误
-                        if (!ActivityPageAward.prizeName || !ActivityPageAward.details.awardType || !ActivityPageAward.details.awardNums) {
+                        if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.prizeName || !ActivityPageAward.details[0].poolId) {
+                            ActivityPageAward.special ? specialerror = true : commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
+                        
+
+                        if (send_scores && send_scores.prop('checked') && !ActivityPageAward.details[0].integralPool) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
 
-                        if (send_scores.prop('checked') && !ActivityPageAward.details.integralPool) {
-                            ActivityPageAward.special ? specialerror = true : commonerror = true;
-                            item.children('.wrong-tip').removeClass('hidden');
-                        }
-
-                        if (radio_res_item.find('.hbnumber').length != 0 && !ActivityPageAward.details.redTotalMoney) {
+                        if (radio_res_item.hasClass('hb') && !ActivityPageAward.details[0].redTotalMoney) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
@@ -215,7 +217,6 @@ define([], function () {
                             commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
-
                         activityAwards.push(ActivityPageAward);  
                     })
                 }
@@ -238,8 +239,8 @@ define([], function () {
                     limitPer: _participateScope.namePerPersonDay || 0,
                     limitAll: _participateScope.namePerPerson || 0,
                     supplier: _launchScope.selectCompanyVal || '',
-                    brands: _launchScope.selectBrandVal || [],
-                    sns: _launchScope.selectSpecificationVal || [],
+                    brandCode: _launchScope.selectBrandVal || [],
+                    sn: _launchScope.selectSpecificationVal || [],
                     areaCodes: _launchScope.selectAreaVal || [],
                     holiday: _launchScope.whichday || 3,
                     stime: _launchScope.startTime || '',
@@ -251,8 +252,6 @@ define([], function () {
                     caidanConfigStr: _drawPrizeScope ? caidanAward.toString() : '',
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
-
-                console.log(fromSonScope);
 
                 checkEmpty(fromSonScope)
                 // final校验 & 提交

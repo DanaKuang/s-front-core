@@ -796,6 +796,8 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .res_search,.gift_search{
   margin-top: 21px;
+  overflow: hidden;
+  width: 130%;
 }
 .res_search>div,.gift_search>div,.report-search>div {
   float: left;
@@ -850,6 +852,12 @@ input[type="checkbox"]:checked + .checkbox{
   /*border: 1px solid #A0A0A0;*/
   /*font-size: 14px;*/
 /*}*/
+
+.panel-body .res_table {
+  width: 205%;
+  min-width: 100%;
+  max-width: inherit;
+}
 
 .table tr th, .table tr td {
   border: 1px solid #A0A0A0;

@@ -310,6 +310,27 @@ agree:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getAwardType'
+    authorized: 1
+    description: '奖品类别'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getPerformAppointCount'
+    authorized: 1
+    description: '履约数量'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getPerformAppoint'
+    authorized: 1
+    description: '履约表格'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visit:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getFeedBack'

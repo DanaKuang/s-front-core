@@ -23,12 +23,12 @@ define([], function () {
 
       // 顶部导航
       $model.getNav = function () {
-        return request.$Search(GET_NAV_DATA);
+        return request.$Search(GET_NAV_DATA, {serviceFor: 'browser'});
       };
 
       // 左侧菜单
       $model.getMenu = function (params) {
-        return request.$Search(GET_MENU_DATA, params)
+        return request.$Search(GET_MENU_DATA, angular.extend({serviceFor: 'browser'}, params))
       };
 
     }]

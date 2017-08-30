@@ -243,8 +243,7 @@ define([], function () {
                         d.name = d.provinceName;
                         d.value = d.activePv;
                     }) || [];
-                    option.visualMap[0].max = _.max(option.series[1].data, function (v) {return v.value}).value;
-                    option.visualMap[0].max = option.visualMap[0].max ? option.visualMap[0].max : 5000;
+                    option.visualMap[0].max = _.max(option.series[1].data, function (v) {return v.value}).value || 5000;
                     mapEchart.setOption(option);
                 });
             }
