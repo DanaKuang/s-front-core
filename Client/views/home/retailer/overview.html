@@ -20,15 +20,17 @@
                 <div class="ui-retailer-search panel rate">
                     <div class="panel-body">
                         <form class="form-inline form-group col-md-12">
-                            <select class="form-control" ng-model="type">
-                                <option value="day">日</option>
-                                <option value="week">周</option>
-                                <option value="month">月</option>
-                            </select>
+                            <div class="inline-block">
+                                <select class="form-control" ng-model="type">
+                                    <option value="day">日</option>
+                                    <option value="week">周</option>
+                                    <option value="month">月</option>
+                                </select>
+                            </div>
                             <div class="inline-block" ng-show="type=='week'">
                                 <select class="form-control" name="weekStaTime" ng-model="weekStaTime">
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
-                                </select>&nbsp;～&nbsp;
+                                </select>&nbsp;&nbsp;至&nbsp;&nbsp;
                                 <select class="form-control" name="weekEndTime" ng-model="weekEndTime">
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
                                 </select>
@@ -36,7 +38,7 @@
                             <div class="inline-block" ng-show="type!=='week'">
                                 <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
                                 <input type="input" name="endTime" ng-model="endTime" class="form-control date">
-                            </div>&nbsp;&nbsp;
+                            </div>
                             <button type="submit" class="btn btn-primary" ng-click="retailerSearch()">查询</button>
                         </form>
                     </div>
