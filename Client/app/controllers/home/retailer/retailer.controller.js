@@ -134,11 +134,15 @@ define([], function () {
                 weekEndTime = weekEndTime.slice(weekEndTime.indexOf('(')+1, weekEndTime.indexOf(')'));
                 weekEndTime = weekEndTime.split('~') || [];
                 weekEndTime = weekEndTime[1] || "";
+                weekEndTime = weekEndTime.replace(/\./g, '-') || "";
+
+                // 前一天
+                weekEndTime = weekEndTime && +new Date(weekEndTime) - 24 * 60 * 60 * 1000;
 
                 params = params.statType == 'week' ?
                 angular.extend({
                     weekStaTime: weekStaTime.replace(/\./g, '-') || "",
-                    weekEndTime: weekEndTime.replace(/\./g, '-') || ""
+                    weekEndTime: dateFormatFilter.date(weekEndTime)
                 }, params) : (params.statType == 'month' ?
                 angular.extend({
                     monStaTime: $scope.monStaTime || "",
