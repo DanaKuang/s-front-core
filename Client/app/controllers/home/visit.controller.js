@@ -20,7 +20,7 @@ define([], function () {
                 "awardName": "",
                 "cityName": "",
                 "feedbackStatus":"",
-                "productId":"",
+                "productSn":"",
                 "productBrand":"",
                 "mobile":"",
                 "endTime":stattime,
@@ -119,7 +119,7 @@ define([], function () {
                             $(".visit_end").find(".date").data().date : $(that).siblings(".visit_end").find("input").val(),
                         "mobile":$(".visit_mobile input").val(),
                         "feedbackStatus":$("#visit_label").val(),
-                        "productId":$("#visit_product").val(),
+                        "productSn":$("#visit_product").val(),
                         "productBrand":$("#visit_brand").val(),
                         "orderId":$(".visit_order").val()
 
