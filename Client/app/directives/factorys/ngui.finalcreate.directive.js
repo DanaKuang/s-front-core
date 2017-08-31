@@ -207,7 +207,7 @@ define([], function () {
                             item.children('.wrong-tip').removeClass('hidden');
                         }
 
-                        if (radio_res_item.hasClass('hb') && (!ActivityPageAward.details[0].redTotalMoney || !ActivityPageAward.details[0].minred || ActivityPageAward.details[0].bigred)) {
+                        if (radio_res_item.hasClass('hb') && (!ActivityPageAward.details[0].redTotalMoney || !ActivityPageAward.details[0].minred || !ActivityPageAward.details[0].bigred)) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
