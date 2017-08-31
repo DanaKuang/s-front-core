@@ -877,6 +877,13 @@ supply:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/metra/uploadCards'
+    authorized: 1
+    description: '卡密文件上传'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/querySupplierByCode'
     authorized: 1
     description: '根据供应商编码查询供应商的详细数据'

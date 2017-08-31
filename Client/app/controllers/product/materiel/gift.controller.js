@@ -25,6 +25,8 @@ define([], function () {
             $scope.startTime = ''; //礼品有效期起始时间
             $scope.endTime = '';
             $scope.effectDays = -1; //礼品有效期标识
+            var camiFileCount = ''; //卡密文件数量
+            var addCimiFileCount = '';
 
             //初始化分页信息
             $scope.pageSize = 15; //每页显示多少条
@@ -410,7 +412,14 @@ define([], function () {
                     $('.stock_warn').show();
                     return;
                 }else{
-                    $('.stock_warn').hide();
+                    if(regNum == camiFileCount){
+                        $('.stock_warn').hide();
+                        $('.cami_file_warn').css('color','#ACACAC').html('');
+                    }else{
+                        $('.cami_file_warn').css('color','#ff3300').html('录入'+ camiFileCount+ '条卡密数据，与库存数值不符');
+                        return;
+                    }
+
                 }
                 //库存阀值
                 var stockThreshValue = $('#stockThresh').val();
@@ -678,11 +687,15 @@ define([], function () {
                         $('.add_cami_box .add_stock_warn').css({'display':'inline-block','margin-left':'10px'});
                         return;
                     }else{
+                        $('.add_cami_box .add_stock_warn').css('display','none');
                         addPoolObj.addNum = addGiftStock;
                         if(addCamiAttach != ''){
                             addPoolObj.cardsAttach = addCamiAttach;
+                            $('.add_cami_box .add_stock_warn').css({'display':'none','margin-left':'-133px'});
+                        }else{
+                            $('.cami_explain').css('color','#ff3300').html('未上传卡密文件');
+                            return;
                         }
-                        $('.add_cami_box .add_stock_warn').css({'display':'none','margin-left':'-133px'});
                     }
                 }else{
                     var giftStock = $('#addGiftStock').val();
@@ -695,13 +708,6 @@ define([], function () {
                     }
                 }
 
-                /*var addPoolObj = {
-                    id : operateGiftItem.id,
-                    addNum : giftStock
-                };
-                if(addCamiAttach != ''){
-                    addPoolObj.cardsAttach = addCamiAttach;
-                }*/
                 $model.addGiftPool(addPoolObj).then(function(res){
                     if(res.data.ret == "200000"){
                         if(operateGiftItem.hasCards == 1){
@@ -749,8 +755,6 @@ define([], function () {
             }
             //编辑礼品
             $scope.editGiftItem = function(giftItem){
-                console.log('编辑礼品');
-                console.log(giftItem);
                 $scope.addGift = false;
                 $scope.operateGiftItem = giftItem;
                 //礼品名称
@@ -880,18 +884,22 @@ define([], function () {
                     var curFileName = camiFile.name;
                     var fileType = curFileName.substring(curFileName.lastIndexOf('.')+1,curFileName.length);
                     if(fileTypeArr.indexOf(fileType) == -1){
-                        $('#camiCreateName').css('color','#ff3300').html('此文件格式不符，请上传csv/excel格式文件');
+                        $('.cami_file_warn').css('color','#ff3300').html('此文件格式不符，请上传csv/excel格式文件');
+                        $('#camiCreateName').html('');
+                        camiAttach = '';
                         return;
                     }
                     if(camiFile.size > 10485760){
-                        $('#camiCreateName').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        $('.cami_file_warn').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        $('#camiCreateName').html('');
+                        camiAttach = '';
                         return;
                     }
-                    $('.cami_file_warn').html('文件上传中...');
+                    $('.cami_file_warn').css('color','#ACACAC').html('文件上传中...');
                     var formData = new FormData();
                     formData.append('file',camiFile);
                     $.ajax({
-                        url: '/api/tztx/saas/saotx/attach/commonUploadFiles',
+                        url: '/api/tztx/saas/saotx/metra/uploadCards',
                         type: 'POST',
                         cache: false,
                         data: formData,
@@ -903,13 +911,27 @@ define([], function () {
                             token : sessionStorage.access_token
                         }
                     }).done(function(res) {
-                        camiAttach = res.data.attachCode;
-                        camiFileName = res.data.filename;
-                        $('#camiCreateName').css('color','#666').html(res.data.filename);
-                        $('.cami_file_warn').html('文件上传成功！');
+                        var stockVal = $('#stock').val();
+                        camiFileCount = res.data.successCount;
+                        if(stockVal != null && stockVal != undefined && stockVal != ''){
+                            if(res.data.successCount == stockVal){
+                                camiAttach = res.data.attach.attachCode;
+                                camiFileName = res.data.attach.filename;
+                                $('#camiCreateName').css('color','#666').html(res.data.attach.filename);
+                                $('.cami_file_warn').css('color','#ACACAC').html('文件上传成功，录入'+ res.data.successCount+ '条卡密数据');
+                            }else{
+                                $('.cami_file_warn').css('color','#ff3300').html('录入'+ res.data.successCount+ '条卡密数据，与库存数值不符');
+                                return;
+                            }
+                        }else{
+                            camiAttach = res.data.attach.attachCode;
+                            camiFileName = res.data.attach.filename;
+                            $('#camiCreateName').css('color','#666').html(res.data.attach.filename);
+                            $('.cami_file_warn').css('color','#ACACAC').html('文件上传成功，录入'+ res.data.successCount+ '条卡密数据');
+                        }
 
                     }).fail(function(res) {
-                        $('.cami_file_warn').html('文件上传失败！');
+                        $('.cami_file_warn').css('color','#ff3300').html('录入文件失败');
                     });
                 }
             });
@@ -921,18 +943,21 @@ define([], function () {
                     var curAddFileName = addCamiFile.name;
                     var addFileType = curAddFileName.substring(curAddFileName.lastIndexOf('.')+1,curAddFileName.length);
                     if(fileTypeArr.indexOf(addFileType) == -1){
-                        $('.cami_name').css({'color':'#ff3300','font-size':'14px'}).html('此文件格式不符，请上传csv/excel格式文件');
+                        $('.cami_explain').css('color','#ff3300').html('此文件格式不符，请上传csv/excel格式文件');
+                        $('.cami_name').css('color','#666').html('');
                         return;
                     }
                     if(addCamiFile.size > 10485760){
-                        $('.cami_name').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        $('.cami_explain').css('color','#ff3300').html('上传文件大小不可超过10MB');
+                        $('.cami_name').css('color','#666').html('');
                         return;
                     }
-                    $('.cami_explain').html('文件上传中...');
+                    $('.cami_explain').css('color','#ACACAC').html('文件上传中...');
+                    $('.cami_name').css('color','#666').html('');
                     var formData = new FormData();
                     formData.append('file',addCamiFile);
                     $.ajax({
-                        url: '/api/tztx/saas/saotx/attach/commonUploadFiles',
+                        url: '/api/tztx/saas/saotx/metra/uploadCards',
                         type: 'POST',
                         cache: false,
                         data: formData,
@@ -944,13 +969,33 @@ define([], function () {
                             token : sessionStorage.access_token
                         }
                     }).done(function(res) {
-                        addCamiAttach = res.data.attachCode;
+                        //addCamiAttach = res.data.attachCode;
                         //camiFileName = res.data.filename;
-                        $('.cami_name').css('color','#666').html(res.data.filename);
-                        $('.cami_explain').html('文件上传成功！');
+                        /*$('.cami_name').css('color','#666').html(res.data.filename);
+                        $('.cami_explain').css('color','#ACACAC').html('文件上传成功！');*/
+
+                        var addStockVal = $('#addGiftCamiStock').val();
+                        addCimiFileCount = res.data.successCount;
+                        if(addStockVal != null && addStockVal != undefined && addStockVal != ''){
+                            if(res.data.successCount == addStockVal){
+                                addCamiAttach = res.data.attach.attachCode;
+                                //camiFileName = res.data.attach.filename;
+                                $('.cami_name').css('color','#666').html(res.data.attach.filename);
+                                $('.cami_explain').css('color','#ACACAC').html('文件上传成功，录入'+ res.data.successCount+ '条卡密数据');
+                            }else{
+                                $('.cami_explain').css('color','#ff3300').html('录入'+ res.data.successCount+ '条卡密数据，与库存数值不符');
+                                $('.cami_name').css('color','#666').html('');
+                                return;
+                            }
+                        }else{
+                            addCamiAttach = res.data.attach.attachCode;
+                            //camiFileName = res.data.attach.filename;
+                            $('.cami_name').css('color','#666').html(res.data.attach.filename);
+                            $('.cami_explain').css('color','#ACACAC').html('文件上传成功，录入'+ res.data.successCount+ '条卡密数据');
+                        }
 
                     }).fail(function(res) {
-                        $('.cami_explain').html('文件上传失败！');
+                        $('.cami_explain').css('color','#ff3300').html('文件上传失败！');
                     });
                 }
             });

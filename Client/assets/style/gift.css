@@ -369,6 +369,7 @@
     width: 180px;
     height: 35px;
     font-size: 16px;
+    padding: 0 5px;
 }
 
 .form_sec div p {
@@ -715,6 +716,14 @@ textarea {
     color: #515151;
     width: 180px;
 }
+.multiselect{
+    text-align: left;
+}
+.multiselect b{
+    float: right;
+    position: relative;
+    top: 8px;
+}
 .time_validity{
     display: none;
 }
@@ -730,4 +739,7 @@ textarea {
 }
 .warn_color{
     color: #ff3300
+}
+#oneCategory{
+    margin-right: 6px;
 }

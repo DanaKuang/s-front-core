@@ -130,7 +130,7 @@
                             <div class="form_sec">
                                 <div>
                                     <label class="label_title" for="supplyName">供应商名称<span>*</span></label>
-                                    <input type="text" placeholder="请输入供应商名称" id="supplyName">
+                                    <input type="text" placeholder="请输入供应商名称" id="supplyName" ng-disabled="!createState">
                                     <p id="supply_warn" ng-show="showWarnSupply">供应商名称不能为空</p>
                                 </div>
                                 <div>

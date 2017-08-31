@@ -113,7 +113,7 @@ define([], function () {
                 var transferFile = $('#transfer')[0].files[0];
                 if(transferFile != undefined){
                     if(transferFile.size > 10485760){
-                        $('#transfer_warn').css('color','#ff3300').html('文件大小超过10M，不能上传！');
+                        $('#transfer_warn').css('color','#ff3300').html('上传文件大小不可超过10MB');
                         return;
                     }
                     $('#transfer_warn').css('color','#ACACAC').html('文件上传中...');
