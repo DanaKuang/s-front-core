@@ -67,40 +67,38 @@ define([], function () {
                 // 彩蛋奖品
                 if (_drawPrizeScope) {
                     var caidanerror = false;
-                    var caidanAward = [];
+                    var caidanAward = {};
                     processCaidanDraw(_drawPrizeScope, caidanAward, caidanerror);
                     // 彩蛋的中奖fn
                     function processCaidanDraw(_drawPrizeScope, caidanAward, caidanerror) {
-                        var caidanAwardInner = {};
-                        caidanAwardInner.sduration = _drawPrizeScope.startHour;
-                        caidanAwardInner.eduration = _drawPrizeScope.endHour;
-                        caidanAwardInner.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+                        caidanAward.sduration = _drawPrizeScope.startHour;
+                        caidanAward.eduration = _drawPrizeScope.endHour;
+                        if (_drawPrizeScope.intervalHourperson != 0) {
+                            caidanAward.duration = _drawPrizeScope.intervalHour;
+                            caidanAward.playplayPerson = _drawPrizeScope.intervalHourperson;
+                        }
+                        caidanAward.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+
                         if (_drawPrizeScope.myPlus) {
-                            caidanAwardInner.condition = _drawPrizeScope.plusval;
+                            caidanAward.condition = _drawPrizeScope.plusval;
                             var index = $('[ng-model="plusval"]')[0].selectedIndex;
-                            caidanAwardInner.conditionName = $('[ng-model="plusval"] option').eq(index).text();
-                            if (!caidanAwardInner.condition) {
+                            caidanAward.conditionName = $('[ng-model="plusval"] option').eq(index).text();
+                            if (!caidanAward.condition) {
                                 caidanerror = true;
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
                             }
                         } else {
-                            caidanAwardInner.probability = _drawPrizeScope.drawChance;
-                            if (!caidanAwardInner.probability) {
+                            caidanAward.probability = _drawPrizeScope.drawChance.toString();
+                            if (!caidanAward.probability) {
                                 caidanerror = true;
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
                             }
                         }
-                        if (!caidanAwardInner.sduration || !caidanAwardInner.eduration || !caidanAwardInner.adcodes) {
+                        if (!caidanAward.sduration || !caidanAward.eduration || !caidanAward.adcodes) {
                             caidanerror = true;
                             $('.plus').children('.wrong-tip').removeClass('hidden');
                         }
 
-                        // 所有中奖条件已填才能push
-                        caidanAward.push(JSON.stringify(caidanAwardInner));
-                        return {
-                            caidanerror: caidanerror,
-                            caidanAward: caidanAward
-                        }
                     }
                 }
 
@@ -154,6 +152,7 @@ define([], function () {
                         } else {
                             ActivityPageAward.special = 0;
                         }
+
                         ActivityPageAward.probability = item.find('.chance').val() || ''; //特殊奖品没有概率设置
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.multiChoose = 0; //目前暂定都为单选奖品
@@ -208,12 +207,12 @@ define([], function () {
                             item.children('.wrong-tip').removeClass('hidden');
                         }
 
-                        if (radio_res_item.hasClass('hb') && !ActivityPageAward.details[0].redTotalMoney) {
+                        if (radio_res_item.hasClass('hb') && (!ActivityPageAward.details[0].redTotalMoney || !ActivityPageAward.details[0].minred || !ActivityPageAward.details[0].bigred)) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
 
-                        if (ActivityPageAward.special == 0 && !ActivityPageAward.probability) {
+                        if (ActivityPageAward.special == 0 && !_drawPrizeScope && !ActivityPageAward.probability) {
                             commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
@@ -246,10 +245,8 @@ define([], function () {
                     stime: _launchScope.startTime || '',
                     etime: _launchScope.endTime || '',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
-                    // specialAwardStr: specialAward.toString() || '',
-                    // commonAwardStr: commonAward.toString() || '',
                     activityAwards: activityAwards,
-                    caidanConfigStr: _drawPrizeScope ? caidanAward.toString() : '',
+                    caidanConfig: _drawPrizeScope ? caidanAward : null,
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
 

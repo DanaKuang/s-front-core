@@ -87,9 +87,7 @@ define([], function () {
                 initBaiDuMap(angular.extend({
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params, {
-                    timeType: "day"
-                }));
+                }, params));
 
                 // 初始化城市
                 $scope.setCityMap = function (cityName) {
@@ -110,17 +108,13 @@ define([], function () {
                 initPieMap(angular.extend({
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params, {
-                    timeType: "day"
-                }));
+                }, params));
                 // 页面流失统计
                 initRateMap(angular.extend({
                     webId: "1001",
                     startTime: sScope.startTime || "",
                     endTime: sScope.endTime || ""
-                }, params, {
-                    timeType: "day"
-                }));
+                }, params));
             }
 
 

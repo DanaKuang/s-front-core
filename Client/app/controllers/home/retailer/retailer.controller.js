@@ -62,6 +62,36 @@ define([], function () {
                     $scope.startTime = '';
                 }
             });
+            $('[name="monStaTime"]').datetimepicker({
+                language: "zh-CN",
+                format: "yyyy-mm",
+                autoclose: true,
+                todayBtn: true,
+                startView: 3,
+                minView: 3,
+                startDate: ""
+            }).on('change', function (e) {
+                var st = e.target.value || '';
+                var et = $scope.monEndTime || '';
+                if (et < st) {
+                    $scope.monEndTime = '';
+                }
+            });
+            $('[name="monEndTime"]').datetimepicker({
+                language: "zh-CN",
+                format: "yyyy-mm",
+                autoclose: true,
+                todayBtn: true,
+                startView: 3,
+                minView: 3,
+                startDate: ""
+            }).on('change', function (e) {
+                var et = e.target.value || '';
+                var st = $scope.monStaTime || '';
+                if (et < st) {
+                    $scope.monStaTime = '';
+                }
+            });
 
             // 后端数据
             var drop_back_data = $model.$dropShop.data || [];
@@ -79,7 +109,11 @@ define([], function () {
                 cityArr: drop_back_data,
                 cityName: drop_back_data[0].bizCode,
                 endTime: dayFilter.yesterday('date'),
-                startTime: dayFilter.yesterday('date')
+                startTime: dayFilter.yesterday('date'),
+                weekStaTime: weekArray[0].weekNo || "",
+                weekEndTime: weekArray[0].weekNo || "",
+                monStaTime: dateFormatFilter.year_month(+new Date) || "",
+                monEndTime: dateFormatFilter.year_month(+new Date) || ""
             });
 
             // 初始化
@@ -100,15 +134,19 @@ define([], function () {
                 weekEndTime = weekEndTime.slice(weekEndTime.indexOf('(')+1, weekEndTime.indexOf(')'));
                 weekEndTime = weekEndTime.split('~') || [];
                 weekEndTime = weekEndTime[1] || "";
+                weekEndTime = weekEndTime.replace(/\./g, '-') || "";
+
+                // 前一天
+                weekEndTime = weekEndTime && +new Date(weekEndTime) - 24 * 60 * 60 * 1000;
 
                 params = params.statType == 'week' ?
                 angular.extend({
                     weekStaTime: weekStaTime.replace(/\./g, '-') || "",
-                    weekEndTime: weekEndTime.replace(/\./g, '-') || ""
+                    weekEndTime: dateFormatFilter.date(weekEndTime)
                 }, params) : (params.statType == 'month' ?
                 angular.extend({
-                    monStaTime: $scope.startTime || "",
-                    monEndTime: $scope.endTime || ""
+                    monStaTime: $scope.monStaTime || "",
+                    monEndTime: $scope.monEndTime || ""
                 }, params) : angular.extend({
                     beginTime: $scope.startTime || "",
                     endTime: $scope.endTime || ""

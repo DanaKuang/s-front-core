@@ -117,7 +117,7 @@ define([], function () {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本周扫码次数",
-              "dayactive" : "本周活跃用户",
+              "dayactive" : "本周连续月活用户",
               "daybag" : "本周扫码烟包数",
               "dayreduce" : "本周新增扫码用户数"
             }
@@ -126,7 +126,7 @@ define([], function () {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本月扫码次数",
-              "dayactive" : "本月活跃用户",
+              "dayactive" : "本月连续月活用户",
               "daybag" : "本月扫码烟包数",
               "dayreduce" : "本月新增扫码用户数"
             }

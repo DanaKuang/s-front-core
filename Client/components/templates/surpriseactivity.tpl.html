@@ -30,6 +30,13 @@
 				      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
 				    </select>&nbsp;时
 					</div>
+					<div class="select-duration-person configuration-item">
+						<small class="wrong-tip hidden">请输入间隔时间内可参与人数</small>
+						<span>每隔&nbsp;&nbsp;<select class="hours intervalHour" name="intervalHour" ng-model="intervalHour" ng-disabled="disabled">
+				      <option ng-repeat="h in intervalHours" value="{{h}}" ng-selected="$index==0">{{h}}</option>
+				    </select></span>&nbsp;小时&nbsp;&nbsp;，可参加人数为&nbsp;
+				    <input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" ng-disabled="disabled" class="intervalHourperson">人
+					</div>
 					<div class="draw-area configuration-item">
 						<i>*</i>
 						<small class="wrong-tip hidden">请选择中奖地区</small>
@@ -41,8 +48,8 @@
 						<input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled"><span>设置</span>
 						<select name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
 							<option value="">请选择附加条件</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
+							<option value="1">第8个人中奖</option>
+							<option value="2">第88个人中奖</option>
 						</select>
 						<div class="wrong-tip hidden">请完善中奖信息设置，确保红星标识处已填写！</div>
 					</div>

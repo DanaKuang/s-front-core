@@ -36,7 +36,7 @@ define([], function () {
             // 根据品牌选择规格
             var GET_PRODUCT_LIST = '/api/tztx/saas/saotx/common/queryProduct';
             // 地区
-            var GET_TIER_AREA = '/api/tztx/saas/saotx/common/queryRegionByParentCode';
+            var GET_TIER_AREA = '/api/tztx/saas/admin/user/queryRightRegion';
 
             // 礼品、红包选择模板
             var GET_PRODUCT_CHOOSE_LIST = '/api/tztx/saas/saotx/product/queryMetraList';

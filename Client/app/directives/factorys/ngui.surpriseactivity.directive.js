@@ -11,9 +11,12 @@ define([], function () {
         var defaults = { //默认配置
             tpl: '/surpriseactivity.tpl.html',
             confUrl: '',
-            hours: _.map(Array(24),function(v, i){return i;}),
+            hours: _.map(Array(25),function(v, i){return i;}),
             startHour: '00:00:00',
-            endHour: '00:00:00'
+            endHour: '00:00:00',
+            intervalHours: _.map(Array(24),function (v,i){return i+1}),
+            intervalHour: '1',
+            intervalHourperson: '0'
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -28,12 +31,12 @@ define([], function () {
         };
 
         function linkFn (scope, element, attrs) {
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'hours', 'startHour', 'endHour']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'hours', 'startHour', 'endHour', 'intervalHours', 'intervalHour', 'intervalHourperson']);
 
             // 监视conf变化更新page
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'hours', 'startHour', 'endHour']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'hours', 'startHour', 'endHour', 'intervalHours', 'intervalHour', 'intervalHourperson']);
 
                 var that_scope = angular.element('.all-template-config-wrap').scope();
 

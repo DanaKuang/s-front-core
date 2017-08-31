@@ -213,6 +213,11 @@
 	top: 6px;
   left: 5px;
 }
+.draw-prize .select-duration-person:before {
+	content: '间隔时间';
+	top: 6px;
+  left: 5px;
+}
 .draw-prize .draw-area button.dropdown-toggle {
 	width: 453px!important;
 	padding: 5px;
@@ -485,11 +490,23 @@ input[type="checkbox"] {
 .circle-money-tick.active .circle {
 	background: #7c8af4;
 }
+.non-first-draw-wrap .configuration-item:nth-of-type(1):before {
+	content: '中奖概率';
+}
 .gift .configuration-item:nth-of-type(1):before {
 	content: '选择礼品';
 }
 .jf .configuration-item:nth-of-type(1):before {
 	content: '选择积分';
+}
+.surprise-pop .jf .configuration-item:nth-of-type(1):before {
+	content: '选择积分'!important;
+}
+.surprise-pop .jf .configuration-item:nth-of-type(2):before {
+	content: '赠送积分'!important;
+}
+.surprise-pop .jf .configuration-item:nth-of-type(3):before {
+	content: '奖品数量'!important;
 }
 .gift .configuration-item:nth-of-type(2):before {
 	content: '奖品数量'!important;
@@ -524,9 +541,6 @@ input[type="checkbox"] {
 	width: 256px!important;
 }
 /*非首抽*/
-.non-first-draw-wrap .configuration-item:nth-of-type(1):before {
-	content: '中奖概率';
-}
 .surprise-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):before {
 	content: '奖品名称';
 }
@@ -675,8 +689,9 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .sendscore {
 	display: inline-block;
 }
-.jf .configuration-item:nth-of-type(2):before {
+.surprise-pop .non-first-draw-wrap .jf .configuration-item:nth-of-type(2):before {
 	content: '赠送积分'!important;
+	top: 6px!important;
 } 
 .jf .configuration-item:nth-of-type(3):before {
 	content: '奖品数量'!important;
@@ -935,4 +950,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 /*保存活动*/
 .submit-prize {
 	opacity: 0;
+}
+.select-duration-person>span {
+	margin-left: 75px;
+}
+.intervalHour {
+	margin-left: 0!important;
+}
+.intervalHourperson {
+	width: 180px;
 }

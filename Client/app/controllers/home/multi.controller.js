@@ -51,7 +51,6 @@ define([], function () {
                 data.k = data.zoneCode;
                 data.v = data.zoneName;
             }),
-            //szArray: [{v:'堡垒型',k:'A'},{v:'发展型',k:'B'},{v:'潜力型',k:'C'}],
             result: []
         };
 
@@ -130,10 +129,10 @@ define([], function () {
             }) : v == 1 ? initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: user === "hunan" ? "白沙" : " 黄金叶",
+                productBrand: user === "hunan" ? "白沙" : "黄金叶",
                 productName: "",
                 productPack: "",
-                saleZone: user === "hunan" ? "堡垒型_A" : "华东分中心",
+                saleZone: user === "hunan" ? "堡垒型_A" : "华东分中心_DB",
                 provinceName: "",
                 cityName: ""
             }) : initSearchScope({
@@ -157,7 +156,10 @@ define([], function () {
             var tScope = angular.element('#targetTarget #common_table').scope();
             var pScope = angular.element('#packetTarget #common_table').scope();
             var rScope = angular.element('#realTarget #common_table').scope();
-            var sZFilter = {A: '堡垒型',B: '发展型',C: '潜力型',Q:'全国',O:'其他'};
+            var sZFilter = {};
+            _.each($model.$getZone.data, function (v) {
+                sZFilter[v.zoneCode] = v.zoneName;
+            });
             var staticParam = {
                 userId: user ,
                 opType: "2",

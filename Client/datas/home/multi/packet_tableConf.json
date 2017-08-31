@@ -43,33 +43,13 @@
         "sortable": true,
         "align": "center"
     }, {
-        "name": "redpacket1Cnt",
-        "label": "1元红包",
+        "name": "awardName",
+        "label": "奖品名称",
         "sortable": true,
         "align": "center"
     }, {
-        "name": "redpacket3Cnt",
-        "label": "3元红包",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "redpacket5Cnt",
-        "label": "5元红包",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "redpacket8Cnt",
-        "label": "8元红包",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "redpacket18Cnt",
-        "label": "18元红包",
-        "sortable": true,
-        "align": "center"
-    }, {
-        "name": "redpacket88Cnt",
-        "label": "88元红包",
+        "name": "awardCnt",
+        "label": "奖品数量",
         "sortable": true,
         "align": "center"
     }],

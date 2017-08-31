@@ -184,13 +184,8 @@ define([], function () {
               pageCount:allpage,
               current:1,
               backFn:function(page){
-                if($scope.bool){
                   Deafault.page = page;
-                  global.other(Deafault);
-                } else {
-                  prize.page = page;
-                  global.getPrize(prize)
-                }
+                  global.getPerformAppoint(Deafault);
               }
             });
           }
