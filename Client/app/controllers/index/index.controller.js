@@ -23,7 +23,7 @@ define([], function() {
                     user = user.data || {};
                     $scope.navConf = {
                         nav: menuFilter.nav(nav.data),
-                        account: user.data.account || ""
+                        account: user.data.name || ""
                     };
                 });
             });
