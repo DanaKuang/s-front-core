@@ -127,10 +127,10 @@
 
 .select_sec div select {
     font-size: 14.7px;
-    /*width: 154px;*/
     width: 60%;
     height: 28px;
     line-height: 28px;
+    margin-left: 4px;
 }
 
 .ser_btn, .rest_btn {
@@ -368,7 +368,7 @@
 .form_sec div select {
     width: 180px;
     height: 35px;
-    font-size: 16px;
+    font-size: 14px;
     padding: 0 5px;
 }
 
@@ -718,6 +718,7 @@ textarea {
 }
 .multiselect{
     text-align: left;
+    margin-left: 4px;
 }
 .multiselect b{
     float: right;

@@ -412,14 +412,15 @@ define([], function () {
                     $('.stock_warn').show();
                     return;
                 }else{
-                    if(regNum == camiFileCount){
-                        $('.stock_warn').hide();
-                        $('.cami_file_warn').css('color','#ACACAC').html('');
-                    }else{
-                        $('.cami_file_warn').css('color','#ff3300').html('录入'+ camiFileCount+ '条卡密数据，与库存数值不符');
-                        return;
+                    if(camiFileCount != ''){
+                        if(stockVal == camiFileCount){
+                            $('.stock_warn').hide();
+                            $('.cami_file_warn').css('color','#ACACAC').html('');
+                        }else{
+                            $('.cami_file_warn').css('color','#ff3300').html('录入'+ camiFileCount+ '条卡密数据，与库存数值不符');
+                            return;
+                        }
                     }
-
                 }
                 //库存阀值
                 var stockThreshValue = $('#stockThresh').val();
