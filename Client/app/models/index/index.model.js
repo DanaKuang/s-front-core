@@ -16,6 +16,11 @@ define([], function () {
 
       var GET_NAV_DATA = "/api/tztx/saas/saotx/menu/user_list_moudle";
       var GET_MENU_DATA = "/api/tztx/saas/saotx/menu/user_list_menu";
+      var GET_USER_DETAIL = "/api/tztx/saas/admin/user/userDetail";
+
+      $model.getUser = function () {
+        return request.$Search(GET_USER_DETAIL);
+      };
 
       $model.getNavJson = function () {
         return request.$Query(GET_NAV_JSON);
