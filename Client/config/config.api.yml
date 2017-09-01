@@ -55,7 +55,7 @@ menu:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/login/user_detail'
+    routepath: '/api/tztx/saas/admin/user/userDetail'
     authorized: 1
     description: '用户信息'
     enableroute: 1
@@ -1022,7 +1022,7 @@ supply:
     description: '修改红包数据状态'
     enableroute: 1
     gatewaytype: 1
-    responetype: 'json'       
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'

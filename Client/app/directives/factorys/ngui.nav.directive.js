@@ -11,7 +11,7 @@ define([], function () {
     var defaults = { //默认配置
         tpl: '/nav.tpl.html',
         nav: [], //选项卡数组
-        account: "刘彬",
+        account: "",
         activeId: 0 // 默认标记第一个active
     };
     var defineObj = { //指令定义对象

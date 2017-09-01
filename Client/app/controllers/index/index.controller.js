@@ -17,12 +17,15 @@ define([], function() {
             // });
 
             // 获取数据
-            $model.getNav().then(function(res) {
-                var data = res.data || {};
-                $scope.navConf = {
-                    nav: menuFilter.nav(data.data),
-                    account: sessionStorage.account || ""
-                };
+            $model.getNav().then(function(nav) {
+                $model.getUser().then(function (user) {
+                    nav = nav.data || {};
+                    user = user.data || {};
+                    $scope.navConf = {
+                        nav: menuFilter.nav(nav.data),
+                        account: user.data.name || ""
+                    };
+                });
             });
 
             // 获取menu
