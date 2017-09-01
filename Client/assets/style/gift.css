@@ -130,7 +130,7 @@
     width: 60%;
     height: 28px;
     line-height: 28px;
-    margin-left: 4px;
+    /*margin-left: 4px;*/
 }
 
 .ser_btn, .rest_btn {
@@ -379,6 +379,7 @@
 }
 #giftName,#marketValue,#stock,#stockThresh,#linkUrl{
     width: 364px;
+    display: inline-block;
 }
 .select_file {
     /*width: 84px;*/
@@ -694,6 +695,7 @@ textarea {
     width: 60%;
     height: 28px;
     line-height: 28px;
+    display: inline-block;
 }
 .file_name{
     color: #6E80FF;
@@ -740,7 +742,4 @@ textarea {
 }
 .warn_color{
     color: #ff3300
-}
-#oneCategory{
-    margin-right: 6px;
 }
