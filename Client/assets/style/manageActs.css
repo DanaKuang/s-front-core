@@ -435,34 +435,14 @@ input[type="checkbox"] {
 }
 .prize-config {
 	margin-top: 10px;
-	padding: 15px 30px 10px;
+	padding: 15px 25px 10px;
 	border: 1px solid #d2d2d2;
 }
 .prize-config .chance {
 	width: 340px!important;
 }
 .prize-config .configuration-item input[type="text"] {
-	margin-left: 50px;
-	width: 360px;
-}
-.prize-config .configuration-item:before {
-	left: -12px;
-	top: 6px;
-}
-.prize-config .configuration-item:nth-of-type(1):before {
-	content: '奖项名称';
-}
-.prize-config .configuration-item:nth-of-type(2):before {
-	content: '奖品类型';
-}
-.redpack-pop .hb-res .configuration-item:nth-of-type(2):before {
-	content: '红包总额'!important;
-} 
-.common-pop .prize-config .configuration-item:nth-of-type(2):before {
-	content: '奖品类型(三选一)';
-	width: 50px;
-	text-align: center;
-	top: 0;
+	width: 340px;
 }
 .circle-money-tick {
 	display: inline-block;
@@ -490,68 +470,15 @@ input[type="checkbox"] {
 .circle-money-tick.active .circle {
 	background: #7c8af4;
 }
-.non-first-draw-wrap .configuration-item:nth-of-type(1):before {
-	content: '中奖概率';
-}
-.gift .configuration-item:nth-of-type(1):before {
-	content: '选择礼品';
-}
-.jf .configuration-item:nth-of-type(1):before {
-	content: '选择积分';
-}
-.surprise-pop .jf .configuration-item:nth-of-type(1):before {
-	content: '选择积分'!important;
-}
-.surprise-pop .jf .configuration-item:nth-of-type(2):before {
-	content: '赠送积分'!important;
-}
-.surprise-pop .jf .configuration-item:nth-of-type(3):before {
-	content: '奖品数量'!important;
-}
-.gift .configuration-item:nth-of-type(2):before {
-	content: '奖品数量'!important;
-	top: 6px!important;
-}
-.hb .configuration-item:nth-of-type(1):before {
-	content: '选择模板';
-}
-.hb .configuration-item:nth-of-type(2):before {
-	content: '红包总额'!important;
-	top: 6px!important;
-}
-.hb .configuration-item:nth-of-type(2):after {
-	content: '元';
-	position: absolute;
-	right: 115px;
-	top: 7px;
-}
-.redpack-pop .first-draw-prize-wrap .configuration-item:nth-of-type(3):before {
-	content: '选择模板';
-} 
-.redpack-pop .first-draw-prize-wrap .configuration-item:nth-of-type(4):before {
-	content: '红包总额';
-}
-.redpack-pop .first-draw-prize-wrap .configuration-item:nth-of-type(4):after {
-	content: '元';
-	position: absolute;
-	right: 100px;
-	top: 7px;
-}
+
 .first-draw-prize-wrap .number {
 	width: 256px!important;
 }
 /*非首抽*/
-.surprise-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):before {
-	content: '奖品名称';
-}
-.redpack-pop .hb-res .configuration-item:nth-of-type(1):before {
-	content: '红包模板'!important;
-}
-
-.common-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after, .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after {
+.common-pop .non-first-draw-wrap .chance-wrap:after, .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after {
 	position: absolute;
 	content: '提示：以上中奖概率控制除参与奖外所设奖项的整体中奖概率，参与奖项的中奖概率为100%（中奖概率设置值）。';
-	left: 20px;
+	left: 38px;
   bottom: -36px;
   font-size: 12px;
   -webkit-transform: scale(0.85);
@@ -559,56 +486,11 @@ input[type="checkbox"] {
   -ms-transform: scale(0.85);
   transform: scale(0.85);
 }
-.surprise-pop .non-first-draw-wrap .configuration-item:nth-of-type(2):before {
-	content: '奖品类型(三选一)'!important;
-	width: 50px;
-	text-align: center;
-	top: 0!important;
-}
-.surprise-pop .non-first-draw-wrap .hb .configuration-item:nth-of-type(2):before {
-	top: 6px!important;
-}
-.non-first-draw-wrap .configuration-item:nth-of-type(2):before {
-	content: '奖项名称'!important;
-	top: 6px!important;
-}
+
 .common-pop .non-first-draw-wrap .configuration-item:nth-of-type(2), .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(2) {
 	margin-top: 40px;
 }
-.non-first-draw-wrap .configuration-item:nth-of-type(3):before {
-	content: '奖品类型(三选一)';
-	width: 50px;
-	text-align: center;
-	top: 0;
-}
-.redpack-pop .non-first-draw-wrap .prize-config .configuration-item:nth-of-type(3):before {
-	content: '奖品类型'!important;
-	top: 6px!important;
-}
-.redpack-pop .non-first-draw-wrap .prize-config .hb-res .configuration-item:nth-of-type(3):before { 
-	content: '红包个数'!important; 
-}
-.common-pop .non-first-draw-wrap .configuration-item:nth-of-type(3):before {
-	content: '奖品类型(三选一)';
-	width: 50px;
-	text-align: center;
-	top: 0;
-}
-.holiday-pop .radio-wrap:before, .surprise-pop .radio-wrap:before {
-	content: '奖品类型(三选一)';
-	width: 50px;
-	text-align: center;
-	top: 0;
-}
-.redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(4):before {
-	content: '选择模板';
-}
-.non-first-draw-wrap .configuration-item:nth-of-type(5):before {
-	content: '奖品数量';
-}
-.redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(5):before {
-	content: '红包总额';
-}
+
 .hb-two-one {
 	position: relative;
 }
@@ -630,37 +512,9 @@ input[type="checkbox"] {
 	right: 100px;
 	top: 7px;
 }
-.redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(5):after {
-	content: '元';
-}
-.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):before {
-	content: '选择礼品';
-}
-.non-first-draw-wrap .gift .configuration-item:nth-of-type(1):after {
-	content: ''
-}
-.non-first-draw-wrap .hb .configuration-item:nth-of-type(1):after {
-	content: ''
-}
-.non-first-draw-wrap .jf .configuration-item:nth-of-type(1):after {
-	content: ''
-}
+
 .non-first-draw-wrap .gift .configuration-item:nth-of-type(2), .non-first-draw-wrap .hb .configuration-item:nth-of-type(2), .non-first-draw-wrap .jf .configuration-item:nth-of-type(2) {
 	margin-top: 0;
-}
-.non-first-draw-wrap .gift .configuration-item:nth-of-type(2):before {
-	content: '奖品数量'!important;
-	top: 6px!important;
-}
-.non-first-draw-wrap .hb .configuration-item:nth-of-type(1):before {
-	content: '选择模板';
-}
-.non-first-draw-wrap .hb .configuration-item:nth-of-type(2):before {
-	content: '红包总额'!important;
-}
-.hb .configuration-item:nth-of-type(3):before {
-	content: '红包个数'!important;
-	top: 6px!important;	
 }
 
 input[type="radio"] {
@@ -681,7 +535,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 .present-integral {
 	margin-top: 10px;
-	margin-left: 50px;
+	margin-left: 64px;
 }
 .present-integral .tickcheckbox {
 	margin-top: 10px;
@@ -689,14 +543,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .sendscore {
 	display: inline-block;
 }
-.surprise-pop .non-first-draw-wrap .jf .configuration-item:nth-of-type(2):before {
-	content: '赠送积分'!important;
-	top: 6px!important;
-} 
-.jf .configuration-item:nth-of-type(3):before {
-	content: '奖品数量'!important;
-	top: 6px!important;
-}
+
 .present-integral .score {
 	margin-right: 8px!important;
  	margin-left: 10px!important;
@@ -728,7 +575,6 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	margin-left: 0;
 }
 .prize-config .add-prize, .choose-list .btn-default {
-	margin-left: 50px;
 	height: 29px;
 	line-height: 12px;
 	border: 1px solid #6e80ff;
@@ -740,15 +586,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 .prize-config .configuration-item .radio-group {
 	display: inline-block;
-	margin: 0 20px;
+	margin-right: 20px;
 }
-.prize-config .configuration-item .radio-group:first-of-type {
-	margin-left: 50px;
-}
+
 .prize-img-preview {
 	position: relative;
-	margin: 5px 0 0 50px;
-	width: 80px;
+	margin: 5px 0 0 65px;
+	width: 82px;
 	height: 80px;
 	border: 1px solid #d2d2d2;
 	text-align: center;
@@ -816,7 +660,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 
 /*红包*/
 .random-hb, .fixed-hb {
-	margin-left: 50px;
+	margin-left: 65px;
 }
 .random-hb .min, .random-hb .max {
 	width: 103.5px!important;
@@ -879,7 +723,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 .ready-set b {
 	position: absolute;
-	left: 38px;
+	left: 50px;
 	top: 4px;
 }
 .create-prize-btn {
@@ -959,4 +803,29 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 .intervalHourperson {
 	width: 180px;
+}
+
+/*label*/
+.prize-config label {
+	margin-right: 14px;
+	font-weight: normal;
+	color: #707478;
+}
+.radio-wrap label {
+	margin-top: 5px;
+}
+.radio-wrap:before {
+	content: '奖品类型'
+}
+.radio-wrap:after {
+  content: '*';
+  position: absolute;
+  left: 50px;
+  top: -3px;
+  color: red;
+  font-size: 19px;
+  font-weight: bold;
+}
+.radio-group:first-of-type {
+	margin-left: 60px;
 }

@@ -116,7 +116,7 @@ define([], function () {
 
           // 操作面板，获取地区
           $('.operation').one('click', '.area', function (e) {
-            var f = {parentCode: 0}
+            var f = {parentCode: 0};
             getArea(f, '[ng-model="allarea"]')
           })
 
@@ -224,25 +224,7 @@ define([], function () {
                 // qa是问答
                 // holiday节假日
                 // unexpected 彩蛋
-              getLaunchInfo();
-              // 获取供应商接口
-              // $model.getSupplierCompany().then(function (res) {
-              //   var selectCompanyScope = angular.element('.select-company').scope();
-              //   selectCompanyScope.company = res.data.data;
-              // })
-
-              // 根据供应商，选择品牌
-              // $scope.$on('supplierCode', function (e, v, f) {
-              //   $model.getBrandList(f).then(function (res) {
-              //     var selectCompanyScope = angular.element('.select-brand').scope();
-              //     selectCompanyScope.brand = res.data.data;
-              //     $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-              //         v.label = v.name;
-              //         v.value = v.brandCode;
-              //     }));
-              //     $('[ng-model="selectBrandVal"]').multiselect('refresh');
-              //   })
-              // })        
+              getLaunchInfo();        
             })
           })
 
@@ -345,13 +327,13 @@ define([], function () {
             })
 
             // 获取已编辑的地区
-            getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
+            // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
           }
 
           // 获取已编辑的中奖地区
-          function getAlreadySelectedDrawAreaInfo(selectedDrawArea) {
-            getArea({parentCode: 0}, '[ng-model="drawAreaVal"]', true, selectedDrawArea.adcodes)
-          }
+          // function getAlreadySelectedDrawAreaInfo(selectedDrawArea) {
+          //   getArea({parentCode: 0}, '[ng-model="drawAreaVal"]', true, selectedDrawArea.adcodes)
+          // }
 
           // 投放设置点击了地区
           $scope.$on('clickselectarea', function(n,v,f) {
@@ -367,46 +349,46 @@ define([], function () {
           // 获取地区
           function getArea(f, selector, bool, boolarr) {
             $model.getTierArea(f).then(function (res) {
-                var areaData = [];
-                var provinceArr = res.data.data;
-                if (provinceArr.length != 0) {
-                  provinceArr.forEach(function (n ,index) {
-                    var group = {
-                        label: n.shortName, 
-                        value: n.code,
-                        children: []
-                    };
-                    $model.getTierArea({parentCode: n.code}).then(function(res) {
-                        var cityArr = res.data.data;
-                        if (cityArr.length != 0) {
-                          cityArr.forEach(function (n, index) {
-                            group['children'].push({
-                                label: n.shortName,
-                                value: n.code
-                            })
-                          })
-                        }
-                        areaData.push(group);
-                        $(selector).multiselect('dataprovider', areaData);
-
-                        // 如果是编辑模式，还要展现已选地区
-                        if (bool) {
-                          if (Array.isArray(boolarr)) {
-                            // 如果是数组，则是中奖地区返回的
-                            $(selector).multiselect('select', boolarr);
-                            $('.multiselect.dropdown-toggle').addClass('disabled');
-                          } else {
-                            var alreadyselectedareaarr = [];
-                            boolarr.forEach(function(n, index){
-                              alreadyselectedareaarr.push(n.adCode);
-                            })
-                            $(selector).multiselect('select', alreadyselectedareaarr);
-                            $('.multiselect.dropdown-toggle').addClass('disabled');
-                          }
-                        }
+              var areaData = [];
+              var provinceArr = res.data.data;
+              if (provinceArr.length != 0) {
+                provinceArr.forEach(function (n ,index) {
+                  var group = {
+                      label: n.shortName, 
+                      value: n.code,
+                      children: []
+                  };
+                  $model.getTierArea({parentCode: n.code}).then(function(res) {
+                    var cityArr = res.data.data;
+                    if (cityArr.length != 0) {
+                      cityArr.forEach(function (n, index) {
+                        group['children'].push({
+                            label: n.shortName,
+                            value: n.code
+                        })
                       })
+                    }
+                    areaData.push(group);
+                    $(selector).multiselect('dataprovider', areaData);
+
+                    // 如果是编辑模式，还要展现已选地区
+                    if (bool) {
+                      if (Array.isArray(boolarr)) {
+                        // 如果是数组，则是中奖地区返回的
+                        $(selector).multiselect('select', boolarr);
+                        $('.multiselect.dropdown-toggle').addClass('disabled');
+                      } else {
+                        var alreadyselectedareaarr = [];
+                        boolarr.forEach(function(n, index){
+                          alreadyselectedareaarr.push(n.adCode);
+                        })
+                        $(selector).multiselect('select', alreadyselectedareaarr);
+                        $('.multiselect.dropdown-toggle').addClass('disabled');
+                      }
+                    }
                   })
-                }
+                })
+              }
             })
           }
 

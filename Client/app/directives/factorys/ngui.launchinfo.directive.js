@@ -42,6 +42,20 @@ define([], function () {
             //         scope.$emit('supplierCode', event, {supplierCode: scope.selectCompanyVal});
             //     }
             // })
+
+            scope.$watch('selectBrandVal', function (n, o, s) {
+                if (n !== '') {
+                    var brandListArrObj = {};
+                    brandListArrObj.brandCode = n;
+                    scope.$emit('brandCode', event, brandListArrObj);
+                }
+            })
+
+            scope.$watch('selectSpecificationVal', function (n, o, s) {
+                scope.$emit('specificationnotempty', event, {
+                    canchoose: true
+                });
+            })
             
             var that_scope = angular.element('.all-template-config-wrap').scope();
 
@@ -49,6 +63,8 @@ define([], function () {
                 // 说明从编辑活动过来
                 scope.disabled = true;
                 var activity = that_scope.conf.data.activity;
+                scope.activity = activity;
+                
                 scope.selectBrandVal = activity.activityBrandsList.join(',');
 
                 var selectSpecificationVal = [];
@@ -127,20 +143,6 @@ define([], function () {
             });
 
             scope.whichday = $('.remark').find('input[type="radio"]:checked').val();
-
-            scope.$watch('selectBrandVal', function (n, o, s) {
-                if (n !== '') {
-                    var brandListArrObj = {};
-                    brandListArrObj.brandCode = n;
-                    scope.$emit('brandCode', event, brandListArrObj);
-                }
-            })
-
-            scope.$watch('selectSpecificationVal', function (n, o, s) {
-                scope.$emit('specificationnotempty', event, {
-                    canchoose: true
-                });
-            })
 
             $('.select-brand').one('click', function() {
                 if (!scope.disabled) {

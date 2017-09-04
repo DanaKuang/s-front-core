@@ -102,13 +102,74 @@ define([], function () {
                     }
                 }
 
-                if (_setPrizeScope.myVar) {
-                    // 特殊
-                    setPrize('special')
+                if (that_scope.activityCode) {
+                    // 编辑模式下
+                    if (_setPrizeScope.myVar) {
+                        // 特殊
+                        setEditPrize('special')
+                    }
+                    // 普通奖品必需填写
+                    setEditPrize('common')
+                } else {
+                    // 新建模式下
+                    if (_setPrizeScope.myVar) {
+                        // 特殊
+                        setPrize('special')
+                    }
+                    // 普通奖品必需填写
+                    setPrize('common')
                 }
-                // 普通奖品必需填写
-                setPrize('common')
-                // 特殊 & 普通奖项设置fn
+
+                // 【编辑】特殊 & 普通奖项设置fn
+                function setEditPrize(tag) {
+                    var dcList = that_scope.conf.data.dcList;
+                    if (tag === 'special') {
+                        var list = dcList.FIRST_LOTTERY_BE_WON;
+                        processPrizeArrEdit(list, 'special')
+                    } else {
+                        var list = dcList.COMMON;
+                        processPrizeArrEdit(list, 'common')
+                    }
+                }
+
+                // 【编辑】 具体 - 特殊 & 普通奖品
+                function processPrizeArrEdit(list, tag) {
+                    list.forEach(function (n, index) {
+                        var ActivityPageAward = {};
+                        if (tag === 'special') {
+                            ActivityPageAward.special = 1;
+                        } else {
+                            ActivityPageAward.special = 0;
+                        }
+                        ActivityPageAward.probability = n.probability ? n.probability.toString() : '';
+                        ActivityPageAward.prizeName = n.prizeName;
+                        ActivityPageAward.details = [];
+                        ActivityPageAward.details[0] = {};
+                        ActivityPageAward.details[0].poolId = n.poolId.toString() || '';
+                        ActivityPageAward.details[0].awardType = n.awardType.toString();
+                        ActivityPageAward.details[0].awardPicUrl = n.awardPicUrl || '';
+                        ActivityPageAward.details[0].awardName = n.awardName || '';
+                        if (n.awardType == 3) {
+                            ActivityPageAward.details[0].awardNums = n.redNum.toString();
+                            ActivityPageAward.details[0].minred = n.minred.toString();
+                            ActivityPageAward.details[0].bigred = n.bigred.toString();
+                            ActivityPageAward.details[0].redTotalMoney = n.redTotalMoney.toString();
+                        } else {
+                            ActivityPageAward.details[0].awardNums = n.totalNum.toString();
+                            if (n.awardType == 6) {
+                                ActivityPageAward.details[0].poolId = n.integralPool.toString();
+                                ActivityPageAward.details[0].score = n.score;
+                            }
+                        }
+                        if (n.giveScore) {
+                            ActivityPageAward.details[0].integralPool = n.integralPool.toString();
+                            ActivityPageAward.details[0].score = n.score;
+                        }
+                        activityAwards.push(ActivityPageAward);
+                    })
+                }
+
+                // 【新建】特殊 & 普通奖项设置fn ===================
                 function setPrize(tag) {
                     if (tag === 'special') {
                         // 特殊奖品
@@ -131,7 +192,7 @@ define([], function () {
                         processPrizeArr(prizeDomList_arr, prizeDomList, false)
                     }
                 }
-                // 具体-处理奖项数组
+                // 【新建】具体-处理奖项数组
                 function processPrizeArr(prizeDomList_arr, prizeDomList, specialBool) {
                     prizeDomList_arr.forEach(function (n, index) {
                         var item = prizeDomList.eq(n);
@@ -199,8 +260,7 @@ define([], function () {
                         if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.prizeName || !ActivityPageAward.details[0].poolId) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
-                        }
-                        
+                        }  
 
                         if (send_scores && send_scores.prop('checked') && !ActivityPageAward.details[0].integralPool) {
                             ActivityPageAward.special ? specialerror = true : commonerror = true;
@@ -238,9 +298,9 @@ define([], function () {
                     limitPer: _participateScope.namePerPersonDay || 0,
                     limitAll: _participateScope.namePerPerson || 0,
                     supplier: _launchScope.selectCompanyVal || '',
-                    brandCode: _launchScope.selectBrandVal || [],
-                    sn: _launchScope.selectSpecificationVal || [],
-                    areaCodes: _launchScope.selectAreaVal || [],
+                    brandCode: _launchScope.activity ? _launchScope.activity.activityBrandsList.join('') : _launchScope.selectBrandVal || '',
+                    sn: _launchScope.activity ? _launchScope.activity.activitySnSList[0].sn : _launchScope.selectSpecificationVal || '',
+                    areaCode: _launchScope.selectAreaVal.toString() || '',
                     holiday: _launchScope.whichday || 3,
                     stime: _launchScope.startTime || '',
                     etime: _launchScope.endTime || '',

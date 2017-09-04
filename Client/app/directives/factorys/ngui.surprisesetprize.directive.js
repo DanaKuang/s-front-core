@@ -11,7 +11,8 @@ define([], function () {
         var defaults = { //默认配置
             tpl: '/surprisesetprize.tpl.html',
             chooseNum: 0,
-            firstornot: false
+            firstornot: false,
+            dcList: {}
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -40,50 +41,7 @@ define([], function () {
                 scope.disabled = true;
                 // 渲染已编辑奖项
                 var dcList = that_scope.conf.data.dcList;
-                var gifthtml = $('#gifthtml').html();
-                var hbhtml = $('#hbhtml').html();
-                var jfhtml = $('#jfhtml').html();
-
-                if (dcList) {
-                    if (dcList.COMMON && dcList.COMMON.length > 0) {
-                        // 普通奖品
-                        var _non_wrap_html = '';
-                        dcList.COMMON.forEach(function (n, index) {
-                            if (n.awardType == 3) {
-                                // 红包
-                                if (n.score > 0) {
-                                // 赠送积分
-                                    var score_html = '<div class="present-integral"><input type="checkbox" class="tickcheckbox" disabled checked="true"><label for="">同时赠送积分</label><input type="number" class="score" disabled value="' + n.score + '">积分</div>';
-                                } else {
-                                    var score_html = '<div class="present-integral"><input type="checkbox" class="tickcheckbox" disabled><label for="">同时赠送积分</label><input type="number" class="score" disabled>积分</div>';
-                                }
-                                if (n.bigred == n.minred) {
-                                    // 固定金额
-                                    var hbmoney_html = '<div class="hb-two-one"><div class="random-hb hb-money-wrap"><div class="circle-money-tick"><i class="circle"></i>随机金额</div><input type="number" class="min" readonly="true" disabled>元 —— <input type="number" class="max" readonly="true" disabled>元</div><div class="fixed-hb hb-money-wrap"><div class="circle-money-tick active"><i class="circle"></i>固定金额</div><input type="number" class="fixed" readonly="true" disabled value="' + n.minred + '">元</div></div>'
-                                } else {
-                                    var hbmoney_html = '<div class="hb-two-one"><div class="random-hb hb-money-wrap"><div class="circle-money-tick active"><i class="circle"></i>随机金额</div><input type="number" class="min" readonly="true" disabled value="'+ n.minred +'">元 —— <input type="number" class="max" readonly="true" disabled value="'+ n.bigred +'">元</div><div class="fixed-hb hb-money-wrap"><div class="circle-money-tick"><i class="circle"></i>固定金额</div><input type="number" class="fixed" readonly="true" disabled>元</div></div>'
-                                }
-
-                                _non_wrap_html += '<div class="draw-prize-wrap" data-id="'+ n.awardCode +'" data-gift-pic="' + n.awardPicUrl + '" data-name="' + n.awardName + '" data-gift-type="' + n.awardType + '"><div class="prize-config border-box"><div class="configuration-item"><input type="text" class="prizename" disabled value="' + n.prizeName + '"></div><div class="configuration-item radio-wrap"><div class="radio-group"><div class="circle-tick"><i class="circle"></i>礼品</div></div><div class="radio-group"><div class="circle-tick active"><i class="circle"></i>微信红包</div></div><div class="radio-group"><div class="circle-tick"><i class="circle"></i>积分</div></div></div><div class="radio-res-wrap">' + gifthtml + '<div class="hb radio-res"><div class="configuration-item"><button class="btn btn-default add-prize show-hb-list" data-toggle="modal" data-target=".create-hbProduct-modal" disabled>+选择红包模板</button>' + hbmoney_html + '</div><div class="configuration-item"><input type="number" class="money" placeholder="请填写奖金总数" disabled value="' + n.redTotalMoney + '"></div><div class="configuration-item"><input type="number" class="hbnumber" placeholder="请填写奖金数量" disabled value="' + n.redNum + '">' + score_html + '</div></div>' + jfhtml + '</div></div><i class="close">×</i></div>';
-
-                            } else if (n.awardType == 6) {
-                                // 积分
-                                _non_wrap_html += '<div class="draw-prize-wrap" data-id="'+ n.awardCode +'" data-gift-pic="' + n.awardPicUrl + '" data-name="' + n.awardName + '" data-gift-type="' + n.awardType + '"><div class="prize-config border-box"><div class="configuration-item"><input type="text" class="prizename" disabled value="' + n.prizeName + '"></div><div class="configuration-item radio-wrap"><div class="radio-group"><div class="circle-tick"><i class="circle"></i>礼品</div></div><div class="radio-group"><div class="circle-tick"><i class="circle"></i>微信红包</div></div><div class="radio-group"><div class="circle-tick active"><i class="circle"></i>积分</div></div></div><div class="radio-res-wrap">' + gifthtml + hbhtml + '<div class="jf radio-res"><div class="configuration-item"><input type="number" class="score" placeholder="请输入数字" value="' + n.score + '" disabled></div><div class="configuration-item"><input type="number" class="number" placeholder="请输入数字" value="' + n.totalNum + '" disabled></div></div></div></div><i class="close">×</i></div>';
-
-                            } else {
-                                // 礼品
-                                if (n.score > 0) {
-                                // 赠送积分
-                                    var score_html = '<div class="present-integral"><input type="checkbox" class="tickcheckbox" disabled checked="true"><label for="">同时赠送积分</label><input type="number" class="score" disabled value="' + n.score + '">积分</div>';
-                                } else {
-                                    var score_html = '<div class="present-integral"><input type="checkbox" class="tickcheckbox" disabled><label for="">同时赠送积分</label><input type="number" class="score" disabled>积分</div>';
-                                }
-                                _non_wrap_html += '<div class="draw-prize-wrap" data-id="'+ n.awardCode +'" data-gift-pic="' + n.awardPicUrl + '" data-name="' + n.awardName + '" data-gift-type="' + n.awardType + '"><div class="prize-config border-box"><div class="configuration-item"><input type="text" class="prizename" disabled value="' + n.prizeName + '"></div><div class="configuration-item radio-wrap"><div class="radio-group"><div class="circle-tick active"><i class="circle"></i>礼品</div></div><div class="radio-group"><div class="circle-tick"><i class="circle"></i>微信红包</div></div><div class="radio-group"><div class="circle-tick"><i class="circle"></i>积分</div></div></div><div class="radio-res-wrap"><div class="gift radio-res"><div class="configuration-item"><button class="btn btn-default add-prize show-product-list" data-toggle="modal" data-target=".create-realProduct-modal" disabled>+选择产品</button><div class="prize-img-preview"><img src="' + n.awardPicUrl + '" alt=""></div></div><div class="configuration-item"><input type="number" class="number" placeholder="请输入数字" value="' + n.totalNum + '" disabled>' + score_html + '</div></div>' + hbhtml + jfhtml + '</div></div><i class="close">×</i></div>';
-                            }
-                            $('.non-first-draw-wrap').find('.ready-set').html(_non_wrap_html);
-                        })
-                    }
-                }
+                scope.dcList = that_scope.conf.data.dcList;
             }
 
             // 产品模板列表
@@ -207,7 +165,7 @@ define([], function () {
                     parentsDrawPrizeWrap.dataset.giftType = '';
                     parentsDrawPrizeWrap.dataset.name = '';
                     $(parentsDrawPrizeWrap).find('.prize-img-preview img').attr('src', '');
-                   $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
+                    $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
                     $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false);
 
                     $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
