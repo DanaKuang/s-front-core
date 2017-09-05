@@ -114,7 +114,7 @@ define([], function () {
 
             $('.draw-area').one('click', function() {
                 if (!scope.disabled) {
-                    scope.$emit('clickdrawarea', event, {parentCode: 0})
+                    scope.$emit('clickdrawarea', event, {parentCode: ''})
                 } else {
                     return
                 }

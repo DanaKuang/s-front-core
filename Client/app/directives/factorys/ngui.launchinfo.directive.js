@@ -155,7 +155,7 @@ define([], function () {
             // 点击选择地区
             $('.select-area').one('click', function () {
                 if (!scope.disabled) {
-                    scope.$emit('clickselectarea', event, {parentCode: 0})
+                    scope.$emit('clickselectarea', event, {parentCode: ''})
                 } else {
                     return
                 }

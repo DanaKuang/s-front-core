@@ -52,7 +52,7 @@ define([], function () {
             scope.choose = function (e) {
                 var item = this.item;
                 var setprizeScope = angular.element('.draw-prize-wrap').scope();
-                var firstornot= setprizeScope.firstornot;
+                var firstornot = setprizeScope.firstornot;
                 var chooseNum = setprizeScope.chooseNum;
                 if (firstornot) {
                     // 特殊项里的设置
@@ -60,9 +60,25 @@ define([], function () {
                     var osJSobject = osJQobject[0];
                 } else {
                     // 非特殊奖项里的设置
-                    var osJQobject = $('.non-first-draw').find('.ready-set').children().eq(chooseNum);
+                    var osJQobject = $('.non-first-draw-wrap').find('.ready-set').children().eq(chooseNum);
                     var osJSobject = osJQobject[0];
                 }
+
+                var listitem = {
+                    id: item.id,
+                    giftPic: item.giftPic,
+                    name: item.name,
+                    giftType: item.giftType
+                }
+                scope.listitem = {
+                    id: item.id,
+                    giftPic: item.giftPic,
+                    name: item.name,
+                    giftType: item.giftType
+                }
+
+                scope.$emit('fromrealproductchoose', event, listitem);
+
                 osJSobject.dataset.id = item.id;
                 osJSobject.dataset.giftPic = item.giftPic;
                 osJSobject.dataset.name = item.name;

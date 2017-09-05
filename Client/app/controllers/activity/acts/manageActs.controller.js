@@ -116,7 +116,7 @@ define([], function () {
 
           // 操作面板，获取地区
           $('.operation').one('click', '.area', function (e) {
-            var f = {parentCode: 0};
+            var f = {parentCode: ''};
             getArea(f, '[ng-model="allarea"]')
           })
 

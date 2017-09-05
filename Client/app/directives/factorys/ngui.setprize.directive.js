@@ -12,8 +12,7 @@ define([], function () {
           tpl: '/setprize.tpl.html',
           chooseNum: 0,
           firstornot: false,
-          dcList: {},
-          myVar: false
+          dcList: {}
       };
       var defineObj = { //指令定义对象
           restrict: 'AE',
@@ -37,13 +36,13 @@ define([], function () {
 
           var that_scope = angular.element('.all-template-config-wrap').scope();
           if (that_scope.activityCode) {
-            scope.myVar = true;
-            console.log($('.first-draw-cbox'));
-            $('.first-draw-cbox').trigger('click');
             // 编辑
             var dcList = that_scope.conf.data.dcList;
             scope.dcList = that_scope.conf.data.dcList;
             scope.disabled = true;
+            if (scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
+              scope.myVar = true;
+            }
           }
 
           // 产品模板列表

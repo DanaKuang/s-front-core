@@ -4,7 +4,7 @@
 		<!-- 非首抽中奖设置 -->
 		<div class="non-first-draw-wrap" ng-click="close($event)">
 			<div class="ready-set" ng-click="changeTab($event)">
-				<div ng-if="dcList.COMMON && dcList.COMMON.length > 0">
+				<div class="edit-part" ng-if="dcList.COMMON && dcList.COMMON.length > 0">
 					<div ng-repeat="(idx, n) in dcList.COMMON">
 						<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
 							<div class="prize-config border-box">
@@ -112,6 +112,7 @@
 									<!-- 积分 -->
 									<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}">
 										<div class="configuration-item">
+											<b>*</b>
 											<label for="">选择积分</label>
 											<div class="choose-list">
 												<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
@@ -138,7 +139,7 @@
 						</div>
 					</div>
 				</div>
-				<div ng-if="!dcList.COMMON">
+				<div class="create-part" ng-if="!dcList.COMMON">
 					<div class="draw-prize-wrap">
 						<div class="prize-config border-box">
 							<div class="configuration-item">
@@ -165,14 +166,15 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 										<label for="">选择礼品</label>
-										<div class="choose-list">
+										<sa-giftpack conf="giftpackConf"></sa-giftpack>
+										<!-- <div class="choose-list">
 											<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
 										</div>
 										<div class="prize-img-preview">
 											<div class="mask"></div>
 											<img src="" alt="">
-										</div>
+										</div> -->
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
@@ -245,6 +247,7 @@
 								<!-- 积分 -->
 								<div class="jf radio-res hidden">
 									<div class="configuration-item">
+										<b>*</b>
 										<label for="">选择积分</label>
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
@@ -381,6 +384,7 @@
 					<!-- 积分 -->
 					<div class="jf radio-res hidden">
 						<div class="configuration-item">
+							<b>*</b>
 							<label for="">选择积分</label>
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>

@@ -98,7 +98,6 @@ define([], function () {
                             caidanerror = true;
                             $('.plus').children('.wrong-tip').removeClass('hidden');
                         }
-
                     }
                 }
 
