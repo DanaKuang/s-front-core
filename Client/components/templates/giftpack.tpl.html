@@ -1,36 +1,19 @@
-<div class="giftlistwrap" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
+<div id="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
 	<div class="already-choose-wrap" ng-if="list && list.length > 0">
-		<!-- 新增的礼品往这里面append -->
-		<div ng-repeat="(idx, item) in list">
-			<div class="prize-img-preview-wrap" data-id="{{item.id}}" data-giftPic="{{item.giftPic}}" data-name="{{item.name}}" data-giftType="{{item.giftType}}">
-				<div class="close">✕</div>
+		<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in list">
+			<div class="prize-img-preview-wrap" data-id="{{item.id}}" data-giftpic="{{item.giftPic}}" data-name="{{item.name}}" data-gifttype="{{item.giftType}}">
+				<div class="gift-delete">✕</div>
 				<div class="prize-img-preview">
-					<img src="{{item.giftPic}}" alt="">
+					<img ng-src="{{item.giftPic}}" alt="">
 				</div>
 				<div class="number-wrap">
 					<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	<div class="choose-list">
 		<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
 		<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
 	</div>
-<!-- 	<div class="prize-img-preview">
-		<div class="mask"></div>
-		<img src="" alt="">
-	</div> -->
-	<script type="text/html" id="imgpreview">
-		<div class="prize-img-preview-wrap">
-			<div class="close">✕</div>
-			<div class="prize-img-preview">
-				<img src="" alt="">
-			</div>
-			<div class="number-wrap">
-				<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
-			</div>
-		</div>
-	</script>
 </div>

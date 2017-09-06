@@ -10,6 +10,8 @@ define([], function () {
     	ServiceName: 'manageActsCtrl',
     	ViewModelName: 'manageActsModel',
     	ServiceContent: ['$rootScope', '$scope', 'manageActsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+          var globalVariable = {};
+
       		$("#durationStart").datetimepicker({
 		      	format: 'yyyy-mm-dd hh:ii:00', 
 		      	language: 'zh-CN',
@@ -422,6 +424,8 @@ define([], function () {
           var fromActivityConfigtoChooseProduct = {};
           $scope.$on('fromActivityConfigtoChooseProduct', function (e, v, f) {
             fromActivityConfigtoChooseProduct = f;
+            globalVariable.show_product_list_scope = fromActivityConfigtoChooseProduct.scope;
+            delete fromActivityConfigtoChooseProduct.scope;
             $model.getProductChooseList(f).then(function (res) {
               $scope.realproductConf = res.data;
               $scope.paginationInnerConf = res.data;
@@ -450,6 +454,7 @@ define([], function () {
 
           // 礼品列表选择翻页,红包选择翻页
           $scope.$on('frominnerpagechange', function(e, v, f) {
+            delete fromActivityConfigtoChooseProduct.scope;
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
             $model.getProductChooseList(newObj).then(function (res) {
               $scope.realproductConf = res.data;
@@ -504,6 +509,19 @@ define([], function () {
               $('.modal-content .close').trigger('click');
             })
           }
+
+          // 多个礼品
+          $scope.$on('fromrealproductchoose', function (e,v,f) {
+            var giftpackScope = globalVariable.show_product_list_scope;
+            if (f) {
+              if (!giftpackScope.conf) {
+                giftpackScope.conf = {
+                  list: []
+                }
+              }
+              giftpackScope.conf.list.push(f);
+            }
+          })
           
           // 新增活动
           $scope.$on('fromcommonactivity', function(e,v,f){

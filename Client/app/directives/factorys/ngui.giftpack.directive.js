@@ -7,7 +7,7 @@
 define([], function () {
     var giftpack = angular.module('ngui.giftpack', []);
 
-    var giftpackFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
+    var giftpackFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat) {
         var defaults = { //默认配置
             tpl: '/giftpack.tpl.html',
             list: []
@@ -34,52 +34,26 @@ define([], function () {
 
                 // 一开始进入页面的时候scope.conf是undefined
                 if (scope.conf) {
-                    
+                    // scope.conf.list = []
                 }
 
                 var that_scope = angular.element('.all-template-config-wrap').scope();
                 if (that_scope.activityCode) {
                     scope.disabled = true;
                 }
-
-                // 产品模板列表
-                $('#surprisesetprize').on('click', '.show-product-list', function (e) {
-                    if (scope.disabled) {
-                        return
-                    }
-                    var that_scope = angular.element('.select-brand').scope();
-                    if (that_scope.selectSpecificationVal != '') {
-                        $(e.target).next().trigger('click');
-                        var data = {
-                            metraType: 'gift',
-                            // supplierCode: that_scope.selectCompanyVal,
-                            brandCodes: that_scope.selectBrandVal,//品牌编码。支持多个，使用英文逗号分隔,
-                            unitCodes: that_scope.selectSpecificationVal,
-                            // businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
-                            status: 1,//礼品、红包池状态。0-停用；1-正常,
-                            hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
-                        }
-                        scope.$emit('fromActivityConfigtoChooseProduct', event, data);
-
-                        scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
-                        scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
-                    } else {
-                        alert('请先选择投放的品牌和规格！')
-                    }
-                })
-
-                // 监听list变化
-                var realproductchooseScope = angular.element('.gift-realproduct-choose').scope();
-                console.log(realproductchooseScope.listitem);
-                if (realproductchooseScope.listitem != undefined) {
-                    scope.list.push(realproductchooseScope.listitem);
-                }
-                
             }, true);
+
+            // 删除某个礼品
+            $('#surprisesetprize').on('click', '.gift-delete', function () {
+                var this_item = $(e.target).parents('.prize-img-preview-wrap-repeat');
+                var this_idx = this_item.index();
+                scope.conf.list.splice(this_idx, 1);
+                scope.$apply();
+            })
 
         }
         return defineObj;
     }
 
-    giftpack.directive('saGiftpack', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', giftpackFn]);
+    giftpack.directive('saGiftpack', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', giftpackFn]);
 })
