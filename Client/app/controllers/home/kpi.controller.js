@@ -53,7 +53,7 @@ define([], function () {
             var res = res.data || {};
             var st = res.scanTimes_of_day || 0;
             var hst = historyScanData[0] || {};
-            var rt = fixData(hst.scanTotalPv, st);
+            var rt = fixData(hst.scanTotalPv, 0);
             $("#scan_day").html(st);
             $("#scan_day_rate").html(rt);
           });
@@ -62,7 +62,7 @@ define([], function () {
             var res = res.data || {};
             var su = res.scanUsers_of_day || 0;
             var hsu = historyScanData[0] || {};
-            var rt = fixData(hsu.scanTotalUv, su);
+            var rt = fixData(hsu.scanTotalUv, 0);
             $("#scan_user").html(su);
             $("#scan_user_rate").html(rt);
           });
@@ -71,7 +71,7 @@ define([], function () {
             var res = res.data || {};
             var sc = res.scanCodes_of_day || 0;
             var hsc = historyScanData[0] || {};
-            var rt = fixData(hsc.scanTotalCode, sc);
+            var rt = fixData(hsc.scanTotalCode, 0);
             $("#scan_code").html(sc);
             $("#scan_code_rate").html(rt);
           });
