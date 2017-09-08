@@ -11,7 +11,7 @@ define([], function () {
     ViewModelName: 'pathdetailViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
-        var pageUrl = 'http://test.hmtx.cc/nscan_data.html?sn=';
+        var pageUrl = 'http://hmtx.cc/nscan_data.html?sn=';
 
         // 后端数据
         // var brand_back_data = $model.$brand.data || [];
