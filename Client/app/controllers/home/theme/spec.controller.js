@@ -23,22 +23,19 @@ define([], function () {
       $(".spec-month").find("input").val(specMonth);
       //设置默认值
       var Default =  {
-        "productSn":"6901028201711",
+        "productSn":"",
         "statTime":stattime,
         "statType":"day"
       };
 
+      //品牌
       (function(){
         $model.$getBrand().then(function(res){
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
-            if(res[i].productBrand ==="芙蓉王"){
-              $(".brand").append("<option value="+res[i].productBrand+" selected>"+res[i].productBrand+"</option>")
-            }else {
               $(".brand").append("<option value="+res[i].productBrand+">"+res[i].productBrand+"</option>")
-            }
           };
-          getProduct({productBrand:$(".brand").val()})
+          getProduct({productBrand:$(".brand").val()},1)
         })
       })();
       //品牌与规格联动
@@ -46,16 +43,16 @@ define([], function () {
         getProduct({productBrand:$(".brand").val()})
       })
       //规格下拉列表
-      function getProduct(params) {
+      function getProduct(params,caller) {
         $model.$getProduct(params).then(function (res) {
           var res = res.data || [];
           $(".region.spec").html("");
-          for(var i=0;i<res.length;i++){
-            if(res[i].name ==="盒-芙蓉王（硬细支）"){
-              $(".region.spec").append("<option value="+res[i].sn+" selected>"+res[i].name+"</option>")
-            }else {
+          for(var i=0;i<res.length;i++) {
               $(".region.spec").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
-            }
+          }
+          Default.productSn = $(".region.spec").val();
+          if(caller === 1) {
+            public (Default);            
           }
         })
       };
@@ -354,7 +351,6 @@ define([], function () {
           });
         })();
       }
-       public (Default);
     }]
   };
 

@@ -20,20 +20,20 @@ define([], function () {
             $(".region-day").find("input").val(stattime);
             $(".region-month").find("input").val(regionMonth);
             //设置默认值
-            var Default =  {"provinceName":sessionStorage.getItem("account")==="henan"?"河南省":"湖南省","statTime":stattime,"statType":"day"};
+            var Default =  {};
             //省份下拉列表
             (function () {
                 $model.$getProvince().then(function (res) {
                     var res = res.data || [];
-                    var provinceName = sessionStorage.getItem("account")==="henan"?"河南省":"湖南省"
                     for (var i = 0; i < res.length; i++) {
-                        if(res[i].provinceName === provinceName){
-                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + " selected>" + res[i].provinceName + "</option>")
+                        if(res[i].code === $model.$DefaultProvince.data[0].orgRegion){
+                            $(".region-search-r .region").append("<option value=" + res[i].name + " selected>" + res[i].name + "</option>")
                         }else {
-                            $(".region-search-r .region").append("<option value=" + res[i].provinceName + ">" + res[i].provinceName + "</option>")
-
+                            $(".region-search-r .region").append("<option value=" + res[i].name + ">" + res[i].name + "</option>");
                         }
                     }
+                    Default =  {"provinceName":$(".region-search-r .region").val(),"statTime":stattime,"statType":"day"};                                            
+                    public(Default);                                            
                 })
             })();
             //周下拉列表
@@ -339,8 +339,6 @@ define([], function () {
                     })
                 })();
             }
-
-            public(Default);
 
         }]
     };

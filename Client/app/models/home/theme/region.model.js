@@ -19,7 +19,8 @@ define([], function () {
         var NAME_JSON_URL = '/statics/home/region/name.json';     //各规格扫码次数
         var CITY_JSON_URL = '/statics/home/region/city.json';    //各市地扫码次数
 
-        var getProvince = '/api/tztx/dataportal/statistics/getProvince';  //省份下拉列表
+        var getProvince = '/api/tztx/public/getUserProvByUserId';  //省份下拉列表
+        var DefaultProvince = '/api/tztx/public/getDefaultProvByorgId';//默认身份
         var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';  //周下拉列表
         var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';  //时刻分析图
         var getScanData = '/api/tztx/dataportal/statistics/getScanData';  //仪表盘数据
@@ -40,6 +41,7 @@ define([], function () {
         this.$getProvince = function(){
           return request.$Search(getProvince,{},true);
         }
+        this.$DefaultProvince = request.$Search(DefaultProvince,{},true);
         this.$getWeeks = function(){
           return request.$Search(getWeeks,{},true);
         }

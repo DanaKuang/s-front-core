@@ -19,10 +19,10 @@ define([], function () {
                 "startTime": stattime,
                 "awardName": "",
                 "cityName": "",
-                "feedbackStatus":"",
-                "sn":"",
+                "checkStatus":"",
+                "productSn":"",
                 "productBrand":"",
-                "mobile":"",
+                "mobileNo":"",
                 "endTime":stattime,
                 "orderId":""
             };
@@ -66,18 +66,18 @@ define([], function () {
             $(".visit_table tbody").on("click", "li", function () {
                 up = {
                     "id": $(this).parent().parent().attr("data-id"),
-                    "feedbackStatus": "",
+                    "checkStatus": "",
                     "checkPerson":sessionStorage.getItem("account"),
                     "checkTime":dayFilter.today("datetime")
                 }
                 if ($(this).text() === "待核实") {
-                    up.feedbackStatus = 1;
+                    up.checkStatus = 1;
                 } else if ($(this).text() === "已核实") {
-                    up.feedbackStatus = 2;
+                    up.checkStatus = 2;
                 } else if ($(this).text() === "不属实") {
-                    up.feedbackStatus = 3;
+                    up.checkStatus = 3;
                 } else if ($(this).text() === "联系不上") {
-                    up.feedbackStatus = 4;
+                    up.checkStatus = 4;
                 };
                 // console.log(up);
                 $(".visit-list").hide();
@@ -117,9 +117,9 @@ define([], function () {
                         "cityName": $(".visit_city input").val(),
                         "endTime": $(".visit_end").find(".date").data().date ?
                             $(".visit_end").find(".date").data().date : $(that).siblings(".visit_end").find("input").val(),
-                        "mobile":$(".visit_mobile input").val(),
-                        "feedbackStatus":$("#visit_label").val(),
-                        "sn":$("#visit_product").val(),
+                        "mobileNo":$(".visit_mobile input").val(),
+                        "checkStatus":$("#visit_label").val(),
+                        "productSn":$("#visit_product").val(),
                         "productBrand":$("#visit_brand").val(),
                         "orderId":$(".visit_order").val()
 

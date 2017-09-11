@@ -148,9 +148,16 @@ index:                                      # 首页
     responetype: 'json'
 region:
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getProvince'
+    routepath: '/api/tztx/public/getUserProvByUserId'
     authorized: 1
     description: '省份下拉列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/public/getDefaultProvByorgId'
+    authorized: 1
+    description: '默认省份值'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
