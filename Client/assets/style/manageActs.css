@@ -471,9 +471,9 @@ input[type="checkbox"] {
 	background: #7c8af4;
 }
 
-.first-draw-prize-wrap .number {
+/*.first-draw-prize-wrap .number {
 	width: 256px!important;
-}
+}*/
 /*非首抽*/
 .common-pop .non-first-draw-wrap .chance-wrap:after, .redpack-pop .non-first-draw-wrap .configuration-item:nth-of-type(1):after {
 	position: absolute;
@@ -605,7 +605,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	cursor: pointer;
 	background: transparent;
 }
-.gift .add-prize, .gift .choose-list .btn-default {
+.gift .add-prize.show-product-list {
 	height: 80px;
 }
 .prize-config .configuration-item .radio-group {
@@ -660,6 +660,10 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	border-radius: 0;
 	cursor: pointer;
 }
+.add-gift-stock {
+	margin-top: 5px;
+	width: 79px;
+}
 .non-first-draw h6 {
 	margin-top: 25px;
 }
@@ -711,12 +715,10 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	margin-left: 5px!important;
 	margin-right: 5px!important;
 }
-.hb .money {
+.first-draw-prize-wrap .hb .money {
 	width: 260px!important;
 }
-.hb .hbnumber {
-	width: 260px!important;
-}
+
 /*multi-select */
 .launch-relate .btn-group {
 	margin-left: 72px;

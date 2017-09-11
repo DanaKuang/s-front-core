@@ -1,4 +1,4 @@
-<div id="setprize">
+<div id="setprize" class="setprize">
 	<!-- 首抽 -->
 	<div class="first-draw gotoset" id="first_draw">
 		<input type="checkbox" class="first-draw-cbox" ng-model="myVar" ng-init="myVar" ng-disabled="disabled"><span>拉新用户奖池</span>
@@ -7,7 +7,7 @@
 			<h6>首抽必中</h6>
 			<div class="ready-set" ng-click="changeTab($event)">
 				<!-- FIRST_LOTTERY_BE_WON -->
-				<div ng-if="dcList.FIRST_LOTTERY_BE_WON && dcList.FIRST_LOTTERY_BE_WON.length > 0">
+				<div class="edit-part" ng-if="dcList.FIRST_LOTTERY_BE_WON && dcList.FIRST_LOTTERY_BE_WON.length > 0">
 					<div ng-repeat="(idx, n) in dcList.FIRST_LOTTERY_BE_WON">
 						<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
 						<div class="prize-config border-box">
@@ -45,11 +45,6 @@
 										</div>
 									</div>
 									<div class="configuration-item">
-										<b>*</b>
-										<small class="wrong-tip  wrong-tip-num hidden">请设置奖品的发放数量</small>
-										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}" ng-disabled="disabled">
-										<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox" ng-checked="n.giveScore" ng-disabled="disabled"><label for="">同时赠送积分</label>
 											<div class="sendscore" ng-class="{'hidden': n.giveScore == 0}">
@@ -144,7 +139,7 @@
 						</div>
 					</div>
 				</div>
-				<div ng-if="!dcList.FIRST_LOTTERY_BE_WON">
+				<div class="create-part" ng-if="!dcList.FIRST_LOTTERY_BE_WON">
 					<div class="draw-prize-wrap">
 						<div class="prize-config border-box">
 							<div class="configuration-item">
@@ -171,21 +166,9 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 										<label for="">选择礼品</label>
-										<div class="choose-list">
-											<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
-											<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
-										</div>
-										<div class="prize-img-preview">
-											<div class="mask">暂无礼品</div>
-											<img src="" alt="">
-										</div>
+										<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
 									</div>
 									<div class="configuration-item">
-										<b>*</b>
-										<small class="wrong-tip  wrong-tip-num hidden">请设置奖品的发放数量</small>
-										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
-										<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 											<div class="sendscore hidden">
@@ -289,7 +272,7 @@
 		<!-- 非首抽中奖设置 -->
 		<div class="non-first-draw-wrap" ng-click="close($event)">
 			<div class="ready-set" ng-click="changeTab($event)">
-				<div ng-if="dcList.COMMON && dcList.COMMON.length > 0">
+				<div class="edit-part" ng-if="dcList.COMMON && dcList.COMMON.length > 0">
 					<div ng-repeat="(idx, n) in dcList.COMMON">
 						<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
 							<div class="prize-config border-box">
@@ -323,20 +306,9 @@
 											<b>*</b>
 											<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 											<label for="">选择礼品</label>
-											<div class="choose-list">
-												<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
-												<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
-											</div>
-											<div class="prize-img-preview">
-												<div class="mask" ng-class="{'hidden': n.awardPicUrl}">暂无礼品</div>
-												<img src="{{n.awardPicUrl}}" alt="">
-											</div>
+											<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
 										</div>
 										<div class="configuration-item">
-											<b>*</b>
-											<small class="wrong-tip wrong-tip-num hidden">请设置奖品的发放数量</small>
-											<label for="">奖品数量</label>
-											<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}" ng-disabled="disabled">
 											<div class="present-integral">
 												<input type="checkbox" class="tickcheckbox" ng-checked="n.giveScore" ng-disabled="disabled"><label for="">同时赠送积分</label>
 												<div class="sendscore" ng-class="{'hidden': n.giveScore == 0}">
@@ -430,7 +402,7 @@
 						</div>
 					</div>
 				</div>
-				<div ng-if="!dcList.COMMON">
+				<div class="create-part" ng-if="!dcList.COMMON">
 					<div class="draw-prize-wrap">
 						<div class="prize-config border-box">
 							<div class="configuration-item chance-wrap">
@@ -463,20 +435,9 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 										<label for="">选择礼品</label>
-										<div class="choose-list">
-											<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
-											<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
-										</div>
-										<div class="prize-img-preview">
-											<div class="mask">暂无礼品</div>
-											<img src="" alt="">
-										</div>
+										<sa-giftpack conf="giftpackConf"></sa-giftpack>
 									</div>
 									<div class="configuration-item">
-										<b>*</b>
-										<small class="wrong-tip wrong-tip-num hidden">请设置奖品的发放数量</small>
-										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
 											<div class="sendscore hidden">
@@ -601,21 +562,9 @@
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 							<label for="">选择礼品</label>
-							<div class="choose-list">
-								<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
-								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
-							</div>
-							<div class="prize-img-preview">
-								<div class="mask">暂无礼品</div>
-								<img src="" alt="">
-							</div>
+							<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
 						</div>
 						<div class="configuration-item">
-							<b>*</b>
-							<small class="wrong-tip  wrong-tip-num hidden">请设置奖品的发放数量</small>
-							<label for="">奖品数量</label>
-							<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
-							<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 								<div class="sendscore hidden">
@@ -743,20 +692,9 @@
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 							<label for="">选择礼品</label>
-							<div class="choose-list">
-								<button class="fake-choose-button add-prize show-product-list">+选择礼品池</button>
-								<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal">+选择礼品池</button>
-							</div>
-							<div class="prize-img-preview">
-								<div class="mask">暂无礼品</div>
-								<img src="" alt="">
-							</div>
+							<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
 						</div>
 						<div class="configuration-item">
-							<b>*</b>
-							<small class="wrong-tip wrong-tip-num hidden">请设置奖品的发放数量</small>
-							<label for="">奖品数量</label>
-							<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox" ng-disabled="disabled"><label for="">同时赠送积分</label>
 								<div class="sendscore hidden">

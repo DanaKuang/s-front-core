@@ -60,7 +60,6 @@ define([], function () {
           event.target.value = '';
         }
       }
-
       return {
         hbpricenumber: hbpricenumber
       }
@@ -86,21 +85,19 @@ define([], function () {
             }
           }
         } else {
-            event.target.value = ''
+          event.target.value = 0
         }
     	}
-
       return {
       	notminusnotzero: notminusnotzero
-      };
+      }
     }]
   }
 
 	function deletezero(str) {
 	  if (str.length > 1) {
-	    if (str[0] === '0') {
-	      str = str.substr(1);
-	      deletezero(str)
+	    if (str[0] == '0') {
+	      return str = 0
 	    } else {
 	      return str
 	    }

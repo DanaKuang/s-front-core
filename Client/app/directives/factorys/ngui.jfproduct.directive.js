@@ -56,11 +56,11 @@ define([], function () {
                 var chooseNum = setprizeScope.chooseNum;
                 if (firstornot) {
                     // 特殊项里的设置
-                    var osJQobject = $('.first-draw').find('.ready-set').children().eq(chooseNum);
+                    var osJQobject = $('.first-draw').find('.ready-set .create-part').children().eq(chooseNum);
                     var osJSobject = osJQobject[0];
                 } else {
                     // 非特殊奖项里的设置
-                    var osJQobject = $('.non-first-draw').find('.ready-set').children().eq(chooseNum);
+                    var osJQobject = $('.non-first-draw').find('.ready-set .create-part').children().eq(chooseNum);
                     var osJSobject = osJQobject[0];
                 }
                 osJSobject.dataset.integralPool = item.id;
