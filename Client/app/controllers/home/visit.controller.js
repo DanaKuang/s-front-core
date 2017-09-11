@@ -58,9 +58,10 @@ define([], function () {
                 })
             };
             //箭头点击
-            $(".visit_table tbody").on("click", "span", function () {
+            $(".visit_table tbody").on("click", "span", function (e) {
                 $(".visit-list").hide();
                 $(this).siblings(".visit-list").show();
+                e.stopPropagation();                
             });
             //更新
             $(".visit_table tbody").on("click", "li", function () {
@@ -83,6 +84,10 @@ define([], function () {
                 $(".visit-list").hide();
                 //global.getFeed(Deafault);
             });
+
+            $(document).bind('click',function(e){
+                $(".visit-list").hide();                
+            })
 
             //模态框点击
             $("#myModal").modal({
@@ -166,7 +171,7 @@ define([], function () {
                                 res[i].cityName + "</td> <td class='award'>" +
                                 res[i].awardName + "</td> <td data-id=" + res[i].id + "> " +
                                 feedback +
-                                " <span class='" + Class + "'></span> <ul class='visit-list'> <li data-toggle='modal' data-target='#myModal'>待核实</li> <li data-toggle='modal' data-target='#myModal'>已核实</li> <li data-toggle='modal' data-target='#myModal'>不属实</li> <li data-toggle='modal' data-target='#myModal'>联系不上</li></ul></td></tr>");
+                                " <span class='" + Class + "'></span> <ul class='visit-list'><li data-toggle='modal' data-target='#myModal'>已核实</li> <li data-toggle='modal' data-target='#myModal'>不属实</li> <li data-toggle='modal' data-target='#myModal'>联系不上</li></ul></td></tr>");
                         };
                         $(".visit_table tbody").append(template.join(" "))
                         $(".visit_btn").removeClass("gray_btn");

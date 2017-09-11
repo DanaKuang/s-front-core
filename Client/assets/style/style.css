@@ -949,7 +949,7 @@ input[type="checkbox"]:checked + .checkbox{
 .visit_table .visit-list{
   position: absolute;
   font-size: 14px;
-  left: 82px;
+  left: 55px;
   top: 60%;
   background: white;
   display: none;
