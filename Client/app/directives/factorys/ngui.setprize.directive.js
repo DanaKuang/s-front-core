@@ -60,7 +60,8 @@ define([], function () {
                       unitCodes: that_scope.selectSpecificationVal,
                       // businessType: 1,//礼品物料类型，1-实物礼品；其它值-虚拟礼品。红包此字段未使用,
                       status: 1,//礼品、红包池状态。0-停用；1-正常,
-                      hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                      hasLeft: true,//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+                      scope: angular.element(e.target).scope()
                   }
                   scope.$emit('fromActivityConfigtoChooseProduct', event, data);
 
@@ -128,11 +129,11 @@ define([], function () {
               return
             }
             if ($(e.target).parent().hasClass('first-draw-prize-wrap')) {
-              var special_dom = $('#special-prize').html();
-              $(e.target).prev('.ready-set').append(special_dom)
+              var special_dom = $compile($('#special-prize').html())(scope.$new());
+              $(e.target).prev('.ready-set').find('.create-part').append(special_dom)
             } else {
-              var non_special_dom = $('#non-special-prize').html();
-              $(e.target).prev('.ready-set').append(non_special_dom)
+              var non_special_dom = $compile($('#non-special-prize').html())(scope.$new());
+              $(e.target).prev('.ready-set').find('.create-part').append(non_special_dom)
             }
           }
 
@@ -154,19 +155,24 @@ define([], function () {
               }
               var $target = $(e.target);
               if ($target.hasClass('circle-tick')) {
-                  // 清空已填写
-                  var parentsDrawPrizeWrap = $target.parents('.draw-prize-wrap')[0];
-                  parentsDrawPrizeWrap.dataset.id = '';
-                  parentsDrawPrizeWrap.dataset.giftPic = '';
-                  parentsDrawPrizeWrap.dataset.giftType = '';
-                  parentsDrawPrizeWrap.dataset.name = '';
-                  $(parentsDrawPrizeWrap).find('.prize-img-preview img').attr('src', '');
-                  $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
-                  $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false)
+                // 清空已填写
+                var parentsDrawPrizeWrap = $target.parents('.draw-prize-wrap')[0];
+                parentsDrawPrizeWrap.dataset.id = '';
+                parentsDrawPrizeWrap.dataset.giftPic = '';
+                parentsDrawPrizeWrap.dataset.giftType = '';
+                parentsDrawPrizeWrap.dataset.name = '';
+                parentsDrawPrizeWrap.dataset.integralPool = '';
+                $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
+                $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false);
+                $(parentsDrawPrizeWrap).find('.sendscore').addClass('hidden');
 
-                  $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
-                  var num = $target.parents('.radio-group').index();
-                  $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
+                $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
+                var num = $target.parents('.radio-group').index();
+                $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
+
+                var giftpack = $(parentsDrawPrizeWrap).find('.giftpack');
+                angular.element($(giftpack)).scope().giftpackConf.list = [];
+
               }
               if ($target.hasClass('circle-money-tick')) {
                   $target.addClass('active').parents('.hb-money-wrap').siblings().children('.circle-money-tick').removeClass('active').siblings().val('').prop('readonly', true);

@@ -123,6 +123,7 @@ define([], function () {
             // 设置中奖概率
             scope.setChance = function (event) {
                 decimalFormat.decimalnumber(event);
+                scope.drawChance = event.target.value;
             }
 
             scope.parseFloat = function (event) {

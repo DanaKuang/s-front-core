@@ -50,6 +50,7 @@ define([], function () {
                         scope.pageName = data.pageExt.pageName;
                         scope.pageCode = data.pageExt.pageCode;
                         scope.activityCode = data.activity.activityCode;
+                        scope.dcList = data.dcList;
                     }
                 }
                 

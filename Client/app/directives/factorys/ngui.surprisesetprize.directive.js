@@ -130,7 +130,7 @@ define([], function () {
                     return
                 }
                 var add_dom = $compile($('#non-special-prize').html())(scope.$new());
-                $(e.target).prev('.ready-set').append(add_dom)
+                $(e.target).prev('.ready-set').find('.create-part').append(add_dom)
             })
 
             // 删除奖品
@@ -167,13 +167,17 @@ define([], function () {
                     parentsDrawPrizeWrap.dataset.giftPic = '';
                     parentsDrawPrizeWrap.dataset.giftType = '';
                     parentsDrawPrizeWrap.dataset.name = '';
-                    $(parentsDrawPrizeWrap).find('.prize-img-preview img').attr('src', '');
+                    parentsDrawPrizeWrap.dataset.integralPool = '';
                     $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
                     $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false);
+                    $(parentsDrawPrizeWrap).find('.sendscore').addClass('hidden');
 
                     $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
                     var num = $target.parents('.radio-group').index();
                     $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
+
+                    var giftpack = $(parentsDrawPrizeWrap).find('.giftpack');
+                    angular.element($(giftpack)).scope().giftpackConf.list = [];
                 }
 
                 if ($target.hasClass('circle-money-tick')) {
