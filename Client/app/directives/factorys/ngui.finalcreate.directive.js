@@ -44,7 +44,12 @@ define([], function () {
             }
 
             scope.cancelActivityBuild = function() {
-                location.reload();
+                var r = confirm('确定要取消吗？')
+                if (r == true) {
+                    location.reload();
+                } else {
+                    return
+                }
             }
 
             // 保存活动

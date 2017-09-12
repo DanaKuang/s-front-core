@@ -190,7 +190,7 @@
 	margin-left: 72px;
 	width: 453px;
 }
-.draw-prize .configuration-item i {
+.draw-prize .configuration-item small {
   position: absolute;
   left: 55px;
   top: 5px;

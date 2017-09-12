@@ -1,11 +1,11 @@
-<div id="setprize" class="setprize">
+<div id="setprize" class="setprize" ng-click="changeTab($event)">
 	<!-- 首抽 -->
 	<div class="first-draw gotoset" id="first_draw">
 		<input type="checkbox" class="first-draw-cbox" ng-model="myVar" ng-init="myVar" ng-disabled="disabled"><span>拉新用户奖池</span>
 		<!-- 首抽中奖设置 -->
 		<div class="first-draw-prize-wrap" ng-show="myVar" ng-click="close($event)">
 			<h6>首抽必中</h6>
-			<div class="ready-set" ng-click="changeTab($event)">
+			<div class="ready-set">
 				<!-- FIRST_LOTTERY_BE_WON -->
 				<div class="edit-part" ng-if="dcList.FIRST_LOTTERY_BE_WON && dcList.FIRST_LOTTERY_BE_WON.length > 0" ng-repeat="(idx, n) in dcList.FIRST_LOTTERY_BE_WON">
 					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
@@ -306,7 +306,7 @@
 		<h6>常规奖池</h6>
 		<!-- 非首抽中奖设置 -->
 		<div class="non-first-draw-wrap" ng-click="close($event)">
-			<div class="ready-set" ng-click="changeTab($event)">
+			<div class="ready-set">
 				<div class="edit-part" ng-if="dcList.COMMON && dcList.COMMON.length > 0" ng-repeat="(idx, n) in dcList.COMMON">
 					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
 						<div class="prize-config border-box">
