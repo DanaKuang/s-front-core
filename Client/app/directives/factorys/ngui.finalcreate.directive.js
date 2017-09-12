@@ -291,7 +291,7 @@ define([], function () {
                 }
 
                 // 校验错误
-                function checkerroreouspart(ActivityPageAward, type, item, radio_res_item, ) {
+                function checkerroreouspart(ActivityPageAward, type, item, radio_res_item ) {
                     if (type === 'gift') {
                         if (ActivityPageAward.details.length != 0) {
                             ActivityPageAward.details.forEach(function(n, index) {
