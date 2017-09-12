@@ -35,13 +35,49 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 										<label for="">选择礼品</label>
-										<div class="choose-list">
-											<button class="fake-choose-button add-prize show-product-list" ng-disabled="disabled">+选择礼品池</button>
-											<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="disabled">+选择礼品池</button>
+										<div ng-if="n.details">
+											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
+												<div class="already-choose-wrap">
+													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
+														<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}" data-gifttype="{{item.awardType}}">
+															<div class="gift-delete" ng-click="close()">✕</div>
+															<div class="prize-img-preview">
+																<img ng-src="{{item.awardPicUrl}}" alt="">
+															</div>
+															<div class="number-wrap">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+															</div>
+															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
+														</div>
+													</div>
+												</div>
+												<div class="choose-list">
+													<button class="fake-choose-button add-prize show-product-list" ng-disabled="disabled">+选择礼品池</button>
+													<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="disabled">+选择礼品池</button>
+												</div>
+											</div>
 										</div>
-										<div class="prize-img-preview">
-											<div class="mask" ng-class="{'hidden': n.awardPicUrl}">暂无礼品</div>
-											<img src="{{n.awardPicUrl}}" alt="">
+										<div ng-if="!n.details">
+											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
+												<div class="already-choose-wrap">
+													<div class="prize-img-preview-wrap-repeat">
+														<div class="prize-img-preview-wrap" data-id="{{n.id}}" data-giftpic="{{n.giftPic}}" data-name="{{n.name}}" data-gifttype="{{item.giftType}}">
+															<div class="gift-delete" ng-click="close()">✕</div>
+															<div class="prize-img-preview">
+																<img ng-src="{{item.giftPic}}" alt="">
+															</div>
+															<div class="number-wrap">
+																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+															</div>
+															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
+														</div>
+													</div>
+												</div>
+												<div class="choose-list">
+													<button class="fake-choose-button add-prize show-product-list" ng-disabled="disabled">+选择礼品池</button>
+													<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="disabled">+选择礼品池</button>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="configuration-item">
@@ -266,6 +302,7 @@
 			<button type="submit" class="btn btn-default create-prize-btn" ng-click="createNewPrize($event)">+新增奖项</button>
 		</div>
 	</div>
+
 	<!-- 非首抽 -->
 	<div class="non-first-draw gotoset" id="none_first_draw">
 		<h6>常规奖池</h6>
@@ -306,7 +343,50 @@
 											<b>*</b>
 											<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 											<label for="">选择礼品</label>
-											<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
+											<div ng-if="n.details">
+												<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
+													<div class="already-choose-wrap">
+														<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
+															<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}" data-gifttype="{{item.awardType}}">
+																<div class="gift-delete" ng-click="close()">✕</div>
+																<div class="prize-img-preview">
+																	<img ng-src="{{item.awardPicUrl}}" alt="">
+																</div>
+																<div class="number-wrap">
+																	<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																</div>
+																<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
+															</div>
+														</div>
+													</div>
+													<div class="choose-list">
+														<button class="fake-choose-button add-prize show-product-list" ng-disabled="disabled">+选择礼品池</button>
+														<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="disabled">+选择礼品池</button>
+													</div>
+												</div>
+											</div>
+											<div ng-if="!n.details">
+												<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
+													<div class="already-choose-wrap">
+														<div class="prize-img-preview-wrap-repeat">
+															<div class="prize-img-preview-wrap" data-id="{{n.id}}" data-giftpic="{{n.giftPic}}" data-name="{{n.name}}" data-gifttype="{{item.giftType}}">
+																<div class="gift-delete" ng-click="close()">✕</div>
+																<div class="prize-img-preview">
+																	<img ng-src="{{item.giftPic}}" alt="">
+																</div>
+																<div class="number-wrap">
+																	<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																</div>
+																<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
+															</div>
+														</div>
+													</div>
+													<div class="choose-list">
+														<button class="fake-choose-button add-prize show-product-list" ng-disabled="disabled">+选择礼品池</button>
+														<button class="btn btn-default" data-toggle="modal" data-target=".create-realProduct-modal" ng-disabled="disabled">+选择礼品池</button>
+													</div>
+												</div>
+											</div>
 										</div>
 										<div class="configuration-item">
 											<div class="present-integral">
@@ -534,6 +614,87 @@
 			<button type="submit" class="btn btn-default create-prize-btn" ng-click="createNewPrize($event)">+新增奖项</button>
 		</div>
 	</div>
+
+	<!-- 参与奖项 -->
+	<div class="thanks-draw">
+		<h6>参与奖设置</h6>
+		<input type="checkbox" ng-model="myThanks" ng-init="myThanks"><span>参与奖</span>
+		<div class="thanks-draw-wrap gotoset" ng-show="myThanks" id="involve_draw">
+			<div class="ready-set">
+				<div class="edit-part" ng-if="dcList.INVOLVE"></div>
+				<div class="create-part" ng-if="!dcList.INVOLVE">
+					<div class="draw-prize-wrap">
+							<div class="prize-config border-box">
+								<div class="configuration-item">
+									<b>*</b>
+									<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
+									<label for="">奖项名称</label>
+									<input type="text" class="prizename" maxlength="20">
+								</div>
+								<div class="configuration-item radio-wrap">
+									<div class="radio-group">
+										<div class="circle-tick active"><i class="circle"></i>礼品</div>
+									</div>
+									<div class="radio-group">
+										<div class="circle-tick"><i class="circle"></i>积分</div>
+									</div>
+								</div>
+								<div class="radio-res-wrap">
+									<!-- 礼品 -->
+									<div class="gift radio-res">
+										<div class="configuration-item">
+											<b>*</b>
+											<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
+											<label for="">选择礼品</label>
+											<sa-giftpack conf="giftpackConf" class="ng-isolate-scope"></sa-giftpack>
+										</div>
+										<div class="configuration-item">
+											<div class="present-integral">
+												<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
+												<div class="sendscore hidden">
+													<div class="choose-list">
+														<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+														<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													</div>
+													<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- 积分 -->
+									<div class="jf radio-res hidden">
+										<div class="configuration-item">
+											<b>*</b>
+											<label for="">选择积分</label>
+											<div class="choose-list">
+												<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
+												<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+											</div>									
+										</div>
+										<div class="configuration-item">
+											<b>*</b>
+											<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
+											<label for="">赠送积分</label>
+											<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										</div>
+										<div class="configuration-item">
+											<b>*</b>
+											<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
+											<label for="">奖品数量</label>
+											<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										</div>
+									</div>
+								</div>
+							</div>
+							<i class="close">×</i>
+							<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 	<script type="text/html" id="special-prize">
 		<div class="draw-prize-wrap">

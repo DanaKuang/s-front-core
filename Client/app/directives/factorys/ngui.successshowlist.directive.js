@@ -33,7 +33,12 @@ define([], function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['successshowlist']);
                 if (scope.conf) {
-                    scope.successshowlist = scope.conf.data.dcList;
+                    var dcList = scope.conf.data.dcList;
+                    if (dcList.FIRST_LOTTERY_BE_WON) {
+                        scope.successshowlist = dcList.COMMON.concat(dcList.FIRST_LOTTERY_BE_WON)
+                    } else {  
+                        scope.successshowlist = dcList.COMMON;
+                    }
                 }
 
             }, true);

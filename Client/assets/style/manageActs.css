@@ -101,6 +101,9 @@
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+.thanks-draw h6 {
+	margin-top: 40px;
+}
 .configuration-item {
 	position: relative;
 	margin-bottom: 15px;
@@ -406,7 +409,7 @@ input[type="checkbox"] {
   border-radius: 20px;
   cursor: pointer;
 }
-.first-draw-prize-wrap, .non-first-draw-wrap {
+.first-draw-prize-wrap, .non-first-draw-wrap, .thanks-draw-wrap {
 	margin-left: 50px;
 }
 .draw-prize-wrap {
@@ -667,6 +670,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .non-first-draw h6 {
 	margin-top: 25px;
 }
+
 .btn-area {
 	text-align: center;
 }

@@ -177,7 +177,9 @@ define([], function () {
                     $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
 
                     var giftpack = $(parentsDrawPrizeWrap).find('.giftpack');
-                    angular.element($(giftpack)).scope().giftpackConf.list = [];
+                    if (angular.element($(giftpack)).scope()) {
+                      angular.element($(giftpack)).scope().giftpackConf.list = [];
+                    }
                 }
 
                 if ($target.hasClass('circle-money-tick')) {
