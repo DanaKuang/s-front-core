@@ -1,20 +1,26 @@
 <div>
-	<table class="table table-striped table-bordered">
-		<thead>
-			<tr class="table-head">
-				<th>奖品名称</th>
-				<th>奖项内容</th>
-				<th>奖品数量</th>
-				<th>中奖概率(%)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="(idx, item) in successshowlist">
-				<td>{{item.prizeName}}</td>
-				<td>{{item.awardName}}</td>
-				<td>{{item.totalNum || item.redNum}}</td>
-				<td>{{item.eggMap.conditionName || item.eggMap.probability || item.probability}}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table table-striped table-bordered">
+		<div class="table-head">
+			<div class="table-cell">奖品名称</div>
+			<div class="table-cell">奖项内容</div>
+			<div class="table-cell">奖品数量</div>
+			<div class="table-cell">中奖概率(%)</div>
+		</div>
+		<div class="table-body">
+			<div ng-repeat="(idx, item) in successshowlist">
+				<div ng-if="item.details">
+					<div class="table-cell">{{item.details.prizeName}}</div>
+					<div class="table-cell">{{item.details.awardName}}</div>
+					<div class="table-cell">{{item.details.totalNum || item.details.redNum}}</div>
+					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || item.details.probability}}</div>
+				</div>
+				<div ng-if="!item.details">
+					<div class="table-cell">{{item.prizeName}}</div>
+					<div class="table-cell">{{item.awardName}}</div>
+					<div class="table-cell">{{item.totalNum || item.redNum}}</div>
+					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || item.probability}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

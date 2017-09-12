@@ -171,8 +171,9 @@ define([], function () {
                 $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
 
                 var giftpack = $(parentsDrawPrizeWrap).find('.giftpack');
-                angular.element($(giftpack)).scope().giftpackConf.list = [];
-
+                if (angular.element($(giftpack)).scope().giftpackConf) {
+                  angular.element($(giftpack)).scope().giftpackConf.list = [];
+                }
               }
               if ($target.hasClass('circle-money-tick')) {
                   $target.addClass('active').parents('.hb-money-wrap').siblings().children('.circle-money-tick').removeClass('active').siblings().val('').prop('readonly', true);
