@@ -205,6 +205,7 @@
   z-index: 1;
   color: red;
   font-size: 12px;
+  font-weight: normal;
 }
 .draw-prize .select-duration:before {
 	content: '中奖时间';
@@ -295,7 +296,7 @@
   font-size: 18px;
   font-weight: bold;
 }
-.launch-relate .configuration-item .wrong-tip small {
+.launch-relate .configuration-item small.wrong-tip  {
 	font-weight: normal;
 }
 .launch-relate .configuration-item .wrong-tip {

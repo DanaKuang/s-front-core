@@ -29,7 +29,7 @@
 							<div class="float-left start operate-btn" ng-if="item.status == 2" ng-click="startActivity($event)" data-toggle="modal" data-target=".start-activity-modal" data-activityCode="{{item.activityCode}}" data-status="1">启用</div>
 							<div class="float-left terminate operate-btn" ng-click="terminateActivity($event)" ng-if="item.status != 0" data-toggle="modal" data-target=".end-activity-modal" data-activityCode="{{item.activityCode}}" data-status="0">终止</div>
 							<div class="float-left look operate-btn" ng-if="item.status == 0" ng-click="lookupActivity($event)" data-activityCode="{{item.activityCode}}" data-toggle="modal" data-target=".look-up">查看</div>
-							<div class="float-left operate-btn track">跟踪</div>
+							<div class="float-left operate-btn track" ng-if="item.status != 2">跟踪</div>
 						</div>
 					</td>
 				</tr>

@@ -60,6 +60,7 @@ define([], function () {
             var scopeVariable = {};
 
             function bigVerify() {
+                $('.wrong-tip').addClass('hidden');
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
@@ -213,7 +214,7 @@ define([], function () {
                             var giftDomList_arr = Array.apply(0, Array(giftDomList_len)).map(function(item, index){
                                 return index
                             })
-                            processGiftArr(giftDomList_arr, giftDomList, ActivityPageAward)
+                            processGiftArr(giftDomList_arr, giftDomList, item, ActivityPageAward)
                         } else {
                             processSingleArr(ActivityPageAward, item, radio_res_item)
                         }
@@ -236,7 +237,7 @@ define([], function () {
                 }
 
                 // 处理gift里面的multiple奖品
-                function processGiftArr(giftDomList_arr, giftDomList, ActivityPageAward) {
+                function processGiftArr(giftDomList_arr, giftDomList, item, ActivityPageAward) {
                     var type = 'gift';
                     if (giftDomList_arr.length > 1) {
                         ActivityPageAward.multiChoose = 1;
@@ -246,15 +247,15 @@ define([], function () {
 
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
-                        var item = giftDomList.eq(index).find('.prize-img-preview-wrap');
-                        ActivityPageAward.details[index].poolId = item[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
-                        ActivityPageAward.details[index].awardName = item[0].dataset.name || '';
-                        ActivityPageAward.details[index].awardPicUrl = item[0].dataset.giftpic || '';
-                        ActivityPageAward.details[index].awardType = item[0].dataset.gifttype;
-                        ActivityPageAward.details[index].awardNums = item.find('.number').val();
+                        var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
+                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
+                        ActivityPageAward.details[index].awardName = n[0].dataset.name || '';
+                        ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
+                        ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
+                        ActivityPageAward.details[index].awardNums = n.find('.number').val();
                     })
 
-                    checkerroreouspart(ActivityPageAward, type)
+                    checkerroreouspart(ActivityPageAward, type, item)
                 }
 
                 // 处理单选奖品
@@ -286,17 +287,23 @@ define([], function () {
                         ActivityPageAward.details[0].poolId = item.data('integral-pool');
                     }
 
-                    checkerroreouspart(ActivityPageAward, type, radio_res_item, item)
+                    checkerroreouspart(ActivityPageAward, type, item, radio_res_item)
                 }
 
                 // 校验错误
-                function checkerroreouspart(ActivityPageAward, type, radio_res_item, item) {
+                function checkerroreouspart(ActivityPageAward, type, item, radio_res_item, ) {
                     if (type === 'gift') {
-                        ActivityPageAward.details.forEach(function(n, index) {
-                            if (!n.poolId || !n.awardNums) {
-                                ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
-                            }
-                        })
+                        if (ActivityPageAward.details.length != 0) {
+                            ActivityPageAward.details.forEach(function(n, index) {
+                                if (!n.poolId || !n.awardNums) {
+                                    ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                                    item.children('.wrong-tip').removeClass('hidden');
+                                }
+                            })
+                        } else {
+                            ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
                     } else {
                         if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.details[0].poolId) {
                             ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
@@ -341,7 +348,7 @@ define([], function () {
                     supplier: scopeVariable._launchScope.selectCompanyVal || '',
                     brandCode: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activityBrandsList.join('') : scopeVariable._launchScope.selectBrandVal || '',
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
-                    areaCode: scopeVariable._launchScope.selectAreaVal.toString() || '',
+                    areaCode: scopeVariable._launchScope.selectAreaVal ? scopeVariable._launchScope.selectAreaVal.toString() : '' || '',
                     holiday: scopeVariable._launchScope.whichday || 3,
                     stime: scopeVariable._launchScope.startTime || '',
                     etime: scopeVariable._launchScope.endTime || '',
