@@ -883,3 +883,43 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .radio-group:first-of-type {
 	margin-left: 60px;
 }
+
+/*success showlist*/
+.createSuccess .table-head, .createSuccess .table-items {
+	display: flex;
+	justify-content: space-around;
+  align-items: center;
+}
+.createSuccess .table-head {
+	height: 36px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.createSuccess .table-items {
+	height: 36px;
+	font-size: 12px;
+}
+.createSuccess .table-cell {
+	width: 25%;
+	text-align: center;
+	align-self: center;
+}
+.createSuccess .table-cell:not(:last-of-type) {
+	border-right: 1px solid #ddd;
+}
+.createSuccess .table-cell {
+	border-bottom: 1px solid #ddd
+}
+.createSuccess .table-cell {
+	height: 100%;
+	line-height: 36px;
+}
+.createSuccess .table-items-wrap:nth-of-type(odd) {
+	background: #f9f9f9
+}
+.createSuccess .table-items-wrap:nth-of-type(even) {
+	background: #F8FBFF;
+}
+.createSuccess .table {
+	border-bottom: 0 none;
+}

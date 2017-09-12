@@ -81,11 +81,11 @@ define([], function () {
             if (val < 0) {
               event.target.value = 0
             } else {
-              event.target.value = Number(deletezero(val));
+              event.target.value = deletezero(val);
             }
           }
         } else {
-          event.target.value = 0
+          event.target.value = ''
         }
     	}
       return {
@@ -97,7 +97,7 @@ define([], function () {
 	function deletezero(str) {
 	  if (str.length > 1) {
 	    if (str[0] == '0') {
-	      return str = 0
+	      return str = '0'
 	    } else {
 	      return str
 	    }

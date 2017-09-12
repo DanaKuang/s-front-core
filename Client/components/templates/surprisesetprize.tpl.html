@@ -42,7 +42,7 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
@@ -58,13 +58,13 @@
 											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-id="{{n.id}}" data-giftpic="{{n.giftPic}}" data-name="{{n.name}}" data-gifttype="{{item.giftType}}">
+														<div class="prize-img-preview-wrap" data-id="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
-																<img ng-src="{{item.giftPic}}" alt="">
+																<img ng-src="{{n.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>

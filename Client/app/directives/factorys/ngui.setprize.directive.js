@@ -40,7 +40,7 @@ define([], function () {
             var dcList = that_scope.conf.data.dcList;
             scope.dcList = that_scope.conf.data.dcList;
             scope.disabled = true;
-            if (scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
+            if (scope.dcList.FIRST_LOTTERY_BE_WON && scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
               scope.myVar = true;
             }
           }

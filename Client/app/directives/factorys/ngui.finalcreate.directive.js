@@ -242,7 +242,6 @@ define([], function () {
                     ActivityPageAward.details[0].awardName = item[0].dataset.name || '';
                     ActivityPageAward.details[0].awardPicUrl = '';
                     ActivityPageAward.details[0].awardNums = radio_res_item.find('.number').val();
-                    ActivityPageAward.details[0].score = radio_res_item.find('.score').val() || 0;
 
                     // 红包总金额，最小、最大
                     if (radio_res_item.hasClass('hb')) {
@@ -258,15 +257,16 @@ define([], function () {
                         }
                     } 
                     if (radio_res_item.hasClass('jf')) {
+                        ActivityPageAward.score = radio_res_item.find('.score').val() || 0;
                         ActivityPageAward.details[0].awardType = 6;
                         ActivityPageAward.details[0].poolId = item.data('integral-pool');
                     }
 
-                    checkerroreouspart(ActivityPageAward, type, radio_res_item)
+                    checkerroreouspart(ActivityPageAward, type, radio_res_item, item)
                 }
 
                 // 校验错误
-                function checkerroreouspart(ActivityPageAward, type, radio_res_item) {
+                function checkerroreouspart(ActivityPageAward, type, radio_res_item, item) {
                     if (type === 'gift') {
                         ActivityPageAward.details.forEach(function(n, index) {
                             if (!n.poolId || !n.awardNums) {

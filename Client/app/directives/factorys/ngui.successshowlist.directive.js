@@ -35,7 +35,7 @@ define([], function () {
                 if (scope.conf) {
                     var dcList = scope.conf.data.dcList;
                     if (dcList.FIRST_LOTTERY_BE_WON) {
-                        scope.successshowlist = dcList.COMMON.concat(dcList.FIRST_LOTTERY_BE_WON)
+                        scope.successshowlist = dcList.FIRST_LOTTERY_BE_WON.concat(dcList.COMMON)
                     } else {  
                         scope.successshowlist = dcList.COMMON;
                     }
