@@ -52,11 +52,16 @@ define([], function () {
             scope.choose = function (e) {
                 var item = this.item;
                 var setprizeScope = angular.element('.draw-prize-wrap').scope();
-                var firstornot= setprizeScope.firstornot;
+                var firstornot = setprizeScope.firstornot;
+                var thanksornot = setprizeScope.thanksornot;
                 var chooseNum = setprizeScope.chooseNum;
                 if (firstornot) {
                     // 特殊项里的设置
                     var osJQobject = $('.first-draw').find('.ready-set .create-part').children().eq(chooseNum);
+                    var osJSobject = osJQobject[0];
+                } else if (thanksornot) {
+                    // 参与奖项
+                    var osJQobject = $('.thanks-draw-wrap').find('.ready-set .create-part').children().eq(chooseNum);
                     var osJSobject = osJQobject[0];
                 } else {
                     // 非特殊奖项里的设置

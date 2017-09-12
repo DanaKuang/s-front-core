@@ -34,13 +34,20 @@ define([], function () {
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['successshowlist']);
                 if (scope.conf) {
                     var dcList = scope.conf.data.dcList;
+                    scope.successshowlist = dcList.COMMON;
                     if (dcList.FIRST_LOTTERY_BE_WON) {
                         scope.successshowlist = dcList.FIRST_LOTTERY_BE_WON.concat(dcList.COMMON)
-                    } else {  
-                        scope.successshowlist = dcList.COMMON;
+                    } 
+
+                    if (dcList.INVOLVE) {
+                        if (dcList.FIRST_LOTTERY_BE_WON) {
+                            scope.successshowlist = dcList.FIRST_LOTTERY_BE_WON.concat(dcList.COMMON).concat(dcList.INVOLVE);
+                        } else {
+                            scope.successshowlist = dcList.COMMON.concat(dcList.INVOLVE)
+                        }
+                       
                     }
                 }
-
             }, true);
 
         }

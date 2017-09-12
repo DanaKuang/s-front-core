@@ -40,8 +40,6 @@ define([], function () {
                 var that_scope = angular.element('.all-template-config-wrap').scope();
                 if (that_scope.activityCode) {
                     scope.disabled = true;
-                    // if (that_scope.)
-                    // scope.conf.list = 
                 }
             }, true);
 
@@ -53,7 +51,6 @@ define([], function () {
                 var this_item = $(event.target).parents('.prize-img-preview-wrap-repeat');
                 var this_idx = this_item.index();
                 scope.conf.list.splice(this_idx, 1);
-                // scope.$apply();
             }
         }
         return defineObj;

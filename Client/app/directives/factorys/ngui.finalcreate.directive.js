@@ -109,13 +109,22 @@ define([], function () {
                         // 特殊
                         setPrize('special', true)
                     }
+                    if (scopeVariable._setPrizeScope.myThanks) {
+                        // 参与奖
+                        setPrize('thanks', true)
+                    }
                     // 普通奖品必需填写
                     setPrize('common', true)
+
                 } else {
                     // 新建模式下
                     if (scopeVariable._setPrizeScope.myVar) {
                         // 特殊
                         setPrize('special')
+                    }
+                    if (scopeVariable._setPrizeScope.myThanks) {
+                        // 参与奖
+                        setPrize('thanks')
                     }
                     // 普通奖品必需填写
                     setPrize('common')
@@ -129,17 +138,21 @@ define([], function () {
                         if (tag === 'special') {
                             // 特殊奖品
                             var prizeDomList = $('.first-draw-prize-wrap').find('.ready-set .edit-part').children();
-                        } else {
+                        } else if (tag === 'common') {
                             // 普通奖品
                             var prizeDomList = $('.non-first-draw-wrap').find('.ready-set .edit-part').children();
+                        } else {
+                            var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .edit-part').children();
                         }
                     } else {
                         if (tag === 'special') {
                             // 特殊奖品
                             var prizeDomList = $('.first-draw-prize-wrap').find('.ready-set .create-part').children();
-                        } else {
+                        } else if (tag === 'common') {
                             // 普通奖品
                             var prizeDomList = $('.non-first-draw-wrap').find('.ready-set .create-part').children();
+                        } else {
+                            var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .create-part').children();
                         }
                     }
 
@@ -150,15 +163,18 @@ define([], function () {
 
                     if (tag === 'special') {
                         // 特殊奖品
-                        processPrizeArr(prizeDomList_arr, prizeDomList, true)
-                    } else {
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'special')
+                    } else if (tag === 'common') {
                         // 普通奖品
-                        processPrizeArr(prizeDomList_arr, prizeDomList, false)
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'common')
+                    } else {
+                        // 参与奖品
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'thanks')
                     }
                 }
 
                 // 具体-处理奖项数组
-                function processPrizeArr(prizeDomList_arr, prizeDomList, specialBool) {
+                function processPrizeArr(prizeDomList_arr, prizeDomList, type) {
                     prizeDomList_arr.forEach(function (n, index) {
                         var item = prizeDomList.eq(n);
                         if (item.parents('.sethbprize').length != 0) {
@@ -171,10 +187,13 @@ define([], function () {
                         }
 
                         var ActivityPageAward = {};
-                        if (specialBool) {
+                        if (type === 'special') {
                             ActivityPageAward.special = 1;
-                        } else {
+                        } else if (type == 'common') {
                             ActivityPageAward.special = 0;
+                        } else {
+                            // 参与奖
+                            ActivityPageAward.special = -1;
                         }
 
                         ActivityPageAward.probability = item.find('.chance').val() || ''; //特殊奖品没有概率设置

@@ -28,12 +28,12 @@ define([], function () {
 
         function linkFn (scope, element, attrs) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myThanks']);
 
             // 监视conf变化更新 basicinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myThanks']);
             }, true);
 
             var that_scope = angular.element('.all-template-config-wrap').scope();
@@ -42,6 +42,9 @@ define([], function () {
                 // 渲染已编辑奖项
                 var dcList = that_scope.conf.data.dcList;
                 scope.dcList = that_scope.conf.data.dcList;
+                if (scope.dcList.INVOLVE && scope.dcList.INVOLVE.length > 0) {
+                    scope.myThanks = true;
+                }
             }
 
             // 产品模板列表
@@ -49,12 +52,9 @@ define([], function () {
                 if (scope.disabled) {
                     return
                 }
-                // e.preventDefault();
-                // e.stopPropagation();
                 var that_scope = angular.element('.select-brand').scope();
                 if (that_scope.selectSpecificationVal != '') {
                     $(e.target).next().trigger('click');
-                    // console.log(angular.element(e.target).scope());
                     var data = {
                         metraType: 'gift',
                         // supplierCode: that_scope.selectCompanyVal,
@@ -116,9 +116,9 @@ define([], function () {
                         hasLeft: true//是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
                     }
                     scope.$emit('fromActivityConfigtoChooseJF', event, data);
-
                     scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
                     scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                    scope.thanksornot = $(e.target).parents('.gotoset').hasClass('thanks-draw-wrap');
                 } else {
                     alert('请先选择投放的品牌和规格！')
                 }
@@ -177,7 +177,7 @@ define([], function () {
                     $target.parents('.radio-wrap').next().children().eq(num).removeClass('hidden').siblings().addClass('hidden');
 
                     var giftpack = $(parentsDrawPrizeWrap).find('.giftpack');
-                    if (angular.element($(giftpack)).scope()) {
+                    if (angular.element($(giftpack)).scope() && angular.element($(giftpack)).scope().giftpackConf) {
                       angular.element($(giftpack)).scope().giftpackConf.list = [];
                     }
                 }
@@ -206,11 +206,11 @@ define([], function () {
 
             // 勾选积分池
             $('#surprisesetprize').on('click', '.tickcheckbox', function (e) {
-              if ($(e.target).prop('checked')) {
-                  $(e.target).siblings('.sendscore').removeClass('hidden')
-              } else {
-                  $(e.target).siblings('.sendscore').addClass('hidden')
-              }
+                if ($(e.target).prop('checked')) {
+                    $(e.target).siblings('.sendscore').removeClass('hidden')
+                } else {
+                    $(e.target).siblings('.sendscore').addClass('hidden')
+                }
             })
         }
 
