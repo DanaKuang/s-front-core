@@ -331,6 +331,20 @@ body {
   height: 16px;
   top: 12px;
 }
+.ui-navbar-left .fa-userAnalysis {
+  background: url('../image/i-userAnalysis.png') no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+}
+.ui-navbar-left li.active .fa-userAnalysis {
+  background: url('../image/i-userAnalysis-act.png') no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+}
 .ui-navbar-left .fa-report {
   // content: url('../image/i-report.png');
   background: url('../image/i-report.png') no-repeat;
@@ -469,6 +483,16 @@ body {
     background-size: cover;
     height: 14px;
     width: 14px;
+}
+
+.ui-panel-title .group {
+  position: absolute;
+  left: 10px;
+  top: 7px;
+  background: url('../image/icon-group.png') no-repeat;
+  background-size: cover;
+  height: 14px;
+  width: 14px;
 }
 
 .region-search-r {

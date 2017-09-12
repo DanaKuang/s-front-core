@@ -134,18 +134,18 @@ define([], function () {
 
 
       //页面执行函数
+      $scope.spec = {
+        "count": 0,
+        "active": 0,
+        "bag": 0,
+        "reduce": 0,
+        "daycount" : "本日扫码次数",
+        "dayactive" : "本日连续月活用户",
+        "daybag" : "本日扫码烟包数",
+        "dayreduce" : "本日新增扫码用户数"
+      };
       function public (param) {
         (function () {
-          $scope.spec = {
-            "count": 0,
-            "active": 0,
-            "bag": 0,
-            "reduce": 0,
-            "daycount" : "本日扫码次数",
-            "dayactive" : "本日连续月活用户",
-            "daybag" : "本日扫码烟包数",
-            "dayreduce" : "本日新增扫码用户数"
-          };
           $model.$specfication(param).then(function (res) {
             var data = res.data[0] || {};
             $(".region-margin .count i").html(data.scanPv || 0);

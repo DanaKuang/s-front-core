@@ -27,6 +27,15 @@
             "hash": "#/view/home/multi",
             "text": "多维查询"
         },{
+            "icon": "user",
+            "text": "用户",
+            "noDataApi": true,
+            "hash": "",
+            "dropdown": [{
+              "text": "用户群体查询",
+              "hash": "#/view/home/user/group"
+            }]
+        },{
             "icon": "report",
             "noDataApi": true,
             "hash": "#/view/home/report",
