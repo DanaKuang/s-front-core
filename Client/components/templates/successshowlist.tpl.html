@@ -7,14 +7,14 @@
 			<div class="table-cell">中奖概率(%)</div>
 		</div>
 		<div class="table-body">
-			<div ng-repeat="(idx, item) in successshowlist">
-				<div ng-if="item.details">
-					<div class="table-cell">{{item.details.prizeName}}</div>
-					<div class="table-cell">{{item.details.awardName}}</div>
-					<div class="table-cell">{{item.details.totalNum || item.details.redNum}}</div>
-					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || item.details.probability}}</div>
+			<div ng-repeat="(idx, item) in successshowlist" class="table-items-wrap">
+				<div class="table-items" ng-if="item.details" ng-repeat="(i, n) in item.details">
+					<div class="table-cell">{{item.prizeName}}</div>
+					<div class="table-cell">{{n.awardName}}</div>
+					<div class="table-cell">{{n.totalNum}}</div>
+					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || item.probability}}</div>
 				</div>
-				<div ng-if="!item.details">
+				<div class="table-items" ng-if="!item.details">
 					<div class="table-cell">{{item.prizeName}}</div>
 					<div class="table-cell">{{item.awardName}}</div>
 					<div class="table-cell">{{item.totalNum || item.redNum}}</div>

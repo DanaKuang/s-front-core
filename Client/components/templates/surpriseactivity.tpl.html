@@ -21,7 +21,7 @@
 				<div class="draw-prize config-item">
 					<h6>中奖设置</h6>
 					<div class="select-duration configuration-item">
-						<i>*</i>
+						<small>*</small>
 						<small class="wrong-tip hidden">请选择可参与的抽奖时间段</small>
 				    <select class="hours" name="startHour" ng-model="startHour" ng-disabled="disabled">
 				      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
@@ -38,12 +38,12 @@
 				    <input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" ng-disabled="disabled" class="intervalHourperson">人
 					</div>
 					<div class="draw-area configuration-item">
-						<i>*</i>
+						<small>*</small>
 						<small class="wrong-tip hidden">请选择中奖地区</small>
 						<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select" ng-disabled="disabled"></select>
 					</div>
 					<div class="plus configuration-item">
-						<i>*</i>
+						<small>*</small>
 						<small class="wrong-tip hidden">若设置请选择附加条件，不设置请填写中奖概率</small>
 						<input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled"><span>设置</span>
 						<select name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
@@ -75,7 +75,7 @@
 			<div class="preview float-left">
 				<p>砸金蛋活动样式</p>
 				<div class="image">
-					<img src="../../../../assets/image/eggpreview.png" alt="">
+					<img src="../../../../assets/image/zajindan.jpg" alt="">
 				</div>
 			</div>
 		</div>

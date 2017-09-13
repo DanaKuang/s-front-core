@@ -272,7 +272,7 @@ select {
 	border-bottom: 1px solid #ddd;
 }
 .table {
-	border-top: 1px solid #A0A0A0!important;
+	/*border-top: 1px solid #A0A0A0!important;*/
 }
 /*分页*/
 .pagination-wrap {

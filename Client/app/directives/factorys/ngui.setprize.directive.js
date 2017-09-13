@@ -27,11 +27,11 @@ define([], function () {
       };
 
       function linkFn (scope, element, attrs) {
-          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar']);
+          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar', 'myThanks']);
           // 监视conf变化更新 basicinfo
           scope.$watch('conf', function () {
               // 属性赋值
-              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar']);
+              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar', 'myThanks']);
           }, true);
 
           var that_scope = angular.element('.all-template-config-wrap').scope();
@@ -40,8 +40,11 @@ define([], function () {
             var dcList = that_scope.conf.data.dcList;
             scope.dcList = that_scope.conf.data.dcList;
             scope.disabled = true;
-            if (scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
+            if (scope.dcList.FIRST_LOTTERY_BE_WON && scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
               scope.myVar = true;
+            }
+            if (scope.dcList.INVOLVE && scope.dcList.INVOLVE.length > 0) {
+              scope.myThanks = true;
             }
           }
 

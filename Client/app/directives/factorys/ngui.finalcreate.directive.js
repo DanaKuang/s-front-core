@@ -44,7 +44,12 @@ define([], function () {
             }
 
             scope.cancelActivityBuild = function() {
-                location.reload();
+                var r = confirm('确定要取消吗？')
+                if (r == true) {
+                    location.reload();
+                } else {
+                    return
+                }
             }
 
             // 保存活动
@@ -55,6 +60,7 @@ define([], function () {
             var scopeVariable = {};
 
             function bigVerify() {
+                $('.wrong-tip').addClass('hidden');
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
@@ -90,7 +96,7 @@ define([], function () {
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
                             }
                         } else {
-                            caidanAward.probability = _drawPrizeScope.drawChance.toString();
+                            caidanAward.probability = parseFloat(_drawPrizeScope.drawChance);
                             if (!caidanAward.probability) {
                                 caidanerror = true;
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
@@ -109,13 +115,22 @@ define([], function () {
                         // 特殊
                         setPrize('special', true)
                     }
+                    if (scopeVariable._setPrizeScope.myThanks) {
+                        // 参与奖
+                        setPrize('thanks', true)
+                    }
                     // 普通奖品必需填写
                     setPrize('common', true)
+
                 } else {
                     // 新建模式下
                     if (scopeVariable._setPrizeScope.myVar) {
                         // 特殊
                         setPrize('special')
+                    }
+                    if (scopeVariable._setPrizeScope.myThanks) {
+                        // 参与奖
+                        setPrize('thanks')
                     }
                     // 普通奖品必需填写
                     setPrize('common')
@@ -129,17 +144,21 @@ define([], function () {
                         if (tag === 'special') {
                             // 特殊奖品
                             var prizeDomList = $('.first-draw-prize-wrap').find('.ready-set .edit-part').children();
-                        } else {
+                        } else if (tag === 'common') {
                             // 普通奖品
                             var prizeDomList = $('.non-first-draw-wrap').find('.ready-set .edit-part').children();
+                        } else {
+                            var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .edit-part').children();
                         }
                     } else {
                         if (tag === 'special') {
                             // 特殊奖品
                             var prizeDomList = $('.first-draw-prize-wrap').find('.ready-set .create-part').children();
-                        } else {
+                        } else if (tag === 'common') {
                             // 普通奖品
                             var prizeDomList = $('.non-first-draw-wrap').find('.ready-set .create-part').children();
+                        } else {
+                            var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .create-part').children();
                         }
                     }
 
@@ -150,15 +169,18 @@ define([], function () {
 
                     if (tag === 'special') {
                         // 特殊奖品
-                        processPrizeArr(prizeDomList_arr, prizeDomList, true)
-                    } else {
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'special')
+                    } else if (tag === 'common') {
                         // 普通奖品
-                        processPrizeArr(prizeDomList_arr, prizeDomList, false)
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'common')
+                    } else {
+                        // 参与奖品
+                        processPrizeArr(prizeDomList_arr, prizeDomList, 'thanks')
                     }
                 }
 
                 // 具体-处理奖项数组
-                function processPrizeArr(prizeDomList_arr, prizeDomList, specialBool) {
+                function processPrizeArr(prizeDomList_arr, prizeDomList, type) {
                     prizeDomList_arr.forEach(function (n, index) {
                         var item = prizeDomList.eq(n);
                         if (item.parents('.sethbprize').length != 0) {
@@ -171,10 +193,13 @@ define([], function () {
                         }
 
                         var ActivityPageAward = {};
-                        if (specialBool) {
+                        if (type === 'special') {
                             ActivityPageAward.special = 1;
-                        } else {
+                        } else if (type == 'common') {
                             ActivityPageAward.special = 0;
+                        } else {
+                            // 参与奖
+                            ActivityPageAward.special = -1;
                         }
 
                         ActivityPageAward.probability = item.find('.chance').val() || ''; //特殊奖品没有概率设置
@@ -189,7 +214,7 @@ define([], function () {
                             var giftDomList_arr = Array.apply(0, Array(giftDomList_len)).map(function(item, index){
                                 return index
                             })
-                            processGiftArr(giftDomList_arr, giftDomList, ActivityPageAward)
+                            processGiftArr(giftDomList_arr, giftDomList, item, ActivityPageAward)
                         } else {
                             processSingleArr(ActivityPageAward, item, radio_res_item)
                         }
@@ -212,7 +237,7 @@ define([], function () {
                 }
 
                 // 处理gift里面的multiple奖品
-                function processGiftArr(giftDomList_arr, giftDomList, ActivityPageAward) {
+                function processGiftArr(giftDomList_arr, giftDomList, item, ActivityPageAward) {
                     var type = 'gift';
                     if (giftDomList_arr.length > 1) {
                         ActivityPageAward.multiChoose = 1;
@@ -222,15 +247,15 @@ define([], function () {
 
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
-                        var item = giftDomList.eq(index).find('.prize-img-preview-wrap');
-                        ActivityPageAward.details[index].poolId = item[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
-                        ActivityPageAward.details[index].awardName = item[0].dataset.name || '';
-                        ActivityPageAward.details[index].awardPicUrl = item[0].dataset.giftpic || '';
-                        ActivityPageAward.details[index].awardType = item[0].dataset.gifttype;
-                        ActivityPageAward.details[index].awardNums = item.find('.number').val();
+                        var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
+                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
+                        ActivityPageAward.details[index].awardName = n[0].dataset.name || '';
+                        ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
+                        ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
+                        ActivityPageAward.details[index].awardNums = n.find('.number').val();
                     })
 
-                    checkerroreouspart(ActivityPageAward, type)
+                    checkerroreouspart(ActivityPageAward, type, item)
                 }
 
                 // 处理单选奖品
@@ -242,7 +267,6 @@ define([], function () {
                     ActivityPageAward.details[0].awardName = item[0].dataset.name || '';
                     ActivityPageAward.details[0].awardPicUrl = '';
                     ActivityPageAward.details[0].awardNums = radio_res_item.find('.number').val();
-                    ActivityPageAward.details[0].score = radio_res_item.find('.score').val() || 0;
 
                     // 红包总金额，最小、最大
                     if (radio_res_item.hasClass('hb')) {
@@ -258,21 +282,28 @@ define([], function () {
                         }
                     } 
                     if (radio_res_item.hasClass('jf')) {
+                        ActivityPageAward.score = radio_res_item.find('.score').val() || 0;
                         ActivityPageAward.details[0].awardType = 6;
                         ActivityPageAward.details[0].poolId = item.data('integral-pool');
                     }
 
-                    checkerroreouspart(ActivityPageAward, type, radio_res_item)
+                    checkerroreouspart(ActivityPageAward, type, item, radio_res_item)
                 }
 
                 // 校验错误
-                function checkerroreouspart(ActivityPageAward, type, radio_res_item) {
+                function checkerroreouspart(ActivityPageAward, type, item, radio_res_item ) {
                     if (type === 'gift') {
-                        ActivityPageAward.details.forEach(function(n, index) {
-                            if (!n.poolId || !n.awardNums) {
-                                ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
-                            }
-                        })
+                        if (ActivityPageAward.details.length != 0) {
+                            ActivityPageAward.details.forEach(function(n, index) {
+                                if (!n.poolId || !n.awardNums) {
+                                    ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                                    item.children('.wrong-tip').removeClass('hidden');
+                                }
+                            })
+                        } else {
+                            ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                            item.children('.wrong-tip').removeClass('hidden');
+                        }
                     } else {
                         if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.details[0].poolId) {
                             ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
@@ -317,7 +348,7 @@ define([], function () {
                     supplier: scopeVariable._launchScope.selectCompanyVal || '',
                     brandCode: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activityBrandsList.join('') : scopeVariable._launchScope.selectBrandVal || '',
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
-                    areaCode: scopeVariable._launchScope.selectAreaVal.toString() || '',
+                    areaCode: scopeVariable._launchScope.selectAreaVal ? scopeVariable._launchScope.selectAreaVal.toString() : '' || '',
                     holiday: scopeVariable._launchScope.whichday || 3,
                     stime: scopeVariable._launchScope.startTime || '',
                     etime: scopeVariable._launchScope.endTime || '',
