@@ -12,7 +12,7 @@ define([], function () {
         ServiceContent: ['$scope', 'setDateConf', '$timeout','dayFilter',function ($scope, setDateConf, $timeout,dayFilter) {
             setDateConf.init($(".agree-date"), 'day');
             var stattime = dayFilter.yesterday("date");
-            $(".date").find("input").val(stattime);
+            $(".date-wrap").find("input").val(stattime);
             var $model = $scope.$model;
             //页面默认加载配置
             var deafaultCou = {
@@ -116,12 +116,12 @@ define([], function () {
                     deafaultCou = {};
                     Deafault = {};
                     deafaultCou = {
-                        "startTime": $(".visit_start").find(".date").data().date ?
-                            $(".visit_start").find(".date").data().date : $(that).siblings(".visit_start").find("input").val(),
+                        "startTime": $(".visit_start").find(".date-wrap").data().date ?
+                            $(".visit_start").find(".date-wrap").data().date : $(that).siblings(".visit_start").find("input").val(),
                         "awardName": $(".visit_award input").val(),
                         "cityName": $(".visit_city input").val(),
-                        "endTime": $(".visit_end").find(".date").data().date ?
-                            $(".visit_end").find(".date").data().date : $(that).siblings(".visit_end").find("input").val(),
+                        "endTime": $(".visit_end").find(".date-wrap").data().date ?
+                            $(".visit_end").find(".date-wrap").data().date : $(that).siblings(".visit_end").find("input").val(),
                         "mobileNo":$(".visit_mobile input").val(),
                         "checkStatus":$("#visit_label").val(),
                         "productSn":$("#visit_product").val(),

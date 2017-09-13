@@ -79,8 +79,8 @@ define([], function () {
                 // var reg = /(省|市|区)/;
                 var params = {
                     "provinceName": $(that).siblings(".region").val(),
-                    "statTime": $(that).siblings().hasClass("date") ?
-                        ($(that).siblings(".date").data().date ? $(that).siblings(".date").data().date : $(that).siblings(".date").find("input").val())
+                    "statTime": $(that).siblings().hasClass("date-wrap") ?
+                        ($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val())
                         : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
                     "statType": $(that).siblings(".ui-search").val()
                 }
