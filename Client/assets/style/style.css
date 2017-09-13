@@ -462,6 +462,11 @@ body {
   border-radius: 0px;
   color: #44c2ed;  
 }
+
+.region-search-r .date-wrap {
+  margin-right: 20px;
+}
+
 .date input{
   border: none;
 }
