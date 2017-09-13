@@ -9,8 +9,8 @@ define([], function () {
       ServiceType: 'controller',
       ServiceName: 'GroupCtrl',
       ViewModelName: 'GroupViewModel',
-      ServiceContent: ['$scope', function ($scope) {
-          console.log("group is under controller")
+      ServiceContent: ['$scope','setDateConf', function ($scope,setDateConf) {
+        setDateConf.init($(".group-month"), 'month');        
       }]
     };
   
