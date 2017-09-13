@@ -7,7 +7,6 @@
 					<th>活动名称</th>
 					<th>规格</th>
 					<th>活动时间</th>
-					<th>剩余时长</th>
 					<th>投放地区</th>
 					<th>使用状态</th>
 					<th>操作</th>
@@ -18,9 +17,8 @@
 					<td>{{idx + 1}}</td>
 					<td>{{item.activityName}}</td>
 					<td class="snslist">{{item.sn}}</td>
-					<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{
+					<td>{{item.stime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{
 					item.etime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-					<td>{{item.days}}天</td>
 					<td class="arealist">{{item.area}}</td>
 					<td>{{!item.status ? '已停用' : item.status == 1 ? '已启用' : '待启用'}}</td>
 					<td>

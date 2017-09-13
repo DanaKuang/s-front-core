@@ -838,6 +838,9 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 /*保存活动*/
 .submit-prize {
 	opacity: 0;
+	width: 0;
+	height: 0;
+	padding: 0;
 }
 .select-duration-person>span {
 	margin-left: 75px;
