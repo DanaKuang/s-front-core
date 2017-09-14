@@ -201,9 +201,9 @@ select {
 .operation>.flex .flex-item>.t, .operation>.flex .flex-item>.b {
 	width: 100%;
 }
-.operation>.flex .flex-item>.t select, .operation>.flex .flex-item>.b select, .operation>.flex .flex-item input {
+/*.operation>.flex .flex-item>.t select, .operation>.flex .flex-item>.b select, .operation>.flex .flex-item input {
 	width: 100%;
-}
+}*/
 
 /*table*/
 @media screen and (min-width: 1721px) {
