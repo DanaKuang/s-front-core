@@ -468,22 +468,32 @@ define([], function () {
             giftaddstockid = f;
           })
           $scope.confirmGiftStock = function () {
-            var addNum = {addNum: $scope.giftnumber};
-            var data = {
-              addNum: $scope.giftnumber,
-              id: giftaddstockid.id
-            };
-            if (!giftaddstockid.id) {
-              alert('请先选择礼品');
+            // num, dataId, ori, activityCode
+            // var data = {
+            //   num: $scope.giftnumber,
+            //   dataId: giftaddstockid.dataId,
+            //   ori: giftaddstockid.ori,
+            //   activityCode: giftaddstockid.activityCode
+            // };
+
+            // $model.addgiftstock(data).then(function(res) {
+              if (giftaddstockid.firstornot) {
+                // 特殊奖
+                var the_drawprizewrap_val = $('.first-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val();
+
+                var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
+
+                $('.first-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val(add_val)
+              } else {
+                // 参与奖
+                var the_drawprizewrap_val = $('.thanks-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val();
+
+                var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
+
+                $('.thanks-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val(add_val)
+              }
               $('.modal-content .close').trigger('click');
-              return
-            }
-            $model.addgiftstock(data).then(function(res) {
-              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(giftaddstockid.index).find('.number').val();
-              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
-              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(giftaddstockid.index).find('.number').val(add_val);
-              $('.modal-content .close').trigger('click');
-            })
+            // })
           } 
 
           // 新增红包库存

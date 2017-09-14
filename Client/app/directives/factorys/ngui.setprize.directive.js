@@ -186,12 +186,19 @@ define([], function () {
 
           // 礼品增库
           $('#setprize').on('click', '.add-gift-stock', function(e){
-              var id = $(e.target).parents('.draw-prize-wrap').data('id');
-              var drawPrizeWrap_index = $(e.target).parents('.draw-prize-wrap').index();
+              var id = $(e.target).parents('.prize-img-preview-wrap').data('dataid');
+              var drawPrizeWrap_index = $(e.target).parents('.edit-part').index();
+              var item_index = $(e.target).parents('.prize-img-preview-wrap-repeat').index();
+              var hasClassornot = $(e.target).parents('.hasdetails').length > 0 ? 'dcMoreExt' : 'dcExt';
+              var firstornot = $(e.target).parents('.first-draw').length > 0 ? true : false
               // 把红包id传到controller
               var data = {
-                  id: id,
-                  index: drawPrizeWrap_index
+                activityCode: that_scope.activityCode,
+                dataId: id,
+                ori: hasClassornot,
+                index: drawPrizeWrap_index,
+                item_index: item_index,
+                firstornot: firstornot
               };
               scope.$emit('giftaddstockid', event, data)
           })
