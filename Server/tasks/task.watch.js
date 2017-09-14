@@ -7,6 +7,7 @@ var port = 35729;
 var Q = require('q');
 var u = require('util');
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var server = require('../server');
 var colors = require('colors/safe');
 var livereload = require('gulp-livereload');
@@ -77,6 +78,22 @@ var forth = function() {
     return deferred.promise;
 };
 
+// 监控less文件变化，编译重新生成css
+var fifth = function () {
+    var deferred = Q.defer();
+    // TODO
+    gulp.watch([
+        './assets/sass/**/*.scss'
+    ], function (event) {
+        process.stdout.write(colors.green('\x20\x20COMPILE FILE: [' + event.path + ']\n'));
+        gulp.src(event.path)
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest('./assets/style'));
+    });
+    deferred.resolve(true);
+    return deferred.promise;
+};
+
 // 异常打印处理
 var error = function(error) {
     process.stdout.write(u.format('%s', error));
@@ -88,5 +105,6 @@ Q.fcall(first)
   .then(second)
   .then(third)
   .then(forth)
+  .then(fifth)
   .catch(error)
   .done();
