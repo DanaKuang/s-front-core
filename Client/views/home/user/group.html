@@ -5,7 +5,7 @@
  * Description: user
  */
 -->
-
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.group.css">
 <div class="animated fadeInRight" ng-controller="GroupCtrl">
         <div class="container-fluid region-margin">
           <div class="row">
@@ -15,9 +15,22 @@
                 <i class="group"></i><span>用户群体分析</span>
               </div>
               <!--box-->
-              <div class="panel rate">
-                <div class="panel-body">
+              <div class="panel rate group-panel-top">
+                <div class="panel-body group-month-search">
+                  <div class="group-month">
+                      <label>月份: &nbsp;&nbsp;</label>                      
+                      <div class="input-append">
+                          <input size="16" type="text" name="searchTime" value="" class="form-control date" readonly />
+                          <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                        <div class="inline-block">
+                            <button type="submit" class="btn btn-primary" ng-click="daySearch()">查询</button>
+                        </div>
+                  </div>
                 </div>
+              </div>
+              <div class="panel rate">
+                <div class="panel-body"></div>
               </div>
             </div>
           </div>

@@ -457,6 +457,16 @@ body {
   line-height: 30px;
   font-size: 15px;
 }
+.region-search-r .input-append .form-control{
+  background-color: #ffffff;
+  border-radius: 0px;
+  color: #44c2ed;  
+}
+
+.region-search-r .date-wrap {
+  margin-right: 20px;
+}
+
 .date input{
   border: none;
 }
@@ -558,7 +568,7 @@ body {
 .ui-total-date {
   position: relative;
   color: #44c2ed;
-  border: 1px solid #44c2ed;
+  /* border: 1px solid #44c2ed; */
   font-size: 12px;
   display: inline-block;
 }
@@ -850,8 +860,13 @@ input[type="checkbox"]:checked + .checkbox{
   line-height: 28px;
   font-size: 16px;
 }
-.res_search .agree-date input{
+/* .res_search .agree-date input{
   width: 98px;
+} */
+.agree-date .input-append .form-control{
+  background-color: #ffffff;
+  border-radius: 0px;
+  color: #44c2ed;  
 }
 .res_search .search_btn ,.gift_search .search_btn{
   font-size: 16px;

@@ -14,7 +14,7 @@ define([], function () {
             setDateConf.init($(".agree-date"), "day");
             //设置input的默认时间
             var stattime = dayFilter.yesterday("date");
-            $(".date").find("input").val(stattime);
+            $(".date-wrap").find("input").val(stattime);
             //页面默认加载配置
             $scope.obj = {
                 "statTime": stattime,
@@ -165,8 +165,8 @@ define([], function () {
                 if (arguments[1] === 1) {
                     $scope.obj = {
                         "activityName": $(that).siblings(".report-gui").find("select").val(),
-                        "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
-                            $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
+                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
                         "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
                     }
                     //console.log($scope.obj);
@@ -174,14 +174,14 @@ define([], function () {
                 } else if (arguments[1] === 2) {
                     $scope.saoobj = {
                         "activityName": $(that).siblings(".report-gui").find("select").val(),
-                        "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
-                            $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
+                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
                     }
                     gloabl.userPro($scope.saoobj);
                 } else if (arguments[1] === 3) {
                     $scope.summar = {
-                        "statTime": $(that).siblings(".agree-date").find(".date").data().date ?
-                            $(that).siblings(".agree-date").find(".date").data().date : $(that).siblings(".agree-date").find("input").val(),
+                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
                     }
                     gloabl.summaryData($scope.summar)
                 }

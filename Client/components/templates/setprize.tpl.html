@@ -34,17 +34,17 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-gift hidden">请点击选择相应的产品</small>
 										<label for="">选择礼品</label>
-										<div ng-if="n.details">
+										<div ng-if="n.details" class="hasdetails">
 											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
-														<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}" data-gifttype="{{item.awardType}}">
+														<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-dataid="{{item.id}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}" data-gifttype="{{item.awardType}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
@@ -287,7 +287,7 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 									</div>
 								</div>
 							</div>
@@ -350,9 +350,8 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
 													</div>
 												</div>
@@ -374,7 +373,6 @@
 															<div class="number-wrap">
 																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
 															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
 													</div>
 												</div>

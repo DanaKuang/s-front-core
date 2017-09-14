@@ -785,14 +785,14 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/poolGift/addPool'
+    routepath: '/api/tztx/saas/saotx/activity/addAwardNum'
     authorized: 1
     description: '礼品增库'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/poolRedpack/addPool'
+    routepath: '/api/tztx/saas/saotx/activity/addAwardNum'
     authorized: 1
     description: '红包增库'
     enableroute: 1

@@ -42,10 +42,10 @@ define([], function () {
             var GET_PRODUCT_CHOOSE_LIST = '/api/tztx/saas/saotx/product/queryMetraList';
 
             // 礼品增库
-            var ADD_GIFT_STOCK = '/api/tztx/saas/saotx/poolGift/addPool';
+            var ADD_GIFT_STOCK = '/api/tztx/saas/saotx/activity/addAwardNum';
 
             // 红包增库
-            var ADD_HB_STOCK = '/api/tztx/saas/saotx/poolRedpack/addPool';
+            var ADD_HB_STOCK = '/api/tztx/saas/saotx/activity/addAwardNum';
 
             // 文件上传到阿里云服务器,并且是让外网可以看到的附件
             var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/attach/commonAliUpload';
