@@ -45,7 +45,7 @@ module.exports = function (callback) {
         process.stdout.write(colors.blue('\x20\x20\x20 copy !doc/*\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 copy !logs/*\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 copy !bower_components/*\n'));
-        gulp.src(['./**', '!bower_components/**/*', '!logs/**/*', '!doc/**/*'])
+        gulp.src(['./**', '!bower_components/**/*', '!logs/**/*', '!doc/**/*', '!assets/sass/*'])
             .pipe(gulp.dest('dist/data-front/Client'))
             .on('finish', function () {
                 process.stdout.write(colors.blue('\x20\x20\x20 copy js successfully!\n'));
