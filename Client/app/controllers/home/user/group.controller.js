@@ -5,77 +5,99 @@
  */
 
 define([], function () {
-    var GroupController = {
-      ServiceType: 'controller',
-      ServiceName: 'GroupCtrl',
-      ViewModelName: 'GroupViewModel',
-      ServiceContent: ['$scope','setDateConf', function ($scope,setDateConf) {
-        var echarts = require('echarts');
-        var $model = $scope.$model;
-        setDateConf.init($(".group-month"), 'month');
-        var amonth = (new Date().getMonth() + 1)<10 ? '0'+ (new Date().getMonth() + 1):(new Date().getMonth() + 1);
-        var yearMonth = new Date().getFullYear() + "-"  + amonth;
-        $(".group-month").find("input").val(yearMonth);        
-        var defaultMonth = {"statDate":yearMonth};
-        $scope.search = function() {
-      
+  var GroupController = {
+    ServiceType: 'controller',
+    ServiceName: 'GroupCtrl',
+    ViewModelName: 'GroupViewModel',
+    ServiceContent: ['$scope', 'setDateConf', function ($scope, setDateConf) {
+      var echarts = require('echarts');
+      var $model = $scope.$model;
+      setDateConf.init($(".group-month"), 'month');
+      var amonth = (new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1);
+      var yearMonth = new Date().getFullYear() + "-" + amonth;
+      $(".group-month").find("input").val(yearMonth);
+      var defaultMonth = { "statDate": yearMonth };
+      $scope.daySearch = function ($event) {
+        var that = $event.target;        
+        defaultMonth = {
+          "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()
         };
-        $scope.monScanUvConf = {
-          Arr: []
-        };
-        $scope.monScanActUv = {
-          Arr: []
-        };
-        $scope.monScanNewUv = {
-          Arr: []
-        };
+        Global(defaultMonth);        
 
-        function Global(data,brand) {
-          var obj1 = {};
-          var obj2 = {};
-          var obj3 = {};
-          $model.$getScanNumberUsers(data).then(function(res) {
-            var res =res.data || {};
-            obj1.tMonth = res.monaddScanUv;
-            obj2.tMonth = res.monaddScanActUv;
-            obj3.tMonth = res.monaddScanNewUv;
-            obj1.lMonth = res.retMonaddScanUv;
-            obj2.lMonth = res.retMonaddScanActUv;
-            obj3.lMonth = res.retMonaddScanNewUv;
-            $model.$getTagName().then(function(res){
-              var res = res.data;
-              $(res).each(function(index,n){
-                if (n.tagId === "10001") {
-                  obj1.title = n.tagName;
-                  $scope.monScanUvConf = {
-                    Arr: [obj1]
-                  };
-                } else if (n.tagId === "10002") {
-                  obj2.title = n.tagName;
-                  $scope.monScanActUv = {
-                    Arr: [obj2]
-                  };               
-                } else if (n.tagId === "10003") {
-                  obj3.title = n.tagName;
-                  $scope.monScanNewUv = {
-                    Arr:[obj3]
-                  };
-                }
-                $scope.$apply();                
-              })
+      };
+      $scope.monScanUvConf = {
+        Arr: []
+      };
+      $scope.monScanActUv = {
+        Arr: []
+      };
+      $scope.monScanNewUv = {
+        Arr: []
+      };
+
+      function Global(data, brand) {
+        var obj1 = {};
+        var obj2 = {};
+        var obj3 = {};
+        //扫码用户数
+        $model.$getScanNumberUsers(data).then(function (res) {
+          var res = res.data || {};
+          obj1.tMonth = res.monaddScanUv;
+          obj2.tMonth = res.monaddScanActUv;
+          obj3.tMonth = res.monaddScanNewUv;
+          obj1.lMonth = res.retMonaddScanUv;
+          obj2.lMonth = res.retMonaddScanActUv;
+          obj3.lMonth = res.retMonaddScanNewUv;
+          $model.$getTagName().then(function (res) {
+            var res = res.data;
+            $(res).each(function (index, n) {
+              if (n.tagId === "10001") {
+                obj1.title = n.tagName;
+                $scope.monScanUvConf = {
+                  Arr: [obj1]
+                };
+              } else if (n.tagId === "10002") {
+                obj2.title = n.tagName;
+                $scope.monScanActUv = {
+                  Arr: [obj2]
+                };
+              } else if (n.tagId === "10003") {
+                obj3.title = n.tagName;
+                $scope.monScanNewUv = {
+                  Arr: [obj3]
+                };
+              }
+              $scope.$apply();
+            })
+          })
+        });
+
+        //当月不同香烟类别扫码用户分布
+        var smokePieChart = echarts.init(document.getElementById("group-smoke-pie"));
+        var pieOPtion = $model.$pie.data;
+        smokePieChart.setOption(pieOPtion, true);
+        $model.$getSmokeTypePie(data).then(function (res) {
+          var res = res.data;
+          $(res).each(function(index,n) {
+            pieOPtion.legend.data.push(n.smokeTypeName);
+            pieOPtion.series[0].data.push({
+              "value":n.monaddScanUv,
+              "name":n.smokeTypeName
             })
           });
-        };
+          smokePieChart.setOption(pieOPtion, true);
+        })
+      };
 
-        Global(defaultMonth);
-
-
-
-
+      Global(defaultMonth);
 
 
-      }]
-    };
-  
-    return GroupController;
-  });
+
+
+
+
+    }]
+  };
+
+  return GroupController;
+});

@@ -1,0 +1,45 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "formatter": "{a} <br/>{b} : {c} ({d}%)"
+    },
+    "legend": {
+        "orient": "horizontal",
+        "left": "center",
+        "bottom": 0,
+        "data": []
+    },
+    "color": [
+        "#ffce23",
+        "#ff8b23",
+        "#77d7f7"
+    ],
+    "series": [
+        {
+            "name": "扫码用户分布",
+            "type": "pie",
+            "radius": "80%",
+            "center": [
+                "50%",
+                "43%"
+            ],
+            "hoverAnimation":false,
+            "avoidLabelOverlap": false,
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "outside",
+                    "formatter": "{d}%"
+                }
+            },
+            "data": [],
+            "itemStyle": {
+                "emphasis": {
+                    "shadowBlur": 10,
+                    "shadowOffsetX": 0,
+                    "shadowColor": "rgba(0, 0, 0, 0.5)"
+                }
+            }
+        }
+    ]
+}
