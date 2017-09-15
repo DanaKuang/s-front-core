@@ -463,37 +463,27 @@ define([], function () {
           })
 
           // 新增礼品库存
-          var giftaddstockid = {};
           $scope.$on('giftaddstockid', function (e,v,f) {
-            giftaddstockid = f;
+            globalVariable.giftaddstockid = f;
           })
+          
           $scope.confirmGiftStock = function () {
-            // num, dataId, ori, activityCode
-            // var data = {
-            //   num: $scope.giftnumber,
-            //   dataId: giftaddstockid.dataId,
-            //   ori: giftaddstockid.ori,
-            //   activityCode: giftaddstockid.activityCode
-            // };
+            if (globalVariable.giftaddstockid.firstornot) {
+              // 特殊奖
+              var the_drawprizewrap_val = $('.first-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val();
 
-            // $model.addgiftstock(data).then(function(res) {
-              if (giftaddstockid.firstornot) {
-                // 特殊奖
-                var the_drawprizewrap_val = $('.first-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
 
-                var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
+              $('.first-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val(add_val)
+            } else {
+              // 参与奖
+              var the_drawprizewrap_val = $('.thanks-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val();
 
-                $('.first-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val(add_val)
-              } else {
-                // 参与奖
-                var the_drawprizewrap_val = $('.thanks-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
 
-                var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="giftnumber"]').val());
-
-                $('.thanks-draw .edit-part').eq(giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(giftaddstockid.item_index).find('.number').val(add_val)
-              }
-              $('.modal-content .close').trigger('click');
-            // })
+              $('.thanks-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val(add_val)
+            }
+            $('.modal-content .close').trigger('click');
           } 
 
           // 新增红包库存
@@ -551,7 +541,6 @@ define([], function () {
               }
             })
           })
-
     	}]
   	}
   	return manageActsController

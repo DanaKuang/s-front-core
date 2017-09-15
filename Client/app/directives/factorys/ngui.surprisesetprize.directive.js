@@ -145,15 +145,6 @@ define([], function () {
                 }
             }
 
-            // 红包增库
-            $('#surprisesetprize').on('click', '.add-hb-stock', function(e){
-                // 把礼品id传到controller
-                var id = $(e.target).parents('.draw-prize-wrap').data('id');
-                // 把红包id传到controller
-                var data = {id: id};
-                scope.$emit('hbaddstockid', event, data)
-            })
-
             // 固定金额、随机金额切换
             scope.changeTab = function (e) {
                 if (scope.disabled) {
@@ -211,6 +202,22 @@ define([], function () {
                 } else {
                     $(e.target).siblings('.sendscore').addClass('hidden')
                 }
+            })
+
+            $('#surprisesetprize').on('click', '.add-gift-stock', function(e){
+                var id = $(e.target).parents('.prize-img-preview-wrap').data('dataid');
+                var item_index = $(e.target).parents('.prize-img-preview-wrap-repeat').index();
+                var hasClassornot = $(e.target).parents('.hasdetails').length > 0 ? 'dcMoreExt' : 'dcExt';
+                // 把红包id传到controller
+                var data = {
+                    activityCode: that_scope.activityCode,
+                    dataId: id,
+                    ori: hasClassornot,
+                    index: 0,
+                    item_index: item_index,
+                    firstornot: false
+                };
+                scope.$emit('giftaddstockid', event, data)
             })
         }
 
