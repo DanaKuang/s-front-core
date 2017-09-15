@@ -1030,6 +1030,21 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+group:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getScanNumberUsers'
+    authorized: 1
+    description: '用户数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getTagName'
+    authorized: 1
+    description: '用户数名称'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
