@@ -1,0 +1,117 @@
+.clearfix:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "";
+}
+.rate{
+	
+}
+.group-panel-top{
+	padding:30px 0;
+}
+.portrait_p{
+	color:#707070;
+	float: left;
+	margin:0 13px 0 35px;
+	/*font-size:20px;*/
+}
+.portrait{
+	position: absolute;	
+    left: 10px;
+    top: 7px;
+	width:14px;
+	height:14px;
+	background:url(../image/portrait.png) no-repeat center;
+	background-size:cover;
+}
+.input_text{
+	width:141px;
+	height:20px;
+	float: left;
+	border:1px solid #e6e6e6;
+}
+.chaXunBtn{
+	display: block;
+	width:80px;
+	float: left;
+	margin-left:34px;
+	border-radius:15px;
+}
+
+
+/*content*/
+.portrait_userInfo{
+	width:662px;
+	height:169px;
+	border:1px solid #e6e6e6;
+	margin:30px auto;
+}
+.portrait_userInfo_top{
+	width:650px;
+	height:27px;
+	margin:0 auto;
+	border-bottom:1px solid #e6e6e6;
+}
+.userH3{
+	font-size:13px;
+	color:#3d467d;
+	font-weight: 600;
+	line-height:27px;
+	float: left;
+}
+.userSpan{
+	font-size:9px;
+	line-height:27px;
+	margin-left:8px;
+	float: left;
+}
+.portrait_userInfo_content{
+	width:636px;
+	height:115px;
+	background:#fcfcfc;
+	border:1px solid #e6e6e6;
+	margin:12px auto;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.portrait_userInfo_content_left{
+	width:180px;
+	height:75px;
+/*	background:red;*/
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.portrait_userInfo_content_img{
+	width:1px;
+	height:93px;
+}
+.portrait_userInfo_content_right{
+	width:160px;
+	height:75px;
+	/*background:green;*/
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.font_style{
+	font-size:8px;
+}
+/*用户扫码频度分析*/
+
+
+.portrait_frequency{
+	width:662px;
+	height:250px;
+	background:red;
+	margin:30px auto;
+}
+#main{
+	height:180px;
+	width:662px;
+	margin:0 auto;
+}

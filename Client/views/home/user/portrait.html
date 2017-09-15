@@ -1,0 +1,81 @@
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.portrait.css">
+<div class="animated fadeInRight" ng-controller="PortraitCtrl">
+	<div class="container-fluid region-margin">
+		<div class="row">
+			<div class="col-md-12" style="padding:0 40px;">
+				<!--title-->
+				<div class="ui-panel-title">
+					<i class="portrait"></i><span>用户群体分析</span>
+				</div>
+				<!--box-->
+				<div class="panel rate group-panel-top">
+					<div class="panel-body group-month-search">
+						<div class="group-month clearfix">
+							<p class='portrait_p'>用户手机号</p>
+							<input type="text" class="input_text" />
+							<button type="submit" class="btn btn-primary chaXunBtn" ng-click="" style="height:20px;font-size:12px;padding:0;">查询</button>
+						</div>
+					</div>
+				</div>
+				<!--content-->
+
+				<div class="panel rate">
+					<div class="panel-body" style="padding:0;">
+						<!--用户基本信息-->
+						<div class="portrait_userInfo">
+							<div class="portrait_userInfo_top clearfix">
+								<h3 class="userH3">用户基本信息</h3>
+								<span class="userSpan">(用户微信ID: 扫天下)</span>
+							</div>
+							<div class="portrait_userInfo_content clearfix">
+								<div class="portrait_userInfo_content_left">
+									<div class="font_style">
+										<span class="weiNiC">用户微信昵称:</span>
+										<span class="weiNiCContent">&nbsp;&nbsp;&nbsp;&nbsp;nini</span>
+									</div>
+									<div class="font_style">
+										<span class="firstTime">用户首次扫码时间:</span>
+										<span class="firstTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
+									</div>
+									<div class="font_style">
+										<span class="newTime">用户最新扫码时间:</span>
+										<span class="newTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
+									</div>
+									<div class="font_style">
+										<span class="chouJTime">用户抽奖扫码时间:</span>
+										<span class="chouJTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
+									</div>
+								</div>
+								<img src="../../../assets/image/fenjiexian.png" alt="" class="portrait_userInfo_content_img" />
+								<div class='portrait_userInfo_content_right'>
+									<div class="font_style">
+										<span class="questionOne">是否关注公众号:</span>
+										<span class="questionOneAnswer">&nbsp;&nbsp;&nbsp;&nbsp;是</span>
+									</div>
+									<div class="font_style">
+										<span class="questionTwo">用户累计扫码次数:</span>
+										<span class="questionTwoAnswer">&nbsp;&nbsp;&nbsp;&nbsp;9123456</span>
+									</div>
+									<div class="font_style">
+										<span class="questionThree">用户累计扫码烟包数:</span>
+										<span class="questionThreeAnswer">&nbsp;&nbsp;&nbsp;&nbsp;9123456</span>
+									</div>
+									<div class="font_style">
+										<span class="questionFour">用户累计抽奖时间:</span>
+										<span class="questionFourAnswer">&nbsp;&nbsp;&nbsp;&nbsp;913444322</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--用户扫码频度分析-->
+						<div class="portrait_frequency">
+							<h3 class="userH3">用户扫码频度分析</h3>
+							<div id="main"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

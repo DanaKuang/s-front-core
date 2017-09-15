@@ -78,6 +78,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/user/group.html'
+  - httpmethod: 'get'                       # 用户全息画像s
+    routepath: '/view/home/user/portrait'
+    description: 'user'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/user/portrait.html'
   - httpmethod: 'get'                       # 活动日常分析
     routepath: '/view/home/dayanalysis'
     description: 'dayanalysis'

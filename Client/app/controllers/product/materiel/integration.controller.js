@@ -6,7 +6,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'IntegrationCtrl',
         ViewModelName: 'integrationViewModel',
-        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter) {
+        ServiceContent: ['$scope','limitlengthFilter', function ($scope,limitlengthFilter){
 //          console.log('agree controller is under control.');
             var $model = $scope.$model;
 
