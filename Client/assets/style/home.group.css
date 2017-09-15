@@ -1,0 +1,53 @@
+.group-panel-top {
+    margin-bottom: 12px;
+    padding-left: 40px;    
+}
+
+.group-pannel-middle , .group-panel-top {
+}
+
+.group-month-search{
+    height: 70px;
+}
+
+.group-month .input-append {
+    display: inline-block;
+    position: relative;
+}
+
+.group-month>* {
+    vertical-align: middle;
+}
+
+.group-month>label {
+    height: 33px;
+    line-height: 40px;
+    font-size: 12px;
+    color: #707070;
+}
+
+.group-month .input-append .form-control{
+    background-color: #ffffff;
+}
+
+.glyphicon.glyphicon-th {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.inline-block {
+    margin-left : 35px;
+}
+
+.group-user-number {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    align-items: center;
+}

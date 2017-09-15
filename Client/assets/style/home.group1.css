@@ -1,0 +1,48 @@
+.group-panel-top {
+  margin-bottom: 12px;
+  padding-left: 40px; }
+  .group-panel-top .group-month-search {
+    height: 70px; }
+    .group-panel-top .group-month-search .group-month > * {
+      vertical-align: middle; }
+    .group-panel-top .group-month-search .group-month > label {
+      height: 33px;
+      line-height: 40px;
+      font-size: 12px;
+      color: #707070; }
+    .group-panel-top .group-month-search .group-month .input-append {
+      display: inline-block;
+      position: relative; }
+      .group-panel-top .group-month-search .group-month .input-append .form-control {
+        background-color: #ffffff; }
+      .group-panel-top .group-month-search .group-month .input-append .glyphicon.glyphicon-th {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%); }
+    .group-panel-top .group-month-search .group-month .inline-block {
+      margin-left: 35px; }
+
+.group-pannel-middle .group-user-number {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center; }
+  .group-pannel-middle .group-user-number > div {
+    width: 200px;
+    height: 90px;
+    border: 1px solid #d2d2d2;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); }
+    .group-pannel-middle .group-user-number > div p {
+      line-height: 17px;
+      text-align: center;
+      font-size: 12px; }
+    .group-pannel-middle .group-user-number > div p:nth-of-type(1) {
+      line-height: 40px;
+      font-size: 18px;
+      color: #7fd0ff;
+      font-weight: bolder; }
