@@ -489,6 +489,7 @@ define([], function () {
 
             //重置功能
             $scope.resetData = function(){
+                $('#allPacketName').val('');
                 var SelectArr = $(".packet_select_sec select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
@@ -657,6 +658,12 @@ define([], function () {
             //启用红包
             $scope.useStatus = function(packetItem){
                 changePacketStatus(packetItem);
+            };
+            //关闭红包弹框
+            $scope.cancelAddPacket = function(){
+                $('#poolMoney').val('');
+                $('.add_pool_warn').css('visibility','hidden');
+                $('.packet_add_box').modal('hide');
             };
             //确定新增资金到以后红包池对应关系
             $scope.confirmAddExistPool = function(exitPacketData){
