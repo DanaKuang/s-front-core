@@ -7,7 +7,7 @@
         }
     },
      "legend": {
-          "data":["本日扫码用户","本日新增扫码用户","近三日扫码用户平均值"],
+          "data":["当月扫码用户","当月新增扫码用户","当月月活用户数"],
           "right":0,
           "selectedMode": false          
     },
@@ -36,22 +36,23 @@
     ],
     "series" : [
         {
-            "name":"本日扫码用户",
+            "name":"当月扫码用户",
             "type":"bar",
             "barWidth": 20,
             "barGap":"0%",
             "data":[]
         },
          {
-            "name":"本日新增扫码用户",
+            "name":"当月新增扫码用户",
             "type":"bar",
             "barWidth": 20,
             "barGap":"0%",
             "data":[]
         },
          {
-            "name":"近三日扫码用户平均值",
-            "type":"line",
+            "name":"当月月活用户数",
+            "type":"bar",
+            "barWidth":20,
             "stack": "总量",
            "data":[]
         }

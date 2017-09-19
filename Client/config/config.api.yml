@@ -1087,6 +1087,20 @@ group:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonthTrendScanUserBar'
+    authorized: 1
+    description: '用户发展月趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonthToptenTable'
+    authorized: 1
+    description: '当月次数排名前10'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'

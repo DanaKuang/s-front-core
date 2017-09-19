@@ -162,7 +162,6 @@ define([], function () {
         var userDayJson = $model.$dayTrend.data;
         $model.$getDayTrendScan(params).then(function(res){
           var res = res.data || [];
-          console.log(_.max(res,"day3EffScanAvgUV"));
           userDayJson.xAxis[0].data = [];      
           $(userDayJson.series).each(function(index,n){
             n.data = [];
@@ -175,15 +174,30 @@ define([], function () {
           })
           userChartTrend.setOption(userDayJson,true)
         })
+        //用户发展月趋势
+        var userMonthTrend = echarts.init(document.getElementById("user-month-trend"));
+        var userMonthJson = $model.$monthTrend.data;
+        $model.$getMonthTrendScan(params).then(function(res) {
+          var res = res.data || [];
+          userMonthJson.xAxis[0].data = [];
+          $(userMonthJson.series).each(function(index,n){
+            n.data = [];
+          });   
+          $(res).each(function(index,n) {
+            userMonthJson.xAxis[0].data.push(n.statDate);
+            userMonthJson.series[0].data.push(n.scanUv);
+            userMonthJson.series[1].data.push(n.scanNewUv); 
+            userMonthJson.series[2].data.push(n.day3EffScanAvgUV);     
+          })
+          userMonthTrend.setOption(userMonthJson,true)
+        })
+        //当月次数排名前十
+        $model.$getMonthTopten(params).then(function(res) {
+          $scope.topTenTable = res.data || [];
+          $scope.$apply();
+        })
       }
-
       Global(defaultMonth);
-
-
-
-
-
-
     }]
   };
 

@@ -1,5 +1,6 @@
 
 $color:#3d467d;
+$borderColor:#A0A0A0;
 .group-panel-top , .group-pannel-middle {
     padding:0 40px;    
 }
@@ -92,8 +93,8 @@ $color:#3d467d;
             line-height: 1!important;
         }
         .group-smoke-table thead tr th {
-            border-top:1px solid #A0A0A0!important;
-            border-bottom:1px solid #A0A0A0!important;
+            border-top:1px solid $borderColor!important;
+            border-bottom:1px solid $borderColor!important;
         }
     }
     .group-brand {
@@ -101,7 +102,7 @@ $color:#3d467d;
         position: relative;
         left: -50px;
         padding-left: 40px;
-        border-bottom:1px solid #A0A0A0;
+        border-bottom:1px solid $borderColor;
         line-height: 45px;
         span,select {
             font-size: 14px;
@@ -124,6 +125,25 @@ $color:#3d467d;
         padding-top: 30px;
         #user-chart-trend {
             height: 200px;
+        }
+    }
+    .user-month-trend {
+        padding-top: 30px;
+        #user-month-trend {
+            height: 200px;
+        }
+    }
+    .user-top-ten {
+        .top-ten-table {
+            thead tr  th {
+                line-height: 1 !important;
+                vertical-align: middle;
+                border-top:1px solid $borderColor;
+                border-bottom:1px solid $borderColor; 
+            }
+            tbody tr td:last-child {
+                text-decoration: underline;
+            }
         }
     }
 }

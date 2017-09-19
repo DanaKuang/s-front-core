@@ -79,6 +79,43 @@
               <div class="group-title">用户发展日趋势</div>
               <div id="user-chart-trend"></div>
             </div>
+            <div class="user-month-trend">
+                <div class="group-title">用户发展月趋势</div>
+                <div id="user-month-trend"></div>
+            </div>
+            <div class="user-top-ten">
+                <div class="group-title">当月扫码次数排名前十</div>
+                <table class="table top-ten-table">
+                  <thead>
+                    <tr>
+                      <th>排名</th>
+                      <th>规格</th>
+                      <th>昵称</th>
+                      <th>手机号</th>
+                      <th>扫码次数</th>
+                      <th>扫码<br />烟包数</th>
+                      <th>中奖次数</th>
+                      <th>中奖现金<br />总金额</th>
+                      <th>中奖实物<br />个数</th>
+                      <th>操作</th>                  
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in topTenTable">
+                      <td>{{$index+1}}</td>     
+                      <td>{{x.productBrand}}</td>                      
+                      <td>{{x.nickName}}</td>                      
+                      <td>{{x.mobileNo}}</td>                      
+                      <td>{{x.scanPv}}</td>                      
+                      <td>{{x.effectScanPv}}</td>                      
+                      <td>{{x.drawPv}}</td>                      
+                      <td>{{x.drawCash}}</td>                      
+                      <td>{{x.drawObPv}}</td>                      
+                      <td onclick = "sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value = "{{x.mobileNo}}">点击查看用户详情</td>                                            
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
           </div>
         </div>
       </div>
