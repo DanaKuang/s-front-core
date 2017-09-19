@@ -7,6 +7,7 @@
         "orient": "horizontal",
         "left": "center",
         "bottom": 0,
+        "selectedMode": false,        
         "data": []
     },
     "color": [
@@ -18,7 +19,7 @@
         {
             "name": "扫码用户分布",
             "type": "pie",
-            "radius": "80%",
+            "radius": "70%",
             "center": [
                 "50%",
                 "43%"

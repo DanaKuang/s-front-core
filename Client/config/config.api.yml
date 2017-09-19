@@ -1052,6 +1052,41 @@ group:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getSmokeTypeTable'
+    authorized: 1
+    description: '用户分布表格'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
+    authorized: 1
+    description: '品牌'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getThrMonScanSmokeBar'
+    authorized: 1
+    description: '近三个月扫码烟包总数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonScanSmokeBar'
+    authorized: 1
+    description: '当月扫码烟包总数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getDayTrendScanUserBar'
+    authorized: 1
+    description: '用户发展日趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'

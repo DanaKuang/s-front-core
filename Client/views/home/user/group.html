@@ -23,7 +23,7 @@
                 <input size="16" type="text" name="searchTime" value="" class="form-control date" readonly />
                 <span class="glyphicon glyphicon-th"></span>
               </div>
-                <button type="submit" class="btn btn-primary inline-block" ng-click="daySearch($event)">查询</button>
+              <button type="submit" class="btn btn-primary inline-block" ng-click="daySearch($event)">查询</button>
             </div>
           </div>
         </div>
@@ -39,7 +39,8 @@
                 当月不同香烟类别扫码用户分布
               </div>
               <div id="group-smoke-pie-wrap">
-                <div id="group-smoke-pie"></div>
+                <div id="group-smoke-pie">
+                </div>
               </div>
               <table class="group-smoke-table table">
                 <thead>
@@ -51,32 +52,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>aa</td>
-                    <td>aa</td>
-                    <td>aa</td>
-                    <td>aa</td>
+                  <tr ng-repeat="x in type">
+                    <td>{{x.smokeLevelName}}</td>
+                    <td>{{x.monaddScanUv}}</td>
+                    <td>{{x.retMonaddScanUv}}</td>
+                    <td>{{x.huanBi}}</td>
                   </tr>
-                  <tr>
-                      <td>bb</td>
-                      <td>bb</td>
-                      <td>bb</td>
-                      <td>bb</td>
-                    </tr>
-                    <tr>
-                        <td>bb</td>
-                        <td>bb</td>
-                        <td>bb</td>
-                        <td>bb</td>
-                      </tr>
-                      <tr>
-                          <td>bb</td>
-                          <td>bb</td>
-                          <td>bb</td>
-                          <td>bb</td>
-                        </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="group-brand">
+              <span>品牌规格 ：</span>
+              <select ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">         
+              </select>
+              <select ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">          
+              </select>
+            </div>
+            <div class="scan-frequency">
+                <div class="group-title">
+                    不同扫码频次用户分布
+                  </div>
+                  <div id="frequency-chart-left"></div>
+                  <div id="frequency-chart-right"></div>                  
+            </div>
+            <div class="user-day-trend">
+              <div class="group-title">用户发展日趋势</div>
+              <div id="user-chart-trend"></div>
             </div>
           </div>
         </div>
