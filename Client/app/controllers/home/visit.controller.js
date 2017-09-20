@@ -126,7 +126,7 @@ define([], function () {
                         "checkStatus":$("#visit_label").val(),
                         "productSn":$("#visit_product").val(),
                         "productBrand":$("#visit_brand").val(),
-                        "orderId":$(".visit_order").val()
+                        "orderId":$(".visit_order input").val()
 
                     };
                     Deafault = _.cloneDeep(deafaultCou)
