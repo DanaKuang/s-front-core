@@ -10,7 +10,6 @@ define([], function () {
     var basicinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/basicinfo.tpl.html',
-            confUrl: '',
             activityForm: '',
             pageName: '',
             namePriority: 1,
@@ -48,6 +47,7 @@ define([], function () {
                 // 编辑
                 scope.disabled = true;
                 var activity = that_scope.conf.data.activity;
+                scope.confUrl = that_scope.conf.data.confUrl;
                 scope.activity = activity;
                 scope.nameVaule = activity.activityName;
                 scope.namePriority = activity.idx || 1;

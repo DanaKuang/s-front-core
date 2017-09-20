@@ -14,9 +14,7 @@ define([], function () {
             hours: _.map(Array(25),function(v, i){return i;}),
             startHour: '00:00:00',
             endHour: '00:00:00',
-            intervalHours: _.map(Array(24),function (v,i){return i+1}),
-            intervalHour: '1',
-            intervalHourperson: '0'
+            intervalHours: _.map(Array(24),function (v,i){return i+1})
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',

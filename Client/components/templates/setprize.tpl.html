@@ -616,7 +616,7 @@
 		<div class="thanks-draw-wrap gotoset" ng-show="myThanks" id="involve_draw">
 			<div class="ready-set">
 				<div class="edit-part" ng-if="dcList.INVOLVE" ng-repeat="(idx, n) in dcList.INVOLVE">
-					<div class="draw-prize-wrap">
+					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}" data-integral-pool="{{n.integralPool}}">
 						<div class="prize-config border-box">
 							<div class="configuration-item">
 								<b>*</b>
