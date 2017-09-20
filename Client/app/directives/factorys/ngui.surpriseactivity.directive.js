@@ -14,7 +14,8 @@ define([], function () {
             hours: _.map(Array(25),function(v, i){return i;}),
             startHour: '00:00:00',
             endHour: '00:00:00',
-            intervalHours: _.map(Array(24),function (v,i){return i+1})
+            intervalHours: _.map(Array(24),function (v,i){return i+1}),
+            intervalHour: '1'
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -93,11 +94,13 @@ define([], function () {
                 });
 
                 if (that_scope.activityCode) {
+                    // 编辑
                     scope.disabled = true;
                     var caidanconfig = that_scope.conf.data.caidanConfig;
                     scope.startHour = caidanconfig.sduration;
                     scope.endHour = caidanconfig.eduration;
-
+                    scope.intervalHour = caidanconfig.duration;
+                    scope.intervalHourperson = caidanconfig.playplayPerson;
                     scope.drawAreaVal = caidanconfig.adcodes;
 
                     if (caidanconfig.condition) {
@@ -107,30 +110,29 @@ define([], function () {
                         $('.plus-draw-cbox').prop('checked', false);
                         scope.drawChance = caidanconfig.probability;
                     }
+                } else {
+                    // 新建
+                    $('.draw-area').one('click', function() {
+                        if (!scope.disabled) {
+                            scope.$emit('clickdrawarea', event, {parentCode: ''})
+                        }
+                    })
+
+                    // 设置中奖概率
+                    scope.setChance = function (event) {
+                        decimalFormat.decimalnumber(event);
+                        scope.drawChance = event.target.value;
+                    }
+
+                    scope.parseFloat = function (event) {
+                        if (event.target.value) {
+                            event.target.value = parseFloat(event.target.value);
+                        } else {
+                            event.target.value == ''
+                        }
+                    }
                 }
             }, true);
-
-            $('.draw-area').one('click', function() {
-                if (!scope.disabled) {
-                    scope.$emit('clickdrawarea', event, {parentCode: ''})
-                } else {
-                    return
-                }
-            })
-
-            // 设置中奖概率
-            scope.setChance = function (event) {
-                decimalFormat.decimalnumber(event);
-                scope.drawChance = event.target.value;
-            }
-
-            scope.parseFloat = function (event) {
-                if (event.target.value) {
-                    event.target.value = parseFloat(event.target.value);
-                } else {
-                    event.target.value == ''
-                }
-            }
         }
 
         return defineObj;
