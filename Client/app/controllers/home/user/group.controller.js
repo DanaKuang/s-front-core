@@ -27,7 +27,7 @@ define([], function () {
           "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()
         };
         defaultBrand = {
-          "statDate": yearMonth,
+          "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val(),
           "productSn":$scope.Product.sn
         }
         Global(defaultMonth);   
