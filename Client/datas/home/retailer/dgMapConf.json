@@ -45,7 +45,7 @@
     "series": [{
         "name": "累计零售户",
         "type": "bar",
-        "barWidth": "40%",
+        "barWidth": "5%",
         "data": []
     },{
         "name": "新增零售户",

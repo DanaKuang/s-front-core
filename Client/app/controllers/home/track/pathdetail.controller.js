@@ -143,8 +143,7 @@ define([], function () {
                     return o.activePv;
                 });
                 // 转换率
-                $scope.visitin && $scope.visitout &&
-                ($scope.visitrate = transRate($scope.visitout, $scope.visitin));
+                $scope.visitrate = transRate($scope.visitout, $scope.visitin);
                 $scope.$apply();
             });
             // 页面流出
@@ -154,13 +153,13 @@ define([], function () {
                     return o.activePv;
                 });
                 // 转换率
-                $scope.visitin && $scope.visitout &&
-                ($scope.visitrate = transRate($scope.visitout, $scope.visitin));
+                $scope.visitrate = transRate($scope.visitout, $scope.visitin);
                 $scope.$apply();
             });
 
             // 转化率
             function transRate (i, o) {
+                if (!o || !i) return '0%';
                 i = Number(i); o = Number(o);
                 return '' + ((i/o)*100).toFixed(2) + '%';
             }

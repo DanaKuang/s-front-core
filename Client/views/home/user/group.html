@@ -63,9 +63,9 @@
             </div>
             <div class="group-brand">
               <span>品牌规格 ：</span>
-              <select ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">         
+              <select ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
               </select>
-              <select ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">          
+              <select ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
               </select>
             </div>
             <div class="scan-frequency">
@@ -73,7 +73,7 @@
                     不同扫码频次用户分布
                   </div>
                   <div id="frequency-chart-left"></div>
-                  <div id="frequency-chart-right"></div>                  
+                  <div id="frequency-chart-right"></div>
             </div>
             <div class="user-day-trend">
               <div class="group-title">用户发展日趋势</div>
@@ -97,21 +97,21 @@
                       <th>中奖次数</th>
                       <th>中奖现金<br />总金额</th>
                       <th>中奖实物<br />个数</th>
-                      <th>操作</th>                  
+                      <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="x in topTenTable">
-                      <td>{{$index+1}}</td>     
-                      <td>{{x.productBrand}}</td>                      
-                      <td>{{x.nickName}}</td>                      
-                      <td>{{x.mobileNo}}</td>                      
-                      <td>{{x.scanPv}}</td>                      
-                      <td>{{x.effectScanPv}}</td>                      
-                      <td>{{x.drawPv}}</td>                      
-                      <td>{{x.drawCash}}</td>                      
-                      <td>{{x.drawObPv}}</td>                      
-                      <td onclick = "sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value = "{{x.mobileNo}}">点击查看用户详情</td>                                            
+                      <td>{{$index+1}}</td>
+                      <td>{{x.productBrand}}</td>
+                      <td>{{x.nickName}}</td>
+                      <td>{{x.mobileNo}}</td>
+                      <td>{{x.scanPv}}</td>
+                      <td>{{x.effectScanPv}}</td>
+                      <td>{{x.drawPv}}</td>
+                      <td>{{x.drawCash}}</td>
+                      <td>{{x.drawObPv}}</td>
+                      <td onclick = "sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value = "{{x.mobileNo}}">点击查看用户详情</td>
                     </tr>
                   </tbody>
                 </table>

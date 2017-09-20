@@ -23,7 +23,7 @@ define([], function () {
                 var st = e.target.value || '';
                 var et = $scope.endTime || '';
                 if (et < st) {
-                    $scope.endTime = '';
+                    $scope.endTime = st;
                 }
             });
             $('[name="endTime"]').datetimepicker({
@@ -37,7 +37,7 @@ define([], function () {
                 var et = e.target.value || '';
                 var st = $scope.beginTime || '';
                 if (et < st) {
-                    $scope.beginTime = '';
+                    $scope.beginTime = et;
                 }
             });
 

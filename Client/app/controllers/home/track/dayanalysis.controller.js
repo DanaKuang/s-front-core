@@ -12,6 +12,16 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
             var echarts = require('echarts');
             var $model = $scope.$model;
+
+            // 图形宽高
+            (function () {
+                $("#dayMap").height($("#dayMap").width()*0.4);
+                $("#baiduMap").height($("#baiduMap").width()*0.6);
+                $("#cityMap").height($("#cityMap").width()*0.6);
+                $("#pie_left").height($("#pie_left").width()*0.6);
+                $("#pie_right").height($("#pie_right").width()*0.6);
+            })();
+
             // 百度地图json
             var chinaJson = $model.$chinaJson.data;
             echarts.registerMap('china', chinaJson);
@@ -27,7 +37,7 @@ define([], function () {
             var mapConf = $model.$mapConf.data;
             mapConf.tooltip.formatter = function (params) {
                 var data = params.data || {};
-                return "日均访问量："+data.activePv+"</br>"+"日均用户数："+data.activeUv;
+                return "日均访问量："+(data.activePv||0)+"</br>"+"日均用户数："+(data.activeUv||0);
             }
             mapEchart.setOption(mapConf);
             // 城市折线图
