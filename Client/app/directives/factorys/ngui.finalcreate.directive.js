@@ -136,8 +136,6 @@ define([], function () {
                     setPrize('common')
                 }
 
-                // ===================
-
                 // 特殊 & 普通奖项设置fn 
                 function setPrize(tag, editornot) {
                     if (editornot) {
