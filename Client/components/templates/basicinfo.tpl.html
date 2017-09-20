@@ -90,7 +90,7 @@
 			<input type="file" name="activityfile" class="uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
 			<b>*</b>
 			<div ng-show="parentForm.$submitted || parentForm.activityfile.$touched">
-				<div ng-show="parentForm.activityfile.$error.required" class="wrong-tip">请输入活动名称，5~30字</div>
+				<div ng-show="parentForm.activityfile.$error.required" class="wrong-tip">请上传活动图片</div>
 			</div>
 		</div>
 		<!-- 节假日 活动链接 -->
@@ -105,7 +105,7 @@
 		</div>
 		<div class="poptext configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
 			<label for="" class="poptextfile">弹窗文案设置</label>
-			<input type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+			<input type="file" onchange="angular.element(this).scope().change()" ng-disabled="disabled">
 		</div>
 	</div>
 </div>
