@@ -26,7 +26,12 @@ define([], function () {
         defaultMonth = {
           "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()
         };
-        Global(defaultMonth);        
+        defaultBrand = {
+          "statDate": yearMonth,
+          "productSn":$scope.Product.sn
+        }
+        Global(defaultMonth);   
+        GlobalBrand(defaultBrand);                
 
       };
       $scope.monScanUvConf = {
