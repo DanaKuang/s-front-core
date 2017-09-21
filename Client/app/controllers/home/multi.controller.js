@@ -60,7 +60,8 @@ define([], function () {
             $(".ui-search-block.multi select").multiselect({
                 nonSelectedText: '请选择',
                 allSelectedText: '全部',
-                nSelectedText: '已选择'
+                nSelectedText: '已选择',
+                enableFiltering: true
             });
             var $product = $("[name='productName']");
             var $proName = $("[name='provinceName']");
