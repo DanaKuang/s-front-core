@@ -55,7 +55,10 @@ define([], function () {
         $model.$getProduct(productBrand).then(function(res){
           $scope.Products = res.data;
           $scope.Product = $scope.Products[0];
-          $scope.$apply();
+          $scope.$apply();          
+          //加载规格时，去渲染屏幕
+          defaultBrand.productSn = $scope.Product.sn;
+          GlobalBrand(defaultBrand);                  
           if (caller) {
             $scope.ProductChange();
           }
@@ -67,6 +70,7 @@ define([], function () {
         defaultBrand.productSn = $scope.Product.sn;
         GlobalBrand(defaultBrand);        
       }
+      //页面初始加载的时候传个参数
       $scope.BrandChange(1);
       function Global(data) {
         var obj1 = {};
