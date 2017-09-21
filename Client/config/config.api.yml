@@ -1045,6 +1045,63 @@ group:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+portrait:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getOpenIdBymobile'
+    authorized: 1
+    description: '用户手机号查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserBasicInfo'
+    authorized: 1
+    description: '用户基本信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanFree'
+    authorized: 1
+    description: '用户扫码频度分析'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScandayBar'
+    authorized: 1
+    description: '用户扫码结构分析'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanBrandThirty'
+    authorized: 1
+    description: '近30天用户扫码烟包数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json' 
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanLocus'
+    authorized: 1
+    description: '用户扫码轨迹'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserBrandScanTable'
+    authorized: 1
+    description: '用户各规格扫码烟包数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanHourPie'
+    authorized: 1
+    description: '用户掃碼時段分析'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'  
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
