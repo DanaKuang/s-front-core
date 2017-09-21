@@ -64,10 +64,7 @@ define([], function () {
 
       //规格发生改变时
       $scope.ProductChange = function () {
-        defaultBrand = {
-          "statDate": yearMonth,
-          "productSn": $scope.Product.sn
-        };
+        defaultBrand.productSn = $scope.Product.sn;
         GlobalBrand(defaultBrand);        
       }
       $scope.BrandChange(1);
