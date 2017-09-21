@@ -15,8 +15,8 @@ define([], function () {
 
         // 图形宽高
         (function () {
-            $("#axisMap").height($("#axisMap").width()*0.5);
-            $("#baiduMap").height($("#baiduMap").width()*0.6);
+            $("#axisMap").height($("#axisMap").width()*0.6);
+            $("#baiduMap").height($("#baiduMap").width()*0.8);
         })();
 
         var chinaJson = $model.$chinaJson.data;

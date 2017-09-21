@@ -16,10 +16,10 @@ define([], function () {
             // 图形宽高
             (function () {
                 $("#growMap").height($("#growMap").width()*0.4);
-                $("#distMap").height($("#distMap").width()*0.6);
-                $("#distGrowMap").height($("#distGrowMap").width()*0.6);
-                $("#leftPieMap").height($("#leftPieMap").width()*0.6);
-                $("#rightPieMap").height($("#rightPieMap").width()*0.6);
+                $("#distMap").height($("#distMap").width()*0.8);
+                $("#distGrowMap").height($("#distGrowMap").width()*0.8);
+                $("#leftPieMap").height($("#leftPieMap").width()*0.8);
+                $("#rightPieMap").height($("#rightPieMap").width()*0.8);
             })();
 
             // 增长折线图

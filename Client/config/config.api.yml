@@ -531,7 +531,7 @@ track:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/actAnalysis/getBrandOfActivity'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌下拉框'
     enableroute: 1

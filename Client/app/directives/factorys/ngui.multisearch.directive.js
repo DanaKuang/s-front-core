@@ -105,7 +105,7 @@ define([], function () {
                 var startTime = e.target.value;
                 var endTime = scope.endTime;
                 if (endTime < startTime) {
-                    scope.endTime = '';
+                    scope.endTime = startTime;
                     scope.$apply();
                 }
             });
@@ -120,7 +120,7 @@ define([], function () {
                 var endTime = e.target.value;
                 var startTime = scope.startTime;
                 if (startTime > endTime) {
-                    scope.startTime = '';
+                    scope.startTime = endTime;
                     scope.$apply();
                 }
             });
@@ -134,8 +134,8 @@ define([], function () {
                 }
                 if (n !== o) {
                     var $ar = [];
-                    s.startTime && $ar.push('<li>'+s.startTime+'_'+s.startHour+':00:00'+'<i class="close" name="startTime"></i></li>');
-                    s.endTime && $ar.push('<li>'+s.endTime+'_'+s.endHour+':00:00'+'<i class="close" name="endTime"></i></li>');
+                    s.startTime && $ar.push('<li>'+s.startTime+'_'+s.startHour+':00:00'+'</li>');
+                    s.endTime && $ar.push('<li>'+s.endTime+'_'+s.endHour+':00:00'+'</li>');
                     s.productBrand.length && $ar.push('<li>'+s.productBrand.join(',')+'<i class="close" name="productBrand"></i></li>');
                     s.productName.length  && $ar.push('<li>'+s.productName.join(',')+'<i class="close" name="productName"></i></li>');
                     s.productPack.length  && $ar.push('<li>'+s.productPack.join(',')+'<i class="close" name="productPack"></i></li>');

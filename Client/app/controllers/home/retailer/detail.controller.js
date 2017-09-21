@@ -45,7 +45,7 @@ define([], function () {
             var bizArr_back_data = $model.$dropShop.data || [];
             var pbArray_back_data = $model.$brand.data || [];
             bizArr_back_data = bizArr_back_data.length ? bizArr_back_data : [{bizCode:"",bizName:""}];
-            pbArray_back_data = pbArray_back_data.length ? pbArray_back_data : [{productBrand:""}];
+            pbArray_back_data = pbArray_back_data.length ? pbArray_back_data : [{brandCode:"",name:"无数据"}];
 
             // 查询默认值
             $scope = angular.extend($scope, {
@@ -53,7 +53,7 @@ define([], function () {
                 beginTime: dayFilter.yesterday('date'),
                 endTime: dayFilter.yesterday('date'),
                 pbArray: pbArray_back_data,
-                productBrand: "" || pbArray_back_data[0].productBrand || "",
+                productBrand: "" || pbArray_back_data[0].name || "",
                 cityName: "",
                 pnArray: [],
                 productSn: "" || $scope.productSn || "",
