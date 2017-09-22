@@ -1045,73 +1045,35 @@ group:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
-<<<<<<< HEAD
-portrait:
-  - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/consumer/getOpenIdBymobile'
-    authorized: 1
-    description: '用户手机号查询'
-=======
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getSmokeTypePie'
     authorized: 1
     description: '用户饼图'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserBasicInfo'
-    authorized: 1
-    description: '用户基本信息'
-=======
     routepath: '/api/tztx/dataportal/consumer/getSmokeTypeTable'
     authorized: 1
     description: '用户分布表格'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserScanFree'
-    authorized: 1
-    description: '用户扫码频度分析'
-=======
     routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserScandayBar'
-    authorized: 1
-    description: '用户扫码结构分析'
-=======
     routepath: '/api/tztx/dataportal/consumer/getThrMonScanSmokeBar'
     authorized: 1
     description: '近三个月扫码烟包总数'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserScanBrandThirty'
-    authorized: 1
-    description: '近30天用户扫码烟包数'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json' 
-  - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/consumer/getUserScanLocus'
-    authorized: 1
-    description: '用户扫码轨迹'
-=======
     routepath: '/api/tztx/dataportal/consumer/getMonScanSmokeBar'
     authorized: 1
     description: '当月扫码烟包总数'
@@ -1122,39 +1084,23 @@ portrait:
     routepath: '/api/tztx/dataportal/consumer/getDayTrendScanUserBar'
     authorized: 1
     description: '用户发展日趋势'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserBrandScanTable'
-    authorized: 1
-    description: '用户各规格扫码烟包数'
-=======
     routepath: '/api/tztx/dataportal/consumer/getMonthTrendScanUserBar'
     authorized: 1
     description: '用户发展月趋势'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-<<<<<<< HEAD
-    routepath: '/api/tztx/dataportal/consumer/getUserScanHourPie'
-    authorized: 1
-    description: '用户掃碼時段分析'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'  
-=======
     routepath: '/api/tztx/dataportal/consumer/getMonthToptenTable'
     authorized: 1
     description: '当月次数排名前10'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
->>>>>>> 7c06c52fa527dbd80338804288283f1207e0f74f
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
