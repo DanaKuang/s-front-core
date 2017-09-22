@@ -3,7 +3,7 @@
     "tooltip" : {
         "trigger": "axis",
         "axisPointer" : {            
-            "type" : "cross"       
+            "type" : "line"       
         }
     },
      "legend": {

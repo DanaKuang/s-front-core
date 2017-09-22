@@ -8,7 +8,7 @@
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
-            "type": "shadow"
+            "type": "line"
         }
     },
     "color": [

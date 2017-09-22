@@ -10,7 +10,7 @@
     .group-panel-top .group-month-search .group-month > label {
       height: 33px;
       line-height: 40px;
-      font-size: 12px;
+      font-size: 14px;
       color: #707070; }
     .group-panel-top .group-month-search .group-month .input-append {
       display: inline-block;
@@ -72,6 +72,8 @@
   .group-pannel-middle .smoke-spread .group-smoke-table thead tr th {
     border-top: 1px solid #A0A0A0 !important;
     border-bottom: 1px solid #A0A0A0 !important; }
+  .group-pannel-middle .smoke-spread .group-smoke-table tbody tr .color {
+    color: #ff8b23; }
 
 .group-pannel-middle .group-brand {
   width: 110%;
