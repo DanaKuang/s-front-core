@@ -195,7 +195,7 @@ define([], function () {
                         myChart.setOption(option, true);
                     })
                     option.series = seriesArr;
-                    $(".plan input").click(function () {
+                    $(".plan input").click(function () { 
                         seriesArr.length = 0;
                         $(".plan input").each(function () {
                             if ($(this).is(":checked")) {

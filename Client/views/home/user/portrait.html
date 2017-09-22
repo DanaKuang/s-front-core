@@ -1,78 +1,195 @@
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.portrait.css">
-<div class="animated fadeInRight" ng-controller="PortraitCtrl">
-	<div class="container-fluid region-margin">
-		<div class="row">
-			<div class="col-md-12" style="padding:0 40px;">
-				<!--title-->
-				<div class="ui-panel-title">
-					<i class="portrait"></i><span>用户群体分析</span>
-				</div>
-				<!--box-->
-				<div class="panel rate group-panel-top">
-					<div class="panel-body group-month-search">
-						<div class="group-month clearfix">
-							<p class='portrait_p'>用户手机号</p>
-							<input type="text" class="input_text" />
-							<button type="submit" class="btn btn-primary chaXunBtn" ng-click="" style="height:20px;font-size:12px;padding:0;">查询</button>
+<div ng-controller="PortraitCtrl">
+	<div class="animated fadeInRight">
+		<div class="container-fluid region-margin">
+			<div class="row">
+				<div class="col-md-12" style="padding:0 40px;">
+					<!--title-->
+					<div class="ui-panel-title">
+						<i class="portrait"></i><span>用户全息画像</span>
+					</div>
+					<!--box-->
+					<div class="panel rate group-panel-top">
+						<div class="panel-body group-month-search">
+							<div class="group-month clearfix">
+								<p class='portrait_p'>用户手机号</p>
+								<input type="text" class="input_text" maxlength="11" />
+								<span data-toggle="modal" class="btn btn-primary chaXunBtn" style="height:20px;font-size:12px;padding:0;" ng-click="chaXun()">查询</span>
+							</div>
+						</div>
+					</div>
+					<!--content-->
+
+					<div class="panel rate">
+						<div class="panel-body" style="padding:0;">
+							<!--用户基本信息-->
+							<div class="portrait_userInfo">
+								<div class="portrait_userInfo_top clearfix">
+									<h3 class="userH3">用户基本信息</h3>
+									<span class="userSpan">(用户微信ID: 扫天下)</span>
+								</div>
+								<div class="portrait_userInfo_content clearfix">
+									<div class="portrait_userInfo_content_left">
+										<div class="font_style">
+											<span class="weiNiC">用户微信昵称:</span>
+											<span class="weiNiCContent" >&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.nickName}}</span>
+										</div>
+										<div class="font_style">
+											<span class="firstTime">用户首次扫码时间:</span>
+											<span class="firstTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.scanFirstTime}}</span>
+										</div>
+										<div class="font_style">
+											<span class="newTime">用户最新扫码时间:</span>
+											<span class="newTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.scanLateTime}}</span>
+										</div>
+										<div class="font_style">
+											<span class="chouJTime">用户首次抽奖时间:</span>
+											<span class="chouJTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.darwFirstTime}}</span>
+										</div>
+									</div>
+									<img src="../../../assets/image/fenjiexian.png" alt="" class="portrait_userInfo_content_img" />
+									<div class='portrait_userInfo_content_right'>
+										<div class="font_style">
+											<span class="questionOne">是否关注公众号:</span>
+											<span class="questionOneAnswer">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.woas}}</span>
+										</div>
+										<div class="font_style">
+											<span class="questionTwo">用户累计扫码次数:</span>
+											<span class="questionTwoAnswer">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.addScanPv}}</span>
+										</div>
+										<div class="font_style">
+											<span class="questionThree">用户累计扫码烟包数:</span>
+											<span class="questionThreeAnswer">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.addEffScanPv}}</span>
+										</div>
+										<div class="font_style">
+											<span class="questionFour">用户累计抽奖次数:</span>
+											<span class="questionFourAnswer">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.addRaffPv}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--用户扫码频度分析-->
+							<h3 class="userH3 pindufenxi">用户扫码频度分析</h3>
+
+							<div id="main"></div>
+
+							<div style="width:662px;margin:0 auto;display:flex;">
+								<h3 class="userH3" style="display:block;width:315px;">用户扫码时段分析</h3>
+								<h3 class="userH3">用户扫码结构分析</h3>
+							</div>
+							<div style="width:662px;margin:0 auto;display:flex;">
+								<span style="font-size:11px;color:#a2a2a2;margin-left:5px;line-height: 28px;">(每时刻近7天扫码次数之和)</span>
+								<span style="font-size:11px;color:#a2a2a2;margin-left:180px;line-height: 28px;">(近7日每日扫码烟包结构分析)</span>
+							</div>
+							<p style="color:#a2a2a2;font-size:9px;margin-left:380px;">单包结构&nbsp;(元)</p>
+							<div class="portrait_frequency">
+								<!--用户扫码时段分析-->
+								<div id="sunPie"></div>
+								<!--用户扫码结构分析-->
+								<div id='zheXianPic'></div>
+							</div>
+
+							<!--用户扫码轨迹-->
+							<div style="width:662px;margin:0 auto;">
+								<h3 class="userH3">用户扫码轨迹</h3>
+
+							</div>
+							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;">近30天扫码烟包数: 30个</p>
+							<p  style="font-size:10px;color:#a2a2a2;margin:10px 0 10px 200px;">
+								<span ng-repeat="listScan in EffectScanPv">其中: {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
+							</p>
+							<div id="saoGuiJi"></div>
+							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
+							<!--用户各规格扫码烟包数-->
+							<div style="width:662px;margin:20px auto 0;">
+								<h3 class="userH3">用户各规格扫码烟包数</h3>
+
+							</div>
+							<table class="EverySao">
+								<tr>
+									<th>规格</th>
+									<th>2017年6月(当月)扫码烟包数
+									</th>
+									<th>2017年5月(上月)扫码烟包数
+									</th>
+									<th>2017年4月(上上月)扫码烟包数
+									</th>
+								</tr>
+								<!--<tr style="background:#f8fbff;">
+									<td>合计</td>
+									<td>{{tableList[0].monthPv}}</td>
+									<td>13124124</td>
+									<td>241241</td>
+								</tr>-->
+								<tr ng-repeat="tableListInfo in tableList">
+									<td>{{tableListInfo.productBrand}}</td>
+									<td>{{tableListInfo.monthPv}}</td>
+									<td>{{tableListInfo.lastMonthPv}}</td>
+									<td>{{tableListInfo.llastMontHPv}}</td>
+								</tr>
+								<!--<tr style="background:#f8fbff;">
+									<td>白沙</td>
+									<td>431243</td>
+									<td>23423</td>
+									<td>3423</td>
+								</tr>
+								<tr>
+									<td>白沙</td>
+									<td>431243</td>
+									<td>23423</td>
+									<td>3423</td>
+								</tr>
+								<tr style="background:#f8fbff;">
+									<td>白沙</td>
+									<td>431243</td>
+									<td>23423</td>
+									<td>3423</td>
+								</tr>-->
+							</table>
+
 						</div>
 					</div>
 				</div>
-				<!--content-->
+			</div>
+		</div>
+	</div>
+	<!--加载提示框-->
+	<div class="modal fade jiaZai_box" tabindex="-1" role="dialog" aria-labelledby="gift_stop_btn">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="box_sec">
 
-				<div class="panel rate">
-					<div class="panel-body" style="padding:0;">
-						<!--用户基本信息-->
-						<div class="portrait_userInfo">
-							<div class="portrait_userInfo_top clearfix">
-								<h3 class="userH3">用户基本信息</h3>
-								<span class="userSpan">(用户微信ID: 扫天下)</span>
-							</div>
-							<div class="portrait_userInfo_content clearfix">
-								<div class="portrait_userInfo_content_left">
-									<div class="font_style">
-										<span class="weiNiC">用户微信昵称:</span>
-										<span class="weiNiCContent">&nbsp;&nbsp;&nbsp;&nbsp;nini</span>
-									</div>
-									<div class="font_style">
-										<span class="firstTime">用户首次扫码时间:</span>
-										<span class="firstTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
-									</div>
-									<div class="font_style">
-										<span class="newTime">用户最新扫码时间:</span>
-										<span class="newTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
-									</div>
-									<div class="font_style">
-										<span class="chouJTime">用户抽奖扫码时间:</span>
-										<span class="chouJTimeContent">&nbsp;&nbsp;&nbsp;&nbsp;2017-5-01 12:00:00</span>
-									</div>
-								</div>
-								<img src="../../../assets/image/fenjiexian.png" alt="" class="portrait_userInfo_content_img" />
-								<div class='portrait_userInfo_content_right'>
-									<div class="font_style">
-										<span class="questionOne">是否关注公众号:</span>
-										<span class="questionOneAnswer">&nbsp;&nbsp;&nbsp;&nbsp;是</span>
-									</div>
-									<div class="font_style">
-										<span class="questionTwo">用户累计扫码次数:</span>
-										<span class="questionTwoAnswer">&nbsp;&nbsp;&nbsp;&nbsp;9123456</span>
-									</div>
-									<div class="font_style">
-										<span class="questionThree">用户累计扫码烟包数:</span>
-										<span class="questionThreeAnswer">&nbsp;&nbsp;&nbsp;&nbsp;9123456</span>
-									</div>
-									<div class="font_style">
-										<span class="questionFour">用户累计抽奖时间:</span>
-										<span class="questionFourAnswer">&nbsp;&nbsp;&nbsp;&nbsp;913444322</span>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="box_cont">
+						请输入手机号进行查询!
+					</div>
+					<div class="box_btn">
+						<div class="enabled_btn" data-dismiss="modal">确定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--查询弹出框-->
+	<div class="modal fade gift_stop_box" tabindex="-1" role="dialog" aria-labelledby="gift_stop_btn">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content" style="width:400px;border:none;">
+				<div class="box_sec" style="width:400px;border:none;">
+					<div class="box_tit">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+						<div class="modal-title" id="gift_stop_btn">选择所需查询的微信 ID</div>
+					</div>
+					<div class="box_cont" style="width:400px;">
+						<p ng-repeat="good in radioList" style="display:flex;justify-content:flex-start;align-items: center;margin-left:140px;">
+							<input name="saotianxia" type="radio" class="radioOne" style="margin:0 5px 0 0;" />
+							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;{{good.openId}}</span>
+						</p>
 
-						<!--用户扫码频度分析-->
-						<div class="portrait_frequency">
-							<h3 class="userH3">用户扫码频度分析</h3>
-							<div id="main"></div>
-						</div>
+					</div>
+					<div class="box_btn">
+						<div class="enabled_btn" data-dismiss="modal" ng-click="search()">确定</div>
 					</div>
 				</div>
 			</div>

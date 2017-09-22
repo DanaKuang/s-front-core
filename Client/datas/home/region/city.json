@@ -3,7 +3,7 @@
     "left":"40",
     "top":20
   },
-  "color": ["#3398DB"],
+"color": ["#3398DB"],
   "xAxis" : [
     {
       "type" : "category",

@@ -1,0 +1,56 @@
+{
+	"title": {
+        "text": "(近30天每天扫码次数)",
+        "textStyle":{
+        "color":"#a2a2a2",
+        "fontStyle":"normal",
+        "fontWeight":"normal",
+        "fontFamily":"sans-serif",
+        "fontSize":"11",
+        "lineHeight":"36"
+        }
+    },
+  "grid":{
+    "left":"10",
+    "top":40
+  },
+"color": ["#bfbfbf"],
+		 "xAxis" : [
+    {
+      "type" : "category",
+       "data":["2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1","2017/1/1"],
+      "axisTick": {
+        "alignWithLabel": true
+      }
+    }
+  ],
+   "yAxis" : {
+      "type" : "value",
+      "axisLabel": {
+        "show": false
+    },
+    "data":[]
+    },
+  "series" : [
+    {
+      "name":"city",
+      "type":"bar",
+      "barWidth": "20%",
+      "label":{
+        "normal":{
+          "show":true,
+          "position":"top",
+          "textStyle":{
+            "color":"#000"
+          }
+        }
+      },
+      "itemStyle":{
+        "normal":{
+          "color":"#76D7F7"
+        }
+      },
+      "data":[10, 52, 200, 334, 490, 330, 220,10]
+    }
+  ]
+}
