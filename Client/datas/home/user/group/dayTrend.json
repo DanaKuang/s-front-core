@@ -22,7 +22,7 @@
           "type": "inside",
           "show": true,
           "start":0,
-          "end": 60,
+          "end": 30,
           "zoomLock":true
         }
       ],

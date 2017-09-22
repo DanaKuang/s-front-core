@@ -31,7 +31,6 @@ define([], function () {
           "productSn":$scope.Product.sn
         }
         Global(defaultMonth);   
-        GlobalBrand(defaultBrand);                
 
       };
       $scope.monScanUvConf = {

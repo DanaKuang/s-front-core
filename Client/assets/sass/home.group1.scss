@@ -25,19 +25,20 @@ $borderColor:#A0A0A0;
                 .form-control {
                     background-color: #ffffff;                    
                 }
-                .glyphicon.glyphicon-th {
-                    position: absolute;
-                    right: 10px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    -webkit-transform: translateY(-50%);
-                    -o-transform: translateY(-50%);
-                    -moz-transform: translateY(-50%);
-                    -ms-transform: translateY(-50%);
-                }
+                // .glyphicon.glyphicon-th {
+                //     position: absolute;
+                //     right: 10px;
+                //     top: 50%;
+                //     transform: translateY(-50%);
+                //     -webkit-transform: translateY(-50%);
+                //     -o-transform: translateY(-50%);
+                //     -moz-transform: translateY(-50%);
+                //     -ms-transform: translateY(-50%);
+                // }
             }
             .inline-block {
                 margin-left : 35px;
+                line-height: 1;
             }
         }
     }    
