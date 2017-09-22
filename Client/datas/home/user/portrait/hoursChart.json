@@ -1,0 +1,52 @@
+{
+	"legend": {
+		"data": [""]
+	},
+	"polar": {},
+	"tooltip": {},
+	"visualMap": {
+		"type": "continuous",
+		"min": 0,
+		"max": "max",
+		"top": "middle",
+		"dimension": 1,
+		"calculable": false
+	},
+	"angleAxis": {
+		"type": "category",
+		"data": [
+		""
+		],
+		"boundaryGap": false,
+		"splitLine": {
+			"show": true,
+			"lineStyle": {
+				"color": "#ddd",
+				"type": "solid"
+			}
+		},
+		"axisLine": {
+			"show": false
+		}
+	},
+	"radiusAxis": {
+		"type": "category",
+		"data": [""],
+		"z": 10,
+		"axisLine": {
+			"show": "false"
+		}
+	},
+	"series": 
+		{
+			"type": "custom",
+			"coordinateSystem": "polar",
+			"itemStyle": {
+				"normal": {
+					"color": "#d14a61"
+				}
+			},
+			"renderItem": "renderItem",
+			"data": []
+		}
+}

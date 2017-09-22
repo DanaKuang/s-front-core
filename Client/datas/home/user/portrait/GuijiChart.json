@@ -1,0 +1,56 @@
+{
+	"xAxis": {
+		"type": "category",
+		"splitLine": {
+			"show": "true",
+			"lineStyle": {
+				"color": [
+					"#e2e2e2"
+				],
+				"type": "solid"
+			}
+		},
+		"data": [
+		""
+		]
+	},
+	"yAxis": {
+		"type": "value",
+		"splitLine": {
+			"show": "true",
+			"lineStyle": {
+				"color": [
+					"#e2e2e2"
+				],
+				"type": "solid"
+			}
+		},
+
+		"scale": "true"
+	},
+	"series": {
+		"data": [
+			""
+		],
+		"type": "scatter",
+		"symbolSize": "symbolSize"
+	},
+	"label": {
+		"emphasis": {
+			"show": "true",
+			"formatter":"formatter",
+			 "position": "top"
+			
+		}
+	},
+	"itemStyle": {
+		"normal": {
+			"shadowBlur": 10,
+			"shadowColor": "rgba(25, 100, 150, 0.5)",
+			"shadowOffsetY": 5,
+			"color": "rgb(25, 183, 207)"
+		}
+	}
+}
+
+

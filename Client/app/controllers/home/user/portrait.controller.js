@@ -7,21 +7,30 @@ define([], function() {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
 			var opendId ="";
+			var index;
+//			var tellNo = "";
+//			$('.input_text').val("15910352745");
 //			var params;
 			
 			
 			
 			//查询弹窗
 			$scope.chaXun = function() {
-				$('.gift_stop_box').modal('show');
-				var tellNo ="15910352745";
-//				var tellNo = $('.input_text').val();
+				
+//				var tellNo ="15910352745";
+				var tellNo = $('.input_text').val();
+				console.log(tellNo)
 				var PhoneNo ={
-					mobileNo: tellNo
+					tellNo: tellNo
 				}
-					
+				
+               if(tellNo.match(/^1[34578]\d{9}$/)){
+               	$('.gift_stop_box').modal('show');
  				$model.$getPhoneNo(PhoneNo).then(function (res) {
  					console.log(res);
+ 					var index=$('input[name="saotianxia"]').val();
+ 					index=res.data.openId;
+ 					console.log(index);
    					if(res.status == 200){
    						for(var i=0;i<res.data.length;i++){
    							$scope.radioList = res.data;
@@ -33,17 +42,24 @@ define([], function() {
    						alert(3333)
    					}
  				})
+ 				}else{
+ 				alert("查询不到手机号！")	
+ 				}
 			};
 			//查询
             $scope.search = function () {
-            	var openId="123456789";
-				var tellNo ="15910352745";
+            	var openId = index;
+            	console.log(openId)
+				var tellNo = $('.input_text').val();
                 var params = {
                     openId:openId,
                     tellNo:tellNo
                 }
                // console.log(params);
-                public(params)
+              
+               	
+               	public(params)
+
             };
 
 			function public(params) {
@@ -51,8 +67,9 @@ define([], function() {
 //			$('.jiaZai_box').modal('show');
 				//用户基本信息
 				(function() {
-					var openId="123456789";
-					var tellNo ="15910352745"; 
+					var openId="";
+					var tellNo = $('.input_text').val();
+					console.log(tellNo)
 					var JiBenInfo={
 						openId:openId,
 						tellNo:tellNo
@@ -67,9 +84,9 @@ define([], function() {
 				(function() {
 					var myChart = echarts.init(document.getElementById("main"));
 					var option = $model.$citychart.data;
-					var openId="123456789";
-					var tellNo ="15910352745"; 
-					var endTime = "2017-09-08";
+					var openId="";
+					var tellNo = $('.input_text').val(); 
+					var endTime = "2017-09-21";
 					var SaoPinFen={
 						openId:openId,
 						tellNo:tellNo,
@@ -92,9 +109,9 @@ define([], function() {
 				(function() {
 					var myChart3 = echarts.init(document.getElementById("zheXianPic"));
 					var optionThree = $model.$hours.data;
-					var openId="123456789";
-					var tellNo ="15910352745"; 
-					var endTime = "2017-09-08";
+					var openId="";
+					var tellNo = $('.input_text').val();
+					var endTime = "2017-09-21";
 					var SaoJieFen={
 						openId:openId,
 						tellNo:tellNo,
@@ -118,8 +135,8 @@ define([], function() {
 
 					var myChart4 = echarts.init(document.getElementById("saoGuiJi"));
 					var optionFour = $model.$Guijichart.data;
-					var openId="123456789";
-					var tellNo ="15910352745"; 
+					var openId="";
+					var tellNo = $('.input_text').val();
 					var statDate = "2017-09-08";
 					var endTime = "2017-09-08";
 					var SaoYanFen={
@@ -163,8 +180,8 @@ define([], function() {
 				})();
 				//用户各规格扫码烟包数
 				(function() {
-					var openId="123456789";
-					var tellNo ="15910352745"; 
+					var openId="";
+					var tellNo = $('.input_text').val(); 
 					var statDate = "2017-09-08";
 					var tableInfo={
 						openId:openId,
@@ -188,9 +205,9 @@ define([], function() {
 					var optionTwo = $model.$hourschart.data;
 					
 					console.log(optionTwo)
-					var openId="123456789";
-					var tellNo ="15910352745"; 
-					var endTime = "2017-09-08";
+					var openId="";
+					var tellNo = $('.input_text').val(); 
+					var endTime = "2017-09-21";
 					var SaoHourFen={
 						openId:openId,
 						tellNo:tellNo,
