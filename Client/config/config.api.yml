@@ -1030,6 +1030,77 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+group:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getScanNumberUsers'
+    authorized: 1
+    description: '用户数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getTagName'
+    authorized: 1
+    description: '用户数名称'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getSmokeTypePie'
+    authorized: 1
+    description: '用户饼图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getSmokeTypeTable'
+    authorized: 1
+    description: '用户分布表格'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
+    authorized: 1
+    description: '品牌'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getThrMonScanSmokeBar'
+    authorized: 1
+    description: '近三个月扫码烟包总数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonScanSmokeBar'
+    authorized: 1
+    description: '当月扫码烟包总数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getDayTrendScanUserBar'
+    authorized: 1
+    description: '用户发展日趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonthTrendScanUserBar'
+    authorized: 1
+    description: '用户发展月趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getMonthToptenTable'
+    authorized: 1
+    description: '当月次数排名前10'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
