@@ -1,0 +1,60 @@
+{
+    "color":["#3EDBF8","#FF8100","#FFCC24"],
+    "tooltip" : {
+        "trigger": "axis",
+        "axisPointer" : {            
+            "type" : "shadow"       
+        }
+    },
+     "legend": {
+          "data":["当月扫码用户","当月新增扫码用户","当月月活用户数"],
+          "right":0,
+          "selectedMode": false          
+    },
+    "grid": {
+        "left": "0%",
+        "right": "10%",
+        "bottom": "2%",
+        "containLabel": true
+    },
+    "xAxis" : [
+        {
+            "type" : "category",
+            "data": [],
+            "axisTick": {
+                "alignWithLabel": true
+            }
+        }
+    ],
+    "yAxis" : [
+        {
+            "type" : "value",
+            "min": 0,
+            "max": "dataMax",
+            "position": "left"
+        }
+    ],
+    "series" : [
+        {
+            "name":"当月扫码用户",
+            "type":"bar",
+            "barWidth": 20,
+            "barGap":"0%",
+            "data":[]
+        },
+         {
+            "name":"当月新增扫码用户",
+            "type":"bar",
+            "barWidth": 20,
+            "barGap":"0%",
+            "data":[]
+        },
+         {
+            "name":"当月月活用户数",
+            "type":"bar",
+            "barWidth":20,
+            "stack": "总量",
+           "data":[]
+        }
+    ]
+}

@@ -11,7 +11,7 @@ define([], function () {
         ServiceContent: ['request', function (request) {
             this.$model = function () {
                 var GET_ACTIVITY_DATA = "/api/tztx/dataportal/actAnalysis/getActyDownBox";      // 获取活动名称
-                var GET_BRAND_DATA = "/api/tztx/dataportal/actAnalysis/getBrandOfActivity";     // 获取品牌
+                var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";     // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
 
                 var GET_PAGEIN_DATA = "/api/tztx/dataportal/actAnalysis/getSourcePageData";     // 获取页面流入数据

@@ -6,7 +6,7 @@
 	<div class="ui-panel-box panel border-box">
 		<div class="pop-inner">
 			<!-- 配置 -->
-			<div class="configuration float-left">
+			<form name="form" novalidate class="configuration float-left css-form">
 				<!-- 基本信息 -->
 				<div class="basic config-item">
 					<h6>基本信息</h6>
@@ -32,10 +32,10 @@
 					</div>
 					<div class="select-duration-person configuration-item">
 						<small class="wrong-tip hidden">请输入间隔时间内可参与人数</small>
-						<span>每隔&nbsp;&nbsp;<select class="hours intervalHour" name="intervalHour" ng-model="intervalHour" ng-disabled="disabled">
+						<span>每隔&nbsp;&nbsp;<select class="hours intervalHour" name="intervalHour" ng-model="intervalHour" value="{{intervalHour}}" ng-disabled="disabled">
 				      <option ng-repeat="h in intervalHours" value="{{h}}" ng-selected="$index==0">{{h}}</option>
 				    </select></span>&nbsp;小时&nbsp;&nbsp;，可参加人数为&nbsp;
-				    <input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" ng-disabled="disabled" class="intervalHourperson">人
+				    <input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" value="{{intervalHourperson}}" ng-disabled="disabled" class="intervalHourperson">人
 					</div>
 					<div class="draw-area configuration-item">
 						<small>*</small>
@@ -69,7 +69,7 @@
 				</div>
 				<!-- 按钮区 -->
 				<sa-finalcreate conf="finalcreateConf"></sa-finalcreate>
-			</div>
+			</form>
 
 			<!-- 预览 -->
 			<div class="preview float-left">

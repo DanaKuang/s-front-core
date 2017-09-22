@@ -18,7 +18,7 @@ define([], function () {
                 var DEF_MAP_DATA = "/statics/home/track/dayanalysis/defMap.json";          // 默认数据
 
                 var GET_ACTIVITY_DATA = "/api/tztx/dataportal/actAnalysis/getActyDownBox";      // 获取活动名称
-                var GET_BRAND_DATA = "/api/tztx/dataportal/actAnalysis/getBrandOfActivity";     // 获取品牌
+                var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";     // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
 
                 var GET_TREND_DATA = "/api/tztx/dataportal/actAnalysis/getTrendData";           // 获取趋势分析

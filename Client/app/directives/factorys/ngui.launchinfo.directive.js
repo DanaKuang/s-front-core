@@ -24,10 +24,11 @@ define([], function () {
             scope: {
                 conf: '='
             },
+            require: '^form',
             link: linkFn
         };
 
-        function linkFn (scope, element, attrs) {
+        function linkFn (scope, element, attrs, ctrl) {
 
             util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours']);
 
@@ -43,19 +44,37 @@ define([], function () {
             //     }
             // })
 
-            scope.$watch('selectBrandVal', function (n, o, s) {
-                if (n !== '') {
-                    var brandListArrObj = {};
-                    brandListArrObj.brandCode = n;
-                    scope.$emit('brandCode', event, brandListArrObj);
+            $('input[name="startTime"]').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:00', 
+                language: 'zh-CN',
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startDate: new Date()
+            }).on('change', function (e) {
+                var startTime = e.target.value;
+                var endTime = scope.endTime;
+                if (endTime < startTime) {
+                    scope.endTime = '';
+                    scope.$apply();
                 }
-            })
-
-            scope.$watch('selectSpecificationVal', function (n, o, s) {
-                scope.$emit('specificationnotempty', event, {
-                    canchoose: true
-                });
-            })
+            });
+          
+            $('input[name="endTime"]').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:00', 
+                language: 'zh-CN',
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startDate: new Date()
+            }).on('change', function (e) {
+                var endTime = e.target.value;
+                var startTime = scope.startTime;
+                if (startTime > endTime) {
+                    scope.startTime = '';
+                    scope.$apply();
+                }
+            });
             
             var that_scope = angular.element('.all-template-config-wrap').scope();
 
@@ -93,6 +112,20 @@ define([], function () {
 
                 var selectDurationEnd = new Date(activity.etime).toLocaleString();
                 scope.endTime = adjustafternoon(selectDurationEnd);
+            } else {
+                scope.$watch('selectBrandVal', function (n, o, s) {
+                    if (n !== '') {
+                        var brandListArrObj = {};
+                        brandListArrObj.brandCode = n;
+                        scope.$emit('brandCode', event, brandListArrObj);
+                    }
+                })
+
+                scope.$watch('selectSpecificationVal', function (n, o, s) {
+                    scope.$emit('specificationnotempty', event, {
+                        canchoose: true
+                    });
+                })
             }
 
             function adjustafternoon(datestr) {
@@ -109,38 +142,6 @@ define([], function () {
                     return newdatestr
                 }
             }
-
-            $('input[name="startTime"]').datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00', 
-                language: 'zh-CN',
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startDate: new Date()
-            }).on('change', function (e) {
-                var startTime = e.target.value;
-                var endTime = scope.endTime;
-                if (endTime < startTime) {
-                    scope.endTime = '';
-                    scope.$apply();
-                }
-            });
-          
-            $('input[name="endTime"]').datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00', 
-                language: 'zh-CN',
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startDate: new Date()
-            }).on('change', function (e) {
-                var endTime = e.target.value;
-                var startTime = scope.startTime;
-                if (startTime > endTime) {
-                    scope.startTime = '';
-                    scope.$apply();
-                }
-            });
 
             scope.whichday = $('.remark').find('input[type="radio"]:checked').val();
 
@@ -160,7 +161,6 @@ define([], function () {
                     return
                 }
             })
-
         }
 
         return defineObj;

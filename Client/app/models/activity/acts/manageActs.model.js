@@ -9,13 +9,6 @@ define([], function () {
         ServiceType: 'service',
         ServiceName: 'manageActsModel',
         ServiceContent: ['request', function (request) {
-            // console.log(this); 
-            //是个对象 manageActsModel.ServiceContent {}
-            // console.log(manageActsModel.ServiceContent) 
-            //是个数组  ["request", function]
-            // console.log(this === manageActsModel.ServiceContent) 
-            //false，其实可以认为是相等，但是angular做了转换
-
             //定义资源
             var $model = this;
             // 模板列表

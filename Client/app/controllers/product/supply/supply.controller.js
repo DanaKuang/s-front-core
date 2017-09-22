@@ -226,13 +226,13 @@ define([], function () {
                 $('#supplyName').val('');
                 $('#registerFile').val('');
                 $('#registerName').html('');
-                $('#regis_warn').html('文件大小不能超过50M');
+                $('#regis_warn').css('color','#ACACAC').html('文件大小不能超过50M');
                 $('#contractFile').val('');
                 $('#contractName').html('');
-                $('#contract_warn').html('文件大小不能超过50M');
+                $('#contract_warn').css('color','#ACACAC').html('文件大小不能超过50M');
                 $('#performanceFile').val('');
                 $('#performanceName').html('');
-                $('#performance_warn').html('文件大小不能超过50M');
+                $('#performance_warn').css('color','#ACACAC').html('文件大小不能超过50M');
                 $("input[type='radio']").each(function(){
                     $(this)[0].checked = false;
                 });
@@ -240,6 +240,8 @@ define([], function () {
                     $(this)[0].checked = false;
                 });
                 $('#warn_tel').val('');
+                //取消警告信息
+                $scope.showWarnSupply = false;
 
             }
             //编辑供应商

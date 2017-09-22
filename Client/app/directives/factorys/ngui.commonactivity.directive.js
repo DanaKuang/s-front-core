@@ -15,6 +15,7 @@ define([], function () {
         var defineObj = { //指令定义对象
             restrict: 'AE',
             replace: true,
+            transclude: true,
             templateUrl: function(tElement, tAttrs) {
                 return tAttrs.tpl || defaults.tpl;
             },
@@ -34,6 +35,7 @@ define([], function () {
                 var allconfigtemplateScope = angular.element('.pop').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
             }, true);
+
         }
 
         return defineObj;

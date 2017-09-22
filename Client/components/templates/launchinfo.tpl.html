@@ -9,27 +9,27 @@
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放品牌</small>
 		<select ng-model="selectBrandVal" value="{{selectBrandVal}}" class="select">
-			<option ng-repeat="item in brand" value="{{item.brandCode}}">{{item.name}}</option>
+			<option ng-repeat="item in brand" value="{{item.brandCode}}" required>{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-specification configuration-item">
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放规格</small>
-		<select ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" class="select">
+		<select ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" class="select" required>
 			<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
 		</select>
 	</div>
 	<div class="select-area configuration-item">
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放地区</small>
-		<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select"></select>
+		<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select" required></select>
 	</div>
 	<div class="select-duration configuration-item">
 		<small>*</small>
 		<small class="wrong-tip hidden">请选择投放时间</small>
-		<input type="text" name="startTime" ng-model="startTime" class="date form_datetime" placeholder="年-月-日 时-分-秒" readonly="disabled">
+		<input type="text" name="startTime" ng-model="startTime" class="date form_datetime" placeholder="年-月-日 时-分-秒" readonly="disabled" required>
 		&nbsp;&nbsp;至&nbsp;&nbsp;
-    <input type="text" name="endTime" ng-model="endTime" class="date form_datetime" placeholder="年-月-日 时-分-秒" readonly="disabled">
+    <input type="text" name="endTime" ng-model="endTime" class="date form_datetime" placeholder="年-月-日 时-分-秒" readonly="disabled" required>
 		<div class="remark">
 			<input class="weekday" type="radio" name="timeduartion" value='1' ng-model="whichday" ng-disabled="disabled"><label for="">仅选择此时段<strong>工作日</strong></label>
 			<input class="weekend" type="radio" name="timeduartion" value='2' ng-model="whichday" ng-disabled="disabled"><label for="">仅选择此时段<strong>节假日</strong></label>

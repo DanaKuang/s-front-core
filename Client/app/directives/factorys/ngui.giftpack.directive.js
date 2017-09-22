@@ -32,11 +32,6 @@ define([], function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list']);
 
-                // 一开始进入页面的时候scope.conf是undefined
-                if (scope.conf) {
-                    // scope.conf.list = []
-                }
-
                 var that_scope = angular.element('.all-template-config-wrap').scope();
                 if (that_scope.activityCode) {
                     scope.disabled = true;

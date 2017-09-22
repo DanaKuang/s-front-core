@@ -12,6 +12,16 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
             var echarts = require('echarts');
             var $model = $scope.$model;
+
+            // 图形宽高
+            (function () {
+                $("#growMap").height($("#growMap").width()*0.4);
+                $("#distMap").height($("#distMap").width()*0.8);
+                $("#distGrowMap").height($("#distGrowMap").width()*0.8);
+                $("#leftPieMap").height($("#leftPieMap").width()*0.8);
+                $("#rightPieMap").height($("#rightPieMap").width()*0.8);
+            })();
+
             // 增长折线图
             var growEchart = echarts.init(document.getElementById('growMap'));
             var growMapConf = $model.$growMapConf.data;
@@ -45,7 +55,7 @@ define([], function () {
                 var st = e.target.value || '';
                 var et = $scope.endTime || '';
                 if (et < st) {
-                    $scope.endTime = '';
+                    $scope.endTime = st;
                 }
             });
             $('[name="endTime"]').datetimepicker({
@@ -59,7 +69,7 @@ define([], function () {
                 var et = e.target.value || '';
                 var st = $scope.startTime || '';
                 if (et < st) {
-                    $scope.startTime = '';
+                    $scope.startTime = et;
                 }
             });
             $('[name="monStaTime"]').datetimepicker({
@@ -74,7 +84,7 @@ define([], function () {
                 var st = e.target.value || '';
                 var et = $scope.monEndTime || '';
                 if (et < st) {
-                    $scope.monEndTime = '';
+                    $scope.monEndTime = st;
                 }
             });
             $('[name="monEndTime"]').datetimepicker({
@@ -89,7 +99,7 @@ define([], function () {
                 var et = e.target.value || '';
                 var st = $scope.monStaTime || '';
                 if (et < st) {
-                    $scope.monStaTime = '';
+                    $scope.monStaTime = et;
                 }
             });
 

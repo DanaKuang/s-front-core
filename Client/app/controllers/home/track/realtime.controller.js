@@ -12,6 +12,13 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, DF, dayFilter) {
         var echarts = require('echarts');
         var $model = $scope.$model;
+
+        // 图形宽高
+        (function () {
+            $("#axisMap").height($("#axisMap").width()*0.6);
+            $("#baiduMap").height($("#baiduMap").width()*0.8);
+        })();
+
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson)
         var axisEchart = echarts.init(document.getElementById("axisMap"));

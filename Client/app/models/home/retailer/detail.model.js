@@ -12,7 +12,7 @@ define([], function () {
             this.$model = function () {
                 var GET_CITY_DROPDOWN = "/api/tztx/dataportal/shopKeeper/getShopDownBox";       // dropdownbox
                 var GET_TABLE_DATA = "/api/tztx/dataportal/shopKeeper/getRetailuserDetail";     // 表格数据
-                var GET_BRAND_DATA = "/api/tztx/dataportal/actAnalysis/getBrandOfActivity";     // 获取品牌
+                var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";     // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
                 var GET_SELLER_DATA = "/api/tztx/dataportal/shopKeeper/getSellerByNameDownbox"; // 获取零售户名称
 

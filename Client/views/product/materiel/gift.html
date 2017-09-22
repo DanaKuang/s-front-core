@@ -28,19 +28,16 @@
                             </div>
                             <div class="select_sec clearfix">
                                 <div class="col-md-3 col-sm-3">
-                                    <label for="selectGiftName">筛选礼品</label>
-                                    <input id="selectGiftName" type="text" placeholder="礼品名称">
+                                    <label for="selectGiftName">筛选信息</label><input id="selectGiftName" type="text" placeholder="礼品名称">
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label for="selectTopCategory">一级类目</label>
-                                    <select id="selectTopCategory">
+                                    <label for="selectTopCategory">一级类目</label><select id="selectTopCategory">
                                         <option value="">全部</option>
                                         <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label for="selectSupply">供应商</label>
-                                    <select id="selectSupply">
+                                    <label for="selectSupply">供应商</label><select id="selectSupply">
                                         <option value="">全部</option>
                                         <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
                                     </select>
@@ -49,32 +46,28 @@
                                     <div class="ser_btn"  ng-click="searchData()">搜索</div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label for="selectBrand">适用品牌</label>
-                                    <select id="selectBrand">
+                                    <label for="selectBrand">适用品牌</label><select id="selectBrand">
                                         <option value="">全部</option>
                                         <option ng-repeat="brandItem in brandList"
                                                 value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label for="selectSpecift">适用规格</label>
-                                    <select id="selectSpecift">
+                                    <label for="selectSpecift">适用规格</label><select id="selectSpecift">
                                         <option value="">全部</option>
                                         <option ng-repeat="speciftItem in selectSpeciftList"
                                                 value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                     </select>
                                 </div>
                                 <div ng-show="showGiftList" class="col-md-3 col-sm-3">
-                                    <label for="giftStatus">使用状态</label>
-                                    <select id="giftStatus">
+                                    <label for="giftStatus">使用状态</label><select id="giftStatus">
                                         <option value="">全部</option>
                                         <option ng-repeat="statusItem in dataStatusList"
                                                 value="{{statusItem.code}}">{{statusItem.name}}</option>
                                     </select>
                                 </div>
                                 <div ng-show="!showGiftList" class="col-md-3 col-sm-3">
-                                    <label for="selectActive">动作</label>
-                                    <select id="selectActive">
+                                    <label for="selectActive">动作</label><select id="selectActive">
                                         <option value="">全部</option>
                                         <option ng-repeat="activeItem in activeValueList" value="{{activeItem.code}}">{{activeItem.name}}</option>
                                     </select>
@@ -192,13 +185,11 @@
                     <div class="panel-body">
                         <div class="form_sec">
                             <div>
-                                <label class="label_title" for="giftName">礼品名称<span>*</span></label>
-                                <input id="giftName" type="text" placeholder="" >
+                                <label class="label_title" for="giftName">礼品名称<span>*</span></label><input id="giftName" type="text" placeholder="" >
                                 <span class="gift_name_warn">礼品名称不能为空</span>
                             </div>
                             <div>
-                                <label class="label_title" for="oneCategory">礼品类型<span>*</span></label>
-                                <select id="oneCategory">
+                                <label class="label_title" for="oneCategory">礼品类型<span>*</span></label><select id="oneCategory">
                                     <option value="">选择一级类目</option>
                                     <option ng-repeat="categoryItem in oneCategoryList" value="{{categoryItem.code}}">{{categoryItem.name}}</option>
                                 </select>
@@ -209,8 +200,7 @@
                                 <span class="category_warn"></span>
                             </div>
                             <div>
-                                <label class="label_title" for="enableSupply">供应商<span>*</span></label>
-                                <select id="enableSupply" ng-disabled="!addGift" ng-class="{true:'disabled_color'}[!addGift]">
+                                <label class="label_title" for="enableSupply">供应商<span>*</span></label><select id="enableSupply" ng-disabled="!addGift" ng-class="{true:'disabled_color'}[!addGift]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
                                             value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
@@ -218,51 +208,44 @@
                                 <span class="gift_supply_warn">供应商不能为空</span>
                             </div>
                             <div class="brand_names">
-                                <label class="label_title" for="brand">适用品牌<span>*</span></label>
-                                <select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
+                                <label class="label_title" for="brand">适用品牌<span>*</span></label><select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
                                     <!--<option value="">请选择</option>-->
                                     <option ng-repeat="brandItem in brandList" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                 </select>
                                 <span class="apply_brand_warn">适用品牌不能为空</span>
                             </div>
                             <div class="specift_names">
-                                <label class="label_title" for="applySpecift">适用规格<span>*</span></label>
-                                <select id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                <label class="label_title" for="applySpecift">适用规格<span>*</span></label><select id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
                                     <!--<option value="">请选择</option>-->
                                     <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                 </select>
                                 <span class="apply_specift_warn">适用规格不能为空</span>
                             </div>
                             <div>
-                                <label class="label_title" for="marketValue">市面价值（元）</label>
-                                <input id="marketValue" type="text" placeholder="">
+                                <label class="label_title" for="marketValue">市面价值（元）</label><input id="marketValue" type="text" placeholder="">
                                 <span class="market_value_warn"></span>
                             </div>
                             <div>
                                 <label class="label_title" for="giftImg">礼品图片<span>*</span></label>
-                                <div class="transfer_sec">
-                                    <input type="file" id="giftImg">
+                                <div class="transfer_sec"><input type="file" id="giftImg">
                                     <div class="select_file">+</div>
                                 </div>
                                 <span id="giftImgName"></span>
                                 <p class="gift_img_warn">图片规格要求：建议尺寸330*330</p>
                             </div>
                             <div>
-                                <label class="label_title" for="stock">库存（件）<span>*</span></label>
-                                <input id="stock" type="text" ng-disabled="!addGift" placeholder="">
+                                <label class="label_title" for="stock">库存（件）<span>*</span></label><input id="stock" type="text" ng-disabled="!addGift" placeholder="">
                                 <span class="stock_warn">请输入大于0的整数</span>
                                 <br/>
                                 <p>库存数量保存后不可手动减库存，请谨慎输入</p>
                             </div>
                             <div>
-                                <label class="label_title" for="stockThresh">库存阀值</label>
-                                <input id="stockThresh" type="text" placeholder="">
+                                <label class="label_title" for="stockThresh">库存阀值</label><input id="stockThresh" type="text" placeholder="">
                                 <span class="stockThresh_warn">库存阀值不可高于库存</span>
                                 <p>库存阀值不可高于库存</p>
                             </div>
                             <div>
-                                <label class="label_title" for="linkUrl">链接URL</label>
-                                <input id="linkUrl" type="text" placeholder="">
+                                <label class="label_title" for="linkUrl">链接URL</label><input id="linkUrl" type="text" placeholder="">
                             </div>
                             <div>
                                 <label class="label_title">礼品有效期<span>*</span></label>
@@ -337,8 +320,7 @@
                         <div class="modal-title" id="add_btn">增库</div>
                     </div>
                     <div class="box_cont">
-                        <label>增加库存：</label>
-                        <input type="text" id="addGiftStock" maxlength="5"><span>件</span>
+                        <label>增加库存：</label><input type="text" id="addGiftStock" maxlength="5"><span>件</span>
                         <p class="add_stock_warn">请输入大于0的整数</p>
                     </div>
                     <div class="box_btn clearfix">
@@ -363,8 +345,7 @@
                         <div class="modal-title" id="add_cami_btn">增库</div>
                     </div>
                     <div class="cami_box_cont">
-                        <label class="cami_stock_label">增加库存：</label>
-                        <input type="text" id="addGiftCamiStock" maxlength="5"><span>件</span>
+                        <label class="cami_stock_label">增加库存：</label><input type="text" id="addGiftCamiStock" maxlength="5"><span>件</span>
                         <p class="add_stock_warn">请输入大于0的整数</p><br>
                         <label for="addPoolCamiFile" class="cami_label">附加卡密文件:</label>
                         <div class="cami_file_sec">

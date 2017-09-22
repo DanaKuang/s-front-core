@@ -287,7 +287,9 @@ button.multiselect {
     margin: 10px 0;
 }
 
-
+#id_page_iframe {
+    margin: 0 auto;
+}
 
 
 

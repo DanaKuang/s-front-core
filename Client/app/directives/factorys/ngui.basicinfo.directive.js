@@ -10,12 +10,11 @@ define([], function () {
     var basicinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/basicinfo.tpl.html',
-            confUrl: '',
             activityForm: '',
             pageName: '',
-            accessUrl: '',
-            attachCode: '',
-            namePriority: 1
+            namePriority: 1,
+            parentForm: {},
+            activity: {}
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -26,94 +25,57 @@ define([], function () {
             scope: {
                 conf: '='
             },
+            require: '^form',
             link: linkFn
         };
 
-        function linkFn (scope, element, attrs) {
+        function linkFn (scope, element, attrs, ctrl) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode', 'disabled', 'nameVaule']);
 
             // 监视conf变化更新 basicinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode']);
-                var that_scope = angular.element('.all-template-config-wrap').scope();
-                var sample_list_scope = angular.element('.sample-list').scope();
-
-                // 判断是否从编辑活动过来
-                if (that_scope.activityCode) {
-                    // 编辑
-                    scope.disabled = true;
-                    var activity = that_scope.conf.data.activity;
-                    scope.nameVaule = activity.activityName;
-                    scope.namePriority = that_scope.conf.data.activity.idx || 1;
-                    scope.descValue = activity.activityDec;
-                    scope.introValue = activity.activityDoc;
-                    scope.accessUrl = activity.activityEntrance;
-                    scope.attachCode = activity.activityEntranceAttach; //缺失
-                    // scope.attachUrl = 
-                    var pageListObj = that_scope.conf.data.pageList[0];
-                    scope.activityForm = pageListObj.type;
-                    scope.pageName = pageListObj.pageName;
-                    scope.pageCode = pageListObj.pageCode;
-                } else {
-                    // 新增
-                    scope.activityForm = sample_list_scope && sample_list_scope.type;
-                    scope.confUrl = that_scope.confUrl;
-                    scope.pageName = that_scope.pageName;
-                }
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode', 'disabled', 'nameVaule']);
             }, true);
 
-            scope.change = function() {
-                if (event.target.classList.contains('uploadimage')) {
-                    var files = event.target.files[0];
-                    var formData = new FormData();
-                    formData.append('file', files);
-                    scope.$emit('frombasicimage', event, formData);
-                }
-            }
+            var that_scope = angular.element('.all-template-config-wrap').scope();
+            var sample_list_scope = angular.element('.sample-list').scope();
 
-            // 活动名称 5~30字
-            scope.namekeyup = function (e) {
-                var val = e.target.value;
-                if (val) {
-                    if (val.length < 5) {
-                        $(e.target).prev().removeClass('hidden')
-                    } else {
-                        $(e.target).prev().addClass('hidden')
-                    }
-                }
-            }
+            // 判断是否从编辑活动过来
+            if (that_scope.activityCode) {
+                // 编辑
+                scope.disabled = true;
+                var activity = that_scope.conf.data.activity;
+                scope.confUrl = that_scope.conf.data.confUrl;
+                scope.activity = activity;
+                scope.nameVaule = activity.activityName;
+                scope.namePriority = activity.idx || 1;
+                scope.descValue = activity.activityDec;
+                scope.introValue = activity.activityDoc;
+                scope.accessUrl = activity.activityEntrance;
+                scope.attachCode = activity.activityEntranceAttach;
 
-            // 优先级 最大500
-            var numReg = /^\d+$/;
-            scope.prioritykeyup = function(e) {
-                var val = e.target.value;
-                if (val) {
-                   if (numReg.test(val)) {
-                        if (val > 500) {
-                            scope.namePriority = e.target.value = deletezero('500')
-                        } else if (val < 1) {
-                             scope.namePriority = e.target.value = deletezero('1')
-                        } else {
-                             scope.namePriority = e.target.value = deletezero(val);
-                        }
-                    } else {
-                         scope.namePriority = e.target.value = deletezero('1');
-                    }
-                }
-            }
+                var pageListObj = that_scope.conf.data.pageList[0];
+                scope.activityForm = pageListObj.type;
+                scope.pageName = pageListObj.pageName;
+                scope.pageCode = pageListObj.pageCode;
+            } else {
+                // 新增
+                scope.activityForm = sample_list_scope && sample_list_scope.type;
+                scope.confUrl = that_scope.confUrl;
+                scope.pageName = that_scope.pageName;
+                
+                // 这样才能拿到父作用域中的scope的form
+                scope.parentForm = angular.element('.css-form').scope().form;
 
-            function deletezero(str) {
-                if (str.length > 1) {
-                    if (str[0] === '0') {
-                        str = str.substr(1);
-                        deletezero(str)
-                    } else {
-                        return str
+                scope.change = function() {
+                    if (event.target.classList.contains('uploadimage')) {
+                        var files = event.target.files[0];
+                        var formData = new FormData();
+                        formData.append('file', files);
+                        scope.$emit('frombasicimage', event, formData);
                     }
-                } else {
-                    return str
                 }
             }
         }

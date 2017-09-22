@@ -31,26 +31,23 @@
                             </div>
                             <div class="packet_select_sec clearfix">
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="allPacketName">筛选信息</label>
-                                    <input type="text" id="allPacketName" placeholder="红包池名称">
+                                    <label for="allPacketName">筛选信息</label><input type="text" id="allPacketName" placeholder="红包池名称">
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="allSupply">&nbsp;&nbsp;&nbsp;供应商</label>
+                                    <label for="allSupply">供应商</label>
                                     <select id="allSupply">
                                         <option value="">全部</option>
                                         <option ng-repeat="supplyItem in allSupplyList" value="{{supplyItem.supplierCode}}">{{supplyItem.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="allBrand">适用品牌</label>
-                                    <select id="allBrand">
+                                    <label for="allBrand">适用品牌</label><select id="allBrand">
                                         <option value="">全部</option>
                                         <option ng-repeat="brandItem in brandList" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="allSpecift">适用规格</label>
-                                    <select id="allSpecift">
+                                    <label for="allSpecift">适用规格</label><select id="allSpecift">
                                         <option value="">全部</option>
                                         <option ng-repeat="speciftItem in allSpeciftList" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                     </select>
@@ -164,13 +161,11 @@
                     <div class="panel-body">
                         <div class="form_sec">
                             <div>
-                                <label class="label_title" for="packetName">红包池名称<span>*</span></label>
-                                <input type="text" id="packetName">
+                                <label class="label_title" for="packetName">红包池名称<span>*</span></label><input type="text" id="packetName">
                                 <span class="packet_name">红包池名称不能为空</span>
                             </div>
                             <div>
-                                <label class="label_title" for="supply">供应商<span>*</span></label>
-                                <select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
+                                <label class="label_title" for="supply">供应商<span>*</span></label><select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
                                             value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
@@ -178,8 +173,7 @@
                                 <span class="select_supply">请选择供应商</span>
                             </div>
                             <div class="brand_names">
-                                <label class="label_title" for="brand">适用品牌<span>*</span></label>
-                                <select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
+                                <label class="label_title" for="brand">适用品牌<span>*</span></label><select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
                                     <!--<option value="">请选择</option>-->
                                     <option ng-repeat="brandItem in brandList"
                                             value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
@@ -187,8 +181,7 @@
                                 <span class="select_brand">请选择适用品牌</span>
                             </div>
                             <div class="specift_names">
-                                <label class="label_title"  for="specift">适用规格<span>*</span></label>
-                                <select id="specift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                <label class="label_title"  for="specift">适用规格<span>*</span></label><select id="specift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
                                     <!--<option value="">请选择</option>-->
                                     <option ng-repeat="speciftItem in speciftList"
                                             value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
@@ -196,8 +189,7 @@
                                 <span class="select_specift">请选择适用规格</span>
                             </div>
                             <div>
-                                <label class="label_title" for="capital">资金<span>*</span></label>
-                                <input style="width: 180px;" type="text" id="capital"
+                                <label class="label_title" for="capital">资金<span>*</span></label><input style="width: 180px;" type="text" id="capital"
                                        ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
                                 <span class="yuan_unit">元</span>
                                 <span class="entry_capital">请输入资金</span>
@@ -205,14 +197,12 @@
                                 <p ng-show="addPocket">保存成功后资金数额不可手动更改，请谨慎操作</p>
                             </div>
                             <div>
-                                <label class="label_title" for="packerThresh">库存阀值</label>
-                                <input type="text" placeholder="￥0.00" id="packerThresh">
+                                <label class="label_title" for="packerThresh">库存阀值</label><input type="text" placeholder="￥0.00" id="packerThresh">
                                 <span class="packet_thresh">请输入大于0的数字</span>
                             </div>
                             <div>
                                 <label class="label_title" for="transfer">资金转账凭证</label>
-                                <div class="transfer_sec">
-                                    <input type="file" id="transfer">
+                                <div class="transfer_sec"><input type="file" id="transfer">
                                     <div class="select_file">+</div><br/>
                                 </div>
                                 <span id="transferName"></span>
@@ -236,18 +226,17 @@
                 <div class="box_sec">
                     <div class="box_tit">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                            <span ng-click="cancelAddPacket()">×</span>
                         </button>
                         <div class="modal-title" id="packet_add_btn">红包池增库</div>
                     </div>
                     <div class="box_cont">
-                        <label>增库红包额度：</label>
-                        <input type="text" placeholder="￥0.00" id="poolMoney"><span>元</span>
+                        <label>增库红包额度：</label><input type="text" placeholder="￥0.00" id="poolMoney"><span>元</span>
                         <p class="add_pool_warn">请输入大于0的数字</p>
                     </div>
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmAddPool(operateItemPacket)">确定</div>
-                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelAddPacket()">取消</div>
                     </div>
                 </div>
             </div>

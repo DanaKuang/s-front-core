@@ -27,7 +27,7 @@ define([], function () {
       var historyScanData = $model.$historyScan.data || [];
 
       $('.ui-map-box').css({
-        height: '' + $(document).height()-250 + 'px'
+        height: '' + $(document).height()-300 + 'px'
       });
       // 右侧数据
       (function () {

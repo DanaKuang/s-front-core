@@ -25,9 +25,7 @@
     },
     "geo": {
         "map": "china",
-        "roam": false,
-        "left": 10,
-        "right": 10,
+        "roam": true,
         "label": {
             "normal": {
                 "show": true,

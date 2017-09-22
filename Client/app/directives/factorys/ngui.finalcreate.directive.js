@@ -53,14 +53,14 @@ define([], function () {
             }
 
             // 保存活动
+            var scopeVariable = {};
             scope.updateActivity = function () {
                 bigVerify()
             }
 
-            var scopeVariable = {};
-
             function bigVerify() {
                 $('.wrong-tip').addClass('hidden');
+
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
@@ -135,8 +135,6 @@ define([], function () {
                     // 普通奖品必需填写
                     setPrize('common')
                 }
-
-                // ===================
 
                 // 特殊 & 普通奖项设置fn 
                 function setPrize(tag, editornot) {
@@ -248,7 +246,7 @@ define([], function () {
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
                         var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
-                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; // 默认，因为积分池的id是integralpool，不是这个字段
+                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; 
                         ActivityPageAward.details[index].awardName = n[0].dataset.name || '';
                         ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
                         ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
@@ -296,29 +294,29 @@ define([], function () {
                         if (ActivityPageAward.details.length != 0) {
                             ActivityPageAward.details.forEach(function(n, index) {
                                 if (!n.poolId || !n.awardNums) {
-                                    ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                                    ActivityPageAward.special == 1 ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
                                     item.children('.wrong-tip').removeClass('hidden');
                                 }
                             })
                         } else {
-                            ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                            ActivityPageAward.special == 1 ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
                     } else {
                         if (!ActivityPageAward.details[0].awardNums || !ActivityPageAward.details[0].poolId) {
-                            ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                            ActivityPageAward.special == 1 ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
-                        }  
+                        }
 
                         if (radio_res_item.hasClass('hb') && (!ActivityPageAward.details[0].redTotalMoney || !ActivityPageAward.details[0].minred || !ActivityPageAward.details[0].bigred)) {
-                            ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                            ActivityPageAward.special == 1 ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
                             item.children('.wrong-tip').removeClass('hidden');
                         }
                     }
 
                     // 1. 奖项名称
                     if (!ActivityPageAward.prizeName) {
-                        ActivityPageAward.special ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
+                        ActivityPageAward.special == 1 ? scopeVariable.specialerror = true : scopeVariable.commonerror = true;
                         item.children('.wrong-tip').removeClass('hidden');
                     }
                     // 2. 概率
@@ -358,9 +356,9 @@ define([], function () {
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
                 }
 
-                checkEmpty(fromSonScope)
-                // final校验 & 提交
-                function checkEmpty(fromSonScope,finalerror) {
+                finalcheck(fromSonScope)
+                // final校验
+                function finalcheck(fromSonScope) {
                     for (var s in fromSonScope) {
                         // attachUrl, specialAwardStr 这两个可以为空
                         if (s == 'name' && fromSonScope[s] == '' ) {
@@ -423,26 +421,27 @@ define([], function () {
                             $('.select-duration .wrong-tip').removeClass('hidden');
                         }
                     }
+                }
 
-                    if (scopeVariable._setPrizeScope.myVar) {
-                        if (!scopeVariable.specialerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
+                 // 提交
+                if (scopeVariable._setPrizeScope.myVar) {
+                    if (!scopeVariable.specialerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
+                        scope.$emit('fromcommonactivity', event, fromSonScope);
+                    } else {
+                        alert('奖品设置有误，请核对后再提交')
+                    }
+                } else {
+                    if (scopeVariable._drawPrizeScope) {
+                        if (!scopeVariable.caidanerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
                             scope.$emit('fromcommonactivity', event, fromSonScope);
                         } else {
                             alert('奖品设置有误，请核对后再提交')
                         }
                     } else {
-                        if (scopeVariable._drawPrizeScope) {
-                            if (!scopeVariable.caidanerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
-                                scope.$emit('fromcommonactivity', event, fromSonScope);
-                            } else {
-                                alert('奖品设置有误，请核对后再提交')
-                            }
+                        if (!scopeVariable.commonerror && !scopeVariable.finalerror) {
+                            scope.$emit('fromcommonactivity', event, fromSonScope);
                         } else {
-                            if (!scopeVariable.commonerror && !scopeVariable.finalerror) {
-                                scope.$emit('fromcommonactivity', event, fromSonScope);
-                            } else {
-                                alert('奖品设置有误，请核对后再提交')
-                            }
+                            alert('奖品设置有误，请核对后再提交')
                         }
                     }
                 }

@@ -26,19 +26,19 @@ define([], function () {
         $scope.targetConf = $model.$target.data
 
 
-        if (user === "henan") {
-            $scope.jin = {
-                world: "昨日黄金叶全国指标",
-                bao: "昨日黄金叶华东分中心活动指标",
-                city: "昨日黄金叶烟台活动指标"
-            }
-        } else if (user === "hunan") {
-            $scope.jin = {
-                world: "昨日芙蓉王全国活动指标",
-                bao: "昨日白沙堡垒活动指标",
-                city: "昨日芙蓉王湖南活动指标"
-            }
-        }
+        // if (user === "henan") {
+        //     $scope.jin = {
+        //         world: "昨日黄金叶全国指标",
+        //         bao: "昨日黄金叶华东分中心活动指标",
+        //         city: "昨日黄金叶烟台活动指标"
+        //     }
+        // } else if (user === "hunan") {
+        //     $scope.jin = {
+        //         world: "昨日芙蓉王全国活动指标",
+        //         bao: "昨日白沙堡垒活动指标",
+        //         city: "昨日芙蓉王湖南活动指标"
+        //     }
+        // }
 
         // 默认配置
         $scope.msConf = {
@@ -60,7 +60,8 @@ define([], function () {
             $(".ui-search-block.multi select").multiselect({
                 nonSelectedText: '请选择',
                 allSelectedText: '全部',
-                nSelectedText: '已选择'
+                nSelectedText: '已选择',
+                enableFiltering: true
             });
             var $product = $("[name='productName']");
             var $proName = $("[name='provinceName']");
@@ -247,6 +248,9 @@ define([], function () {
                 ctime: +new Date
             }).then(function (res) {
                 console.log(res.data);
+                $("#tipsModalId").modal({
+                    backdrop: 'static'
+                });
             });
         };
 

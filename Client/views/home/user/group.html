@@ -7,29 +7,6 @@
 -->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.group1.css">
 <div class="animated fadeInRight" ng-controller="GroupCtrl">
-<<<<<<< HEAD
-        <div class="container-fluid region-margin">
-          <div class="row">
-            <div class="col-md-12" >
-              <!--title-->
-              <div class="ui-panel-title" >
-                <i class="group"></i><span>用户群体分析</span>
-              </div>
-              <!--box-->
-              <div class="panel rate group-panel-top">
-                <div class="panel-body group-month-search">
-                  <div class="group-month">
-                      <label>月份: &nbsp;&nbsp;</label>                      
-                      <div class="input-append">
-                          <input size="16" type="text" name="searchTime" value="" class="form-control date" readonly />
-                          <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                        <div class="inline-block">
-                            <button type="submit" class="btn btn-primary" ng-click="daySearch()">查询</button>
-                        </div>
-                  </div>
-                </div>
-=======
   <div class="container-fluid region-margin">
     <div class="row">
       <div class="col-md-12">
@@ -42,23 +19,102 @@
           <div class="panel-body group-month-search">
             <div class="group-month">
               <label>月份: &nbsp;&nbsp;</label>
-              <div class="input-append">
+              <div class="input-append date-wrap">
                 <input size="16" type="text" name="searchTime" value="" class="form-control date" readonly />
                 <span class="glyphicon glyphicon-th"></span>
->>>>>>> ff007a4349000f2f94b79c279c4b851f4d90507f
               </div>
-              <div class="inline-block">
-                <button type="submit" class="btn btn-primary" ng-click="daySearch()">查询</button>
-              </div>
+              <button type="submit" class="btn btn-primary inline-block" ng-click="daySearch($event)">查询</button>
             </div>
           </div>
         </div>
         <div class="panel rate group-pannel-middle">
           <div class="panel-body">
             <div class="group-user-number">
-            <sa-scannumber conf = "monScanUvConf"></sa-scannumber>
-            <sa-scannumber conf = "monScanActUv"></sa-scannumber>
-            <sa-scannumber conf = "monScanNewUv"></sa-scannumber>            
+              <sa-scannumber conf="monScanUvConf"></sa-scannumber>
+              <sa-scannumber conf="monScanActUv"></sa-scannumber>
+              <sa-scannumber conf="monScanNewUv"></sa-scannumber>
+            </div>
+            <div class="smoke-spread">
+              <div class="group-title">
+                当月不同香烟类别扫码用户分布
+              </div>
+              <div id="group-smoke-pie-wrap">
+                <div id="group-smoke-pie">
+                </div>
+              </div>
+              <table class="group-smoke-table table">
+                <thead>
+                  <tr>
+                    <th>类别</th>
+                    <th>本月用户数</th>
+                    <th>上月扫码用户数</th>
+                    <th>环比</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="x in type">
+                    <td>{{x.smokeLevelName}}</td>
+                    <td>{{x.monaddScanUv}}</td>
+                    <td>{{x.retMonaddScanUv}}</td>
+                    <td class="{{x.huanbi>0?'':'color'}}">{{x.huanBi}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="group-brand">
+              <span>品牌规格 ：</span>
+              <select ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
+              </select>
+              <select ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
+              </select>
+            </div>
+            <div class="scan-frequency">
+                <div class="group-title">
+                    不同扫码频次用户分布
+                  </div>
+                  <div id="frequency-chart-left"></div>
+                  <div id="frequency-chart-right"></div>
+            </div>
+            <div class="user-day-trend">
+              <div class="group-title">用户发展日趋势</div>
+              <div id="user-chart-trend"></div>
+            </div>
+            <div class="user-month-trend">
+                <div class="group-title">用户发展月趋势</div>
+                <div id="user-month-trend"></div>
+            </div>
+            <div class="user-top-ten">
+                <div class="group-title">当月扫码次数排名前十</div>
+                <table class="table top-ten-table">
+                  <thead>
+                    <tr>
+                      <th>排名</th>
+                      <th>规格</th>
+                      <th>昵称</th>
+                      <th>手机号</th>
+                      <th>扫码次数</th>
+                      <th>扫码<br />烟包数</th>
+                      <th>中奖次数</th>
+                      <th>中奖现金<br />总金额</th>
+                      <th>中奖实物<br />个数</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in topTenTable">
+                      <td>{{$index+1}}</td>
+                      <td>{{x.productBrand}}</td>
+                      <td>{{x.nickName}}</td>
+                      <td>{{x.mobileNo}}</td>
+                      <td>{{x.scanPv}}</td>
+                      <td>{{x.effectScanPv}}</td>
+                      <td>{{x.drawPv}}</td>
+                      <td>{{x.drawCash}}</td>
+                      <td>{{x.drawObPv}}</td>
+                      <td onclick = "sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value = "{{x.mobileNo}}">点击查看用户详情</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
           </div>
         </div>

@@ -215,7 +215,7 @@ define([], function () {
             });
             //重置功能
             $scope.resetData = function(){
-                var SelectArr = $("select");
+                var SelectArr = $(".select_sec select");
                 for (var i = 0; i < SelectArr.length; i++) {
                     SelectArr[i].options[0].selected = true;
                 }
@@ -326,6 +326,12 @@ define([], function () {
                 $('.cami_file_warn').html('仅当新建礼品为卡密类虚拟礼品时，需上传csv/excel格式卡密文件');
                 $('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
                 $('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
+                //隐藏警告弹框
+                $('.gift_name_warn').hide();
+                $('.category_warn').hide();
+                $('.gift_supply_warn').hide();
+                $('.apply_brand_warn').hide();
+                $('.apply_specift_warn').hide();
             }
 
             //保存礼品信息

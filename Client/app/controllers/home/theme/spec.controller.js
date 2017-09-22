@@ -282,7 +282,7 @@ define([], function () {
                   case "扫码次数":
                     obj[x].data.push(res[i].scanPv);
                     break;
-                  case "有效扫码数":
+                  case "扫码烟包数":
                     obj[x].data.push(res[i].scanCode);
                     break;
                   case "抽奖次数":

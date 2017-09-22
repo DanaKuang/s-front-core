@@ -1,0 +1,71 @@
+{
+    "color":["#3EDBF8","#FF8100","#FFCC24"],
+    "tooltip" : {
+        "trigger": "axis",
+        "axisPointer" : {            
+            "type" : "cross"       
+        }
+    },
+     "legend": {
+          "data":["本日扫码用户","本日新增扫码用户","近三日扫码用户平均值"],
+          "right":0,
+          "selectedMode": false          
+    },
+    "grid": {
+        "left": "0%",
+        "right": "10%",
+        "bottom": "2%",
+        "containLabel": true
+    },
+    "dataZoom": [
+        {
+          "type": "inside",
+          "show": true,
+          "start":0,
+          "end": 60,
+          "zoomLock":true
+        }
+      ],
+    "xAxis" : [
+        {
+            "type" : "category",
+            "data": [],
+            "axisTick": {
+                "alignWithLabel": true
+            },
+            "axisLabel":{
+                "interval": 0
+              }
+        }
+    ],
+    "yAxis" : [
+        {
+            "type" : "value",
+            "min": 0,
+            "max": "dataMax",
+            "position": "left"
+        }
+    ],
+    "series" : [
+        {
+            "name":"本日扫码用户",
+            "type":"bar",
+            "barWidth": 20,
+            "barGap":"0%",
+            "data":[]
+        },
+         {
+            "name":"本日新增扫码用户",
+            "type":"bar",
+            "barWidth": 20,
+            "barGap":"0%",
+            "data":[]
+        },
+         {
+            "name":"近三日扫码用户平均值",
+            "type":"line",
+            "stack": "总量",
+           "data":[]
+        }
+    ]
+}

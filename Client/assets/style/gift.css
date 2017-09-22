@@ -229,7 +229,7 @@
 
 .packet_select_sec div label {
     font-size: 14.7px;
-    /*width: 60px;*/
+    width: 60px;
     line-height: 28px;
     /*margin-right: 14px;*/
     margin-right: 3%;
@@ -600,7 +600,7 @@ body{
 }
 .transfer_sec{
     position: relative;
-    margin-left: 122px;
+    margin-left: 120px;
     margin-top: -30px;
     width: 84px;
     height: 84px;
