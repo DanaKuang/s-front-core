@@ -11,7 +11,7 @@
 		<div class="item">
 			<label for="" class="required control-label">条形码</label><input type="text" class="form-control" placeholder="请输入条形码" ng-model="sn" value="{{sn}}"><div class="btn btn-default" ng-click="checksn($event)">查询</div>
 		</div>
-		<div class="edit-part" ng-if="conf.data">
+		<div class="edit-part" ng-if="conf.snData">
 			<div class="item">
 				<label for="" class="control-label">规格</label><input type="text" class="form-control" placeholder="请输入规格名称" value="{{conf.snData.product.name}}" ng-disabled="disabled">
 			</div>
