@@ -5,7 +5,7 @@
  * Description: 活动管理
  */
 -->
-<link rel="stylesheet" href="statics/assets/style/panel.css">
+<link rel="stylesheet" href="statics/assets/style/panelbak.css">
 <link rel="stylesheet" href="statics/assets/style/manageActs.css">
 <div ng-controller="manageActsCtrl" class="manageacts">
 	<div class="animated fadeInRight">
@@ -13,48 +13,41 @@
 			<div class="ui-content-box row">
 				<div class="col-md-12">
 					<div class="ui-panel-title">
-						<button type="submit" id="createActivity" class="btn btn-default float-right rt" data-toggle="modal" data-target=".create-activity-modal">+新建活动</button>
+						<button type="submit" id="createActivity" class="btn btn-default float-right btn-blue" data-toggle="modal" data-target=".create-activity-modal">+新建活动</button>
 						<div class="lft">
 							<i class="hot"></i>
 							<span>活动模板管理</span>
 						</div>
 					</div>
 					<div class="ui-panel-box panel">
-
 						<!-- 操作区 -->
 						<div class="panel-body operation multi">
-							<div class="col-md-10 col-sm-12 col-xs-6 lft flex ">
+							<div class="col-md-10 col-sm-12 col-xs-6 flex">
 								<div class="l flex-item">
 									<div class="category t">
-										<label for="category" class="label">活动类型</label>
+										<label for="category">活动类型</label>
 										<select class="form-item" id="category" ng-model="categoryVal" val="{{categoryVal}}">
 											<option value="">全部</option>
 											<option ng-repeat="item in actsampleList" value="{{item.code}}">{{item.name}}</option>
 										</select>
 									</div>
 									<div class="norms b">
-										<label for="status" class="label">活动状态</label>
+										<label for="status">活动状态</label>
 										<select class="form-item" name="" id="status" ng-model="statusVal" value="{{statusVal}}">
 											<option value="">全部</option>
 											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
 										</select>
 									</div>
-									<div class="duration bb">
-										<label for="duration" class="label">活动时段</label>
-										<input id="durationStart" size="16" type="text" value="" placeholder="年-月-日(开始时间)" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> 
-										<p style="text-align:center; margin: 2px auto;">&nbsp;&nbsp;至&nbsp;&nbsp;</p>
-										<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
-									</div>
 								</div>
 								<div class="m flex-item">
 									<div class="status t select-brand-name">
-										<label for="norms" class="label">品牌选择</label>
+										<label for="norms">品牌选择</label>
 										<select class="form-item select" name="" id="norms" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple="multiple">
 											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
 										</select>
 									</div>
 									<div class="location b">
-										<label for="norms" class="label">规格选择</label>
+										<label for="norms">规格选择</label>
 										<select class="form-item select" name="" id="norms" ng-model="selectSpeci" value="{{selectSpeci}}" multiple="multiple">
 											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 										</select>
@@ -62,18 +55,26 @@
 								</div>
 								<div class="r flex-item">
 									<div class="area t">
-										<label for="location" class="label">地区</label>
+										<label for="location">地区</label>
 										<select class="form-item select" name="" id="location" ng-model="allarea" value="{{allarea}}" multiple="multiple"></select>
 									</div>
 									<div class="keywords b">
-										<label for="keywords" class="label">关键字</label>
+										<label for="keywords">关键字</label>
 										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval" value="{{keysval}}">
 									</div>
 								</div>
+								<div class="r-r flex-item">
+									<div class="duration t">
+										<label for="duration">活动时段</label>
+										<input id="durationStart" size="16" type="text" value="" placeholder="年-月-日(开始时间)" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}"> 
+										&nbsp;&nbsp;至&nbsp;&nbsp;
+										<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
+									</div>
+								</div>						
 							</div>
-							<div class="col-md-2 col-sm-6 col-xs-6 rt">
-								<button type="submit" id="search" class="btn btn-default search" ng-click="search($event)">搜索</button>
-								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset">重置</button>
+							<div class="col-md-2 col-sm-6 col-xs-6">
+								<button type="submit" id="search" class="btn btn-default search btn-white" ng-click="search($event)">搜索</button>
+								<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset btn-white">重置</button>
 							</div>
 						</div>
 
