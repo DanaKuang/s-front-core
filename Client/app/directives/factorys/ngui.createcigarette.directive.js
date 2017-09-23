@@ -47,9 +47,9 @@ define([], function () {
             // 烟支规格
             scope.$emit('cigarettetype', event, {})
             // 包装
-            $scope.$emit('cigarettepack', event, {})
+            scope.$emit('cigarettepack', event, {})
             // 一级价类
-            $scope.$emit('cigarettegrade', event, {})
+            scope.$emit('cigarettegrade', event, {})
 
             scope.checksn = function () {
                 scope.$emit('checksn', event, {sn: scope.sn})
