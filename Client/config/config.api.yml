@@ -685,6 +685,56 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+cigarettemanage: 
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/tobaccoList'
+    authorized: 1
+    description: '卷烟管理列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/queryProductTobacco'
+    authorized: 1
+    description: '查询sn条形码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/saveOrUpdateTobacco'
+    authorized: 1
+    description: '保存/更新卷烟信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoType'
+    authorized: 1
+    description: '查询烟草规格'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoPack'
+    authorized: 1
+    description: '获取烟草包装维度数据/包装单位'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoStyle'
+    authorized: 1
+    description: '查询卷烟类型'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoGrade'
+    authorized: 1
+    description: '获取烟草等级维度数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/activity/list'

@@ -443,10 +443,10 @@ body {
 /** 自己写样式 */
 .ui-panel-title {
   position: relative;
-  padding-left: 30px;
+  margin: 20px 0 10px 0;
+  padding-top: 10px;
   font-size: 18px;
   color: #8a8a8a;
-  margin-bottom: 2px;
 }
 /*================================begin region==========================*/
 .region-margin {
@@ -1096,12 +1096,6 @@ input[type="checkbox"]:checked + .checkbox{
 
 
 /*==============================end report================================*/
-
-
-
-
-
-
 
 
 

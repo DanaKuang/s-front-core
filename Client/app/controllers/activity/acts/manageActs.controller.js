@@ -70,7 +70,7 @@ define([], function () {
               includeSelectAllOption: true,
               selectAllValue: 'all',
               enableFiltering: true,
-              buttonWidth: '100%',
+              buttonWidth: '16em',
               maxHeight: '200px',
               numberDisplayed: 1
             });

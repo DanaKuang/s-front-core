@@ -1,0 +1,9 @@
+.modal.in .modal-dialog {
+  margin: 50px auto; }
+
+.modal-body {
+  margin: 0 auto;
+  width: 60%; }
+
+.modal-body img {
+  max-width: 30px; }

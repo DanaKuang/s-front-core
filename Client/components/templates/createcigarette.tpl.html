@@ -1,0 +1,139 @@
+<div>	
+	<div class="md create-cigarette-body">
+		<div class="item">
+			<div class="form-group flex-item">
+		    <label for="brands" class="control-label">关联品牌</label>
+	    	<select class="form-control" name="brands" id="brands" ng-model="selectbrands" value="{{selectbrands}}">
+	    		<option ng-repeat="item in conf.brandlist" value="{{item.brandCode}}">{{item.name}}</option>
+				</select>
+		  </div>
+		</div>
+		<div class="item">
+			<label for="" class="required control-label">条形码</label><input type="text" class="form-control" placeholder="请输入条形码" ng-model="sn" value="{{sn}}"><div class="btn btn-default" ng-click="checksn($event)">查询</div>
+		</div>
+		<div class="edit-part" ng-if="conf.data">
+			<div class="item">
+				<label for="" class="control-label">规格</label><input type="text" class="form-control" placeholder="请输入规格名称" value="{{conf.snData.product.name}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">价格(元)</label><input type="text" class="form-control" placeholder="请输入价格" value="{{conf.snData.price}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">图片</label><div class="file-input-wrap" ng-class="{'hidden': conf.snData.product.smallPic}"><div class="fake-input-file form-control">请选择图片</div><input type="file" class="form-control" ng-disabled="disabled"></div><span ng-class="{'hidden': !conf.snData.product.smallPic}"><img ng-src="{{conf.snData.product.smallPic}}" alt=""></span>
+			</div>
+			<div class="item">
+				<label for="cigatype" class="control-label">卷烟类型</label>
+				<select name="" id="cigatype" class="form-control" ng-model="cigatype" ng-disabled="disabled" value="{{}}">
+					<option ng-repeat="item in type" value="{{item.typeName}}" ng-selected="{{item.typeName}}">全部</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">焦油含量</label><input type="text" class="form-control" placeholder="请输入焦油含量" value="{{conf.snData.oil}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟碱量</label><input type="text" class="form-control" placeholder="请输入烟碱量" value="{{conf.snData.nicotine}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">一氧化碳量</label><input type="text" class="form-control" placeholder="请输入一氧化碳量" value="{{conf.snData.carbonMonoxide}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟支长度</label><input type="text" class="form-control" placeholder="请输入烟支长度" value="{{conf.snData.length}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟支数量</label><input type="text" class="form-control" placeholder="请输入烟支数量" value="{{conf.snData.num}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">包装单位</label>
+				<select class="form-control" name="" id="" ng-disabled="disabled" value="{{}}">
+					<option value="">盒</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">包装</label>
+				<select class="form-control" name="" id="" ng-disabled="disabled" value="{{}}">
+					<option value="">软包</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">价类</label>
+				<select class="form-control" name="" id="" ng-disabled="disabled" value="{{}}">
+					<option value="">一类</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">二级价类</label>
+				<select class="form-control" name="" id="" ng-disabled="disabled" value="{{}}">
+					<option value="">二类</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">批次自动激活延期天数</label><input type="text" class="form-control" value="{{conf.snData.activeDays}}" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">描述</label><input type="text" class="form-control" value="{{conf.snData.product.memo}}" ng-disabled="disabled">
+			</div>
+		</div>
+		<div ng-if="!conf.snData">
+			<div class="item">
+				<label for="" class="control-label">规格</label><input type="text" class="form-control" placeholder="请输入规格名称" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">价格(元)</label><input type="text" class="form-control" placeholder="请输入价格" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">图片</label><div class="file-input-wrap"><div class="fake-input-file form-control">请选择图片</div><input type="file" class="form-control" ng-disabled="disabled"></div><span class="hidden">选择的图片</span>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">卷烟类型</label>
+				<select name="" id="" class="form-control" ng-disabled="disabled">
+					<option value="1">全部</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">焦油含量</label><input type="text" class="form-control" placeholder="请输入焦油含量" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟碱量</label><input type="text" class="form-control" placeholder="请输入烟碱量" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">一氧化碳量</label><input type="text" class="form-control" placeholder="请输入一氧化碳量" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟支长度</label><input type="text" class="form-control" placeholder="请输入烟支长度" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">烟支数量</label><input type="text" class="form-control" placeholder="请输入烟支数量" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">包装单位</label>
+				<select name="" id="" ng-disabled="disabled">
+					<option value="">盒</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">包装</label>
+				<select name="" id="" ng-disabled="disabled">
+					<option value="">软包</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">价类</label>
+				<select name="" id="" ng-disabled="disabled">
+					<option value="">一类</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">二级价类</label>
+				<select name="" id="" ng-disabled="disabled">
+					<option value="">二类</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="" class="control-label">批次自动激活延期天数</label><input type="text" class="form-control" ng-disabled="disabled">
+			</div>
+			<div class="item">
+				<label for="" class="control-label">描述</label><input type="text" class="form-control" ng-disabled="disabled">
+			</div>
+		</div>
+	</div>
+</div>
