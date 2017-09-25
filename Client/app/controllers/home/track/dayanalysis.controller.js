@@ -266,8 +266,8 @@ define([], function () {
                     var backArray = res.data || [];
                     // 排序 省会最前
                     backArray = backArray.sort(function(a,b){return a.cityId-b.cityId;});
-                    $scope.cityArr = backArray.length ? backArray : [{cityName:''}];
-                    $scope.cityName = backArray[0].cityName;
+                    $scope.cityArr = backArray.length ? backArray : [{cityName:'无数据'}];
+                    $scope.cityName = $scope.cityArr[0].cityName;
                     $scope.$apply();
                 });
             }
