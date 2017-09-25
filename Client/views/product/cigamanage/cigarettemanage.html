@@ -16,7 +16,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="ui-panel-title">
-						<button type="submit" class="btn btn-default float-right" data-toggle="modal" data-target=".create-modal">新建</button>
+						<button type="submit" class="btn btn-default float-right btn-sm" data-toggle="modal" data-target=".create-modal">新建</button>
 						<div>
 							<i class="hot"></i>
 							<span>卷烟管理</span>
@@ -30,36 +30,36 @@
 									<div>
 										<div class="form-group flex-item">
 									    <label class="control-label">品牌</label>
-								    	<select class="form-control" name="">
+								    	<select class="form-control input-sm" name="">
 											</select>
 									  </div>
 									  <div class="form-group flex-item">
 									    <label class="control-label">价类</label>
-											<input class="form-control" type="text">
+											<input class="form-control input-sm" type="text">
 									  </div>
 									  <div class="form-group flex-item">
 									    <label class="control-label">包装</label>
-											<select class="form-control" name=""></select>
+											<select class="form-control input-sm" name=""></select>
 									  </div>
 									</div>
 									<div>
 										<div class="form-group flex-item">
 									    <label class="control-label">规格</label>
-											<select class="form-control" name=""></select>
+											<select class="form-control input-sm" name=""></select>
 									  </div>
 									  <div class="form-group flex-item">
 									    <label class="control-label">价格</label>
-											<input class="form-control" type="text"> &nbsp;&nbsp;至&nbsp;&nbsp; <input class="form-control" type="text">
+											<input class="form-control input-sm" type="text"> &nbsp;&nbsp;至&nbsp;&nbsp; <input class="form-control input-sm" type="text">
 									  </div>
 									</div>
 								</div>
 								<div class="col-md-2 col-sm-6 col-xs-6">
 									<div class="form-horizontal button-group">
 										<div class="form-group">
-											<button type="submit" id="search" class="btn btn-default search" ng-click="search($event)">搜索</button>
+											<button type="submit" id="search" class="btn btn-default search btn-sm" ng-click="search($event)">搜索</button>
 										</div>
 										<div class="form-group">
-											<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset">重置</button>
+											<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset btn-sm">重置</button>
 										</div>
 									</div>
 								</div>
@@ -81,7 +81,7 @@
 	</div>
 
 	<!-- 新建卷烟 -->
-	<div class="modal fade create-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal fade create-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
 	  <div class="modal-dialog modal-lg" role="document">
 	    <form class="modal-content">
 	    	<div class="modal-header">新建卷烟<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>

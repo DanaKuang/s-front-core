@@ -1,18 +1,8 @@
 .md input, .md select {
   width: 160px !important; }
 
-.form-inline-layer {
-  margin-bottom: 12px; }
-
-.file-input-wrap {
-  display: inline-block; }
-  .file-input-wrap .fake-input-file {
-    margin-left: 8.5em;
-    -webkit-border-radius: 0px !important;
-    -moz-border-radius: 0px !important;
-    -ms-border-radius: 0px !important;
-    border-radius: 0px !important;
-    width: 74px; }
+.form-inline {
+  overflow: hidden; }
 
 input[type="file"] {
   opacity: 0; }
@@ -58,3 +48,25 @@ tr td {
   font-size: 1em !important; }
   tr td img {
     max-height: 4em; }
+
+.form-inline {
+  margin-bottom: 5px; }
+  .form-inline .control-label {
+    text-align: right;
+    margin-right: 15px; }
+  .form-inline .form-control {
+    margin-right: 5px; }
+  .form-inline .inline .form-control {
+    width: 100% !important; }
+  .form-inline label.required {
+    position: relative; }
+    .form-inline label.required:after {
+      content: '*';
+      position: absolute;
+      right: -10px;
+      top: -1px;
+      color: red;
+      font-size: 18px; }
+
+.fixed-label-w .control-label {
+  width: 80px !important; }

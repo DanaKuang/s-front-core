@@ -5,25 +5,16 @@
 	border-radius: $num!important;
 }
 
-@mixin btn-width($w) {
+@mixin width($w) {
 	width: $w!important;
 }
 
 .md input, .md select {
-  @include btn-width(160px);
+  @include width(160px);
 }
 
-.form-inline-layer {
-	margin-bottom: 12px;
-}
-
-.file-input-wrap {
-	display: inline-block;
-	.fake-input-file {
-		margin-left: 8.5em;
- 		@include border-radius(0px);
- 		width: 74px;
-	}
+.form-inline {
+	overflow: hidden;
 }
 
 input[type="file"] {
@@ -96,6 +87,38 @@ tr td {
 		max-height: 4em;
 	}
 }
+
+.form-inline {
+	margin-bottom: 5px;
+	.control-label {
+		text-align: right;
+		margin-right: 15px;
+	}
+	.form-control {
+		margin-right: 5px;
+	}
+	.inline {
+		.form-control {
+			width: 100%!important;
+		}
+	}
+	label.required {
+		position: relative;
+		&:after {
+			content: '*';
+			position: absolute;
+			right: -10px;
+			top: -1px;
+			color: red;
+			font-size: 18px;
+		}
+	}
+}
+
+.fixed-label-w .control-label {
+	@include width(80px);
+}
+
 
 // .multiselect-container>li.multiselect-group label {
 // 	width: 100%;
