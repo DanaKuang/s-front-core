@@ -24,16 +24,16 @@ define([], function () {
         var fenBu_JSON_URL = '/statics/home/spec/fenbu.json';
 
 
-        var getBrand = "/api/tztx/dataportal/statistics/getBrand"; // 品牌接口        
-        var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格
-        var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';  //周下拉列表
-        var specification = "/api/tztx/dataportal/statistics/specificationKPI"  //新增扫码人数
-        var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';  //时刻分析图
-        var getMap = "/api/tztx/dataportal/statistics/getMapData"  //地图
-        var City = "/api/tztx/dataportal/statistics/scanTimesOfCityAndSpec"  //地市
-        var timesTrendOfSpec = "/api/tztx/dataportal/statistics/scanTimesTrendOfSpec" //扫码次数时间趋势
-        var drawTimes = "/api/tztx/dataportal/statistics/drawTimesTrendOfSpec" //奖品领取
-        var getAward = "/api/tztx/dataportal/statistics/getAwardDistribute" //奖品分布
+        var getBrand = "/api/tztx/dataportal/public/getUserBrandByUserId";              // 品牌接口        
+        var getProduct = '/api/tztx/dataportal/statistics/getProduct';                  //规格
+        var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';                      //周下拉列表
+        var specification = "/api/tztx/dataportal/statistics/specificationKPI"          //新增扫码人数
+        var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';           //时刻分析图
+        var getMap = "/api/tztx/dataportal/statistics/getMapData"                       //地图
+        var City = "/api/tztx/dataportal/statistics/scanTimesOfCityAndSpec"             //地市
+        var timesTrendOfSpec = "/api/tztx/dataportal/statistics/scanTimesTrendOfSpec"   //扫码次数时间趋势
+        var drawTimes = "/api/tztx/dataportal/statistics/drawTimesTrendOfSpec"          //奖品领取
+        var getAward = "/api/tztx/dataportal/statistics/getAwardDistribute"             //奖品分布
 
         
         
