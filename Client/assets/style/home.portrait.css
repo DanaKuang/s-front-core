@@ -45,27 +45,27 @@
 
 /*content*/
 .portrait_userInfo{
-	width:662px;
-	height:169px;
+	width:862px;
+	height:200px;
 	border:1px solid #e6e6e6;
 	margin:30px auto;
 }
 .portrait_userInfo_top{
-	width:650px;
+	width:800px;
 	height:27px;
 	margin:0 auto;
 	border-bottom:1px solid #e6e6e6;
 }
 
 .userSpan{
-	font-size:9px;
+	font-size:10px;
 	line-height:27px;
 	margin-left:8px;
 	float: left;
 }
 .portrait_userInfo_content{
-	width:636px;
-	height:115px;
+	width:800px;
+	height:120px;
 	background:#fcfcfc;
 	border:1px solid #e6e6e6;
 	margin:12px auto;
@@ -74,8 +74,8 @@
 	align-items: center;
 }
 .portrait_userInfo_content_left{
-	width:180px;
-	height:75px;
+	width:300px;
+	height:90px;
 /*	background:red;*/
 	display: flex;
 	flex-direction: column;
@@ -86,8 +86,8 @@
 	height:93px;
 }
 .portrait_userInfo_content_right{
-	width:160px;
-	height:75px;
+	width:250px;
+	height:90px;
 	/*background:green;*/
 	display: flex;
 	flex-direction: column;
@@ -113,13 +113,13 @@
 	line-height:27px;
 }
 .pindufenxi{
-	width:662px;
+	width:862px;
 	height:27px;
 	margin:0 auto;
 }
 #main{
 	height:220px;
-	width:662px;
+	width:862px;
 	/*background:green;*/
 	
 	margin:0 auto ;
@@ -129,11 +129,11 @@
 	width:300px;
 	height:220px;
 	/*background:red;*/
-	margin-left:80px;
+	margin-left:60px;
 }
 /*用户扫码结构分析*/
 #zheXianPic{
-	width:450px;
+	width:550px;
 	height:220px;
 	/*background:green;*/
 	margin-left:50px;
@@ -142,7 +142,7 @@
 /*用户扫码轨迹*/
 #saoGuiJi{
 	height:270px;
-	width:662px;
+	width:862px;
 	/*background:green;*/
 	
 	margin:0 auto ;
@@ -150,7 +150,7 @@
 /*用户各规格扫码烟包数*/
 .EverySao{
 	height:220px;
-	width:662px;
+	width:862px;
 	/*background:red;*/
 	
 	margin:20px auto ;
