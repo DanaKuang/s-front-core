@@ -15,7 +15,7 @@ define([], function () {
         var getFeed = '/api/tztx/dataportal/statistics/getFeedBack';  //回访记录
         var feedBack = '/api/tztx/dataportal/statistics/feedbackCount';  //回访数量
         var update = '/api/tztx/dataportal/statistics/updateFeddBackStatus';  //更新回访记录
-        var getBrand = "/api/tztx/dataportal/statistics/getBrand"; // 品牌接口
+        var getBrand = "/api/tztx/dataportal/public/getUserBrandByUserId"; // 品牌接口
         var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格        
         
         this.$getFeed = function (params) {

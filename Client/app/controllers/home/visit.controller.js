@@ -38,7 +38,7 @@ define([], function () {
                 $model.$getBrand().then(function(res){
                     var res = res.data || [];
                     for(var i=0;i<res.length;i++){
-                        $("#visit_brand").append("<option value="+res[i].productBrand+">"+res[i].productBrand+"</option>")
+                        $("#visit_brand").append("<option value="+res[i].name+">"+res[i].name+"</option>")
                     };
                     getProduct({productBrand:$("#visit_brand").val()})
                   })
