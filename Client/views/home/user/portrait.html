@@ -74,15 +74,15 @@
 
 							<div id="main"></div>
 
-							<div style="width:662px;margin:0 auto;display:flex;">
-								<h3 class="userH3" style="display:block;width:315px;">用户扫码时段分析</h3>
+							<div style="width:862px;margin:0 auto;display:flex;">
+								<h3 class="userH3" style="display:block;width:415px;">用户扫码时段分析</h3>
 								<h3 class="userH3">用户扫码结构分析</h3>
 							</div>
-							<div style="width:662px;margin:0 auto;display:flex;">
+							<div style="width:862px;margin:0 auto;display:flex;">
 								<span style="font-size:11px;color:#a2a2a2;margin-left:5px;line-height: 28px;">(每时刻近7天扫码次数之和)</span>
-								<span style="font-size:11px;color:#a2a2a2;margin-left:180px;line-height: 28px;">(近7日每日扫码烟包结构分析)</span>
+								<span style="font-size:11px;color:#a2a2a2;margin-left:229px;line-height: 28px;">(近7日每日扫码烟包结构分析)</span>
 							</div>
-							<p style="color:#a2a2a2;font-size:9px;margin-left:380px;">单包结构&nbsp;(元)</p>
+							<p style="color:#a2a2a2;font-size:9px;margin-left:430px;">单包结构&nbsp;(元)</p>
 							<div class="portrait_frequency">
 								<!--用户扫码时段分析-->
 								<div id="sunPie"></div>
@@ -91,18 +91,18 @@
 							</div>
 
 							<!--用户扫码轨迹-->
-							<div style="width:662px;margin:0 auto;">
+							<div style="width:862px;margin:0 auto;">
 								<h3 class="userH3">用户扫码轨迹</h3>
 
 							</div>
 							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;">近30天扫码烟包数: 30个</p>
-							<p  style="font-size:10px;color:#a2a2a2;margin:10px 0 10px 200px;">
+							<p  style="font-size:12px;color:#a2a2a2;margin:10px 0 10px 150px;">
 								<span ng-repeat="listScan in EffectScanPv">其中: {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
 							</p>
 							<div id="saoGuiJi"></div>
 							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
 							<!--用户各规格扫码烟包数-->
-							<div style="width:662px;margin:20px auto 0;">
+							<div style="width:862px;margin:20px auto 0;">
 								<h3 class="userH3">用户各规格扫码烟包数</h3>
 
 							</div>
@@ -147,7 +147,9 @@
 									<td>3423</td>
 								</tr>-->
 							</table>
-
+							<div class="page_sec rf">
+                                    <div class='tcdPageCode'></div>
+                                </div>
 						</div>
 					</div>
 				</div>
@@ -183,10 +185,11 @@
 					</div>
 					<div class="box_cont" style="width:400px;">
 						<p ng-repeat="good in radioList" style="display:flex;justify-content:flex-start;align-items: center;margin-left:140px;">
-							<input name="saotianxia" type="radio" class="radioOne" style="margin:0 5px 0 0;" />
-							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;{{good.openId}}</span>
+							<input type="radio" name="saotianxia" class="radioOne" style="-webkit-appearance:checkbox;margin:0 5px 0 0;" />
+							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;</span>
+							<span>{{good.openId}}</span>
 						</p>
-
+						
 					</div>
 					<div class="box_btn">
 						<div class="enabled_btn" data-dismiss="modal" ng-click="search()">确定</div>
@@ -195,4 +198,5 @@
 			</div>
 		</div>
 	</div>
+	<script src="../../../assets/libs/jquery.page.js"></script>
 </div>
