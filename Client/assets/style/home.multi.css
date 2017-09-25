@@ -98,7 +98,8 @@
     border: 1px solid #ddd;
 }
 .ui-search-block .hours {
-    width: 80px;
+    width: 100px;
+    padding: 5px;
     // top: -2px;
     margin: 0 5px;
 }
