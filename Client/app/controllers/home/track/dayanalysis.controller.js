@@ -12,6 +12,8 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
             var echarts = require('echarts');
             var $model = $scope.$model;
+            var DEFPROVINCE = $model.$defPro.data.orgId || "hunanzhongyan";
+            DEFPROVINCE = DEFPROVINCE === "hunanzhongyan" ? "湖南" : "河南";
 
             // 图形宽高
             (function () {
@@ -101,7 +103,8 @@ define([], function () {
 
                 // 初始化城市
                 $scope.setCityMap = function (cityName) {
-                    cityName && initCityMap(angular.extend({
+                    cityName = cityName === '无数据' ? '' : cityName;
+                    initCityMap(angular.extend({
                         cityName: cityName || "",
                         startTime: sScope.startTime || "",
                         endTime: sScope.endTime || ""
@@ -112,8 +115,7 @@ define([], function () {
                     }, params));
                 };
                 // 默认值
-                clickOfMap("湖南");
-                $scope.setCityMap($scope.cityName||"长沙");
+                clickOfMap(DEFPROVINCE);
                 // 初始化饼图
                 initPieMap(angular.extend({
                     startTime: sScope.startTime || "",
@@ -269,6 +271,7 @@ define([], function () {
                     $scope.cityArr = backArray.length ? backArray : [{cityName:'无数据'}];
                     $scope.cityName = $scope.cityArr[0].cityName;
                     $scope.$apply();
+                    $scope.setCityMap($scope.cityName);
                 });
             }
 
