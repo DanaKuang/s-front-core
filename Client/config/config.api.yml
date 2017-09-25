@@ -224,7 +224,7 @@ region:
     responetype: 'json'
 spec:
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getBrand'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌'
     enableroute: 1
@@ -323,7 +323,7 @@ agree:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getBrand'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌'
     enableroute: 1
