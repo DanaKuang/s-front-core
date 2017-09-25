@@ -6,6 +6,7 @@ define([], function() {
 		ServiceContent: ['$scope', 'setDateConf', function($scope, setDateConf) {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
+<<<<<<< HEAD
 			var item;
 			//			var openId;
 			//			var tellNo = "15910352745";
@@ -64,6 +65,61 @@ define([], function() {
 				          }
 				          else{
 				              public(params)
+=======
+			var opendId ="";
+			var index;
+//			var tellNo = "";
+//			$('.input_text').val("15910352745");
+//			var params;
+
+
+
+			//查询弹窗
+			$scope.chaXun = function() {
+
+//				var tellNo ="15910352745";
+				var tellNo = $('.input_text').val();
+				console.log(tellNo)
+				var PhoneNo ={
+					tellNo: tellNo
+				}
+
+               if(tellNo.match(/^1[34578]\d{9}$/)){
+               	$('.gift_stop_box').modal('show');
+ 				$model.$getPhoneNo(PhoneNo).then(function (res) {
+ 					console.log(res);
+ 					var index=$('input[name="saotianxia"]').val();
+ 					index=res.data.openId;
+ 					console.log(index);
+   					if(res.status == 200){
+   						for(var i=0;i<res.data.length;i++){
+   							$scope.radioList = res.data;
+   							$scope.$apply();
+   							console.log(radioList)
+   						}
+// 						$scope.giftList = res.data;
+   					}else{
+   						alert(3333)
+   					}
+ 				})
+ 				}else{
+ 				alert("查询不到手机号！")
+ 				}
+			};
+			//查询
+            $scope.search = function () {
+            	var openId = index;
+            	console.log(openId)
+				var tellNo = $('.input_text').val();
+                var params = {
+                    openId:openId,
+                    tellNo:tellNo
+                }
+               // console.log(params);
+
+
+               	public(params)
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 
 				          }
 
@@ -98,8 +154,13 @@ define([], function() {
 				(function() {
 					var myChart = echarts.init(document.getElementById("main"));
 					var option = $model.$citychart.data;
+<<<<<<< HEAD
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					var mobileNo = $('.input_text').val();
+=======
+					var openId="";
+					var tellNo = $('.input_text').val();
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 					var endTime = "2017-09-21";
 					var SaoPinFen = {
 						openId: openId,
@@ -172,6 +233,7 @@ define([], function() {
 
 					console.log(optionFour)
 					optionFour.xAxis.data = [];
+<<<<<<< HEAD
 					optionFour.series.data = [];
 					$model.$getSaoYanFen(SaoYanFen).then(function(res) {
 						console.log(res);
@@ -190,6 +252,26 @@ define([], function() {
 						}
 						myChart4.setOption(optionFour, true)
 					})
+=======
+                    optionFour.series.data = [];
+                    $model.$getSaoYanFen(SaoYanFen).then(function (res) {
+                    	console.log(res);
+                        for (var i = 0; i < res.data.length; i++) {
+						$scope.EffectScanPv=res.data;
+						$scope.apply();
+
+                        }
+                    })
+                    $model.$getSaoGeGuiFen(SaoYanFen).then(function (res) {
+                    	console.log(res);
+                    	var res = res.data || [];
+                        for (var i = 0; i < res.length; i++) {
+						optionFour.xAxis.data.push(res[i].statDate);
+                        optionFour.series.data.push(res[i].effectScanPv);
+                        }
+                        myChart4.setOption(optionFour, true)
+                    })
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 
 				})();
 				
@@ -215,6 +297,7 @@ define([], function() {
                 });
             }
 				//用户各规格扫码烟包数
+<<<<<<< HEAD
 				function getSupplyData(initPage) {
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					var mobileNo = $('.input_text').val();
@@ -223,6 +306,16 @@ define([], function() {
 						openId: openId,
 						mobileNo: mobileNo,
 						statDate: statDate
+=======
+				(function() {
+					var openId="";
+					var tellNo = $('.input_text').val();
+					var statDate = "2017-09-08";
+					var tableInfo={
+						openId:openId,
+						tellNo:tellNo,
+						statDate:statDate
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 					}
 					$model.$getTableInfo(tableInfo).then(function(res) {
 						console.log(res);
@@ -257,8 +350,13 @@ define([], function() {
 					var optionTwo = $model.$hourschart.data;
 
 					console.log(optionTwo)
+<<<<<<< HEAD
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					var mobileNo = $('.input_text').val();
+=======
+					var openId="";
+					var tellNo = $('.input_text').val();
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 					var endTime = "2017-09-21";
 					var SaoHourFen = {
 						openId: openId,
@@ -289,6 +387,7 @@ define([], function() {
 					optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
 						return Math.max(max, item);
 					}, -Infinity);
+<<<<<<< HEAD
 					$model.$getSaoHourFen(SaoHourFen).then(function(res) {
 						console.log(res);
 						var res = res.data || [];
@@ -298,6 +397,18 @@ define([], function() {
 						}
 						myChart2.setOption(optionTwo, true)
 					})
+=======
+					$model.$getSaoHourFen(SaoHourFen).then(function (res) {
+                    	console.log(res);
+                    	var res = res.data || [];
+                        for (var i = 0; i < res.length; i++) {
+                        optionTwo.series.data.push(res[i].scanPv);
+                        optionTwo.angleAxis.data.push(res[i].timeh);
+                        }
+                        myChart2.setOption(optionTwo, true)
+                    })
+
+>>>>>>> 30ea83783de2426d8c4b66cbbfd3bb7c85851a6c
 
 				})();
 

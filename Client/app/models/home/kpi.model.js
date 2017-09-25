@@ -29,6 +29,7 @@ define([], function () {
         var TOP10_JSON_URL = '/api/tztx/dataportal/data/topTen';                  // TOP10数据
         var MAPDATA_JSON_URL = '/api/tztx/dataportal/data/mapdata';               // 地图数据
 
+        var SALE_JSON_URL = '/api/tztx/dataportal/public/getUserSaleByUserId';    // 获取销区
         var PROVINCE_JSON_URL = '/api/tztx/dataportal/data/getProvinceKPI';       // 省份指标
         var SPECIFIC_JSON_URL = '/api/tztx/dataportal/data/getSpecificationKPI';  // 规格指标
         var FIRSTTIME_JSON_URL = '/api/tztx/dataportal/statistics/firstTimeScan'; // 销区与规格
@@ -47,6 +48,9 @@ define([], function () {
         // this.$fscanData = request.$Search(FIRSTTIME_JSON_URL);
 
         this.$historyScan = request.$Search(HISTORY_JSON_URL, historyParams, true);
+
+        // 获取销区
+        this.$sale = request.$Search(SALE_JSON_URL, {}, true);
 
         // 请求数据封装成函数，实时调用
         // 获取实时扫码数
