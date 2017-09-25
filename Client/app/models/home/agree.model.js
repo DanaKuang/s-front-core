@@ -14,7 +14,7 @@ define([], function () {
         //请求的接口地址
         var getOtherResouce = "api/tztx/dataportal/statistics/getOtherResouce"; // 异业
         var getPrize = "/api/tztx/dataportal/statistics/getPrize"; // 现金奖品分发
-        var getBrand = "/api/tztx/dataportal/statistics/getBrand"; // 品牌接口
+        var getBrand = "/api/tztx/dataportal/public/getUserBrandByUserId"; // 品牌接口
         var otherCount = "api/tztx/dataportal/statistics/getOtherResouceCount"; // 异业分页
         var prizeCount = "/api/tztx/dataportal/statistics/getPrizeCount"; // 奖品分页
         var getProduct = '/api/tztx/dataportal/statistics/getProduct';  //规格 
