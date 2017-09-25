@@ -261,11 +261,13 @@ define([], function () {
             // 地图点击事件
             function clickOfMap (name) {
                 $model.getCityName({
-                    provinceName: name + '省'
+                    provinceName: ['北京','上海','天津','重庆'].indexOf(name) !== -1 ? name + '市' : name + '省'
                 }).then(function (res) {
                     var backArray = res.data || [];
+                    // 排序 省会最前
+                    backArray = backArray.sort(function(a,b){return a.cityId-b.cityId;});
                     $scope.cityArr = backArray.length ? backArray : [{cityName:''}];
-                    $scope.cityName = name == "湖南" ? "长沙" : backArray[0].cityName;
+                    $scope.cityName = backArray[0].cityName;
                     $scope.$apply();
                 });
             }
