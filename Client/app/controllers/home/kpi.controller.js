@@ -43,9 +43,10 @@ define([], function () {
         }
 
         // tooltip
-        $(document).ready(function () {
+        // 先这么写吧，应该在指令里控制
+        setTimeout(function () {
           $('[data-toggle="tooltip"]').tooltip();
-        });
+        }, 500);
 
         Interval_1 = setInterval(function() {
           // 获取扫码次数
@@ -217,7 +218,7 @@ define([], function () {
           });
         };
 
-        // 销区规格
+        // 规格指标
         $scope.reSpecificationKPI = function () {
           $model.getSpecificationKPI().then(function (res) {
             var formatData = res.data || [];
@@ -229,15 +230,20 @@ define([], function () {
           });
         };
 
-        // 规格指标
+        // 销区规格
         $scope.reFirstscanKPI = function () {
           $model.getFirstscanKPI({page:1,pageSize:300})
             .then(function (res) {
               var sfData = res.data || [];
               var sfTbl = $model.$sfConf.data;
+              var salesData = $model.$sale.data;
               sfTbl.rows = formatFilter.sfTable(sfData);
-              $scope.sfConf = sfTbl;
+              $scope.sfConf = formatFilter.sfTableConf(sfTbl, salesData);
               $scope.$apply();
+              $("#sfTarget table").css({
+                width: 300*salesData.length,
+                maxWidth: 300*salesData.length
+              });
               $('[data-toggle="tooltip"]').tooltip();
           });
         };

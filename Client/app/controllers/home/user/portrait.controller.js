@@ -6,75 +6,86 @@ define([], function() {
 		ServiceContent: ['$scope', 'setDateConf', function($scope, setDateConf) {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
-			var opendId ="";
-			var index;
-//			var tellNo = "";
-//			$('.input_text').val("15910352745");
-//			var params;
-			
-			
-			
+			//			var openId;
+			//			var mobileNo = "15910352745";
+			$('.input_text').val("15910352745");
+			//			var params;
+
 			//查询弹窗
 			$scope.chaXun = function() {
-				
-//				var tellNo ="15910352745";
-				var tellNo = $('.input_text').val();
-				console.log(tellNo)
-				var PhoneNo ={
-					tellNo: tellNo
+				//				 openId ="123456789";
+				// 					console.log(openId);
+				var mobileNo = $('.input_text').val();
+				console.log(mobileNo)
+
+				var PhoneNo = {
+					mobileNo: mobileNo
 				}
-				
-               if(tellNo.match(/^1[34578]\d{9}$/)){
-               	$('.gift_stop_box').modal('show');
- 				$model.$getPhoneNo(PhoneNo).then(function (res) {
- 					console.log(res);
- 					var index=$('input[name="saotianxia"]').val();
- 					index=res.data.openId;
- 					console.log(index);
-   					if(res.status == 200){
-   						for(var i=0;i<res.data.length;i++){
-   							$scope.radioList = res.data;
-   							$scope.$apply();
-   							console.log(radioList)
-   						}
-// 						$scope.giftList = res.data;
-   					}else{
-   						alert(3333)
-   					}
- 				})
- 				}else{
- 				alert("查询不到手机号！")	
- 				}
+				if(mobileNo.match(/^1[34578]\d{9}$/)) {
+
+					$model.$getPhoneNo(PhoneNo).then(function(res) {
+						console.log(res);
+
+						// 						$(".radioOne").each(function() {
+						//					$(this).click(function() {
+						//						openId = $(this).val();
+						//						console.log(openId);
+						//					})
+						//				})
+
+						if(res.status == 200) {
+							$('.gift_stop_box').modal('show');
+							for(var i = 0; i < res.data.length; i++) {
+								$scope.radioList = res.data;
+								$scope.$apply();
+								console.log($scope.radioList)
+							}
+						} else {
+							alert(3333)
+						}
+					})
+				} else {
+					alert("查询不到手机号！")
+				}
 			};
 			//查询
-            $scope.search = function () {
-            	var openId = index;
-            	console.log(openId)
-				var tellNo = $('.input_text').val();
-                var params = {
-                    openId:openId,
-                    tellNo:tellNo
-                }
-               // console.log(params);
-              
-               	
-               	public(params)
+			$scope.search = function() {
+				var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+				console.log(openId)
+				var mobileNo = $('.input_text').val();
+				var params = {
+					openId: openId,
+					mobileNo: mobileNo
+				}
+				          if(openId==null){
+				              alert("请选择微信ID!");
+				              return false;
+				          }else{
+				              public(params)
+							}
 
-            };
+				}
+
+
+					
+
+
+
+
 
 			function public(params) {
 				//页面加载提示弹窗
-//			$('.jiaZai_box').modal('show');
+				//			$('.jiaZai_box').modal('show');
 				//用户基本信息
 				(function() {
-					var openId="";
-					var tellNo = $('.input_text').val();
-					console.log(tellNo)
-					var JiBenInfo={
-						openId:openId,
-						tellNo:tellNo
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
+					console.log(mobileNo)
+					var JiBenInfo = {
+						openId: openId,
+						mobileNo: mobileNo
 					}
-					$model.$getJiBenInfo(JiBenInfo).then(function (res) {
+					$model.$getJiBenInfo(JiBenInfo).then(function(res) {
 						console.log(res)
 						$scope.itemList = res.data[0];
 						$scope.$apply();
@@ -84,50 +95,50 @@ define([], function() {
 				(function() {
 					var myChart = echarts.init(document.getElementById("main"));
 					var option = $model.$citychart.data;
-					var openId="";
-					var tellNo = $('.input_text').val(); 
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
 					var endTime = "2017-09-21";
-					var SaoPinFen={
-						openId:openId,
-						tellNo:tellNo,
-						endTime:endTime
+					var SaoPinFen = {
+						openId: openId,
+						mobileNo: mobileNo,
+						endTime: endTime
 					}
 					option.xAxis[0].data = [];
-                    option.series[0].data = [];
-                    $model.$getSaoPinFen(SaoPinFen).then(function (res) {
-                    	console.log(res);
-                        var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-                            option.xAxis[0].data.push(res[i].statDate);
-                            option.series[0].data.push(res[i].scanPv);
-                        }
-                        myChart.setOption(option, true);
-                    })
+					option.series[0].data = [];
+					$model.$getSaoPinFen(SaoPinFen).then(function(res) {
+						console.log(res);
+						var res = res.data || [];
+						for(var i = 0; i < res.length; i++) {
+							option.xAxis[0].data.push(res[i].statDate);
+							option.series[0].data.push(res[i].scanPv);
+						}
+						myChart.setOption(option, true);
+					})
 				})();
 
 				//各地用户扫码结构分析
 				(function() {
 					var myChart3 = echarts.init(document.getElementById("zheXianPic"));
 					var optionThree = $model.$hours.data;
-					var openId="";
-					var tellNo = $('.input_text').val();
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
 					var endTime = "2017-09-21";
-					var SaoJieFen={
-						openId:openId,
-						tellNo:tellNo,
-						endTime:endTime
+					var SaoJieFen = {
+						openId: openId,
+						mobileNo: mobileNo,
+						endTime: endTime
 					}
 					optionThree.xAxis.data = [];
-                    optionThree.series.data = [];
-                    $model.$getSaoJieFen(SaoJieFen).then(function (res) {
-                    	console.log(res);
-                        var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-                            optionThree.xAxis.data.push(res[i].statDate);
-                            optionThree.series.data.push(res[i].scanSmokeVlue);
-                        }
-                        myChart3.setOption(optionThree, true)
-                    })
+					optionThree.series.data = [];
+					$model.$getSaoJieFen(SaoJieFen).then(function(res) {
+						console.log(res);
+						var res = res.data || [];
+						for(var i = 0; i < res.length; i++) {
+							optionThree.xAxis.data.push(res[i].statDate);
+							optionThree.series.data.push(res[i].scanSmokeVlue);
+						}
+						myChart3.setOption(optionThree, true)
+					})
 
 				})();
 				//用户扫码轨迹
@@ -135,20 +146,20 @@ define([], function() {
 
 					var myChart4 = echarts.init(document.getElementById("saoGuiJi"));
 					var optionFour = $model.$Guijichart.data;
-					var openId="";
-					var tellNo = $('.input_text').val();
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
 					var statDate = "2017-09-08";
-					var endTime = "2017-09-08";
-					var SaoYanFen={
-						openId:openId,
-						tellNo:tellNo,
-						endTime:endTime
+					var endTime = "2017-09-21";
+					var SaoYanFen = {
+						openId: openId,
+						mobileNo: mobileNo,
+						endTime: endTime
 					}
-//					var SaoYanFen2={
-//						openId:openId,
-//						tellNo:tellNo,
-//						statDate:statDate
-//					}
+					//					var SaoYanFen2={
+					//						openId:openId,
+					//						mobileNo:mobileNo,
+					//						statDate:statDate
+					//					}
 					optionFour.series.symbolSize = function(data) {
 						return Math.sqrt(data) / 0.5e1;
 					}
@@ -158,60 +169,99 @@ define([], function() {
 
 					console.log(optionFour)
 					optionFour.xAxis.data = [];
-                    optionFour.series.data = [];
-                    $model.$getSaoYanFen(SaoYanFen).then(function (res) {
-                    	console.log(res);
-                        for (var i = 0; i < res.data.length; i++) {
-						$scope.EffectScanPv=res.data;
-						$scope.apply();
-						
-                        }
-                    })
-                    $model.$getSaoGeGuiFen(SaoYanFen).then(function (res) {
-                    	console.log(res);
-                    	var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-						optionFour.xAxis.data.push(res[i].statDate);
-                        optionFour.series.data.push(res[i].effectScanPv);
-                        }
-                        myChart4.setOption(optionFour, true)
-                    })
+					optionFour.series.data = [];
+					$model.$getSaoYanFen(SaoYanFen).then(function(res) {
+						console.log(res);
+						for(var i = 0; i < res.data.length; i++) {
+							$scope.EffectScanPv = res.data;
+							$scope.apply();
+
+						}
+					})
+					$model.$getSaoGeGuiFen(SaoYanFen).then(function(res) {
+						console.log(res);
+						var res = res.data || [];
+						for(var i = 0; i < res.length; i++) {
+							optionFour.xAxis.data.push(res[i].statDate);
+							optionFour.series.data.push(res[i].effectScanPv);
+						}
+						myChart4.setOption(optionFour, true)
+					})
+                    
 
 				})();
+				
+				$scope.pageSize = 5; //每页显示多少条
+            $scope.currentPageNumber = 1; //当前页数
+            $scope.totalPage = 0;//总页数
+            var initPage = {
+                currentPageNumber : $scope.currentPageNumber,
+                pageSize : $scope.pageSize
+            };
+				//创建分页工具
+				function createPageTools(pageData){
+                $(".tcdPageCode").createPage({
+                    pageCount: pageData.allPages,
+                    current : pageData.currentPage,
+                    backFn : function(pageNum){
+                        var curPageData = {
+                            currentPageNumber : pageNum,
+                            pageSize : $scope.pageSize
+                        };
+                       getSupplyData(curPageData);
+                    }
+                });
+            }
 				//用户各规格扫码烟包数
-				(function() {
-					var openId="";
-					var tellNo = $('.input_text').val(); 
-					var statDate = "2017-09-08";
-					var tableInfo={
-						openId:openId,
-						tellNo:tellNo,
-						statDate:statDate
-					}
-                    $model.$getTableInfo(tableInfo).then(function (res) {
-                    	console.log(res);
-                        for (var i = 0; i < res.data.length; i++) {
-                        	$scope.tableList = res.data;
-                        	$scope.$apply();
-                        	console.log($scope.tableList[0].monthPv)
-                        }
-                    })
+				function getSupplyData(initPage) {
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
+					var statDate = "2017-09-21";
+					var tableInfo = {
+						openId: openId,
+						mobileNo: mobileNo,
+						statDate: statDate
+				}
+					$model.$getTableInfo(tableInfo).then(function(res) {
+						console.log(res);
+						for(var i = 0; i < res.data.length; i++) {
+							$scope.tableList = res.data;
+							$scope.$apply();
+							console.log($scope.tableList[0].monthPv)
+						}
+						var dataObj = res.data;
+							$scope.supplyLists = dataObj.list;
+                            $scope.totalPage = dataObj.page.pageNumber;
+                            $scope.totalCount = dataObj.page.count;
+                            var pageObj = {
+                                allPages : dataObj.page.pageNumber,
+                                currentPage : dataObj.page.currentPageNumber
+                            };
+                            $scope.currentPageNumber = dataObj.page.currentPageNumber;
+                            if ($(".tcdPageCode").createPage) {
+                                $(".tcdPageCode").remove();
+                            }
+                            $(".page_sec").append("<div class='tcdPageCode'></div>");
+                            $scope.$apply();
+                            createPageTools(pageObj);
+					})
 
-				})();
+				};
+				getSupplyData(initPage);
 				//各地用户扫码时段分析
 				(function() {
 
 					var myChart2 = echarts.init(document.getElementById("sunPie"));
 					var optionTwo = $model.$hourschart.data;
-					
+
 					console.log(optionTwo)
-					var openId="";
-					var tellNo = $('.input_text').val(); 
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+					var mobileNo = $('.input_text').val();
 					var endTime = "2017-09-21";
-					var SaoHourFen={
-						openId:openId,
-						tellNo:tellNo,
-						endTime:endTime
+					var SaoHourFen = {
+						openId: openId,
+						mobileNo: mobileNo,
+						endTime: endTime
 					}
 					optionTwo.series.renderItem = function renderItem(params, api) {
 						var values = [api.value(0), api.value(1)];
@@ -237,19 +287,19 @@ define([], function() {
 					optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
 						return Math.max(max, item);
 					}, -Infinity);
-					$model.$getSaoHourFen(SaoHourFen).then(function (res) {
-                    	console.log(res);
-                    	var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-                        optionTwo.series.data.push(res[i].scanPv);
-                        optionTwo.angleAxis.data.push(res[i].timeh);
-                        }
-                        myChart2.setOption(optionTwo, true)
-                    })
+					$model.$getSaoHourFen(SaoHourFen).then(function(res) {
+						console.log(res);
+						var res = res.data || [];
+						for(var i = 0; i < res.length; i++) {
+							optionTwo.series.data.push(res[i].scanPv);
+							optionTwo.angleAxis.data.push(res[i].timeh);
+						}
+						myChart2.setOption(optionTwo, true)
+					})
 					
 
-				})();
 
+				})();
 			}
 		}]
 	};

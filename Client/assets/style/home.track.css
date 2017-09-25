@@ -20,12 +20,9 @@
     color: #3d467d;
 }
 .ui-form-search {
-    height: 50px;
+    height: 35px;
     // line-height: 50px;
     font-size: 12px;
-}
-.ui-form-search .form-group {
-    margin-right: 15px;
 }
 .ui-form-search button.multiselect {
     max-width: 300px !important;
@@ -106,7 +103,7 @@
 }
 .ui-path-search .inline-block {
     margin-right: 20px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 .ui-path-search label {
     margin-right: 15px;

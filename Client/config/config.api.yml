@@ -5,15 +5,12 @@
 # 接口控制格式 参数说明
 # login: 登陆模块
 # index: 首页模块
-#region   地域模块
-#spec     规格模块
-#agree    履约模块
-#report   固定格式报表
 # httpmethod: 请求类型
 # routepath: 请求接口[统一加前缀][/api/tztx]
 # authorized: 是否已授权
 # description: 接口描述
 # enableroute: 是否已废弃
+# gatewaytype: 后端接口
 # responetype: 接口返回格式
 #
 test:                                       # 测试
@@ -21,6 +18,35 @@ test:                                       # 测试
     routepath: '/api/tztx/dataportal/test/datScanTimes'
     authorized: 1
     description: 'test'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+public:                                             ## 公共接口 [勿动]
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getDefaultProvByorgId'
+    authorized: 1
+    description: '根据用户获取默认省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserSaleByUserId'
+    authorized: 1
+    description: '根据用户获取销区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
+    authorized: 1
+    description: '根据用户获取品牌下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserProvByUserId'
+    authorized: 1
+    description: '根据用户获取省份'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -147,20 +173,6 @@ index:                                      # 首页
     gatewaytype: 0
     responetype: 'json'
 region:
-  - httpmethod: 'post'
-    routepath: '/api/tztx/public/getUserProvByUserId'
-    authorized: 1
-    description: '省份下拉列表'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/public/getDefaultProvByorgId'
-    authorized: 1
-    description: '默认省份值'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getWeeks'
     authorized: 1
@@ -531,13 +543,6 @@ track:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
-    authorized: 1
-    description: '品牌下拉框'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/actAnalysis/getActyProductDownBox'
     authorized: 1
     description: '规格下拉框'
@@ -685,7 +690,7 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
-cigarettemanage: 
+cigarettemanage:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/product/tobaccoList'
     authorized: 1
@@ -1106,13 +1111,6 @@ group:
     routepath: '/api/tztx/dataportal/consumer/getSmokeTypeTable'
     authorized: 1
     description: '用户分布表格'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
-    authorized: 1
-    description: '品牌'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'

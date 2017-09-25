@@ -123,6 +123,7 @@
   margin: 10px 15px 10px 0;
   padding: 0;
   border-radius: 0;
+  font-size: 16px;
 }
 .ui-nav-table-panel li.active a,
 .ui-nav-table-panel li a:hover,
