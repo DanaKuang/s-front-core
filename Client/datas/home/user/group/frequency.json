@@ -38,6 +38,7 @@
     "yAxis": {
         "type": "category",
         "data": [],
+        "name":"",
         "axisTick": {
             "show":false,
             "alignWithLabel": true

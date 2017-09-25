@@ -139,9 +139,9 @@ define([], function () {
         var frequencyChartLeft = echarts.init(document.getElementById("frequency-chart-left"));
         var frequencyChartRight = echarts.init(document.getElementById("frequency-chart-right"));   
         var frequencyDataLeft = _.cloneDeep($model.$frequency.data); 
-        frequencyDataLeft.title.text = "近三个月扫码烟包数";
+        frequencyDataLeft.yAxis.name = "近三个月扫码烟包数";
         var frequencyDataRight = _.cloneDeep($model.$frequency.data);    
-        frequencyDataRight.title.text = "当月扫码烟包数"     
+        frequencyDataRight.yAxis.name = "当月扫码烟包数"     
         $model.$getThrMonScanSmokeBar(params).then(function(res) {
           var res = res.data || [];
           frequencyDataLeft.yAxis.data = [];
