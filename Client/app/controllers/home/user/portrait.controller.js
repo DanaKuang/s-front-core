@@ -187,24 +187,7 @@ define([], function() {
 						}
 						myChart4.setOption(optionFour, true)
 					})
-                    optionFour.series.data = [];
-                    $model.$getSaoYanFen(SaoYanFen).then(function (res) {
-                    	console.log(res);
-                        for (var i = 0; i < res.data.length; i++) {
-						$scope.EffectScanPv=res.data;
-						$scope.apply();
-
-                        }
-                    })
-                    $model.$getSaoGeGuiFen(SaoYanFen).then(function (res) {
-                    	console.log(res);
-                    	var res = res.data || [];
-                        for (var i = 0; i < res.length; i++) {
-						optionFour.xAxis.data.push(res[i].statDate);
-                        optionFour.series.data.push(res[i].effectScanPv);
-                        }
-                        myChart4.setOption(optionFour, true)
-                    })
+                    
 
 				})();
 				
