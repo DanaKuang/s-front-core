@@ -443,8 +443,7 @@ body {
 /** 自己写样式 */
 .ui-panel-title {
   position: relative;
-/*  margin-bottom: 2px;*/
-  margin: 20px 0 10px 0;
+  margin-bottom: 2px;
   padding-left: 30px;
   font-size: 18px;
   color: #8a8a8a;
