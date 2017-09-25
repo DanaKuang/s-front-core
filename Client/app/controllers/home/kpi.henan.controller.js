@@ -44,9 +44,10 @@ define([], function () {
         }
 
         // tooltip
-        $(document).ready(function () {
+        // 先这么写吧，应该在指令里控制
+        setTimeout(function () {
           $('[data-toggle="tooltip"]').tooltip();
-        });
+        }, 500);
 
         Interval_1 = setInterval(function() {
           // 获取扫码次数

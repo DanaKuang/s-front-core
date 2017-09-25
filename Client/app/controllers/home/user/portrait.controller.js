@@ -11,19 +11,19 @@ define([], function() {
 //			var tellNo = "";
 //			$('.input_text').val("15910352745");
 //			var params;
-			
-			
-			
+
+
+
 			//查询弹窗
 			$scope.chaXun = function() {
-				
+
 //				var tellNo ="15910352745";
 				var tellNo = $('.input_text').val();
 				console.log(tellNo)
 				var PhoneNo ={
 					tellNo: tellNo
 				}
-				
+
                if(tellNo.match(/^1[34578]\d{9}$/)){
                	$('.gift_stop_box').modal('show');
  				$model.$getPhoneNo(PhoneNo).then(function (res) {
@@ -43,7 +43,7 @@ define([], function() {
    					}
  				})
  				}else{
- 				alert("查询不到手机号！")	
+ 				alert("查询不到手机号！")
  				}
 			};
 			//查询
@@ -56,8 +56,8 @@ define([], function() {
                     tellNo:tellNo
                 }
                // console.log(params);
-              
-               	
+
+
                	public(params)
 
             };
@@ -85,7 +85,7 @@ define([], function() {
 					var myChart = echarts.init(document.getElementById("main"));
 					var option = $model.$citychart.data;
 					var openId="";
-					var tellNo = $('.input_text').val(); 
+					var tellNo = $('.input_text').val();
 					var endTime = "2017-09-21";
 					var SaoPinFen={
 						openId:openId,
@@ -164,7 +164,7 @@ define([], function() {
                         for (var i = 0; i < res.data.length; i++) {
 						$scope.EffectScanPv=res.data;
 						$scope.apply();
-						
+
                         }
                     })
                     $model.$getSaoGeGuiFen(SaoYanFen).then(function (res) {
@@ -181,7 +181,7 @@ define([], function() {
 				//用户各规格扫码烟包数
 				(function() {
 					var openId="";
-					var tellNo = $('.input_text').val(); 
+					var tellNo = $('.input_text').val();
 					var statDate = "2017-09-08";
 					var tableInfo={
 						openId:openId,
@@ -203,10 +203,10 @@ define([], function() {
 
 					var myChart2 = echarts.init(document.getElementById("sunPie"));
 					var optionTwo = $model.$hourschart.data;
-					
+
 					console.log(optionTwo)
 					var openId="";
-					var tellNo = $('.input_text').val(); 
+					var tellNo = $('.input_text').val();
 					var endTime = "2017-09-21";
 					var SaoHourFen={
 						openId:openId,
@@ -246,7 +246,7 @@ define([], function() {
                         }
                         myChart2.setOption(optionTwo, true)
                     })
-					
+
 
 				})();
 

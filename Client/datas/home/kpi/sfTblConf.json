@@ -9,63 +9,12 @@
             "rowspan": 2,
             "width": "200px",
             "align": "center"
-        }, {
-            "name": "A",
-            "label": "堡垒型",
-            "colspan": 2,
-            "align": "center"
-        }, {
-            "name": "B",
-            "label": "发展型",
-            "colspan": 2,
-            "align": "center"
-        }, {
-            "name": "C",
-            "label": "潜力型",
-            "colspan": 2,
-            "align": "center"
         }],
         "child": [{
             "name": "productName",
             "label": "规格",
             "align": "center",
             "ishide": true
-        }, {
-            "name": "A_orderFirstTime",
-            "label": "首订单时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由商业投放市场后首次订单的时间",
-            "align": "center"
-        }, {
-            "name": "A_scanFirstTime",
-            "label": "首扫时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由消费者首次扫码的时间",
-            "align": "center"
-        }, {
-            "name": "B_orderFirstTime",
-            "label": "首订单时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由商业投放市场后首次订单的时间",
-            "align": "center"
-        }, {
-            "name": "B_scanFirstTime",
-            "label": "首扫时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由消费者首次扫码的时间",
-            "align": "center"
-        }, {
-            "name": "C_orderFirstTime",
-            "label": "首订单时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由商业投放市场后首次订单的时间",
-            "align": "center"
-        }, {
-            "name": "C_scanFirstTime",
-            "label": "首扫时间",
-            "sortable": false,
-            "tooltip": "某规格的烟在某个地域范围内由消费者首次扫码的时间",
-            "align": "center"
         }]
     },
     "rows": [],

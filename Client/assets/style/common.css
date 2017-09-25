@@ -40,7 +40,7 @@ input[type=button], input[type=submit], select {
   user-select: none
 }
 input, textarea {
-  -webkit-appearance: none;
+  // -webkit-appearance: none;
   -webkit-user-modify: read-write-plaintext-only
 }
 a, img {
@@ -150,7 +150,7 @@ tr td {
   align-items: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  -webkit-box-pack: center; 
+  -webkit-box-pack: center;
   flex-wrap: wrap;
 }
 
