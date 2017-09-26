@@ -713,6 +713,13 @@ cigarettemanage:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/saas//saotx/product/removeTobacco'
+    authorized: 1
+    description: '删除某个卷烟数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoType'
     authorized: 1
     description: '查询烟草规格'
@@ -791,7 +798,7 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '根据供应商获取品牌接口'
     enableroute: 1
@@ -812,7 +819,7 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/brand/queryBrands'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '查询所有品牌'
     enableroute: 1
@@ -960,7 +967,7 @@ supply:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '获取品牌'
     enableroute: 1

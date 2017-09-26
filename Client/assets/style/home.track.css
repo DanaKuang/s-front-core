@@ -285,7 +285,9 @@ button.multiselect {
 }
 
 #id_page_iframe {
-    margin: 0 auto;
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 

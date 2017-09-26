@@ -13,7 +13,7 @@
 <div ng-controller="cigarettemanageCtrl" class="cigarettemanage">
 	<div class="animated fadeInRight">
 		<div class="container-fluid">
-			<div class="row">
+			<div class="ui-content-box row">
 				<div class="col-md-12">
 					<div class="ui-panel-title">
 						<button type="submit" class="btn btn-default float-right btn-sm" data-toggle="modal" data-target=".create-modal">新建</button>
@@ -25,38 +25,42 @@
 					<div class="ui-panel-box panel">
 						<!-- 操作区 -->
 						<div class="panel-body operation">
-							<form novalidate name="form" class="md">
-								<div class="form-inline flex col-xs-6 col-sm-12 col-md-10">
-									<div>
-										<div class="form-group flex-item">
-									    <label class="control-label">品牌</label>
-								    	<select class="form-control input-sm" name="">
-											</select>
-									  </div>
-									  <div class="form-group flex-item">
-									    <label class="control-label">价类</label>
-											<input class="form-control input-sm" type="text">
-									  </div>
-									  <div class="form-group flex-item">
-									    <label class="control-label">包装</label>
-											<select class="form-control input-sm" name=""></select>
-									  </div>
-									</div>
-									<div>
-										<div class="form-group flex-item">
-									    <label class="control-label">规格</label>
-											<select class="form-control input-sm" name=""></select>
-									  </div>
-									  <div class="form-group flex-item">
-									    <label class="control-label">价格</label>
-											<input class="form-control input-sm" type="text"> &nbsp;&nbsp;至&nbsp;&nbsp; <input class="form-control input-sm" type="text">
-									  </div>
-									</div>
+							<form novalidate name="searchForm" class="md">
+								<div class="form-inline col-xs-6 col-sm-12 col-md-10">
+									<div class="form-group col-md-4">
+								    <label class="control-label">品牌</label>
+							    	<select class="form-control input-sm" name="" ng-model="brandCode">
+							    		<option value="">请选择</option>
+	    								<option ng-repeat="item in brandlist" value="{{item.brandCode}}">{{item.name}}</option>
+										</select>
+								  </div>
+								  <div class="form-group col-md-4">
+								    <label class="control-label">价类</label>
+								    <select class="form-control input-sm" name="" id="" ng-model="grade" required>
+											<option value="">请选择</option>
+											<option ng-repeat="item in gradelist" value="{{item.code}}">{{item.name}}</option>
+										</select>
+								  </div>
+								  <div class="form-group col-md-4">
+								    <label class="control-label">包装</label>
+										<select class="form-control input-sm" name="" id="" ng-model="pack" required>
+											<option value="">请选择</option>
+											<option ng-repeat="item in packlist" value="{{item.code}}">{{item.name}}</option>
+										</select>
+								  </div>
+									<div class="form-group col-md-4">
+								    <label class="control-label">规格</label>
+										<input type="text" class="form-control input-sm" ng-model="sn">
+								  </div>
+								  <div class="form-group col-md-8">
+								    <label class="control-label">价格</label>
+										<input class="form-control input-sm" type="text"> &nbsp;&nbsp;至&nbsp;&nbsp; <input class="form-control input-sm" type="text">
+								  </div>
 								</div>
 								<div class="col-md-2 col-sm-6 col-xs-6">
 									<div class="form-horizontal button-group">
 										<div class="form-group">
-											<button type="submit" id="search" class="btn btn-default search btn-sm" ng-click="search($event)">搜索</button>
+											<button type="submit" id="search" class="btn btn-default search btn-sm" ng-click="search($event)" ng-click="search()">搜索</button>
 										</div>
 										<div class="form-group">
 											<button ng-click="reset()" type="submit" id="reset" class="btn btn-default reset btn-sm">重置</button>
@@ -83,15 +87,21 @@
 	<!-- 新建卷烟 -->
 	<div class="modal fade create-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
 	  <div class="modal-dialog modal-lg" role="document">
-	    <form class="modal-content">
+	    <form novalidate name="form" class="modal-content">
 	    	<div class="modal-header">新建卷烟<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
 		    <div class="modal-body">
 		    	<!-- 新建卷烟 -->
 		    	<sa-createcigarette conf="createcigaretteConf"></sa-createcigarette>
 		    </div>
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
-		    	<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+		    	<div class="form-group">
+		    		<div class="inline">
+		    			<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+		    			<div class="fake btn btn-primary" ng-click="save(form)">保存</div>
+		    			<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+		    			<div class="fake btn btn-primary" ng-click="cancel(form)">取消</div>
+		    		</div>
+		    	</div>
 		    </div>
 	    </form>					    	
 	  </div>

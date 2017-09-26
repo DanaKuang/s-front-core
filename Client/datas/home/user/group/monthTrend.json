@@ -17,6 +17,7 @@
         "bottom": "2%",
         "containLabel": true
     },
+    "dataZoom": [],
     "xAxis" : [
         {
             "type" : "category",

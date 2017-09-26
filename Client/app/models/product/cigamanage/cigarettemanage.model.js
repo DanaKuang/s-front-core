@@ -14,7 +14,7 @@ define([], function () {
 
             var LIST = '/api/tztx/saas/saotx/product/tobaccoList';
 
-            var GET_ALL_BRANDS = '/api/tztx/saas/saotx/brand/queryBrands';
+            var GET_ALL_BRANDS = '/api/tztx/saas/saotx/common/queryBrandWithRight';
 
             var CHECK_SN = '/api/tztx/saas/saotx/product/queryProductTobacco';
 
@@ -25,6 +25,10 @@ define([], function () {
             var CHECK_STYLE = '/api/tztx/saas/saotx/common/queryDimTobaccoStyle';
 
             var CHECK_GRADE = '/api/tztx/saas/saotx/common/queryDimTobaccoGrade';
+
+            var SAVE = '/api/tztx/saas/saotx/product/saveOrUpdateTobacco';
+
+            var DELETE = '/api/tztx/saas//saotx/product/removeTobacco';
 
             // 获取列表数据
             $model.getlist = function (params) {
@@ -59,6 +63,16 @@ define([], function () {
             // 查询价类、二级价类
             $model.checkgrade = function (params) {
                 return request.$Search(CHECK_GRADE, params)
+            }
+
+            // 保存卷烟
+            $model.save = function (params) {
+                return request.$Search(SAVE, params, true)
+            }
+
+            // 删除
+            $model.delete = function (params) {
+                return request.$Search(DELETE, params)
             }
 
         }]

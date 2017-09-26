@@ -44,6 +44,8 @@ $borderColor:#A0A0A0;
     }    
 }
 .group-pannel-middle {
+    height: 450px;
+    overflow-y: scroll;
     .group-user-number {
         display: flex;
         display: -webkit-flex;
@@ -51,7 +53,7 @@ $borderColor:#A0A0A0;
         align-items: center;
         margin-bottom: 32px;
         > div {
-            width: 200px;
+            width: 270px;
             height: 90px;
             border: 1px solid #d2d2d2;            
             box-shadow: 5px 5px 5px rgba(0,0,0,.2);

@@ -147,6 +147,12 @@ body {
   position: relative;
   top: 24px !important;
   right: 0 !important;
+  transform: rotate(0deg);
+  transition: transform .5s;
+}
+.ui-navbar-user.open span {
+  transform: rotate(180deg);
+  transition: transform .5s;
 }
 .ui-navbar-user ul {
   padding-left: 0;
@@ -461,7 +467,7 @@ body {
 .region-search-r .input-append .form-control{
   background-color: #ffffff;
   border-radius: 0px;
-  color: #44c2ed;  
+  color: #44c2ed;
 }
 
 .region-search-r .date-wrap {
@@ -867,7 +873,7 @@ input[type="checkbox"]:checked + .checkbox{
 .agree-date .input-append .form-control{
   background-color: #ffffff;
   border-radius: 0px;
-  color: #44c2ed;  
+  color: #44c2ed;
 }
 .res_search .search_btn ,.gift_search .search_btn{
   font-size: 16px;

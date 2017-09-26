@@ -21,91 +21,86 @@
       margin-left: 35px;
       line-height: 1; }
 
-.group-pannel-middle .group-user-number {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px; }
-  .group-pannel-middle .group-user-number > div {
-    width: 200px;
-    height: 90px;
-    border: 1px solid #d2d2d2;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); }
-    .group-pannel-middle .group-user-number > div p {
-      line-height: 17px;
-      text-align: center;
-      font-size: 12px; }
-    .group-pannel-middle .group-user-number > div p:nth-of-type(1) {
-      line-height: 40px;
-      font-size: 18px;
-      color: #7fd0ff;
-      font-weight: bolder; }
-
-.group-pannel-middle .group-title {
-  color: #3d467d;
-  font-size: 14px;
-  margin-bottom: 28px; }
-
-.group-pannel-middle .smoke-spread {
-  overflow: hidden;
-  margin-bottom: 40px; }
-  .group-pannel-middle .smoke-spread #group-smoke-pie-wrap, .group-pannel-middle .smoke-spread .group-smoke-table {
-    width: 50%;
-    height: 210px;
-    float: left;
-    position: relative; }
-  .group-pannel-middle .smoke-spread #group-smoke-pie-wrap #group-smoke-pie {
-    height: 260px;
-    position: relative;
-    z-index: 30; }
-  .group-pannel-middle .smoke-spread .group-smoke-table thead tr th, .group-pannel-middle .smoke-spread .group-smoke-table tbody tr td {
-    line-height: 1 !important; }
-  .group-pannel-middle .smoke-spread .group-smoke-table thead tr th {
-    border-top: 1px solid #A0A0A0 !important;
-    border-bottom: 1px solid #A0A0A0 !important; }
-  .group-pannel-middle .smoke-spread .group-smoke-table tbody tr .color {
-    color: #ff8b23; }
-
-.group-pannel-middle .group-brand {
-  width: 110%;
-  position: relative;
-  left: -50px;
-  padding-left: 40px;
-  border-bottom: 1px solid #A0A0A0;
-  line-height: 45px; }
-  .group-pannel-middle .group-brand span, .group-pannel-middle .group-brand select {
+.group-pannel-middle {
+  height: 450px;
+  overflow-y: scroll; }
+  .group-pannel-middle .group-user-number {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px; }
+    .group-pannel-middle .group-user-number > div {
+      width: 270px;
+      height: 90px;
+      border: 1px solid #d2d2d2;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); }
+      .group-pannel-middle .group-user-number > div p {
+        line-height: 17px;
+        text-align: center;
+        font-size: 12px; }
+      .group-pannel-middle .group-user-number > div p:nth-of-type(1) {
+        line-height: 40px;
+        font-size: 18px;
+        color: #7fd0ff;
+        font-weight: bolder; }
+  .group-pannel-middle .group-title {
+    color: #3d467d;
     font-size: 14px;
-    vertical-align: middle; }
-  .group-pannel-middle .group-brand span, .group-pannel-middle .group-brand select {
-    margin-right: 20px; }
-  .group-pannel-middle .group-brand select {
-    height: 22px; }
-
-.group-pannel-middle .scan-frequency {
-  padding-top: 30px;
-  overflow: hidden; }
-  .group-pannel-middle .scan-frequency #frequency-chart-left, .group-pannel-middle .scan-frequency #frequency-chart-right {
-    width: 50%;
-    height: 250px;
-    float: left; }
-
-.group-pannel-middle .user-day-trend {
-  padding-top: 30px; }
-  .group-pannel-middle .user-day-trend #user-chart-trend {
-    height: 200px; }
-
-.group-pannel-middle .user-month-trend {
-  padding-top: 30px; }
-  .group-pannel-middle .user-month-trend #user-month-trend {
-    height: 200px; }
-
-.group-pannel-middle .user-top-ten .top-ten-table thead tr th {
-  line-height: 1 !important;
-  vertical-align: middle;
-  border-top: 1px solid #A0A0A0;
-  border-bottom: 1px solid #A0A0A0; }
-
-.group-pannel-middle .user-top-ten .top-ten-table tbody tr td:last-child {
-  text-decoration: underline;
-  cursor: pointer; }
+    margin-bottom: 28px; }
+  .group-pannel-middle .smoke-spread {
+    overflow: hidden;
+    margin-bottom: 40px; }
+    .group-pannel-middle .smoke-spread #group-smoke-pie-wrap, .group-pannel-middle .smoke-spread .group-smoke-table {
+      width: 50%;
+      height: 210px;
+      float: left;
+      position: relative; }
+    .group-pannel-middle .smoke-spread #group-smoke-pie-wrap #group-smoke-pie {
+      height: 260px;
+      position: relative;
+      z-index: 30; }
+    .group-pannel-middle .smoke-spread .group-smoke-table thead tr th, .group-pannel-middle .smoke-spread .group-smoke-table tbody tr td {
+      line-height: 1 !important; }
+    .group-pannel-middle .smoke-spread .group-smoke-table thead tr th {
+      border-top: 1px solid #A0A0A0 !important;
+      border-bottom: 1px solid #A0A0A0 !important; }
+    .group-pannel-middle .smoke-spread .group-smoke-table tbody tr .color {
+      color: #ff8b23; }
+  .group-pannel-middle .group-brand {
+    width: 110%;
+    position: relative;
+    left: -50px;
+    padding-left: 40px;
+    border-bottom: 1px solid #A0A0A0;
+    line-height: 45px; }
+    .group-pannel-middle .group-brand span, .group-pannel-middle .group-brand select {
+      font-size: 14px;
+      vertical-align: middle; }
+    .group-pannel-middle .group-brand span, .group-pannel-middle .group-brand select {
+      margin-right: 20px; }
+    .group-pannel-middle .group-brand select {
+      height: 22px; }
+  .group-pannel-middle .scan-frequency {
+    padding-top: 30px;
+    overflow: hidden; }
+    .group-pannel-middle .scan-frequency #frequency-chart-left, .group-pannel-middle .scan-frequency #frequency-chart-right {
+      width: 50%;
+      height: 250px;
+      float: left; }
+  .group-pannel-middle .user-day-trend {
+    padding-top: 30px; }
+    .group-pannel-middle .user-day-trend #user-chart-trend {
+      height: 200px; }
+  .group-pannel-middle .user-month-trend {
+    padding-top: 30px; }
+    .group-pannel-middle .user-month-trend #user-month-trend {
+      height: 200px; }
+  .group-pannel-middle .user-top-ten .top-ten-table thead tr th {
+    line-height: 1 !important;
+    vertical-align: middle;
+    border-top: 1px solid #A0A0A0;
+    border-bottom: 1px solid #A0A0A0; }
+  .group-pannel-middle .user-top-ten .top-ten-table tbody tr td:last-child {
+    text-decoration: underline;
+    cursor: pointer; }

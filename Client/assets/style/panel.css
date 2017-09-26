@@ -1,17 +1,13 @@
-.md input, .md select {
-  width: 160px !important; }
-
-.form-inline {
-  overflow: hidden; }
-
-input[type="file"] {
-  opacity: 0; }
-
 .float-left {
   float: left; }
 
 .float-right {
   float: right; }
+
+.form-group .inline button.btn {
+  opacity: 0;
+  width: 0;
+  height: 0; }
 
 @media screen and (max-width: 1280px) {
   .flex {
@@ -19,17 +15,6 @@ input[type="file"] {
 
 .panel-body .flex {
   justify-content: flex-start; }
-  .panel-body .flex .t input, .panel-body .flex .t select, .panel-body .flex .b input, .panel-body .flex .b select {
-    margin-left: 0.6em; }
-  .panel-body .flex .flex-item .flex-item-l, .panel-body .flex .flex-item .flex-item-r {
-    width: 6em; }
-  .panel-body .flex .flex-item .flex-item-r {
-    right: 0; }
-  .panel-body .flex .flex-item:not(:last-child) {
-    width: 21em;
-    margin-right: 2.5em; }
-  .panel-body .flex .flex-item .b {
-    margin-top: 18px; }
 
 .panel-body .oper-btn-wrap {
   margin: 0 auto;
@@ -49,24 +34,25 @@ tr td {
   tr td img {
     max-height: 4em; }
 
+.form-group {
+  overflow: hidden; }
+
+.col-md-4 .input-sm {
+  width: 80% !important; }
+
 .form-inline {
+  overflow: hidden;
   margin-bottom: 5px; }
   .form-inline .control-label {
-    text-align: right;
-    margin-right: 15px; }
-  .form-inline .form-control {
-    margin-right: 5px; }
-  .form-inline .inline .form-control {
+    text-align: right; }
+  .form-inline .inline .input-group, .form-inline .inline .form-control {
     width: 100% !important; }
   .form-inline label.required {
     position: relative; }
     .form-inline label.required:after {
       content: '*';
       position: absolute;
-      right: -10px;
+      right: 0;
       top: -1px;
       color: red;
       font-size: 18px; }
-
-.fixed-label-w .control-label {
-  width: 80px !important; }

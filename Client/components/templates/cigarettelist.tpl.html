@@ -24,8 +24,8 @@
 					<td>{{item.price}}</td>
 					<td>
 						<div class="oper-btn-wrap">
-							<div class="operate-btn float-left">修改</div>
-							<div class="operate-btn float-left">删除</div>
+							<div class="operate-btn float-left" data-sn="{{item.product.sn}}" ng-click="edit($event)">修改</div>
+							<div class="operate-btn float-left" data-id="{{item.id}}" ng-click="delete($event)">删除</div>
 						</div>
 					</td>
 				</tr>
