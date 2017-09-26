@@ -1,13 +1,13 @@
 <div>
     <div class="ui-navbar-left navbar-left">
-        <ul class="">
+        <ul class="parent">
             <li ng-class="{active:tab.menu.menuCode==activeCode, open:tab.open}" ng-repeat="tab in tabs" repeat-finish>
-                <a ng-click="clickTab($event,tab)" data-target="{{tab.nodeList.length ? '' : tab.menu.manuUrl}}" data-toggle="" ng-class="{'dropdown-toggle': tab.nodeList.length}" href="{{tab.menu.manuUrl}}" ng-href="{{tab.nodeList.length ? '' : tab.menu.manuUrl}}">
+                <a ng-click="clickTab($event,tab)" data-target="{{tab.menu.menuCode}}" data-toggle="" ng-class="{'dropdown-toggle': tab.nodeList.length}" href="{{tab.menu.manuUrl}}" ng-href="{{tab.nodeList.length ? '' : tab.menu.manuUrl}}">
                     <i class="fa fa-{{tab.menu.menuCode}}"></i>
                     <div class="ellipsis">{{tab.menu.menuName}}</div>
                     <i class="sa"></i>
                 </a>
-                <ul ng-if="tab.nodeList.length" class="" ng-style="{display:tab.open ? 'block': 'none'}">
+                <ul ng-if="tab.nodeList.length" class="child" ng-style="{display:tab.open ? 'block': 'none'}">
                     <li ng-repeat="node in tab.nodeList" ng-class="{active:node.menuCode==activeHash}">
                         <a ng-click="getActiveLi($event,node);" ng-if="node.menuName!==''" data-target="{{node.menuCode}}" data-hash="{{node.manuUrl}}" ng-href="{{node.manuUrl}}">
                             <div class="ellipsis">{{node.menuName}}</div>
