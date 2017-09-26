@@ -96,7 +96,7 @@
 
 							</div>
 							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;">近30天扫码烟包数: 30个</p>
-							<p  style="font-size:12px;color:#a2a2a2;margin:10px 0 10px 150px;">
+							<p  style="font-size:12px;color:#a2a2a2;margin:10px 50px 10px 150px;">
 								<span>其中: </span>
 								<span ng-repeat="listScan in EffectScanPv">{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
 							</p>
@@ -112,41 +112,18 @@
 									<th>规格</th>
 									<th class="topTitle1">
 									</th>
-									<th class="topTitle2">2017年5月(上月)扫码烟包数
+									<th class="topTitle2">
 									</th>
-									<th class="topTitle3">2017年4月(上上月)扫码烟包数
+									<th class="topTitle3">
 									</th>
-								</tr>
-								<!--<tr style="background:#f8fbff;">
-									<td>合计</td>
-									<td>{{tableList[0].monthPv}}</td>
-									<td>13124124</td>
-									<td>241241</td>
-								</tr>-->
+								</tr>								
 								<tr ng-repeat="tableListInfo in tableList">
-									<td>{{tableListInfo.productBrand}}</td>
+									<td>{{tableListInfo.productName}}</td>
 									<td>{{tableListInfo.monthPv}}</td>
 									<td>{{tableListInfo.lastMonthPv}}</td>
 									<td>{{tableListInfo.llastMontHPv}}</td>
 								</tr>
-								<!--<tr style="background:#f8fbff;">
-									<td>白沙</td>
-									<td>431243</td>
-									<td>23423</td>
-									<td>3423</td>
-								</tr>
-								<tr>
-									<td>白沙</td>
-									<td>431243</td>
-									<td>23423</td>
-									<td>3423</td>
-								</tr>
-								<tr style="background:#f8fbff;">
-									<td>白沙</td>
-									<td>431243</td>
-									<td>23423</td>
-									<td>3423</td>
-								</tr>-->
+								
 							</table>
 							<div class="page_sec rf">
                                     <div class='tcdPageCode'></div>

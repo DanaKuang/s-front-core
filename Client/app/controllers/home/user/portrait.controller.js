@@ -6,7 +6,23 @@ define([], function() {
 		ServiceContent: ['$scope', 'setDateConf', function($scope, setDateConf) {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
-			var flag = false;
+			//获取时间当前年月
+					var date = new Date(); //获取系统当前时间
+					var year = date.getFullYear();
+					var month1 = date.getMonth() + 1;
+					var month2 = date.getMonth();
+					var month3 = date.getMonth() - 1;
+					var day = date.getDate() - 1;
+					month1 = (month1 < 10 ? "0" + month1 : month1);
+					month2 = (month2 < 10 ? "0" + month2 : month2);
+					month3 = (month3 < 10 ? "0" + month3 : month3);
+					var endTime = (year.toString() + '-' + month1.toString() + "-"+ day.toString());
+					var mydate1 = (year.toString() + '年' + month1.toString() + "月");
+					var mydate2 = (year.toString() + '年' + month2.toString() + "月");
+					var mydate3 = (year.toString() + '年' + month3.toString() + "月");
+					$(".topTitle1").html(mydate1+"(当月)扫码烟包数");
+					$(".topTitle2").html(mydate2+"(上月)扫码烟包数");
+					$(".topTitle3").html(mydate3+"(上上月)扫码烟包数");
 			//			15910352745
 			var mobileNo;
 			if(mobileNo == null) {
@@ -87,7 +103,7 @@ define([], function() {
 						var option = $model.$citychart.data;
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						var endTime = "2017-09-21";
+						endTime = endTime;
 						var SaoPinFen = {
 							openId: openId,
 							mobileNo: mobileNo,
@@ -112,7 +128,7 @@ define([], function() {
 						var optionThree = $model.$hours.data;
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						var endTime = "2017-09-21";
+						endTime = endTime;
 						var SaoJieFen = {
 							openId: openId,
 							mobileNo: mobileNo,
@@ -138,15 +154,14 @@ define([], function() {
 						var optionFour = $model.$Guijichart.data;
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						var statDate = "2017-09-08";
-						var endTime = "2017-09-21";
+						endTime = endTime;
 						var SaoYanFen = {
 							openId: openId,
 							mobileNo: mobileNo,
 							endTime: endTime
 						}
 						optionFour.series.symbolSize = function(data) {
-							return Math.sqrt(data) / 0.01e1;
+							return Math.sqrt(data) / 0.05e1;
 						}
 						optionFour.label.emphasis.formatter = function(param) {
 							return param.datas;
@@ -159,7 +174,7 @@ define([], function() {
 							console.log(res);
 							for(var i = 0; i < res.data.length; i++) {
 								$scope.EffectScanPv = res.data;
-								$scope.apply();
+								$scope.$apply();
 
 							}
 						})
@@ -201,7 +216,7 @@ define([], function() {
 					function getSupplyData(initPage) {
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						var statDate = "2017-09-21";
+						var statDate = endTime;
 						var tableInfo = {
 							openId: openId,
 							mobileNo: mobileNo,
@@ -214,21 +229,21 @@ define([], function() {
 								$scope.$apply();
 								console.log($scope.tableList[0].monthPv)
 							}
-							var dataObj = res.data;
-							$scope.supplyLists = dataObj.list;
-							$scope.totalPage = dataObj.page.pageNumber;
-							$scope.totalCount = dataObj.page.count;
-							var pageObj = {
-								allPages: dataObj.page.pageNumber,
-								currentPage: dataObj.page.currentPageNumber
-							};
-							$scope.currentPageNumber = dataObj.page.currentPageNumber;
-							if($(".tcdPageCode").createPage) {
-								$(".tcdPageCode").remove();
-							}
-							$(".page_sec").append("<div class='tcdPageCode'></div>");
-							$scope.$apply();
-							createPageTools(pageObj);
+//							var dataObj = res.data;
+//							$scope.supplyLists = dataObj.list;
+//							$scope.totalPage = dataObj.page.pageNumber;
+//							$scope.totalCount = dataObj.page.count;
+//							var pageObj = {
+//								allPages: dataObj.page.pageNumber,
+//								currentPage: dataObj.page.currentPageNumber
+//							};
+//							$scope.currentPageNumber = dataObj.page.currentPageNumber;
+//							if($(".tcdPageCode").createPage) {
+//								$(".tcdPageCode").remove();
+//							}
+//							$(".page_sec").append("<div class='tcdPageCode'></div>");
+//							$scope.$apply();
+//							createPageTools(pageObj);
 						})
 
 					};
@@ -242,7 +257,7 @@ define([], function() {
 						console.log(optionTwo)
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						var endTime = "2017-09-21";
+						endTime = endTime;
 						var SaoHourFen = {
 							openId: openId,
 							mobileNo: mobileNo,
@@ -279,7 +294,7 @@ define([], function() {
 								optionTwo.series.data.push(res[i].scanPv);
 								optionTwo.angleAxis.data.push(res[i].timeh);
 							}
-							myChart2.setOption(optionTwo, true)
+							myChart2.setOption(optionTwo)
 						})
 
 					})();
@@ -292,21 +307,7 @@ define([], function() {
 			
 			
 			
-			//获取时间当前年月
-					var date = new Date(); //获取系统当前时间
-					var year = date.getFullYear();
-					var month1 = date.getMonth() + 1;
-					var month2 = date.getMonth();
-					var month3 = date.getMonth() - 1;
-					month1 = (month1 < 10 ? "0" + month1 : month1);
-					month2 = (month2 < 10 ? "0" + month2 : month2);
-					month3 = (month3 < 10 ? "0" + month3 : month3);
-					var mydate1 = (year.toString() + '年' + month1.toString() + "月");
-					var mydate2 = (year.toString() + '年' + month2.toString() + "月");
-					var mydate3 = (year.toString() + '年' + month3.toString() + "月");
-					$(".topTitle1").html(mydate1+"(当月)扫码烟包数");
-					$(".topTitle2").html(mydate2+"(上月)扫码烟包数");
-					$(".topTitle3").html(mydate3+"(上上月)扫码烟包数");
+			
 		}]
 	};
 
