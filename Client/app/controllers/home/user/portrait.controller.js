@@ -7,6 +7,7 @@ define([], function() {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
 			var flag = false;
+			//			15910352745
 			var mobileNo;
 			if(mobileNo == null) {
 				var mobileNo = window.sessionStorage.getItem("mobileNo");
@@ -21,24 +22,24 @@ define([], function() {
 					var PhoneNo = {
 						mobileNo: mobileNo
 					}
-					
+
 					if(mobileNo.match(/^1[34578]\d{9}$/)) {
-						
+
 						$model.$getPhoneNo(PhoneNo).then(function(res) {
 							console.log(res);
 							console.log(PhoneNo)
-							if(res.data.length == 0){
-							alert("该手机号查询不到微信ID!");
-							return false;
-						}else{
-							$('.gift_stop_box').modal('show');
-							for(var i = 0; i < res.data.length; i++) {
-								$scope.radioList = res.data;
-								$scope.$apply();
-								console.log($scope.radioList)
-							}
+							if(res.data.length == 0) {
+								alert("该手机号查询不到微信ID!");
+								return false;
+							} else {
+								$('.gift_stop_box').modal('show');
+								for(var i = 0; i < res.data.length; i++) {
+									$scope.radioList = res.data;
+									$scope.$apply();
+									console.log($scope.radioList)
+								}
 
-						}
+							}
 						})
 					} else {
 						alert("查询不到手机号！")
@@ -144,11 +145,6 @@ define([], function() {
 							mobileNo: mobileNo,
 							endTime: endTime
 						}
-						//					var SaoYanFen2={
-						//						openId:openId,
-						//						mobileNo:mobileNo,
-						//						statDate:statDate
-						//					}
 						optionFour.series.symbolSize = function(data) {
 							return Math.sqrt(data) / 0.01e1;
 						}
@@ -178,7 +174,8 @@ define([], function() {
 						})
 
 					})();
-
+					
+					//设置分页（备用）
 					$scope.pageSize = 5; //每页显示多少条
 					$scope.currentPageNumber = 1; //当前页数
 					$scope.totalPage = 0; //总页数
@@ -292,6 +289,24 @@ define([], function() {
 				return false;
 
 			}
+			
+			
+			
+			//获取时间当前年月
+					var date = new Date(); //获取系统当前时间
+					var year = date.getFullYear();
+					var month1 = date.getMonth() + 1;
+					var month2 = date.getMonth();
+					var month3 = date.getMonth() - 1;
+					month1 = (month1 < 10 ? "0" + month1 : month1);
+					month2 = (month2 < 10 ? "0" + month2 : month2);
+					month3 = (month3 < 10 ? "0" + month3 : month3);
+					var mydate1 = (year.toString() + '年' + month1.toString() + "月");
+					var mydate2 = (year.toString() + '年' + month2.toString() + "月");
+					var mydate3 = (year.toString() + '年' + month3.toString() + "月");
+					$(".topTitle1").html(mydate1+"(当月)扫码烟包数");
+					$(".topTitle2").html(mydate2+"(上月)扫码烟包数");
+					$(".topTitle3").html(mydate3+"(上上月)扫码烟包数");
 		}]
 	};
 

@@ -97,7 +97,8 @@
 							</div>
 							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;">近30天扫码烟包数: 30个</p>
 							<p  style="font-size:12px;color:#a2a2a2;margin:10px 0 10px 150px;">
-								<span ng-repeat="listScan in EffectScanPv">其中: {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
+								<span>其中: </span>
+								<span ng-repeat="listScan in EffectScanPv">{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
 							</p>
 							<div id="saoGuiJi"></div>
 							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
@@ -109,11 +110,11 @@
 							<table class="EverySao">
 								<tr>
 									<th>规格</th>
-									<th>2017年6月(当月)扫码烟包数
+									<th class="topTitle1">
 									</th>
-									<th>2017年5月(上月)扫码烟包数
+									<th class="topTitle2">2017年5月(上月)扫码烟包数
 									</th>
-									<th>2017年4月(上上月)扫码烟包数
+									<th class="topTitle3">2017年4月(上上月)扫码烟包数
 									</th>
 								</tr>
 								<!--<tr style="background:#f8fbff;">
