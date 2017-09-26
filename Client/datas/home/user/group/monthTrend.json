@@ -17,6 +17,15 @@
         "bottom": "2%",
         "containLabel": true
     },
+    "dataZoom": [
+        {
+          "type": "inside",
+          "show": true,
+          "start":0,
+          "end": 30,
+          "zoomLock":true
+        }
+      ],
     "xAxis" : [
         {
             "type" : "category",
