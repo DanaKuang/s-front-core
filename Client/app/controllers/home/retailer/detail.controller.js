@@ -62,9 +62,6 @@ define([], function () {
                 shopName: "" || ""
             });
 
-            // 初始化
-            initSearch();
-
             // 初始化查询
             function initSearch () {
                 $model.getTableData({
@@ -84,34 +81,60 @@ define([], function () {
                 });
             }
 
+            // 下拉框
+            function initDropdown (productBrand) {
+                var $productSn = $("[name='productSn']");
+                $model.getProduct({
+                    productBrand: productBrand
+                }).then(function (res) {
+                    $scope.pnArray = res.data || [];
+                    $scope.$apply();
+                    $productSn.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                        val.label = val.productName;
+                        val.value = val.sn;
+                    }));
+                    $scope.productSn = $scope.pnArray.map(function(m){return m.sn;});
+                    $productSn.multiselect('select', $scope.productSn);
+                    $productSn.multiselect('refresh');
+                    // 初始化
+                    initSearch();
+                });
+            }
+
             // 初始化multiselect
             $(document).ready(function () {
-                var $select = $("form select");
-                $select.multiselect({
+                var $prBrand = $("[name='productBrand']");
+                var $productSn = $("[name='productSn']");
+                // 品牌
+                $prBrand.multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    onChange: function (opt) {
+                        $model.getProduct({
+                            productBrand: opt[0].value || event.target.value || ""
+                        }).then(function (res) {
+                            $scope.pnArray = res.data || [];
+                            $scope.$apply();
+                            $productSn.multiselect('dataprovider', _.forEach(res.data, function(val) {
+                                val.label = val.productName;
+                                val.value = val.sn;
+                            }));
+                            $scope.productSn = $scope.pnArray.map(function(m){return m.sn;});
+                            $productSn.multiselect('select', $scope.productSn);
+                            $productSn.multiselect('refresh');
+                        });
+                    }
+                });
+                $prBrand.multiselect('select', $scope.productBrand);
+                $prBrand.multiselect('refresh');
+                // 规格
+                $productSn.multiselect({
                     nonSelectedText: '请选择',
                     allSelectedText: '全部',
                     nSelectedText: '已选择'
                 });
-                var $prBrand = $("[name='productBrand']");
-                var $productSn = $("[name='productSn']");
-                // 品牌
-                $prBrand.multiselect('select', $scope.productBrand);
-                $prBrand.multiselect('refresh');
-                // 规格
-                $productSn.next().off().on('click', function (e) {
-                    $model.getProduct({
-                        productBrand: $scope.productBrand
-                    }).then(function (res) {
-                        $scope.pnArray = res.data || [];
-                        $scope.$apply();
-                        $productSn.multiselect('dataprovider', _.forEach(res.data, function(val) {
-                            val.label = val.productName;
-                            val.value = val.sn;
-                        }));
-                        $productSn.multiselect('select', $scope.productSn);
-                        $productSn.multiselect('refresh');
-                    });
-                });
+                initDropdown($scope.productBrand);
             });
 
         }]

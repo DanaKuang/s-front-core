@@ -98,8 +98,9 @@
     border: 1px solid #ddd;
 }
 .ui-search-block .hours {
-    width: 80px;
-    top: -2px;
+    width: 100px;
+    padding: 5px;
+    // top: -2px;
     margin: 0 5px;
 }
 .ui-search-block .date {
@@ -134,6 +135,7 @@
   margin: 10px 15px 10px 0;
   padding: 0;
   border-radius: 0;
+  font-size: 16px;
 }
 .ui-nav-table-panel li.active a,
 .ui-nav-table-panel li a:hover,
@@ -237,7 +239,7 @@
     overflow-y: auto;
 }
 button.multiselect {
-    max-width: 200px;
+    width: 200px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
