@@ -1,9 +1,17 @@
+.ui-panel-title {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
 .modal.in .modal-dialog {
 	margin: 100px auto;
 }
 .modal-body {
 	margin: 0 auto;
-	width: percentage(3/5)
+	width: percentage(3/5);
+	.control-label {
+		margin-top: 6px;
+	}
 }
 .modal-body img {
 	max-width: 30px;

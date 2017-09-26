@@ -14,7 +14,7 @@ define([], function () {
       // 领奖明细
       var GET_PRIZE_LIST = '/api/tztx/saas/saotx/order/queryOrderList';
       // 所有品牌
-      var GET_ALL_BRANDS = '/api/tztx/saas/saotx/brand/queryBrands';
+      var GET_ALL_BRANDS = '/api/tztx/saas/saotx/common/queryBrandWithRight';
       // 根据品牌选择规格
       var GET_PRODUCT_LIST = '/api/tztx/saas/saotx/common/queryProduct';
       // 地区

@@ -35,12 +35,21 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber']);
-
-                // 一开始进入页面的时候scope.conf是undefined
-                if (scope.conf) {
-                   // scope.list = scope.conf.data.list
-                }
             }, true);
+
+            scope.edit = function (e) {
+                var sn = $(e.target).data('sn');
+                scope.$emit('edit', event, {
+                    sn: sn
+                })
+            }
+
+            scope.delete = function (e) {
+                var id = $(e.target).data('id');
+                scope.$emit('delete', event, {
+                    id: id
+                })
+            }
         }
         return defineObj;
     }
