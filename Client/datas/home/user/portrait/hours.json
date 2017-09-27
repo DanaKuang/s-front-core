@@ -31,7 +31,7 @@
 	},
 	"series":
 		{
-			"name": "扫码次数",
+			"name": "扫码价格",
 			"type": "line",
 			"label": {
 				"normal": {
