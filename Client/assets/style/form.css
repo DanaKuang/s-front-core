@@ -17,18 +17,18 @@ form input.ng-touched.ng-invalid {
 .form-control-feedback {
   right: 10px; }
 
-.form-inline {
+.form-inline, .form-horizontal {
   overflow: hidden;
   margin-bottom: 5px; }
-  .form-inline .control-label {
+  .form-inline .control-label, .form-horizontal .control-label {
     text-align: right; }
-  .form-inline .form-control {
+  .form-inline .form-control, .form-horizontal .form-control {
     line-height: 100% !important; }
-  .form-inline .inline .input-group, .form-inline .inline .form-control {
+  .form-inline .inline .input-group, .form-inline .inline .form-control, .form-horizontal .inline .input-group, .form-horizontal .inline .form-control {
     width: 100% !important; }
-  .form-inline label.required {
+  .form-inline label.required, .form-horizontal label.required {
     position: relative; }
-    .form-inline label.required:after {
+    .form-inline label.required:after, .form-horizontal label.required:after {
       content: '*';
       position: absolute;
       right: 0;

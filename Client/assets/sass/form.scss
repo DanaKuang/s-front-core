@@ -20,7 +20,7 @@ form input.ng-touched.ng-invalid {
 .form-control-feedback {
 	right: 10px;
 }
-.form-inline {
+.form-inline, .form-horizontal {
 	overflow: hidden;
 	margin-bottom: 5px;
 	.control-label {
