@@ -549,9 +549,9 @@ body {
 .region-search-r .btn:hover,
 .region-search-r .btn:focus,
 .region-search-r .btn:active,
-.report-search .btn:hover,
-.report-search .btn:focus,
-.report-search .btn:active
+.report-search .btn-sm:hover,
+.report-search .btn-sm:focus,
+.report-search .btn-sm:active
 {
   background: #44c2ed;
   border-color: #44c2ed;
@@ -848,7 +848,7 @@ input[type="checkbox"]:checked + .checkbox{
   line-height: 28px;
 }
 
-.res_search div input,.report-search div input {
+.res_search div input,.report-search div .input_frame {
   font-size: 16px;
   width:120px;
   height: 28px;
@@ -1041,11 +1041,11 @@ input[type="checkbox"]:checked + .checkbox{
 }
 
 .report_wrap ul li span:nth-of-type(2) {
-  padding-left: 100px;
+  padding-left: 60px;
 }
 
 .report-search div select{
-  width: 200px;
+  width: 180px;
 }
 
 .report_wrap ul li:nth-of-type(2n) {
@@ -1067,7 +1067,8 @@ input[type="checkbox"]:checked + .checkbox{
   border: 7px solid transparent;
   border-right:7px solid black;
 }
-.report-search button {
+/*.report-search button {*/
+.btn_style{
   width: 85px;
   border-radius: 40px;
   margin-left: 40px;
@@ -1075,6 +1076,8 @@ input[type="checkbox"]:checked + .checkbox{
   outline-color: #44c2ed;
   border-color: #44c2ed;
   color: #fff;
+  margin-bottom: 15px;
+  float: left;
 }
 .report-provice {
   background:#525EB4;
@@ -1093,8 +1096,31 @@ input[type="checkbox"]:checked + .checkbox{
   background: #EDF0FF !important;
   color: #707478;
 }
-
-
+.report-search .multiselect-container li label{
+    font-size: 15px;
+    color: #515151;
+    width: 180px;
+}
+.report-search .multiselect{
+    text-align: left;
+    margin-left: 4px;
+}
+.report-search .multiselect b{
+    position: absolute;
+    top: 15px;
+    right: 8px;
+}
+#weeks + div ul{
+  max-height: 300px;
+  overflow-y: scroll;
+}
+#weeks + div ul li{
+  margin-left: -10px;
+}
+.reset_height{
+  height: 34px !important;
+  line-height: 34px !important;
+}
 /*==============================end report================================*/
 
 

@@ -15,6 +15,9 @@ define([], function () {
             //设置input的默认时间
             var stattime = dayFilter.yesterday("date");
             $(".date-wrap").find("input").val(stattime);
+            var curTableIndex = '';
+            var curWeekStr = '';
+            var curSpeciftStr = '';
             //页面默认加载配置
             $scope.obj = {
                 "statTime": stattime,
@@ -32,12 +35,48 @@ define([], function () {
             $scope.tabs = function (index) {
                 $(".region-margin").hide();
                 $(".region-margin").eq(index).show();
-                if (index === 1) {
-                    gloabl.getProduct();
-                } else if (index === 2) {
-                    gloabl.getProductNo();
-                } else if (index === 3) {
-                    gloabl.summaryData($scope.summar);
+                // if (index === 1) {
+                //     gloabl.getProduct();
+                // } else if (index === 2) {
+                //     gloabl.getProductNo();
+                // } else if (index === 3) {
+                //     gloabl.summaryData($scope.summar);
+                // }
+                switch(index){
+                    case 1 : 
+                        gloabl.getProduct();
+                        break;
+                    case 2 : 
+                        gloabl.getProductNo();
+                        break;
+                    case 3 : 
+                        gloabl.summaryData($scope.summar);
+                        break;
+                    case 4 : 
+                        gloabl.getBrand();
+                        gloabl.getWeeks(4);
+                        gloabl.getPack(4);
+                        gloabl.getTimes();
+                        break;
+                    case 5 : 
+                        gloabl.getBrand();
+                        curTableIndex = 5;
+                        gloabl.getWeeks(5);
+                        break;
+                    case 6 : 
+                        gloabl.getBrand();
+                        curTableIndex = 6;
+                        gloabl.getWeeks(6);
+                        gloabl.getPack(6);
+                        break;
+                    case 7 : 
+                        gloabl.getBrand();
+                        curTableIndex = 7;
+                        gloabl.getWeeks(7);
+                        gloabl.getPack(7);
+                        break;
+                    default : 
+                        
                 }
             }
             var gloabl = {
@@ -151,39 +190,332 @@ define([], function () {
                         }
                         ;
                     }
+                },
+                "getWeeks":  function (num) {
+                    $model.$getWeeksData().then(function (res) {
+                        // var res = res.data || [];
+                        $scope.weeksList = res.data || [];
+                        $scope.$apply();
+                        var startTimeObj = {
+                            statTime : $scope.weeksList[0].weekId
+                        }
+                        switch(num){
+                            case 4:
+                                $("select#weeks").multiselect({
+                                    nonSelectedText: '请选择',
+                                    allSelectedText: '全部',
+                                    nSelectedText: '已选择',
+                                    selectAll:true,
+                                    selectAllText: '全部',
+                                    selectAllValue: 'all',
+                                    buttonWidth: '180px'
+                                });
+                                if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                    gloabl.getWeekScanWinData(startTimeObj);
+                                }
+                                break;
+                            case 5:
+                                curWeekStr = $scope.weeksList[0].weekNo;
+                                $model.$getBrandData().then(function (res) {
+                                    var brandList = res.data || [];
+                                    if(brandList.length > 0){
+                                        var fristBrandName = brandList[0].name;
+                                        $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
+                                            var speciftList = res.data || [];
+                                            if(speciftList.length > 0){
+                                                var firstSpeciftSn = speciftList[0].sn;
+                                                startTimeObj.productSn = firstSpeciftSn;
+                                            }
+                                            if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                                gloabl.getProvData(startTimeObj);
+                                            }
+                                        });
+                                    }
+                                })
+                                break;
+                            case 6:
+                                $model.$getBrandData().then(function (res) {
+                                    var brandList = res.data || [];
+                                    if(brandList.length > 0){
+                                        var fristBrandName = brandList[0].name;
+                                        $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
+                                            var speciftList = res.data || [];
+                                            if(speciftList.length > 0){
+                                                startTimeObj.productSn = speciftList[0].sn;
+                                            }
+                                            $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
+                                                var packsList = res.data || [];
+                                                if(packsList.length > 0){
+                                                    startTimeObj.unit = packsList[0].tagId;
+                                                }
+                                                if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                                    gloabl.getWeekCashWinData(startTimeObj);
+                                                }               
+                                            })
+                                            
+                                        });
+                                    }
+                                })
+                                // if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                //     gloabl.getWeekCashWinData(startTimeObj);
+                                // }
+                                break;
+                            case 7:
+                                $model.$getBrandData().then(function (res) {
+                                    var brandList = res.data || [];
+                                    if(brandList.length > 0){
+                                        var fristBrandName = brandList[0].name;
+                                        $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
+                                            var speciftList = res.data || [];
+                                            if(speciftList.length > 0){
+                                                startTimeObj.productSn = speciftList[0].sn;
+                                            }
+                                            $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
+                                                var packsList = res.data || [];
+                                                if(packsList.length > 0){
+                                                    startTimeObj.unit = packsList[0].tagId;
+                                                }
+                                                if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                                    gloabl.getWeekEntityWinData(startTimeObj);
+                                                }               
+                                            })
+                                        });
+                                    }
+                                })
+                                // if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                //     gloabl.getWeekEntityWinData(startTimeObj);
+                                // }
+                                break;
+                            default:
+                        }                 
+                
+                    })
+                },
+                "getBrand":  function () {
+                    $model.$getBrandData().then(function (res) {
+                        $scope.brandList = res.data || [];
+                        $scope.$apply();  
+                        var curBrandName = $scope.brandList[0].name;
+                        if(curTableIndex == 5 || curTableIndex == 6 || curTableIndex == 7){
+                            $model.$getSpecifData({productBrand:curBrandName}).then(function(res){
+                                $scope.speciftList = res.data || [];
+                                $scope.$apply();
+                                if($scope.speciftList.length > 0){
+                                    curSpeciftStr = $scope.speciftList[0].name
+                                }
+                            });
+                        }
+                    })
+                },
+                "getPack":  function (typeNum) {
+                    $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
+                        $scope.packsList = res.data || [];
+                        $scope.$apply(); 
+                        if(typeNum == 4){
+                            $("select#packs").multiselect({
+                                nonSelectedText: '请选择',
+                                allSelectedText: '全部',
+                                nSelectedText: '已选择',
+                                selectAll:true,
+                                selectAllText: '全部',
+                                selectAllValue: 'all',
+                                buttonWidth: '180px'
+                            }); 
+                        }
+                                     
+                    })
+                },
+                "getTimes":  function () {
+                    $model.$getPackAndTimeData({"pageName":"packtype"}).then(function (res) {
+                        $scope.statisTimeList = res.data || [];
+                        $scope.$apply();
+                        $("select#cycleTime").multiselect({
+                            nonSelectedText: '请选择',
+                            allSelectedText: '全部',
+                            nSelectedText: '已选择',
+                            selectAll:true,
+                            selectAllText: '全部',
+                            selectAllValue: 'all',
+                            buttonWidth: '180px'
+                        });                      
+                        
+                    })
+                },
+                'getWeekScanWinData' : function(timesObj){
+                    $model.$getWeekScanWinData(timesObj).then(function (res) {
+                        var res = res.data || [];
+                        $(".report-table").find("tbody").html("");
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                $("#weekScanWin").append("<tr><td>" + res[i].statTime + "</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].cycle + "</td><td>" + res[i].scanCode + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].redNum + "</td><td>" + res[i].realNum + "</td><td>" + res[i].redValue + "</td></tr>");
+                            }
+                        }else{
+                            $("#weekScanWin").append("<tr><td colspan='9'>暂无符合条件的数据</td></tr>");
+                        }
+                        
+                    })
+                },
+                'getWeekCashWinData' : function(timesObj){
+                    $model.$getWeekCashWinData(timesObj).then(function (res) {
+                        var res = res.data || [];
+                        $(".report-table").find("tbody").html("");
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                $("#weekCashWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + res[i].price + "</td><td>" + res[i].cudreNum + "</td><td>" + res[i].lastdreNum + "</td><td>" + res[i].lratio + "%</td><td>" + res[i].totalNum + "</td><td>" + res[i].drawMoney + "</td><td>" + res[i].totalMoney + "</td></tr>");
+                            }
+                        }else{
+                            $("#weekCashWin").append("<tr><td colspan='11'>暂无符合条件的数据</td></tr>");
+                        }
+                        
+                    })
+                },
+                'getWeekEntityWinData' : function(timesObj){
+                    $model.$getWeekEntityWinData(timesObj).then(function (res) {
+                        var res = res.data || [];
+                        $(".report-table").find("tbody").html("");
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                $("#weekEntityWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + res[i].cudreNum + "</td><td>" + res[i].lastdreNum + "</td><td>" + res[i].lratio + "%</td><td>" + res[i].totalNum + "</td></tr>");
+                            }
+                        }else{
+                            $("#weekEntityWin").append("<tr><td colspan='8'>暂无符合条件的数据</td></tr>");
+                        }
+                        
+                    })
+                },
+                'getProvData' : function(timesObj){
+                    $model.$getProvData(timesObj).then(function (res) {
+                        var res = res.data || [];
+                        $(".report-table").find("tbody").html("");
+                        //表标题显示
+                        $('#provDataTitle').html(curSpeciftStr +'扫码数据汇总('+ curWeekStr + ')');
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                var curNum = i+1;
+                                $("#provDataDetail").append("<tr><td>"+ curNum +"</td><td>" + res[i].province + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].scanCode + "</td><td>" + res[i].totalScanPv + "</td><td>" + res[i].totalScanUv + "</td><td>" + res[i].totalScanCode + "</td><td>" + res[i].heprovince + "</td><td>" + res[i].heScanPv + "</td><td>" + res[i].heScanUv + "</td><td>" + res[i].heScanCode + "</td><td>" + res[i].heTotalScanPv + "</td><td>" + res[i].heTotalScanUv + "</td><td>" + res[i].heTotalScanCode + "</td></tr>");
+                            }
+                        }else{
+                            $("#provDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
+                        }
+                    })
                 }
             }
             //点击按钮的返回
             $scope.goback = function () {
                 $(".region-margin").hide();
                 $(".region-margin").eq(0).show();
+                $('#weeks').multiselect().val([]).multiselect("refresh");
+                $('#brand').val('');
+                $('#specift').val('');
+                if($scope.speciftList != undefined && $scope.speciftList.length > 0){
+                    $scope.speciftList.length = 0;
+                }
+                $('#packs').multiselect().val([]).multiselect("refresh");
+                $('#cycleTime').multiselect().val([]).multiselect("refresh");
+                $('#cashWinSpecift').val('');
+                $('#entityWinSpecift').val('');
             }
 
             //查询按钮
             $scope.search = function ($event) {
                 var that = $event.target;
-                if (arguments[1] === 1) {
-                    $scope.obj = {
-                        "activityName": $(that).siblings(".report-gui").find("select").val(),
-                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                // if (arguments[1] === 1) {
+                //     $scope.obj = {
+                //         "activityName": $(that).siblings(".report-gui").find("select").val(),
+                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //         "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
+                //     }
+                //     //console.log($scope.obj);
+                //     gloabl.winUser($scope.obj);
+                // } else if (arguments[1] === 2) {
+                //     $scope.saoobj = {
+                //         "activityName": $(that).siblings(".report-gui").find("select").val(),
+                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //     }
+                //     gloabl.userPro($scope.saoobj);
+                // } else if (arguments[1] === 3) {
+                //     $scope.summar = {
+                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //     }
+                //     gloabl.summaryData($scope.summar)
+                // }
+                switch(arguments[1]){
+                    case 1:
+                        $scope.obj = {
+                            "activityName": $(that).siblings(".report-gui").find("select").val(),
+                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                                $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                            "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
+                        }
+                        //console.log($scope.obj);
+                        gloabl.winUser($scope.obj);
+                        break;
+                    case 2:
+                        $scope.saoobj = {
+                            "activityName": $(that).siblings(".report-gui").find("select").val(),
+                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
+                                $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                        }
+                        gloabl.userPro($scope.saoobj);
+                        break;
+                    case 3:
+                        $scope.summar = {
+                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
                             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
-                        "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
-                    }
-                    //console.log($scope.obj);
-                    gloabl.winUser($scope.obj);
-                } else if (arguments[1] === 2) {
-                    $scope.saoobj = {
-                        "activityName": $(that).siblings(".report-gui").find("select").val(),
-                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
-                    }
-                    gloabl.userPro($scope.saoobj);
-                } else if (arguments[1] === 3) {
-                    $scope.summar = {
-                        "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
-                    }
-                    gloabl.summaryData($scope.summar)
+                        }
+                        gloabl.summaryData($scope.summar);
+                        break;
+                    case 4:
+                        var weekArr = $('#weeks').val();
+                        var weekStr = weekArr.join(',');
+                        var packArr = $('#packs').val();
+                        var packStr = packArr.join(',');
+                        var cycleTimeArr = $('#cycleTime').val();
+                        var cycleTimeStr = cycleTimeArr.join(',');
+                        var winDataObj = {
+                            'statTime' : weekStr,
+                            'productSn' : $('#specift').val(),
+                            'unit' : packStr,
+                            'cycle' : cycleTimeStr
+                        }
+                        gloabl.getWeekScanWinData(winDataObj);
+                        break;
+                    case 5:
+                        var provWeekObj = $('#proviceDataWeeks');
+                        if(provWeekObj.val() != ''){
+                            curWeekStr = provWeekObj.find("option:selected").text();
+                        }
+                        var provSpeciftObj = $('#proviceDataSpecift');
+                        if(provSpeciftObj.val() != ''){
+                            curSpeciftStr = provSpeciftObj.find("option:selected").text();
+                        }
+                        
+                        var cashWinDataObj = {
+                            'statTime' : $('#proviceDataBrand').val(),
+                            'productSn' : $('#proviceDataSpecift').val()
+                        }
+                        gloabl.getProvData(cashWinDataObj);
+                        break;
+                    case 6:
+                        var cashWinDataObj = {
+                            'statTime' : $('#cashWinWeeks').val(),
+                            'productSn' : $('#cashWinSpecift').val(),
+                            'unit' : $('#cashWinPacks').val()
+                        }
+                        gloabl.getWeekCashWinData(cashWinDataObj);
+                        break;
+                    case 7:
+                        var entityWinDataObj = {
+                            'statTime' : $('#entityWinWeeks').val(),
+                            'productSn' : $('#entityWinSpecift').val(),
+                            'unit' : $('#entityWinPacks').val()
+                        }
+                        gloabl.getWeekEntityWinData(entityWinDataObj);
+                        break;
+                    default :
                 }
             }
             //下载
@@ -217,11 +549,49 @@ define([], function () {
                     var url ="/fixatreport/importExcelDailySummData";                    
                     // var statTime = $scope.summar.statTime;
                     // window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
+                } else if (a === 4){
+                    var weekArr = $('#weeks').val();
+                    var weekStr = weekArr.join(',');
+                    var packArr = $('#packs').val();
+                    var packStr = packArr.join(',');
+                    var cycleTimeArr = $('#cycleTime').val();
+                    var cycleTimeStr = cycleTimeArr.join(',');
+                    var data = {
+                        'statTime' : weekStr,
+                        'productSn' : $('#specift').val(),
+                        'unit' : packStr,
+                        'cycle' : cycleTimeStr
+                    }
+                    var url = "/api/tztx/dataportal/fixatreport/impExcelWeekScanWinData";
+                }else if(a === 5){
+                    var data = {
+                        'statTime' : $('#proviceDataBrand').val(),
+                        'productSn' : $('#proviceDataSpecift').val()
+                    }
+                    if(curSpeciftStr != '' && curWeekStr != ''){
+                        // console.log(curSpeciftStr + ':' + curWeekStr);
+                        data.tableTitle = curSpeciftStr +'扫码数据汇总('+ curWeekStr + ')';
+                    }
+                    var url = "/api/tztx/dataportal/fixatreport/impExcelWeekScanProvData";
+                }else if(a === 6){
+                    var data = {
+                        'statTime' : $('#cashWinWeeks').val(),
+                        'productSn' : $('#cashWinSpecift').val(),
+                        'unit' : $('#cashWinPacks').val()
+                    }
+                    var url = "/api/tztx/dataportal/fixatreport/impExcelWeekCashBonusData";
+                }else if(a === 7){
+                    var data = {
+                        'statTime' : $('#entityWinWeeks').val(),
+                        'productSn' : $('#entityWinSpecift').val(),
+                        'unit' : $('#entityWinPacks').val()
+                    }
+                    var url = "/api/tztx/dataportal/fixatreport/impExcelWeekEntityWinData";
                 }
                 var xhr = new XMLHttpRequest();
                 var formData = new FormData();
                 for(var attr in data) {
-                        formData.append(attr, data[attr]);
+                    formData.append(attr, data[attr]);
                 }
                 xhr.overrideMimeType("text/plain; charset=x-user-defined");
                 xhr.open('POST', url, true);
@@ -230,24 +600,52 @@ define([], function () {
                 xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
                 xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
                 xhr.onload = function(res) {
-                if (this.status == 200) {
-                    var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
-                    var respHeader = xhr.getResponseHeader("Content-Disposition");
-                    var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
-                    if (window.navigator.msSaveOrOpenBlob) {
-                        navigator.msSaveBlob(blob, fileName);
-                    } else {
-                        var link = document.createElement('a');
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = fileName;
-                        link.click();
-                        window.URL.revokeObjectURL(link.href);
+                    if (this.status == 200) {
+                        var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                        var respHeader = xhr.getResponseHeader("Content-Disposition");
+                        var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+                        if (window.navigator.msSaveOrOpenBlob) {
+                            navigator.msSaveBlob(blob, fileName);
+                        } else {
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = fileName;
+                            link.click();
+                            window.URL.revokeObjectURL(link.href);
+                        }
                     }
-                }
-            }
+                };
                 xhr.send(formData);
             }
-
+            //监听品牌变化
+            $('#brand').change(function(){
+                var curBrandValue = $(this).val();
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    $scope.$apply();
+                });
+            });
+            $('#cashWinBrand').change(function(){
+                var curBrandValue = $(this).val();
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    $scope.$apply();
+                });
+            });
+            $('#entityWinBrand').change(function(){
+                var curBrandValue = $(this).val();
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    $scope.$apply();
+                });
+            });
+            $('#proviceDataBrand').change(function(){
+                var curBrandValue = $(this).val();
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    $scope.$apply();
+                });
+            });
         }]
     };
 
