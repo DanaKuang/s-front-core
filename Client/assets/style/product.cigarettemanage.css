@@ -13,3 +13,6 @@
 
 .modal-body img {
   max-width: 30px; }
+
+.modal-body input[type="file"] {
+  width: 31% !important; }

@@ -19,7 +19,7 @@ define([], function () {
             pageNumber: 1,
             activity_page_data: {
                 currentPageNumber: 1, 
-                pageSize: 15
+                pageSize: 10
             }
         };
         var defineObj = { //指令定义对象
@@ -73,11 +73,11 @@ define([], function () {
                 };
 
                 // 页码点击事件触发的时候。因为在同一个模板里，目前有2处用到了这个指令，所以要区分
-                if (scope.size < 15) {
-                    scope.$emit('frominnerpagechange', event, scope.activity_page_data )
-                } else {
+                // if (scope.size < 15) {
+                //     scope.$emit('frominnerpagechange', event, scope.activity_page_data )
+                // } else {
                     scope.$emit('frompagechange', event, scope.activity_page_data);
-                }
+                // }
                 
             }
 

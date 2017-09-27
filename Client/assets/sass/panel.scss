@@ -1,3 +1,9 @@
+/**
+ * Author: kuang
+ * Create Date: 2017-09
+ * Description: panel.scss
+ */
+
 @mixin border-radius($num) {
 	-webkit-border-radius: $num!important;
 	-moz-border-radius: $num!important;
@@ -21,15 +27,6 @@
 	@include float(right)
 }
 
-.form-group {
-	.inline {
-		button.btn {
-			opacity: 0;
-			width: 0;
-			height: 0;
-		}
-	}
-}
 
 @media screen and (max-width: 1280px) {
 	.flex {
@@ -64,32 +61,7 @@ tr td {
 		max-height: 4em;
 	}
 }
-.form-group {
-	overflow: hidden;
-}
+
 .col-md-4 .input-sm {
 	width: 80%!important;
-}
-.form-inline {
-	overflow: hidden;
-	margin-bottom: 5px;
-	.control-label {
-		text-align: right;
-	}
-	.inline {
-		.input-group, .form-control {
-			width: 100%!important;
-		}
-	}
-	label.required {
-		position: relative;
-		&:after {
-			content: '*';
-			position: absolute;
-			right: 0;
-			top: -1px;
-			color: red;
-			font-size: 18px;
-		}
-	}
 }
