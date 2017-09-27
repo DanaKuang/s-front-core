@@ -12,30 +12,39 @@
     },
   "grid":{
     "left":"10",
-    "top":40
+    "top":"40"
   },
 "color": ["#bfbfbf"],
-		 "xAxis" : [
+"dataZoom": [
+        {
+          "type": "inside",
+          "show": true,
+          "start":0,
+          "end": 30,
+          "zoomLock":true
+        }
+      ],
+"xAxis" : [
     {
       "type" : "category",
-       "data":["2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1", "2017/1/1","2017/1/1"],
+       "data":[""],
       "axisTick": {
         "alignWithLabel": true
       }
     }
   ],
-   "yAxis" : {
-      "type" : "value",
-      "axisLabel": {
-        "show": false
-    },
-    "data":[]
-    },
+    "yAxis" : [
+        {
+            "type" : "value",
+            "position": "left"
+        }
+    ],
+    
   "series" : [
     {
       "name":"city",
       "type":"bar",
-      "barWidth": "20%",
+      "barWidth": "30%",
       "label":{
         "normal":{
           "show":true,
@@ -50,7 +59,7 @@
           "color":"#76D7F7"
         }
       },
-      "data":[10, 52, 200, 334, 490, 330, 220,10]
+      "data":[""]
     }
   ]
 }

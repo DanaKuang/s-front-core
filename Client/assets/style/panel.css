@@ -1,13 +1,13 @@
+/**
+ * Author: kuang
+ * Create Date: 2017-09
+ * Description: panel.scss
+ */
 .float-left {
   float: left; }
 
 .float-right {
   float: right; }
-
-.form-group .inline button.btn {
-  opacity: 0;
-  width: 0;
-  height: 0; }
 
 @media screen and (max-width: 1280px) {
   .flex {
@@ -34,25 +34,5 @@ tr td {
   tr td img {
     max-height: 4em; }
 
-.form-group {
-  overflow: hidden; }
-
 .col-md-4 .input-sm {
   width: 80% !important; }
-
-.form-inline {
-  overflow: hidden;
-  margin-bottom: 5px; }
-  .form-inline .control-label {
-    text-align: right; }
-  .form-inline .inline .input-group, .form-inline .inline .form-control {
-    width: 100% !important; }
-  .form-inline label.required {
-    position: relative; }
-    .form-inline label.required:after {
-      content: '*';
-      position: absolute;
-      right: 0;
-      top: -1px;
-      color: red;
-      font-size: 18px; }

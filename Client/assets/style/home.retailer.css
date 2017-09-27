@@ -34,13 +34,23 @@
 }
 .ui-retailer-search select {
     min-width: 100px;
+    height: 30px;
+    padding: 0;
 }
 .ui-retailer-search form >div {
     margin-right: 20px;
 }
-.ui-retailer-search .multiselect-container {
+.ui-retailer-search .multiselect-container,
+.ui-detail-search .multiselect-container {
     max-height: 200px;
     overflow: auto;
+}
+.ui-retailer-search .multiselect,
+.ui-detail-search .multiselect,
+.ui-detail-search select {
+    height: 30px;
+    padding: 4px 12px;
+    min-width: 150px;
 }
 .ui-detail-box .box {
     height: 80px;
@@ -81,6 +91,8 @@
 .ui-city-block select {
     display: inline-block;
     width: 100px;
+    height: 30px;
+    padding: 4px 12px;
 }
 
 .ui-detail-search .inline-block {

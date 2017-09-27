@@ -4,19 +4,18 @@
 	},
 	"polar": {},
 	"tooltip": {},
+	
 	"visualMap": {
 		"type": "continuous",
 		"min": 0,
-		"max": "max",
+		"max": "4",
 		"top": "middle",
 		"dimension": 1,
 		"calculable": false
 	},
 	"angleAxis": {
 		"type": "category",
-		"data": [
-		""
-		],
+		"data": [""],
 		"boundaryGap": false,
 		"splitLine": {
 			"show": true,
@@ -47,6 +46,6 @@
 				}
 			},
 			"renderItem": "renderItem",
-			"data": []
+			"data":[""]
 		}
 }

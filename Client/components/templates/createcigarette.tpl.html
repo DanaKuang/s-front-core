@@ -1,269 +1,327 @@
 <div>	
 	<div class="create-cigarette-body">
-		<!-- 修改状态 -->
+		<!-- 修改状态 / 查询状态 -->
 		<div class="edit-part" ng-if="conf.snData">
-			<div class="form-inline">
+			<div class="form-inline" ng-class="{'has-error': form.brandCode.$error.required && form.brandCode.$dirty || form.brandCode.$invalid, 'has-success': form.brandCode.$dirty && form.brandCode.$valid}">
 				<label for="brands" class="control-label col-md-3 col-xs-6 required">关联品牌</label>
 				<div class="col-md-7 col-xs-12 inline">
-					<select class="form-control input-sm" name="brands" id="brands" ng-model="conf.snData.product.brandCode" required>
+					<select class="form-control input-sm" name="brandCode" id="brands" ng-model="ciga.product.brandCode" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-		    		<option ng-repeat="item in conf.brandlist" value="{{item.brandCode}}" ng-selected="conf.snData.product.brandCode == item.brandCode">{{item.name}}</option>
+		    		<option ng-repeat="item in conf.brandlist" value="{{item.brandCode}}" ng-selected="ciga.product.brandCode == item.brandCode">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.brandCode.$dirty && form.brandCode.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.brandCode.$dirty && form.brandCode.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
 			<div class="form-inline">
 				<label for="" class="required control-label col-md-3 col-xs-6">条形码</label>
 				<div class="col-md-7 col-xs-12 inline">
-					<input type="text" class="form-control input-sm" placeholder="请输入条形码" ng-model="conf.snData.product.sn" disabled>
+					<input name="sn" type="text" class="form-control input-sm" placeholder="请输入条形码" ng-model="ciga.product.sn" disabled>
 				</div>
 				<div class="inline">
 					<div class="btn btn-default input-sm" ng-click="checksn($event)" disabled>查询</div>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">规格</label>
+			<div class="form-inline" ng-class="{'has-error': form.name.$dirty && (form.name.$error.required || form.name.$invalid), 'has-success': form.name.$dirty && form.name.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">规格</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入规格名称" ng-model="conf.snData.product.name" required>
+					<input name="name" type="text" class="form-control input-sm" placeholder="请输入规格名称" ng-model="ciga.product.name" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.name.$dirty && form.name.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.name.$dirty && form.name.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">价格(元)</label>
+			<div class="form-inline" ng-class="{'has-error': form.price.$dirty && (form.price.$error.required || form.price.$invalid), 'has-success': form.price.$dirty && form.price.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">价格</label>
 				<div class="inline col-md-7 col-xs-12">
 					<div class="input-group">
 			      <div class="input-group-addon">￥</div>
-			      <input type="text" class="form-control input-sm" placeholder="请输入价格" ng-model="conf.snData.price" required>
-			      <div class="input-group-addon">.00</div>
+			      <input name="price" type="text" class="form-control input-sm" placeholder="请输入价格" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.price" ng-disabled="disabled" required>
+			      <div class="input-group-addon">元</div>
 			    </div>
+			    <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.price.$dirty && form.price.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.price.$dirty && form.price.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">图片</label>
+			<div class="form-inline" ng-class="{'has-error': form.smallPic.$dirty && (form.smallPic.$error.required || form.smallPic.$invalid), 'has-success': form.smallPic.$dirty && form.smallPic.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">图片</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="file" class="form-control input-sm" ng-class="{'hidden': conf.snData.product.smallPic}" required>
-					<span ng-class="{'hidden': !conf.snData.product.smallPic}">
-						<img ng-src="{{conf.snData.product.smallPic}}" alt="">
+					<input name="smallPic" type="file" class="form-control input-sm" ng-hide="checked" ng-disabled="disabled" required>
+					<span ng-class="{'hidden': !ciga.product.smallPic}">
+						<img ng-src="{{ciga.product.smallPic}}" alt="">
 					</span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.smallPic.$dirty && form.smallPic.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.smallPic.$dirty && form.smallPic.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-inline" ng-class="{'has-error': form.typeCode.$dirty && (form.typeCode.$error.required || form.typeCode.$invalid), 'has-success': form.typeCode.$dirty && form.typeCode.$valid}">
 				<label class="control-label col-md-3 col-xs-6 required">卷烟类型</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select name="" class="form-control input-sm" ng-model="conf.snData.typeCode" required>
+					<select name="typeCode" class="form-control input-sm" ng-model="ciga.typeCode" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-						<option ng-repeat="item in conf.stylelist" value="{{item.code}}" ng-selected="conf.snData.typeCode == item.code">{{item.name}}</option>
+						<option ng-repeat="item in conf.stylelist" value="{{item.code}}" ng-selected="ciga.typeCode == item.code">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.typeCode.$dirty && form.typeCode.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.typeCode.$dirty && form.typeCode.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">焦油含量</label>
+			<div class="form-inline" ng-class="{'has-error': form.oil.$dirty && (form.oil.$error.required || form.oil.$invalid), 'has-success': form.oil.$dirty && form.oil.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">焦油含量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入焦油含量" ng-model="conf.snData.oil" required>
+					<input name="oil" type="text" class="form-control input-sm" placeholder="请输入焦油含量" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.oil" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.oil.$dirty && form.oil.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.oil.$dirty && form.oil.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">烟碱量</label>
+			<div class="form-inline" ng-class="{'has-error': form.nicotine.$dirty && (form.nicotine.$error.required || form.nicotine.$invalid), 'has-success': form.nicotine.$dirty && form.nicotine.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">烟碱量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入烟碱量" ng-model="conf.snData.nicotine" required>
+					<input name="nicotine" type="text" class="form-control input-sm" placeholder="请输入烟碱量" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.nicotine" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.nicotine.$dirty && form.nicotine.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.nicotine.$dirty && form.nicotine.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">一氧化碳量</label>
+			<div class="form-inline" ng-class="{'has-error': form.carbonMonoxide.$dirty && (form.carbonMonoxide.$error.required || form.carbonMonoxide.$invalid), 'has-success': form.carbonMonoxide.$dirty && form.carbonMonoxide.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">一氧化碳量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入一氧化碳量" ng-model="conf.snData.carbonMonoxide" required>
+					<input name="carbonMonoxide" type="text" class="form-control input-sm" placeholder="请输入一氧化碳量" ng-model="ciga.carbonMonoxide" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.carbonMonoxide.$dirty && form.carbonMonoxide.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.carbonMonoxide.$dirty && form.carbonMonoxide.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">烟支长度</label>
+			<div class="form-inline" ng-class="{'has-error': form.length.$dirty && (form.length.$error.required || form.length.$invalid), 'has-success': form.length.$dirty && form.length.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">烟支长度</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入烟支长度" ng-model="conf.snData.length" required>
+					<input name="length" type="text" class="form-control input-sm" placeholder="请输入烟支长度" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.length" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.length.$dirty && form.length.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.length.$dirty && form.length.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">烟支数量</label>
+			<div class="form-inline" ng-class="{'has-error': form.num.$dirty && (form.num.$error.required || form.num.$invalid), 'has-success': form.num.$dirty && form.num.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">烟支数量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入烟支数量" ng-model="conf.snData.num" required>
+					<input name="num" type="text" class="form-control input-sm" placeholder="请输入烟支数量" ng-pattern="/^\d+$/" ng-model="ciga.num" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.num.$dirty && form.num.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.num.$dirty && form.num.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">包装单位</label>
+			<div class="form-inline" ng-class="{'has-error': form.num.$dirty && (form.unitType.$error.required || form.unitType.$invalid), 'has-success': form.unitType.$dirty && form.unitType.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">包装单位</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="conf.snData.product.unitType" required>
+					<select class="form-control input-sm" name="unitType" id="" ng-model="ciga.product.unitType" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-						<option ng-repeat="item in conf.typelist" value="{{item.code}}" ng-selected="conf.snData.product.unitType == item.code">{{item.name}}</option>
+						<option ng-repeat="item in conf.typelist" value="{{item.code}}" ng-selected="ciga.product.unitType == item.code">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.unitType.$dirty && form.unitType.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.unitType.$dirty && form.unitType.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">包装</label>
+			<div class="form-inline" ng-class="{'has-error': form.pack.$dirty && (form.pack.$error.required || form.pack.$invalid), 'has-success': form.pack.$dirty && form.pack.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">包装</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="conf.snData.pack" required>
+					<select class="form-control input-sm" name="pack" id="" ng-model="ciga.pack" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-						<option ng-repeat="item in conf.packlist" value="{{item.code}}" ng-selected="conf.snData.pack == item.code">{{item.name}}</option>
+						<option ng-repeat="item in conf.packlist" value="{{item.code}}" ng-selected="ciga.pack == item.code">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.pack.$dirty && form.pack.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.pack.$dirty && form.pack.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">价类</label>
+			<div class="form-inline" ng-class="{'has-error': form.grade.$dirty && (form.grade.$error.required || form.grade.$invalid), 'has-success': form.grade.$dirty && form.grade.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">价类</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="conf.snData.grade" required>
+					<select class="form-control input-sm" name="grade" id="" ng-model="ciga.grade" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-						<option ng-repeat="item in conf.gradelist" value="{{item.code}}" ng-selected="conf.snData.grade == item.code">{{item.name}}</option>
+						<option ng-repeat="item in conf.gradelist" value="{{item.code}}" ng-selected="ciga.grade == item.code">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.grade.$dirty && form.grade.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.grade.$dirty && form.grade.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-inline" ng-class="{'has-error': form.gradeLevel.$dirty && (form.gradeLevel.$error.required || form.gradeLevel.$invalid), 'has-success': form.gradeLevel.$dirty && form.gradeLevel.$valid}">
 				<label for="" class="control-label col-md-3 col-xs-6 required">二级价类</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="conf.snData.gradeLevel" required>
+					<select class="form-control input-sm" name="gradeLevel" id="" ng-model="ciga.gradeLevel" ng-disabled="disabled" required>
 						<option value="">请选择</option>
-						<option ng-repeat="item in conf.gradelistjunior" value="{{item.code}}" ng-selected="conf.snData.gradeLevel == item.code">{{item.name}}</option>
+						<option ng-repeat="item in conf.gradelistjunior" value="{{item.code}}" ng-selected="ciga.gradeLevel == item.code">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.gradeLevel.$dirty && form.gradeLevel.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.gradeLevel.$dirty && form.gradeLevel.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
 			<div class="form-inline">
 				<label for="" class="control-label col-md-3 col-xs-6">批次自动激活延期天数</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" ng-model="conf.snData.activeDays">
+					<input type="text" class="form-control input-sm" ng-model="ciga.activeDays" ng-pattern="/^\d+$/" ng-disabled="disabled">
 				</div>
 			</div>
 			<div class="form-inline">
 				<label for="" class="control-label col-md-3 col-xs-6">描述</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" ng-model="conf.snData.product.memo">
+					<input type="text" class="form-control input-sm" ng-model="ciga.product.memo" ng-disabled="disabled">
 				</div>
 			</div>
 		</div>
 	
 		<!-- 新建状态 -->
 		<div class="create-part" ng-if="!conf.snData">
-			<div class="form-inline">
-				<label for="brands" class="control-label col-md-3 col-xs-6 required">关联品牌</label>
+			<div class="form-inline" ng-class="{'has-error': form.brandCode.$dirty && (form.brandCode.$error.required || form.brandCode.$invalid), 'has-success': form.brandCode.$dirty && form.brandCode.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">关联品牌</label>
 				<div class="col-md-7 col-xs-12 inline">
-					<select class="form-control input-sm" name="brands" id="brands" ng-model="ciga.product.brandCode" required>
+					<select class="form-control input-sm" name="brandCode" ng-model="ciga.product.brandCode" required>
 						<option value="">请选择</option>
-		    		<option ng-repeat="item in conf.brandlist" value="{{item.brandCode}}">{{item.name}}</option>
+		    		<option ng-repeat="item in conf.brandlist" value="{{item.brandCode}}" ng-selected="ciga.product.brandCode == item.brandCode">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.brandCode.$dirty && form.brandCode.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.brandCode.$dirty && form.brandCode.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="required control-label col-md-3 col-xs-6">条形码</label>
+			<div class="form-inline" ng-class="{'has-error': form.sn.$dirty && (form.sn.$error.required || form.sn.$invalid), 'has-success': form.sn.$dirty && form.sn.$valid}">
+				<label class="required control-label col-md-3 col-xs-6">条形码</label>
 				<div class="col-md-7 col-xs-12 inline">
-					<input type="text" class="form-control input-sm" placeholder="请输入条形码" ng-model="ciga.product.sn" required>
+					<input name="sn" type="text" class="form-control input-sm" placeholder="请输入条形码" ng-pattern="/^\d+$/" ng-model="ciga.product.sn" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.sn.$dirty && form.sn.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.sn.$dirty && form.sn.$invalid}" aria-hidden="true"></span>
 				</div>
 				<div class="inline">
 					<div class="btn btn-default input-sm" ng-click="checksn($event)">查询</div>
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-inline" ng-class="{'has-error': form.name.$dirty && (form.name.$error.required || form.name.$invalid), 'has-success': form.name.$dirty && form.name.$valid}">
 				<label for="" class="control-label col-md-3 col-xs-6 required">规格</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入规格名称" ng-model="ciga.product.name" ng-disabled="disabled" required>
+					<input name="name" type="text" class="form-control input-sm" placeholder="请输入规格名称" ng-model="ciga.product.name" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.name.$dirty && form.name.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.name.$dirty && form.name.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">价格(元)</label>
+			<div class="form-inline" ng-class="{'has-error': form.price.$dirty && (form.price.$error.required || form.price.$invalid), 'has-success': form.price.$dirty && form.price.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">价格</label>
 				<div class="inline col-md-7 col-xs-12">
 					<div class="input-group">
 			      <div class="input-group-addon">￥</div>
-			      	<input type="text" class="form-control input-sm" placeholder="请输入价格" ng-model="ciga.price" ng-disabled="disabled" required>
-			      <div class="input-group-addon">.00</div>
+			      	<input name="price" type="text" class="form-control input-sm" placeholder="请输入价格" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.price" ng-disabled="disabled" required>
+			      <div class="input-group-addon">元</div>
 			    </div>
+			    <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.price.$dirty && form.price.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.price.$dirty && form.price.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">图片</label>
+			<div class="form-inline" ng-class="{'has-error': form.smallPic.$dirty && (form.smallPic.$error.required || form.smallPic.$invalid), 'has-success': form.smallPic.$dirty && form.smallPic.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">图片</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input class="form-control input-sm" ng-class="{'hidden': ciga.product.smallPic}" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled" ng-model="ciga.product.smallPic" required>
+					<input name="smallPic" class="form-control input-sm" ng-class="{'hidden': ciga.product.smallPic}" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled" ng-model="ciga.product.smallPic" required>
 					<span ng-class="{'hidden': !ciga.product.smallPic}">
 						<img ng-src="{{ciga.product.smallPic}}" alt="">
 					</span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.smallPic.$dirty && form.smallPic.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.smallPic.$dirty && form.smallPic.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">卷烟类型</label>
+			<div class="form-inline" ng-class="{'has-error': form.typeCode.$dirty && (form.typeCode.$error.required || form.typeCode.$invalid), 'has-success': form.typeCode.$dirty && form.typeCode.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">卷烟类型</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select name="" id="" class="form-control input-sm" ng-model="ciga.typeCode" ng-disabled="disabled" required>
+					<select name="typeCode" id="" class="form-control input-sm" ng-model="ciga.typeCode" ng-disabled="disabled" required>
 						<option value="1">请选择</option>
 						<option ng-repeat="item in conf.stylelist" value="{{item.code}}">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.typeCode.$dirty && form.typeCode.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.typeCode.$dirty && form.typeCode.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">焦油含量</label>
+			<div class="form-inline" ng-class="{'has-error': form.oil.$dirty && (form.oil.$error.required || form.oil.$invalid), 'has-success': form.oil.$dirty && form.oil.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">焦油含量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入焦油含量" ng-model="ciga.oil" ng-disabled="disabled" required>
+					<input name="oil" type="text" class="form-control input-sm" placeholder="请输入焦油含量" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.oil" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.oil.$dirty && form.oil.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.oil.$dirty && form.oil.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-inline" ng-class="{'has-error': form.nicotine.$dirty && (form.nicotine.$error.required || form.nicotine.$invalid), 'has-success': form.nicotine.$dirty && form.nicotine.$valid}">
 				<label for="" class="control-label col-md-3 col-xs-6 required">烟碱量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" ng-model="ciga.nicotine" class="form-control input-sm" placeholder="请输入烟碱量" ng-disabled="disabled" required>
+					<input name="nicotine" type="text" ng-model="ciga.nicotine" class="form-control input-sm" placeholder="请输入烟碱量" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.nicotine.$dirty && form.nicotine.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.nicotine.$dirty && form.nicotine.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">一氧化碳量</label>
+			<div class="form-inline" ng-class="{'has-error': form.carbonMonoxide.$dirty && (form.carbonMonoxide.$error.required || form.carbonMonoxide.$invalid), 'has-success': form.carbonMonoxide.$dirty && form.carbonMonoxide.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">一氧化碳量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入一氧化碳量" ng-model="ciga.carbonMonoxide" ng-disabled="disabled" required>
+					<input name="carbonMonoxide" type="text" class="form-control input-sm" placeholder="请输入一氧化碳量" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.carbonMonoxide" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.carbonMonoxide.$dirty && form.carbonMonoxide.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.carbonMonoxide.$dirty && form.carbonMonoxide.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">烟支长度</label>
+			<div class="form-inline" ng-class="{'has-error': form.length.$dirty && (form.length.$error.required || form.length.$invalid), 'has-success': form.length.$dirty && form.length.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">烟支长度</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" ng-disabled="disabled" placeholder="请输入烟支长度" ng-model="ciga.length" required>
+					<input name="length" type="text" class="form-control input-sm" ng-disabled="disabled" placeholder="请输入烟支长度" ng-model="ciga.length" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.length.$dirty && form.length.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.length.$dirty && form.length.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">烟支数量</label>
+			<div class="form-inline" ng-class="{'has-error': form.num.$dirty && (form.num.$error.required || form.num.$invalid), 'has-success': form.num.$dirty && form.num.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">烟支数量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" placeholder="请输入烟支数量" ng-model="ciga.num" ng-disabled="disabled" required>
+					<input name="num" type="text" class="form-control input-sm" placeholder="请输入烟支数量" ng-pattern="/^\d+$/" ng-model="ciga.num" ng-disabled="disabled" required>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.num.$dirty && form.num.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.num.$dirty && form.num.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">包装单位</label>
+			<div class="form-inline" ng-class="{'has-error': form.num.$dirty && (form.unitType.$error.required || form.unitType.$invalid), 'has-success': form.unitType.$dirty && form.unitType.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">包装单位</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="ciga.product.unitType" ng-disabled="disabled" required>
+					<select class="form-control input-sm" name="unitType" id="" ng-model="ciga.product.unitType" ng-disabled="disabled" required>
 						<option value="">请选择</option>
 						<option ng-repeat="item in conf.typelist" value="{{item.code}}">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.unitType.$dirty && form.unitType.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.unitType.$dirty && form.unitType.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">包装</label>
+			<div class="form-inline" ng-class="{'has-error': form.pack.$dirty && (form.pack.$error.required || form.pack.$invalid), 'has-success': form.pack.$dirty && form.pack.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">包装</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="ciga.pack" ng-disabled="disabled" required>
+					<select class="form-control input-sm" name="pack" id="" ng-model="ciga.pack" ng-disabled="disabled" required>
 						<option value="">请选择</option>
 						<option ng-repeat="item in conf.packlist" value="{{item.code}}">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.pack.$dirty && form.pack.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.pack.$dirty && form.pack.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">价类</label>
+			<div class="form-inline" ng-class="{'has-error': form.grade.$dirty && (form.grade.$error.required || form.grade.$invalid), 'has-success': form.grade.$dirty && form.grade.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">价类</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="ciga.grade" ng-disabled="disabled" required>
+					<select class="form-control input-sm" name="grade" id="" ng-model="ciga.grade" ng-disabled="disabled" required>
 						<option value="">请选择</option>
 						<option ng-repeat="item in conf.gradelist" value="{{item.code}}">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.grade.$dirty && form.grade.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.grade.$dirty && form.grade.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
-			<div class="form-inline">
-				<label for="" class="control-label col-md-3 col-xs-6 required">二级价类</label>
+			<div class="form-inline" ng-class="{'has-error': form.gradeLevel.$dirty && (form.gradeLevel.$error.required || form.gradeLevel.$invalid), 'has-success': form.gradeLevel.$dirty && form.gradeLevel.$valid}">
+				<label class="control-label col-md-3 col-xs-6 required">二级价类</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select class="form-control input-sm" name="" id="" ng-model="ciga.gradeLevel" ng-disabled="disabled" required>
+					<select class="form-control input-sm" name="gradeLevel" id="" ng-model="ciga.gradeLevel" ng-disabled="disabled" required>
 						<option value="">请选择</option>
 						<option ng-repeat="item in conf.gradelistjunior" value="{{item.code}}">{{item.name}}</option>
 					</select>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.gradeLevel.$dirty && form.gradeLevel.$valid}" aria-hidden="true"></span>
+					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.gradeLevel.$dirty && form.gradeLevel.$invalid}" aria-hidden="true"></span>
 				</div>
 			</div>
 			<div class="form-inline">
 				<label for="" class="control-label col-md-3 col-xs-6">批次自动激活延期天数</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" ng-model="ciga.activeDays">
+					<input type="text" class="form-control input-sm" ng-model="ciga.activeDays" ng-pattern="/^\d+$/" ng-disabled="disabled">
 				</div>
 			</div>
 			<div class="form-inline">
 				<label for="" class="control-label col-md-3 col-xs-6">描述</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input type="text" class="form-control input-sm" ng-model="ciga.memo">
+					<input type="text" class="form-control input-sm" ng-model="ciga.memo" ng-disabled="disabled">
 				</div>
 			</div>
 		</div>

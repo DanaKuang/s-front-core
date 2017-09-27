@@ -29,12 +29,19 @@ define([], function () {
         };
 
         function linkFn (scope, element, attrs) {
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber', 'size']);
 
             // 监视conf变化更新page
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber', 'size']);
+                if (scope.conf) {
+                    var page = scope.conf.data.page;
+                    scope.totalCount = page.count;
+                    scope.size = page.pageNumber > 1 ? page.pageSize : page.count;
+                    scope.curPage = page.currentPageNumber;
+                    scope.pageNumber = page.pageNumber;
+                }
             }, true);
 
             scope.edit = function (e) {
