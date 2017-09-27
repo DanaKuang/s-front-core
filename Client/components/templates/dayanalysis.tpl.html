@@ -3,15 +3,15 @@
         <div class="form-inline col-md-12">
             <div class="inline-block">
                 <label>日期</label>
-                <input type="input" name="startTime" ng-model="startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
-                <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                <input type="input" name="startTime" ng-model="startTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
             </div>&nbsp;&nbsp;
             <label class="checkbox">
                 <input type="checkbox" ng-model="checked" ng-change="fixDateInput(checked)">&nbsp;&nbsp;对比&nbsp;&nbsp;
             </label>&nbsp;&nbsp;
             <div class="inline-block" ng-show="checked">
-                <input type="input" name="b_startTime" ng-model="b_startTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
-                <input type="input" name="b_endTime" ng-model="b_endTime" class="form-control" disabled>
+                <input type="input" name="b_startTime" ng-model="b_startTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="input" name="b_endTime" ng-model="b_endTime" class="form-control input-sm" disabled>
             </div>
         </div>
         <div class="form-inline col-md-12">
