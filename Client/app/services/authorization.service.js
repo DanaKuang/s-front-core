@@ -16,7 +16,7 @@ define([], function () {
           .bootstrap(document, ['tztx.saas'])
           .invoke(['mark', function(mark) {
             // 加载动画
-            mark.hiden();
+            mark.hide();
           }]);
       };
       //URL访问权限核查

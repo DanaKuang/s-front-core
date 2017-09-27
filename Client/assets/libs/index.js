@@ -50,6 +50,10 @@ requirejs.config({
       'https://cdn.bootcss.com/angular-file-upload/2.5.0/angular-file-upload.min',
       'bower_components/angular-file-upload/dist/angular-file-upload.min'
     ],
+    nprogress: [
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min',
+      'bower_components/nprogress/nprogress'
+    ],
     app: 'app/app'
   },
   shim: {
@@ -84,6 +88,9 @@ requirejs.config({
     angularFileUpload: {
       deps: ['angular']
     },
+    nprogress: {
+      deps: ['jquery']
+    },
     app: {
       deps: [
         'datetimepicker'
@@ -100,7 +107,8 @@ requirejs.config({
     'echarts',
     'angular',
     'angularAnimate',
-    'angularFileUpload'
+    'angularFileUpload',
+    'nprogress'
   ],
   callback: function() {
     require(['app']); //引导应用初始化

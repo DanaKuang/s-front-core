@@ -591,6 +591,20 @@ body {
   top: 4px;
   right: 5px;
 }
+/** nprogress bar */
+#nprogress .bar {
+  background: #44c2ed;
+  height: 3px;
+}
+#nprogress .spinner {
+  top: 65px;
+}
+#nprogress .spinner-icon {
+  height: 25px;
+  width: 25px;
+  border-top-color: #44c2ed;
+  border-left-color: #44c2ed;
+}
 
 .region-hours-wrap {
   padding-left:25px;
