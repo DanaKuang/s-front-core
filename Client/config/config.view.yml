@@ -199,6 +199,13 @@ product:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'product/supply/supply.html'
+  - httpmethod: 'get'                       # 卷烟管理
+    routepath: '/view/product/cigamanage'
+    description: 'supply'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'product/cigamanage/cigarettemanage.html'  
 visitManage:
   - httpmethod: 'get'                       # 零售户管理
     routepath: '/view/visit/manage'

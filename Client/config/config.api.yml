@@ -5,15 +5,12 @@
 # 接口控制格式 参数说明
 # login: 登陆模块
 # index: 首页模块
-#region   地域模块
-#spec     规格模块
-#agree    履约模块
-#report   固定格式报表
 # httpmethod: 请求类型
 # routepath: 请求接口[统一加前缀][/api/tztx]
 # authorized: 是否已授权
 # description: 接口描述
 # enableroute: 是否已废弃
+# gatewaytype: 后端接口
 # responetype: 接口返回格式
 #
 test:                                       # 测试
@@ -21,6 +18,35 @@ test:                                       # 测试
     routepath: '/api/tztx/dataportal/test/datScanTimes'
     authorized: 1
     description: 'test'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+public:                                             ## 公共接口 [勿动]
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getDefaultProvByorgId'
+    authorized: 1
+    description: '根据用户获取默认省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserSaleByUserId'
+    authorized: 1
+    description: '根据用户获取销区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
+    authorized: 1
+    description: '根据用户获取品牌下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserProvByUserId'
+    authorized: 1
+    description: '根据用户获取省份'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -148,20 +174,6 @@ index:                                      # 首页
     responetype: 'json'
 region:
   - httpmethod: 'post'
-    routepath: '/api/tztx/public/getUserProvByUserId'
-    authorized: 1
-    description: '省份下拉列表'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/public/getDefaultProvByorgId'
-    authorized: 1
-    description: '默认省份值'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getWeeks'
     authorized: 1
     description: '周下拉列表'
@@ -212,7 +224,7 @@ region:
     responetype: 'json'
 spec:
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getBrand'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌'
     enableroute: 1
@@ -311,7 +323,7 @@ agree:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/getBrand'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
     authorized: 1
     description: '品牌'
     enableroute: 1
@@ -608,13 +620,6 @@ track:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
-    authorized: 1
-    description: '品牌下拉框'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/actAnalysis/getActyProductDownBox'
     authorized: 1
     description: '规格下拉框'
@@ -762,6 +767,63 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+cigarettemanage:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/tobaccoList'
+    authorized: 1
+    description: '卷烟管理列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/queryProductTobacco'
+    authorized: 1
+    description: '查询sn条形码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/saveOrUpdateTobacco'
+    authorized: 1
+    description: '保存/更新卷烟信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas//saotx/product/removeTobacco'
+    authorized: 1
+    description: '删除某个卷烟数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoType'
+    authorized: 1
+    description: '查询烟草规格'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoPack'
+    authorized: 1
+    description: '获取烟草包装维度数据/包装单位'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoStyle'
+    authorized: 1
+    description: '查询卷烟类型'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDimTobaccoGrade'
+    authorized: 1
+    description: '获取烟草等级维度数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/activity/list'
@@ -813,7 +875,7 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '根据供应商获取品牌接口'
     enableroute: 1
@@ -834,7 +896,7 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/brand/queryBrands'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '查询所有品牌'
     enableroute: 1
@@ -982,7 +1044,7 @@ supply:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    routepath: '/api/tztx/saas/saotx/common/queryBrandWithRight'
     authorized: 1
     description: '获取品牌'
     enableroute: 1
@@ -1137,13 +1199,6 @@ group:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
-    authorized: 1
-    description: '品牌'
-    enableroute: 1
-    gatewaytype: 0
-    responetype: 'json'
-  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getThrMonScanSmokeBar'
     authorized: 1
     description: '近三个月扫码烟包总数'
@@ -1175,6 +1230,63 @@ group:
     routepath: '/api/tztx/dataportal/consumer/getMonthToptenTable'
     authorized: 1
     description: '当月次数排名前10'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+portrait:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getOpenIdBymobile'
+    authorized: 1
+    description: '用户手机号查询 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserBasicInfo'
+    authorized: 1
+    description: '用户基本信息 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanFree'
+    authorized: 1
+    description: '用户扫码频度分析 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScandayBar'
+    authorized: 1
+    description: '用户扫码结构分析 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanBrandThirty'
+    authorized: 1
+    description: '近30天用户扫码烟包数 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanLocus'
+    authorized: 1
+    description: '用户扫码轨迹 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserBrandScanTable'
+    authorized: 1
+    description: '用户各规格扫码烟包数 '
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getUserScanHourPie'
+    authorized: 1
+    description: '用户掃碼時段分析 '
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'

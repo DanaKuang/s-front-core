@@ -74,11 +74,43 @@ define([], function () {
         return result;
       }
 
+      function sfTableConf (conf, sale) {
+        if (sale) {
+          _.each(sale, function (s) {
+            conf.columns.head.push({
+                name: s.code || "",
+                label: s.name || "",
+                // width: "400px",
+                colspan: 2,
+                align: "center"
+            });
+            conf.columns.child.push({
+                name: s.code + "_orderFirstTime",
+                label: "首订单时间",
+                sortable: false,
+                tooltip: "某规格的烟在某个地域范围内由商业投放市场后首次订单的时间",
+                placement: "bottom",
+                align: "center"
+            });
+            conf.columns.child.push({
+                name: s.code + "_scanFirstTime",
+                label: "首扫时间",
+                sortable: false,
+                tooltip: "某规格的烟在某个地域范围内由消费者首次扫码的时间",
+                placement: "bottom",
+                align: "center"
+            })
+          });
+        }
+        return conf;
+      }
+
       this.$get = function () {
         return {
           __filter__: $filter,
           salesTable: salesTable,
           formatTable: formatTable,
+          sfTableConf: sfTableConf,
           sfTable: sfTable
         }
       }

@@ -19,15 +19,13 @@
                 <div class="panel rate">
                     <div class="panel-body">
                         <form class="form-inline ui-form-search col-md-12">
-                            <div class="form-group">
+                            <div class="">
                                 <label class="control-label">活动名称</label>
-                            </div>
-                            <div class="form-group">
                                 <select class="form-control" name="activityId" ng-model="activityId">
                                     <option ng-repeat="act in activity" value="{{act.activityId}}">{{act.activityName}}</option>
                                 </select>
+                                <button type="submit" class="btn btn-primary" ng-click="realSearch()" style="margin-left: 15px">查询</button>
                             </div>
-                            <button type="submit" class="btn btn-primary" ng-click="realSearch()">查询</button>
                         </form>
                     </div>
                 </div>

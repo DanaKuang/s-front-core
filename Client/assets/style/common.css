@@ -9,7 +9,8 @@ body {
   font-family: STHeiti, Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-overflow-scrolling: touch
+  -webkit-overflow-scrolling: touch;
+  font-size: 14px;
 }
 a {
   text-decoration: none;
@@ -27,10 +28,13 @@ address, em, i {
   font-style: normal
 }
 button, input {
-  // border: 0 none;
+  border: 0 none;
   outline: none
 }
-input[type=button], input[type=submit] {
+input {
+  border: 1px solid #d2d2d2;
+}
+input[type=button], input[type=submit], select {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none
@@ -80,9 +84,7 @@ a {
   -moz-transition: color .1s ease-in-out;
   -webkit-transition: color .1s ease-in-out
 }
-label {
-  color: #242a30
-}
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,6 +92,9 @@ label {
 }
 .modal {
   height: 100%;
+}
+.modal-header {
+  font-size: 16px;
 }
 .modal.in .modal-dialog {
   margin: 0 auto;
@@ -100,13 +105,57 @@ label {
   display: inline-block;
 }
 .btn.btn-primary,
-.btn.btn-primary:focus,
-.btn.btn-primary:active,
-.btn.btn-primary:hover {
+.btn.btn-primary:focus {
   position: relative;
   height: 30px;
-  background: #44c2ed;
+  background: #337ab7;
   color: #fff;
-  border-color: #44c2ed;
+  border-color: #2e6da4;
+  transition: background .3s;
+}
+.btn.btn-primary:hover {
+  background: #1b5c94
+}
+.btn.btn-primary:active {
+  font-weight: bold;
+}
+.button-group {
+  text-align: center;
+}
+.form-group {
+  margin-bottom: 12px!important;
+}
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+  border-bottom-width: 0;
+}
+
+tr td {
+  vertical-align: middle!important;
+}
+
+.control-label {
+  margin-right: 5px;
+}
+
+/* ============== flex布局 ================ */
+ .flex {
+  display: -webkit-box;
+  display: box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: center;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  align-self: flex-start;
+  flex-wrap: nowrap;
 }
 

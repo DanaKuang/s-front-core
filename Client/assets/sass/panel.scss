@@ -1,0 +1,95 @@
+@mixin border-radius($num) {
+	-webkit-border-radius: $num!important;
+	-moz-border-radius: $num!important;
+	-ms-border-radius: $num!important;
+	border-radius: $num!important;
+}
+
+@mixin width($w) {
+	width: $w!important;
+}
+
+@mixin float($dir) {
+	float: $dir;
+}
+
+.float-left {
+	@include float(left)
+}
+
+.float-right {
+	@include float(right)
+}
+
+.form-group {
+	.inline {
+		button.btn {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.flex {
+		font-size: 8px;
+	}
+}
+
+.panel-body {
+	.flex {
+		justify-content: flex-start;
+	}
+	.oper-btn-wrap {
+		margin: 0 auto;
+		width: 70px;
+		cursor: pointer;
+	}
+	.operate-btn {
+		margin: 0 5px;
+		&:hover {
+			color: #6e80ff;
+		}
+	}
+}
+
+th {
+	font-size: 1.1em!important;
+}
+
+tr td {
+	font-size: 1em!important;
+	img {
+		max-height: 4em;
+	}
+}
+.form-group {
+	overflow: hidden;
+}
+.col-md-4 .input-sm {
+	width: 80%!important;
+}
+.form-inline {
+	overflow: hidden;
+	margin-bottom: 5px;
+	.control-label {
+		text-align: right;
+	}
+	.inline {
+		.input-group, .form-control {
+			width: 100%!important;
+		}
+	}
+	label.required {
+		position: relative;
+		&:after {
+			content: '*';
+			position: absolute;
+			right: 0;
+			top: -1px;
+			color: red;
+			font-size: 18px;
+		}
+	}
+}

@@ -3,7 +3,7 @@
     "tooltip" : {
         "trigger": "axis",
         "axisPointer" : {            
-            "type" : "shadow"       
+            "type" : "line"       
         }
     },
      "legend": {
@@ -17,6 +17,7 @@
         "bottom": "2%",
         "containLabel": true
     },
+    "dataZoom": [],
     "xAxis" : [
         {
             "type" : "category",

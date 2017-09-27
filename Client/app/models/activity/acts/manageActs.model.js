@@ -19,13 +19,13 @@ define([], function () {
             var GET_ACTIVITY_STATUS = '/api/tztx/saas/saotx/activity/queryDimDataStatus';
 
             // 所有品牌
-            var GET_ALL_BRANDS = '/api/tztx/saas/saotx/brand/queryBrands';
+            var GET_ALL_BRANDS = '/api/tztx/saas/saotx/common/queryBrandWithRight';
             // 模板列表对应的配置弹窗
             var GET_TEMPLATE_SPECIFIC = '/api/tztx/saas/saotx/template/template_common_list';
             // 供应商
             var GET_SUPPLIER_COMPANY = '/api/tztx/saas/saotx/common/querySupplier';
             // 根据供应商选择品牌
-            var GET_BRAND_LIST = '/api/tztx/saas/saotx/common/queryBrand'
+            var GET_BRAND_LIST = '/api/tztx/saas/saotx/common/queryBrandWithRight'
             // 根据品牌选择规格
             var GET_PRODUCT_LIST = '/api/tztx/saas/saotx/common/queryProduct';
             // 地区

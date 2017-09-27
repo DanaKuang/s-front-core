@@ -55,7 +55,10 @@ define([], function () {
         $model.$getProduct(productBrand).then(function(res){
           $scope.Products = res.data;
           $scope.Product = $scope.Products[0];
-          $scope.$apply();
+          $scope.$apply();          
+          //加载规格时，去渲染屏幕
+          defaultBrand.productSn = $scope.Product.sn;
+          GlobalBrand(defaultBrand);                  
           if (caller) {
             $scope.ProductChange();
           }
@@ -64,12 +67,10 @@ define([], function () {
 
       //规格发生改变时
       $scope.ProductChange = function () {
-        defaultBrand = {
-          "statDate": yearMonth,
-          "productSn": $scope.Product.sn
-        };
+        defaultBrand.productSn = $scope.Product.sn;
         GlobalBrand(defaultBrand);        
       }
+      //页面初始加载的时候传个参数
       $scope.BrandChange(1);
       function Global(data) {
         var obj1 = {};
@@ -138,9 +139,9 @@ define([], function () {
         var frequencyChartLeft = echarts.init(document.getElementById("frequency-chart-left"));
         var frequencyChartRight = echarts.init(document.getElementById("frequency-chart-right"));   
         var frequencyDataLeft = _.cloneDeep($model.$frequency.data); 
-        frequencyDataLeft.title.text = "近三个月扫码烟包数";
+        frequencyDataLeft.yAxis.name = "近三个月扫码烟包数";
         var frequencyDataRight = _.cloneDeep($model.$frequency.data);    
-        frequencyDataRight.title.text = "当月扫码烟包数"     
+        frequencyDataRight.yAxis.name = "当月扫码烟包数"     
         $model.$getThrMonScanSmokeBar(params).then(function(res) {
           var res = res.data || [];
           frequencyDataLeft.yAxis.data = [];
@@ -184,6 +185,15 @@ define([], function () {
         var userMonthJson = $model.$monthTrend.data;
         $model.$getMonthTrendScan(params).then(function(res) {
           var res = res.data || [];
+          if (res.length>=8) {
+            userMonthJson.dataZoom.push({
+              "type": "inside",
+              "show": true,
+              "start":0,
+              "end": 30,
+              "zoomLock":true
+            })
+          }
           userMonthJson.xAxis[0].data = [];
           $(userMonthJson.series).each(function(index,n){
             n.data = [];

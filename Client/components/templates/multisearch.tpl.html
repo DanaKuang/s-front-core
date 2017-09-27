@@ -3,11 +3,11 @@
         <div class="col-md-12 form-inline">
             <label for="">查询时间：</label>
             <input type="text" name="startTime" ng-model="startTime" class="date form-control" readonly="">
-            <select class="hours" name="startHour" ng-model="startHour">
+            <select class="hours form-control" name="startHour" ng-model="startHour">
                 <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
             </select>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;
             <input type="text" name="endTime" ng-model="endTime" class="date form-control" readonly="">
-            <select class="hours" name="endHour" ng-model="endHour">
+            <select class="hours form-control" name="endHour" ng-model="endHour">
                 <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
             </select>&nbsp;
         </div>

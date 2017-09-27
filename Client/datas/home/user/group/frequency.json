@@ -8,7 +8,7 @@
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
-            "type": "shadow"
+            "type": "line"
         }
     },
     "color": [
@@ -38,6 +38,7 @@
     "yAxis": {
         "type": "category",
         "data": [],
+        "name":"",
         "axisTick": {
             "show":false,
             "alignWithLabel": true

@@ -13,7 +13,7 @@ define([], function () {
 
         var giftTypeUrl = '/api/tztx/saas/saotx/common/queryDimAwardType';  //礼品类型。1-实物；2-红包；3-卡券；4-积分
         var supplyListUrl = '/api/tztx/saas/saotx/supplier/queryList';  //获取供应商列表
-        var brandListUrl = '/api/tztx/saas/saotx/common/queryBrand';  //获取品牌
+        var brandListUrl = '/api/tztx/saas/saotx/common/queryBrandWithRight';  //获取品牌
         var speciftByBrandUrl  = '/api/tztx/saas/saotx/common/queryProduct'; //根据品牌获取适用规格
         var saveOrUpdateDataUrl = '/api/tztx/saas/saotx/poolGift/saveOrUpdate'; //新增或修改礼品对象数据
         var giftListUrl = '/api/tztx/saas/saotx/product/queryMetraList'; //获取礼品列表

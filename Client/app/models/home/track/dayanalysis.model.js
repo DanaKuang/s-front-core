@@ -15,11 +15,12 @@ define([], function () {
                 var MAP_JSON_CONF = '/statics/home/track/dayanalysis/mapConf.json';         // 地图配置
                 var CITYMAP_JSON_CONF = '/statics/home/track/dayanalysis/cityMapConf.json'; // 城市配置
                 var PIE_JSON_CONF = "/statics/home/track/dayanalysis/pieConf.json";         // 饼图配置
-                var DEF_MAP_DATA = "/statics/home/track/dayanalysis/defMap.json";          // 默认数据
+                var DEF_MAP_DATA = "/statics/home/track/dayanalysis/defMap.json";           // 默认数据
 
                 var GET_ACTIVITY_DATA = "/api/tztx/dataportal/actAnalysis/getActyDownBox";      // 获取活动名称
-                var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";     // 获取品牌
+                var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";        // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
+                var GET_DEFAULT_PROVINCE = "/api/tztx/dataportal/public/getDefaultProvByorgId"; // 获取默认省份
 
                 var GET_TREND_DATA = "/api/tztx/dataportal/actAnalysis/getTrendData";           // 获取趋势分析
                 var GET_MAP_DATA = "/api/tztx/dataportal/actAnalysis/getProvinceData";          // 获取地域分析
@@ -31,12 +32,13 @@ define([], function () {
                 this.$chinaJson = request.$Query(CHINA_JSON_URL);
                 this.$defMap = request.$Query(DEF_MAP_DATA);
                 // 地图、折线图配置、饼图
-                this.$dayMapConf = request.$Query(DAYMAP_JSON_CONF);          // 日常折线图
-                this.$cityMapConf = request.$Query(CITYMAP_JSON_CONF);        // 城市折线图
-                this.$mapConf = request.$Query(MAP_JSON_CONF);                // 地域分析
-                this.$pieLeftConf = request.$Query(PIE_JSON_CONF);            // 左侧饼图配置
-                this.$pieRightConf = request.$Query(PIE_JSON_CONF);           // 右侧饼图配置
-                this.$activity = request.$Search(GET_ACTIVITY_DATA, {}, true);// 获取活动下拉框
+                this.$dayMapConf = request.$Query(DAYMAP_JSON_CONF);            // 日常折线图
+                this.$cityMapConf = request.$Query(CITYMAP_JSON_CONF);          // 城市折线图
+                this.$mapConf = request.$Query(MAP_JSON_CONF);                  // 地域分析
+                this.$pieLeftConf = request.$Query(PIE_JSON_CONF);              // 左侧饼图配置
+                this.$pieRightConf = request.$Query(PIE_JSON_CONF);             // 右侧饼图配置
+                this.$activity = request.$Search(GET_ACTIVITY_DATA, {}, true);  // 获取活动下拉框
+                this.$defPro = request.$Search(GET_DEFAULT_PROVINCE, {}, true); // 获取默认省份
 
                 // 获取品牌
                 this.$brand = request.$Search(GET_BRAND_DATA, {}, true);

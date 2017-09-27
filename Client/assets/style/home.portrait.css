@@ -1,3 +1,4 @@
+
 .clearfix:after {
     clear: both;
     height: 0;
@@ -44,33 +45,27 @@
 
 /*content*/
 .portrait_userInfo{
-	width:662px;
-	height:169px;
+	width:862px;
+	height:200px;
 	border:1px solid #e6e6e6;
 	margin:30px auto;
 }
 .portrait_userInfo_top{
-	width:650px;
+	width:800px;
 	height:27px;
 	margin:0 auto;
 	border-bottom:1px solid #e6e6e6;
 }
-.userH3{
-	font-size:13px;
-	color:#3d467d;
-	font-weight: 600;
-	line-height:27px;
-	float: left;
-}
+
 .userSpan{
-	font-size:9px;
+	font-size:10px;
 	line-height:27px;
 	margin-left:8px;
 	float: left;
 }
 .portrait_userInfo_content{
-	width:636px;
-	height:115px;
+	width:800px;
+	height:120px;
 	background:#fcfcfc;
 	border:1px solid #e6e6e6;
 	margin:12px auto;
@@ -79,8 +74,8 @@
 	align-items: center;
 }
 .portrait_userInfo_content_left{
-	width:180px;
-	height:75px;
+	width:300px;
+	height:90px;
 /*	background:red;*/
 	display: flex;
 	flex-direction: column;
@@ -91,8 +86,8 @@
 	height:93px;
 }
 .portrait_userInfo_content_right{
-	width:160px;
-	height:75px;
+	width:250px;
+	height:90px;
 	/*background:green;*/
 	display: flex;
 	flex-direction: column;
@@ -105,13 +100,308 @@
 
 
 .portrait_frequency{
-	width:662px;
-	height:250px;
-	background:red;
-	margin:30px auto;
+	width:100%;
+	height:220px;
+	/*background:red;*/
+	display: flex;
+	margin:10px auto 30px;
+}
+.userH3{
+	font-size:13px;
+	color:#3d467d;
+	font-weight: 600;
+	line-height:27px;
+}
+.pindufenxi{
+	width:862px;
+	height:27px;
+	margin:0 auto;
 }
 #main{
-	height:180px;
-	width:662px;
-	margin:0 auto;
+	height:220px;
+	width:862px;
+	/*background:green;*/
+	
+	margin:0 auto ;
+}
+/*用户扫码时段分析*/
+#sunPie{
+	width:300px;
+	height:220px;
+	/*background:red;*/
+	margin-left:60px;
+}
+/*用户扫码结构分析*/
+#zheXianPic{
+	width:550px;
+	height:220px;
+	/*background:green;*/
+	margin-left:50px;
+	
+}
+/*用户扫码轨迹*/
+#saoGuiJi{
+	height:270px;
+	width:862px;
+	/*background:green;*/
+	
+	margin:0 auto ;
+}
+/*用户各规格扫码烟包数*/
+.EverySao{
+	/*height:220px;*/
+	width:862px;
+	/*background:red;*/
+	
+	margin:20px auto ;
+}
+.EverySao tr{
+	width:100%;
+	height:36px;
+	
+}
+.EverySao tr td{
+	width:25%;
+	height:36px;
+	text-align: center;
+}
+
+table, th, td{
+  border:1px solid #a0a0a0;
+  text-align: center;
+  }
+  /*弹窗*/
+ body{
+    height: 100%;
+}
+.z_num{
+    z-index: 10;
+}
+.box_tit{
+    background-color: #e6e6e6;
+    font-size: 13px;
+    color: #727272;
+    text-align: center;
+    height:30px;
+    line-height: 30px;
+    width:400px;
+    border-top-left-radius: 6px;
+    border-top-right-radius:6px ;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius:6px ;
+    padding: 5px 7px 5px 14px;
+}
+.box_cont{
+    font-size: 13px;
+    width:400px;
+    background:#fff;
+    text-align: center;
+    padding: 10px 0;
+}
+.cami_box_cont{
+    font-size: 16px;
+    padding: 50px 0;
+    /*border-bottom: 1px solid #CECECE;*/
+}
+/*.box_cont input{
+    width: 100px;
+    margin-right: 10px;
+}*/
+.box_btn{
+	width:400px;
+	background:#fff;
+	text-align:center;
+    padding: 12px 0;
+}
+.box_btn div{
+    width: 50%;
+    font-size: 15px;
+    text-align: center;
+}
+.box_btn div:hover{
+    cursor: pointer;
+}
+.box_btn .box_btn_conf{
+    color: #6E80FF;
+    border-right: 1px solid #CECECE;
+}
+.box_btn .box_btn_cancel{
+    color: #CECECE;
+}
+.box_btn .enabled_btn{
+	width:170px;
+	height:30px;
+	background:#dcdcdc;
+	text-align:center;
+	line-height: 30px;
+	border-radius:5px;
+	font-size:15px;
+    color: #696969;
+    margin: 0 auto;
+}
+.no_search{
+    text-align: center;
+    margin: 0 auto;
+    padding: 50px 0;
+    font-size: 20px;
+}
+#transfer,#giftImg,#camiFile,#camiCreateFile,#addPoolCamiFile{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 19;
+    height: 100%;
+}
+.transfer_sec{
+    position: relative;
+    margin-left: 122px;
+    margin-top: -30px;
+    width: 84px;
+    height: 84px;
+}
+.cami_create{
+    position: relative;
+    margin-left: 122px;
+    margin-top: -35px;
+    width: 100px;
+    height: 28px;
+}
+.cami_file_sec{
+    position: relative;
+    margin-left: 135px;
+    margin-top: -30px;
+    width: 100px;
+    height: 28px;
+}
+.cami_explain{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 135px;
+}
+#transferName{
+    margin-left: 220px;
+    display: inline-block;
+    margin-top: -90px;
+}
+#addGiftCamiStock{
+    width: 100px;
+    height: 26px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+.cami_name{
+    position: absolute;
+    margin-left: 250px;
+    margin-top: -25px;
+}
+#transfer_warn{
+    margin-top: -15px;
+    color: #ACACAC;
+}
+
+.select_supply,.select_brand,.entry_capital,.select_specift,.packet_name,.packet_thresh{
+    color: #ff3300;
+    font-size: 10px;
+    margin-left: 10px;
+    display: none;
+}
+.gift_name_warn,.category_warn,.gift_supply_warn,.apply_brand_warn,.apply_specift_warn,.market_value_warn,.stock_warn,.stockThresh_warn{
+    color: #ff3300;
+    font-size: 15px;
+    margin-left: 10px;
+    display: none;
+}
+.add_stock_warn{
+    color: #ff3300;
+    font-size: 13px;
+    margin-left: 10px;
+    display: none;
+}
+#giftImgName{
+    color: #666;
+    font-size: 16px;
+    position: absolute;
+    margin-left: 230px;
+    margin-top: -60px;
+}
+#camiCreateName{
+    color: #666;
+    font-size: 15px;
+    position: absolute;
+    margin-left: 230px;
+    margin-top: -30px;
+}
+.gift_brief_sec{
+    position: relative;
+    margin-left: 122px;
+    margin-top: -35px;
+}
+textarea {
+    resize: none;
+    font-size: 14px;
+}
+.gift_img img{
+    height: 50px;
+}
+#selectGiftName{
+    font-size: 14.7px;
+    /*width: 154px;*/
+    width: 60%;
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+}
+.file_name{
+    color: #6E80FF;
+}
+.disabled_color{
+    background-color: #EBEBE4;
+}
+#allPacketName{
+    font-size: 14.7px;
+    height: 28px;
+    width: 60%;
+    line-height: 28px;
+}
+.time_period{
+    display: inline-block;
+    font-size: 15px;
+}
+.multiselect-container li label{
+    font-size: 15px;
+    color: #515151;
+    width: 180px;
+}
+.multiselect{
+    text-align: left;
+    margin-left: 4px;
+}
+.multiselect b{
+    float: right;
+    position: relative;
+    top: 8px;
+}
+.time_validity{
+    display: none;
+}
+.cami_stock_label{
+    margin-left: 50px;
+}
+.add_pool_warn{
+    color: #ff3300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 145px;
+    visibility : hidden;
+}
+.warn_color{
+    color: #ff3300;
+}
+.radioOne{
+	margin:auto 0;
+}
+.EverySao tr:nth-child(even){
+	background:#f8fbff;
 }

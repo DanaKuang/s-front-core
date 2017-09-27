@@ -42,14 +42,14 @@ define([], function () {
 
         // 默认配置
         $scope.msConf = {
-            pbArray: _.pluck($model.$brand.data, 'productBrand'),
+            pbArray: _.pluck($model.$brand.data, 'name'),
             pnArray: [],
             ppArray: ['盒','条'],
             prNArray: [],
             cnArray: [],
             szArray: _.each($model.$getZone.data, function (data) {
-                data.k = data.zoneCode;
-                data.v = data.zoneName;
+                data.k = data.code;
+                data.v = data.name;
             }),
             result: []
         };
@@ -60,7 +60,9 @@ define([], function () {
             $(".ui-search-block.multi select").multiselect({
                 nonSelectedText: '请选择',
                 allSelectedText: '全部',
-                nSelectedText: '已选择'
+                nSelectedText: '已选择',
+                enableFiltering: true,
+                filterPlaceholder: '查询'
             });
             var $product = $("[name='productName']");
             var $proName = $("[name='provinceName']");
@@ -86,10 +88,10 @@ define([], function () {
                 $model.getProvince({
                     saleZone: _.map(pArr, function (v) {return v.split('_')[1];}).join(',')
                 }).then(function (res) {
-                    mulScope.prNArray = _.pluck(res.data, 'provinceName');
+                    mulScope.prNArray = _.pluck(res.data, 'name');
                     mulScope.$apply();
                     $proName.multiselect('dataprovider', _.forEach(res.data, function(val) {
-                        return val.label = val.value = val.provinceName;
+                        return val.label = val.value = val.name;
                     }));
                     $proName.multiselect('select', mulScope.provinceName);
                     $proName.multiselect('refresh');

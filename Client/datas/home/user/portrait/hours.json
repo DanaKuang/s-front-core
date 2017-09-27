@@ -1,0 +1,55 @@
+{
+	"grid": {
+		"left": "30",
+		"top": 20
+	},
+	"tooltip": {
+		"formatter": "{a}:{c}"
+	},
+	"xAxis": {
+		"type": "category",
+		"boundaryGap": false,	
+		"data": [
+			""
+		],
+		
+		"axisLabel": {
+			"interval": 0
+		}
+	},
+	"yAxis": {
+		"type":"value",
+		"data": [
+		],
+		"nameTextStyle": {
+			"color": "rgb(128, 128, 128)",
+			"fontSize": 8
+		},
+		"axisLabel": {
+			"show": true
+		}
+	},
+	"series":
+		{
+			"name": "扫码次数",
+			"type": "line",
+			"label": {
+				"normal": {
+					"show": false
+				}
+			},
+			"lineStyle": {
+				"normal": {
+					"color": "#80D3F6"
+				}
+			},
+			"itemStyle": {
+				"normal": {
+					"color": "#80D3F6"
+				}
+			},
+			"data": [
+				""
+			]
+		}
+}
