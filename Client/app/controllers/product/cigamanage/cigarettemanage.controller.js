@@ -10,7 +10,7 @@ define([], function () {
     	ServiceName: 'cigarettemanageCtrl',
     	ViewModelName: 'cigarettemanageModel',
     	ServiceContent: ['$rootScope', '$scope', 'cigarettemanageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
-        $scope.master = {}; //初始化表单
+        $scope.master = {}; //初始化新建卷烟的表单
 
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
@@ -31,9 +31,14 @@ define([], function () {
           }
           $model.getlist(data).then(function (res) {
             $scope.cigarettelistConf = res.data;
+            $scope.paginationConf = res.data;
           })
         }
         getList()
+
+        $scope.$on('frompagechange', function (e,v,f) {
+          getList(f)
+        })
 
         // 搜索
         $scope.search = function () {
@@ -41,9 +46,17 @@ define([], function () {
             sn: $scope.sn || '',
             brandCode: $scope.brandCode || '',
             grade: $scope.grade || '',
-            pack: $scope.pack || ''
+            pack: $scope.pack || '',
+            minPrice: $scope.minprice || '',
+            maxPrice: $scope.maxprice || ''
           }
           getList(data)
+        }
+
+        // 重置
+        $scope.reset = function () {
+          searchForm.reset();
+          getList()
         }
         
         $scope.$on('choosebrands', function(e,v,f) {
@@ -103,18 +116,21 @@ define([], function () {
               // 保存 和 取消
               $scope.form.$setPristine();
               $scope.form.$setUntouched();
-              scope('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
+              scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
               scope_conf('.create-cigarette-body').snData = null;
-              scope('.create-cigarette-body').disabled = true;
+              scope_conf('.create-cigarette-body').disabled = true;
               $('[data-dismiss="modal"]').trigger('click');
+              form.reset();
             } else {
-              // 查询
+              // 查询没有结果
               var sn = scope('.create-cigarette-body').ciga.product.sn;
-              scope('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').ciga =  angular.copy($scope.master);
-              scope('.create-cigarette-body').ciga.product = {
+              var brandCode = scope('.create-cigarette-body').ciga.product.brandCode;
+              scope_conf('.create-cigarette-body').ciga =  angular.copy($scope.master);
+              scope_conf('.create-cigarette-body').ciga.product = {
                 type: 1
               };
-              scope('.create-cigarette-body').ciga.product.sn = sn
+              scope_conf('.create-cigarette-body').ciga.product.sn = sn;
+              scope_conf('.create-cigarette-body').ciga.product.brandCode = brandCode;
             }
           }
         }
@@ -124,7 +140,8 @@ define([], function () {
           $model.checksn(f).then(function(res) {
             if (res.data.data) {
               scope_conf('.create-cigarette-body').disabled = true;
-              scope_conf('.create-cigarette-body').snData = res.data.data;
+              scope_conf('.create-cigarette-body').checked = true;
+              scope_conf('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').snData = res.data.data;
             } else {
               scope_conf('.create-cigarette-body').disabled = false;
               init(false)
@@ -141,13 +158,18 @@ define([], function () {
               getList()
             })
           } else {
-            var data = scope('.create-cigarette-body').ciga;
-            data.activeDays = data.activeDays || 5;
-            data.num = data.num || 10;
-            $model.save(data).then(function (res) {
-              init(true);
-              getList()
-            })
+            var data = scope_conf('.create-cigarette-body').ciga;
+            if (data && !$.isEmptyObject(data)) {
+              data.activeDays = data.activeDays || 5;
+              data.num = data.num || 10;
+              $model.save(data).then(function (res) {
+                init(true);
+                getList()
+              })
+            } else {
+              alert('请确保必填内容已填写再提交')
+              return
+            }
           }
         }
 
@@ -155,9 +177,9 @@ define([], function () {
         $scope.cancel = function() {
           var r = confirm('确定要取消吗？')
           if (r == true) {
-              init(true)
+            init(true)
           } else {
-              return
+            return
           }
         };
 
@@ -166,7 +188,8 @@ define([], function () {
           $model.checksn(f).then(function(res) {
             if (res.data.data) {
               $('[data-target=".create-modal"]').trigger('click');
-              scope('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').snData = res.data.data;
+              scope_conf('.create-cigarette-body').checked = false;
+              scope_conf('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').snData = res.data.data;
               scope_conf('.create-cigarette-body').disabled = false;
             } 
           })
@@ -196,7 +219,7 @@ define([], function () {
           }).done(function (res) {
             var data = res.data;
             var fileSuccessData = res.data;
-            scope('.create-cigarette-body').ciga.product.smallPic = fileSuccessData.accessUrl; //图片保存地址    
+            scope_conf('.create-cigarette-body').ciga.product.smallPic = fileSuccessData.accessUrl; //图片保存地址    
           }).fail(function (res) {
             alert('文件上传失败，请重试');
             return

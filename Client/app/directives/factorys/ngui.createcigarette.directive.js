@@ -11,11 +11,13 @@ define([], function () {
         var defaults = { //默认配置
             tpl: '/createcigarette.tpl.html',
             disabled: true,
+            checked: false,
             ciga: {
                 product: {
                     type: 1
                 }
-            }
+            },
+            form: angular.element('.create-modal').scope().form
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -26,17 +28,43 @@ define([], function () {
             scope: {
                 conf: '='
             },
+            require: '^form',
             link: linkFn
         };
 
-        function linkFn (scope, element, attrs) {
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['disabled', 'ciga']);
+        function linkFn (scope, element, attrs, ctrl) {
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['disabled', 'ciga', 'checked', 'form']);
 
             // 监视conf变化更新page
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['disabled', 'ciga'])
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['disabled', 'ciga', 'checked', 'form'])
             }, true);
+
+            scope.form = angular.element('.create-modal').scope().form;
+
+            scope.$watch('scope.form', function (n, o, s) {
+                if (n != o) {
+                    scope.form = n;
+                }
+            })
+
+            scope.change = function() {
+                var files = event.target.files[0];
+                var formData = new FormData();
+                formData.append('file', files);
+                scope.$emit('image', event, formData);
+            }
+
+            scope.checksn = function () {
+                if (scope.form.sn.$invalid) {
+                    scope.form.sn.$dirty = true;
+                    return
+                } else {
+                    scope.form.sn.$invalid = false;
+                    scope.$emit('checksn', event, {sn: scope.ciga.product.sn})
+                }
+            }
 
             // 品牌
             scope.$emit('choosebrands', event, {})
@@ -50,24 +78,12 @@ define([], function () {
             scope.$emit('cigarettegrade', event, {})
             // 二级价类
             scope.$watch('ciga.grade', function (n, o, s) {
-                if (n != o) {
+                if (n != '') {
                     scope.$emit('gradechange', event, {
                         parentCode: n
                     })
                 }
             })
-
-            scope.change = function() {
-                var files = event.target.files[0];
-                var formData = new FormData();
-                formData.append('file', files);
-                scope.$emit('image', event, formData);
-            }
-
-            scope.checksn = function () {
-                scope.$emit('checksn', event, {sn: scope.sn})
-            }
-
         }
         return defineObj;
     }

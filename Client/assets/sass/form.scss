@@ -1,3 +1,48 @@
-form input.ng-invalid.ng-touched {
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+}
+form input.ng-touched.ng-invalid {
 	border-color: #FA787E;
+}
+.form-group {
+	overflow: hidden;
+	.inline {
+		button.btn {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+	}
+}
+.form-control-feedback {
+	right: 10px;
+}
+.form-inline {
+	overflow: hidden;
+	margin-bottom: 5px;
+	.control-label {
+		text-align: right;
+	}
+	.form-control {
+		line-height: 100%!important;
+	}
+	.inline {
+		.input-group, .form-control {
+			width: 100%!important;
+		}
+	}
+	label.required {
+		position: relative;
+		&:after {
+			content: '*';
+			position: absolute;
+			right: 0;
+			top: -1px;
+			color: red;
+			font-size: 18px;
+		}
+	}
 }

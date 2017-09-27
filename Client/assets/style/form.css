@@ -1,2 +1,37 @@
-form input.ng-invalid.ng-touched {
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none; }
+
+form input.ng-touched.ng-invalid {
   border-color: #FA787E; }
+
+.form-group {
+  overflow: hidden; }
+  .form-group .inline button.btn {
+    opacity: 0;
+    width: 0;
+    height: 0; }
+
+.form-control-feedback {
+  right: 10px; }
+
+.form-inline {
+  overflow: hidden;
+  margin-bottom: 5px; }
+  .form-inline .control-label {
+    text-align: right; }
+  .form-inline .form-control {
+    line-height: 100% !important; }
+  .form-inline .inline .input-group, .form-inline .inline .form-control {
+    width: 100% !important; }
+  .form-inline label.required {
+    position: relative; }
+    .form-inline label.required:after {
+      content: '*';
+      position: absolute;
+      right: 0;
+      top: -1px;
+      color: red;
+      font-size: 18px; }
