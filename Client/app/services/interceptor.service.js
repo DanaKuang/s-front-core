@@ -5,7 +5,7 @@ define([], function () {
   var interceptor = {
       ServiceType: 'factory',
       ServiceName: 'httpInterceptor',
-      ServiceContent: ['$injector', '$q', function($injector, $q) {
+      ServiceContent: ['$injector', '$q', 'loadingProgress', function($injector, $q, lPro) {
           var clearSession = function () {
             sessionStorage.removeItem("access_token");
             sessionStorage.removeItem("access_loginId");
@@ -25,9 +25,7 @@ define([], function () {
           };
           return {
               request: function(config) {
-                  // loadingMark.show();
-                  // if (config.url === '/logOff') return weblogout();
-
+                  lPro.show();
                   config.headers.client = location.host;
                   config.headers.domain = location.hostname;
                   config.headers.token = sessionStorage.getItem('access_token');
@@ -36,7 +34,7 @@ define([], function () {
                   return config;
               },
               response: function(response) {
-                  // loadingMark.hide();
+                  lPro.hide();
                   response.config.responseTimestamp = +new Date;
                   return response;
               },

@@ -8,7 +8,7 @@
 <!--style-->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.retailer.css">
 <!--html-->
-<div class="animated fadeInRight" ng-controller="detailCtrl">
+<div class="animated fadeInRightBig" ng-controller="detailCtrl">
     <div class="container-fluid">
         <div class="ui-retailer-box row">
             <div class="col-md-12">
@@ -24,8 +24,8 @@
                                 <!--日期-->
                                 <div class="inline-block">
                                     <label>日期</label>
-                                    <input type="input" name="beginTime" ng-model="beginTime" class="form-control date">&nbsp;&nbsp;至&nbsp;&nbsp;
-                                    <input type="input" name="endTime" ng-model="endTime" class="form-control date">
+                                    <input type="input" name="beginTime" ng-model="beginTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                    <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
                                 </div>
                                 <!--品牌-->
                                 <div class="inline-block">
@@ -44,7 +44,7 @@
                                 <!--城市-->
                                 <div class="inline-block">
                                     <label for="">城市</label>
-                                    <input type="text" name="cityName" ng-model="cityName" class="form-control">
+                                    <input type="text" name="cityName" ng-model="cityName" class="form-control input-sm">
                                 </div>
                                 <!--业态-->
                                 <div class="inline-block">
@@ -56,7 +56,7 @@
                                 <!--零售户名称-->
                                 <div class="inline-block">
                                     <label for="">零售户名称</label>
-                                    <input type="text" name="shopName" ng-model="shopName" class="form-control">
+                                    <input type="text" name="shopName" ng-model="shopName" class="form-control input-sm">
                                 </div>
                                 <button type="submit" class="btn btn-primary" ng-click="detailSearch()">查询</button>
                             </div>

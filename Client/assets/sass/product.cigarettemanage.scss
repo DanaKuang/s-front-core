@@ -16,34 +16,8 @@
 .modal-body img {
 	max-width: 30px;
 }
-// .modal-body {
-// 	.item {
-// 		position: relative;
-// 		margin-top: 8px;
-// 		label.required {
-// 			position: relative;
-// 			&:after {
-// 				content: '*';
-// 				position: absolute;
-// 				right: -10px;
-// 				top: -1px;
-// 				color: red;
-// 				font-size: 18px;
-// 			}
-// 		}
-// 		input, select {
-// 			position: absolute;
-// 			left: 11em;
-// 			top: -4px;
-// 			width: 50%;
-// 		}
-// 		button {
-// 			position: absolute;
-// 			top: -5px;
-// 			left: 32em;
-// 			width: 6em;
-// 		}
-// 	}
-// }
 
+.modal-body input[type="file"] {
+	width: 31%!important;
+}
 

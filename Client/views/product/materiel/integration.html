@@ -7,7 +7,7 @@
 -->
 <link rel="stylesheet" href="../../../assets/style/integration.css">
 <div ng-controller="IntegrationCtrl">
-<div class="animated fadeInRight">
+<div class="animated fadeInRightBig">
     <div class="container-fluid" ng-show="showTables">
         <div class="row">
             <div class="col-md-12">
@@ -62,7 +62,7 @@
                                         <option ng-repeat="statusItem in dataStatusList" value="{{statusItem.code}}">{{statusItem.name}}</option>
                                     </select>
                                 </div>
-                               
+
                                 <div ng-show="!showPacketList" class="col-md-2 col-sm-2">
                                     <label for="activeLog">动作</label>
                                     <select id="activeLog">
@@ -77,7 +77,7 @@
                                 <div ng-show="showPacketList" class="col-md-2 col-sm-2 packet_fr">
                                     <div class="ser_btn" style="width: 100%" ng-click="searchData()">搜索</div>
                                 </div>
-                               
+
                                 <div ng-show="!showPacketList" class="col-md-2 col-sm-2 packet_fr">
                                     <div class="rest_btn" ng-click="resetData()">重置</div>
                                 </div>
@@ -216,7 +216,7 @@
                             </div>
                             <div>
                                 <label for="capital_Ku">库存阀值</label>
-                                <input  type="text" placeholder="" id="capital_Ku" ng-disabled = '!addPocket'>                             
+                                <input  type="text" placeholder="" id="capital_Ku" ng-disabled = '!addPocket'>
                             </div>
                             <div>
                                 <label for="transfer" style="line-height:70px;">凭证文件</label>

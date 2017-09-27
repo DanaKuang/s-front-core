@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.portrait.css">
 <div ng-controller="PortraitCtrl">
-	<div class="animated fadeInRight">
+	<div class="animated fadeInRightBig">
 		<div class="container-fluid region-margin">
 			<div class="row">
 				<div class="col-md-12" style="padding:0 40px;">
@@ -116,14 +116,14 @@
 									</th>
 									<th class="topTitle3">
 									</th>
-								</tr>								
+								</tr>
 								<tr ng-repeat="tableListInfo in tableList">
 									<td>{{tableListInfo.productName}}</td>
 									<td>{{tableListInfo.monthPv}}</td>
 									<td>{{tableListInfo.lastMonthPv}}</td>
 									<td>{{tableListInfo.llastMontHPv}}</td>
 								</tr>
-								
+
 							</table>
 							<div class="page_sec rf">
                                     <div class='tcdPageCode'></div>
@@ -167,7 +167,7 @@
 							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;</span>
 							<span>{{good.openId}}</span>
 						</p>
-						
+
 					</div>
 					<div class="box_btn">
 						<div class="enabled_btn" data-dismiss="modal" ng-click="search()">确定</div>
