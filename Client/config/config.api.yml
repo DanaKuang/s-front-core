@@ -407,6 +407,83 @@ report:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getWeeks'
+    authorized: 1
+    description: '获取每周时间数据'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'
+    authorized: 1
+    description: '获取品牌'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/consumer/getTagName'
+    authorized: 1
+    description: '获取包数及周期'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekScanWinData'
+    authorized: 1
+    description: '周报_扫码中奖情况统计'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/impExcelWeekScanWinData'
+    authorized: 1
+    description: '周报_扫码中奖情况统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekCashBonusData'
+    authorized: 1
+    description: '周报—现金红包中奖情况统计'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/impExcelWeekCashBonusData'
+    authorized: 1
+    description: '周报—现金红包中奖情况统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekEntityWinData'
+    authorized: 1
+    description: '周报_实物奖品中奖情况统计'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/impExcelWeekEntityWinData'
+    authorized: 1
+    description: '周报_实物奖品中奖情况统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekScanProvData'
+    authorized: 1
+    description: '周报_扫码数据分省统计'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/impExcelWeekScanProvData'
+    authorized: 1
+    description: '周报_扫码数据分省统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 multi:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getQueryRecord'

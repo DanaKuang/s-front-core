@@ -44,6 +44,8 @@ $borderColor:#A0A0A0;
     }    
 }
 .group-pannel-middle {
+    height: 450px;
+    overflow-y: scroll;
     .group-user-number {
         display: flex;
         display: -webkit-flex;

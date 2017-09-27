@@ -34,10 +34,30 @@
                     <u>日报汇总表</u>
                   </span>
                 </li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>
+                  <span>4</span>
+                  <span ng-click="tabs(4)">
+                    <u>周报_扫码中奖情况统计</u>
+                  </span>
+                </li>
+                <li>
+                  <span>5</span>
+                  <span ng-click="tabs(5)">
+                    <u>周报_扫码数据分省统计</u>
+                  </span>
+                </li>
+                <li>
+                  <span>6</span>
+                  <span ng-click="tabs(6)">
+                    <u>周报_现金红包中奖情况统计</u>
+                  </span>
+                </li>
+                <li>
+                  <span>7</span>
+                  <span ng-click="tabs(7)">
+                    <u>周报_实物奖品中奖情况统计</u>
+                  </span>
+                </li>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -79,10 +99,10 @@
                   <!--<option value="芙蓉王硬细支（盒）">芙蓉王硬细支（盒）</option>-->
                 </select>
               </div>
-              <button class="btn btn-sm btn-default" ng-click="search($event,1)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,1)">
                 查询
               </button>
-              <button class="btn btn-sm btn-default" ng-click="down(1)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(1)">
                 下载
               </button>
             </div>
@@ -145,10 +165,10 @@
                   <!--<option value="包">包</option>-->
                 </select>
               </div>
-              <button class="btn btn-sm btn-default" ng-click="search($event,2)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,2)">
                 查询
               </button>
-              <button class="btn btn-sm btn-default" ng-click="down(2)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(2)">
                 下载
               </button>
             </div>
@@ -209,10 +229,10 @@
                   <span class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
-              <button class="btn btn-sm btn-default" ng-click="search($event,3)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,3)">
                 查询
               </button>
-              <button class="btn btn-sm btn-default" ng-click="down(3)">
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(3)">
                 下载
               </button>
             </div>
@@ -253,6 +273,332 @@
               </tr>
               </thead>
               <tbody id="summary_table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--周报_扫码中奖情况统计-->
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>周报_扫码中奖情况统计</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label class="reset_height">查询时间：</label>
+                <select id="weeks" multiple="multiple" value="{{selectWeeks}}">
+                    <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label class="reset_height">品牌：</label>
+                <select id="brand" value="{{selectBrands}}" class="reset_height" style="border-radius:4px;">
+                    <option value="">请选择</option>
+                    <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label class="reset_height">规格：</label>
+                <select id="specift" value="{{selectSpecift}}" class="reset_height" style="border-radius:4px;">
+                    <option value="">请选择</option>
+                    <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label class="reset_height">包装：</label>
+                <select id="packs" multiple="multiple" ng-model="selectSpacks" value="{{selectSpacks}}">
+                    <option ng-repeat="packItem in packsList" value="{{packItem.tagId}}">{{packItem.tagName}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label class="reset_height">统计周期：</label>
+                <select id="cycleTime" multiple="multiple" ng-model="selectStatisTime" value="{{selectStatisTime}}">
+                    <option ng-repeat="statisTimeItem in statisTimeList" value="{{statisTimeItem.tagName}}">{{statisTimeItem.tagName}}</option>
+                </select>
+              </div>
+
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,4)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(4)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top:1px solid #a0a0a0">
+              <tr>
+                <!--<th rowspan="3">品牌</th>
+                <th colspan="7">{{summar.statTime}}</th>
+                <th colspan="6">{{summar.statTime}}</th>
+                <th colspan="7">{{summar.statTime}}</th>-->
+                <th>日期</th>
+                <th>规格</th>
+                <th>包装</th>
+                <th>统计周期</th>
+                <th>扫烟码包数</th>
+                <th>扫码次数</th>
+                <th>红包中奖数量</th>
+                <th>实物中奖数量</th>
+                <th>红包中奖金额</th>
+              </tr>
+              </thead>
+              <tbody id="weekScanWin">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--周报_扫码数据分省统计-->
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>周报_扫码数据分省统计</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <select id="proviceDataWeeks">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>品牌：</label>
+                <select id="proviceDataBrand">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>规格：</label>
+                <select id="proviceDataSpecift">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                </select>
+              </div>
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,5)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(5)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top:1px solid #a0a0a0">
+              <tr>
+                <!--<th colspan="15">白沙（天天向上）扫码数据汇总（8.7~8.13）</th>-->
+                <th colspan="15" id="provDataTitle"></th>
+              </tr>
+              <tr>
+                <th rowspan="2" style="vertical-align:middle;">排序</th>
+                <th colspan="7">小盒扫码数据</th>
+                <th colspan="7">条盒扫码数据</th>
+              </tr>
+              <tr>
+                <th>省份</th>
+                <th>本期扫码次数</th>
+                <th>本期扫码人数</th>
+                <th>本期扫码烟包数</th>
+                <th>本年累计扫码次数</th>
+                <th>本年累计扫码人数</th>
+                <th>本年累计扫码烟包数</th>
+                <th>省份</th>
+                <th>本期扫码次数</th>
+                <th>本期扫码人数</th>
+                <th>本期扫码烟包数</th>
+                <th>本年累计扫码次数</th>
+                <th>本年累计扫码人数</th>
+                <th>本年累计扫码烟包数</th>
+                <!--<th colspan="7" style="background: white">扫码情况</th>
+                <th colspan="7" style="background: white">现金红包（单位：个）</th>-->
+              </tr>
+              <!--<tr>
+                <th></th>
+                <th>合计</th>
+                <th>53536</th>
+                <th>22164</th>
+                <th>22164</th>
+                <th>2082994</th>
+                <th>713006</th>
+                <th>713006</th>
+                <th>合计</th>
+                <th>53536</th>
+                <th>22164</th>
+                <th>22164</th>
+                <th>2082994</th>
+                <th>713006</th>
+                <th>713006</th>
+              </tr>-->
+              </thead>
+              <tbody id="provDataDetail">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--周报_现金红包中奖情况统计-->
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>周报_现金红包中奖情况统计</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <select id="cashWinWeeks">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>品牌：</label>
+                <select id="cashWinBrand" value="{{selectBrands}}">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>规格：</label>
+                <select id="cashWinSpecift" value="{{selectSpecift}}">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>包装：</label>
+                <select id="cashWinPacks">
+                  <option ng-repeat="packItem in packsList" value="{{packItem.tagId}}">{{packItem.tagName}}</option>
+                </select>
+              </div>
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,6)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(6)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top:1px solid #a0a0a0">
+              <tr>
+                <!--<th rowspan="3">品牌</th>
+                <th colspan="7">{{summar.statTime}}</th>
+                <th colspan="6">{{summar.statTime}}</th>
+                <th colspan="7">{{summar.statTime}}</th>-->
+                <th>活动</th>
+                <th>规格</th>
+                <th>包装</th>
+                <th>奖品名称</th>
+                <th>单价</th>
+                <th>本期中奖数量</th>
+                <th>上期中奖数量</th>
+                <th>环比（%）</th>
+                <th>本年累计中奖数量</th>
+                <th>本期中奖金额</th>
+                <th>本年累计中奖金额（元）</th>
+              </tr>
+              </thead>
+              <tbody id="weekCashWin">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--周报_实物奖品中奖情况统计-->
+  <div class="container-fluid region-margin report-table" style="display: none">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>周报_实物奖品中奖情况统计</span>
+          <div  ng-click = "goback()">
+            <span></span>
+            返回
+          </div>
+        </div>
+        <!--box-->
+        <div class="panel rate">
+          <div class="panel-body">
+            <div class="report-search">
+              <div class="agree-date">
+                <label>查询时间：</label>
+                <select id="entityWinWeeks">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>品牌：</label>
+                <select id="entityWinBrand" value="{{selectBrands}}">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>规格：</label>
+                <select id="entityWinSpecift" value="{{selectSpecift}}">
+                    <!--<option value="">请选择</option>-->
+                    <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                </select>
+              </div>
+              <div class="agree-date">
+                <label>包装：</label>
+                <select id="entityWinPacks">
+                  <option ng-repeat="packItem in packsList" value="{{packItem.tagId}}">{{packItem.tagName}}</option>
+                </select>
+              </div>
+              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,7)">
+                查询
+              </button>
+              <button class="btn btn-sm btn-default btn_style" ng-click="down(7)">
+                下载
+              </button>
+            </div>
+            <table class="table">
+              <thead style="border-top:1px solid #a0a0a0">
+              <tr>
+                <th>活动</th>
+                <th>规格</th>
+                <th>包装</th>
+                <th>奖品类别</th>
+                <th>本期中奖数量</th>
+                <th>上期中奖数量</th>
+                <th>环比（%）</th>
+                <th>本年累计中奖数量</th>
+              </tr>
+              </thead>
+              <tbody id="weekEntityWin">
               </tbody>
             </table>
           </div>

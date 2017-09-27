@@ -185,6 +185,15 @@ define([], function () {
         var userMonthJson = $model.$monthTrend.data;
         $model.$getMonthTrendScan(params).then(function(res) {
           var res = res.data || [];
+          if (res.length>=8) {
+            userMonthJson.dataZoom.push({
+              "type": "inside",
+              "show": true,
+              "start":0,
+              "end": 30,
+              "zoomLock":true
+            })
+          }
           userMonthJson.xAxis[0].data = [];
           $(userMonthJson.series).each(function(index,n){
             n.data = [];
