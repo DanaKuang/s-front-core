@@ -1,58 +1,70 @@
-<link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-04-28
+ * Description: 重构
+ */
+-->
 <link rel="stylesheet" href="statics/assets/style/visit.reward.css"/>
 <div ng-controller="rewardCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid" id="content-reward">
-            <div class="row">
+            <div class="row ui-panel-reward">
                 <div class="col-md-12">
-                    <div class="reward-box">
-                        <div class="reward-right">
-                            <div class="reward-top">
-                                <span class="fl"></span>
-                                <div class="fl">零售户>零售户激励设置</div>
-                            </div>
-                            <div class="reward-bottom">
-                                <form action="">
-                                    <p class="return">客户返现设置</p>
-                                    <div class="money-magin">
-                                        客户返现比例：
-                                        <input type="text" id="moneyPer" class="money"  value="{{select.seller_reward_percent*100}}">%
+                    <!--title-->
+                    <div class="ui-panel-title reward">
+                        <i class="reward"></i><span>零售户激励设置</span>
+                    </div>
+                    <!--box-->
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <form action="" class="form-horizontal">
+                                <div class="title col-md-12">客户返现设置</div>
+                                <div class="col-md-12">
+                                    <label class="control-label col-md-3">客户返现比例：</label>
+                                    <div class="col-md-4 form-inline">
+                                        <input type="text" id="moneyPer" class="money form-control input-sm"  value="{{select.seller_reward_percent*100}}">%
                                     </div>
-                                    <!--<a class="save" href="javascript:" id="award">保存</a>-->
-                                    <i></i>
-                                    <p class="erwei">零售户二维码打印设置</p>
-                                    <div>
-                                        二维码打印费：
-                                        <input type="text" id="copyMoney" placeholder="请输入金额" value="{{select.qr.qrExpenses}}">
+                                </div>
+                                <div class="line col-md-12"></div>
+                                <div class="title col-md-12">零售户二维码打印设置</div>
+                                <div class="col-md-12">
+                                    <label class="control-label col-md-3">二维码打印费：</label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="copyMoney" placeholder="请输入金额" value="{{select.qr.qrExpenses}}" class="form-control input-sm">
                                     </div>
-                                    <div class="yunfei">含运费和税费</div>
-                                    <div class="ifFree">
-                                        是否免费:
-                                        <div class="openButton1" ng-click="qrFreeSwitch()" ng-mouseover="mouser()">当前开启</div>
-                                        &nbsp;&nbsp;注:点击按钮可改变开关状态
-                                        <!--<div class="closeButton1" ng-click="closeSet();">关闭</div>-->
+                                </div>
+                                <div class="title col-md-12">含运费和税费</div>
+                                <div class="col-md-12">
+                                    <label class="control-label col-md-3">是否免费:</label>
+                                    <div class="col-md-4 form-inline">
+                                        <div class="openButton1 col-md-4" ng-click="qrFreeSwitch()" ng-mouseover="mouser()">当前开启</div>
+                                        <div class="help-block">&nbsp;&nbsp;注:点击按钮可改变开关状态</div>
                                     </div>
-                                    <div class="numble">
-                                        免费数量：
-                                        <input type="text" id="free-numble" placeholder="请输入数量" value="{{select.qr.qrFreeNum}}">
+                                </div>
+                                <div class="numble col-md-12">
+                                    <label class="control-label col-md-3">免费数量：</label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="free-numble" placeholder="请输入数量" value="{{select.qr.qrFreeNum}}" class="form-control input-sm">
                                     </div>
-                                    <!--<a class="save" id="numbleSave" href="javascript:">保存</a>-->
-                                    <i></i>
-                                    <p>店铺-消费者关联有效时间设置</p>
-                                    <div class="spaceTime">
-                                        有效时间:
-                                        <input type="text" id="time-space"
-                                               value="{{select.consumer_seller_threshold}}">分钟
+                                </div>
+                                <div class="line col-md-12"></div>
+                                <div class="title col-md-12">店铺-消费者关联有效时间设置</div>
+                                <div class="spaceTime">
+                                    <label class="control-label col-md-3">有效时间:</label>
+                                    <div class="col-md-4 form-inline">
+                                        <input type="text" id="time-space" value="{{select.consumer_seller_threshold}}" class="form-control input-sm">分钟
                                     </div>
-                                    <!--<a class="save" id="consumerSave" href="javascript:">保存</a>-->
-                                    <i></i>
-                                    <p class="active">客户活动介绍</p>
-                                    <textarea name="" id="textintro" cols="30" rows="10">{{select.ac.introduction}}</textarea>
-                                    <!--<a class="save" id="intrSave" href="javascript:">保存</a>-->
-
-                                    <a class="save" id ="saveAllBut">保存更改</a>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="line col-md-12"></div>
+                                <div class="title col-md-12">客户活动介绍</div>
+                                <div class="col-md-offset-3 col-md-4">
+                                    <textarea name="" id="textintro" cols="30" rows="10" class="form-control">{{select.ac.introduction}}</textarea>
+                                </div>
+                                <div class="col-md-12 save-div">
+                                    <button type="button" class="save btn btn-primary" id ="saveAllBut">保存更改</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

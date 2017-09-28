@@ -1,4 +1,8 @@
-/***/
+/**
+ * [description]
+ * @param  {Object} ) {    var        rewardModel [description]
+ * @return {[type]}   [description]
+ */
 define([], function () {
 	var rewardModel = {
 		ServiceType: "service",
@@ -19,7 +23,6 @@ define([], function () {
                 this.getAward = function (params) {
                     return request.$Search(AWARD_JSON_DATA, params);
                 };
-    			var HIS_JSON_DATA = '/api/tztx/seller-manager/setting/qr/his';
     			// 获取表格数据
                 this.getIntroduction = function (params) {
                     return request.$Search(INTRODUCTION_JSON_DATA, params);
