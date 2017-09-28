@@ -1,104 +1,78 @@
 {
-    "nav": [{
-        "hash": "index",
-        "text": "首页",
-        "icon": "",
-        "active": "",
-        "tabs": [{
-            "icon": "kpi",
-            "noDataApi": true,
-            "hash": "#/view/home/kpi",
-            "text": "KPI指标总览"
-        },{
-            "icon": "theme",
-            "text": "主题查询",
-            "noDataApi": true,
-            "hash": "",
-            "dropdown": [{
-              "text": "地域查询",
-              "hash": "#/view/home/theme/region"
-            }, {
-              "text": "规格查询",
-              "hash": "#/view/home/theme/spec"
-            }]
-        },{
-            "icon": "multi",
-            "noDataApi": true,
-            "hash": "#/view/home/multi",
-            "text": "多维查询"
-        },{
-            "icon": "user",
-            "text": "用户",
-            "noDataApi": true,
-            "hash": "",
-            "dropdown": [{
-              "text": "用户群体查询",
-              "hash": "#/view/home/user/group"
-            }]
-        },{
-            "icon": "report",
-            "noDataApi": true,
-            "hash": "#/view/home/report",
-            "text": "固定格式报表"
-        },{
-            "icon": "agree",
-            "noDataApi": true,
-            "hash": "#/view/home/agree",
-            "text": "履约报表"
-        },{
-            "icon": "visit",
-            "noDataApi": true,
-            "hash": "#/view/home/visit",
-            "text": "回访报表"
-        }]
-    },{
-        "hash": "product",
-        "text": "产品",
-        "icon": "",
-        "active": "",
-        "tabs": [{
-            "icon": "materiel",
-            "noDataApi": true,
-            "hash": "",
-            "text": "物料管理",
-            "dropdown": [
-                {
-                    "text": "礼品管理",
-                    "hash": "#/view/product/materiel/gift"
-                }, {
-                    "text": "红包管理",
-                    "hash": "#/view/product/materiel/packet"
-                }
-            ]
-        },{
-            "icon": "visit",
-            "noDataApi": true,
-            "hash": "#/view/product/supply",
-            "text": "供应商管理"
-        }]
-    },{
-        "hash": "activity",
-        "text": "活动",
-        "icon": "",
-        "active": "",
-        "tabs": [{
-            "icon": "",
-            "text": "活动",
-            "noDataApi": true,
-            "hash": "",
-            "dropdown": [{
-                "text": "活动管理",
-                "hash": "#/view/activity/acts/manageActs"
-            }, {
-                "text": "实物奖品领取明细",
-                "hash": "#/view/activity/acts/mPrizeGotHistory"
-            }, {
-                "text": "虚拟奖品领取明细",
-                "hash": "#/view/activity/acts/vPrizeGotHistory"
-            }, {
-                "text": "积分领奖明细",
-                "hash": "#/view/activity/acts/integralHistory"
-            }]
-        }]
+    "data": [{
+        "id": 67,
+        "status": 1,
+        "ctime": 1502696629000,
+        "utime": 1502696629000,
+        "creator": null,
+        "modifier": null,
+        "orgCode": "hunanzhongyan",
+        "menuCode": "index",
+        "menuName": "首页",
+        "manuUrl": null,
+        "parentCode": "0",
+        "menuType": 1,
+        "idx": 1,
+        "serviceFor": "browser"
+    }, {
+        "id": 68,
+        "status": 1,
+        "ctime": 1502696629000,
+        "utime": 1502696629000,
+        "creator": null,
+        "modifier": null,
+        "orgCode": "hunanzhongyan",
+        "menuCode": "activity",
+        "menuName": "活动",
+        "manuUrl": null,
+        "parentCode": "0",
+        "menuType": 1,
+        "idx": 2,
+        "serviceFor": "browser"
+    }, {
+        "id": 69,
+        "status": 1,
+        "ctime": 1502696629000,
+        "utime": 1502696629000,
+        "creator": null,
+        "modifier": null,
+        "orgCode": "hunanzhongyan",
+        "menuCode": "seller",
+        "menuName": "零售户",
+        "manuUrl": null,
+        "parentCode": "0",
+        "menuType": 1,
+        "idx": 3,
+        "serviceFor": "browser"
+    }, {
+        "id": 70,
+        "status": 1,
+        "ctime": 1502696629000,
+        "utime": 1502696629000,
+        "creator": null,
+        "modifier": null,
+        "orgCode": "hunanzhongyan",
+        "menuCode": "account",
+        "menuName": "账号",
+        "manuUrl": null,
+        "parentCode": "0",
+        "menuType": 1,
+        "idx": 4,
+        "serviceFor": "browser"
+    }, {
+        "id": 72,
+        "status": 1,
+        "ctime": 1502696629000,
+        "utime": 1502696629000,
+        "creator": null,
+        "modifier": null,
+        "orgCode": "hunanzhongyan",
+        "menuCode": "product",
+        "menuName": "产品",
+        "manuUrl": null,
+        "parentCode": "0",
+        "menuType": 1,
+        "idx": 6,
+        "serviceFor": "browser"
     }]
 }

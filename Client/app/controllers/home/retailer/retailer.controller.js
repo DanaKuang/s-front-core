@@ -13,15 +13,6 @@ define([], function () {
             var echarts = require('echarts');
             var $model = $scope.$model;
 
-            // 图形宽高
-            (function () {
-                $("#growMap").height($("#growMap").width()*0.4);
-                $("#distMap").height($("#distMap").width()*0.8);
-                $("#distGrowMap").height($("#distGrowMap").width()*0.8);
-                $("#leftPieMap").height($("#leftPieMap").width()*0.8);
-                $("#rightPieMap").height($("#rightPieMap").width()*0.8);
-            })();
-
             // 增长折线图
             var growEchart = echarts.init(document.getElementById('growMap'));
             var growMapConf = $model.$growMapConf.data;

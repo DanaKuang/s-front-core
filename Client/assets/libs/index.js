@@ -5,53 +5,55 @@
  */
 
 // 异步非阻塞加载依赖包
+var SAO_CDN_URL = 'https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/';
 
 requirejs.config({
   baseUrl: '/statics',
   waitSeconds: 0,
+  map: {
+    '*': {
+      'css': 'bower_components/require-css/css.min'
+    }
+  },
   paths: {
     jquery: [
-      'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
+      SAO_CDN_URL + 'js/jquery.min',
       'bower_components/jquery/dist/jquery'
     ],
     lodash: [
-      'https://cdn.bootcss.com/lodash.js/3.10.1/lodash.min',
+      SAO_CDN_URL + 'js/lodash.min',
       'bower_components/lodash/lodash'
     ],
-    d3: [
-      'https://cdn.bootcss.com/d3/4.9.1/d3.min',
-      'bower_components/d3/d3'
-    ],
     bootstrap: [
-      'https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
+      SAO_CDN_URL + 'js/bootstrap.min',
       'bower_components/bootstrap/dist/js/bootstrap'
     ],
     datetimepicker: [
-      'https://cdn.bootcss.com/smalot-bootstrap-datetimepicker/2.4.4/js/bootstrap-datetimepicker.min',
+      SAO_CDN_URL + 'js/bootstrap-datetimepicker.min',
       'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker'
     ],
     bootstrapMultiselect: [
-      'https://cdn.bootcss.com/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min',
+      SAO_CDN_URL + 'js/bootstrap-multiselect',
       'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect'
     ],
     echarts: [
-      'https://cdn.bootcss.com/echarts/3.6.2/echarts.min',
+      SAO_CDN_URL + 'js/echarts.min',
       'bower_components/echarts/dist/echarts'
     ],
     angular: [
-      'https://cdn.bootcss.com/angular.js/1.3.20/angular.min',
+      SAO_CDN_URL + 'js/angular.min',
       'bower_components/angular/angular'
     ],
     angularAnimate: [
-      'https://cdn.bootcss.com/angular.js/1.3.20/angular-animate.min',
+      SAO_CDN_URL + 'js/angular-animate.min',
       'bower_components/angular-animate/angular-animate'
     ],
     angularFileUpload: [
-      'https://cdn.bootcss.com/angular-file-upload/2.5.0/angular-file-upload.min',
+      SAO_CDN_URL + 'js/angular-file-upload.min',
       'bower_components/angular-file-upload/dist/angular-file-upload.min'
     ],
     nprogress: [
-      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min',
+      SAO_CDN_URL + 'js/nprogress',
       'bower_components/nprogress/nprogress'
     ],
     app: 'app/app'
@@ -63,17 +65,25 @@ requirejs.config({
     lodash: {
       exports: '_'
     },
-    d3: {
-      exports: 'd3'
-    },
     bootstrap: {
-      deps: ['jquery']
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/animate.min',
+        'css!bower_components/font-awesome/css/font-awesome.min',
+        'css!bower_components/bootstrap/dist/css/bootstrap.min'
+      ]
     },
     datetimepicker: {
-      deps: ['jquery']
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/bootstrap-datetimepicker.min'
+      ]
     },
     bootstrapMultiselect: {
-      deps: ['jquery']
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/bootstrap-multiselect'
+      ]
     },
     angular: {
       deps: ['jquery'],
@@ -89,18 +99,22 @@ requirejs.config({
       deps: ['angular']
     },
     nprogress: {
-      deps: ['jquery']
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/nprogress'
+      ]
     },
     app: {
       deps: [
-        'datetimepicker'
+        'datetimepicker',
+        'css!assets/style/common',
+        'css!assets/style/style'
       ]
     }
   },
   deps: [
     'jquery',
     'lodash',
-    'd3',
     'bootstrap',
     'datetimepicker',
     'bootstrapMultiselect',

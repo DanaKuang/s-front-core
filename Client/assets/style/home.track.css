@@ -3,6 +3,21 @@
  * Create Date: 2017-08-02
  * Description: track
  */
+@media screen and (min-width: 1300px) {
+    .ui-axis-box {
+        height: 350px;
+    }
+    .ui-map-box {
+        height: 550px;
+    }
+    .ui-common-box {
+        height: 350px;
+    }
+    #baiduMap.ui-common-box,
+    #cityMap.ui-common-box {
+        height: 450px;
+    }
+}
 
 /** realtime */
 .ui-common-box {
@@ -157,6 +172,8 @@ button.multiselect {
 .ui-city-block select {
     display: inline-block;
     width: 100px;
+    height: 30px;
+    padding: 4px 12px;
 }
 .ui-transform-box {
     min-height: 340px;

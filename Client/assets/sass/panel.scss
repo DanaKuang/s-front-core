@@ -27,11 +27,14 @@
 	@include float(right)
 }
 
-
 @media screen and (max-width: 1280px) {
 	.flex {
 		font-size: 8px;
 	}
+}
+
+input.form_datetime::placeholder {
+	color: #555;
 }
 
 .panel-body {
@@ -62,6 +65,49 @@ tr td {
 	}
 }
 
-.col-md-4 .input-sm {
-	width: 80%!important;
+
+// 处理multiselect
+.multiselect.dropdown-toggle {
+	text-align: left;
+	font-size: inherit;
+	color: #555;
+}
+
+.form-control {
+	width: 100%!important;
+}
+
+// 处理 datetime
+.form_datetime {
+	background: transparent!important;
+}
+
+// 活动页面
+.manageacts .col-sm-7 {
+	padding: 0; //为了不显得太空荡
+}
+.manageacts .col-md-10 {
+	.col-sm-3 {
+		padding: 0;
+	}
+	.col-sm-1.control-label {
+		text-align: center;
+	}
+} 
+
+button.btn-primary {
+	line-height: 10%!important;
+	font-size: 14px;
+}
+
+.middle-word {
+	width: auto;
+	margin-right: 0;
+}
+
+.cigarettemanage {
+	.middle-word {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }

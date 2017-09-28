@@ -11,7 +11,7 @@ form input.ng-touched.ng-invalid {
 	overflow: hidden;
 	.inline {
 		button.btn {
-			opacity: 0;
+			visibility: hidden;
 			width: 0;
 			height: 0;
 		}
@@ -20,12 +20,12 @@ form input.ng-touched.ng-invalid {
 .form-control-feedback {
 	right: 10px;
 }
-.form-inline {
+.form-inline, .form-horizontal {
 	overflow: hidden;
 	margin-bottom: 5px;
-	.control-label {
-		text-align: right;
-	}
+	// .control-label {
+	// 	text-align: right;
+	// }
 	.form-control {
 		line-height: 100%!important;
 	}

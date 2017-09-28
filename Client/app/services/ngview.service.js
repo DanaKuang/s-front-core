@@ -1,5 +1,7 @@
 /**
- *
+ * Author: liubin
+ * Create Date: 2017-08-12
+ * Description: route
  */
 
 define([], function () {
@@ -10,7 +12,7 @@ define([], function () {
     var ngViewFactory = {
         ServiceType: "directive",
         ServiceName: "ngView",
-        ServiceContent: ['$location', '$route', '$anchorScroll', '$animate', function($location, $route, $anchorScroll, $animate) {
+        ServiceContent: ['$route', '$anchorScroll', '$animate', function($route, $anchorScroll, $animate) {
             return {
                 restrict: 'ECA',
                 terminal: true,
@@ -94,16 +96,7 @@ define([], function () {
                         if (current.controller) {
                             locals.$scope = scope;
                             if (model) {
-                                //动态路由模型注入，动态路由根据ng-controller在link函数中完成控制器的实例化
                                 locals.$scope.$model = model;
-                            } else {
-                                //静态路由实例解析，页面上无须添加ng-controller指令，控制器的实例化根据$route.current.controller来解析执行
-                                var controller = $controller(current.controller, locals);
-                                if (current.controllerAs) {
-                                    scope[current.controllerAs] = controller;
-                                }
-                                $element.data('$ngControllerController', controller);
-                                $element.children().data('$ngControllerController', controller);
                             }
                         }
                         link(scope);

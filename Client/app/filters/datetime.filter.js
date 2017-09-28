@@ -84,7 +84,7 @@ define([], function () {
             // 几天前
             function beforenday (type, num) {
                 init();
-                var value = daytime + num * 24 * 60 * 60 * 1000;
+                var value = daytime - num * 24 * 60 * 60 * 1000;
                 return filter()[type](value);
             }
 

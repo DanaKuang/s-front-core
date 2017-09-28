@@ -22,7 +22,7 @@
       line-height: 1; }
 
 .group-pannel-middle {
-  height: 450px;
+  overflow-x: hidden;
   overflow-y: scroll; }
   .group-pannel-middle .group-user-number {
     display: flex;

@@ -52,6 +52,10 @@ define([], function () {
             }
 
             scope.delete = function (e) {
+                var r = confirm('确定要删除吗？');
+                if (r == false) {
+                    return
+                }
                 var id = $(e.target).data('id');
                 scope.$emit('delete', event, {
                     id: id

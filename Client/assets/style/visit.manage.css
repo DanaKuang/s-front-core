@@ -1,12 +1,65 @@
-.manage-box {
-    width: 100%;
-    overflow: hidden;
-    font-family: "Microsoft yahei","PingFangSC Medium";
+.left {
+    float: left;
 }
-/*#container-fluid {
-   padding-right:0;
-   padding-left:0;
-}*/
+.right {
+    float: right;
+}
+.inline {
+    display: inline;
+}
+.inline-block {
+    display: inline-block;
+}
+.margin {
+    margin: 15px;
+}
+.margin-left {
+    margin-left: 15px;
+}
+.margin-right {
+    margin-right: 15px;
+}
+.margin-top {
+    margin-top: 15px;
+}
+.margin-bottom {
+    margin-bottom: 15px;
+}
+
+.ui-manage-panel input,
+.ui-manage-panel select {
+    height: 30px;
+    padding: 4px 12px;
+}
+.ui-manage-panel .btn-primary {
+    width: 90px;
+    border-radius: 15px;
+    padding: 0;
+}
+.ui-panel-title .retailer {
+    background: url('../image/i-retailer-title.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    height: 14px;
+    width: 16px;
+}
+.ui-panel-title {
+    position: relative;
+    margin: 20px 0 5px 0;
+    font-size: 16px;
+}
+.ui-manage-panel .tab-content {
+    margin-top: 15px;
+}
+#pay,#timeNow,#isReturn,
+#achievement-seacher,
+#seacherId {
+    margin-left: 15px;
+}
+
+
 .manage-right {
     height: 100%;
     /*background-color: #F1F1F1;*/
@@ -95,13 +148,6 @@
 .manage-bottom .tab-content #profileList  #loadFileContent {
     right: 200px;
 }
-.tab-content #timeStart2 {
-    width: 81px;
-    height: 30px;
-    font-size: 14px;
-    padding-left: 0;
-    font-style: 14px;
-}
 #profile .tab-content  .tab-pane .tab-input select {
     padding: 0;
     margin: 0;
@@ -142,9 +188,6 @@
 .tab-content  .tab-pane .tab-input .time {
     float: left;
     margin-left: 10px;
-}
-#timeNow {
-    margin-left: 20px;
 }
 
 .tab-content  .tab-pane .tab-input #seacherId {
@@ -193,9 +236,6 @@
 }
 .tab-content  .tab-pane .tab-input #s1,#s2,#s3 {
     width: 46px;
-}
-.tab-content .tab-pane .tab-table table th, table td {
-    font-size: 14px;
 }
 .manage-bottom .nav>li>a:focus,.manage-bottom .nav>li>a:hover {
     background-color: #fff;
@@ -254,38 +294,6 @@
 }
 .tab-content  .tab-pane .spacil-table {
     border-top: 1px solid #555;
-}
-.tab-content  .tab-pane .tab-table table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
-
-}
-.tab-table tr td a {
-    color: blue;
-    cursor: pointer;
-}
-.tab-content  .tab-pane .tab-table table thead {
-    background-color: #EEF7FE;
-
-}
-.tab-content  .tab-pane .tab-table table thead tr {
-    height: 50px;
-    font-size: 14px;
-    color:#3A3939;
-    font-weight: bold;
-}
-.tab-content  .tab-pane .tab-table table th {
-    border:1px solid #555;
-    text-align: center;
-    font-size: 14px;
-    vertical-align: middle;
-}
-.tab-content  .tab-pane .tab-table table td {
-    border:1px solid #555;
-    text-align: center;
-    font-size: 14px;
-    vertical-align: middle;
 }
 .manage-bottom .bottom-list {
     height: 50px;
