@@ -5,14 +5,14 @@
  */
 
 // 异步非阻塞加载依赖包
-let SAO_CDN_URL = 'https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/';
+var SAO_CDN_URL = 'https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/';
 
 requirejs.config({
   baseUrl: '/statics',
   waitSeconds: 0,
   map: {
     '*': {
-        'css': 'bower_components/require-css/css.min'
+      'css': 'bower_components/require-css/css.min'
     }
   },
   paths: {

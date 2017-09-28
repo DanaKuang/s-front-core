@@ -15,15 +15,6 @@ define([], function () {
             var DEFPROVINCE = $model.$defPro.data.orgId || "hunanzhongyan";
             DEFPROVINCE = DEFPROVINCE === "hunanzhongyan" ? "湖南" : "河南";
 
-            // 图形宽高
-            (function () {
-                $("#dayMap").height($("#dayMap").width()*0.4);
-                $("#baiduMap").height($("#baiduMap").width()*0.8);
-                $("#cityMap").height($("#cityMap").width()*0.8);
-                $("#pie_left").height($("#pie_left").width()*0.8);
-                $("#pie_right").height($("#pie_right").width()*0.8);
-            })();
-
             // 百度地图json
             var chinaJson = $model.$chinaJson.data;
             echarts.registerMap('china', chinaJson);
