@@ -23,8 +23,14 @@ define([], function () {
       };
 
       //获取屏幕高度
-      var windowHeight = $(window).height() - 210;
-      $(".group-pannel-middle").css({"height":windowHeight+"px"})
+      function reHeight() {
+        var windowHeight = $(window).height() - 210;
+        $(".group-pannel-middle").css({"height":windowHeight+"px"});
+      }
+      reHeight();
+      window.onresize = function() {
+        reHeight();        
+      }
       $scope.daySearch = function ($event) {
         var that = $event.target;        
         defaultMonth = {
