@@ -7,6 +7,7 @@
 /*新建活动模态框*/
 .ui-panel-title {
 	margin-top: 30px;
+	margin-bottom: 10px;
 }
 .create-activity-modal .modal-body {
 	overflow: hidden;
@@ -809,7 +810,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	font-size: 14px;
 }
 .detail-wrap p {
-	color: #6e80ff;
+	color: #5bc0de;
 	line-height: 2;
 }
 .detail-wrap p span {

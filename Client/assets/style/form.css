@@ -10,7 +10,7 @@ form input.ng-touched.ng-invalid {
 .form-group {
   overflow: hidden; }
   .form-group .inline button.btn {
-    opacity: 0;
+    visibility: hidden;
     width: 0;
     height: 0; }
 
@@ -20,8 +20,6 @@ form input.ng-touched.ng-invalid {
 .form-inline, .form-horizontal {
   overflow: hidden;
   margin-bottom: 5px; }
-  .form-inline .control-label, .form-horizontal .control-label {
-    text-align: right; }
   .form-inline .form-control, .form-horizontal .form-control {
     line-height: 100% !important; }
   .form-inline .inline .input-group, .form-inline .inline .form-control, .form-horizontal .inline .input-group, .form-horizontal .inline .form-control {

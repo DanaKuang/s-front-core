@@ -68,6 +68,7 @@ tr td {
 
 // 处理multiselect
 .multiselect.dropdown-toggle {
+	text-align: left;
 	font-size: inherit;
 	color: #555;
 }
@@ -94,7 +95,19 @@ tr td {
 	}
 } 
 
-.btn-primary {
+button.btn-primary {
 	line-height: 10%!important;
 	font-size: 14px;
+}
+
+.middle-word {
+	width: auto;
+	margin-right: 0;
+}
+
+.cigarettemanage {
+	.middle-word {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }

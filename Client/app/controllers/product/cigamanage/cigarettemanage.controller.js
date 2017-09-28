@@ -158,14 +158,19 @@ define([], function () {
               getList()
             })
           } else {
-            var data = scope_conf('.create-cigarette-body').ciga;
-            if (data && !$.isEmptyObject(data)) {
-              data.activeDays = data.activeDays || 5;
-              data.num = data.num || 10;
-              $model.save(data).then(function (res) {
-                init(true);
-                getList()
-              })
+            if (scope('.create-cigarette-body').form.$valid) {
+              var data = scope_conf('.create-cigarette-body').ciga;
+              if (data && !$.isEmptyObject(data)) {
+                data.activeDays = data.activeDays || 5;
+                data.num = data.num || 10;
+                $model.save(data).then(function (res) {
+                  init(true);
+                  getList()
+                })
+              } else {
+                alert('请确保必填内容已填写再提交')
+                return
+              }
             } else {
               alert('请确保必填内容已填写再提交')
               return
@@ -188,7 +193,7 @@ define([], function () {
           $model.checksn(f).then(function(res) {
             if (res.data.data) {
               $('[data-target=".create-modal"]').trigger('click');
-              scope_conf('.create-cigarette-body').checked = false;
+              scope_conf('.create-cigarette-body').checked = false; //判断是否可以选择图片的标识
               scope_conf('.create-cigarette-body').ciga = scope_conf('.create-cigarette-body').snData = res.data.data;
               scope_conf('.create-cigarette-body').disabled = false;
             } 
