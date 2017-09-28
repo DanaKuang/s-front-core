@@ -7,33 +7,32 @@ define([], function() {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
 			//获取时间当前年月
-					var date = new Date(); //获取系统当前时间
-					var year = date.getFullYear();
-					var month1 = date.getMonth() + 1;
-					var month2 = date.getMonth();
-					var month3 = date.getMonth() - 1;
-					var day = date.getDate() - 1;
-					month1 = (month1 < 10 ? "0" + month1 : month1);
-					month2 = (month2 < 10 ? "0" + month2 : month2);
-					month3 = (month3 < 10 ? "0" + month3 : month3);
-					var endTime = (year.toString() + '-' + month1.toString() + "-"+ day.toString());
-					var mydate1 = (year.toString() + '年' + month1.toString() + "月");
-					var mydate2 = (year.toString() + '年' + month2.toString() + "月");
-					var mydate3 = (year.toString() + '年' + month3.toString() + "月");
-					$(".topTitle1").html(mydate1+"(当月)扫码烟包数");
-					$(".topTitle2").html(mydate2+"(上月)扫码烟包数");
-					$(".topTitle3").html(mydate3+"(上上月)扫码烟包数");
+			var date = new Date(); //获取系统当前时间
+			var year = date.getFullYear();
+			var month1 = date.getMonth() + 1;
+			var month2 = date.getMonth();
+			var month3 = date.getMonth() - 1;
+			var day = date.getDate() - 1;
+			month1 = (month1 < 10 ? "0" + month1 : month1);
+			month2 = (month2 < 10 ? "0" + month2 : month2);
+			month3 = (month3 < 10 ? "0" + month3 : month3);
+			var endTime = (year.toString() + '-' + month1.toString() + "-" + day.toString());
+			var mydate1 = (year.toString() + '年' + month1.toString() + "月");
+			var mydate2 = (year.toString() + '年' + month2.toString() + "月");
+			var mydate3 = (year.toString() + '年' + month3.toString() + "月");
+			$(".topTitle1").html(mydate1 + "(当月)扫码烟包数");
+			$(".topTitle2").html(mydate2 + "(上月)扫码烟包数");
+			$(".topTitle3").html(mydate3 + "(上上月)扫码烟包数");
 			//			15910352745
-			var mobileNo;
-			if(mobileNo == null) {
-				var mobileNo = window.sessionStorage.getItem("mobileNo");
+			var mobileNo = window.sessionStorage.getItem("mobileNo");
+			if(mobileNo) {
 
 				$('.input_text').val(mobileNo);
 
 				//查询弹窗
 				$scope.chaXun = function() {
 					var mobileNo = $('.input_text').val();
-					console.log(mobileNo)
+					//					console.log(mobileNo)
 
 					var PhoneNo = {
 						mobileNo: mobileNo
@@ -42,8 +41,8 @@ define([], function() {
 					if(mobileNo.match(/^1[34578]\d{9}$/)) {
 
 						$model.$getPhoneNo(PhoneNo).then(function(res) {
-							console.log(res);
-							console.log(PhoneNo)
+							//							console.log(res);
+							//							console.log(PhoneNo)
 							if(res.data.length == 0) {
 								alert("该手机号查询不到微信ID!");
 								return false;
@@ -52,7 +51,7 @@ define([], function() {
 								for(var i = 0; i < res.data.length; i++) {
 									$scope.radioList = res.data;
 									$scope.$apply();
-									console.log($scope.radioList)
+									//									console.log($scope.radioList)
 								}
 
 							}
@@ -64,7 +63,7 @@ define([], function() {
 				//查询
 				$scope.search = function() {
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
-					console.log(openId)
+					//					console.log(openId)
 					var mobileNo = $('.input_text').val();
 					var params = {
 						openId: openId,
@@ -76,7 +75,7 @@ define([], function() {
 					} else {
 						public(params)
 					}
-
+//					window.sessionStorage.removeItem("mobileNo");
 				}
 
 				function public(params) {
@@ -86,15 +85,21 @@ define([], function() {
 					(function() {
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
-						console.log(mobileNo)
+						//						console.log(mobileNo)
 						var JiBenInfo = {
 							openId: openId,
 							mobileNo: mobileNo
 						}
 						$model.$getJiBenInfo(JiBenInfo).then(function(res) {
-							console.log(res)
+							//							console.log(res)
 							$scope.itemList = res.data[0];
 							$scope.$apply();
+							$(".userSpan").html("(用户微信ID:&nbsp;&nbsp;" +openId+")")
+							if(res.data[0].woas == 0) {
+								$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;否")
+							} else if(res.data[0].woas == 1) {
+								$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;是")
+							}
 						})
 					})();
 					//用户扫码频度分析
@@ -112,7 +117,7 @@ define([], function() {
 						option.xAxis[0].data = [];
 						option.series[0].data = [];
 						$model.$getSaoPinFen(SaoPinFen).then(function(res) {
-							console.log(res);
+							//							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								option.xAxis[0].data.push(res[i].statDate);
@@ -137,11 +142,11 @@ define([], function() {
 						optionThree.xAxis.data = [];
 						optionThree.series.data = [];
 						$model.$getSaoJieFen(SaoJieFen).then(function(res) {
-							console.log(res);
+							//							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								optionThree.xAxis.data.push(res[i].statDate);
-								optionThree.series.data.push(res[i].scanSmokeVlue);
+								optionThree.series.data.push(res[i].scanSmokeAvgVlue);
 							}
 							myChart3.setOption(optionThree, true)
 						})
@@ -167,19 +172,21 @@ define([], function() {
 							return param.datas;
 						};
 
-						console.log(optionFour)
+						//						console.log(optionFour)
 						optionFour.xAxis.data = [];
 						optionFour.series.data = [];
 						$model.$getSaoYanFen(SaoYanFen).then(function(res) {
-							console.log(res);
+							//							console.log(res);
+							var sum = 0;
 							for(var i = 0; i < res.data.length; i++) {
 								$scope.EffectScanPv = res.data;
 								$scope.$apply();
-
+								sum = sum + res.data[i].effectScanPv;
 							}
+							$(".effectScanPvSum").html("近30天扫码烟包数:&nbsp;&nbsp;" + sum + "包")
 						})
 						$model.$getSaoGeGuiFen(SaoYanFen).then(function(res) {
-							console.log(res);
+							//							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								optionFour.xAxis.data.push(res[i].statDate);
@@ -189,7 +196,7 @@ define([], function() {
 						})
 
 					})();
-					
+
 					//设置分页（备用）
 					$scope.pageSize = 5; //每页显示多少条
 					$scope.currentPageNumber = 1; //当前页数
@@ -223,27 +230,27 @@ define([], function() {
 							statDate: statDate
 						}
 						$model.$getTableInfo(tableInfo).then(function(res) {
-							console.log(res);
+							//							console.log(res);
 							for(var i = 0; i < res.data.length; i++) {
 								$scope.tableList = res.data;
 								$scope.$apply();
-								console.log($scope.tableList[0].monthPv)
+								//								console.log($scope.tableList[0].monthPv)
 							}
-//							var dataObj = res.data;
-//							$scope.supplyLists = dataObj.list;
-//							$scope.totalPage = dataObj.page.pageNumber;
-//							$scope.totalCount = dataObj.page.count;
-//							var pageObj = {
-//								allPages: dataObj.page.pageNumber,
-//								currentPage: dataObj.page.currentPageNumber
-//							};
-//							$scope.currentPageNumber = dataObj.page.currentPageNumber;
-//							if($(".tcdPageCode").createPage) {
-//								$(".tcdPageCode").remove();
-//							}
-//							$(".page_sec").append("<div class='tcdPageCode'></div>");
-//							$scope.$apply();
-//							createPageTools(pageObj);
+							//							var dataObj = res.data;
+							//							$scope.supplyLists = dataObj.list;
+							//							$scope.totalPage = dataObj.page.pageNumber;
+							//							$scope.totalCount = dataObj.page.count;
+							//							var pageObj = {
+							//								allPages: dataObj.page.pageNumber,
+							//								currentPage: dataObj.page.currentPageNumber
+							//							};
+							//							$scope.currentPageNumber = dataObj.page.currentPageNumber;
+							//							if($(".tcdPageCode").createPage) {
+							//								$(".tcdPageCode").remove();
+							//							}
+							//							$(".page_sec").append("<div class='tcdPageCode'></div>");
+							//							$scope.$apply();
+							//							createPageTools(pageObj);
 						})
 
 					};
@@ -254,7 +261,7 @@ define([], function() {
 						var myChart2 = echarts.init(document.getElementById("sunPie"));
 						var optionTwo = $model.$hourschart.data;
 
-						console.log(optionTwo)
+												console.log(optionTwo)
 						var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 						var mobileNo = $('.input_text').val();
 						endTime = endTime;
@@ -284,11 +291,9 @@ define([], function() {
 						}
 						optionTwo.series.data = [];
 						optionTwo.angleAxis.data = [];
-						optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
-							return Math.max(max, item);
-						}, -Infinity);
+
 						$model.$getSaoHourFen(SaoHourFen).then(function(res) {
-							console.log(res);
+							//							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								optionTwo.series.data.push(res[i].scanPv);
@@ -296,18 +301,19 @@ define([], function() {
 							}
 							myChart2.setOption(optionTwo)
 						})
-
+//						optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
+//							return Math.max(max, item);
+//						}, -Infinity);
+						console.log(optionTwo.series.data)
+						console.log(optionTwo.visualMap.max)
 					})();
 				}
+
 			} else {
-				window.sessionStorage.removeItem("mobileNo");
 				return false;
 
 			}
-			
-			
-			
-			
+
 		}]
 	};
 

@@ -25,7 +25,7 @@
 							<!--用户基本信息-->
 							<div class="portrait_userInfo">
 								<div class="portrait_userInfo_top clearfix">
-									<h3 class="userH3">用户基本信息</h3>
+									<h3 class="userH3" style="float:left;">用户基本信息</h3>
 									<span class="userSpan">(用户微信ID: 扫天下)</span>
 								</div>
 								<div class="portrait_userInfo_content clearfix">
@@ -51,7 +51,7 @@
 									<div class='portrait_userInfo_content_right'>
 										<div class="font_style">
 											<span class="questionOne">是否关注公众号:</span>
-											<span class="questionOneAnswer">&nbsp;&nbsp;&nbsp;&nbsp;{{itemList.woas}}</span>
+											<span class="questionOneAnswer"></span>
 										</div>
 										<div class="font_style">
 											<span class="questionTwo">用户累计扫码次数:</span>
@@ -95,8 +95,8 @@
 								<h3 class="userH3">用户扫码轨迹</h3>
 
 							</div>
-							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;">近30天扫码烟包数: 30个</p>
-							<p  style="font-size:12px;color:#a2a2a2;margin:10px 50px 10px 150px;">
+							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;" class="effectScanPvSum"></p>
+							<p  style="font-size:12px;color:#a2a2a2;margin:10px 140px 10px 150px;">
 								<span>其中: </span>
 								<span ng-repeat="listScan in EffectScanPv">{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
 							</p>
@@ -163,7 +163,7 @@
 					</div>
 					<div class="box_cont" style="width:400px;">
 						<p ng-repeat="good in radioList" style="display:flex;justify-content:center;align-items: center;">
-							<input type="radio" name="saotianxia" class="radioOne" style="-webkit-appearance:checkbox;margin:0 5px 0 0;" />
+							<input type="radio" name="saotianxia" class="radioOne" style="margin:0 5px 0 0;" />
 							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;</span>
 							<span>{{good.openId}}</span>
 						</p>

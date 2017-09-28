@@ -21,6 +21,10 @@ define([], function () {
         "statDate": yearMonth,
         "productSn":""
       };
+
+      //获取屏幕高度
+      var windowHeight = $(window).height() - 210;
+      $(".group-pannel-middle").css({"height":windowHeight+"px"})
       $scope.daySearch = function ($event) {
         var that = $event.target;        
         defaultMonth = {
