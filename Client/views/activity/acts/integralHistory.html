@@ -7,7 +7,10 @@
 -->
 <link rel="stylesheet" href="statics/assets/style/panel.css">
 <link rel="stylesheet" href="statics/assets/style/prizegot.css">
-<div ng-controller="integralHistoryCtrl">
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<div ng-controller="integralHistoryCtrl" class="integralhistory">
 	<div class="animated fadeInRightBig">
 		<div class="container-fluid">
 			<div class="ui-content-box row">
@@ -22,58 +25,74 @@
 						<!-- 操作区 -->
 						<!-- 操作区 -->
 						<div class="panel-body operation multi">
-							<div class="col-md-10 col-sm-12 col-xs-6 lft flex">
-								<div class="l flex-item">
-									<div class="category t">
-										<label for="category" class="label">订单号</label>
-										<input type="text" class="form-item" placeholder="请输入订单号" ng-model="orderCode" value="{{orderCode}}">
+							<form novalidate name="form">
+								<div class="form-horizontal">
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">订单号</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control input-sm" placeholder="请输入订单号" ng-model="orderCode">
+										</div>
 									</div>
-									<div class="norms b">
-										<label for="status" class="label">活动状态</label>
-										<select class="form-item" name="" id="status" ng-model="statusVal" value="{{statusVal}}">
-											<option value="">全部</option>
-											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
-										</select>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">品牌选择</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="selectAllBrands" multiple="multiple">
+												<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
+											</select>
+										</div>
 									</div>
-									<div class="duration bb">
-										<label for="duration" class="label">领奖时段</label>
-										<input id="durationStart" size="16" type="text" value="" placeholder="年/月/日" readonly class="form_datetime form-item" ng-model="startTime" value="{{startTime}}">
-										<p style="text-align:center; margin: 2px auto;">&nbsp;&nbsp;至&nbsp;&nbsp;</p>
-										<input id="durationEnd" size="16" type="text" value="" readonly placeholder="年/月/日" class="form_datetime form-item" ng-model="endTime" value="{{endTime}}">
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">活动状态</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm" name="" id="status" ng-model="statusVal">
+												<option value="">全部</option>
+												<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4 area">
+										<label class="control-label col-sm-4">地区</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="allarea" multiple="multiple"></select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">规格选择</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
+												<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">关键字</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control input-sm" placeholder="请填写" ng-model="keysval">
+										</div>
 									</div>
 								</div>
-								<div class="m flex-item">
-									<div class="status t">
-										<label for="norms" class="label">品牌选择</label>
-										<select class="form-item select" name="" id="norms" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple="multiple">
-											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
-										</select>
-									</div>
-									<div class="location b">
-										<label for="norms" class="label">规格选择</label>
-										<select class="form-item select" name="" id="norms" ng-model="selectSpeci" value="{{selectSpeci}}" multiple="multiple">
-											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
-										</select>
+								<div class="form-horizontal">
+									<div class="form-group col-md-10 col-md-pull-2">
+										<label class="control-label col-sm-4" for="duration">领奖时段</label>
+										<div class="col-sm-3">
+											<input id="durationStart" size="16" type="text" placeholder="年-月-日(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="startTime">
+										</div>
+										<div class="col-sm-1 control-label middle-word">至</div>
+										<div class="col-sm-3">
+											<input id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form-control input-sm form_datetime" ng-model="endTime">
+										</div>
 									</div>
 								</div>
-								<div class="r flex-item">
-									<div class="area t">
-										<label for="location" class="label">地区</label>
-										<select class="form-item select" name="" id="location" ng-model="allarea" value="{{allarea}}" multiple="multiple"></select>
-									</div>
-									<div class="keywords b">
-										<label for="keywords" class="label">关键字</label>
-										<input class="form-item keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval" value="{{keysval}}">
+								<div class="form-inline">
+									<div class="float-right">
+										<button type="submit" class="btn btn-primary search" ng-click="search($event)">搜索</button>
+										<button ng-click="reset()" type="submit" class="btn btn-primary reset" >重置</button>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-2 col-sm-6 col-xs-6 rt">
-								<button type="submit" class="btn btn-default search" ng-click="search($event)">搜索</button>
-								<button ng-click="reset()" type="submit" class="btn btn-default reset" >重置</button>
-							</div>
+							</form>
 						</div>
 						<div class="operBtnWrap">
-							<button class="push-out operBtn btn btn-default" ng-click="export($event)">导出搜索结果</button>
+							<button class="push-out btn btn-primary" ng-click="export($event)">导出搜索结果</button>
 						</div>
 
 						<!-- 列表展示区 -->
