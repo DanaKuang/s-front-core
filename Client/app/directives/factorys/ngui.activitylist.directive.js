@@ -59,6 +59,10 @@ define([], function () {
 
             // 停用
             scope.terminateActivity = function (e) {
+                var r = confirm('确定要终止吗？');
+                if (r == false) {
+                    return 
+                }
                 var data = {
                     activityCode: e.target.dataset.activitycode,
                     status: e.target.dataset.status
