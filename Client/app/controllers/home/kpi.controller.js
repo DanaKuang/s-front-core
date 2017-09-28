@@ -79,6 +79,7 @@ define([], function () {
           // top10
           $model.getTopTen().then(function (res) {
             var res = res.data || [];
+            res = res instanceof Array ? res : [];
             $("#scan_top").html(_.compact(res).join('、'));
           });
         }, Interval_common);

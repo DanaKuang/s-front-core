@@ -255,7 +255,7 @@
 			<div class="form-inline" ng-class="{'has-error': form.length.$dirty && (form.length.$error.required || form.length.$invalid), 'has-success': form.length.$dirty && form.length.$valid}">
 				<label class="control-label col-md-3 col-xs-6 required">烟支长度</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input name="length" type="text" class="form-control input-sm" ng-disabled="disabled" placeholder="请输入烟支长度" ng-model="ciga.length" required>
+					<input name="length" type="text" class="form-control input-sm" ng-disabled="disabled" placeholder="请输入烟支长度" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" ng-model="ciga.length" required>
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.length.$dirty && form.length.$valid}" aria-hidden="true"></span>
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.length.$dirty && form.length.$invalid}" aria-hidden="true"></span>
 				</div>

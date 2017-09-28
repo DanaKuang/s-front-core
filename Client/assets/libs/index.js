@@ -69,7 +69,7 @@ requirejs.config({
       deps: [
         'jquery',
         'css!' + SAO_CDN_URL + 'css/animate.min',
-        'css!' + SAO_CDN_URL + 'css/font-awesome.min',
+        'css!bower_components/font-awesome/css/font-awesome.min',
         'css!bower_components/bootstrap/dist/css/bootstrap.min'
       ]
     },
