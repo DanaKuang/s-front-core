@@ -48,13 +48,13 @@ tr td {
 .form_datetime {
   background: transparent !important; }
 
-.manageacts .col-sm-7 {
+.manageacts .col-sm-7, .mprizegothistory .col-sm-7, .vprizegothistory .col-sm-7, .integralhistory .col-sm-7 {
   padding: 0; }
 
-.manageacts .col-md-10 .col-sm-3 {
+.manageacts .col-md-10 .col-sm-3, .mprizegothistory .col-md-10 .col-sm-3, .vprizegothistory .col-md-10 .col-sm-3, .integralhistory .col-sm-10 .col-sm-3 {
   padding: 0; }
 
-.manageacts .col-md-10 .col-sm-1.control-label {
+.manageacts .col-md-10 .col-sm-1.control-label, .mprizegothistory .col-md-10 .col-sm-1.control-label, .vprizegothistory .col-md-10 .col-sm-1.control-label, .integralhistory .col-sm-10 .col-sm-1.control-label {
   text-align: center; }
 
 button.btn-primary {
@@ -68,3 +68,9 @@ button.btn-primary {
 .cigarettemanage .middle-word {
   padding-left: 0;
   padding-right: 0; }
+
+.cigarettemanage .modal .modal-footer {
+  clear: both; }
+
+.cigarettemanage .modal .form-inline {
+  overflow: hidden; }
