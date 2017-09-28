@@ -157,6 +157,8 @@ button.multiselect {
 .ui-city-block select {
     display: inline-block;
     width: 100px;
+    height: 30px;
+    padding: 4px 12px;
 }
 .ui-transform-box {
     min-height: 340px;
