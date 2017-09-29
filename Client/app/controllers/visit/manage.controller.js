@@ -1,20 +1,33 @@
-/***/
-function strToTimestamp(s) {
-    s = s.replace(/-/g,"/");
-    var date = new Date(s );
-    return date.valueOf();
-}
+/**
+ * Author: liubin
+ * Create Date: 2017-09-28
+ * Description: [重构]
+ */
+
 define([], function () {
     var manageCtrl = {
         ServiceType: "controller",
         ServiceName: "manageCtrl",
         ViewModelName: 'manageViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, dateFormatFilter) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
             var $model = $scope.$model;
             //设置input的默认时间
             var allpage;
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
-            var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+            var stattime = dayFilter.beforenday('date', 10);
+            var endtime = dayFilter.today('date');
+
+            function strToTimestamp(s) {
+                s = s.replace(/-/g,"/");
+                var date = new Date(s );
+                return date.valueOf();
+            }
+            //时间戳变
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
+            }
+            function openwin(){
+                window.open("","","width=200,height=200")
+            }
             $("#timeStart1").val(stattime);
             $("#timeStart2").val(stattime);
             $("#timeEnd1").val(endtime);
@@ -399,8 +412,8 @@ define([], function () {
                 $scope.myVar = !$scope.myVar;
             }
             //设置input的默认时间
-            var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
-            var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+            var stattime = dayFilter.beforenday('date', 10);
+            var endtime = dayFilter.today('date');
             $("#timeStart111").val(stattime);
             $("#timeStart222").val(stattime);
             $("#timeStart333").val(stattime);

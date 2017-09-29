@@ -31,18 +31,33 @@
 									<div class="form-group col-md-4">
 								    <label class="control-label col-sm-3">品牌</label>
 								    <div class="col-sm-8">
-								    	<select class="form-control input-sm select" ng-model="brandCode" multiple>
+								    	<select name="brand" class="form-control input-sm select" ng-model="brandCode" multiple>
 								    		<option value="">请选择</option>
 		    								<option ng-repeat="item in brandlist" value="{{item.brandCode}}">{{item.name}}</option>
 											</select>
 								    </div>
 								  </div>
 								  <div class="form-group col-md-4">
+								    <label class="control-label col-sm-3">规格</label>
+								    <div class="col-sm-8">
+								    	<select name="sn" type="text" class="form-control input-sm select" ng-model="sn" multiple>
+								    		<option value="">全部</option>
+								    	</select>
+								    </div>
+								  </div>
+								  <div class="form-group col-md-4">
+								    <label class="control-label col-sm-3">包装</label>
+								    <div class="col-sm-8">
+											<select class="form-control input-sm select" name="pack" id="" ng-model="pack" multiple required>
+												<option value="">请选择</option>
+											</select>								    	
+								    </div>
+								  </div>
+								  <div class="form-group col-md-4">
 								    <label class="control-label col-sm-3">价类</label>
 								    <div class="col-sm-8">
-								    	<select class="form-control input-sm" name="" id="" ng-model="grade" required>
+								    	<select name="name" class="form-control input-sm select" id="" ng-model="grade" multiple required>
 												<option value="">请选择</option>
-												<option ng-repeat="item in gradelist" value="{{item.code}}">{{item.name}}</option>
 											</select>
 								    </div>
 								  </div>
@@ -54,23 +69,6 @@
 								  	<div class="col-sm-1 control-label middle-word">至</div>
 								  	<div class="col-sm-3" style="padding: 0">
 								    	<input class="form-control input-sm" type="text"  ng-model="maxprice">
-								    </div>
-								  </div>
-								  <div class="form-group col-md-4">
-								    <label class="control-label col-sm-3">规格</label>
-								    <div class="col-sm-8">
-								    	<select type="text" class="form-control input-sm select" ng-model="sn" multiple>
-								    		<option value="">全部</option>
-								    	</select>
-								    </div>
-								  </div>
-								  <div class="form-group col-md-4">
-								    <label class="control-label col-sm-3">包装</label>
-								    <div class="col-sm-8">
-											<select class="form-control input-sm" name="" id="" ng-model="pack" required>
-												<option value="">请选择</option>
-												<option ng-repeat="item in packlist" value="{{item.code}}">{{item.name}}</option>
-											</select>								    	
 								    </div>
 								  </div>
 								</div>
