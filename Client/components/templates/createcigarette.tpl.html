@@ -56,7 +56,7 @@
 			<div class="form-inline" ng-class="{'has-error': form.typeCode.$dirty && (form.typeCode.$error.required || form.typeCode.$invalid), 'has-success': form.typeCode.$dirty && form.typeCode.$valid}">
 				<label class="control-label col-md-3 col-xs-6 required">卷烟类型</label>
 				<div class="inline col-md-7 col-xs-12">
-					<select name="typeCode" class="form-control input-sm" ng-model="ciga.typeCode" ng-disabled="disabled" required>
+					<select class="form-control input-sm" name="typeCode" ng-model="ciga.typeCode" ng-disabled="disabled" required>
 						<option value="">请选择</option>
 						<option ng-repeat="item in conf.stylelist" value="{{item.code}}" ng-selected="ciga.typeCode == item.code">{{item.name}}</option>
 					</select>
@@ -221,7 +221,7 @@
 				<label class="control-label col-md-3 col-xs-6 required">卷烟类型</label>
 				<div class="inline col-md-7 col-xs-12">
 					<select name="typeCode" id="" class="form-control input-sm" ng-model="ciga.typeCode" ng-disabled="disabled" required>
-						<option value="1">请选择</option>
+						<option value="">请选择</option>
 						<option ng-repeat="item in conf.stylelist" value="{{item.code}}">{{item.name}}</option>
 					</select>
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.typeCode.$dirty && form.typeCode.$valid}" aria-hidden="true"></span>
