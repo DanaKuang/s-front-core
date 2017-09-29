@@ -89,7 +89,7 @@ tr td {
 .cigarettemanage .col-sm-8 {
 	padding: 0; //为了不显得太空荡
 }
-.manageacts .col-md-10, .mprizegothistory .col-md-10, .vprizegothistory .col-md-10, .integralhistory .col-sm-10 {
+.manageacts .col-md-10, .mprizegothistory .col-md-10, .vprizegothistory .col-md-10, .integralhistory .col-md-10 {
 	.col-sm-3 {
 		padding: 0;
 	}
@@ -113,6 +113,9 @@ button.btn-primary {
 
 .cigarettemanage {
 	.modal {
+		.inquire, .fake {
+			line-height: 1.3
+		}
 		.modal-footer {
 			clear: both;
 		}
