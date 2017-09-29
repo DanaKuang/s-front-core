@@ -392,7 +392,7 @@ define([], function () {
                         $(".report-table").find("tbody").html("");
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
-                                $("#weekScanWin").append("<tr><td>" + res[i].statTime + "</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].cycle + "</td><td>" + res[i].scanCode + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].redNum + "</td><td>" + res[i].realNum + "</td><td>" + res[i].redValue + "</td></tr>");
+                                $("#weekScanWin").append("<tr><td>" + res[i].statTime + "</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].cycle + "</td><td>" + res[i].scanCode + "</td><td>" + res[i].scanPv + "</td><td>" + formatNum(res[i].redNum) + "</td><td>" + formatNum(res[i].realNum) + "</td><td>" + formatNum(res[i].redValue) + "</td></tr>");
                             }
                         }else{
                             $("#weekScanWin").append("<tr><td colspan='9'>暂无符合条件的数据</td></tr>");
@@ -406,7 +406,7 @@ define([], function () {
                         $(".report-table").find("tbody").html("");
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
-                                $("#weekCashWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + res[i].price + "</td><td>" + res[i].cudreNum + "</td><td>" + res[i].lastdreNum + "</td><td>" + res[i].lratio + "%</td><td>" + res[i].totalNum + "</td><td>" + res[i].drawMoney + "</td><td>" + res[i].totalMoney + "</td></tr>");
+                                $("#weekCashWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + formatNum(res[i].price) + "</td><td>" + formatNum(res[i].cudreNum) + "</td><td>" + formatNum(res[i].lastdreNum) + "</td><td>" + formatNum(res[i].lratio) + "%</td><td>" + formatNum(res[i].totalNum) + "</td><td>" + formatNum(res[i].drawMoney) + "</td><td>" + formatNum(res[i].totalMoney )+ "</td></tr>");
                             }
                         }else{
                             $("#weekCashWin").append("<tr><td colspan='11'>暂无符合条件的数据</td></tr>");
@@ -420,7 +420,7 @@ define([], function () {
                         $(".report-table").find("tbody").html("");
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
-                                $("#weekEntityWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + res[i].cudreNum + "</td><td>" + res[i].lastdreNum + "</td><td>" + res[i].lratio + "%</td><td>" + res[i].totalNum + "</td></tr>");
+                                $("#weekEntityWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + formatNum(res[i].awardName) + "</td><td>" + formatNum(res[i].cudreNum) + "</td><td>" + formatNum(res[i].lastdreNum) + "</td><td>" + formatNum(res[i].lratio) + "%</td><td>" + formatNum(res[i].totalNum) + "</td></tr>");
                             }
                         }else{
                             $("#weekEntityWin").append("<tr><td colspan='8'>暂无符合条件的数据</td></tr>");
@@ -437,7 +437,7 @@ define([], function () {
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
                                 var curNum = i+1;
-                                $("#provDataDetail").append("<tr><td>"+ curNum +"</td><td>" + res[i].province + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].scanCode + "</td><td>" + res[i].totalScanPv + "</td><td>" + res[i].totalScanUv + "</td><td>" + res[i].totalScanCode + "</td><td>" + res[i].heprovince + "</td><td>" + res[i].heScanPv + "</td><td>" + res[i].heScanUv + "</td><td>" + res[i].heScanCode + "</td><td>" + res[i].heTotalScanPv + "</td><td>" + res[i].heTotalScanUv + "</td><td>" + res[i].heTotalScanCode + "</td></tr>");
+                                $("#provDataDetail").append("<tr><td>"+ formatNum(curNum) +"</td><td>" + formatNum(res[i].province) + "</td><td>" + formatNum(res[i].scanPv) + "</td><td>" + formatNum(res[i].scanUv) + "</td><td>" + formatNum(res[i].scanCode) + "</td><td>" + formatNum(res[i].totalScanPv) + "</td><td>" + formatNum(res[i].totalScanUv) + "</td><td>" + formatNum(res[i].totalScanCode) + "</td><td>" + formatNum(res[i].heprovince) + "</td><td>" + formatNum(res[i].heScanPv) + "</td><td>" + formatNum(res[i].heScanUv) + "</td><td>" + formatNum(res[i].heScanCode) + "</td><td>" + formatNum(res[i].heTotalScanPv) + "</td><td>" + formatNum(res[i].heTotalScanUv) + "</td><td>" + formatNum(res[i].heTotalScanCode) + "</td></tr>");
                             }
                         }else{
                             $("#provDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
@@ -570,6 +570,13 @@ define([], function () {
                         break;
                     default :
                 }
+            }
+            //转化undefined为0
+            function formatNum(formarStr){
+                if(formarStr == undefined){
+                    return 0;
+                }
+                return formarStr;
             }
             //下载
             $scope.down = function (a) {
