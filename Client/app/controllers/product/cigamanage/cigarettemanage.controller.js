@@ -87,7 +87,7 @@ define([], function () {
 
         // 操作面板，根据品牌获取规格
         $scope.$watch('brandCode', function(n, o, s) {
-          if (n !== '') {
+          if (n && n != o) {
             $scope.brandCode = n;
             var brandListArrObj = {};
             brandListArrObj.brandCode = n;
@@ -160,7 +160,10 @@ define([], function () {
               }
               $scope.searchForm.$setPristine();
               $scope.searchForm.$setUntouched();
-
+              $scope.brandCode = '';
+              $scope.sn = '';
+              $scope.pack = '';
+              $scope.grade = '';
               searchForm.reset();
               getList()
             } else {
