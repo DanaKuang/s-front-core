@@ -96,10 +96,13 @@
 
 							</div>
 							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;" class="effectScanPvSum"></p>
-							<p  style="font-size:12px;color:#a2a2a2;margin:10px 140px 10px 150px;">
-								<span>其中: </span>
-								<span ng-repeat="listScan in EffectScanPv">{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
-							</p>
+							<div  style="font-size:12px;color:#a2a2a2;margin:10px 140px 10px 150px;">
+								<!--<span>其中: </span>-->
+									<!--<tr>
+										<td ng-repeat="listScan in EffectScanPv"> {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</td>
+									</tr>							-->
+						<span ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							</div>
 							<div id="saoGuiJi"></div>
 							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
 							<!--用户各规格扫码烟包数-->
@@ -166,6 +169,10 @@
 							<input type="radio" name="saotianxia" class="radioOne" style="margin:0 5px 0 0;" />
 							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;</span>
 							<span>{{good.openId}}</span>
+						</p>
+						<p ng-repeat="good in radioList" style="display:flex;justify-content:center;align-items: center;">
+						<span class="WeiIDContent1">昵称: &nbsp;&nbsp;</span>
+						<span>{{good.nickName}}</span>
 						</p>
 
 					</div>

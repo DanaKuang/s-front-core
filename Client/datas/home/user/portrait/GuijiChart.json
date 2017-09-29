@@ -45,14 +45,14 @@
 	"dataZoom": [
           {
             "type": "slider",
-            "show": false,
+            "show": true,
             "xAxisIndex": [0],
-            "start": 0,
+            "start": 10,
             "end": 35
         },
         {
             "type": "slider",
-            "show": false,
+            "show": true,
             "yAxisIndex": [0],
             "left": "93%",
             "start": 0,
@@ -61,7 +61,7 @@
         {
             "type": "inside",
             "xAxisIndex": [0],
-            "start": 0,
+            "start": 10,
             "end": 35
         },
         {

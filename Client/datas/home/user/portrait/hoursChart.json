@@ -8,7 +8,7 @@
 	"visualMap": {
 		"type": "continuous",
 		"min": 0,
-		"max": "4",
+		"max": "42",
 		"top": "middle",
 		"dimension": 1,
 		"calculable": false
@@ -16,7 +16,7 @@
 	"angleAxis": {
 		"type": "category",
 		"data": [""],
-		"boundaryGap": false,
+		"boundaryGap": true,
 		"splitLine": {
 			"show": true,
 			"lineStyle": {
