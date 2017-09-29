@@ -304,21 +304,7 @@ define([], function() {
 								$scope.$apply();
 								//								console.log($scope.tableList[0].monthPv)
 							}
-							//							var dataObj = res.data;
-							//							$scope.supplyLists = dataObj.list;
-							//							$scope.totalPage = dataObj.page.pageNumber;
-							//							$scope.totalCount = dataObj.page.count;
-							//							var pageObj = {
-							//								allPages: dataObj.page.pageNumber,
-							//								currentPage: dataObj.page.currentPageNumber
-							//							};
-							//							$scope.currentPageNumber = dataObj.page.currentPageNumber;
-							//							if($(".tcdPageCode").createPage) {
-							//								$(".tcdPageCode").remove();
-							//							}
-							//							$(".page_sec").append("<div class='tcdPageCode'></div>");
-							//							$scope.$apply();
-							//							createPageTools(pageObj);
+
 						})
 
 					};
@@ -361,7 +347,7 @@ define([], function() {
 						optionTwo.angleAxis.data = [];
 
 						$model.$getSaoHourFen(SaoHourFen).then(function(res) {
-							//							console.log(res);
+														console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								optionTwo.series.data.push(res[i].scanPv);

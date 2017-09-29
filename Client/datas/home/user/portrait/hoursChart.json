@@ -11,7 +11,8 @@
 		"max": "42",
 		"top": "middle",
 		"dimension": 1,
-		"calculable": false
+		"calculable": false,
+		"show":false
 	},
 	"angleAxis": {
 		"type": "category",
@@ -38,6 +39,7 @@
 	},
 	"series": 
 		{
+			"name":"扫码次数之和",
 			"type": "custom",
 			"coordinateSystem": "polar",
 			"itemStyle": {

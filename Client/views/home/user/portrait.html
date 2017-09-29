@@ -13,8 +13,8 @@
 						<div class="panel-body group-month-search">
 							<div class="group-month clearfix">
 								<p class='portrait_p'>用户手机号</p>
-								<input type="text" class="input_text form-control input-sm" maxlength="11" />
-								<span data-toggle="modal" class="btn btn-primary chaXunBtn" style="height:20px;font-size:12px;padding:0;" ng-click="chaXun()">查询</span>
+								<input type="text" class="input_text form-control input-sm" maxlength="11" style="height:23px;"/>
+								<span data-toggle="modal" class="btn btn-primary chaXunBtn" style="height:23px;line-height:23px;font-size:12px;padding:0;" ng-click="chaXun()">查询</span>
 							</div>
 						</div>
 					</div>
@@ -100,11 +100,17 @@
 								<!--<span>其中: </span>-->
 									<!--<tr>
 										<td ng-repeat="listScan in EffectScanPv"> {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</td>
-									</tr>							-->
-						<span ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									</tr>-->
+									<div style="width:600px;word-wrap: break-word; word-break: normal;">
+						<span  ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									</div>
 							</div>
 							<div id="saoGuiJi"></div>
-							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
+							<!--<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />-->
+							<div class="SaoMFoot">
+								<div class="SaoMFootDiv"></div>
+								<span class="SaoMFootSpan">扫码烟包数</span>
+							</div>
 							<!--用户各规格扫码烟包数-->
 							<div style="width:862px;margin:20px auto 0;">
 								<h3 class="userH3">用户各规格扫码烟包数</h3>
