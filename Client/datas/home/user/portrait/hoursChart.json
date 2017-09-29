@@ -3,7 +3,9 @@
 		"data": [""]
 	},
 	"polar": {},
-	"tooltip": {},
+	"tooltip": {
+	"trigger":"axis"
+	},
 	
 	"visualMap": {
 		"type": "continuous",
@@ -33,6 +35,7 @@
 		"type": "category",
 		"data": [""],
 		"z": 10,
+		"show":true,
 		"axisLine": {
 			"show": "false"
 		}
