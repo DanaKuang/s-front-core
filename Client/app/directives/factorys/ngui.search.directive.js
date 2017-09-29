@@ -17,24 +17,25 @@ define([], function () {
             startView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
             minView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
             $(ele).find('.date').datetimepicker({
-                language:  'zh-CN',  //日期
-                format: format,
-                autoclose: true,
-                todayBtn: true,
-                minView:minView,
-                startView: startView,
-                endDate: dateFormatFilter.date(new Date()),
-                pickerPosition: "bottom-left"
+                'language': 'zh-CN',  //日期
+                'format': format,
+                'autoclose': true,
+                'todayBtn': true,
+                'minView': minView,
+                'startView': startView,
+                'endDate': dateFormatFilter.date(new Date()),
+                'pickerPosition': "bottom-left"
             });
             return this;
         };
         dateSearch.init = function (ele, type) {
+            var that = this;
             type = type || 'year';
-            $(ele).find('select').on('chnage', function (e, val) {
-                this.dateConf(val, ele);
+            $(ele).find('select').on('change', function (e, val) {
+                that.dateConf(val, ele);
             })
-            this.dateConf(type, ele);
-            return this;
+            that.dateConf(type, ele);
+            return that;
         };
 
         return dateSearch;

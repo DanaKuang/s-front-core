@@ -1,189 +1,43 @@
-.reward-box {
-    width: 100%;
-    height: 100%;
-}
-.reward-right {
-    height: 100%;
+.ui-panel-title {
     position: relative;
-    font-size: 14px;
+    margin: 20px 0 5px 0;
+    font-size: 16px;
 }
-.reward-top {
-    height: 64px;
-    padding-top: 32px;
-    margin-bottom: 20px;
-    padding-left: 16px;
-}
-.reward-top span {
-    display: block;
-    width: 5px;
-    height: 18px;
-    background-color: #737CF3
-
-}
-.reward-top div {
-    font-family: "Microsoft yahei","PingFangSC Medium";
-    /*font-size:  20px;*/
-    color: #515151;
-    margin-left: 10px;
-    transform: translateY(-3px);
-}
-.reward-bottom {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid #F1F1F1;
-    margin-bottom: 50px;
-    top: 70px;
+.ui-panel-title .reward {
+    background: url('../image/i-retailer-title.png') no-repeat;
+    background-size: cover;
     position: absolute;
-    bottom: 0;
+    left: 10px;
+    top: 5px;
+    height: 14px;
+    width: 16px;
 }
-.reward-bottom form {
-    width: 100%;
-    margin: 0 auto;
-    background-color: #fff;
-    font-family: "Microsoft yahei","PingFangSC Medium";
-    color: #9D9D9D;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-}
-.reward-bottom form p {
-    font-family: "Microsoft yahei","PingFangSC Medium";
-    color: #686768;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    margin-left: 239px;
-}
-.reward-bottom form  div {
-    margin-left: 300px;
-}
-.reward-bottom form  div.yunfei {
-    margin-left: 713px;
-}
-.reward-bottom form .money-magin {
-    margin-right: 272px;
-}
-.reward-bottom form .money-magin p {
-    margin-left: 300px;
-}
-.reward-bottom form i {
+.ui-panel-reward form .line {
     display: block;
     height: 1px;
     background-color: #686768;
-    margin:20px 65px 0;
+    margin:20px 65px 20px 65px;
 }
-.reward-bottom form input {
-    border: 1px solid #555;
-    width: 400px;
-    height: 30px;
-    padding-left: 20px;
-    font-family: "Microsoft yahei","PingFangSC Medium";
-}
-.reward-bottom form .money-magin a {
-    margin-left: 233px;
-}
-#freestore {
-    margin-left: 424px;
-    color: #56A7DB;
-    text-decoration: none;
-}
-.reward-bottom form  .spaceTime a.save {
-    margin-left: 210px;
-}
-.reward-bottom form .money {
-    width: 360px;
-    padding-right: 0;
-}
-.reward-bottom form .money-magin  a {
-    margin-left: 233px;
-}
-/*.reward-bottom form  button {
-	margin:20px 0 20px;
-	border: 1px solid #555;
-	color: #585858;
-	height: 36px;
-
-}*/
-#intrSave {
+.ui-panel-reward form .title {
     display: block;
-    margin-left: 528px;
+    font-size: 14px;
 }
-.reward-bottom form textarea {
-    padding-top: 10px;
-    padding-left: 20px;
-    border: 1px solid #555;
-    width: 400px;
-    height: 160px;
-    text-indent: 2em;
-    margin-top: 16px;
-    margin-left: 8px;
-}
-.reward-bottom .return {
-    margin-left: 300px;
-    margin-top: 20px;
-}
-.reward-bottom  .active {
-    float: left;
-    margin-left: 306px;
-}
-.reward-bottom .erwei {
-    margin-left: 249px;
-}
-.reward-bottom .save {
-    display: inline-block;
-    margin-left: 528px;
+.ui-panel-reward .openButton1 {
+    height: 30px;
     width: 100px;
-    height: 30px;
-    text-align: center;
     line-height: 30px;
-    background-color: #6e80ff;
     border-radius: 15px;
-    border: none;
-    color: #fff;
-    margin-top: 15px;
-}
-.reward-bottom .ifFree,.reward-bottom .numble,.reward-bottom .spaceTime {
-    margin-left: 326px;
-}
-.reward-bottom .openButton1,.reward-bottom .closeButton1 {
     text-align: center;
-    line-height: 36px;
-    display: inline-block;
-    width: 120px;
-    cursor: pointer;
-    margin:20px 0 20px;
-    border: 1px solid #555;
-    height: 36px;
 }
-.reward-bottom .openButton1 {
-    transform: translateX(7px);
-    background-color: #30A13E;
-    border-radius: 15px 15px 15px 15px;
-    color: #585858;
-
-}
-.reward-bottom .closeButton1 {
-    background-color: #fff;
-    opacity: 1;
-    border-radius: 0 15px 15px 0;
-    color: #585858;
-}
-#aaa {
-    position: relative;
-    width: 500px;
-    height: 100%;
-    margin-left:300px;
-    background-color: #6E80FF;
-    margin-top: 100px;
-    z-index: -999;
-
-}
-#pleaseColse {
-    position: absolute;
-    right: 10px;
-    color:#fff;
-}
-#aaa p{
-    color: #fff;
+.ui-panel-reward .help-block {
     height: 30px;
+}
+.ui-panel-reward .save {
+    width: 90px;
+    border-radius: 15px;
+    padding: 0;
+}
+.ui-panel-reward .save-div {
+    text-align: center;
+    margin: 15px 0;
 }

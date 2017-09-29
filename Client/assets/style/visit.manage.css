@@ -36,7 +36,7 @@
     border-radius: 15px;
     padding: 0;
 }
-.ui-panel-title .retailer {
+.ui-panel-title .manage {
     background: url('../image/i-retailer-title.png') no-repeat;
     background-size: cover;
     position: absolute;

@@ -16,6 +16,8 @@ define([], function () {
 
             var GET_ALL_BRANDS = '/api/tztx/saas/saotx/common/queryBrandWithRight';
 
+            var GET_ALL_SNS = '/api/tztx/saas/saotx/common/queryProduct';
+
             var CHECK_SN = '/api/tztx/saas/saotx/product/queryProductTobacco';
 
             var CHECK_TYEP = '/api/tztx/saas/saotx/common/queryDimTobaccoType';
@@ -38,6 +40,11 @@ define([], function () {
             // 获取品牌数据
             $model.getbrands = function () {
                 return request.$Search(GET_ALL_BRANDS);
+            }
+
+            // 根据品牌获取规格
+            $model.getsns = function () {
+                return request.$Search(GET_ALL_SNS);
             }
 
             // 查询sn条形码

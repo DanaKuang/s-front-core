@@ -23,7 +23,7 @@
     "requirejs": "2.3.3",
     "echarts": "3.6.2",
     "angular-animate": "1.2.26",
-    "smalot-bootstrap-datetimepicker": "2.3.4",
+    "smalot-bootstrap-datetimepicker": "2.0",
     "animate.css": "^3.5.2",
     "bootstrap-multiselect": "^0.9.13",
     "angular-file-upload": "^2.5.0",

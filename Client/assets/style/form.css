@@ -7,18 +7,15 @@ select {
 form input.ng-touched.ng-invalid {
   border-color: #FA787E; }
 
-.form-group {
-  overflow: hidden; }
-  .form-group .inline button.btn {
-    visibility: hidden;
-    width: 0;
-    height: 0; }
+.form-group .inline button.btn {
+  visibility: hidden;
+  width: 0;
+  height: 0; }
 
 .form-control-feedback {
   right: 10px; }
 
 .form-inline, .form-horizontal {
-  overflow: hidden;
   margin-bottom: 5px; }
   .form-inline .form-control, .form-horizontal .form-control {
     line-height: 100% !important; }
@@ -33,3 +30,9 @@ form input.ng-touched.ng-invalid {
       top: -1px;
       color: red;
       font-size: 18px; }
+
+.multiselect-container input[type=checkbox] {
+  margin-top: 3px; }
+
+.multiselect-container input[type=radio] {
+  margin-top: 4px; }
