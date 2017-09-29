@@ -239,7 +239,7 @@
 			<div class="form-inline" ng-class="{'has-error': form.nicotine.$dirty && (form.nicotine.$error.required || form.nicotine.$invalid), 'has-success': form.nicotine.$dirty && form.nicotine.$valid}">
 				<label for="" class="control-label col-md-3 col-xs-6 required">烟碱量</label>
 				<div class="inline col-md-7 col-xs-12">
-					<input name="nicotine" type="text" ng-model="ciga.nicotine" class="form-control input-sm" placeholder="请输入烟碱量" ng-disabled="disabled" required>
+					<input name="nicotine" type="text" ng-model="ciga.nicotine" class="form-control input-sm" placeholder="请输入烟碱量" ng-disabled="disabled" ng-pattern="/^[0-9]+([.]{1}[0-9]+){0,1}$/" required>
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.nicotine.$dirty && form.nicotine.$valid}" aria-hidden="true"></span>
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.nicotine.$dirty && form.nicotine.$invalid}" aria-hidden="true"></span>
 				</div>

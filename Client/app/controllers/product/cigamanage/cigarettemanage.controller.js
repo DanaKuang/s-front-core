@@ -59,6 +59,7 @@ define([], function () {
           $scope.brandCode = '';
           $scope.grade = '';
           $('.multiselect-selected-text').text('请选择');
+          $('.multiselect-item').removeClass('active');
           searchForm.reset();
           getList()
         }
