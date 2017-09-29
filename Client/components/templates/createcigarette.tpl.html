@@ -19,7 +19,7 @@
 					<input name="sn" type="text" class="form-control input-sm" placeholder="请输入条形码" ng-model="ciga.product.sn" disabled>
 				</div>
 				<div class="inline">
-					<div class="btn btn-default input-sm" ng-click="checksn($event)" ng-hide="!checked" disabled>查询</div>
+					<div class="btn btn-default input-sm inquire" ng-click="checksn($event)" ng-hide="!checked" disabled>查询</div>
 				</div>
 			</div>
 			<div class="form-inline" ng-class="{'has-error': form.name.$dirty && (form.name.$error.required || form.name.$invalid), 'has-success': form.name.$dirty && form.name.$valid}">
@@ -183,7 +183,7 @@
 					<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.sn.$dirty && form.sn.$invalid}" aria-hidden="true"></span>
 				</div>
 				<div class="inline">
-					<div class="btn btn-default input-sm" ng-click="checksn($event)">查询</div>
+					<div class="btn btn-default input-sm inquire" ng-click="checksn($event)">查询</div>
 				</div>
 			</div>
 			<div class="form-inline" ng-class="{'has-error': form.name.$dirty && (form.name.$error.required || form.name.$invalid), 'has-success': form.name.$dirty && form.name.$valid}">

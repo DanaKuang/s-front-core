@@ -166,6 +166,8 @@ define([], function () {
               scope_conf('.create-cigarette-body').disabled = true;
               $('[data-dismiss="modal"]').trigger('click');
               form.reset();
+              searchForm.reset();
+              getList()
             } else {
               // 查询没有结果
               var sn = scope('.create-cigarette-body').ciga.product.sn;
@@ -196,35 +198,28 @@ define([], function () {
 
         // 保存卷烟
         $scope.save = function () {
-          var snData  = scope_conf('.create-cigarette-body').snData;
-          if (snData) {
-            if (scope('.create-cigarette-body').form.$valid) {
+          if (scope('.create-cigarette-body').form.$valid) {
+            var snData  = scope_conf('.create-cigarette-body').snData;
+            if (snData) {
               $model.save(snData).then(function (res) {
                 init(true);
-                getList()
               })
             } else {
-              alert('请确保必填内容已填写再提交')
-              return
-            }
-          } else {
-            if (scope('.create-cigarette-body').form.$valid) {
               var data = scope_conf('.create-cigarette-body').ciga;
               if (data && !$.isEmptyObject(data)) {
                 data.activeDays = data.activeDays || 5;
                 data.num = data.num || 10;
                 $model.save(data).then(function (res) {
                   init(true);
-                  getList()
                 })
               } else {
                 alert('请确保必填内容已填写再提交')
                 return
               }
-            } else {
-              alert('请确保必填内容已填写再提交')
-              return
             }
+          } else {
+            alert('请确保必填内容已填写再提交')
+            return
           }
         }
 
