@@ -54,14 +54,7 @@ define([], function () {
 
         // 重置
         $scope.searchreset = function () {
-          $scope.searchForm.$setPristine();
-          $scope.searchForm.$setUntouched();
-          $scope.brandCode = '';
-          $scope.grade = '';
-          $('.multiselect-selected-text').text('请选择');
-          $('.multiselect-item').removeClass('active');
-          searchForm.reset();
-          getList()
+          init(true, 'searchform');
         }
         
         // 新建卷烟里面选择品牌
@@ -158,17 +151,25 @@ define([], function () {
         })
 
         // 执行初始化(查询、保存、取消)
-        function init(bool) {
+        function init(bool, tag) {
           if (scope_conf('.create-cigarette-body')) {
             if (bool) {
               // 保存 和 取消
-              $scope.form.$setPristine();
-              $scope.form.$setUntouched();
-              scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
-              scope_conf('.create-cigarette-body').snData = null;
-              scope_conf('.create-cigarette-body').disabled = true;
-              $('[data-dismiss="modal"]').trigger('click');
-              form.reset();
+              if (!tag) {
+                $scope.form.$setPristine();
+                $scope.form.$setUntouched();
+                scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
+                scope_conf('.create-cigarette-body').snData = null;
+                scope_conf('.create-cigarette-body').disabled = true;
+                $('[data-dismiss="modal"]').trigger('click');
+                form.reset();
+              }
+              $scope.searchForm.$setPristine();
+              $scope.searchForm.$setUntouched();
+              $scope.brandCode = '';
+              $scope.grade = '';
+              $('.multiselect-selected-text').text('请选择');
+              $('.multiselect-item').removeClass('active');
               searchForm.reset();
               getList()
             } else {
