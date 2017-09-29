@@ -34,7 +34,6 @@ define([], function () {
             $scope.paginationConf = res.data;
           })
         }
-        // getList()
 
         $scope.$on('frompagechange', function (e,v,f) {
           getList(f)
@@ -59,6 +58,7 @@ define([], function () {
           $scope.searchForm.$setUntouched();
           $scope.brandCode = '';
           $scope.grade = '';
+          $('.multiselect-selected-text').text('请选择');
           searchForm.reset();
           getList()
         }
