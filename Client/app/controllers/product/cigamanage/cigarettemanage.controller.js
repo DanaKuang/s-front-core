@@ -60,10 +60,10 @@ define([], function () {
         // 搜索
         $scope.search = function () {
           var data = {
-            sn: $scope.sn ? $scope.sn.join('') : '',
-            brandCode: $scope.brandCode ? $scope.brandCode.join('') : '',
-            grade: $scope.grade ? $scope.grade.join('') : '',
-            pack: $scope.pack ? $scope.pack.join('') : '',
+            sn: $scope.sn ? $scope.sn.join(',') : '',
+            brandCode: $scope.brandCode ? $scope.brandCode.join(',') : '',
+            grade: $scope.grade ? $scope.grade.join(',') : '',
+            pack: $scope.pack ? $scope.pack.join(',') : '',
             minPrice: $scope.minprice || '',
             maxPrice: $scope.maxprice || ''
           }
