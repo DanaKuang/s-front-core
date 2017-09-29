@@ -46,7 +46,7 @@ define([], function () {
           return request.$Search(getBrandUrl,{},true);
         }
         this.$getSpecifData = function(params){
-          return request.$Search(getSpeciftUrl,params,true);
+          return request.$Search(getProductNo,params,true);
         }
         this.$getPackAndTimeData = function(params){
           return request.$Search(getPackAndTimeUrl,params,true);
