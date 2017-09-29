@@ -1,4 +1,8 @@
-/***/
+/**
+ * Author: liubin
+ * Create Date: 2017-09-28
+ * Description: visit
+ */
 
 define([], function () {
 	var achievementModel = {
@@ -8,7 +12,6 @@ define([], function () {
     		this.$model = function () {
                 var SEARCH_INCOME_DATA = '/api/tztx/seller-manager/income/statis';
     			var SEARCH_DETAIL_DATA = '/api/tztx/seller-manager/income/detail';
-
 
     			// 获取表格数据
     			this.getTblStatic = function (params) {

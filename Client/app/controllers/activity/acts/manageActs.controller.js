@@ -68,7 +68,7 @@ define([], function () {
               selectAllText: '全部',
               nSelectedText: '已选择',
               includeSelectAllOption: true,
-              selectAllValue: 'all',
+              allSelectedText: '全选',
               enableFiltering: true,
               buttonWidth: '100%',
               maxHeight: '200px',
@@ -76,7 +76,7 @@ define([], function () {
             });
           });
 
-          $('.select-brand-name').on('click', function () {
+          $('.select-brand-name').one('click', function () {
             $model.getAllBrands().then(function(res) {
               $scope.allBrands = res.data.data;
               $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
@@ -84,6 +84,8 @@ define([], function () {
                   v.value = v.brandCode;
               }));
               $('[ng-model="selectAllBrands"]').multiselect('refresh');
+              var default_val = $('[ng-model="selectAllBrands"]').find('option:first').val();
+              $scope.selectAllBrands = default_val;
             })
           })
 
@@ -237,7 +239,7 @@ define([], function () {
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
-                selectAllValue: 'all',
+                allSelectedText: '全选',
                 enableFiltering: true,
                 buttonWidth: '453px',
                 maxHeight: '500px',
@@ -285,7 +287,7 @@ define([], function () {
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
-                selectAllValue: 'all',
+                allSelectedText: '全选',
                 enableFiltering: true,
                 buttonWidth: '453px',
                 maxHeight: '500px',
@@ -352,7 +354,7 @@ define([], function () {
           function getArea(f, selector, bool, boolarr) {
             $model.getTierArea(f).then(function (res) {
               var areaData = [];
-              var provinceArr = res.data.data;
+              var provinceArr = res.data.data.datas;
               if (provinceArr.length != 0) {
                 provinceArr.forEach(function (n ,index) {
                   var group = {
@@ -361,7 +363,7 @@ define([], function () {
                       children: []
                   };
                   $model.getTierArea({parentCode: n.code}).then(function(res) {
-                    var cityArr = res.data.data;
+                    var cityArr = res.data.data.datas;
                     if (cityArr.length != 0) {
                       cityArr.forEach(function (n, index) {
                         group['children'].push({

@@ -38,6 +38,7 @@ tr td {
     max-height: 4em; }
 
 .multiselect.dropdown-toggle {
+  text-align: left;
   font-size: inherit;
   color: #555; }
 
@@ -47,15 +48,34 @@ tr td {
 .form_datetime {
   background: transparent !important; }
 
-.manageacts .col-sm-7 {
+.manageacts .col-sm-7, .mprizegothistory .col-sm-7, .vprizegothistory .col-sm-7, .integralhistory .col-sm-7 {
   padding: 0; }
 
-.manageacts .col-md-10 .col-sm-3 {
+.cigarettemanage .col-sm-8 {
   padding: 0; }
 
-.manageacts .col-md-10 .col-sm-1.control-label {
+.manageacts .col-md-10 .col-sm-3, .mprizegothistory .col-md-10 .col-sm-3, .vprizegothistory .col-md-10 .col-sm-3, .integralhistory .col-md-10 .col-sm-3 {
+  padding: 0; }
+
+.manageacts .col-md-10 .col-sm-1.control-label, .mprizegothistory .col-md-10 .col-sm-1.control-label, .vprizegothistory .col-md-10 .col-sm-1.control-label, .integralhistory .col-md-10 .col-sm-1.control-label {
   text-align: center; }
 
-.btn-primary {
+.manageacts .col-md-10 .modal .control-label, .mprizegothistory .col-md-10 .modal .control-label, .vprizegothistory .col-md-10 .modal .control-label, .integralhistory .col-md-10 .modal .control-label {
+  text-align: right; }
+
+button.btn-primary {
   line-height: 10% !important;
   font-size: 14px; }
+
+.middle-word {
+  width: auto;
+  margin-right: 0; }
+
+.cigarettemanage .modal .inquire, .cigarettemanage .modal .fake {
+  line-height: 1.3; }
+
+.cigarettemanage .modal .modal-footer {
+  clear: both; }
+
+.cigarettemanage .modal .form-inline {
+  overflow: hidden; }

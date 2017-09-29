@@ -1,19 +1,21 @@
-/***/
-function strToTimestamp(s) {
-	s = s.replace(/-/g, "/");
-	var date = new Date(s);
-	return date.valueOf();
-}
+/**
+ * Author: liubin
+ * Create Date: 2017-09-28
+ * Description: achievement[简单重构]
+ */
 define([], function() {
 	var achievementCtrl = {
 		ServiceType: "controller",
 		ServiceName: "achievementCtrl",
 		ViewModelName: 'achievementViewModel',
-		ServiceContent: ['$scope', function($scope) {
+		ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function($scope, df, dayFilter) {
 			var $model = $scope.$model;
+			function getLocalTime(nS) {
+	            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
+	        }
 			//设置input的默认时间
-			var stattime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 10);
-			var endtime = new Date().getFullYear() + "-" + "0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+			var stattime = dayFilter.beforenday('date', 10);
+			var endtime = dayFilter.today('date');
 			$("#timeStart1").val(stattime);
 			$("#timeStart2").val(stattime);
 			$("#timeEnd1").val(endtime);

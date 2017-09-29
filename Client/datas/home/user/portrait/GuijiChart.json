@@ -11,11 +11,19 @@
 			}
 		},
 		"data": [
-		""
+		"2017-01-01",
+		"2017-01-02",
+		"2017-01-03",
+		"2017-01-04",
+		"2017-01-05",
+		"2017-01-06",
+		"2017-01-07",
+		"2017-01-08",
+		"2017-01-09",
+		"2017-01-10"
 		]
 	},
 	"yAxis": {
-		"type": "value",
 		"splitLine": {
 			"show": "true",
 			"lineStyle": {
@@ -25,15 +33,49 @@
 				"type": "solid"
 			}
 		},
-
-		"scale": "true"
-	},
-	"series": {
-		"data": [
+		"scale": "true",
+		"data":[
 			""
 		],
+		"axisLabel": {
+			"interval": 0,
+			"rotate":50
+		}
+	},
+	"dataZoom": [
+          {
+            "type": "slider",
+            "show": true,
+            "xAxisIndex": [0],
+            "start": 10,
+            "end": 35
+        },
+        {
+            "type": "slider",
+            "show": true,
+            "yAxisIndex": [0],
+            "left": "93%",
+            "start": 0,
+            "end": 36
+        },
+        {
+            "type": "inside",
+            "xAxisIndex": [0],
+            "start": 10,
+            "end": 35
+        },
+        {
+            "type":"inside",
+            "yAxisIndex": [0],
+            "start": 0,
+            "end": 36
+        }
+      ],
+	"series": {
+		"name":"扫码烟包数",		
 		"type": "scatter",
-		"symbolSize": "symbolSize"
+		"symbolSize": "symbolSize",
+		"data": [""]
 	},
 	"label": {
 		"emphasis": {

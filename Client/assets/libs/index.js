@@ -30,7 +30,7 @@ requirejs.config({
     ],
     datetimepicker: [
       SAO_CDN_URL + 'js/bootstrap-datetimepicker.min',
-      'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker'
+      'bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker'
     ],
     bootstrapMultiselect: [
       SAO_CDN_URL + 'js/bootstrap-multiselect',
@@ -69,14 +69,14 @@ requirejs.config({
       deps: [
         'jquery',
         'css!' + SAO_CDN_URL + 'css/animate.min',
-        'css!' + SAO_CDN_URL + 'css/font-awesome.min',
+        'css!bower_components/font-awesome/css/font-awesome.min',
         'css!bower_components/bootstrap/dist/css/bootstrap.min'
       ]
     },
     datetimepicker: {
       deps: [
         'jquery',
-        'css!' + SAO_CDN_URL + 'css/bootstrap-datetimepicker.min'
+        'css!' + SAO_CDN_URL + 'css/datetimepicker.min'
       ]
     },
     bootstrapMultiselect: {

@@ -1,1 +1,33 @@
-<div><table class="table table-bordered table-hover"><thead><tr><th ng-repeat="col in columns track by $index" ng-class="{hide:col.hide}" ng-style="{width: col.width}" colspan="{{!!rows[0].data?col.colspan:'1'}}"><span data-toggle="{{col.tooltip && 'tooltip'}}" title="{{col.tooltip || ''}}" data-placement="{{col.placement || 'top'}}">{{col.label}}</span> <i ng-if="col.sortable" class="ui-sort-table {{active&&$index==sortId?'asc':'desc'}}" ng-click="sortTable($event, col)"></i></th></tr></thead><tbody ng-if="!rows[0].data"><tr ng-repeat="row in rows"><td ng-repeat="col in columns track by $index"><span>{{row[col.name]}}</span> <i ng-if="col.icon" class="ui-td-icon" ng-click="openCity($event, row[col.name]);"></i></td></tr></tbody><tbody ng-repeat="row in rows track by $index" ng-init="$outIndex=$index" ng-if="!!rows[0].data"><tr ng-repeat="d in row.data track by $index"><td ng-if="$index == 0 && (row.saleType || row.specType)" rowspan="{{row.data.length}}" class="ui-kpi-ragion-{{$outIndex}} ui-kpi-ragion">{{row.saleType||row.specType}}</td><td ng-repeat="col in columns" class="ui-kpi-row-{{$outIndex}}"><span>{{d[col.name]}}</span> <i ng-if="col.icon" class="ui-td-icon" ng-click="openCity($event, d[col.name]);"></i></td></tr><tr ng-if="row.sum" class="ui-kpi-sum-{{$outIndex}}"><td>总计</td><td ng-repeat="col in columns">{{row.sum[col.name]}}</td></tr></tbody></table></div>
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th ng-repeat="col in columns track by $index" ng-class="{hide:col.hide}" ng-style="{width: col.width}" colspan="{{!!rows[0].data?col.colspan:'1'}}">
+                    <span data-toggle="{{col.tooltip && 'tooltip'}}" title="{{col.tooltip || ''}}" data-placement="{{col.placement || 'top'}}">{{col.label||''}}</span>
+                    <i ng-if="col.sortable" class="ui-sort-table {{active&&$index==sortId?'asc':'desc'}}" ng-click="sortTable($event, col)"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-if="!rows[0].data">
+            <tr ng-repeat="row in rows">
+                <td ng-repeat="col in columns track by $index">
+                    <span>{{row[col.name]||''}}</span>
+                    <i ng-if="col.icon" class="ui-td-icon" ng-click="openCity($event, row[col.name]);"></i>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-repeat="row in rows track by $index" ng-init="$outIndex=$index" ng-if="!!rows[0].data">
+            <tr ng-repeat="d in row.data track by $index">
+                <td ng-if="$index == 0 && (row.saleType || row.specType)" rowspan="{{row.data.length}}" class="ui-kpi-ragion-{{$outIndex}} ui-kpi-ragion">{{row.saleType||row.specType||''}}</td>
+                <td ng-repeat="col in columns" class="ui-kpi-row-{{$outIndex}}">
+                    <span>{{d[col.name]||''}}</span>
+                    <i ng-if="col.icon" class="ui-td-icon" ng-click="openCity($event, d[col.name]);"></i>
+                </td>
+            </tr>
+            <tr ng-if="row.sum" class="ui-kpi-sum-{{$outIndex}}">
+                <td>总计</td>
+                <td ng-repeat="col in columns">{{row.sum[col.name]||''}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -37,7 +37,7 @@
     background-image: -ms-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image: -o-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image: linear-gradient(top, #F3F3F3, #D7D7D7); }
-  .pagination-wrap .pagination a:nth-of-type(1), .pagination-wrap .pagination a:last-of-type {
+  .pagination-wrap .pagination > a {
     width: 32px; }
   .pagination-wrap .pagination i {
     margin: 0 3px 0 3px; }

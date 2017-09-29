@@ -8,10 +8,9 @@ form input.ng-touched.ng-invalid {
 	border-color: #FA787E;
 }
 .form-group {
-	overflow: hidden;
 	.inline {
 		button.btn {
-			opacity: 0;
+			visibility: hidden;
 			width: 0;
 			height: 0;
 		}
@@ -21,11 +20,10 @@ form input.ng-touched.ng-invalid {
 	right: 10px;
 }
 .form-inline, .form-horizontal {
-	overflow: hidden;
 	margin-bottom: 5px;
-	.control-label {
-		text-align: right;
-	}
+	// .control-label {
+	// 	text-align: right;
+	// }
 	.form-control {
 		line-height: 100%!important;
 	}
@@ -45,4 +43,12 @@ form input.ng-touched.ng-invalid {
 			font-size: 18px;
 		}
 	}
+}
+
+.multiselect-container input[type=checkbox] {
+	margin-top: 3px;
+}
+
+.multiselect-container input[type=radio] {
+	margin-top: 4px;
 }

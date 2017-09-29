@@ -68,6 +68,7 @@ tr td {
 
 // 处理multiselect
 .multiselect.dropdown-toggle {
+	text-align: left;
 	font-size: inherit;
 	color: #555;
 }
@@ -82,19 +83,44 @@ tr td {
 }
 
 // 活动页面
-.manageacts .col-sm-7 {
+.manageacts .col-sm-7, .mprizegothistory .col-sm-7, .vprizegothistory .col-sm-7, .integralhistory .col-sm-7 {
 	padding: 0; //为了不显得太空荡
 }
-.manageacts .col-md-10 {
+.cigarettemanage .col-sm-8 {
+	padding: 0; //为了不显得太空荡
+}
+.manageacts .col-md-10, .mprizegothistory .col-md-10, .vprizegothistory .col-md-10, .integralhistory .col-md-10 {
 	.col-sm-3 {
 		padding: 0;
 	}
 	.col-sm-1.control-label {
 		text-align: center;
 	}
+	.modal .control-label {
+		text-align: right;
+	}
 } 
 
-.btn-primary {
+button.btn-primary {
 	line-height: 10%!important;
 	font-size: 14px;
+}
+
+.middle-word {
+	width: auto;
+	margin-right: 0;
+}
+
+.cigarettemanage {
+	.modal {
+		.inquire, .fake {
+			line-height: 1.3
+		}
+		.modal-footer {
+			clear: both;
+		}
+		.form-inline {
+			overflow: hidden;
+		}
+	}
 }

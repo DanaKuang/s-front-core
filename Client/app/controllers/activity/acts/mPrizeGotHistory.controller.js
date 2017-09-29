@@ -90,7 +90,7 @@ define([], function () {
               v.label = v.name;
               v.value = v.sn;
             }));
-            $('[ng-model="selectAllBrands"]').multiselect('refresh');
+            $('[ng-model="selectSpeci"]').multiselect('refresh');
           })
         }
       })
@@ -121,7 +121,7 @@ define([], function () {
       function getArea(f, selector, bool) {
         $model.getTierArea(f).then(function (res) {
             var areaData = [];
-            var provinceArr = res.data.data;
+            var provinceArr = res.data.data.datas;
             if (provinceArr.length != 0) {
               provinceArr.forEach(function (n ,index) {
                 var group = {
@@ -130,7 +130,7 @@ define([], function () {
                     children: []
                 };
                 $model.getTierArea({parentCode: n.code}).then(function(res) {
-                    var cityArr = res.data.data;
+                    var cityArr = res.data.data.datas;
                     if (cityArr.length != 0) {
                       cityArr.forEach(function (n, index) {
                         group['children'].push({
@@ -201,6 +201,9 @@ define([], function () {
 
       // 导出奖品明细
       $scope.export = function (e) {
+        if ($('.mprizegothistory').find('tbody').children().length == 0) {
+          return
+        }
         var data = {
           orderCode: $scope.orderCode || '',
           brandCodeArr: $scope.selectAllBrands || [],

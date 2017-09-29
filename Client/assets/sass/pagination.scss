@@ -41,7 +41,7 @@
 	  background-image: linear-gradient(top, #F3F3F3, #D7D7D7); 
 	}
 
-	.pagination a:nth-of-type(1), .pagination a:last-of-type {
+	.pagination>a {
 		width: 32px;
 	}
 

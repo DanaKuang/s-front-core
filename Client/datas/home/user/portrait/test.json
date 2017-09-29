@@ -36,7 +36,13 @@
     "yAxis" : [
         {
             "type" : "value",
-            "position": "left"
+            "position": "left",
+            "axisLabel":{
+            "show":false
+        },
+            "axisTick":{
+            "show":false
+        }
         }
     ],
     

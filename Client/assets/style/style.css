@@ -876,6 +876,10 @@ input[type="checkbox"]:checked + .checkbox{
   line-height: 28px;
 }
 
+.res_search div input {
+  width: 150px !important;
+}
+
 .res_search div select {
   height: 28px;
   line-height: 28px;

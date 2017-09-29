@@ -1,5 +1,8 @@
-/***/
-
+/**
+ * Author: liubin
+ * Create Date: 2017-09-28
+ * Description: 重构
+ */
 define([], function () {
     var rewardCtrl = {
         ServiceType: "controller",
