@@ -36,6 +36,20 @@
 										</select>
 									</div>
 								</div>
+								<div class="form-group col-md-4 select-brand-name">
+									<label class="control-label col-sm-4">品牌选择</label>
+									<div class="col-sm-7">
+										<select class="form-control input-sm select" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple>
+											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group col-md-4 area">
+									<label class="control-label col-sm-4" for="location">地区</label>
+									<div class="col-sm-7">
+										<select class="form-control input-sm allarea select" name="" id="location" ng-model="allarea" multiple></select>
+									</div>
+								</div>
 								<div class="form-group col-md-4">
 									<label class="control-label col-sm-4">活动状态</label>
 									<div class="col-sm-7">
@@ -45,26 +59,12 @@
 										</select>
 									</div>
 								</div>
-								<div class="form-group col-md-4 select-brand-name">
-									<label class="control-label col-sm-4">品牌选择</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm select" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple>
-											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
-										</select>
-									</div>
-								</div>
 								<div class="form-group col-md-4">
 									<label class="control-label col-sm-4">规格选择</label>
 									<div class="col-sm-7">
 										<select class="form-control input-sm select" ng-model="selectSpeci" multiple>
 											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 										</select>
-									</div>
-								</div>
-								<div class="form-group col-md-4 area">
-									<label class="control-label col-sm-4" for="location">地区</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm allarea select" name="" id="location" ng-model="allarea" multiple></select>
 									</div>
 								</div>
 								<div class="form-group col-md-4">

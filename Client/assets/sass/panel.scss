@@ -86,12 +86,18 @@ tr td {
 .manageacts .col-sm-7, .mprizegothistory .col-sm-7, .vprizegothistory .col-sm-7, .integralhistory .col-sm-7 {
 	padding: 0; //为了不显得太空荡
 }
-.manageacts .col-md-10, .mprizegothistory .col-md-10, .vprizegothistory .col-md-10, .integralhistory .col-sm-10 {
+.cigarettemanage .col-sm-8 {
+	padding: 0; //为了不显得太空荡
+}
+.manageacts .col-md-10, .mprizegothistory .col-md-10, .vprizegothistory .col-md-10, .integralhistory .col-md-10 {
 	.col-sm-3 {
 		padding: 0;
 	}
 	.col-sm-1.control-label {
 		text-align: center;
+	}
+	.modal .control-label {
+		text-align: right;
 	}
 } 
 
@@ -106,11 +112,10 @@ button.btn-primary {
 }
 
 .cigarettemanage {
-	.middle-word {
-		padding-left: 0;
-		padding-right: 0;
-	}
 	.modal {
+		.inquire, .fake {
+			line-height: 1.3
+		}
 		.modal-footer {
 			clear: both;
 		}

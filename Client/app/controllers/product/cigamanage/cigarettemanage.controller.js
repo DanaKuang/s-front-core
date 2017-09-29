@@ -34,7 +34,6 @@ define([], function () {
             $scope.paginationConf = res.data;
           })
         }
-        getList()
 
         $scope.$on('frompagechange', function (e,v,f) {
           getList(f)
@@ -54,11 +53,11 @@ define([], function () {
         }
 
         // 重置
-        $scope.reset = function () {
-          searchForm.reset();
-          getList()
+        $scope.searchreset = function () {
+          init(true, 'searchform');
         }
         
+        // 新建卷烟里面选择品牌
         $scope.$on('choosebrands', function(e,v,f) {
           $model.getbrands().then(function(res) {
             var data = res.data.data;
@@ -66,6 +65,48 @@ define([], function () {
             $scope.brandlist = data;
           })
         })
+
+        $(document).ready(function () {
+          $(".operation.multi .select").multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: '请选择',
+            selectAllText: '全部',
+            nSelectedText: '已选择',
+            allSelectedText: '全选',
+            enableFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: '200px',
+            numberDisplayed: 1
+          });
+        });
+
+        // 操作面板 获取品牌
+        $model.getbrands().then(function(res) {
+          $scope.brandlist = res.data.data;
+          $('[ng-model="brandCode"]').multiselect('dataprovider', _.forEach($scope.brandlist, function(v){
+              v.label = v.name;
+              v.value = v.brandCode;
+          }));
+          $('[ng-model="brandCode"]').multiselect('refresh');
+        })
+
+        // 操作面板，根据品牌获取规格
+        $scope.$watch('brandCode', function(n, o, s) {
+          if (n !== '') {
+            $scope.brandCode = n;
+            var brandListArrObj = {};
+            brandListArrObj.brandCode = n;
+            $model.getsns(brandListArrObj).then(function (res) {
+              $scope.sn = res.data.data;
+              $('[ng-model="sn"]').multiselect('dataprovider', _.forEach($scope.sn, function(v){
+                v.label = v.name;
+                v.value = v.sn;
+              }));
+              $('[ng-model="sn"]').multiselect('refresh');
+            })
+          }
+        })
+
 
         // 卷烟类型
         $scope.$on('cigarettestyle', function (e,v,f) {
@@ -110,17 +151,27 @@ define([], function () {
         })
 
         // 执行初始化(查询、保存、取消)
-        function init(bool) {
+        function init(bool, tag) {
           if (scope_conf('.create-cigarette-body')) {
             if (bool) {
               // 保存 和 取消
-              $scope.form.$setPristine();
-              $scope.form.$setUntouched();
-              scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
-              scope_conf('.create-cigarette-body').snData = null;
-              scope_conf('.create-cigarette-body').disabled = true;
-              $('[data-dismiss="modal"]').trigger('click');
-              form.reset();
+              if (!tag) {
+                $scope.form.$setPristine();
+                $scope.form.$setUntouched();
+                scope_conf('.create-cigarette-body').ciga = angular.copy($scope.master);
+                scope_conf('.create-cigarette-body').snData = null;
+                scope_conf('.create-cigarette-body').disabled = true;
+                $('[data-dismiss="modal"]').trigger('click');
+                form.reset();
+              }
+              $scope.searchForm.$setPristine();
+              $scope.searchForm.$setUntouched();
+              $scope.brandCode = '';
+              $scope.grade = '';
+              $('.multiselect-selected-text').text('请选择');
+              $('.operation .multiselect-container li').removeClass('active');
+              searchForm.reset();
+              getList()
             } else {
               // 查询没有结果
               var sn = scope('.create-cigarette-body').ciga.product.sn;
@@ -151,30 +202,28 @@ define([], function () {
 
         // 保存卷烟
         $scope.save = function () {
-          var snData  = scope_conf('.create-cigarette-body').snData;
-          if (snData) {
-            $model.save(snData).then(function (res) {
-              init(true);
-              getList()
-            })
-          } else {
-            if (scope('.create-cigarette-body').form.$valid) {
+          if (scope('.create-cigarette-body').form.$valid) {
+            var snData  = scope_conf('.create-cigarette-body').snData;
+            if (snData) {
+              $model.save(snData).then(function (res) {
+                init(true);
+              })
+            } else {
               var data = scope_conf('.create-cigarette-body').ciga;
               if (data && !$.isEmptyObject(data)) {
                 data.activeDays = data.activeDays || 5;
                 data.num = data.num || 10;
                 $model.save(data).then(function (res) {
                   init(true);
-                  getList()
                 })
               } else {
                 alert('请确保必填内容已填写再提交')
                 return
               }
-            } else {
-              alert('请确保必填内容已填写再提交')
-              return
             }
+          } else {
+            alert('请确保必填内容已填写再提交')
+            return
           }
         }
 

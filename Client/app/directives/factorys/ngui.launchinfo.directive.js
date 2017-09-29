@@ -59,7 +59,7 @@ define([], function () {
                     scope.$apply();
                 }
             });
-          
+            
             $('input[name="endTime"]').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:00', 
                 language: 'zh-CN',

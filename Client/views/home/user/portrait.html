@@ -3,7 +3,7 @@
 	<div class="animated fadeInRightBig">
 		<div class="container-fluid region-margin">
 			<div class="row">
-				<div class="col-md-12" style="padding:0 40px;">
+				<div class="col-md-12" style="padding:0 15px;">
 					<!--title-->
 					<div class="ui-panel-title">
 						<i class="portrait"></i><span>用户全息画像</span>
@@ -13,8 +13,8 @@
 						<div class="panel-body group-month-search">
 							<div class="group-month clearfix">
 								<p class='portrait_p'>用户手机号</p>
-								<input type="text" class="input_text form-control input-sm" maxlength="11" />
-								<span data-toggle="modal" class="btn btn-primary chaXunBtn" style="height:20px;font-size:12px;padding:0;" ng-click="chaXun()">查询</span>
+								<input type="text" class="input_text form-control input-sm" maxlength="11" style="height:30px;line-height:30px;font-size:14px;"/>
+								<span data-toggle="modal" class="btn btn-primary chaXunBtn" style="height:30px;line-height:30px;font-size:14px;padding:0;" ng-click="chaXun()">查询</span>
 							</div>
 						</div>
 					</div>
@@ -96,12 +96,19 @@
 
 							</div>
 							<p  style="font-size:11px;color:#a2a2a2;margin-left:420px;" class="effectScanPvSum"></p>
-							<p  style="font-size:12px;color:#a2a2a2;margin:10px 140px 10px 150px;">
-								<span>其中: </span>
-								<span ng-repeat="listScan in EffectScanPv">{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</span>
-							</p>
+							<div  style="font-size:12px;color:#a2a2a2;margin:10px 140px 10px 150px;">
+								<!--<span>其中: </span>-->
+									<!--<tr>
+										<td ng-repeat="listScan in EffectScanPv"> {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</td>
+									</tr>							-->
+						<span ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;<br ng-if = "($index+1)%4==0"/></span>
+							</div>
 							<div id="saoGuiJi"></div>
-							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
+							<!--<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />-->
+							<div class="SaoMFoot">
+								<div class="SaoMFootDiv"></div>
+								<span class="SaoMFootSpan">扫码烟包数</span>
+							</div>
 							<!--用户各规格扫码烟包数-->
 							<div style="width:862px;margin:20px auto 0;">
 								<h3 class="userH3">用户各规格扫码烟包数</h3>
@@ -166,6 +173,10 @@
 							<input type="radio" name="saotianxia" class="radioOne" style="margin:0 5px 0 0;" />
 							<span class="WeiIDContent1">微信ID: &nbsp;&nbsp;</span>
 							<span>{{good.openId}}</span>
+						</p>
+						<p ng-repeat="good in radioList" style="display:flex;justify-content:center;align-items: center;">
+						<span class="WeiIDContent1">昵称: &nbsp;&nbsp;</span>
+						<span>{{good.nickName}}</span>
 						</p>
 
 					</div>
