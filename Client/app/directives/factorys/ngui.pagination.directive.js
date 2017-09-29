@@ -96,7 +96,7 @@ define([], function () {
                 if (n == scope.page.length - 1) {
                     return
                 }
-                n = n + 2;
+                n = n + 1;
                 scope.cur = n;
                 scope.changePage(e, n)
             }
