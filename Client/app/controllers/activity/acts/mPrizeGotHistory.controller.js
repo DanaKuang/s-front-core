@@ -90,7 +90,7 @@ define([], function () {
               v.label = v.name;
               v.value = v.sn;
             }));
-            $('[ng-model="selectAllBrands"]').multiselect('refresh');
+            $('[ng-model="selectSpeci"]').multiselect('refresh');
           })
         }
       })

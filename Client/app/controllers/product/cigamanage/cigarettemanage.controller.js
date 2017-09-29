@@ -54,11 +54,14 @@ define([], function () {
         }
 
         // 重置
-        $scope.reset = function () {
+        $scope.searchreset = function () {
+          $scope.searchForm.$setPristine();
+          $scope.searchForm.$setUntouched();
           searchForm.reset();
           getList()
         }
         
+        // 新建卷烟里面选择品牌
         $scope.$on('choosebrands', function(e,v,f) {
           $model.getbrands().then(function(res) {
             var data = res.data.data;
@@ -66,6 +69,48 @@ define([], function () {
             $scope.brandlist = data;
           })
         })
+
+        $(document).ready(function () {
+          $(".operation.multi .select").multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: '请选择',
+            selectAllText: '全部',
+            nSelectedText: '已选择',
+            selectAllValue: 'all',
+            enableFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: '200px',
+            numberDisplayed: 1
+          });
+        });
+
+        // 操作面板 获取品牌
+        $model.getbrands().then(function(res) {
+          $scope.brandlist = res.data.data;
+          $('[ng-model="brandCode"]').multiselect('dataprovider', _.forEach($scope.brandlist, function(v){
+              v.label = v.name;
+              v.value = v.brandCode;
+          }));
+          $('[ng-model="brandCode"]').multiselect('refresh');
+        })
+
+        // 操作面板，根据品牌获取规格
+        $scope.$watch('brandCode', function(n, o, s) {
+          if (n !== '') {
+            $scope.brandCode = n;
+            var brandListArrObj = {};
+            brandListArrObj.brandCode = n;
+            $model.getsns(brandListArrObj).then(function (res) {
+              $scope.sn = res.data.data;
+              $('[ng-model="sn"]').multiselect('dataprovider', _.forEach($scope.sn, function(v){
+                v.label = v.name;
+                v.value = v.sn;
+              }));
+              $('[ng-model="sn"]').multiselect('refresh');
+            })
+          }
+        })
+
 
         // 卷烟类型
         $scope.$on('cigarettestyle', function (e,v,f) {
@@ -153,10 +198,15 @@ define([], function () {
         $scope.save = function () {
           var snData  = scope_conf('.create-cigarette-body').snData;
           if (snData) {
-            $model.save(snData).then(function (res) {
-              init(true);
-              getList()
-            })
+            if (scope('.create-cigarette-body').form.$valid) {
+              $model.save(snData).then(function (res) {
+                init(true);
+                getList()
+              })
+            } else {
+              alert('请确保必填内容已填写再提交')
+              return
+            }
           } else {
             if (scope('.create-cigarette-body').form.$valid) {
               var data = scope_conf('.create-cigarette-body').ciga;
