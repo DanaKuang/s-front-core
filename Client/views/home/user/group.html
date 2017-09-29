@@ -61,11 +61,11 @@
                 </tbody>
               </table>
             </div>
-            <div class="group-brand">
+            <div class="group-brand form-inline">
               <span>品牌规格 ：</span>
-              <select ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
+              <select class="form-control" ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
               </select>
-              <select ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
+              <select class="form-control" ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
               </select>
             </div>
             <div class="scan-frequency">
