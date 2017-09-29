@@ -21,51 +21,6 @@ define([], function () {
           return angular.element(selector).scope()
         }
 
-  			// 获取列表数据
-        var getList = function(data) {
-          if (data) {
-            data.status = 1;
-          } else {
-            var data = {};
-            data.status = 1
-          }
-          $model.getlist(data).then(function (res) {
-            $scope.cigarettelistConf = res.data;
-            $scope.paginationConf = res.data;
-          })
-        }
-
-        $scope.$on('frompagechange', function (e,v,f) {
-          getList(f)
-        })
-
-        // 搜索
-        $scope.search = function () {
-          var data = {
-            sn: $scope.sn || '',
-            brandCode: $scope.brandCode || '',
-            grade: $scope.grade || '',
-            pack: $scope.pack || '',
-            minPrice: $scope.minprice || '',
-            maxPrice: $scope.maxprice || ''
-          }
-          getList(data)
-        }
-
-        // 重置
-        $scope.searchreset = function () {
-          init(true, 'searchform');
-        }
-        
-        // 新建卷烟里面选择品牌
-        $scope.$on('choosebrands', function(e,v,f) {
-          $model.getbrands().then(function(res) {
-            var data = res.data.data;
-            scope_conf('.create-cigarette-body').brandlist = data;
-            $scope.brandlist = data;
-          })
-        })
-
         $(document).ready(function () {
           $(".operation.multi .select").multiselect({
             includeSelectAllOption: true,
@@ -80,10 +35,50 @@ define([], function () {
           });
         });
 
-        // 操作面板 获取品牌
+  			// 获取列表数据
+        var getList = function(data) {
+          if (data) {
+            data.status = 1;
+          } else {
+            var data = {};
+            data.status = 1
+          }
+          $model.getlist(data).then(function (res) {
+            $('.operation [name="brand"]').multiselect('refresh');
+            $('.operation [name="sn"]').multiselect('refresh');
+            $('.operation [name="pack"]').multiselect('refresh');
+            $('.operation [name="grade"]').multiselect('refresh');
+            $scope.cigarettelistConf = res.data;
+            $scope.paginationConf = res.data;
+          })
+        }
+
+        $scope.$on('frompagechange', function (e,v,f) {
+          getList(f)
+        })
+
+        // 搜索
+        $scope.search = function () {
+          var data = {
+            sn: $scope.sn ? $scope.sn.join('') : '',
+            brandCode: $scope.brandCode ? $scope.brandCode.join('') : '',
+            grade: $scope.grade ? $scope.grade.join('') : '',
+            pack: $scope.pack ? $scope.pack.join('') : '',
+            minPrice: $scope.minprice || '',
+            maxPrice: $scope.maxprice || ''
+          }
+          getList(data)
+        }
+
+        // 重置
+        $scope.searchreset = function () {
+          init(true, 'searchform');
+        }
+        
         $model.getbrands().then(function(res) {
-          $scope.brandlist = res.data.data;
-          $('[ng-model="brandCode"]').multiselect('dataprovider', _.forEach($scope.brandlist, function(v){
+          var data = res.data.data;
+          scope_conf('.create-cigarette-body').brandlist = data;
+          $('[ng-model="brandCode"]').multiselect('dataprovider', _.forEach(data, function(v){
               v.label = v.name;
               v.value = v.brandCode;
           }));
@@ -97,8 +92,8 @@ define([], function () {
             var brandListArrObj = {};
             brandListArrObj.brandCode = n;
             $model.getsns(brandListArrObj).then(function (res) {
-              $scope.sn = res.data.data;
-              $('[ng-model="sn"]').multiselect('dataprovider', _.forEach($scope.sn, function(v){
+              var data = res.data.data;
+              $('[ng-model="sn"]').multiselect('dataprovider', _.forEach(data, function(v){
                 v.label = v.name;
                 v.value = v.sn;
               }));
@@ -107,39 +102,38 @@ define([], function () {
           }
         })
 
-
         // 卷烟类型
-        $scope.$on('cigarettestyle', function (e,v,f) {
-          $model.checkstyle().then(function (res) {
-            var data = res.data.data;
-            scope_conf('.create-cigarette-body').stylelist = data;
-          })
+        $model.checkstyle().then(function (res) {
+          var data = res.data.data;
+          scope_conf('.create-cigarette-body').stylelist = data;
         })
 
         // 包装单位
-        $scope.$on('cigarettetype', function (e,v,f) {
-          $model.checktype().then(function (res) {
-            var data = res.data.data;
-            scope_conf('.create-cigarette-body').typelist = data;
-          })
+        $model.checktype().then(function (res) {
+          var data = res.data.data;
+          scope_conf('.create-cigarette-body').typelist = data;
         })
 
         // 包装
-        $scope.$on('cigarettepack', function (e,v,f) {
-          $model.checkpack().then(function (res) {
-            var data = res.data.data;
-            scope_conf('.create-cigarette-body').packlist = data;
-            $scope.packlist = data;
-          })
+        $model.checkpack().then(function (res) {
+          var data = res.data.data;
+          scope_conf('.create-cigarette-body').packlist = data;
+          $('[ng-model="pack"]').multiselect('dataprovider', _.forEach(data, function(v){
+              v.label = v.name;
+              v.value = v.code;
+          }));
+          $('[ng-model="pack"]').multiselect('refresh');
         })
 
         // 价类
-        $scope.$on('cigarettegrade', function (e,v,f) {
-          $model.checkgrade().then(function (res) {
-            var data = res.data.data;
-            scope_conf('.create-cigarette-body').gradelist = data;
-            $scope.gradelist = data;
-          })
+        $model.checkgrade().then(function (res) {
+          var data = res.data.data;
+          scope_conf('.create-cigarette-body').gradelist = data;
+          $('[ng-model="grade"]').multiselect('dataprovider', _.forEach(data, function(v){
+              v.label = v.name;
+              v.value = v.code;
+          }));
+          $('[ng-model="grade"]').multiselect('refresh');
         })
 
         // 二级价类
@@ -166,10 +160,7 @@ define([], function () {
               }
               $scope.searchForm.$setPristine();
               $scope.searchForm.$setUntouched();
-              $scope.brandCode = '';
-              $scope.grade = '';
-              $('.multiselect-selected-text').text('请选择');
-              $('.operation .multiselect-container li').removeClass('active');
+
               searchForm.reset();
               getList()
             } else {
