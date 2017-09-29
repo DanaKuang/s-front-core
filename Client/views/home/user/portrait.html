@@ -101,7 +101,7 @@
 									<!--<tr>
 										<td ng-repeat="listScan in EffectScanPv"> {{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;</td>
 									</tr>							-->
-						<span ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span ng-repeat="listScan in EffectScanPv" >{{listScan.productName}}: {{listScan.effectScanPv}}包&nbsp;&nbsp;&nbsp;&nbsp;<br ng-if = "($index+1)%4==0"/></span>
 							</div>
 							<div id="saoGuiJi"></div>
 							<img src="../../../assets/image/mdgImg.jpg" alt="" style="margin:0 auto;width:66px;height:10px;display:block;" />
