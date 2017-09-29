@@ -5,184 +5,174 @@
  * Description: visit
  */
 -->
-<link rel="stylesheet" href="statics/assets/style/visit.base.css"/>
-<link href="statics/assets/style/detail.css" rel="stylesheet">
 <link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
-<link rel="stylesheet" href="statics/assets/style/shadow.css"/>
-<link rel="stylesheet" href="statics/assets/style/lanrenzhijia.css"/>
 <div ng-controller="manageCtrl">
     <div class="animated fadeInRightBig" ng-show="myVar">
-        <div>
-            <div class="row">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
                 <div class="col-md-12">
-                    <div class="panel rate manage-tap" id="manage-tap">
-                        <div class="panel-body manage-body" id="panel-body">
-                            <div class="manage-box">
-                                <div class="manage-right">
-                                    <div class="manage-top" id="manage-top">
-                                        <span class="fl"></span>
-                                        <div class="fl">零售户>零售户管理</div>
-                                    </div>
-                                    <div class="manage-bottom">
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a id="tab1" href="#homeList" aria-controls="home" role="tab" data-toggle="tab">零售户列表</a></li>
-                                            <li role="presentation"><a href="#profileList" aria-controls="profile" id="tab2" role="tab" data-toggle="tab">零售户二维码</a></li>
-
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="homeList">
-                                                <div class="tab-input">
-                                                    <input type="text" placeholder="烟草证号\经营人姓名\联系人姓名\联系人手机号" id="input1">
-                                                    <form >
-                                                        <select id="provinceId" ng-model="provinceCode">
-                                                            <option value="">请选择省</option>
-                                                            <option value="">全部</option>
-                                                            <option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
-                                                        </select>
-                                                        <select name="" id="cityId" ng-model="cityCode">
-                                                            <option value="">请选择市</option>
-                                                            <option value="">全部</option>
-                                                            <option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
-                                                        </select>
-                                                        <select name="" id="areaId" ng-model="areaCode">
-                                                            <option value="">请选择区</option>
-                                                            <option value="">全部</option>
-                                                            <option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
-                                                        </select>
-                                                    </form>
-                                                    <div class="time">
-                                                        <div>时间区间</div>
-                                                        <input name="时间" id="timeStart1"  class="form_datetime dateTime" placeholder="2017-8-1">
-                                                        <div>至</div>
-                                                        <input name="时间" id="timeEnd1" class="form_datetime dateTime" placeholder="2017-8-2">
-                                                    </div>
-                                                    <select name="authStatus" id="authStatus">
-                                                        <option value="">状态</option>
-                                                        <option value="1">待审核</option>
-                                                        <option value="2">审核通过</option>
-                                                        <option value="3">审核未通过</option>
-                                                    </select>
-                                                    <div class="seacher" id="manage-list"><a href="javascript:" ng-click="bbb(index);">查询</a></div>
-                                                </div>
-                                                <div class="tab-table">
-                                                    <table class="table spacil-table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>烟草专卖照片</th>
-                                                            <th>烟草专卖号</th>
-                                                            <th style="width:100px;">门店名称</th>
-                                                            <th style="width:100px;">门店地址</th>
-                                                            <th>经营人姓名</th>
-                                                            <th>区域</th>
-                                                            <th>业态</th>
-                                                            <th>联系人姓名</th>
-                                                            <th>联系人电话</th>
-                                                            <th>申请时间</th>
-                                                            <th>状态</th>
-                                                            <th style="width:80px;">操作</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr ng-repeat="tr in listData">
-                                                            <td id="imgBox" class="imgBox">
-                                                                <img class="smokeImg" id="smokeImg_$index" ng-src="{{tr.licenceImg}}" alt="" ng-click="showBig(tr.licenceImg);" data-toggle="modal" data-target="#myModalImg" title="点击可显示高清大图">
-                                                            </td>
-                                                            <td>{{tr.licenceNo}}</td>
-                                                            <td>{{tr.shopName}}</td>
-                                                            <td>{{tr.addrDetail}}</td>
-                                                            <td>{{tr.ownerName}}</td>
-                                                            <td>{{tr.district}}</td>
-                                                            <td>{{tr.commercial }}</td>
-                                                            <td>{{tr.contactName}}</td>
-                                                            <td>{{tr.contactPhone}}</td>
-                                                            <td>{{tr.applyTime}}</td>
-                                                            <td>{{tr.authStatus}}</td>
-                                                            <td>
-                                                                <a  class="sava-shen" data-toggle="modal" data-target="#myModal" ng-click="aaa(tr)" ng-hide="{{tr.isShow}}">审核</a><br/>
-                                                                <a  ng-click="showDetail(tr)">商户详情</a>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="profileList">
-                                                <div class="fr">
-                                                    <a data-toggle="modal" data-target="#myModalDown">下载订单文件</a>
-                                                </div>
-                                                <div class="fr" id="loadFileContent">
-                                                    <a href="javascript:"  data-toggle="modal" data-target="#myModalFile">上传订单文件</a>
-                                                </div>
-                                                <div class="tab-input">
-                                                    <input type="text" placeholder="烟草证号/门店名/联系人姓名/联系人手机号" id="input2">
-                                                    <div class="time">
-                                                        <div>时间区间</div>
-                                                        <input name="时间" id="timeStart2"  class="form_datetime dateTime" placeholder="2017-8-1">
-                                                        <div>至</div>
-                                                        <input name="时间" id="timeEnd2"  class="form_datetime dateTime" placeholder="2017-8-2">
-                                                    </div>
-                                                    <select name="" id="send">
-                                                        <option value="">发货状态</option>
-                                                        <option value="0">未发货</option>
-                                                        <option value="1">已发货</option>
-                                                    </select>
-                                                    <select name="" id="is-pay">
-                                                        <option value="">支付状态</option>
-                                                        <option value="0">未支付</option>
-                                                        <option value="1">已支付</option>
-                                                    </select>
-                                                    <div class="seacher" id="manage-erwei"><a href="javascript:">查询</a></div>
-                                                </div>
-                                                <div class="tab-table">
-                                                    <table class="table spacil-table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>零售户ID</th>
-                                                            <th>门店名称</th>
-                                                            <th>订单顺序号</th>
-                                                            <th>收货人姓名</th>
-                                                            <th>收货人电话</th>
-                                                            <th style="width:130px;">收货地址</th>
-                                                            <th>申请时间</th>
-                                                            <th>费用</th>
-                                                            <th>认证状态</th>
-                                                            <th>订单状态</th>
-                                                            <th style="width:80px;">操作</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr ng-repeat="tm in erweiData">
-                                                            <td>{{tm.sellerId}}</td>
-                                                            <td>{{tm.shopName}}</td>
-                                                            <td>{{tm.orderId}}</td>
-                                                            <td>{{tm.contactName}}</td>
-                                                            <td>{{tm.contactPhone}}</td>
-                                                            <td>{{tm.provinceName+"省"+tm.cityName+"市"+tm.areaName+"县"+tm.addrDetail}}</td>
-                                                            <td>{{tm.ctime}}</td>
-                                                            <td>{{tm.amout+"元"}}</td>
-                                                            <td>{{tm.authStatus}}</td>
-                                                            <td>{{tm.orderStatus}}</td>
-                                                            <td>
-                                                                <a href="javascript:" ng-click="showDetail(tm);">商户详情</a>
-                                                            </td>
-
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                    <!--title-->
+                    <div class="ui-panel-title manage">
+                        <i class="manage"></i><span>零售户业绩</span>
+                    </div>
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a id="tab1" href="#homeList" aria-controls="home" role="tab" data-toggle="tab">零售户列表</a></li>
+                                <li role="presentation"><a href="#profileList" aria-controls="profile" id="tab2" role="tab" data-toggle="tab">零售户二维码</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="homeList">
+                                    <form class="form-horizontal form-inline margin-top margin-bottom">
+                                        <input type="text" placeholder="烟草证号\经营人姓名\联系人姓名\联系人手机号" id="input1" class="form-control input-sm margin-right" style="width: 280px;">
+                                        <select id="provinceId" ng-model="provinceCode" class="form-control input-sm">
+                                            <option value="">请选择省</option>
+                                            <option value="">全部</option>
+                                            <option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
+                                        </select>
+                                        <select name="" id="cityId" ng-model="cityCode" class="form-control input-sm">
+                                            <option value="">请选择市</option>
+                                            <option value="">全部</option>
+                                            <option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
+                                        </select>
+                                        <select name="" id="areaId" ng-model="areaCode" class="form-control input-sm">
+                                            <option value="">请选择区</option>
+                                            <option value="">全部</option>
+                                            <option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
+                                        </select>
+                                        <div class="time inline-block margin-right margin-left">
+                                            <div class="inline-block">时间区间</div>
+                                            <input name="时间" id="timeStart1"  class="form_datetime dateTime form-control input-sm">
+                                            <div class="inline-block">至</div>
+                                            <input name="时间" id="timeEnd1" class="form_datetime dateTime form-control input-sm">
                                         </div>
-                                        <div class="footer_sec clearfix">
-                                            <div class="total_info lf">总共&nbsp;&nbsp;
-                                <span id="pageCount">
-                                </span>&nbsp;&nbsp;条记录，当前页共&nbsp;&nbsp;
-                                                <span id="pageSize"></span>&nbsp;&nbsp;条记录
-                                            </div>
-                                            <div class="page_sec rf">
-                                                <div class="tcdPageCode"></div>
-                                            </div>
+                                        <select name="authStatus" id="authStatus" class="form-control input-sm margin-right">
+                                            <option value="">状态</option>
+                                            <option value="1">待审核</option>
+                                            <option value="2">审核通过</option>
+                                            <option value="3">审核未通过</option>
+                                        </select>
+                                        <div class="margin-top inline-block">
+                                            <button type="button" class="seacher btn btn-primary" ng-click="bbb(index);" id="manage-list">查询</button>
+                                        </div>
+                                    </form>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>烟草专卖照片</th>
+                                            <th>烟草专卖号</th>
+                                            <th style="width:100px;">门店名称</th>
+                                            <th style="width:100px;">门店地址</th>
+                                            <th>经营人姓名</th>
+                                            <th>区域</th>
+                                            <th>业态</th>
+                                            <th>联系人姓名</th>
+                                            <th>联系人电话</th>
+                                            <th>申请时间</th>
+                                            <th>状态</th>
+                                            <th style="width:80px;">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="tr in listData">
+                                            <td id="imgBox" class="imgBox">
+                                                <img class="smokeImg" id="smokeImg_$index" ng-src="{{tr.licenceImg}}" alt="" ng-click="showBig(tr.licenceImg);" data-toggle="modal" data-target="#myModalImg" title="点击可显示高清大图">
+                                            </td>
+                                            <td>{{tr.licenceNo}}</td>
+                                            <td>{{tr.shopName}}</td>
+                                            <td>{{tr.addrDetail}}</td>
+                                            <td>{{tr.ownerName}}</td>
+                                            <td>{{tr.district}}</td>
+                                            <td>{{tr.commercial }}</td>
+                                            <td>{{tr.contactName}}</td>
+                                            <td>{{tr.contactPhone}}</td>
+                                            <td>{{tr.applyTime}}</td>
+                                            <td>{{tr.authStatus}}</td>
+                                            <td>
+                                                <a  class="sava-shen" data-toggle="modal" data-target="#myModal" ng-click="aaa(tr)" ng-hide="{{tr.isShow}}">审核</a><br/>
+                                                <a  ng-click="showDetail(tr)">商户详情</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profileList">
+                                    <div class="margin-top right">
+                                        <div class="right download margin-left">
+                                            <a data-toggle="modal" data-target="#myModalDown">下载订单文件</a>
+                                        </div>
+                                        <div class="right" id="loadFileContent">
+                                            <a href="javascript:"  data-toggle="modal" data-target="#myModalFile">上传订单文件</a>
                                         </div>
                                     </div>
+                                    <form class="margin-top margin-bottom form-horizontal form-inline left">
+                                        <input type="text" placeholder="烟草证号/门店名/联系人姓名/联系人手机号" id="input2" class="form-control input-sm margin-right" style="width: 260px;">
+                                        <div class="time inline-block margin-right">
+                                            <div class="inline-block">时间区间</div>
+                                            <input name="时间" id="timeStart2"  class="form_datetime dateTime form-control input-sm">
+                                            <div class="inline-block">至</div>
+                                            <input name="时间" id="timeEnd2"  class="form_datetime dateTime form-control input-sm">
+                                        </div>
+                                        <select name="" id="send" class="form-control input-sm margin-right">
+                                            <option value="">发货状态</option>
+                                            <option value="0">未发货</option>
+                                            <option value="1">已发货</option>
+                                        </select>
+                                        <select name="" id="is-pay" class="form-control input-sm margin-right">
+                                            <option value="">支付状态</option>
+                                            <option value="0">未支付</option>
+                                            <option value="1">已支付</option>
+                                        </select>
+                                        <div class="inline-block">
+                                            <button type="button" class="seacher btn btn-primary" id="manage-erwei">查询</button>
+                                        </div>
+                                    </form>
+                                    <div class="left">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>零售户ID</th>
+                                                    <th>门店名称</th>
+                                                    <th>订单顺序号</th>
+                                                    <th>收货人姓名</th>
+                                                    <th>收货人电话</th>
+                                                    <th style="width:130px;">收货地址</th>
+                                                    <th>申请时间</th>
+                                                    <th>费用</th>
+                                                    <th>认证状态</th>
+                                                    <th>订单状态</th>
+                                                    <th style="width:80px;">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="tm in erweiData">
+                                                    <td>{{tm.sellerId}}</td>
+                                                    <td>{{tm.shopName}}</td>
+                                                    <td>{{tm.orderId}}</td>
+                                                    <td>{{tm.contactName}}</td>
+                                                    <td>{{tm.contactPhone}}</td>
+                                                    <td>{{tm.provinceName+"省"+tm.cityName+"市"+tm.areaName+"县"+tm.addrDetail}}</td>
+                                                    <td>{{tm.ctime}}</td>
+                                                    <td>{{tm.amout+"元"}}</td>
+                                                    <td>{{tm.authStatus}}</td>
+                                                    <td>{{tm.orderStatus}}</td>
+                                                    <td>
+                                                        <a href="javascript:" ng-click="showDetail(tm);">商户详情</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer_sec clearfix">
+                                <div class="total_info lf">总共&nbsp;&nbsp;
+                                    <span id="pageCount">
+                                    </span>&nbsp;&nbsp;条记录，当前页共&nbsp;&nbsp;
+                                    <span id="pageSize"></span>&nbsp;&nbsp;条记录
+                                </div>
+                                <div class="page_sec rf">
+                                    <div class="tcdPageCode"></div>
                                 </div>
                             </div>
                         </div>
@@ -225,62 +215,73 @@
     <div  id="detailsPage" ng-hide="myVar">
         <div class="row">
             <div class="col-md-12">
-                <div class="goods-box">
-                    <div class="goods-right">
-                        <div class="manage-top">
-                            <span class="fl"></span>
-                            <div class="fl">零售户&gt;零售户管理</div>
-                            <input type="button" value="返回" id="goBack" ng-click="goBack();">
-                        </div>
-                        <div class="commodity_con goods-content">
-                            <div class="row commodity_div " >
-                                <div class="col-md-2 smake-image">
-                                    <img ng-src="{{sellerInfo.licenceImg}}" alt="" />
-                                </div>
-                                <div class="col-md-3 " id="content-right-first">
-                                    <span class="span1">门店名称:</span>
-                                    <span class="span2" >{{sellerInfo.shopName}}</span>
-                                    <span class="span1">门店地址:</span>
-                                    <span class="span2">{{sellerInfo.addrProvinceName+sellerInfo.addrCityName+"市"+sellerInfo.addrAreaNmae+sellerInfo.addrDetail}}</span>
-                                    <span class="span1">微信名:</span>
-                                    <span class="span2" >{{wxinfo.nickname}}</span>
-                                    <span class="span1">申请时间:</span>
-                                    <span class="span2"> {{sellerInfo.applyTime}}</span>
-                                    <span class="span1">账户余额:</span>
-                                    <span class="span2">{{walletInfo.balance}}</span>
-                                </div>
-                                <div class="col-md-3" id="content-right-second">
-                                    <span class="span1">烟草专卖证号:</span>
-                                    <span class="span2">{{sellerInfo.licenceNo}}</span>
-                                    <span class="span1">联系人姓名:</span>
-                                    <span class="span2">{{sellerInfo.contactName}}</span>
-                                    <span class="span1">区域:</span>
-                                    <span class="span2">{{sellerInfo.district}}</span>
-                                    <span class="span1">审核时间:</span>
-                                    <span class="span2">{{sellerInfo.lastUpdateTime}}</span>
-
-                                </div>
-                                <div class="col-md-3" id="content-right-third">
-                                    <span class="span1">经营人姓名:</span>
-                                    <span class="span2">{{sellerInfo.ownerName}}</span>
-                                    <span class="span1">联系人电话:</span>
-                                    <span class="span2">{{sellerInfo.contactPhone}}</span>
-                                    <span class="span1">业态:</span>
-                                    <span class="span2"> {{sellerInfo.commercial}}</span>
-                                    <span class="span1" >审核状态:</span>
-                                    <span class="span2" id="authStatus">{{sellerInfo.authStatus}}</span>
-
-                                </div>
-                                <!-- <button type="button" ng-click="secondThough();" class="btn btn-primary goods-though">审核通过</button>
-                                <button type="button" class="btn btn-primary  goods-back" ng-click="secondBack();">审核驳回</button> -->
+                <!--title-->
+                <div class="ui-panel-title manage">
+                    <i class="manage"></i><span>零售户管理</span>
+                    <button type="button" class="btn btn-primary back-btn right" id="goBack" ng-click="goBack();">返回</button>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="ui-detail-box left margin-bottom">
+                            <div class="col-md-3 smake-image">
+                                <img ng-src="{{sellerInfo.licenceImg}}" alt="" />
                             </div>
-                            <!--  <div class="row reason_div">
-                               <i class="line"></i>
-                               <span class="bg-info reason_title">驳回理由</span>
-                               <div id="reason-box"></div>
-                             </div> -->
+                            <div class="col-md-9">
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">门店名称:</label>
+                                    <div class="col-md-7 padding padding">{{sellerInfo.shopName}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">烟草专卖证号:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.licenceNo}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">经营人姓名:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.ownerName}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">门店地址:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.addrProvinceName+sellerInfo.addrCityName+"市"+sellerInfo.addrAreaNmae+sellerInfo.addrDetail}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">联系人姓名:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.contactName}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">联系人电话:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.contactPhone}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">微信名:</label>
+                                    <div class="col-md-7 padding">{{wxinfo.nickname}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">区域:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.district}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">业态:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.commercial}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">申请时间:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.applyTime}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">审核时间:</label>
+                                    <div class="col-md-7 padding">{{sellerInfo.lastUpdateTime}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">审核状态:</label>
+                                    <div id="authStatus" class="col-md-7 padding">{{sellerInfo.authStatus}}</div>
+                                </div>
+                                <div class="col-md-4 height padding">
+                                    <label class="col-md-5 padding">账户余额:</label>
+                                    <div class="col-md-7 padding">{{walletInfo.balance}}</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row commodity_nav" id="commodity_nav">
+                        <div class="col-md-12 padding" id="commodity_nav">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
@@ -294,50 +295,48 @@
                                 </li>
                             </ul>
                             <!-- Tab panes -->
-                            <div class="tab-content row">
+                            <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="home">
-                                    <div class="row">
-                                        <form class="form-inline form_div">
-                                            <div class="form-group goods-top">
-                                                <label for="exampleInputName1" class="label1">时间区间</label>
-                                                <input name="时间" id="timeStart111" class="form_datetime form-control dateTime"
-                                                       placeholder="2017-8-1" />
-                                                <label for="exampleInputName2">至</label>
-                                                <input name="时间" id="timeEnd111" class="form_datetime form-control dateTime"
-                                                       placeholder="2017-8-1" />
-                                                <select class="form-control" id="manage-unit">
-                                                    <option value="">扫码单位</option>
-                                                    <option value="1">盒</option>
-                                                    <option value="2">条</option>
-                                                </select>
-                                                <select class="form-control" id="manage-isfx">
-                                                    <option value="">有无返还</option>
-                                                    <option value="1">有</option>
-                                                    <option value="0">无</option>
-                                                </select>
-                                                <button id="return" type="button" class="btn btn-primary">查询</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-12 goods-bottom">
-                                        <table class="table table-bordered table-striped table-hover tables">
-                                            <thead class="bg-success">
-                                            <tr>
-                                                <th>消费者微信名</th>
-                                                <th>扫码时间(店码)</th>
-                                                <th>扫码时间(烟码)</th>
-                                                <th>扫码单位</th>
-                                                <th>返还金额</th>
-                                            </tr>
+                                    <form class="form-inline form_div margin-top margin-bottom">
+                                        <div class="inline-block margin-right">
+                                            <label for="exampleInputName1" class="label1">时间区间</label>
+                                            <input name="时间" id="timeStart111" class="form_datetime form-control dateTime input-sm" />
+                                            <label for="exampleInputName2">至</label>
+                                            <input name="时间" id="timeEnd111" class="form_datetime form-control dateTime input-sm"/>
+                                        </div>
+                                        <select class="form-control input-sm margin-right" id="manage-unit">
+                                            <option value="">扫码单位</option>
+                                            <option value="1">盒</option>
+                                            <option value="2">条</option>
+                                        </select>
+                                        <select class="form-control input-sm margin-right" id="manage-isfx">
+                                            <option value="">有无返还</option>
+                                            <option value="1">有</option>
+                                            <option value="0">无</option>
+                                        </select>
+                                        <div class="inline-block">
+                                            <button id="return" type="button" class="btn btn-primary">查询</button>
+                                        </div>
+                                    </form>
+                                    <div class="col-md-12 padding">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>消费者微信名</th>
+                                                    <th>扫码时间(店码)</th>
+                                                    <th>扫码时间(烟码)</th>
+                                                    <th>扫码单位</th>
+                                                    <th>返还金额</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="rt in returnData">
-                                                <td>{{}}</td>
-                                                <td>{{rt.zjTime}}</td>
-                                                <td>{{rt.ctime}}</td>
-                                                <td>{{rt.unit}}</td>
-                                                <td>{{rt.fxAmount}}</td>
-                                            </tr>
+                                                <tr ng-repeat="rt in returnData">
+                                                    <td>{{}}</td>
+                                                    <td>{{rt.zjTime}}</td>
+                                                    <td>{{rt.ctime}}</td>
+                                                    <td>{{rt.unit}}</td>
+                                                    <td>{{rt.fxAmount}}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -353,9 +352,9 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="profile">
-                                    <div class="col-md-12 goods-bottom" id="goods-bottom">
-                                        <table class="table table-bordered table-striped table-hover tables">
-                                            <thead class="bg-success">
+                                    <div class="col-md-12 padding" id="goods-bottom">
+                                        <table class="table table-bordered table-hover tables">
+                                            <thead>
                                             <tr>
                                                 <th>微信openId</th>
                                                 <!-- <th>消费者微信名</th> -->
@@ -387,22 +386,22 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="messages">
-                                    <div class="row">
-                                        <form class="form-inline form_div">
-                                            <div class="form-group goods-top">
+                                    <form class="form-inline form_div">
+                                        <div class="form-group goods-top margin-top">
+                                            <div class="inline-block margin-right">
                                                 <label for="exampleInputName1" class="label1">时间区间</label>
-                                                <input name="时间" id="timeStart333" class="form_datetime form-control dateTime"
-                                                       value="2017-8-1" />
+                                                <input name="时间" id="timeStart333" class="form_datetime form-control dateTime input-sm"/>
                                                 <label for="exampleInputName2">至</label>
-                                                <input name="时间" id="timeEnd333" class="form_datetime form-control dateTime"
-                                                       placeholder="2017-8-1" />
+                                                <input name="时间" id="timeEnd333" class="form_datetime form-control dateTime input-sm"/>
+                                            </div>
+                                            <div class="inline-block">
                                                 <button id="tixian" type="button" class="btn btn-primary">查询</button>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-12 goods-bottom">
-                                        <table class="table table-bordered table-striped table-hover tables">
-                                            <thead class="bg-success">
+                                        </div>
+                                    </form>
+                                    <div class="col-md-12 goods-bottom padding">
+                                        <table class="table table-bordered table-hover tables">
+                                            <thead>
                                             <tr>
                                                 <th>提现金额</th>
                                                 <th>余额</th>
@@ -420,8 +419,8 @@
                                     </div>
                                     <div class="footer_sec clearfix">
                                         <div class="total_info lf">总共&nbsp;&nbsp;
-                        <span id="pageAmout2">
-                        </span>&nbsp;&nbsp;条记录，当前页共&nbsp;&nbsp;
+                                        <span id="pageAmout2">
+                                        </span>&nbsp;&nbsp;条记录，当前页共&nbsp;&nbsp;
                                             <span id="pageSize3"></span>&nbsp;&nbsp;条记录
                                         </div>
                                         <div class="page_sec rf">
@@ -449,9 +448,9 @@
                 <div class="modal-body body">
                     <form>
                         <div class="row" id="timeRow">
-                            <div class="time">
-                                <div>时间</div>
-                                <input name="时间" id="timeStart"  class="form_datetime dateTime" placeholder="2017-8-1">
+                            <div class="time inline-block">
+                                <div class="inline-block">时间</div>
+                                <input name="时间" id="timeStart"  class="form_datetime dateTime form-control input-sm">
                             </div>
                             <div id="seacherbtn" ng-click="seacherbtn();"><a>查询</a></div>
                         </div>
@@ -512,18 +511,4 @@
     </div>
     <script src="statics/assets/libs/jquery.page.js"></script>
     <script src="statics/assets/libs/jqmeter.min.js"></script>
-
-    <script>
-        function getLocalTime(nS) {
-            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
-        }
-        //时间戳变
-        function getLocalTime(nS) {
-            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
-        }
-        function openwin(){
-            window.open("","","width=200,height=200")
-        }
-
-    </script>
 </div>
