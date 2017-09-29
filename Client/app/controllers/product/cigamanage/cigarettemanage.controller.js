@@ -161,8 +161,6 @@ define([], function () {
               $scope.searchForm.$setPristine();
               $scope.searchForm.$setUntouched();
 
-              $scope.brandCode = '';
-              $scope.grade = '';
               searchForm.reset();
               getList()
             } else {
