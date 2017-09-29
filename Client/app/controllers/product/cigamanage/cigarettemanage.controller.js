@@ -34,7 +34,7 @@ define([], function () {
             $scope.paginationConf = res.data;
           })
         }
-        getList()
+        // getList()
 
         $scope.$on('frompagechange', function (e,v,f) {
           getList(f)
@@ -78,7 +78,7 @@ define([], function () {
             nonSelectedText: '请选择',
             selectAllText: '全部',
             nSelectedText: '已选择',
-            selectAllValue: 'all',
+            allSelectedText: '全选',
             enableFiltering: true,
             buttonWidth: '100%',
             maxHeight: '200px',

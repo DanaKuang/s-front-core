@@ -84,7 +84,7 @@ define([], function () {
                         nSelectedText: '已选择',
                         includeSelectAllOption: true,
                         selectAllText: '全部',
-                        selectAllValue: 'all',
+                        allSelectedText: '全选',
                         enableClickableOptGroups: true,
                         enableFiltering: true,
                         buttonWidth: '170px',
