@@ -210,9 +210,53 @@ define([], function () {
                                     selectAllValue: 'all',
                                     buttonWidth: '180px'
                                 });
-                                if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
-                                    gloabl.getWeekScanWinData(startTimeObj);
-                                }
+                                // $('#weeks').val($scope.weeksList[0].weekId);
+                                $('#weeks').multiselect().val($scope.weeksList[0].weekId).multiselect("refresh");
+                                $model.$getBrandData().then(function (res) {
+                                    var brandList = res.data || [];
+                                    if(brandList.length > 0){
+                                        var fristBrandName = brandList[0].name;
+                                        $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
+                                            var speciftList = res.data || [];
+                                            if(speciftList.length > 0){
+                                                var firstSpeciftSn = speciftList[0].name;
+                                                startTimeObj.productSn = firstSpeciftSn;
+                                            }
+
+                                            $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
+                                                var packsList = res.data || [];
+                                                if(packsList.length > 0){
+                                                    var packStrArr = [];
+                                                    for(var i=0;i<packsList.length;i++){
+                                                        packStrArr.push(packsList[i].tagId);
+                                                    }
+                                                    $('#packs').multiselect().val(packStrArr).multiselect("refresh");
+                                                    var packArr = packStrArr.join(',');
+                                                    startTimeObj.unit = packArr;
+                                                }
+
+                                                 $model.$getPackAndTimeData({"pageName":"packtype"}).then(function (res) {
+                                                    var statisTimeList = res.data || [];
+                                                    if(statisTimeList.length > 0){
+                                                        var statisTimeArr = [];
+                                                        for(var i=0;i<statisTimeList.length;i++){
+                                                            statisTimeArr.push(statisTimeList[i].tagName);
+                                                        }
+                                                        $('#cycleTime').multiselect().val(statisTimeArr).multiselect("refresh");
+                                                        var statisTimeStr = statisTimeArr.join(',');
+                                                        startTimeObj.cycle = statisTimeStr;
+                                                    }                                                    
+                                                    if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                                        gloabl.getWeekScanWinData(startTimeObj);
+                                                    }
+                                                })          
+                                            })  
+                                        });
+                                    }
+                                })
+                                // if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                //     gloabl.getWeekScanWinData(startTimeObj);
+                                // }
                                 break;
                             case 5:
                                 curWeekStr = $scope.weeksList[0].weekNo;
@@ -297,15 +341,15 @@ define([], function () {
                         $scope.brandList = res.data || [];
                         $scope.$apply();  
                         var curBrandName = $scope.brandList[0].name;
-                        if(curTableIndex == 5 || curTableIndex == 6 || curTableIndex == 7){
-                            $model.$getSpecifData({productBrand:curBrandName}).then(function(res){
-                                $scope.speciftList = res.data || [];
-                                $scope.$apply();
-                                if($scope.speciftList.length > 0){
-                                    curSpeciftStr = $scope.speciftList[0].name
-                                }
-                            });
-                        }
+                        
+                        $model.$getSpecifData({productBrand:curBrandName}).then(function(res){
+                            $scope.speciftList = res.data || [];
+                            $scope.$apply();
+                            if($scope.speciftList.length > 0){
+                                curSpeciftStr = $scope.speciftList[0].name
+                            }
+                        });
+                        
                     })
                 },
                 "getPack":  function (typeNum) {
@@ -472,15 +516,24 @@ define([], function () {
                         var weekArr = $('#weeks').val();
                         var weekStr = weekArr.join(',');
                         var packArr = $('#packs').val();
-                        var packStr = packArr.join(',');
+                        var packStr = '请选择包装';
+                        if(packArr.length > 0){
+                            packStr = packArr.join(',');
+                        }
+                        
                         var cycleTimeArr = $('#cycleTime').val();
-                        var cycleTimeStr = cycleTimeArr.join(',');
+                        var cycleTimeStr = '请选择统计周期';
+                        if(cycleTimeArr.length > 0){
+                            cycleTimeStr = cycleTimeArr.join(',');
+                        }
+                        
                         var winDataObj = {
                             'statTime' : weekStr,
                             'productSn' : $('#specift').val(),
                             'unit' : packStr,
                             'cycle' : cycleTimeStr
                         }
+                        
                         gloabl.getWeekScanWinData(winDataObj);
                         break;
                     case 5:
@@ -565,7 +618,7 @@ define([], function () {
                     var url = "/api/tztx/dataportal/fixatreport/impExcelWeekScanWinData";
                 }else if(a === 5){
                     var data = {
-                        'statTime' : $('#proviceDataBrand').val(),
+                        'statTime' : $('#proviceDataWeeks').val(),
                         'productSn' : $('#proviceDataSpecift').val()
                     }
                     if(curSpeciftStr != '' && curWeekStr != ''){
