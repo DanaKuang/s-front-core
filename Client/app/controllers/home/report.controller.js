@@ -223,9 +223,10 @@ define([], function () {
                                         $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
                                             var speciftList = res.data || [];
                                             if(speciftList.length > 0){
-                                                var firstSpeciftSn = speciftList[0].sn;
+                                                var firstSpeciftSn = speciftList[0].name;
                                                 startTimeObj.productSn = firstSpeciftSn;
                                             }
+                                            
                                             if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
                                                 gloabl.getProvData(startTimeObj);
                                             }
@@ -241,7 +242,7 @@ define([], function () {
                                         $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
                                             var speciftList = res.data || [];
                                             if(speciftList.length > 0){
-                                                startTimeObj.productSn = speciftList[0].sn;
+                                                startTimeObj.productSn = speciftList[0].name;
                                             }
                                             $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
                                                 var packsList = res.data || [];
@@ -268,7 +269,7 @@ define([], function () {
                                         $model.$getSpecifData({productBrand:fristBrandName}).then(function(res){
                                             var speciftList = res.data || [];
                                             if(speciftList.length > 0){
-                                                startTimeObj.productSn = speciftList[0].sn;
+                                                startTimeObj.productSn = speciftList[0].name;
                                             }
                                             $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
                                                 var packsList = res.data || [];
@@ -450,7 +451,6 @@ define([], function () {
                                 $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
                             "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
                         }
-                        //console.log($scope.obj);
                         gloabl.winUser($scope.obj);
                         break;
                     case 2:
@@ -494,7 +494,7 @@ define([], function () {
                         }
                         
                         var cashWinDataObj = {
-                            'statTime' : $('#proviceDataBrand').val(),
+                            'statTime' : $('#proviceDataWeeks').val(),
                             'productSn' : $('#proviceDataSpecift').val()
                         }
                         gloabl.getProvData(cashWinDataObj);
