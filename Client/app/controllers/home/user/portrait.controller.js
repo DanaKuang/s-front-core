@@ -41,7 +41,7 @@ define([], function() {
 					if(mobileNo.match(/^1[34578]\d{9}$/)) {
 
 						$model.$getPhoneNo(PhoneNo).then(function(res) {
-														console.log(res);
+							console.log(res);
 							//							console.log(PhoneNo)
 							if(res.data.length == 0) {
 								alert("该手机号查询不到微信ID!");
@@ -142,7 +142,7 @@ define([], function() {
 						optionThree.xAxis.data = [];
 						optionThree.series.data = [];
 						$model.$getSaoJieFen(SaoJieFen).then(function(res) {
-														console.log(res);
+							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								num = res[i].scanSmokeAvgVlue.toFixed(2);
@@ -179,16 +179,16 @@ define([], function() {
 							['2017-01-09', '白沙(硬精品三代)', 0],
 							['2017-01-10', '白沙(硬红运当头)', 1]
 						];
-//						console.log(datamdg)
+						//						console.log(datamdg)
 						var data = [];
-						var dataY =[];
+						var dataY = [];
 						optionFour.xAxis.data = [];
 						optionFour.series.data = [];
 
-//						console.log(optionFour)
+						//						console.log(optionFour)
 
 						$model.$getSaoYanFen(SaoYanFen).then(function(res) {
-//														console.log(res);
+							//														console.log(res);
 							var sum = 0;
 							for(var i = 0; i < res.data.length; i++) {
 								$scope.EffectScanPv = res.data;
@@ -199,12 +199,12 @@ define([], function() {
 						})
 
 						$model.$getSaoGeGuiFen(SaoYanFen).then(function(res) {
-//							console.log(res);
+							//							console.log(res);
 							var str = "";
 							var str2 = "";
 							var str3 = "";
 							var res = res.data || [];
-//							console.log(optionFour.series.data)
+							//							console.log(optionFour.series.data)
 							//去重
 							Array.prototype.unique3 = function() {
 								var res = [];
@@ -227,41 +227,40 @@ define([], function() {
 								result.push(str);
 								result2.push(str2);
 								result3.push(str3);
-							}							
+							}
 							dataY = result.unique3();
 							dataX = result2;
 							var dataInfo = []
-							for(var e=0;e<res.length;e++){
-								
-							data =result2[e]+','+result[e]+','+result3[e];
-							datalist = data.split(",");
-//							console.log(data)
-							
-							dataInfo.push(datalist)
+							for(var e = 0; e < res.length; e++) {
+
+								data = result2[e] + ',' + result[e] + ',' + result3[e];
+								datalist = data.split(",");
+								//							console.log(data)
+
+								dataInfo.push(datalist)
 							}
-//							console.log(dataInfo)
-							
-//循环遍历三组数据
-						for(var a = 0; a < dataX.length; a++) {
-							optionFour.xAxis.data.push(dataX[a])
-						}//X轴
-						for(var b = 0; b < dataY.length; b++) {
-							optionFour.yAxis.data.push(dataY[b])
-						}//Y轴
-						for(var z = 0; z < dataInfo.length; z++) {
-							optionFour.series.data.push(dataInfo[z])
-						}//数据
-						optionFour.series.symbolSize = function(data) {
-							return Math.sqrt(data[2]) * 5;
-						}
-						
-						optionFour.label.emphasis.formatter = function(param) {
-//							console.log(data)
-							return param.data;
-						};
-						myChart4.setOption(optionFour, true)
+							//							console.log(dataInfo)
+
+							//循环遍历三组数据
+							for(var a = 0; a < dataX.length; a++) {
+								optionFour.xAxis.data.push(dataX[a])
+							} //X轴
+							for(var b = 0; b < dataY.length; b++) {
+								optionFour.yAxis.data.push(dataY[b])
+							} //Y轴
+							for(var z = 0; z < dataInfo.length; z++) {
+								optionFour.series.data.push(dataInfo[z])
+							} //数据
+							optionFour.series.symbolSize = function(data) {
+								return Math.sqrt(data[2]) * 5;
+							}
+
+							optionFour.label.emphasis.formatter = function(param) {
+								//							console.log(data)
+								return param.data;
+							};
+							myChart4.setOption(optionFour, true)
 						})
-						
 
 					})();
 
@@ -335,8 +334,8 @@ define([], function() {
 									cy: params.coordSys.cy,
 									r0: coord[2] - size[0] / 2,
 									r: coord[2] + size[0] / 2,
-									startAngle: coord[3] - size[1]/2,
-									endAngle: coord[3] + size[1]/2
+									startAngle: coord[3] - size[1] / 2,
+									endAngle: coord[3] + size[1] / 2
 								},
 								style: api.style({
 									fill: api.visual('color')
@@ -347,19 +346,20 @@ define([], function() {
 						optionTwo.angleAxis.data = [];
 
 						$model.$getSaoHourFen(SaoHourFen).then(function(res) {
-														console.log(res);
+							console.log(res);
 							var res = res.data || [];
 							for(var i = 0; i < res.length; i++) {
 								optionTwo.series.data.push(res[i].scanPv);
 								optionTwo.angleAxis.data.push(res[i].timeh);
 							}
-							myChart2.setOption(optionTwo)
+							
+							optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
+							return Math.max(max, item);
+						}, -Infinity);
+						myChart2.setOption(optionTwo)
 						})
-//												optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
-//													return Math.max(max, item);
-//												}, -Infinity);
-						console.log(optionTwo.series.data)
-						console.log(optionTwo.visualMap.max)
+
+					
 					})();
 				}
 

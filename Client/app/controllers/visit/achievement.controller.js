@@ -13,6 +13,11 @@ define([], function() {
 			function getLocalTime(nS) {
 	            return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
 	        }
+	        function strToTimestamp(s) {
+                s = s.replace(/-/g,"/");
+                var date = new Date(s );
+                return date.valueOf();
+            }
 			//设置input的默认时间
 			var stattime = dayFilter.beforenday('date', 10);
 			var endtime = dayFilter.today('date');
