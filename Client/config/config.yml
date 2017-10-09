@@ -24,7 +24,7 @@ def:                                             # 默认环境配置
     - path: 'assets/layout'                      # 页面头脚
     - path: 'assets'                             # 静态文件路径(css、img)
     - path: 'datas'
-  requesttimeout: 3000                           # 请求超时
+  requesttimeout: 0                              # 0不设置;8000请求超时 8s
   token: '00000000-0000-0000-0000-000000000000'  # token
   etag: 'weak'                                   # http标志[weak/strong]
   appconf:                                       # app信息
@@ -41,13 +41,13 @@ local:                                           # 测试环境配置
     port: 9091                                   # Web端口
     host: '127.0.0.1'                            # IP地址
   gateway:                                       # 配置请求IP地址
-    - port: 8080                                   # 请求端口号
-      host: '172.16.1.109'              # 请求IP地址
+    - port: 80                                   # 请求端口号
+      host: 'datatest.taozuike.com'              # 请求IP地址
     - port: 80                                   # 请求端口号
       host: 'portal.v2.taozuike.com'             # 请求IP地址
     - port: 80                                   # 请求端口号
-      host: 'retailer.taozuike.com'                     # 请求IP地址
-  rootfilter: '/(saas)'               # 接口过滤
+      host: 'retailer.taozuike.com'              # 请求IP地址
+  rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存

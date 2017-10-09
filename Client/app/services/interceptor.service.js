@@ -2,6 +2,7 @@
  *
  */
 define([], function () {
+  var count = 0;
   var interceptor = {
       ServiceType: 'factory',
       ServiceName: 'httpInterceptor',
@@ -25,7 +26,9 @@ define([], function () {
           };
           return {
               request: function(config) {
-                  lPro.show();
+                  if (!count++) {
+                    lPro.show();
+                  }
                   config.headers.client = location.host;
                   config.headers.domain = location.hostname;
                   config.headers.token = sessionStorage.getItem('access_token');
@@ -34,7 +37,9 @@ define([], function () {
                   return config;
               },
               response: function(response) {
-                  lPro.hide();
+                  if (!--count) {
+                    lPro.hide();
+                  }
                   response.config.responseTimestamp = +new Date;
                   return response;
               },
@@ -42,6 +47,9 @@ define([], function () {
                   return $q.reject(rejectReason);
               },
               responseError: function(response) {
+                  if (!--count) {
+                    lPro.hide();
+                  }
                   switch (response.status) {
                       case 401:
                           return clearSession();
