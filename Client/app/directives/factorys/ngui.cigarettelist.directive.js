@@ -35,7 +35,7 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['list', 'totalCount', 'curPage', 'pageNumber', 'size']);
-                if (scope.conf) {
+                if (scope.conf && scope.conf.data) {
                     var page = scope.conf.data.page;
                     scope.totalCount = page.count;
                     scope.size = page.pageNumber > 1 ? page.pageSize : page.count;

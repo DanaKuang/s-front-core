@@ -32,8 +32,6 @@
 								    <label class="control-label col-sm-3">品牌</label>
 								    <div class="col-sm-8">
 								    	<select name="brand" class="form-control input-sm select" ng-model="brandCode" multiple>
-								    		<option value="">请选择</option>
-		    								<option ng-repeat="item in brandlist" value="{{item.brandCode}}">{{item.name}}</option>
 											</select>
 								    </div>
 								  </div>
@@ -41,7 +39,6 @@
 								    <label class="control-label col-sm-3">规格</label>
 								    <div class="col-sm-8">
 								    	<select name="sn" type="text" class="form-control input-sm select" ng-model="sn" multiple>
-								    		<option value="">全部</option>
 								    	</select>
 								    </div>
 								  </div>
@@ -49,15 +46,13 @@
 								    <label class="control-label col-sm-3">包装</label>
 								    <div class="col-sm-8">
 											<select class="form-control input-sm select" name="pack" id="" ng-model="pack" multiple required>
-												<option value="">请选择</option>
 											</select>								    	
 								    </div>
 								  </div>
 								  <div class="form-group col-md-4">
 								    <label class="control-label col-sm-3">价类</label>
 								    <div class="col-sm-8">
-								    	<select name="name" class="form-control input-sm select" id="" ng-model="grade" multiple required>
-												<option value="">请选择</option>
+								    	<select name="grade" class="form-control input-sm select" id="" ng-model="grade" multiple required>
 											</select>
 								    </div>
 								  </div>

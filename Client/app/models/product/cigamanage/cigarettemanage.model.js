@@ -43,8 +43,8 @@ define([], function () {
             }
 
             // 根据品牌获取规格
-            $model.getsns = function () {
-                return request.$Search(GET_ALL_SNS);
+            $model.getsns = function (params) {
+                return request.$Search(GET_ALL_SNS, params);
             }
 
             // 查询sn条形码
