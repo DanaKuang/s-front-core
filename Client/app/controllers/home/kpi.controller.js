@@ -17,7 +17,7 @@ define([], function () {
           Interval_3,                     // map定时对象
           // Interval_4,                     // 表格刷新实时对象
           Interval_common = 3000,         // 循环滚动间隔
-          Interval_scroll_I = 3000,       // 滚工区接口刷新
+          Interval_scroll_I = 9000,       // 滚工区接口刷新
           Interval_table_I = 60*60*1000;  // 表格一小时刷新
 
       $('.ui-map-box').css({
