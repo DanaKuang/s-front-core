@@ -68,6 +68,7 @@ define([], function () {
                 allSelectedText: '全部',
                 nSelectedText: '已选择',
                 enableFiltering: true,
+                filterPlaceholder: '查询',
                 onChange: function (opt) {
                     var act_sn = opt[0].value || event.target.value || "";
                     act_sn = act_sn.split('_');
