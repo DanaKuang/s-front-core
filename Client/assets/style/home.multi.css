@@ -3,9 +3,6 @@
  * Create Date: 2017-07-18
  * Description: multi
  */
-.btn {
-    padding: 4px 12px;
-}
 .panel-body {
     padding: 15px 30px;
 }
@@ -243,6 +240,7 @@ button.multiselect {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding: 4px 12px;
 }
 .ui-result-list {
     width: calc(100% - 80px);
