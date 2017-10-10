@@ -17,39 +17,36 @@ define([], function () {
           Interval_3,                     // map定时对象
           // Interval_4,                     // 表格刷新实时对象
           Interval_common = 3000,         // 循环滚动间隔
-          Interval_scroll_I = 9000,       // 滚工区接口刷新
+          Interval_scroll_I = 3000,       // 滚工区接口刷新
           Interval_table_I = 60*60*1000;  // 表格一小时刷新
 
+      $('.ui-map-box').css({
+          height: '' + $(document).height()-300 + 'px'
+      });
       // 首页较特殊 页面切换清楚所有的定时器
       window.IntervalArr = [];
 
       // 历史数据
       var historyScanData = $model.$historyScan.data || [];
-
-      $('.ui-map-box').css({
-        height: '' + $(document).height()-300 + 'px'
-      });
-      // 右侧数据
-      (function () {
-        // 计算环比
-        function fixData (o, v) {
-          var result = 0;
-          o = o || 0; v = v || 0;
-          o = Number(o); v = Number(v);
-          result = o + v;
-          if (result > 10000) {
+      // 计算环比
+      function fixData (o, v) {
+        var result = 0;
+        o = o || 0; v = v || 0;
+        o = Number(o); v = Number(v);
+        result = o + v;
+        if (result > 10000) {
             result = ''+Math.round(result/10000)+'万';
-          }
-          return result;
         }
-
-        // tooltip
-        // 先这么写吧，应该在指令里控制
-        setTimeout(function () {
+        return result;
+      }
+      // tooltip
+      // 先这么写吧，应该在指令里控制
+      setTimeout(function () {
           $('[data-toggle="tooltip"]').tooltip();
-        }, 500);
+      }, 500);
 
-        Interval_1 = setInterval(function() {
+      (function () {
+        function getRightData () {
           // 获取扫码次数
           $model.getScanTime().then(function (res) {
             var res = res.data || {};
@@ -83,23 +80,21 @@ define([], function () {
             res = res instanceof Array ? res : [];
             $("#scan_top").html(_.compact(res).join('、'));
           });
-        }, Interval_common);
+        }
+        // 右侧数据
+        getRightData();
+        Interval_1 = setInterval(getRightData, Interval_common);
         // 记录1
         window.IntervalArr.push(Interval_1);
       })();
 
-      // 滚动区域数据
       (function () {
-        var $wrap = $("#scroll_data");
-        var wrapper = null;
-        var newData = "";
-        var animateli = true;
-        Interval_2 = setInterval(function () {
+        function getScrollData () {
           $model.getScrollData().then(function (res) {
             var data = res.data || [];
             clearInterval(wrapper);
             animateli && $wrap.html(_.map(data, function (d) {
-              return '<li>'+d+'</li>';
+                return '<li>'+d+'</li>';
             }).join(''));
             wrapper = setInterval(function() {
               if ($wrap.children().length <= 1) {
@@ -119,8 +114,14 @@ define([], function () {
               });
             }, Interval_common);
           });
-        }, Interval_scroll_I);
-
+        }
+        getScrollData();
+        // 滚动区域数据
+        var $wrap = $("#scroll_data");
+        var wrapper = null;
+        var newData = "";
+        var animateli = true;
+        Interval_2 = setInterval(getScrollData, Interval_scroll_I);
         // 记录2
         window.IntervalArr.push(Interval_2);
       })();
@@ -135,14 +136,14 @@ define([], function () {
         var option = $model.$echartConf.data;
         var data = $model.$mapData.data || [];
         var convertData = function (data) {
-            var res = [];
-            data.forEach(function (d) {
-              res.push({
-                name: d.city,
-                value: [d.longitude,d.latitude,d.scantimes]
-              });
+          var res = [];
+          data.forEach(function (d) {
+            res.push({
+              name: d.city,
+              value: [d.longitude,d.latitude,d.scantimes]
             });
-            return res;
+          });
+          return res;
         };
 
         var sortData = convertData(data.sort(function (a, b) {
@@ -174,13 +175,9 @@ define([], function () {
         // top 30点
         option.series[3].data = top0_30;
         // option.series[1].symbolSize = symbolSize
-
-
-
         myChart.setOption(option);
 
-        // 实时调用接口
-        Interval_3 = setInterval(function () {
+        function getMapData () {
           $model.getMapData().then(function (res) {
             var data = res.data || [];
             var option = myChart.getOption();
@@ -196,7 +193,10 @@ define([], function () {
             option.series[3].data = top0_30;
             myChart.setOption(option);
           });
-        }, Interval_common);
+        }
+        getMapData();
+        // 实时调用接口
+        Interval_3 = setInterval(getMapData, Interval_common);
         // 记录3
         window.IntervalArr.push(Interval_3);
       })();
