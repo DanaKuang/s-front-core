@@ -363,7 +363,7 @@ define([], function () {
                         $("#though-backDown").css("display","none");
                         $("#though-check").css("display","block");
                     }else {
-                        $("#though-check").css("display","node");
+                        $("#though-check").css("display","none");
                         $("#though-backDown").css("display","block");
                     };
                 });
