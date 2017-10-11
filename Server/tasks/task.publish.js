@@ -18,14 +18,8 @@ module.exports = function () {
         privateKey: '/Users/Admin/.ssh/id_rsa'
     }];
     var SERVER = {
-        161: {
-            host: '172.17.15.161',
-            port: 22,
-            user: '',
-            dist: '/opt/webapps',
-            privateKey: ''
-        },
         172: {
+            type: 'dev',
             host: '172.17.15.172',
             port: 22,
             user: '',
@@ -33,6 +27,7 @@ module.exports = function () {
             privateKey: ''
         },
         173: {
+            type: 'dev',
             host: '172.17.15.173',
             port: 22,
             user: '',
@@ -40,6 +35,7 @@ module.exports = function () {
             privateKey: ''
         },
         174: {
+            type: 'test',
             host: '172.17.15.174',
             port: 22,
             user: '',
@@ -51,7 +47,6 @@ module.exports = function () {
         ips.push(SERVER[process.argv[3]]);
     } else {
         process.stdout.write(colors.blue('\x20server required!\n'));
-        process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 161\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 172\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 173\n'));
         process.stdout.write(colors.blue('\x20\x20\x20 node main pusblish 174\n'));

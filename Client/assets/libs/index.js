@@ -30,7 +30,7 @@ requirejs.config({
     ],
     datetimepicker: [
       SAO_CDN_URL + 'js/bootstrap-datetimepicker.min',
-      'bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker'
+      'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker'
     ],
     bootstrapMultiselect: [
       SAO_CDN_URL + 'js/bootstrap-multiselect',
@@ -125,6 +125,7 @@ requirejs.config({
     'nprogress'
   ],
   callback: function() {
+    // debugger
     require(['app']); //引导应用初始化
   }
 });

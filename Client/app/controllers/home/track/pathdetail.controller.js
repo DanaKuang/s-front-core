@@ -11,7 +11,7 @@ define([], function () {
     ViewModelName: 'pathdetailViewModel',
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
-        var pageUrl = 'http://hmtx.cc/nscan_data.html?sn=';
+        var pageUrl = 'https://hmtx.cc/nscan_data.html?sn=';
 
         // 后端数据
         // var brand_back_data = $model.$brand.data || [];
@@ -68,6 +68,7 @@ define([], function () {
                 allSelectedText: '全部',
                 nSelectedText: '已选择',
                 enableFiltering: true,
+                filterPlaceholder: '查询',
                 onChange: function (opt) {
                     var act_sn = opt[0].value || event.target.value || "";
                     act_sn = act_sn.split('_');

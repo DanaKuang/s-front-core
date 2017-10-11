@@ -70,6 +70,9 @@ define([], function() {
 					endTime: strToTimestamp(endTime)+86400000
 				}
 				$model.getTblStatic(seacherId).then(function(res) {
+					_.each(res.data.data, function (d, i) {
+						d.index = (seacherId.pageNum-1)*seacherId.pageSize + i + 1;
+					});
 					$scope.staticData = res.data.data || [];
 					$scope.$apply();
 					var pageCount = Math.ceil(res.data.totalNum/seacherId.pageSize);
@@ -88,6 +91,9 @@ define([], function() {
 						backFn: function(p) {
 							seacherId.pageNum =p;
 							$model.getTblStatic(seacherId).then(function(res) {
+								_.each(res.data.data, function (d, i) {
+									d.index = (seacherId.pageNum-1)*seacherId.pageSize + i + 1;
+								});
 								$scope.staticData = res.data.data || [];
 								$scope.$apply();
 								$("#pageCount").text(res.data.totalNum);
