@@ -1,0 +1,45 @@
+/**
+ * Author: liubin
+ * Create Date: 2017-10-11
+ * Description: 修改密码
+ */
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.inline {
+    display: inline;
+}
+.inline-block {
+    display: inline-block;
+}
+.margin {
+    margin: 15px;
+}
+.margin-left {
+    margin-left: 15px;
+}
+.margin-right {
+    margin-right: 15px;
+}
+.margin-top {
+    margin-top: 15px;
+}
+.margin-bottom {
+    margin-bottom: 15px;
+}
+.padding {
+    padding: 0;
+}
+.height {
+    height: 50px;
+}
+.fix-btn {
+    padding: 4px 12px;
+    margin-left: 90px;
+}
+.btn-option {
+    margin-top: 30px;
+}

@@ -26,7 +26,8 @@ define([], function() {
                 $model.getUser().then(function (user) {
                     nav = nav.data || {};
                     user = user.data.data || {};
-                    sessionStorage.setItem("account", USERMAP[user.account]);
+                    sessionStorage.setItem("account", USERMAP[user.orgCode]);
+                    sessionStorage.setItem("checkperson", USERMAP[user.account]);
                     $scope.navConf = {
                         nav: menuFilter.nav(nav.data),
                         account: user.name || ""

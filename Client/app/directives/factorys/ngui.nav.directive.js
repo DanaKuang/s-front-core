@@ -56,7 +56,7 @@ define([], function () {
 
         // 修改密码
         scope.changePassword = function () {
-            console.log('changePassword...');
+            location.href = '#/view/account/changepwd';
         };
       }
       return defineObj;
