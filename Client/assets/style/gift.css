@@ -130,7 +130,7 @@
     width: 60%;
     height: 28px;
     line-height: 28px;
-    /*margin-left: 4px;*/
+    border-radius: 4px;
 }
 
 .ser_btn, .rest_btn {
@@ -242,6 +242,7 @@
     width: 60%;
     height: 28px;
     line-height: 28px;
+    border-radius: 4px;
 }
 
 .packet_select_sec .ser_btn, .packet_select_sec .rest_btn {
@@ -296,6 +297,7 @@
     width: 70%;
     height: 28px;
     line-height: 28px;
+    border-radius: 4px;
 }
 
 .supply_select_sec div input {
@@ -305,6 +307,8 @@
     height: 28px;
     line-height: 28px;
     border: 1px solid #888888;
+    padding-left: 3px;
+    border-radius: 4px;
 }
 
 .supply_select_sec .ser_btn, .supply_select_sec .rest_btn {
@@ -691,11 +695,12 @@ textarea {
 }
 #selectGiftName{
     font-size: 14.7px;
-    /*width: 154px;*/
     width: 60%;
     height: 28px;
     line-height: 28px;
     display: inline-block;
+    padding-left: 3px;
+    border-radius: 4px;
 }
 .file_name{
     color: #6E80FF;
@@ -708,6 +713,8 @@ textarea {
     height: 28px;
     width: 60%;
     line-height: 28px;
+    padding-left: 3px;
+    border-radius: 4px;
 }
 .time_period{
     display: inline-block;
