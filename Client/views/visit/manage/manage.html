@@ -444,15 +444,13 @@
                     </div>
                 </div>
                 <div class="modal-body body">
-                    <form>
-                        <div class="row" id="timeRow">
-                            <div class="time inline-block">
-                                <div class="inline-block">时间</div>
-                                <input name="时间" id="timeStart"  class="form_datetime dateTime form-control input-sm">
-                            </div>
-                            <div id="seacherbtn" ng-click="seacherbtn();"><a>查询</a></div>
+                    <form class="row form-horizontal" id="timeRow" style="margin-top: 10px;">
+                        <div class="time form-inline col-md-8">
+                            <label>时间</label>
+                            <input name="时间" id="timeStart"  class="form_datetime dateTime form-control input-sm">
                         </div>
-                        <div class="row" id="third">
+                        <div id="seacherbtn" ng-click="seacherbtn();"><a>查询</a></div>
+                        <div class="row col-md-12" id="third" style="margin-top:30px;">
                             <div class="down" ng-click="downButton();"></div>
                         </div>
                     </form>
