@@ -47,8 +47,8 @@
             "type": "slider",
             "show": true,
             "xAxisIndex": [0],
-            "start": 10,
-            "end": 35
+            "start": 0,
+            "end": 50
         },
         {
             "type": "slider",
@@ -56,19 +56,19 @@
             "yAxisIndex": [0],
             "left": "93%",
             "start": 0,
-            "end": 36
+            "end": 50
         },
         {
             "type": "inside",
             "xAxisIndex": [0],
-            "start": 10,
-            "end": 35
+            "start": 0,
+            "end": 50
         },
         {
             "type":"inside",
             "yAxisIndex": [0],
             "start": 0,
-            "end": 36
+            "end": 50
         }
       ],
 	"series": {
