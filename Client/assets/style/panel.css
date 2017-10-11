@@ -30,7 +30,8 @@ input.form_datetime::placeholder {
     color: #6e80ff; }
 
 th {
-  font-size: 1.1em !important; }
+  font-size: 1.1em !important;
+  vertical-align: middle; }
 
 tr td {
   font-size: 1em !important; }
