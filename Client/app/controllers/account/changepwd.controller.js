@@ -11,7 +11,7 @@ define([], function () {
         ServiceContent: ['$scope', function ($scope) {
             var $model = $scope.$model;
 
-            var default = {
+            var defaultVal = {
                 account: '',
                 newPwd: '',
                 reNewPwd: '',
@@ -33,7 +33,7 @@ define([], function () {
                 }
             };
             //默认值
-            $scope = angular.extend($scope, default);
+            $scope = angular.extend($scope, defaultVal);
         }]
     };
     return changePwdCtrl;
