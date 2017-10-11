@@ -90,7 +90,7 @@ define([], function () {
             //根据code查询详细扫码信息
             function getDetailByCode(pageObj){
                 $scope.currentPageNumber = pageObj.page;
-                $model.$detailDataByCode(initPage).then(function (res) {
+                $model.$detailDataByCode(pageObj).then(function (res) {
                     var res = res.data || [];
                     $scope.totalPage = res.Count;
                     $('#sweepDataTable').hide();
