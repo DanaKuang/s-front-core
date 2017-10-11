@@ -191,7 +191,7 @@ product:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'product/materiel/integration.html'  
+    staticfile: 'product/materiel/integration.html'
   - httpmethod: 'get'                       # 供应商管理
     routepath: '/view/product/supply'
     description: 'supply'
@@ -205,7 +205,7 @@ product:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'product/cigamanage/cigarettemanage.html'  
+    staticfile: 'product/cigamanage/cigarettemanage.html'
 visitManage:
   - httpmethod: 'get'                       # 零售户管理
     routepath: '/view/visit/manage'
@@ -242,6 +242,14 @@ visitManage:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/detail/detail.html'
+account:
+  - httpmethod: 'get'                       # 修改密码
+    routepath: '/view/account/changepwd'
+    description: 'changepwd'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'account/changepwd/changepwd.html'
 operateTools:
   - httpmethod: 'get'                       # 盗扫明细查询
     routepath: '/view/home/operateTools/sweepDetail'

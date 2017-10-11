@@ -68,7 +68,7 @@ define([], function () {
                 up = {
                     "id": $(this).parent().parent().attr("data-id"),
                     "checkStatus": "",
-                    "checkPerson":sessionStorage.getItem("account"),
+                    "checkPerson":sessionStorage.getItem("checkperson"),
                     "checkTime":dayFilter.today("datetime")
                 }
                 if ($(this).text() === "待核实") {

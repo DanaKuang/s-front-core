@@ -1431,6 +1431,13 @@ visitManage:
     enableroute: 1
     gatewaytype: 2
     responetype: 'json'
+account:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/admin/user/modifyPwd'
+    authorized: 1
+    description: '修改密码'
+    enableroute: 1
+    gatewaytype: 1
 operateTools:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fixatreport/getDetailHome'
