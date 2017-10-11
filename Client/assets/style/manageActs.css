@@ -817,6 +817,13 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .detail-wrap p span {
 	color: #707478;
 }
+.detail-wrap p span.area {
+	overflow-y: scroll;
+	display: block;
+	margin-left: 70px;
+	margin-top: -28px;
+	max-height: 300px;
+}
 
 /*投放设置 单选*/
 .select-brand .multiselect-container>li>a>label, .select-specification .multiselect-container>li>a>label {
