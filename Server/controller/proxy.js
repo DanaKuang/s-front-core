@@ -27,7 +27,11 @@ function proxyAPI (req, res, route) {
           }
       })).pipe(res);
   } else {
-    req.pipe(request[route.httpmethod](req.url, timeout=timeout)).pipe(res);
+    if (!!timeout) {
+        req.pipe(request[route.httpmethod](req.url)).pipe(res);
+    } else {
+        req.pipe(request[route.httpmethod](req.url, {timeout: timeout})).pipe(res);
+    }
     // var STATUS_5xx = /^5\d{2}/i;
     // var STATUS_2xx = /^2\d{2}/i;
     // var STATUS_4xx = /^4\d{2}/i;

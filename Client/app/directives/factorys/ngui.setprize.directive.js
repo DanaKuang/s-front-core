@@ -12,6 +12,7 @@ define([], function () {
           tpl: '/setprize.tpl.html',
           chooseNum: 0,
           firstornot: false,
+          thanksornot: false,
           dcList: {}
       };
       var defineObj = { //指令定义对象
@@ -27,11 +28,11 @@ define([], function () {
       };
 
       function linkFn (scope, element, attrs) {
-          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar', 'myThanks']);
+          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks']);
           // 监视conf变化更新 basicinfo
           scope.$watch('conf', function () {
               // 属性赋值
-              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'myVar', 'myThanks']);
+              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks']);
           }, true);
 
           var that_scope = angular.element('.all-template-config-wrap').scope();
@@ -70,6 +71,7 @@ define([], function () {
 
                   scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
                   scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                  scope.thanksornot = $(e.target).parents('.gotoset').hasClass('thanks-draw-wrap');
               } else {
                   alert('请先选择投放的品牌和规格！')
               }
@@ -121,6 +123,7 @@ define([], function () {
 
                   scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
                   scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+                  scope.thanksornot = $(e.target).parents('.gotoset').hasClass('thanks-draw-wrap');
               } else {
                   alert('请先选择投放的品牌和规格！')
               }
