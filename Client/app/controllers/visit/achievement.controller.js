@@ -71,7 +71,7 @@ define([], function() {
 				}
 				$model.getTblStatic(seacherId).then(function(res) {
 					_.each(res.data.data, function (d, i) {
-						d.index = (seacherId.pageNum-1)*seacherId.pageSize + i;
+						d.index = (seacherId.pageNum-1)*seacherId.pageSize + i + 1;
 					});
 					$scope.staticData = res.data.data || [];
 					$scope.$apply();
@@ -92,7 +92,7 @@ define([], function() {
 							seacherId.pageNum =p;
 							$model.getTblStatic(seacherId).then(function(res) {
 								_.each(res.data.data, function (d, i) {
-									d.index = (seacherId.pageNum-1)*seacherId.pageSize + i;
+									d.index = (seacherId.pageNum-1)*seacherId.pageSize + i + 1;
 								});
 								$scope.staticData = res.data.data || [];
 								$scope.$apply();
