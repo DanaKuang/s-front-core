@@ -250,3 +250,11 @@ account:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'account/changepwd/changepwd.html'
+operateTools:
+  - httpmethod: 'get'                       # 盗扫明细查询
+    routepath: '/view/home/operateTools/sweepDetail'
+    description: 'sweepDetail'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/operateTools/sweepDetail.html'

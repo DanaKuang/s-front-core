@@ -4,13 +4,17 @@
 	},
 	"polar": {},
 	"tooltip": {
-	"trigger":"axis"
+	"trigger":"axis",
+	"axisPointer":{
+	"type":"line",
+	"axis":"angle"
+	}
 	},
 	
 	"visualMap": {
 		"type": "continuous",
 		"min": 0,
-		"max": "42",
+		"max": "",
 		"top": "middle",
 		"dimension": 1,
 		"calculable": false,
