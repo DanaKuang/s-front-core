@@ -406,7 +406,7 @@ define([], function () {
                         $(".report-table").find("tbody").html("");
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
-                                $("#weekCashWin").append("<tr><td>扫码活动</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + formatNum(res[i].price) + "</td><td>" + formatNum(res[i].cudreNum) + "</td><td>" + formatNum(res[i].lastdreNum) + "</td><td>" + formatNum(res[i].lratio) + "%</td><td>" + formatNum(res[i].totalNum) + "</td><td>" + formatNum(res[i].drawMoney) + "</td><td>" + formatNum(res[i].totalMoney )+ "</td></tr>");
+                                $("#weekCashWin").append("<tr><td>"+ res[i].activId +"</td><td>" + res[i].name + "</td><td>" + res[i].unit + "</td><td>" + res[i].awardName + "</td><td>" + formatNum(res[i].price) + "</td><td>" + formatNum(res[i].cudreNum) + "</td><td>" + formatNum(res[i].lastdreNum) + "</td><td>" + formatNum(res[i].lratio) + "%</td><td>" + formatNum(res[i].totalNum) + "</td><td>" + formatNum(res[i].drawMoney) + "</td><td>" + formatNum(res[i].totalMoney )+ "</td></tr>");
                             }
                         }else{
                             $("#weekCashWin").append("<tr><td colspan='11'>暂无符合条件的数据</td></tr>");
