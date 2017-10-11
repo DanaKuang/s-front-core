@@ -1171,7 +1171,20 @@ input[type="checkbox"]:checked + .checkbox{
 #codeDetailFooter div{
   float: right;
 }
-
+.ui-navbar-left .fa-operate {
+  background: url('../image/i-report.png') no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+}
+.ui-navbar-left li.active .fa-operate {
+  background: url('../image/i-report-act.png') no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+}
 
 /*==============================end sweepDetail================================*/
 
