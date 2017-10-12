@@ -4,11 +4,11 @@
  * Description: css
  */
 @media screen and (min-width: 1300px) {
-    .ui-map-box {
+    div.ui-map-box {
         height: 350px;
     }
-    #distMap.ui-map-box,
-    #distGrowMap.ui-map-box {
+    div#distMap.ui-map-box,
+    div#distGrowMap.ui-map-box {
         height: 450px;
     }
 }
