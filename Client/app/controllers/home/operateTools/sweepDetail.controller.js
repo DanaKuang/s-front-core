@@ -13,7 +13,7 @@ define([], function () {
             var $model = $scope.$model;
             setDateConf.init($(".agree-date"), "day");
             //设置input的默认时间
-            var stattime = dayFilter.yesterday("date");
+            var stattime = dayFilter.today("date");
             $(".agree-date").find("input").val(stattime);
             //小时时间段数组
             $scope.hoursArr = ['00:00:00~00:59:59','01:00:00~01:59:59','02:00:00~02:59:59','03:00:00~03:59:59','04:00:00~04:59:59',
