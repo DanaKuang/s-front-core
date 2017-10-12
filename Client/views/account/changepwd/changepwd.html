@@ -6,44 +6,65 @@
  */
 -->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/account.changepwd.css">
-<div class="animated fadeInRightBig" ng-controller="changePwdCtrl">
-    <div class="container-fluid row">
-        <div class="ui-acc-cpwd margin-top col-md-12">
-            <!--title-->
-            <div class="ui-panel-title">
-                <i class="title"></i><span>修改密码</span>
+<div ng-controller="changePwdCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>修改密码</span>
+                </div>
+                <!--panel-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-horizontal" autocomplete="off">
+                            <!--原密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">原密码</label>
+                                <div class="col-md-4" ng-class="{'has-error':oldpwd}">
+                                    <input type="password" name="oldpwd" class="form-control input-sm" ng-model="account" ng-blur="checkold(account);">
+                                    <p class="help-block" style="display:{{oldpwd?'block':'none';}}">原密码输入不符</p>
+                                </div>
+                            </div>
+                            <!--新密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">新密码</label>
+                                <div class="col-md-4" ng-class="{'has-error':newpwd}">
+                                    <input type="password" name="newpwd" class="form-control input-sm" ng-model="newPwd" ng-blur="checkpwd(newPwd);">
+                                    <p class="help-block" style="display: {{newpwd?'block':'none';}}">4-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                </div>
+                            </div>
+                            <!--确认新密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">确认新密码</label>
+                                <div class="col-md-4" ng-class="{'has-error':nr}">
+                                    <input type="password" name="renewpwd" class="form-control input-sm" ng-model="reNewPwd" ng-blur="checkrepwd(reNewPwd);">
+                                    <p class="help-block" style="display:{{nr?'block':'none';}}">两次密码输入不一致</p>
+                                </div>
+                            </div>
+                            <!--确认按钮-->
+                            <div class="btn-option col-md-12 form-group">
+                                <button type="button" class="btn btn-primary fix-btn" ng-click="changepwd();">确认</button>
+                                <button type="button" class="btn btn-primary fix-btn" ng-click="closepage();">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!--panel-->
-            <div class="panel rate">
-                <div class="panel-body">
-                    <form class="form-horizontal">
-                        <!--原密码-->
-                        <div class="margin-top col-md-12 form-group">
-                            <label class="control-label col-md-2">原密码</label>
-                            <div class="col-md-4">
-                                <input type="password" name="oldpwd" class="form-control input-sm" ng-model="account">
-                            </div>
-                        </div>
-                        <!--新密码-->
-                        <div class="margin-top col-md-12 form-group">
-                            <label class="control-label col-md-2">新密码</label>
-                            <div class="col-md-4">
-                                <input type="password" name="newpwd" class="form-control input-sm" ng-model="newPwd">
-                            </div>
-                        </div>
-                        <!--确认新密码-->
-                        <div class="margin-top col-md-12 form-group">
-                            <label class="control-label col-md-2">确认新密码</label>
-                            <div class="col-md-4">
-                                <input type="password" name="renewpwd" class="form-control input-sm" ng-model="reNewPwd">
-                            </div>
-                        </div>
-                        <!--确认按钮-->
-                        <div class="btn-option col-md-12 form-group">
-                            <button type="button" class="btn btn-primary fix-btn" ng-click="changepwd();">确认</button>
-                            <button type="button" class="btn btn-primary fix-btn" ng-click="closepage();">取消</button>
-                        </div>
-                    </form>
+        </div>
+    </div>
+    <!--弹窗提醒-->
+    <div class="modal fade in" id="tipsModalId" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content" style="border-radius: 15px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header" style="border-top-right-radius:15px;border-top-left-radius:15px;">提示</h4>
+                </div>
+                <div class="modal-body" style="height:60px;line-height:50px;text-align:center;font-size:18px;">
+                  密码修改成功,请退出重新登陆!
                 </div>
             </div>
         </div>
