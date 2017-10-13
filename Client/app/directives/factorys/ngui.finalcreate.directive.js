@@ -62,6 +62,7 @@ define([], function () {
                 $('.wrong-tip').addClass('hidden');
 
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
+                scopeVariable._samplelistScope = angular.element('.sample-list').scope();
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
                 scopeVariable._setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
@@ -330,7 +331,7 @@ define([], function () {
                 var fromSonScope = {
                     copyOfPageCode: angular.element('.all-template-config-wrap').scope().pageCode,
                     pageCode: scopeVariable._basicScope.pageCode || '',
-                    activityForm: scopeVariable._basicScope.activityForm,
+                    activityForm: scopeVariable._samplelistScope.type,
                     activityCode: angular.element('.all-template-config-wrap').scope().activityCode || '',
                     pageName: scopeVariable._basicScope.pageName || '',
                     activityDec: scopeVariable._basicScope.descValue || '', //活动描述

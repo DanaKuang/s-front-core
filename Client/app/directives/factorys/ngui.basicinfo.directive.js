@@ -10,7 +10,6 @@ define([], function () {
     var basicinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/basicinfo.tpl.html',
-            activityForm: '',
             pageName: '',
             namePriority: 1,
             parentForm: {},

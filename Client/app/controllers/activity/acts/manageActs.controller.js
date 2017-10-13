@@ -234,7 +234,7 @@ define([], function () {
 
           function getLaunchInfo() {
             $(document).ready(function () {
-              $(".ui-search-block.multi .select").multiselect({
+              $("multi .select").multiselect({
                 nonSelectedText: '请选择',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
