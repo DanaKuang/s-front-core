@@ -4,17 +4,17 @@
  * Description: track
  */
 @media screen and (min-width: 1300px) {
-    .ui-axis-box {
+    div.ui-axis-box {
         height: 350px;
     }
-    .ui-map-box {
+    div.ui-map-box {
         height: 450px;
     }
-    .ui-common-box {
+    div.ui-common-box {
         height: 350px;
     }
-    #baiduMap.ui-common-box,
-    #cityMap.ui-common-box {
+    div#baiduMap.ui-common-box,
+    div#cityMap.ui-common-box {
         height: 450px;
     }
 }
