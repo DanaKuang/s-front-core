@@ -55,6 +55,7 @@ define([], function () {
                 var firstornot = setprizeScope.firstornot;
                 var thanksornot = setprizeScope.thanksornot;
                 var chooseNum = setprizeScope.chooseNum;
+
                 if (firstornot) {
                     // 特殊项里的设置
                     var osJQobject = $('.first-draw').find('.ready-set .create-part').children().eq(chooseNum);
@@ -69,6 +70,7 @@ define([], function () {
                     var osJSobject = osJQobject[0];
                 }
                 osJSobject.dataset.integralPool = item.id;
+                $(osJSobject).find('.radio-res').not('.hidden').find('.show-chosen').html('（已选择：' + item.name + '）');
                 $('.modal-content .close').trigger('click');
             }
 

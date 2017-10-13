@@ -171,6 +171,7 @@ define([], function () {
                 $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
                 $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false);
                 $(parentsDrawPrizeWrap).find('.sendscore').addClass('hidden');
+                $(parentsDrawPrizeWrap).find('.show-chosen').html('');
 
                 $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
                 var num = $target.parents('.radio-group').index();

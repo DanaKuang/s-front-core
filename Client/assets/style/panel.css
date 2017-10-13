@@ -29,29 +29,27 @@ input.form_datetime::placeholder {
   .panel-body .operate-btn:hover {
     color: #6e80ff; }
 
-th {
-  font-size: 1.1em !important;
+.table-bordered tr td, .table-bordered > thead > tr > th {
   vertical-align: middle; }
+
+th {
+  font-size: 1.1em !important; }
 
 tr td {
-  font-size: 1em !important;
-  vertical-align: middle; }
+  font-size: 1em !important; }
   tr td img {
     max-height: 4em; }
-
-.multiselect.dropdown-toggle {
-  text-align: left;
-  font-size: inherit;
-  color: #555; }
-
-.multiselect.dropdown-toggle .btn-group {
-  width: 100%; }
 
 .form-control {
   width: 100% !important; }
 
 .form_datetime {
   background: transparent !important; }
+
+.form_datetime[disabled] {
+  background: #eee !important;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
 .manageacts .col-sm-7, .mprizegothistory .col-sm-7, .vprizegothistory .col-sm-7, .integralhistory .col-sm-7 {
   padding: 0; }

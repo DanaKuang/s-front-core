@@ -83,7 +83,7 @@ define([], function () {
                         caidanAward.eduration = _drawPrizeScope.endHour;
                         if (_drawPrizeScope.intervalHourperson != 0) {
                             caidanAward.duration = _drawPrizeScope.intervalHour;
-                            caidanAward.playplayPerson = _drawPrizeScope.intervalHourperson;
+                            caidanAward.playPerson = _drawPrizeScope.intervalHourperson;
                         }
                         caidanAward.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
 
