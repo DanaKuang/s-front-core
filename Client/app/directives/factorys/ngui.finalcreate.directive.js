@@ -62,7 +62,6 @@ define([], function () {
                 // $('.wrong-tip').addClass('hidden');
 
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
-                scopeVariable._samplelistScope = angular.element('.sample-list').scope();
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
                 scopeVariable._setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
@@ -332,7 +331,7 @@ define([], function () {
                 var fromSonScope = {
                     copyOfPageCode: angular.element('.all-template-config-wrap').scope().pageCode,
                     pageCode: scopeVariable._basicScope.pageCode || '',
-                    activityForm: scopeVariable._samplelistScope.type,
+                    activityForm: scopeVariable._basicScope.activityForm,
                     activityCode: angular.element('.all-template-config-wrap').scope().activityCode || '',
                     pageName: scopeVariable._basicScope.pageName || '',
                     activityDec: scopeVariable._basicScope.descValue || '', //活动描述
@@ -350,8 +349,8 @@ define([], function () {
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
                     areaCode: scopeVariable._launchScope.selectAreaVal ? scopeVariable._launchScope.selectAreaVal.toString() : '' || '',
                     holiday: scopeVariable._launchScope.whichday || 3,
-                    stime: scopeVariable._launchScope.startTime + ':00' || '',
-                    etime: scopeVariable._launchScope.endTime + ':00' || '',
+                    stime: that_scope.activityCode ? scopeVariable._launchScope.startTime : scopeVariable._launchScope.startTime + ':00',
+                    etime: that_scope.activityCode ? scopeVariable._launchScope.endTime :  scopeVariable._launchScope.endTime + ':00',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,

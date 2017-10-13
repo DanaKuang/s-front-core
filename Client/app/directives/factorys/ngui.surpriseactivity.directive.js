@@ -87,6 +87,7 @@ define([], function () {
                     scope.intervalHour = caidanconfig.duration;
                     scope.intervalHourperson = caidanconfig.playPerson;
                     scope.drawAreaVal = caidanconfig.adcodes;
+                    scope.adcodenames = caidanconfig.adnames;
 
                     if (caidanconfig.condition) {
                         scope.plusval = caidanconfig.condition;
