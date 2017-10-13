@@ -594,6 +594,7 @@ define([], function () {
                     $('.add_pool_warn').css('display','none');
                 }else{
                     $('.add_pool_warn').css('display','block');
+                    $('.add_pool_warn2').css('display','none');
                     return;
                 }
                if(regNum2.test(poolMoney)){
