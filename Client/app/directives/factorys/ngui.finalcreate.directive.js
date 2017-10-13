@@ -59,7 +59,7 @@ define([], function () {
             }
 
             function bigVerify() {
-                $('.wrong-tip').addClass('hidden');
+                // $('.wrong-tip').addClass('hidden');
 
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._samplelistScope = angular.element('.sample-list').scope();
@@ -87,6 +87,7 @@ define([], function () {
                             caidanAward.playPerson = _drawPrizeScope.intervalHourperson;
                         }
                         caidanAward.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+                        caidanAward.adnames = $('.draw-area').find('.multiselect-selected-text').html() && $('.draw-area').find('.multiselect-selected-text').html().toString();
 
                         if (_drawPrizeScope.myPlus) {
                             caidanAward.condition = _drawPrizeScope.plusval;

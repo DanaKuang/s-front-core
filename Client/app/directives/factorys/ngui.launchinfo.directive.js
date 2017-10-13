@@ -12,7 +12,8 @@ define([], function () {
             tpl: '/launchinfo.tpl.html',
             selectBrandVal: '',
             selectSpecificationVal: '',
-            hours: _.map(Array(24),function(v, i){return i;})
+            hours: _.map(Array(24),function(v, i){return i;}),
+            parentForm: {}
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -110,6 +111,8 @@ define([], function () {
                 var selectDurationEnd = new Date(activity.etime).toLocaleString();
                 scope.endTime = adjustafternoon(selectDurationEnd);
             } else {
+                scope.parentForm = angular.element('.css-form').scope().form;
+                
                 scope.$watch('selectBrandVal', function (n, o, s) {
                     if (n !== '') {
                         var brandListArrObj = {};

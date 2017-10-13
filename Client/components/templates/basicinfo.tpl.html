@@ -104,9 +104,7 @@
 			<div class="col-sm-9">
 				<input type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
 			</div>
-			<div ng-show="parentForm.$submitted || parentForm.activityfile.$touched">
-				<div ng-show="parentForm.activityfile.$error.required" class="wrong-tip">请上传活动图片</div>
-			</div>
+			<div ng-show="parentForm.$submitted || parentForm.activityfile.$touched" class="wrong-tip">请上传活动图片</div>
 		</div>
 		<div class="file-instructions configuration-item form-group col-md-5">
 			<label class="control-label col-sm-2 normfile">文件说明</label>

@@ -122,7 +122,7 @@
 .configuration-item .control-label {
 	position: relative;
 }
-.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .select-duration  .control-label:before {
+.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before {
 	content: '*';
 	position: absolute;
 	right: 0;
@@ -296,10 +296,12 @@ select[multiple].input-sm, textarea.input-sm {
 }
 .launch-relate .configuration-item .wrong-tip {
 	position: absolute;
-	left: 395px;
-	top: 7px;
-	color: red;
-	font-size: 12px;
+  left: 265px;
+  top: -9px;
+  z-index: 3;
+  color: red;
+  font-size: 12px;
+  width: 200px;
 }
 .launch-relate select {
 /*	margin-left: 72px;
