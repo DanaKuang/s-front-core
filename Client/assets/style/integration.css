@@ -146,6 +146,25 @@
     width: 60%;
     height: 28px;
     line-height: 28px;
+    padding-left:6px;
+}
+/*改Bug添加样式*/
+#poolMoney{
+	text-align: center;
+}
+.add_pool_warn{
+    color: #ff3300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 145px;
+    display: none;
+}	
+.add_pool_warn2{
+    color: #ff3300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 165px;
+    display: none;
 }
 .ser_btn, .rest_btn {
     /*width: 112px;*/
@@ -356,7 +375,7 @@
     margin-bottom: 5px;
 }
 
-.form_sec div label {
+.form_sec div .label_title {
     font-size: 15px;
     text-align: right;
     line-height: 35px;
@@ -539,7 +558,7 @@ body{
 .box_cont{
     font-size: 16px;
     text-align: center;
-    padding: 62px 0;
+    padding: 50px 0;
     border-bottom: 1px solid #CECECE;
 }
 .box_cont input{
@@ -646,4 +665,44 @@ body{
 }
 .disabled_color{
     background-color: #EBEBE4;
+}
+.multiselect-container li label{
+    font-size: 15px;
+    color: #515151;
+    width: 180px;
+}
+.multiselect{
+    text-align: left;
+    margin-left: 4px;
+}
+.multiselect b{
+    float: right;
+    position: relative;
+    top: 8px;
+}
+.time_validity{
+    display: none;
+}
+.cami_stock_label{
+    margin-left: 50px;
+}
+.add_pool_warn{
+    color: #ff3300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 145px;
+    visibility : hidden;
+}
+.warn_color{
+    color: #ff3300
+}
+#allPacketName{
+    font-size: 14.7px;
+    height: 28px;
+    width: 60%;
+    line-height: 28px;
+}
+.time_period{
+    display: inline-block;
+    font-size: 15px;
 }

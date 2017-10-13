@@ -84,10 +84,25 @@ define([], function () {
 
 
             //取对应品牌
+//          $model.getBrandList().then(function(res){
+//              if(res.status == 200){
+//                  $scope.brandList = res.data.data;
+//                  $scope.$apply();
+//              }
+//          });
             $model.getBrandList().then(function(res){
                 if(res.status == 200){
                     $scope.brandList = res.data.data;
                     $scope.$apply();
+                    $("select#brand").multiselect({
+                        nonSelectedText: '请选择',
+                        allSelectedText: '全部',
+                        nSelectedText: '已选择',
+                        selectAll:true,
+                        selectAllText: '全部',
+                        selectAllValue: 'all',
+                        buttonWidth: '180px'
+                    });
                 }
             });
             //获取操作动作维度值
@@ -142,13 +157,32 @@ define([], function () {
                 var supplyOption = $("#supply");
                 supplyOption[0].options[0].selected = true;
                 //清空品牌
-                var brandOption = $("#brand");
-                brandOption[0].options[0].selected = true;
+//              var brandOption = $("#brand");
+//              brandOption[0].options[0].selected = true;
+				//清空品牌
+                $scope.selectAllBrands = '';  //清空适用品牌
+                $('[ng-model="selectAllBrands"]').multiselect().val([]).multiselect("refresh");
                 //清空规格
-                var speciftOption = $("#specift");
-                speciftOption[0].options[0].selected = true;
+//              var speciftOption = $("#specift");
+//              speciftOption[0].options[0].selected = true;
+				$scope.selectSpeci = '';     //清空适用规格
+                $('[ng-model="selectSpeci"]').multiselect().val([]).multiselect("refresh");
                 //清空资金
                 $('#capital').val('');
+                //清空积分数量提示
+                $(".entry_capital").hide();
+                //清空积分池名称提示
+                $(".select_JiFenChi").hide();
+                //清空供应商名称提示
+                $(".select_supply").hide();
+                //清空适用品牌提示
+                $(".select_brand").hide();
+                //清空适用规格提示
+                $(".select_specift").hide();
+                //清空库存阀值
+                $("#capital_Ku").val('');
+                //清空凭证文件提示
+                $("#regis_warn").html('');
                 //清空资金转账凭证
                 $('#transfer').val('');
                 $('#transferName').html('');
@@ -156,14 +190,48 @@ define([], function () {
                 $scope.operateItemPacket = null;
             }
             //监听品牌选择信息
-            $('#brand').change(function(){
-                var curBrandValue = $(this).val();
-                $model.getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
-                    if(res.status == 200){
-                        $scope.speciftList = res.data.data;
-                        $scope.$apply();
-                    }
+//          $('#brand').change(function(){
+//              var curBrandValue = $(this).val();
+//              $model.getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
+//                  if(res.status == 200){
+//                      $scope.speciftList = res.data.data;
+//                      $scope.$apply();
+//                  }
+//              });
+//          });
+			$(document).ready(function () {
+                $("select.multi").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    selectAll:true,
+                    selectAllText: '全部',
+                    selectAllValue: 'all',
+                    buttonWidth: '180px'
                 });
+            });
+            //监听品牌选择信息
+            $scope.$watch('selectAllBrands', function(n, o, s) {
+                if (n !== o) {
+                    $scope.selectAllBrands = n;
+                    var brandListArrObj = {};
+                    brandListArrObj.brandCode = n;
+                    $model.getSpeciftByBrand(brandListArrObj).then(function (res) {
+                        if(res.data.ret == "200000"){
+                            $scope.speciftList = res.data.data;
+                            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftList, function(v){
+                                v.label = v.allName;
+                                v.value = v.sn;
+                            }));
+                            $('[ng-model="selectSpeci"]').multiselect('refresh');
+                        }
+                    })
+                }
+            });
+            $scope.$watch('selectSpeci', function (n, o, s) {
+                if (n !== o) {
+                    $scope.selectSpeci = n;
+                }
             });
             //监听搜索框品牌选择信息
             $('#allBrand').change(function(){
@@ -195,19 +263,39 @@ define([], function () {
                     $('.select_supply').hide();
                 }
                 //选择品牌
+//              var brandVal = $('#brand').val();
+//              if(brandVal == ''){
+//                  $('.select_brand').show();
+//                  return;
+//              }else{
+//                  $('.select_brand').hide();
+//              }
+   				//选择品牌
                 var brandVal = $('#brand').val();
-                if(brandVal == ''){
+                //var brandValue = brandObj.val();
+                var brandNames = $('.brand_names .multiselect').attr('title');
+                if(brandVal == '' || brandVal.length == 0){
                     $('.select_brand').show();
                     return;
                 }else{
+                    brandVal = brandVal.join(',');
                     $('.select_brand').hide();
                 }
                 //选择规格
-                var speciftVal = $('#specift').val();
-                if(speciftVal == ''){
+//              var speciftVal = $('#specift').val();
+//              if(speciftVal == ''){
+//                  $('.select_specift').show();
+//                  return;
+//              }else{
+//                  $('.select_specift').hide();
+//              }
+				var speciftVal = $('#specift').val();
+                var speciftNames = $('.specift_names .multiselect').attr('title');
+                if(speciftVal == '' || speciftVal.length == 0){
                     $('.select_specift').show();
                     return;
                 }else{
+                    speciftVal = speciftVal.join(',');
                     $('.select_specift').hide();
                 }
                 //资金
@@ -232,9 +320,11 @@ define([], function () {
                 	name: JiFenChiVal,
                     supplierCode : supplyVal,
                     brandCodes : brandVal,
-                    brandNames : $('#brand').find("option:selected").text(),
+//                  brandNames : $('#brand').find("option:selected").text(),
+					brandNames : brandNames,
                     units : speciftVal,
-                    unitNames: $('#specift').find("option:selected").text(),
+//                  unitNames: $('#specift').find("option:selected").text(),
+                    unitNames: speciftNames,
                     poolNum : capitalVal,
                     poolWarning:$('#capital_Ku').val(),
                     transferVoucherFilename : transferVoucherFilename,
@@ -440,27 +530,78 @@ define([], function () {
                     });
                 }
                 //$scope.editPacketId = itemPacket.id;
+				 var brandValArr = itemPacket.brandCodes.split(',');
+                $('[ng-model="selectAllBrands"]').multiselect().val(brandValArr).multiselect("refresh");
+                $('.brand_names .multiselect').attr('title',itemPacket.brandNames);
 
-
-                $("#brand option").each(function(){
-                    var curBrandOptionObj = $(this)[0];
-                    if(itemPacket.brandCodes == curBrandOptionObj.value){
-                        curBrandOptionObj.selected = true;
-                    }
-                });
+//              $("#brand option").each(function(){
+//                  var curBrandOptionObj = $(this)[0];
+//                  if(itemPacket.brandCodes == curBrandOptionObj.value){
+//                      curBrandOptionObj.selected = true;
+//                  }
+//              });
+				//适用规格
+                if(itemPacket.brandCodes != '' && itemPacket.brandCodes != null){
+                    $model.getSpeciftByBrand({brandCode: itemPacket.brandCodes}).then(function(res){
+                        if(res.data.ret == 200000){
+                            $scope.speciftList = res.data.data;
+                            $scope.$apply();
+                            var speciftValArr = itemPacket.units.split(',');
+                            $('[ng-model="selectSpeci"]').multiselect().val(speciftValArr).multiselect("refresh");
+                            $('.specift_names .multiselect').attr('title',itemPacket.unitNames);
+                        }
+                        /*$("#specift option").each(function(){
+                            var packetSpeciftObj = $(this)[0];
+                            if(itemPacket.units == packetSpeciftObj.value){
+                                packetSpeciftObj.selected = true;
+                            }
+                        });*/
+                    });
+                }
 				$('#JiFenChi').val(itemPacket.name);
                 $('#capital').val(itemPacket.poolNum);
+                $('#packerThresh').val(itemPacket.poolWarning);
                 transferVoucherAttach = itemPacket.transferVoucherAttach;
                 transferVoucherFilename = itemPacket.transferVoucherFilename;
                 $('#transferName').html(itemPacket.transferVoucherFilename);
                 $scope.showTables = !$scope.showTables;
+                
+                
+                
+//              $('#packetName').val(itemPacket.name);
+//              $('#capital').val(itemPacket.moneyPool);
+//              $('#packerThresh').val(itemPacket.poolWarning);
+//              transferVoucherAttach = itemPacket.transferVoucherAttach;
+//              transferVoucherFilename = itemPacket.transferVoucherFilename;
+//              $('#transferName').html(itemPacket.transferVoucherFilename);
+//              $scope.showTables = !$scope.showTables;
             };
             //确定积分增库
             $scope.confirmAddPool = function(operateItemPacket){
+//              var poolMoney = $('#poolMoney').val();
+//              var numStr = poolMoney.toString().indexOf('.');
+//              if(numStr > -1){
+//                  poolMoney = Number(poolMoney.toString().match(/^\d+(?:\.\d{0,2})?/));
+//              }
                 var poolMoney = $('#poolMoney').val();
-                var numStr = poolMoney.toString().indexOf('.');
-                if(numStr > -1){
-                    poolMoney = Number(poolMoney.toString().match(/^\d+(?:\.\d{0,2})?/));
+                var regNum = /^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/;
+                var regNum2 = /^[0-9]*$/;
+                if(regNum.test(poolMoney)){
+                    var numStr = poolMoney.toString().indexOf('.');
+                    if(numStr > -1){
+                        poolMoney = Number(poolMoney.toString().match(/^\d+(?:\.\d{0,2})?/));
+                    }
+                    $('.add_pool_warn').css('display','none');
+                }else{
+                    $('.add_pool_warn').css('display','block');
+                    return;
+                }
+               if(regNum2.test(poolMoney)){
+                	$('.add_pool_warn2').css('display','none');
+                	
+                }else{
+                	$('.add_pool_warn2').css('display','block');
+                	return;
                 }
                 var addPoolObj = {
                     id : operateItemPacket.id,
@@ -495,6 +636,13 @@ define([], function () {
                     $('.supply_stop_box').modal('show');
                 }
 
+            };
+            //关闭积分池增库弹框
+            $scope.cancelAddPacket = function(){
+                $('#poolMoney').val('');
+                $('.add_pool_warn').css('display','none');
+                $('.add_pool_warn2').css('display','none');
+                $('.packet_add_box').modal('hide');
             };
             //积分停用状态
             $scope.stopStatus = function(packetItem){
