@@ -1,10 +1,4 @@
 <div class="launchinfo multi form-horizontal">
-<!-- 	<div class="select-company configuration-item">
-		<select ng-model="selectCompanyVal" value="{{selectCompanyVal}}">
-			<option value="" selected="selected">请先选择供应商</option>
-			<option ng-repeat="item in company" value="{{item.supplierCode}}">{{item.name}}</option>
-		</select>
-	</div> -->
 	<div class="select-brand configuration-item form-group col-md-5">
 		<label class="control-label col-sm-2">选择品牌</label>
 		<div class="col-sm-9">
@@ -24,7 +18,11 @@
 	<div class="select-area configuration-item col-md-5 form-group">
 		<label class="control-label col-sm-2">投放地区</label>
 		<div class="col-sm-9">
-			<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required></select>
+			<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required ng-hide="edit"></select>
+			<div class="btn-group" ng-show="edit">
+				<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false">{{adcodenames}}
+				</button>
+			</div>
 		</div>
 	</div>
 	<div class="select-duration configuration-item form-group col-md-5">

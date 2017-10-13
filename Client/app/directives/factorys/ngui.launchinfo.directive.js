@@ -10,7 +10,6 @@ define([], function () {
     var launchinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/launchinfo.tpl.html',
-            // selectCompanyVal: '',
             selectBrandVal: '',
             selectSpecificationVal: '',
             hours: _.map(Array(24),function(v, i){return i;})
@@ -30,19 +29,13 @@ define([], function () {
 
         function linkFn (scope, element, attrs, ctrl) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours', 'adcodenames']);
 
             // 监视conf变化更新 launchinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours', 'adcodenames']);
             }, true);
-
-            // scope.$watch('selectCompanyVal', function (n, o, s) {
-            //     if (n !== o) {
-            //         scope.$emit('supplierCode', event, {supplierCode: scope.selectCompanyVal});
-            //     }
-            // })
 
             $('input[name="startTime"]').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:00', 
@@ -81,6 +74,7 @@ define([], function () {
             if (that_scope.activityCode) {
                 // 说明从编辑活动过来
                 scope.disabled = true;
+                scope.edit = true;
                 var activity = that_scope.conf.data.activity;
                 scope.activity = activity;
                 
@@ -93,10 +87,13 @@ define([], function () {
                 scope.selectSpecificationVal = selectSpecificationVal.join(',');
 
                 var selectAreaVal = [];
+                var adcodenames = [];
                 activity.activityAreaList.forEach(function(n, index) {
                     selectAreaVal[index] = n.adCode;
+                    adcodenames.push(n.city)
                 })
                 scope.selectAreaVal = selectAreaVal.join(',');
+                scope.adcodenames = adcodenames.join(',');
 
                 scope.whichday = activity.holiday;
                 if (scope.whichday == 3) {

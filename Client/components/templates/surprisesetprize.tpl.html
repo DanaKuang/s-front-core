@@ -335,7 +335,7 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>

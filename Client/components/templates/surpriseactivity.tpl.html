@@ -58,7 +58,11 @@
 						<div class="draw-area configuration-item col-md-5 form-group">
 							<label class="control-label col-sm-2">中奖地区</label>
 							<div class="col-sm-9">
-								<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled"></select>
+								<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled" ng-hide="edit"></select>
+								<div class="btn-group" ng-show="edit">
+									<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false">{{adcodenames}}
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="plus configuration-item col-md-5 form-group">
