@@ -242,14 +242,63 @@ visitManage:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/detail/detail.html'
-account:
+system:
   - httpmethod: 'get'                       # 修改密码
-    routepath: '/view/account/changepwd'
-    description: 'changepwd'
+    routepath: '/view/system/password'
+    description: 'password'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'account/changepwd/changepwd.html'
+    staticfile: 'system/account/password.html'
+  - httpmethod: 'get'                       # 角色管理
+    routepath: '/view/system/role'
+    description: 'role'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/account/role.html'
+  - httpmethod: 'get'                       # 用户管理
+    routepath: '/view/system/user'
+    description: 'user'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/account/user.html'
+  - httpmethod: 'get'                       # 广告位管理
+    routepath: '/view/system/adsense'
+    description: 'adsense'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/advert/adsense.html'
+  - httpmethod: 'get'                       # 广告资源管理
+    routepath: '/view/system/source'
+    description: 'source'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/advert/source.html'
+  - httpmethod: 'get'                       # 用户接口管理
+    routepath: '/view/system/interface'
+    description: 'interface'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/customer/interface.html'
+  - httpmethod: 'get'                       # 用户资源管理
+    routepath: '/view/system/source'
+    description: 'source'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/customer/source.html'
+  - httpmethod: 'get'                       # 风格设置
+    routepath: '/view/system/style'
+    description: 'style'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/style/style.html'
 operateTools:
   - httpmethod: 'get'                       # 盗扫明细查询
     routepath: '/view/home/operateTools/sweepDetail'
