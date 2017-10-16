@@ -931,6 +931,7 @@ input[type="checkbox"]:checked + .checkbox{
   border: 1px solid #A0A0A0;
   font-size: 14px;
   text-align: center;
+  vertical-align: middle !important
 }
 
 .table tr:nth-of-type(even) {
@@ -938,6 +939,12 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .footer_sec {
   margin-top: 21px;
+}
+.footer_sec > .aggree-account, .footer_sec > .visit-account {
+  float:right;
+  line-height:25px;
+  margin-right: 20px;
+  font-size: 14px;
 }
 .total_info {
   font-size: 11px;
