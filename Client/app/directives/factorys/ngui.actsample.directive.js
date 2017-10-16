@@ -10,8 +10,7 @@ define([], function () {
     var nguiActsampleFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/actsample.tpl.html',
-            actsampleList: [],
-            type: ''
+            actsampleList: []
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',

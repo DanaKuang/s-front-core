@@ -234,7 +234,7 @@ define([], function () {
 
           function getLaunchInfo() {
             $(document).ready(function () {
-              $(".ui-search-block.multi .select").multiselect({
+              $("multi .select").multiselect({
                 nonSelectedText: '请选择',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
@@ -416,6 +416,12 @@ define([], function () {
               var basicScope = angular.element('.configuration-image').scope();
               basicScope.attachCode = fileSuccessData.attachCode; //图片编码
               basicScope.accessUrl = fileSuccessData.accessUrl; //图片保存地址    
+              if (basicScope.accessUrl) {
+                $('.configuration-image').find('.wrong-tip').addClass('hidden');
+              } else {
+                $('.configuration-image').find('.wrong-tip').removeClass('hidden');
+              }
+              
             }).fail(function (res) {
               alert('文件上传失败，请重试');
               return

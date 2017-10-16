@@ -1,111 +1,136 @@
 <div>
 	<!-- 编辑状态 -->
-	<div class="basicinfo" ng-if="disabled">
-		<div class="activity-name configuration-item">
-			<label>活动名称</label>
-			<input type="text" name="nameVaule" ng-model="activity.activityName" value="{{nameVaule}}" ng-readonly="disabled" required>
-			<b>*</b>
+	<div class="basicinfo form-horizontal" ng-if="disabled">
+		<div class="activity-name configuration-item form-group col-md-5">
+			<label class="control-label col-sm-2">活动名称</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="text" name="nameVaule" ng-model="activity.activityName" value="{{nameVaule}}" ng-readonly="disabled" required>
+			</div>
 		</div>
-		<div class="activity-intro configuration-item">
-		 	<label for="">活动描述</label>
-			<input type="text" name="descValue" ng-model="activity.activityDec" value="{{descValue}}" ng-readonly="disabled" required>
-			<b>*</b>
+		<div class="activity-intro configuration-item form-group col-md-5">
+		 	<label class="control-label col-sm-2">活动描述</label>
+		 	<div class="col-sm-9">
+		 		<input class="form-control input-sm" type="text" name="descValue" ng-model="activity.activityDec" value="{{descValue}}" ng-readonly="disabled" required>
+		 	</div>
 		</div>
-		<div class="file-instructions configuration-item">
-			<label for="" class="normfile">规范性文件及说明</label>
-			<input type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
+		<div class="file-instructions configuration-item form-group col-md-5">
+			<label class="normfile control-label col-sm-2">规范性文件及说明</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
+			</div>
 		</div>
 		<!-- 彩蛋、节假日没有优先级这一项 -->
-		<div class="activity-priority configuration-item" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
-			<label class="priority">活动优先级</label>
-			<input type="number" name="points" ng-model="activity.idx" value="{{namePriority}}" ng-readonly="disabled" required>
-			<b>*</b>
+		<div class="activity-priority configuration-item form-group col-md-5" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
+			<label class="priority control-label col-sm-2">活动优先级</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="number" name="points" ng-model="activity.idx" value="{{namePriority}}" ng-readonly="disabled" required>
+			</div>
 		</div>
-		<div class="configuration-item activity-desc">
-			<label for="">活动规则</label>
-			<textarea class="border-box" name="introValue" ng-model="activity.activityDoc" value="{{introValue}}" ng-readonly="disabled" required></textarea>
-			<b>*</b>
+		<div class="configuration-item activity-desc form-group col-md-5">
+			<label class="control-label col-sm-2">活动规则</label>
+			<div class="col-sm-9">
+				<textarea class="border-box form-control input-sm" name="introValue" ng-model="activity.activityDoc" value="{{introValue}}" ng-readonly="disabled" required></textarea>
+			</div>
 		</div>
-		<div class="configuration-item configuration-image">
-			<label class="activityfileimage">活动图片</label>
-			<input type="file" name="activityfile" class="uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
-			<b>*</b>
+		<div class="configuration-item configuration-image form-group col-md-5">
+			<label class="activityfileimage control-label col-sm-2">活动图片</label>
+			<div class="col-sm-9">
+				<input style="position:absolute;clip:rect(0 0 0 0);" type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
+				<span>{{accessUrl}}</span>
+			</div>
 		</div>
 		<!-- 节假日 活动链接 -->
-		<div class="url-name configuration-item" ng-if="confUrl === 'holiday'">
-			<label for="">活动链接</label>
-			<input type="url" ng-model="urlVaule" value="{{urlVaule}}" placeholder="请输入活动链接" ng-readonly="disabled">
+		<div class="url-name configuration-item form-group col-md-5" ng-if="confUrl === 'holiday'">
+			<label class="control-label col-sm-2">活动链接</label>
+			<div class="col-sm-9">
+				<input class="input-sm form-control" type="url" ng-model="urlVaule" value="{{urlVaule}}" placeholder="请输入活动链接" ng-readonly="disabled">
+			</div>
 		</div>
 		<!-- 彩蛋、节假日 （弹窗图设置、弹窗文案设置）-->
-		<div class="popimage configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label for="" class="popimagefile">弹窗图设置</label>
-			<input type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+		<div class="popimage configuration-item form-group col-md-5" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+			<label class="popimagefile control-label col-sm-2">弹窗图</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+			</div>
 		</div>
-		<div class="poptext configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label for="" class="poptextfile">弹窗文案设置</label>
-			<input type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+		<div class="poptext configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+			<label class="poptextfile control-label col-sm-2">弹窗文案</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+			</div>
 		</div>
 	</div>
 	<!-- 新建状态 -->
-	<div class="basicinfo" ng-if="!disabled">
-		<div class="activity-name configuration-item">
-			<label>活动名称</label>
-			<input type="text" name="nameVaule" ng-model="nameVaule" value="{{nameVaule}}" placeholder="请输入活动名称，不能少于5个字，最多30个字" minlength="5" maxlength="30" ng-readonly="disabled" required>
-			<b>*</b>
+	<div class="basicinfo form-horizontal" ng-if="!disabled">
+		<div class="activity-name configuration-item form-group col-md-5">
+			<label class="control-label col-sm-2">活动名称</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="text" name="nameVaule" ng-model="nameVaule" placeholder="请输入活动名称，不能少于5个字，最多30个字" minlength="5" maxlength="30" ng-readonly="disabled" required>
+			</div>
 			<div ng-show="parentForm.$submitted || parentForm.nameVaule.$touched">
 				<div ng-show="parentForm.nameVaule.$error.required || parentForm.nameVaule.$error.minlength || parentForm.nameValue.$error.maxlength" class="wrong-tip">请输入活动名称，5~30字</div>
 			</div>
 		</div>
-		<div class="activity-intro configuration-item">
-		 	<label for="">活动描述</label>
-			<input type="text" name="descValue" ng-model="descValue" value="{{descValue}}" placeholder="请输入活动描述，50个字以内" minlength="1" maxlength="50" ng-readonly="disabled" required>
-			<b>*</b>
+		<div class="activity-intro configuration-item form-group col-md-5">
+		 	<label class="control-label col-sm-2">活动描述</label>
+		 	<div class="col-sm-9">
+		 		<input class="form-control input-sm" type="text" name="descValue" ng-model="descValue" value="{{descValue}}" placeholder="请输入活动描述，50个字以内" minlength="1" maxlength="50" ng-readonly="disabled" required>
+		 	</div>
 			<div ng-show="parentForm.$submitted || parentForm.descValue.$touched">
 				<div ng-show="parentForm.descValue.$error.required || parentForm.descValue.$error.minlength || parentForm.descValue.$error.maxlength" class="wrong-tip">请输入活动描述，1~50字</div>
 			</div>
 		</div>
-		<div class="file-instructions configuration-item">
-			<label for="" class="normfile">规范性文件及说明</label>
-			<input type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
-		</div>
 		<!-- 彩蛋、节假日没有优先级这一项 -->
-		<div class="activity-priority configuration-item" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
-			<label class="priority">活动优先级</label>
-			<input type="number" name="points" min="1" max="500" ng-model="namePriority" value="{{namePriority}}" placeholder="请指明活动优先级，用数字表示，最大值为500" ng-readonly="disabled" required>
-			<b>*</b>
+		<div class="activity-priority configuration-item form-group col-md-5" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
+			<label class="control-label col-sm-2 priority">优先级</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="text" name="points" min="1" max="500" ng-model="namePriority" value="{{namePriority}}" placeholder="请指明活动优先级，用数字表示，最大值为500" ng-readonly="disabled" required>
+			</div>
 			<div ng-show="parentForm.$submitted || parentForm.points.$touched">
 				<div ng-show="parentForm.points.$error.required || parentForm.points.$error.min || parentForm.points.$error.max" class="wrong-tip">请用数字标明优先级，不得大于500</div>
 			</div>
 		</div>
-		<div class="configuration-item activity-desc">
-			<label for="">活动规则</label>
-			<textarea class="border-box" name="introValue" ng-model="introValue" value="{{introValue}}" placeholder="请输入活动规则" ng-readonly="disabled" minlength="5" maxlength="300" required></textarea>
-			<b>*</b>
+		<div class="configuration-item activity-desc form-group col-md-5">
+			<label class="control-label col-sm-2">活动规则</label>
+			<div class="col-sm-9">
+				<textarea class="border-box form-control input-sm" name="introValue" ng-model="introValue" value="{{introValue}}" placeholder="请输入活动规则" ng-readonly="disabled" minlength="5" maxlength="300" required></textarea>
+			</div>
 			<div ng-show="parentForm.$submitted || parentForm.introValue.$touched">
 				<div ng-show="parentForm.introValue.$error.required || parentForm.introValue.$error.minlength || parentForm.introValue.$error.maxlength" class="wrong-tip">请输入活动规则，5~100字</div>
 			</div>
 		</div>
-		<div class="configuration-item configuration-image">
-			<label for="" class="activityfileimage">活动图片</label>
-			<input type="file" name="activityfile" class="uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
-			<b>*</b>
-			<div ng-show="parentForm.$submitted || parentForm.activityfile.$touched">
-				<div ng-show="parentForm.activityfile.$error.required" class="wrong-tip">请上传活动图片</div>
+		<div class="configuration-item configuration-image form-group col-md-5">
+			<label class="activityfileimage col-sm-2 control-label">活动图片</label>
+			<div class="col-sm-9">
+				<input type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
+			</div>
+			<div ng-show="parentForm.$submitted || parentForm.activityfile.$touched" class="wrong-tip">请上传活动图片</div>
+		</div>
+		<div class="file-instructions configuration-item form-group col-md-5">
+			<label class="control-label col-sm-2 normfile">文件说明</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
 			</div>
 		</div>
 		<!-- 节假日 活动链接 -->
-		<div class="url-name configuration-item" ng-if="confUrl === 'holiday'">
-			<label for="">活动链接</label>
-			<input type="url" ng-model="urlVaule" value="{{urlVaule}}" placeholder="请输入活动链接" ng-readonly="disabled">
+		<div class="url-name configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday'">
+			<label class="control-label col-sm-2">活动链接</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="url" ng-model="urlVaule" value="{{urlVaule}}" placeholder="请输入活动链接" ng-readonly="disabled">
+			</div>
 		</div>
 		<!-- 彩蛋、节假日 （弹窗图设置、弹窗文案设置）-->
-		<div class="popimage configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label for="" class="popimagefile">弹窗图设置</label>
-			<input type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+		<div class="popimage configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+			<label class="popimagefile control-label col-sm-2">弹窗图</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
+			</div>
 		</div>
-		<div class="poptext configuration-item" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label for="" class="poptextfile">弹窗文案设置</label>
-			<input type="file" onchange="angular.element(this).scope().change()" ng-disabled="disabled">
+		<div class="poptext configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
+			<label class="poptextfile control-label col-sm-2">弹窗文案</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="file" onchange="angular.element(this).scope().change()" ng-disabled="disabled">
+			</div>
 		</div>
 	</div>
 </div>

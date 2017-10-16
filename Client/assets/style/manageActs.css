@@ -90,7 +90,7 @@
 }
 /*新建活动 操作界面*/
 .config-item {
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
 }
 .configuration {
 	width: 60%;
@@ -112,13 +112,53 @@
 	margin-bottom: 15px;
 	width: 100%;
 }
-.basicinfo .configuration-item b {
+/*.basicinfo .configuration-item b {
 	position: absolute;
 	left: 110px;
   top: 5px;
   color: red;
   font-size: 18px;
+}*/
+.configuration-item .control-label {
+	position: relative;
 }
+.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .select-duration .control-label:before {
+	content: '*';
+	position: absolute;
+	right: 0;
+	top: 5px;
+	color: red;
+	font-size: 20px;
+	font-weight: bold;
+}
+.select-duration .col-sm-1 {
+	padding: 7px 0 0;
+	margin-bottom: 0;
+	text-align: center; 
+}
+.select-duration .col-sm-5 {
+	padding-right: 0;
+}
+.select-duration-person .col-sm-1, .select-duration-person .col-sm-4 {
+	margin-bottom: 0;
+	padding: 7px 0 0;
+	text-align: center; 
+}
+.select-duration-person .paddingright {
+	padding-right: 0;
+}
+.select-duration-person .col-sm-3 {
+	padding-left: 0;
+	padding-right: 0;
+}
+.select-duration .col-sm-9 {
+	padding-left: 0;
+}
+select[multiple].input-sm, textarea.input-sm {
+	height: 30px;
+	line-height: 30px;
+}
+
 .wrong-tip {
 	color: red;
 	font-size: 12px;
@@ -128,52 +168,46 @@
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
   background: #fff;
 }
+.basicinfo, .participateinfo {
+	overflow: hidden;
+}
+.prize-relate, .launch-relate {
+	clear: both;
+}
+.select-duration .col-sm-3 {
+	padding-right: 0;
+}
 .basicinfo .configuration-item .wrong-tip {
   position: absolute;
 	left: 395px;
 	top: 7px;
 }
-.basicinfo label {
+/*.basicinfo label {
 	position: absolute;
 	top: 6px;
 	left: 60px;
 	color: #707478;
 	font-weight: normal;
-}
+}*/
 .basicinfo .configuration-image b {
 	top: 0;
 }
-.basic .normfile {
-	left: 14px;
-	top: 1px;
+.configuration-image span {
+	width: 400px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+  color: indianred;
+  position: absolute;
+  top: 6px;
 }
 .basic .activityfileimage {
 	top: 1px;
 }
-.basic .priority {
-	left: 49px;
-}
-.basic .popimagefile {
-	left: 48px;
-	top: 1px;
-}
-.basic .poptextfile {
-	left: 37px;
-	top: 1px;
-}
-.participate-relate {
-	margin-top: 60px;
-}
-.basic input, .participate-relate input {
-	margin-left: 130px;
-}
 
-.basic input[type="text"], .basic input[type="number"], .basic input[type="url"], .participate-relate input[type="number"] {
-	width: 400px;
-}
 
 .basicinfo textarea {
-	margin-left: 130px;
+	/*margin-left: 130px;*/
 	resize: none;
 	border-width: 1px;
   border-style: solid;
@@ -181,7 +215,7 @@
   width: 400px;
   height: 100px;
   margin-top: 6px;
-  padding: 4px 6px;
+  padding: 6px;
 }
 
 .configuration-item:before {
@@ -189,10 +223,6 @@
 	position: absolute;
 }
 
-.draw-prize select {
-	margin-left: 72px;
-	width: 453px;
-}
 .draw-prize .configuration-item small {
   position: absolute;
   left: 55px;
@@ -210,55 +240,32 @@
   font-size: 12px;
   font-weight: normal;
 }
-.draw-prize .select-duration:before {
-	content: '中奖时间';
-	top: 6px;
-  left: 5px;
+
+.btn-group {
+	width: 100%;
 }
-.draw-prize .draw-area:before {
-	content: '中奖地区';
-	top: 6px;
-  left: 5px;
+.btn-group .multiselect {
+	width: 100%;
 }
-.draw-prize .select-duration-person:before {
-	content: '间隔时间';
-	top: 6px;
-  left: 5px;
-}
-.draw-prize .draw-area button.dropdown-toggle {
-	width: 453px!important;
-	padding: 5px;
-  background: transparent;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(210, 210, 210);
-  border-radius: 0px;
-  height: 29px;
-  text-align: left;
-}
-.draw-prize .btn-group {
-	margin-left: 72px;
-}
-.draw-prize .plus:before {
-	content: '附加条件';
-	top: 6px;
-  left: 5px;
-}
-.draw-prize .plus input[type="checkbox"] {
-	margin-left: 72px;
-  margin-top: 8px;
-}
+
 .draw-prize .plus select {
 	margin-top: 5px;
 }
-.draw-prize .chance:before {
-	content: '中奖概率';
-	top: 6px;
-  left: 5px;
+.draw-prize .plus .chance {
+	position: relative;
+	clear: both;
 }
-.draw-prize .chance input {
-	margin-left: 72px;
-	width: 445px;
+.draw-prize .plus .chance:after {
+	content: "%";
+	position: absolute;
+	right: 5px;
+	top: 7px;
+}
+.draw-prize .plus .col-sm-2 {
+	padding-left: 0;
+}
+.draw-prize .plus .checkbox {
+	padding-top: 0;
 }
 .activity-priority:after {
 	content: '提示：数值越大活动越靠前显示，最小数值为1';
@@ -271,21 +278,6 @@
   -moz-transform: scale(0.85);
   -ms-transform: scale(0.85);
   transform: scale(0.85);
-}
-.participate-relate .configuration-item:nth-of-type(1):before {
-	content: '参与消耗积分';
-	top: 6px;
-	left: 40px
-}
-.participate-relate .configuration-item:nth-of-type(2):before {
-	content: '每人每天参与总次数';
-	top: 6px;
-	left: 5px;
-}
-.participate-relate .configuration-item:nth-of-type(3):before {
-	content: '每人可参与总次数';
-	top: 6px;
-	left: 17px;
 }
 
 .launch-relate {
@@ -304,47 +296,22 @@
 }
 .launch-relate .configuration-item .wrong-tip {
 	position: absolute;
-	left: 395px;
-	top: 7px;
-	color: red;
-	font-size: 12px;
+  left: 265px;
+  top: -9px;
+  z-index: 3;
+  color: red;
+  font-size: 12px;
+  width: 200px;
 }
 .launch-relate select {
-	margin-left: 72px;
-	width: 453px;
+/*	margin-left: 72px;
+	width: 453px;*/
 }
 .launch-relate select.hours, .draw-prize select.hours {
 	margin-left: 0;
 	width: 60px;
 }
-.draw-prize select.hours:first-of-type {
-	margin-left: 72px;
-}
-/*.launch-relate .configuration-item:nth-of-type(1):before {
-	content: '选择供应商';
-	top: 6px;
-	left: -6px
-}*/
-.launch-relate .configuration-item:nth-of-type(1):before {
-	content: '选择品牌';
-	top: 6px;
-	left: 5px;
-}
-.launch-relate .configuration-item:nth-of-type(2):before {
-	content: '选择规格';
-	top: 5px;
-	left: 5px;
-}
-.launch-relate .configuration-item:nth-of-type(3):before {
-	content: '地区';
-	top: 6px;
-	left: 27px;
-}
-.launch-relate .configuration-item:nth-of-type(4):before {
-	content: '活动时段';
-	top: 6px;
-	left: 5px;
-}
+
 .surprise-pop .launch-relate .configuration-item:nth-of-type(6):before {
 	content: '中奖条件';
 	top: 6px;
@@ -383,17 +350,7 @@
 .pop-image-config input, .pop-text-config input {
 	margin-left: 72px;
 }
-.select-duration .form_datetime:first-of-type {
-	margin-left: 72px;
-	margin-right: 5px;
-}
-.select-duration .form_datetime:last-of-type {
-	margin-left: 10px;
-	margin-right: 5px;
-}
-.select-duration .form_datetime {
-	width: 203px!important;
-}
+
 
 input[type="checkbox"] {
 	margin-right: 6px!important;
@@ -536,9 +493,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	color: #707478;
 	font-weight: normal;
 }
-.remark {
-	margin-left: 72px;
-}
+
 .present-integral {
 	margin-top: 10px;
 	margin-left: 64px;
@@ -577,6 +532,17 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	z-index: -1;
 	opacity: 0;
 	width: 10px;
+}
+.choose-list .show-chosen {
+	position: absolute;
+  left: 80px;
+  top: 7px;
+  width: 250px;
+  color: indianred;
+}
+.sendscore .show-chosen {
+	left: -10px;
+  top: 32px;
 }
 .number-wrap {
 	overflow: hidden;
@@ -628,7 +594,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	width: 80px;
 	height: 80px;
 	border: 1px solid #d2d2d2;
-	background: #eee;
+	/*background: #eee;*/
 }
 .prize-img-preview-wrap .gift-delete {
 	position: absolute;
@@ -727,9 +693,6 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 /*multi-select */
-.launch-relate .btn-group {
-	margin-left: 72px;
-}
 
 .launch-relate .btn-group button, .launch-relate .btn-group ul, .operation .btn-group button, .operation .btn-group ul {
 	/*width: 453px;*/
@@ -822,7 +785,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	display: block;
 	margin-left: 70px;
 	margin-top: -28px;
-	max-height: 300px;
+	max-height: 200px;
 }
 
 /*投放设置 单选*/
