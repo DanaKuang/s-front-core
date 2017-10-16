@@ -180,6 +180,8 @@ define([], function () {
                 //回访数量
                 "feedBack": function (params) {
                     $model.$feedBack(params).then(function (res) {
+                        $scope.count = res.data.Count;
+                        $scope.$apply();
                         allpage = Math.ceil(res.data.Count / 10);
                         global.createPage();
                     })
