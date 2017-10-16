@@ -1,0 +1,28 @@
+{
+    "errorModal": {
+        "modalid": "errorModalId",
+        "header": {
+            "title": "修改密码",
+            "icon": "icon-close",
+            "cls": "text-header"
+        },
+        "body": {
+            "html": ""
+        },
+        "footer": false,
+        "style": ""
+    },
+    "successModal": {
+        "modalid": "successModalId",
+        "header": {
+            "title": "修改密码",
+            "icon": "icon-close",
+            "cls": "text-header"
+        },
+        "body": {
+            "html": "密码修改成功,请退出重新登陆!"
+        },
+        "footer": false,
+        "style": ""
+    }
+}
