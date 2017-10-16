@@ -46,7 +46,7 @@ define([], function () {
             scope.cancelActivityBuild = function() {
                 var r = confirm('确定要取消吗？')
                 if (r == true) {
-                    location.reload();
+                    scope.$emit('popback', event, {}); 
                 } else {
                     return
                 }

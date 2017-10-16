@@ -232,16 +232,23 @@ define([], function () {
             })
           })
 
+          // 点击返回时
+          $scope.$on('popback', function (e,v,f) {
+            $model.getTemplateSpecific(f).then(function(res){
+              $scope.allConfigTemplateConf = null;       
+            })
+          })
+
           function getLaunchInfo() {
             $(document).ready(function () {
-              $("multi .select").multiselect({
+              $('.multi .select').multiselect({
                 nonSelectedText: '请选择',
                 nSelectedText: '已选择',
                 includeSelectAllOption: true,
                 selectAllText: '全部',
                 allSelectedText: '全选',
                 enableFiltering: true,
-                buttonWidth: '453px',
+                buttonWidth: '100%',
                 maxHeight: '500px',
                 numberDisplayed: 1
               });
@@ -542,7 +549,17 @@ define([], function () {
                   backdrop: false
                 });
                 $scope.iknow = function (e) {
-                  location.reload();
+                  $model.getTemplateSpecific(f).then(function(res){
+                    $scope.allConfigTemplateConf = null;       
+                  })
+                  // 还需要再次请求list
+                  $model.getActivityList({
+                    currentPageNumber: 1,
+                    pageSize: 10
+                  }).then(function(res) {
+                    $scope.activitylistConf = res.data;
+                    $scope.paginationConf = res.data;
+                  })
                 }
               } else {
                 alert(res.data.message);

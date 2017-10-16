@@ -722,8 +722,6 @@ define([], function () {
                 });
             }
 
-
-
         }]
     };
     return manageCtrl;

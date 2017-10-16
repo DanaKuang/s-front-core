@@ -4,7 +4,7 @@
 		<sa-popback></sa-popback>
 	</div>
 	<div class="ui-panel-box panel border-box">
-		<form name="form" novalidate class="pop-inner">
+		<form name="form" novalidate class="pop-inner" role="form" ng-submit="submitForm(form.$valid)">
 			<!-- 配置 -->
 			<div class="configuration css-form col-md-8 col-lg-8">
 				<!-- 基本信息 -->
