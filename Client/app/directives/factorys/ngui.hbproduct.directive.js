@@ -68,7 +68,6 @@ define([], function () {
                 $(osJSobject).find('.radio-res').not('.hidden').find('.show-chosen').html('（已选择：' + item.name + '）');
                 $('.modal-content .close').trigger('click');
             }
-
         }
         return defineObj;
     }

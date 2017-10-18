@@ -72,13 +72,7 @@ define([], function () {
                     pageSize: scope.size
                 };
 
-                // 页码点击事件触发的时候。因为在同一个模板里，目前有2处用到了这个指令，所以要区分
-                // if (scope.size < 15) {
-                //     scope.$emit('frominnerpagechange', event, scope.activity_page_data )
-                // } else {
-                    scope.$emit('frompagechange', event, scope.activity_page_data);
-                // }
-                
+                scope.$emit('frompagechange', event, scope.activity_page_data);
             }
 
             scope.prev = function (e, n) {

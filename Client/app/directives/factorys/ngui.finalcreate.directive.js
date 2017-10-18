@@ -338,8 +338,8 @@ define([], function () {
                     activityDoc: scopeVariable._basicScope.introValue || '', //活动说明
                     activityEntrance: scopeVariable._basicScope.accessUrl || '', //accessUrl
                     activityEntranceAttach: scopeVariable._basicScope.attachCode || '', // attachCode
-                    idx: scopeVariable._basicScope.namePriority || 1,
-                    name: scopeVariable._basicScope.nameVaule || '',
+                    idx: scopeVariable._basicScope.points || 1,
+                    name: scopeVariable._basicScope.nameValue || '',
                     attachUrl: '',
                     score: scopeVariable._participateScope.nameIntegral || 0,
                     limitPer: scopeVariable._participateScope.namePerPersonDay || 0,
