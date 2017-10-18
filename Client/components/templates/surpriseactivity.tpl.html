@@ -66,21 +66,21 @@
 							</div>
 						</div>
 						<div class="plus configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">附加条件</label>
+							<label class="control-label col-sm-2">中奖概率</label>
 							<div class="col-sm-9">
-								<div class="checkbox col-sm-2">
+								<!-- <div class="checkbox col-sm-2">
 								  <label class="checkbox-inline">
 								    <input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled">设置
 								  </label>
-								</div>
-								<div>
+								</div> -->
+							<!-- 	<div>
 									<select class="form-control input-sm" name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
 										<option value="">请选择附加条件</option>
 										<option value="1">第8个人中奖</option>
 										<option value="2">第88个人中奖</option>
 									</select>
-								</div>
-								<div class="chance configuration-item" ng-show="!myPlus">
+								</div> -->
+								<div class="chance configuration-item">
 									<input class="form-control input-sm" type="text" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-blur="parseFloat($event)" ng-disabled="disabled">
 								</div>
 							</div>

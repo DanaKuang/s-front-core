@@ -87,7 +87,7 @@
 				<input class="form-control input-sm" type="text" name="points" ng-pattern="/^(?:[1-9]\d?|[1-4]\d{2}|500)$/" ng-model="points" placeholder="请指明活动优先级，用数字表示，最大值为500" required>
 			</div>
 			<div ng-show="parentForm.$submitted || parentForm.points.$touched">
-				<div ng-show="parentForm.points.$dirty && parentForm.points.$invalid " class="wrong-tip">请用数字标明优先级，不得大于500</div>
+				<div ng-show="parentForm.points.$error.required || parentForm.points.$invalid" class="wrong-tip">请用数字标明优先级，不得大于500</div>
 			</div>
 		</div>
 		<div class="configuration-item activity-desc form-group col-md-5">
@@ -96,13 +96,13 @@
 				<textarea class="border-box form-control input-sm" name="introValue" ng-model="introValue" placeholder="请输入活动规则" ng-readonly="disabled" minlength="5" maxlength="300" required></textarea>
 			</div>
 			<div ng-show="parentForm.$submitted || parentForm.introValue.$touched">
-				<div ng-show="parentForm.introValue.$error.required || parentForm.introValue.$error.minlength || parentForm.introValue.$error.maxlength" class="wrong-tip">请输入活动规则，5~100字</div>
+				<div ng-show="parentForm.introValue.$error.required || parentForm.introValue.$error.minlength || parentForm.introValue.$error.maxlength" class="wrong-tip">请输入活动规则，5~300字</div>
 			</div>
 		</div>
 		<div class="configuration-item configuration-image form-group col-md-5">
 			<label class="activityfileimage col-sm-2 control-label">活动图片</label>
 			<div class="col-sm-9">
-				<input type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
+				<input type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" accept="image/*" ng-disabled="disabled" required>
 			</div>
 			<div class="wrong-tip hidden">请上传活动图片</div>
 		</div>
