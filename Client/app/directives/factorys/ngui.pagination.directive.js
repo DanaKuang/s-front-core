@@ -72,10 +72,17 @@ define([], function () {
                     pageSize: scope.size
                 };
 
-                if (scope.size < 10) {
-                    // 选择奖池的翻页
-                    scope.$emit('frominnerpagechange', event, scope.activity_page_data)
+                if (scope.size == 4) {
+                    // 礼品奖池的翻页
+                    scope.$emit('fromgiftpagechange', event, scope.activity_page_data)
+                } else if (scope.size == 5) {
+                    // 红包奖池翻页
+                    scope.$emit('fromhbpagechange', event, scope.activity_page_data)
+                } else if (scope.size == 6) {
+                    // 积分奖池翻页
+                    scope.$emit('fromjfpagechange', event, scope.activity_page_data)
                 } else {
+                    // 其他
                     scope.$emit('frompagechange', event, scope.activity_page_data);
                 }
             }

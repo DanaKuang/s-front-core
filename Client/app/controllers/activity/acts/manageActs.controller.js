@@ -145,7 +145,7 @@ define([], function () {
               areaCodes: $scope.allarea || [],
               keys: $scope.keysval || '',
               currentPageNumber: 1,
-              pageSize: 15,
+              pageSize: 10,
               stime: $scope.startTime || '',
               etime: $scope.endTime || ''
             };
@@ -167,7 +167,7 @@ define([], function () {
             $scope.endTime = '';
             $model.getActivityList({
               currentPageNumber:1, 
-              pageSize: 15
+              pageSize: 10
             }).then(function(res) {
               $('[ng-model="selectAllBrands"]').multiselect('refresh');
               $('[ng-model="selectSpeci"]').multiselect('refresh');
@@ -201,7 +201,7 @@ define([], function () {
           function afterWords() {
             var data = {
               currentPageNumber: 1,
-              pageSize: 15
+              pageSize: 10
             }
             $model.getActivityList(data).then(function(res) {
               $scope.activitylistConf = res.data;
@@ -454,7 +454,7 @@ define([], function () {
             delete fromActivityConfigtoChooseProduct.scope;
             var data = {
               currentPageNumber: 1, 
-              pageSize: 5
+              pageSize: 4
             }
             var target = Object.assign({}, f, data);
 
@@ -464,7 +464,7 @@ define([], function () {
             })
           })
           // 礼品列表翻页
-          $scope.$on('frominnerpagechange', function(e, v, f) {
+          $scope.$on('fromgiftpagechange', function(e, v, f) {
             delete fromActivityConfigtoChooseProduct.scope;
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
             $model.getProductChooseList(newObj).then(function (res) {
@@ -488,7 +488,7 @@ define([], function () {
             })
           })
           // 红包列表翻页
-          $scope.$on('frominnerpagechange', function(e, v, f) {
+          $scope.$on('fromhbpagechange', function(e, v, f) {
             delete fromActivityConfigtoChooseHb.scope;
             var newObj = Object.assign(fromActivityConfigtoChooseHb, f);
             $model.getProductChooseList(newObj).then(function (res) {
@@ -503,7 +503,7 @@ define([], function () {
             fromActivityConfigtoChooseJF = f;
             var data = {
               currentPageNumber: 1, 
-              pageSize: 5
+              pageSize: 6
             }
             var target = Object.assign({}, f, data);
             $model.getProductChooseList(target).then(function (res) {
@@ -512,7 +512,7 @@ define([], function () {
             })
           })
           // 积分池列表翻页
-          $scope.$on('frominnerpagechange', function(e, v, f) {
+          $scope.$on('fromjfpagechange', function(e, v, f) {
             delete fromActivityConfigtoChooseProduct.scope;
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
             $model.getProductChooseList(newObj).then(function (res) {
