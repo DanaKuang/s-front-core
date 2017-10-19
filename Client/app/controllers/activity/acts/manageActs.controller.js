@@ -513,8 +513,8 @@ define([], function () {
           })
           // 积分池列表翻页
           $scope.$on('fromjfpagechange', function(e, v, f) {
-            delete fromActivityConfigtoChooseProduct.scope;
-            var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
+            delete fromActivityConfigtoChooseJF.scope;
+            var newObj = Object.assign(fromActivityConfigtoChooseJF, f);
             $model.getProductChooseList(newObj).then(function (res) {
               $scope.jfproductConf = res.data;
               $scope.paginationjfInnerConf = res.data;
