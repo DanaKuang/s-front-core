@@ -72,7 +72,12 @@ define([], function () {
                     pageSize: scope.size
                 };
 
-                scope.$emit('frompagechange', event, scope.activity_page_data);
+                if (scope.size < 10) {
+                    // 选择奖池的翻页
+                    scope.$emit('frominnerpagechange', event, scope.activity_page_data)
+                } else {
+                    scope.$emit('frompagechange', event, scope.activity_page_data);
+                }
             }
 
             scope.prev = function (e, n) {

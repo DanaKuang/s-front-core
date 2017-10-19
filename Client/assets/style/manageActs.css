@@ -131,6 +131,9 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+.configuration-image .wrong-tip {
+	left: 290px;
+}
 .select-duration .col-sm-1 {
 	padding: 7px 0 0;
 	margin-bottom: 0;

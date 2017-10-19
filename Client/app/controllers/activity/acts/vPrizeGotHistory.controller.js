@@ -46,9 +46,20 @@ define([], function () {
 
       // 获取领奖明细
       $scope.$on('frompagechange', function (e, v, f) {
-      	var realthing = {realThing: 0};
-      	var data = Object.assign(f, realthing);
-        $model.getprizelist(data).then(function(res) {
+      	var data = {
+          orderCode: $scope.orderCode || '',
+          brandCodeArr: $scope.selectAllBrands || [],
+          unitArr: $scope.selectSpeci || [],
+          areaCodes: $scope.allarea || [],
+          keys: $scope.keysval || '',
+          realThing: 0,
+          status: $scope.statusVal || '', //活动状态
+          orderStatus: $scope.orderstatus || '',
+          stime: $scope.startTime || '',
+          etime: $scope.endTime || ''
+        };
+        var target = Object.assign({}, f, data);
+        $model.getprizelist(target).then(function(res) {
           $scope.vprizegotlistConf = res.data;
           $scope.paginationConf = res.data;
         })

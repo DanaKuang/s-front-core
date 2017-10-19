@@ -55,7 +55,18 @@ define([], function () {
       		
           // 获取活动列表
           $scope.$on('frompagechange', function (e,v, f) {
-            $model.getActivityList(f).then(function(res) {
+            var data = {
+              activityForm: $scope.categoryVal || '',
+              status: $scope.statusVal || '',
+              brands: $scope.selectAllBrands || [],
+              sns: $scope.selectSpeci || [],
+              areaCodes: $scope.allarea || [],
+              keys: $scope.keysval || '',
+              stime: $scope.startTime || '',
+              etime: $scope.endTime || ''
+            };
+            var target = Object.assign({}, f, data);
+            $model.getActivityList(target).then(function(res) {
               $scope.activitylistConf = res.data;
               $scope.paginationConf = res.data;
             })
@@ -441,7 +452,22 @@ define([], function () {
             fromActivityConfigtoChooseProduct = f;
             globalVariable.show_product_list_scope = fromActivityConfigtoChooseProduct.scope;
             delete fromActivityConfigtoChooseProduct.scope;
-            $model.getProductChooseList(f).then(function (res) {
+            var data = {
+              currentPageNumber: 1, 
+              pageSize: 5
+            }
+            var target = Object.assign({}, f, data);
+
+            $model.getProductChooseList(target).then(function (res) {
+              $scope.realproductConf = res.data;
+              $scope.paginationInnerConf = res.data;
+            })
+          })
+          // 礼品列表翻页
+          $scope.$on('frominnerpagechange', function(e, v, f) {
+            delete fromActivityConfigtoChooseProduct.scope;
+            var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
+            $model.getProductChooseList(newObj).then(function (res) {
               $scope.realproductConf = res.data;
               $scope.paginationInnerConf = res.data;
             })
@@ -451,7 +477,21 @@ define([], function () {
           var fromActivityConfigtoChooseHb = {};
           $scope.$on('fromActivityConfigtoChooseHb', function (e, v, f) {
             fromActivityConfigtoChooseHb = f;
-            $model.getProductChooseList(f).then(function (res) {
+            var data = {
+              currentPageNumber: 1, 
+              pageSize: 5
+            }
+            var target = Object.assign({}, f, data);
+            $model.getProductChooseList(target).then(function (res) {
+              $scope.hbproductConf = res.data;
+              $scope.paginationhbInnerConf = res.data;
+            })
+          })
+          // 红包列表翻页
+          $scope.$on('frominnerpagechange', function(e, v, f) {
+            delete fromActivityConfigtoChooseHb.scope;
+            var newObj = Object.assign(fromActivityConfigtoChooseHb, f);
+            $model.getProductChooseList(newObj).then(function (res) {
               $scope.hbproductConf = res.data;
               $scope.paginationhbInnerConf = res.data;
             })
@@ -461,19 +501,23 @@ define([], function () {
           var fromActivityConfigtoChooseJF = {};
           $scope.$on('fromActivityConfigtoChooseJF', function (e, v, f) {
             fromActivityConfigtoChooseJF = f;
-            $model.getProductChooseList(f).then(function (res) {
+            var data = {
+              currentPageNumber: 1, 
+              pageSize: 5
+            }
+            var target = Object.assign({}, f, data);
+            $model.getProductChooseList(target).then(function (res) {
               $scope.jfproductConf = res.data;
               $scope.paginationjfInnerConf = res.data;
             })
           })
-
-          // 礼品列表选择翻页,红包选择翻页
+          // 积分池列表翻页
           $scope.$on('frominnerpagechange', function(e, v, f) {
             delete fromActivityConfigtoChooseProduct.scope;
             var newObj = Object.assign(fromActivityConfigtoChooseProduct, f);
             $model.getProductChooseList(newObj).then(function (res) {
-              $scope.realproductConf = res.data;
-              $scope.paginationInnerConf = res.data;
+              $scope.jfproductConf = res.data;
+              $scope.paginationjfInnerConf = res.data;
             })
           })
 

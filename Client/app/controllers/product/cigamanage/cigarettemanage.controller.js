@@ -54,7 +54,16 @@ define([], function () {
         }
 
         $scope.$on('frompagechange', function (e,v,f) {
-          getList(f)
+          var data = {
+            sn: $scope.sn ? $scope.sn.join(',') : '',
+            brandCode: $scope.brandCode ? $scope.brandCode.join(',') : '',
+            grade: $scope.grade ? $scope.grade.join(',') : '',
+            pack: $scope.pack ? $scope.pack.join(',') : '',
+            minPrice: $scope.minprice || '',
+            maxPrice: $scope.maxprice || ''
+          }
+          var target = Object.assign({}, f, data)
+          getList(target)
         })
 
         // 搜索
