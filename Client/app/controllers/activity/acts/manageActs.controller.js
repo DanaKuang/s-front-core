@@ -561,7 +561,7 @@ define([], function () {
           })
         }
 
-        // 多个礼品
+        // 多个礼品显示配置
         $scope.$on('fromrealproductchoose', function (e,v,f) {
           var giftpackScope = globalVariable.show_product_list_scope;
           if (f) {
@@ -588,14 +588,7 @@ define([], function () {
                 $model.getTemplateSpecific(f).then(function(res){
                   $scope.allConfigTemplateConf = null;       
                 })
-                // 还需要再次请求list
-                $model.getActivityList({
-                  currentPageNumber: 1,
-                  pageSize: 10
-                }).then(function(res) {
-                  $scope.activitylistConf = res.data;
-                  $scope.paginationConf = res.data;
-                })
+                getList();
               }
             } else {
               alert(res.data.message);

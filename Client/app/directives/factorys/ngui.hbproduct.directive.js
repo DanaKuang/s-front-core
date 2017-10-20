@@ -53,7 +53,7 @@ define([], function () {
                 var item = this.item;
                 var setprizeScope = angular.element('.draw-prize-wrap').scope();
 
-                if (setprizeScope){
+                if (setprizeScope) {
                     var firstornot = setprizeScope.firstornot;
                     var chooseNum = setprizeScope.chooseNum;
                     if (firstornot) {
@@ -66,9 +66,11 @@ define([], function () {
                         var osJSobject = osJQobject[0];
                     }
                     osJSobject.dataset.id = item.id;
-                    $(osJSobject).find('.radio-res').not('.hidden').find('.show-chosen').html('（已选择：' + item.name + '）');
+
+                    $('.choose-tag').children().last().html('（已选择：' + item.name + '）');
                     $('.modal-content .close').trigger('click');
-                }else{
+                } else {
+                    // 问卷
                     $('#chosePacket').attr('data-packetId',item.id).html('（已选择：' + item.name + '）');
                     $('.modal-content .close').trigger('click');
                 }
