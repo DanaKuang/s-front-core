@@ -62,7 +62,7 @@ define([], function () {
             // nav切换事件绑定
             // 初始的时候
             var data = _.cloneDeep(scope.activity_page_data);
-            scope.$emit('frompagechange', event, data);
+            // scope.$emit('frompagechange', event, data);
 
             scope.changePage = function (e, n) {
                 scope.cur = (+n);

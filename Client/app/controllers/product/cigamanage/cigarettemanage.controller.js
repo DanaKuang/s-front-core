@@ -12,15 +12,16 @@ define([], function () {
     	ServiceContent: ['$rootScope', '$scope', 'cigarettemanageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
         $scope.master = {}; //初始化新建卷烟的表单
 
+        // 获取scope，scope对应conf的通用方法
+        var scope = function (selector) {
+          return angular.element(selector).scope()
+        }
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
           return scope ? scope.conf ? scope.conf : scope.conf = {} : false;
         }
 
-        var scope = function (selector) {
-          return angular.element(selector).scope()
-        }
-
+        // 操作panel multiselect初始化
         $(document).ready(function () {
           $(".operation.multi .select").multiselect({
             includeSelectAllOption: true,
@@ -35,7 +36,7 @@ define([], function () {
           });
         });
 
-  			// 获取列表数据
+  			// 获取卷烟列表数据
         var getList = function(data) {
           if (data) {
             data.status = 1;
@@ -53,6 +54,7 @@ define([], function () {
           })
         }
 
+        // 卷烟列表翻页
         $scope.$on('frompagechange', function (e,v,f) {
           var data = {
             sn: $scope.sn ? $scope.sn.join(',') : '',
@@ -84,6 +86,7 @@ define([], function () {
           init(true, 'searchform');
         }
         
+        // 操作面板，获取品牌
         $model.getbrands().then(function(res) {
           var data = res.data.data;
           scope_conf('.create-cigarette-body').brandlist = data;
@@ -111,13 +114,13 @@ define([], function () {
           }
         })
 
-        // 卷烟类型
+        // 操作面板，卷烟类型
         $model.checkstyle().then(function (res) {
           var data = res.data.data;
           scope_conf('.create-cigarette-body').stylelist = data;
         })
 
-        // 包装单位
+        // 操作面板，包装单位
         $model.checktype().then(function (res) {
           var data = res.data.data;
           scope_conf('.create-cigarette-body').typelist = data;
