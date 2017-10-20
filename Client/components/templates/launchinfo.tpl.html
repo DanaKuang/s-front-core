@@ -25,8 +25,8 @@
 		<label class="control-label col-sm-2">投放地区</label>
 		<div class="col-sm-9">
 			<select name="selectarea" ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required ng-hide="edit"></select>
-			<div class="btn-group" ng-show="edit">
-				<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false">{{adcodenames}}
+			<div class="btn-group edit" ng-show="edit">
+				<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false"><span class="multiselect-selected-text">{{adcodenames}}</span>
 				</button>
 			</div>
 		</div>

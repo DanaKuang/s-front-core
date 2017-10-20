@@ -122,7 +122,7 @@
 .configuration-item .control-label {
 	position: relative;
 }
-.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .select-duration .control-label:before {
+.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .launch-relate .select-duration .control-label:before {
 	content: '*';
 	position: absolute;
 	right: 0;
@@ -131,6 +131,9 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+.configuration-image .wrong-tip {
+	left: 290px;
+}
 .select-duration .col-sm-1 {
 	padding: 7px 0 0;
 	margin-bottom: 0;
@@ -138,6 +141,9 @@
 }
 .select-duration .col-sm-5 {
 	padding-right: 0;
+}
+.select-duration .col-sm-1~.col-sm-5 {
+	padding-left: 0;
 }
 .select-duration-person .col-sm-1, .select-duration-person .col-sm-4 {
 	margin-bottom: 0;
@@ -158,7 +164,9 @@ select[multiple].input-sm, textarea.input-sm {
 	height: 30px;
 	line-height: 30px;
 }
-
+.remark {
+	margin-top: 5px;
+}
 .wrong-tip {
 	color: red;
 	font-size: 12px;
@@ -296,12 +304,12 @@ select[multiple].input-sm, textarea.input-sm {
 }
 .launch-relate .configuration-item .wrong-tip {
 	position: absolute;
-  left: 265px;
+  left: 340px;
   top: -9px;
   z-index: 3;
   color: red;
   font-size: 12px;
-  width: 200px;
+  width: 140px;
 }
 .launch-relate select {
 /*	margin-left: 72px;
@@ -339,10 +347,6 @@ select[multiple].input-sm, textarea.input-sm {
 }
 .surprise-pop .condition-one input[type="text"] {
 	margin-left: 8px;
-}
-.surprise-pop label {
-  color: #707478;
-  font-weight: normal;
 }
 .time-config, .area-config, .condition-config {
 	margin-top: 6px;
@@ -789,11 +793,8 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 /*投放设置 单选*/
-.select-brand .multiselect-container>li>a>label, .select-specification .multiselect-container>li>a>label {
-	padding: 0 20px 0 40px;
-}
 .select-brand .multiselect-container>li>a>label.radio, .select-specification .multiselect-container>li>a>label.radio {
-	line-height: 2.4;
+	line-height: 1.8;
 }
 
 /*保存活动*/

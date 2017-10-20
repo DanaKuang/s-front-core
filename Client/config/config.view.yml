@@ -278,20 +278,20 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/advert/source.html'
-  - httpmethod: 'get'                       # 用户接口管理
+  - httpmethod: 'get'                       # 客户接口设置
     routepath: '/view/system/interface'
     description: 'interface'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/customer/interface.html'
-  - httpmethod: 'get'                       # 用户资源管理
-    routepath: '/view/system/source'
-    description: 'source'
+  - httpmethod: 'get'                       # 客户支付设置
+    routepath: '/view/system/pay'
+    description: 'pay'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/customer/source.html'
+    staticfile: 'system/customer/pay.html'
   - httpmethod: 'get'                       # 风格设置
     routepath: '/view/system/style'
     description: 'style'

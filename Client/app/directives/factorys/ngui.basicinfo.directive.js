@@ -11,7 +11,6 @@ define([], function () {
         var defaults = { //默认配置
             tpl: '/basicinfo.tpl.html',
             pageName: '',
-            namePriority: 1,
             parentForm: {},
             activity: {}
         };
@@ -30,12 +29,12 @@ define([], function () {
 
         function linkFn (scope, element, attrs, ctrl) {
 
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode', 'disabled', 'nameVaule']);
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'points', 'accessUrl', 'attachCode', 'disabled', 'nameValue']);
 
             // 监视conf变化更新 basicinfo
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'namePriority', 'accessUrl', 'attachCode', 'disabled', 'nameVaule']);
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['confUrl', 'activityForm', 'pageName', 'points', 'accessUrl', 'attachCode', 'disabled', 'nameValue']);
             }, true);
 
             var that_scope = angular.element('.all-template-config-wrap').scope();
@@ -49,7 +48,7 @@ define([], function () {
                 scope.confUrl = that_scope.conf.data.confUrl;
                 scope.activity = activity;
                 scope.nameVaule = activity.activityName;
-                scope.namePriority = activity.idx || 1;
+                scope.points = activity.idx || 1;
                 scope.descValue = activity.activityDec;
                 scope.introValue = activity.activityDoc;
                 scope.accessUrl = activity.activityEntrance;
@@ -76,6 +75,13 @@ define([], function () {
                         scope.$emit('frombasicimage', event, formData);
                     }
                 }
+
+                $("textarea[maxlength]").bind('input propertychange', function() {  
+                    var maxLength = $(this).attr('maxlength');  
+                    if ($(this).val().length > maxLength) {  
+                        $(this).val($(this).val().substring(0, maxLength));  
+                    }  
+                })  
             }
         }
 

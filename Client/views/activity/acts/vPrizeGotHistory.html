@@ -27,12 +27,6 @@
 							<form novalidate name="form">
 								<div class="form-horizontal">
 									<div class="form-group col-md-4">
-										<label class="control-label col-sm-4">订单号</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control input-sm" placeholder="请输入订单号" ng-model="orderCode">
-										</div>
-									</div>
-									<div class="form-group col-md-4">
 										<label class="control-label col-sm-4">品牌选择</label>
 										<div class="col-sm-7">
 											<select class="form-control input-sm select" ng-model="selectAllBrands" multiple="multiple">
@@ -40,12 +34,20 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group col-md-4">
+									<!-- <div class="form-group col-md-4">
 										<label class="control-label col-sm-4">活动状态</label>
 										<div class="col-sm-7">
 											<select class="form-control input-sm" name="" id="status" ng-model="statusVal">
 												<option value="">全部</option>
 												<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div> -->
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">规格选择</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
+												<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 											</select>
 										</div>
 									</div>
@@ -56,19 +58,17 @@
 										</div>
 									</div>
 									<div class="form-group col-md-4">
-										<label class="control-label col-sm-4">规格选择</label>
+										<label class="control-label col-sm-4">订单号</label>
 										<div class="col-sm-7">
-											<select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
-												<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
-											</select>
+											<input type="text" class="form-control input-sm" placeholder="请输入订单号" ng-model="orderCode">
 										</div>
 									</div>
-									<div class="form-group col-md-4">
+									<!-- <div class="form-group col-md-4">
 										<label class="control-label col-sm-4">关键字</label>
 										<div class="col-sm-7">
 											<input type="text" class="form-control input-sm" placeholder="请填写" ng-model="keysval">
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="form-horizontal">
 									<div class="form-group col-md-10 col-md-pull-2">

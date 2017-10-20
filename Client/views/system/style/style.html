@@ -5,11 +5,39 @@
  * Description: style
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/system.style.css"/>
 <div ng-controller="styleCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
-            <div class="row">
-
+            <div class="row col-md-12">
+                <div class="ui-panel-title style">
+                    <i class="style"></i><span>配色方案管理</span>
+                </div>
+                <div class="ui-panel-box panel rate">
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label ui-form-label">选择配色方案<i class="red">&nbsp;*</i></label>
+                                <div class="ui-form-content"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label ui-form-label">选择模板方案<i class="red">&nbsp;*</i></label>
+                                <div class="ui-form-content"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label ui-form-label">当前风格示例<i class="red">&nbsp;*</i></label>
+                                <div class="ui-form-content ui-flex-between">
+                                    <img src="" class="ui-flex-img">
+                                    <img src="" class="ui-flex-img">
+                                    <img src="" class="ui-flex-img">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary ui-submit">确定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
