@@ -291,7 +291,7 @@ define([], function () {
         // 获取已编辑的信息
         function getAlreadySelectedLaunchInfo(selectedData) {
           $(document).ready(function () {
-            $(".ui-search-block.multi .select").multiselect({
+            $(".multi .select").multiselect({
               nonSelectedText: '请选择',
               nSelectedText: '已选择',
               includeSelectAllOption: true,

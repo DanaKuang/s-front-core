@@ -41,7 +41,7 @@ define([], function () {
                     var page = data.page;
                     scope.hbChooseList = data.list;
                     scope.totalCount = page.count;
-                    scope.size = page.pageSize;
+                    scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
                     scope.curPage = page.currentPageNumber;
                     scope.pageNumber = page.pageNumber;
                 }
