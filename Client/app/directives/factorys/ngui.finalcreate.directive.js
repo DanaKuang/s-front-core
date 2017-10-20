@@ -421,12 +421,6 @@ define([], function () {
                             scopeVariable.finalerror = true;
                             $('.select-duration .wrong-tip').removeClass('hidden');
                         }
-
-                        if (s == 'activityAwards' && fromSonScope[s].length === 0) {
-                            scopeVariable.finalerror = true;
-                            alert('尚未配置任何奖项，请勿提交')
-                            return
-                        }
                     }
                 }
 
