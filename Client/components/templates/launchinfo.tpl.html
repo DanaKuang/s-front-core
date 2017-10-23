@@ -1,30 +1,37 @@
 <div class="launchinfo multi form-horizontal">
-<!-- 	<div class="select-company configuration-item">
-		<select ng-model="selectCompanyVal" value="{{selectCompanyVal}}">
-			<option value="" selected="selected">请先选择供应商</option>
-			<option ng-repeat="item in company" value="{{item.supplierCode}}">{{item.name}}</option>
-		</select>
-	</div> -->
 	<div class="select-brand configuration-item form-group col-md-5">
 		<label class="control-label col-sm-2">选择品牌</label>
 		<div class="col-sm-9">
-			<select class="select form-control input-sm" ng-model="selectBrandVal" value="{{selectBrandVal}}">
+			<select name="selectbrand" class="select form-control input-sm" ng-model="selectBrandVal" value="{{selectBrandVal}}">
 				<option ng-repeat="item in brand" value="{{item.brandCode}}" required>{{item.name}}</option>
 			</select>
+		</div>
+		<div ng-show="parentForm.$submitted || parentForm.selectbrand.$touched">
+			<div ng-show="!parentForm.selectbrand.$viewValue" class="wrong-tip">请选择投放品牌</div>
 		</div>
 	</div>
 	<div class="select-specification configuration-item form-group col-md-5">
 		<label class="control-label col-sm-2">选择规格</label>
 		<div class="col-sm-9">
-			<select ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" class="select form-control input-sm" required>
+			<select name="selectspeci" ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" class="select form-control input-sm" required>
 				<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
 			</select>
+		</div>
+		<div ng-show="parentForm.$submitted || parentForm.selectspeci.$touched">
+			<div ng-show="!parentForm.selectspeci.$viewValue" class="wrong-tip">请选择投放规格</div>
 		</div>
 	</div>
 	<div class="select-area configuration-item col-md-5 form-group">
 		<label class="control-label col-sm-2">投放地区</label>
 		<div class="col-sm-9">
-			<select ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required></select>
+			<select name="selectarea" ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required ng-hide="edit"></select>
+			<div class="btn-group edit" ng-show="edit">
+				<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false"><span class="multiselect-selected-text">{{adcodenames}}</span>
+				</button>
+			</div>
+		</div>
+		<div ng-show="parentForm.$submitted || parentForm.selectarea.$touched">
+			<div ng-show="!parentForm.selectarea.$viewValue" class="wrong-tip">请选择投放地区</div>
 		</div>
 	</div>
 	<div class="select-duration configuration-item form-group col-md-5">
@@ -36,6 +43,9 @@
 			<div class="col-sm-1">至</div>
 			<div class="col-sm-5">
 				<input type="text" name="endTime" ng-model="endTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分-秒" readonly="disabled" ng-disabled="disabled" required>
+			</div>
+			<div ng-show="parentForm.$submitted || parentForm.startTime.$touched || parentForm.endTime.$touched">
+				<div ng-show="parentForm.startTime.$error.required || parentForm.endTime.$error.required" class="wrong-tip">请选择完整的投放时间</div>
 			</div>
 			<div class="remark col-sm-12">
 				<input class="weekday" type="radio" name="timeduartion" value='1' ng-model="whichday" ng-disabled="disabled"><label for="">仅选择此时段<strong>工作日</strong></label>

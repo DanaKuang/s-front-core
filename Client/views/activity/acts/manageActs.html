@@ -6,9 +6,10 @@
  */
 -->
 
+<!-- <link rel="stylesheet" href="statics/assets/style/questionnaire.css"> -->
 <link rel="stylesheet" href="statics/assets/style/panel.css">
-<link rel="stylesheet" href="statics/assets/style/manageActs.css">
 <link rel="stylesheet" href="statics/assets/style/form.css">
+<link rel="stylesheet" href="statics/assets/style/manageActs.css">
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
 
 <div ng-controller="manageActsCtrl" class="manageacts">
@@ -17,7 +18,7 @@
 			<div class="ui-content-box row">
 				<div class="col-md-12">
 					<div class="ui-panel-title">
-						<button type="submit" id="createActivity"  class="btn btn-primary float-right btn-lg" data-toggle="modal" data-target=".create-activity-modal">新建活动</button>
+						<button type="submit" id="createActivity" class="btn btn-primary float-right btn-lg" data-toggle="modal" data-target=".create-activity-modal">新建活动</button>
 						<div>
 							<i class="hot"></i>
 							<span>活动模板管理</span>
@@ -26,72 +27,74 @@
 					<div class="ui-panel-box panel">
 						<!-- 操作区 -->
 						<div class="panel-body operation multi">
-							<div class="form-horizontal">
-								<div class="form-group col-md-4">
-									<label class="control-label col-sm-4">活动类型</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm" ng-model="categoryVal">
-											<option value="">全部</option>
-											<option ng-repeat="item in actsampleList" value="{{item.code}}">{{item.name}}</option>
-										</select>
+							<form novalidate name="searchForm">
+								<div class="form-horizontal">
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">活动类型</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm" ng-model="categoryVal">
+												<option value="">全部</option>
+												<option ng-repeat="item in actsampleList" value="{{item.code}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4 select-brand-name">
+										<label class="control-label col-sm-4">品牌选择</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple>
+												<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4 area">
+										<label class="control-label col-sm-4" for="location">地区</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm allarea select" name="" id="location" ng-model="allarea" multiple></select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">活动状态</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm" ng-model="statusVal">
+												<option value="">全部</option>
+												<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4">规格选择</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="selectSpeci" multiple>
+												<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label col-sm-4" for="keywords">关键字</label>
+										<div class="col-sm-7">
+											<input class="form-control input-sm keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval">
+										</div>
 									</div>
 								</div>
-								<div class="form-group col-md-4 select-brand-name">
-									<label class="control-label col-sm-4">品牌选择</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm select" ng-model="selectAllBrands" value="{{selectAllBrands}}" multiple>
-											<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
-										</select>
+								<div class="form-horizontal">
+									<div class="form-group col-md-10 col-md-pull-2">
+										<label class="control-label col-sm-4" for="duration">活动时段</label>
+										<div class="col-sm-3">
+											<input id="durationStart" size="16" type="text" placeholder="年-月-日(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="startTime">
+										</div>
+										<div class="col-sm-1 control-label middle-word">至</div>
+										<div class="col-sm-3">
+											<input id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form-control input-sm form_datetime" ng-model="endTime">
+										</div>
 									</div>
 								</div>
-								<div class="form-group col-md-4 area">
-									<label class="control-label col-sm-4" for="location">地区</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm allarea select" name="" id="location" ng-model="allarea" multiple></select>
+								<div class="form-inline">
+									<div class="float-right">
+										<button type="submit" id="search" class="btn btn-primary search btn-lg" ng-click="search($event)">搜索</button>
+										<button ng-click="searchreset()" type="submit" class="btn btn-primary reset btn-lg">重置</button>
 									</div>
 								</div>
-								<div class="form-group col-md-4">
-									<label class="control-label col-sm-4">活动状态</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm" ng-model="statusVal">
-											<option value="">全部</option>
-											<option ng-repeat="item in statusList" value="{{item.code}}">{{item.name}}</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group col-md-4">
-									<label class="control-label col-sm-4">规格选择</label>
-									<div class="col-sm-7">
-										<select class="form-control input-sm select" ng-model="selectSpeci" multiple>
-											<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group col-md-4">
-									<label class="control-label col-sm-4" for="keywords">关键字</label>
-									<div class="col-sm-7">
-										<input class="form-control input-sm keywords-input" type="text" id="keywords" placeholder="请填写" ng-model="keysval">
-									</div>
-								</div>
-							</div>
-							<div class="form-horizontal">
-								<div class="form-group col-md-10 col-md-pull-2">
-									<label class="control-label col-sm-4" for="duration">活动时段</label>
-									<div class="col-sm-3">
-										<input id="durationStart" size="16" type="text" placeholder="年-月-日(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="startTime">
-									</div>
-									<div class="col-sm-1 control-label middle-word">至</div>
-									<div class="col-sm-3">
-										<input id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form-control input-sm form_datetime" ng-model="endTime">
-									</div>
-								</div>
-							</div>
-							<div class="form-inline">
-								<div class="float-right">
-									<button type="submit" id="search" class="btn btn-primary search btn-lg" ng-click="search($event)">搜索</button>
-									<button ng-click="reset()" type="submit" id="reset" class="btn btn-primary reset btn-lg">重置</button>
-								</div>
-							</div>
+							</form>
 						</div>
 
 						<!-- 列表展示区 -->

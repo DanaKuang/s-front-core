@@ -41,7 +41,7 @@ define([], function () {
                     var page = data.page;
                     scope.jfChooseList = data.list;
                     scope.totalCount = page.count;
-                    scope.size = page.pageSize;
+                    scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
                     scope.curPage = page.currentPageNumber;
                     scope.pageNumber = page.pageNumber;
                 }
@@ -70,7 +70,7 @@ define([], function () {
                     var osJSobject = osJQobject[0];
                 }
                 osJSobject.dataset.integralPool = item.id;
-                $(osJSobject).find('.radio-res').not('.hidden').find('.show-chosen').html('（已选择：' + item.name + '）');
+                $('.choose-tag').children().last().html('（已选择：' + item.name + '）');
                 $('.modal-content .close').trigger('click');
             }
 

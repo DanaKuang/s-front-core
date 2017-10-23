@@ -1,11 +1,11 @@
 /**
- * Author: liubin
+ * Author: {author}
  * Create Date: 2017-10-11
  * Description: 修改密码
  */
 define([], function () {
-    var changePwdViewModel = {
-        ServiceName: 'changePwdViewModel',
+    var passwordViewModel = {
+        ServiceName: 'passwordViewModel',
         ServiceType: 'service',
         ServiceContent: ['request', function (request) {
             this.$model = function () {
@@ -17,5 +17,5 @@ define([], function () {
             }
         }]
     };
-    return changePwdViewModel;
+    return passwordViewModel;
 });

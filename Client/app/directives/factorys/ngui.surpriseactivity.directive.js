@@ -80,12 +80,14 @@ define([], function () {
                 if (that_scope.activityCode) {
                     // 编辑
                     scope.disabled = true;
+                    scope.edit = true;
                     var caidanconfig = that_scope.conf.data.caidanConfig;
                     scope.startHour = caidanconfig.sduration;
                     scope.endHour = caidanconfig.eduration;
                     scope.intervalHour = caidanconfig.duration;
                     scope.intervalHourperson = caidanconfig.playPerson;
                     scope.drawAreaVal = caidanconfig.adcodes;
+                    scope.adcodenames = caidanconfig.adnames;
 
                     if (caidanconfig.condition) {
                         scope.plusval = caidanconfig.condition;

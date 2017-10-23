@@ -19,7 +19,7 @@
 						<sa-participateInfo conf="participateInfoConf"></sa-participateInfo>
 					</div>
 					<!-- 中奖设置 -->
-					<div class="draw-prize config-item form-horizontal">
+					<div class="draw-prize multi config-item form-horizontal">
 						<h6>中奖设置</h6>
 						<div class="select-duration configuration-item col-md-5 form-group">
 							<label class="control-label col-sm-2">参与时段</label>
@@ -58,25 +58,29 @@
 						<div class="draw-area configuration-item col-md-5 form-group">
 							<label class="control-label col-sm-2">中奖地区</label>
 							<div class="col-sm-9">
-								<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled"></select>
+								<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled" ng-hide="edit"></select>
+								<div class="btn-group edit" ng-show="edit">
+									<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false"><span class="multiselect-selected-text">{{adcodenames}}</span>
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="plus configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">附加条件</label>
+							<label class="control-label col-sm-2">中奖概率</label>
 							<div class="col-sm-9">
-								<div class="checkbox col-sm-2">
+								<!-- <div class="checkbox col-sm-2">
 								  <label class="checkbox-inline">
 								    <input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled">设置
 								  </label>
-								</div>
-								<div>
+								</div> -->
+							<!-- 	<div>
 									<select class="form-control input-sm" name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
 										<option value="">请选择附加条件</option>
 										<option value="1">第8个人中奖</option>
 										<option value="2">第88个人中奖</option>
 									</select>
-								</div>
-								<div class="chance configuration-item" ng-show="!myPlus">
+								</div> -->
+								<div class="chance configuration-item">
 									<input class="form-control input-sm" type="text" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-blur="parseFloat($event)" ng-disabled="disabled">
 								</div>
 							</div>

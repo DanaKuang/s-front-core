@@ -119,6 +119,7 @@ define([], function () {
         //计算履约报表页数
         "getPerformAppointCount": function (params) {
           $model.$getPerformAppointCount(params).then(function (res) {
+            $scope.count = res.data.Count;            
             allpage = Math.ceil(res.data.Count/10);
             global.createPage();
           })

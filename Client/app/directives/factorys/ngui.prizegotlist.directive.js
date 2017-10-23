@@ -42,7 +42,7 @@ define([], function () {
                     var page = data.page;
                     scope.list = data.list;
                     scope.totalCount = page.count;
-                    scope.size = page.pageNumber > 1 ? page.pageSize : page.count;
+                    scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
                     scope.curPage = page.currentPageNumber;
                     scope.pageNumber = page.pageNumber;
                 }
