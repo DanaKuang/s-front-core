@@ -442,26 +442,26 @@ define([], function() {
 						break;
 					case 4:
 
-						var winDataObj = {
+						$scope.winDataObj = {
 							'activityName': $("#activityName").val().join(),
 							'cityName': $("#activityCityName").val().join(),
 							'awardName': $("#inputSou").val()
 						}
 
-						gloabl.getWeekScanWinData(winDataObj);
+						gloabl.getWeekScanWinData($scope.winDataObj);
 						break;
 					case 5:
 
-						var cashWinDataObj = {
+						$scope.cashWinDataObj = {
 							'dt': $('#jifenData').val(),
 						}
-						gloabl.getProvData(cashWinDataObj);
+						gloabl.getProvData($scope.cashWinDataObj);
 						break;
 					case 6:
-						var cashWinDataObjmdg = {
+						$scope.cashWinDataObjmdg = {
 							'dt': $('#cashWinWeeks').val(),
 						}
-						gloabl.getWeekCashWinData(cashWinDataObjmdg);
+						gloabl.getWeekCashWinData($scope.cashWinDataObjmdg);
 						break;
 					default:
 				}
@@ -479,69 +479,50 @@ define([], function() {
 				// var ctxName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 				if(a === 1) {
 					var data = {
-						"statTime": $scope.obj.statTime,
-						"activityName": $scope.obj.activityName,
-						"productSn": $scope.obj.productSn
+						"dt": $scope.obj.dt,
+						"productBrand":$scope.obj.productBrand,
+						"productSn": $scope.obj.productSn,
+						"provinceName":$scope.obj.provinceName,
+						"cityName":$scope.obj.cityName
 					}
-					var url = "/fixatreport/importExcelWinUseProvData";
-					// var statTime = $scope.obj.statTime;
-					// var activityName = $scope.obj.activityName;
-					// var productSn = $scope.obj.productSn;
-					// window.location.href = '/fixatreport/importExcelWinUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName)) + '&productSn=' + productSn;
+					var url = "/api/tztx/dataportal/henanreport/importProvReportData";
 				} else if(a === 2) {
 					var data = {
-						"statTime": $scope.saoobj.statTime,
+						"dt": $scope.saoobj.dt,
 						"activityName": $scope.saoobj.activityName
 					}
-					var url = "/fixatreport/importExcelScanUseProvData";
-					// var statTime = $scope.saoobj.statTime;
-					// var activityName = $scope.saoobj.activityName;
-					// window.location.href = '/fixatreport/importExcelScanUseProvData?staTime=' + statTime + '&activityName=' + encodeURI(encodeURI(activityName))
+					var url = "/api/tztx/dataportal/henanreport/importActReportData";
 				} else if(a === 3) {
 					var data = {
-						"statTime": $scope.summar.statTime
+						"dt": $scope.summar.dt,
+						"productBrand": $scope.summar.productBrand,
+						"productSn": $scope.summar.productSn,
+						
 					}
-					var url = "/fixatreport/importExcelDailySummData";
+					var url = "/api/tztx/dataportal/henanreport/importRedPacketReportData";
 					// var statTime = $scope.summar.statTime;
 					// window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
 				} else if(a === 4) {
-					var weekArr = $('#weeks').val();
-					var weekStr = weekArr.join(',');
-					var packArr = $('#packs').val();
-					var packStr = packArr.join(',');
-					var cycleTimeArr = $('#cycleTime').val();
-					var cycleTimeStr = cycleTimeArr.join(',');
 					var data = {
-						'statTime': weekStr,
-						'productSn': $('#specift').val(),
-						'unit': packStr,
-						'cycle': cycleTimeStr
+						'activityName': $scope.winDataObj.activityName,
+						'cityName': $scope.winDataObj.cityName,
+						'awardName': $scope.winDataObj.awardName
 					}
-					var url = "/api/tztx/dataportal/fixatreport/impExcelWeekScanWinData";
+					var url = "/api/tztx/dataportal/henanreport/importObjectReportData";
 				} else if(a === 5) {
 					var data = {
-						'statTime': $('#proviceDataWeeks').val(),
-						'productSn': $('#proviceDataSpecift').val()
+						'dt': $scope.cashWinDataObj.dt
 					}
-					if(curSpeciftStr != '' && curWeekStr != '') {
-						// console.log(curSpeciftStr + ':' + curWeekStr);
-						data.tableTitle = curSpeciftStr + '扫码数据汇总(' + curWeekStr + ')';
-					}
-					var url = "/api/tztx/dataportal/fixatreport/impExcelWeekScanProvData";
+//					if(curSpeciftStr != '' && curWeekStr != '') {
+//						// console.log(curSpeciftStr + ':' + curWeekStr);
+//						data.tableTitle = curSpeciftStr + '扫码数据汇总(' + curWeekStr + ')';
+//					}
+					var url = "/api/tztx/dataportal/henanreport/importIntegralDarwReportData";
 				} else if(a === 6) {
 					var data = {
-						'statTime': $('#cashWinWeeks').val(),
-						'productSn': $('#cashWinSpecift').val(),
-						'unit': $('#cashWinPacks').val()
+						'dt': $scope.cashWinDataObjmdg.dt
 					}
-					var url = "/api/tztx/dataportal/fixatreport/impExcelWeekCashBonusData";
-				} else if(a === 7) {
-					var data = {
-						'statTime': $('#entityWinWeeks').val(),
-						'productSn': $('#entityWinSpecift').val(),
-						'unit': $('#entityWinPacks').val()
-					}
-					var url = "/api/tztx/dataportal/fixatreport/impExcelWeekEntityWinData";
+					var url = "/api/tztx/dataportal/henanreport/importIntegralListReportData";
 				}
 				var xhr = new XMLHttpRequest();
 				var formData = new FormData();
@@ -574,26 +555,7 @@ define([], function() {
 				};
 				xhr.send(formData);
 			}
-			//监听品牌变化
-			//			$('#brand').change(function() {
-			//				var curBrandValue = $(this).val();
-			//				$model.$getSpecifData({
-			//					productBrand: curBrandValue
-			//				}).then(function(res) {
-			//					$scope.speciftList = res.data || [];
-			//					$scope.$apply();
-			//				});
-			//			});
-			//			$('#cashWinBrand').change(function() {
-			//				var curBrandValue = $(this).val();
-			//				$model.$getSpecifData({
-			//					productBrand: curBrandValue
-			//				}).then(function(res) {
-			//
-			//					$scope.speciftList = res.data || [];
-			//					$scope.$apply();
-			//				});
-			//			});
+			//监听品牌变化			
 			$('#moneyDataBrand').change(function() {
 				var curBrandValue = $(this).val();
 				$model.$getSpecifData({

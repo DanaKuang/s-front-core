@@ -381,6 +381,13 @@ formarReport:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importProvReportData'
+    authorized: 1
+    description: 'KPI数据分省统计日报下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/actAnalysis/getActyDownBox'
     authorized: 1
     description: '活动下拉菜单'
@@ -388,9 +395,23 @@ formarReport:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importActReportData'
+    authorized: 1
+    description: '活动下拉菜单下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/henanreport/getActReportData'
     authorized: 1
     description: '河南活动中奖统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importRedPacketReportData'
+    authorized: 1
+    description: '河南活动中奖统计日报下载'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -409,6 +430,13 @@ formarReport:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importObjectReportData'
+    authorized: 1
+    description: '实物奖品中奖统计日报下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/henanreport/getIntegralDarwReportData'
     authorized: 1
     description: '河南积分操作情况统计日报'
@@ -416,9 +444,23 @@ formarReport:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importIntegralDarwReportData'
+    authorized: 1
+    description: '河南积分操作情况统计日报下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/henanreport/getIntegralListReportData'
     authorized: 1
     description: '积分兑换明细日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/importIntegralListReportData'
+    authorized: 1
+    description: '积分兑换明细日报下载'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
