@@ -372,6 +372,70 @@ visit:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+formarReport:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getProvReportData'
+    authorized: 1
+    description: 'KPI数据分省统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/actAnalysis/getActyDownBox'
+    authorized: 1
+    description: '活动下拉菜单'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getActReportData'
+    authorized: 1
+    description: '河南活动中奖统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getRedPacketReportData'
+    authorized: 1
+    description: '河南现金红包中奖统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getObjectReportData'
+    authorized: 1
+    description: '实物奖品中奖统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getIntegralDarwReportData'
+    authorized: 1
+    description: '河南积分操作情况统计日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/henanreport/getIntegralListReportData'
+    authorized: 1
+    description: '积分兑换明细日报'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserProvByUserId'
+    authorized: 1
+    description: '省份下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getCitysByProvince'
+    authorized: 1
+    description: '地市下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 report:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fixatreport/getWinUseProvData'

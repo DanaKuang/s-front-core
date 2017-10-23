@@ -120,6 +120,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/report/report.html'
+  - httpmethod: 'get'                       # 河南报表导出
+    routepath: '/view/home/formarReport'
+    description: 'report'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/formarReport/formarReport.html'
   - httpmethod: 'get'                       # 履约报表
     routepath: '/view/home/agree'
     description: 'agree'
