@@ -69,7 +69,10 @@ define([], function() {
 					$model.$winUser(params).then(function(res) {
 //						console.log(res)
 						var res = res.data || [];
+						var guiGeBihend=$("#proviceDataSpecift").val();
+						var inputOne=$("#inputOne").val();
 						$("#win_table").html("");
+						$("#titlePOne").html('规格&nbsp;&nbsp;'+guiGeBihend+'&nbsp;&nbsp;'+'('+inputOne+')');
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
@@ -86,6 +89,9 @@ define([], function() {
 					$model.$getUserPro(params).then(function(res) {
 						var res = res.data || [];
 						$("#user_table").html("");
+						var guiGeBihendTwo=$("#activityNameMdg").val();
+						var inputTwo=$("#inputTwo").val();
+						$("#titlePTwo").html('活动名称&nbsp;&nbsp;'+guiGeBihendTwo+'&nbsp;&nbsp;'+'('+inputTwo+')')
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								$("#user_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].addRafflePv + "</td><td>" + res[i].addDrawPv + "</td><td>" + res[i].addDrawRate + "</td></tr>");
@@ -120,7 +126,7 @@ define([], function() {
 							$scope.selectActivityNameList = res.data;
 							$scope.$apply();
 							console.log($scope.selectActivityNameList)
-							$("select#activityName").multiselect({
+							$("#activityName").multiselect({
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
 								nSelectedText: '已选择',
@@ -142,7 +148,7 @@ define([], function() {
 							$scope.selectActivityCityNameList = res.data;
 							$scope.$apply();
 							console.log($scope.selectActivityCityNameList)
-							$("select#activityCityName").multiselect({
+							$("#activityCityName").multiselect({
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
 								nSelectedText: '已选择',

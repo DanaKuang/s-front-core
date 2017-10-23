@@ -82,7 +82,7 @@
               <div class="agree-date">
                 <label>查询日期：</label>
                 <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" />
+                  <input id="inputOne" size="16" type="text" value="" readonly class="form-control date" />
                   <span class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
@@ -118,7 +118,7 @@
                 下载
               </button>
             </div>
-            <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;">规格&nbsp;({{obj.dt}})</p>
+            <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePOne"></p>
             <table class="table">
               <thead style="border-top: 1px solid #A0A0A0;">
               <!--<tr>
@@ -172,13 +172,13 @@
               <div class="agree-date">
                 <label>查询日期：</label>
                 <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" />
+                  <input id="inputTwo" size="16" type="text" value="" readonly class="form-control date" />
                   <span class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
               <div class="report-gui">
                 <label>活动名称：</label>
-                <select>
+                <select id="activityNameMdg">
                   <!--<option value="条">条</option>-->
                   <!--<option value="包">包</option>-->
                 </select>
@@ -191,7 +191,7 @@
               </button>
             </div>
             <table class="table">
-            	<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;">活动名称&nbsp;({{saoobj.dt}})</p>
+            	<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePTwo"></p>
               <thead style="border-top: 1px solid #A0A0A0;">
               <tr>
                 <th>省份</th>
