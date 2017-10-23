@@ -101,14 +101,14 @@
                 </select>
               </div>
               <div class="brand_names">
-              <label  for="proviceName">省份</label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
-                      <option ng-repeat="brandItem in brandListsss" value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
+              <label  for="proviceName">省份: </label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" style="width:240px;"  value="{{selectAllBrands}}">
+                      <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
                                 </select>
               </div>
               <div class="specift_names">
-                                <label class="label_title" for="applySpecift">地市:</label><select id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                <label  class="label_title" for="applySpecift">地市: </label><select style="width:240px;" id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
                                     <!--<option value="">请选择</option>-->
-                                    <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                                    <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
                                 </select>
                             </div>
               <button class="btn btn-sm btn-default btn_style" ng-click="search($event,1)">
@@ -309,21 +309,19 @@
             <div class="report-search">
               <div class="formarReport-gui">
                 <label>活动名称：</label>
-                <select>
-                  <!--<option value="条">条</option>-->
-                  <!--<option value="包">包</option>-->
-                </select>
+								<select id="activityName" multiple="multiple" ng-model="selectActivityName" value="{{selectActivityName}}">
+                                    <option ng-repeat="brandItem in selectActivityNameList" value="{{brandItem.activityName}}">{{brandItem.activityName}}</option>
+                                </select>
               </div>
               <div class="formarReport-gui">
                 <label>地市：</label>
-                <select>
-                  <!--<option value="条">条</option>-->
-                  <!--<option value="包">包</option>-->
-                </select>
+                <select id="activityCityName" multiple="multiple" ng-model="selectActivityCityName" value="{{selectActivityCityName}}">
+                                    <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
+                                </select>
               </div>
               <div class="report-gui">
                 <label>奖品：</label>
-                <input type="text" style="width:200px;height:30px;padding: 4px 12px;"/>
+                <input id="inputSou" type="text" style="width:240px;height:30px;padding: 4px 12px;"/>
               </div>
 
               <button class="btn btn-sm btn-default btn_style" ng-click="search($event,4)">

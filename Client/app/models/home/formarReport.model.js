@@ -70,7 +70,10 @@ define([], function () {
         this.$getProviceName = function(){
           return request.$Search(getProviceName,{},true);
         }
-        this.$getSpeciftByBrand = function(){
+        this.$getSpeciftByBrand = function(params){
+          return request.$Search(getSpeciftByBrand,params,true);
+        }
+        this.$getSpeciftByBrandTwo = function(){
           return request.$Search(getSpeciftByBrand,{},true);
         }
       };

@@ -1131,7 +1131,7 @@ input[type="checkbox"]:checked + .checkbox{
 .report-search .multiselect-container li label{
     font-size: 15px;
     color: #515151;
-    width: 180px;
+    width: 240px;
 }
 .report-search .multiselect{
     text-align: left;

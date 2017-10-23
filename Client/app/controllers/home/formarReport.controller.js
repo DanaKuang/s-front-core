@@ -52,7 +52,7 @@ define([], function() {
 						//						gloabl.getMoneyReport();
 						break;
 					case 4:
-
+						gloabl.getActivityName();
 						break;
 					case 5:
 
@@ -69,7 +69,7 @@ define([], function() {
 					$model.$winUser(params).then(function(res) {
 //						console.log(res)
 						var res = res.data || [];
-						$(".report-table").find("tbody").html("");
+						$("#win_table").html("");
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
@@ -85,7 +85,7 @@ define([], function() {
 				"userPro": function(params) {
 					$model.$getUserPro(params).then(function(res) {
 						var res = res.data || [];
-						$(".report-table").find("tbody").html("");
+						$("#user_table").html("");
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								$("#user_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].addRafflePv + "</td><td>" + res[i].addDrawPv + "</td><td>" + res[i].addDrawRate + "</td></tr>");
@@ -111,6 +111,49 @@ define([], function() {
 						//console.log($scope.saoobj);
 						//						gloabl.userPro($scope.saoobj);
 					})
+				},
+				//活动多选框下拉菜单
+				"getActivityName": function() {
+					$model.$getZhongGift().then(function(res) {
+						console.log(res)
+						if(res.status == 200) {
+							$scope.selectActivityNameList = res.data;
+							$scope.$apply();
+							console.log($scope.selectActivityNameList)
+							$("select#activityName").multiselect({
+								nonSelectedText: '请选择',
+								allSelectedText: '全部',
+								nSelectedText: '已选择',
+								selectAll: true,
+								selectAllText: '全部',
+								selectAllValue: 'all',
+								buttonWidth: '240px'
+							});
+//							.report-search .multiselect-container li label
+						}
+
+					});
+					
+					
+					//地市多选下拉框
+					$model.$getSpeciftByBrandTwo().then(function(res) {
+						console.log(res)
+						if(res.status == 200) {
+							$scope.selectActivityCityNameList = res.data;
+							$scope.$apply();
+							console.log($scope.selectActivityCityNameList)
+							$("select#activityCityName").multiselect({
+								nonSelectedText: '请选择',
+								allSelectedText: '全部',
+								nSelectedText: '已选择',
+								selectAll: true,
+								selectAllText: '全部',
+								selectAllValue: 'all',
+								buttonWidth: '240px'
+							});
+						}
+
+					});
 				},
 				//KPI分省
 				"getProduct": function() {
@@ -166,6 +209,7 @@ define([], function() {
 				"summaryData": function(params) {
 					$model.$getsummaryData(params).then(function(res) {
 						console.log(res);
+						$("#summary_table").html("");
 						var res = res.data || [];
 						var summarProduct = $("#moneyDataSpecift").val();
 						var summarDt = $(".summarDt").val();
@@ -204,6 +248,7 @@ define([], function() {
 				"getProviceName": function() {
 					$model.$getProviceName().then(function(res) {
 						console.log(res)
+						
 						if(res.status == 200) {
 							$scope.brandListsss = res.data;
 							console.log($scope.brandListsss)
@@ -215,7 +260,7 @@ define([], function() {
 								selectAll: true,
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '180px'
+								buttonWidth: '240px'
 							});
 						}
 
@@ -229,24 +274,28 @@ define([], function() {
 							selectAll: true,
 							selectAllText: '全部',
 							selectAllValue: 'all',
-							buttonWidth: '180px'
+							buttonWidth: '240px'
 						});
 					});
 					
 					
 					//监听省份选择信息
             $scope.$watch('selectAllBrands', function(n, o, s) {
-                if (n !== o) {
+                if (n !== "") {
                     $scope.selectAllBrands = n;
+                    console.log($scope.selectAllBrands)
                     var brandListArrObj = {};
-                    brandListArrObj.brandCode = n;
+                    var aaa=n.join()
+                    brandListArrObj.provinceName = aaa;
+//                  console.log(n)
+//                  console.log(brandListArrObj)
                     $model.$getSpeciftByBrand(brandListArrObj).then(function (res) {
                     	console.log(res)
-                        if(res.data.ret == "200000"){
+                        if(res.status == "200"){
                             $scope.speciftListsss = res.data;
                             $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftListsss, function(v){
                                 v.label = v.cityName;
-                                v.value = v.cityId;
+                                v.value = v.cityName;
                             }));
                             $('[ng-model="selectSpeci"]').multiselect('refresh');
                         }
@@ -254,7 +303,7 @@ define([], function() {
                 }
             });
             $scope.$watch('selectSpeci', function (n, o, s) {
-                if (n !== o) {
+                if (n !== "") {
                     $scope.selectSpeci = n;
                 }
             });
@@ -272,48 +321,11 @@ define([], function() {
 //                  }
 //              });
 //          });
-				},
-				"getPack": function(typeNum) {
-					$model.$getPackAndTimeData({
-						"pageName": "report"
-					}).then(function(res) {
-						$scope.packsList = res.data || [];
-						$scope.$apply();
-						if(typeNum == 4) {
-							$("select#packs").multiselect({
-								nonSelectedText: '请选择',
-								allSelectedText: '全部',
-								nSelectedText: '已选择',
-								selectAll: true,
-								selectAllText: '全部',
-								selectAllValue: 'all',
-								buttonWidth: '180px'
-							});
-						}
-
-					})
-				},
-				"getTimes": function() {
-					$model.$getPackAndTimeData({
-						"pageName": "packtype"
-					}).then(function(res) {
-						$scope.statisTimeList = res.data || [];
-						$scope.$apply();
-						$("select#cycleTime").multiselect({
-							nonSelectedText: '请选择',
-							allSelectedText: '全部',
-							nSelectedText: '已选择',
-							selectAll: true,
-							selectAllText: '全部',
-							selectAllValue: 'all',
-							buttonWidth: '180px'
-						});
-
-					})
-				},
+		},
 				//tab4
 				'getWeekScanWinData': function(timesObj) {
 					$model.$getWeekScanWinData(timesObj).then(function(res) {
+						$("#weekScanWin").html('');
 						console.log(res)
 						var res = res.data || [];
 						$(".report-table").find("tbody").html("");
@@ -364,9 +376,25 @@ define([], function() {
 			$scope.goback = function() {
 				$(".region-margin").hide();
 				$(".region-margin").eq(0).show();
-				$('#weeks').multiselect().val([]).multiselect("refresh");
+				$("#proviceName").multiselect().val([]).multiselect("refresh");
+				$("#applySpecift").multiselect().val([]).multiselect("refresh");
+				console.log($("#proviceName").multiselect().val([]))
+				$("#activityName").multiselect().val([]).multiselect("refresh");
+				$("#activityCityName").multiselect().val([]).multiselect("refresh");
+				
 				$('#brand').val('');
 				$('#specift').val('');
+				$('#proviceName').val('');
+				$('#user_table').html('');
+				$('#win_table').html('');
+				$('#weekScanWin').html('');
+				$('#summary_table').html('');
+				$('#provDataDetail').html('');
+				$('#weekCashWin').html('');
+				console.log($('#proviceName').val())
+				$('#applySpecift').val('');
+				$('#activityName').val('');
+				$('#activityCityName').val('');
 				if($scope.speciftLists != undefined && $scope.speciftLists.length > 0) {
 					$scope.speciftList.length = 0;
 				}
@@ -388,8 +416,8 @@ define([], function() {
 							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
 								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
 							"productSn": $(".mengdeguo").find("select option:selected").attr("data-sn"),
-							"provinceName": "北京市",
-							"cityName": "北京市"
+							"provinceName": $("#proviceName").val().join(),
+							"cityName": $("#applySpecift").val().join()
 						}
 						gloabl.winUser($scope.obj);
 						break;
@@ -415,9 +443,9 @@ define([], function() {
 					case 4:
 
 						var winDataObj = {
-							'activityName': '爱“尚”翻牌子',
-							'cityName': '北京市',
-							'awardName': '雨伞'
+							'activityName': $("#activityName").val().join(),
+							'cityName': $("#activityCityName").val().join(),
+							'awardName': $("#inputSou").val()
 						}
 
 						gloabl.getWeekScanWinData(winDataObj);
