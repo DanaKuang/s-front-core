@@ -1,0 +1,48 @@
+.operation {
+	.col-sm-1, 
+	.col-sm-3,
+	.col-sm-3 {
+		padding-left: 0;
+		margin-bottom: 5px;
+	}
+}
+
+form {
+	margin-bottom: 30px;
+}
+
+.chart-all {
+	clear: both;
+	.chart {
+		margin-bottom: 50px;
+		&:before {
+			content: '';
+			width: 0;
+			height: 0;
+			display: block;
+			clear: both;
+		}
+	}
+	p {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.absolute {
+		position: absolute;
+		top: 3px;
+		left: 50%;
+		z-index: 10;
+		-webkit-transform: translateX(-50%);
+		-moz-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	label {
+		margin-right: 6px;
+		font-size: 12px;
+	}
+	input[type="checkbox"] {
+		margin-right: 10px;
+		cursor: pointer;
+	}
+}
