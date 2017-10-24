@@ -577,12 +577,17 @@ body {
   color: #44c2ed;
   /* border: 1px solid #44c2ed; */
   font-size: 12px;
+  width:240px;
+  height:34px;
+  border-radius:3px;
   display: inline-block;
 }
 .ui-total-date input {
   /* background-color: #3e4162; */
   padding-left: 5px;
-  height: 26px;
+  height: 34px;
+  border-radius:3px;
+  width:240px;
 }
 
 .ui-total-date .icon-th {
@@ -890,7 +895,7 @@ input[type="checkbox"]:checked + .checkbox{
 } */
 .agree-date .input-append .form-control{
   background-color: #ffffff;
-  border-radius: 0px;
+  border-radius: 3px;
   color: #44c2ed;
 }
 .res_search .search_btn ,.gift_search .search_btn{
@@ -1077,7 +1082,10 @@ input[type="checkbox"]:checked + .checkbox{
 }
 
 .report-search div select{
-  width: 180px;
+  width: 240px;
+  height:34px;
+  border-radius:3px;
+  padding:6px 10px;
 }
 
 .report_wrap ul li:nth-of-type(2n) {
