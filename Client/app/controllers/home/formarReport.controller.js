@@ -18,11 +18,15 @@ define([], function() {
 			var curTableIndex = '';
 			var curWeekStr = '';
 			var curSpeciftStr = '';
+			
+			//			var guiGeBihend= '';
 			//页面默认加载配置
 			$scope.obj = {
 				"dt": stattime,
 				"productBrand": "黄金叶",
-				"productSn": ""
+				"productSn": "6901028165242",
+				"provinceName": "",
+				"cityName": ""
 			};
 			$scope.saoobj = {
 				"dt": stattime,
@@ -31,7 +35,13 @@ define([], function() {
 			$scope.summar = {
 				"dt": stattime,
 				"productBrand": "黄金叶",
-				"productSn": ""
+				"productSn": "6901028165242"
+			};
+			$scope.cashWinDataObj = {
+				"dt": stattime
+			};
+			$scope.cashWinDataObjmdg = {
+				"dt": stattime
 			};
 			//页面切换
 			$scope.tabs = function(index) {
@@ -39,40 +49,65 @@ define([], function() {
 				$(".region-margin").eq(index).show();
 				switch(index) {
 					case 1:
+//						gloabl.getTitleHtml();
 						gloabl.getBrand();
-						gloabl.getProduct();
 						gloabl.getProviceName();
+						gloabl.winUser($scope.obj);
 						break;
 					case 2:
 						gloabl.getZhongGift();
+						gloabl.userPro($scope.saoobj);
 						break;
 					case 3:
 						gloabl.getBrand();
-						gloabl.getProduct();
-						//						gloabl.getMoneyReport();
+						gloabl.summaryData($scope.summar)
 						break;
 					case 4:
 						gloabl.getActivityName();
 						break;
 					case 5:
-
+						gloabl.getProvData($scope.cashWinDataObj);
 						break;
 					case 6:
+						gloabl.getWeekCashWinData($scope.cashWinDataObjmdg)
 						break;
 					default:
 
 				}
 			}
 			var gloabl = {
+				//品牌
+				"getBrand": function() {
+					$model.$getBrandData().then(function(res) {
+						$scope.brandList = res.data || [];
+						$scope.$apply();
+
+						var curBrandName = $scope.brandList[0].name;
+
+						$model.$getSpecifData({
+							productBrand: curBrandName
+						}).then(function(res) {
+							$scope.speciftList = res.data || [];
+							$scope.$apply();
+							//							if($scope.speciftList.length > 0) {
+							curSpeciftStr = $scope.speciftList[0].name;
+							console.log(curSpeciftStr)
+							//							}
+						});
+
+					});
+				},
 				//KPI数据分省统计日报
 				"winUser": function(params) {
 					$model.$winUser(params).then(function(res) {
-//						console.log(res)
+						//						console.log(res)
 						var res = res.data || [];
-						var guiGeBihend=$("#proviceDataSpecift").val();
-						var inputOne=$("#inputOne").val();
+						var guiGeBihend = $("#proviceDataSpecift").val();
+						//						curSpeciftStr = $scope.speciftList[0].name;
+						console.log(guiGeBihend)
+						var inputOne = $("#inputOne").val();
 						$("#win_table").html("");
-						$("#titlePOne").html('规格&nbsp;&nbsp;'+guiGeBihend+'&nbsp;&nbsp;'+'('+inputOne+')');
+						$("#titlePOne").html('规格&nbsp;&nbsp;' + (guiGeBihend == null?'条-黄金叶（爱尚）':guiGeBihend) + '&nbsp;&nbsp;' + '(' + inputOne + ')');
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
@@ -89,9 +124,9 @@ define([], function() {
 					$model.$getUserPro(params).then(function(res) {
 						var res = res.data || [];
 						$("#user_table").html("");
-						var guiGeBihendTwo=$("#activityNameMdg").val();
-						var inputTwo=$("#inputTwo").val();
-						$("#titlePTwo").html('活动名称&nbsp;&nbsp;'+guiGeBihendTwo+'&nbsp;&nbsp;'+'('+inputTwo+')')
+						var guiGeBihendTwo = $("#activityNameMdg").val();
+						var inputTwo = $("#inputTwo").val();
+						$("#titlePTwo").html('活动名称&nbsp;&nbsp;' + guiGeBihendTwo + '&nbsp;&nbsp;' + '(' + inputTwo + ')')
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								$("#user_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].addRafflePv + "</td><td>" + res[i].addDrawPv + "</td><td>" + res[i].addDrawRate + "</td></tr>");
@@ -120,27 +155,29 @@ define([], function() {
 				},
 				//活动多选框下拉菜单
 				"getActivityName": function() {
-					$model.$getZhongGift().then(function(res) {
+					$model.$getZhongGiftTwo().then(function(res) {
 						console.log(res)
 						if(res.status == 200) {
 							$scope.selectActivityNameList = res.data;
 							$scope.$apply();
 							console.log($scope.selectActivityNameList)
 							$("#activityName").multiselect({
+								includeSelectAllOption: true,
+								enableFiltering: true,
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
 								nSelectedText: '已选择',
-								selectAll: true,
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '240px'
+								buttonWidth: '240px',
+								maxHeight: '200px',
+								numberDisplayed: 1
 							});
-//							.report-search .multiselect-container li label
+							//							.report-search .multiselect-container li label
 						}
 
 					});
-					
-					
+
 					//地市多选下拉框
 					$model.$getSpeciftByBrandTwo().then(function(res) {
 						console.log(res)
@@ -149,69 +186,24 @@ define([], function() {
 							$scope.$apply();
 							console.log($scope.selectActivityCityNameList)
 							$("#activityCityName").multiselect({
+								includeSelectAllOption: true,
+								enableFiltering: true,
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
 								nSelectedText: '已选择',
-								selectAll: true,
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '240px'
+								buttonWidth: '240px',
+								maxHeight: '200px',
+								numberDisplayed: 1
 							});
 						}
 
 					});
 				},
-				//KPI分省
-				"getProduct": function() {
-					$model.$getBrandData().then(function(res) {
-//						console.log(res)
-						var brandList = res.data || [];
-						if(brandList.length > 0) {
-							var fristBrandName = brandList[0].name;
-//							console.log(fristBrandName)
-
-							$model.$getProduct({
-								productBrand: fristBrandName
-							}).then(function(res) {
-								var speciftList = res.data || [];
-								$scope.obj.productSn = $(".mengdeguo").find("select option:selected").attr("data-sn");
-								//                              $scope.obj.productSn = "6901028165242";
-
-								console.log($scope.obj.productSn)
-
-								$scope.speciftList = speciftList;
-
-								gloabl.winUser($scope.obj);
-							});
-						}
-					})
-				},
-				"getProductTwo": function() {
-					$model.$getBrandData().then(function(res) {
-						console.log(res)
-						var brandList = res.data || [];
-						if(brandList.length > 0) {
-							var fristBrandName = brandList[0].name;
-							console.log(fristBrandName)
-
-							$model.$getProduct({
-								productBrand: fristBrandName
-							}).then(function(res) {
-								console.log(res)
-								var speciftList = res.data || [];
-								$scope.summar.productSn = $(".mengdeguoTwo").find("select option:selected").attr("data-sn");
-								//                              $scope.obj.productSn = "6901028165242";
-
-								console.log($scope.summar.productSn)
-
-								$scope.speciftList = speciftList;
-
-								console.log($scope.speciftList)
-								gloabl.winUser($scope.obj);
-							});
-						}
-					})
-				},
+//				"getTitleHtml":function(){
+//					$("#titlePOne").html('规格&nbsp;&nbsp;' + '条-黄金叶（爱尚）' + '&nbsp;&nbsp;' + '(' + stattime + ')');
+//				},
 				"summaryData": function(params) {
 					$model.$getsummaryData(params).then(function(res) {
 						console.log(res);
@@ -221,7 +213,7 @@ define([], function() {
 						var summarDt = $(".summarDt").val();
 
 						$(".report-table").find("tbody").html("");
-						$(".titleTop").html("规格&nbsp;&nbsp;" + (summarProduct) + "&nbsp;&nbsp;" + (summarDt));
+						$(".titleTop").html("规格&nbsp;&nbsp;" + (summarProduct == null?'条-黄金叶（爱尚）':summarProduct) + "&nbsp;&nbsp;" + (summarDt));
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
@@ -232,102 +224,86 @@ define([], function() {
 						}
 					})
 				},
-				//品牌
-				"getBrand": function() {
-					$model.$getBrandData().then(function(res) {
-						$scope.brandList = res.data || [];
-						$scope.$apply();
-						var curBrandName = $scope.brandList[0].name;
 
-						$model.$getSpecifData({
-							productBrand: curBrandName
-						}).then(function(res) {
-							$scope.speciftList = res.data || [];
-							$scope.$apply();
-							if($scope.speciftList.length > 0) {
-								curSpeciftStr = $scope.speciftList[0].name
-							}
-						});
-
-					})
-				},
 				"getProviceName": function() {
 					$model.$getProviceName().then(function(res) {
-						console.log(res)
-						
+						//						console.log(res)
+
 						if(res.status == 200) {
 							$scope.brandListsss = res.data;
-							console.log($scope.brandListsss)
+							//							console.log($scope.brandListsss)
 							$scope.$apply();
 							$("select#proviceName").multiselect({
+								includeSelectAllOption: true,
+								enableFiltering: true,
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
 								nSelectedText: '已选择',
-								selectAll: true,
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '240px'
+								buttonWidth: '240px',
+								maxHeight: '200px',
+								numberDisplayed: 1
 							});
 						}
+						$('[ng-model="selectAllBrands"]').multiselect('refresh');
 
 					})
 
 					$(document).ready(function() {
 						$("select.multi").multiselect({
+							includeSelectAllOption: true,
+							enableFiltering: true,
 							nonSelectedText: '请选择',
 							allSelectedText: '全部',
 							nSelectedText: '已选择',
-							selectAll: true,
 							selectAllText: '全部',
 							selectAllValue: 'all',
-							buttonWidth: '240px'
+							buttonWidth: '240px',
+							maxHeight: '200px',
+							numberDisplayed: 1
 						});
 					});
-					
-					
+
 					//监听省份选择信息
-            $scope.$watch('selectAllBrands', function(n, o, s) {
-                if (n !== "") {
-                    $scope.selectAllBrands = n;
-                    console.log($scope.selectAllBrands)
-                    var brandListArrObj = {};
-                    var aaa=n.join()
-                    brandListArrObj.provinceName = aaa;
-//                  console.log(n)
-//                  console.log(brandListArrObj)
-                    $model.$getSpeciftByBrand(brandListArrObj).then(function (res) {
-                    	console.log(res)
-                        if(res.status == "200"){
-                            $scope.speciftListsss = res.data;
-                            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftListsss, function(v){
-                                v.label = v.cityName;
-                                v.value = v.cityName;
-                            }));
-                            $('[ng-model="selectSpeci"]').multiselect('refresh');
-                        }
-                    })
-                }
-            });
-            $scope.$watch('selectSpeci', function (n, o, s) {
-                if (n !== "") {
-                    $scope.selectSpeci = n;
-                }
-            });
-            
-            
-            //监听省份选择信息
-//          $('#proviceName').change(function(){
-//              var curBrandValue = $(this).val();
-//              console.log(curBrandValue)
-//              $model.$getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
-//              	console.log(res)
-//                  if(res.status == 200){
-//                      $scope.selectSpeciftList = res.data.data;
-//                      $scope.$apply();
-//                  }
-//              });
-//          });
-		},
+					$scope.$watch('selectAllBrands', function(n, o, s) {
+						if(n !== "") {
+							$scope.selectAllBrands = n;
+							var brandListArrObj = {};
+							var aaa = n.join()
+							brandListArrObj.provinceName = aaa;
+							$model.$getSpeciftByBrand(brandListArrObj).then(function(res) {
+								//                  	console.log(res)
+								if(res.status == "200") {
+									$scope.speciftListsss = res.data;
+									$('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftListsss, function(v) {
+										v.label = v.cityName;
+										v.value = v.cityName;
+									}));
+									$('[ng-model="selectSpeci"]').multiselect('refresh');
+								}
+							})
+						}
+					});
+					$scope.$watch('selectSpeci', function(n, o, s) {
+						if(n !== "") {
+							$scope.selectSpeci = n;
+						}
+					});
+
+					//监听省份选择信息
+					//          $('#proviceName').change(function(){
+					//              var curBrandValue = $(this).val();
+					//              console.log(curBrandValue)
+					//              $model.$getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
+					//              	console.log(res)
+					//                  if(res.status == 200){
+					//                      $scope.selectSpeciftList = res.data.data;
+					//                      $scope.$apply();
+					//                  }
+					//              });
+					//          });
+				},
 				//tab4
 				'getWeekScanWinData': function(timesObj) {
 					$model.$getWeekScanWinData(timesObj).then(function(res) {
@@ -346,8 +322,8 @@ define([], function() {
 					})
 				},
 				//tab5
-				'getProvData': function(timesObj) {
-					$model.$getProvData(timesObj).then(function(res) {
+				'getProvData': function(params) {
+					$model.$getProvData(params).then(function(res) {
 						console.log(res)
 						var res = res.data || [];
 						$(".report-table").find("tbody").html("");
@@ -387,7 +363,7 @@ define([], function() {
 				console.log($("#proviceName").multiselect().val([]))
 				$("#activityName").multiselect().val([]).multiselect("refresh");
 				$("#activityCityName").multiselect().val([]).multiselect("refresh");
-				
+
 				$('#brand').val('');
 				$('#specift').val('');
 				$('#proviceName').val('');
@@ -401,8 +377,14 @@ define([], function() {
 				$('#applySpecift').val('');
 				$('#activityName').val('');
 				$('#activityCityName').val('');
-				if($scope.speciftLists != undefined && $scope.speciftLists.length > 0) {
+				if($scope.speciftList != undefined && $scope.speciftList.length > 0) {
 					$scope.speciftList.length = 0;
+				}
+				if($scope.speciftListsss != undefined && $scope.speciftListsss.length > 0) {
+					$scope.speciftListsss.length = 0;
+				}
+				if($scope.selectActivityNameList != undefined && $scope.selectActivityNameList.length > 0) {
+					$scope.selectActivityNameList.length = 0;
 				}
 				$("#proviceDataSpecift").val();
 				$('#packs').multiselect().val([]).multiselect("refresh");
@@ -486,10 +468,10 @@ define([], function() {
 				if(a === 1) {
 					var data = {
 						"dt": $scope.obj.dt,
-						"productBrand":$scope.obj.productBrand,
+						"productBrand": $scope.obj.productBrand,
 						"productSn": $scope.obj.productSn,
-						"provinceName":$scope.obj.provinceName,
-						"cityName":$scope.obj.cityName
+						"provinceName": $scope.obj.provinceName,
+						"cityName": $scope.obj.cityName
 					}
 					var url = "/api/tztx/dataportal/henanreport/importProvReportData";
 				} else if(a === 2) {
@@ -503,7 +485,7 @@ define([], function() {
 						"dt": $scope.summar.dt,
 						"productBrand": $scope.summar.productBrand,
 						"productSn": $scope.summar.productSn,
-						
+
 					}
 					var url = "/api/tztx/dataportal/henanreport/importRedPacketReportData";
 					// var statTime = $scope.summar.statTime;
@@ -519,10 +501,10 @@ define([], function() {
 					var data = {
 						'dt': $scope.cashWinDataObj.dt
 					}
-//					if(curSpeciftStr != '' && curWeekStr != '') {
-//						// console.log(curSpeciftStr + ':' + curWeekStr);
-//						data.tableTitle = curSpeciftStr + '扫码数据汇总(' + curWeekStr + ')';
-//					}
+					//					if(curSpeciftStr != '' && curWeekStr != '') {
+					//						// console.log(curSpeciftStr + ':' + curWeekStr);
+					//						data.tableTitle = curSpeciftStr + '扫码数据汇总(' + curWeekStr + ')';
+					//					}
 					var url = "/api/tztx/dataportal/henanreport/importIntegralDarwReportData";
 				} else if(a === 6) {
 					var data = {

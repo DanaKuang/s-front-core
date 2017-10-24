@@ -25,6 +25,18 @@ define([], function () {
 		
 		        
 
+		this.$getBrandData = function(){
+		  return request.$Search(getBrandUrl,{},true);
+		}
+		 this.$getSpecifData = function(params){
+          return request.$Search(getProduct,params,true);
+        }
+		 this.$getBrandDataTwo = function(){
+		  return request.$Search(getBrandUrl,{},true);
+		}
+		 this.$getSpecifDataTwo = function(params){
+          return request.$Search(getProduct,params,true);
+        }
         this.$winUser = function (params) {
           return request.$Search(winUser,params,true);
         }
@@ -37,29 +49,18 @@ define([], function () {
         this.$getZhongGift = function () {
           return request.$Search(getZhongGift,{},true);
         }
+        this.$getZhongGiftTwo = function () {
+          return request.$Search(getZhongGift,{},true);
+        }
         this.$getProduct = function (params) {
           return request.$Search(getProduct,params,true);
         }
-        this.$getWeeksData = function(){
-          return request.$Search(getWeeksDtatUrl,{},true);
-        }
-        this.$getBrandData = function(){
-          return request.$Search(getBrandUrl,{},true);
-        }
-        this.$getSpecifData = function(params){
-          return request.$Search(getProduct,params,true);
-        }
+       
         this.$getsummaryData = function(params){
           return request.$Search(getsummaryData,params,true);
         }
-        this.$getPackAndTimeData = function(params){
-          return request.$Search(getPackAndTimeUrl,params,true);
-        }
         this.$getWeekScanWinData = function(params){
           return request.$Search(getWeekScanWinUrl,params,true);
-        }
-        this.$getWeekEntityWinData = function(params){
-          return request.$Search(getWeekEntityWinUrl,params,true);
         }
         this.$getProvData = function(params){
           return request.$Search(getProvDataUrl,params,true);

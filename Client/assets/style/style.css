@@ -1131,7 +1131,11 @@ input[type="checkbox"]:checked + .checkbox{
 .report-search .multiselect-container li label{
     font-size: 15px;
     color: #515151;
-    width: 240px;
+    width: 220px;
+}
+.open .dropdown-menu{
+	oveflow-y:auto;
+	max-height:150px;
 }
 .report-search .multiselect{
     text-align: left;
