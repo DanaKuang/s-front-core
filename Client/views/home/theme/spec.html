@@ -68,14 +68,18 @@
               <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
             </div>
             <div class="spec-wrap">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <img src="" class="img" />
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <span class="count">{{spec.daycount}}：<i>{{spec.count}}</i>次</span><br />
-                <span class="active">{{spec.dayactive}}：<i>{{spec.active}}</i>人</span><br />
+                <span class="active">{{spec.dayactive}}：<i>{{spec.active}}</i>人</span>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
+                  <br />
+                  <span class="weekactive">{{spec.weekactive}}：<i>{{spec.weekActive}}</i>人</span>
+                </div>
+              <div class="col-md-3">
                 <span class="bag">{{spec.daybag}}：<i>{{spec.bag}}</i>个</span><br />
                 <span class="reduce">{{spec.dayreduce}}：<i>{{spec.reduce}}</i>人</span><br />
               </div>
