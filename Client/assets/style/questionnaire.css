@@ -4,6 +4,11 @@
     border-radius: 15px;
     text-align: center;
 }
+.que_btn_nomal{
+    color: #6e80ff;
+    background: #fff;
+    border: 1px solid #6e80ff;
+}
 .que_btn:hover{
     cursor: pointer;
 }
@@ -105,7 +110,149 @@ a.zjxx { display: block; background: url(../image/jiajia.png) no-repeat left; he
  .option_box select{width: 120px;height: 33px;line-height: 33px;padding-left: 10px;}
  textarea.btwen_text{font-family: "微软雅黑"; height: 90px; width: 450px; margin-bottom: 15px; margin-left: 18px;}
  .font_size_limit{width: 120px;height: 33px;line-height: 33px;padding-left: 10px;}
- .add-packet{background: #F8FBFF;border: 1px solid #ccc;height: 33px;line-height: 33px;text-align: center;border-radius: 15px;margin-left: 8px;padding: 0px 15px;}
+ .add-packet{background: #F8FBFF;border: 1px solid #ccc;height: 33px;line-height: 33px;text-align: center;border-radius: 10px;margin-left: 8px;width: 100px;}
  .warn_info{ display: inline-block;height: 33px;line-height: 33px;color: #f00;display: none;}
  .open>.dropdown-menu{max-height: 200px;overflow-y: auto;}
  .btn .caret{float: right;margin-top: 6px;}
+ .normal_file{position: relative;
+    height: 33px;
+    width: 100px;}
+ #normalFile{ opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    height: 100%;}
+ .select_cami_file{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #D2D2D2;
+    font-size: 13px;
+    text-align: center;
+    line-height: 33px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #F8FBFF;
+    border-radius: 10px;
+}
+#normalFileWarn{
+    position: absolute;margin-left: 30%;margin-top:2px;font-size: 13px;
+}
+.select-duration .control-label:before,.packet_pool .control-label:before{
+    content: '*';
+    position: absolute;
+    right: 0;
+    top: 5px;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.amont_warn{margin-left: -3%;line-height:30px;color: #f00;display: none;}
+textarea{overflow-x: hidden;}
+.yd_box{margin-left: 2%;}
+.view_box{
+    margin-left: 33%;
+    border: 1px solid #6e80ff;
+    height: 700px;
+    border-radius: 30px;
+}
+.view_title{
+    border-bottom: 1px solid #6e80ff;
+    height: 70px;
+    margin: 0 -15px;
+}
+.view_title div{
+    display: inline-block;
+    margin-top: 30px;
+}
+.view_title .cir_show{
+    width: 10px;
+    height: 10px;
+    border: 1px solid #6e80ff;
+    border-radius: 50%;
+    margin-left: 38%;
+}
+.view_title .long_show{
+    width: 60px;
+    height: 10px;
+    border: 1px solid #6e80ff;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+.view_main{
+    height: 560px;
+    overflow-y: auto;
+}
+.view_bottom{
+    border-top: 1px solid #6e80ff;
+    margin: 0 -15px;
+}
+.view_bottom .bottom_but{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #6e80ff;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: 43%;
+}
+/*调查问卷预览*/
+.naire_name{
+    padding: 15px 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.item_box{
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+}
+.naire_title,.radio_item{
+    padding-left: 12px;
+    text-indent: -12px;
+}
+.option_item{
+    vertical-align: text-bottom;
+}
+.naire_area{
+    height: 60px;
+    width: 100%;
+}
+/*滚动条样式*/
+.view_main::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.view_main::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.view_main::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+.item_box:last-child{
+    border-bottom: 1px solid #ccc;
+}
+.naire_bottom{
+    padding: 10px 0 15px;
+}
+.must_write{
+    color: red;
+    font-size: 20px;
+    vertical-align: -webkit-baseline-middle;
+}
+.view_opeta_box{
+    margin-left: 33%;
+    margin-top: 20px;
+}
+.view_opeta_box div{
+    width: 30%;
+    display: inline-block;
+    margin: 0 9%;
+    box-sizing: border-box;
+}

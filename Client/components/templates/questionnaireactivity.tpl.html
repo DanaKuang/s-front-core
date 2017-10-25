@@ -1,11 +1,11 @@
 <div>
 	<div class="pop-header">
-		<p class="pop-title float-left">新建活动 > 调查问卷</p>
+		<p class="pop-title float-left">新建活动 > {{pageName}}</p>
 		<sa-popback></sa-popback>
 	</div>
     <div class="ui-panel-box panel border-box" style="overflow:hidden;">
         <!--新建调查问卷-->
-        <div id="createQuestionnaire">
+        <div id="createQuestionnaire" style="display: none;">
             <div class="activity-name form-horizontal configuration-item form-group col-md-5">
                 <label class="control-label col-sm-2">活动名称</label>
                 <div class="col-sm-4">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="warn_info" id="specifWarn">请选择规格</div>
             </div>
-            <div class="select-area form-horizontal configuration-item col-md-5 form-group">
+            <div id="selectArea" class="select-area form-horizontal configuration-item col-md-5 form-group">
                 <label class="control-label col-sm-2">地区</label>
                 <div class="col-sm-3">
                     <select name="selectarea" ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required ng-hide="edit"></select>
@@ -43,7 +43,7 @@
                 <div class="warn_info" id="areaWarn">请选择地区</div>
             </div>
             <div class="select-duration form-horizontal configuration-item form-group col-md-5">
-                <label class="control-label col-sm-2">活动时段</label>
+                <label class="col-sm-2 control-label">活动时段</label>
                 <div class="col-sm-9">
                     <div class="col-sm-3">
                         <input type="text" name="startTime" ng-model="startTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分" readonly="disabled" ng-disabled="disabled" required>
@@ -52,16 +52,20 @@
                     <div class="col-sm-3" style="margin-left: -12px;margin-right: 12px;">
                         <input type="text" name="endTime" ng-model="endTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分" readonly="disabled" ng-disabled="disabled" required>
                     </div>
-                    <div class="warn_info">请选择完整的活动时段</div>
+                    <div class="warn_info" id="durationWarn">请选择完整的活动时段</div>
                 </div>
             </div>
 
             <div class="configuration-item form-horizontal configuration-image form-group col-md-5">
                 <label class="activityfileimage col-sm-2 control-label">规范性文件及说明</label>
-                <div class="col-sm-3" style="margin-left:-10px;">
-                    <input type="file" name="activityfile" class="form-control input-sm uploadimage" ng-disabled="disabled" required>
+                <div class="normal_file" style="margin-left:18.6%;">
+                    <!-- <input type="file" id="normalFile" name="activityfile" class="form-control input-sm uploadimage" ng-disabled="disabled" required> -->
+                    <input type="file" id="normalFile">
+                    <div class="select_cami_file">选择文件</div>
                 </div>
-                <div class="warn_info">请上传规范性文件及说明文件</div>
+                <span id="normalFileWarn"></span>
+
+                <!-- <div class="warn_info" style="display: inline-block">请上传规范性文件及说明文件</div> -->
             </div>
 
             <div class="configuration-item form-horizontal form-group col-md-5">
@@ -72,14 +76,13 @@
             </div>
             <!-- 微信红包 -->
             <div class="select_packet hide" id="selectPacketBox">
-                <div class="configuration-item form-horizontal form-group col-md-5">
+                <div class="configuration-item form-horizontal form-group col-md-5 packet_pool">
                     <label class="control-label col-sm-2">选择红包池:</label>
                     <div class="col-sm-9" style="margin-left:-10px;">
-                        <!-- <input type="file" name="packetfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required> -->
                         <div class="choose-list">
-                            <button class="fake-choose-button add-packet show-hb-list" ng-click="selectPacketPool()">选择</button>
+                            <button class="fake-choose-button add-packet show-hb-list" ng-click="selectPacketPool()">选择红包池</button>
                             <button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
-                            <span class="show-chosen" id="chosePacket"></span>
+                            <span class="show-chosen" id="chosePacket" style="left: 110px;"></span>
                         </div>
                     </div>
                 </div>
@@ -87,47 +90,51 @@
                     <label class="control-label col-sm-2"></label>
                     <div class="col-sm-9">
                         <div class="col-sm-2" style="margin-right: -6%;margin-left: -2%;">
-                            <input type="radio" name="packetAmont">随机金额
+                            <input id="ranAmont" type="radio" name="packetAmont">随机金额
                         </div>
                         
                         <div class="col-sm-2">
-                            <input type="text" name="startMoney" class="form-control input-sm">
+                            <input type="text" id="startMoney" name="startMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-right: -6%;margin-left: -3%;line-height:30px;">~</div>
                         <div class="col-sm-2">
-                            <input type="text" name="endMoney" class="form-control input-sm">
+                            <input type="text" id="endMoney" name="endMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
+                        <div class="amont_warn col-sm-3" id="ranWarn">请输入完整的随机金额</div>
                     </div>
                 </div>
                 <div class="configuration-item form-horizontal form-group col-md-5">
                     <label class="control-label col-sm-2"></label>
                     <div class="col-sm-9">
                         <div class="col-sm-2" style="margin-right: -6%;margin-left: -2%;">
-                            <input type="radio" name="packetAmont">固定金额
+                            <input id="fixdAmont" type="radio" name="packetAmont">固定金额
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" name="startMoney" class="form-control input-sm">
+                            <input type="text" id="fixdMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
+                        <div class="amont_warn col-sm-3" id="fixdWarn">请输入固定金额</div>
                     </div>
                 </div>
-                <div class="configuration-item form-horizontal form-group col-md-5">
+                <div class="configuration-item form-horizontal form-group col-md-5 packet_pool">
                     <label class="control-label col-sm-2">红包总额：</label>
                     <div class="col-sm-9">
                         <div class="col-sm-4" style="margin-left:-2%;">
-                            <input type="text" name="startMoney" class="form-control input-sm">
+                            <input type="text" id="packetToal" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
+                        <div class="amont_warn col-sm-3" id="totalWarn">请输入红包总额</div>
                     </div>
                 </div>
-                <div class="configuration-item form-horizontal form-group col-md-5">
+                <div class="configuration-item form-horizontal form-group col-md-5 packet_pool">
                     <label class="control-label col-sm-2">奖品数量：</label>
                     <div class="col-sm-9">
                         <div class="col-sm-4" style="margin-left:-2%;">
-                            <input type="text" name="startMoney" class="form-control input-sm">
+                            <input type="text" id="prizeNum" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">件</div>
+                        <div class="amont_warn col-sm-3" id="prizeNumWarn">请输入奖品数量</div>
                     </div>
                 </div>
                 <div class="configuration-item form-horizontal form-group col-md-5">
@@ -151,7 +158,7 @@
             </div>
         </div>
         <!--添加调查问卷题目-->
-        <div id="addQquestion" style="display:none;">
+        <div id="addQquestion" style="display:block;">
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <div class="col-sm-9">
                     <div class="col-sm-2 que_btn que_btn_next" ng-click="addQuestion(0)">
@@ -175,18 +182,18 @@
 
             <div class="form-horizontal configuration-item form-group col-md-5">
                 <label class="control-label col-sm-1">活动名称</label>
-                <div class="col-sm-6 content_top">云烟活动调查问卷</div>
+                <div class="col-sm-6 content_top" id="activeName"></div>
             </div>
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <label class="control-label col-sm-1">开始说明</label>
                 <div class="col-sm-6 content_top">
-                    <textarea class="border-box form-control input-sm textarea_box" name="startExplain" style="height:80px;"></textarea>
+                    <textarea class="border-box form-control input-sm textarea_box" id="startExplain" style="height:80px;" ng-blur="startDesc()"></textarea>
                 </div>
             </div>
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <label class="control-label col-sm-1">结束说明</label>
                 <div class="col-sm-6 content_top">
-                    <textarea class="border-box form-control input-sm textarea_box" name="endExplain" style="height:80px;"></textarea>
+                    <textarea class="border-box form-control input-sm textarea_box" id="endExplain" style="height:80px;" ng-blur="endDesc()"></textarea>
                 </div>
             </div>
 
@@ -199,16 +206,14 @@
                         <div class="xxk_xzqh_box dxuan ">
                             <div>
                                 <label for="" style="vertical-align: middle;">标题：</label>
-                                <!--<textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_dx" placeholder="单选题目"></textarea>-->
                                 <input name="" class="input_wenbk btwen_text btwen_text_dx" placeholder="单选题目"/>
                                 
-                                <input name="" type="checkbox" value="" class="fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
+                                <input name="" type="checkbox" value="" class="bdtm fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
                                 
                             </div>
 
                             <div>
                                 <label for="" style="vertical-align: middle;">描述：</label>
-                                <!--<textarea name="" cols="" rows="" class="input_wenbk btwen_brief btwen_text_dx" placeholder="单选题目描述"></textarea>-->
                                 <input name="" class="input_wenbk btwen_brief btwen_text_dx" placeholder="单选题目描述"/>
                             </div>
                             
@@ -234,24 +239,18 @@
                         <div class="xxk_xzqh_box duoxuan hide">
                             <div>
                                 <label for="" style="vertical-align: middle;">标题：</label>
-                                <!--<textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_duox" placeholder="多选题目"></textarea>-->
                                 <input name="" class="input_wenbk btwen_text btwen_text_duox" placeholder="多选题目"/>
-                                <input name="" type="checkbox" value="" class="fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
+                                <input name="" type="checkbox" value="" class="bdtm fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
                                 
                             </div>
                             <div>
                                 <label for="" style="vertical-align: middle;">描述：</label>
-                                <!--<textarea name="" cols="" rows="" class="input_wenbk btwen_brief btwen_text_dx" placeholder="单选题目描述"></textarea>-->
                                 <input name="" class="input_wenbk btwen_brief btwen_text_duox" placeholder="多选题目描述"/>
                             </div>
                             <div class="title_itram">
                                 <div class="kzjxx_iteam">
                                     <input name="" type="checkbox" value="" class="dxk">
                                     <input name="" type="text" class="input_wenbk" placeholder="选项" style="margin-left:4px;">
-                                    <!--<label>
-                                        <input name="" type="checkbox" value="" class="fxk"> 
-                                        <span>可填空</span>
-                                    </label>-->
                                     <a href="javascript:void(0);" class="del_xm">X</a>
                                 </div>
                             </div>
@@ -277,7 +276,7 @@
                                 <label for="" style="vertical-align: middle;">标题：</label>
                                 <!--<textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_tk" placeholder="答题区"></textarea>-->
                                 <input name="" class="input_wenbk btwen_text btwen_text_tk" placeholder="答题区"/>
-                                <input name="" type="checkbox" value="" class="fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
+                                <input name="" type="checkbox" value="" class="bdtm fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
                             </div>
                             <div>
                                 <label for="" style="vertical-align: middle;">描述：</label>
@@ -285,7 +284,7 @@
                             </div>
                             <div style="margin-left:-12px;">
                                 <label for="">至少写：</label>
-                                <input name="" class="input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
+                                <input name="" class="least_size input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
                                 <span>字</span>
                                 <!--<label for="" style="margin-left:20px;">至多写：</label>
                                 <input name="" class="input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
@@ -299,9 +298,98 @@
                         </div>
                     </div>
                 </div>
+                <div style="margin-left: 3%">
+                    <input type="checkbox" name="" id="isEnable">是否启用本活动
+                </div>
+                <div style="margin-top: 20px;">
+                    <label class="control-label col-sm-1"></label>
+                    <div class="col-sm-9">
+                        <div class="col-sm-2 que_btn que_btn_nomal" ng-click="previewQuestionira()">预览</div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2 que_btn que_btn_nomal" ng-click="saveData()">保存</div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2 que_btn que_btn_nomal">取消</div>
+                    </div>
+                </div>
+                
             </div>
         </div>
         <!--调查问卷结束-->
+        <!-- 调查问卷预览开始 -->
+        <div id="viewQuestion" style="display: none;">
+            <div class="configuration-item form-horizontal form-group col-md-5">
+                <div class="col-sm-4 view_box" style="clear: both;">
+                    <div class="view_title">
+                        <div class="cir_show"></div>
+                        <div class="long_show"></div>
+                    </div>
+                    <div class="view_main">
+                        <div class="naire_name">{{previewData.name}}</div>
+                        <div style="padding-bottom: 10px;">{{previewData.qc.preDesc}}</div>
+                        <ul>
+                           <li class="item_box" ng-repeat="itemData in previewData.qc.qcList">
+                                <div ng-if="itemData.questType == 1">
+                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                       <ul>
+                                           <li class="radio_item" ng-repeat="optionItem in itemData.qcaList">
+                                            <input type="radio" disabled="true" class="option_item" />{{optionItem.answerName}}
+                                            </li>   
+                                       </ul>
+                                </div>
+                                <div ng-if="itemData.questType == 2">
+                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                       <ul>
+                                           <li class="radio_item" ng-repeat="optionItem in itemData.qcaList">
+                                            <input type="checkbox" disabled="true" class="option_item" />{{optionItem.answerName}}
+                                            </li>
+                                       </ul>
+                                </div>
+                                <div ng-if="itemData.questType == 3">
+                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <textarea class="naire_area" readonly="readonly"></textarea>
+                                </div>
+                               
+                           </li>
+                           <!-- <li class="item_box">
+                               <div class="naire_title">2.为什么耳机线怎么用都没事，而电源线时间长了就坏了？</div>
+                               <ul>
+                                   <li class="radio_item">
+                                    <input type="checkbox" disabled="true" class="option_item" />How to Look Up
+                                    </li>
+                                    <li>
+                                    <input type="checkbox" disabled="true"/>How to Look Up
+                                    </li>
+                               </ul>
+                           </li>
+                           <li class="item_box">
+                               <div class="naire_title">2.为什么耳机线怎么用都没事，而电源线时间长了就坏了？</div>
+                               <ul>
+                                   <li class="radio_item">
+                                    <input type="checkbox" disabled="true" class="option_item" />How to Look Up
+                                    </li>
+                                    <li>
+                                    <input type="checkbox" disabled="true"/>How to Look Up
+                                    </li>
+                               </ul>
+                           </li> -->
+                           <!-- <li class="item_box">
+                               <div class="naire_title">3.为什么耳机线怎么用都没事，而电源线时间长了就坏了？</div>
+                               <textarea class="naire_area" readonly="readonly"></textarea>
+                           </li> -->
+                        </ul>
+                        <div class="naire_bottom">{{previewData.qc.afterDesc}}</div>
+                    </div>
+                    <div class="view_bottom">
+                        <div class="bottom_but"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4 view_opeta_box" style="clear: both;">
+                    <div class="que_btn que_btn_next" ng-click="saveData()">申请上线</div>
+                    <div class="que_btn que_btn_nomal" ng-click="exitView()">退出预览</div>
+                </div>
+            </div>
+        </div>
+        <!-- 调查问卷预览开始 -->
 		
 
 	</div>

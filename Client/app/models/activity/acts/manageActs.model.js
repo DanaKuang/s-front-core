@@ -58,6 +58,10 @@ define([], function () {
             // 查看活动
             var LOOK_ACTIVITY = '/api/tztx/saas/saotx/activity/detail';
 
+            //保存调查问卷
+            var SAVE_QUSDTIONNAIRE_JSON_DATA = '/api/tztx/saas/saotx/activity/saveOrUpdate';
+
+
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
@@ -146,6 +150,11 @@ define([], function () {
             $model.lookActivity = function (data) {
                 return request.$Search(LOOK_ACTIVITY, data);
             }
+
+            //调查问卷
+            $model.saveQuestionnair = function (data) {
+                return request.$Search(SAVE_QUSDTIONNAIRE_JSON_DATA, data, true);
+            };
 
         }]
     }
