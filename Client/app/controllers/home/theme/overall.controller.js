@@ -14,34 +14,16 @@ define([], function () {
         var $model = $scope.$model;
         var echarts = require('echarts');
 
+        // 默认当日
         $scope.singleSelect = {
           unit: 'day'
         }
-
-        $scope.$watch($scope.singleSelect, function (n, o, s) {
-          if (n == 'day') {
-            // 日
-            $scope.singleSelect.unitZh = '日';
-          } else if (n == 'week') {
-            // 周
-            $scope.singleSelect.unitZh = '周';
-          } else {
-            // 月
-            $scope.singleSelect.unitZh = '月';
-          }
-        })
-
-        $scope.singleSelect.unitZh = $scope.singleSelect == 'day' ? '日' : $scope.singleSelect == 'week' ? '周' : '月'
-
-        // 默认当日
         $scope.today = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
         $scope.thismonth = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
 
         // datetimepicker初始化
         setDateConf.init($('.overall'), 'day')
         setDateConf.init($('.overall'), 'month')
-
-        // 根据日、周、月切换
 
 
         // 1. 扫码次数趋势分析

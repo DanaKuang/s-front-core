@@ -12,7 +12,7 @@ define([], function () {
     ServiceContent: ['$rootScope', '$scope', 'mPrizeGotHistoryModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
 
       $("#durationStart").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00',
+        format: 'yyyy-mm-dd hh:ii:ss',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -27,7 +27,7 @@ define([], function () {
       });
 
       $("#durationEnd").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00',
+        format: 'yyyy-mm-dd hh:ii:ss',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,

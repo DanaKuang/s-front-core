@@ -32,15 +32,15 @@
 									</div>
 									<div class="col-sm-3">
 										<!-- 日 -->
-										<input type="text" class="day input-sm form-control form_datetime" readonly id="day" ng-if="singleSelect.unit == 'day'" placeholder="{{today}}">
+										<input type="text" class="day input-sm form-control form_datetime" readonly id="day" ng-show="singleSelect.unit == 'day'" placeholder="{{today}}">
 										<!-- 周 -->
-										<select name="" id="" class="week input-sm form-control" ng-if="singleSelect.unit == 'week'">
+										<select name="" id="" class="week input-sm form-control" ng-show="singleSelect.unit == 'week'">
 											<option value="">2017年第XX周</option>
 											<option value="">2017年第XX周</option>
 											<option value="">2017年第XX周</option>
 										</select>
 										<!-- 月 -->
-										<input type="text" class="month input-sm form-control form_datetime" readonly id="month" ng-if="singleSelect.unit == 'month'" placeholder="{{thismonth}}">
+										<input type="text" class="month input-sm form-control form_datetime" readonly id="month" ng-show="singleSelect.unit == 'month'" placeholder="{{thismonth}}">
 									</div>
 									<div class="col-sm-1">
 										<button type="submit" class="btn btn-primary input-sm">查询</button>
@@ -55,7 +55,7 @@
 										<!-- 可拖动折线图 -->
 									</div>
 									<div class="col-md-3" style="height: 400px;">
-										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unitZh}}扫码次数：XXXX次</p>
+										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：XXXX次</p>
 										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：XXXX次</p>
 									</div>
 								</div>
@@ -73,14 +73,14 @@
 
 								<!-- 扫码用户数分析 -->
 								<div class="chart-wrap col-md-12">
-									<p class="absolute">本{{singleSelect.unitZh}}扫码人数：XXXX人 （本年度累计扫码人数：XXXX人）</p>
+									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：XXXX人 （本年度累计扫码人数：XXXX人）</p>
 									<div class="chart" id="userChart" style="height: 400px"></div>
 								</div>
 								
 								<!-- 扫码烟包数分析 -->
 								<div class="chart-wrap col-md-12">
 									<div class="absolute">
-										<p class="inline">本{{singleSelect.unitZh}}扫码烟包数：XXXX个 （本年度累计扫码烟包总数：XXXX个）</p>
+										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：XXXX个 （本年度累计扫码烟包总数：XXXX个）</p>
 										<div class="inline" style="text-align: center">
 											<label for="">盒</label><input type="checkbox">
 											<label for="">条</label><input type="checkbox">

@@ -89,7 +89,7 @@ define([], function () {
 
         // 初始化datetimepicker并判断开始日期不得晚于结束日期
     		$("#durationStart").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
+	      	format: 'yyyy-mm-dd hh:ii:ss', 
 	      	language: 'zh-CN',
 	        todayBtn:  1,
 	        autoclose: 1,
@@ -104,7 +104,7 @@ define([], function () {
         });
         // 初始化datetimepicker并判断结束日期不得早于开始日期
     		$("#durationEnd").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
+	      	format: 'yyyy-mm-dd hh:ii:ss', 
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
