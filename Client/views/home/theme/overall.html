@@ -12,7 +12,7 @@
 
 <div ng-controller="overallCtrl" class="overall">
 	<div class="animated fadeInRightBig">
-		<div class="container-fluid overall">
+		<div class="container-fluid">
 			<div class="ui-content-box row">
 				<div class="col-md-12">
 					<div class="ui-panel-title">
@@ -21,7 +21,7 @@
 					</div>
 					<div class="panel">
 						<div class="panel-body">
-							<form novalidate name="form" role="form" ng-submit="submitForm(form.$valid)" class="col-md-12">
+							<form novalidate name="form" role="form" class="col-md-12">
 								<div class="form-inline operation">
 									<div class="col-sm-1">
 										<select name="singleSelect" id="" class="input-sm form-control" ng-model="singleSelect.unit">
@@ -32,18 +32,18 @@
 									</div>
 									<div class="col-sm-3">
 										<!-- 日 -->
-										<input type="text" class="day input-sm form-control form_datetime" readonly id="day" ng-show="singleSelect.unit == 'day'" placeholder="{{today}}">
+										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" placeholder="{{todayplaceholder}}" ng-model="day"></label>
+
 										<!-- 周 -->
-										<select name="" id="" class="week input-sm form-control" ng-show="singleSelect.unit == 'week'">
-											<option value="">2017年第XX周</option>
-											<option value="">2017年第XX周</option>
-											<option value="">2017年第XX周</option>
-										</select>
+										<label for="" class="week" ng-show="singleSelect.unit == 'week'"><select name="week" id="" class="input-sm form-control" ng-model="week">
+											<option ng-repeat="item in allweek" value="{{item.weekId}}">{{item.weekNo}}</option>
+										</select></label>
+										
 										<!-- 月 -->
-										<input type="text" class="month input-sm form-control form_datetime" readonly id="month" ng-show="singleSelect.unit == 'month'" placeholder="{{thismonth}}">
+										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" placeholder="{{thismonthplaceholder}}" ng-model="month"></label>
 									</div>
 									<div class="col-sm-1">
-										<button type="submit" class="btn btn-primary input-sm">查询</button>
+										<button type="submit" class="btn btn-primary input-sm" ng-click="search($event)">查询</button>
 									</div>
 								</div>
 							</form>
@@ -55,8 +55,8 @@
 										<!-- 可拖动折线图 -->
 									</div>
 									<div class="col-md-3" style="height: 400px;">
-										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：XXXX次</p>
-										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：XXXX次</p>
+										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
+										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：{{yearpv}}次</p>
 									</div>
 								</div>
 
@@ -73,17 +73,17 @@
 
 								<!-- 扫码用户数分析 -->
 								<div class="chart-wrap col-md-12">
-									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：XXXX人 （本年度累计扫码人数：XXXX人）</p>
+									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}人）</p>
 									<div class="chart" id="userChart" style="height: 400px"></div>
 								</div>
 								
 								<!-- 扫码烟包数分析 -->
 								<div class="chart-wrap col-md-12">
 									<div class="absolute">
-										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：XXXX个 （本年度累计扫码烟包总数：XXXX个）</p>
+										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：{{changepack}}个 （本年度累计扫码烟包总数：{{yearpack}}个）</p>
 										<div class="inline" style="text-align: center">
-											<label for="">盒</label><input type="checkbox">
-											<label for="">条</label><input type="checkbox">
+											<label for="">盒</label><input type="checkbox"  ng-checked="checked">
+											<label for="">条</label><input type="checkbox" ng-checked="checked">
 										</div>
 									</div>
 									<div class="chart col-md-12" id="packedChart" style="height: 400px"></div>
@@ -93,10 +93,10 @@
 								<div class="chart-wrap col-md-12">
 									<div class="absolute">
 										<div class="inline">
-											<label for="">促销计划</label><input type="checkbox">
-											<label for="">抽奖次数</label><input type="checkbox">
-											<label for="">中奖数量</label><input type="checkbox">
-											<label for="">领取数量</label><input type="checkbox">
+											<label for="">促销计划</label><input type="checkbox" ng-checked="checked">
+											<label for="">抽奖次数</label><input type="checkbox" ng-checked="checked">
+											<label for="">中奖数量</label><input type="checkbox" ng-checked="checked">
+											<label for="">领取数量</label><input type="checkbox" ng-checked="checked">
 										</div>
 									</div>
 									<div class="chart col-md-12" id="promotionChart" style="height: 400px"></div>

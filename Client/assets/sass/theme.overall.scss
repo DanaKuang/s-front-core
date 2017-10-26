@@ -11,6 +11,10 @@ form {
 	margin-bottom: 30px;
 }
 
+.operation label {
+	width: 100%;
+}
+
 .chart-all {
 	clear: both;
 	.chart {
@@ -36,6 +40,9 @@ form {
 		-moz-transform: translateX(-50%);
 		-ms-transform: translateX(-50%);
 		transform: translateX(-50%);
+	}
+	.chart-wrap:last-child .absolute {
+		left: 40%;
 	}
 	label {
 		margin-right: 6px;
