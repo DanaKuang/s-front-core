@@ -30,13 +30,12 @@ define([], function () {
                 global.week = true;
                 $model.getweeks().then(function (res) {
                     var data = res.data || [{weekId: ''}];
-                    data.forEach(function (n, i) {
+                    $scope.allweek = data.map(function (n, i) {
                         var a = n.weekNo.substr(n.weekNo.indexOf('(')+1);
                         a = a.substr(0, a.indexOf('~')).replace(/\./g, '-');
-                        data[i].weekId = a;
+                        n.weekId = a;
+                        return n
                     })
-                    console.log(data);
-                    $scope.allweek = data;
                     $scope.week = $scope.allweek[0].weekId;
                     $scope.$apply()
                 })
@@ -44,7 +43,7 @@ define([], function () {
         })
 
         var global = {};
-        init();
+        $scope.checkbox = {};
         function init() {
             global.f_axisx      = []; // 扫码次数、扫码人数、促销趋势x轴
             global.s_axisx      = []; // 扫码烟包数x轴
@@ -58,7 +57,19 @@ define([], function () {
             global.pack_y       = [];
             global.bar_y        = [];
             global.various_y    = []; // 各规格扫码烟包数分析
-            $scope.checked      = true;
+
+            // $scope.checked      = true;
+            $scope.checkbox.packcheckbox  = true;
+            $scope.checkbox.barcheckbox   = true;
+            $scope.checkbox.promocheckbox = true;
+            $scope.checkbox.drawcheckbox  = true;
+            $scope.checkbox.getcheckbox   = true;
+            $scope.checkbox.paycheckbox   = true;
+
+            // 地图省下的市初始化
+            districtOption.xAxis.data = [];
+            districtOption.series[0].data = [];
+            districtChart.setOption(districtOption);
         }
 
         global.searchItem = function () {
@@ -70,7 +81,6 @@ define([], function () {
         }
 
         // 搜索，进入页面默认查询当日数据
-        search();
         $scope.search = search;
         function search() {
             init();
@@ -80,15 +90,14 @@ define([], function () {
             $model.scan_people_promotion(searchItem).then(function (res) {
                 // awardPutPv 促销计划，drawPv 抽奖次数，drawResultPv 中奖数量 awardPayPv 领取数量
                 var data = res.data;
-                data.forEach(function (n, i) {
-                    global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
-                    global.scan_y.push(n.scanPv);
-                    global.uv_y.push(n.scanUv);
-                    global.awardPut_y.push(n.awardPutPv); //促销计划
-                    global.draw_y.push(n.drawPv); //抽奖次数
-                    global.drawResult_y.push(n.drawResultPv); //中奖数量
-                    global.awardPay_y.push(n.awardPayPv); //领奖数量
-                })
+                global.f_axisx = data.map(n => n.statTime ? n.statTime : n.weekNo);
+                global.scan_y = data.map(n => n.scanPv || 0);
+                global.uv_y = data.map(n => n.scanUv || 0);
+                global.awardPut_y = data.map(n => n.awardPutPv || 0);
+                global.draw_y = data.map(n => n.drawPv || 0);
+                global.drawResult_y = data.map(n => n.drawResultPv || 0);
+                global.awardPay_y = data.map(n => n.awardPayPv || 0);
+
                 trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
                 trendOption.series[0].data = global.scan_y;
                 trendChart.setOption(trendOption);
@@ -100,6 +109,7 @@ define([], function () {
                 promotionChartOption.series[1].data = global.draw_y;
                 promotionChartOption.series[2].data = global.drawResult_y;
                 promotionChartOption.series[3].data = global.awardPay_y;
+               
                 promotionChart.setOption(promotionChartOption)
             })
 
@@ -113,6 +123,14 @@ define([], function () {
                 $scope.$apply();
             })
 
+            // 各规格扫码数分析
+            $model.various(searchItem).then(function (res) {
+                var data = res.data;
+                standardChartOption.xAxis[0].data = global.t_axisx = data.map(n => n.productName)
+                standardChartOption.series[0].data = global.various_y = data.map(n => n.scanPv)
+                standardChart.setOption(standardChartOption);
+            })
+
             // 扫码烟包数
             $model.packet(searchItem).then(function (res) {
                 var data = res.data;
@@ -121,22 +139,20 @@ define([], function () {
                     global.bar_y.push(n.scanPair);
                     global.s_axisx.push(n.statTime ? n.statTime : n.weekNo);
                 })
-                packedChartOption.xAxis.data = global.s_axisx;
-                packedChartOption.series[0].data = global.pack_y;
-                packedChartOption.series[1].data = global.bar_y;
+                packedChartOption = {
+                    xAxis: {
+                        data: global.s_axisx
+                    },
+                    series: [
+                        {
+                            data: global.pack_y
+                        },
+                        {
+                            data: global.bar_y
+                        }
+                    ]
+                }
                 packedChart.setOption(packedChartOption);
-            })
-
-            // 各规格烟包数分析
-            $model.various(searchItem).then(function (res) {
-                var data = res.data;
-                data.forEach(function (n, i) {
-                    global.t_axisx.push(n.productName);
-                    global.various_y.push(n.scanPv);
-                })
-                standardChartOption.xAxis[0].data = global.t_axisx;
-                standardChartOption.series[0].data = global.various_y;
-                standardChart.setOption(standardChartOption);
             })
         }
         
@@ -213,8 +229,6 @@ define([], function () {
                 }
             ]
         };
-        trendChart.setOption(trendOption)
-        
 
         // 2. 扫码次数地域分析
         var chinaJson = $model.$chinaJson.data;
@@ -322,9 +336,6 @@ define([], function () {
           ]
         };
 
-        // use configuration item and data specified to show chart
-        districtChart.setOption(districtOption);
-
         mapEchart.on('click', function (e) {
             if (e.componentType === 'series') {
                 // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
@@ -333,17 +344,10 @@ define([], function () {
                     statTime: global.searchItem().statTime,
                     statType: global.searchItem().statType
                 }
-                var xAxis = [];
-                var yAxis = [];
                 $model.province(data).then(function(res) {
                     var data = res.data;
-                    data.forEach(function (n, i) {
-                        // yMax
-                        xAxis.push(n.cityName);
-                        yAxis.push(n.scanPv);
-                    })
-                    districtOption.xAxis.data = dataAxis = xAxis;
-                    districtOption.series[0].data = dataAxisY = yAxis;
+                    districtOption.xAxis.data = dataAxis = data.map(n => n.cityName);
+                    districtOption.series[0].data = dataAxisY = data.map(n => n.scanPv);
                     districtChart.setOption(districtOption);
                 })
             }
@@ -444,7 +448,6 @@ define([], function () {
                 }
             ]
         };
-        standardChart.setOption(standardChartOption);
 
         // 4. 扫码用户数分析
         var userChart = echarts.init(document.getElementById('userChart'));
@@ -499,8 +502,6 @@ define([], function () {
             ]
         };
 
-        userChart.setOption(userChartOption);
-
         // 5. 扫码烟包数分析
         var packedChart = echarts.init(document.getElementById('packedChart'));
 
@@ -548,7 +549,6 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 },
                 {
@@ -563,7 +563,6 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 },
             ]
@@ -618,7 +617,6 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 },
                 {
@@ -633,7 +631,6 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 },
                 {
@@ -648,7 +645,6 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 },
                 {
@@ -663,12 +659,39 @@ define([], function () {
                         }
                       }
                     },
-                    stack: '总量',
                     data:[]
                 }
             ]
         };
-        promotionChart.setOption(promotionChartOption)
+
+        // 烟包数分析 条、盒勾选
+        var packorbar = [];
+        $scope.updatepackorbar = function (val, num) {
+            FN_TICK(val, num, packedChartOption, 'pack')
+        }
+
+        // 促销效果分析 4个勾选
+        var promobackup = [];
+        $scope.updatepromo = function (val, num) {
+            FN_TICK(val, num, promotionChartOption, 'promo')
+        }
+
+        function FN_TICK(val, num, option, tag) {
+            var backarr = tag === 'pack' ? packorbar : promobackup;
+            var chart = tag === 'pack' ? packedChart : promotionChart;
+            if (val) {
+                option.series[num].data = backarr[num].data;
+            } else {
+                backarr[num] = {};
+                backarr[num].data = option.series[num].data
+                option.series[num].data = [];
+            }
+            chart.setOption(option)
+        }
+
+        // 进入页面初始化
+        init();
+        search();
       }]
   	}
   	return overallController

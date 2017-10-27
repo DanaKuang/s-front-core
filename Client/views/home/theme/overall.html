@@ -82,8 +82,8 @@
 									<div class="absolute">
 										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：{{changepack}}个 （本年度累计扫码烟包总数：{{yearpack}}个）</p>
 										<div class="inline" style="text-align: center">
-											<label for="">盒</label><input type="checkbox"  ng-checked="checked">
-											<label for="">条</label><input type="checkbox" ng-checked="checked">
+											<label for="">盒</label><input type="checkbox"  ng-model="checkbox.packcheckbox" ng-change="updatepackorbar(checkbox.packcheckbox, 0)">
+											<label for="">条</label><input type="checkbox" ng-model="checkbox.barcheckbox" ng-change="updatepackorbar(checkbox.barcheckbox, 1)">
 										</div>
 									</div>
 									<div class="chart col-md-12" id="packedChart" style="height: 400px"></div>
@@ -93,10 +93,10 @@
 								<div class="chart-wrap col-md-12">
 									<div class="absolute">
 										<div class="inline">
-											<label for="">促销计划</label><input type="checkbox" ng-checked="checked">
-											<label for="">抽奖次数</label><input type="checkbox" ng-checked="checked">
-											<label for="">中奖数量</label><input type="checkbox" ng-checked="checked">
-											<label for="">领取数量</label><input type="checkbox" ng-checked="checked">
+											<label for="">促销计划</label><input type="checkbox" ng-model="checkbox.promocheckbox" ng-change="updatepromo(checkbox.promocheckbox, 0)">
+											<label for="">抽奖次数</label><input type="checkbox" ng-model="checkbox.drawcheckbox" ng-change="updatepromo(checkbox.drawcheckbox, 1)">
+											<label for="">中奖数量</label><input type="checkbox" ng-model="checkbox.getcheckbox" ng-change="updatepromo(checkbox.getcheckbox, 2)">
+											<label for="">领取数量</label><input type="checkbox" ng-model="checkbox.paycheckbox" ng-change="updatepromo(checkbox.paycheckbox, 3)">
 										</div>
 									</div>
 									<div class="chart col-md-12" id="promotionChart" style="height: 400px"></div>
