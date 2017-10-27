@@ -101,12 +101,12 @@
                 </select>
               </div>
               <div class="brand_names">
-              <label  for="proviceName">省份:&nbsp;&nbsp;</label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" style="width:240px;"  value="{{selectAllBrands}}">
+              <label  for="proviceName" style="margin-left:30px;">省份&nbsp;:&nbsp;&nbsp;</label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" style="width:240px;"  value="{{selectAllBrands}}">
                       <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
                                 </select>
               </div>
               <div class="specift_names">
-                                <label  class="label_title" for="applySpecift">地市:&nbsp;&nbsp; </label><select style="width:240px;" id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                <label  class="label_title" for="applySpecift">地市&nbsp;:&nbsp;&nbsp; </label><select style="width:240px;" id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
                                     <!--<option value="">请选择</option>-->
                                     <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
                                 </select>
@@ -386,7 +386,7 @@
             	<!--<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;">活动积分情况</p>-->
               <thead style="border-top:1px solid #a0a0a0">
               <tr>
-                <th colspan="15" id="provDataTitle">活动积分情况</th>
+                <th colspan="15" id="provDataTitle">积分情况统计</th>
               </tr>
               <tr>
                 <th>地市</th>
