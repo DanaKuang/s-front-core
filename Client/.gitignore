@@ -1,0 +1,8 @@
+.DS_Store
+bower_components/
+dist/
+logs/
+npm-debug.log
+yarn-error.log
+备份/
+.project
