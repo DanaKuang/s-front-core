@@ -27,10 +27,11 @@
 						<div class="panel-body operation multi">
 							<form novalidate name="form">
 								<div class="form-horizontal">
-									<div class="form-group col-md-4">
+									<div class="form-group col-md-4 brand">
 										<label class="control-label col-sm-4">品牌选择</label>
 										<div class="col-sm-7">
-											<select class="form-control input-sm select" ng-model="selectAllBrands" multiple="multiple">
+											<select class="form-control input-sm select" ng-model="selectAllBrands">
+												<option value="">请选择</option>
 												<option ng-repeat="item in allBrands" value="{{item.brandCode}}">{{item.name}}</option>
 											</select>
 										</div>
@@ -38,7 +39,8 @@
 									<div class="form-group col-md-4">
 										<label class="control-label col-sm-4">规格选择</label>
 										<div class="col-sm-7">
-											<select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
+											<select class="form-control input-sm select" ng-model="selectSpeci">
+												<option value="">请选择</option>
 												<option ng-repeat="item in speci" value="{{item.productCode}}">{{item.name}}</option>
 											</select>
 										</div>
@@ -52,16 +54,18 @@
 											</select>
 										</div>
 									</div> -->
-									<div class="form-group col-md-4 area">
-										<label class="control-label col-sm-4">地区</label>
-										<div class="col-sm-7">
-											<select class="form-control input-sm select" ng-model="allarea" multiple="multiple"></select>
-										</div>
-									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label col-sm-4">订单号</label>
 										<div class="col-sm-7">
 											<input type="text" class="form-control input-sm" placeholder="请输入订单号" ng-model="orderCode">
+										</div>
+									</div>
+									<div class="form-group col-md-4 area">
+										<label class="control-label col-sm-4">地区</label>
+										<div class="col-sm-7">
+											<select class="form-control input-sm select" ng-model="allarea">
+												<option value="">请选择</option>
+											</select>
 										</div>
 									</div>
 									<!-- <div class="form-group col-md-4">

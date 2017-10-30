@@ -106,6 +106,7 @@ define([], function () {
             $scope.spec = {
               "daycount" : "本日扫码次数",
               "dayactive" : "本日连续月活用户",
+              "weekactive":"本日连续周活用户",
               "daybag" : "本日扫码烟包数",
               "dayreduce" : "本日新增扫码用户数"
             }
@@ -115,6 +116,7 @@ define([], function () {
             $scope.spec = {
               "daycount" : "本周扫码次数",
               "dayactive" : "本周连续月活用户",
+              "weekactive":"本周连续周活用户",              
               "daybag" : "本周扫码烟包数",
               "dayreduce" : "本周新增扫码用户数"
             }
@@ -124,6 +126,7 @@ define([], function () {
             $scope.spec = {
               "daycount" : "本月扫码次数",
               "dayactive" : "本月连续月活用户",
+              "weekactive":"本月连续周活用户",              
               "daybag" : "本月扫码烟包数",
               "dayreduce" : "本月新增扫码用户数"
             }
@@ -141,6 +144,7 @@ define([], function () {
         "reduce": 0,
         "daycount" : "本日扫码次数",
         "dayactive" : "本日连续月活用户",
+        "weekactive":"本日连续周活用户",                      
         "daybag" : "本日扫码烟包数",
         "dayreduce" : "本日新增扫码用户数"
       };
@@ -150,6 +154,7 @@ define([], function () {
             var data = res.data[0] || {};
             $(".region-margin .count i").html(data.scanPv || 0);
             $(".region-margin .active i").html(data.activeUv || 0);
+            $(".region-margin .weekactive i").html(data.weekActiveUv || 0);            
             $(".region-margin .bag i").html(data.scanCode || 0);
             $(".region-margin .reduce i").html(data.scanAddUv || 0);
             $(".region-margin .img").attr("src",data.image || "")

@@ -75,3 +75,9 @@
   opacity: 0;
   cursor: pointer;
 }
+.multiselect-container input[type=radio] {
+  margin-top: 2px!important;
+}
+.btn-group, button.multiselect {
+  width: 100%;
+}

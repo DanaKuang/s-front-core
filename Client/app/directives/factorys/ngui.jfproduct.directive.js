@@ -70,7 +70,7 @@ define([], function () {
                     var osJSobject = osJQobject[0];
                 }
                 osJSobject.dataset.integralPool = item.id;
-                $(osJSobject).find('.radio-res').not('.hidden').find('.show-chosen').html('（已选择：' + item.name + '）');
+                $('.choose-tag').children().last().html('（已选择：' + item.name + '）');
                 $('.modal-content .close').trigger('click');
             }
 

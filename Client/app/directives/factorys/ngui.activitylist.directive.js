@@ -79,6 +79,11 @@ define([], function () {
             scope.lookupActivity = function (e) {
                 scope.$emit('lookupActivity', event, {activityCode: e.target.dataset.activitycode})
             }
+            // 页面跳转
+            scope.turnToReal = function () {
+                angular.element(".ui-navbar-header").scope().changeNav(null, {menuCode: 'index'});
+                sessionStorage.setItem('menuCode', 'realtime');
+            }
         }
         return defineObj;
     }

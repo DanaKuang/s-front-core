@@ -1,15 +1,15 @@
 /**
  * Author: kuang
  * Create Date: 2017-07-18
- * Description: manageActs
+ * Description: manageacts
  */
 
 define([], function () {
-  	var manageActsController = {
+  	var manageactsController = {
     	ServiceType: 'controller',
-    	ServiceName: 'manageActsCtrl',
-    	ViewModelName: 'manageActsModel',
-    	ServiceContent: ['$rootScope', '$scope', 'manageActsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    	ServiceName: 'manageactsCtrl',
+    	ViewModelName: 'manageactsModel',
+    	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
         // 全局变量
         var globalVariable = {};
         // 获取全局搜索条件
@@ -21,8 +21,8 @@ define([], function () {
             sns: $scope.selectSpeci || [],
             areaCodes: $scope.allarea || [],
             keys: $scope.keysval || '',
-            stime: $scope.startTime || '',
-            etime: $scope.endTime || '',
+            stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
             currentPageNumber: 1, 
             pageSize: 10
           }
@@ -89,7 +89,7 @@ define([], function () {
 
         // 初始化datetimepicker并判断开始日期不得晚于结束日期
     		$("#durationStart").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
+	      	format: 'yyyy-mm-dd hh:ii', 
 	      	language: 'zh-CN',
 	        todayBtn:  1,
 	        autoclose: 1,
@@ -104,7 +104,7 @@ define([], function () {
         });
         // 初始化datetimepicker并判断结束日期不得早于开始日期
     		$("#durationEnd").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
+	      	format: 'yyyy-mm-dd hh:ii', 
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
@@ -652,7 +652,7 @@ define([], function () {
           
         }
 
-        // 多个礼品
+        // 多个礼品显示配置
         $scope.$on('fromrealproductchoose', function (e,v,f) {
           var giftpackScope = globalVariable.show_product_list_scope;
           if (f) {
@@ -679,14 +679,7 @@ define([], function () {
                 $model.getTemplateSpecific(f).then(function(res){
                   $scope.allConfigTemplateConf = null;       
                 })
-                // 还需要再次请求list
-                $model.getActivityList({
-                  currentPageNumber: 1,
-                  pageSize: 10
-                }).then(function(res) {
-                  $scope.activitylistConf = res.data;
-                  $scope.paginationConf = res.data;
-                })
+                getList();
               }
             } else {
               alert(res.data.message);
@@ -718,5 +711,5 @@ define([], function () {
 
     	}]
   	}
-  	return manageActsController
+  	return manageactsController
 })
