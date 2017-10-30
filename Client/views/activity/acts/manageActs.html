@@ -238,6 +238,7 @@
 		    	<div class="input-wrap">
 		    		<label for="">增加金额</label><input type="number" ng-model="hbnumber">
 		    	</div>
+		    	<div class="pool_warn" id='poolDetail'></div>
 		    </div>
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -280,5 +281,25 @@
 	    </div>
 	  </div>
 	</div>
+	<!--取消调查问卷时弹框-->
+    <div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="cancel_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">问卷信息未保存，确认取消么？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

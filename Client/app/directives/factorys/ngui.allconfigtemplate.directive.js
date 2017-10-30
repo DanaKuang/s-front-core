@@ -45,12 +45,19 @@ define([], function () {
                         scope.pageName = data[0].pageName;
                         scope.pageCode = data[0].pageCode;
                     } else {
-                        // 编辑活动
-                        scope.confUrl = data.confUrl;
-                        scope.pageName = data.pageExt.pageName;
-                        scope.pageCode = data.pageExt.pageCode;
-                        scope.activityCode = data.activity.activityCode;
-                        scope.dcList = data.dcList;
+                        if(data.activity.activityForm != 'act-4'){
+                            // 编辑活动
+                            scope.confUrl = data.confUrl;
+                            scope.pageName = data.pageExt.pageName;
+                            scope.pageCode = data.pageExt.pageCode;
+                            scope.activityCode = data.activity.activityCode;
+                            scope.dcList = data.dcList;
+                        }else{
+                            //属于调查问卷的编辑活动
+                            scope.confUrl = data.confUrl;
+                            scope.activityCode = data.activity.activityCode;
+                        }
+                        
                     }
                 }
                 

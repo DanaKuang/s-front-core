@@ -5,7 +5,7 @@
 	</div>
     <div class="ui-panel-box panel border-box" style="overflow:hidden;">
         <!--新建调查问卷-->
-        <div id="createQuestionnaire" style="display: none;">
+        <div id="createQuestionnaire" style="display: block;">
             <div class="activity-name form-horizontal configuration-item form-group col-md-5">
                 <label class="control-label col-sm-2">活动名称</label>
                 <div class="col-sm-4">
@@ -94,11 +94,11 @@
                         </div>
                         
                         <div class="col-sm-2">
-                            <input type="text" id="startMoney" name="startMoney" class="form-control input-sm">
+                            <input type="number" id="startMoney" name="startMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-right: -6%;margin-left: -3%;line-height:30px;">~</div>
                         <div class="col-sm-2">
-                            <input type="text" id="endMoney" name="endMoney" class="form-control input-sm">
+                            <input type="number" id="endMoney" name="endMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
                         <div class="amont_warn col-sm-3" id="ranWarn">请输入完整的随机金额</div>
@@ -111,7 +111,7 @@
                             <input id="fixdAmont" type="radio" name="packetAmont">固定金额
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" id="fixdMoney" class="form-control input-sm">
+                            <input type="number" step="0.01" id="fixdMoney" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
                         <div class="amont_warn col-sm-3" id="fixdWarn">请输入固定金额</div>
@@ -121,17 +121,18 @@
                     <label class="control-label col-sm-2">红包总额：</label>
                     <div class="col-sm-9">
                         <div class="col-sm-4" style="margin-left:-2%;">
-                            <input type="text" id="packetToal" class="form-control input-sm">
+                            <input type="number" step="0.01" id="packetToal" class="form-control input-sm" ng-blur="totalPacket()">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">元</div>
                         <div class="amont_warn col-sm-3" id="totalWarn">请输入红包总额</div>
+                        <div ng-if="edit" class="col-sm-2 add-packet" style="width: 80px;" data-toggle="modal" data-target=".add-hbstock-pop" >增库</div>
                     </div>
                 </div>
                 <div class="configuration-item form-horizontal form-group col-md-5 packet_pool">
                     <label class="control-label col-sm-2">奖品数量：</label>
                     <div class="col-sm-9">
                         <div class="col-sm-4" style="margin-left:-2%;">
-                            <input type="text" id="prizeNum" class="form-control input-sm">
+                            <input type="number" id="prizeNum" class="form-control input-sm">
                         </div>
                         <div class="col-sm-1" style="margin-left: -3%;line-height:30px;">件</div>
                         <div class="amont_warn col-sm-3" id="prizeNumWarn">请输入奖品数量</div>
@@ -147,18 +148,21 @@
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <label class="control-label col-sm-2"></label>
                 <div class="col-sm-9">
-                    <div class="col-sm-2 que_btn que_btn_next" ng-click="finishGeneral()">
+                    <div ng-if="edit" class="col-sm-2 que_btn que_btn_next" ng-click="saveEditData()">
+                        保存
+                    </div>
+                    <div ng-if="!edit" class="col-sm-2 que_btn que_btn_next" ng-click="finishGeneral()">
                         下一步
                     </div>
                     <div class="col-sm-1"></div>
-                    <div class="col-sm-2 que_btn que_btn_back">
+                    <div class="col-sm-2 que_btn que_btn_back" ng-click="changeNair()">
                         返回
                     </div>
                 </div>
             </div>
         </div>
         <!--添加调查问卷题目-->
-        <div id="addQquestion" style="display:block;">
+        <div id="addQquestion" style="display:none;">
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <div class="col-sm-9">
                     <div class="col-sm-2 que_btn que_btn_next" ng-click="addQuestion(0)">
@@ -308,7 +312,7 @@
                         <div class="col-sm-1"></div>
                         <div class="col-sm-2 que_btn que_btn_nomal" ng-click="saveData()">保存</div>
                         <div class="col-sm-1"></div>
-                        <div class="col-sm-2 que_btn que_btn_nomal">取消</div>
+                        <div class="col-sm-2 que_btn que_btn_nomal" ng-click="changeNair()">取消</div>
                     </div>
                 </div>
                 
@@ -324,12 +328,13 @@
                         <div class="long_show"></div>
                     </div>
                     <div class="view_main">
-                        <div class="naire_name">{{previewData.name}}</div>
+                        <div class="naire_name">{{previewData.activityName}}</div>
                         <div style="padding-bottom: 10px;">{{previewData.qc.preDesc}}</div>
                         <ul>
                            <li class="item_box" ng-repeat="itemData in previewData.qc.qcList">
                                 <div ng-if="itemData.questType == 1">
-                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_title">{{itemData.idx}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_desc" ng-if="itemData.questDec != undefined && itemData.questDec != ''">{{itemData.questDec}}</div>
                                        <ul>
                                            <li class="radio_item" ng-repeat="optionItem in itemData.qcaList">
                                             <input type="radio" disabled="true" class="option_item" />{{optionItem.answerName}}
@@ -337,7 +342,8 @@
                                        </ul>
                                 </div>
                                 <div ng-if="itemData.questType == 2">
-                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_title">{{itemData.idx}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_desc" ng-if="itemData.questDec != undefined && itemData.questDec != ''">{{itemData.questDec}}</div>
                                        <ul>
                                            <li class="radio_item" ng-repeat="optionItem in itemData.qcaList">
                                             <input type="checkbox" disabled="true" class="option_item" />{{optionItem.answerName}}
@@ -345,7 +351,8 @@
                                        </ul>
                                 </div>
                                 <div ng-if="itemData.questType == 3">
-                                    <div class="naire_title">{{index+1}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_title">{{itemData.idx}}.{{itemData.questName}}<span ng-if="itemData.requireQuest == 1" class="must_write">*</span></div>
+                                    <div class="naire_desc" ng-if="itemData.questDec != undefined && itemData.questDec != ''">{{itemData.questDec}}</div>
                                     <textarea class="naire_area" readonly="readonly"></textarea>
                                 </div>
                                

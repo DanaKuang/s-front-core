@@ -202,16 +202,28 @@ define([], function () {
 
         // 编辑活动
         $scope.$on('editActivity', function (e, v, f) {
-          $model.editActivity(f).then(function(res){
-            $scope.allConfigTemplateConf = res.data;
-            getAlreadySelectedLaunchInfo(res.data.data.activity);
+          
+          if(f.activityForm != 'act-4'){
+              $model.editActivity({'activityCode': f.activityCode}).then(function(res){
+                // console.log('编辑中奖');
+                // console.log(res);
+                $scope.allConfigTemplateConf = res.data;
+                getAlreadySelectedLaunchInfo(res.data.data.activity);
 
-            // 如果存在中奖地区
-            var draeareascope = angular.element('.draw-area').scope();
-            if (draeareascope) {
-              getAlreadySelectedDrawAreaInfo(res.data.data.caidanConfig);
-            }
-          })
+                // 如果存在中奖地区
+                var draeareascope = angular.element('.draw-area').scope();
+                if (draeareascope) {
+                  getAlreadySelectedDrawAreaInfo(res.data.data.caidanConfig);
+                }
+            })
+          }else{
+            $model.editActivityQuestionnair({'activityCode': f.activityCode}).then(function(res){
+
+                $scope.allConfigTemplateConf = res.data;
+                getAlreadySelectedLaunchInfo(res.data.data.activity);
+            })
+          }
+          
         })
 
         // 查看活动
@@ -254,6 +266,18 @@ define([], function () {
               maxHeight: '500px',
               numberDisplayed: 1
             });
+            //调查问卷地区选择
+            $('#selectArea .select').multiselect({
+              nonSelectedText: '请选择',
+              nSelectedText: '已选择',
+              includeSelectAllOption: true,
+              selectAllText: '全部',
+              allSelectedText: '全选',
+              enableFiltering: true,
+              buttonWidth: '100%',
+              maxHeight: '200px',
+              numberDisplayed: 1
+            });
           });
           // 不需要根据供应商获取品牌信息
           $scope.$on('clickbrandval', function (e, v, f) {
@@ -290,57 +314,93 @@ define([], function () {
 
         // 获取已编辑的信息
         function getAlreadySelectedLaunchInfo(selectedData) {
-          $(document).ready(function () {
-            $(".multi .select").multiselect({
-              nonSelectedText: '请选择',
-              nSelectedText: '已选择',
-              includeSelectAllOption: true,
-              selectAllText: '全部',
-              allSelectedText: '全选',
-              enableFiltering: true,
-              buttonWidth: '453px',
-              maxHeight: '500px',
-              numberDisplayed: 1
+          if(selectedData.activityForm != 'act-4'){
+            $(document).ready(function () {
+              $(".multi .select").multiselect({
+                nonSelectedText: '请选择',
+                nSelectedText: '已选择',
+                includeSelectAllOption: true,
+                selectAllText: '全部',
+                allSelectedText: '全选',
+                enableFiltering: true,
+                buttonWidth: '453px',
+                maxHeight: '500px',
+                numberDisplayed: 1
+              });
             });
-          });
-          // 获取已选品牌
-          $model.getBrandList().then(function (res) {
-            var selectCompanyScope = angular.element('.select-brand').scope();
-            selectCompanyScope.brand = res.data.data;
-            $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                v.label = v.name;
-                v.value = v.brandCode;
-            }));
-            $('[ng-model="selectBrandVal"]').multiselect('refresh');
-            $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
-            $('.multiselect.dropdown-toggle').addClass('disabled');
-          })
-
-          var alreadyselectedbrandsarrObj = {};
-          alreadyselectedbrandsarrObj.brandCode = [];
-          selectedData.activityBrandsList.forEach(function(n, index){
-            alreadyselectedbrandsarrObj.brandCode.push(n);
-          })
-
-          // 获取已选规格
-          $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
-            var selectBrandScope = angular.element('.select-specification').scope();
-            selectBrandScope.specification = res.data.data;
-            $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                v.label = v.allName;
-                v.value = v.sn;
-            }));
-            $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
-            var activitySnSList = [];
-            selectedData.activitySnSList.forEach(function(n, index) {
-              activitySnSList.push(n.sn);
+            // 获取已选品牌
+            $model.getBrandList().then(function (res) {
+              var selectCompanyScope = angular.element('.select-brand').scope();
+              selectCompanyScope.brand = res.data.data;
+              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.name;
+                  v.value = v.brandCode;
+              }));
+              $('[ng-model="selectBrandVal"]').multiselect('refresh');
+              $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
-            $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-            $('.multiselect.dropdown-toggle').addClass('disabled');
-          })
+            var alreadyselectedbrandsarrObj = {};
+            alreadyselectedbrandsarrObj.brandCode = [];
+            selectedData.activityBrandsList.forEach(function(n, index){
+              alreadyselectedbrandsarrObj.brandCode.push(n);
+            })
 
-          // 获取已编辑的地区
-          // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
+            // 获取已选规格
+            $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
+              var selectBrandScope = angular.element('.select-specification').scope();
+              selectBrandScope.specification = res.data.data;
+              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.allName;
+                  v.value = v.sn;
+              }));
+              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+              var activitySnSList = [];
+              selectedData.activitySnSList.forEach(function(n, index) {
+                activitySnSList.push(n.sn);
+              })
+              $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+            // 获取已编辑的地区
+            // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
+          }else{
+            // 获取已选品牌
+            $model.getBrandList().then(function (res) {
+              var selectCompanyScope = angular.element('.select-brand').scope();
+              selectCompanyScope.brand = res.data.data;
+              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.name;
+                  v.value = v.brandCode;
+              }));
+              $('[ng-model="selectBrandVal"]').multiselect('refresh');
+              $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.brandCode);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+            var alreadyselectedbrandsarrObj = {};
+            alreadyselectedbrandsarrObj.brandCode = [];
+            // selectedData.activityBrandsList.forEach(function(n, index){
+            //   alreadyselectedbrandsarrObj.brandCode.push(n);
+            // })
+            alreadyselectedbrandsarrObj.brandCode.push(selectedData.brandCode);
+            // 获取已选规格
+            $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
+              var selectBrandScope = angular.element('.select-specification').scope();
+              selectBrandScope.specification = res.data.data;
+              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.allName;
+                  v.value = v.sn;
+              }));
+              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+              var activitySnSList = [];
+              // selectedData.activitySnSList.forEach(function(n, index) {
+              //   activitySnSList.push(n.sn);
+              // })
+              activitySnSList.push(selectedData.sn);
+              $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+          }
         }
 
         // 获取已编辑的中奖地区
@@ -540,25 +600,56 @@ define([], function () {
         // 新增红包库存
         var hbaddstockid = {};
         $scope.$on('hbaddstockid', function (e,v,f) {
+          console.log('传过来的红包数据');
+          console.log(f);
+          if(f.activityForm == 'act-4'){
+            $model.getPoolDetaiById({id:f.poolId}).then(function(res) {
+              console.log(333333);
+              console.log(res);
+              if(res.data.ret == '200000'){
+                var poolDetailObj = res.data.data;
+                // $scope.poolDetail = '红包池剩余额度：'+ poolDetailObj.moneyPool +'元';
+                $('#poolDetail').html('红包池剩余额度：'+ poolDetailObj.moneyPool +'元').show();
+                $scope.poolDetailMoney = poolDetailObj.moneyPool;
+              }
+            })
+          }else{
+            $('#poolDetail').html('').hide();
+          }
           hbaddstockid = f;
         })
         $scope.confirmHbStock = function () {
           var addNum = {addNum: $scope.hbnumber};
-          var data = {
-            addNum: $scope.hbnumber,
-            id: hbaddstockid.id
-          };
-          if (!hbaddstockid.id) {
-            alert('请先选择红包');
-            $('.modal-content .close').trigger('click');
-            return
+          if(hbaddstockid.activityForm != 'act-4'){
+            var data = {
+              addNum: $scope.hbnumber,
+              id: hbaddstockid.id
+            };
+            if (!hbaddstockid.id) {
+              alert('请先选择红包');
+              $('.modal-content .close').trigger('click');
+              return
+            }
+            $model.addhbstock(data).then(function(res) {
+              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
+              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
+              $('.modal-content .close').trigger('click');
+            })
+          }else{
+            if($scope.hbnumber > $scope.poolDetailMoney){
+              $('#poolDetail').html('增库额度超出红包剩余额度，请重新输入增库金额').show();
+              return;
+            }else{
+              var saveEditData = {
+                activityCode : hbaddstockid.activityCode
+              }
+              $model.saveQuestionnair().then(function(){
+
+              })
+            }
           }
-          $model.addhbstock(data).then(function(res) {
-            var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
-            var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
-            $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
-            $('.modal-content .close').trigger('click');
-          })
+          
         }
 
         // 多个礼品
@@ -602,6 +693,29 @@ define([], function () {
             }
           })
         })
+
+        //调查问卷
+        $scope.$on('questionnaireSaveData', function(e,v,f){
+          $model.saveQuestionnair(f).then(function(res){
+            if (res.data.ret === '200000') {
+              $model.getTemplateSpecific({}).then(function(res){
+                $scope.allConfigTemplateConf = null;      
+              })
+              getList();
+            }else{
+              alert(res.data.message);
+            }
+          })
+        })
+
+        //确认取消调查问卷
+        $scope.confirmCancel = function(){
+            $('.cancel_box').modal('hide');
+            $model.getTemplateSpecific({}).then(function(res){
+                $scope.allConfigTemplateConf = null;       
+            })
+        };
+
     	}]
   	}
   	return manageActsController

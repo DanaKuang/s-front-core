@@ -68,7 +68,11 @@ define([], function () {
 
             // 编辑
             scope.editActivity = function (e) {
-                scope.$emit('editActivity', event, {activityCode: e.target.dataset.activitycode})
+                var sendData = {
+                    activityCode : e.target.dataset.activitycode,
+                    activityForm : e.target.dataset.activityform 
+                }
+                scope.$emit('editActivity', event, sendData)
             }
 
             // 停用-查看

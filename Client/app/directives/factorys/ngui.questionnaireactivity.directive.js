@@ -39,19 +39,83 @@ define([], function () {
             }, true);
 
             var questionnaireData = {
-                // 'activityForm' : 'art-4',
-                // 'copyOfPageCode' : 'wenjuan',
                 'qc' : {}
             };
 
             var all_template_scope = angular.element('.all-template-config-wrap').scope();
-            var pageListObj = all_template_scope.conf.data[0];
-            questionnaireData.activityForm = pageListObj.type;
-            questionnaireData.copyOfPageCode = pageListObj.pageCode;
+            if(all_template_scope.activityCode){
+                // 说明从编辑活动过来
+                scope.disabled = true;
+                scope.edit = true;
+                var activity = all_template_scope.conf.data.activity;
+                console.log("开始啦啦啦");
+                console.log(activity);
+                scope.activity = activity;
+                scope.actForm = activity.activityForm;
+                scope.selectBrandVal = activity.brandCode;
+                scope.selectSpecificationVal = activity.sn;
+
+                var cityCodeArr = activity.areaCode.split(',');
+                var selectAreaVal = [];
+                var adcodenames = [];
+
+                scope.selectAreaVal = selectAreaVal.join(',');
+                scope.adcodenames = activity.areaName;
+                $('#quesName').val(activity.activityName).attr('disabled','true');
+                var sTime = new Date(activity.stime);
+                scope.startTime = timesFormatStr(sTime);
+                var eTime = new Date(activity.etime);
+                scope.endTime = timesFormatStr(eTime);
+                $('#normalFileWarn').html(activity.attachName).css('color','#ccc');
+                $('#normalFile').attr('disabled','true');
+                $('#checkWxPacket').attr('disabled','true');
+                if(activity.activityAwards.length > 0){
+                    $('#checkWxPacket').attr('checked','true');
+                    $('#selectPacketBox').removeClass('hide');
+                    //normalFileWarn
+                    $('#normalFileWarn').html(activity.attachName);
+                    var activeAwardsObj = activity.activityAwards[0].details[0];
+                    console.log(activeAwardsObj);
+                    $('#chosePacket').html(activeAwardsObj.poolName);
+                    scope.poolId = activeAwardsObj.poolId; //红包池id
+
+                    //判断是随机还是固定金额
+                    if(activeAwardsObj.bigred != activeAwardsObj.minred){
+                        $('#ranAmont').attr({'checked':'true',"disabled":'true'});
+                        $('#fixdAmont').attr("disabled",'true');
+                        $('#fixdMoney').attr('disabled','true');
+                        $('#startMoney').val(activeAwardsObj.minred).attr('disabled','true');
+                        $('#endMoney').val(activeAwardsObj.bigred).attr('disabled','true');
+                    }else{
+                        $('#ranAmont').attr("disabled",'true');
+                        $('#fixdAmont').attr({'checked':'true',"disabled":'true'});
+                        $('#fixdMoney').val(activeAwardsObj.bigred).attr('disabled','true');
+                        $('#startMoney').attr('disabled','true');
+                        $('#endMoney').attr('disabled','true');
+                    }
+                    $('#packetToal').val(activeAwardsObj.redTotalMoney).attr('disabled','true');
+                    $('#prizeNum').val(activeAwardsObj.awardNums).attr('disabled','true');
+                }
+            }else{
+                var pageListObj = all_template_scope.conf.data[0];
+                questionnaireData.activityForm = pageListObj.type;
+                questionnaireData.copyOfPageCode = pageListObj.pageCode;
+                $('#ranAmont').attr('checked','true');
+            }
+            
+            //时间转换格式
+            function timesFormatStr(times){
+                return times.getFullYear() + "-" + strRegion((times.getMonth() + 1)) + "-" + strRegion(times.getDate()) + " " + strRegion(times.getHours()) + ":" + strRegion(times.getMinutes());
+            }
+            //时间补位
+            function strRegion(timeStr){
+                if(parseInt(timeStr) <= 9){
+                    return '0'+timeStr;
+                }
+                return timeStr;
+            }
 
             //品牌
-            // scope.parentForm = angular.element('#createQuestionnaire').scope();
-
             $('.select-brand').one('click', function() {
                 if (!scope.disabled) {
                     scope.$emit('clickbrandval', event, {})
@@ -186,6 +250,57 @@ define([], function () {
                 }
             });
 
+            function checkRanOrFix(){
+                var isRan = $('#ranAmont')[0].checked;
+                if(isRan){
+                    $('#prizeNum').removeAttr('disabled').val('');
+                    $('#packetToal').val('');
+                    $('#fixdMoney').val('');
+                }else{
+                    $('#prizeNum').attr('disabled','true').val('');
+                    $('#startMoney').val('');
+                    $('#endMoney').val('');
+                    $('#packetToal').val('');
+                }
+            }
+
+            //是否选为随机金额
+            $('#ranAmont').on('change',function(){
+                checkRanOrFix();
+            });
+            //是否选为固定金额
+            $('#fixdAmont').on('change',function(){
+                checkRanOrFix();
+            });
+
+            //金额转换
+            function formatMoney(moneyVal){
+                if(moneyVal != ''){
+                    var regNum = /^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/;
+                    if(regNum.test(moneyVal)){
+                        var numStr = moneyVal.toString().indexOf('.');
+                        if(numStr > -1){
+                            moneyVal = Number(moneyVal.toString().match(/^\d+(?:\.\d{0,2})?/));
+                        }
+                        return moneyVal;
+                    }
+                } 
+            }
+
+            scope.totalPacket = function(){
+                //固定金额
+                var fixdMoney = $('#fixdMoney').val();
+                if(fixdMoney != ''){
+                    var formatFixd = formatMoney(fixdMoney);
+                    //红包总额
+                    var packetToal = $('#packetToal').val();
+                    var formatTotal = formatMoney(packetToal);
+                    var packetNum = Math.floor(formatTotal/formatFixd);
+                    $('#prizeNum').val(packetNum);
+                } 
+            }
+
+
             //完成题干进行下一步
             scope.finishGeneral = function(){
                 // questionnaireData
@@ -196,7 +311,7 @@ define([], function () {
                     return;
                 }else{
                     $('#nameWarn').hide();
-                    questionnaireData.name = quesName;
+                    questionnaireData.activityName = quesName;
                 }
                 //选择品牌
                 var that_scope = angular.element('.select-brand').scope();
@@ -334,7 +449,7 @@ define([], function () {
 
                 }
                 //活动名称显示
-                $('#activeName').html(questionnaireData.name);
+                $('#activeName').html(questionnaireData.activityName);
                 $('#createQuestionnaire').hide();
                 $('#addQquestion').show();
             }
@@ -492,7 +607,6 @@ define([], function () {
                             }
                         }
                     }
-
                 }
 
                 var czxx = $(this).parent(".kzqy_czbut").parent(".movie_box");
@@ -837,8 +951,6 @@ define([], function () {
                 if(questionnaireData.activityAwards.length > 0){
                     questionnaireData.qc.giveRedpack = 1;
                 }
-
-                console.log(questionnaireData);
                 scope.$emit('questionnaireSaveData', event, questionnaireData);
             }
 
@@ -848,8 +960,14 @@ define([], function () {
                 $('#addQquestion').hide();
                 $('#viewQuestion').show();
                 scope.previewData = questionnaireData;
-                console.log(scope.previewData);
             }
+            //取消调查问卷创建
+            scope.changeNair = function(){
+                $('.cancel_box').modal('show');
+                // 请求接口就好
+                // scope.$emit('popback', event, {});
+            }
+
             //退出预览
             scope.exitView = function(){
                 $('#createQuestionnaire').hide();
@@ -858,8 +976,22 @@ define([], function () {
                 console.log(questionnaireData);          
             }
 
-
-             
+            // 红包增库
+          $('#createQuestionnaire').on('click', '.add-packet', function(e){
+                // var poolId = $(this).attr('data-poolid');
+                // var actform = $(this).attr('data-actform');
+              // 把礼品红包id传到controller
+              // var data = {
+              //     id: poolId, 
+              //     activityForm: actform
+              // };
+              var data = {
+                  poolId: scope.poolId, 
+                  activityForm: scope.actForm,
+                  activityCode: all_template_scope.activityCode
+              };
+              scope.$emit('hbaddstockid', event, data)
+          })
         }
 
         return defineObj;

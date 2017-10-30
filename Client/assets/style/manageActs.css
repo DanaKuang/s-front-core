@@ -901,3 +901,8 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .sample-list-item {
 	width: 25%;
 }
+.pool_warn{
+	margin-top: 10px;
+	color: #f00;
+	display: none;
+}
