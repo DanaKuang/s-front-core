@@ -361,12 +361,16 @@ define([], function () {
                     statTime: global.searchItem().statTime,
                     statType: global.searchItem().statType
                 }
+                dataAxis = [];
+                dataAxisY = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
                 $model.province(data).then(function(res) {
                     var data = res.data;
                     data.forEach(function (n, i) {
-                        districtOption.xAxis.data = dataAxis = n.cityName;
-                        districtOption.series[0].data = dataAxisY
+                        dataAxis.push(n.cityName);
+                        dataAxisY.push(n.scanPv);
                     });
+                    districtOption.xAxis.data = dataAxis;
+                    districtOption.series[0].data = dataAxisY;
                     districtChart.setOption(districtOption);
                 })
             }
