@@ -79,11 +79,11 @@
 								<div class="form-horizontal">
 									<div class="form-group col-md-10 col-md-pull-2">
 										<label class="control-label col-sm-4" for="duration">活动时段</label>
-										<div class="col-sm-3">
+										<div class="col-sm-3 starttime">
 											<input id="durationStart" size="16" type="text" placeholder="年-月-日(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="startTime">
 										</div>
 										<div class="col-sm-1 control-label middle-word">至</div>
-										<div class="col-sm-3">
+										<div class="col-sm-3 endtime">
 											<input id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form-control input-sm form_datetime" ng-model="endTime">
 										</div>
 									</div>
@@ -109,10 +109,9 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
-	<!-- 新建活动 模态框 -->
-	<div class="modal fade create-activity-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<!-- 新建活动1.0 模态框 -->
+	<div class="modal fade create-activity-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
 	  <div class="modal-dialog modal-lg" role="document">
 	    <div class="modal-content">
 	    	<div class="modal-header">选择活动模板<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
@@ -124,6 +123,12 @@
 	    </div>
 	  </div>
 	</div>
+
+	<!-- 新建活动2.0 -->
+	<sa-choosetemplate conf="choosetemplateConf"></sa-choosetemplate>
+
+	<!-- 容纳所有配置弹窗的div -->
+	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
 
 	<!-- 启用活动 -->
 	<div class="modal fade bs-example-modal-sm start-activity-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -247,9 +252,6 @@
 	    </div>
 	  </div>
 	</div>
-
-	<!-- 容纳所有配置弹窗的div -->
-	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
 
 	<!-- 活动创建成功 -->
 	<div class="modal fade createSuccess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">

@@ -10,8 +10,65 @@ define([], function () {
     	ServiceName: 'manageactsCtrl',
     	ViewModelName: 'manageactsModel',
     	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+
+        // 通用方法-获取scope和对应conf
+        var scope = function (selector) {
+          return angular.element(selector).scope()
+        }
+        var scope_conf = function (selector) {
+          var scope = angular.element(selector).scope();
+          return scope ? scope.conf ? scope.conf : scope.conf = {} : false
+        }
+
         // 全局变量
         var globalVariable = {};
+
+        // 初始化multiselect 
+        $(document).ready(function () {
+          $(".operation.multi .select").multiselect({
+            nonSelectedText: '请选择',
+            selectAllText: '全部',
+            nSelectedText: '已选择',
+            includeSelectAllOption: true,
+            allSelectedText: '全选',
+            enableFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: '200px',
+            numberDisplayed: 1
+          });
+        });
+
+        // 初始化datetimepicker
+        $("#durationStart").datetimepicker({
+          format: 'yyyy-mm-dd hh:ii', 
+          language: 'zh-CN',
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1
+        }).on('change', function (e) {
+          var startTime = e.target.value;
+          var endTime = $scope.endTime;
+          if (endTime < startTime) {
+            $scope.endTime = '';
+            $scope.$apply();
+          }
+        })
+
+        $("#durationEnd").datetimepicker({
+          format: 'yyyy-mm-dd hh:ii', 
+          language: 'zh-CN',
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1
+        }).on('change', function (e) {
+          var endTime = e.target.value;
+          var startTime = $scope.startTime;
+          if (startTime > endTime) {
+            $scope.startTime = '';
+            $scope.$apply();
+          }
+        });
+
         // 获取全局搜索条件
         globalVariable.searchItem = function () {
           return {
@@ -26,15 +83,6 @@ define([], function () {
             currentPageNumber: 1, 
             pageSize: 10
           }
-        }
-
-        // 通用方法-获取scope和对应conf
-        var scope = function (selector) {
-          return angular.element(selector).scope()
-        }
-        var scope_conf = function (selector) {
-          var scope = angular.element(selector).scope();
-          return scope ? scope.conf ? scope.conf : scope.conf = {} : false
         }
 
         // 获取活动列表，通用方法
@@ -70,53 +118,33 @@ define([], function () {
             $scope.paginationConf = res.data;
           })
         }
+
+        // 进入页面，获取活动列表
         getList();
 
-        // multiselect 初始化
-        $(document).ready(function () {
-          $(".operation.multi .select").multiselect({
-            nonSelectedText: '请选择',
-            selectAllText: '全部',
-            nSelectedText: '已选择',
-            includeSelectAllOption: true,
-            allSelectedText: '全选',
-            enableFiltering: true,
-            buttonWidth: '100%',
-            maxHeight: '200px',
-            numberDisplayed: 1
-          });
-        });
+        // 翻页获取活动列表
+        $scope.$on('frompagechange', function (e,v,f) {
+          var target = Object.assign({}, globalVariable.searchItem(), f)
+          getList(target)
+        })
 
-        // 初始化datetimepicker并判断开始日期不得晚于结束日期
-    		$("#durationStart").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii', 
-	      	language: 'zh-CN',
-	        todayBtn:  1,
-	        autoclose: 1,
-	        todayHighlight: 1
-    		}).on('change', function (e) {
-            var startTime = e.target.value;
-            var endTime = $scope.endTime;
-            if (endTime < startTime) {
-                $scope.endTime = '';
-                $scope.$apply();
-            }
-        });
-        // 初始化datetimepicker并判断结束日期不得早于开始日期
-    		$("#durationEnd").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii', 
-          language: 'zh-CN',
-          todayBtn:  1,
-          autoclose: 1,
-          todayHighlight: 1
-    		}).on('change', function (e) {
-          var endTime = e.target.value;
-          var startTime = $scope.startTime;
-          if (startTime > endTime) {
-              $scope.startTime = '';
-              $scope.$apply();
-          }
-        });
+        // 搜索
+        $scope.search = function (e) {
+          getList(globalVariable.searchItem());
+        }
+
+        // 重置
+        $scope.searchreset = function () {
+          getList();
+        }
+
+        // 点击新建，获取模板对应的配置页面
+        $scope.$on('typefromActSample', function (e,v,f) {
+          $model.getTemplateSpecific(f).then(function(res){
+            $scope.allConfigTemplateConf = res.data;
+            getLaunchInfo();        
+          })
+        })
 
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
@@ -129,13 +157,7 @@ define([], function () {
           $scope.statusList = res.data.data;
         })
 
-        // 获取活动列表
-        $scope.$on('frompagechange', function (e,v,f) {
-          var target = Object.assign({}, globalVariable.searchItem(), f)
-          getList(target)
-        })
-
-        // 获取品牌
+        // 操作面板，获取品牌
         $model.getAllBrands().then(function(res) {
           $scope.allBrands = res.data.data;
           $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
@@ -169,16 +191,6 @@ define([], function () {
           var f = {parentCode: ''};
           getArea(f, '[ng-model="allarea"]')
         })
-
-        // 点击搜索
-        $scope.search = function (e) {
-          getList(globalVariable.searchItem());
-        }
-
-        // 重置
-        $scope.searchreset = function () {
-          getList();
-        }
 
         // 启用活动
         $scope.$on('startActivity', function (e, v, f) {
@@ -229,27 +241,15 @@ define([], function () {
             $scope.lookupConf = res.data;
           })
         })
-          
-        // 点击新建，获取模板对应的配置页面
-        $scope.$on('typefromActSample', function (e,v,f) {
-          $model.getTemplateSpecific(f).then(function(res){
-            $scope.allConfigTemplateConf = res.data;
-              // 抽奖都是common
-              // redpack是红包
-              // qa是问答
-              // holiday节假日
-              // unexpected 彩蛋
-            getLaunchInfo();        
-          })
-        })
 
-        // 点击返回时
+        // 返回
         $scope.$on('popback', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = null;       
           })
         })
 
+        // 
         function getLaunchInfo() {
           $(document).ready(function () {
             $('.multi .select').multiselect({

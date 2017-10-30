@@ -901,8 +901,45 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .sample-list-item {
 	width: 25%;
 }
-.pool_warn{
+
+.pool_warn {
 	margin-top: 10px;
 	color: #f00;
 	display: none;
+}
+
+/*saas 2.0*/
+nav p {
+	position: relative;
+	text-indent: 12px;
+	font-weight: 600;
+}
+nav p:before {
+	content: '';
+	position: absolute;
+	top: -2px;
+	display: block;
+	width: 8px;
+	height: 20px;
+	background: #337ab7;
+}
+header {
+	height: 100px;
+	background: #fff;
+}
+header .step, header .col-md-4 {
+	height: 100%;
+}
+header .step p {
+	margin-top: 4px;
+}
+.first-step:after, .second-step:after, .third-step:after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	clear: both;
+}
+header .step {
+	padding-top: 35px;
 }
