@@ -94,13 +94,13 @@ define([], function () {
                 // awardPutPv 促销计划，drawPv 抽奖次数，drawResultPv 中奖数量 awardPayPv 领取数量
                 var data = res.data;
                 data.forEach(function (n, i) {
-                    global.f_axisx = n.statTime ? n.statTime : n.weekNo;
-                    global.scan_y = n.scanPv || 0;
-                    global.uv_y = n.scanUv || 0;
-                    global.awardPut_y = n.awardPutPv || 0;
-                    global.draw_y = n.drawPv || 0;
-                    global.drawResult_y = n.drawResultPv || 0;
-                    global.awardPay_y = n.awardPayPv || 0;
+                    global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
+                    global.scan_y.push(n.scanPv || 0);
+                    global.uv_y.push(n.scanUv || 0);
+                    global.awardPut_y.push(n.awardPutPv || 0);
+                    global.draw_y.push(n.drawPv || 0);
+                    global.drawResult_y.push(n.drawResultPv || 0);
+                    global.awardPay_y.push(n.awardPayPv || 0);
                 })
 
                 // global.f_axisx = data.map(n => n.statTime ? n.statTime : n.weekNo);
@@ -140,9 +140,11 @@ define([], function () {
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
                 data.forEach(function (n, i) {
-                    standardChartOption.xAxis[0].data = global.t_axisx = n.productName;
-                    standardChartOption.series[0].data = global.various_y = n.scanPv
+                    global.t_axisx.push(n.productName);
+                    global.various_y.push(n.scanPv);
                 })
+                standardChartOption.xAxis[0].data = global.t_axisx;
+                standardChartOption.series[0].data = global.various_y;
                 standardChart.setOption(standardChartOption);
             })
 
