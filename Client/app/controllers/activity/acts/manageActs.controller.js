@@ -1,15 +1,15 @@
 /**
  * Author: kuang
  * Create Date: 2017-07-18
- * Description: manageActs
+ * Description: manageacts
  */
 
 define([], function () {
-  	var manageActsController = {
+  	var manageactsController = {
     	ServiceType: 'controller',
-    	ServiceName: 'manageActsCtrl',
-    	ViewModelName: 'manageActsModel',
-    	ServiceContent: ['$rootScope', '$scope', 'manageActsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    	ServiceName: 'manageactsCtrl',
+    	ViewModelName: 'manageactsModel',
+    	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
         // 全局变量
         var globalVariable = {};
         // 获取全局搜索条件
@@ -597,5 +597,5 @@ define([], function () {
         })
     	}]
   	}
-  	return manageActsController
+  	return manageactsController
 })

@@ -1,13 +1,13 @@
 /**
  * Author: kuang
  * Create Date: 2017-07-18
- * Description: manageActs
+ * Description: manageacts
  */
 
 define([], function () {
-    var manageActsModel = {
+    var manageactsModel = {
         ServiceType: 'service',
-        ServiceName: 'manageActsModel',
+        ServiceName: 'manageactsModel',
         ServiceContent: ['request', function (request) {
             //定义资源
             var $model = this;
@@ -149,5 +149,5 @@ define([], function () {
 
         }]
     }
-    return manageActsModel
+    return manageactsModel
 })
