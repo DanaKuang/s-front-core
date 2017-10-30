@@ -257,8 +257,7 @@ define([], function () {
         var districtChart = echarts.init(document.getElementById('districtChart'));
 
         var dataAxis = [];
-        var dataAxisY = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-        var yMax = 500;
+        var dataAxisY = [];
 
         var districtOption = {
           title: {
@@ -305,7 +304,7 @@ define([], function () {
             }
           ],
           series: [
-            { 
+            {
               type: 'bar',
               label: {
                   normal: {
@@ -316,16 +315,6 @@ define([], function () {
                     }
                   }
               },
-              itemStyle: {
-                  normal: {color: 'rgba(0,0,0,0.05)'}
-              },
-              barGap:'-100%',
-              barCategoryGap:'40%',
-              data: [],
-              animation: false
-            },
-            {
-              type: 'bar',
               itemStyle: {
                 normal: {
                   color: new echarts.graphic.LinearGradient(
@@ -362,12 +351,12 @@ define([], function () {
                     statType: global.searchItem().statType
                 }
                 dataAxis = [];
-                dataAxisY = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+                dataAxisY = [];
                 $model.province(data).then(function(res) {
                     var data = res.data;
                     data.forEach(function (n, i) {
                         dataAxis.push(n.cityName);
-                        dataAxisY.push(n.scanPv);
+                        dataAxisY.push(n.scanPv || 0);
                     });
                     districtOption.xAxis.data = dataAxis;
                     districtOption.series[0].data = dataAxisY;
