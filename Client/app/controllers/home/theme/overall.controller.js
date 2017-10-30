@@ -13,16 +13,19 @@ define([], function () {
 
         var $model = $scope.$model;
         var echarts = require('echarts');
-        // 默认当日
-        $scope.singleSelect = {
-          unit: 'day'
-        }
-        $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
-        $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
 
         // datetimepicker初始化
         setDateConf.init($('.day'), 'day')
         setDateConf.init($('.month'), 'month')
+
+        // 默认当日
+        $scope.singleSelect = {
+          unit: 'day'
+        }
+
+        // 当日、当月的placeholder
+        $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
+        $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
 
         // 选择周
         $scope.$watch('singleSelect.unit', function (n, o, s) {
@@ -42,6 +45,7 @@ define([], function () {
             }
         })
 
+        // 全部变量、属性
         var global = {};
         $scope.checkbox = {};
         function init() {
@@ -58,7 +62,6 @@ define([], function () {
             global.bar_y        = [];
             global.various_y    = []; // 各规格扫码烟包数分析
 
-            // $scope.checked      = true;
             $scope.checkbox.packcheckbox  = true;
             $scope.checkbox.barcheckbox   = true;
             $scope.checkbox.promocheckbox = true;
@@ -90,13 +93,23 @@ define([], function () {
             $model.scan_people_promotion(searchItem).then(function (res) {
                 // awardPutPv 促销计划，drawPv 抽奖次数，drawResultPv 中奖数量 awardPayPv 领取数量
                 var data = res.data;
-                global.f_axisx = data.map(n => n.statTime ? n.statTime : n.weekNo);
-                global.scan_y = data.map(n => n.scanPv || 0);
-                global.uv_y = data.map(n => n.scanUv || 0);
-                global.awardPut_y = data.map(n => n.awardPutPv || 0);
-                global.draw_y = data.map(n => n.drawPv || 0);
-                global.drawResult_y = data.map(n => n.drawResultPv || 0);
-                global.awardPay_y = data.map(n => n.awardPayPv || 0);
+                data.forEach(function (n, i) {
+                    global.f_axisx = n.statTime ? n.statTime : n.weekNo;
+                    global.scan_y = n.scanPv || 0;
+                    global.uv_y = n.scanUv || 0;
+                    global.awardPut_y = n.awardPutPv || 0;
+                    global.draw_y = n.drawPv || 0;
+                    global.drawResult_y = n.drawResultPv || 0;
+                    global.awardPay_y = n.awardPayPv || 0;
+                })
+
+                // global.f_axisx = data.map(n => n.statTime ? n.statTime : n.weekNo);
+                // global.scan_y = data.map(n => n.scanPv || 0);
+                // global.uv_y = data.map(n => n.scanUv || 0);
+                // global.awardPut_y = data.map(n => n.awardPutPv || 0);
+                // global.draw_y = data.map(n => n.drawPv || 0);
+                // global.drawResult_y = data.map(n => n.drawResultPv || 0);
+                // global.awardPay_y = data.map(n => n.awardPayPv || 0);
 
                 trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
                 trendOption.series[0].data = global.scan_y;
@@ -126,8 +139,10 @@ define([], function () {
             // 各规格扫码数分析
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
-                standardChartOption.xAxis[0].data = global.t_axisx = data.map(n => n.productName)
-                standardChartOption.series[0].data = global.various_y = data.map(n => n.scanPv)
+                data.forEach(function (n, i) {
+                    standardChartOption.xAxis[0].data = global.t_axisx = n.productName;
+                    standardChartOption.series[0].data = global.various_y = n.scanPv
+                })
                 standardChart.setOption(standardChartOption);
             })
 
@@ -346,8 +361,10 @@ define([], function () {
                 }
                 $model.province(data).then(function(res) {
                     var data = res.data;
-                    districtOption.xAxis.data = dataAxis = data.map(n => n.cityName);
-                    districtOption.series[0].data = dataAxisY = data.map(n => n.scanPv);
+                    data.forEach(function (n, i) {
+                        districtOption.xAxis.data = dataAxis = n.cityName;
+                        districtOption.series[0].data = dataAxisY
+                    });
                     districtChart.setOption(districtOption);
                 })
             }
