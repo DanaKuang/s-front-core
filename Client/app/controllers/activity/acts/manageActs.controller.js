@@ -205,8 +205,6 @@ define([], function () {
           
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
-                // console.log('编辑中奖');
-                // console.log(res);
                 $scope.allConfigTemplateConf = res.data;
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
 
@@ -218,7 +216,6 @@ define([], function () {
             })
           }else{
             $model.editActivityQuestionnair({'activityCode': f.activityCode}).then(function(res){
-
                 $scope.allConfigTemplateConf = res.data;
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
             })
@@ -379,9 +376,6 @@ define([], function () {
             })
             var alreadyselectedbrandsarrObj = {};
             alreadyselectedbrandsarrObj.brandCode = [];
-            // selectedData.activityBrandsList.forEach(function(n, index){
-            //   alreadyselectedbrandsarrObj.brandCode.push(n);
-            // })
             alreadyselectedbrandsarrObj.brandCode.push(selectedData.brandCode);
             // 获取已选规格
             $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
@@ -393,9 +387,6 @@ define([], function () {
               }));
               $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
               var activitySnSList = [];
-              // selectedData.activitySnSList.forEach(function(n, index) {
-              //   activitySnSList.push(n.sn);
-              // })
               activitySnSList.push(selectedData.sn);
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
               $('.multiselect.dropdown-toggle').addClass('disabled');
@@ -600,15 +591,10 @@ define([], function () {
         // 新增红包库存
         var hbaddstockid = {};
         $scope.$on('hbaddstockid', function (e,v,f) {
-          console.log('传过来的红包数据');
-          console.log(f);
           if(f.activityForm == 'act-4'){
             $model.getPoolDetaiById({id:f.poolId}).then(function(res) {
-              console.log(333333);
-              console.log(res);
               if(res.data.ret == '200000'){
                 var poolDetailObj = res.data.data;
-                // $scope.poolDetail = '红包池剩余额度：'+ poolDetailObj.moneyPool +'元';
                 $('#poolDetail').html('红包池剩余额度：'+ poolDetailObj.moneyPool +'元').show();
                 $scope.poolDetailMoney = poolDetailObj.moneyPool;
               }
@@ -642,11 +628,25 @@ define([], function () {
               return;
             }else{
               var saveEditData = {
-                activityCode : hbaddstockid.activityCode
+                activityCode : hbaddstockid.activityCode,
+                addPoolMoney : $scope.hbnumber
               }
-              $model.saveQuestionnair().then(function(){
-
-              })
+              var nowTotal = $('#packetToal').val();
+              var addTotalMoney = parseInt(nowTotal) + parseInt($scope.hbnumber);
+              $('#packetToal').val(addTotalMoney);
+              
+              if(parseInt($scope.hbnumber) > 0){
+                if($('#ranAmont')[0].checked){
+                  $('#prizeNum').removeAttr("disabled");
+                }else{
+                  var fixdMoney = $('#fixdMoney').val();
+                  var nowNum = Math.floor(addTotalMoney/parseInt(fixdMoney))
+                  $('#prizeNum').val(nowNum).attr('disabled','true');
+                }
+              }
+              $scope.hbnumber = '';
+              $('.modal-content .close').trigger('click');
+              
             }
           }
           

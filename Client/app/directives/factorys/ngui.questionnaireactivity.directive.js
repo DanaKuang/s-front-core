@@ -48,8 +48,6 @@ define([], function () {
                 scope.disabled = true;
                 scope.edit = true;
                 var activity = all_template_scope.conf.data.activity;
-                console.log("开始啦啦啦");
-                console.log(activity);
                 scope.activity = activity;
                 scope.actForm = activity.activityForm;
                 scope.selectBrandVal = activity.brandCode;
@@ -75,7 +73,6 @@ define([], function () {
                     //normalFileWarn
                     $('#normalFileWarn').html(activity.attachName);
                     var activeAwardsObj = activity.activityAwards[0].details[0];
-                    console.log(activeAwardsObj);
                     $('#chosePacket').html(activeAwardsObj.poolName);
                     scope.poolId = activeAwardsObj.poolId; //红包池id
 
@@ -93,6 +90,8 @@ define([], function () {
                         $('#startMoney').attr('disabled','true');
                         $('#endMoney').attr('disabled','true');
                     }
+                    scope.oldTotalMoney = activeAwardsObj.redTotalMoney;
+                    scope.oldAwardNum = activeAwardsObj.awardNums;
                     $('#packetToal').val(activeAwardsObj.redTotalMoney).attr('disabled','true');
                     $('#prizeNum').val(activeAwardsObj.awardNums).attr('disabled','true');
                 }
@@ -216,11 +215,8 @@ define([], function () {
             //规范性文件及说明
             $('#normalFile').change(function(){
                 var normalFile = $('#normalFile')[0].files[0];
-                //fileLimit 52428800  type fileExt(xlsx,xls,csv)
                 if(normalFile != undefined){
                     var curFileName = normalFile.name;
-                    //var fileType = curFileName.substring(curFileName.lastIndexOf('.')+1,curFileName.length);
-                    
                     $('#normalFileWarn').css('color','#ACACAC').html('文件上传中...');
                     var formData = new FormData();
                     formData.append('file',normalFile);
@@ -381,7 +377,7 @@ define([], function () {
                     var packetObj = {
                         'probability' : 100,
                         'prizeName' : '参与奖',
-                        'special' : -1
+                        'special' : '-1'
                     };
                     packetObj.details = [];
                     var packetDetail = {
@@ -586,7 +582,7 @@ define([], function () {
                     $.each(idxOrder, function(index, value){  
                         
                     });
-                    console.log(questionnaireData);
+                    
 
                 } else {
                     alert("到头了");
@@ -651,7 +647,6 @@ define([], function () {
                     //赋值文本框 
                     //题目标题
                     var texte_bt_val = $(this).parent(".kzqy_czbut").parent(".movie_box").find(".wjdc_list").children("li").eq(0).find(".tm_btitlt").children(".btwenzi").text();
-                    // console.log(texte_bt_val);
                     dx_rq.find(".btwen_text").val(texte_bt_val);
                     //标题描述
                     var texte_ms_val = $(this).parent(".kzqy_czbut").parent(".movie_box").find(".wjdc_list").children("li").eq(0).find(".tm_breif").text();
@@ -735,7 +730,6 @@ define([], function () {
                     dx_rq.find(".btwen_text").val(texte_bt_val);
                     //标题描述
                     var texte_ms_val = $(this).parent(".kzqy_czbut").parent(".movie_box").find(".wjdc_list").children("li").eq(0).find(".tm_breif").text();
-                    // console.log(texte_ms_val);
                     dx_rq.find(".btwen_brief").val(texte_ms_val);
                     //是否为必选题 nmb
                     var curIndex = $(this).parent(".kzqy_czbut").parent(".movie_box").find(".wjdc_list").children("li").eq(0).find(".nmb").text();
@@ -760,10 +754,8 @@ define([], function () {
                 //多选题增加至多选项
                 var optionObj = $("#mostOption");
                 var optionLen = optionObj.parent().parent().find('.title_itram').children('div').length;
-                // console.log("show："+optionLen);
                 
                 var selectChildLen = optionObj.children('option').length - 1;
-                // console.log("option："+selectChildLen);
                 if(selectChildLen != optionLen){
                     optionObj.empty();
                     optionObj.append('<option value="0">请选择</option>');
@@ -808,7 +800,6 @@ define([], function () {
                 var querstionType = jcxxxx.attr("data-t"); //获取题目类型
                 //当前题目序号
                 var finishIndex = jcxxxx.parent(".movie_box").children(".wjdc_list").children("li").eq(0).find(".nmb").text();
-                // console.log(finishIndex);
                 switch(querstionType) {
                     case "0": //单选
                     case "1": //多选	
@@ -934,9 +925,7 @@ define([], function () {
             questionnaireData.status = 2;
             
             $("#isEnable").on('change',function(){
-                // console.log($(this));
                 var isEnable = $(this)[0].checked;
-                console.log(isEnable);
                 if(isEnable){
                     questionnaireData.status = 1;
                 }else{
@@ -972,26 +961,33 @@ define([], function () {
             scope.exitView = function(){
                 $('#createQuestionnaire').hide();
                 $('#viewQuestion').hide();
-                $('#addQquestion').show();
-                console.log(questionnaireData);          
+                $('#addQquestion').show();          
             }
 
             // 红包增库
           $('#createQuestionnaire').on('click', '.add-packet', function(e){
-                // var poolId = $(this).attr('data-poolid');
-                // var actform = $(this).attr('data-actform');
-              // 把礼品红包id传到controller
-              // var data = {
-              //     id: poolId, 
-              //     activityForm: actform
-              // };
               var data = {
                   poolId: scope.poolId, 
                   activityForm: scope.actForm,
                   activityCode: all_template_scope.activityCode
               };
-              scope.$emit('hbaddstockid', event, data)
+              scope.$emit('hbaddstockid', event, data);
           })
+            //保存编辑时红包增库
+            scope.saveEditData = function(){
+                var editDataObj = {
+                    activityCode: all_template_scope.activityCode,
+                    pageCode : scope.activity.pageCode,
+                    activityAwards : scope.activity.activityAwards
+                }
+                var nowToatal = $('#packetToal').val();
+                var nowNum = $('#prizeNum').val();
+                editDataObj.activityAwards[0].special = '-1';
+                editDataObj.activityAwards[0].details[0].awardNums = nowNum; 
+                editDataObj.activityAwards[0].details[0].redTotalMoney = nowToatal;
+                scope.$emit('questionnaireSaveData', event, editDataObj);
+            }
+          
         }
 
         return defineObj;
