@@ -11,14 +11,34 @@
         <div class="container-fluid">
             <div class="row col-md-12">
                 <div class="ui-panel-title style">
-                    <i class="style"></i><span>配色方案管理</span>
+                    <i class="style"></i><span>选择模板</span>
                 </div>
                 <div class="ui-panel-box panel rate">
                     <div class="panel-body">
+                        <!--步骤图-->
+                        <div class="ui-step-box">
+                            <div class="col-md-2">
+                                <input type="checkbox" name="">选择模板
+                            </div>
+                        </div>
+                        <!--标签图-->
+                        <div class="ui-marker-box">
+                            <label>分类模板:&nbsp;</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--配置页面-->
+                <div class="ui-panel-box panel rate" style="display: none;">
+                    <div class="panel-body">
                         <form class="form-horizontal">
                             <div class="form-group">
-                                <label class="control-label ui-form-label">选择配色方案<i class="red">&nbsp;*</i></label>
-                                <div class="ui-form-content"></div>
+                                <label class="control-label ui-form-label">选择配置页面<i class="red">&nbsp;*</i></label>
+                                <div class="col-md-3">
+                                    <select class="form-control input-sm" ng-model="pagename">
+                                        <option ng-repeat="page in pageArr" ng-value="page.pageid">{{page.name}}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label ui-form-label">选择模板方案<i class="red">&nbsp;*</i></label>
@@ -27,9 +47,9 @@
                             <div class="form-group">
                                 <label class="control-label ui-form-label">当前风格示例<i class="red">&nbsp;*</i></label>
                                 <div class="ui-form-content ui-flex-between">
-                                    <img src="" class="ui-flex-img">
-                                    <img src="" class="ui-flex-img">
-                                    <img src="" class="ui-flex-img">
+                                    <iframe frameborder="0" class="ui-flex-img"></iframe>
+                                    <iframe frameborder="0" class="ui-flex-img"></iframe>
+                                    <iframe frameborder="0" class="ui-flex-img"></iframe>
                                 </div>
                             </div>
                             <div class="form-group">
