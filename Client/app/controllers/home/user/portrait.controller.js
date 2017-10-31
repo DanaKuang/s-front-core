@@ -62,8 +62,8 @@ define([], function() {
 				};
 				//查询
 				$scope.search = function() {
-					var openId = "osPmCv_C_HAU7DHJIBAnB-9_AKX0";
-					//					console.log(openId)
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
+										console.log(openId)
 					var mobileNo = $('.input_text').val();
 					var params = {
 						openId: openId,
@@ -121,7 +121,7 @@ define([], function() {
 				};
 				//查询
 				$scope.search = function() {
-					var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
+					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					//					console.log(openId)
 					var mobileNo = $('.input_text').val();
 					var params = {

@@ -98,6 +98,9 @@ define([], function () {
 
                   scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
                   scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
+
+                  $('.show-hb-list').parent().removeClass('choose-tag');
+                  $(this).parent().addClass('choose-tag');
               } else {
                   alert('请先选择投放的品牌和规格！')
               }
@@ -124,6 +127,9 @@ define([], function () {
                   scope.chooseNum = $(e.target).parents('.draw-prize-wrap').index();
                   scope.firstornot = $(e.target).parents('.gotoset').hasClass('first-draw');
                   scope.thanksornot = $(e.target).parents('.gotoset').hasClass('thanks-draw-wrap');
+
+                  $('.show-jf-list').parent().removeClass('choose-tag');
+                  $(this).parent().addClass('choose-tag');
               } else {
                   alert('请先选择投放的品牌和规格！')
               }
@@ -171,6 +177,7 @@ define([], function () {
                 $(parentsDrawPrizeWrap).find('.radio-res-wrap input').val('');
                 $(parentsDrawPrizeWrap).find('input[type="checkbox"]').prop('checked', false);
                 $(parentsDrawPrizeWrap).find('.sendscore').addClass('hidden');
+                $(parentsDrawPrizeWrap).find('.show-chosen').html('');
 
                 $target.addClass('active').parent().siblings().children('.circle-tick').removeClass('active');
                 var num = $target.parents('.radio-group').index();

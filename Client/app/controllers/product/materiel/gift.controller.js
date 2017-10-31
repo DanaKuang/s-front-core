@@ -136,6 +136,7 @@ define([], function () {
                     var brandListArrObj = {};
                     brandListArrObj.brandCode = n;
                     $model.getSpeciftByBrand(brandListArrObj).then(function (res) {
+                    	console.log(res)
                         if(res.data.ret == "200000"){
                             $scope.speciftList = res.data.data;
                             $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftList, function(v){

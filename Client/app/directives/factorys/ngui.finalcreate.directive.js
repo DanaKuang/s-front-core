@@ -46,7 +46,7 @@ define([], function () {
             scope.cancelActivityBuild = function() {
                 var r = confirm('确定要取消吗？')
                 if (r == true) {
-                    location.reload();
+                    scope.$emit('popback', event, {}); 
                 } else {
                     return
                 }
@@ -59,7 +59,7 @@ define([], function () {
             }
 
             function bigVerify() {
-                $('.wrong-tip').addClass('hidden');
+                // $('.wrong-tip').addClass('hidden');
 
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
@@ -83,9 +83,10 @@ define([], function () {
                         caidanAward.eduration = _drawPrizeScope.endHour;
                         if (_drawPrizeScope.intervalHourperson != 0) {
                             caidanAward.duration = _drawPrizeScope.intervalHour;
-                            caidanAward.playplayPerson = _drawPrizeScope.intervalHourperson;
+                            caidanAward.playPerson = _drawPrizeScope.intervalHourperson;
                         }
                         caidanAward.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
+                        caidanAward.adnames = $('.draw-area').find('.multiselect-selected-text').html() && $('.draw-area').find('.multiselect-selected-text').html().toString();
 
                         if (_drawPrizeScope.myPlus) {
                             caidanAward.condition = _drawPrizeScope.plusval;
@@ -337,8 +338,8 @@ define([], function () {
                     activityDoc: scopeVariable._basicScope.introValue || '', //活动说明
                     activityEntrance: scopeVariable._basicScope.accessUrl || '', //accessUrl
                     activityEntranceAttach: scopeVariable._basicScope.attachCode || '', // attachCode
-                    idx: scopeVariable._basicScope.namePriority || 1,
-                    name: scopeVariable._basicScope.nameVaule || '',
+                    idx: scopeVariable._basicScope.points || 1,
+                    name: scopeVariable._basicScope.nameValue || '',
                     attachUrl: '',
                     score: scopeVariable._participateScope.nameIntegral || 0,
                     limitPer: scopeVariable._participateScope.namePerPersonDay || 0,
@@ -348,8 +349,8 @@ define([], function () {
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
                     areaCode: scopeVariable._launchScope.selectAreaVal ? scopeVariable._launchScope.selectAreaVal.toString() : '' || '',
                     holiday: scopeVariable._launchScope.whichday || 3,
-                    stime: scopeVariable._launchScope.startTime + ':00' || '',
-                    etime: scopeVariable._launchScope.endTime + ':00' || '',
+                    stime: that_scope.activityCode ? scopeVariable._launchScope.startTime : scopeVariable._launchScope.startTime + ':00',
+                    etime: that_scope.activityCode ? scopeVariable._launchScope.endTime :  scopeVariable._launchScope.endTime + ':00',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,

@@ -41,7 +41,7 @@ define([], function () {
                     var page = data.page;
                     scope.hbChooseList = data.list;
                     scope.totalCount = page.count;
-                    scope.size = page.pageSize;
+                    scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
                     scope.curPage = page.currentPageNumber;
                     scope.pageNumber = page.pageNumber;
                 }
@@ -52,22 +52,31 @@ define([], function () {
             scope.choose = function (e) {
                 var item = this.item;
                 var setprizeScope = angular.element('.draw-prize-wrap').scope();
-                var firstornot= setprizeScope.firstornot;
-                var chooseNum = setprizeScope.chooseNum;
-                if (firstornot) {
-                    // 特殊项里的设置
-                    var osJQobject = $('.first-draw').find('.ready-set .create-part').children().eq(chooseNum);
-                    var osJSobject = osJQobject[0];
+
+                if (setprizeScope) {
+                    var firstornot = setprizeScope.firstornot;
+                    var chooseNum = setprizeScope.chooseNum;
+                    if (firstornot) {
+                        // 特殊项里的设置
+                        var osJQobject = $('.first-draw').find('.ready-set .create-part').children().eq(chooseNum);
+                        var osJSobject = osJQobject[0];
+                    } else {
+                        // 非特殊奖项里的设置
+                        var osJQobject = $('.non-first-draw').find('.ready-set .create-part').children().eq(chooseNum);
+                        var osJSobject = osJQobject[0];
+                    }
+                    osJSobject.dataset.id = item.id;
+
+                    $('.choose-tag').children().last().html('（已选择：' + item.name + '）');
+                    $('.modal-content .close').trigger('click');
                 } else {
-                    // 非特殊奖项里的设置
-                    var osJQobject = $('.non-first-draw').find('.ready-set .create-part').children().eq(chooseNum);
-                    var osJSobject = osJQobject[0];
+                    // 问卷
+                    $('#chosePacket').attr('data-packetId',item.id).html('（已选择：' + item.name + '）');
+                    $('.modal-content .close').trigger('click');
                 }
-                osJSobject.dataset.id = item.id;
-
-                $('.modal-content .close').trigger('click');
+                
+                
             }
-
         }
         return defineObj;
     }

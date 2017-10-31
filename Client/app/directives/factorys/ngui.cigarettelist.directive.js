@@ -38,7 +38,7 @@ define([], function () {
                 if (scope.conf && scope.conf.data) {
                     var page = scope.conf.data.page;
                     scope.totalCount = page.count;
-                    scope.size = page.pageNumber > 1 ? page.pageSize : page.count;
+                    scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
                     scope.curPage = page.currentPageNumber;
                     scope.pageNumber = page.pageNumber;
                 }

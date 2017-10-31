@@ -1,0 +1,42 @@
+.operation .col-sm-1,
+.operation .col-sm-3,
+.operation .col-sm-3 {
+  padding-left: 0;
+  margin-bottom: 5px; }
+
+form {
+  margin-bottom: 30px; }
+
+.operation label {
+  width: 100%; }
+
+.chart-all {
+  clear: both; }
+  .chart-all .chart {
+    margin-bottom: 50px; }
+    .chart-all .chart:before {
+      content: '';
+      width: 0;
+      height: 0;
+      display: block;
+      clear: both; }
+  .chart-all p {
+    font-size: 14px;
+    font-weight: bold; }
+  .chart-all .absolute {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    z-index: 10;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%); }
+  .chart-all .chart-wrap:last-child .absolute {
+    left: 40%; }
+  .chart-all label {
+    margin-right: 6px;
+    font-size: 12px; }
+  .chart-all input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer; }

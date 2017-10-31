@@ -4,9 +4,9 @@
 		<sa-popback></sa-popback>
 	</div>
 	<div class="ui-panel-box panel border-box">
-		<div class="pop-inner">
+		<form name="form" novalidate class="pop-inner" role="form" ng-submit="submitForm(form.$valid)">
 			<!-- 配置 -->
-			<form name="form" novalidate class="configuration float-left css-form">
+			<div class="configuration css-form col-md-8 col-lg-8">
 				<!-- 基本信息 -->
 				<div class="basic config-item">
 					<h6>基本信息</h6>
@@ -29,15 +29,15 @@
 				</div>
 				<!-- 按钮区 -->
 				<sa-finalcreate conf="finalcreateConf"></sa-finalcreate>
-			</form>
+			</div>
 
 			<!-- 预览 -->
-			<div class="preview float-left">
+			<div class="preview col-md-4 col-lg-4">
 				<p>翻牌活动样式</p>
 				<div class="image">
 					<img src="../../../../assets/image/fanpai.png" alt="">
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

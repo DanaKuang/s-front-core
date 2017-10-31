@@ -41,7 +41,7 @@ requirejs.config({
       'bower_components/echarts/dist/echarts'
     ],
     angular: [
-      SAO_CDN_URL + 'js/angular.min',
+      // SAO_CDN_URL + 'js/angular.min',
       'bower_components/angular/angular'
     ],
     angularAnimate: [

@@ -33,9 +33,8 @@ define([], function () {
             }, true);
 
             $('.pop-back').on('click', function(){
-                // 这里必须刷新，不然接口不刷新
-                location.reload();
-                // $(this).parents('.pop').addClass('hidden');
+                // 请求接口就好
+                scope.$emit('popback', event, {}); 
             })
         }
 
