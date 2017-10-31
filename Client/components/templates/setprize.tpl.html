@@ -102,6 +102,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-hb-list" ng-disabled="disabled">+选择红包池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+											<span class="show-chosen">（已选择）</span>
 										</div>
 										<div class="hb-two-one">
 											<small class="wrong-tip hidden wrong-tip-redpack-type">请选择相应的红包类型并填写金额</small>
@@ -152,6 +153,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分模板</button>
+											<span class="show-chosen">（已选择）</span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -169,7 +171,6 @@
 								</div>
 							</div>
 						</div>
-						<i class="close">×</i>
 						<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 					</div>
 				</div>
@@ -180,7 +181,7 @@
 								<b>*</b>
 								<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 								<label for="">奖项名称</label>
-								<input type="text" class="prizename" maxlength="20">
+								<input type="text" class="prizename" maxlength="20" placeholder="不得超过20字">
 							</div>
 							<div class="configuration-item radio-wrap">
 								<div class="radio-group">
@@ -209,6 +210,7 @@
 												<div class="choose-list">
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													<span class="show-chosen"></span>
 												</div>
 												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
@@ -225,6 +227,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-hb-list">+选择红包池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+											<span class="show-chosen"></span>
 										</div>
 										<div class="hb-two-one">
 											<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
@@ -260,6 +263,7 @@
 												<div class="choose-list">
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													<span class="show-chosen"></span>
 												</div>
 												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
@@ -275,6 +279,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+											<span class="show-chosen"></span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -292,7 +297,6 @@
 								</div>
 							</div>
 						</div>
-						<i class="close">×</i>
 						<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 					</div>
 				</div>
@@ -406,6 +410,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-hb-list" ng-disabled="disabled">+选择红包池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal" ng-disabled="disabled">+选择红包模板</button>
+											<span class="show-chosen">（已选择）</span>
 										</div>
 										<div class="hb-two-one">
 											<small class="wrong-tip hidden wrong-tip-redpack-type">请选择相应的红包类型并填写金额</small>
@@ -455,6 +460,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分模板</button>
+											<span class="show-chosen">（已选择）</span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -518,6 +524,7 @@
 												<div class="choose-list">
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													<span class="show-chosen"></span>
 												</div>
 												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
@@ -534,6 +541,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-hb-list">+选择红包池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+											<span class="show-chosen"></span>
 										</div>
 										<div class="hb-two-one">
 											<small class="wrong-tip hidden wrong-tip-redpack-type">请选择相应的红包类型并填写金额</small>
@@ -568,6 +576,7 @@
 												<div class="choose-list">
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													<span class="show-chosen"></span>
 												</div>
 												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
@@ -583,6 +592,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+											<span class="show-chosen"></span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -600,7 +610,6 @@
 								</div>
 							</div>
 						</div>
-						<i class="close">×</i>
 						<div class="wrong-tip hidden">请完善该奖项信息，确保红星标识处已填写！</div>
 					</div>
 				</div>
@@ -649,7 +658,7 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
@@ -706,6 +715,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分模板</button>
+											<span class="show-chosen">（已选择）</span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -759,6 +769,7 @@
 												<div class="choose-list">
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+													<span class="show-chosen"></span>
 												</div>
 												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
@@ -774,6 +785,7 @@
 										<div class="choose-list">
 											<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 											<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+											<span class="show-chosen"></span>
 										</div>									
 									</div>
 									<div class="configuration-item">
@@ -797,7 +809,6 @@
 			</div>
 		</div>
 	</div>
-	
 
 	<script type="text/html" id="special-prize">
 		<div class="draw-prize-wrap">
@@ -835,6 +846,7 @@
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+										<span class="show-chosen"></span>
 									</div>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
@@ -851,6 +863,7 @@
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-hb-list">+选择红包池</button>
 								<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+								<span class="show-chosen"></span>
 							</div>
 							<div class="hb-two-one">
 								<small class="wrong-tip wrong-tip-redpack-type hidden">请选择相应的红包类型并填写金额</small>
@@ -886,6 +899,7 @@
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+										<span class="show-chosen"></span>
 									</div>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
@@ -901,6 +915,7 @@
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 								<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+								<span class="show-chosen"></span>
 							</div>									
 						</div>
 						<div class="configuration-item">
@@ -965,6 +980,7 @@
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+										<span class="show-chosen"></span>
 									</div>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
@@ -981,6 +997,7 @@
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-hb-list">+选择红包池</button>
 								<button class="btn btn-default" data-toggle="modal" data-target=".create-hbProduct-modal">+选择红包模板</button>
+								<span class="show-chosen"></span>
 							</div>
 							<div class="hb-two-one">
 								<small class="wrong-tip hidden wrong-tip-redpack-type">请选择相应的红包类型并填写金额</small>
@@ -1015,6 +1032,7 @@
 									<div class="choose-list">
 										<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
+										<span class="show-chosen"></span>
 									</div>
 									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
@@ -1029,6 +1047,7 @@
 							<div class="choose-list">
 								<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 								<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分模板</button>
+								<span class="show-chosen"></span>
 							</div>									
 						</div>
 						<div class="configuration-item">

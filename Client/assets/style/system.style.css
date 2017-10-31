@@ -1,0 +1,62 @@
+/**
+ * Author: liubin
+ * Create Date: 2017-10-16
+ * Description: 系统配色
+ */
+@media screen and (max-width: 1300px) {
+    .ui-flex-img {
+        width: 250px;
+        min-height: 350px;
+        border: 1px solid #ddd;
+    }
+}
+@media screen and (min-width: 1300px) {
+    .ui-flex-img {
+        width: 300px;
+        min-height: 350px;
+        border: 1px solid #ddd;
+    }
+}
+.ui-panel-title {
+    position: relative;
+    padding-left: 30px;
+    font-size: 18px;
+    color: #8a8a8a;
+    margin-bottom: 2px;
+    margin-top: 15px;
+}
+.ui-panel-title .style {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  background: url('../image/total.png') no-repeat;
+  background-size: cover;
+  height: 14px;
+  width: 14px;
+}
+.ui-panel-box .red {
+    color: red;
+}
+.ui-form-label {
+    width: 150px;
+    float: left;
+}
+.ui-form-content {
+    width: calc(100% - 155px);
+    float: left;
+    padding: 0 15px;
+}
+.ui-flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+.ui-submit {
+    padding: 4px 12px;
+    margin-left: 170px;
+}
+.form-horizontal .form-group {
+    min-height: 50px;
+}
+
+
+

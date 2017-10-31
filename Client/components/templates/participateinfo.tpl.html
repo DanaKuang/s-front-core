@@ -1,11 +1,20 @@
-<div class="">
-	<div class="participate-integral configuration-item">
-		<input type="number" ng-model="nameIntegral" value="{{nameIntegral}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+<div class="form-horizontal participateinfo">
+	<div class="participate-integral configuration-item col-md-5 form-group">
+		<label class="control-label col-sm-2">消耗积分</label>
+		<div class="col-sm-9">
+			<input class="form-control input-sm" type="text" ng-model="nameIntegral" value="{{nameIntegral}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+		</div>
 	</div>
-	<div class="per-person-day configuration-item">
-		<input type="number" ng-model="namePerPersonDay" value="{{namePerPersonDay}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+	<div class="per-person-day configuration-item col-md-5 form-group">
+		<label class="control-label col-sm-2">每天次数</label>
+		<div class="col-sm-9">
+			<input class="form-control input-sm" type="text" ng-model="namePerPersonDay" value="{{namePerPersonDay}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+		</div>
 	</div>
-	<div class="per-person configuration-item">
-		<input type="number" ng-model="namePerPerson" value="{{namePerPerson}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+	<div class="per-person configuration-item col-md-5 form-group">
+		<label class="control-label col-sm-2">总次数</label>
+		<div class="col-sm-9">
+			<input class="form-control input-sm" type="text" ng-model="namePerPerson" value="{{namePerPerson}}" placeholder="请输入数字" maxlength="10" ng-readonly="disabled" ng-keyup="verify($event)">
+		</div>
 	</div>
 </div>
