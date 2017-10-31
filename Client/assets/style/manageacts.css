@@ -909,6 +909,9 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 }
 
 /*saas 2.0*/
+nav {
+	margin-bottom: 5px;
+}
 nav p {
 	position: relative;
 	text-indent: 12px;
@@ -917,20 +920,19 @@ nav p {
 nav p:before {
 	content: '';
 	position: absolute;
-	top: -2px;
 	display: block;
-	width: 8px;
-	height: 20px;
+	width: 6px;
+	height: 16px;
 	background: #337ab7;
 }
-header {
+.header {
 	height: 100px;
 	background: #fff;
 }
-header .step, header .col-md-4 {
+.header .step, header .col-md-4 {
 	height: 100%;
 }
-header .step p {
+.header .step p {
 	margin-top: 4px;
 }
 .first-step:after, .second-step:after, .third-step:after {
@@ -940,6 +942,6 @@ header .step p {
 	height: 0;
 	clear: both;
 }
-header .step {
-	padding-top: 35px;
+.header .step {
+	padding-top: 30px;
 }

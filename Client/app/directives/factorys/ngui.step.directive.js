@@ -10,6 +10,7 @@ define([], function () {
     var nguistepFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/step.tpl.html',
+            step: []
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -24,8 +25,11 @@ define([], function () {
         };
 
         function linkFn (scope, element, attrs) {
-            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
- 
+            // debugger
+            util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['step']);
+            scope.$watch('conf', function () {
+                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['step']);
+            })            
 
         }
         return defineObj;
