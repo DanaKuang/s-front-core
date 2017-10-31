@@ -77,31 +77,17 @@ define([], function () {
                 var allconfigtemplateScope = angular.element('.pop').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
 
-                $(document).ready(function () {
-                    $(".draw-area .select").multiselect({
-                        nonSelectedText: '请选择',
-                        allSelectedText: '全部',
-                        nSelectedText: '已选择',
-                        includeSelectAllOption: true,
-                        selectAllText: '全部',
-                        allSelectedText: '全选',
-                        enableClickableOptGroups: true,
-                        enableFiltering: true,
-                        buttonWidth: '170px',
-                        maxHeight: '200px',
-                        numberDisplayed: 1
-                    });
-                });
-
                 if (that_scope.activityCode) {
                     // 编辑
                     scope.disabled = true;
+                    scope.edit = true;
                     var caidanconfig = that_scope.conf.data.caidanConfig;
                     scope.startHour = caidanconfig.sduration;
                     scope.endHour = caidanconfig.eduration;
                     scope.intervalHour = caidanconfig.duration;
-                    scope.intervalHourperson = caidanconfig.playplayPerson;
+                    scope.intervalHourperson = caidanconfig.playPerson;
                     scope.drawAreaVal = caidanconfig.adcodes;
+                    scope.adcodenames = caidanconfig.adnames;
 
                     if (caidanconfig.condition) {
                         scope.plusval = caidanconfig.condition;

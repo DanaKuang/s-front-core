@@ -456,7 +456,7 @@ body {
 }
 
 /*================================begin region==========================*/
-.region-margin {
+.region-margin, .overall {
     margin-top: 25px;
 }
 
@@ -577,12 +577,17 @@ body {
   color: #44c2ed;
   /* border: 1px solid #44c2ed; */
   font-size: 12px;
+  width:240px;
+  height:34px;
+  border-radius:3px;
   display: inline-block;
 }
 .ui-total-date input {
   /* background-color: #3e4162; */
   padding-left: 5px;
-  height: 26px;
+  height: 34px;
+  border-radius:3px;
+  width:240px;
 }
 
 .ui-total-date .icon-th {
@@ -719,27 +724,28 @@ input[type="checkbox"]:checked + .checkbox{
   cursor: none !important;
 }
 
-.spec-wrap>.col-md-4{
+.spec-wrap>.col-md-3{
   height: 100px;
 }
 
-.spec-wrap>.col-md-4:nth-of-type(1){
+.spec-wrap>.col-md-3:nth-of-type(1){
   text-align: center;
   line-height: 100px;
 }
 
-.spec-wrap>.col-md-4:nth-of-type(2),
-.spec-wrap>.col-md-4:nth-of-type(3){
+.spec-wrap>.col-md-3:nth-of-type(2),
+.spec-wrap>.col-md-3:nth-of-type(3),
+.spec-wrap>.col-md-3:nth-of-type(4){
   line-height: 50px;
   font-size: 15px;
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
 }
 
-.spec-wrap>.col-md-4 i{
+.spec-wrap>.col-md-3 i{
   color: #8CD7F7;
 }
 
-.spec-wrap>.col-md-4:nth-of-type(1)>img{
+.spec-wrap>.col-md-3:nth-of-type(1)>img{
   height: 100px;
   vertical-align: middle;
 }
@@ -890,7 +896,7 @@ input[type="checkbox"]:checked + .checkbox{
 } */
 .agree-date .input-append .form-control{
   background-color: #ffffff;
-  border-radius: 0px;
+  border-radius: 3px;
   color: #44c2ed;
 }
 .res_search .search_btn ,.gift_search .search_btn{
@@ -931,6 +937,7 @@ input[type="checkbox"]:checked + .checkbox{
   border: 1px solid #A0A0A0;
   font-size: 14px;
   text-align: center;
+  vertical-align: middle !important
 }
 
 .table tr:nth-of-type(even) {
@@ -938,6 +945,12 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .footer_sec {
   margin-top: 21px;
+}
+.footer_sec > .aggree-account, .footer_sec > .visit-account {
+  float:right;
+  line-height:25px;
+  margin-right: 20px;
+  font-size: 14px;
 }
 .total_info {
   font-size: 11px;
@@ -1070,7 +1083,10 @@ input[type="checkbox"]:checked + .checkbox{
 }
 
 .report-search div select{
-  width: 180px;
+  width: 240px;
+  height:34px;
+  border-radius:3px;
+  padding:6px 10px;
 }
 
 .report_wrap ul li:nth-of-type(2n) {
@@ -1124,7 +1140,11 @@ input[type="checkbox"]:checked + .checkbox{
 .report-search .multiselect-container li label{
     font-size: 15px;
     color: #515151;
-    width: 180px;
+    width: 220px;
+}
+.open .dropdown-menu{
+	oveflow-y:auto;
+	max-height:150px;
 }
 .report-search .multiselect{
     text-align: left;
@@ -1155,6 +1175,7 @@ input[type="checkbox"]:checked + .checkbox{
   line-height: 26px;
   border: 1px solid #d2d2d2;
   color:#000;
+  margin-left: 5px;
 }
 .code_detail{
   color:#44c2ed;
@@ -1185,7 +1206,10 @@ input[type="checkbox"]:checked + .checkbox{
   height: 16px;
   top: 12px;
 }
-
+#dayTime{
+  color:#000;
+  font-size:14px;
+}
 /*==============================end sweepDetail================================*/
 
 

@@ -56,7 +56,8 @@ define([], function () {
 
         // 修改密码
         scope.changePassword = function () {
-            location.href = '#/view/account/changepwd';
+            scope.changeNav(null, {menuCode: 'sysManage'});
+            sessionStorage.setItem('menuCode', 'pwdChange');
         };
       }
       return defineObj;

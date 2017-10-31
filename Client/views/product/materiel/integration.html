@@ -173,13 +173,13 @@
                     <div class="panel-body">
                         <div class="form_sec">
                         	<div>
-                                <label for="JiFenChi">积分池名称<span>*</span></label>
+                                <label class="label_title" for="JiFenChi">积分池名称<span>*</span></label>
                                 <input type="text" placeholder="" id="JiFenChi" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]"/>
                                 <!--ng-disabled = '!addPocket'-->
                                 <span class="select_JiFenChi">请选择积分池名称</span>
                             </div>
                             <div>
-                                <label for="supply">供应商<span>*</span></label>
+                                <label class="label_title" for="supply">供应商<span>*</span></label>
                                 <select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
@@ -187,16 +187,25 @@
                                 </select>
                                 <span class="select_supply">请选择供应商</span>
                             </div>
-                            <div>
+                            <!--<div>
                                 <label for="brand">适用品牌<span>*</span></label>
-                                <select id="brand" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
+                                	<select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
                                     <option value="">请选择</option>
                                     <option ng-repeat="brandItem in brandList"
                                             value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
                                 </select>
                                 <span class="select_brand">请选择适用品牌</span>
+                            </div>-->
+                            <div class="brand_names">
+                                <label class="label_title" for="brand">适用品牌<span>*</span></label><select id="brand" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}">
+                                    <!--<option value="">请选择</option>-->
+                                    <option ng-repeat="brandItem in brandList"
+                                            value="{{brandItem.brandCode}}">{{brandItem.name}}</option>
+                                </select>
+                                <span class="select_brand">请选择适用品牌</span>
                             </div>
-                            <div>
+                            
+                            <!--<div>
                                 <label for="specift">适用规格<span>*</span></label>
                                 <select id="specift" ng-disabled = '!addPocket' ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option ng-if = '!addPocket' value="operateItemPacket.units" checked>{{operateItemPacket.unitNames}}</option>
@@ -205,21 +214,29 @@
                                             value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
                                 </select>
                                 <span class="select_specift">请选择适用规格</span>
+                            </div>-->
+                            <div class="specift_names">
+                                <label class="label_title"  for="specift">适用规格<span>*</span></label><select id="specift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                                    <!--<option value="">请选择</option>-->
+                                    <option ng-repeat="speciftItem in speciftList"
+                                            value="{{speciftItem.sn}}">{{speciftItem.allName}}</option>
+                                </select>
+                                <span class="select_specift">请选择适用规格</span>
                             </div>
                             <div>
-                                <label for="capital">积分数量<span>*</span></label>
+                                <label class="label_title" for="capital">积分数量<span>*</span></label>
                                 <input  type="text" placeholder="" id="capital" ng-disabled = '!addPocket'>
                                 <!--<span class="yuan_unit">元</span>-->
-                                <span class="entry_capital">请输入资金</span>
+                                <span class="entry_capital">请输入积分</span>
                                 <br/>
                                 <p ng-show="addPocket">保存成功后积分数量不可手动更改，请谨慎操作</p>
                             </div>
                             <div>
-                                <label for="capital_Ku">库存阀值</label>
+                                <label class="label_title" for="capital_Ku">库存阀值</label>
                                 <input  type="text" placeholder="" id="capital_Ku" ng-disabled = '!addPocket'>
                             </div>
                             <div>
-                                <label for="transfer" style="line-height:70px;">凭证文件</label>
+                                <label class="label_title" for="transfer" style="line-height:70px;">凭证文件</label>
                                 <div class="transfer_sec">
                                     <input type="file" id="transfer">
                                     <!--<div class="select_file"></div><br/>-->
@@ -247,17 +264,20 @@
                 <div class="box_sec">
                     <div class="box_tit">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                            <!--<span aria-hidden="true">×</span>-->
+                            <span ng-click="cancelAddPacket()">×</span>
                         </button>
                         <div class="modal-title" id="packet_add_btn">积分池增库</div>
                     </div>
                     <div class="box_cont">
                         <label>增库积分额度：</label>
-                        <input type="text" placeholder="0.00" id="poolMoney">
+                        <input type="text" placeholder="0" id="poolMoney">
+                        <p class="add_pool_warn">请输入大于0的数字</p>
+                        <p class="add_pool_warn2">请输入整数!</p>
                     </div>
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmAddPool(operateItemPacket)">确定</div>
-                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelAddPacket()">取消</div>
                     </div>
                 </div>
             </div>
@@ -371,7 +391,7 @@
                         </button>
                         <div class="modal-title" id="packet_stop_btn">操作提示</div>
                     </div>
-                    <div class="box_cont">此物料已停用，无法执行增库操作</div>
+                    <div class="box_cont">此积分池已停用，无法执行增库操作</div>
                     <div class="box_btn">
                         <div class="enabled_btn" data-dismiss="modal">确定</div>
                     </div>
@@ -379,6 +399,27 @@
             </div>
         </div>
     </div>
+    
+    <!--取消时弹框-->
+    <!--<div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="cancel_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">信息未保存，确认现在返回吗？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
     <script src="statics/assets/libs/jquery.page.js"></script>
 </div>
 

@@ -16,7 +16,7 @@ define([], function () {
             format = (type == 'month'?'yyyy-mm':(type == 'year'?'yyyy':'yyyy-mm-dd'));
             startView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
             minView = (type == 'month' ? 3 : (type == 'year' ? 3 : 2));
-            $(ele).find('.date').datetimepicker({
+            $(ele).find('.date, .form_datetime').datetimepicker({
                 'language': 'zh-CN',  //日期
                 'format': format,
                 'autoclose': true,
@@ -28,12 +28,12 @@ define([], function () {
             });
             return this;
         };
-        dateSearch.init = function (ele, type) {
+        dateSearch.init = function (ele, type, fn) {
             var that = this;
             type = type || 'year';
-            $(ele).find('select').on('change', function (e, val) {
-                that.dateConf(val, ele);
-            })
+            // $(ele).find('select, .form_datetime').on('change', function (e, val) {
+            //     that.dateConf(val, ele);
+            // })
             that.dateConf(type, ele);
             return that;
         };

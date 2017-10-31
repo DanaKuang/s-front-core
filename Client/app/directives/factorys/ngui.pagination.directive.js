@@ -62,7 +62,7 @@ define([], function () {
             // nav切换事件绑定
             // 初始的时候
             var data = _.cloneDeep(scope.activity_page_data);
-            scope.$emit('frompagechange', event, data);
+            // scope.$emit('frompagechange', event, data);
 
             scope.changePage = function (e, n) {
                 scope.cur = (+n);
@@ -72,13 +72,19 @@ define([], function () {
                     pageSize: scope.size
                 };
 
-                // 页码点击事件触发的时候。因为在同一个模板里，目前有2处用到了这个指令，所以要区分
-                // if (scope.size < 15) {
-                //     scope.$emit('frominnerpagechange', event, scope.activity_page_data )
-                // } else {
+                if (scope.size == 4) {
+                    // 礼品奖池的翻页
+                    scope.$emit('fromgiftpagechange', event, scope.activity_page_data)
+                } else if (scope.size == 5) {
+                    // 红包奖池翻页
+                    scope.$emit('fromhbpagechange', event, scope.activity_page_data)
+                } else if (scope.size == 6) {
+                    // 积分奖池翻页
+                    scope.$emit('fromjfpagechange', event, scope.activity_page_data)
+                } else {
+                    // 其他
                     scope.$emit('frompagechange', event, scope.activity_page_data);
-                // }
-                
+                }
             }
 
             scope.prev = function (e, n) {
