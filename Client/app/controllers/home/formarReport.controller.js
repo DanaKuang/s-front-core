@@ -172,7 +172,7 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
-							//							.report-search .multiselect-container li label
+						$('[ng-model="selectActivityName"]').multiselect('refresh');
 						}
 
 					});
@@ -196,6 +196,8 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
+						$('[ng-model="selectActivityCityName"]').multiselect('refresh');
+							
 						}
 
 					});
@@ -359,12 +361,12 @@ define([], function() {
 			$scope.goback = function() {
 				$(".region-margin").hide();
 				$(".region-margin").eq(0).show();
-				$("#proviceName").multiselect().val([]).multiselect("refresh");
-				$("#applySpecift").multiselect().val([]).multiselect("refresh");
-				console.log($("#proviceName").multiselect().val([]))
-				$("#activityName").multiselect().val([]).multiselect("refresh");
-				$("#activityCityName").multiselect().val([]).multiselect("refresh");
-
+//				$("#proviceName").multiselect().val([]).multiselect("refresh");
+//				$("#applySpecift").multiselect().val([]).multiselect("refresh");
+//				console.log($("#proviceName").multiselect().val([]))
+//				$("#activityName").multiselect().val([]).multiselect("refresh");
+//				$("#activityCityName").multiselect().val([]).multiselect("refresh");
+//
 				$('#brand').val('');
 				$('#specift').val('');
 				$('#proviceName').val('');
@@ -387,10 +389,6 @@ define([], function() {
 					$scope.selectActivityNameList.length = 0;
 				}
 				$("#proviceDataSpecift").val();
-				$('#packs').multiselect().val([]).multiselect("refresh");
-				$('#cycleTime').multiselect().val([]).multiselect("refresh");
-				$('#cashWinSpecift').val('');
-				$('#entityWinSpecift').val('');
 			}
 
 			//查询按钮

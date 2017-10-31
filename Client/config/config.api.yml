@@ -372,6 +372,42 @@ visit:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+interface:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/querytAllOrgParam'
+    authorized: 1
+    description: '接口管理列表接口'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/wechat/queryWechatByOrgCode'
+    authorized: 1
+    description: '判断接口'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/wechat/saveOrUpdateInter'
+    authorized: 1
+    description: '保存微信管理'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/wechat/saveOrUpdatePay'
+    authorized: 1
+    description: '保存支付接口'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/wechat/queryListPlatForm'
+    authorized: 1
+    description: '下拉框'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 formarReport:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/henanreport/getProvReportData'

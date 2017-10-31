@@ -43,11 +43,11 @@ local:                                           # 测试环境配置
   gateway:                                       # 配置请求IP地址
     - port: 80                                   # 请求端口号
       host: 'datatest.taozuike.com'              # 请求IP地址
-    - port: 80                                   # 请求端口号
-      host: 'portal.v2.taozuike.com'             # 请求IP地址
+    - port: 8080                                   # 请求端口号
+      host: '172.16.1.217'             # 请求IP地址 'portal.v2.taozuike.com' 172.16.1.217
     - port: 80                                   # 请求端口号
       host: 'retailer.taozuike.com'              # 请求IP地址
-  rootfilter: '/(dataportal|saas)'               # 接口过滤
+  rootfilter: '/(dataportal)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存
