@@ -43,6 +43,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/kpi/kpi-henan.html'
+  - httpmethod: 'get'                       # KPI总指标
+    routepath: '/view/home/theme/overall'
+    description: 'theme'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/theme/overall.html'
   - httpmethod: 'get'                       # 主题查询[规格]
     routepath: '/view/home/theme/spec'
     description: 'theme'
@@ -150,12 +157,12 @@ home:                                       # 首页
     staticfile: 'home/materiel/gift.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
-    routepath: '/view/activity/acts/manageActs'
+    routepath: '/view/activity/acts/manageacts'
     description: '活动页面'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'activity/acts/manageActs.html'
+    staticfile: 'activity/acts/manageacts.html'
   - httpmethod: 'get'                       # 实物奖品领奖明细
     routepath: '/view/activity/acts/mPrizeGotHistory'
     description: '实物奖品领奖明细'

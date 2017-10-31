@@ -1,17 +1,74 @@
 /**
  * Author: kuang
  * Create Date: 2017-07-18
- * Description: manageActs
+ * Description: manageacts
  */
 
 define([], function () {
-  	var manageActsController = {
+  	var manageactsController = {
     	ServiceType: 'controller',
-    	ServiceName: 'manageActsCtrl',
-    	ViewModelName: 'manageActsModel',
-    	ServiceContent: ['$rootScope', '$scope', 'manageActsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    	ServiceName: 'manageactsCtrl',
+    	ViewModelName: 'manageactsModel',
+    	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+
+        // 通用方法-获取scope和对应conf
+        var scope = function (selector) {
+          return angular.element(selector).scope()
+        }
+        var scope_conf = function (selector) {
+          var scope = angular.element(selector).scope();
+          return scope ? scope.conf ? scope.conf : scope.conf = {} : false
+        }
+
         // 全局变量
         var globalVariable = {};
+
+        // 初始化multiselect 
+        $(document).ready(function () {
+          $(".operation.multi .select").multiselect({
+            nonSelectedText: '请选择',
+            selectAllText: '全部',
+            nSelectedText: '已选择',
+            includeSelectAllOption: true,
+            allSelectedText: '全选',
+            enableFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: '200px',
+            numberDisplayed: 1
+          });
+        });
+
+        // 初始化datetimepicker
+        $("#durationStart").datetimepicker({
+          format: 'yyyy-mm-dd hh:ii', 
+          language: 'zh-CN',
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1
+        }).on('change', function (e) {
+          var startTime = e.target.value;
+          var endTime = $scope.endTime;
+          if (endTime < startTime) {
+            $scope.endTime = '';
+            $scope.$apply();
+          }
+        })
+
+        $("#durationEnd").datetimepicker({
+          format: 'yyyy-mm-dd hh:ii', 
+          language: 'zh-CN',
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1
+        }).on('change', function (e) {
+          var endTime = e.target.value;
+          var startTime = $scope.startTime;
+          if (startTime > endTime) {
+            $scope.startTime = '';
+            $scope.$apply();
+          }
+        });
+
         // 获取全局搜索条件
         globalVariable.searchItem = function () {
           return {
@@ -21,20 +78,11 @@ define([], function () {
             sns: $scope.selectSpeci || [],
             areaCodes: $scope.allarea || [],
             keys: $scope.keysval || '',
-            stime: $scope.startTime || '',
-            etime: $scope.endTime || '',
+            stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
             currentPageNumber: 1, 
             pageSize: 10
           }
-        }
-
-        // 通用方法-获取scope和对应conf
-        var scope = function (selector) {
-          return angular.element(selector).scope()
-        }
-        var scope_conf = function (selector) {
-          var scope = angular.element(selector).scope();
-          return scope ? scope.conf ? scope.conf : scope.conf = {} : false
         }
 
         // 获取活动列表，通用方法
@@ -70,53 +118,33 @@ define([], function () {
             $scope.paginationConf = res.data;
           })
         }
+
+        // 进入页面，获取活动列表
         getList();
 
-        // multiselect 初始化
-        $(document).ready(function () {
-          $(".operation.multi .select").multiselect({
-            nonSelectedText: '请选择',
-            selectAllText: '全部',
-            nSelectedText: '已选择',
-            includeSelectAllOption: true,
-            allSelectedText: '全选',
-            enableFiltering: true,
-            buttonWidth: '100%',
-            maxHeight: '200px',
-            numberDisplayed: 1
-          });
-        });
+        // 翻页获取活动列表
+        $scope.$on('frompagechange', function (e,v,f) {
+          var target = Object.assign({}, globalVariable.searchItem(), f)
+          getList(target)
+        })
 
-        // 初始化datetimepicker并判断开始日期不得晚于结束日期
-    		$("#durationStart").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
-	      	language: 'zh-CN',
-	        todayBtn:  1,
-	        autoclose: 1,
-	        todayHighlight: 1
-    		}).on('change', function (e) {
-            var startTime = e.target.value;
-            var endTime = $scope.endTime;
-            if (endTime < startTime) {
-                $scope.endTime = '';
-                $scope.$apply();
-            }
-        });
-        // 初始化datetimepicker并判断结束日期不得早于开始日期
-    		$("#durationEnd").datetimepicker({
-	      	format: 'yyyy-mm-dd hh:ii:00', 
-          language: 'zh-CN',
-          todayBtn:  1,
-          autoclose: 1,
-          todayHighlight: 1
-    		}).on('change', function (e) {
-          var endTime = e.target.value;
-          var startTime = $scope.startTime;
-          if (startTime > endTime) {
-              $scope.startTime = '';
-              $scope.$apply();
-          }
-        });
+        // 搜索
+        $scope.search = function (e) {
+          getList(globalVariable.searchItem());
+        }
+
+        // 重置
+        $scope.searchreset = function () {
+          getList();
+        }
+
+        // 点击新建，获取模板对应的配置页面
+        $scope.$on('typefromActSample', function (e,v,f) {
+          $model.getTemplateSpecific(f).then(function(res){
+            $scope.allConfigTemplateConf = res.data;
+            getLaunchInfo();        
+          })
+        })
 
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
@@ -129,13 +157,7 @@ define([], function () {
           $scope.statusList = res.data.data;
         })
 
-        // 获取活动列表
-        $scope.$on('frompagechange', function (e,v,f) {
-          var target = Object.assign({}, globalVariable.searchItem(), f)
-          getList(target)
-        })
-
-        // 获取品牌
+        // 操作面板，获取品牌
         $model.getAllBrands().then(function(res) {
           $scope.allBrands = res.data.data;
           $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
@@ -170,16 +192,6 @@ define([], function () {
           getArea(f, '[ng-model="allarea"]')
         })
 
-        // 点击搜索
-        $scope.search = function (e) {
-          getList(globalVariable.searchItem());
-        }
-
-        // 重置
-        $scope.searchreset = function () {
-          getList();
-        }
-
         // 启用活动
         $scope.$on('startActivity', function (e, v, f) {
           $('.start-activity-modal .btn-primary').on('click', function(){
@@ -202,16 +214,25 @@ define([], function () {
 
         // 编辑活动
         $scope.$on('editActivity', function (e, v, f) {
-          $model.editActivity(f).then(function(res){
-            $scope.allConfigTemplateConf = res.data;
-            getAlreadySelectedLaunchInfo(res.data.data.activity);
+          
+          if(f.activityForm != 'act-4'){
+              $model.editActivity({'activityCode': f.activityCode}).then(function(res){
+                $scope.allConfigTemplateConf = res.data;
+                getAlreadySelectedLaunchInfo(res.data.data.activity);
 
-            // 如果存在中奖地区
-            var draeareascope = angular.element('.draw-area').scope();
-            if (draeareascope) {
-              getAlreadySelectedDrawAreaInfo(res.data.data.caidanConfig);
-            }
-          })
+                // 如果存在中奖地区
+                var draeareascope = angular.element('.draw-area').scope();
+                if (draeareascope) {
+                  getAlreadySelectedDrawAreaInfo(res.data.data.caidanConfig);
+                }
+            })
+          }else{
+            $model.editActivityQuestionnair({'activityCode': f.activityCode}).then(function(res){
+                $scope.allConfigTemplateConf = res.data;
+                getAlreadySelectedLaunchInfo(res.data.data.activity);
+            })
+          }
+          
         })
 
         // 查看活动
@@ -220,27 +241,15 @@ define([], function () {
             $scope.lookupConf = res.data;
           })
         })
-          
-        // 点击新建，获取模板对应的配置页面
-        $scope.$on('typefromActSample', function (e,v,f) {
-          $model.getTemplateSpecific(f).then(function(res){
-            $scope.allConfigTemplateConf = res.data;
-              // 抽奖都是common
-              // redpack是红包
-              // qa是问答
-              // holiday节假日
-              // unexpected 彩蛋
-            getLaunchInfo();        
-          })
-        })
 
-        // 点击返回时
+        // 返回
         $scope.$on('popback', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = null;       
           })
         })
 
+        // 
         function getLaunchInfo() {
           $(document).ready(function () {
             $('.multi .select').multiselect({
@@ -252,6 +261,18 @@ define([], function () {
               enableFiltering: true,
               buttonWidth: '100%',
               maxHeight: '500px',
+              numberDisplayed: 1
+            });
+            //调查问卷地区选择
+            $('#selectArea .select').multiselect({
+              nonSelectedText: '请选择',
+              nSelectedText: '已选择',
+              includeSelectAllOption: true,
+              selectAllText: '全部',
+              allSelectedText: '全选',
+              enableFiltering: true,
+              buttonWidth: '100%',
+              maxHeight: '200px',
               numberDisplayed: 1
             });
           });
@@ -290,57 +311,87 @@ define([], function () {
 
         // 获取已编辑的信息
         function getAlreadySelectedLaunchInfo(selectedData) {
-          $(document).ready(function () {
-            $(".multi .select").multiselect({
-              nonSelectedText: '请选择',
-              nSelectedText: '已选择',
-              includeSelectAllOption: true,
-              selectAllText: '全部',
-              allSelectedText: '全选',
-              enableFiltering: true,
-              buttonWidth: '453px',
-              maxHeight: '500px',
-              numberDisplayed: 1
+          if(selectedData.activityForm != 'act-4'){
+            $(document).ready(function () {
+              $(".multi .select").multiselect({
+                nonSelectedText: '请选择',
+                nSelectedText: '已选择',
+                includeSelectAllOption: true,
+                selectAllText: '全部',
+                allSelectedText: '全选',
+                enableFiltering: true,
+                buttonWidth: '453px',
+                maxHeight: '500px',
+                numberDisplayed: 1
+              });
             });
-          });
-          // 获取已选品牌
-          $model.getBrandList().then(function (res) {
-            var selectCompanyScope = angular.element('.select-brand').scope();
-            selectCompanyScope.brand = res.data.data;
-            $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                v.label = v.name;
-                v.value = v.brandCode;
-            }));
-            $('[ng-model="selectBrandVal"]').multiselect('refresh');
-            $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
-            $('.multiselect.dropdown-toggle').addClass('disabled');
-          })
-
-          var alreadyselectedbrandsarrObj = {};
-          alreadyselectedbrandsarrObj.brandCode = [];
-          selectedData.activityBrandsList.forEach(function(n, index){
-            alreadyselectedbrandsarrObj.brandCode.push(n);
-          })
-
-          // 获取已选规格
-          $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
-            var selectBrandScope = angular.element('.select-specification').scope();
-            selectBrandScope.specification = res.data.data;
-            $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                v.label = v.allName;
-                v.value = v.sn;
-            }));
-            $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
-            var activitySnSList = [];
-            selectedData.activitySnSList.forEach(function(n, index) {
-              activitySnSList.push(n.sn);
+            // 获取已选品牌
+            $model.getBrandList().then(function (res) {
+              var selectCompanyScope = angular.element('.select-brand').scope();
+              selectCompanyScope.brand = res.data.data;
+              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.name;
+                  v.value = v.brandCode;
+              }));
+              $('[ng-model="selectBrandVal"]').multiselect('refresh');
+              $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
-            $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-            $('.multiselect.dropdown-toggle').addClass('disabled');
-          })
+            var alreadyselectedbrandsarrObj = {};
+            alreadyselectedbrandsarrObj.brandCode = [];
+            selectedData.activityBrandsList.forEach(function(n, index){
+              alreadyselectedbrandsarrObj.brandCode.push(n);
+            })
 
-          // 获取已编辑的地区
-          // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
+            // 获取已选规格
+            $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
+              var selectBrandScope = angular.element('.select-specification').scope();
+              selectBrandScope.specification = res.data.data;
+              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.allName;
+                  v.value = v.sn;
+              }));
+              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+              var activitySnSList = [];
+              selectedData.activitySnSList.forEach(function(n, index) {
+                activitySnSList.push(n.sn);
+              })
+              $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+            // 获取已编辑的地区
+            // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
+          }else{
+            // 获取已选品牌
+            $model.getBrandList().then(function (res) {
+              var selectCompanyScope = angular.element('.select-brand').scope();
+              selectCompanyScope.brand = res.data.data;
+              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.name;
+                  v.value = v.brandCode;
+              }));
+              $('[ng-model="selectBrandVal"]').multiselect('refresh');
+              $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.brandCode);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+            var alreadyselectedbrandsarrObj = {};
+            alreadyselectedbrandsarrObj.brandCode = [];
+            alreadyselectedbrandsarrObj.brandCode.push(selectedData.brandCode);
+            // 获取已选规格
+            $model.getProductList(alreadyselectedbrandsarrObj).then(function (res) {
+              var selectBrandScope = angular.element('.select-specification').scope();
+              selectBrandScope.specification = res.data.data;
+              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                  v.label = v.allName;
+                  v.value = v.sn;
+              }));
+              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
+              var activitySnSList = [];
+              activitySnSList.push(selectedData.sn);
+              $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
+              $('.multiselect.dropdown-toggle').addClass('disabled');
+            })
+          }
         }
 
         // 获取已编辑的中奖地区
@@ -540,25 +591,65 @@ define([], function () {
         // 新增红包库存
         var hbaddstockid = {};
         $scope.$on('hbaddstockid', function (e,v,f) {
+          if(f.activityForm == 'act-4'){
+            $model.getPoolDetaiById({id:f.poolId}).then(function(res) {
+              if(res.data.ret == '200000'){
+                var poolDetailObj = res.data.data;
+                $('#poolDetail').html('红包池剩余额度：'+ poolDetailObj.moneyPool +'元').show();
+                $scope.poolDetailMoney = poolDetailObj.moneyPool;
+              }
+            })
+          }else{
+            $('#poolDetail').html('').hide();
+          }
           hbaddstockid = f;
         })
         $scope.confirmHbStock = function () {
           var addNum = {addNum: $scope.hbnumber};
-          var data = {
-            addNum: $scope.hbnumber,
-            id: hbaddstockid.id
-          };
-          if (!hbaddstockid.id) {
-            alert('请先选择红包');
-            $('.modal-content .close').trigger('click');
-            return
+          if(hbaddstockid.activityForm != 'act-4'){
+            var data = {
+              addNum: $scope.hbnumber,
+              id: hbaddstockid.id
+            };
+            if (!hbaddstockid.id) {
+              alert('请先选择红包');
+              $('.modal-content .close').trigger('click');
+              return
+            }
+            $model.addhbstock(data).then(function(res) {
+              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
+              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
+              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
+              $('.modal-content .close').trigger('click');
+            })
+          }else{
+            if($scope.hbnumber > $scope.poolDetailMoney){
+              $('#poolDetail').html('增库额度超出红包剩余额度，请重新输入增库金额').show();
+              return;
+            }else{
+              var saveEditData = {
+                activityCode : hbaddstockid.activityCode,
+                addPoolMoney : $scope.hbnumber
+              }
+              var nowTotal = $('#packetToal').val();
+              var addTotalMoney = parseInt(nowTotal) + parseInt($scope.hbnumber);
+              $('#packetToal').val(addTotalMoney);
+              
+              if(parseInt($scope.hbnumber) > 0){
+                if($('#ranAmont')[0].checked){
+                  $('#prizeNum').removeAttr("disabled");
+                }else{
+                  var fixdMoney = $('#fixdMoney').val();
+                  var nowNum = Math.floor(addTotalMoney/parseInt(fixdMoney))
+                  $('#prizeNum').val(nowNum).attr('disabled','true');
+                }
+              }
+              $scope.hbnumber = '';
+              $('.modal-content .close').trigger('click');
+              
+            }
           }
-          $model.addhbstock(data).then(function(res) {
-            var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
-            var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
-            $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
-            $('.modal-content .close').trigger('click');
-          })
+          
         }
 
         // 多个礼品显示配置
@@ -595,7 +686,30 @@ define([], function () {
             }
           })
         })
+
+        //调查问卷
+        $scope.$on('questionnaireSaveData', function(e,v,f){
+          $model.saveQuestionnair(f).then(function(res){
+            if (res.data.ret === '200000') {
+              $model.getTemplateSpecific({}).then(function(res){
+                $scope.allConfigTemplateConf = null;      
+              })
+              getList();
+            }else{
+              alert(res.data.message);
+            }
+          })
+        })
+
+        //确认取消调查问卷
+        $scope.confirmCancel = function(){
+            $('.cancel_box').modal('hide');
+            $model.getTemplateSpecific({}).then(function(res){
+                $scope.allConfigTemplateConf = null;       
+            })
+        };
+
     	}]
   	}
-  	return manageActsController
+  	return manageactsController
 })

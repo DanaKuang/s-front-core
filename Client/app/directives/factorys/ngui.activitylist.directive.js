@@ -68,12 +68,21 @@ define([], function () {
 
             // 编辑
             scope.editActivity = function (e) {
-                scope.$emit('editActivity', event, {activityCode: e.target.dataset.activitycode})
+                var sendData = {
+                    activityCode : e.target.dataset.activitycode,
+                    activityForm : e.target.dataset.activityform 
+                }
+                scope.$emit('editActivity', event, sendData)
             }
 
             // 停用-查看
             scope.lookupActivity = function (e) {
                 scope.$emit('lookupActivity', event, {activityCode: e.target.dataset.activitycode})
+            }
+            // 页面跳转
+            scope.turnToReal = function () {
+                angular.element(".ui-navbar-header").scope().changeNav(null, {menuCode: 'index'});
+                sessionStorage.setItem('menuCode', 'realtime');
             }
         }
         return defineObj;

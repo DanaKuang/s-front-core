@@ -12,7 +12,7 @@ define([], function () {
     ServiceContent: ['$rootScope', '$scope', 'mPrizeGotHistoryModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
 
     	$("#durationStart").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00',
+        format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -27,7 +27,7 @@ define([], function () {
       });
 
       $("#durationEnd").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:00',
+        format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
         todayBtn:  1,
         autoclose: 1,
@@ -67,30 +67,26 @@ define([], function () {
       })
 
       // 操作面板，获取所有品牌
-      $(document).ready(function () {
-        $(".operation.multi .select").multiselect({
-          includeSelectAllOption: true,
-          nonSelectedText: '请选择',
-          selectAllText: '全部',
-          nSelectedText: '已选择',
-          allSelectedText: '全选',
-          enableFiltering: true,
-          buttonWidth: '100%',
-          maxHeight: '200px',
-          numberDisplayed: 1
-        });
-      });
+      // $(document).ready(function () {
+      //   $(".operation.multi .select").multiselect({
+      //     includeSelectAllOption: true,
+      //     nonSelectedText: '请选择',
+      //     selectAllText: '全部',
+      //     nSelectedText: '已选择',
+      //     allSelectedText: '全选',
+      //     enableFiltering: true,
+      //     buttonWidth: '100%',
+      //     maxHeight: '200px',
+      //     numberDisplayed: 1
+      //   });
+      // });
 
-      $model.getAllBrands().then(function(res) {
-        $scope.allBrands = res.data.data;
-        $('[ng-model="selectAllBrands"]').multiselect('dataprovider', _.forEach($scope.allBrands, function(v){
-            v.label = v.name;
-            v.value = v.brandCode;
-        }));
-        $('[ng-model="selectAllBrands"]').multiselect('refresh');
+      $('.brand').one('click', function () {
+        $model.getAllBrands().then(function(res) {
+          $scope.allBrands = res.data.data;
+        })
       })
 
-      // 操作面板，根据品牌获取规格
       $scope.$watch('selectAllBrands', function(n, o, s) {
         if (n !== o) {
           $scope.selectAllBrands = n;
@@ -98,25 +94,17 @@ define([], function () {
           brandListArrObj.brandCode = n;
           $model.getProductList(brandListArrObj).then(function (res) {
             $scope.speci = res.data.data;
-            $('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speci, function(v){
-              v.label = v.name;
-              v.value = v.sn;
-            }));
-            $('[ng-model="selectSpeci"]').multiselect('refresh');
+            // 给一个默认的初始值
+            var default_val = $('[ng-model="selectSpeci"]').find('option:first').val();
+            $scope.selectSpeci = default_val;
           })
         }
       })
 
-      $scope.$watch('selectSpeci', function (n, o, s) {
-        if (n !== o) {
-          $scope.selectSpeci = n;
-        }
-      })
-
       // 操作面板，获取活动状态
-      $model.getActivityStatus().then(function(res) {
-        $scope.statusList = res.data.data;
-      })
+      // $model.getActivityStatus().then(function(res) {
+      //   $scope.statusList = res.data.data;
+      // })
 
       // 操作面板，点击获取地区
       $('.operation').one('click', '.area', function (e) {
@@ -166,8 +154,8 @@ define([], function () {
           awardType: 6,
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
-          stime: $scope.startTime || '',
-          etime: $scope.endTime || '',
+          stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+          etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
           currentPageNumber: 1,
           pageSize: 10
         };
