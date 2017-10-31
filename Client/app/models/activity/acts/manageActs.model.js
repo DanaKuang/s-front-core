@@ -170,7 +170,6 @@ define([], function () {
             $model.getPoolDetaiById = function (data) {
                 return request.$Search(GET_POOL_DETAIL, data);
             };
-
         }]
     }
     return manageactsModel
