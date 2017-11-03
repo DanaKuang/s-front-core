@@ -30,7 +30,12 @@
                   <span class="add-on"><i class="icon-th"></i></span>
               </div>
               <select class="region" autocomplete="off">
-                <option value="全国">全国</option>
+                <!--<option value="全国">全国</option>-->
+                <!--<option></option>-->
+              </select>
+              <select class="regions">
+              	<option value="全部">全部</option>
+                <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
               </select>
               <!--search-->
               <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
