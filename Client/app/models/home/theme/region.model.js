@@ -20,14 +20,21 @@ define([], function () {
         var CITY_JSON_URL = '/statics/home/region/city.json';    //各市地扫码次数
 
         var getProvince = '/api/tztx/dataportal/public/getUserProvByUserId';  //省份下拉列表
+        var getCityName = '/api/tztx/dataportal/statistics/getCitysByProvince';  //地市下拉列表
         var DefaultProvince = '/api/tztx/dataportal/public/getDefaultProvByorgId';//默认身份
         var getWeeks = '/api/tztx/dataportal/statistics/getWeeks';  //周下拉列表
-        var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';  //时刻分析图
-        var getScanData = '/api/tztx/dataportal/statistics/getScanData';  //仪表盘数据
-        var scanTimes ='/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'; //各规格扫码次数
-        var City = "/api/tztx/dataportal/statistics/scanTimesOfCity";  //地市
-        var timeTrend = "/api/tztx/dataportal/statistics/scanTimesTrend" //扫码次数时间趋势
-        var bagTrend = "/api/tztx/dataportal/statistics/scanCodesOfProvince" //扫码包数时间趋势
+//      var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrend';  //时刻分析图
+        var hourTrend = '/api/tztx/dataportal/statistics/scanTimesHourTrendCtiy';  //时刻分析图
+//      var getScanData = '/api/tztx/dataportal/statistics/getScanData';  //仪表盘数据
+        var getScanData = '/api/tztx/dataportal/statistics/getScanDataCity';  //仪表盘数据
+//      var scanTimes ='/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'; //各规格扫码次数
+         var scanTimes ='/api/tztx/dataportal/statistics/scanTimesOfProvAndSpecCity'; //各规格扫码次数
+//      var City = "/api/tztx/dataportal/statistics/scanTimesOfCity";  //地市
+        var City = "/api/tztx/dataportal/statistics/scanTimesOfCitys";  //地市
+//      var timeTrend = "/api/tztx/dataportal/statistics/scanTimesTrend" //扫码次数时间趋势
+        var timeTrend = "/api/tztx/dataportal/statistics/scanTimesTrendCity" //扫码次数时间趋势
+//      var bagTrend = "/api/tztx/dataportal/statistics/scanCodesOfProvince" //扫码包数时间趋势
+        var bagTrend = "/api/tztx/dataportal/statistics/scanCodesOfProvinceCity" //扫码包数时间趋势
 
 
         this.$gaugechart = request.$Query(GAUGE_JSON_URL);
@@ -40,6 +47,9 @@ define([], function () {
 
         this.$getProvince = function(){
           return request.$Search(getProvince,{},true);
+        }
+        this.$getCityName = function(params){
+          return request.$Search(getCityName,params,true);
         }
         this.$DefaultProvince = request.$Search(DefaultProvince,{},true);
         this.$getWeeks = function(){
