@@ -96,6 +96,7 @@ define([], function () {
                         $('.plus-draw-cbox').prop('checked', false);
                         scope.drawChance = caidanconfig.probability;
                     }
+
                 } else {
                     // 新建
                     $('.draw-area').one('click', function() {
