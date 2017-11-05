@@ -146,6 +146,11 @@ define([], function () {
           })
         })
 
+        $model.step().then(function (res) {
+          $scope.createConf = res.data;
+        })
+        
+
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
           $scope.createActModalConf = res.data;
@@ -214,7 +219,6 @@ define([], function () {
 
         // 编辑活动
         $scope.$on('editActivity', function (e, v, f) {
-          
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
@@ -228,11 +232,10 @@ define([], function () {
             })
           }else{
             $model.editActivityQuestionnair({'activityCode': f.activityCode}).then(function(res){
-                $scope.allConfigTemplateConf = res.data;
-                getAlreadySelectedLaunchInfo(res.data.data.activity);
+              $scope.allConfigTemplateConf = res.data;
+              getAlreadySelectedLaunchInfo(res.data.data.activity);
             })
           }
-          
         })
 
         // 查看活动

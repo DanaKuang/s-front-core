@@ -83,6 +83,13 @@ define([], function () {
             }
         }
 
+        // 2. 扫码次数地域分析
+        var chinaJson = $model.$chinaJson.data;
+        echarts.registerMap('china', chinaJson);
+        var mapEchart = echarts.init(document.getElementById('baidumap'));
+        var mapConf = $model.$mapConf.data;
+        mapEchart.setOption(mapConf);
+
         // 搜索，进入页面默认查询当日数据
         $scope.search = search;
         function search() {
@@ -133,7 +140,28 @@ define([], function () {
                 $scope.changepv   = change && change.scanPv;
                 $scope.changeuv   = change && change.scanUv;
                 $scope.changepack = change && change.scanCode;
+                $scope.yearpv     = change.scanYtdPv && change.scanYtdPv + '次' || '正在统计中';
+                $scope.yearuv     = change.scanYtdUv && change.scanYtdUv + '人' || '正在统计中';
                 $scope.$apply();
+            })
+
+            var nationwideData = _.cloneDeep(searchItem);
+            delete nationwideData.provinceName;
+            $model.zone(nationwideData).then(function (res) {
+                var data = res.data || [];
+
+                mapConf.series[1].data = _.each(data, function (d) {
+                    d.name = d.provinceName;
+                    d.value = d.scanPv;
+                }) || [];
+
+                mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
+                mapEchart.setOption(mapConf);
+
+                mapConf.tooltip.formatter = function (params) {
+                    return params.name + '<br>' + 'PV:' + (params.data.pv || 0);
+                }
+                mapEchart.setOption(mapConf);
             })
 
             // 各规格扫码数分析
@@ -151,6 +179,7 @@ define([], function () {
             // 扫码烟包数
             $model.packet(searchItem).then(function (res) {
                 var data = res.data;
+                $scope.yearpack = Number(data[data.length - 1].scanYtdCode) + Number(data[data.length - 1].scanYtdPair);
                 data.forEach(function (n, i) {
                     global.pack_y.push(n.scanCode);
                     global.bar_y.push(n.scanPair);
@@ -247,13 +276,7 @@ define([], function () {
             ]
         };
 
-        // 2. 扫码次数地域分析
-        var chinaJson = $model.$chinaJson.data;
-        echarts.registerMap('china', chinaJson);
-        var mapEchart = echarts.init(document.getElementById('baidumap'));
-        var mapConf = $model.$mapConf.data;
-        mapEchart.setOption(mapConf);
-        
+             
         var districtChart = echarts.init(document.getElementById('districtChart'));
 
         var dataAxis = [];

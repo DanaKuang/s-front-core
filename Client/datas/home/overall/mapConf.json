@@ -24,7 +24,7 @@
         "min": 0,
         "max": 5000,
         "left": "left",
-        "text": ["高","低"],
+        "text": ["高", "低"],
         "seriesIndex": [1],
         "inRange": {
             "color": ["#e0ffff", "#006edd"]
