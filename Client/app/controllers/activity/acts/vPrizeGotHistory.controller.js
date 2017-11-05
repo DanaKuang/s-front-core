@@ -44,6 +44,14 @@ define([], function () {
 
       $scope.hours = _.map(Array(24),function(v, i){return i;});
 
+      // 进入页面调用
+      $model.getprizelist({
+        realThing: 0
+      }).then(function(res) {
+        $scope.vprizegotlistConf = res.data;
+        $scope.paginationConf = res.data;
+      })
+
       // 获取领奖明细
       $scope.$on('frompagechange', function (e, v, f) {
       	var data = {
@@ -64,21 +72,6 @@ define([], function () {
           $scope.paginationConf = res.data;
         })
       })
-
-      // 操作面板，获取所有品牌
-      // $(document).ready(function () {
-      //   $(".operation.multi .select").multiselect({
-      //     includeSelectAllOption: true,
-      //     nonSelectedText: '请选择',
-      //     selectAllText: '全部',
-      //     nSelectedText: '已选择',
-      //     allSelectedText: '全选',
-      //     enableFiltering: true,
-      //     buttonWidth: '100%',
-      //     maxHeight: '200px',
-      //     numberDisplayed: 1
-      //   });
-      // });
 
       $('.brand').one('click', function () {
         $model.getAllBrands().then(function(res) {
@@ -153,7 +146,7 @@ define([], function () {
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
-          etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+          etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
           pageSize: 10
         };
         $model.getprizelist(data).then(function(res) {
@@ -164,6 +157,9 @@ define([], function () {
 
       // 重置
       $scope.reset = function () {
+        $scope.form.$setPristine();
+        $scope.form.$setUntouched();
+        form.reset();
         $scope.orderstatus = '';
         $scope.statusVal = '';
         $scope.selectAllBrands = '';
