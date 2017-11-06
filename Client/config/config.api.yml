@@ -224,7 +224,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getCitysByProvince'
+    authorized: 1
+    description: '地市下拉列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesHourTrend'
+    authorized: 1
+    description: '时刻分析图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesHourTrendCtiy'
     authorized: 1
     description: '时刻分析图'
     enableroute: 1
@@ -238,7 +252,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getScanDataCity'
+    authorized: 1
+    description: '仪表盘'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'
+    authorized: 1
+    description: '各规格扫码次数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpecCity'
     authorized: 1
     description: '各规格扫码次数'
     enableroute: 1
@@ -252,6 +280,13 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesOfCitys'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesTrend'
     authorized: 1
     description: '扫码次数时间趋势'
@@ -259,7 +294,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesTrendCity'
+    authorized: 1
+    description: '扫码次数时间趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanCodesOfProvince'
+    authorized: 1
+    description: '扫码包数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanCodesOfProvinceCity'
     authorized: 1
     description: '扫码包数'
     enableroute: 1
