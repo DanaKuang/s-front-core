@@ -27,9 +27,9 @@ define([], function () {
         $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
         $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
 
-        // 选择周
+        // 选择周的处理，确保只请求一次
         $scope.$watch('singleSelect.unit', function (n, o, s) {
-            if ( n === 'week' && !global.week) {
+            if (n === 'week' && !global.week) {
                 global.week = true;
                 $model.getweeks().then(function (res) {
                     var data = res.data || [{weekId: ''}];
@@ -67,9 +67,7 @@ define([], function () {
                 provinceName: '',
                 statTime: '',
                 statType: ''
-            },
-            global.provinceName     = '';
-
+            };
             $scope.checkbox.packcheckbox  = true;
             $scope.checkbox.barcheckbox   = true;
             $scope.checkbox.promocheckbox = true;
@@ -746,7 +744,6 @@ define([], function () {
         }
 
         // 进入页面初始化
-        init();
         search();
       }]
   	}
