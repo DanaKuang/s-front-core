@@ -76,11 +76,6 @@ define([], function () {
             $scope.checkbox.drawcheckbox  = true;
             $scope.checkbox.getcheckbox   = true;
             $scope.checkbox.paycheckbox   = true;
-
-            // 地图省下的市初始化
-            // districtOption.xAxis.data = [];
-            // districtOption.series[0].data = [];
-            // districtChart.setOption(districtOption);
         }
 
         // 1. 扫码次数趋势分析
@@ -584,7 +579,6 @@ define([], function () {
                 }
             ]
         };
-
 
         global.searchItem = function () {
             return {
