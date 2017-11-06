@@ -74,7 +74,7 @@ define([], function () {
                     });
                 }
 
-                var allconfigtemplateScope = angular.element('.pop').scope();
+                var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
 
                 if (that_scope.activityCode) {
@@ -96,7 +96,6 @@ define([], function () {
                         $('.plus-draw-cbox').prop('checked', false);
                         scope.drawChance = caidanconfig.probability;
                     }
-
                 } else {
                     // 新建
                     $('.draw-area').one('click', function() {
