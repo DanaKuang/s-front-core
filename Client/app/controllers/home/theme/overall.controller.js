@@ -263,9 +263,7 @@ define([], function () {
                     provinceName: e.name + '省',
                     statTime: global.searchItem().statTime,
                     statType: global.searchItem().statType
-                } || global.initProvinceData;
-                global.districtAxis = [];
-                global.districtAxisY = [];
+                };
                 $model.province(data).then(function(res) {
                     provinceData(e, res, false);
                 })
@@ -277,7 +275,7 @@ define([], function () {
             districtChart.dispatchAction({
                 type: 'dataZoom',
                 startValue: global.districtAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-                endValue: global.districtAxisY[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
+                endValue: global.districtAxis[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
             });
         });
 
@@ -627,14 +625,6 @@ define([], function () {
                     global.awardPay_y.push(n.awardPayPv || 0);
                 })
 
-                // global.f_axisx = data.map(n => n.statTime ? n.statTime : n.weekNo);
-                // global.scan_y = data.map(n => n.scanPv || 0);
-                // global.uv_y = data.map(n => n.scanUv || 0);
-                // global.awardPut_y = data.map(n => n.awardPutPv || 0);
-                // global.draw_y = data.map(n => n.drawPv || 0);
-                // global.drawResult_y = data.map(n => n.drawResultPv || 0);
-                // global.awardPay_y = data.map(n => n.awardPayPv || 0);
-
                 trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
                 trendOption.series[0].data = global.scan_y;
                 trendChart.setOption(trendOption);
@@ -744,6 +734,8 @@ define([], function () {
         }
 
         function provinceData(e, res, bool) {
+            global.districtAxis = [];
+            global.districtAxisY = [];
             if (bool) {
                 districtOption.title.text = sessionStorage.getItem("account") === 'henan' ? '河南省的各地扫码次数' : '湖南省的各地扫码次数';
             } else {
