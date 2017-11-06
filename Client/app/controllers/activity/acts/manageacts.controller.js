@@ -79,7 +79,7 @@ define([], function () {
             areaCodes: $scope.allarea || [],
             keys: $scope.keysval || '',
             stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
-            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
             currentPageNumber: 1, 
             pageSize: 10
           }
@@ -320,7 +320,6 @@ define([], function () {
                 selectAllText: '全部',
                 allSelectedText: '全选',
                 enableFiltering: true,
-                buttonWidth: '453px',
                 maxHeight: '500px',
                 numberDisplayed: 1
               });
@@ -359,9 +358,16 @@ define([], function () {
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
               $('.multiselect.dropdown-toggle').addClass('disabled');
             })
+
+            // 异步
+            setTimeout(function () {
+              $('.draw-area').find('.btn-group').not('.edit').css('display', 'none');
+              $('.select-area').find('.btn-group').not('.edit').css('display', 'none')
+            }, 500)
+            
             // 获取已编辑的地区
             // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
-          }else{
+          } else {
             // 获取已选品牌
             $model.getBrandList().then(function (res) {
               var selectCompanyScope = angular.element('.select-brand').scope();

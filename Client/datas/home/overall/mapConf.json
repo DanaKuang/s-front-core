@@ -22,7 +22,7 @@
     },
     "visualMap": {
         "min": 0,
-        "max": 5000,
+        "max": "",
         "left": "left",
         "text": ["高","低"],
         "seriesIndex": [1],
@@ -57,22 +57,43 @@
             }
         }
     },
+    "dataRange": {
+        "min": 0,
+        "max": 1000,
+        "color": ["#006edd", "#e0ffff"],
+        "text": ["高", "低"],
+        "calculable": true
+    },
     "series" : [{
-       "type": "scatter",
-       "coordinateSystem": "geo",
-       "data": "",
-       "symbolSize": 20,
-       "symbol": "",
-       "symbolRotate": 35,
-       "label": {
-           "normal": {
-               "formatter": "{b}",
-               "position": "right",
-               "show": false
-           },
-           "emphasis": {
-               "show": true
-           }
+      "type": "map",
+      "coordinateSystem": "geo",
+      "data": "",
+      "symbolSize": 20,
+      "symbol": "",
+      "symbolRotate": 35,
+      "selectedMode" : "single",
+      "itemStyle": {
+        "normal": {
+          "label":  {
+            "show": true
+          }
+        },
+        "emphasis": {
+          "label": {
+            "show": true
+          }
+        }
+      },
+      "coordinateSystem": "geo",
+      "label": {
+          "normal": {
+            "formatter": "{b}",
+            "position": "right",
+            "show": true
+          },
+          "emphasis": {
+            "show": true
+          }
        },
        "itemStyle": {
            "normal": {
@@ -80,7 +101,7 @@
            }
        }
     }, {
-        "name": "访问量",
+        "name": "pv",
         "type": "map",
         "geoIndex": 0,
         "data":[]

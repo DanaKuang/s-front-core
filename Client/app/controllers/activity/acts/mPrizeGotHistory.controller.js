@@ -44,6 +44,14 @@ define([], function () {
 
       $scope.hours = _.map(Array(24),function(v, i){return i;});
 
+      // 一进入页面调用
+      $model.getprizelist({
+        realThing: 1
+      }).then(function(res) {
+        $scope.prizegotlistConf = res.data;
+        $scope.paginationConf = res.data;
+      })
+
     	// 获取领奖明细
       $scope.$on('frompagechange', function (e, v, f) {
         var data = {
@@ -144,7 +152,7 @@ define([], function () {
           status: $scope.statusVal || '', //活动状态
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
-          etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+          etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
           currentPageNumber: 1,
           pageSize: 10
         };
@@ -156,6 +164,9 @@ define([], function () {
 
       // 重置
       $scope.reset = function () {
+        $scope.form.$setPristine();
+        $scope.form.$setUntouched();
+        form.reset();
         $scope.orderstatus = '';
         $scope.statusVal = '';
         $scope.selectAllBrands = '';
