@@ -192,9 +192,6 @@ define([], function() {
 					'font-size': '12px',
 					'margin-left': '0px'
 				});
-				$("#regis_warn").html('');
-				$("#transferName").html('');
-				$("#transfer_warn").html('');
 			}
 			//取消设置页面
 			$scope.cancelCreateGift = function() {
@@ -314,17 +311,8 @@ define([], function() {
 				}
 				//域名
 				var applySpeciftValue = $("#applySpecift").val();
-				var reg4 = /^http(s)?:\/\/(.*?)/;
 				if(applySpeciftValue == '') {
 					$('.apply_specift_warns').html('请输入域名');
-					$('.apply_specift_warns').css({
-						'color': '#ff3300',
-						'font-size': '15px',
-						'margin-left': '10px'
-					});
-					return;
-				} else if(!reg4.test(applySpeciftValue)) {
-					$('.apply_specift_warns').html('域名输入有误');
 					$('.apply_specift_warns').css({
 						'color': '#ff3300',
 						'font-size': '15px',
