@@ -9,9 +9,9 @@ define([], function() {
 			//获取时间当前年月
 			var date = new Date(); //获取系统当前时间
 			var year = date.getFullYear();
-			var month1 = date.getMonth() + 1;
+			var month1 = date.getMonth() == 12 ? 1 : date.getMonth()+1;
 			var month2 = date.getMonth();
-			var month3 = date.getMonth() - 1;
+			var month3 = date.getMonth() == 1 ? 12 : date.getMonth()-1;
 			var day = date.getDate() - 1;
 			month1 = (month1 < 10 ? "0" + month1 : month1);
 			month2 = (month2 < 10 ? "0" + month2 : month2);

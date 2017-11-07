@@ -56,7 +56,7 @@
 									</div>
 									<div class="col-md-3" style="height: 400px;">
 										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
-										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：{{yearpv}}次</p>
+										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：{{yearpv}}</p>
 									</div>
 								</div>
 
@@ -73,7 +73,7 @@
 
 								<!-- 扫码用户数分析 -->
 								<div class="chart-wrap col-md-12">
-									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}人）</p>
+									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}）</p>
 									<div class="chart" id="userChart" style="height: 400px"></div>
 								</div>
 								

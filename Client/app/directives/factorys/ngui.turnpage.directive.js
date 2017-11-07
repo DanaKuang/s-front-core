@@ -1,15 +1,15 @@
 /**
  * Author: Kuang
- * Create Date: 2017-10-30
- * Description: choosetemplate
+ * Create Date: 2017-11-1
+ * Description: turnpage
  */
 
 define([], function () {
-    var nguicreate = angular.module('ngui.create', []);
+    var nguiturnpage = angular.module('ngui.turnpage', []);
 
-    var nguicreateFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var nguiturnpageFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
-            tpl: '/choosetemplate.tpl.html'
+            tpl: '/turnpage.tpl.html'
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -28,7 +28,6 @@ define([], function () {
             
             scope.$watch('conf', function () {
                 // 属性赋值
-                util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
 
                 
             }, true);   
@@ -37,5 +36,5 @@ define([], function () {
         return defineObj;
     }
 
-    nguicreate.directive('saCreate', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguicreateFn]);
+    nguiturnpage.directive('saTurnpage', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguiturnpageFn]);
 })

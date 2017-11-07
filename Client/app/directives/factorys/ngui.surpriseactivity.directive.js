@@ -74,7 +74,7 @@ define([], function () {
                     });
                 }
 
-                var allconfigtemplateScope = angular.element('.pop').scope();
+                var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
 
                 if (that_scope.activityCode) {

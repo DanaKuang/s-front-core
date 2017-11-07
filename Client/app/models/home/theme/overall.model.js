@@ -67,14 +67,12 @@ define([], function () {
             return request.$Search(VARIOUS_SN, data, true)
           }
 
-
 	        // 接口数据
           $model.$chinaJson = request.$Query(CHINA_JSON_URL);
 
           // 地图配置
           $model.$mapConf = request.$Query(MAP_JSON_CONF);
-
-        
+    
         }]
     }
     return overallModel

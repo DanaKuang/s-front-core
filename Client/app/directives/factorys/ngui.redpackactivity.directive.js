@@ -32,7 +32,7 @@ define([], function () {
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['commonActivity']);
             }, true);
 
-            var allconfigtemplateScope = angular.element('.pop').scope();
+            var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
             scope.pageName = allconfigtemplateScope.pageName;
 
         }
