@@ -97,7 +97,7 @@ define([], function () {
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
                             }
                         } else {
-                            caidanAward.probability = parseFloat(_drawPrizeScope.drawChance);
+                            caidanAward.probability = parseFloat(_drawPrizeScope.drawChance) || 0;
                             if (!caidanAward.probability) {
                                 caidanerror = true;
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
