@@ -687,14 +687,20 @@ define([], function () {
           })
         })
 
+        var successTimer = null;
         //调查问卷
         $scope.$on('questionnaireSaveData', function(e,v,f){
           $model.saveQuestionnair(f).then(function(res){
             if (res.data.ret === '200000') {
+              $('.ques_success_box').modal('show');
+              successTimer = setTimeout(function(){
+                  $('.ques_success_box').modal('hide');
+                  clearTimeout(successTimer);
+              },3000);
               $model.getTemplateSpecific({}).then(function(res){
                 $scope.allConfigTemplateConf = null;      
               })
-              getList();
+              getList();              
             }else{
               alert(res.data.message);
             }

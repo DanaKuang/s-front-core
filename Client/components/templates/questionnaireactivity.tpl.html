@@ -3,7 +3,7 @@
 		<p class="pop-title float-left">新建活动 > {{pageName}}</p>
 		<sa-popback></sa-popback>
 	</div>
-    <div class="ui-panel-box panel border-box" style="overflow:hidden;">
+    <div class="ui-panel-box panel border-box" id="questionnaireBox" style="overflow:hidden;">
         <!--新建调查问卷-->
         <div id="createQuestionnaire" style="display: block;">
             <div class="activity-name form-horizontal configuration-item form-group col-md-5">
@@ -148,13 +148,13 @@
             <div class="configuration-item form-horizontal form-group col-md-5">
                 <label class="control-label col-sm-2"></label>
                 <div class="col-sm-9">
-                    <div ng-if="edit" class="col-sm-2 que_btn que_btn_next" ng-click="saveEditData()">
+                    <div ng-if="!editBtn" class="col-sm-2 que_btn que_btn_next" ng-click="saveEditData()">
                         保存
                     </div>
-                    <div ng-if="!edit" class="col-sm-2 que_btn que_btn_next" ng-click="finishGeneral()">
+                    <div ng-if="creatBtn" class="col-sm-2 que_btn que_btn_next" ng-click="finishGeneral()">
                         下一步
                     </div>
-                    <div class="col-sm-1"></div>
+                    <div class="col-sm-1" id="blankBox"></div>
                     <div class="col-sm-2 que_btn que_btn_back" ng-click="changeNair()">
                         返回
                     </div>
@@ -213,15 +213,11 @@
                                 <input name="" class="input_wenbk btwen_text btwen_text_dx" placeholder="单选题目"/>
                                 
                                 <input name="" type="checkbox" value="" class="bdtm fxk" style="vertical-align: text-bottom;margin-left: 10px"/> <span>必答题</span>
-                                
                             </div>
-
                             <div>
                                 <label for="" style="vertical-align: middle;">描述：</label>
                                 <input name="" class="input_wenbk btwen_brief btwen_text_dx" placeholder="单选题目描述"/>
                             </div>
-                            
-
                             <div class="title_itram">
                                 <div class="kzjxx_iteam">
                                     <input name="" type="radio" value="" class="dxk">
@@ -267,7 +263,6 @@
                                 </select>
                                 <span>项</span>
                             </div>-->
-                            
                             <!--完成编辑-->
                             <div class="bjqxwc_box">
                                 <a href="javascript:void(0);" class="swcbj_but">完成编辑</a>
@@ -288,7 +283,7 @@
                             </div>
                             <div style="margin-left:-12px;">
                                 <label for="">至少写：</label>
-                                <input name="" class="least_size input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
+                                <input type="number" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="least_size input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
                                 <span>字</span>
                                 <!--<label for="" style="margin-left:20px;">至多写：</label>
                                 <input name="" class="input_wenbk font_size_limit btwen_text_duox" placeholder="请输入"/>
