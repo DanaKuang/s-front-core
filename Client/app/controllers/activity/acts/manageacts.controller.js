@@ -146,6 +146,10 @@ define([], function () {
           })
         })
 
+        $model.step().then(function (res) {
+          $scope.createConf = res.data;
+        })
+
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
           $scope.createActModalConf = res.data;
@@ -719,8 +723,7 @@ define([], function () {
             $model.getTemplateSpecific({}).then(function(res){
                 $scope.allConfigTemplateConf = null;       
             })
-        };
-
+        }
     	}]
   	}
   	return manageactsController

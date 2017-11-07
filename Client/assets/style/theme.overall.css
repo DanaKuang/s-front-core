@@ -22,7 +22,8 @@ form {
       clear: both; }
   .chart-all p {
     font-size: 14px;
-    font-weight: bold; }
+    font-weight: bold;
+    line-height: 4; }
   .chart-all .absolute {
     position: absolute;
     top: 3px;
