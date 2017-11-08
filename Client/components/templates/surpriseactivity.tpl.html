@@ -4,108 +4,109 @@
 		<sa-popback></sa-popback>
 	</div>
 	<div class="ui-panel-box panel border-box">
-		<form name="form" novalidate>
-			<div class="pop-inner">
-				<!-- 配置 -->
-				<div class="configuration float-left css-form">
-					<!-- 基本信息 -->
-					<div class="basic config-item">
-						<h6>基本信息</h6>
-						<sa-basicInfo conf="basicInfoConf"></sa-basicInfo>
-					</div>
-					<!-- 参与设置 -->
-					<div class="participate-relate config-item">
-						<h6>参与设置</h6>
-						<sa-participateInfo conf="participateInfoConf"></sa-participateInfo>
-					</div>
-					<!-- 中奖设置 -->
-					<div class="draw-prize multi config-item form-horizontal">
-						<h6>中奖设置</h6>
-						<div class="select-duration configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">参与时段</label>
-							<div class="col-sm-9">
-								<div class="col-sm-3">
-									<select class="hours input-sm form-control" name="startHour" ng-model="startHour" ng-disabled="disabled">
-							      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
-							    </select>
-								</div>
-								<div class="col-sm-1">时&nbsp;&nbsp;~&nbsp;&nbsp;</div>
-								&nbsp;
-								<div class="col-sm-3">
-									<select class="hours input-sm form-control" name="endHour" ng-model="endHour" ng-disabled="disabled">
-							      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
-							    </select>
-								</div>
-								<div class="col-sm-1">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-							</div>
-						</div>
-						<div class="select-duration-person configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">间隔时间</label>
-							<div class="col-sm-9">
-								<div class="col-sm-1 paddingtop">每隔</div>
-								<div class="col-sm-2 paddingright">
-									<select class="hours intervalHour form-control input-sm" name="intervalHour" ng-model="intervalHour" value="{{intervalHour}}" ng-disabled="disabled">
-							      <option ng-repeat="h in intervalHours" value="{{h}}" ng-selected="$index==0">{{h}}</option>
-							    </select>
-								</div>
-								<div class="col-sm-4 paddingtop">小时,可参加人数为</div>
-								<div class="col-sm-3">
-									<input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" value="{{intervalHourperson}}" ng-disabled="disabled" class="intervalHourperson form-control input-sm">
-								</div>
-						    <div class="col-sm-1">人</div>
-							</div>
-						</div>
-						<div class="draw-area configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">中奖地区</label>
-							<div class="col-sm-9">
-								<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled" ng-hide="edit"></select>
-								<div class="btn-group edit" ng-show="edit">
-									<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false"><span class="multiselect-selected-text">{{adcodenames}}</span>
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="plus configuration-item col-md-5 form-group">
-							<label class="control-label col-sm-2">中奖概率</label>
-							<div class="col-sm-9">
-								<!-- <div class="checkbox col-sm-2">
-								  <label class="checkbox-inline">
-								    <input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled">设置
-								  </label>
-								</div> -->
-							<!-- 	<div>
-									<select class="form-control input-sm" name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
-										<option value="">请选择附加条件</option>
-										<option value="1">第8个人中奖</option>
-										<option value="2">第88个人中奖</option>
-									</select>
-								</div> -->
-								<div class="chance configuration-item">
-									<input class="form-control input-sm" type="text" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-blur="parseFloat($event)" ng-disabled="disabled">
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- 投放设置 -->
-					<div class="launch-relate config-item">
-						<h6>投放设置</h6>
-						<sa-launchInfo conf="launchInfoConf"></sa-launchInfo>
-					</div>
-					<!-- 中奖设置 -->
-					<div class="prize-relate config-item">
-						<h6>奖项设置</h6>
-						<sa-surprisesetprize conf="surpriseprizeConf"></sa-surprisesetprize>
-					</div>
-					<!-- 按钮区 -->
-					<sa-finalcreate conf="finalcreateConf"></sa-finalcreate>
+		<form name="form" novalidate class="pop-inner" role="form" ng-submit="submitForm(form.$valid)">
+			<!-- 配置 -->
+			<div class="configuration css-form col-md-8 col-lg-8">
+				<!-- 基本信息 -->
+				<div class="basic config-item">
+					<h6>基本信息</h6>
+					<sa-basicInfo conf="basicInfoConf"></sa-basicInfo>
 				</div>
-
-				<!-- 预览 -->
-				<div class="preview float-left">
-					<p>砸金蛋活动样式</p>
-					<div class="image">
-						<img src="../../../../assets/image/zajindan.jpg" alt="">
+				<!-- 参与设置 -->
+				<div class="participate-relate config-item">
+					<h6>参与设置</h6>
+					<sa-participateInfo conf="participateInfoConf"></sa-participateInfo>
+				</div>
+				<!-- 中奖设置 -->
+				<div class="draw-prize multi config-item form-horizontal">
+					<h6>中奖设置</h6>
+					<div class="select-duration configuration-item col-md-5 form-group">
+						<label class="control-label col-sm-2">参与时段</label>
+						<div class="col-sm-9">
+							<div class="col-sm-3">
+								<select class="hours input-sm form-control" name="startHour" ng-model="startHour" ng-disabled="disabled">
+						      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
+						    </select>
+							</div>
+							<div class="col-sm-1">时&nbsp;&nbsp;~&nbsp;&nbsp;</div>
+							&nbsp;
+							<div class="col-sm-3">
+								<select class="hours input-sm form-control" name="endHour" ng-model="endHour" ng-disabled="disabled">
+						      <option ng-repeat="h in hours" value="{{h < 10 ? '0'+h : h}}:00:00" ng-selected="$index==0">{{h < 10 ? '0'+h : h}}:00:00</option>
+						    </select>
+							</div>
+							<div class="col-sm-1">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						</div>
 					</div>
+					<div class="select-duration-person configuration-item col-md-5 form-group">
+						<label class="control-label col-sm-2">间隔时间</label>
+						<div class="col-sm-9">
+							<div class="col-sm-1 paddingtop">每隔</div>
+							<div class="col-sm-2 paddingright">
+								<select class="hours intervalHour form-control input-sm" name="intervalHour" ng-model="intervalHour" value="{{intervalHour}}" ng-disabled="disabled">
+						      <option ng-repeat="h in intervalHours" value="{{h}}" ng-selected="$index==0">{{h}}</option>
+						    </select>
+							</div>
+							<div class="col-sm-4 paddingtop">小时,可参加人数为</div>
+							<div class="col-sm-3">
+								<input type="text" placeholder="请输入前面时间段内可参与人数" name="intervalHourperson" ng-model="intervalHourperson" value="{{intervalHourperson}}" ng-disabled="disabled" class="intervalHourperson form-control input-sm">
+							</div>
+					    <div class="col-sm-1">人</div>
+						</div>
+					</div>
+					<div class="draw-area configuration-item col-md-5 form-group">
+						<label class="control-label col-sm-2">中奖地区</label>
+						<div class="col-sm-9">
+							<select ng-model="drawAreaVal" value="{{drawAreaVal}}" multiple="multiple" class="select form-control input-sm" ng-disabled="disabled" ng-hide="edit"></select>
+							<div class="btn-group edit" ng-show="edit">
+								<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="{{adcodenames}}" aria-expanded="false"><span class="multiselect-selected-text">{{adcodenames}}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="plus configuration-item col-md-5 form-group">
+						<label class="control-label col-sm-2">中奖概率</label>
+						<div class="col-sm-9">
+							<!-- <div class="checkbox col-sm-2">
+							  <label class="checkbox-inline">
+							    <input type="checkbox" class="plus-draw-cbox" ng-model="myPlus" ng-init="myPlus = true" ng-disabled="disabled">设置
+							  </label>
+							</div> -->
+						<!-- 	<div>
+								<select class="form-control input-sm" name="" id="" ng-show="myPlus" ng-model="plusval" ng-disabled="disabled">
+									<option value="">请选择附加条件</option>
+									<option value="1">第8个人中奖</option>
+									<option value="2">第88个人中奖</option>
+								</select>
+							</div> -->
+							<div class="chance configuration-item">
+								<input name="caidanprobability" class="form-control input-sm" type="text" placeholder="请填写中奖概率" ng-model="drawChance" value="{{drawChance}}" ng-keyup="setChance($event)" ng-blur="parseFloat($event)" ng-disabled="disabled" required>
+							</div>
+						</div>
+						<div ng-show="form.$submitted || form.caidanprobability.$touched">
+							<div ng-show="form.caidanprobability.$error.required" class="wrong-tip">请输入中奖概率</div>
+						</div>
+					</div>
+				</div>
+				<!-- 投放设置 -->
+				<div class="launch-relate config-item">
+					<h6>投放设置</h6>
+					<sa-launchInfo conf="launchInfoConf"></sa-launchInfo>
+				</div>
+				<!-- 中奖设置 -->
+				<div class="prize-relate config-item">
+					<h6>奖项设置</h6>
+					<sa-surprisesetprize conf="surpriseprizeConf"></sa-surprisesetprize>
+				</div>
+				<!-- 按钮区 -->
+				<sa-finalcreate conf="finalcreateConf"></sa-finalcreate>
+			</div>
+
+			<!-- 预览 -->
+			<div class="preview col-md-4 col-lg-4">
+				<p>砸金蛋活动样式</p>
+				<div class="image">
+					<img src="../../../../assets/image/zajindan.jpg" alt="">
 				</div>
 			</div>
 		</form>
