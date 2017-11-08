@@ -59,8 +59,6 @@ define([], function () {
             }
 
             function bigVerify() {
-                // $('.wrong-tip').addClass('hidden');
-
                 scopeVariable._basicScope = angular.element('.basicinfo').scope(); //基本信息
                 scopeVariable._participateScope = angular.element('.participate-integral').scope(); //参与设置
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
@@ -338,7 +336,7 @@ define([], function () {
                     activityDoc: scopeVariable._basicScope.introValue || '', //活动说明
                     activityEntrance: scopeVariable._basicScope.accessUrl || '', //accessUrl
                     activityEntranceAttach: scopeVariable._basicScope.attachCode || '', // attachCode
-                    idx: scopeVariable._basicScope.points || 1,
+                    idx: scopeVariable._basicScope.points || 502,
                     name: scopeVariable._basicScope.nameValue || '',
                     attachUrl: '',
                     score: scopeVariable._participateScope.nameIntegral || 0,
