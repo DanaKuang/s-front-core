@@ -486,7 +486,6 @@ define([], function () {
             } else {
               $('.configuration-image').find('.wrong-tip').removeClass('hidden');
             }
-            
           }).fail(function (res) {
             alert('文件上传失败，请重试');
             return

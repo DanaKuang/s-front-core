@@ -86,21 +86,21 @@ define([], function () {
                         caidanAward.adcodes = Array.isArray(_drawPrizeScope.drawAreaVal) ? _drawPrizeScope.drawAreaVal.join(',') : _drawPrizeScope.drawAreaVal || '';
                         caidanAward.adnames = $('.draw-area').find('.multiselect-selected-text').html() && $('.draw-area').find('.multiselect-selected-text').html().toString();
 
-                        if (_drawPrizeScope.myPlus) {
-                            caidanAward.condition = _drawPrizeScope.plusval;
-                            var index = $('[ng-model="plusval"]')[0].selectedIndex;
-                            caidanAward.conditionName = $('[ng-model="plusval"] option').eq(index).text();
-                            if (!caidanAward.condition) {
-                                caidanerror = true;
-                                $('.plus').children('.wrong-tip').removeClass('hidden');
-                            }
-                        } else {
+                        // if (_drawPrizeScope.myPlus) {
+                        //     caidanAward.condition = _drawPrizeScope.plusval;
+                        //     var index = $('[ng-model="plusval"]')[0].selectedIndex;
+                        //     caidanAward.conditionName = $('[ng-model="plusval"] option').eq(index).text();
+                        //     if (!caidanAward.condition) {
+                        //         caidanerror = true;
+                        //         $('.plus').children('.wrong-tip').removeClass('hidden');
+                        //     }
+                        // } else {
                             caidanAward.probability = parseFloat(_drawPrizeScope.drawChance) || 0;
                             if (!caidanAward.probability) {
                                 caidanerror = true;
                                 $('.plus').children('.wrong-tip').removeClass('hidden');
                             }
-                        }
+                        // }
                         if (!caidanAward.sduration || !caidanAward.eduration || !caidanAward.adcodes) {
                             caidanerror = true;
                             $('.plus').children('.wrong-tip').removeClass('hidden');
@@ -199,7 +199,7 @@ define([], function () {
                             ActivityPageAward.special = -1;
                         }
 
-                        ActivityPageAward.probability = item.find('.chance').val() || ''; //特殊奖品没有概率设置
+                        ActivityPageAward.probability = ActivityPageAward.special == 1 ? '100%' : item.find('.chance').val() || ''; //特殊奖品没有概率设置
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.details = []; //具体奖品数组
 
@@ -347,8 +347,8 @@ define([], function () {
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
                     areaCode: scopeVariable._launchScope.selectAreaVal ? scopeVariable._launchScope.selectAreaVal.toString() : '' || '',
                     holiday: scopeVariable._launchScope.whichday || 3,
-                    stime: that_scope.activityCode ? scopeVariable._launchScope.startTime : scopeVariable._launchScope.startTime + ':00',
-                    etime: that_scope.activityCode ? scopeVariable._launchScope.endTime :  scopeVariable._launchScope.endTime + ':00',
+                    stime: that_scope.activityCode ? scopeVariable._launchScope.startTime : scopeVariable._launchScope.startTime ? scopeVariable._launchScope.startTime + ':00' : scopeVariable._launchScope.startTime || '',
+                    etime: that_scope.activityCode ? scopeVariable._launchScope.endTime : scopeVariable._launchScope.endTime ? scopeVariable._launchScope.endTime + ':00' : scopeVariable._launchScope.endTime || '',
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,
@@ -392,7 +392,7 @@ define([], function () {
                             }
                         }
                         
-                        if (s == 'areaCodes' && fromSonScope[s].length == 0) {
+                        if (s == 'areaCode' && fromSonScope[s].length == 0) {
                             // 地区没选
                             scopeVariable.finalerror = true;
                             $('.select-area .wrong-tip').removeClass('hidden');

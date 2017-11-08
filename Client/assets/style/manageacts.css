@@ -122,7 +122,7 @@
 .configuration-item .control-label {
 	position: relative;
 }
-.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .launch-relate .select-duration .control-label:before {
+.activity-name .control-label:before, .activity-intro .control-label:before, .activity-priority .control-label:before, .activity-desc .control-label:before, .configuration-image .control-label:before, .select-brand .control-label:before, .select-specification .control-label:before, .select-area .control-label:before, .launch-relate .select-duration .control-label:before, .draw-prize .plus .control-label:before {
 	content: '*';
 	position: absolute;
 	right: 0;
