@@ -51,12 +51,13 @@
 							<div class="chart-all col-md-12">
 								<!-- 扫码次数趋势分析 -->
 								<div class="chart-wrap">
-									<div class="chart col-md-9" id="trendChart" style="height: 400px;">
-										<!-- 可拖动折线图 -->
+									<h4>扫码次数趋势分析</h4>
+									<div class="col-md-3" style="margin-top: 60px;">
+										<p class="text-left">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
+										<p class="text-left">本年累计扫码次数：{{yearpv}}</p>
 									</div>
-									<div class="col-md-3" style="height: 400px;">
-										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
-										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：{{yearpv}}次</p>
+									<div class="chart col-md-9" id="trendChart" style="height: 250px;">
+										<!-- 可拖动折线图 -->
 									</div>
 								</div>
 
@@ -73,7 +74,7 @@
 
 								<!-- 扫码用户数分析 -->
 								<div class="chart-wrap col-md-12">
-									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}人）</p>
+									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}）</p>
 									<div class="chart" id="userChart" style="height: 400px"></div>
 								</div>
 								

@@ -11,6 +11,9 @@ define([], function () {
         ServiceContent: ['request', function (request) {
             //定义资源
             var $model = this;
+
+            var STEP = '/statics/activity/step.json';
+
             // 模板列表
             var GET_ACT_SAMPLE_LIST = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
             // 活动列表
@@ -70,6 +73,10 @@ define([], function () {
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
+            }
+
+            $model.step = function () {
+                return request.$Query(STEP)
             }
 
             // 活动状态

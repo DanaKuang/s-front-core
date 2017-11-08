@@ -1,15 +1,15 @@
 /**
  * Author: Kuang
  * Create Date: 2017-10-30
- * Description: step
+ * Description: create
  */
 
 define([], function () {
-    var nguistep = angular.module('ngui.step', []);
+    var nguicreate = angular.module('ngui.create', []);
 
-    var nguistepFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var nguicreateFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
-            tpl: '/step.tpl.html',
+            tpl: '/create.tpl.html',
             step: []
         };
         var defineObj = { //指令定义对象
@@ -25,15 +25,22 @@ define([], function () {
         };
 
         function linkFn (scope, element, attrs) {
-            // debugger
             util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['step']);
+            
             scope.$watch('conf', function () {
+                // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['step']);
-            })            
+
+                scope.step = 0;
+                scope.stepstream = scope.conf && scope.conf.step[scope.step];
+
+                // 还需要一个active判断
+                
+            }, true);   
 
         }
         return defineObj;
     }
 
-    nguistep.directive('saStep', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguistepFn]);
+    nguicreate.directive('saCreate', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguicreateFn]);
 })
