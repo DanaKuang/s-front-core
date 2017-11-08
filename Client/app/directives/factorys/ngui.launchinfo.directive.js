@@ -110,7 +110,6 @@ define([], function () {
 
                 var selectDurationEnd = new Date(activity.etime).toLocaleString();
                 scope.endTime = adjustafternoon(selectDurationEnd);
-
             } else {
                 scope.parentForm = angular.element('.css-form').scope().form;
                 
