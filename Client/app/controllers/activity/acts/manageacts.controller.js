@@ -146,9 +146,9 @@ define([], function () {
           })
         })
 
-        // $model.step().then(function (res) {
-        //   $scope.createConf = res.data;
-        // })
+        $model.step().then(function (res) {
+          $scope.createConf = res.data;
+        })
 
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
@@ -218,7 +218,6 @@ define([], function () {
 
         // 编辑活动
         $scope.$on('editActivity', function (e, v, f) {
-          
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
@@ -315,6 +314,7 @@ define([], function () {
 
         // 获取已编辑的信息
         function getAlreadySelectedLaunchInfo(selectedData) {
+          $('.pop .multiselect.dropdown-toggle').addClass('disabled');
           if(selectedData.activityForm != 'act-4'){
             $(document).ready(function () {
               $(".multi .select").multiselect({
@@ -338,7 +338,6 @@ define([], function () {
               }));
               $('[ng-model="selectBrandVal"]').multiselect('refresh');
               $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
             var alreadyselectedbrandsarrObj = {};
             alreadyselectedbrandsarrObj.brandCode = [];
@@ -360,7 +359,6 @@ define([], function () {
                 activitySnSList.push(n.sn);
               })
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
 
             // 异步
@@ -382,7 +380,6 @@ define([], function () {
               }));
               $('[ng-model="selectBrandVal"]').multiselect('refresh');
               $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.brandCode);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
             var alreadyselectedbrandsarrObj = {};
             alreadyselectedbrandsarrObj.brandCode = [];
@@ -399,7 +396,6 @@ define([], function () {
               var activitySnSList = [];
               activitySnSList.push(selectedData.sn);
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
           }
         }
@@ -457,7 +453,6 @@ define([], function () {
                         alreadyselectedareaarr.push(n.adCode);
                       })
                       $(selector).multiselect('select', alreadyselectedareaarr);
-                      $('.multiselect.dropdown-toggle').addClass('disabled');
                     }
                   }
                 })
@@ -491,7 +486,6 @@ define([], function () {
             } else {
               $('.configuration-image').find('.wrong-tip').removeClass('hidden');
             }
-            
           }).fail(function (res) {
             alert('文件上传失败，请重试');
             return
