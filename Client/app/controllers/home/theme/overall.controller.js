@@ -650,7 +650,6 @@ define([], function () {
                         d.value = d.scanPv;
                     }) || [];
 
-                    mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
                     mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
                     mapEchart.setOption(mapConf);
                 }
