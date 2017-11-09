@@ -142,7 +142,6 @@ define([], function () {
         echarts.registerMap('china', chinaJson);
         var mapEchart = echarts.init(document.getElementById('baidumap'));
         var mapConf = $model.$mapConf.data;
-        mapConf.title.text = '';
 
         // 鼠标悬浮地图上面时，针对悬浮区域的tip展示
         mapConf.tooltip.formatter = function (params) {
@@ -643,15 +642,15 @@ define([], function () {
             var nationwideData = _.cloneDeep(searchItem);
             delete nationwideData.provinceName;
             $model.zone(nationwideData).then(function (res) {
+                var opts = mapEchart.getOption();
                 var data = res.data || [];
                 if (data.length > 0) {
-                    mapConf.series[1].data = _.each(data, function (d) {
+                    opts.series[1].data = _.each(data, function (d) {
                         d.name = d.provinceName;
                         d.value = d.scanPv;
                     }) || [];
-
-                    mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
-                    mapEchart.setOption(mapConf);
+                    opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
+                    mapEchart.setOption(opts, true);
                 }
             })
 
