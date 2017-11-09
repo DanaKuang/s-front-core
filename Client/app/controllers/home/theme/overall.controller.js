@@ -78,7 +78,6 @@ define([], function () {
 
         // 1. 扫码次数趋势分析
         var trendChart = echarts.init(document.getElementById('trendChart'));
-
         var trendOption = {
             tooltip: {
                 trigger: 'axis',
@@ -106,29 +105,16 @@ define([], function () {
                 type: 'value',
                 boundaryGap: [0, '100%']
             },
-            // dataZoom: [{
-            //     type: 'inside',
-            //     start: 0,
-            //     end: 100
-            // }, {
-            //     start: 0,
-            //     end: 10,
-            //     handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-            //     handleSize: '80%',
-            //     handleStyle: {
-            //         color: '#fff',
-            //         shadowBlur: 3,
-            //         shadowColor: 'rgba(0, 0, 0, 0.6)',
-            //         shadowOffsetX: 2,
-            //         shadowOffsetY: 2
-            //     }
-            // }],
             series: [
                 {
                     name: '扫码次数',
                     type: 'line',
+                    label:{
+                        normal:{
+                          show:true
+                        }
+                    },
                     smooth: true,
-                    symbol: 'none',
                     sampling: 'average',
                     itemStyle: {
                         normal: {
@@ -156,6 +142,7 @@ define([], function () {
         echarts.registerMap('china', chinaJson);
         var mapEchart = echarts.init(document.getElementById('baidumap'));
         var mapConf = $model.$mapConf.data;
+        mapConf.title.text = '';
 
         // 鼠标悬浮地图上面时，针对悬浮区域的tip展示
         mapConf.tooltip.formatter = function (params) {
@@ -167,7 +154,7 @@ define([], function () {
 
         var districtOption = {
           title: {
-            text: '所选省份的各地扫码次数',
+            text: '',
           },
           toolbox: {
             x: '85%',
@@ -277,7 +264,7 @@ define([], function () {
 
         var standardChartOption = {
             title: {
-              "text": "各规格扫码次数分析（单位：次）",
+              "text": "",
               "left": "left"
             },
             legend: {
@@ -288,9 +275,9 @@ define([], function () {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow',
-                    label: {
-                        show: true
-                    }
+                    // label: {
+                    //     show: true
+                    // }
                 }
             },
             toolbox: {
@@ -312,7 +299,11 @@ define([], function () {
             xAxis: [
                 {
                     type : 'category',
-                    data : []
+                    data : [],
+                    axisLabel:{
+                        interval: 0,
+                        rotate: -20
+                    }
                 }
             ],
             yAxis: [
@@ -323,7 +314,7 @@ define([], function () {
             ],
             dataZoom: [
                 {
-                    show: true,
+                    // show: true,
                     start: 0,
                     end: 50
                 },
@@ -332,15 +323,15 @@ define([], function () {
                     start: 94,
                     end: 100
                 },
-                {
-                    show: true,
-                    yAxisIndex: 0,
-                    filterMode: 'empty',
-                    width: 30,
-                    height: '80%',
-                    showDataShadow: false,
-                    left: '93%'
-                }
+                // {
+                //     show: true,
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty',
+                //     width: 30,
+                //     height: '80%',
+                //     showDataShadow: false,
+                //     left: '93%'
+                // }
             ],
             series : [
                 {
@@ -365,7 +356,7 @@ define([], function () {
 
         var userChartOption = {
             title: {
-                text: '扫码用户数分析（单位：人）'
+                text: ''
             },
             legend: {
                 data:['扫码用户数'],
@@ -382,7 +373,7 @@ define([], function () {
             },
             toolbox: {
                 y: '6%',
-                x: '90%',
+                x: '95%',
                 feature: {
                     saveAsImage: {}
                 }
@@ -419,7 +410,7 @@ define([], function () {
 
         var packedChartOption = {
             title: {
-                text: '扫码烟包数分析（单位：个）'
+                text: ''
             },
             tooltip: {
                 trigger: 'axis'
@@ -436,7 +427,7 @@ define([], function () {
             },
             toolbox: {
                 y: '6%',
-                x: '90%',
+                x: '95%',
                 feature: {
                     saveAsImage: {}
                 }
@@ -488,7 +479,7 @@ define([], function () {
 
         var promotionChartOption = {
             title: {
-                text: '促销效果趋势分析'
+                text: ''
             },
             tooltip: {
                 trigger: 'axis'
@@ -607,41 +598,45 @@ define([], function () {
             $model.scan_people_promotion(searchItem).then(function (res) {
                 // awardPutPv 促销计划，drawPv 抽奖次数，drawResultPv 中奖数量 awardPayPv 领取数量
                 var data = res.data;
-                data.forEach(function (n, i) {
-                    global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
-                    global.scan_y.push(n.scanPv || 0);
-                    global.uv_y.push(n.scanUv || 0);
-                    global.awardPut_y.push(n.awardPutPv || 0);
-                    global.draw_y.push(n.drawPv || 0);
-                    global.drawResult_y.push(n.drawResultPv || 0);
-                    global.awardPay_y.push(n.awardPayPv || 0);
-                })
+                if (data.length > 0) {
+                    data.forEach(function (n, i) {
+                        global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
+                        global.scan_y.push(n.scanPv || 0);
+                        global.uv_y.push(n.scanUv || 0);
+                        global.awardPut_y.push(n.awardPutPv || 0);
+                        global.draw_y.push(n.drawPv || 0);
+                        global.drawResult_y.push(n.drawResultPv || 0);
+                        global.awardPay_y.push(n.awardPayPv || 0);
+                    })
 
-                trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
-                trendOption.series[0].data = global.scan_y;
-                trendChart.setOption(trendOption);
+                    trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
+                    trendOption.series[0].data = global.scan_y;
+                    trendChart.setOption(trendOption);
 
-                userChartOption.series[0].data = global.uv_y;
-                userChart.setOption(userChartOption);
+                    userChartOption.series[0].data = global.uv_y;
+                    userChart.setOption(userChartOption);
 
-                promotionChartOption.series[0].data = global.awardPut_y;
-                promotionChartOption.series[1].data = global.draw_y;
-                promotionChartOption.series[2].data = global.drawResult_y;
-                promotionChartOption.series[3].data = global.awardPay_y;
-               
-                promotionChart.setOption(promotionChartOption)
+                    promotionChartOption.series[0].data = global.awardPut_y;
+                    promotionChartOption.series[1].data = global.draw_y;
+                    promotionChartOption.series[2].data = global.drawResult_y;
+                    promotionChartOption.series[3].data = global.awardPay_y;
+                   
+                    promotionChart.setOption(promotionChartOption)
+                }
             })
 
             // 地域分析-显示数字
             $model.zone(searchItem).then(function (res) {
                 var data = res.data;
-                var change = data[0];
-                $scope.changepv   = change && change.scanPv;
-                $scope.changeuv   = change && change.scanUv;
-                $scope.changepack = change && change.scanCode;
-                $scope.yearpv     = change.scanYtdPv && change.scanYtdPv + '次' || '正在统计中';
-                $scope.yearuv     = change.scanYtdUv && change.scanYtdUv + '人' || '正在统计中';
-                $scope.$apply();
+                if (data.length > 0) {
+                    var change = data[0];
+                    $scope.changepv   = change && change.scanPv;
+                    $scope.changeuv   = change && change.scanUv;
+                    $scope.changepack = change && change.scanCode;
+                    $scope.yearpv     = change.scanYtdPv && change.scanYtdPv + '次' || '正在统计中';
+                    $scope.yearuv     = change.scanYtdUv && change.scanYtdUv + '人' || '正在统计中';
+                    $scope.$apply();
+                }
             })
 
             // 地域分析-地图展示
@@ -649,34 +644,37 @@ define([], function () {
             delete nationwideData.provinceName;
             $model.zone(nationwideData).then(function (res) {
                 var data = res.data || [];
+                if (data.length > 0) {
+                    mapConf.series[1].data = _.each(data, function (d) {
+                        d.name = d.provinceName;
+                        d.value = d.scanPv;
+                    }) || [];
 
-                mapConf.series[1].data = _.each(data, function (d) {
-                    d.name = d.provinceName;
-                    d.value = d.scanPv;
-                }) || [];
-
-                mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
-                mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
-                mapEchart.setOption(mapConf);
+                    mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
+                    mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
+                    mapEchart.setOption(mapConf);
+                }
             })
 
             // 各规格扫码数分析
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
-                data.forEach(function (n, i) {
-                    global.t_axisx.push(n.productName);
-                    global.various_y.push(n.scanPv);
-                })
-                standardChartOption.xAxis[0].data = global.t_axisx;
-                standardChartOption.series[0].data = global.various_y;
-                standardChart.setOption(standardChartOption);
+                if (data.length > 0) {
+                    data.forEach(function (n, i) {
+                        global.t_axisx.push(n.productName);
+                        global.various_y.push(n.scanPv);
+                    })
+                    standardChartOption.xAxis[0].data = global.t_axisx;
+                    standardChartOption.series[0].data = global.various_y;
+                    standardChart.setOption(standardChartOption);
+                }
             })
 
             // 扫码烟包数
             $model.packet(searchItem).then(function (res) {
                 var data = res.data;
-                $scope.yearpack = data.length > 0 && Number(data[data.length - 1].scanYtdCode) + Number(data[data.length - 1].scanYtdPair) || 0;
                 if (data.length > 0) {
+                    $scope.yearpack = data.length > 0 && Number(data[data.length - 1].scanYtdCode) + Number(data[data.length - 1].scanYtdPair) || 0;
                     data.forEach(function (n, i) {
                         global.pack_y.push(n.scanCode);
                         global.bar_y.push(n.scanPair);

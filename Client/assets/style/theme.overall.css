@@ -10,10 +10,19 @@ form {
 .operation label {
   width: 100%; }
 
+h5 {
+  color: #3d467d;
+  line-height: 1.5; }
+  h5 hr {
+    margin-left: 13%;
+    margin-top: -10px;
+    width: 84%;
+    border: 1px solid #ccc; }
+
 .chart-all {
   clear: both; }
   .chart-all .chart {
-    margin-bottom: 50px; }
+    z-index: 200; }
     .chart-all .chart:before {
       content: '';
       width: 0;
@@ -26,13 +35,26 @@ form {
     line-height: 4; }
   .chart-all .absolute {
     position: absolute;
-    top: 3px;
+    top: 20px;
     left: 50%;
-    z-index: 10;
+    z-index: 210;
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%); }
+    .chart-all .absolute .inline {
+      margin-top: 14px; }
+  .chart-all .chart-wrap {
+    position: relative;
+    overflow: hidden; }
+  .chart-all .chart-wrap.all-specification, .chart-all .chart-wrap.user-analysis, .chart-all .chart-wrap.packandbar-analysis {
+    margin-bottom: 40px; }
+    .chart-all .chart-wrap.all-specification hr, .chart-all .chart-wrap.user-analysis hr, .chart-all .chart-wrap.packandbar-analysis hr {
+      margin-top: -25px; }
+  .chart-all .packandbar-analysis .absolute {
+    top: 12px; }
+    .chart-all .packandbar-analysis .absolute .inline {
+      margin-top: 0; }
   .chart-all .chart-wrap:last-child .absolute {
     left: 40%; }
   .chart-all label {

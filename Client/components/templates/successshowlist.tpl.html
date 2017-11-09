@@ -12,13 +12,13 @@
 					<div class="table-cell">{{item.prizeName}}</div>
 					<div class="table-cell">{{n.awardName}}</div>
 					<div class="table-cell">{{n.totalNum}}</div>
-					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || '0' || item.probability}}</div>
+					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability.toString() || item.probability}}</div>
 				</div>
 				<div class="table-items" ng-if="!item.details">
 					<div class="table-cell">{{item.prizeName}}</div>
 					<div class="table-cell">{{item.awardName}}</div>
 					<div class="table-cell">{{item.totalNum || item.redNum}}</div>
-					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability || '0' || item.probability}}</div>
+					<div class="table-cell">{{item.eggMap.conditionName || item.eggMap.probability.toString() || item.probability}}</div>
 				</div>
 			</div>
 		</div>
