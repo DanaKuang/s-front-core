@@ -78,7 +78,6 @@ define([], function () {
 
         // 1. 扫码次数趋势分析
         var trendChart = echarts.init(document.getElementById('trendChart'));
-
         var trendOption = {
             tooltip: {
                 trigger: 'axis',
@@ -88,7 +87,7 @@ define([], function () {
             },
             title: {
                 left: 'left',
-                text: '扫码次数趋势分析',
+                text: '',
             },
             toolbox: {
                 x: '90%',
@@ -106,29 +105,16 @@ define([], function () {
                 type: 'value',
                 boundaryGap: [0, '100%']
             },
-            dataZoom: [{
-                type: 'inside',
-                start: 0,
-                end: 100
-            }, {
-                start: 0,
-                end: 10,
-                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                handleSize: '80%',
-                handleStyle: {
-                    color: '#fff',
-                    shadowBlur: 3,
-                    shadowColor: 'rgba(0, 0, 0, 0.6)',
-                    shadowOffsetX: 2,
-                    shadowOffsetY: 2
-                }
-            }],
             series: [
                 {
                     name: '扫码次数',
                     type: 'line',
+                    label:{
+                        normal:{
+                          show:true
+                        }
+                    },
                     smooth: true,
-                    symbol: 'none',
                     sampling: 'average',
                     itemStyle: {
                         normal: {
@@ -156,6 +142,7 @@ define([], function () {
         echarts.registerMap('china', chinaJson);
         var mapEchart = echarts.init(document.getElementById('baidumap'));
         var mapConf = $model.$mapConf.data;
+        mapConf.title.text = '';
 
         // 鼠标悬浮地图上面时，针对悬浮区域的tip展示
         mapConf.tooltip.formatter = function (params) {
@@ -167,7 +154,7 @@ define([], function () {
 
         var districtOption = {
           title: {
-            text: '所选省份的各地扫码次数',
+            text: '',
           },
           toolbox: {
             x: '85%',
@@ -277,7 +264,7 @@ define([], function () {
 
         var standardChartOption = {
             title: {
-              "text": "各规格扫码次数分析（单位：次）",
+              "text": "",
               "left": "left"
             },
             legend: {
@@ -288,9 +275,9 @@ define([], function () {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow',
-                    label: {
-                        show: true
-                    }
+                    // label: {
+                    //     show: true
+                    // }
                 }
             },
             toolbox: {
@@ -312,7 +299,11 @@ define([], function () {
             xAxis: [
                 {
                     type : 'category',
-                    data : []
+                    data : [],
+                    axisLabel:{
+                        interval: 0,
+                        rotate: -20
+                    }
                 }
             ],
             yAxis: [
@@ -323,7 +314,7 @@ define([], function () {
             ],
             dataZoom: [
                 {
-                    show: true,
+                    // show: true,
                     start: 0,
                     end: 50
                 },
@@ -332,15 +323,15 @@ define([], function () {
                     start: 94,
                     end: 100
                 },
-                {
-                    show: true,
-                    yAxisIndex: 0,
-                    filterMode: 'empty',
-                    width: 30,
-                    height: '80%',
-                    showDataShadow: false,
-                    left: '93%'
-                }
+                // {
+                //     show: true,
+                //     yAxisIndex: 0,
+                //     filterMode: 'empty',
+                //     width: 30,
+                //     height: '80%',
+                //     showDataShadow: false,
+                //     left: '93%'
+                // }
             ],
             series : [
                 {
@@ -365,7 +356,7 @@ define([], function () {
 
         var userChartOption = {
             title: {
-                text: '扫码用户数分析（单位：人）'
+                text: ''
             },
             legend: {
                 data:['扫码用户数'],
@@ -382,7 +373,7 @@ define([], function () {
             },
             toolbox: {
                 y: '6%',
-                x: '90%',
+                x: '95%',
                 feature: {
                     saveAsImage: {}
                 }
@@ -419,7 +410,7 @@ define([], function () {
 
         var packedChartOption = {
             title: {
-                text: '扫码烟包数分析（单位：个）'
+                text: ''
             },
             tooltip: {
                 trigger: 'axis'
@@ -436,7 +427,7 @@ define([], function () {
             },
             toolbox: {
                 y: '6%',
-                x: '90%',
+                x: '95%',
                 feature: {
                     saveAsImage: {}
                 }
@@ -488,7 +479,7 @@ define([], function () {
 
         var promotionChartOption = {
             title: {
-                text: '促销效果趋势分析'
+                text: ''
             },
             tooltip: {
                 trigger: 'axis'
