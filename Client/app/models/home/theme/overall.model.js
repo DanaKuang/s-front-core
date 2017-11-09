@@ -28,7 +28,8 @@ define([], function () {
           var PACKET = '/api/tztx/dataportal/statistics/scanCodesOfProvince';
 
           // 各规格扫码数分析
-          var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec';
+          // var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'; 替换成如下：
+          var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesofSpec';
 
 	        // 地图JSON
 	        var CHINA_JSON_URL = '/statics/home/kpi/china.json'; 

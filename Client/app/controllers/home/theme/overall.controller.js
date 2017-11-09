@@ -607,41 +607,45 @@ define([], function () {
             $model.scan_people_promotion(searchItem).then(function (res) {
                 // awardPutPv 促销计划，drawPv 抽奖次数，drawResultPv 中奖数量 awardPayPv 领取数量
                 var data = res.data;
-                data.forEach(function (n, i) {
-                    global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
-                    global.scan_y.push(n.scanPv || 0);
-                    global.uv_y.push(n.scanUv || 0);
-                    global.awardPut_y.push(n.awardPutPv || 0);
-                    global.draw_y.push(n.drawPv || 0);
-                    global.drawResult_y.push(n.drawResultPv || 0);
-                    global.awardPay_y.push(n.awardPayPv || 0);
-                })
+                if (data.length > 0) {
+                    data.forEach(function (n, i) {
+                        global.f_axisx.push(n.statTime ? n.statTime : n.weekNo)
+                        global.scan_y.push(n.scanPv || 0);
+                        global.uv_y.push(n.scanUv || 0);
+                        global.awardPut_y.push(n.awardPutPv || 0);
+                        global.draw_y.push(n.drawPv || 0);
+                        global.drawResult_y.push(n.drawResultPv || 0);
+                        global.awardPay_y.push(n.awardPayPv || 0);
+                    })
 
-                trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
-                trendOption.series[0].data = global.scan_y;
-                trendChart.setOption(trendOption);
+                    trendOption.xAxis.data = userChartOption.xAxis.data = promotionChartOption.xAxis.data = global.f_axisx;
+                    trendOption.series[0].data = global.scan_y;
+                    trendChart.setOption(trendOption);
 
-                userChartOption.series[0].data = global.uv_y;
-                userChart.setOption(userChartOption);
+                    userChartOption.series[0].data = global.uv_y;
+                    userChart.setOption(userChartOption);
 
-                promotionChartOption.series[0].data = global.awardPut_y;
-                promotionChartOption.series[1].data = global.draw_y;
-                promotionChartOption.series[2].data = global.drawResult_y;
-                promotionChartOption.series[3].data = global.awardPay_y;
-               
-                promotionChart.setOption(promotionChartOption)
+                    promotionChartOption.series[0].data = global.awardPut_y;
+                    promotionChartOption.series[1].data = global.draw_y;
+                    promotionChartOption.series[2].data = global.drawResult_y;
+                    promotionChartOption.series[3].data = global.awardPay_y;
+                   
+                    promotionChart.setOption(promotionChartOption)
+                }
             })
 
             // 地域分析-显示数字
             $model.zone(searchItem).then(function (res) {
                 var data = res.data;
-                var change = data[0];
-                $scope.changepv   = change && change.scanPv;
-                $scope.changeuv   = change && change.scanUv;
-                $scope.changepack = change && change.scanCode;
-                $scope.yearpv     = change.scanYtdPv && change.scanYtdPv + '次' || '正在统计中';
-                $scope.yearuv     = change.scanYtdUv && change.scanYtdUv + '人' || '正在统计中';
-                $scope.$apply();
+                if (data.length > 0) {
+                    var change = data[0];
+                    $scope.changepv   = change && change.scanPv;
+                    $scope.changeuv   = change && change.scanUv;
+                    $scope.changepack = change && change.scanCode;
+                    $scope.yearpv     = change.scanYtdPv && change.scanYtdPv + '次' || '正在统计中';
+                    $scope.yearuv     = change.scanYtdUv && change.scanYtdUv + '人' || '正在统计中';
+                    $scope.$apply();
+                }
             })
 
             // 地域分析-地图展示
@@ -649,34 +653,37 @@ define([], function () {
             delete nationwideData.provinceName;
             $model.zone(nationwideData).then(function (res) {
                 var data = res.data || [];
+                if (data.length > 0) {
+                    mapConf.series[1].data = _.each(data, function (d) {
+                        d.name = d.provinceName;
+                        d.value = d.scanPv;
+                    }) || [];
 
-                mapConf.series[1].data = _.each(data, function (d) {
-                    d.name = d.provinceName;
-                    d.value = d.scanPv;
-                }) || [];
-
-                mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
-                mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
-                mapEchart.setOption(mapConf);
+                    mapConf.visualMap.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
+                    mapConf.dataRange.max = _.max(mapConf.series[1].data, function (v) {return v.value}).value || 5000;
+                    mapEchart.setOption(mapConf);
+                }
             })
 
             // 各规格扫码数分析
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
-                data.forEach(function (n, i) {
-                    global.t_axisx.push(n.productName);
-                    global.various_y.push(n.scanPv);
-                })
-                standardChartOption.xAxis[0].data = global.t_axisx;
-                standardChartOption.series[0].data = global.various_y;
-                standardChart.setOption(standardChartOption);
+                if (data.length > 0) {
+                    data.forEach(function (n, i) {
+                        global.t_axisx.push(n.productName);
+                        global.various_y.push(n.scanPv);
+                    })
+                    standardChartOption.xAxis[0].data = global.t_axisx;
+                    standardChartOption.series[0].data = global.various_y;
+                    standardChart.setOption(standardChartOption);
+                }
             })
 
             // 扫码烟包数
             $model.packet(searchItem).then(function (res) {
                 var data = res.data;
-                $scope.yearpack = data.length > 0 && Number(data[data.length - 1].scanYtdCode) + Number(data[data.length - 1].scanYtdPair) || 0;
                 if (data.length > 0) {
+                    $scope.yearpack = data.length > 0 && Number(data[data.length - 1].scanYtdCode) + Number(data[data.length - 1].scanYtdPair) || 0;
                     data.forEach(function (n, i) {
                         global.pack_y.push(n.scanCode);
                         global.bar_y.push(n.scanPair);
