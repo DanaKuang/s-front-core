@@ -51,34 +51,41 @@
 							<div class="chart-all col-md-12">
 								<!-- 扫码次数趋势分析 -->
 								<div class="chart-wrap">
-									<div class="chart col-md-9" id="trendChart" style="height: 400px;">
-										<!-- 可拖动折线图 -->
+									<h5>扫码次数趋势分析<hr></h5>
+									<div class="col-md-3" style="margin-top: 60px;">
+										<p class="text-left">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
+										<p class="text-left">本年累计扫码次数：{{yearpv}}</p>
 									</div>
-									<div class="col-md-3" style="height: 400px;">
-										<p class="text-left" style="line-height: 50px;">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码次数：{{changepv}}次</p>
-										<p class="text-left" style="line-height: 50px;">本年累计扫码次数：{{yearpv}}次</p>
+									<div class="chart col-md-9" id="trendChart" style="height: 260px;">
+										<!-- 可拖动折线图 -->
 									</div>
 								</div>
 
 								<!-- 扫码次数地域分析 -->
-								<div class="chart-wrap col-md-12">
+								<div class="chart-wrap">
+									<h5>扫码次数地域分析<hr></h5>
 									<!-- 地图 -->
-									<div class="chart col-md-5" id="baidumap" style="height: 350px;"></div>
+									<div class="chart col-md-5" id="baidumap" style="height: 280px;"></div>
 									<!-- 柱状图 -->
-									<div class="chart col-md-7" id="districtChart" style="height: 400px;"></div>
+									<div class="chart col-md-7" id="districtChart" style="height: 300px;"></div>
 								</div>
 								
 								<!-- 各规格扫码次数分析 -->
-								<div class="chart col-md-12" id="standardChart" style="height: 400px"></div>
+								<div class="chart-wrap all-specification">
+									<h5>各规格扫码次数分析<br>（单位：次）<hr></h5>
+									<div class="chart col-md-12" id="standardChart" style="height: 260px"></div>
+								</div>
 
 								<!-- 扫码用户数分析 -->
-								<div class="chart-wrap col-md-12">
-									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}人）</p>
-									<div class="chart" id="userChart" style="height: 400px"></div>
+								<div class="chart-wrap user-analysis">
+									<h5>扫码用户数分析<br>（单位：人）<hr></h5>
+									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}）</p>
+									<div class="chart" id="userChart" style="height: 260px"></div>
 								</div>
 								
 								<!-- 扫码烟包数分析 -->
-								<div class="chart-wrap col-md-12">
+								<div class="chart-wrap packandbar-analysis">
+									<h5>扫码烟包数分析<br>（单位：个）<hr></h5>
 									<div class="absolute">
 										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：{{changepack}}个 （本年度累计扫码烟包总数：{{yearpack}}个）</p>
 										<div class="inline" style="text-align: center">
@@ -86,11 +93,12 @@
 											<label for="">条</label><input type="checkbox" ng-model="checkbox.barcheckbox" ng-change="updatepackorbar(checkbox.barcheckbox, 1)">
 										</div>
 									</div>
-									<div class="chart col-md-12" id="packedChart" style="height: 400px"></div>
+									<div class="chart col-md-12" id="packedChart" style="height: 260px"></div>
 								</div>
 
 								<!-- 促销效果趋势分析 -->
-								<div class="chart-wrap col-md-12">
+								<div class="chart-wrap">
+									<h5>促销效果趋势分析<hr></h5>
 									<div class="absolute">
 										<div class="inline">
 											<label for="">促销计划</label><input type="checkbox" ng-model="checkbox.promocheckbox" ng-change="updatepromo(checkbox.promocheckbox, 0)">
@@ -99,7 +107,7 @@
 											<label for="">领取数量</label><input type="checkbox" ng-model="checkbox.paycheckbox" ng-change="updatepromo(checkbox.paycheckbox, 3)">
 										</div>
 									</div>
-									<div class="chart col-md-12" id="promotionChart" style="height: 400px"></div>
+									<div class="chart col-md-12" id="promotionChart" style="height: 260px"></div>
 								</div>
 							</div>
 						</div>

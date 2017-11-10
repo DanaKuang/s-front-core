@@ -11,7 +11,7 @@ define([], function () {
         ServiceContent: ['request', function (request) {
 	        //定义资源
 	        var $model = this;
-
+          
           // 获取每周
           var WEEKS = '/api/tztx/dataportal/statistics/getWeeks';
 
@@ -28,7 +28,8 @@ define([], function () {
           var PACKET = '/api/tztx/dataportal/statistics/scanCodesOfProvince';
 
           // 各规格扫码数分析
-          var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec';
+          // var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'; 替换成如下：
+          var VARIOUS_SN = '/api/tztx/dataportal/statistics/scanTimesofSpec';
 
 	        // 地图JSON
 	        var CHINA_JSON_URL = '/statics/home/kpi/china.json'; 
@@ -66,7 +67,6 @@ define([], function () {
           $model.various = function (data) {
             return request.$Search(VARIOUS_SN, data, true)
           }
-
 
 	        // 接口数据
           $model.$chinaJson = request.$Query(CHINA_JSON_URL);

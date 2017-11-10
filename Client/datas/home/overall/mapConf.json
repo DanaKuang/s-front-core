@@ -1,8 +1,4 @@
 {
-    "title": {
-        "text": "扫码次数地域分析",
-        "left": "left"
-    },
     "tooltip": {
         "show": true,
         "trigger": "item",
@@ -13,11 +9,6 @@
         "borderWidth": 1,
         "textStyle": {
             "color": "#6e6d6d"
-        }
-    },
-    "toolbox": {
-        "feature": {
-            "restore": {}
         }
     },
     "visualMap": {
@@ -80,7 +71,7 @@
            }
        }
     }, {
-        "name": "访问量",
+        "name": "扫码次数",
         "type": "map",
         "geoIndex": 0,
         "data":[]

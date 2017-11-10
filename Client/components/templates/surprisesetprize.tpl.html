@@ -11,7 +11,7 @@
 								<b>*</b>
 								<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 								<label for="">奖项名称</label>
-								<input type="text" class="prizename" maxlength="20" value="{{n.prizeName}}" ng-disabled="disabled">
+								<input type="text" class="prizename input-sm" maxlength="20" value="{{n.prizeName}}" ng-disabled="disabled">
 							</div>
 							<div class="configuration-item radio-wrap">
 								<div class="radio-group">
@@ -42,7 +42,7 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number input-sm" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 														</div>
 													</div>
@@ -63,7 +63,7 @@
 																<img ng-src="{{n.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
+																<input type="text" placeholder="奖品数量" class="number input-sm" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
 															</div>
 														</div>
 													</div>
@@ -83,7 +83,7 @@
 													<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分池</button>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
 											</div>
 										</div>
 									</div>
@@ -105,13 +105,13 @@
 												<div class="circle-money-tick" ng-class="{'active': n.bigred != n.minred}">
 													<i class="circle"></i>随机金额
 												</div>
-												<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred != n.bigred ? n.minred : 0}}">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred != n.bigred ? n.bigred : 0}}">元
+												<input type="text" class="min hbdecimal input-sm" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred != n.bigred ? n.minred : 0}}">元 —— <input type="text" class="max hbdecimal input-sm" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred != n.bigred ? n.bigred : 0}}">元
 											</div>
 											<div class="fixed-hb hb-money-wrap">
 												<div class="circle-money-tick" ng-class="{'active': n.bigred == n.minred}">
 													<i class="circle"></i>固定金额
 												</div>
-												<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred == n.bigred ? n.minred : 0}}">元
+												<input type="text" class="fixed hbdecimal input-sm" readonly="true" placeholder="请输入数字" maxlength="10" ng-disabled="disabled" value="{{n.minred == n.bigred ? n.minred : 0}}">元
 											</div>
 										</div>
 									</div>
@@ -119,13 +119,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
 										<label for="">红包金额</label>
-										<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10" ng-disabled="disabled" value="{{n.redTotalMoney}}">
+										<input type="text" class="money hbdecimal input-sm" placeholder="请填写奖金总数" maxlength="10" ng-disabled="disabled" value="{{n.redTotalMoney}}">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
 										<label for="">红包数量</label>
-										<input type="text" class="number" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.redNum}}">
+										<input type="text" class="number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.redNum}}">
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox" ng-checked="n.giveScore" ng-disabled="disabled"><label for="">同时赠送积分</label>
 											<div class="sendscore" ng-class="{'hidden': n.giveScore == 0}">
@@ -133,7 +133,7 @@
 													<button class="fake-choose-button add-prize show-jf-list" ng-disabled="disabled">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分池</button>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
 											</div>
 										</div>
 									</div>
@@ -153,13 +153,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 										<label for="">赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.score}}">
+										<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.score}}">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}" ng-disabled="disabled">
+										<input type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}" ng-disabled="disabled">
 									</div>
 								</div>
 							</div>
@@ -174,7 +174,7 @@
 								<b>*</b>
 								<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 								<label for="">奖项名称</label>
-								<input type="text" class="prizename" maxlength="20">
+								<input type="text" class="prizename input-sm" maxlength="20">
 							</div>
 							<div class="configuration-item radio-wrap">
 								<div class="radio-group">
@@ -205,7 +205,7 @@
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
 													<span class="show-chosen"></span>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
 										</div>
 									</div>
@@ -228,13 +228,13 @@
 												<div class="circle-money-tick active">
 													<i class="circle"></i>随机金额
 												</div>
-												<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
+												<input type="text" class="min hbdecimal input-sm" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal input-sm" placeholder="请输入数字" maxlength="10">元
 											</div>
 											<div class="fixed-hb hb-money-wrap">
 												<div class="circle-money-tick">
 													<i class="circle"></i>固定金额
 												</div>
-												<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
+												<input type="text" class="fixed hbdecimal input-sm" readonly="true" placeholder="请输入数字" maxlength="10">元
 											</div>
 										</div>
 									</div>
@@ -242,13 +242,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
 										<label for="">红包金额</label>
-										<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10">
+										<input type="text" class="money hbdecimal input-sm" placeholder="请填写奖金总数" maxlength="10">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
 										<label for="">红包数量</label>
-										<input type="text" class="number" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 											<div class="sendscore hidden">
@@ -257,7 +257,7 @@
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
 													<span class="show-chosen"></span>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
 										</div>
 									</div>
@@ -278,13 +278,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 										<label for="">赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 									</div>
 								</div>
 							</div>
@@ -310,7 +310,7 @@
 								<b>*</b>
 								<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 								<label for="">奖项名称</label>
-								<input type="text" class="prizename" maxlength="20" ng-disabled="disabled" value="{{n.prizeName}}">
+								<input type="text" class="prizename input-sm" maxlength="20" ng-disabled="disabled" value="{{n.prizeName}}">
 							</div>
 							<div class="configuration-item radio-wrap">
 								<div class="radio-group">
@@ -337,7 +337,7 @@
 																<img ng-src="{{item.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
+																<input type="text" placeholder="奖品数量" value="{{item.totalNum}}" class="number input-sm" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
@@ -359,7 +359,7 @@
 																<img ng-src="{{n.awardPicUrl}}" alt="">
 															</div>
 															<div class="number-wrap">
-																<input type="text" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
+																<input type="text" placeholder="奖品数量" class="number input-sm" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10" ng-disabled="disabled">
 															</div>
 															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
 														</div>
@@ -380,7 +380,7 @@
 													<button class="fake-choose-button add-prize show-jf-list">+选择积分池</button>
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal" ng-disabled="disabled">+选择积分池</button>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.score}}" ng-disabled="disabled">积分
 											</div>
 										</div>
 									</div>
@@ -400,13 +400,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 										<label for="">赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.score}}">
+										<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.score}}">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.totalNum}}">
+										<input type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled" value="{{n.totalNum}}">
 									</div>
 								</div>
 							</div>
@@ -421,7 +421,7 @@
 								<b>*</b>
 								<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 								<label for="">奖项名称</label>
-								<input type="text" class="prizename" maxlength="20">
+								<input type="text" class="prizename input-sm" maxlength="20">
 							</div>
 							<div class="configuration-item radio-wrap">
 								<div class="radio-group">
@@ -449,7 +449,7 @@
 													<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
 													<span class="show-chosen"></span>
 												</div>
-												<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+												<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 											</div>
 										</div>
 									</div>
@@ -470,13 +470,13 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 										<label for="">赠送积分</label>
-										<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 									</div>
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">奖品数量</label>
-										<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+										<input type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 									</div>
 								</div>
 							</div>
@@ -494,7 +494,7 @@
 					<b>*</b>
 					<small class="wrong-tip wrong-tip-prizename hidden">请设置奖项名称</small>
 					<label for="">奖项名称</label>
-					<input type="text" class="prizename" maxlength="20">
+					<input type="text" class="prizename input-sm" maxlength="20">
 				</div>
 				<div class="configuration-item radio-wrap">
 					<div class="radio-group">
@@ -525,7 +525,7 @@
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
 										<span class="show-chosen"></span>
 									</div>
-									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+									<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
 							</div>
 						</div>
@@ -548,13 +548,13 @@
 									<div class="circle-money-tick active">
 										<i class="circle"></i>随机金额
 									</div>
-									<input type="text" class="min hbdecimal" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal" placeholder="请输入数字" maxlength="10">元
+									<input type="text" class="min hbdecimal input-sm" placeholder="请输入数字" maxlength="10">元 —— <input type="text" class="max hbdecimal input-sm" placeholder="请输入数字" maxlength="10">元
 								</div>
 								<div class="fixed-hb hb-money-wrap">
 									<div class="circle-money-tick">
 										<i class="circle"></i>固定金额
 									</div>
-									<input type="text" class="fixed hbdecimal" readonly="true" placeholder="请输入数字" maxlength="10">元
+									<input type="text" class="fixed hbdecimal input-sm" readonly="true" placeholder="请输入数字" maxlength="10">元
 								</div>
 							</div>
 						</div>
@@ -562,13 +562,13 @@
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-redpack-money hidden">请填写发放的金额总数</small>
 							<label for="">红包金额</label>
-							<input type="text" class="money hbdecimal" placeholder="请填写奖金总数" maxlength="10">
+							<input type="text" class="money hbdecimal input-sm" placeholder="请填写奖金总数" maxlength="10">
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
 							<label for="">红包数量</label>
-							<input type="text" class="number" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
+							<input type="text" class="number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10">
 							<div class="present-integral">
 								<input type="checkbox" class="tickcheckbox"><label for="">同时赠送积分</label>
 								<div class="sendscore hidden">
@@ -577,7 +577,7 @@
 										<button class="btn btn-default" data-toggle="modal" data-target=".create-jfProduct-modal">+选择积分池</button>
 										<span class="show-chosen"></span>
 									</div>
-									<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
+									<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">积分
 								</div>
 							</div>
 						</div>
@@ -598,13 +598,13 @@
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-score hidden">请填写赠送的积分</small>
 							<label for="">赠送积分</label>
-							<input type="text" class="score" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+							<input type="text" class="score input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 						</div>
 						<div class="configuration-item">
 							<b>*</b>
 							<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 							<label for="">奖品数量</label>
-							<input type="text" class="number" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
+							<input type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10">
 						</div>
 					</div>
 				</div>

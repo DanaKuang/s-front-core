@@ -34,7 +34,7 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['pageName']);
-                var allconfigtemplateScope = angular.element('.pop').scope();
+                var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
             }, true);
 
@@ -47,6 +47,7 @@ define([], function () {
                 // 说明从编辑活动过来
                 scope.disabled = true;
                 scope.edit = true;
+                scope.creatBtn = false;
                 var activity = all_template_scope.conf.data.activity;
                 scope.activity = activity;
                 scope.actForm = activity.activityForm;
@@ -56,7 +57,6 @@ define([], function () {
                 var cityCodeArr = activity.areaCode.split(',');
                 var selectAreaVal = [];
                 var adcodenames = [];
-
                 scope.selectAreaVal = selectAreaVal.join(',');
                 scope.adcodenames = activity.areaName;
                 $('#quesName').val(activity.activityName).attr('disabled','true');
@@ -68,6 +68,7 @@ define([], function () {
                 $('#normalFile').attr('disabled','true');
                 $('#checkWxPacket').attr('disabled','true');
                 if(activity.activityAwards.length > 0){
+                    scope.editBtn = false;
                     $('#checkWxPacket').attr('checked','true');
                     $('#selectPacketBox').removeClass('hide');
                     //normalFileWarn
@@ -94,12 +95,17 @@ define([], function () {
                     scope.oldAwardNum = activeAwardsObj.awardNums;
                     $('#packetToal').val(activeAwardsObj.redTotalMoney).attr('disabled','true');
                     $('#prizeNum').val(activeAwardsObj.awardNums).attr('disabled','true');
+                }else{
+                    scope.editBtn = true;
+                    $('#blankBox').hide();
                 }
             }else{
                 var pageListObj = all_template_scope.conf.data[0];
                 questionnaireData.activityForm = pageListObj.type;
                 questionnaireData.copyOfPageCode = pageListObj.pageCode;
                 $('#ranAmont').attr('checked','true');
+                scope.creatBtn = true;
+                scope.editBtn = true;
             }
             
             //时间转换格式
@@ -466,37 +472,41 @@ define([], function () {
             questionnaireData.qc.qcList = [];
             //添加题目
             scope.addQuestion = function(index){
-                var movie_box = '<div class="movie_box" style="border: 1px solid rgb(255, 255, 255);"></div>';
-                var Grade = $(".yd_box").find(".movie_box").length + 1;
-                var quesType = index + 1;
-                var subjectObj = {
-                    'questType' : quesType,
-                    'idx' : Grade
-                };
-                questionnaireData.qc.qcList.push(subjectObj);
-                switch (index) {
-                    case 0: //单选
-                    case 1: //多选
-                    case 2: //问答
-                        var wjdc_list = '<ul class="wjdc_list"></ul>'; //问答 单选 多选
-                        var danxuan = "";
-                        if (index == 0) {
-                            danxuan = '【单选】';
-                        } else if (index == 1) {
-                            danxuan = '【多选】';
-                        } else if (index == 2) {
-                            danxuan = '【问答】';
-                        }
-                        wjdc_list = $(wjdc_list).append(' <li><div class="tm_btitlt"><i class="nmb">' + Grade + '</i>. <i class="btwenzi">请编辑问题？</i><span class="tip_wz">' + danxuan + '</span></div>'+
-                        '<div class="tm_breif"></div></li>');
-                        if (index == 2) {
-                            wjdc_list = $(wjdc_list).append('<li>  <label><textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_dx" ></textarea></label><div class="tm_breif"></div> </li>');
-                        }
-                        movie_box = $(movie_box).append(wjdc_list);
-                        movie_box = $(movie_box).append('<div class="dx_box" data-t="' + index + '"></div>');
+                var quesLength = $(".yd_box").children().length;
+                if(quesLength < 30){
+                    var movie_box = '<div class="movie_box" style="border: 1px solid rgb(255, 255, 255);"></div>';
+                    var Grade = $(".yd_box").find(".movie_box").length + 1;
+                    var quesType = index + 1;
+                    var subjectObj = {
+                        'questType' : quesType,
+                        'idx' : Grade
+                    };
+                    questionnaireData.qc.qcList.push(subjectObj);
+                    switch (index) {
+                        case 0: //单选
+                        case 1: //多选
+                        case 2: //问答
+                            var wjdc_list = '<ul class="wjdc_list"></ul>'; //问答 单选 多选
+                            var danxuan = "";
+                            if (index == 0) {
+                                danxuan = '【单选】';
+                            } else if (index == 1) {
+                                danxuan = '【多选】';
+                            } else if (index == 2) {
+                                danxuan = '【问答】';
+                            }
+                            wjdc_list = $(wjdc_list).append(' <li><div class="tm_btitlt"><i class="nmb">' + Grade + '</i>. <i class="btwenzi">请编辑问题？</i><span class="tip_wz">' + danxuan + '</span></div>'+
+                            '<div class="tm_breif"></div></li>');
+                            if (index == 2) {
+                                wjdc_list = $(wjdc_list).append('<li>  <label><textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_dx" ></textarea></label><div class="tm_breif"></div> </li>');
+                            }
+                            movie_box = $(movie_box).append(wjdc_list);
+                            movie_box = $(movie_box).append('<div class="dx_box" data-t="' + index + '"></div>');
 
-                        break;
+                            break;
+                    }
                 }
+                
 
                 $(movie_box).hover(function() {
                     var html_cz = "<div class='kzqy_czbut'><a href='javascript:void(0)' class='sy'>上移</a><a href='javascript:void(0)'  class='xy'>下移</a><a href='javascript:void(0)'  class='bianji'>编辑</a><a href='javascript:void(0)' class='del' >删除</a></div>"
@@ -608,7 +618,6 @@ define([], function () {
                 var czxx = $(this).parent(".kzqy_czbut").parent(".movie_box");
                 var zgtitle_gs = czxx.parent(".yd_box").find(".movie_box").length;
                 var xh_num = 1;
-                
                 czxx.remove();
 
                 //重新编号
@@ -716,7 +725,9 @@ define([], function () {
                         }
                         //题目选项
                         var texte_val = $(this).find("span").text();
-                        dx_rq.find(".title_itram").children(".kzjxx_iteam").eq(bjjs - 1).find(".input_wenbk").val(texte_val);
+                        if(bjjs > 0){
+                            dx_rq.find(".title_itram").children(".kzjxx_iteam").eq(bjjs - 1).find(".input_wenbk").val(texte_val);
+                        }   
                         bjjs++
 
                     });
@@ -767,9 +778,13 @@ define([], function () {
 
             //增加选项  
             $(".yd_box").on("click",".zjxx", function() {
-                var zjxx_html = $(this).prev(".title_itram").children(".kzjxx_iteam").html();
-                $(this).prev(".title_itram").append("<div class='kzjxx_iteam'>" + zjxx_html + "</div>"); 
-                // optionChangeNum();
+                var optionLen = $(this).prev(".title_itram").children().length;
+                if(optionLen < 10){
+                    var zjxx_html = $(this).prev(".title_itram").children(".kzjxx_iteam").html();
+                    $(this).prev(".title_itram").append("<div class='kzjxx_iteam'>" + zjxx_html + "</div>"); 
+                    // optionChangeNum();
+                }
+                
             });
 
             //删除一行 
@@ -948,6 +963,7 @@ define([], function () {
                 $('#createQuestionnaire').hide();
                 $('#addQquestion').hide();
                 $('#viewQuestion').show();
+                $(".ui-view-container").animate({scrollTop:0}, 200); 
                 scope.previewData = questionnaireData;
             }
             //取消调查问卷创建
@@ -961,19 +977,20 @@ define([], function () {
             scope.exitView = function(){
                 $('#createQuestionnaire').hide();
                 $('#viewQuestion').hide();
-                $('#addQquestion').show();          
+                $('#addQquestion').show();
+                $(".ui-view-container").animate({scrollTop:0}, 200);         
             }
 
             // 红包增库
-          $('#createQuestionnaire').on('click', '.add-packet', function(e){
-              var data = {
-                  poolId: scope.poolId, 
-                  activityForm: scope.actForm,
-                  activityCode: all_template_scope.activityCode
-              };
-              scope.$emit('hbaddstockid', event, data);
-          })
-            //保存编辑时红包增库
+            $('#createQuestionnaire').on('click', '.add-packet', function(e){
+                var data = {
+                    poolId: scope.poolId, 
+                    activityForm: scope.actForm,
+                    activityCode: all_template_scope.activityCode
+                };
+                scope.$emit('hbaddstockid', event, data);
+            })
+            
             scope.saveEditData = function(){
                 var editDataObj = {
                     activityCode: all_template_scope.activityCode,

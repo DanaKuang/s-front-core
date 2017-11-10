@@ -195,7 +195,7 @@ overall:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesofSpec'
     authorized: 1
     description: '各规格扫码数分析'
     enableroute: 1
@@ -1509,6 +1509,56 @@ portrait:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+labelManage:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getFirstLevelAttr'
+    authorized: 1
+    description: '一级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getSecondLevelAttr'
+    authorized: 1
+    description: '二级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getThirdLevelAttr'
+    authorized: 1
+    description: '三级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getSaleZone'
+    authorized: 1
+    description: '销区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getProvince'
+    authorized: 1
+    description: '省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getCitysByProvince'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getProductOfNoNuit'
+    authorized: 1
+    description: '偏好'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
@@ -1649,7 +1699,7 @@ visitManage:
     description: '订单物流信息导入'
     enableroute: 1
     gatewaytype: 2
-    responetype: 'json'
+    responetype: 'json'  
 account:
   - httpmethod: 'post'
     routepath: '/api/tztx/admin/user/modifyPwd'

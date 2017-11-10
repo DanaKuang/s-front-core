@@ -79,7 +79,7 @@ define([], function () {
             areaCodes: $scope.allarea || [],
             keys: $scope.keysval || '',
             stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
-            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
+            etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
             currentPageNumber: 1, 
             pageSize: 10
           }
@@ -144,6 +144,10 @@ define([], function () {
             $scope.allConfigTemplateConf = res.data;
             getLaunchInfo();        
           })
+        })
+
+        $model.step().then(function (res) {
+          $scope.createConf = res.data;
         })
 
         // 操作面板，活动模板
@@ -214,7 +218,6 @@ define([], function () {
 
         // 编辑活动
         $scope.$on('editActivity', function (e, v, f) {
-          
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
@@ -311,6 +314,7 @@ define([], function () {
 
         // 获取已编辑的信息
         function getAlreadySelectedLaunchInfo(selectedData) {
+          $('.pop .multiselect.dropdown-toggle').addClass('disabled');
           if(selectedData.activityForm != 'act-4'){
             $(document).ready(function () {
               $(".multi .select").multiselect({
@@ -320,7 +324,6 @@ define([], function () {
                 selectAllText: '全部',
                 allSelectedText: '全选',
                 enableFiltering: true,
-                buttonWidth: '453px',
                 maxHeight: '500px',
                 numberDisplayed: 1
               });
@@ -335,7 +338,6 @@ define([], function () {
               }));
               $('[ng-model="selectBrandVal"]').multiselect('refresh');
               $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.activityBrandsList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
             var alreadyselectedbrandsarrObj = {};
             alreadyselectedbrandsarrObj.brandCode = [];
@@ -357,11 +359,17 @@ define([], function () {
                 activitySnSList.push(n.sn);
               })
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
+
+            // 异步
+            setTimeout(function () {
+              $('.draw-area').find('.btn-group').not('.edit').css('display', 'none');
+              $('.select-area').find('.btn-group').not('.edit').css('display', 'none')
+            }, 500)
+            
             // 获取已编辑的地区
             // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
-          }else{
+          } else {
             // 获取已选品牌
             $model.getBrandList().then(function (res) {
               var selectCompanyScope = angular.element('.select-brand').scope();
@@ -372,7 +380,6 @@ define([], function () {
               }));
               $('[ng-model="selectBrandVal"]').multiselect('refresh');
               $('[ng-model="selectBrandVal"]').multiselect('select', selectedData.brandCode);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
             var alreadyselectedbrandsarrObj = {};
             alreadyselectedbrandsarrObj.brandCode = [];
@@ -389,7 +396,6 @@ define([], function () {
               var activitySnSList = [];
               activitySnSList.push(selectedData.sn);
               $('[ng-model="selectSpecificationVal"]').multiselect('select', activitySnSList);
-              $('.multiselect.dropdown-toggle').addClass('disabled');
             })
           }
         }
@@ -447,7 +453,6 @@ define([], function () {
                         alreadyselectedareaarr.push(n.adCode);
                       })
                       $(selector).multiselect('select', alreadyselectedareaarr);
-                      $('.multiselect.dropdown-toggle').addClass('disabled');
                     }
                   }
                 })
@@ -481,7 +486,6 @@ define([], function () {
             } else {
               $('.configuration-image').find('.wrong-tip').removeClass('hidden');
             }
-            
           }).fail(function (res) {
             alert('文件上传失败，请重试');
             return
@@ -687,14 +691,20 @@ define([], function () {
           })
         })
 
+        var successTimer = null;
         //调查问卷
         $scope.$on('questionnaireSaveData', function(e,v,f){
           $model.saveQuestionnair(f).then(function(res){
             if (res.data.ret === '200000') {
+              $('.ques_success_box').modal('show');
+              successTimer = setTimeout(function(){
+                  $('.ques_success_box').modal('hide');
+                  clearTimeout(successTimer);
+              },3000);
               $model.getTemplateSpecific({}).then(function(res){
                 $scope.allConfigTemplateConf = null;      
               })
-              getList();
+              getList();              
             }else{
               alert(res.data.message);
             }
@@ -707,8 +717,7 @@ define([], function () {
             $model.getTemplateSpecific({}).then(function(res){
                 $scope.allConfigTemplateConf = null;       
             })
-        };
-
+        }
     	}]
   	}
   	return manageactsController
