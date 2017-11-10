@@ -195,7 +195,7 @@ overall:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesofSpec'
     authorized: 1
     description: '各规格扫码数分析'
     enableroute: 1
