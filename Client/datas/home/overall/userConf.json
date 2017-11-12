@@ -25,7 +25,7 @@
     },
     "series": [
         {
-            "name": "扫码次数",
+            "name": "扫码用户数",
             "type": "line",
             "lineStyle": {
               "normal": {
@@ -33,15 +33,16 @@
               }
             },
             "label": {
-              "normal": {
-                "show": true,
-                "position": "top",
-                "textStyle": {
-                    "color": "black"
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
                 }
-              }
             },
-            "data":[]
+            "stack": "总量",
+            "data": []
         }
     ]
 }

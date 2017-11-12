@@ -1,0 +1,92 @@
+{
+    "title": {
+        "text": ""
+    },
+    "tooltip": {
+        "trigger": "axis"
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "toolbox": {
+        "y": "6%",
+        "x": "95%",
+        "feature": {
+            "saveAsImage": {}
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": []
+    },
+    "yAxis": {
+        "type": "value"
+    },
+    "series": [
+        {
+            "name": "促销计划",
+            "type": "line",
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "data": []
+        },
+        {
+            "name": "抽奖次数",
+            "type": "line",
+            "lineStyle": {
+              "normal": {
+                "color": "#3fb6ed"
+              }
+            },
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "data": []
+        },
+        {
+            "name": "中奖数量",
+            "type": "line",
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "data": []
+        },
+        {
+            "name": "领取数量",
+            "type": "line",
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "data": []
+        }
+    ]
+}

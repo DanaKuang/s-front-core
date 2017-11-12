@@ -1,5 +1,4 @@
-{
-    "tooltip": {
+{"tooltip": {
         "trigger": "axis"
     },
     "grid": {
@@ -25,7 +24,21 @@
     },
     "series": [
         {
-            "name": "扫码次数",
+            "name": "盒",
+            "type": "line",
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "data": []
+        },
+        {
+            "name": "条",
             "type": "line",
             "lineStyle": {
               "normal": {
@@ -33,15 +46,15 @@
               }
             },
             "label": {
-              "normal": {
-                "show": true,
-                "position": "top",
-                "textStyle": {
-                    "color": "black"
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
                 }
-              }
             },
-            "data":[]
+            "data": []
         }
     ]
 }
