@@ -13,7 +13,7 @@
     },
     "visualMap": {
         "min": 0,
-        "max": 5000,
+        "max": "5000",
         "left": "left",
         "text": ["高","低"],
         "seriesIndex": [1],
@@ -71,7 +71,7 @@
            }
        }
     }, {
-        "name": "扫码次数",
+        "name": "pv",
         "type": "map",
         "geoIndex": 0,
         "data":[]

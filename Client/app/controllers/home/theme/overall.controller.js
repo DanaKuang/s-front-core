@@ -28,31 +28,10 @@ define([], function () {
             return params.name + '<br>' + 'PV:' + (params.data.value || 0);
         }
         mapEchart.setOption(mapConf);
-        mapEchart.on('click', function (e) {
-            if (e.componentType === 'series') {
-                // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
-                var data = {
-                    provinceName: e.name + '省',
-                    statTime: global.searchItem().statTime,
-                    statType: global.searchItem().statType
-                };
-                $model.province(data).then(function(res) {
-                    provinceData(e, res, false);
-                })
-            }
-        });
+    
         // 3. 点击地图，各省份扫码次数
         var districtChart = echarts.init(document.getElementById('districtChart'));
         var districtOption = $model.$districtConf.data;
-
-        var zoomSize = 6;
-        districtChart.on('click', function (params) {
-            districtChart.dispatchAction({
-                type: 'dataZoom',
-                startValue: global.districtAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-                endValue: global.districtAxis[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
-            });
-        });
 
         // 4. 各规格扫码次数分析
         var standardChart = echarts.init(document.getElementById('standardChart'));
@@ -206,17 +185,18 @@ define([], function () {
             // 地域分析-地图展示
             var nationwideData = _.cloneDeep(searchItem);
             delete nationwideData.provinceName;
+            var reg = /省|市|区/;
+            var mongoReg = /内蒙区/;
             $model.zone(nationwideData).then(function (res) {
                 var opts = mapEchart.getOption();
                 var data = res.data || [];
-                if (data.length > 0) {
-                    opts.series[1].data = _.each(data, function (d) {
-                        d.name = d.provinceName;
-                        d.value = d.scanPv;
-                    }) || [];
-                    opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
-                    mapEchart.setOption(opts, true);
-                }
+
+                opts.series[1].data = _.each(data, function (d) {
+                    d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
+                    d.value = d.scanPv;
+                }) || [];
+                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
+                mapEchart.setOption(opts);
             })
 
             // 各规格扫码数分析
@@ -289,13 +269,36 @@ define([], function () {
             chart.setOption(option)
         }
 
+        mapEchart.on('click', function (e) {
+            if (e.componentType === 'series') {
+                // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
+                var data = {
+                    provinceName: e.data.provinceName,
+                    statTime: global.searchItem().statTime,
+                    statType: global.searchItem().statType
+                };
+                $model.province(data).then(function(res) {
+                    provinceData(e, res, false);
+                })
+            }
+        });
+
+        districtChart.on('click', function (params) {
+            var zoomSize = 6;
+            districtChart.dispatchAction({
+                type: 'dataZoom',
+                startValue: global.districtAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                endValue: global.districtAxis[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
+            });
+        });
+
         function provinceData(e, res, bool) {
             global.districtAxis = [];
             global.districtAxisY = [];
             if (bool) {
                 districtOption.title.text = sessionStorage.getItem("account") === 'henan' ? '河南省的各地扫码次数' : '湖南省的各地扫码次数';
             } else {
-                districtOption.title.text = e.name + '省的各地扫码次数';
+                districtOption.title.text = e.name + '的各地扫码次数';
             }
             var data = res.data;
             data.forEach(function (n, i) {
