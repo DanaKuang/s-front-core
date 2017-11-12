@@ -190,10 +190,11 @@ define([], function () {
             $model.zone(nationwideData).then(function (res) {
                 var opts = mapEchart.getOption();
                 var data = res.data || [];
-
                 opts.series[1].data = _.each(data, function (d) {
-                    d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
-                    d.value = d.scanPv;
+                    if (d.provinceName != '全国') {
+                       d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
+                        d.value = d.scanPv; 
+                    }
                 }) || [];
                 opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
                 mapEchart.setOption(opts);
