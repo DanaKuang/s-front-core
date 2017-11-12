@@ -14,6 +14,64 @@ define([], function () {
         var $model = $scope.$model;
         var echarts = require('echarts');
 
+        var chinaJson = $model.$chinaJson.data;
+        echarts.registerMap('china', chinaJson)
+        // 1. 扫码次数趋势分析
+        var trendChart = echarts.init(document.getElementById('trendChart'));
+        var trendOption = $model.$trendConf.data;
+        // 2. 扫码次数地域分析
+        var mapEchart = echarts.init(document.getElementById('baidumap'));
+        var mapConf = $model.$mapConf.data;
+
+        // 鼠标悬浮地图上面时，针对悬浮区域的tip展示
+        mapConf.tooltip.formatter = function (params) {
+            return params.name + '<br>' + 'PV:' + (params.data.value || 0);
+        }
+        mapEchart.setOption(mapConf);
+        mapEchart.on('click', function (e) {
+            if (e.componentType === 'series') {
+                // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
+                var data = {
+                    provinceName: e.name + '省',
+                    statTime: global.searchItem().statTime,
+                    statType: global.searchItem().statType
+                };
+                $model.province(data).then(function(res) {
+                    provinceData(e, res, false);
+                })
+            }
+        });
+        // 3. 点击地图，各省份扫码次数
+        var districtChart = echarts.init(document.getElementById('districtChart'));
+        var districtOption = $model.$districtConf.data;
+
+        var zoomSize = 6;
+        districtChart.on('click', function (params) {
+            districtChart.dispatchAction({
+                type: 'dataZoom',
+                startValue: global.districtAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                endValue: global.districtAxis[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
+            });
+        });
+
+        // 4. 各规格扫码次数分析
+        var standardChart = echarts.init(document.getElementById('standardChart'));
+        var standardChartOption = $model.$specConf.data;
+        // 5. 扫码用户数分析
+        var userChart = echarts.init(document.getElementById('userChart'));
+
+        var userChartOption = $model.$userConf.data;
+        // 6. 扫码烟包数分析
+        var packedChart = echarts.init(document.getElementById('packedChart'));
+        var packedChartOption = $model.$packConf.data;
+
+        packedChart.setOption(packedChartOption);
+
+        // 7. 促销效果趋势分析
+        var promotionChart = echarts.init(document.getElementById('promotionChart'));
+        var promotionChartOption = $model.$resultConf.data;
+
+
         // datetimepicker初始化
         setDateConf.init($('.day'), 'day')
         setDateConf.init($('.month'), 'month')
@@ -76,498 +134,6 @@ define([], function () {
             $scope.checkbox.paycheckbox   = true;
         }
 
-        // 1. 扫码次数趋势分析
-        var trendChart = echarts.init(document.getElementById('trendChart'));
-        var trendOption = {
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
-            title: {
-                left: 'left',
-                text: '',
-            },
-            toolbox: {
-                x: '90%',
-                feature: {
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: []
-            },
-            yAxis: {
-                type: 'value',
-                boundaryGap: [0, '100%']
-            },
-            series: [
-                {
-                    name: '扫码次数',
-                    type: 'line',
-                    label:{
-                        normal:{
-                          show:true
-                        }
-                    },
-                    smooth: true,
-                    sampling: 'average',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(255, 70, 131)'
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(255, 158, 68)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 70, 131)'
-                            }])
-                        }
-                    },
-                    data: []
-                }
-            ]
-        };
-
-        // 2. 扫码次数地域分析
-        var chinaJson = $model.$chinaJson.data;
-        echarts.registerMap('china', chinaJson);
-        var mapEchart = echarts.init(document.getElementById('baidumap'));
-        var mapConf = $model.$mapConf.data;
-
-        // 鼠标悬浮地图上面时，针对悬浮区域的tip展示
-        mapConf.tooltip.formatter = function (params) {
-            return params.name + '<br>' + 'PV:' + (params.data.value || 0);
-        }
-        mapEchart.setOption(mapConf);
-
-        var districtChart = echarts.init(document.getElementById('districtChart'));
-
-        var districtOption = {
-          title: {
-            text: '',
-          },
-          toolbox: {
-            x: '85%',
-            feature: {
-              restore : {show: true},
-              saveAsImage : {show: true}
-            }
-          },
-          xAxis: {
-            data: global.districtAxis,
-            axisLabel: {
-              inside: false,
-              textStyle: {
-                color: '#000'
-              }
-            },
-            axisTick: {
-              show: false
-            },
-            axisLine: {
-              show: false
-            },
-            z: 10
-          },
-          yAxis: {
-            axisLine: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            axisLabel: {
-              textStyle: {
-                color: '#999'
-              }
-            }
-          },
-          dataZoom: [
-            {
-              type: 'inside'
-            }
-          ],
-          series: [
-            {
-              type: 'bar',
-              label: {
-                  normal: {
-                    show: true,
-                    position: 'top',
-                    textStyle: {
-                        color: 'black'
-                    }
-                  }
-              },
-              itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                    [
-                        {offset: 0, color: '#83bff6'},
-                        {offset: 0.5, color: '#188df0'},
-                        {offset: 1, color: '#188df0'}
-                    ]
-                  )
-                },
-                emphasis: {
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#2378f7'},
-                      {offset: 0.7, color: '#2378f7'},
-                      {offset: 1, color: '#83bff6'}
-                    ]
-                  )
-                }
-              },
-              data: global.districtAxisY
-            }
-          ]
-        };
-
-        mapEchart.on('click', function (e) {
-            if (e.componentType === 'series') {
-                // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
-                var data = {
-                    provinceName: e.name + '省',
-                    statTime: global.searchItem().statTime,
-                    statType: global.searchItem().statType
-                };
-                $model.province(data).then(function(res) {
-                    provinceData(e, res, false);
-                })
-            }
-        });
-
-        var zoomSize = 6;
-        districtChart.on('click', function (params) {
-            districtChart.dispatchAction({
-                type: 'dataZoom',
-                startValue: global.districtAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-                endValue: global.districtAxis[Math.min(params.dataIndex + zoomSize / 2, global.districtAxisY.length - 1)]
-            });
-        });
-
-        // 3. 各规格扫码次数分析
-        var standardChart = echarts.init(document.getElementById('standardChart'))
-
-        var standardChartOption = {
-            title: {
-              "text": "",
-              "left": "left"
-            },
-            legend: {
-                data:['扫码次数'],
-                right: '12%'
-            },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow',
-                    // label: {
-                    //     show: true
-                    // }
-                }
-            },
-            toolbox: {
-                x: '90%',
-                show : true,
-                feature : {
-                    mark : {show: true},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            grid: {
-                top: '12%',
-                left: '1%',
-                right: '10%',
-                containLabel: true
-            },
-            xAxis: [
-                {
-                    type : 'category',
-                    data : [],
-                    axisLabel:{
-                        interval: 0,
-                        rotate: -20
-                    }
-                }
-            ],
-            yAxis: [
-                {
-                    type : 'value',
-                    name : ''
-                }
-            ],
-            dataZoom: [
-                {
-                    // show: true,
-                    start: 0,
-                    end: 50
-                },
-                {
-                    type: 'inside',
-                    start: 94,
-                    end: 100
-                },
-                // {
-                //     show: true,
-                //     yAxisIndex: 0,
-                //     filterMode: 'empty',
-                //     width: 30,
-                //     height: '80%',
-                //     showDataShadow: false,
-                //     left: '93%'
-                // }
-            ],
-            series : [
-                {
-                    name: '扫码次数',
-                    type: 'bar',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data: []
-                }
-            ]
-        };
-
-        // 4. 扫码用户数分析
-        var userChart = echarts.init(document.getElementById('userChart'));
-
-        var userChartOption = {
-            title: {
-                text: ''
-            },
-            legend: {
-                data:['扫码用户数'],
-                right: 0
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            toolbox: {
-                y: '6%',
-                x: '95%',
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: []
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'扫码用户数',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    stack: '总量',
-                    data:[]
-                }
-            ]
-        };
-
-        // 5. 扫码烟包数分析
-        var packedChart = echarts.init(document.getElementById('packedChart'));
-
-        var packedChartOption = {
-            title: {
-                text: ''
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['盒','条'],
-                right: 0
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            toolbox: {
-                y: '6%',
-                x: '95%',
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: []
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'盒',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                },
-                {
-                    name:'条',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                },
-            ]
-        };
-
-        packedChart.setOption(packedChartOption);
-
-        // 6. 促销效果趋势分析
-        var promotionChart = echarts.init(document.getElementById('promotionChart'));
-
-        var promotionChartOption = {
-            title: {
-                text: ''
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['促销计划','抽奖次数','中奖数量','领取数量'],
-                right: 0
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            toolbox: {
-                y: '6%',
-                x: '95%',
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: []
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'促销计划',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                },
-                {
-                    name:'抽奖次数',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                },
-                {
-                    name:'中奖数量',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                },
-                {
-                    name:'领取数量',
-                    type:'line',
-                    label: {
-                      normal: {
-                        show: true,
-                        position: 'top',
-                        textStyle: {
-                            color: 'black'
-                        }
-                      }
-                    },
-                    data:[]
-                }
-            ]
-        };
-
         global.searchItem = function () {
             return {
                 provinceName: '全国',
@@ -577,8 +143,7 @@ define([], function () {
         }
 
         // 搜索，进入页面默认查询当日数据
-        $scope.search = search;
-        function search() {
+        $scope.search = function () {
             init();
             var searchItem = global.searchItem();
 
@@ -695,6 +260,9 @@ define([], function () {
                 }
             })
         }
+
+        // 进入页面就要执行一次默认查询
+        $scope.search();
         
         // 烟包数分析 条、盒勾选
         var packorbar = [];
@@ -738,9 +306,7 @@ define([], function () {
             districtOption.series[0].data = global.districtAxisY;
             districtChart.setOption(districtOption);
         }
-
-        // 进入页面初始化
-        search();
+ 
       }]
   	}
   	return overallController
