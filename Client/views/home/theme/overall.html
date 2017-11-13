@@ -32,7 +32,7 @@
 									</div>
 									<div class="col-sm-3">
 										<!-- 日 -->
-										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" placeholder="{{todayplaceholder}}" ng-model="day"></label>
+										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" ng-model="day"></label>
 
 										<!-- 周 -->
 										<label for="" class="week" ng-show="singleSelect.unit == 'week'"><select name="week" id="" class="input-sm form-control" ng-model="week">
@@ -40,7 +40,7 @@
 										</select></label>
 										
 										<!-- 月 -->
-										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" placeholder="{{thismonthplaceholder}}" ng-model="month"></label>
+										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" ng-model="month"></label>
 									</div>
 									<div class="col-sm-1">
 										<button type="submit" class="btn btn-primary input-sm" ng-click="search($event)">查询</button>

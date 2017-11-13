@@ -9,7 +9,7 @@ define([], function () {
     	ServiceType: 'controller',
     	ServiceName: 'overallCtrl',
     	ViewModelName: 'overallModel',
-    	ServiceContent: ['$rootScope', '$scope', 'overallModel', 'setDateConf', function ($rootScope, $scope, $model, setDateConf) {
+    	ServiceContent: ['$rootScope', '$scope', 'overallModel', 'setDateConf', 'dayFilter', function ($rootScope, $scope, $model, setDateConf, dayFilter) {
 
         var $model = $scope.$model;
         var echarts = require('echarts');
@@ -88,9 +88,10 @@ define([], function () {
           unit: 'day'
         }
 
-        // 当日、当月的placeholder
-        $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
-        $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
+        // 当日、当月的显示
+        $scope.day = dayFilter.yesterday('date'); //默认选择昨天
+        $scope.month = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
+        
 
         // 选择周的处理，确保只请求一次
         $scope.$watch('singleSelect.unit', function (n, o, s) {
@@ -114,7 +115,7 @@ define([], function () {
             return {
                 provinceName: '全国',
                 statType: $scope.singleSelect.unit === 'day' ? 'day' : $scope.singleSelect.unit === 'week' ? 'week' : 'month' || '',
-                statTime: $scope.singleSelect.unit === 'day' ? $scope.day || $scope.todayplaceholder : $scope.singleSelect.unit === 'month' ? $scope.month || $scope.thismonthplaceholder : $scope.week
+                statTime: $scope.singleSelect.unit === 'day' ? $scope.day : $scope.singleSelect.unit === 'month' ? $scope.month : $scope.week
             }
         }
 
