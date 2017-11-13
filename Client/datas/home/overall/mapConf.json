@@ -1,8 +1,4 @@
 {
-    "title": {
-        "text": "扫码次数地域分析",
-        "left": "left"
-    },
     "tooltip": {
         "show": true,
         "trigger": "item",
@@ -15,22 +11,15 @@
             "color": "#6e6d6d"
         }
     },
-    "toolbox": {
-        "feature": {
-            "restore": {}
-        }
-    },
-    "visualMap": {
+    "dataRange": {
         "min": 0,
-        "max": "",
-        "left": "left",
-        "text": ["高","低"],
-        "seriesIndex": [1],
+        "max": 2500,
+        "x": "left",
+        "y": "bottom",
+        "text": ["高","低"], 
         "inRange": {
             "color": ["#e0ffff", "#006edd"]
-        },
-        "padding": 0,
-        "calculable" : true
+        }
     },
     "geo": {
         "map": "china",
@@ -57,43 +46,22 @@
             }
         }
     },
-    "dataRange": {
-        "min": 0,
-        "max": 1000,
-        "color": ["#006edd", "#e0ffff"],
-        "text": ["高", "低"],
-        "calculable": true
-    },
     "series" : [{
-      "type": "map",
-      "coordinateSystem": "geo",
-      "data": "",
-      "symbolSize": 20,
-      "symbol": "",
-      "symbolRotate": 35,
-      "selectedMode" : "single",
-      "itemStyle": {
-        "normal": {
-          "label":  {
-            "show": true
-          }
-        },
-        "emphasis": {
-          "label": {
-            "show": true
-          }
-        }
-      },
-      "coordinateSystem": "geo",
-      "label": {
-          "normal": {
-            "formatter": "{b}",
-            "position": "right",
-            "show": true
-          },
-          "emphasis": {
-            "show": true
-          }
+       "type": "scatter",
+       "coordinateSystem": "geo",
+       "data": "",
+       "symbolSize": 20,
+       "symbol": "",
+       "symbolRotate": 35,
+       "label": {
+           "normal": {
+               "formatter": "{b}",
+               "position": "right",
+               "show": false
+           },
+           "emphasis": {
+               "show": true
+           }
        },
        "itemStyle": {
            "normal": {
