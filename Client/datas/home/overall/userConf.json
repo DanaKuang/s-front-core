@@ -10,15 +10,15 @@
     },
     "toolbox": {
         "y": "6%",
-        "x": "95%",
-        "feature": {
-            "saveAsImage": {}
-        }
+        "x": "95%"
     },
     "xAxis": {
-        "type": "category",
-        "boundaryGap": false,
-        "data": []
+        "type":"category",
+        "boundaryGap":false,
+        "data": ["6-18","6-19","6-20","6-21","6-22","6-23","6-24","6-25","6-26","6-27","6-28","6-29"],
+        "axisLabel":{
+          "interval": 0
+        }
     },
     "yAxis": {
         "type": "value",

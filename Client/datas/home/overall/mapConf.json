@@ -1,4 +1,12 @@
 {
+    "toolbox": {
+      "x": "85%",
+      "feature": {
+          "restore" : {
+              "show": true
+          }
+      }
+    },
     "tooltip": {
         "show": true,
         "trigger": "item",

@@ -10,10 +10,7 @@
     },
     "toolbox": {
         "y": "6%",
-        "x": "95%",
-        "feature": {
-            "saveAsImage": {}
-        }
+        "x": "95%"
     },
     "xAxis": {
         "type": "category",

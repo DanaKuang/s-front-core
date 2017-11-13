@@ -18,6 +18,7 @@ form {
 h5 {
 	color: #3d467d;
 	line-height: 1.5;
+	font-weight: normal;
 	hr {
 		margin-left: 13%;
 		margin-top: -10px;
@@ -56,6 +57,36 @@ h5 {
 			margin-top: 14px;
 		}
 	}
+	.checkbox-wrap {
+		position: absolute;
+		top: 40px;
+		left: 0;
+		.inline-block {
+			margin-right: 10px;
+		}
+	}
+	.packandbar-analysis {
+		.checkbox-wrap {
+			top: 50px;
+		}
+	}
+	.inline-block {
+		display: inline-block;
+	}
+	.relative {
+		position: relative;
+		span {
+			position: absolute;
+			top: -3px;
+			z-index: 221;
+			border: 1px solid #b5e4f4;
+			width: 18px;
+			height: 18px;
+		}
+		label {
+			font-weight: normal;
+		}
+	}
 	.chart-wrap {
 		position: relative;
 		overflow: hidden;
@@ -76,11 +107,18 @@ h5 {
 		left: 40%;
 	}
 	label {
-		margin-right: 6px;
+		margin-left: 20px;
+    margin-top: 8px;
 		font-size: 12px;
 	}
 	input[type="checkbox"] {
-		margin-right: 10px;
+		position: absolute;
+		top: 2px;
+		left: 0;
+		z-index: 222;
+		opacity: 0;
+		width: 18px;
+		height: 18px;
 		cursor: pointer;
 	}
 }

@@ -13,15 +13,15 @@
     },
     "toolbox": {
         "y": "6%",
-        "x": "95%",
-        "feature": {
-            "saveAsImage": {}
-        }
+        "x": "95%"
     },
     "xAxis": {
-        "type": "category",
-        "boundaryGap": false,
-        "data": []
+        "type":"category",
+        "boundaryGap":false,
+        "data": ["6-18","6-19","6-20","6-21","6-22","6-23","6-24","6-25","6-26","6-27","6-28","6-29"],
+        "axisLabel":{
+          "interval": 0
+        }
     },
     "yAxis": {
         "type": "value",
@@ -33,6 +33,11 @@
         {
             "name": "促销计划",
             "type": "line",
+            "lineStyle": {
+              "normal": {
+                "color": "#f4a460"
+              }
+            },
             "label": {
                 "normal": {
                     "show": true,
@@ -66,6 +71,11 @@
         {
             "name": "中奖数量",
             "type": "line",
+            "lineStyle": {
+              "normal": {
+                "color": "#3cb371"
+              }
+            },
             "label": {
                 "normal": {
                     "show": true,

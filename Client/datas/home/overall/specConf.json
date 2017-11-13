@@ -14,9 +14,6 @@
             },
             "restore": {
                 "show": true
-            },
-            "saveAsImage": {
-                "show": true
             }
         }
     },
@@ -40,13 +37,15 @@
     "yAxis": [
         {
             "type": "value",
-            "name": ""
+                "axisLabel": {
+                "show": false
+            }
         }
     ],
     "dataZoom": [
         {
             "start": 0,
-            "end": 50
+            "end": 30
         },
         {
             "type": "inside",
