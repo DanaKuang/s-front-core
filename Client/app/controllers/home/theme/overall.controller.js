@@ -15,7 +15,7 @@ define([], function () {
         var echarts = require('echarts');
 
         var chinaJson = $model.$chinaJson.data;
-        echarts.registerMap('china', chinaJson)
+        echarts.registerMap('china', chinaJson);
         // 1. 扫码次数趋势分析
         var trendChart = echarts.init(document.getElementById('trendChart'));
         var trendOption = $model.$trendConf.data;
@@ -38,49 +38,19 @@ define([], function () {
         var standardChartOption = $model.$specConf.data;
         // 5. 扫码用户数分析
         var userChart = echarts.init(document.getElementById('userChart'));
-
         var userChartOption = $model.$userConf.data;
+
         // 6. 扫码烟包数分析
         var packedChart = echarts.init(document.getElementById('packedChart'));
         var packedChartOption = $model.$packConf.data;
-
-        packedChart.setOption(packedChartOption);
 
         // 7. 促销效果趋势分析
         var promotionChart = echarts.init(document.getElementById('promotionChart'));
         var promotionChartOption = $model.$resultConf.data;
 
-
         // datetimepicker初始化
         setDateConf.init($('.day'), 'day')
         setDateConf.init($('.month'), 'month')
-
-        // 默认当日
-        $scope.singleSelect = {
-          unit: 'day'
-        }
-
-        // 当日、当月的placeholder
-        $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
-        $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
-
-        // 选择周的处理，确保只请求一次
-        $scope.$watch('singleSelect.unit', function (n, o, s) {
-            if (n === 'week' && !global.week) {
-                global.week = true;
-                $model.getweeks().then(function (res) {
-                    var data = res.data || [{weekId: ''}];
-                    $scope.allweek = data.map(function (n, i) {
-                        var a = n.weekNo.substr(n.weekNo.indexOf('(')+1);
-                        a = a.substr(0, a.indexOf('~')).replace(/\./g, '-');
-                        n.weekId = a;
-                        return n
-                    })
-                    $scope.week = $scope.allweek[0].weekId;
-                    $scope.$apply()
-                })
-            }
-        })
 
         // 全部变量、属性
         var global = {};
@@ -112,6 +82,33 @@ define([], function () {
             $scope.checkbox.getcheckbox   = true;
             $scope.checkbox.paycheckbox   = true;
         }
+
+        // 默认当日
+        $scope.singleSelect = {
+          unit: 'day'
+        }
+
+        // 当日、当月的placeholder
+        $scope.todayplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('-');
+        $scope.thismonthplaceholder = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
+
+        // 选择周的处理，确保只请求一次
+        $scope.$watch('singleSelect.unit', function (n, o, s) {
+            if (n === 'week' && !global.week) {
+                global.week = true;
+                $model.getweeks().then(function (res) {
+                    var data = res.data || [{weekId: ''}];
+                    $scope.allweek = data.map(function (n, i) {
+                        var a = n.weekNo.substr(n.weekNo.indexOf('(')+1);
+                        a = a.substr(0, a.indexOf('~')).replace(/\./g, '-');
+                        n.weekId = a;
+                        return n
+                    })
+                    $scope.week = $scope.allweek[0].weekId;
+                    $scope.$apply()
+                })
+            }
+        })
 
         global.searchItem = function () {
             return {
@@ -224,19 +221,22 @@ define([], function () {
                         global.bar_y.push(n.scanPair);
                         global.s_axisx.push(n.statTime ? n.statTime : n.weekNo);
                     })
-                    packedChartOption = {
-                        xAxis: {
-                            data: global.s_axisx
-                        },
-                        series: [
-                            {
-                                data: global.pack_y
-                            },
-                            {
-                                data: global.bar_y
-                            }
-                        ]
-                    }
+                    packedChartOption.xAxis.data = global.s_axisx;
+                    packedChartOption.series[0].data = global.pack_y;
+                    packedChartOption.series[1].data = global.bar_y;
+                    // packedChartOption = {
+                    //     xAxis: {
+                    //         data: global.s_axisx
+                    //     },
+                    //     series: [
+                    //         {
+                    //             data: global.pack_y
+                    //         },
+                    //         {
+                    //             data: global.bar_y
+                    //         }
+                    //     ]
+                    // }
                     packedChart.setOption(packedChartOption);
                 }
             })
@@ -310,7 +310,6 @@ define([], function () {
             districtOption.series[0].data = global.districtAxisY;
             districtChart.setOption(districtOption);
         }
- 
       }]
   	}
   	return overallController
