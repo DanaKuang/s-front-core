@@ -27,7 +27,7 @@ define([], function() {
 					var res = res.data || [];
 					for(var i = 0; i < res.length; i++) {
 						if(res[i].code === $model.$DefaultProvince.data[0].orgRegion) {
-							console.log($model.$DefaultProvince)
+							// console.log($model.$DefaultProvince)
 							$(".region-search-r .region").append("<option value=" + res[i].name + " selected>" + res[i].name + "</option>")
 						} else {
 							$(".region-search-r .region").append("<option value=" + res[i].name + ">" + res[i].name + "</option>");
@@ -115,7 +115,6 @@ define([], function() {
 						($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()) : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
 					"statType": $(that).siblings(".ui-search").val()
 				}
-				// console.log(params);
 				public(params)
 			};
 
@@ -146,7 +145,6 @@ define([], function() {
 					secChart.series[0].data[0].name = "扫码烟包数（单位：万）\n\n扫码总条数和总包数(不包含重复扫码的情况)";
 					thrChart.series[0].data[0].name = "扫码人数（单位：万）\n\n时间段内扫码用户去重后总人数";
 					// console.log(firChart);
-					// console.log(secChart);
 					$model.$getScanData(params).then(function(res) {
 						var data = res.data[0] || {};
 						firChart.series[0].data[0].value = data.scanPv / 10000;
@@ -163,8 +161,125 @@ define([], function() {
 				})();
 				//扫码次数时刻趋势
 				(function() {
+					var myChart = echarts.init(document.getElementById("date-chart"));
+					var option = $model.$datechart.data;
+					var obj = {
+						"扫码次数": {
+							"name": "扫码次数",
+							"type": "line",
+							"lineStyle": {
+								"normal": {
+									"color": "#A7A393"
+								}
+							},
+							"label": {
+								"normal": {
+									"show": true
+								}
+							},
+							"itemStyle": {
+								"normal": {
+									"color": "#A7A393"
+								}
+							},
+							"data": []
+						},
+						"扫码烟包数": {
+							"name": "扫码烟包数",
+							"type": "line",
+							"lineStyle": {
+								"normal": {
+									"color": "#FF7525"
+								}
+							},
+							"label": {
+								"normal": {
+									"show": true
+								}
+							},
+							"itemStyle": {
+								"normal": {
+									"color": "#FF7525"
+								}
+							},
+							"data": []
+						},
+						"扫码人数": {
+							"name": "扫码人数",
+							"type": "line",
+							"lineStyle": {
+								"normal": {
+									"color": "#399BD2"
+								}
+							},
+							"label": {
+								"normal": {
+									"show": true
+								}
+							},
+							"itemStyle": {
+								"normal": {
+									"color": "#399BD2"
+								}
+							},
+							"data": []
+						}
+					}
+					var seriesArr = [];
+					for(x in obj) {
+						obj[x].data = [];
+					}
+					option.xAxis.data = [];
+					$model.$dateTrend(params).then(function(res) {
+						var res = res.data || [];
+						for(var x in obj) {
+							for(var i = 0; i < res.length; i++) {
+								switch(x) {
+									case "扫码次数":
+										obj[x].data.push(res[i].scanPv);
+										break;
+									case '扫码烟包数':
+										obj[x].data.push(res[i].scanCode);
+										break;
+									case '扫码人数':
+										obj[x].data.push(res[i].scanUv);
+										break;
+									default:
+								}
+							}
+						}
+						
+						for(var i = 0; i < res.length; i++) {
+							//判断是周还是日月
+							var x = res[i].statTime || res[i].weekNo;
+							option.xAxis.data.push(x);
+						}
+						//页面几个复选框选中展示几条
+						$(".date-trend input").each(function() {
+							if($(this).is(":checked")) {
+								seriesArr.push(obj[$(this)[0].name]);
+							}
+						})
+						option.series = seriesArr;
+						myChart.setOption(option, true);
+					})
+					$(".date-trend input").click(function() {
+						seriesArr.length = 0;
+						$(".date-trend input").each(function() {
+							if($(this).is(":checked")) {
+								seriesArr.push(obj[$(this)[0].name]);
+							}
+						})
+						myChart.clear();
+						myChart.setOption(option);
+					})
+				})();
+
+				//扫码次数时刻趋势
+				(function() {
 					var myChart = echarts.init(document.getElementById("hours-chart"));
 					var option = $model.$hourschart.data;
+					// console.log(option);
 					option.series[0].data = [];
 					option.xAxis.data = [];
 					$model.$hourTrend(params).then(function(res) {
@@ -352,8 +467,31 @@ define([], function() {
 					// option.series[0].data = data;
 				})();
 
+				//获取各地市扫码次数数据
+				function getCityTimesData(paramsObj){
+					$model.$cityCodeTimes(paramsObj).then(function(res) {
+						$scope.resData = res.data || [];
+						if($scope.resData.length > 0){
+							for(var i=0;i<$scope.resData.length;i++){
+								//最大扫码次数
+								if($scope.resData[i].rownum == 1){
+									$scope.maxPv = $scope.resData[i].scanPv;
+								}
+								//最大扫码烟包数
+								if($scope.resData[i].rownum2 == 1){
+									$scope.maxCode = $scope.resData[i].scanCode;
+								}
+								//最大扫码人数
+								if($scope.resData[i].rownum3 == 1){
+									$scope.maxUv = $scope.resData[i].scanUv;
+								}
+							}
+						}
+						$scope.$apply();
+					})
+				}
 				//各地市扫码扫码次数
-				(function() {
+				/*(function() {
 					var myChart = echarts.init(document.getElementById("city-chart"));
 					var option = $model.$citychart.data;
 					option.xAxis[0].data = [];
@@ -366,7 +504,27 @@ define([], function() {
 						}
 						myChart.setOption(option, true);
 					})
+				})();*/
+				(function() {
+					//默认根据扫码次数排序
+					params.kpiType = 'pv';
+					getCityTimesData(params);
 				})();
+				//根据扫码次数排序查询
+				$scope.orderByPv = function(){
+					params.kpiType = 'pv';
+					getCityTimesData(params);
+				}
+				//根据扫码烟包数排序查询
+				$scope.orderByCode = function(){
+					params.kpiType = 'code';
+					getCityTimesData(params);
+				}
+				//根据扫码人数排序查询
+				$scope.orderByUv = function(){
+					params.kpiType = 'uv';
+					getCityTimesData(params);
+				}
 			}
 
 		}]
