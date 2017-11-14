@@ -122,7 +122,11 @@
 	font-size: 14px;
 	cursor: pointer;
 }
-
+.secondMenu_spans {
+	margin-left: 55px;
+	font-size: 14px;
+	cursor: pointer;
+}
 .threeMenu {
 	margin: 0 30px;
 	padding: 15px 0;
@@ -306,7 +310,7 @@ label {
 	padding:20px 20px 0;
 }
 .aui_title{
-	width:92px;
+	/*width:92px;*/
 	padding:0 5px;
 	display:flex;
 	justify-content: space-between;
@@ -337,6 +341,9 @@ label {
 	margin-bottom:20px;
 	/*display:none;*/
 }
+.aui_close{
+	margin-left:15px;
+}
 .youKuoHao{
 	float:left;
 	width:20px;
@@ -348,4 +355,47 @@ label {
 	margin-bottom:20px;
 	align-items: center;
 	/*display:none;*/
+}
+/*弹窗*/
+.box_tit{
+    background-color: #29b839;
+    font-size: 17px;
+    color: #FFFFFF;
+    line-height: 28px;
+    border-top-left-radius: 6px;
+    border-top-right-radius:6px ;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius:6px ;
+    padding: 5px 7px 5px 14px;
+}
+.lf {
+    float: left;
+}
+
+.rf {
+    float: right;
+}
+.box_cont{
+    font-size: 16px;
+    text-align: center;
+    padding: 50px 0;
+    border-bottom: 1px solid #CECECE;
+}
+.box_btn .box_btn_conf{
+    color: #29b839;
+    border-right: 1px solid #CECECE;
+}
+.box_btn .box_btn_cancel{
+    color: #CECECE;
+}
+.box_btn div{
+    width: 50%;
+    font-size: 15px;
+    text-align: center;
+}
+.box_btn div:hover{
+    cursor: pointer;
+}
+.box_btn{
+    padding: 12px 0;
 }
