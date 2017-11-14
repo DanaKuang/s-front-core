@@ -18,6 +18,7 @@ define([], function () {
         var BAG_JSON_URL = '/statics/home/region/bag.json';       //扫码包数时间趋势
         var NAME_JSON_URL = '/statics/home/region/name.json';     //各规格扫码次数
         var CITY_JSON_URL = '/statics/home/region/city.json';    //各市地扫码次数
+        var DATE_JSON_URL = '/statics/home/region/date.json';    //扫码日期趋势
 
         var getProvince = '/api/tztx/dataportal/public/getUserProvByUserId';  //省份下拉列表
         var getCityName = '/api/tztx/dataportal/statistics/getCitysByProvince';  //地市下拉列表
@@ -35,7 +36,8 @@ define([], function () {
         var timeTrend = "/api/tztx/dataportal/statistics/scanTimesTrendCity" //扫码次数时间趋势
 //      var bagTrend = "/api/tztx/dataportal/statistics/scanCodesOfProvince" //扫码包数时间趋势
         var bagTrend = "/api/tztx/dataportal/statistics/scanCodesOfProvinceCity" //扫码包数时间趋势
-
+        var dateTrend = "/api/tztx/dataportal/statistics/scanDaysTrendCtiy";//扫码日期趋势 
+        var cityCodeUrl = "/api/tztx/dataportal/statistics/scanCityRandings"; //各地市扫码次数
 
         this.$gaugechart = request.$Query(GAUGE_JSON_URL);
         this.$hourschart = request.$Query(HOURS_JSON_URL);
@@ -44,6 +46,7 @@ define([], function () {
         this.$bagchart = request.$Query(BAG_JSON_URL);
         this.$namechart = request.$Query(NAME_JSON_URL);
         this.$citychart = request.$Query(CITY_JSON_URL);
+        this.$datechart = request.$Query(DATE_JSON_URL);
 
         this.$getProvince = function(){
           return request.$Search(getProvince,{},true);
@@ -79,6 +82,16 @@ define([], function () {
         this.$bagTrend = function(options){
           var params = options;
           return request.$Search(bagTrend,params,true)
+        }
+        //扫码日期趋势
+        this.$dateTrend = function(options){
+          var params = options;
+          return request.$Search(dateTrend,params,true)
+        }
+        //各地市扫码次数
+        this.$cityCodeTimes = function(options){
+          var params = options;
+          return request.$Search(cityCodeUrl,params,true)
         }
       };
     }]

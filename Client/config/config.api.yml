@@ -314,6 +314,20 @@ region:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanDaysTrendCtiy'
+    authorized: 1
+    description: '扫码日期趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanCityRandings'
+    authorized: 1
+    description: '各地市扫码次数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 spec:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/public/getUserBrandByUserId'

@@ -664,7 +664,7 @@ body {
 }
 
 #hours-chart,#plan-chart,#bag-chart,#name-chart,#city-chart,#map-chart,
-#award-chart {
+#award-chart,#date-chart {
   width: 100%;
   height: 222px;
 }
@@ -709,9 +709,55 @@ input[type="checkbox"]:checked + .checkbox{
   padding-left: 28px;
   line-height: 18px;
 }
+.but_sty{
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 5px;
+  /*border: 1px solid #000;  */
+  background: linear-gradient(to bottom,#f1f1f1,#bbb);
+  font-size: 15px;
+  position: relative;
+}
+.btn_pointer{
+  cursor: pointer;
+}
 
-
-
+.view_times_main{
+  width:100%;
+  max-height: 200px;
+  margin-top:20px;
+  float:left;
+  overflow-y: auto;
+}
+/*滚动条样式*/
+.view_times_main::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.view_times_main::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.view_times_main::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+/*向下实心箭头*/
+.sx-arrow-down{
+    border-style:solid dashed dashed dashed;
+    border-top-width: 10px;
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-color:#666666 transparent transparent transparent;
+    width:0;
+    height:0;
+    position: absolute;
+    top: 14px;
+    margin-left: 3px;
+}
 
 /*================================end region==========================*/
 
