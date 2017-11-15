@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+.clearfix:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.ads-source {
+  select {
+    -webkit-appearance: normal;
+  }
+  .form-control {
+    width: auto !important;
+  }
+
+  .ui-panel-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .col-sm-7 {
+    padding: 0;
+  }
+
+  .panel-body {
+    .btn-con {
+      float: right;
+    }
+  }
+
+  select, .keywords-input, #status {
+    width: 100% !important;
+    line-height: 17px;
+  }
+
+  .btn-group {
+    button {
+      display: block;
+      width: 100%;
+      height: 34px;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #d2d2d2;
+      border-radius: 4px;
+      color: #555;
+      line-height: 16px;
+      padding: 5px;
+      text-align: left !important;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+  }
+
+  // select搜索筛选
+  .filter {
+    .input-group {
+      height: 34px;
+    }
+    .form-control {
+      height: 34px;
+      line-height: 20px;
+    }
+
+    .input-group-addon {
+      padding: 3px 9px;
+    }
+  }
+
+
+  // 新建广告,编辑广告
+  .create-ads-modal, .edit-ads-modal {
+    form {
+      .form-group {
+        margin: 0;
+      }
+
+      .adsnew-row {
+        display: block;
+        line-height: 34px;
+        position: relative;
+        @extend .clearfix;
+        span, input {
+          float: left;
+        }
+        & > span {
+          width: 80px;
+          color: #242a30;
+          font-weight: bold;
+          float: left;
+        }
+        & > input {
+          width: 300px !important;
+          height: 34px;
+          color: #707070;
+          font-size: 12px;
+        }
+        .form_datetime {
+          width: 100% !important;
+          cursor: pointer;
+        }
+        & span>i {
+          color: #ff3300;
+        }
+        .time-line {
+          width: 35px;
+          line-height: 34px;
+          text-align: center;
+        }
+      }
+
+      .adsnew-row-time {
+        .col-sm-4 {
+          padding: 0;
+        }
+      }
+
+      .adsnew-row-type {
+        & > span {
+          color: #242a30;
+          font-weight: bold;
+        }
+        label {
+          cursor: pointer;
+        }
+        input {
+          width: 20px;
+          height: auto;
+          float: none;
+          margin-top: 0px;
+        }
+      }
+
+      .adsnew-checkbox {
+        cursor: pointer;
+      }
+
+      .multiselect-item.filter {
+        .input-group-addon {
+          display: none;
+        }
+        .multiselect-search {
+          width: 245px;
+        }
+        .input-group-btn {
+          width: 26px;
+        }
+      }
+
+      .ads-image-input {
+        outline: none;
+      }
+    }
+
+    .modal-body {
+      padding: 20px 30px 0px;
+
+      .multiselect-container {
+        input[type=radio] {
+          margin-top: 3px;
+        }
+      }
+    }
+
+    .submit-wrap {
+      text-align: center;
+    }
+
+    .cancel-prize {
+      background: 0 0;
+      border: 1px solid #6e80ff;
+      color: #6e80ff;
+    }
+
+    // 验证
+    .wrong-tip {
+      color: #f00;
+      font-size: 12px;
+      text-indent: 5px;
+    }
+    .wrong-tip-start, .wrong-tip-end {
+      line-height: 1;
+      position: absolute;
+      top: 36px;
+      left: 74px;
+    }
+    .wrong-tip-end {
+      left: 288px;
+    }
+
+    // 礼品按钮
+    .show-gift-list {
+      width: 80px;
+      height: 80px;
+      background: none;
+      line-height: 80px;
+      border: 1px solid #6e80ff;
+      color: #6e80ff;
+      font-size: 12px;
+      cursor: pointer;
+      float: left;
+      text-align: center;
+    }
+    // 礼品图片、广告图片
+    .gift-img-con, .ads-img-con {
+      width: 80px;
+      height: 80px;
+      border: 1px solid #6e80ff;
+      float: left;
+      line-height: 1;
+      overflow: hidden;
+      position: relative;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        width: 100%;
+        height: auto;
+      }
+      .img-delete {
+        position: absolute;
+        right: 3px;
+        top: 3px;
+        z-index: 10;
+        color: red;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+    .gift-img-title {
+      width: 100%;
+      float: left;
+      line-height: 20px;
+      margin-left: 80px;
+    }
+  }
+
+  .modal {
+    .modal-dialog {
+      transform: translateY(0%);
+      top: 100px;
+      margin-bottom: 100px;
+    }
+  }
+
+  input[type="text"], select, input[type="number"], input[type="url"] {
+    border-radius: 4px;
+  }
+
+  .search, .reset {
+    transition: all ease-in-out .15s;
+  }
+
+
+  .form_datetime {
+    font-size: 12px;
+  }
+  .form_datetime::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+  }
+  .form_datetime:-ms-input-placeholder {
+    color: #999;
+  }
+  .form_datetime::-webkit-input-placeholder {
+    color: #999;
+  }
+}
+
+.btn {
+  transition: all ease-in-out .15s;
+}
+.f-btn {
+  margin: 0px 30px;
+  height: 26px;
+  width: 90px;
+  color: #fff;
+  background: #6e80ff;
+  display: inline-block;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  line-height: 1;
+}
+.cancel-new {
+  background: 0 0;
+  border: 1px solid #6e80ff;
+  color: #6e80ff;
+}

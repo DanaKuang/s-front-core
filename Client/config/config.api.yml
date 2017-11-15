@@ -1736,3 +1736,117 @@ operateTools:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+adsSource:                                      # 广告资源管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryList'
+    authorized: 1
+    description: '广告资源-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    authorized: 1
+    description: '广告资源-品牌'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/attach/commonAliUpload'
+    authorized: 1
+    description: '广告资源-图片上传'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdate'
+    authorized: 1
+    description: '广告资源-新建广告'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/modifyStatus'
+    authorized: 1
+    description: '广告资源-修改广告状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryAdById'
+    authorized: 1
+    description: '广告资源-编辑广告时获取一条数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdate'
+    authorized: 1
+    description: '广告资源-编辑广告保存'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDim'
+    authorized: 1
+    description: '广告资源-使用状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/queryMetraList'
+    authorized: 1
+    description: '广告资源-礼品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+adsEnse:                                      # 广告位管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/querySpaceList'
+    authorized: 1
+    description: '广告位-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/queryListAllOrg'
+    authorized: 1
+    description: '广告位-厂家'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/brand/queryBrands'
+    authorized: 1
+    description: '广告位-品牌'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryAdSpaceById'
+    authorized: 1
+    description: '广告位-查看'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdateSpace'
+    authorized: 1
+    description: '广告位-新增、编辑'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/AdvertSpaceStatus'
+    authorized: 1
+    description: '广告位-状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryListAllNoPage'
+    authorized: 1
+    description: '广告位-广告列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
