@@ -75,7 +75,7 @@ define([], function () {
       //  广告图片
       scope.adsImageShow = false;
       scope.adsImage = '';
-      // 获取礼品列表
+      // 关闭广告图
       scope.adsImgClose = function() {
         scope.adsImageShow = false;
         scope.adsImage = '';
@@ -84,7 +84,7 @@ define([], function () {
       // 礼物图片是否显示
       scope.imgshow = false;
       scope.giftId = '';
-      // 获取礼品列表
+      // 关闭礼品图
       scope.giftClose = function() {
         scope.imgshow = false;
         scope.giftId = '';

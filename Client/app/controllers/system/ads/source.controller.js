@@ -44,6 +44,7 @@ define([], function () {
         direScope.isDisabled = false; // 设置input可用
         $scope.modalType = false; // 表示弹窗为编辑或查看，而不是新增
         direScope.isView = false; // 表示弹窗为编辑，而不是查看
+        direScope.isShow = true; // 设置图片的关闭按钮隐藏
 
         // 重置form状态，提交、失去焦点
         direScope.form.$setPristine();
@@ -61,8 +62,10 @@ define([], function () {
         $scope.clickType = 'new';
         // 自定义指令的scope
         var direScope = scope('.adsnew-list');
+        direScope.isDisabled = false; // 设置input可用
         $scope.modalType = true;
         direScope.isView = false;
+        direScope.isShow = true; // 设置图片的关闭按钮隐藏
 
         // 重置form状态
         direScope.form.$setPristine();
@@ -73,7 +76,7 @@ define([], function () {
         direScope.id = '';
         direScope.adsName = '' // 名称
         direScope.adsSort = ''; // 优先级
-        direScope.adsUrl = ''; // 链接
+        direScope.adUrl = ''; // 链接
         direScope.adsImage = ''; // 图片
         direScope.adsEnabled = ''; // 是否启用本广告
         direScope.adsType = true; // 类型
@@ -118,7 +121,7 @@ define([], function () {
                 attachCode: direScope.attachCode || '', //图片编码
                 idx: direScope.adsSort || '', // 优先级
                 adType: adType, // 广告类型
-                adUrl: direScope.adsUrl || '', // 链接
+                adUrl: direScope.adUrl || '', // 链接
                 status: adStatus
               };
             } else {
@@ -151,7 +154,7 @@ define([], function () {
                 attachCode: direScope.attachCode || '', //图片编码
                 idx: direScope.adsSort || '', // 优先级
                 adType: adType, // 广告类型
-                adUrl: direScope.adsUrl || '', // 链接
+                adUrl: ads.adUrl || '', // 链接
                 status: adStatus
               };
             } else {
@@ -246,6 +249,7 @@ define([], function () {
         $scope.modalType = false; // 表示弹窗为编辑或查看，而不是新增
         direScope.isView = true; // 表示弹窗为查看，而不是编辑
         direScope.isDisabled = true; // 设置input不可用
+        direScope.isShow = true; // 设置图片的关闭按钮隐藏
 
         // 重置form状态
         direScope.form.$setPristine();
@@ -259,10 +263,25 @@ define([], function () {
 
       // 获取礼品列表
       $scope.$on('getGiftList', function (e, v, d){
-        $model.giftAds().then(function(res){
-          // 自定义指令的scope
-          var direScope = scope('.adsenseedit-list');
-          $scope.realproductConf = res.data;
+        var data = {
+          metraType: 'gift',
+          currentPageNumber: 1,
+          pageSize: 5
+        }
+        $model.giftAds(data).then(function(res){
+          $scope.adsgiftConf = res.data;
+          $scope.paginationInnerConf = res.data;
+        })
+      })
+      // 礼品列表翻页,5条数据的就是fromhbpagechange，固定的。
+      $scope.$on('fromhbpagechange', function(e, v, f) {
+        var data = {
+          metraType: 'gift',
+          currentPageNumber: f.currentPageNumber,
+          pageSize: 5
+        }
+        $model.giftAds(data).then(function (res) {
+          $scope.adsgiftConf = res.data;
           $scope.paginationInnerConf = res.data;
         })
       })
@@ -324,13 +343,14 @@ define([], function () {
         if(type == 'edit' || type == 'view') {
           $scope.editAdsModalConf = res.data; //conf传一些配置到模板
           var data = res.data.data;
+          direScope.ads = data;
 
           // 根据接口数据，设置各项的值
           direScope.adCode = data.adCode; // 编码
           direScope.id = data.id;
           direScope.adsName = data.adName; // 名称
           direScope.adsSort = data.idx; // 优先级
-          direScope.adsUrl = data.adUrl; // 链接
+          direScope.ads.adUrl = data.adUrl; // 链接
 
           direScope.attachCode = data.attachCode; // 图片编码
           // direScope.adsImage = data.adPic; // 图片
@@ -343,7 +363,7 @@ define([], function () {
             direScope.adsImageShow = false;
           }
 
-          if(data.status == 1) { // 是否启用本广告，1是启用，0是停用
+          if(data.status == 1) { // 是否启用本广告，0是停用，1是启用，2是待启用
             direScope.adsEnabled = true; // 类型
           } else {
             direScope.adsEnabled = false; // 类型
@@ -363,7 +383,6 @@ define([], function () {
               direScope.giftId = data.giftId;
               direScope.cardNo = data.cardNo;
               // 获取不到数量，所以用了这种方式，加点  .
-              direScope.ads = data;
               direScope.ads.cardNum = data.cardNum;
             } else {
               direScope.imgshow = false;
@@ -415,7 +434,6 @@ define([], function () {
           });
         }
       }
-
     }]
   }
 
