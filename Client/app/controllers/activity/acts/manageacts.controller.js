@@ -11,10 +11,7 @@ define([], function () {
     	ViewModelName: 'manageactsModel',
     	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
 
-        // 通用方法-获取scope和对应conf
-        var scope = function (selector) {
-          return angular.element(selector).scope()
-        }
+        // 通用方法 获取对应conf
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
           return scope ? scope.conf ? scope.conf : scope.conf = {} : false
@@ -35,7 +32,7 @@ define([], function () {
             buttonWidth: '100%',
             maxHeight: '200px',
             numberDisplayed: 1
-          });
+          })
         });
 
         // 初始化datetimepicker
