@@ -103,10 +103,10 @@ define([], function () {
             var adType = 2
           }
 
-          if(direScope.adsEnabled) { // 是否启用本广告，1是启用，0是停用
+          if(direScope.adsEnabled) { // 是否启用本广告，0是停用，1是启用，2 待启用
             var adStatus = 1
           } else {
-            var adStatus = 0
+            var adStatus = 2
           }
 
           if($scope.clickType == 'new') {
@@ -121,7 +121,7 @@ define([], function () {
                 attachCode: direScope.attachCode || '', //图片编码
                 idx: direScope.adsSort || '', // 优先级
                 adType: adType, // 广告类型
-                adUrl: direScope.adUrl || '', // 链接
+                adUrl: ads.adUrl || '', // 链接
                 status: adStatus
               };
             } else {
