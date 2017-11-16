@@ -61,13 +61,14 @@
       height: 34px;
       line-height: 20px;
     }
-    .input-group-addon {
-      padding: 3px 9px;
-    }
   }
 
   // 新建广告,编辑广告
   .edit-ads-modal {
+    .modal-dialog {
+      min-width: 590px;
+    }
+
     form {
       .form-group {
         margin: 0;
@@ -78,10 +79,10 @@
         line-height: 34px;
         position: relative;
         @extend .clearfix;
-        span, input {
+        .label-title, input, .time-line {
           float: left;
         }
-        & > span {
+        .label-title {
           width: 80px;
           color: #242a30;
           font-weight: bold;
@@ -95,10 +96,10 @@
           line-height: 32px;
         }
         .form_datetime {
-          width: 100% !important;
+          width: 203px !important;
           cursor: pointer;
         }
-        & span>i {
+        .label-title .star {
           color: #ff3300;
         }
         .time-line {
@@ -134,15 +135,21 @@
         cursor: pointer;
       }
 
+
+      // 下拉搜索框
+      .multi {
+        width: 300px;
+        float: left;
+      }
+      .multiselect-container {
+        max-width: 450px;
+      }
       .multiselect-item.filter {
-        .input-group-addon {
-          display: none;
-        }
         .multiselect-search {
-          width: 245px;
+          //width: 245px;
         }
         .input-group-btn {
-          width: 26px;
+          //width: 26px;
         }
       }
 
@@ -184,7 +191,7 @@
       left: 74px;
     }
     .wrong-tip-end {
-      left: 288px;
+      left: 312px;
     }
   }
 
@@ -240,3 +247,10 @@
   border: 1px solid #6e80ff;
   color: #6e80ff;
 }
+
+.multiselect-container.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+

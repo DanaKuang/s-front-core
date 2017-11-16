@@ -160,11 +160,36 @@ define([], function () {
         })
       })
 
+      // 多选搜索下拉
+      $(document).ready(function () {
+        $('.multi .select').multiselect({
+          nonSelectedText: '请选择',
+          nSelectedText: '已选择',
+          includeSelectAllOption: true,
+          selectAllText: '全部',
+          allSelectedText: '全选',
+          enableFiltering: true,
+          buttonWidth: '100%',
+          maxHeight: '500px',
+          numberDisplayed: 1
+        });
+      })
+
       // 获取广告列表
       $model.getAdsList().then(function(res){
         // 自定义指令的scope
         var direScope = scope('.adsenseedit-list');
         direScope.selectAdCodeList = res.data.data;
+
+        // 多选搜索下拉
+        $('[ng-model="adCode"]').multiselect('dataprovider', _.forEach(direScope.selectAdCodeList, function(v){
+          v.label = v.adName;
+          v.value = v.adCode;
+        }));
+        $('[ng-model="adCode"]').multiselect('refresh');
+        var default_val = $('[ng-model="adCode"]').find('option:first').val();
+        $scope.adCode = default_val;
+
 
         // 注意：获取广告列表后，再去进行编辑、查看点击获取数据
         // 查看
@@ -211,7 +236,11 @@ define([], function () {
         direScope.stime = data.stime || '';
         direScope.etime = data.etime || '';
 
+        if(type == 'view') {
+          $('.multiselect').prop('disabled', true);
+        }
         if(type == 'edit') {
+          $('.multiselect').prop('disabled', false);
           // 时间设置
           $("#durationStart").datetimepicker({
             format: 'yyyy-mm-dd hh:ii:00',
