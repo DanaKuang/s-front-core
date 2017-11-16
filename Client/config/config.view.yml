@@ -291,14 +291,14 @@ system:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/advert/adsense.html'
+    staticfile: 'system/ads/adsense.html'
   - httpmethod: 'get'                       # 广告资源管理
     routepath: '/view/system/source'
     description: 'source'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/advert/source.html'
+    staticfile: 'system/ads/source.html'
   - httpmethod: 'get'                       # 客户接口设置
     routepath: '/view/system/interface'
     description: 'interface'
@@ -328,3 +328,11 @@ operateTools:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/operateTools/sweepDetail.html'
+#advertising:
+#  - httpmethod: 'get'                       # 广告管理
+#    routepath: '/view/system/source'       #路由
+#    description: 'source'
+#    enableroute: 1
+#    responetype: 'html'
+#    gatewaytype: 0
+#    staticfile: 'system/ads/source.html'       #路径
