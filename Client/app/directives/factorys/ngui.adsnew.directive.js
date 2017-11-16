@@ -55,7 +55,7 @@ define([], function () {
       }
 
       // 设置单选 默认选中
-      scope.adsType = false;
+      scope.adsType = true;
       // scope.radioChange = function() {
       //   // scope.adsType = !adsType;
       //   console.log(scope.adsType)

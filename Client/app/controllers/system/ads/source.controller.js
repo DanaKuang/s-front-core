@@ -76,7 +76,7 @@ define([], function () {
         direScope.adsUrl = ''; // 链接
         direScope.adsImage = ''; // 图片
         direScope.adsEnabled = ''; // 是否启用本广告
-        direScope.adsType = false; // 类型
+        direScope.adsType = true; // 类型
         // 设置日历
         direScope.startTime = '';
         direScope.endTime = '';

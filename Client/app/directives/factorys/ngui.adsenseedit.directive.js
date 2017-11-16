@@ -45,13 +45,6 @@ define([], function () {
         $('.modal-content .close').trigger('click');
       }
 
-      // 设置单选 默认选中
-      scope.adsType = 'true';
-      // scope.radioChange = function() {
-      //   // scope.adsType = !adsType;
-      //   console.log(scope.adsType)
-      // }
-
       // 编辑
       scope.updateAds = function() {
         scope.$emit('updateAds', event);
