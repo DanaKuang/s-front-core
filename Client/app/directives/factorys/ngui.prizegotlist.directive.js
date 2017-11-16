@@ -52,6 +52,7 @@ define([], function () {
                 var orderid = {orderCode: e.target.dataset.orderid};
                 scope.$emit('orderid', event, orderid)
             }
+
         }
         return defineObj;
     }

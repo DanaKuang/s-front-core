@@ -13,7 +13,7 @@ define([], function () {
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
-            replace: true,
+            replace: false,
             templateUrl: function(tElement, tAttrs) {
                 return tAttrs.tpl || defaults.tpl;
             },
@@ -28,7 +28,7 @@ define([], function () {
             
             scope.$watch('conf', function () {
                 // 属性赋值
-
+                
                 
             }, true);   
 
