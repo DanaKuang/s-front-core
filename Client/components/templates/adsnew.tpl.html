@@ -35,7 +35,7 @@
                     <label class="adsnew-row">
                         <span>广告图片 <i>*</i></span>
                         <div class="ads-img-con" ng-if="adsImageShow">
-                            <img src="{{adsImage}}" alt="">
+                            <img ng-src="{{adsImage}}" alt="">
                             <div ng-if="!isShow" class="img-delete" ng-click="adsImgClose()">✕</div>
                         </div>
                         <input ng-if="!adsImageShow" name="adsImage" ng-disabled="isDisabled" class="form-control ads-image-input" type="file" class="uploadimage" onchange="angular.element(this).scope().fileChange()" accept="image/*" ng-model="adsImage" required/>
@@ -79,7 +79,7 @@
                         <label class="adsnew-row">
                             <span>选择礼品 <i>*</i></span>
                             <div class="gift-img-con" ng-if="imgshow">
-                                <img src="{{giftPic}}" alt="">
+                                <img ng-src="{{giftPic}}" alt="">
                                 <div ng-if="!isShow" class="img-delete" ng-click="giftClose()">✕</div>
                             </div>
                             <p ng-if="imgshow" class="gift-img-title">{{giftName}}</p>
