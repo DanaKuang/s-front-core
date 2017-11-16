@@ -48,6 +48,9 @@
 .ads-source .filter .input-group-addon {
   padding: 3px 9px; }
 
+.ads-source .create-ads-modal .modal-dialog, .ads-source .edit-ads-modal .modal-dialog {
+  min-width: 590px; }
+
 .ads-source .create-ads-modal form .form-group, .ads-source .edit-ads-modal form .form-group {
   margin: 0; }
 
@@ -68,7 +71,7 @@
     color: #707070;
     font-size: 12px; }
   .ads-source .create-ads-modal form .adsnew-row .form_datetime, .ads-source .edit-ads-modal form .adsnew-row .form_datetime {
-    width: 100% !important;
+    width: 203px !important;
     cursor: pointer; }
   .ads-source .create-ads-modal form .adsnew-row span > i, .ads-source .edit-ads-modal form .adsnew-row span > i {
     color: #ff3300; }
@@ -133,7 +136,7 @@
   left: 74px; }
 
 .ads-source .create-ads-modal .wrong-tip-end, .ads-source .edit-ads-modal .wrong-tip-end {
-  left: 288px; }
+  left: 312px; }
 
 .ads-source .create-ads-modal .show-gift-list, .ads-source .edit-ads-modal .show-gift-list {
   width: 80px;
@@ -181,10 +184,12 @@
   line-height: 20px;
   margin-left: 80px; }
 
-.ads-source .modal .modal-dialog {
-  transform: translateY(0%);
-  top: 100px;
-  margin-bottom: 100px; }
+.ads-source .modal {
+  overflow-y: auto; }
+  .ads-source .modal .modal-dialog {
+    transform: translateY(0%);
+    top: 100px;
+    margin-bottom: 100px; }
 
 .ads-source input[type="text"], .ads-source select, .ads-source input[type="number"], .ads-source input[type="url"] {
   border-radius: 4px; }

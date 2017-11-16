@@ -43,10 +43,10 @@ define([], function () {
         return request.$Search(START_DISABLE_ADS, data)
       }
 
-      // 礼品
+      // 礼品列表
       var GIFT_ADS = '/api/tztx/saas/saotx/product/queryMetraList';
-      $model.giftAds = function () {
-        return request.$Search(GIFT_ADS, {metraType: 'gift'})
+      $model.giftAds = function (data) {
+        return request.$Search(GIFT_ADS, data)
       }
 
     }]

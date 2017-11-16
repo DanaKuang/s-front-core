@@ -69,6 +69,9 @@
 
   // 新建广告,编辑广告
   .create-ads-modal, .edit-ads-modal {
+    .modal-dialog {
+      min-width: 590px;
+    }
     form {
       .form-group {
         margin: 0;
@@ -95,7 +98,7 @@
           font-size: 12px;
         }
         .form_datetime {
-          width: 100% !important;
+          width: 203px !important;
           cursor: pointer;
         }
         & span>i {
@@ -184,8 +187,11 @@
       left: 74px;
     }
     .wrong-tip-end {
-      left: 288px;
+      left: 312px;
     }
+    //form input.ng-untouched.ng-invalid {
+    //  border-color: #FA787E !important
+    //}
 
     // 礼品按钮
     .show-gift-list {
@@ -240,6 +246,7 @@
   }
 
   .modal {
+    overflow-y: auto;
     .modal-dialog {
       transform: translateY(0%);
       top: 100px;

@@ -8,7 +8,7 @@
                         <input ng-disabled="isDisabled" class="form-control" type="text" name="adsName" ng-model="adsName" placeholder="请输入广告名称，最多50个字" maxlength="50" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.adsName.$touched">
-                            <div ng-show="form.adsName.$error.required || form.adsName.$error.maxlength" class="wrong-tip">请输入广告名称，1~30字</div>
+                            <div ng-show="form.adsName.$error.required || form.adsName.$error.maxlength" class="wrong-tip">请输入广告名称，1~50字</div>
                         </div>
                     </label>
                 </div>
@@ -16,9 +16,7 @@
                 <div class="form-group">
                     <label class="adsnew-row adsnew-row-time">
                         <span>时间设置 <i>*</i></span>
-                        <div class="col-sm-4">
-                            <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationStart" size="16" type="text" value="" readonly placeholder="年-月-日(开始时间)" class="form_datetime form-item" name="startTime" ng-model="startTime" value="{{startTime}}" required>
-                        </div>
+                        <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationStart" size="16" type="text" readonly placeholder="年-月-日(开始时间)" class="form_datetime form-item" name="startTime" ng-model="startTime" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.startTime.$touched">
                             <div ng-show="form.startTime.$error.required" class="wrong-tip wrong-tip-start">请输入开始时间</div>
@@ -26,9 +24,7 @@
 
                         <span class="time-line">至</span>
 
-                        <div class="col-sm-4">
-                            <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationEnd" size="16" type="text" value="" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" name="endTime" ng-model="endTime" value="{{endTime}}" required>
-                        </div>
+                        <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" name="endTime" ng-model="endTime" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.endTime.$touched">
                             <div ng-show="form.endTime.$error.required" class="wrong-tip wrong-tip-end">请输入结束时间</div>
@@ -40,7 +36,7 @@
                         <span>广告图片 <i>*</i></span>
                         <div class="ads-img-con" ng-if="adsImageShow">
                             <img src="{{adsImage}}" alt="">
-                            <div class="img-delete" ng-click="adsImgClose()">✕</div>
+                            <div ng-if="!isShow" class="img-delete" ng-click="adsImgClose()">✕</div>
                         </div>
                         <input ng-if="!adsImageShow" name="adsImage" ng-disabled="isDisabled" class="form-control ads-image-input" type="file" class="uploadimage" onchange="angular.element(this).scope().fileChange()" accept="image/*" ng-model="adsImage" required/>
 
@@ -70,10 +66,10 @@
                 <div class="form-group" ng-if="adsType">
                     <label class="adsnew-row">
                         <span>URL <i>*</i></span>
-                        <input ng-disabled="isDisabled" class="form-control zha" type="text" name="adsUrl" ng-model="adsUrl" value="{{adsUrl}}" placeholder="请输入URL" required>
+                        <input ng-disabled="isDisabled" class="form-control" type="url" name="adUrl" ng-model="ads.adUrl" placeholder="请输入URL" required>
                         <!--验证-->
-                        <div ng-show="form.$submitted || form.adsUrl.$touched">
-                            <div ng-show="form.adsUrl.$error.required" class="wrong-tip">请输入URL</div>
+                        <div ng-show="form.$submitted || form.adUrl.$touched">
+                            <div ng-show="form.adUrl.$error.required || form.adUrl.$invalid" class="wrong-tip">请输入正确格式的URL</div>
                         </div>
                     </label>
                 </div>
@@ -84,7 +80,7 @@
                             <span>选择礼品 <i>*</i></span>
                             <div class="gift-img-con" ng-if="imgshow">
                                 <img src="{{giftPic}}" alt="">
-                                <div class="img-delete" ng-click="giftClose()">✕</div>
+                                <div ng-if="!isShow" class="img-delete" ng-click="giftClose()">✕</div>
                             </div>
                             <p ng-if="imgshow" class="gift-img-title">{{giftName}}</p>
 
@@ -102,7 +98,7 @@
                             <input name="cardNum" ng-disabled="isDisabled" class="form-control" type="number" step="1" min="0" ng-model="ads.cardNum" required>
                             <!--验证-->
                             <div ng-show="form.$submitted || form.cardNum.$touched">
-                                <div ng-show="form.cardNum.$error.required" class="wrong-tip">请输入奖品数量</div>
+                                <div ng-show="form.cardNum.$error.required || form.cardNum.$invalid" class="wrong-tip">请输入正确格式的奖品数量</div>
                             </div>
                         </label>
                     </div>
@@ -110,7 +106,7 @@
 
                 <div class="form-group">
                     <label class="adsnew-checkbox">
-                        <input ng-disabled="isDisabled" type="checkbox" ng-model="adsEnabled" /> 是否启用本广告（勾选并保存后该广告将生效，不勾选则为停用状态)
+                        <input ng-disabled="isDisabled" type="checkbox" ng-model="adsEnabled" /> 是否启用本广告（勾选并保存后该广告将生效，不勾选则为待启用状态)
                     </label>
                 </div>
             </div>
