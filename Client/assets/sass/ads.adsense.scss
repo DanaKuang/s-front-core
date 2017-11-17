@@ -10,8 +10,11 @@
   select {
     -webkit-appearance: menulist;
   }
-  .form-control {
-    //width: auto !important;
+  .form-horizontal {
+    .form-control {
+      line-height: 22px !important;
+      //width: auto !important;
+    }
   }
 
   .ui-panel-title {

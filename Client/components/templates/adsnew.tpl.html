@@ -49,10 +49,10 @@
                 <div class="form-group">
                     <label class="adsnew-row">
                         <span>排序优先级 <i>*</i></span>
-                        <input ng-disabled="isDisabled" class="form-control" type="text" step="1" min="0" name="adsSort" ng-model="adsSort" placeholder="请输入优先级" required>
+                        <input ng-disabled="isDisabled" class="form-control" type="number" step="1" min="0" name="adsSort" ng-model="adsSort" placeholder="请输入优先级" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.adsSort.$touched">
-                            <div ng-show="form.adsSort.$error.required" class="wrong-tip">请输入优先级</div>
+                            <div ng-show="form.adsSort.$error.required || form.adsSort.$invalid" class="wrong-tip">请输入优先级</div>
                         </div>
                     </label>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="adsnew-row adsnew-row-type">
                         <span>广告类型 <i>*</i></span>
                         <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="true" ng-checked="true" type="radio" name="type" />外链宣传</label>
-                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="false" type="radio" name="type"/>虚拟卡</label>
+                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="false" type="radio" name="type"/>虚拟卡券</label>
                     </div>
                 </div>
                 <div class="form-group" ng-if="adsType">
@@ -95,11 +95,18 @@
                     <div class="form-group">
                         <label class="adsnew-row">
                             <span>奖品数量 <i>*</i></span>
-                            <input name="cardNum" ng-disabled="isDisabled" class="form-control" type="number" step="1" min="0" ng-model="ads.cardNum" required>
+                            <input name="cardNum" ng-disabled="clickType == 'edit' ? true : false" class="form-control" type="number" step="1" min="0" ng-model="ads.cardNum" required>
                             <!--验证-->
                             <div ng-show="form.$submitted || form.cardNum.$touched">
                                 <div ng-show="form.cardNum.$error.required || form.cardNum.$invalid" class="wrong-tip">请输入正确格式的奖品数量</div>
                             </div>
+                        </label>
+                    </div>
+                    <div ng-if="clickType == 'edit'" class="form-group">
+                        <label class="adsnew-row">
+                            <span>剩余奖品数量</span>
+                            <input disabled class="form-control" type="number" ng-model="cardSuptNum">件
+                            <button class="add-stock btn btn-primary" ng-click="addStock()" data-toggle="modal" data-target=".add-stock-modal">增库</button>
                         </label>
                     </div>
                 </div>

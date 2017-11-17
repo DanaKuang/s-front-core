@@ -6,7 +6,8 @@
 .ads-source select {
   -webkit-appearance: normal; }
 
-.ads-source .form-control {
+.ads-source .form-horizontal .form-control {
+  line-height: 22px !important;
   width: auto !important; }
 
 .ads-source .ui-panel-title {
@@ -190,6 +191,18 @@
     transform: translateY(0%);
     top: 100px;
     margin-bottom: 100px; }
+
+.ads-source .add-stock-modal .modal-body label {
+  margin-right: 10px;
+  line-height: 34px; }
+
+.ads-source .add-stock-modal .modal-body input {
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 10px; }
+
+.ads-source .add-stock {
+  margin-left: 20px; }
 
 .ads-source input[type="text"], .ads-source select, .ads-source input[type="number"], .ads-source input[type="url"] {
   border-radius: 4px; }

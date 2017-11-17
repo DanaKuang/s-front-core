@@ -68,7 +68,7 @@
                     <label class="adsnew-row">
                         <span class="label-title">选择广告 <i class="star">*</i></span>
                         <div class="multi">
-                            <select name="adCode" class="form-control input-sm select" ng-disabled="isDisabled" ng-model="adCode" multiple="multiple" required>
+                            <select name="adCode" class="form-control input-sm select" ng-disabled="isDisabled" ng-model="ads.adCode" multiple="multiple" required>
                                 <option ng-repeat="item in selectAdCodeList" value="{{item.adCode}}">{{item.adName}}</option>
                             </select>
                         </div>

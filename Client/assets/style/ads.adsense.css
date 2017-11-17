@@ -6,6 +6,9 @@
 .ads-adsense select {
   -webkit-appearance: menulist; }
 
+.ads-adsense .form-horizontal .form-control {
+  line-height: 22px !important; }
+
 .ads-adsense .ui-panel-title {
   margin-top: 30px;
   margin-bottom: 10px; }

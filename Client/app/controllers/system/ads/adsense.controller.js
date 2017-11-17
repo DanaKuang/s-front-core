@@ -80,7 +80,6 @@ define([], function () {
           currentPageNumber:1,
           pageSize: 10
         }).then(function(res) {
-          // $('[ng-model="selectAllBrands"]').multiselect('refresh');
           $scope.adsenseConf = res.data;
           $scope.paginationConf = res.data;
         })
@@ -88,7 +87,6 @@ define([], function () {
 
       // confirm弹窗结果
       $scope.isConfirm = function () {
-        console.log($scope.confirmData)
         $model.startDisableAds($scope.confirmData).then(function () {
           $('.start-ads-modal').modal('hide');
           getList($scope.paginationConf.data.page.currentPageNumber || 1);
@@ -118,7 +116,7 @@ define([], function () {
             adBrandCode: direScope.adBrandCode || '', // 投放品牌
             stime: direScope.stime || '', // 开始时间
             etime: direScope.etime || '', // 结束时间
-            adCode: direScope.adCode || '', // 选择广告
+            adCode: direScope.ads.adCode || [] // 选择广告
           };
 
           // zha: 表单数据data作为搜索条件传入$model.getAdsenseList
@@ -172,6 +170,15 @@ define([], function () {
 
       // 多选搜索下拉
       $(document).ready(function () {
+
+      })
+
+      // 获取广告列表
+      $model.getAdsList().then(function(res){
+        // 自定义指令的scope
+        var direScope = scope('.adsenseedit-list');
+        direScope.selectAdCodeList = res.data.data;
+
         $('.multi .select').multiselect({
           nonSelectedText: '请选择',
           nSelectedText: '已选择',
@@ -183,21 +190,14 @@ define([], function () {
           maxHeight: '500px',
           numberDisplayed: 1
         });
-      })
-
-      // 获取广告列表
-      $model.getAdsList().then(function(res){
-        // 自定义指令的scope
-        var direScope = scope('.adsenseedit-list');
-        direScope.selectAdCodeList = res.data.data;
 
         // 多选搜索下拉
-        $('[ng-model="adCode"]').multiselect('dataprovider', _.forEach(direScope.selectAdCodeList, function(v){
+        $('[ng-model="ads.adCode"]').multiselect('dataprovider', _.forEach(direScope.selectAdCodeList, function(v){
           v.label = v.adName;
           v.value = v.adCode;
         }));
-        $('[ng-model="adCode"]').multiselect('refresh');
-        var default_val = $('[ng-model="adCode"]').find('option:first').val();
+        $('[ng-model="ads.adCode"]').multiselect('refresh');
+        var default_val = $('[ng-model="ads.adCode"]').find('option:first').val();
         $scope.adCode = default_val;
 
 
@@ -231,7 +231,7 @@ define([], function () {
         var data = res.data.data;
         // 自定义指令的scope
         var direScope = scope('.adsenseedit-list');
-
+        direScope.ads = data;
         // 重置form状态
         direScope.form.$setPristine();
         direScope.form.$setUntouched();
@@ -241,7 +241,9 @@ define([], function () {
         direScope.adSpPosition = data.adSpPosition; // id
         direScope.adOrgCode = data.adOrgCode; // 投放厂家
         direScope.adBrandCode = data.adBrandCode; // 投放品牌
-        direScope.adCode = data.adCode; // 选择广告
+        direScope.ads.adCode = data.adCode.split(","); // 选择广告
+        $('[ng-model="ads.adCode"]').val(data.adCode);
+        $('[ng-model="ads.adCode"]').multiselect('refresh');
         // 设置日历
         direScope.stime = data.stime || '';
         direScope.etime = data.etime || '';

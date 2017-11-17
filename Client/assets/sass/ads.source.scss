@@ -10,8 +10,11 @@
   select {
     -webkit-appearance: normal;
   }
-  .form-control {
-    width: auto !important;
+  .form-horizontal {
+    .form-control {
+      line-height: 22px !important;
+      width: auto !important;
+    }
   }
 
   .ui-panel-title {
@@ -252,6 +255,24 @@
       top: 100px;
       margin-bottom: 100px;
     }
+  }
+
+  // 增库弹窗
+  .add-stock-modal {
+    .modal-body {
+      label {
+        margin-right: 10px;
+        line-height: 34px;
+      }
+      input {
+        height: 34px;
+        line-height: 22px;
+        padding: 6px 10px;
+      }
+    }
+  }
+  .add-stock {
+    margin-left: 20px;
   }
 
   input[type="text"], select, input[type="number"], input[type="url"] {

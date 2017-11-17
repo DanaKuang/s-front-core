@@ -45,6 +45,7 @@ define([], function () {
         $scope.modalType = false; // 表示弹窗为编辑或查看，而不是新增
         direScope.isView = false; // 表示弹窗为编辑，而不是查看
         direScope.isShow = true; // 设置图片的关闭按钮隐藏
+        direScope.clickType = 'edit';
 
         // 重置form状态，提交、失去焦点
         direScope.form.$setPristine();
@@ -66,6 +67,7 @@ define([], function () {
         $scope.modalType = true;
         direScope.isView = false;
         direScope.isShow = true; // 设置图片的关闭按钮隐藏
+        direScope.clickType = 'new';
 
         // 重置form状态
         direScope.form.$setPristine();
@@ -137,6 +139,8 @@ define([], function () {
                 giftId: direScope.giftId,
                 cardNo: direScope.cardNo,
                 cardNum: ads.cardNum,
+                addStockNumber: direScope.addStockNumber,
+                cardNo: direScope.cardNo,
                 status: adStatus
               };
             }
@@ -172,7 +176,7 @@ define([], function () {
                 adType: adType, // 广告类型
                 giftId: direScope.giftId,
                 cardNo: direScope.cardNo,
-                cardNum: ads.cardNum,
+                cardNum: $scope.addStockNumber || 0, //ads.cardNum, 编辑时，传过去的数量为增库数
                 status: adStatus
               };
             }
@@ -237,11 +241,19 @@ define([], function () {
 
       // confirm弹窗结果
       $scope.isConfirm = function () {
-        console.log($scope.confirmData)
         $model.startDisableAds($scope.confirmData).then(function () {
           $('.start-ads-modal').modal('hide');
           getList($scope.paginationConf.data.page.currentPageNumber || 1);
         });
+      }
+
+      // 增库
+      $scope.addStockConfirm = function () {
+        // 自定义指令的scope
+        var direScope = scope('.adsnew-list');
+        direScope.ads.cardNum = direScope.ads.cardNum + ($scope.addStockNumber || 0);
+        direScope.cardSuptNum = direScope.cardSuptNum + $scope.addStockNumber || 0;
+        $('.add-stock-modal').modal('hide');
       }
 
       // 启用、终止
@@ -363,7 +375,6 @@ define([], function () {
           direScope.adsName = data.adName; // 名称
           direScope.adsSort = data.idx; // 优先级
           direScope.ads.adUrl = data.adUrl; // 链接
-
           direScope.attachCode = data.attachCode; // 图片编码
           // direScope.adsImage = data.adPic; // 图片
           // 如果有广告图
@@ -396,6 +407,7 @@ define([], function () {
               direScope.cardNo = data.cardNo;
               // 获取不到数量，所以用了这种方式，加点  .
               direScope.ads.cardNum = data.cardNum;
+              direScope.cardSuptNum = data.cardSuptNum; // 剩余库存
             } else {
               direScope.imgshow = false;
             }
