@@ -191,6 +191,28 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
+dealer:
+  - httpmethod: 'get'                       # 经销商订单管理
+    routepath: '/view/dealer/dealerordermanage'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/dealerordermanage.html'
+  - httpmethod: 'get'                       # 提现审核
+    routepath: '/view/dealer/presentaudit'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/presentaudit.html'
+  - httpmethod: 'get'                       # 系统设置
+    routepath: '/view/dealer/systemsettings'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/systemsettings.html'
 product:
   - httpmethod: 'get'                       # 礼品管理
     routepath: '/view/product/materiel/gift'
