@@ -204,6 +204,10 @@
 .ads-source .add-stock {
   margin-left: 20px; }
 
+.ads-source .add-stock-intro {
+  color: #f00;
+  margin-left: 57px; }
+
 .ads-source input[type="text"], .ads-source select, .ads-source input[type="number"], .ads-source input[type="url"] {
   border-radius: 4px; }
 
