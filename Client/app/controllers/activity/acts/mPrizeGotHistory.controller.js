@@ -170,7 +170,6 @@ define([], function () {
           $('[ng-model="selectSpeci"]').multiselect('refresh');
           $('[ng-model="allarea"]').multiselect('refresh');
           $scope.prizegotlistConf = res.data;
-          $scope.paginationConf = res.data;
         })
       }
 

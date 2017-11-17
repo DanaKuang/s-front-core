@@ -143,14 +143,15 @@ define([], function () {
           })
         })
 
-        $model.step().then(function (res) {
-          $scope.createConf = res.data;
-        })
+        // $model.step().then(function (res) {
+        //   $scope.createConf = res.data;
+        // })
 
         // 操作面板，活动模板
         $model.getActSampleList().then(function (res) {
           $scope.createActModalConf = res.data;
           $scope.actsampleList = res.data.data;
+          $scope.createConf = res.data;
         });
 
         // 操作面板，活动状态

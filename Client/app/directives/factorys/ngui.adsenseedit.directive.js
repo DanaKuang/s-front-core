@@ -36,6 +36,12 @@ define([], function () {
         scope.adsnewList = scope.conf && scope.conf.data;
       }, true);
 
+      scope.$watch('ads.adCode', function (n, o, s) {
+        if (n != o) {
+          scope.ads.adCode = n;
+        }
+      })
+
       scope.newActSample = function(e, type) {
         var typeData = {
             type: type
@@ -47,7 +53,7 @@ define([], function () {
 
       // 编辑
       scope.updateAds = function() {
-        scope.$emit('updateAds', event);
+        scope.$emit('updateAds', event, this.ads);
       }
     }
     return defineObj;

@@ -18,14 +18,15 @@
 					<td>{{item.adName}}</td>
 					<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{item.etime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
 					<td>{{item.adType == 1 ? '外链宣传' : '虚拟卡券'}}</td>
-					<td>{{item.cardSuptNum}}</td>
+					<td>{{item.adType == 1 ? '- -' : (item.cardSuptNum ? item.cardSuptNum : '- -')}}</td>
 					<td>{{!item.status ? '已停用' : item.status == 1 ? '已启用' : '待启用'}}</td>
 					<td>
 						<div class="oper-btn-wrap">
-							<div class="float-left edit operate-btn" ng-click="editAds($event, item.id)" ng-if="item.status != 0" data-toggle="modal" data-target=".create-ads-modal">编辑</div>
-							<div class="float-left start operate-btn" ng-if="item.status == 0" ng-click="startDisableSource($event, item.id, 1)" data-toggle="modal" data-target=".start-activity-modal">启用</div>
-							<div class="float-left terminate operate-btn" ng-if="item.status == 1" ng-click="startDisableSource($event, item.id, 0)" data-toggle="modal" data-target=".end-activity-modal">终止</div>
-							<div class="float-left look operate-btn" ng-if="item.status == 0" ng-click="viewSource($event, item.id)" data-toggle="modal" data-target=".edit-ads-modal">查看</div>
+							<!--0 终止； 1 启用； 2 待启用-->
+							<div class="float-left edit operate-btn" ng-if="item.status != 0" ng-click="editAds($event, item.id)" data-toggle="modal" data-target=".create-ads-modal">编辑</div>
+							<div class="float-left start operate-btn" ng-if="item.status == 2" ng-click="startSource($event, item.id, 1)" data-toggle="modal" data-target=".start-ads-modal">启用</div>
+							<div class="float-left terminate operate-btn" ng-if="item.status != 0" ng-click="disableSource($event, item.id, 0)" data-toggle="modal" data-target=".start-ads-modal">终止</div>
+							<div class="float-left look operate-btn" ng-click="viewSource($event, item.id)" data-toggle="modal" data-target=".create-ads-modal">查看</div>
 						</div>
 					</td>
 				</tr>
