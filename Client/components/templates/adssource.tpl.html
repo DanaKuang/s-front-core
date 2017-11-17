@@ -24,8 +24,8 @@
 						<div class="oper-btn-wrap">
 							<!--0 终止； 1 启用； 2 待启用-->
 							<div class="float-left edit operate-btn" ng-if="item.status != 0" ng-click="editAds($event, item.id)" data-toggle="modal" data-target=".create-ads-modal">编辑</div>
-							<div class="float-left start operate-btn" ng-if="item.status == 2" ng-click="startDisableSource($event, item.id, 1)" data-toggle="modal" data-target=".start-activity-modal">启用</div>
-							<div class="float-left terminate operate-btn" ng-if="item.status != 0" ng-click="startDisableSource($event, item.id, 0)" data-toggle="modal" data-target=".end-activity-modal">终止</div>
+							<div class="float-left start operate-btn" ng-if="item.status == 2" ng-click="startSource($event, item.id, 1)" data-toggle="modal" data-target=".start-ads-modal">启用</div>
+							<div class="float-left terminate operate-btn" ng-if="item.status != 0" ng-click="disableSource($event, item.id, 0)" data-toggle="modal" data-target=".start-ads-modal">终止</div>
 							<div class="float-left look operate-btn" ng-click="viewSource($event, item.id)" data-toggle="modal" data-target=".create-ads-modal">查看</div>
 						</div>
 					</td>

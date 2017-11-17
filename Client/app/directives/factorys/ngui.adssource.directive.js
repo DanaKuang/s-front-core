@@ -63,13 +63,21 @@ define([], function () {
       }, true);
 
       // 启用
-      scope.startDisableSource = function (e, id, status) {
+      scope.startSource = function (e, id, status) {
         var data = {
           id: id,
           status: status
         }
-        // fixme: $emit释放一个叫startActivity的变量
-        scope.$emit('startDisableSource', event, data);
+        // fixme: $emit释放一个叫disableSource的变量
+        scope.$emit('startSource', event, data);
+      }
+      // 终止
+      scope.disableSource = function (e, id, status) {
+        var data = {
+          id: id,
+          status: status
+        }
+        scope.$emit('disableSource', event, data);
       }
 
       // 编辑

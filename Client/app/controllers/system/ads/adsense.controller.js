@@ -86,12 +86,22 @@ define([], function () {
         })
       }
 
-      // 启用、终止
-      $scope.$on('startDisableAdsense', function (e, v, f) {
-        // 先传id过去，再获取当前最新列表状态。
-        $model.startDisableAds(f).then(function () {
-          getList($scope.paginationConf.data.page.currentPageNumber || 1)
+      // confirm弹窗结果
+      $scope.isConfirm = function () {
+        console.log($scope.confirmData)
+        $model.startDisableAds($scope.confirmData).then(function () {
+          $('.start-ads-modal').modal('hide');
+          getList($scope.paginationConf.data.page.currentPageNumber || 1);
         });
+      }
+      // 启用、终止
+      $scope.$on('startSource', function (e, v, f) {
+        $scope.isStart = true;
+        $scope.confirmData = f;
+      })
+      $scope.$on('disableSource', function (e, v, f) {
+        $scope.isStart = false;
+        $scope.confirmData = f;
       })
 
       // 编辑保存

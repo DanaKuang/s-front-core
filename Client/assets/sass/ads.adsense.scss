@@ -196,6 +196,7 @@
   }
 
   .modal {
+    overflow-y: auto;
     .modal-dialog {
       transform: translateY(0%);
       top: 100px;

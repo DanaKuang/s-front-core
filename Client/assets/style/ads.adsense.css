@@ -131,10 +131,12 @@
 .ads-adsense .edit-ads-modal .wrong-tip-end {
   left: 312px; }
 
-.ads-adsense .modal .modal-dialog {
-  transform: translateY(0%);
-  top: 100px;
-  margin-bottom: 100px; }
+.ads-adsense .modal {
+  overflow-y: auto; }
+  .ads-adsense .modal .modal-dialog {
+    transform: translateY(0%);
+    top: 100px;
+    margin-bottom: 100px; }
 
 .ads-adsense input[type="text"], .ads-adsense select, .ads-adsense input[type="number"], .ads-adsense input[type="url"] {
   border-radius: 4px; }
