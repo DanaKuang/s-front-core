@@ -112,7 +112,6 @@ define([], function () {
                 scope.endTime = adjustafternoon(selectDurationEnd);
             } else {
                 scope.parentForm = angular.element('.css-form').scope().form;
-                
                 scope.$watch('selectBrandVal', function (n, o, s) {
                     if (n !== '') {
                         var brandListArrObj = {};
