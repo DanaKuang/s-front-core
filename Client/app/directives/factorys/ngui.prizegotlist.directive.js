@@ -49,8 +49,14 @@ define([], function () {
             }, true);
 
             scope.showdetail = function (e) {
-                var orderid = {orderCode: e.target.dataset.orderid};
-                scope.$emit('orderid', event, orderid)
+                var dataset = e.target.dataset;
+                var data = {
+                    orderCode: dataset.orderid,
+                    appId: dataset.appid,
+                    autoId: dataset.autoid,
+                    openId: dataset.openid
+                };
+                scope.$emit('orderid', event, data)
             }
 
         }
