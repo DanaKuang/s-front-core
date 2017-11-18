@@ -4,11 +4,10 @@
   display: table; }
 
 .ads-source select {
-  -webkit-appearance: normal; }
+  -webkit-appearance: menulist; }
 
 .ads-source .form-horizontal .form-control {
-  line-height: 22px !important;
-  width: auto !important; }
+  line-height: 22px !important; }
 
 .ads-source .ui-panel-title {
   margin-top: 30px;

@@ -8,12 +8,12 @@
 
 .ads-source {
   select {
-    -webkit-appearance: normal;
+    -webkit-appearance: menulist;
   }
   .form-horizontal {
     .form-control {
       line-height: 22px !important;
-      width: auto !important;
+      //width: auto !important;
     }
   }
 
