@@ -42,36 +42,7 @@ define([], function () {
           }
       });
 
-      $scope.hours = _.map(Array(24),function(v, i){return i;});
-
-      // 一进入页面调用
-      $model.getprizelist({
-        realThing: 1
-      }).then(function(res) {
-        $scope.prizegotlistConf = res.data;
-        $scope.paginationConf = res.data;
-      })
-
-    	// 获取领奖明细
-      $scope.$on('frompagechange', function (e, v, f) {
-        var data = {
-          orderCode: $scope.orderCode || '',
-          brandCodeArr : $scope.selectAllBrands || [],
-          unitArr: $scope.selectSpeci || [],
-          areaCodes: $scope.allarea || [],
-          keys: $scope.keysval || '',
-          realThing: 1,
-          status: $scope.statusVal || '', //活动状态
-          orderStatus: $scope.orderstatus || '',
-          stime: $scope.startTime || '',
-          etime: $scope.endTime || ''
-        };
-        var target = Object.assign({}, f, data);
-        $model.getprizelist(target).then(function(res) {
-          $scope.prizegotlistConf = res.data;
-          $scope.paginationConf = res.data;
-        })
-      })
+      // $scope.hours = _.map(Array(24),function(v, i){return i;});
 
       // 操作面板，根据品牌获取规格
       $('.brand').one('click', function () {
@@ -141,8 +112,8 @@ define([], function () {
       }
 
       // 点击搜索
-      $scope.search = function (e) {
-        var data = {
+      var searchItem = function () {
+        return {
           orderCode: $scope.orderCode || '',
           brandCodeArr : $scope.selectAllBrands || [],
           unitArr: $scope.selectSpeci || [],
@@ -153,14 +124,29 @@ define([], function () {
           orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
           etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
+        }
+      }
+
+      $scope.search = function (e) {
+        var newSearchItem = Object.assign(searchItem(), {
           currentPageNumber: 1,
           pageSize: 10
-        };
-        $model.getprizelist(data).then(function(res) {
+        });
+        $model.getprizelist(newSearchItem).then(function(res) {
           $scope.prizegotlistConf = res.data;
-          $scope.paginationConf = res.data;
         })
       }
+
+      // 一进入页面获取列表
+      $scope.search();
+      
+      // 翻页
+      $scope.$on('frompagechange', function (e, v, f) {
+        var target = Object.assign(searchItem(), f);
+        $model.getprizelist(target).then(function(res) {
+          $scope.prizegotlistConf = res.data;
+        })
+      })
 
       // 重置
       $scope.reset = function () {
@@ -184,7 +170,6 @@ define([], function () {
           $('[ng-model="selectSpeci"]').multiselect('refresh');
           $('[ng-model="allarea"]').multiselect('refresh');
           $scope.prizegotlistConf = res.data;
-          $scope.paginationConf = res.data;
         })
       }
 

@@ -113,7 +113,7 @@ a.zjxx { display: block; background: url(../image/jiajia.png) no-repeat left; he
  .add-packet{background: #F8FBFF;border: 1px solid #ccc;height: 33px;line-height: 33px;text-align: center;border-radius: 10px;margin-left: 8px;width: 100px;}
  .warn_info{ display: inline-block;height: 33px;line-height: 33px;color: #f00;display: none;}
  .open>.dropdown-menu{max-height: 200px;overflow-y: auto;}
- .btn .caret{float: right;margin-top: 6px;}
+ .btn .caret{float: right;margin: 6px 0px;}
  .normal_file{position: relative;
     height: 33px;
     width: 100px;}
@@ -141,7 +141,7 @@ a.zjxx { display: block; background: url(../image/jiajia.png) no-repeat left; he
 #normalFileWarn{
     position: absolute;margin-left: 30%;margin-top:2px;font-size: 13px;
 }
-.select-duration .control-label:before,.packet_pool .control-label:before{
+.select_time .control-label:before,.packet_pool .control-label:before{
     content: '*';
     position: absolute;
     right: 0;
