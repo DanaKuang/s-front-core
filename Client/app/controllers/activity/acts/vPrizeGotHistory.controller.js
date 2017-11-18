@@ -141,7 +141,7 @@ define([], function () {
       $scope.$on('frompagechange', function (e, v, f) {
         var target = Object.assign(searchItem(), f);
         $model.getprizelist(target).then(function(res) {
-          $scope.prizegotlistConf = res.data;
+          $scope.vprizegotlistConf = res.data;
         })
       })
 

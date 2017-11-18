@@ -31,8 +31,8 @@ define([], function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['step']);
 
-                scope.step = 0;
-                scope.stepstream = scope.conf && scope.conf.step[scope.step];
+                // scope.step = 0;
+                // scope.stepstream = scope.conf && scope.conf.step[scope.step];
 
                 // 还需要一个active判断
                 

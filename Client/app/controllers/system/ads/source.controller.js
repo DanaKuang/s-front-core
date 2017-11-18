@@ -45,6 +45,10 @@ define([], function () {
         $scope.modalType = false; // 表示弹窗为编辑或查看，而不是新增
         direScope.isView = false; // 表示弹窗为编辑，而不是查看
         direScope.isShow = true; // 设置图片的关闭按钮隐藏
+        direScope.clickType = 'edit';
+        direScope.imgShow = true; // 图片关闭按钮
+
+        direScope.viewDis = true;
 
         // 重置form状态，提交、失去焦点
         direScope.form.$setPristine();
@@ -66,6 +70,10 @@ define([], function () {
         $scope.modalType = true;
         direScope.isView = false;
         direScope.isShow = true; // 设置图片的关闭按钮隐藏
+        direScope.imgShow = false; // 图片关闭按钮
+
+        direScope.clickType = 'new';
+        direScope.viewDis = false;
 
         // 重置form状态
         direScope.form.$setPristine();
@@ -137,6 +145,8 @@ define([], function () {
                 giftId: direScope.giftId,
                 cardNo: direScope.cardNo,
                 cardNum: ads.cardNum,
+                addStockNumber: direScope.addStockNumber,
+                cardNo: direScope.cardNo,
                 status: adStatus
               };
             }
@@ -172,7 +182,7 @@ define([], function () {
                 adType: adType, // 广告类型
                 giftId: direScope.giftId,
                 cardNo: direScope.cardNo,
-                cardNum: ads.cardNum,
+                cardNum: $scope.addStockNumber || 0, //ads.cardNum, 编辑时，传过去的数量为增库数
                 status: adStatus
               };
             }
@@ -235,11 +245,44 @@ define([], function () {
         })
       }
 
-      // 启用、终止
-      $scope.$on('startDisableSource', function (e, v, f) {
-        $model.startDisableAds(f).then(function () {
+      // confirm弹窗结果
+      $scope.isConfirm = function () {
+        $model.startDisableAds($scope.confirmData).then(function () {
+          $('.start-ads-modal').modal('hide');
           getList($scope.paginationConf.data.page.currentPageNumber || 1);
         });
+      }
+
+      // 增库
+      $scope.addStockConfirm = function () {
+        if(!$scope.addStockIntro) {
+          // 自定义指令的scope
+          var direScope = scope('.adsnew-list');
+          direScope.ads.cardNum = direScope.ads.cardNum + ($scope.addStockNumber >=0 ? $scope.addStockNumber : 0);
+          direScope.cardSuptNum = direScope.cardSuptNum + ($scope.addStockNumber >=0 ? $scope.addStockNumber : 0);
+          $('.add-stock-modal').modal('hide');
+        }
+      }
+
+      // 增库input修改时
+      $scope.addStockIntro = false;
+      $scope.addStockInputChange = function() {
+        if($scope.addStockNumber>0) {
+          $scope.addStockIntro = false;
+        } else {
+          $scope.addStockIntro = true;
+        }
+      }
+
+
+      // 启用、终止
+      $scope.$on('startSource', function (e, v, f) {
+        $scope.isStart = true;
+        $scope.confirmData = f;
+      })
+      $scope.$on('disableSource', function (e, v, f) {
+        $scope.isStart = false;
+        $scope.confirmData = f;
       })
 
       // 查看
@@ -250,6 +293,7 @@ define([], function () {
         direScope.isView = true; // 表示弹窗为查看，而不是编辑
         direScope.isDisabled = true; // 设置input不可用
         direScope.isShow = true; // 设置图片的关闭按钮隐藏
+        direScope.imgShow = false; // 图片关闭按钮
 
         // 重置form状态
         direScope.form.$setPristine();
@@ -321,7 +365,7 @@ define([], function () {
           var direScope = scope('.adsnew-list');
           direScope.attachCode = data.attachCode; //图片编码
           direScope.adsImage = data.accessUrl; //图片保存地址
-
+          direScope.isShow = false; // 设置图片的关闭按钮显示
           direScope.adsImageShow = true;
           $scope.$apply();
 
@@ -351,7 +395,6 @@ define([], function () {
           direScope.adsName = data.adName; // 名称
           direScope.adsSort = data.idx; // 优先级
           direScope.ads.adUrl = data.adUrl; // 链接
-
           direScope.attachCode = data.attachCode; // 图片编码
           // direScope.adsImage = data.adPic; // 图片
           // 如果有广告图
@@ -384,6 +427,7 @@ define([], function () {
               direScope.cardNo = data.cardNo;
               // 获取不到数量，所以用了这种方式，加点  .
               direScope.ads.cardNum = data.cardNum;
+              direScope.cardSuptNum = data.cardSuptNum; // 剩余库存
             } else {
               direScope.imgshow = false;
             }

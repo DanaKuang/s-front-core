@@ -788,6 +788,42 @@ multi:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+dealer:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrderStatus'
+    authorized: 1
+    description: '订单状态'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getProvince'
+    authorized: 1
+    description: '省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getCity'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getCountry'
+    authorized: 1
+    description: '区县'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrders'
+    authorized: 1
+    description: '订单列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 track:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/activity/getPvData'

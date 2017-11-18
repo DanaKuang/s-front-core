@@ -63,13 +63,20 @@ define([], function () {
       }, true);
 
       // 启用
-      scope.startDisableAdsense = function (e, id, status) {
+      scope.startSource = function (e, id, status) {
         var data = {
           id: id,
           status: status
         }
-        // fixme: $emit释放一个叫startActivity的变量
-        scope.$emit('startDisableAdsense', event, data);
+        scope.$emit('startSource', event, data);
+      }
+      // 终止
+      scope.disableSource = function (e, id, status) {
+        var data = {
+          id: id,
+          status: status
+        }
+        scope.$emit('disableSource', event, data);
       }
 
       // 编辑

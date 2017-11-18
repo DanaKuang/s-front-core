@@ -6,6 +6,9 @@
 .ads-adsense select {
   -webkit-appearance: menulist; }
 
+.ads-adsense .form-horizontal .form-control {
+  line-height: 22px !important; }
+
 .ads-adsense .ui-panel-title {
   margin-top: 30px;
   margin-bottom: 10px; }
@@ -42,8 +45,8 @@
   height: 34px;
   line-height: 20px; }
 
-.ads-adsense .filter .input-group-addon {
-  padding: 3px 9px; }
+.ads-adsense .edit-ads-modal .modal-dialog {
+  min-width: 590px; }
 
 .ads-adsense .edit-ads-modal form .form-group {
   margin: 0; }
@@ -52,9 +55,9 @@
   display: block;
   line-height: 34px;
   position: relative; }
-  .ads-adsense .edit-ads-modal form .adsnew-row span, .ads-adsense .edit-ads-modal form .adsnew-row input {
+  .ads-adsense .edit-ads-modal form .adsnew-row .label-title, .ads-adsense .edit-ads-modal form .adsnew-row input, .ads-adsense .edit-ads-modal form .adsnew-row .time-line {
     float: left; }
-  .ads-adsense .edit-ads-modal form .adsnew-row > span {
+  .ads-adsense .edit-ads-modal form .adsnew-row .label-title {
     width: 80px;
     color: #242a30;
     font-weight: bold; }
@@ -66,9 +69,9 @@
     float: left;
     line-height: 32px; }
   .ads-adsense .edit-ads-modal form .adsnew-row .form_datetime {
-    width: 100% !important;
+    width: 203px !important;
     cursor: pointer; }
-  .ads-adsense .edit-ads-modal form .adsnew-row span > i {
+  .ads-adsense .edit-ads-modal form .adsnew-row .label-title .star {
     color: #ff3300; }
   .ads-adsense .edit-ads-modal form .adsnew-row .time-line {
     width: 35px;
@@ -94,14 +97,12 @@
 .ads-adsense .edit-ads-modal form .adsnew-checkbox {
   cursor: pointer; }
 
-.ads-adsense .edit-ads-modal form .multiselect-item.filter .input-group-addon {
-  display: none; }
+.ads-adsense .edit-ads-modal form .multi {
+  width: 300px;
+  float: left; }
 
-.ads-adsense .edit-ads-modal form .multiselect-item.filter .multiselect-search {
-  width: 245px; }
-
-.ads-adsense .edit-ads-modal form .multiselect-item.filter .input-group-btn {
-  width: 26px; }
+.ads-adsense .edit-ads-modal form .multiselect-container {
+  max-width: 450px; }
 
 .ads-adsense .edit-ads-modal form .ads-image-input {
   outline: none; }
@@ -131,12 +132,14 @@
   left: 74px; }
 
 .ads-adsense .edit-ads-modal .wrong-tip-end {
-  left: 288px; }
+  left: 312px; }
 
-.ads-adsense .modal .modal-dialog {
-  transform: translateY(0%);
-  top: 100px;
-  margin-bottom: 100px; }
+.ads-adsense .modal {
+  overflow-y: auto; }
+  .ads-adsense .modal .modal-dialog {
+    transform: translateY(0%);
+    top: 100px;
+    margin-bottom: 100px; }
 
 .ads-adsense input[type="text"], .ads-adsense select, .ads-adsense input[type="number"], .ads-adsense input[type="url"] {
   border-radius: 4px; }
@@ -176,3 +179,7 @@
   background: 0 0;
   border: 1px solid #6e80ff;
   color: #6e80ff; }
+
+.multiselect-container.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto; }

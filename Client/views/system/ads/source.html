@@ -96,7 +96,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
 
-                <!-- 活动模板 conf="createActModalConf"是干嘛的？？？，这里的conf只是一个自定义变量，放在directive的scope下，$scope.conf -->
+                <!-- 广告模板 conf="createActModalConf"是干嘛的？？？，这里的conf只是一个自定义变量，放在directive的scope下，$scope.conf -->
                 <sa-adsnew conf="editAdsModalConf" type="new"></sa-adsnew>
             </div>
         </div>
@@ -121,4 +121,39 @@
             </div>
         </div>
     </div>
+
+    <!-- 启用广告 -->
+    <div class="modal fade bs-example-modal-sm start-ads-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">提示：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p ng-if="isStart">确定要启用该广告资源吗？</p>
+                    <p ng-if="!isStart">确定要终止该广告资源吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="isConfirm()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 增库 -->
+    <div class="modal fade bs-example-modal-sm add-stock-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <label>增加数量</label><input type="number" step="1" min="0" ng-model="addStockNumber" ng-keyup="addStockInputChange()">
+                    <p ng-if="addStockIntro" class="add-stock-intro">请输入大于0的正整数</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="addStockConfirm()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
