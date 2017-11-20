@@ -148,3 +148,122 @@
 .table-head{
 	background-color:rgba(242, 242, 242, 1);
 }
+.seeInfo{
+	color:#337ab7;
+	cursor: pointer;
+}
+.infoTop{
+	width:98%;
+	/*height:150px;*/
+	margin:0 auto;
+	background:rgba(242, 242, 242, 1);
+}
+.infoTopH3{
+	display:inline-block;
+	text-align: left;
+	font-size:14px;
+	font-weight:400;
+	margin:10px 0 0 10px;
+}
+.infoTopNei{
+	width:90%;
+	/*height:120px;*/
+	margin:0 auto;
+	padding:10px;
+	
+}
+.spanAllTitle{
+	font-size:14px;
+	color: rgb(102, 102, 102);
+}
+.spanAllBody{
+	margin-left:8px;
+	font-size:14px;
+	color:rgb(30, 30, 30);
+}
+.ul1{
+	display:flex;
+	justify-content: space-between;
+	margin:20px 0;
+}
+.ul2{
+	display:flex;
+	justify-content: flex-start;
+	margin:20px 0;
+}
+.ul2 li:nth-child(2){
+	margin-left:115px;
+}
+.shrInfo{
+	height:200px;
+	width:98%;
+	/*background:#D0E9C6;*/
+	margin:20px auto;
+}
+#form{
+	width:80%;
+	height:150px;
+	/*background:#003399;*/
+	margin-left:95px;
+	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+	/*align-items: center;*/
+}
+.shrInfo_input{
+	height:30px;
+	width:400px;
+	border:1px solid #d2d2d2;
+	padding:0 10px;
+}
+.orderTracking{
+	width:98%;
+	height:330px;
+	/*background:#94FF7C;*/
+	margin:0 auto;
+}
+.orderTracking_left{
+	width:400px;
+	height:250px;
+	/*background:#0000FF;*/
+	margin:20px 0 0 100px;
+}
+.orderTracking_div{
+	display:flex;
+	justify-content: space-between;
+	margin:20px 0 ;
+}
+.btnCancel{
+	width:98%;
+	margin:0 auto;
+	display:flex;
+	justify-content: center;
+}
+.btnCancel button:nth-child(1){
+	width:70px;
+	height:25px;
+	background:rgba(22, 155, 213, 1);
+	color:#fff;
+	border:none;
+	border-radius:6px;
+	cursor: pointer;
+}
+.btnCancel button:nth-child(2){
+	width:70px;
+	height:25px;
+	background:rgba(22, 155, 213, 1);
+	color:#fff;
+	border:none;
+	margin: 0 20px;
+	border-radius:6px;
+	cursor: pointer;
+}
+.btnCancel button:nth-child(3){
+	width:70px;
+	height:25px;
+	background:#fff;
+	color:rgba(22, 155, 213, 1);
+	border:1px solid #1697d5;
+	border-radius:6px;
+	cursor: pointer;
+}

@@ -87,36 +87,60 @@ define([], function() {
                     $scope.$apply();
                 });
             });
-            
+            $scope.search = function(){
+            	lists()
+            }
             	//列表
             	var lists = function(){
-            		
+            		var statusChange = $('.form-controlmdg').val();
+            		var newCode = $('#newCode').val();
+            		var provinceId = $('#provinceId').val();
+            		var cityId = $('#cityId').val();
+            		var areaId = $('#areaId').val();
+            		var areaId = $('#areaId').val();
+            		var durationStart = $('#durationStart').val();
+            		var durationEnd = $('#durationEnd').val();
+//          		var formcontrolaaa = $('.form-controlaaa').val();
+            		console.log(durationStart)
             	var manageErwei = {
-                    orderStatus: '',//提现状态
-                    orderId:'',//订单号
-                    contactName:'',//抢购人
-                    contactPhone:'',//手机号
-                    salerName:'',//经销商
-                    provinceId:'',//省份id
-                    cityId:'',//地市id
-                    areaId:'',//区县id                   
+                    orderStatus: statusChange,//提现状态
+                    orderId:newCode,//订单号
+                    contactName:newCode,//抢购人
+                    contactPhone:newCode,//手机号
+                    salerName:newCode,//经销商
+                    provinceId:provinceId,//省份id
+                    cityId:cityId,//地市id
+                    areaId:areaId,//区县id                   
                     pageNum: 1,
                     pageSize: 10,
-                    startTime: '',//开始时间
-                    endTime:  ''//结束时间
+                    startTime: durationStart,//开始时间
+                    endTime:  durationEnd//结束时间
                 }
             	
             	$model.$getOrderList(manageErwei).then(function(res){
             	console.log(res)
-//          	if(res.status != null){
-//          		
-//          		var res = res.data || [];
-//          		$scope.province = res;
-//          		 $scope.$apply();
-//          	}
+            	if(res.status != null){
+            		for(var i=0;i<res.data.length;i++){
+                        res.data[i].ctime=getLocalTime(res.data[i].ctime);
+                        console.log(res.data[i].ctime)
+                    }
+            		var res = res.data || [];
+            		$scope.topTenTable = res;
+            		 $scope.$apply();
+            	}
             	})
             	}
-            	lists()
+            	lists();
+            	//跳转订单详情页
+            	//点击切换页面
+            	$scope.myVar = true;
+            	$scope.canCelOrder = true;
+            	$scope.orderInfo = function(params){
+            		$scope.myVar = !$scope.myVar
+            	}
+            	$scope.goBack = function(params){
+            		$scope.myVar = !$scope.myVar
+            	}
         }]
     };
 

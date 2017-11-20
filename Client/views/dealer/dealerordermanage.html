@@ -5,9 +5,10 @@
  * Description: labelManage
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
 <link rel="stylesheet" type="text/css" href="statics/assets/style/dealerordermanage.css">
 <div ng-controller="dealerordermanageCtrl">
-	<div class="animated fadeInRightBig">
+	<div class="animated fadeInRightBig" ng-show="myVar">
 		<div class="container-fluid">
 			<div class="col-md-12" style="padding:0;">
 				<!--title-->
@@ -40,7 +41,7 @@
 												<option value="经销商">经销商</option>
 												
 											</select>
-											<input type="text" class="input-sm" placeholder="请输入关键字" ng-model="orderCode">
+											<input type="text" id="newCode" class="input-sm" placeholder="请输入关键字" ng-model="orderCode">
 										</div>
 									</div>
 									<!--<div class="form-group col-md-4">
@@ -62,7 +63,7 @@
 												<option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
 											</select>
 
-											<select ng-model="areaCode"  class="form-control input-sm select" >
+											<select id="areaId" ng-model="areaCode"  class="form-control input-sm select" >
 												<option value="">请选择</option>
 												<option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
 											</select>
@@ -134,15 +135,19 @@
 							<tbody>
 								<tr ng-repeat="x in topTenTable">
 									<td>{{$index+1}}</td>
-									<td>{{x.productBrand}}</td>
-									<td>{{x.nickName}}</td>
-									<td>{{x.mobileNo}}</td>
-									<td>{{x.scanPv}}</td>
-									<td>{{x.effectScanPv}}</td>
-									<td>{{x.drawPv}}</td>
-									<td>{{x.drawCash}}</td>
-									<td>{{x.drawObPv}}</td>
-									<td onclick="sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value="{{x.mobileNo}}">点击查看用户详情</td>
+									<td ng-click='orderInfo(x.orderId)' class="seeInfo">查看详情</td>
+									<td>{{x.orderId}}</td>
+									<td>{{x.contactName}}</td>
+									<td>{{x.contactPhone}}</td>
+									<td>{{x.nickname}}</td>
+									<td>{{x.addrDetail}}</td>
+									<td>{{x.region}}</td>
+									<td>{{x.buyNum}}</td>
+									<td>{{x.amount}}</td>
+									<td>{{x.salerName}}</td>
+									<td>{{x.orderStatus}}</td>
+									<td>{{x.ctime}}</td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -151,4 +156,150 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 订单详情 -->
+    <div  id="detailsPage" ng-hide="myVar">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title manage">
+                    <span>订单详情</span>
+                    <button type="button" class="btn btn-primary back-btn right" id="goBack" ng-click="goBack();">返回</button>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body" >
+                        <div class="infoTop">
+                        	<h3 class="infoTopH3">订单信息</h3>
+                        	<div class="infoTopNei">
+                        		<ul class="ul1">
+                        		<li class="li">
+                        			<span class="spanAllTitle">订单号:</span>
+                        			<span class="spanFirst spanAllBody">12321341231</span>
+                        		</li>
+                        		<li class="li">
+                        			<span class="spanAllTitle">订单数量:</span>
+                        			<span class="spanTwo spanAllBody">1套</span>
+                        		</li>
+                        		<li class="li">
+                        			<span class="spanAllTitle">位置:</span>
+                        			<span class="spanThird spanAllBody">河南-郑州-管城区</span>
+                        		</li>
+                        		<li class="li">
+                        			<span class="spanAllTitle">微信号:</span>
+                        			<span class="spanFour spanAllBody">1dfgg</span>
+                        		</li>
+                        		<li class="li">
+                        			<span class="spanAllTitle">经销商:</span>
+                        			<span class="spanFive spanAllBody">张三</span>
+                        		</li>
+                        		</ul>
+                        		<ul class="ul2">
+                        		<li class="li">
+                        			<span class="spanAllTitle">推荐码:</span>
+                        			<span class="spanSix spanAllBody">asasdas</span>
+                        		</li>
+                        		<li class="li">
+                        			<span class="spanAllTitle">支付金额:</span>
+                        			<span class="spanSeven spanAllBody">￥222.00</span>
+                        		</li>
+                        		
+                        		</ul>
+                        		<ul class="ul2">
+                        			<li>
+                        			<span class="spanAllTitle" >留&nbsp;&nbsp;&nbsp;&nbsp;言:</span>
+                        			<span class="spanEight spanAllBody">撒啊舒服撒额我给我发的是</span>
+                        			</li>
+                        		</ul>
+                        		
+                        	</div>
+                        </div>
+                        
+                           <!--第二栏-->
+                           <div class="shrInfo">
+                           	<h3 class="infoTopH3">收货人信息</h3>
+                           	<form action="" id="form">
+                           		<div>
+                           		<label style="margin-left:13px;font-size:14px;" for="">抢购人：</label>
+                           		<input class="shrInfo_input" type="text" placeholder="请输入抢购人"/>
+                           		</div>
+                           		<div>
+                           		<label  style="margin-left:13px;font-size:14px;" for="">手机号：</label>
+                           		<input maxlength="11" class="shrInfo_input" type="text" placeholder="请输入手机号"/>
+                           		</div>
+                           		<div>
+                           		<label style="font-size:14px;" for="">收货地址：</label>
+                           		<input class="shrInfo_input" type="text" placeholder="请输入收货地址"/>
+                           		</div>
+                           	</form>
+                           </div>
+                           
+                           <!--第三栏-->
+                           <div class="orderTracking">
+                           	<h3 class="infoTopH3">订单追踪</h3>
+                           	<div class="orderTracking_left">
+                           		<div class="orderTracking_div">
+                           			<div>
+                           				<span class="spanAllTitle">下单时间:</span>
+                           				<span class="spanAllBody">2016.09.16 12:11:56</span>
+                           			</div>
+                           			<div>
+                           				<span class="spanAllTitle">订单状态:</span>
+                           				<span class="spanAllBody">待支付</span>
+                           			</div>
+                           		</div>
+                           		<div class="orderTracking_div">
+                           			<div>
+                           				<span class="spanAllTitle">取消订单时间:</span>
+                           				<span class="spanAllBody">2016.09.16 12:11:56</span>
+                           			</div>
+                           			<div>
+                           				<span class="spanAllTitle">订单状态:</span>
+                           				<span class="spanAllBody">已取消</span>
+                           			</div>
+                           		</div>
+                           		<div class="orderTracking_div">
+                           			<div>
+                           				<span class="spanAllTitle">支付时间:</span>
+                           				<span class="spanAllBody">2016.09.16 12:11:56</span>
+                           			</div>
+                           			<div>
+                           				<span class="spanAllTitle">订单状态:</span>
+                           				<span class="spanAllBody">代发货</span>
+                           			</div>
+                           		</div>
+                           		<div class="orderTracking_div">
+                           			<div>
+                           				<span class="spanAllTitle">发货时间:</span>
+                           				<span class="spanAllBody">2016.09.16 12:11:56</span>
+                           			</div>
+                           			<div>
+                           				<span class="spanAllTitle">订单状态:</span>
+                           				<span class="spanAllBody">代收货</span>
+                           			</div>
+                           		</div>
+                           		<div class="orderTracking_div">
+                           			<div>
+                           				<span class="spanAllTitle">收货时间:</span>
+                           				<span class="spanAllBody">2016.09.16 12:11:56</span>
+                           			</div>
+                           			<div>
+                           				<span class="spanAllTitle">订单状态:</span>
+                           				<span class="spanAllBody">已完成</span>
+                           			</div>
+                           		</div>
+                           	</div>
+                           </div>
+                           
+                           <!--确定和取消-->
+                           <div class="btnCancel">
+                           	<button class="cancelOrder" ng-hide = 'canCelOrder'>取消订单</button>
+                           	<button>确定</button>
+                           	<button>取消</button>
+                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
