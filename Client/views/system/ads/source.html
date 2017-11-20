@@ -145,7 +145,8 @@
             <div class="modal-content">
                 <div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <div class="modal-body">
-                    <label>增加数量</label><input type="number" ng-model="addStockNumber">
+                    <label>增加数量</label><input type="number" step="1" min="0" ng-model="addStockNumber" ng-keyup="addStockInputChange()">
+                    <p ng-if="addStockIntro" class="add-stock-intro">请输入大于0的正整数</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

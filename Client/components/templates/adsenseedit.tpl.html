@@ -21,7 +21,7 @@
                     <label class="adsnew-row">
                         <span class="label-title">投放厂家 <i class="star">*</i></span>
                         <select name="adOrgCode" ng-disabled="isDisabled" class="form-control" ng-model="adOrgCode" required>
-                            <option value="">全部</option>
+                            <option value="">请选择</option>
                             <option ng-repeat="item in selectManufacturerList" value="{{item.orgCode}}">{{item.orgName}}</option>
                         </select>
                         <!--验证-->
@@ -35,7 +35,7 @@
                     <label class="adsnew-row">
                         <span class="label-title">投放品牌 <i class="star">*</i></span>
                         <select name="adBrandCode" ng-disabled="isDisabled" class="form-control" ng-model="adBrandCode" required>
-                            <option value="">全部</option>
+                            <option value="">请选择</option>
                             <option ng-repeat="item in selectBrandsList" value="{{item.brandCode}}">{{item.name}}</option>
                         </select>
                         <!--验证-->

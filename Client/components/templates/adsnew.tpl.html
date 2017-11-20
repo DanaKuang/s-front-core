@@ -36,7 +36,7 @@
                         <span>广告图片 <i>*</i></span>
                         <div class="ads-img-con" ng-if="adsImageShow">
                             <img ng-src="{{adsImage}}" alt="">
-                            <div ng-if="!isShow" class="img-delete" ng-click="adsImgClose()">✕</div>
+                            <div ng-if="!isShow || imgShow" class="img-delete" ng-click="adsImgClose()">✕</div>
                         </div>
                         <input ng-if="!adsImageShow" name="adsImage" ng-disabled="isDisabled" class="form-control ads-image-input" type="file" class="uploadimage" onchange="angular.element(this).scope().fileChange()" accept="image/*" ng-model="adsImage" required/>
 
@@ -59,8 +59,8 @@
                 <div class="form-group">
                     <div class="adsnew-row adsnew-row-type">
                         <span>广告类型 <i>*</i></span>
-                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="true" ng-checked="true" type="radio" name="type" />外链宣传</label>
-                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="false" type="radio" name="type"/>虚拟卡券</label>
+                        <label><input ng-disabled="isDisabled || viewDis" ng-model="adsType" ng-value="true" ng-checked="true" type="radio" name="type" />外链宣传</label>
+                        <label><input ng-disabled="isDisabled || viewDis" ng-model="adsType" ng-value="false" type="radio" name="type"/>虚拟卡券</label>
                     </div>
                 </div>
                 <div class="form-group" ng-if="adsType">
