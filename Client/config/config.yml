@@ -61,7 +61,7 @@ test:                                            # 测试环境配置
     - port: 10090                                # 请求端口号
       host: '172.17.15.174'                      # 请求IP地址
     - port: 80                                 # 请求端口号
-      host: 'console.taozuike.com'                      # 请求IP地址
+      host: 'cs-retailer.saotianxia.com.cn'                      # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
