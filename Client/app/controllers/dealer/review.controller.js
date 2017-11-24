@@ -110,9 +110,16 @@ define([], function () {
 
         if(f.appStatus == 3) {
           f.appNote = $scope.appNote || '';
-        }
-        // 如果验证成功
-        if($scope.form.$valid) {
+          // 如果验证成功
+          if($scope.form.$valid) {
+            $model.approvalSalers(f).then(function(res) {
+              // 审核成功后刷新列表
+              getList($scope.paginationConf.data.page.currentPageNumber);
+              // 隐藏弹窗
+              $('.review-modal').modal('hide');
+            })
+          }
+        } else {
           $model.approvalSalers(f).then(function(res) {
             // 审核成功后刷新列表
             getList($scope.paginationConf.data.page.currentPageNumber);
