@@ -5,7 +5,7 @@
             <p class="col-sm-3"><span>经销商姓名：</span>{{info.salerName}}</p>
             <p class="col-sm-3"><span>手机号：</span>{{info.phoneNo}}</p>
             <p class="col-sm-3"><span>微信ID：</span>{{info.wxid}}</p>
-            <p class="col-sm-3"><span>微信号：</span>{{info.nickname}}</p>
+            <p class="col-sm-3"><span>微信号：</span>{{info.wxId}}</p>
             <p class="col-sm-3"><span>位置：</span>{{info.region}}</p>
             <p class="col-sm-3"><span>推荐人：</span>{{info.recommandNickname}}</p>
             <p class="col-sm-3"><span>推荐码：</span>{{info.invitCode}}</p>
@@ -58,10 +58,10 @@
             <tbody>
                 <tr class="show-list" ng-repeat="(idx, item) in list">
                 <td>{{idx + 1}}</td>
-                <td>{{item.wxId}}</td>
+                <td>{{item.wxOpenId}}</td>
                 <td>{{item.salerName}}</td>
                 <td>{{item.phoneNo}}</td>
-                <td>{{item.nickname}}</td>
+                <td>{{item.wxId}}</td>
 
                 <td>{{item.region}}</td>
                 <td>{{item.invitCode}}</td>
@@ -160,7 +160,7 @@
                     <td>{{item.orderId}}</td>
                     <td>{{item.contactName}}</td>
                     <td>{{item.contactPhone}}</td>
-                    <td>{{item.nickname}}</td>
+                    <td>{{item.wxId}}</td>
 
                     <td>{{item.buyerRegion}}</td>
                     <td>{{item.source}}</td>
@@ -221,7 +221,7 @@
                 <td>{{item.orderId}}</td>
                 <td>{{item.contactName}}</td>
                 <td>{{item.contactPhone}}</td>
-                <td>{{item.nickname}}</td>
+                <td>{{item.wxId}}</td>
 
                 <td>{{item.addrDetail}}</td>
                 <td>{{item.buyNum}}</td>

@@ -42,11 +42,11 @@
                         <div ng-if="item.accountStatus == 1" class="operate-btn" ng-click="startManage($event, item.salerId, 2)" data-toggle="modal" data-target=".start-manage-modal">禁用</div>
                     </div>
                 </td>
-                <td>{{item.wxId}}</td>
+                <td>{{item.wxOpenId}}</td>
                 <td>{{item.salerName}}</td>
                 <td>{{item.phoneNo}}</td>
 
-                <td>{{item.nickname}}</td>
+                <td>{{item.wxId}}</td>
                 <td>{{item.region}}</td>
                 <td>{{item.invitCode}}</td>
                 <td>{{item.recommandNickname ? item.v : '- -'}}</td>
