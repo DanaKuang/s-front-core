@@ -129,7 +129,8 @@
                 <div class="modal-header"><span id="notpassTitle">请输入不通过理由：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <form name="form" novalidate>
                     <div class="modal-body">
-                        <textarea name="appNote" cols="30" rows="5" ng-model="appNote" required></textarea>
+                        <textarea name="appNote" cols="30" rows="5" maxlength="50" ng-model="appNote" ng-change="textareaChage($event)" required></textarea>
+                        <p class="textarea-num"><span>{{textareaNum ? textareaNum : 0}}</span>/50</p>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.appNote.$touched">
                             <div ng-show="form.appNote.$error.required" class="wrong-tip">请输入不通过理由</div>

@@ -103,7 +103,14 @@
     textarea {
       width: 100%;
       height: 80px;
+      resize: none;
       padding: 5px;
+    }
+    .textarea-num {
+      position: absolute;
+      right: 15px;
+      top: 100px;
+      text-align: right;
     }
     .modal-footer {
       text-align: center;

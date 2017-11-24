@@ -98,6 +98,10 @@ define([], function () {
       $scope.$on('passReview', function (e, v, f) {
         $scope.passConfirmData = f;
         $scope.appNote = '';
+
+        // 重置form状态
+        $scope.form.$setPristine();
+        $scope.form.$setUntouched();
       })
 
       // 审核通过  确认点击
@@ -107,12 +111,20 @@ define([], function () {
         if(f.appStatus == 3) {
           f.appNote = $scope.appNote || '';
         }
-        $model.approvalSalers(f).then(function(res) {
-          // 审核成功后刷新列表
-          getList($scope.paginationConf.data.page.currentPageNumber);
-          // 隐藏弹窗
-          $('.review-modal').modal('hide');
-        })
+        // 如果验证成功
+        if($scope.form.$valid) {
+          $model.approvalSalers(f).then(function(res) {
+            // 审核成功后刷新列表
+            getList($scope.paginationConf.data.page.currentPageNumber);
+            // 隐藏弹窗
+            $('.review-modal').modal('hide');
+          })
+        }
+      }
+
+      // 输入不通过理由
+      $scope.textareaChage = function() {
+        $scope.textareaNum = $scope.appNote.length;
       }
 
       // 获取活动列表

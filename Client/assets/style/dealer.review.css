@@ -69,7 +69,14 @@
 .dealer-review .review-modal textarea {
   width: 100%;
   height: 80px;
+  resize: none;
   padding: 5px; }
+
+.dealer-review .review-modal .textarea-num {
+  position: absolute;
+  right: 15px;
+  top: 100px;
+  text-align: right; }
 
 .dealer-review .review-modal .modal-footer {
   text-align: center; }
