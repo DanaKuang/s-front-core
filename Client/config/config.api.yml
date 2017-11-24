@@ -224,7 +224,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getCitysByProvince'
+    authorized: 1
+    description: '地市下拉列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesHourTrend'
+    authorized: 1
+    description: '时刻分析图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesHourTrendCtiy'
     authorized: 1
     description: '时刻分析图'
     enableroute: 1
@@ -238,7 +252,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getScanDataCity'
+    authorized: 1
+    description: '仪表盘'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpec'
+    authorized: 1
+    description: '各规格扫码次数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesOfProvAndSpecCity'
     authorized: 1
     description: '各规格扫码次数'
     enableroute: 1
@@ -252,7 +280,21 @@ region:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesOfCitys'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/scanTimesTrend'
+    authorized: 1
+    description: '扫码次数时间趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanTimesTrendCity'
     authorized: 1
     description: '扫码次数时间趋势'
     enableroute: 1
@@ -262,6 +304,27 @@ region:
     routepath: '/api/tztx/dataportal/statistics/scanCodesOfProvince'
     authorized: 1
     description: '扫码包数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanCodesOfProvinceCity'
+    authorized: 1
+    description: '扫码包数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanDaysTrendCtiy'
+    authorized: 1
+    description: '扫码日期趋势'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/scanCityRandings'
+    authorized: 1
+    description: '各地市扫码次数'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -414,42 +477,6 @@ visit:
     description: '更新回访'
     enableroute: 1
     gatewaytype: 0
-    responetype: 'json'
-interface:
-  - httpmethod: 'post'
-    routepath: '/api/tztx/saas/admin/sys/querytAllOrgParam'
-    authorized: 1
-    description: '接口管理列表接口'
-    enableroute: 1
-    gatewaytype: 1
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/wechat/queryWechatByOrgCode'
-    authorized: 1
-    description: '判断接口'
-    enableroute: 1
-    gatewaytype: 1
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/wechat/saveOrUpdateInter'
-    authorized: 1
-    description: '保存微信管理'
-    enableroute: 1
-    gatewaytype: 1
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/wechat/saveOrUpdatePay'
-    authorized: 1
-    description: '保存支付接口'
-    enableroute: 1
-    gatewaytype: 1
-    responetype: 'json'
-  - httpmethod: 'post'
-    routepath: '/api/tztx/saas/saotx/wechat/queryListPlatForm'
-    authorized: 1
-    description: '下拉框'
-    enableroute: 1
-    gatewaytype: 1
     responetype: 'json'
 formarReport:
   - httpmethod: 'post'
@@ -758,6 +785,112 @@ multi:
     routepath: '/api/tztx/dataportal/statistics/getSaleZone'
     authorized: 1
     description: '销区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+dealer: #经销商
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getSalers'
+    authorized: 1
+    description: '审核列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/approvalSalers'
+    authorized: 1
+    description: '审核通过'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getApprovaledSalers'
+    authorized: 1
+    description: '管理列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/updateSalers'
+    authorized: 1
+    description: '管理列表 - 启用、禁止'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getSalerDetail'
+    authorized: 1
+    description: '管理详情 - 详细信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getTeamList'
+    authorized: 1
+    description: '管理详情 - TA的团队列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyCommission'
+    authorized: 1
+    description: '管理详情 - 佣金明细列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyWithDraw'
+    authorized: 1
+    description: '管理详情 - 提现记录列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyOrders'
+    authorized: 1
+    description: '管理详情 - 推广订单明细列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyTeam'
+    authorized: 1
+    description: '管理详情 - 佣金明细 - 我的团队'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrderStatus'
+    authorized: 1
+    description: '订单状态'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getProvince'
+    authorized: 1
+    description: '省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getCity'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getCountry'
+    authorized: 1
+    description: '区县'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrders'
+    authorized: 1
+    description: '订单列表'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -1496,6 +1629,56 @@ portrait:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+labelManage:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getFirstLevelAttr'
+    authorized: 1
+    description: '一级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getSecondLevelAttr'
+    authorized: 1
+    description: '二级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getThirdLevelAttr'
+    authorized: 1
+    description: '三级标签'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getSaleZone'
+    authorized: 1
+    description: '销区'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getProvince'
+    authorized: 1
+    description: '省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getCitysByProvince'
+    authorized: 1
+    description: '地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/statistics/getProductOfNoNuit'
+    authorized: 1
+    description: '偏好'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 visitManage:
   - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/seller/select/list'
@@ -1636,7 +1819,7 @@ visitManage:
     description: '订单物流信息导入'
     enableroute: 1
     gatewaytype: 2
-    responetype: 'json'
+    responetype: 'json'  
 account:
   - httpmethod: 'post'
     routepath: '/api/tztx/admin/user/modifyPwd'
@@ -1658,4 +1841,118 @@ operateTools:
     description: '盗扫明细查询'
     enableroute: 1
     gatewaytype: 0
+    responetype: 'json'
+adsSource:                                      # 广告资源管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryList'
+    authorized: 1
+    description: '广告资源-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryBrand'
+    authorized: 1
+    description: '广告资源-品牌'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/attach/commonAliUpload'
+    authorized: 1
+    description: '广告资源-图片上传'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdate'
+    authorized: 1
+    description: '广告资源-新建广告'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/modifyStatus'
+    authorized: 1
+    description: '广告资源-修改广告状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryAdById'
+    authorized: 1
+    description: '广告资源-编辑广告时获取一条数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdate'
+    authorized: 1
+    description: '广告资源-编辑广告保存'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryDim'
+    authorized: 1
+    description: '广告资源-使用状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/product/queryMetraList'
+    authorized: 1
+    description: '广告资源-礼品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+adsEnse:                                      # 广告位管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/querySpaceList'
+    authorized: 1
+    description: '广告位-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/queryListAllOrg'
+    authorized: 1
+    description: '广告位-厂家'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/brand/queryBrands'
+    authorized: 1
+    description: '广告位-品牌'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryAdSpaceById'
+    authorized: 1
+    description: '广告位-查看'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/saveOrUpdateSpace'
+    authorized: 1
+    description: '广告位-新增、编辑'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/AdvertSpaceStatus'
+    authorized: 1
+    description: '广告位-状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/ad/queryListAllNoPage'
+    authorized: 1
+    description: '广告位-广告列表'
+    enableroute: 1
+    gatewaytype: 1
     responetype: 'json'

@@ -92,6 +92,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/user/portrait.html'
+  - httpmethod: 'get'                       # 用户全息画像s
+    routepath: '/view/home/user/labelmanage'
+    description: 'user'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/user/labelmanage.html'
   - httpmethod: 'get'                       # 活动日常分析
     routepath: '/view/home/dayanalysis'
     description: 'dayanalysis'
@@ -184,6 +191,42 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
+dealer:
+  - httpmethod: 'get'                       # 经销商审核
+    routepath: '/view/dealer/review'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/review.html'
+  - httpmethod: 'get'                       # 经销商管理
+    routepath: '/view/dealer/manage'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/manage.html'
+  - httpmethod: 'get'                       # 经销商订单管理
+    routepath: '/view/dealer/dealerordermanage'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/dealerordermanage.html'
+  - httpmethod: 'get'                       # 提现审核
+    routepath: '/view/dealer/presentaudit'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/presentaudit.html'
+  - httpmethod: 'get'                       # 系统设置
+    routepath: '/view/dealer/systemsettings'
+    description: 'dealerordermanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/systemsettings.html'
 product:
   - httpmethod: 'get'                       # 礼品管理
     routepath: '/view/product/materiel/gift'
@@ -284,14 +327,14 @@ system:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/advert/adsense.html'
+    staticfile: 'system/ads/adsense.html'
   - httpmethod: 'get'                       # 广告资源管理
     routepath: '/view/system/source'
     description: 'source'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/advert/source.html'
+    staticfile: 'system/ads/source.html'
   - httpmethod: 'get'                       # 客户接口设置
     routepath: '/view/system/interface'
     description: 'interface'
