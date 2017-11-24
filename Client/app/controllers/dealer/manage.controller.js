@@ -33,8 +33,8 @@ define([], function () {
           data.salerName = $scope.keysVal || ''; // 姓名
         } else if($scope.keysKey == 'phoneNo') {
           data.phoneNo = $scope.keysVal || ''; // 手机号
-        } else if($scope.keysKey == 'wxId') {
-          data.wxId = $scope.keysVal || ''; // 微信ID
+        } else if($scope.keysKey == 'wxOpenId') {
+          data.wxOpenId = $scope.keysVal || ''; // 微信ID
         }
 
         $model.getManageList(data).then(function(res) {
