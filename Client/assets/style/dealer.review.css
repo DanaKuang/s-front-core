@@ -1,0 +1,96 @@
+.clearfix:after {
+  content: '';
+  clear: both;
+  display: table; }
+
+.dealer-review select {
+  -webkit-appearance: menulist; }
+
+.dealer-review .btn {
+  transition: all ease-in-out .15s; }
+
+.dealer-review .form-horizontal .form-control {
+  line-height: 22px !important;
+  float: left; }
+
+.dealer-review .operation .control-label {
+  width: 100px;
+  margin-right: 0px; }
+
+.dealer-review .operation .location .form-control {
+  width: 30% !important;
+  margin-right: 3%; }
+
+.dealer-review .operation .keywords .form-control {
+  width: 45% !important;
+  margin-right: 5%; }
+
+.dealer-review .ui-panel-title {
+  margin-top: 30px;
+  margin-bottom: 10px; }
+
+.dealer-review .panel-body .btn-con {
+  float: right; }
+
+.dealer-review .panel-body .operate-btn {
+  color: #2D72B9; }
+  .dealer-review .panel-body .operate-btn:hover {
+    text-decoration: underline; }
+
+.dealer-review select, .dealer-review .keywords-input, .dealer-review #status {
+  width: 100% !important;
+  line-height: 17px; }
+
+.dealer-review .btn-group button {
+  display: block;
+  width: 100%;
+  height: 34px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  color: #555;
+  line-height: 16px;
+  padding: 5px;
+  text-align: left !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+
+.dealer-review .filter .input-group {
+  height: 34px; }
+
+.dealer-review .filter .form-control {
+  height: 34px;
+  line-height: 20px; }
+
+.dealer-review .filter .input-group-addon {
+  padding: 3px 9px; }
+
+.dealer-review .review-modal textarea {
+  width: 100%;
+  height: 80px;
+  padding: 5px; }
+
+.dealer-review .review-modal .modal-footer {
+  text-align: center; }
+
+.dealer-review .review-modal .btn {
+  display: inline-block; }
+
+.dealer-review .wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  text-indent: 5px; }
+
+.dealer-review .modal {
+  overflow-y: auto; }
+  .dealer-review .modal .modal-dialog {
+    transform: translateY(0%);
+    top: 100px;
+    margin-bottom: 100px; }
+
+.dealer-review input[type="text"], .dealer-review select, .dealer-review input[type="number"], .dealer-review input[type="url"] {
+  border-radius: 4px; }
+
+.dealer-review .search, .dealer-review .reset {
+  transition: all ease-in-out .15s; }

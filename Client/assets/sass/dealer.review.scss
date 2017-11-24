@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+.clearfix:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.dealer-review {
+  // 顶部搜索表单样式
+  select {
+    -webkit-appearance: menulist;
+  }
+  .btn {
+    transition: all ease-in-out .15s;
+  }
+  .form-horizontal {
+    .form-control {
+      line-height: 22px !important;
+      float: left;
+    }
+  }
+
+  // 搜索区
+  .operation {
+    .control-label {
+      width: 100px;
+      margin-right: 0px;
+    }
+    .location {
+      .form-control {
+        width: 30% !important;
+        margin-right: 3%;
+      }
+    }
+    .keywords {
+      .form-control {
+        width: 45% !important;
+        margin-right: 5%;
+      }
+    }
+  }
+
+  .ui-panel-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .panel-body {
+    .btn-con {
+      float: right;
+    }
+    // 操作按钮样式
+    .operate-btn {
+      color: #2D72B9;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  select, .keywords-input, #status {
+    width: 100% !important;
+    line-height: 17px;
+  }
+
+  .btn-group {
+    button {
+      display: block;
+      width: 100%;
+      height: 34px;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #d2d2d2;
+      border-radius: 4px;
+      color: #555;
+      line-height: 16px;
+      padding: 5px;
+      text-align: left !important;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+  }
+
+  // select搜索筛选
+  .filter {
+    .input-group {
+      height: 34px;
+    }
+    .form-control {
+      height: 34px;
+      line-height: 20px;
+    }
+
+    .input-group-addon {
+      padding: 3px 9px;
+    }
+  }
+
+
+  // 审核弹窗
+  .review-modal {
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 5px;
+    }
+    .modal-footer {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+    }
+  }
+
+  // 验证
+  .wrong-tip {
+    color: #f00;
+    font-size: 12px;
+    text-indent: 5px;
+  }
+
+  .modal {
+    overflow-y: auto;
+    .modal-dialog {
+      transform: translateY(0%);
+      top: 100px;
+      margin-bottom: 100px;
+    }
+  }
+
+  input[type="text"], select, input[type="number"], input[type="url"] {
+    border-radius: 4px;
+  }
+
+  .search, .reset {
+    transition: all ease-in-out .15s;
+  }
+}
+
