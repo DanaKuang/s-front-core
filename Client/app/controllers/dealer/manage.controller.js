@@ -11,6 +11,8 @@ define([], function () {
     ViewModelName: 'manageModel', // zha: 对应model，下面的第三个参数也是model
     ServiceContent: ['$rootScope', '$scope', 'manageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
 
+      $scope.vm = this; // ???
+
       // 获取指令的html结构的作用域（指定一个容器）
       var scope = function (selector) {
         return angular.element(selector).scope()
@@ -19,22 +21,22 @@ define([], function () {
       // 获取table列表
       function getList(page, ispage) {
         var data = {
-          accountStatus: $scope.selectStatus || '', // 状态
-          provinceId: $scope.selectProvince || '',
-          cityId: $scope.selectCity || '',
-          areaId: $scope.selectCountry || '',
+          accountStatus: $scope.vm.selectStatus || '', // 状态
+          provinceId: $scope.vm.selectProvince || '',
+          cityId: $scope.vm.selectCity || '',
+          areaId: $scope.vm.selectCountry || '',
           orderBy: $scope.orderBy || 1,
           currentPageNumber: page || 1,
           pageSize: 1
         };
 
         // 根据关键词搜索条件，传不同数据
-        if($scope.keysKey == 'salerName') {
-          data.salerName = $scope.keysVal || ''; // 姓名
-        } else if($scope.keysKey == 'phoneNo') {
-          data.phoneNo = $scope.keysVal || ''; // 手机号
-        } else if($scope.keysKey == 'wxOpenId') {
-          data.wxOpenId = $scope.keysVal || ''; // 微信ID
+        if($scope.vm.keysKey == 'salerName') {
+          data.salerName = $scope.vm.keysVal || ''; // 姓名
+        } else if($scope.vm.keysKey == 'phoneNo') {
+          data.phoneNo = $scope.vm.keysVal || ''; // 手机号
+        } else if($scope.vm.keysKey == 'wxOpenId') {
+          data.wxOpenId = $scope.vm.keysVal || ''; // 微信ID
         }
 
         $model.getManageList(data).then(function(res) {
@@ -57,24 +59,24 @@ define([], function () {
 
       // 省份change
       $scope.provinceChage = function (e) {
-        if($scope.selectProvince != '') {
+        if($scope.vm.selectProvince != '') {
           // 市
-          $model.getManageCity({parentCode: $scope.selectProvince}).then(function (res) {
+          $model.getManageCity({parentCode: $scope.vm.selectProvince}).then(function (res) {
             $scope.manageCityList = res.data;
-            $scope.selectCity = '';
-            $scope.selectCountry = '';
+            $scope.vm.selectCity = '';
+            $scope.vm.selectCountry = '';
           });
         }
       }
 
       // 城市change
       $scope.cityChage = function (e) {
-        console.log($scope.selectCity)
-        if($scope.selectCity != '') {
+        console.log($scope.vm.selectCity)
+        if($scope.vm.selectCity != '') {
           // 区/县
-          $model.getManageCountry({parentCode: $scope.selectCity}).then(function (res) {
+          $model.getManageCountry({parentCode: $scope.vm.selectCity}).then(function (res) {
             $scope.manageCountryList = res.data;
-            $scope.selectCountry = '';
+            $scope.vm.selectCountry = '';
           });
         }
       }
@@ -86,12 +88,12 @@ define([], function () {
 
       // 重置
       $scope.reset = function () {
-        $scope.selectStatus = ''; // 状态
-        $scope.selectProvince = '';
-        $scope.selectCity = '';
-        $scope.selectCountry = '';
-        $scope.keysKey = 'salerName';
-        $scope.keysVal = '';
+        $scope.vm.selectStatus = ''; // 状态
+        $scope.vm.selectProvince = '';
+        $scope.vm.selectCity = '';
+        $scope.vm.selectCountry = '';
+        $scope.vm.keysKey = 'salerName';
+        $scope.vm.keysVal = '';
         getList(1, true);
       }
 
