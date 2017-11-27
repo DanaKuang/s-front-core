@@ -27,7 +27,7 @@ define([], function () {
           areaId: $scope.vm.selectCountry || '',
           orderBy: $scope.orderBy || 1,
           currentPageNumber: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
 
         // 根据关键词搜索条件，传不同数据
@@ -157,7 +157,7 @@ define([], function () {
           salerId: $scope.currentSalerId || '', // 状态
           orderBy: $scope.teamOrderBy,
           page: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
 
         $model.getTeamList(data).then(function(res) {
@@ -179,7 +179,7 @@ define([], function () {
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
           page: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
         // 选择团队返佣时，才发这个
         if(direScope.vm.selectType == 2) {
@@ -207,7 +207,7 @@ define([], function () {
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
           page: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
 
         $model.getMyWithDraw(data).then(function(res) {
@@ -229,7 +229,7 @@ define([], function () {
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
           page: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
 
         $model.getMyOrders(data).then(function(res) {

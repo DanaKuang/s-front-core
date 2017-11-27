@@ -24,7 +24,7 @@ define([], function () {
           cityId: $scope.selectCity || '',
           areaId: $scope.selectCountry || '',
           currentPageNumber: page || 1,
-          pageSize: 1
+          pageSize: 10
         };
 
         // 根据关键词搜索条件，传不同数据
