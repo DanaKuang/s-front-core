@@ -1160,10 +1160,17 @@ manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryDimActivatyForm'
     authorized: 1
-    description: '查询活动形式维度信息'
+    description: '查询所有活动形式维度信息'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/queryActTempByParams'
+    authorized: 1
+    description: '查询某个活动形式维度信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'    
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/template/template_common_list'
     authorized: 1

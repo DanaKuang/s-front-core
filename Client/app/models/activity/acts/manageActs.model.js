@@ -16,6 +16,7 @@ define([], function () {
 
             // 模板列表
             var GET_ACT_SAMPLE_LIST = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
+            var GET_WHICH_SAMPLE = '/api/tztx/saas/saotx/activity/queryActTempByParams';
             // 活动列表
             var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
             // 活动状态
@@ -73,6 +74,11 @@ define([], function () {
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
+            }
+
+            // 根据参数获取某种类型模板 
+            $model.getwhichsample = function (data) {
+                return request.$Search(GET_WHICH_SAMPLE, data)
             }
 
             $model.step = function () {

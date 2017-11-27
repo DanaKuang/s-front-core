@@ -125,7 +125,25 @@
 	</div>
 
 	<!-- 新建活动2.0 -->
-	<sa-create conf="createConf" style="display: none"></sa-create>
+	<div class="create-activity pop" style="display: none">
+		<!-- title 显示 -->
+		<nav>
+			<p>选择模板|活动设置</p>
+		</nav>
+		<!-- 进度展示 -->
+		<div class="header">
+			<div class="step">
+				<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="(idx, item) in stepstream" ng-class="{'active': idx == step}">
+					<img class="img-thumbnail center-block" ng-src="{{item.image}}" alt="">
+					<p class="text-center">{{item.text}}</p>
+				</div>
+			</div>
+		</div>
+		<!-- 第一步：选择模板 -->
+		<sa-choosetemplate conf="chooseConf"></sa-choosetemplate>
+		<!-- 第二部：活动设置 -->
+		<sa-configtemplate conf="configtemplateConf"></sa-configtemplate>
+	</div>
 
 	<!-- 容纳所有配置弹窗的div -->
 	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
