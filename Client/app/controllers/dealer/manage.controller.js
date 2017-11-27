@@ -71,7 +71,6 @@ define([], function () {
 
       // 城市change
       $scope.cityChage = function (e) {
-        console.log($scope.vm.selectCity)
         if($scope.vm.selectCity != '') {
           // 区/县
           $model.getManageCountry({parentCode: $scope.vm.selectCity}).then(function (res) {
@@ -128,11 +127,23 @@ define([], function () {
       }
 
       // 获取活动列表
-      $scope.$on('frompagechange', function (e, v, f) {// zha: 如果点击了分页导航;  $on监听和接收数据(接收event与data)
-        getList(f.currentPageNumber, true);
+      $scope.$on('frompagechange', function (e, v, f) {
+        // 自定义指令的scope
+        var direScope = scope('.dealer-manage-detial');
+        if($scope.isDetial == true) {
+          if(direScope.currentPage == 'team') {
+            getTeamList(f.currentPageNumber, true);
+          } else if(direScope.currentPage == 'commission') {
+            getCommissionList(f.currentPageNumber, true);
+          } else if(direScope.currentPage == 'withdraw') {
+            getWithdrawList(f.currentPageNumber, true);
+          } else if(direScope.currentPage == 'orders') {
+            getOrdersList(f.currentPageNumber, true);
+          }
+        } else {
+          getList(f.currentPageNumber, true);
+        }
       })
-
-
 
 
       // 查看详情点击
@@ -148,7 +159,6 @@ define([], function () {
 
         getTeamList(1, true);
       })
-
 
 
       // TA的团队 - 获取table列表
@@ -243,7 +253,6 @@ define([], function () {
 
       // TA的团队 - 团队排序
       $scope.$on('teamOrderBy', function (e, v, f) {
-        console.log(f.orderBy)
         $scope.teamOrderBy = f.orderBy;
         getTeamList(1, true);
       })
@@ -260,17 +269,13 @@ define([], function () {
           direScope.currentPage = 'commission';
           getCommissionList(1, true);
         } else if(f == 'withdraw') {
-          console.log(3)
           direScope.currentPage = 'withdraw';
           getWithdrawList(1, true);
         } else if(f == 'orders') {
-          console.log(4)
           direScope.currentPage = 'orders';
           getOrdersList(1, true);
         }
 
-
-        console.log(1111)
         // 时间设置
         $("#durationStart").datetimepicker({
           format: 'yyyy-mm-dd hh:ii:00',
@@ -302,7 +307,6 @@ define([], function () {
           }
         });
       })
-
 
       // 佣金明细 - 佣金来源change
       $scope.$on('sourceChage', function (e, v, f) {
