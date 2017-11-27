@@ -1,15 +1,15 @@
 /**
  * Author: Kuang
- * Create Date: 2017-10-30
- * Description: choosetemplate
+ * Create Date: 2017-11-17
+ * Description: activityconfiguation
  */
 
 define([], function () {
-    var nguichoosetemplate = angular.module('ngui.choosetemplate', []);
+    var nguiconfigtemplate = angular.module('ngui.configtemplate', []);
 
-    var nguichoosetemplateFn = function ($rootScope, $http, $compile, $timeout, util) {
+    var nguiconfigtemplateFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
-            tpl: '/choosetemplate.tpl.html'
+            tpl: '/configtemplate.tpl.html'
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -30,20 +30,12 @@ define([], function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), []);
 
-                scope.list = scope.conf && scope.conf.data;
-                
-                scope.getstartedtoconfig = function (e, type) {
-                    var typeData = {
-                        type: type
-                    };
-                    scope.type = type;
-                    scope.$emit('choosetype', event, typeData);
-                }
+                // scope.conf.confUrl = scope.conf && scope.conf.data[0].confUrl;
             }, true);   
 
         }
         return defineObj;
     }
 
-    nguichoosetemplate.directive('saChoosetemplate', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguichoosetemplateFn]);
+    nguiconfigtemplate.directive('saConfigtemplate', ['$rootScope', '$http', '$compile', '$timeout', 'util', nguiconfigtemplateFn]);
 })

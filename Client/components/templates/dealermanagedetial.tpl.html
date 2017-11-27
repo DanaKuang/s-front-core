@@ -1,0 +1,242 @@
+<div>
+    <!-- 经销商管理，详情页表格 -->
+    <div class="dealer-manage-detial panel-body">
+        <div class="detial-head">
+            <p class="col-sm-3"><span>经销商姓名：</span>{{info.salerName}}</p>
+            <p class="col-sm-3"><span>手机号：</span>{{info.phoneNo}}</p>
+            <p class="col-sm-3"><span>微信ID：</span>{{info.wxid}}</p>
+            <p class="col-sm-3"><span>微信号：</span>{{info.wxId}}</p>
+            <p class="col-sm-3"><span>位置：</span>{{info.region}}</p>
+            <p class="col-sm-3"><span>推荐人：</span>{{info.higherName}}</p>
+            <p class="col-sm-3"><span>推荐码：</span>{{info.invitCode}}</p>
+            <p class="col-sm-3"><span>团队数量：</span>{{info.teamAcount}}</p>
+            <p class="col-sm-3"><span>累积金额：</span>{{info.totalIincome}}</p>
+            <p class="col-sm-3"><span>可提现金额：</span>{{info.balance}}</p>
+            <p class="col-sm-3"><span>申请时间：</span>{{info.ctime}}</p>
+            <p class="col-sm-3"><span>申请通过时间：</span>{{info.appPassTme}}</p>
+        </div>
+
+        <div class="detial-nav">
+            <ul>
+                <li ng-click="detialNav($event, 'team')" ng-class="currentPage == 'team' ? 'cur' : ''">TA的团队</li>
+                <li ng-click="detialNav($event, 'commission')" ng-class="currentPage == 'commission' ? 'cur' : ''">佣金明细</li>
+                <li ng-click="detialNav($event, 'withdraw')" ng-class="currentPage == 'withdraw' ? 'cur' : ''">提现记录</li>
+                <li ng-click="detialNav($event, 'orders')" ng-class="currentPage == 'orders' ? 'cur' : ''">推广订单明细</li>
+            </ul>
+        </div>
+
+
+        <!-- 团队s -->
+        <div class="sort-btn-con" ng-if="currentPage == 'team'">
+            <button ng-click="teamOrderBy($event, 1)" class="btn btn-primary">按申请成功时间排序</button>
+            <button ng-click="teamOrderBy($event, 2)" class="btn btn-primary">按团队数量排序</button>
+            <button ng-click="teamOrderBy($event, 3)" class="btn btn-primary">按累积佣金排序</button>
+            <button ng-click="teamOrderBy($event, 4)" class="btn btn-primary">按可提现金额排序</button>
+            <button ng-click="teamOrderBy($event, 5)" class="btn btn-primary">按已提现金额排序</button>
+        </div>
+
+        <table class="table table-bordered" ng-if="currentPage == 'team'">
+            <thead>
+                <tr class="table-head">
+                <th>序号</th>
+                <th>微信ID</th>
+                <th>经销商姓名</th>
+                <th>手机号</th>
+                <th>微信号</th>
+
+                <th>位置</th>
+                <th>TA的推荐码</th>
+                <th>累积佣金</th>
+                <th>可提现金额</th>
+                <th>已提现</th>
+
+                <th>TA的团队数量</th>
+                <th>申请时间</th>
+                <th>申请通过时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="show-list" ng-repeat="(idx, item) in list">
+                <td>{{idx + 1}}</td>
+                <td>{{item.wxOpenId}}</td>
+                <td>{{item.salerName}}</td>
+                <td>{{item.phoneNo}}</td>
+                <td>{{item.wxId}}</td>
+
+                <td>{{item.region}}</td>
+                <td>{{item.invitCode}}</td>
+                <td>{{item.totalIncome}}</td>
+                <td>{{item.balance}}</td>
+                <td>{{item.totalPay}}</td>
+
+                <td>{{item.teamAcount}}</td>
+                <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.appPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 团队e -->
+
+        <!-- 详情 - 搜索条件 -->
+        <form class="form-horizontal commission-search" ng-show="currentPage != 'team'">
+            <!--佣金来源-->
+            <div class="form-group col-sm-5 source" ng-if="currentPage == 'commission'">
+                <label class="control-label col-sm-2">佣金来源</label>
+                <div class="col-sm-10">
+                    <select class="form-control" ng-model="vm.selectType" ng-change="sourceChage()">
+                        <option value="0">全部</option>
+                        <option value="1">我的返佣</option>
+                        <option value="2">团队返佣</option>
+                    </select>
+
+                    <select class="form-control" ng-model="vm.selectName" ng-if="sourceIsTeam">
+                        <option value="0">全部</option>
+                        <option ng-repeat="item in myTeamList" value="{{item.salerId}}">{{item.salerName}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--提现状态-->
+            <div class="form-group col-sm-3" ng-if="currentPage == 'withdraw'">
+                <label class="control-label">提现状态</label>
+                <div class="col-sm-7">
+                    <select class="form-control" ng-model="vm.appStatus" ng-change="sourceChage()">
+                        <option value="0">全部</option>
+                        <option value="1">申请中</option>
+                        <option value="2">已到账</option>
+                        <option value="3">申请失败</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--支付状态-->
+            <div class="form-group col-sm-3" ng-if="currentPage == 'orders'">
+                <label class="control-label">支付状态</label>
+                <div class="col-sm-7">
+                    <select class="form-control" ng-model="vm.orderStatus" ng-change="sourceChage()">
+                        <option value="0">全部</option>
+                        <option value="1">待支付</option>
+                        <option value="2">待发货</option>
+                        <option value="3">待收货</option>
+                        <option value="2">已完成</option>
+                        <option value="3">已取消</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-5 time">
+                <label class="control-label col-sm-2">时间区间</label>
+
+                <div class="col-sm-10">
+                    <input class="form-control form_datetime col-sm-5" id="durationStart" size="16" type="text" readonly placeholder="开始时间" class="form_datetime form-item" name="startTime" ng-model="vm.startTime">
+                    <span class="to">至</span>
+                    <input class="form-control form_datetime col-sm-5" id="durationEnd" size="16" type="text" readonly placeholder="结束时间" class="form_datetime form-item" name="endTime" ng-model="vm.endTime">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary search btn-lg  col-sm-2" ng-click="detialSearch($event)">搜索</button>
+        </form>
+
+        <!-- 佣金明细 s -->
+        <table class="table table-bordered" ng-if="currentPage == 'commission'">
+            <thead>
+                <tr class="table-head">
+                <th>序号</th>
+                <th>订单号</th>
+                <th>抢购人</th>
+                <th>手机号</th>
+                <th>微信号</th>
+
+                <th>位置</th>
+                <th>佣金来源</th>
+                <th>佣金金额</th>
+                <th>下单时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="show-list" ng-repeat="(idx, item) in list">
+                    <td>{{idx + 1}}</td>
+                    <td>{{item.orderId}}</td>
+                    <td>{{item.contactName}}</td>
+                    <td>{{item.contactPhone}}</td>
+                    <td>{{item.wxId}}</td>
+
+                    <td>{{item.buyerRegion}}</td>
+                    <td>{{item.source}}</td>
+                    <td>{{item.reward}}</td>
+                    <td>{{item.totalIincome | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 佣金明细 e -->
+
+        <!-- 提现记录 s -->
+        <table class="table table-bordered" ng-if="currentPage == 'withdraw'">
+            <thead>
+                <tr class="table-head">
+                <th>序号</th>
+                <th>申请时间</th>
+                <th>提现金额</th>
+                <th>状态</th>
+                <th>到账时间</th>
+
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="show-list" ng-repeat="(idx, item) in list">
+                <td>{{idx + 1}}</td>
+                <td>{{item.txTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.txAmount}}</td>
+                <td>{{item.txStatus}}</td>
+                <td>{{item.finishTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                <td>{{item.failReason}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 提现记录 e -->
+
+        <!-- 推广订单明细 s -->
+        <table class="table table-bordered" ng-if="currentPage == 'orders'">
+            <thead>
+                <tr class="table-head">
+                <th>序号</th>
+                <th>订单号</th>
+                <th>抢购人</th>
+                <th>手机号</th>
+                <th>微信号</th>
+
+                <th>收货地址</th>
+                <th>数量</th>
+                <th>支付金额</th>
+                <th>支付状态</th>
+                <th>下单时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="show-list" ng-repeat="(idx, item) in list">
+                <td>{{idx + 1}}</td>
+                <td>{{item.orderId}}</td>
+                <td>{{item.contactName}}</td>
+                <td>{{item.contactPhone}}</td>
+                <td>{{item.wxId}}</td>
+
+                <td>{{item.addrDetail}}</td>
+                <td>{{item.buyNum}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.orderStatus}}</td>
+                <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 推广订单明细 e -->
+
+
+
+        <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+
+        <button ng-click="backList($event)" class="btn btn-primary back-btn">返回列表</button>
+    </div>
+</div>

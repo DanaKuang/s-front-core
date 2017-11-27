@@ -1,0 +1,47 @@
+<div>
+	<div class="dealer-review-list panel-body">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr class="table-head">
+					<th>序号</th>
+					<th>操作</th>
+					<th>微信ID</th>
+					<th>申请人姓名</th>
+					<th>手机号</th>
+
+					<th>微信号</th>
+					<th>位置</th>
+					<th>推荐码</th>
+					<th>推荐人</th>
+					<th>申请时间</th>
+
+					<th>状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="show-list" ng-repeat="(idx, item) in list">
+					<td>{{idx + 1}}</td>
+					<td>
+						<div class="oper-btn-wrap">
+							<!--2 审批通过  3 审批不通过-->
+							<div class="operate-btn" ng-click="passReview($event, item.salerId, 2)" data-toggle="modal" data-target=".pass-review-modal">审核通过</div>
+							<div class="operate-btn" ng-click="passReview($event, item.salerId, 3)" data-toggle="modal" data-target=".notpass-review-modal">审核不通过</div>
+						</div>
+					</td>
+					<td>{{item.wxOpenId}}</td>
+					<td>{{item.salerName}}</td>
+					<td>{{item.phoneNo}}</td>
+
+					<td>{{item.wxId}}</td>
+					<td>{{item.region}}</td>
+					<td>{{item.invitCode}}</td>
+					<td>{{item.higherName ? item.higherName : '- -'}}</td>
+					<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                    <td>{{item.appStatus == 1 ? '未审核' : '审核失败'}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+	</div>
+</div>

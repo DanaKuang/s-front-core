@@ -180,7 +180,7 @@ body {
 }
 .ui-navbar-left {
   position: fixed;
-  width: 200px;
+  width: 160px;
   height: 100%;
   border-left: 1px solid #ddd;
   background-color: #fff;
@@ -427,7 +427,7 @@ body {
 }
 
 .ui-view-container {
-  margin-left: 200px;
+  margin-left: 160px;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;

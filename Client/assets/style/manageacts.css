@@ -1056,6 +1056,7 @@ nav p:before {
 	margin-bottom: 30px;
 }
 .showtemplate .template .shadow-frame {
+	overflow: hidden;
 	padding: 10px;
 	-webkit-box-shadow: 0 1px 8px rgba(0,0,0,.3);
 	-moz-box-shadow: 0 1px 8px rgba(0,0,0,.3);
@@ -1067,12 +1068,20 @@ nav p:before {
 	-ms-transition: transform .3s;
 	transition: transform .3s;
 }
+@media screen and (max-width: 1280px) {
+	.showtemplate .shadow-frame {
+		height: 328px;
+	}
+}
+
+.showtemplate .template .image {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 .showtemplate .template img {
 	width: 100%;
 	border: 0 none;
-}
-.showtemplate .template .image {
-	position: relative;
 }
 .showtemplate .template .image:after {
 	content: '';

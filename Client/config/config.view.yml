@@ -192,6 +192,20 @@ activity:
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
 dealer:
+  - httpmethod: 'get'                       # 经销商审核
+    routepath: '/view/dealer/review'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/review.html'
+  - httpmethod: 'get'                       # 经销商管理
+    routepath: '/view/dealer/manage'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'dealer/manage.html'
   - httpmethod: 'get'                       # 经销商订单管理
     routepath: '/view/dealer/dealerordermanage'
     description: 'dealerordermanage'
@@ -350,11 +364,3 @@ operateTools:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/operateTools/sweepDetail.html'
-#advertising:
-#  - httpmethod: 'get'                       # 广告管理
-#    routepath: '/view/system/source'       #路由
-#    description: 'source'
-#    enableroute: 1
-#    responetype: 'html'
-#    gatewaytype: 0
-#    staticfile: 'system/ads/source.html'       #路径

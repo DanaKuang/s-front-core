@@ -788,7 +788,77 @@ multi:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
-dealer:
+dealer: #经销商
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getSalers'
+    authorized: 1
+    description: '审核列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/approvalSalers'
+    authorized: 1
+    description: '审核通过'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getApprovaledSalers'
+    authorized: 1
+    description: '管理列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/updateSalers'
+    authorized: 1
+    description: '管理列表 - 启用、禁止'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getSalerDetail'
+    authorized: 1
+    description: '管理详情 - 详细信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getTeamList'
+    authorized: 1
+    description: '管理详情 - TA的团队列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyCommission'
+    authorized: 1
+    description: '管理详情 - 佣金明细列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyWithDraw'
+    authorized: 1
+    description: '管理详情 - 提现记录列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyOrders'
+    authorized: 1
+    description: '管理详情 - 推广订单明细列表'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getMyTeam'
+    authorized: 1
+    description: '管理详情 - 佣金明细 - 我的团队'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getOrderStatus'
     authorized: 1
@@ -1146,10 +1216,17 @@ manageacts:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/common/queryDimActivatyForm'
     authorized: 1
-    description: '查询活动形式维度信息'
+    description: '查询所有活动形式维度信息'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/queryActTempByParams'
+    authorized: 1
+    description: '查询某个活动形式维度信息'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'    
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/template/template_common_list'
     authorized: 1
