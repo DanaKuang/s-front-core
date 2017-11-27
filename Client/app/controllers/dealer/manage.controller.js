@@ -156,7 +156,7 @@ define([], function () {
         var data = {
           salerId: $scope.currentSalerId || '', // 状态
           orderBy: $scope.teamOrderBy,
-          page: page || 1,
+          currentPageNumber: page || 1,
           pageSize: 10
         };
 
@@ -178,7 +178,7 @@ define([], function () {
           salerId: $scope.currentSalerId || '', // 状态
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
-          page: page || 1,
+          currentPageNumber: page || 1,
           pageSize: 10
         };
         // 选择团队返佣时，才发这个
@@ -206,7 +206,7 @@ define([], function () {
           appStatus: direScope.vm.appStatus || 0, // 提现状态
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
-          page: page || 1,
+          currentPageNumber: page || 1,
           pageSize: 10
         };
 
@@ -228,7 +228,7 @@ define([], function () {
           appStatus: direScope.vm.orderStatus || 0, // 支付状态
           startTime: direScope.vm.startTime || '', //
           endTime: direScope.vm.endTime || '', //
-          page: page || 1,
+          currentPageNumber: page || 1,
           pageSize: 10
         };
 
