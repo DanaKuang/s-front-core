@@ -10,7 +10,64 @@
 <div ng-controller="systemsettingsCtrl">
 	<div class="animated fadeInRightBig">
 		<div class="container-fluid">
-			hello world
+			<div class="col-md-12" style="padding:0;">
+				<!--title-->
+				<div class="ui-panel-title" style="margin-top:20px;">
+					<span>系统设置</span>
+				</div>
+				<div class="panel rate">
+					<div class="panel-body">
+						<div class="apply-dealer info-box">
+							<div>申请经销商设置：</div>
+							<div class="info-detail">
+								<label>申请经销商时，推荐码是否必填：</label>
+								<input type="radio" name="dealerCode" ng-checked="systemObj.invitCode == 1" ng-click="selectRadio(1)">是
+								<input type="radio" name="dealerCode" ng-checked="systemObj.invitCode == 0" ng-click="selectRadio(0)">否
+							</div>
+						</div>
+						<div class="back-amount info-box">
+							<div>返现金额设置：</div>
+							<div class="back-detail">
+								<label for="oneBack">一级经销商返佣金额:</label>
+								<input type="text" id="oneBack" ng-model="systemObj.rewardOne">元
+							</div>
+							<div class="back-detail">
+								<label for="twoBack">一级经销商返佣金额:</label>
+								<input type="text" id="twoBack" ng-model="systemObj.rewardTwo">元
+							</div>
+						</div>
+						<div class="back-amount info-box">
+							<div>提现申请阀值设置：</div>
+							<div class="back-detail">
+								<label for="getCash">提现需申请阀值金额:</label>
+								<input type="text" id="getCash" ng-model="systemObj.txAmount">元
+							</div>
+						</div>
+						<div class="btn-box">
+							<div ng-click="comfirmUpdate()">确定</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<!--更新状态操作成功弹窗-->
+    <div class="modal fade set_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_enabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont"></div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

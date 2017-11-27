@@ -824,6 +824,62 @@ dealer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrderTrack'
+    authorized: 1
+    description: '订单跟踪'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/exportOrders'
+    authorized: 1
+    description: '导出未发货订单'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/importOrders'
+    authorized: 1
+    description: '导入物流订单信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/modifyOrderAddress'
+    authorized: 1
+    description: '修改收货地址'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getOrderDetail'
+    authorized: 1
+    description: '获取订单详情'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/cancelOrder'
+    authorized: 1
+    description: '取消订单'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getSystemParam'
+    authorized: 1
+    description: '获取系统设置参数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/setSystemParam'
+    authorized: 1
+    description: '设置系统设置参数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 track:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/activity/getPvData'
