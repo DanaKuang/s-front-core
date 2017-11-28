@@ -4,10 +4,10 @@
  * Description: interface
  */
 define([], function() {
-    var dealerordermanageController = {
+    var ordermanageController = {
         ServiceType: "controller",
-        ServiceName: "dealerordermanageCtrl",
-        ViewModelName: 'dealerordermanageViewModel',
+        ServiceName: "ordermanageCtrl",
+        ViewModelName: 'ordermanageViewModel',
         ServiceContent: ['$scope','dateFormatFilter', 'dayFilter', function($scope,dateFormatFilter, dayFilter) {
 			var $model = $scope.$model;
 
@@ -354,5 +354,5 @@ define([], function() {
         }]
     };
 
-  return dealerordermanageController;
+  return ordermanageController;
 });

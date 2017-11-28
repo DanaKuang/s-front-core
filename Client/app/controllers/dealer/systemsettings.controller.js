@@ -12,6 +12,7 @@ define([], function() {
             var $model = $scope.$model;
             $model.$getSystemParam().then(function (res) {
                 $scope.systemObj = res.data;
+                $scope.$apply();
             });
             
             var updateObj = {};

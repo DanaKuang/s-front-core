@@ -4,9 +4,9 @@
  * Description: interface
  */
 define([], function () {
-    var dealerordermanageModel = {
+    var ordermanageModel = {
         ServiceType: "service",
-        ServiceName: "dealerordermanageViewModel",
+        ServiceName: "ordermanageViewModel",
         ServiceContent: ['request', function (request) {
             this.$model = function () {
             	var province = '/api/tztx/dataportal/fxback/getProvince';//省份
@@ -50,5 +50,5 @@ define([], function () {
             };
         }]
     };
-    return dealerordermanageModel;
+    return ordermanageModel;
 });
