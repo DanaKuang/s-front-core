@@ -13,6 +13,23 @@ define([], function () {
 
       $scope.vm = this; // ???
 
+      // 判断是否为提现审核页面跳转过来的
+      if(sessionStorage.salerId) {
+        // 当前页改为详情
+        $scope.isDetial = true;
+        $scope.currentSalerId = sessionStorage.salerId
+
+        // 顶部详情
+        $model.getSalerDetail({salerId: $scope.currentSalerId}).then(function(res) {
+          $scope.detialInfoConf = res.data;
+        })
+
+        getTeamList(1, true);
+
+        sessionStorage.removeItem('salerId') // 进入详情页后，移除salerId，防止下次刷新再进入
+      }
+
+
       // 获取指令的html结构的作用域（指定一个容器）
       var scope = function (selector) {
         return angular.element(selector).scope()
