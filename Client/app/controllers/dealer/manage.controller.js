@@ -9,7 +9,7 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'dealerManageCtrl', // zha: 对应html的<div ng-controller="manageCtrl">
     ViewModelName: 'dealerManageModel', // zha: 对应model，下面的第三个参数也是model
-    ServiceContent: ['$rootScope', '$scope', 'dealerManageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    ServiceContent: ['$rootScope', '$scope', 'dealerManageModel', 'dateFormatFilter', '$location', function ($rootScope, $scope, $model, dateFormatFilter, $location) {
 
       $scope.vm = this; // ???
 
@@ -27,6 +27,7 @@ define([], function () {
         getTeamList(1, true);
 
         sessionStorage.removeItem('salerId') // 进入详情页后，移除salerId，防止下次刷新再进入
+        $scope.fromPage = 'presentaudit';
       }
 
 
@@ -360,9 +361,14 @@ define([], function () {
 
       // 返回列表
       $scope.$on('backList', function (e, v, f) {
-        // 当前页改为详情
-        $scope.isDetial = false;
-        getList(1, true);
+        if($scope.fromPage == 'presentaudit') {
+          $location.path('view/dealer/presentaudit');
+          $scope.fromPage == 'manage';
+        } else {
+          // 当前页改为详情
+          $scope.isDetial = false;
+          getList(1, true);
+        }
       })
     }]
   }

@@ -8,7 +8,7 @@ define([], function() {
         ServiceType: "controller",
         ServiceName: "presentauditCtrl",
         ViewModelName: 'presentauditViewModel',
-        ServiceContent: ['$scope','dateFormatFilter','dayFilter',function($scope,dateFormatFilter,dayFilter) {
+        ServiceContent: ['$scope','dateFormatFilter','dayFilter', '$location',function($scope,dateFormatFilter,dayFilter, $location) {
             var $model = $scope.$model;
 
             //初始化分页信息
@@ -171,7 +171,8 @@ define([], function() {
             //显示详情
             $scope.showDealerDetail = function(salerId){
                 sessionStorage.setItem('salerId',salerId);
-                window.location.href = '/#/view/dealer/manage';
+                // window.location.href = '/#/view/dealer/manage';
+                $location.path('view/dealer/manage');
             }
 
             //审核通过
