@@ -5,9 +5,9 @@
  */
 
 define([], function () {
-  var manageModel = {
+  var dealerManageModel = {
     ServiceType: 'service',
-    ServiceName: 'manageModel', // 这里如果是给controller引用的话，那下面的return是什么..
+    ServiceName: 'dealerManageModel', // 这里如果是给controller引用的话，那下面的return是什么..
     ServiceContent: ['request', function (request) {
 
       //定义资源
@@ -85,5 +85,5 @@ define([], function () {
       
     }]
   }
-  return manageModel
+  return dealerManageModel
 })

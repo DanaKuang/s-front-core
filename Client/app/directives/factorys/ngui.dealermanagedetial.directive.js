@@ -114,5 +114,5 @@ define([], function () {
     return defineObj;
   }
 
-  manage.directive('saDealermanagedetial', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'manageModel', manageFn]);
+  manage.directive('saDealermanagedetial', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'dealerManageModel', manageFn]);
 })

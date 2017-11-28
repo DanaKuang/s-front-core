@@ -234,4 +234,11 @@
   .search, .reset, .btn {
     transition: all ease-in-out .15s;
   }
+
+  // 分页
+  .paginationDetial {
+    position: absolute;
+    bottom: 54px;
+    right: 20px;
+  }
 }

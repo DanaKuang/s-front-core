@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
 
 <!--一个页面一个controller，一个页面对应一个controller文件-->
-<div ng-controller="manageCtrl" class="dealer-manage">
+<div ng-controller="dealerManageCtrl" class="dealer-manage">
     <!--加个类，动画-->
     <div class="animated fadeInRight">
         <!--bootstrap容器-->
@@ -96,7 +96,7 @@
 
 
                         <!-- 分页区 -->
-                        <div class="pagination-wrap">
+                        <div class="pagination-wrap" ng-class='{paginationDetial: isDetial}'>
                             <!-- 分页指令 -->
                             <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
                         </div>
@@ -105,12 +105,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
     <!--模态框和animated同级-->
 

@@ -792,21 +792,21 @@ dealer: #经销商
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getSalers'
     authorized: 1
-    description: '审核列表'
+    description: '经销商 - 审核列表'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/approvalSalers'
     authorized: 1
-    description: '审核通过'
+    description: '经销商 - 审核通过'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getApprovaledSalers'
     authorized: 1
-    description: '管理列表'
+    description: '经销商 - 管理列表'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -862,35 +862,35 @@ dealer: #经销商
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getOrderStatus'
     authorized: 1
-    description: '订单状态'
+    description: '经销商 - 订单状态'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getProvince'
     authorized: 1
-    description: '省份'
+    description: '经销商 - 省份'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getCity'
     authorized: 1
-    description: '地市'
+    description: '经销商 - 地市'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getCountry'
     authorized: 1
-    description: '区县'
+    description: '经销商 - 区县'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fxback/getOrders'
     authorized: 1
-    description: '订单列表'
+    description: '经销商 - 订单列表'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'

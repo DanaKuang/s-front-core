@@ -7,9 +7,9 @@
 define([], function () {
   var manageController = {
     ServiceType: 'controller',
-    ServiceName: 'manageCtrl', // zha: 对应html的<div ng-controller="manageCtrl">
-    ViewModelName: 'manageModel', // zha: 对应model，下面的第三个参数也是model
-    ServiceContent: ['$rootScope', '$scope', 'manageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    ServiceName: 'dealerManageCtrl', // zha: 对应html的<div ng-controller="manageCtrl">
+    ViewModelName: 'dealerManageModel', // zha: 对应model，下面的第三个参数也是model
+    ServiceContent: ['$rootScope', '$scope', 'dealerManageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
 
       $scope.vm = this; // ???
 
