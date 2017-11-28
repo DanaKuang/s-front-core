@@ -344,3 +344,18 @@
     border-radius: 4px;
     vertical-align: middle;
 }
+/*.box_area{
+	width: 100%;
+}*/
+#aduitNoPass{
+	width: 260px;
+	height: 80px;
+	margin: 22px 0 20px 20px;
+	box-sizing: border-box;	
+	display: block;
+	float: left;
+}
+.box_btn{
+	box-sizing: border-box;
+	border-top: 1px solid #CECECE;
+}

@@ -950,6 +950,20 @@ dealer: #经销商
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/getWithDraws'
+    authorized: 1
+    description: '设置系统设置参数'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fxback/auditWithdraw'
+    authorized: 1
+    description: '提现审核操作'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 track:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/activity/getPvData'
