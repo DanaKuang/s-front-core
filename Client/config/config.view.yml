@@ -194,14 +194,14 @@ activity:
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
-    description: 'manage'
+    description: 'dealerreview'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'dealer/review.html'
   - httpmethod: 'get'                       # 经销商管理
     routepath: '/view/dealer/manage'
-    description: 'manage'
+    description: 'dealermanage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0

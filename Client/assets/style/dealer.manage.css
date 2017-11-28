@@ -165,3 +165,8 @@
 
 .dealer-manage .search, .dealer-manage .reset, .dealer-manage .btn {
   transition: all ease-in-out .15s; }
+
+.dealer-manage .paginationDetial {
+  position: absolute;
+  bottom: 54px;
+  right: 20px; }
