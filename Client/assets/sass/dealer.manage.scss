@@ -145,6 +145,9 @@
     padding-top: 10px;
     .col-sm-3 {
       margin-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       span {
         color: #333;
         float: left;
@@ -240,5 +243,20 @@
     position: absolute;
     bottom: 54px;
     right: 20px;
+  }
+
+  td > div {
+    margin: 0 auto;
+  }
+  .oper-btn-wrap {
+    width: 60px;
+  }
+  .wxOpenId, .wxId {
+    width: 80px;
+    overflow: hidden;
+    word-wrap: break-word; // 强制换行
+  }
+  .addrDetail {
+    width: 100px;
   }
 }
