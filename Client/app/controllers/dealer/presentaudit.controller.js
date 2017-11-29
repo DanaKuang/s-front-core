@@ -86,6 +86,36 @@ define([], function() {
                             page : pageNum,
                             pageSize : $scope.pageSize
                         };
+                        var keyCode = $('#keyCode').val();
+                        var statusChange = $('.form-controlmdg').val();
+                        var newCode = $('#newCode').val();
+                        var provinceId = $('#provinceId').val();
+                        var cityId = $('#cityId').val();
+                        var areaId = $('#areaId').val();
+                        var durationStart = $('#durationStart').val();
+                        var durationEnd = $('#durationEnd').val();
+                        var buyNum = $('#buyNum').val();
+
+                        curPageData.appStatus = statusChange,//提现状态
+                        curPageData.provinceId = provinceId,//省份id
+                        curPageData.cityId = cityId,//地市id
+                        curPageData.areaId = areaId,//区县id                   
+                        curPageData.startTime = durationStart,//开始时间
+                        curPageData.endTime =  durationEnd;//结束时间
+                        if(newCode != '' && newCode != null){
+                            switch(keyCode){
+                                case 'telphone':
+                                    curPageData.phoneNo = newCode;
+                                    break;
+                                case 'dealer':
+                                    curPageData.salerName = newCode;
+                                    break;
+                                case 'wx':
+                                    curPageData.wxId = newCode;
+                                    break;
+                                default:
+                            }
+                        }
                         getDrawsList(curPageData);
                     }
                 });
@@ -151,7 +181,6 @@ define([], function() {
                         default:
                     }
                 }
-                
                 getDrawsList(searchData);
             }
 
@@ -201,18 +230,24 @@ define([], function() {
             }
             //确认审核不通过
             $scope.confirmNoPass = function(){
+                alert($scope.aduitNoPassPerson);
                 var aduitNoPassObj = {
                     'id' : $scope.noPassId,
                      'appStatus' : 2,
-                     'failReason' : $('#aduitNoPass').val()
+                     'failReason' : $scope.aduitNoPassPerson
                 }
                 $model.$aduitOperate(aduitNoPassObj).then(function (res) {
                     if(res.data.ok){
                         $('.audit_no_pass_box').modal('hide');
+                        $scope.aduitNoPassPerson = '';
                         getDrawsList(initPage);
                     }
                 });
-
+            }
+            //隐藏审核不通过弹框
+            $scope.cancelBox = function(){
+                $scope.aduitNoPassPerson = '';
+                $('.audit_no_pass_box').modal('hide');
             }
 
         }]

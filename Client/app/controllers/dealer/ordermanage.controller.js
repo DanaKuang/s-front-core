@@ -106,10 +106,6 @@ define([], function() {
 
                 var searchData = {
                     orderStatus: statusChange,//提现状态
-                    // orderId:newCode,//订单号
-                    // contactName:newCode,//抢购人
-                    // contactPhone:newCode,//手机号
-                    // salerName:newCode,//经销商
                     provinceId:provinceId,//省份id
                     cityId:cityId,//地市id
                     areaId:areaId,//区县id                   
@@ -161,6 +157,40 @@ define([], function() {
                             page : pageNum,
                             pageSize : $scope.pageSize
                         };
+                        var keyCode = $('#keyCode').val();
+                        var statusChange = $('.form-controlmdg').val();
+                        var newCode = $('#newCode').val();
+                        var provinceId = $('#provinceId').val();
+                        var cityId = $('#cityId').val();
+                        var areaId = $('#areaId').val();
+                        var durationStart = $('#durationStart').val();
+                        var durationEnd = $('#durationEnd').val();
+                        var buyNum = $('#buyNum').val();
+
+                        
+                            curPageData.orderStatus = statusChange;//提现状态
+                            curPageData.provinceId = provinceId;//省份id
+                            curPageData.cityId = cityId;//地市id
+                            curPageData.areaId = areaId;//区县id                   
+                            curPageData.startTime = durationStart;//开始时间
+                            curPageData.endTime = durationEnd;//结束时间
+                            curPageData.buyNum = buyNum; //购买数量
+                        
+                        switch(keyCode){
+                            case 'order-num':
+                                curPageData.orderId = newCode;
+                                break;
+                            case 'buy-person':
+                                curPageData.contactName = newCode;
+                                break;
+                            case 'telphone':
+                                curPageData.contactPhone = newCode;
+                                break;
+                            case 'dealer':
+                                curPageData.salerName = newCode;
+                                break;
+                            default:
+                        }
                         getOrderList(curPageData);
                     }
                 });
@@ -288,7 +318,6 @@ define([], function() {
             $('#importTrackOrder').change(function(){
                 var addTrackFile = $('#importTrackOrder')[0].files[0];
                 if(addTrackFile != undefined){
-                    var curAddFileName = addTrackFile.name;
                     var formData = new FormData();
                     formData.append('file',addTrackFile);
                     $.ajax({
@@ -304,11 +333,12 @@ define([], function() {
                             token : sessionStorage.access_token
                         }
                     }).done(function(res) {
-                        if(res.length == 0){
-                            getOrderList(initPage);
-                        }
+                        getOrderList(initPage);
+                        $scope.importTitle = '导入成功';
+                        $('.import_success_box').modal('show');                        
                     }).fail(function(res) {
-                        
+                        $scope.importTitle = '导入失败';
+                        $('.import_success_box').modal('show');
                     });
                 }
             });

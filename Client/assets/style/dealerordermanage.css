@@ -17,23 +17,24 @@
 .form-group {
 	width: 25%;
 	display: flex;
-	justify-content: space-around;
+	/*justify-content: space-around;*/
+	margin-left: 16px !important;
 }
 
 .form-controlmdg {
-	width: 150px;
+	width: 156px;
 }
 
 .form-groups {
 	width: 35%;
 	display: flex;
-	justify-content: space-around;
+	/*justify-content: space-around;*/
 }
 
 .form-groupss {
 	width: 45%;
 	display: flex;
-	justify-content: space-around;
+	/*justify-content: space-around;*/
 }
 
 .form-groupTwo {
@@ -70,10 +71,6 @@
 	margin: 15px 0;
 }
 
-.form-group {
-	margin: 0;
-}
-
 .time_duan {
 	margin-left: 16px;
 }
@@ -83,7 +80,7 @@
 }
 
 .control-label {
-	margin-right: 0;
+	margin-right: 12px;
 	margin-bottom: 0;
 }
 

@@ -24,7 +24,7 @@
 								<div class="firstTr">
 									<div class="form-group brand">
 										<label class="control-label">订单状态</label>
-										<div class="">
+										<div>
 											<select class="form-controlmdg input-sm select">
 												<option value="">全部</option>
 												<option ng-repeat="statusItem in allStatus" value="{{statusItem.code}}">{{statusItem.desc}}</option>
@@ -43,12 +43,6 @@
 											<input type="text" id="newCode" class="input-sm" placeholder="请输入关键字" ng-model="orderCode">
 										</div>
 									</div>
-									<!--<div class="form-group col-md-4">
-									<label class="control-label col-sm-4">订单号</label>
-									<div class="col-sm-7">
-										<input type="text" class="form-control input-sm" placeholder="请输入订单号" ng-model="orderCode">
-									</div>
-								</div>-->
 									<div class="form-groupss">
 										<label class="control-label newKeys">位置</label>
 										<div class="form_city">
@@ -88,8 +82,8 @@
 									<div class="">
 										<select class="form-controlaaa input-sm select" id="buyNum">
 											<option value="">全部</option>
-											<option value="">1</option>
-											<option value="">2</option>	
+											<option value="1">1</option>
+											<option value="2">2</option>	
 										</select>
 									</div>
 								</div>
@@ -145,7 +139,11 @@
 									<td>{{x.buyNum}}</td>
 									<td>{{x.amount}}</td>
 									<td>{{x.salerName}}</td>
-									<td>{{x.desc}}</td>
+									<td ng-if="x.orderStatus == 1">待支付</td>
+									<td ng-if="x.orderStatus == 2">处理中</td>
+									<td ng-if="x.orderStatus == 3">已发货</td>
+									<td ng-if="x.orderStatus == 4">已收货</td>
+									<td ng-if="x.orderStatus == 5">已取消</td>
 									<td>{{x.ctime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
 								</tr>
 								<tr ng-if="topTenTable.length == 0">
@@ -295,6 +293,25 @@
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
                         <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--更新状态操作成功弹窗-->
+    <div class="modal fade import_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="supply_enabled_btn">操作提示</div>
+                    </div>
+                    <div class="box_cont">{{importTitle}}</div>
+                    <div class="box_btn">
+                        <div class="enabled_btn" data-dismiss="modal">确定</div>
                     </div>
                 </div>
             </div>

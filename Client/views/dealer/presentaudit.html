@@ -31,6 +31,7 @@
 												<option value="1">申请中</option>
 												<option value="2">已到账</option>
 												<option value="3">申请失败</option>
+												<option value="4">审核通过</option>
 											</select>
 										</div>
 									</div>
@@ -112,10 +113,10 @@
 								<tr ng-repeat="item in drawsList" ng-if="drawsList.length > 0">
 									<td>{{(pageNum-1)*pageSize+($index+1)}}</td>
 									<td class="seeInfo">
-										<span ng-if="item.txStatus == '已到账' || item.txStatus == '申请失败'" style="color:#666;">审核通过</span>
-										<span ng-if="item.txStatus != '已到账' && item.txStatus != '申请失败'" ng-click="auditPass(item.id)">审核通过</span>&nbsp;&nbsp;
-										<span ng-if="item.txStatus == '已到账' || item.txStatus == '申请失败'" style="color:#666;">审核不通过</span>
-										<span ng-if="item.txStatus != '已到账' && item.txStatus != '申请失败'" ng-click="auditNoPass(item.id)">审核不通过</span><br/>
+										<span ng-if="item.txStatus != '申请中'" style="color:#666;">审核通过</span>
+										<span ng-if="item.txStatus == '申请中'" ng-click="auditPass(item.id)">审核通过</span>&nbsp;&nbsp;
+										<span ng-if="item.txStatus != '申请中'" style="color:#666;">审核不通过</span>
+										<span ng-if="item.txStatus == '申请中'" ng-click="auditNoPass(item.id)">审核不通过</span><br/>
 										<span ng-click='showDealerDetail(item.salerId)'>查看详情</span>
 									</td>
 									<td>{{item.salerName}}</td>
@@ -175,17 +176,17 @@
             <div class="modal-content">
                 <div class="box_sec">
                     <div class="box_tit">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" ng-click="cancelBox()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                         <div class="modal-title" id="audit_no_pass_btn">请输入不通过审核理由</div>
                     </div>
                     <div class="clearfix">
-						<textarea name="" id="aduitNoPass" placeholder="最多50字" maxlength="50"></textarea>
+						<textarea name="" id="aduitNoPass" placeholder="最多50字" maxlength="50" ng-model="aduitNoPassPerson"></textarea>
 					</div>
                     <div class="box_btn clearfix">
                         <div class="box_btn_conf lf" ng-click="confirmNoPass()">确定</div>
-                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelBox()">取消</div>
                     </div>
                 </div>
             </div>
