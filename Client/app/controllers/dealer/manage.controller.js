@@ -9,7 +9,7 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'dealerManageCtrl', // zha: 对应html的<div ng-controller="manageCtrl">
     ViewModelName: 'dealerManageModel', // zha: 对应model，下面的第三个参数也是model
-    ServiceContent: ['$rootScope', '$scope', 'dealerManageModel', 'dateFormatFilter', '$location', function ($rootScope, $scope, $model, dateFormatFilter, $location) {
+    ServiceContent: ['$rootScope', '$scope', '$location', 'dealerManageModel', 'dateFormatFilter', function ($rootScope, $scope, $location, $model, dateFormatFilter) {
 
       $scope.vm = this; // ???
 
@@ -65,7 +65,6 @@ define([], function () {
           }
         })
       }
-
 
       // 刚进入页面
       getList(1, true);
