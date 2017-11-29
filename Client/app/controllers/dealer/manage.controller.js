@@ -294,6 +294,10 @@ define([], function () {
           getOrdersList(1, true);
         }
 
+        // 点击导航清空日历
+        direScope.vm.startTime = ''
+        direScope.vm.endTime = ''
+
         // 时间设置
         $("#durationStart").datetimepicker({
           format: 'yyyy-mm-dd hh:ii:00',
