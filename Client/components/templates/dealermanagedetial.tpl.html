@@ -12,8 +12,8 @@
             <p class="col-sm-3"><span>团队数量：</span>{{info.teamAcount}}</p>
             <p class="col-sm-3"><span>累积金额：</span>{{info.totalIncome}}</p>
             <p class="col-sm-3"><span>可提现金额：</span>{{info.balance}}</p>
-            <p class="col-sm-3"><span>申请时间：</span>{{info.ctime}}</p>
-            <p class="col-sm-3"><span>申请通过时间：</span>{{info.appPassTme}}</p>
+            <p class="col-sm-3"><span>申请时间：</span>{{info.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            <p class="col-sm-3"><span>申请通过时间：</span>{{info.appPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </div>
 
         <div class="detial-nav">
@@ -222,7 +222,7 @@
 
                 <td>{{item.buyNum}}</td>
                 <td>{{item.amount}}</td>
-                <td>{{item.orderStatus}}</td>
+                <td>{{item.desc}}</td>
                 <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             </tr>
             </tbody>

@@ -9,9 +9,27 @@ define([], function () {
     ServiceType: 'controller',
     ServiceName: 'dealerManageCtrl', // zha: 对应html的<div ng-controller="manageCtrl">
     ViewModelName: 'dealerManageModel', // zha: 对应model，下面的第三个参数也是model
-    ServiceContent: ['$rootScope', '$scope', 'dealerManageModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
+    ServiceContent: ['$rootScope', '$scope', '$location', 'dealerManageModel', 'dateFormatFilter', function ($rootScope, $scope, $location, $model, dateFormatFilter) {
 
       $scope.vm = this; // ???
+
+      // 判断是否为提现审核页面跳转过来的
+      if(sessionStorage.salerId) {
+        // 当前页改为详情
+        $scope.isDetial = true;
+        $scope.currentSalerId = sessionStorage.salerId
+
+        // 顶部详情
+        $model.getSalerDetail({salerId: $scope.currentSalerId}).then(function(res) {
+          $scope.detialInfoConf = res.data;
+        })
+
+        getTeamList(1, true);
+
+        sessionStorage.removeItem('salerId') // 进入详情页后，移除salerId，防止下次刷新再进入
+        $scope.fromPage = 'presentaudit';
+      }
+
 
       // 获取指令的html结构的作用域（指定一个容器）
       var scope = function (selector) {
@@ -47,7 +65,6 @@ define([], function () {
           }
         })
       }
-
 
       // 刚进入页面
       getList(1, true);
@@ -276,6 +293,10 @@ define([], function () {
           getOrdersList(1, true);
         }
 
+        // 点击导航清空日历
+        direScope.vm.startTime = ''
+        direScope.vm.endTime = ''
+
         // 时间设置
         $("#durationStart").datetimepicker({
           format: 'yyyy-mm-dd hh:ii:00',
@@ -343,9 +364,14 @@ define([], function () {
 
       // 返回列表
       $scope.$on('backList', function (e, v, f) {
-        // 当前页改为详情
-        $scope.isDetial = false;
-        getList(1, true);
+        if($scope.fromPage == 'presentaudit') {
+          $location.path('view/dealer/presentaudit');
+          $scope.fromPage == 'manage';
+        } else {
+          // 当前页改为详情
+          $scope.isDetial = false;
+          getList(1, true);
+        }
       })
     }]
   }

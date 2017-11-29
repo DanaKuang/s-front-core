@@ -103,7 +103,8 @@
     margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+    white-space: nowrap;
+    padding: 0 10px 0 0; }
     .dealer-manage .detial-head .col-sm-3 span {
       color: #333;
       float: left;
