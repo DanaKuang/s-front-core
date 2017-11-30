@@ -231,7 +231,6 @@ define([], function() {
             }
             //确认审核不通过
             $scope.confirmNoPass = function(){
-                alert($scope.aduitNoPassPerson);
                 var aduitNoPassObj = {
                     'id' : $scope.noPassId,
                      'appStatus' : 2,
