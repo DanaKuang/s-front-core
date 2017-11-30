@@ -45,16 +45,16 @@
 								<div class="form-group col-sm-6">
 									<label class="control-label col-sm-2">位置</label>
 									<div class="col-sm-10">
-										<select id="provinceId" ng-model="provinceCode" class="form-control input-sm col-sm-4">
+										<select id="provinceId" ng-model="provinceCode" class="input-sm col-sm-4">
 											<option value="">请选择</option>
 											<option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
 										</select>
-										<select id="cityId" ng-model="cityCode"  class="form-control input-sm col-sm-4" >
+										<select id="cityId" ng-model="cityCode"  class="input-sm col-sm-4" >
 											<option value="">请选择</option>
 											<option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
 										</select>
 
-										<select id="areaId" ng-model="areaCode"  class="form-control input-sm col-sm-4" >
+										<select id="areaId" ng-model="areaCode"  class="input-sm col-sm-4" >
 											<option value="">请选择</option>
 											<option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
 										</select>
@@ -73,7 +73,7 @@
 									</div>
 								</div>
 								
-								<div class="form-group col-sm-4" style="margin-left:6px;">
+								<div class="form-group col-sm-4" style="margin-left:5px;">
 									<label class="control-label col-sm-2">订单数量</label>
 									<div class="col-sm-4">
 										<select class="input-sm" id="buyNum">
