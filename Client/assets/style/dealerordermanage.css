@@ -2,99 +2,19 @@
 	margin-top: 25px;
 }
 
-
-/*.form-control{
-	width:35%;
-}
-.form-controls{
-	width:30%;
-}*/
-
 .ui-panel-title {
 	margin-top: 20px;
 }
 
-.form-group {
-	width: 25%;
-	display: flex;
-	/*justify-content: space-around;*/
-	margin-left: 16px !important;
-}
-
 .form-controlmdg {
-	width: 156px;
-}
-
-.form-groups {
-	width: 35%;
-	display: flex;
-	/*justify-content: space-around;*/
-}
-
-.form-groupss {
-	width: 45%;
-	display: flex;
-	/*justify-content: space-around;*/
-}
-
-.form-groupTwo {
-	/*width:45%;*/
-	display: flex;
-	justify-content: space-around;
-}
-
-.form-group-three {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.newKey {
-	margin-left: 40px;
-}
-
-.newKeys {
-	margin-left: 37px;
-}
-
-.form_city {
-	width: 80%;
-	display: flex;
-}
-
-.noRap {
-	display: flex;
-}
-
-.firstTr {
-	display: flex;
-	margin: 15px 0;
-}
-
-.time_duan {
-	margin-left: 16px;
+	width: 100px;
 }
 
 #durationStart {
 	margin-left: 12px;
 }
-
-.control-label {
-	margin-right: 12px;
-	margin-bottom: 0;
-}
-
-.middle-word {
-	display: block;
-	margin: 0 15px 0 30px;
-}
-
-.order_Num {
-	margin: 0 13px 0 182px;
-}
-
-.form-controlaaa {
-	width: 200px;
+.control-label{
+	width: 80px;
 }
 
 .form-inline {
@@ -151,7 +71,6 @@
 }
 .infoTop{
 	width:98%;
-	/*height:150px;*/
 	margin:0 auto;
 	background:rgba(242, 242, 242, 1);
 }
@@ -164,7 +83,6 @@
 }
 .infoTopNei{
 	width:90%;
-	/*height:120px;*/
 	margin:0 auto;
 	padding:10px;
 	
