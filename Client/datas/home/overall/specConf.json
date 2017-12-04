@@ -1,0 +1,78 @@
+{
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "x": "90%",
+        "show": true,
+        "feature": {
+            "mark": {
+                "show": true
+            },
+            "restore": {
+                "show": true
+            }
+        }
+    },
+    "calculable": true,
+    "grid": {
+        "top": "12%",
+        "left": "1%",
+        "right": "10%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [],
+            "axisLabel": {
+                "interval": 0,
+                "rotate": -20
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+                "axisLabel": {
+                "show": false
+            }
+        }
+    ],
+    "dataZoom": [
+        {
+            "start": 0,
+            "end": 30
+        },
+        {
+            "type": "inside",
+            "start": 94,
+            "end": 100
+        }
+    ],
+    "series": [
+        {
+            "name": "扫码次数",
+            "type": "bar",
+            "barWidth": "50%",
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "top",
+                    "textStyle": {
+                        "color": "black"
+                    }
+                }
+            },
+            "itemStyle":{
+                "normal":{
+                    "color":"#76D7F7"
+                }
+            },
+            "data": []
+        }
+    ]
+}

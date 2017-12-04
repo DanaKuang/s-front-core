@@ -10,18 +10,16 @@ define([], function () {
     	ServiceName: 'manageactsCtrl',
     	ViewModelName: 'manageactsModel',
     	ServiceContent: ['$rootScope', '$scope', 'manageactsModel', 'dateFormatFilter', function ($rootScope, $scope, $model, dateFormatFilter) {
-
-        // 通用方法-获取scope和对应conf
+        // 通用方法 获取对应scope
         var scope = function (selector) {
-          return angular.element(selector).scope()
+          return angular.element(selector).scope() ? angular.element(selector).scope() : null
         }
+
+        // 通用方法 获取对应conf
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
           return scope ? scope.conf ? scope.conf : scope.conf = {} : false
         }
-
-        // 全局变量
-        var globalVariable = {};
 
         // 初始化multiselect 
         $(document).ready(function () {
@@ -35,7 +33,7 @@ define([], function () {
             buttonWidth: '100%',
             maxHeight: '200px',
             numberDisplayed: 1
-          });
+          })
         });
 
         // 初始化datetimepicker
@@ -69,7 +67,10 @@ define([], function () {
           }
         });
 
-        // 获取全局搜索条件
+        // 全局变量
+        var globalVariable = {};
+
+        // 获取搜索条件
         globalVariable.searchItem = function () {
           return {
             activityForm: $scope.categoryVal || '',
@@ -86,58 +87,53 @@ define([], function () {
         }
 
         // 获取活动列表，通用方法
-        var getList = function (data) {
-          var reset = false;
-          if (!data) {
-            reset = true;
-            var data = {
-              currentPageNumber:1, 
-              pageSize: 10
-            }
-          }
-
-          $model.getActivityList(data).then(function(res) {
+        var getList = function (resetbool, data) {
+          if (resetbool) {
             // 重置
-            if (reset) {
-              $scope.searchForm.$setPristine();
-              $scope.searchForm.$setUntouched();
-              searchForm.reset();
-              $scope.categoryVal = '';
-              $scope.statusVal = '';
-              $scope.selectAllBrands = [];
-              $scope.selectSpeci = [];
-              $scope.allarea = [];
-              $scope.keysval = '';
-              $scope.startTime = '';
-              $scope.endTime = '';
-              $('[ng-model="selectAllBrands"]').multiselect('refresh');
-              $('[ng-model="selectSpeci"]').multiselect('refresh');
-              $('[ng-model="allarea"]').multiselect('refresh');
-            }
+            $scope.searchForm.$setPristine();
+            $scope.searchForm.$setUntouched();
+            searchForm.reset();
+            $scope.categoryVal = '';
+            $scope.statusVal = '';
+            $scope.selectAllBrands = [];
+            $scope.selectSpeci = [];
+            $scope.allarea = [];
+            $scope.keysval = '';
+            $scope.startTime = '';
+            $scope.endTime = '';
+            $('[ng-model="selectAllBrands"]').multiselect('refresh');
+            $('[ng-model="selectSpeci"]').multiselect('refresh');
+            $('[ng-model="allarea"]').multiselect('refresh');
+          }
+          if (!data) {
+            data = globalVariable.searchItem();
+          }
+          $model.getActivityList(data).then(function(res) {
             $scope.activitylistConf = res.data;
             $scope.paginationConf = res.data;
           })
         }
 
         // 进入页面，获取活动列表
-        getList();
+        getList(false);
 
         // 翻页获取活动列表
         $scope.$on('frompagechange', function (e,v,f) {
           var target = Object.assign({}, globalVariable.searchItem(), f)
-          getList(target)
+          getList(false, target)
         })
 
         // 搜索
         $scope.search = function (e) {
-          getList(globalVariable.searchItem());
+          getList(false, globalVariable.searchItem());
         }
 
         // 重置
         $scope.searchreset = function () {
-          getList();
+          getList(true);
         }
 
+        // ------------------ 1.0分界线 ------------------
         // 点击新建，获取模板对应的配置页面
         $scope.$on('typefromActSample', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
@@ -146,15 +142,32 @@ define([], function () {
           })
         })
 
-        $model.step().then(function (res) {
-          $scope.createConf = res.data;
-        })
-
-        // 操作面板，活动模板
+        // 活动模板
         $model.getActSampleList().then(function (res) {
           $scope.createActModalConf = res.data;
           $scope.actsampleList = res.data.data;
+          $scope.chooseConf = res.data;
         });
+
+        // ------------------ 2.0分界线 ------------------
+        $model.getActSampleList().then(function (res) {
+          $scope.chooseConf = res.data;
+          $model.getwhichsample({type: ''}).then(function (res) {
+            // 获取全部类型
+            scope('.showtemplate').type = res.data.data.list;
+          })
+        });
+
+        $scope.$on('choosetype', function (e, v, f) {
+          $model.getTemplateSpecific(f).then(function(res){
+            $scope.configtemplateConf = res.data;
+          })
+        })
+        
+
+        // $model.step().then(function (res) {
+        //   $scope.createConf = res.data;
+        // })    
 
         // 操作面板，活动状态
         $model.getActivityStatus().then(function(res) {
@@ -201,7 +214,7 @@ define([], function () {
           $('.start-activity-modal .btn-primary').on('click', function(){
             $model.changeActivityStatus(f).then(function(){
               $('.modal-content .close').trigger('click');
-              getList(globalVariable.searchItem())
+              getList(globalVariable.searchItem(false))
             })
           })
         })
@@ -211,7 +224,7 @@ define([], function () {
           $('.end-activity-modal .btn-primary').on('click', function(){
             $model.changeActivityStatus(f).then(function(){
               $('.modal-content .close').trigger('click');
-              getList(globalVariable.searchItem())
+              getList(globalVariable.searchItem(false))
             })
           })
         })
@@ -683,7 +696,7 @@ define([], function () {
                 $model.getTemplateSpecific(f).then(function(res){
                   $scope.allConfigTemplateConf = null;       
                 })
-                getList();
+                getList(true);
               }
             } else {
               alert(res.data.message);
@@ -704,7 +717,7 @@ define([], function () {
               $model.getTemplateSpecific({}).then(function(res){
                 $scope.allConfigTemplateConf = null;      
               })
-              getList();              
+              getList(true);              
             }else{
               alert(res.data.message);
             }

@@ -32,7 +32,7 @@
 									</div>
 									<div class="col-sm-3">
 										<!-- 日 -->
-										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" placeholder="{{todayplaceholder}}" ng-model="day"></label>
+										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" ng-model="day"></label>
 
 										<!-- 周 -->
 										<label for="" class="week" ng-show="singleSelect.unit == 'week'"><select name="week" id="" class="input-sm form-control" ng-model="week">
@@ -40,7 +40,7 @@
 										</select></label>
 										
 										<!-- 月 -->
-										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" placeholder="{{thismonthplaceholder}}" ng-model="month"></label>
+										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" ng-model="month"></label>
 									</div>
 									<div class="col-sm-1">
 										<button type="submit" class="btn btn-primary input-sm" ng-click="search($event)">查询</button>
@@ -88,9 +88,17 @@
 									<h5>扫码烟包数分析<br>（单位：个）<hr></h5>
 									<div class="absolute">
 										<p class="inline">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码烟包数：{{changepack}}个 （本年度累计扫码烟包总数：{{yearpack}}个）</p>
-										<div class="inline" style="text-align: center">
-											<label for="">盒</label><input type="checkbox"  ng-model="checkbox.packcheckbox" ng-change="updatepackorbar(checkbox.packcheckbox, 0)">
-											<label for="">条</label><input type="checkbox" ng-model="checkbox.barcheckbox" ng-change="updatepackorbar(checkbox.barcheckbox, 1)">
+									</div>
+									<div class="checkbox-wrap">
+										<div class="inline-block relative">
+											<input type="checkbox"  ng-model="checkbox.packcheckbox" ng-change="updatepackorbar(checkbox.packcheckbox, 0)">
+											<span class="checkbox"></span>
+											<label for="">盒</label>
+										</div>
+										<div class="inline-block relative">
+											<input type="checkbox" ng-model="checkbox.barcheckbox" ng-change="updatepackorbar(checkbox.barcheckbox, 1)">
+											<span class="checkbox"></span>
+											<label for="">条</label>
 										</div>
 									</div>
 									<div class="chart col-md-12" id="packedChart" style="height: 260px"></div>
@@ -99,12 +107,26 @@
 								<!-- 促销效果趋势分析 -->
 								<div class="chart-wrap">
 									<h5>促销效果趋势分析<hr></h5>
-									<div class="absolute">
-										<div class="inline">
-											<label for="">促销计划</label><input type="checkbox" ng-model="checkbox.promocheckbox" ng-change="updatepromo(checkbox.promocheckbox, 0)">
-											<label for="">抽奖次数</label><input type="checkbox" ng-model="checkbox.drawcheckbox" ng-change="updatepromo(checkbox.drawcheckbox, 1)">
-											<label for="">中奖数量</label><input type="checkbox" ng-model="checkbox.getcheckbox" ng-change="updatepromo(checkbox.getcheckbox, 2)">
-											<label for="">领取数量</label><input type="checkbox" ng-model="checkbox.paycheckbox" ng-change="updatepromo(checkbox.paycheckbox, 3)">
+									<div class="checkbox-wrap">
+										<div class="inline-block relative">
+											<input type="checkbox" ng-model="checkbox.promocheckbox" ng-change="updatepromo(checkbox.promocheckbox, 0)">
+											<span class="checkbox"></span>
+											<label for="">促销计划</label>
+										</div>
+										<div class="inline-block relative">
+											<input type="checkbox" ng-model="checkbox.drawcheckbox" ng-change="updatepromo(checkbox.drawcheckbox, 1)">
+											<span class="checkbox"></span>
+											<label for="">抽奖次数</label>
+										</div>
+										<div class="inline-block relative">
+											<input type="checkbox" ng-model="checkbox.getcheckbox" ng-change="updatepromo(checkbox.getcheckbox, 2)">
+											<span class="checkbox"></span>
+											<label for="">中奖数量</label>
+										</div>
+										<div class="inline-block relative">
+											<input type="checkbox" ng-model="checkbox.paycheckbox" ng-change="updatepromo(checkbox.paycheckbox, 3)">
+											<span class="checkbox"></span>
+											<label for="">领取数量</label>
 										</div>
 									</div>
 									<div class="chart col-md-12" id="promotionChart" style="height: 260px"></div>

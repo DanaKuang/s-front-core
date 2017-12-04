@@ -1,0 +1,247 @@
+.clearfix:after, .ads-source .create-ads-modal form .adsnew-row:after, .ads-source .edit-ads-modal form .adsnew-row:after {
+  content: '';
+  clear: both;
+  display: table; }
+
+.ads-source select {
+  -webkit-appearance: menulist; }
+
+.ads-source .form-horizontal .form-control {
+  line-height: 22px !important; }
+
+.ads-source .ui-panel-title {
+  margin-top: 30px;
+  margin-bottom: 10px; }
+
+.ads-source .col-sm-7 {
+  padding: 0; }
+
+.ads-source .panel-body .btn-con {
+  float: right; }
+
+.ads-source select, .ads-source .keywords-input, .ads-source #status {
+  width: 100% !important;
+  line-height: 17px; }
+
+.ads-source .btn-group button {
+  display: block;
+  width: 100%;
+  height: 34px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  color: #555;
+  line-height: 16px;
+  padding: 5px;
+  text-align: left !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+
+.ads-source .filter .input-group {
+  height: 34px; }
+
+.ads-source .filter .form-control {
+  height: 34px;
+  line-height: 20px; }
+
+.ads-source .filter .input-group-addon {
+  padding: 3px 9px; }
+
+.ads-source .create-ads-modal .modal-dialog, .ads-source .edit-ads-modal .modal-dialog {
+  min-width: 590px; }
+
+.ads-source .create-ads-modal form .form-group, .ads-source .edit-ads-modal form .form-group {
+  margin: 0; }
+
+.ads-source .create-ads-modal form .adsnew-row, .ads-source .edit-ads-modal form .adsnew-row {
+  display: block;
+  line-height: 34px;
+  position: relative; }
+  .ads-source .create-ads-modal form .adsnew-row span, .ads-source .create-ads-modal form .adsnew-row input, .ads-source .edit-ads-modal form .adsnew-row span, .ads-source .edit-ads-modal form .adsnew-row input {
+    float: left; }
+  .ads-source .create-ads-modal form .adsnew-row > span, .ads-source .edit-ads-modal form .adsnew-row > span {
+    width: 80px;
+    color: #242a30;
+    font-weight: bold;
+    float: left; }
+  .ads-source .create-ads-modal form .adsnew-row > input, .ads-source .edit-ads-modal form .adsnew-row > input {
+    width: 300px !important;
+    height: 34px;
+    color: #707070;
+    font-size: 12px; }
+  .ads-source .create-ads-modal form .adsnew-row .form_datetime, .ads-source .edit-ads-modal form .adsnew-row .form_datetime {
+    width: 203px !important;
+    cursor: pointer; }
+  .ads-source .create-ads-modal form .adsnew-row span > i, .ads-source .edit-ads-modal form .adsnew-row span > i {
+    color: #ff3300; }
+  .ads-source .create-ads-modal form .adsnew-row .time-line, .ads-source .edit-ads-modal form .adsnew-row .time-line {
+    width: 35px;
+    line-height: 34px;
+    text-align: center; }
+
+.ads-source .create-ads-modal form .adsnew-row-time .col-sm-4, .ads-source .edit-ads-modal form .adsnew-row-time .col-sm-4 {
+  padding: 0; }
+
+.ads-source .create-ads-modal form .adsnew-row-type > span, .ads-source .edit-ads-modal form .adsnew-row-type > span {
+  color: #242a30;
+  font-weight: bold; }
+
+.ads-source .create-ads-modal form .adsnew-row-type label, .ads-source .edit-ads-modal form .adsnew-row-type label {
+  cursor: pointer; }
+
+.ads-source .create-ads-modal form .adsnew-row-type input, .ads-source .edit-ads-modal form .adsnew-row-type input {
+  width: 20px;
+  height: auto;
+  float: none;
+  margin-top: 0px; }
+
+.ads-source .create-ads-modal form .adsnew-checkbox, .ads-source .edit-ads-modal form .adsnew-checkbox {
+  cursor: pointer; }
+
+.ads-source .create-ads-modal form .multiselect-item.filter .input-group-addon, .ads-source .edit-ads-modal form .multiselect-item.filter .input-group-addon {
+  display: none; }
+
+.ads-source .create-ads-modal form .multiselect-item.filter .multiselect-search, .ads-source .edit-ads-modal form .multiselect-item.filter .multiselect-search {
+  width: 245px; }
+
+.ads-source .create-ads-modal form .multiselect-item.filter .input-group-btn, .ads-source .edit-ads-modal form .multiselect-item.filter .input-group-btn {
+  width: 26px; }
+
+.ads-source .create-ads-modal form .ads-image-input, .ads-source .edit-ads-modal form .ads-image-input {
+  outline: none; }
+
+.ads-source .create-ads-modal .modal-body, .ads-source .edit-ads-modal .modal-body {
+  padding: 20px 30px 0px; }
+  .ads-source .create-ads-modal .modal-body .multiselect-container input[type=radio], .ads-source .edit-ads-modal .modal-body .multiselect-container input[type=radio] {
+    margin-top: 3px; }
+
+.ads-source .create-ads-modal .submit-wrap, .ads-source .edit-ads-modal .submit-wrap {
+  text-align: center; }
+
+.ads-source .create-ads-modal .cancel-prize, .ads-source .edit-ads-modal .cancel-prize {
+  background: 0 0;
+  border: 1px solid #6e80ff;
+  color: #6e80ff; }
+
+.ads-source .create-ads-modal .wrong-tip, .ads-source .edit-ads-modal .wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  text-indent: 5px; }
+
+.ads-source .create-ads-modal .wrong-tip-start, .ads-source .create-ads-modal .wrong-tip-end, .ads-source .edit-ads-modal .wrong-tip-start, .ads-source .edit-ads-modal .wrong-tip-end {
+  line-height: 1;
+  position: absolute;
+  top: 36px;
+  left: 74px; }
+
+.ads-source .create-ads-modal .wrong-tip-end, .ads-source .edit-ads-modal .wrong-tip-end {
+  left: 312px; }
+
+.ads-source .create-ads-modal .show-gift-list, .ads-source .edit-ads-modal .show-gift-list {
+  width: 80px;
+  height: 80px;
+  background: none;
+  line-height: 80px;
+  border: 1px solid #6e80ff;
+  color: #6e80ff;
+  font-size: 12px;
+  cursor: pointer;
+  float: left;
+  text-align: center; }
+
+.ads-source .create-ads-modal .gift-img-con, .ads-source .create-ads-modal .ads-img-con, .ads-source .edit-ads-modal .gift-img-con, .ads-source .edit-ads-modal .ads-img-con {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #6e80ff;
+  float: left;
+  line-height: 1;
+  overflow: hidden;
+  position: relative; }
+  .ads-source .create-ads-modal .gift-img-con img, .ads-source .create-ads-modal .ads-img-con img, .ads-source .edit-ads-modal .gift-img-con img, .ads-source .edit-ads-modal .ads-img-con img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    height: auto; }
+  .ads-source .create-ads-modal .gift-img-con .img-delete, .ads-source .create-ads-modal .ads-img-con .img-delete, .ads-source .edit-ads-modal .gift-img-con .img-delete, .ads-source .edit-ads-modal .ads-img-con .img-delete {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    z-index: 10;
+    color: red;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer; }
+
+.ads-source .create-ads-modal .gift-img-title, .ads-source .edit-ads-modal .gift-img-title {
+  width: 100%;
+  float: left;
+  line-height: 20px;
+  margin-left: 80px; }
+
+.ads-source .modal {
+  overflow-y: auto; }
+  .ads-source .modal .modal-dialog {
+    transform: translateY(0%);
+    top: 100px;
+    margin-bottom: 100px; }
+
+.ads-source .add-stock-modal .modal-body label {
+  margin-right: 10px;
+  line-height: 34px; }
+
+.ads-source .add-stock-modal .modal-body input {
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 10px; }
+
+.ads-source .add-stock {
+  margin-left: 20px; }
+
+.ads-source .add-stock-intro {
+  color: #f00;
+  margin-left: 57px; }
+
+.ads-source input[type="text"], .ads-source select, .ads-source input[type="number"], .ads-source input[type="url"] {
+  border-radius: 4px; }
+
+.ads-source .search, .ads-source .reset {
+  transition: all ease-in-out .15s; }
+
+.ads-source .form_datetime {
+  font-size: 12px; }
+
+.ads-source .form_datetime::-moz-placeholder {
+  color: #999;
+  opacity: 1; }
+
+.ads-source .form_datetime:-ms-input-placeholder {
+  color: #999; }
+
+.ads-source .form_datetime::-webkit-input-placeholder {
+  color: #999; }
+
+.btn {
+  transition: all ease-in-out .15s; }
+
+.f-btn {
+  margin: 0px 30px;
+  height: 26px;
+  width: 90px;
+  color: #fff;
+  background: #6e80ff;
+  display: inline-block;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  line-height: 1; }
+
+.cancel-new {
+  background: 0 0;
+  border: 1px solid #6e80ff;
+  color: #6e80ff; }

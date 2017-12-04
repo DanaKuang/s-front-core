@@ -1,4 +1,12 @@
 {
+    "toolbox": {
+      "x": "85%",
+      "feature": {
+          "restore" : {
+              "show": true
+          }
+      }
+    },
     "tooltip": {
         "show": true,
         "trigger": "item",
@@ -11,17 +19,15 @@
             "color": "#6e6d6d"
         }
     },
-    "visualMap": {
+    "dataRange": {
         "min": 0,
-        "max": 5000,
-        "left": "left",
-        "text": ["高","低"],
-        "seriesIndex": [1],
+        "max": 2500,
+        "x": "left",
+        "y": "bottom",
+        "text": ["高","低"], 
         "inRange": {
             "color": ["#e0ffff", "#006edd"]
-        },
-        "padding": 0,
-        "calculable" : true
+        }
     },
     "geo": {
         "map": "china",
@@ -71,7 +77,7 @@
            }
        }
     }, {
-        "name": "扫码次数",
+        "name": "pv",
         "type": "map",
         "geoIndex": 0,
         "data":[]

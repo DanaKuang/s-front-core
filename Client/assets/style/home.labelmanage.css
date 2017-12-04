@@ -8,7 +8,7 @@
 }
 
 .ui-panel-title {
-	position: relative;
+	/*position: relative;*/
 	margin: 20px 0 5px 0;
 	font-size: 16px;
 	padding-left: 10px;
@@ -34,7 +34,10 @@
 	background: #6e80ff;
 	color: #fff;
 }
-
+.d-item-active{
+	background: #6e80ff;
+	color: #fff;
+}
 .select_active:hover {
 	cursor: pointer;
 }
@@ -57,7 +60,16 @@
 	border: none;
 	border-radius: 4px;
 }
-
+.cityNameList_span  {
+	/*height:20px;*/
+	/*width: 75px;*/
+	text-align: center;
+	line-height: 22px;
+	font-size: 14px;
+	border: none;
+	border-radius: 4px;
+	margin-right:10px;
+}
 .userAttribute {
 	text-align: center;
 	line-height: 22px;
@@ -108,6 +120,7 @@
 .content_box {
 	margin: 0 20px;
 	border: 1px solid #d2d2d2;
+	padding:10px 0;
 }
 #content_box_two{
 	overflow: hidden;
@@ -121,8 +134,14 @@
 	margin-right: 55px;
 	font-size: 14px;
 	cursor: pointer;
+	border-radius:4px;
 }
-
+.secondMenu_spans {
+	margin-left: 55px;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius:4px;
+}
 .threeMenu {
 	margin: 0 30px;
 	padding: 15px 0;
@@ -135,6 +154,7 @@
 	margin-right: 51px;
 	font-size: 14px;
 	cursor: pointer;
+	border-radius:4px;
 }
 
 .substance {
@@ -168,11 +188,21 @@
 	line-height: 30px;
 }
 .cityNameLists{
-	margin: 0 30px;
+	margin: 5px 30px;
 	font-size: 14px;
 	cursor: pointer;
-	line-height: 30px;
+	/*line-height: 30px;*/
 	float:left;
+	text-align: center;
+	line-height: 22px;
+	/*font-size: 14px;*/
+	border: none;
+	border-radius: 4px;
+	/*margin-right:10px;*/
+}
+.fenge{
+	display:block;
+	/*float:left;*/
 }
 .operationMenu {
 	margin: 20px;
@@ -306,7 +336,7 @@ label {
 	padding:20px 20px 0;
 }
 .aui_title{
-	width:92px;
+	/*width:92px;*/
 	padding:0 5px;
 	display:flex;
 	justify-content: space-between;
@@ -317,6 +347,13 @@ label {
 	color:#7378ca;
 	float:left;
 	margin:0 10px 20px;
+	/*position:absolute;*/
+	cursor: move;
+}
+.boxGu{
+	margin-bottom:20px;
+	display:flex;
+	justify-content: center;
 }
 .select_option{
 	height:20px;
@@ -337,6 +374,9 @@ label {
 	margin-bottom:20px;
 	/*display:none;*/
 }
+.aui_close{
+	margin-left:15px;
+}
 .youKuoHao{
 	float:left;
 	width:20px;
@@ -348,4 +388,47 @@ label {
 	margin-bottom:20px;
 	align-items: center;
 	/*display:none;*/
+}
+/*弹窗*/
+.box_tit{
+    background-color: #29b839;
+    font-size: 17px;
+    color: #FFFFFF;
+    line-height: 28px;
+    border-top-left-radius: 6px;
+    border-top-right-radius:6px ;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius:6px ;
+    padding: 5px 7px 5px 14px;
+}
+.lf {
+    float: left;
+}
+
+.rf {
+    float: right;
+}
+.box_cont{
+    font-size: 16px;
+    text-align: center;
+    padding: 50px 0;
+    border-bottom: 1px solid #CECECE;
+}
+.box_btn .box_btn_conf{
+    color: #29b839;
+    border-right: 1px solid #CECECE;
+}
+.box_btn .box_btn_cancel{
+    color: #CECECE;
+}
+.box_btn div{
+    width: 50%;
+    font-size: 15px;
+    text-align: center;
+}
+.box_btn div:hover{
+    cursor: pointer;
+}
+.box_btn{
+    padding: 12px 0;
 }

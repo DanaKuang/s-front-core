@@ -109,6 +109,7 @@ define([], function () {
                             district ="乡村";
                         }
                         res.data.data[i].district =district;
+                        console.log(res.data.data[i].applyTime)
                     }
                     $scope.listData = res.data.data || [];
                     $scope.$apply();

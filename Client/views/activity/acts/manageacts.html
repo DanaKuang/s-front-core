@@ -125,7 +125,25 @@
 	</div>
 
 	<!-- 新建活动2.0 -->
-	<sa-create conf="createConf" style="display: none"></sa-create>
+	<div class="create-activity pop" style="display: none">
+		<!-- title 显示 -->
+		<nav>
+			<p>选择模板|活动设置</p>
+		</nav>
+		<!-- 进度展示 -->
+		<div class="header">
+			<div class="step">
+				<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="(idx, item) in stepstream" ng-class="{'active': idx == step}">
+					<img class="img-thumbnail center-block" ng-src="{{item.image}}" alt="">
+					<p class="text-center">{{item.text}}</p>
+				</div>
+			</div>
+		</div>
+		<!-- 第一步：选择模板 -->
+		<sa-choosetemplate conf="chooseConf"></sa-choosetemplate>
+		<!-- 第二部：活动设置 -->
+		<sa-configtemplate conf="configtemplateConf"></sa-configtemplate>
+	</div>
 
 	<!-- 容纳所有配置弹窗的div -->
 	<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>
@@ -283,43 +301,44 @@
 	    </div>
 	  </div>
 	</div>
+
 	<!--取消调查问卷时弹框-->
-    <div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="box_sec">
-                    <div class="box_tit">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <div class="modal-title" id="cancel_btn">操作提示</div>
-                    </div>
-                    <div class="box_cont">问卷信息未保存，确认取消么？</div>
-                    <div class="box_btn clearfix">
-                        <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
-                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-		<!--调查问卷操作成功弹窗-->
-    <div class="modal fade ques_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="box_sec">
-                    <div class="box_tit">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <div class="modal-title" id="supply_enabled_btn">操作提示</div>
-                    </div>
-                    <div class="box_cont">操作成功</div>
-                    <div class="box_btn">
-                        <div class="enabled_btn" data-dismiss="modal">确定</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+      <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+              <div class="box_sec">
+                  <div class="box_tit">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                      <div class="modal-title" id="cancel_btn">操作提示</div>
+                  </div>
+                  <div class="box_cont">问卷信息未保存，确认取消么？</div>
+                  <div class="box_btn clearfix">
+                      <div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+                      <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+	<!--调查问卷操作成功弹窗-->
+  <div class="modal fade ques_success_box" tabindex="-1" role="dialog" aria-labelledby="supply_enabled_btn">
+      <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+              <div class="box_sec">
+                  <div class="box_tit">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                      <div class="modal-title" id="supply_enabled_btn">操作提示</div>
+                  </div>
+                  <div class="box_cont">操作成功</div>
+                  <div class="box_btn">
+                      <div class="enabled_btn" data-dismiss="modal">确定</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
