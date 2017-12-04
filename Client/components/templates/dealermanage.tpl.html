@@ -1,0 +1,67 @@
+<div>
+    <div class="dealer-manage-list panel-body">
+        <div class="sort-btn-con">
+            <button ng-click="orderBy($event, 1)" class="btn btn-primary">按申请成功时间排序</button>
+            <button ng-click="orderBy($event, 2)" class="btn btn-primary">按团队数量排序</button>
+            <button ng-click="orderBy($event, 3)" class="btn btn-primary">按累积佣金排序</button>
+            <button ng-click="orderBy($event, 4)" class="btn btn-primary">按可提现金额排序</button>
+            <button ng-click="orderBy($event, 5)" class="btn btn-primary">按已提现金额排序</button>
+        </div>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr class="table-head">
+                <th>序号</th>
+                <th>操作</th>
+                <th>微信ID</th>
+                <th>经销商姓名</th>
+                <th>手机号</th>
+
+                <th>微信号</th>
+                <th>位置</th>
+                <th>推荐码</th>
+                <th>推荐人</th>
+                <th>累积佣金</th>
+
+                <th>可提现金额</th>
+                <th>已提现金额</th>
+                <th>团队数量</th>
+                <th>申请时间</th>
+                <th>申请通过时间</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="show-list" ng-repeat="(idx, item) in list">
+                <td>{{idx + 1}}</td>
+                <td>
+                    <div class="oper-btn-wrap">
+                        <div class="operate-btn" ng-click="viewManage($event, item.salerId)">查看详情</div>
+                        <!--1 启用状态  2 禁用状态-->
+                        <div ng-if="item.accountStatus == 2" class="operate-btn" ng-click="startManage($event, item.salerId, 1)" data-toggle="modal" data-target=".start-manage-modal">启用</div>
+                        <div ng-if="item.accountStatus == 1" class="operate-btn" ng-click="startManage($event, item.salerId, 2)" data-toggle="modal" data-target=".start-manage-modal">禁用</div>
+                    </div>
+                </td>
+                <td><div class="wxOpenId">{{item.wxOpenId}}</div></td>
+                <td>{{item.salerName}}</td>
+                <td>{{item.phoneNo}}</td>
+
+                <td><div class="wxId">{{item.wxId ? item.wxId : '- -'}}</div></td>
+                <td>{{item.region}}</td>
+                <td>{{item.invitCode}}</td>
+                <td>{{item.higherName ? item.higherName : '- -'}}</td>
+                <td>{{item.totalIncome}}</td>
+
+                <td>{{item.balance}}</td>
+                <td>{{item.totalPay}}</td>
+                <td>{{item.teamAcount}}</td>
+                <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.appPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.accountStatus == 1 ? '启用中' : '禁用中'}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+    </div>
+</div>
