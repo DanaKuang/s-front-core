@@ -49,19 +49,19 @@
                                 <div class="form-group col-sm-8 location">
                                     <label for="location" class="control-label col-sm-2">位置</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" id="location" ng-model="vm.selectProvince" ng-change="provinceChage()">
+                                        <select class="form-control" id="location" ng-model="vm.selectProvince" ng-options="o.name for o in manageProvinceList">
                                             <option value="">省</option>
-                                            <option ng-repeat="item in manageProvinceList" value="{{item.code}}">{{item.name}}</option>
+                                            <!--<option ng-repeat="item in manageProvinceList" value="{{item.code}}">{{item.name}}</option>-->
                                         </select>
 
-                                        <select class="form-control" ng-model="vm.selectCity" ng-change="cityChage()">
+                                        <select class="form-control" ng-model="vm.selectCity" ng-options="o.name for o in manageCityList">
                                             <option value="">市</option>
-                                            <option ng-repeat="item in manageCityList" value="{{item.code}}">{{item.name}}</option>
+                                            <!--<option ng-repeat="item in manageCityList" value="{{item.code}}">{{item.name}}</option>-->
                                         </select>
 
-                                        <select class="form-control" ng-model="vm.selectCountry">
+                                        <select class="form-control" ng-model="vm.selectCountry" ng-options="o.name for o in manageCountryList">
                                             <option value="">区/县</option>
-                                            <option ng-repeat="item in manageCountryList" value="{{item.code}}">{{item.name}}</option>
+                                            <!--<option ng-repeat="item in manageCountryList" value="{{item.code}}">{{item.name}}</option>-->
                                         </select>
                                     </div>
                                 </div>
