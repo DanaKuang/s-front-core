@@ -89,18 +89,18 @@ define([], function() {
                         var keyCode = $('#keyCode').val();
                         var statusChange = $('.form-controlmdg').val();
                         var newCode = $('#newCode').val();
-                        var provinceId = $('#provinceId').val();
-                        var cityId = $('#cityId').val();
-                        var areaId = $('#areaId').val();
+                        var provinceName = $('#provinceId').find("option:selected").text();
+                        var cityName = $('#cityId').find("option:selected").text();
+                        var areaName = $('#areaId').find("option:selected").text();
                         var durationStart = $('#durationStart').val();
                         var durationEnd = $('#durationEnd').val();
                         var buyNum = $('#buyNum').val();
 
-                        curPageData.appStatus = statusChange,//提现状态
-                        curPageData.provinceId = provinceId,//省份id
-                        curPageData.cityId = cityId,//地市id
-                        curPageData.areaId = areaId,//区县id                   
-                        curPageData.startTime = durationStart,//开始时间
+                        curPageData.appStatus = statusChange;//提现状态
+                        curPageData.provinceName = provinceName;//省份id
+                        curPageData.cityName = cityName;//地市id
+                        curPageData.areaName = areaName;//区县id                   
+                        curPageData.startTime = durationStart;//开始时间
                         curPageData.endTime =  durationEnd;//结束时间
                         if(newCode != '' && newCode != null){
                             switch(keyCode){
@@ -150,18 +150,18 @@ define([], function() {
                 var keyCode = $('#keyCode').val();
             	var statusChange = $('.form-controlmdg').val();
                 var newCode = $('#newCode').val();
-                var provinceId = $('#provinceId').val();
-                var cityId = $('#cityId').val();
-                var areaId = $('#areaId').val();
+                var provinceName = $('#provinceId').find("option:selected").text();
+                var cityName = $('#cityId').find("option:selected").text();
+                var areaName = $('#areaId').find("option:selected").text();
                 var durationStart = $('#durationStart').val();
                 var durationEnd = $('#durationEnd').val();
                 var buyNum = $('#buyNum').val();
 
                 var searchData = {
                     appStatus: statusChange,//提现状态
-                    provinceId:provinceId,//省份id
-                    cityId:cityId,//地市id
-                    areaId:areaId,//区县id                   
+                    provinceName: provinceName,//省份id
+                    cityName: cityName,//地市id
+                    areaName: areaName,//区县id                   
                     startTime: durationStart,//开始时间
                     endTime:  durationEnd,//结束时间
                     page: 1,
