@@ -36,13 +36,56 @@ define([], function () {
         return angular.element(selector).scope()
       }
 
+
+      // 监听省
+      $scope.$watch("vm.selectProvince", function(n){
+        if(n) {
+          $scope.provinceName = n.name;
+          $scope.provinceId = n.code;
+          // 省份change
+          $model.getManageCity({parentCode: $scope.provinceId}).then(function (res) {
+            $scope.manageCityList = res.data;
+            $scope.vm.selectCity = '';
+            $scope.vm.selectCountry = '';
+          });
+        } else {
+          $scope.provinceName = '';
+          $scope.provinceId = '';
+        }
+      })
+      // 监听市
+      $scope.$watch("vm.selectCity", function(n){
+        if(n) {
+          $scope.cityName = n.name;
+          $scope.cityId = n.code;
+          // 城市change，获取区/县
+          $model.getManageCountry({parentCode: $scope.cityId}).then(function (res) {
+            $scope.manageCountryList = res.data;
+            $scope.vm.selectCountry = '';
+          });
+        } else {
+          $scope.cityName = '';
+          $scope.cityId = '';
+        }
+      })
+      // 监听区
+      $scope.$watch("vm.selectCountry", function(n){
+        if(n) {
+          $scope.areaName = n.name;
+          $scope.areaId = n.code;
+        } else {
+          $scope.areaName = '';
+          $scope.areaId = '';
+        }
+      })
+
       // 获取table列表
       function getList(page, ispage) {
         var data = {
           accountStatus: $scope.vm.selectStatus || '', // 状态
-          provinceId: $scope.vm.selectProvince || '',
-          cityId: $scope.vm.selectCity || '',
-          areaId: $scope.vm.selectCountry || '',
+          provinceName: $scope.provinceName || '',
+          cityName: $scope.cityName || '',
+          areaName: $scope.areaName || '',
           orderBy: $scope.orderBy || 1,
           currentPageNumber: page || 1,
           pageSize: 10
@@ -74,28 +117,6 @@ define([], function () {
         $scope.manageProvinceList = res.data;
       });
 
-      // 省份change
-      $scope.provinceChage = function (e) {
-        if($scope.vm.selectProvince != '') {
-          // 市
-          $model.getManageCity({parentCode: $scope.vm.selectProvince}).then(function (res) {
-            $scope.manageCityList = res.data;
-            $scope.vm.selectCity = '';
-            $scope.vm.selectCountry = '';
-          });
-        }
-      }
-
-      // 城市change
-      $scope.cityChage = function (e) {
-        if($scope.vm.selectCity != '') {
-          // 区/县
-          $model.getManageCountry({parentCode: $scope.vm.selectCity}).then(function (res) {
-            $scope.manageCountryList = res.data;
-            $scope.vm.selectCountry = '';
-          });
-        }
-      }
 
       // 点击搜索
       $scope.search = function (e) {
@@ -105,9 +126,20 @@ define([], function () {
       // 重置
       $scope.reset = function () {
         $scope.vm.selectStatus = ''; // 状态
+
         $scope.vm.selectProvince = '';
         $scope.vm.selectCity = '';
         $scope.vm.selectCountry = '';
+
+        $scope.provinceName = '';
+        $scope.provinceId = '';
+        $scope.cityName = '';
+        $scope.cityId = '';
+        $scope.areaName = '';
+
+        $scope.manageCityList = '';
+        $scope.manageCountryList = '';
+
         $scope.vm.keysKey = 'salerName';
         $scope.vm.keysVal = '';
         getList(1, true);
