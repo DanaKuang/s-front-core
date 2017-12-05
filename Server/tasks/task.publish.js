@@ -5,6 +5,7 @@
  */
 module.exports = function () {
     'use strict';
+    var O = 'data-front';
     var Q = require('q');
     var node_ssh = require('node-ssh');
     var build = require('./task.build');
@@ -111,8 +112,8 @@ module.exports = function () {
     var fifthStep = function (file) {
         var deferred = Q.defer();
         process.stdout.write(colors.green('5、copy: \n'));
-        process.stdout.write(colors.blue('\x20\x20\x20 copy data-front to '+ips[1].host+'!\n'));
-        center.exec('scp -r '+ips[0].dist+'/data-front'+' '+ips[1].host+':'+ips[1].dist)
+        process.stdout.write(colors.blue('\x20\x20\x20 copy '+ O +' to '+ips[1].host+'!\n'));
+        center.exec('scp -r '+ips[0].dist+'/'+ O +' '+ips[1].host+':'+ips[1].dist)
         .then(function (result) {
             process.stdout.write(colors.blue('\x20\x20\x20 copy successfully!\n'));
             deferred.resolve(file);
@@ -124,7 +125,7 @@ module.exports = function () {
     var sixthStep = function (file) {
         var deferred = Q.defer();
         process.stdout.write(colors.green('6、del: \n'));
-        center.exec('rm -rf '+file.filename+' '+'data-front/').then(function (result) {
+        center.exec('rm -rf '+file.filename+' '+ O +'/').then(function (result) {
             process.stdout.write(colors.blue('\x20\x20\x20 del successfully!\n'));
             deferred.resolve(true);
         });
