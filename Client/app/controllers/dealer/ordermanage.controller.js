@@ -286,12 +286,15 @@ define([], function() {
                 if(areaId != '' && areaId != null){
                     data.areaId = areaId;
                 }
-                if(durationStart != '' && durationStart != null){
-                    data.startTime = durationStart;
-                }
-                if(durationEnd != '' && durationEnd != null){
-                    data.endTime = durationEnd;
-                }
+                // if(durationStart != '' && durationStart != null){
+                //     data.startTime = durationStart;
+                // }
+                // if(durationEnd != '' && durationEnd != null){
+                //     data.endTime = durationEnd;
+                // }
+                data.startTime = $scope.startTime ? $scope.startTime + ':00' : '';
+                data.endTime = $scope.endTime ? $scope.endTime + ':00' : '';
+                
                 if(newCode != '' && newCode != null){
                     switch(keyCode){
                         case 'order-num':
