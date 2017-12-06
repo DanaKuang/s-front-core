@@ -111,7 +111,7 @@ define([], function() {
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
-								$("#win_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].effectScanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].drawUv + "</td><td>" + res[i].redpacketFee + "</td><td>" + res[i].yearRedpacketFee + "</td></tr>");
+								$("#win_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].effectScanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].yearEffectScanPv  + "</td><td>" + res[i].yearScanUv + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].drawUv + "</td><td>" + res[i].redpacketFee + "</td><td>" + res[i].yearRedpacketFee + "</td></tr>");
 							}
 						} else {
 							$("#win_table").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
@@ -329,7 +329,7 @@ define([], function() {
 						$(".report-table").find("tbody").html("");
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
-								$("#provDataDetail").append("<tr><td>" + res[i].cityName + "</td><td>" + (res[i].integralType == '0' ? '总计' : (res[i].integralType == '1' ? '盒包扫码获得积分' : (res[i].integralType == '2' ? '条包扫码获得积分' : (res[i].integralType == '3' ? '兑奖消耗积分' : '抽奖消耗积分')))) + "</td><td>" + (res[i].integralType == '0' ? '-' : res[i].integralValue) + "</td><td>" + res[i].addIntegralValue + "</td></tr>");
+								$("#provDataDetail").append("<tr><td>" + res[i].cityName + "</td><td>" + (res[i].integralType == '0' ? '总计' : (res[i].integralType == '1' ? '盒包扫码获得积分' : (res[i].integralType == '2' ? '条包扫码获得积分' : (res[i].integralType == '3' ? '兑奖消耗积分' : '抽奖消耗积分')))) + "</td><td>" +  res[i].integralValue + "</td><td>" + res[i].addIntegralValue + "</td></tr>");
 							}
 						} else {
 							$("#provDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
