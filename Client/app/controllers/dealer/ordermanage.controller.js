@@ -21,13 +21,13 @@ define([], function() {
             };
 
             //设置input的默认时间
-            var allpage;
-            var stattime = dayFilter.beforenday('date', 10);
-            var endtime = dayFilter.today('date');
+            // var allpage;
+            // var stattime = dayFilter.beforenday('date', 10);
+            // var endtime = dayFilter.today('date');
 
             function strToTimestamp(s) {
                 s = s.replace(/-/g,"/");
-                var date = new Date(s );
+                var date = new Date(s);
                 return date.valueOf();
             }
             //时间戳变
@@ -37,24 +37,54 @@ define([], function() {
             function openwin(){
                 window.open("","","width=200,height=200")
             }
-            $("#durationStart").val(stattime);
-            $("#durationEnd").val(endtime); 
+            // $("#durationStart").val(stattime);
+            // $("#durationEnd").val(endtime); 
+            // $("#durationStart").datetimepicker({
+            //     format: 'yyyy-mm-dd HH:mm:ss',
+            //     minView:'month',
+            //     language: 'zh-CN',
+            //     autoclose:true
+            // }).on("click",function(){
+            //     $("#durationStart").datetimepicker("setEndDate",$("#durationEnd").val());
+            // });
+            // $("#durationEnd").datetimepicker({
+            //     format: 'yyyy-mm-dd HH:mm:ss',
+            //     minView:'month',
+            //     language: 'zh-CN',
+            //     autoclose:true,
+            //     endDate:new Date()
+            // }).on("click",function(){
+            //     $("#durationEnd").datetimepicker("setStartDate",$("#durationStart").val());
+            // });
+
             $("#durationStart").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
+                format: 'yyyy-mm-dd hh:ii', 
                 language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#durationStart").datetimepicker("setEndDate",$("#durationEnd").val());
-            });
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1
+            }).on('change', function (e) {
+                var startTime = e.target.value;
+                var endTime = $scope.endTime;
+                if (endTime < startTime) {
+                    $scope.endTime = '';
+                    $scope.$apply();
+                }
+            })
+
             $("#durationEnd").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
+                format: 'yyyy-mm-dd hh:ii', 
                 language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#durationEnd").datetimepicker("setStartDate",$("#durationStart").val());
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1
+            }).on('change', function (e) {
+                var endTime = e.target.value;
+                var startTime = $scope.startTime;
+                if (startTime > endTime) {
+                    $scope.startTime = '';
+                    $scope.$apply();
+                }
             });
             
             
@@ -100,8 +130,6 @@ define([], function() {
                 var provinceId = $('#provinceId').val();
                 var cityId = $('#cityId').val();
                 var areaId = $('#areaId').val();
-                var durationStart = $('#durationStart').val();
-                var durationEnd = $('#durationEnd').val();
                 var buyNum = $('#buyNum').val();
 
                 var searchData = {
@@ -109,8 +137,8 @@ define([], function() {
                     provinceId:provinceId,//省份id
                     cityId:cityId,//地市id
                     areaId:areaId,//区县id                   
-                    startTime: durationStart,//开始时间
-                    endTime:  durationEnd,//结束时间
+                    startTime: $scope.startTime ? $scope.startTime + ':00' : '',//开始时间
+                    endTime: $scope.endTime ? $scope.endTime + ':00' : '',//结束时间
                     buyNum : buyNum, //购买数量
                     page: 1,
                     pageSize: 10
@@ -141,9 +169,9 @@ define([], function() {
                 $('#provinceId').val('');
                 $('#cityId').val('');
                 $('#areaId').val('');
-                $('#durationStart').val('');
-                $('#durationEnd').val('');
                 $('#buyNum').val('');
+                $scope.startTime = '';
+                $scope.endTime = '';
                 getOrderList(initPage);
             }
 
@@ -163,18 +191,15 @@ define([], function() {
                         var provinceId = $('#provinceId').val();
                         var cityId = $('#cityId').val();
                         var areaId = $('#areaId').val();
-                        var durationStart = $('#durationStart').val();
-                        var durationEnd = $('#durationEnd').val();
                         var buyNum = $('#buyNum').val();
 
-                        
-                            curPageData.orderStatus = statusChange;//提现状态
-                            curPageData.provinceId = provinceId;//省份id
-                            curPageData.cityId = cityId;//地市id
-                            curPageData.areaId = areaId;//区县id                   
-                            curPageData.startTime = durationStart;//开始时间
-                            curPageData.endTime = durationEnd;//结束时间
-                            curPageData.buyNum = buyNum; //购买数量
+                        curPageData.orderStatus = statusChange;//提现状态
+                        curPageData.provinceId = provinceId;//省份id
+                        curPageData.cityId = cityId;//地市id
+                        curPageData.areaId = areaId;//区县id                   
+                        curPageData.startTime = $scope.startTime ? $scope.startTime + ':00' : '';//开始时间
+                        curPageData.endTime = $scope.endTime ? $scope.endTime + ':00' : '';//结束时间
+                        curPageData.buyNum = buyNum; //购买数量
                         
                         switch(keyCode){
                             case 'order-num':
