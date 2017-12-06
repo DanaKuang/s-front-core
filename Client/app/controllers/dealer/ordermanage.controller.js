@@ -270,8 +270,8 @@ define([], function() {
                 var provinceId = $('#provinceId').val();//省份id
                 var cityId = $('#cityId').val();//地市id
                 var areaId = $('#areaId').val();//区县id
-                var durationStart = $('#durationStart').val();//开始时间
-                var durationEnd = $('#durationEnd').val();//结束时间
+                // var durationStart = $('#durationStart').val();//开始时间
+                // var durationEnd = $('#durationEnd').val();//结束时间
                 var data = {};
 
                 if(statusChange != '' && statusChange != null){
@@ -286,12 +286,15 @@ define([], function() {
                 if(areaId != '' && areaId != null){
                     data.areaId = areaId;
                 }
-                if(durationStart != '' && durationStart != null){
-                    data.startTime = durationStart;
+                if($scope.startTime != '' && $scope.startTime != null){
+                    var startStr = $scope.startTime + ':00';
+                    data.startTime = startStr.replace(/:/g,'-');
                 }
-                if(durationEnd != '' && durationEnd != null){
-                    data.endTime = durationEnd;
+                if($scope.endTime != '' && $scope.endTime != null){
+                    var endStr = $scope.endTime + ':00';
+                    data.endTime = endStr.replace(/:/g,'-');
                 }
+                
                 if(newCode != '' && newCode != null){
                     switch(keyCode){
                         case 'order-num':
