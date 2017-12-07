@@ -1,0 +1,143 @@
+<div>
+	<div class="create-activity pop">
+	<!-- title 显示 -->
+	<nav>
+		<p>选择模板|活动设置</p>
+	</nav>
+	<!-- 进度展示 -->
+	<div class="header">
+		<div class="step">
+			<div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="(idx, item) in stepstream" ng-class="{'active': idx == step}">
+				<img class="img-thumbnail center-block" ng-src="{{item.image}}" alt="">
+				<p class="text-center">{{item.text}}</p>
+			</div>
+		</div>
+	</div>
+	<!-- 主体 -->
+	<div class="main">
+		<!-- 选择模板 -->
+		<div class="choosetemplate col-md-12 center-block">
+			<div class="choosecategory center-block">
+				<div class="title col-md-2 text-center"><span>分类模板&nbsp;&nbsp;:</span></div>
+				<div class="col-md-1 text-center"><span class="type all chose">全部</span></div>
+				<div class="col-md-8">
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+					<span class="type">全部</span>
+				</div>
+			</div>
+			<div class="showtemplate center-block">
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 template">
+					<div class="shadow-frame">
+						<div class="image">
+							<img class="img-thumbnail center-block" src="../../../../assets/image/fanpai.png" alt="">
+						</div>
+						<div class="qr text-center">
+							<p>扫一扫预览</p>
+							<img src="https://weiopn.oss-cn-beijing.aliyuncs.com/saas/wj.png" alt="">
+							<button class="choose">使用</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 分页 -->
+			<sa-turnpage conf="turnpageConf"></sa-turnpage>
+		</div>
+		<!-- 活动设置 -->
+		<sa-activityconfiguration></sa-activityconfiguration>
+	</div>
+</div>
+</div>

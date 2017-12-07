@@ -1,0 +1,29 @@
+<div>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr class="table-head">
+				<th>礼品ID</th>
+				<th>礼品名称</th>
+				<th>礼品图片</th>
+				<th>礼品类型</th>
+				<th>适用品牌</th>
+				<th>适用规格</th>
+				<th>剩余库存</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(idx, item) in productChooseList">
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td><img ng-src="{{item.giftPic}}" alt=""></td>
+				<td>{{item.giftType}}</td>
+				<td>{{item.brandNames}}</td>
+				<td>{{item.unitNames}}</td>
+				<td>{{item.stock}}</td>
+				<td class="choose" ng-click="choose($event)">选择</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+</div>

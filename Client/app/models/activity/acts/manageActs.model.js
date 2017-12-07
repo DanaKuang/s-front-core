@@ -1,13 +1,13 @@
 /**
  * Author: kuang
  * Create Date: 2017-07-18
- * Description: manageActs
+ * Description: manageacts
  */
 
 define([], function () {
-    var manageActsModel = {
+    var manageactsModel = {
         ServiceType: 'service',
-        ServiceName: 'manageActsModel',
+        ServiceName: 'manageactsModel',
         ServiceContent: ['request', function (request) {
             //定义资源
             var $model = this;
@@ -57,6 +57,15 @@ define([], function () {
 
             // 查看活动
             var LOOK_ACTIVITY = '/api/tztx/saas/saotx/activity/detail';
+
+            //保存调查问卷
+            var SAVE_QUSDTIONNAIRE_JSON_DATA = '/api/tztx/saas/saotx/activity/saveOrUpdate';
+
+            //获取调查问卷的编辑信息
+            var GET_QUSDTIONNAIRE_DETAIL_DATA = '/api/tztx/saas/saotx/activity/activityDetail';
+
+            //根据红包id获取红包详情
+            var GET_POOL_DETAIL = '/api/tztx/saas/saotx/poolRedpack/queryDetail';
 
             // 模板列表
             $model.getActSampleList = function () {
@@ -147,7 +156,22 @@ define([], function () {
                 return request.$Search(LOOK_ACTIVITY, data);
             }
 
+            //调查问卷
+            $model.saveQuestionnair = function (data) {
+                return request.$Search(SAVE_QUSDTIONNAIRE_JSON_DATA, data, true);
+            };
+
+            //获取调查问卷编辑信息
+            $model.editActivityQuestionnair = function (data) {
+                return request.$Search(GET_QUSDTIONNAIRE_DETAIL_DATA, data);
+            };
+
+            //获取调红包详情
+            $model.getPoolDetaiById = function (data) {
+                return request.$Search(GET_POOL_DETAIL, data);
+            };
+
         }]
     }
-    return manageActsModel
+    return manageactsModel
 })

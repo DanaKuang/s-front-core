@@ -16,7 +16,7 @@
 			</thead>
 			<tbody>
 				<tr class="show-list"  ng-repeat="(idx, item) in list">
-			  	<td class="order-num" data-toggle="modal" data-target=".check-dedtail" ng-click="showdetail($event)" data-orderid="{{item.orderCode}}">{{item.orderCode}}</td>
+			  	<td class="order-num" data-toggle="modal" data-target=".check-dedtail" ng-click="showdetail($event)" data-orderid="{{item.orderCode}}" data-appid="{{item.appId}}" data-autoid="{{item.autoId}}" data-openid="{{item.openId}}">{{item.orderCode}}</td>
 			  	<td>{{item.prizeWinner}}</td>
 			  	<td>{{item.activityName}}</td>
 			  	<td>{{item.prizeName}}</td>	
@@ -28,7 +28,6 @@
 			  </tr>
 			</tbody>
 		</table>
-		<div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+		<sa-flipover></sa-flipover>
 	</div>
-	
 </div>

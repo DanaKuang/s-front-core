@@ -145,7 +145,7 @@
 .select-duration .col-sm-1~.col-sm-5 {
 	padding-left: 0;
 }
-.select-duration-person .col-sm-1, .select-duration-person .col-sm-4 {
+.select-duration-person .col-sm-1, .select-duration-person .col-sm-5 {
 	margin-bottom: 0;
 	padding: 7px 0 0;
 	text-align: center; 
@@ -900,4 +900,23 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 
 .sample-list-item {
 	width: 25%;
+}
+
+
+
+/*添加CSS样式*/
+.padding{
+	padding:15px 45px;
+}
+.SheZhiStyle{
+	color:#0000FF;
+	font-weight:500;
+	cursor: pointer;
+}
+#selectSupply{
+	    border: 1px solid #D2D2D2;
+    width: 320px;
+    height: 35px;
+    font-size: 15px;
+    padding-left: 10px;
 }

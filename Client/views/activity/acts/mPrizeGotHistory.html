@@ -109,15 +109,8 @@
 							<button class="push-out btn btn-primary" ng-click="export($event)">导出搜索结果</button>
 							<div class="pull-in"><button class="btn btn-primary">导入物流信息</button><input type="file" onchange="angular.element(this).scope().change()"></div>
 						</div>
-
 						<!-- 列表展示区 -->
 						<sa-prizegotlist conf="prizegotlistConf"></sa-prizegotlist>
-
-						<!-- 分页区 -->
-							<div class="pagination-wrap">
-								<!-- 分页指令 -->
-								<sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
-							</div>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 def:                                             # 默认环境配置
-  runmode: 'local'                                 # 开发环境 #local #test #dev
+  runmode: 'local'                                # 开发环境 #local #test #dev
   homepage: 'index.html'                         # 首页
   loginpage: 'login.html'                        # 登陆
   findpage: 'find.html'                          # 找回密码
@@ -44,7 +44,7 @@ local:                                           # 测试环境配置
     - port: 80                                   # 请求端口号
       host: 'datatest.taozuike.com'              # 请求IP地址
     - port: 80                                   # 请求端口号
-      host: 'portal.v2.taozuike.com'             # 请求IP地址
+      host: 'portal.v2.taozuike.com'             # 请求IP地址 
     - port: 80                                   # 请求端口号
       host: 'retailer.taozuike.com'              # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤
@@ -59,7 +59,7 @@ test:                                            # 测试环境配置
     - port: 9090                                 # 请求端口号
       host: '127.0.0.1'                          # 请求IP地址
     - port: 10090                                # 请求端口号
-      host: '127.0.0.1'                          # 请求IP地址
+      host: '172.17.15.174'                      # 请求IP地址
     - port: 9096                                 # 请求端口号
       host: '172.17.15.164'                      # 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤

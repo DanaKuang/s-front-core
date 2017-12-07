@@ -1,0 +1,92 @@
+<div>
+	<div class="adsenseedit-list">
+        <form class="form-horizontal" enctype="multipart/form-data" name="form" novalidate>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span class="label-title">广告位ID</span>
+                        <p ng-model="id">{{id}}</p>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span class="label-title">广告位位置</span>
+                        <p ng-model="adSpPosition">{{adSpPosition}}</p>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span class="label-title">投放厂家 <i class="star">*</i></span>
+                        <select name="adOrgCode" ng-disabled="isDisabled" class="form-control" ng-model="adOrgCode" required>
+                            <option value="">全部</option>
+                            <option ng-repeat="item in selectManufacturerList" value="{{item.orgCode}}">{{item.orgName}}</option>
+                        </select>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adOrgCode.$touched">
+                            <div ng-show="form.adOrgCode.$error.required" class="wrong-tip">请选择投放厂家</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span class="label-title">投放品牌 <i class="star">*</i></span>
+                        <select name="adBrandCode" ng-disabled="isDisabled" class="form-control" ng-model="adBrandCode" required>
+                            <option value="">全部</option>
+                            <option ng-repeat="item in selectBrandsList" value="{{item.brandCode}}">{{item.name}}</option>
+                        </select>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adBrandCode.$touched">
+                            <div ng-show="form.adBrandCode.$error.required" class="wrong-tip">请选择投放品牌</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row adsnew-row-time">
+                        <span class="label-title">投放时间 <i class="star">*</i></span>
+                        <input name="stime" ng-disabled="isDisabled" class="form-control form_datetime" id="durationStart" size="16" type="text" value="" readonly placeholder="年-月-日(开始时间)" class="form_datetime form-item" ng-model="stime" value="{{stime}}" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.stime.$touched">
+                            <div ng-show="form.stime.$error.required" class="wrong-tip wrong-tip-start">请选择开始时间</div>
+                        </div>
+
+                        <span class="time-line">至</span>
+
+                        <input name="etime" ng-disabled="isDisabled" class="form-control form_datetime" id="durationEnd" size="16" type="text" value="" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" ng-model="etime" value="{{etime}}" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.etime.$touched">
+                            <div ng-show="form.etime.$error.required" class="wrong-tip wrong-tip-end">请选择结束时间</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span class="label-title">选择广告 <i class="star">*</i></span>
+                        <div class="multi">
+                            <select name="adCode" class="form-control input-sm select" ng-disabled="isDisabled" ng-model="ads.adCode" multiple="multiple" required>
+                                <option ng-repeat="item in selectAdCodeList" value="{{item.adCode}}">{{item.adName}}</option>
+                            </select>
+                        </div>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adCode.$touched">
+                            <div ng-show="form.adCode.$error.required" class="wrong-tip">请选择广告</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer" ng-hide="isView">
+                <div class="submit-wrap">
+                    <button type="submit" id="adsEditSave" class="btn btn-default f-btn" ng-click="updateAds()">保存</button>
+                    <button class="btn btn-default cancel-new f-btn" data-dismiss="modal" data-target=".edit-ads-modal">取消</button>
+                </div>
+            </div>
+
+        </form>
+	</div>
+</div>

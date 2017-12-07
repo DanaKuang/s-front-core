@@ -1,0 +1,131 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date: 2017-11-18
+ * Description: 经销商管理
+ */
+-->
+<!--搜索条件区域、表格、弹窗样式初始化-->
+<link rel="stylesheet" href="statics/assets/style/panel.css">
+<!--当前页样式-->
+<link rel="stylesheet" href="statics/assets/style/dealer.manage.css">
+<!--表单样式初始化-->
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<!--一个页面一个controller，一个页面对应一个controller文件-->
+<div ng-controller="dealerManageCtrl" class="dealer-manage">
+    <!--加个类，动画-->
+    <div class="animated fadeInRight">
+        <!--bootstrap容器-->
+        <div class="container-fluid">
+            <div class="ui-content-box row">
+                <div class="col-sm-12">
+                    <div class="ui-panel-title">
+                        <div class="lft">
+                            <i class="hot"></i>
+                            <span ng-if="!isDetial">经销商管理</span>
+                            <span ng-if="isDetial">经销商详情</span>
+                        </div>
+                    </div>
+
+                    <div class="ui-panel-box panel">
+                        <!-- 操作区 -->
+                        <div ng-if="!isDetial" class="panel-body operation multi">
+                            <!-- 筛选条件 -->
+                            <form class="form-horizontal">
+                                <div class="form-group col-sm-4">
+                                    <label for="status" class="control-label col-sm-4">审核状态</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="status" ng-model="vm.selectStatus">
+                                            <option value="">全部</option>
+                                            <option value="2">禁用</option>
+                                            <option value="1">启用</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-8 location">
+                                    <label for="location" class="control-label col-sm-2">位置</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="location" ng-model="vm.selectProvince" ng-options="o.name for o in manageProvinceList">
+                                            <option value="">省</option>
+                                            <!--<option ng-repeat="item in manageProvinceList" value="{{item.code}}">{{item.name}}</option>-->
+                                        </select>
+
+                                        <select class="form-control" ng-model="vm.selectCity" ng-options="o.name for o in manageCityList">
+                                            <option value="">市</option>
+                                            <!--<option ng-repeat="item in manageCityList" value="{{item.code}}">{{item.name}}</option>-->
+                                        </select>
+
+                                        <select class="form-control" ng-model="vm.selectCountry" ng-options="o.name for o in manageCountryList">
+                                            <option value="">区/县</option>
+                                            <!--<option ng-repeat="item in manageCountryList" value="{{item.code}}">{{item.name}}</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-8 keywords">
+                                    <label for="keywords" class="control-label col-sm-2">关键词</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control col-sm-5" ng-model="vm.keysKey" ng-init="vm.keysKey='salerName'">
+                                            <option value="salerName" selected>姓名</option>
+                                            <option value="phoneNo">手机号</option>
+                                            <option value="wxOpenId">微信ID</option>
+                                        </select>
+                                        <input class="keywords-input form-control col-sm-5" type="text" id="keywords" placeholder="请输入关键词" ng-model="vm.keysVal">
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- 搜索按钮 -->
+                            <div class="btn-con">
+                                <button type="submit" id="search" class="btn btn-primary search btn-lg" ng-click="search($event)">搜索</button>
+                                <button ng-click="reset()" type="submit" id="reset" class="btn btn-primary reset btn-lg">重置</button>
+                            </div>
+                        </div>
+
+                        <!-- 列表展示区 -->
+                        <sa-dealermanage ng-if="!isDetial" conf="manageConf"></sa-dealermanage>
+
+
+                        <!-- 管理详情：TA的团队、佣金明细、提现记录、推广订单明细 -->
+                        <sa-dealermanagedetial ng-if="isDetial" conf="detialTeamConf" info="detialInfoConf"></sa-dealermanagedetial>
+
+
+
+                        <!-- 分页区 -->
+                        <div class="pagination-wrap" ng-class='{paginationDetial: isDetial}'>
+                            <!-- 分页指令 -->
+                            <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框和animated同级-->
+
+
+    <!-- 容纳所有配置弹窗的div -->
+    <!--<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>-->
+
+    <!-- 启用、禁用 -->
+    <div class="modal fade bs-example-modal-sm start-manage-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle"><span ng-if="isStart">启用</span><span ng-if="!isStart">禁用</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p>您确定<span ng-if="isStart">启用</span><span ng-if="!isStart">禁用</span>此经销商？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="startConfirm()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

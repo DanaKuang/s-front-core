@@ -1,7 +1,11 @@
 {
-    "title": {
-        "text": "扫码次数地域分析",
-        "left": "left"
+    "toolbox": {
+      "x": "85%",
+      "feature": {
+          "restore" : {
+              "show": true
+          }
+      }
     },
     "tooltip": {
         "show": true,
@@ -15,22 +19,15 @@
             "color": "#6e6d6d"
         }
     },
-    "toolbox": {
-        "feature": {
-            "restore": {}
-        }
-    },
-    "visualMap": {
+    "dataRange": {
         "min": 0,
-        "max": 5000,
-        "left": "left",
-        "text": ["高","低"],
-        "seriesIndex": [1],
+        "max": 2500,
+        "x": "left",
+        "y": "bottom",
+        "text": ["高","低"], 
         "inRange": {
             "color": ["#e0ffff", "#006edd"]
-        },
-        "padding": 0,
-        "calculable" : true
+        }
     },
     "geo": {
         "map": "china",
@@ -80,7 +77,7 @@
            }
        }
     }, {
-        "name": "访问量",
+        "name": "pv",
         "type": "map",
         "geoIndex": 0,
         "data":[]

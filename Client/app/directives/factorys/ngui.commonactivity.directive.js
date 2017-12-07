@@ -32,7 +32,7 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['pageName']);
-                var allconfigtemplateScope = angular.element('.pop').scope();
+                var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
             }, true);
 

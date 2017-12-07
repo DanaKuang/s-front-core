@@ -1,0 +1,281 @@
+.region-margin {
+	margin-top: 25px;
+}
+
+.ui-panel-title {
+	margin-top: 20px;
+}
+
+.form-controlmdg {
+	width: 100px;
+}
+
+#durationStart {
+	margin-left: 12px;
+}
+.control-label{
+	width: 80px;
+}
+
+.form-inline {
+	display: flex;
+	justify-content: center;
+}
+
+
+/*导出*/
+
+.operBtnWrap {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pull-in {
+	position: relative;
+	display: inline-block;
+	margin-left: 20px;
+	width: 100px;
+	height: 26px;
+	cursor: pointer;
+}
+
+.pull-in input[type="file"] {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.form-control[readonly]{
+	background-color:#fff;
+}
+#cityId, #areaId, #provinceId {
+    width: 80px;
+    padding: 0;
+    margin: 0 0 0 5px;
+}
+/*表单*/
+
+.table-bordered {
+	border: 1px solid #ddd;
+}
+
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.table-head{
+	background-color:rgba(242, 242, 242, 1);
+}
+.seeInfo{
+	color:#337ab7;
+	cursor: pointer;
+}
+.infoTop{
+	width:98%;
+	margin:0 auto;
+	background:rgba(242, 242, 242, 1);
+}
+.infoTopH3{
+	display:inline-block;
+	text-align: left;
+	font-size:14px;
+	font-weight:400;
+	margin:10px 0 0 10px;
+}
+.infoTopNei{
+	width:90%;
+	margin:0 auto;
+	padding:10px;
+	
+}
+.spanAllTitle{
+	font-size:14px;
+	color: rgb(102, 102, 102);
+}
+.spanAllBody{
+	margin-left:8px;
+	font-size:14px;
+	color:rgb(30, 30, 30);
+}
+.ul1{
+	display:flex;
+	justify-content: space-between;
+	margin:20px 0;
+}
+.ul2{
+	display:flex;
+	justify-content: flex-start;
+	margin:20px 0;
+}
+.ul2 li:nth-child(2){
+	margin-left:115px;
+}
+.shrInfo{
+	height:200px;
+	width:98%;
+	/*background:#D0E9C6;*/
+	margin:20px auto;
+}
+#form{
+	width:80%;
+	height:150px;
+	/*background:#003399;*/
+	margin-left:95px;
+	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+	/*align-items: center;*/
+}
+.shrInfo_input{
+	height:30px;
+	width:400px;
+	border:1px solid #d2d2d2;
+	padding:0 10px;
+}
+.orderTracking{
+	width:98%;
+	/*background:#94FF7C;*/
+	margin:0 auto;
+}
+.orderTracking_left{
+	/*width:400px;*/
+	/*background:#0000FF;*/
+	margin:20px 0 0 100px;
+}
+.orderTracking_div{
+	/*display:flex;
+	justify-content: space-between;*/
+	margin:20px 0 ;
+}
+.btnCancel{
+	width:98%;
+	margin:0 auto;
+	display:flex;
+	justify-content: center;
+}
+.btnCancel button:nth-child(1){
+	width:70px;
+	height:25px;
+	background:rgba(22, 155, 213, 1);
+	color:#fff;
+	border:none;
+	border-radius:6px;
+	cursor: pointer;
+}
+.btnCancel button:nth-child(2){
+	width:70px;
+	height:25px;
+	background:rgba(22, 155, 213, 1);
+	color:#fff;
+	border:none;
+	margin: 0 20px;
+	border-radius:6px;
+	cursor: pointer;
+}
+.btnCancel button:nth-child(3){
+	width:70px;
+	height:25px;
+	background:#fff;
+	color:rgba(22, 155, 213, 1);
+	border:1px solid #1697d5;
+	border-radius:6px;
+	cursor: pointer;
+}
+.clearfix {
+    *zoom: 1
+}
+
+.clearfix:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "";
+}
+
+.lf {
+    float: left;
+}
+
+.rf {
+    float: right;
+}
+.footer_sec {
+    margin-top: 21px;
+}
+.total_info {
+    font-size: 11px;
+    color: #8A8A8A;
+}
+/*分页样式*/
+.tcdPageCode {
+    /*padding: 15px 20px;*/
+    text-align: left;
+    color: #ccc;
+}
+
+.tcdPageCode a {
+    display: inline-block;
+    /*color: #428bca;*/
+    color: #8A8A8A;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    /*border: 1px solid #ddd;*/
+    border: 1px solid #6E80FF;
+    margin: 0 2px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode a:hover {
+    /*text-decoration: none;*/
+    /*border: 1px solid #428bca;*/
+}
+
+.tcdPageCode span.current {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #6E80FF;
+    border: 1px solid #6E80FF;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.tcdPageCode span.disabled {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #8A8A8A;
+    background: #f2f2f2;
+    border: 1px solid #8A8A8A;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+/*.box_area{
+	width: 100%;
+}*/
+#aduitNoPass{
+	width: 260px;
+	height: 80px;
+	margin: 22px 0 20px 20px;
+	box-sizing: border-box;	
+	display: block;
+	float: left;
+}
+.box_btn{
+	box-sizing: border-box;
+	border-top: 1px solid #CECECE;
+}

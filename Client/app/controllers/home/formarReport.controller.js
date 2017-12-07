@@ -160,8 +160,7 @@ define([], function() {
 						if(res.status == 200) {
 							$scope.selectActivityNameList = res.data;
 							$scope.$apply();
-							console.log($scope.selectActivityNameList)
-							$("#activityName").multiselect({
+							$("select#activityName").multiselect({
 								includeSelectAllOption: true,
 								enableFiltering: true,
 								nonSelectedText: '请选择',
@@ -173,7 +172,7 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
-							//							.report-search .multiselect-container li label
+						$('[ng-model="selectActivityName"]').multiselect('refresh');
 						}
 
 					});
@@ -185,11 +184,11 @@ define([], function() {
 							$scope.selectActivityCityNameList = res.data;
 							$scope.$apply();
 							console.log($scope.selectActivityCityNameList)
-							$("#activityCityName").multiselect({
-								includeSelectAllOption: true,
-								enableFiltering: true,
+							$("select#activityCityName").multiselect({
 								nonSelectedText: '请选择',
 								allSelectedText: '全部',
+								includeSelectAllOption: true,
+								enableFiltering: true,
 								nSelectedText: '已选择',
 								selectAllText: '全部',
 								selectAllValue: 'all',
@@ -197,6 +196,8 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
+						$('[ng-model="selectActivityCityName"]').multiselect('refresh');
+							
 						}
 
 					});
@@ -245,6 +246,7 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
+
 						}
 						$('[ng-model="selectAllBrands"]').multiselect('refresh');
 
@@ -270,8 +272,9 @@ define([], function() {
 						if(n !== "") {
 							$scope.selectAllBrands = n;
 							var brandListArrObj = {};
-							var aaa = n.join()
-							brandListArrObj.provinceName = aaa;
+//							var aaa = n.join()
+							brandListArrObj.provinceName = n.join();
+
 							$model.$getSpeciftByBrand(brandListArrObj).then(function(res) {
 								//                  	console.log(res)
 								if(res.status == "200") {
@@ -358,12 +361,12 @@ define([], function() {
 			$scope.goback = function() {
 				$(".region-margin").hide();
 				$(".region-margin").eq(0).show();
-				$("#proviceName").multiselect().val([]).multiselect("refresh");
-				$("#applySpecift").multiselect().val([]).multiselect("refresh");
-				console.log($("#proviceName").multiselect().val([]))
-				$("#activityName").multiselect().val([]).multiselect("refresh");
-				$("#activityCityName").multiselect().val([]).multiselect("refresh");
-
+//				$("#proviceName").multiselect().val([]).multiselect("refresh");
+//				$("#applySpecift").multiselect().val([]).multiselect("refresh");
+//				console.log($("#proviceName").multiselect().val([]))
+//				$("#activityName").multiselect().val([]).multiselect("refresh");
+//				$("#activityCityName").multiselect().val([]).multiselect("refresh");
+//
 				$('#brand').val('');
 				$('#specift').val('');
 				$('#proviceName').val('');
@@ -373,7 +376,6 @@ define([], function() {
 				$('#summary_table').html('');
 				$('#provDataDetail').html('');
 				$('#weekCashWin').html('');
-				console.log($('#proviceName').val())
 				$('#applySpecift').val('');
 				$('#activityName').val('');
 				$('#activityCityName').val('');
@@ -387,10 +389,6 @@ define([], function() {
 					$scope.selectActivityNameList.length = 0;
 				}
 				$("#proviceDataSpecift").val();
-				$('#packs').multiselect().val([]).multiselect("refresh");
-				$('#cycleTime').multiselect().val([]).multiselect("refresh");
-				$('#cashWinSpecift').val('');
-				$('#entityWinSpecift').val('');
 			}
 
 			//查询按钮

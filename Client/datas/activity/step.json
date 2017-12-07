@@ -1,0 +1,48 @@
+{
+    "step": [
+        [
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step1-1.png",
+                "text": "选择模板"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step2-0.png",
+                "text": "活动设置"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step3-0.png",
+                "text": "设置完成"
+            }
+
+        ],
+    	[
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step1-0.png",
+                "text": "选择模板"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step2-1.png",
+                "text": "活动设置"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step3-0.png",
+                "text": "设置完成"
+            }
+
+        ],
+        [
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step1-0.png",
+                "text": "选择模板"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step2-0.png",
+                "text": "活动设置"
+            },
+            {
+                "image": "https://weiopn.oss-cn-beijing.aliyuncs.com/saas/step3-1.png",
+                "text": "设置完成"
+            }
+        ]
+    ]
+}

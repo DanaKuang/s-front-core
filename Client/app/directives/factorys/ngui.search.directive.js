@@ -28,7 +28,7 @@ define([], function () {
             });
             return this;
         };
-        dateSearch.init = function (ele, type) {
+        dateSearch.init = function (ele, type, fn) {
             var that = this;
             type = type || 'year';
             // $(ele).find('select, .form_datetime').on('change', function (e, val) {

@@ -1,0 +1,130 @@
+<div>
+    <div class="adsnew-list">
+        <form class="form-horizontal" enctype="multipart/form-data" name="form" novalidate>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span>广告名称 <i>*</i></span>
+                        <input ng-disabled="isDisabled" class="form-control" type="text" name="adsName" ng-model="adsName" placeholder="请输入广告名称，最多50个字" maxlength="50" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adsName.$touched">
+                            <div ng-show="form.adsName.$error.required || form.adsName.$error.maxlength" class="wrong-tip">请输入广告名称，1~50字</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-row adsnew-row-time">
+                        <span>时间设置 <i>*</i></span>
+                        <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationStart" size="16" type="text" readonly placeholder="年-月-日(开始时间)" class="form_datetime form-item" name="startTime" ng-model="startTime" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.startTime.$touched">
+                            <div ng-show="form.startTime.$error.required" class="wrong-tip wrong-tip-start">请输入开始时间</div>
+                        </div>
+
+                        <span class="time-line">至</span>
+
+                        <input ng-disabled="isDisabled" class="form-control form_datetime" id="durationEnd" size="16" type="text" readonly placeholder="年-月-日(结束时间)" class="form_datetime form-item" name="endTime" ng-model="endTime" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.endTime.$touched">
+                            <div ng-show="form.endTime.$error.required" class="wrong-tip wrong-tip-end">请输入结束时间</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span>广告图片 <i>*</i></span>
+                        <div class="ads-img-con" ng-if="adsImageShow">
+                            <img ng-src="{{adsImage}}" alt="">
+                            <div ng-if="!isShow" class="img-delete" ng-click="adsImgClose()">✕</div>
+                        </div>
+                        <input ng-if="!adsImageShow" name="adsImage" ng-disabled="isDisabled" class="form-control ads-image-input" type="file" class="uploadimage" onchange="angular.element(this).scope().fileChange()" accept="image/*" ng-model="adsImage" required/>
+
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adsImage.$touched">
+                            <div ng-show="form.adsImage.$error.required" class="wrong-tip">请上传图片</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="adsnew-row">
+                        <span>排序优先级 <i>*</i></span>
+                        <input ng-disabled="isDisabled" class="form-control" type="number" step="1" min="0" name="adsSort" ng-model="adsSort" placeholder="请输入优先级" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adsSort.$touched">
+                            <div ng-show="form.adsSort.$error.required || form.adsSort.$invalid" class="wrong-tip">请输入优先级</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="adsnew-row adsnew-row-type">
+                        <span>广告类型 <i>*</i></span>
+                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="true" ng-checked="true" type="radio" name="type" />外链宣传</label>
+                        <label><input ng-disabled="isDisabled" ng-model="adsType" ng-value="false" type="radio" name="type"/>虚拟卡券</label>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="adsType">
+                    <label class="adsnew-row">
+                        <span>URL <i>*</i></span>
+                        <input ng-disabled="isDisabled" class="form-control" type="url" name="adUrl" ng-model="ads.adUrl" placeholder="请输入URL" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.adUrl.$touched">
+                            <div ng-show="form.adUrl.$error.required || form.adUrl.$invalid" class="wrong-tip">请输入正确格式的URL</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div ng-if="!adsType">
+                    <div class="form-group">
+                        <label class="adsnew-row">
+                            <span>选择礼品 <i>*</i></span>
+                            <div class="gift-img-con" ng-if="imgshow">
+                                <img ng-src="{{giftPic}}" alt="">
+                                <div ng-if="!isShow" class="img-delete" ng-click="giftClose()">✕</div>
+                            </div>
+                            <p ng-if="imgshow" class="gift-img-title">{{giftName}}</p>
+
+                            <div ng-if="!imgshow" class="show-gift-list" ng-click="getGiftList()" data-toggle="modal" data-target=".create-adsgift-modal">+选择礼品池</div>
+                            <input name="giftId" ng-disabled="isDisabled" class="form-control" ng-model="giftId" type="hidden" required>
+                            <!--验证-->
+                            <div ng-show="form.$submitted">
+                                <div ng-show="form.giftId.$error.required" class="wrong-tip">请选择礼品</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="adsnew-row">
+                            <span>奖品数量 <i>*</i></span>
+                            <input name="cardNum" ng-disabled="clickType == 'edit' ? true : false" class="form-control" type="number" step="1" min="0" ng-model="ads.cardNum" required>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.cardNum.$touched">
+                                <div ng-show="form.cardNum.$error.required || form.cardNum.$invalid" class="wrong-tip">请输入正确格式的奖品数量</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div ng-if="clickType == 'edit'" class="form-group">
+                        <label class="adsnew-row">
+                            <span>剩余奖品数量</span>
+                            <input disabled class="form-control" type="number" ng-model="cardSuptNum">件
+                            <button class="add-stock btn btn-primary" ng-click="addStock()" data-toggle="modal" data-target=".add-stock-modal">增库</button>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="adsnew-checkbox">
+                        <input ng-disabled="isDisabled" type="checkbox" ng-model="adsEnabled" /> 是否启用本广告（勾选并保存后该广告将生效，不勾选则为待启用状态)
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer" ng-hide="isView">
+                <div class="submit-wrap">
+                    <button type="submit" class="btn btn-default f-btn" ng-click="createAds()">保存</button>
+                    <button class="btn btn-default cancel-new f-btn" data-dismiss="modal" data-target=".create-ads-modal">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
