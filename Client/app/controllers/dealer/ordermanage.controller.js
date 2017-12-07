@@ -86,6 +86,36 @@ define([], function() {
                     $scope.$apply();
                 }
             });
+            //支付时间
+            $("#payStartTime").datetimepicker({
+                format: 'yyyy-mm-dd hh:ii', 
+                language: 'zh-CN',
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1
+            }).on('change', function (e) {
+                var payStartTime = e.target.value;
+                var payEndTime = $scope.payEndTime;
+                if (payEndTime < payStartTime) {
+                    $scope.payEndTime = '';
+                    $scope.$apply();
+                }
+            })
+
+            $("#payEndTime").datetimepicker({
+                format: 'yyyy-mm-dd hh:ii', 
+                language: 'zh-CN',
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1
+            }).on('change', function (e) {
+                var payEndTime = e.target.value;
+                var payStartTime = $scope.payStartTime;
+                if (payStartTime > payEndTime) {
+                    $scope.payStartTime = '';
+                    $scope.$apply();
+                }
+            });
             
             
             //订单状态
@@ -139,6 +169,8 @@ define([], function() {
                     areaId:areaId,//区县id                   
                     startTime: $scope.startTime ? $scope.startTime + ':00' : '',//开始时间
                     endTime: $scope.endTime ? $scope.endTime + ':00' : '',//结束时间
+                    startTime2: $scope.payStartTime ? $scope.payStartTime + ':00' : '',//支付开始时间
+                    endTime2: $scope.payEndTime ? $scope.payEndTime + ':00' : '',//支付结束时间
                     buyNum : buyNum, //购买数量
                     page: 1,
                     pageSize: 10
@@ -172,6 +204,8 @@ define([], function() {
                 $('#buyNum').val('');
                 $scope.startTime = '';
                 $scope.endTime = '';
+                $scope.payStartTime = '';
+                $scope.payEndTime = '';
                 getOrderList(initPage);
             }
 
@@ -199,6 +233,8 @@ define([], function() {
                         curPageData.areaId = areaId;//区县id                   
                         curPageData.startTime = $scope.startTime ? $scope.startTime + ':00' : '';//开始时间
                         curPageData.endTime = $scope.endTime ? $scope.endTime + ':00' : '';//结束时间
+                        curPageData.startTime2 = $scope.payStartTime ? $scope.payStartTime + ':00' : '';//支付开始时间
+                        curPageData.endTime2 = $scope.payEndTime ? $scope.payEndTime + ':00' : '';//支付结束时间
                         curPageData.buyNum = buyNum; //购买数量
                         
                         switch(keyCode){
@@ -270,8 +306,6 @@ define([], function() {
                 var provinceId = $('#provinceId').val();//省份id
                 var cityId = $('#cityId').val();//地市id
                 var areaId = $('#areaId').val();//区县id
-                // var durationStart = $('#durationStart').val();//开始时间
-                // var durationEnd = $('#durationEnd').val();//结束时间
                 var data = {};
 
                 if(statusChange != '' && statusChange != null){
@@ -294,7 +328,15 @@ define([], function() {
                     var endStr = $scope.endTime + ':00';
                     data.endTime = endStr.replace(/:/g,'-');
                 }
-                
+                //支付时间
+                if($scope.payStartTime != '' && $scope.payStartTime != null){
+                    var payStartStr = $scope.payStartTime + ':00';
+                    data.startTime2 = payStartStr.replace(/:/g,'-');
+                }
+                if($scope.payEndTime != '' && $scope.payEndTime != null){
+                    var payEndStr = $scope.payEndTime + ':00';
+                    data.endTime2 = payEndStr.replace(/:/g,'-');
+                }
                 if(newCode != '' && newCode != null){
                     switch(keyCode){
                         case 'order-num':
