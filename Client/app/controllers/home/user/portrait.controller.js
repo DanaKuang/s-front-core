@@ -323,8 +323,8 @@ define([], function() {
 
 				})();
 
-				
-			
+
+
 				//用户各规格扫码烟包数
 				function getSupplyData() {
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
@@ -400,10 +400,10 @@ define([], function() {
 
 				})();
 			}
-			
-			
-			
-			
+
+
+
+
 			//调取openId
 			function publicTwo(params) {
 				//用户基本信息
@@ -589,8 +589,8 @@ define([], function() {
 
 				})();
 
-				
-			
+
+
 				//用户各规格扫码烟包数
 				function getSupplyData() {
 					var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
