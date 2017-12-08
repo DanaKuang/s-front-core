@@ -249,11 +249,13 @@ define([], function () {
               if(res.data[i].provinceName === "内蒙区"){
                 res.data[i].provinceName = "内蒙古"
               }
-              var obj = {
-                "value": res.data[i].scanPv,
-                "name": res.data[i].provinceName.replace(reg,"")
+              if (res.data[i].scanPv !== 0) {
+                var obj = {
+                  "value": res.data[i].scanPv,
+                  "name": res.data[i].provinceName.replace(reg,"")
+                }
+                mapOption.series[0].data.push(obj)
               }
-              mapOption.series[0].data.push(obj)
             }
             //console.log(mapOption);
             mapChart.setOption(mapOption);
