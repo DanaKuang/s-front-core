@@ -84,6 +84,18 @@
 									</div>
 								</div>
 							</div>
+							<div class="form-horizontal">
+								<div class="form-group col-sm-6">
+									<label class="control-label col-sm-2">支付时间</label>
+									<div class="col-sm-4">
+										<input id="payStartTime" style="width:100%;" size="16" type="text" placeholder="年-月-日 时:分(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="payStartTime">
+									</div>
+									<div class="control-label col-sm-1" style="width:20px;margin-left:-12px;">至</div>
+									<div class="col-sm-4">
+										<input id="payEndTime" style="width:100%;" size="16" type="text" readonly placeholder="年-月-日 时:分(结束时间)" class="form-control input-sm form_datetime" ng-model="payEndTime">
+									</div>
+								</div>
+							</div>
 							<div class="form-inline col-sm-12">
 								<button class="btn btn-primary search" style="margin-right:30px;" ng-click="search()">查询</button>
 								<button class="btn btn-primary reset" ng-click="reset()">重置</button>
