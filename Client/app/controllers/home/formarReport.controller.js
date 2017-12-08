@@ -30,7 +30,7 @@ define([], function() {
 			};
 			$scope.saoobj = {
 				"dt": stattime,
-				"activityName": "芙蓉王（硬细支）"
+				"activityName": ""
 			};
 			$scope.summar = {
 				"dt": stattime,
@@ -56,7 +56,6 @@ define([], function() {
 						break;
 					case 2:
 						gloabl.getZhongGift();
-						gloabl.userPro($scope.saoobj);
 						break;
 					case 3:
 						gloabl.getBrand();
@@ -148,6 +147,9 @@ define([], function() {
 								$(".report-gui").find("select").append("<option value=" + res[i].activityName + ">" + res[i].activityName + "</option>")
 							}
 						}
+						$scope.saoobj.activityName = $(".report-gui").find("select").val();
+						gloabl.userPro($scope.saoobj);
+						
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
 						//console.log($scope.saoobj);
 						//						gloabl.userPro($scope.saoobj);
