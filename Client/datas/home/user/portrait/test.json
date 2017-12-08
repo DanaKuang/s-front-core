@@ -19,8 +19,8 @@
         {
           "type": "inside",
           "show": true,
-          "start":0,
-          "end": 30,
+          "start": 70,
+          "end": 100,
           "zoomLock":true
         }
       ],
@@ -45,7 +45,7 @@
         }
         }
     ],
-    
+
   "series" : [
     {
       "name":"city",
