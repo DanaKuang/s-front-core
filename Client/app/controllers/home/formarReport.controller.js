@@ -30,7 +30,7 @@ define([], function() {
 			};
 			$scope.saoobj = {
 				"dt": stattime,
-				"activityName": "芙蓉王（硬细支）"
+				"activityName": ""
 			};
 			$scope.summar = {
 				"dt": stattime,
@@ -56,7 +56,6 @@ define([], function() {
 						break;
 					case 2:
 						gloabl.getZhongGift();
-						gloabl.userPro($scope.saoobj);
 						break;
 					case 3:
 						gloabl.getBrand();
@@ -111,7 +110,7 @@ define([], function() {
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
 								var curNum = i + 1;
-								$("#win_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].effectScanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].drawUv + "</td><td>" + res[i].redpacketFee + "</td><td>" + res[i].yearRedpacketFee + "</td></tr>");
+								$("#win_table").append("<tr><td>" + res[i].provinceName + "</td><td>" + res[i].cityName + "</td><td>" + res[i].scanPv + "</td><td>" + res[i].effectScanPv + "</td><td>" + res[i].scanUv + "</td><td>" + res[i].yearScanPv + "</td><td>" + res[i].yearEffectScanPv  + "</td><td>" + res[i].yearScanUv + "</td><td>" + res[i].rafflePv + "</td><td>" + res[i].drawPv + "</td><td>" + res[i].drawRate + "</td><td>" + res[i].drawUv + "</td><td>" + res[i].redpacketFee + "</td><td>" + res[i].yearRedpacketFee + "</td></tr>");
 							}
 						} else {
 							$("#win_table").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
@@ -148,6 +147,9 @@ define([], function() {
 								$(".report-gui").find("select").append("<option value=" + res[i].activityName + ">" + res[i].activityName + "</option>")
 							}
 						}
+						$scope.saoobj.activityName = $(".report-gui").find("select").val();
+						gloabl.userPro($scope.saoobj);
+						
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
 						//console.log($scope.saoobj);
 						//						gloabl.userPro($scope.saoobj);
@@ -160,7 +162,8 @@ define([], function() {
 						if(res.status == 200) {
 							$scope.selectActivityNameList = res.data;
 							$scope.$apply();
-							$("select#activityName").multiselect({
+							console.log($scope.selectActivityNameList)
+							$("#activityName").multiselect({
 								includeSelectAllOption: true,
 								enableFiltering: true,
 								nonSelectedText: '请选择',
@@ -172,7 +175,7 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
-						$('[ng-model="selectActivityName"]').multiselect('refresh');
+							//							.report-search .multiselect-container li label
 						}
 
 					});
@@ -184,11 +187,11 @@ define([], function() {
 							$scope.selectActivityCityNameList = res.data;
 							$scope.$apply();
 							console.log($scope.selectActivityCityNameList)
-							$("select#activityCityName").multiselect({
-								nonSelectedText: '请选择',
-								allSelectedText: '全部',
+							$("#activityCityName").multiselect({
 								includeSelectAllOption: true,
 								enableFiltering: true,
+								nonSelectedText: '请选择',
+								allSelectedText: '全部',
 								nSelectedText: '已选择',
 								selectAllText: '全部',
 								selectAllValue: 'all',
@@ -196,8 +199,6 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
-						$('[ng-model="selectActivityCityName"]').multiselect('refresh');
-							
 						}
 
 					});
@@ -246,7 +247,6 @@ define([], function() {
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
-
 						}
 						$('[ng-model="selectAllBrands"]').multiselect('refresh');
 
@@ -272,9 +272,8 @@ define([], function() {
 						if(n !== "") {
 							$scope.selectAllBrands = n;
 							var brandListArrObj = {};
-//							var aaa = n.join()
-							brandListArrObj.provinceName = n.join();
-
+							var aaa = n.join()
+							brandListArrObj.provinceName = aaa;
 							$model.$getSpeciftByBrand(brandListArrObj).then(function(res) {
 								//                  	console.log(res)
 								if(res.status == "200") {
@@ -332,7 +331,7 @@ define([], function() {
 						$(".report-table").find("tbody").html("");
 						if(res.length > 0) {
 							for(var i = 0; i < res.length; i++) {
-								$("#provDataDetail").append("<tr><td>" + res[i].cityName + "</td><td>" + (res[i].integralType == '0' ? '总计' : (res[i].integralType == '1' ? '盒包扫码获得积分' : (res[i].integralType == '2' ? '条包扫码获得积分' : (res[i].integralType == '3' ? '兑奖消耗积分' : '抽奖消耗积分')))) + "</td><td>" + (res[i].integralType == '0' ? '-' : res[i].integralValue) + "</td><td>" + res[i].addIntegralValue + "</td></tr>");
+								$("#provDataDetail").append("<tr><td>" + res[i].cityName + "</td><td>" + (res[i].integralType == '0' ? '总计' : (res[i].integralType == '1' ? '盒包扫码获得积分' : (res[i].integralType == '2' ? '条包扫码获得积分' : (res[i].integralType == '3' ? '兑奖消耗积分' : '抽奖消耗积分')))) + "</td><td>" +  res[i].integralValue + "</td><td>" + res[i].addIntegralValue + "</td></tr>");
 							}
 						} else {
 							$("#provDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
@@ -361,12 +360,12 @@ define([], function() {
 			$scope.goback = function() {
 				$(".region-margin").hide();
 				$(".region-margin").eq(0).show();
-//				$("#proviceName").multiselect().val([]).multiselect("refresh");
-//				$("#applySpecift").multiselect().val([]).multiselect("refresh");
-//				console.log($("#proviceName").multiselect().val([]))
-//				$("#activityName").multiselect().val([]).multiselect("refresh");
-//				$("#activityCityName").multiselect().val([]).multiselect("refresh");
-//
+				$("#proviceName").multiselect().val([]).multiselect("refresh");
+				$("#applySpecift").multiselect().val([]).multiselect("refresh");
+				console.log($("#proviceName").multiselect().val([]))
+				$("#activityName").multiselect().val([]).multiselect("refresh");
+				$("#activityCityName").multiselect().val([]).multiselect("refresh");
+
 				$('#brand').val('');
 				$('#specift').val('');
 				$('#proviceName').val('');
@@ -376,6 +375,7 @@ define([], function() {
 				$('#summary_table').html('');
 				$('#provDataDetail').html('');
 				$('#weekCashWin').html('');
+				console.log($('#proviceName').val())
 				$('#applySpecift').val('');
 				$('#activityName').val('');
 				$('#activityCityName').val('');
@@ -389,6 +389,10 @@ define([], function() {
 					$scope.selectActivityNameList.length = 0;
 				}
 				$("#proviceDataSpecift").val();
+				$('#packs').multiselect().val([]).multiselect("refresh");
+				$('#cycleTime').multiselect().val([]).multiselect("refresh");
+				$('#cashWinSpecift').val('');
+				$('#entityWinSpecift').val('');
 			}
 
 			//查询按钮
