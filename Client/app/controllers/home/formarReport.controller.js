@@ -43,6 +43,11 @@ define([], function() {
 			$scope.cashWinDataObjmdg = {
 				"dt": stattime
 			};
+			$scope.winDataObj = {
+				'activityName': $("#activityName").val().join(),
+				'cityName': $("#activityCityName").val().join(),
+				'awardName': $("#inputSou").val()
+			}
 			//页面切换
 			$scope.tabs = function(index) {
 				$(".region-margin").hide();
@@ -63,6 +68,7 @@ define([], function() {
 						break;
 					case 4:
 						gloabl.getActivityName();
+						gloabl.getWeekScanWinData($scope.winDataObj);						
 						break;
 					case 5:
 						gloabl.getProvData($scope.cashWinDataObj);
