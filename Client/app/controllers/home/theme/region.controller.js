@@ -512,31 +512,19 @@ define([], function() {
 					params.kpiType = 'pv';
 					getCityTimesData(params);
 				})();
-				$scope.pvOrder = true;
-				$scope.codeOrder = false;
-				$scope.uvOrder = false;
 				//根据扫码次数排序查询
 				$scope.orderByPv = function(){
 					params.kpiType = 'pv';
-					$scope.pvOrder = true;
-					$scope.codeOrder = false;
-					$scope.uvOrder = false;
 					getCityTimesData(params);
 				}
 				//根据扫码烟包数排序查询
 				$scope.orderByCode = function(){
 					params.kpiType = 'code';
-					$scope.pvOrder = false;
-					$scope.codeOrder = true;
-					$scope.uvOrder = false;
 					getCityTimesData(params);
 				}
 				//根据扫码人数排序查询
 				$scope.orderByUv = function(){
 					params.kpiType = 'uv';
-					$scope.pvOrder = false;
-					$scope.codeOrder = false;
-					$scope.uvOrder = true;
 					getCityTimesData(params);
 				}
 			}

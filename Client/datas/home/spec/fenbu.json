@@ -2,6 +2,9 @@
   "title": {
     "text": ""
   },
+  "legend":{
+    "data": ["中奖数量","领奖数量"]
+  },
   "tooltip": {
     "trigger": "axis",
     "axisPointer": {
@@ -30,23 +33,30 @@
   },
   "series": [
     {
+      "name":"领奖数量",
       "type": "bar",
       "barWidth":20,
+      "stack": "红包",
       "data": [],
-      "label":{
-        "normal":{
-          "show":true,
-          "position":"right",
-          "textStyle":{
-            "color":"black"
-          }
-        }
-      },
+    
       "itemStyle":{
         "normal":{
-          "color":"#76D7F7"
+          "color":"#5d9cd2"
+        }
+      }
+    },
+    {
+      "name": "中奖数量",
+      "type": "bar",
+      "barWidth":20,
+      "stack": "红包",
+      "data": [],
+      "itemStyle":{
+        "normal":{
+          "color":"#7ad7f6"
         }
       }
     }
+    
   ]
 }

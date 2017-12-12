@@ -1,0 +1,54 @@
+{
+    "grid": {
+        "left": "0%",
+        "right": "6%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "type": "category",
+        "axisLabel":{
+            "interval": 0
+        },
+        "data": []
+    },
+    "dataZoom": [
+        {
+          "type": "inside",
+          "show": true,
+          "start":0,
+          "end": 45,
+          "zoomLock":true
+        }
+      ],
+    "yAxis": {
+        "type": "value",
+        "axisLabel": {
+            "show": false
+        }
+    },
+    "series": [
+        {
+            "name":"城市扫码排名",
+            "type": "bar",
+            "barWidth": "45%",
+            "itemStyle": {
+                "normal": {
+                    "color": "#7ad7f6",
+                    "lineStyle": {
+                        "color": "#7ad7f6"
+                    }
+                }
+            },
+            "label": {
+              "normal": {
+                "show": true,
+                "position": "top",
+                "textStyle": {
+                    "color": "black"
+                }
+              }
+            },
+            "data":[]
+        }
+    ]
+}

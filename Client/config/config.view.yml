@@ -127,13 +127,6 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/retailer/detail.html'
-  - httpmethod: 'get'                       # 零售户分析
-    routepath: '/view/home/retailer/analysis'
-    description: 'retailer'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'home/retailer/analysis.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'
