@@ -86,11 +86,7 @@ define([], function() {
 				$(".ui-search option").each(function(i) {
 					$(".ui-search option").eq(i).attr("selected", false);
 				})
-				$(".region option").each(function(i) {
-					$(".region option").eq(i).attr("selected", false);
-					$(".region").find("option[value=" + Value + "]").attr("selected", "selected");
-					$(".regions").find("option[value=" + cityValue + "]").attr("selected", "selected")
-				})
+				
 				if($(this).val() === "month") {
 					$("#month").attr("selected", "selected");
 					$(".region-search-r").eq(2).show();
@@ -104,20 +100,27 @@ define([], function() {
 					$(".region-search-r").eq(1).show();
 					$(".region-describle").text("仪表盘中间值确定方式：往前推四周（不包括本周）的均值")
 				}
+				$(".region option").each(function(i) {
+					$(".region option").eq(i).attr("selected", false);
+					$(".region").find("option[value=" + Value + "]").attr("selected", "selected");
+				})
+				$(".regions option").each(function(i) {
+					$(".regions option").eq(i).attr("selected", false);
+					$(".regions").find("option[value=" + cityValue + "]").attr("selected", "selected");
+				})
 			});
 			//查询
 			$scope.search = function($event) {
 				var that = $event.target;
 				// var reg = /(省|市|区)/;
-				console.log($('.regions').val());
 				var params = {
 					"provinceName": $(that).siblings(".region").val(),
-					"cityName": $('.regions').val() == '全部' ? '' : $('.regions').val(),
+					"cityName": $(that).siblings('.regions').val() == '全部' ? '' : $(that).siblings(".regions").val(),
 					"statTime": $(that).siblings().hasClass("date-wrap") ?
 						($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()) : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
 					"statType": $(that).siblings(".ui-search").val()
 				}
-				public(params)
+				public(params);
 			};
 
 			function public(params) {
