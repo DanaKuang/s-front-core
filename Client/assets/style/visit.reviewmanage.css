@@ -4,7 +4,7 @@
 
 /*11.28零售户调改*/
 .form-horizontal .control-label {
-  width: 100px;
+  width: 90px;
   margin-right: 0px; }
 
 .form-horizontal .form-control {
@@ -35,10 +35,6 @@
   line-height: 34px;
   text-align: center; }
 
-.print .control-label {
-  width: 110px;
-  margin-left: -38px; }
-
 .panel-body {
   padding: 15px;
   position: relative; }
@@ -47,7 +43,7 @@
   float: left; }
 
 .search-btn-con .search {
-  margin-left: 87px; }
+  margin-left: 76px; }
 
 .search-btn-con .reset {
   margin-left: 30px; }

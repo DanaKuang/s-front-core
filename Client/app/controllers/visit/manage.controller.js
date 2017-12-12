@@ -31,7 +31,7 @@ define([], function () {
             currentPage: 'index'
           }
 
-          // *** 详情 开始
+          // 详情
           $scope.detial = {
             detialPage: 'info'
           };
@@ -194,6 +194,7 @@ define([], function () {
           }, true)
 
 
+          // *** 详情 start
           // 获取详情信息
           function getDetialList(id, from) {
             // 初始化 基本信息，这里注意，不能写成$scope.info={isEdit : true,licenceImg: ''}
@@ -262,7 +263,7 @@ define([], function () {
               $scope.paginationConf = $scope.indexPaginationConf;
             }
           }
-          // *** 详情 结束
+          // *** 详情 end
 
 
 

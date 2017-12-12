@@ -7,8 +7,9 @@
 
 /*11.28零售户调改*/
 .form-horizontal .control-label {
-  width: 100px;
-  margin-right: 0px; }
+  width: 90px;
+  margin-right: 0px;
+}
 
 .form-horizontal .form-control {
   width: 100%; }
@@ -40,7 +41,7 @@
 
 .print .control-label {
   width: 110px;
-  margin-left: -38px; }
+  margin-left: -50px; }
 
 .panel-body {
   padding: 15px;
@@ -178,7 +179,9 @@
 
 // 基本信息
 .detial-info {
-  overflow: hidden;
+  ul {
+    overflow: hidden;
+  }
   li {
     width: 315px;
     line-height: 34px;

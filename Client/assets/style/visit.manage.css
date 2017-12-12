@@ -4,7 +4,7 @@
 
 /*11.28零售户调改*/
 .form-horizontal .control-label {
-  width: 100px;
+  width: 90px;
   margin-right: 0px; }
 
 .form-horizontal .form-control {
@@ -37,7 +37,7 @@
 
 .print .control-label {
   width: 110px;
-  margin-left: -38px; }
+  margin-left: -50px; }
 
 .panel-body {
   padding: 15px;
@@ -156,55 +156,61 @@
   text-decoration: underline;
   margin-bottom: 5px; }
 
-.detial-info {
+.detial-info ul {
   overflow: hidden; }
-  .detial-info li {
-    width: 315px;
-    line-height: 34px;
-    font-size: 12px;
+
+.detial-info li {
+  width: 315px;
+  line-height: 34px;
+  font-size: 12px;
+  float: left;
+  margin: 0 15px 10px 0; }
+  .detial-info li label {
     float: left;
-    margin: 0 15px 10px 0; }
-    .detial-info li label {
-      float: left;
-      font-weight: normal;
-      margin-bottom: 0px; }
-    .detial-info li .title {
-      width: 115px;
-      float: left;
-      text-align: right; }
-      .detial-info li .title i {
-        color: #f00; }
-    .detial-info li .value {
-      width: 200px;
-      float: left;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; }
-    .detial-info li .form-control {
-      width: 200px;
-      float: left;
-      font-size: 12px; }
-    .detial-info li .info-btn-con {
-      margin-left: 115px; }
-  .detial-info .row {
-    width: 100%;
-    margin-top: 10px; }
-    .detial-info .row .value, .detial-info .row .form-control {
-      width: 400px; }
-  .detial-info .location {
-    width: 400px;
-    overflow: hidden; }
-    .detial-info .location .form-control {
-      width: 30%;
-      margin-right: 3%; }
-  .detial-info .status label {
-    margin-right: 20px; }
-  .detial-info .status input {
-    margin-right: 5px; }
-  .detial-info .btn-con {
+    font-weight: normal;
+    margin-bottom: 0px; }
+  .detial-info li .title {
+    width: 115px;
+    float: left;
+    text-align: right; }
+    .detial-info li .title i {
+      color: #f00; }
+  .detial-info li .value {
+    width: 200px;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .detial-info li .form-control {
+    width: 200px;
+    float: left;
+    font-size: 12px; }
+  .detial-info li .info-btn-con {
     margin-left: 115px; }
-    .detial-info .btn-con .btn {
-      margin: 20px 15px 10px 0; }
+
+.detial-info .row {
+  width: 100%;
+  margin-top: 10px; }
+  .detial-info .row .value, .detial-info .row .form-control {
+    width: 400px; }
+
+.detial-info .location {
+  width: 400px;
+  overflow: hidden; }
+  .detial-info .location .form-control {
+    width: 30%;
+    margin-right: 3%; }
+
+.detial-info .status label {
+  margin-right: 20px; }
+
+.detial-info .status input {
+  margin-right: 5px; }
+
+.detial-info .btn-con {
+  margin-left: 115px; }
+  .detial-info .btn-con .btn {
+    margin: 20px 15px 10px 0; }
 
 .table tr th, .table tr td {
   font-size: 12px; }
