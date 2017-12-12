@@ -89,9 +89,18 @@ define([], function() {
                         var keyCode = $('#keyCode').val();
                         var statusChange = $('.form-controlmdg').val();
                         var newCode = $('#newCode').val();
-                        var provinceName = $('#provinceId').find("option:selected").text();
-                        var cityName = $('#cityId').find("option:selected").text();
-                        var areaName = $('#areaId').find("option:selected").text();
+                        var provinceName = ''; //省
+                        if($scope.provinceCode != '' && $scope.provinceCode != undefined){
+                            provinceName = $('#provinceId').find("option:selected").text();
+                        }    
+                        var cityName = ''; //市
+                        if($scope.cityCode != '' && $scope.cityCode != undefined){
+                            cityName = $('#cityId').find("option:selected").text();
+                        }
+                        var areaName = ''; //区
+                        if($scope.areaCode != '' && $scope.areaCode != undefined){
+                            areaName = $('#areaId').find("option:selected").text();
+                        }
                         var durationStart = $('#durationStart').val();
                         var durationEnd = $('#durationEnd').val();
                         var buyNum = $('#buyNum').val();
@@ -150,9 +159,18 @@ define([], function() {
                 var keyCode = $('#keyCode').val();
             	var statusChange = $('.form-controlmdg').val();
                 var newCode = $('#newCode').val();
-                var provinceName = $('#provinceId').find("option:selected").text();
-                var cityName = $('#cityId').find("option:selected").text();
-                var areaName = $('#areaId').find("option:selected").text();
+                var provinceName = ''; //省
+                if($scope.provinceCode != '' && $scope.provinceCode != undefined){
+                    provinceName = $('#provinceId').find("option:selected").text();
+                }    
+                var cityName = ''; //市
+                if($scope.cityCode != '' && $scope.cityCode != undefined){
+                    cityName = $('#cityId').find("option:selected").text();
+                }
+                var areaName = ''; //区
+                if($scope.areaCode != '' && $scope.areaCode != undefined){
+                    areaName = $('#areaId').find("option:selected").text();
+                }
                 var durationStart = $('#durationStart').val();
                 var durationEnd = $('#durationEnd').val();
                 var buyNum = $('#buyNum').val();
@@ -167,6 +185,7 @@ define([], function() {
                     page: 1,
                     pageSize: 10
                 }
+                
                 if(newCode != '' && newCode != null){
                     switch(keyCode){
                         case 'telphone':
