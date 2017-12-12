@@ -14,6 +14,12 @@ define([], function () {
         var $model = $scope.$model;
         var echarts = require('echarts');
 
+
+
+
+
+
+
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson);
         // 1. 扫码次数趋势分析
@@ -33,6 +39,12 @@ define([], function () {
         var districtChart = echarts.init(document.getElementById('districtChart'));
         var districtOption = $model.$districtConf.data;
 
+
+
+
+
+
+
         // 4. 各规格扫码次数分析
         var standardChart = echarts.init(document.getElementById('standardChart'));
         var standardChartOption = $model.$specConf.data;
@@ -49,9 +61,9 @@ define([], function () {
         var promotionChartOption = $model.$resultConf.data;
 
         // datetimepicker初始化
+        
         setDateConf.init($('.day'), 'day')
         setDateConf.init($('.month'), 'month')
-
         // 全部变量、属性
         var global = {};
         $scope.checkbox = {};
@@ -123,7 +135,7 @@ define([], function () {
         $scope.search = function () {
             init();
             var searchItem = global.searchItem();
-
+            console.log(searchItem);
             // 初始地图及起右边柱状图
             global.initProvinceData = {
                 provinceName: sessionStorage.getItem("account") === 'henan' ? '河南省' : '湖南省',
@@ -132,6 +144,8 @@ define([], function () {
             }
 
             $model.province(global.initProvinceData).then(function(res) {
+                console.log(global.initProvinceData)
+                console.log(res);
                 provinceData('undefined', res, true);
             })
 
@@ -186,18 +200,22 @@ define([], function () {
             var reg = /省|市|区/;
             var mongoReg = /内蒙区/;
             $model.zone(nationwideData).then(function (res) {
+                //console.log(nationwideData);
                 var opts = mapEchart.getOption();
                 var data = res.data || [];
                 opts.series[1].data = _.each(data, function (d) {
+                    //console.log(d);
                     if (d.provinceName != '全国') {
                        d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
                         d.value = d.scanPv; 
                     }
                 }) || [];
-                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
+                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {
+                    //console.log(v)
+                    return v.value
+                }).value || 5000;
                 mapEchart.setOption(opts);
             })
-
             // 各规格扫码数分析
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
@@ -271,7 +289,11 @@ define([], function () {
             chart.setOption(option)
         }
 
+
+
+
         mapEchart.on('click', function (e) {
+            alert(1);
             if (e.componentType === 'series') {
                 // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
                 var data = {
@@ -284,6 +306,12 @@ define([], function () {
                 })
             }
         });
+
+
+
+
+
+
 
         districtChart.on('click', function (params) {
             var zoomSize = 6;

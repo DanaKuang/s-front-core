@@ -175,6 +175,38 @@ define([], function () {
             myChart.setOption(option,true);
           })
         })();
+        //扫码人数时间趋势
+        (function () {
+          var myChart = echarts.init(document.getElementById("people-chart"));
+          var option = $model.$peopletrend.data;
+          // 自定义tooltip
+            option.tooltip.formatter = function (params) {
+                return "<i style='float:left;margin:5px 3px 0 0;width:10px;height:10px;background:#ea7d3c'></i>" + "新增扫码人数:" + params[1].data + "<br>" + "<i style='float:left;margin:5px 3px 0 0;width:10px;height:10px;background:#5d9cd2'></i>" + "历史扫码人数:" + params[0].data + "<br>" + "<i style='float:left;margin:5px 3px 0 0;width:10px;height:10px;background:#fff'></i>" + "扫码总人数:" + (params[1].data + params[0].data);
+            }
+          $model.$peopleTrend(param).then(function (res) {
+            //console.log(param)
+            var res = res.data || [];
+            option.series[0].data = [];
+            option.series[1].data = [];           
+            option.xAxis.data = [];
+           for(var i = 0;i<res.length;i++){
+             //console.log(res[i]);
+             option.series[1].data.push(res[i].scanAddUv);
+             option.series[0].data.push(res[i].scanHistoryUv);  
+              if(param.statType === "day") {
+                option.xAxis.data.push(res[i].statTime.replace(/-/g,"/"));
+              }else if(param.statType === "month"){
+                option.xAxis.data.push(res[i].statTime.replace(/-/g,""));
+                
+              } else{
+                option.xAxis.data.push(res[i].weekNo);
+              }
+
+           }
+            myChart.setOption(option,true);
+          })
+        })();
+
 
         //扫码次数时间趋势
         (function () {
@@ -192,7 +224,7 @@ define([], function () {
               for (var i = 0; i < res.length; i++) {
                 switch (x) {
                   case "促销计划":
-                    obj[x].data.push(res[i].awardPutPv);
+                    obj[x].data.push(res[i].scanCode);
                     break;
                   case "抽奖次数":
                     obj[x].data.push(res[i].drawPv);
@@ -224,7 +256,6 @@ define([], function () {
           $(".plan input").click(function () {
             seriesArr.length = 0;
             $(".plan input").each(function () {
-              //console.log($(this)[0].name);
               if ($(this).is(":checked")) {
                 seriesArr.push(obj[$(this)[0].name]);
               }
@@ -234,96 +265,152 @@ define([], function () {
           })
         })();
 
-        //各地市扫码扫码次数
+        //扫码地域分布
         (function () {
+          //分省分布；
           var chinaJson = $model.$chinaJson.data;
           echarts.registerMap('china', chinaJson);
-          var myChart = echarts.init(document.getElementById("city-chart"));
-          var mapChart = echarts.init(document.getElementById("map-chart"));
-          var option = $model.$citychart.data;
-          var mapOption = $model.$mapchart.data;
-           var reg = /(省|市|区)/;
-          $model.$getMap(param).then(function (res) {
-            mapOption.series[0].data = [];
-            for (var i = 0; i < res.data.length; i++) {
-              if(res.data[i].provinceName === "内蒙区"){
-                res.data[i].provinceName = "内蒙古"
+          var mapEchart = echarts.init(document.getElementById('map-chart'));
+          var mapConf = $model.$mapConf.data;
+          mapConf.tooltip.formatter = function (params) {
+            //console.log(params);
+            return "扫码烟包数" + '<br>' + params.name + ":" + (params.data.value || 0);
+          }
+          mapEchart.setOption(mapConf);
+          //扫码烟包数时间时间趋势； 
+          var districtChart = echarts.init(document.getElementById('time-chart'));
+          var districtOption = $model.$districtConf.data;
+          //省内各地市扫码烟包数排名；
+          var cityChart = echarts.init(document.getElementById('city-chart'));
+          var cityOption = $model.$cityConf.data;
+          //地域地图显示；
+          var reg = /省|市|区/;
+          var mongoReg = /内蒙区/;
+                     
+          $model.$getProvincialAnalysis(param).then(function (res) {
+            var opts = mapEchart.getOption();
+            var data = res.data || [];
+            opts.series[1].data = _.each(data, function (d) {
+              if (d.provinceName != '全国') {
+                 d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
+                  d.value = d.scanCode; 
+                  
               }
-              if (res.data[i].scanPv !== 0) {
-                var obj = {
-                  "value": res.data[i].scanPv,
-                  "name": res.data[i].provinceName.replace(reg,"")
-                }
-                mapOption.series[0].data.push(obj)
-              }
-            }
-            //console.log(mapOption);
-            mapChart.setOption(mapOption);
+            }) || [];
+            opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
+            mapEchart.setOption(opts); 
           })
-          $model.$City(param).then(function (res) {
+           
+          //扫码烟包数时间趋势；
+          var global = {};
+          global.initProvinceData = {
+            productSn:'',
+            statTime: '',
+            provinceName: '',
+            statType: ''
+          };
+          global.searchItem = function() {
+
+          }
+          global.initProvinceData = {
+            provinceName: sessionStorage.getItem("account") === 'henan' ? '河南省' : '湖南省',
+            statTime: global.statTime,
+            statType: global.statType
+          }
+          $model.$getDistrictTrend(param).then(function (res) {
+            global.initProvinceData.productSn = param.productSn;
+            global.initProvinceData.statTime = param.statTime;
+            global.initProvinceData.statType = param.statType;
+            global.initProvinceData.provinceName = param.provinceName;
+            
+            if(global.initProvinceData.provinceName === undefined) {
+              global.initProvinceData.provinceName = "湖南省";
+              $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
+                  var res = res.data || [];
+                  districtOption.series[0].data = [];          
+                  districtOption.xAxis.data = [];
+                  for(var i = 0;i<res.length;i++){
+                    districtOption.xAxis.data.push(res[i].statTime);
+                    districtOption.series[0].data.push(res[i].scanCode); 
+                  }
+                  districtChart.setOption(districtOption);
+              })
+            } 
+          })
+
+          $model.$getCityTrend(param).then(function (res) {
+            global.initProvinceData.productSn = param.productSn;
+            global.initProvinceData.statTime = param.statTime;
+            global.initProvinceData.statType = param.statType;
+            global.initProvinceData.provinceName = param.provinceName;
+            if(global.initProvinceData.provinceName === undefined) {
+              global.initProvinceData.provinceName = "湖南省";
+              $model.$getCityTrend(global.initProvinceData).then(function(res) {
+                var res = res.data || [];
+                
+                cityOption.series[0].data = [];          
+                cityOption.xAxis.data = [];
+                for(var i = 0;i<res.length;i++){
+                  cityOption.xAxis.data.push(res[i].cityName);
+                  cityOption.series[0].data.push(res[i].scanCode); 
+                }
+                //console.log(cityOptionz);
+                cityChart.setOption(cityOption);
+              })  
+
+            }
+            
+            
+          })
+          
+          mapEchart.on('click', function (e) {
+            if (e.componentType === 'series') {
+            //     // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
+                var data = {
+                    provinceName: e.data.provinceName,
+                    statTime: global.initProvinceData.statTime,
+                    statType: global.initProvinceData.statType,
+                    productSn: global.initProvinceData.productSn
+                };
+                $model.$getDistrictTrend(data).then(function(res) {
+                  var res = res.data || [];
+                  districtOption.series[0].data = [];          
+                  districtOption.xAxis.data = [];
+                  for(var i = 0;i<res.length;i++){
+                    districtOption.xAxis.data.push(res[i].statTime);
+                    districtOption.series[0].data.push(res[i].scanCode); 
+                  }
+                  districtChart.setOption(districtOption);
+                })
+                $model.$getCityTrend(data).then(function(res) {
+                  var res = res.data || [];
+                  
+                  cityOption.series[0].data = [];          
+                  cityOption.xAxis.data = [];
+                  for(var i = 0;i<res.length;i++){
+                    cityOption.xAxis.data.push(res[i].cityName);
+                    cityOption.series[0].data.push(res[i].scanCode); 
+                  }
+                  //console.log(cityOptionz);
+                  cityChart.setOption(cityOption);
+                })
+
+            }
+            
+        });
+         
+        })();
+        //全国地市扫码烟包数排名；
+        (function () {
+          var myChart = echarts.init(document.getElementById("award-chart"));
+          var option = $model.$scan.data;
+          $model.$getScan(param).then(function (res) {
             option.xAxis[0].data = [];
             option.series[0].data = [];
             for (var i = 0; i < res.data.length; i++) {
               option.xAxis[0].data.push(res.data[i].cityName);
-              option.series[0].data.push(res.data[i].scanPv);
+              option.series[0].data.push(res.data[i].scanCode);
             }
-            myChart.setOption(option);
-          })
-        })();
-
-        //扫码趋势分析
-        (function () {
-          var myChart = echarts.init(document.getElementById("award-chart"));
-          var option = $model.$awardchart.data
-          var obj = $model.$draw.data;
-          var seriesArr = [];
-          for(x in obj){
-            obj[x].data = [];
-          }
-          $model.$drawTimes(param).then(function (res) {
-            var res = res.data || [];
-            option.xAxis.data = [];
-            for (x in obj) {
-              for (var i = 0; i < res.length; i++) {
-                switch (x) {
-                  case "扫码次数":
-                    obj[x].data.push(res[i].scanPv);
-                    break;
-                  case "扫码烟包数":
-                    obj[x].data.push(res[i].scanCode);
-                    break;
-                  case "抽奖次数":
-                    obj[x].data.push(res[i].drawPv);
-                    break;
-                  case "奖品领取":
-                    obj[x].data.push(res[i].awardPayPv);
-                    break;
-                }
-              }
-            }
-            for (var i = 0; i < res.length; i++) {
-              var x = res[i].statTime || res[i].weekNo
-              option.xAxis.data.push(x)
-            }
-
-            //页面几个复选框选中展示几条
-            $(".award input").each(function () {
-              if ($(this).is(":checked")) {
-                seriesArr.push(obj[$(this)[0].name] || {type:'line'});
-              }
-            })
-            //seriesArr[0] = obj["扫码次数"];
-            option.series = seriesArr;
-            myChart.setOption(option,true);
-          })
-          $(".award input").click(function () {
-            seriesArr.length = 0;
-            $(".award input").each(function () {
-              if ($(this).is(":checked")) {
-                seriesArr.push(obj[$(this)[0].name] || {type:'line'});
-              }
-            })
-            myChart.clear();
             myChart.setOption(option);
           })
         })();
@@ -333,22 +420,29 @@ define([], function () {
           var pieChart = echarts.init(document.getElementById("pie2-chart"));
           var option = $model.$fenbu.data;
           var jiangoption = _.cloneDeep(option);
+          //自定义tooltip
+          jiangoption.tooltip.formatter = function (params) {
+            //console.log(params);
+            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          }
           jiangoption.title.text = "现金红包";
           var shioption = _.cloneDeep(option);
           shioption.title.text = "实物奖品";
           jiangoption.series[0].data = [];
+          jiangoption.series[1].data = [];          
           jiangoption.yAxis.data = [];
           shioption.series[0].data = [];
           shioption.yAxis.data = [];
-          $model.$money(param, 1).then(function (res) {
+          $model.$getMoney(param, 2).then(function (res) {
             var res = res.data || [];
             for(var i=0;i<res.length;i++){
-              jiangoption.series[0].data.push(res[i].awardPayPv);
+              jiangoption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
+              jiangoption.series[0].data.push(res[i].awardPayPv);  
               jiangoption.yAxis.data.push(res[i].awardName)
             }
             myChart.setOption(jiangoption,true);
           })
-          $model.$thing(param).then(function (res) {
+          $model.$getThing(param,1).then(function (res) {
             var res = res.data || [];
             for (var i = 0; i < res.length; i++) {
               shioption.series[0].data.push(res[i].awardPayPv);
