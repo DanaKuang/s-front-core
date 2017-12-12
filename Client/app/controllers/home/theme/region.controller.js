@@ -61,7 +61,6 @@ define([], function() {
 				$model.$getCityName(params).then(function(res) {
 					if(res.status == 200) {
 						$scope.secondCategoryList = res.data;
-						//						console.log($scope.secondCategoryList)
 						$scope.$apply();
 					}
 				})
@@ -80,6 +79,7 @@ define([], function() {
 			//日期改变时
 			$(".ui-search").change(function() {
 				var Value = $(this).siblings(".region").val();
+				var cityValue = $(this).siblings(".regions").val();
 				$(".region-search-r").each(function(i) {
 					$(".region-search-r").eq(i).hide();
 				});
@@ -88,7 +88,8 @@ define([], function() {
 				})
 				$(".region option").each(function(i) {
 					$(".region option").eq(i).attr("selected", false);
-					$(".region").find("option[value=" + Value + "]").attr("selected", "selected")
+					$(".region").find("option[value=" + Value + "]").attr("selected", "selected");
+					$(".regions").find("option[value=" + cityValue + "]").attr("selected", "selected")
 				})
 				if($(this).val() === "month") {
 					$("#month").attr("selected", "selected");
@@ -108,6 +109,7 @@ define([], function() {
 			$scope.search = function($event) {
 				var that = $event.target;
 				// var reg = /(省|市|区)/;
+				console.log($('.regions').val());
 				var params = {
 					"provinceName": $(that).siblings(".region").val(),
 					"cityName": $('.regions').val() == '全部' ? '' : $('.regions').val(),

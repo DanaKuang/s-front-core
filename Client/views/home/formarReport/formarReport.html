@@ -307,23 +307,31 @@
         <div class="panel rate">
           <div class="panel-body">
             <div class="report-search">
+              <div class="agree-date">
+                <label>查询日期：</label>
+                <div class="ui-total-date input-append date-wrap" style="width:120px;">
+                  <input id="goodsDate" size="16" type="text" value="" readonly class="form-control date" style="width:120px;"/>
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+              </div>
               <div class="formarReport-gui">
                 <label>活动名称：</label>
 								<select id="activityName" multiple="multiple" ng-model="selectActivityName" value="{{selectActivityName}}">
-                                    <option ng-repeat="brandItem in selectActivityNameList" value="{{brandItem.activityName}}">{{brandItem.activityName}}</option>
-                                </select>
+                    <option ng-repeat="brandItem in selectActivityNameList" value="{{brandItem.activityName}}">{{brandItem.activityName}}</option>
+                </select>
               </div>
               <div class="formarReport-gui">
                 <label>地市：</label>
                 <select id="activityCityName" multiple="multiple" ng-model="selectActivityCityName" value="{{selectActivityCityName}}">
-                                    <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
-                                </select>
+                    <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
+                </select>
               </div>
               <div class="report-gui">
                 <label>奖品：</label>
-                <input id="inputSou" type="text" style="width:240px;height:30px;padding: 4px 12px;"/>
+                <input id="inputSou" type="text" style="width:130px;height:30px;padding: 4px 12px;"/>
               </div>
-
+            </div>
+            <div style="width:300px;margin-left:35%;overflow:hidden;">
               <button class="btn btn-sm btn-default btn_style" ng-click="search($event,4)">
                 查询
               </button>
@@ -331,6 +339,7 @@
                 下载
               </button>
             </div>
+            <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="goodsTitle">实物中奖情况（{{goodsWinDate}}）</p>
             <table class="table">
               <thead style="border-top:1px solid #a0a0a0">
               <tr>
