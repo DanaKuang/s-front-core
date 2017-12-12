@@ -39,11 +39,11 @@
 
   // 排序按钮
   .sort-btn-con {
-    margin-bottom: 10px;
     overflow: hidden;
     .btn {
       float: left;
       margin-right: 20px;
+      margin-bottom: 10px;
     }
   }
 
@@ -59,6 +59,7 @@
     // 操作按钮样式
     .operate-btn {
       color: #2D72B9;
+      margin-bottom: 5px;
       &:hover {
         text-decoration: underline;
       }

@@ -23,11 +23,11 @@
   margin-right: 5%; }
 
 .dealer-manage .sort-btn-con {
-  margin-bottom: 10px;
   overflow: hidden; }
   .dealer-manage .sort-btn-con .btn {
     float: left;
-    margin-right: 20px; }
+    margin-right: 20px;
+    margin-bottom: 10px; }
 
 .dealer-manage .ui-panel-title {
   margin-top: 30px;
@@ -37,7 +37,8 @@
   float: right; }
 
 .dealer-manage .panel-body .operate-btn {
-  color: #2D72B9; }
+  color: #2D72B9;
+  margin-bottom: 5px; }
   .dealer-manage .panel-body .operate-btn:hover {
     text-decoration: underline; }
 
