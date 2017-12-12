@@ -61,7 +61,6 @@ define([], function() {
 				$model.$getCityName(params).then(function(res) {
 					if(res.status == 200) {
 						$scope.secondCategoryList = res.data;
-						//						console.log($scope.secondCategoryList)
 						$scope.$apply();
 					}
 				})
@@ -80,16 +79,14 @@ define([], function() {
 			//日期改变时
 			$(".ui-search").change(function() {
 				var Value = $(this).siblings(".region").val();
+				var cityValue = $(this).siblings(".regions").val();
 				$(".region-search-r").each(function(i) {
 					$(".region-search-r").eq(i).hide();
 				});
 				$(".ui-search option").each(function(i) {
 					$(".ui-search option").eq(i).attr("selected", false);
 				})
-				$(".region option").each(function(i) {
-					$(".region option").eq(i).attr("selected", false);
-					$(".region").find("option[value=" + Value + "]").attr("selected", "selected")
-				})
+				
 				if($(this).val() === "month") {
 					$("#month").attr("selected", "selected");
 					$(".region-search-r").eq(2).show();
@@ -103,6 +100,14 @@ define([], function() {
 					$(".region-search-r").eq(1).show();
 					$(".region-describle").text("仪表盘中间值确定方式：往前推四周（不包括本周）的均值")
 				}
+				$(".region option").each(function(i) {
+					$(".region option").eq(i).attr("selected", false);
+					$(".region").find("option[value=" + Value + "]").attr("selected", "selected");
+				})
+				$(".regions option").each(function(i) {
+					$(".regions option").eq(i).attr("selected", false);
+					$(".regions").find("option[value=" + cityValue + "]").attr("selected", "selected");
+				})
 			});
 			//查询
 			$scope.search = function($event) {
@@ -110,12 +115,12 @@ define([], function() {
 				// var reg = /(省|市|区)/;
 				var params = {
 					"provinceName": $(that).siblings(".region").val(),
-					"cityName": $('.regions').val() == '全部' ? '' : $('.regions').val(),
+					"cityName": $(that).siblings('.regions').val() == '全部' ? '' : $(that).siblings(".regions").val(),
 					"statTime": $(that).siblings().hasClass("date-wrap") ?
 						($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()) : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
 					"statType": $(that).siblings(".ui-search").val()
 				}
-				public(params)
+				public(params);
 			};
 
 			function public(params) {
@@ -510,31 +515,19 @@ define([], function() {
 					params.kpiType = 'pv';
 					getCityTimesData(params);
 				})();
-				$scope.pvOrder = true;
-				$scope.codeOrder = false;
-				$scope.uvOrder = false;
 				//根据扫码次数排序查询
 				$scope.orderByPv = function(){
 					params.kpiType = 'pv';
-					$scope.pvOrder = true;
-					$scope.codeOrder = false;
-					$scope.uvOrder = false;
 					getCityTimesData(params);
 				}
 				//根据扫码烟包数排序查询
 				$scope.orderByCode = function(){
 					params.kpiType = 'code';
-					$scope.pvOrder = false;
-					$scope.codeOrder = true;
-					$scope.uvOrder = false;
 					getCityTimesData(params);
 				}
 				//根据扫码人数排序查询
 				$scope.orderByUv = function(){
 					params.kpiType = 'uv';
-					$scope.pvOrder = false;
-					$scope.codeOrder = false;
-					$scope.uvOrder = true;
 					getCityTimesData(params);
 				}
 			}

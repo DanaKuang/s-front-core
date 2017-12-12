@@ -14,6 +14,7 @@ define([], function() {
 			setDateConf.init($(".agree-date"), "day");
 			//设置input的默认时间
 			var stattime = dayFilter.yesterday("date");
+			$scope.goodsWinDate = stattime;
 			$(".date-wrap").find("input").val(stattime);
 			var curTableIndex = '';
 			var curWeekStr = '';
@@ -43,31 +44,45 @@ define([], function() {
 			$scope.cashWinDataObjmdg = {
 				"dt": stattime
 			};
+			$scope.winDataObj = {
+				'dt' : $scope.goodsWinDate,
+				'activityName': $("#activityName").val().join(),
+				'cityName': $("#activityCityName").val().join(),
+				'awardName': $("#inputSou").val()
+			}
 			//页面切换
 			$scope.tabs = function(index) {
 				$(".region-margin").hide();
 				$(".region-margin").eq(index).show();
 				switch(index) {
 					case 1:
+						$scope.obj.dt = stattime;
 //						gloabl.getTitleHtml();
 						gloabl.getBrand();
 						gloabl.getProviceName();
 						gloabl.winUser($scope.obj);
 						break;
 					case 2:
+						$scope.saoobj.dt = stattime;
 						gloabl.getZhongGift();
 						break;
 					case 3:
+					 	$scope.summar.dt = stattime;
 						gloabl.getBrand();
 						gloabl.summaryData($scope.summar)
 						break;
 					case 4:
+						$scope.winDataObj.dt = stattime;
+						$scope.goodsWinDate = stattime;
 						gloabl.getActivityName();
+						gloabl.getWeekScanWinData($scope.winDataObj);						
 						break;
 					case 5:
+						$scope.cashWinDataObj.dt = stattime;
 						gloabl.getProvData($scope.cashWinDataObj);
 						break;
 					case 6:
+						$scope.cashWinDataObjmdg.dt = stattime;
 						gloabl.getWeekCashWinData($scope.cashWinDataObjmdg)
 						break;
 					default:
@@ -90,7 +105,6 @@ define([], function() {
 							$scope.$apply();
 							//							if($scope.speciftList.length > 0) {
 							curSpeciftStr = $scope.speciftList[0].name;
-							console.log(curSpeciftStr)
 							//							}
 						});
 
@@ -99,11 +113,9 @@ define([], function() {
 				//KPI数据分省统计日报
 				"winUser": function(params) {
 					$model.$winUser(params).then(function(res) {
-						//						console.log(res)
 						var res = res.data || [];
 						var guiGeBihend = $("#proviceDataSpecift").val();
 						//						curSpeciftStr = $scope.speciftList[0].name;
-						console.log(guiGeBihend)
 						var inputOne = $("#inputOne").val();
 						$("#win_table").html("");
 						$("#titlePOne").html('规格&nbsp;&nbsp;' + (guiGeBihend == null?'条-黄金叶（爱尚）':guiGeBihend) + '&nbsp;&nbsp;' + '(' + inputOne + ')');
@@ -151,18 +163,15 @@ define([], function() {
 						gloabl.userPro($scope.saoobj);
 						
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
-						//console.log($scope.saoobj);
 						//						gloabl.userPro($scope.saoobj);
 					})
 				},
 				//活动多选框下拉菜单
 				"getActivityName": function() {
 					$model.$getZhongGiftTwo().then(function(res) {
-						console.log(res)
 						if(res.status == 200) {
 							$scope.selectActivityNameList = res.data;
 							$scope.$apply();
-							console.log($scope.selectActivityNameList)
 							$("#activityName").multiselect({
 								includeSelectAllOption: true,
 								enableFiltering: true,
@@ -182,11 +191,9 @@ define([], function() {
 
 					//地市多选下拉框
 					$model.$getSpeciftByBrandTwo().then(function(res) {
-						console.log(res)
 						if(res.status == 200) {
 							$scope.selectActivityCityNameList = res.data;
 							$scope.$apply();
-							console.log($scope.selectActivityCityNameList)
 							$("#activityCityName").multiselect({
 								includeSelectAllOption: true,
 								enableFiltering: true,
@@ -208,7 +215,6 @@ define([], function() {
 //				},
 				"summaryData": function(params) {
 					$model.$getsummaryData(params).then(function(res) {
-						console.log(res);
 						$("#summary_table").html("");
 						var res = res.data || [];
 						var summarProduct = $("#moneyDataSpecift").val();
@@ -229,11 +235,8 @@ define([], function() {
 
 				"getProviceName": function() {
 					$model.$getProviceName().then(function(res) {
-						//						console.log(res)
-
 						if(res.status == 200) {
 							$scope.brandListsss = res.data;
-							//							console.log($scope.brandListsss)
 							$scope.$apply();
 							$("select#proviceName").multiselect({
 								includeSelectAllOption: true,
@@ -269,13 +272,12 @@ define([], function() {
 
 					//监听省份选择信息
 					$scope.$watch('selectAllBrands', function(n, o, s) {
-						if(n !== "") {
+						if(n !== "" & n != undefined) {
 							$scope.selectAllBrands = n;
 							var brandListArrObj = {};
-							var aaa = n.join()
+							var aaa = n.join();
 							brandListArrObj.provinceName = aaa;
 							$model.$getSpeciftByBrand(brandListArrObj).then(function(res) {
-								//                  	console.log(res)
 								if(res.status == "200") {
 									$scope.speciftListsss = res.data;
 									$('[ng-model="selectSpeci"]').multiselect('dataprovider', _.forEach($scope.speciftListsss, function(v) {
@@ -296,9 +298,7 @@ define([], function() {
 					//监听省份选择信息
 					//          $('#proviceName').change(function(){
 					//              var curBrandValue = $(this).val();
-					//              console.log(curBrandValue)
 					//              $model.$getSpeciftByBrand({brandCode:curBrandValue}).then(function(res){
-					//              	console.log(res)
 					//                  if(res.status == 200){
 					//                      $scope.selectSpeciftList = res.data.data;
 					//                      $scope.$apply();
@@ -310,7 +310,6 @@ define([], function() {
 				'getWeekScanWinData': function(timesObj) {
 					$model.$getWeekScanWinData(timesObj).then(function(res) {
 						$("#weekScanWin").html('');
-						console.log(res)
 						var res = res.data || [];
 						$(".report-table").find("tbody").html("");
 						if(res.length > 0) {
@@ -326,7 +325,6 @@ define([], function() {
 				//tab5
 				'getProvData': function(params) {
 					$model.$getProvData(params).then(function(res) {
-						console.log(res)
 						var res = res.data || [];
 						$(".report-table").find("tbody").html("");
 						if(res.length > 0) {
@@ -341,7 +339,6 @@ define([], function() {
 				//tab6
 				'getWeekCashWinData': function(cashWinDataObjmdg) {
 					$model.$getWeekCashWinData(cashWinDataObjmdg).then(function(res) {
-						console.log(res);
 						var res = res.data || [];
 						$(".report-table").find("tbody").html("");
 						if(res.length > 0) {
@@ -358,11 +355,14 @@ define([], function() {
 			}
 			//点击按钮的返回
 			$scope.goback = function() {
+				//设置input的默认时间
+				var resetTime = dayFilter.yesterday("date");
+				$scope.goodsWinDate = resetTime;
+				$(".date-wrap").find("input").val(resetTime);
 				$(".region-margin").hide();
 				$(".region-margin").eq(0).show();
 				$("#proviceName").multiselect().val([]).multiselect("refresh");
 				$("#applySpecift").multiselect().val([]).multiselect("refresh");
-				console.log($("#proviceName").multiselect().val([]))
 				$("#activityName").multiselect().val([]).multiselect("refresh");
 				$("#activityCityName").multiselect().val([]).multiselect("refresh");
 
@@ -375,7 +375,6 @@ define([], function() {
 				$('#summary_table').html('');
 				$('#provDataDetail').html('');
 				$('#weekCashWin').html('');
-				console.log($('#proviceName').val())
 				$('#applySpecift').val('');
 				$('#activityName').val('');
 				$('#activityCityName').val('');
@@ -393,6 +392,7 @@ define([], function() {
 				$('#cycleTime').multiselect().val([]).multiselect("refresh");
 				$('#cashWinSpecift').val('');
 				$('#entityWinSpecift').val('');
+				
 			}
 
 			//查询按钮
@@ -431,8 +431,9 @@ define([], function() {
 						gloabl.summaryData($scope.summar);
 						break;
 					case 4:
-
+						$scope.goodsWinDate = $('#goodsDate').val();
 						$scope.winDataObj = {
+							'dt' : $('#goodsDate').val(),
 							'activityName': $("#activityName").val().join(),
 							'cityName': $("#activityCityName").val().join(),
 							'awardName': $("#inputSou").val()
@@ -489,11 +490,12 @@ define([], function() {
 						"productSn": $scope.summar.productSn,
 
 					}
-					var url = "/api/tztx/dataportal/henanreport/importRedPacketReportData";
+					var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
 					// var statTime = $scope.summar.statTime;
 					// window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
 				} else if(a === 4) {
 					var data = {
+						'dt' : $scope.goodsWinDate,
 						'activityName': $scope.winDataObj.activityName,
 						'cityName': $scope.winDataObj.cityName,
 						'awardName': $scope.winDataObj.awardName
