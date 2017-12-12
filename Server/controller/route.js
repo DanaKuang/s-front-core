@@ -20,6 +20,12 @@ module.exports.register = function (express, routes) {
     return route.enableroute;
   }
 
+  // 随机函数
+  function hostRandom (host) {
+    var len = host.length || 0;
+    // process.stdout.write(JSON.stringify('-----------'+host[Math.floor(Math.random() * len)]+'-------------'));
+    return host[Math.floor(Math.random() * len)] || '127.0.0.1';
+  }
 
   /**
    * 请求处理分类
@@ -37,7 +43,12 @@ module.exports.register = function (express, routes) {
       var rootfilter = new RegExp(config.rootfilter, 'i');
       var baseURL = 'http://'; //
       var gatewaytype = route.gatewaytype || 0;
-      baseURL += config.gateway[gatewaytype].host; // 请求ip
+      var host = config.gateway[gatewaytype].host;
+      if (Array.isArray(host)) {
+        baseURL += hostRandom(host);
+      } else {
+        baseURL += host; // 请求ip
+      }
       baseURL += ':';
       baseURL += config.gateway[gatewaytype].port; // 请求端口号
 
