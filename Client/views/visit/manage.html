@@ -125,18 +125,19 @@
 
                                         <div class="search-btn-con">
                                             <button type="button" class="seacher btn btn-primary" ng-click="search($event);">查询</button>
-                                            <button type="button" class="reset btn btn-primary" ng-click="reset($event);">重置</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="reset($event);">重置</button>
                                         </div>
                                     </form>
                                 </div>
 
                                 <!-- table -->
                                 <div class="panel-body">
+                                    <!-- 排序 -->
                                     <div ng-show="vm.currentPage == 'index'" class="sort-btn-con">
-                                        <button ng-click="sortBy($event, 1, sortTimeValue)" class="btn btn-primary">按入驻时间排序</button>
-                                        <button ng-click="sortBy($event, 2, sortFansValue)" class="btn btn-primary">按粉丝数排序</button>
-                                        <button ng-click="sortBy($event, 3, sortAchieveValue)" class="btn btn-primary">按业绩排序</button>
-                                        <button ng-click="sortBy($event, 5, sortPointValue)" class="btn btn-primary">按积分排序</button>
+                                        <button ng-click="sortBy(1)" class="btn btn-primary">按入驻时间排序</button>
+                                        <button ng-click="sortBy(2)" class="btn btn-primary">按粉丝数排序</button>
+                                        <button ng-click="sortBy(3)" class="btn btn-primary">按业绩排序</button>
+                                        <button ng-click="sortBy(5)" class="btn btn-primary">按积分排序</button>
                                     </div>
 
                                     <table ng-show="vm.currentPage == 'index'" class="table table-bordered table-hover">
@@ -163,8 +164,8 @@
                                                     <div class="oper-btn-wrap">
                                                         <div class="operate-btn" ng-click="viewManage($event, item.sellerId)">查看详情</div>
                                                         <!--1 启用状态  2 禁用状态-->
-                                                        <div ng-if="item.authOrg.status == 0" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 1)" data-toggle="modal" data-target=".start-manage-modal">上架</div>
-                                                        <div ng-if="item.authOrg.status == 1" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 0)" data-toggle="modal" data-target=".start-manage-modal">下架</div>
+                                                        <div ng-if="item.authOrg.status == 0" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 1)" data-toggle="modal" data-target=".shelf-modal">上架</div>
+                                                        <div ng-if="item.authOrg.status == 1" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 0)" data-toggle="modal" data-target=".shelf-modal">下架</div>
                                                     </div>
                                                 </td>
                                                 <td>{{item.licenceNo}}</td>
@@ -187,8 +188,18 @@
 
                                     <!-- 详情 -->
                                     <div ng-show="vm.currentPage == 'detial'">
-                                        <!-- 1基本信息 -->
-                                        <div class="detial-info">
+                                        <div class="detial-nav">
+                                            <ul>
+                                                <li ng-click="detialNav('info')" ng-class="detial.detialPage == 'info' ? 'cur' : ''">基本信息</li>
+                                                <li ng-click="detialNav('sellerfans')" ng-class="detial.detialPage == 'sellerfans' ? 'cur' : ''">店铺粉丝</li>
+                                                <li ng-click="detialNav('cashback')" ng-class="detial.detialPage == 'cashback' ? 'cur' : ''">扫码返现</li>
+                                                <li ng-click="detialNav('bill')" ng-class="detial.detialPage == 'bill' ? 'cur' : ''">账单流水</li>
+                                                <li ng-click="detialNav('storage')" ng-class="detial.detialPage == 'storage' ? 'cur' : ''">入库明细</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- 1 基本信息 -->
+                                        <div ng-show="detial.detialPage == 'info'" class="detial-info">
                                             <form name="infoForm" novalidate>
                                                 <ul>
                                                     <li>
@@ -434,6 +445,180 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- 2 店铺粉丝 -->
+                                        <div ng-show="detial.detialPage == 'sellerfans'" class="detial-sellerfans">
+                                            <!-- 排序 -->
+                                            <div class="sort-btn-con">
+                                                <button ng-click="sellerfans.sortBy(1)" class="btn btn-primary">按最后扫码时间排序</button>
+                                                <button ng-click="sellerfans.sortBy(2)" class="btn btn-primary">按扫码次数排序</button>
+                                                <button ng-click="sellerfans.sortBy(3)" class="btn btn-primary">按扫店码次数排序</button>
+                                            </div>
+
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>微信openld</th>
+                                                        <th>昵称</th>
+                                                        <th>扫店码次数</th>
+                                                        <th>扫烟码次数</th>
+
+                                                        <th>最后一次扫店码时间</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="(index, item) in sellerfans.listData">
+                                                        <td>{{index+1}}</td>
+                                                        <td>{{item.openId}}</td>
+                                                        <td>{{item.nickname}}</td>
+                                                        <td>{{item.scanSellerCount}}</td>
+                                                        <td>{{item.scanProdCount}}</td>
+
+                                                        <td>{{item.lastScanSeller | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 搜索项 -->
+                                        <div class="detial-search">
+                                            <!-- 日历 -->
+                                            <div ng-show="detial.detialPage != 'info'" class="form-group time">
+                                                <label class="control-label">时间段：</label>
+                                                <input ng-model="detial.startTime" id="detialStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="detial.endTime" id="detialEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+
+                                            <!-- 扫码返现 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'cashback'" class="form-group">
+                                                <label class="control-label">扫码单位：</label>
+                                                <select class="form-control" ng-model="cashback.unit">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">条</option>
+                                                    <option value="2">盒</option>
+                                                </select>
+                                            </div>
+                                            <div ng-show="detial.detialPage == 'cashback'" class="form-group">
+                                                <label class="control-label">有无返还：</label>
+                                                <select class="form-control" ng-model="cashback.isFx">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">有</option>
+                                                    <option value="0">无</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 账单流水 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'bill'" class="form-group">
+                                                <label class="control-label">交易类型：</label>
+                                                <select class="form-control" ng-model="bill.type">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">扫码返现</option>
+                                                    <option value="2">提现</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 入库明细 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'storage'" class="form-group">
+                                                <label class="control-label">奖品类型：</label>
+                                                <select class="form-control" ng-model="storage.type">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">积分奖励</option>
+                                                    <option value="2">实物奖励</option>
+                                                    <option value="2">红包奖励</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 搜索、重置 -->
+                                            <div ng-show="detial.detialPage == 'cashback' || detial.detialPage == 'bill' || detial.detialPage == 'storage'" class="btn-con">
+                                                <button type="button" class="seacher btn btn-primary" ng-click="detial.search();">查询</button>
+                                                <button type="button" class="reset btn btn-default" ng-click="detial.reset();">重置</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- 3 扫码返现 -->
+                                        <div ng-show="detial.detialPage == 'cashback'" class="detial-cashback">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>微信openld</th>
+                                                    <th>昵称</th>
+                                                    <th>扫店码时间</th>
+                                                    <th>扫烟码时间</th>
+
+                                                    <th>扫码单位</th>
+                                                    <th>返回金额</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in cashback.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.openId}}</td>
+                                                    <td>{{item.nickname}}</td>
+                                                    <td>{{item.scanSellerTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    <td>{{item.zjTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                                                    <td>{{item.unit == 1 ? '盒' : '条'}}</td>
+                                                    <td>{{item.fxAmount}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 4 账单流水 -->
+                                        <div ng-show="detial.detialPage == 'bill'" class="detial-bill">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>交易类型</th>
+                                                    <th>金额</th>
+                                                    <th>交易时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in bill.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.type == 1 ? '扫码返现' : '提现'}}</td>
+                                                    <td ng-if="item.type == 1" class="add">+￥{{item.amount}}</td>
+                                                    <td ng-if="item.type == 2" class="subtract">-￥{{item.amount}}</td>
+                                                    <td>{{item.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 5 入库明细 -->
+                                        <div ng-show="detial.detialPage == 'storage'" class="detial-storage">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>品牌</th>
+                                                    <th>规格</th>
+                                                    <th>奖品类型</th>
+                                                    <th>单次入库数量</th>
+
+                                                    <th>单次扫码奖励</th>
+                                                    <th>入库时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in storage.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.openId}}</td>
+                                                    <td>{{item.nickname}}</td>
+                                                    <td>{{item.nickname}}</td>
+                                                    <td>{{item.nickname}}</td>
+
+                                                    <td>{{item.unit == 1 ? '盒' : '条'}}</td>
+                                                    <td>{{item.fxAmount}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
 
                                     <div ng-show="vm.currentPage == 'index' || detial.detialPage != 'info'" class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
@@ -446,6 +631,8 @@
                                 <!-- 分页指令 -->
                                 <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
                             </div>
+
+                            <button ng-show="vm.currentPage == 'detial' && detial.detialPage != 'info'" ng-click="info.back()" class="btn btn-primary detial-back">返回列表</button>
                         </div>
                     </div>
                 </div>
@@ -458,6 +645,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
         <p class="prompt"></p>
     </div>
+
     <!-- 新增 -->
     <div class="animated fadeInRightBig" ng-show="vm.currentPage == 'new'">
         <div class="container-fluid">
@@ -636,6 +824,24 @@
             </div>
         </div>
     </div>
+
+    <!-- 上下架 -->
+    <div class="modal fade bs-example-modal-sm shelf-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle"><span ng-if="isUpShelf">审核通过</span><span ng-if="!isUpShelf">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <span ng-if="isUpShelf">您确认要上架此零售户？</span>
+                    <span ng-if="!isUpShelf">您确认要下架此零售户？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="shelfConfirm()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 

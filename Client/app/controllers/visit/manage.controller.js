@@ -28,7 +28,7 @@ define([], function () {
             sortValue: 1,
             pageNo: 1,
             pageSize: 10,
-            currentPage: 'index'
+            currentPage: 'index' // fixme
           }
 
           // 详情
@@ -36,14 +36,14 @@ define([], function () {
             detialPage: 'info'
           };
 
-          // 基本信息
+            // 基本信息
           $scope.info = {
             // isEdit: false
           };
 
           // 判断是否为 审核管理 跳转过来的
           if(sessionStorage.sellerId) {
-            getDetialList(sessionStorage.sellerId);
+            getDetialInfoList(sessionStorage.sellerId);
 
             sessionStorage.removeItem('sellerId') // 进入详情页后，移除sellerId，防止刷新再进入
             $scope.fromPage = 'reviewManage'; // 在返回列表时，根据来源返回。
@@ -66,8 +66,6 @@ define([], function () {
               sortValue: $scope.vm.sortValue,
               pageNo: page || 1,
               pageSize: 10
-              // currentPageNumber: page || 1,
-              // pageSize: 10
             };
 
             // 根据关键词搜索条件，传不同数据
@@ -179,7 +177,7 @@ define([], function () {
           }
 
           // 排序
-          $scope.sortBy = function (e, type) {
+          $scope.sortBy = function (type) {
             $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
             $scope.vm.sortType = type;
             getList(1, true);
@@ -193,23 +191,299 @@ define([], function () {
             }
           }, true)
 
+          // 上下架 fixme
+          $scope.UpOffShelf = function (id, value) {
+            if(value == 1) {
+              $scope.isUpShelf = true;
+            } else {
+              $scope.isUpShelf = false;
+            }
+
+            $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
+            $scope.vm.sortType = type;
+            getList(1, true);
+          }
+
+          // 上下架弹窗  确认按钮点击
+          $scope.shelfConfirm = function() {
+            var data = {
+              sellerIds: $scope.selected,
+              authResult: $scope.reviewValue,
+            }
+
+            $model.reviewAndPass(data).then(function(res) {
+              if(res.data.ok) {
+                // 审核成功后刷新列表
+                getList($scope.paginationConf.data.page.currentPageNumber);
+                // 隐藏弹窗
+                $('.review-modal').modal('hide');
+              } else {
+                alertMsg($('#newAlert'), 'danger', res.data.msg);
+              }
+            })
+          }
+
+
+
 
           // *** 详情 start
+          // 详情 - 导航点击
+          $scope.detialNav = function (type) {
+            // 判断当前nav页
+            if(type == 'info') { // 基本信息
+              $scope.detial.detialPage = 'info';
+              getDetialInfoList($scope.info.sellerId, 'nowPage');
+            } else if(type == 'sellerfans') { // 店铺粉丝
+              $scope.detial.detialPage = 'sellerfans';
+              // 重置
+              $scope.sellerfans.sortValue = 1;
+              $scope.sellerfans.sortValue = 1;
+              getDetialSellerfansList(1, true);
+            } else if(type == 'cashback') { // 扫码返现
+              $scope.detial.detialPage = 'cashback';
+              // 重置
+              $scope.cashback.unit = '';
+              $scope.cashback.isFx = '';
+              getDetialCashbackList(1, true);
+            } else if(type == 'bill') { // 账单流水
+              $scope.detial.detialPage = 'bill';
+              getDetialBillList(1, true);
+            } else if(type == 'storage') { // 入库明细
+              $scope.detial.detialPage = 'storage';
+              getDetialStorageList(1, true);
+            }
+
+            // 点击导航清空日历
+            $scope.detial.startTime = ''
+            $scope.detial.endTime = ''
+
+            // 时间设置
+            $("#detialStart").datetimepicker({
+              format: 'yyyy-mm-dd hh:ii:00',
+              language: 'zh-CN',
+              todayBtn:  1,
+              autoclose: 1,
+              todayHighlight: 1
+            }).on('change', function (e) {
+              var startTime = e.target.value;
+              var endTime = $scope.detial.endTime;
+              if (endTime < startTime) {
+                $scope.detial.endTime = '';
+                $scope.$apply();
+              }
+            });
+
+            $("#detialEnd").datetimepicker({
+              format: 'yyyy-mm-dd hh:ii:00',
+              language: 'zh-CN',
+              todayBtn:  1,
+              autoclose: 1,
+              todayHighlight: 1
+            }).on('change', function (e) {
+              var endTime = e.target.value;
+              var startTime = $scope.detial.startTime;
+              if (startTime > endTime) {
+                $scope.detial.startTime = '';
+                $scope.$apply();
+              }
+            });
+          }
+
+          // 搜索
+          $scope.detial.search = function () {
+            if($scope.detial.detialPage == 'cashback') { // 扫码返现
+              getDetialCashbackList(1, true);
+            } else if($scope.detial.detialPage == 'bill') { // 账单流水
+              getDetialBillList(1, true);
+            } else if($scope.detial.detialPage == 'storage') { // 入库明细
+              getDetialStorageList(1, true);
+            }
+          }
+
+          // 重置
+          $scope.detial.reset = function () {
+            if($scope.detial.detialPage == 'cashback') { // 扫码返现
+              $scope.cashback = {
+                sellerId: $scope.info.sellerId,
+                unit: '', // 条/盒
+                isFx: '', // 是否返现
+                pageNo: 1,
+                pageSize: 10
+              }
+              getDetialCashbackList(1, true);
+            } else if($scope.detial.detialPage == 'bill') { // 账单流水
+              $scope.bill = {
+                sellerId: $scope.info.sellerId,
+                type: '', // 流水类型
+                pageNo: 1,
+                pageSize: 10
+              }
+              getDetialBillList(1, true);
+            } else if($scope.detial.detialPage == 'storage') { // 入库明细
+              getDetialStorageList(1, true);
+            }
+
+            $scope.detial.startTime = '';
+            $scope.detial.endTime = '';
+          }
+
+          // *** 店铺粉丝 start
+          $scope.sellerfans = {
+            sortValue: 1,
+          };
+
+          // 店铺粉丝 - 获取列表
+          function getDetialSellerfansList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              sortType: $scope.sellerfans.sortType || 1,
+              sortValue: $scope.sellerfans.sortValue || 1,
+              pageNo: page || 1,
+              pageSize: 10
+            }
+            $model.getManageDetialSellerFans(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.sellerfans.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+
+          // 店铺粉丝 - 排序
+          $scope.sellerfans.sortBy = function (type) {
+            $scope.sellerfans.sortValue = ($scope.sellerfans.sortValue == 1 ? 0 : 1); // 升序、降序
+            $scope.sellerfans.sortType = type;
+            getDetialSellerfansList(1, true);
+          }
+
+          // 店铺粉丝 - 监听sorttype，如果变了，说明换了一个排序，那就初始value值为1（降序）.
+          $scope.$watch('sellerfans.sortType', function(n, o) {
+            if (n !== o) {
+              $scope.sellerfans.sortValue = 1;
+              getDetialSellerfansList(1, true); // fixme: 多调用了一次，这里怎么解决？？？
+            }
+          }, true)
+          // *** 店铺粉丝 end
+
+
+          // *** 扫码返现 start
+          $scope.cashback = {};
+
+          // 扫码返现 - 获取列表
+          function getDetialCashbackList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              unit: $scope.cashback.unit || '', // 条/盒
+              isFx: $scope.cashback.isFx || '', // 是否返现
+              startTime: (new Date($scope.detial.startTime)).getTime() || '',
+              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialCashback(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.cashback.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 扫码返现 end
+
+
+          // *** 账单流水 start
+          $scope.bill = {};
+
+          // 账单流水 - 获取列表
+          function getDetialBillList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              type: $scope.bill.type || '', // 流水类型
+              startTime: (new Date($scope.detial.startTime)).getTime() || '',
+              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialBill(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.bill.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 账单流水 end
+
+
+          // *** 入库明细 start
+          $scope.storage = {};
+
+          // 入库明细 - 获取列表
+          function getDetialStorageList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              type: $scope.storage.type || '', // 流水类型
+              startTime: (new Date($scope.detial.startTime)).getTime() || '',
+              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialStorage(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.storage.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 入库明细 end
+
+
           // 获取详情信息
-          function getDetialList(id, from) {
+          function getDetialInfoList(id, from) {
+            // 当前页改为详情
+            $scope.vm.currentPage = 'detial';
+            $scope.detial.detialPage = 'info';
             // 初始化 基本信息，这里注意，不能写成$scope.info={isEdit : true,licenceImg: ''}
             $scope.info.isEdit = false;
-            $scope.info.licenceImg = '';
 
-            $scope.vm.currentPage = 'detial'; // 当前页改为详情
-
+            // 当前页进来的就重置表单
             if(from == 'nowPage') {
               // 重置form状态
               $scope.infoForm.$setPristine();
               $scope.infoForm.$setUntouched();
             }
 
-            $model.getManageDetial({sellerId: id}).then(function(res) {
+            $model.getManageDetialInfo({sellerId: id}).then(function(res) {
+              // 获取到的数据放入info里
               $scope.info = Object.assign({}, $scope.info, res.data.data.sellerInfo);
 
               // 这时加载市、区列表
@@ -226,7 +500,8 @@ define([], function () {
 
           // 查看点击
           $scope.viewManage = function(e, id) {
-            getDetialList(id, 'nowPage');
+            $scope.info.sellerId = id;
+            getDetialInfoList(id, 'nowPage');
           }
 
           // 基本信息 - 修改点击
@@ -264,7 +539,6 @@ define([], function () {
             }
           }
           // *** 详情 end
-
 
 
 
@@ -368,9 +642,8 @@ define([], function () {
                   contactName: $scope.info.contactName || '', // 联系人姓名
                   contactPhone: $scope.info.contactPhone || '', // 联系人手机号
 
-                  authOrg: '', // 状态
+                  status: $scope.info.status, // 状态
                 };
-                // data.authOrg.status = $scope.info.status;
               }
 
               $model.newManageSave(data).then(function (res) {

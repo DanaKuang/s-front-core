@@ -8,8 +8,8 @@ define([], function () {
     var visitReviewManageCtrl = {
         ServiceType: "controller",
         ServiceName: "visitReviewManageCtrl",
-        ViewModelName: 'visitReviewManageModel',
-        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitReviewManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
+        ViewModelName: 'visitManageModel',
+        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
 
           // 初始化一个对象，vm
           $scope.vm = {
@@ -61,7 +61,7 @@ define([], function () {
               data.salesmanName = $scope.vm.keywords || ''; // 业务员
             }
 
-            $model.getReviewManageList(data).then(function(res) {
+            $model.getManageList(data).then(function(res) {
               $scope.vm.listData = res.data.list || [];
               // 是否刷新页码
               if(ispage) {
@@ -100,7 +100,7 @@ define([], function () {
           })
 
           // 省
-          $model.getReviewManageProvince().then(function (res) {
+          $model.getManageProvince().then(function (res) {
             $scope.provinceList = res.data;
           });
 
@@ -108,7 +108,7 @@ define([], function () {
           $scope.provinceChage = function (e) {
             if($scope.vm.addrProvince != '') {
               // 市
-              $model.getReviewManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
+              $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
                 $scope.cityList = res.data;
                 $scope.vm.addrCity = '';
                 $scope.vm.addrArea = '';
@@ -120,7 +120,7 @@ define([], function () {
           $scope.cityChage = function (e) {
             if($scope.vm.addrCity != '') {
               // 区/县
-              $model.getReviewManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
+              $model.getManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
                 $scope.areaList = res.data;
                 $scope.vm.addrArea = '';
               });
@@ -209,6 +209,7 @@ define([], function () {
 
             if(id != '') {
               $scope.selected = [id];
+              $scope.ifBatch = true;
             }
 
             $scope.reviewValue = value; // 要传的值，1通过，2不通过

@@ -54,8 +54,13 @@
 
 .btn-primary {
   width: auto;
+  height: 30px;
   border: none;
-  border-radius: 10px;
+  line-height: 18px;
+  padding: 6px 12px; }
+
+.btn-default {
+  height: 30px;
   line-height: 18px;
   padding: 6px 12px; }
 
@@ -156,6 +161,29 @@
   text-decoration: underline;
   margin-bottom: 5px; }
 
+.detial-nav {
+  margin-bottom: 15px;
+  overflow: hidden; }
+  .detial-nav ul {
+    background: #179bd6;
+    border-right: 2px solid #179bd6;
+    float: left; }
+  .detial-nav li {
+    min-width: 100px;
+    height: 40px;
+    background: #fff;
+    border: 2px solid #179bd6;
+    border-right: none;
+    cursor: pointer;
+    color: #363636;
+    float: left;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0 20px; }
+    .detial-nav li:hover, .detial-nav li.cur {
+      color: #169BD5; }
+
 .detial-info ul {
   overflow: hidden; }
 
@@ -211,6 +239,44 @@
   margin-left: 115px; }
   .detial-info .btn-con .btn {
     margin: 20px 15px 10px 0; }
+
+.detial-search {
+  overflow: hidden; }
+  .detial-search .form-group {
+    float: left;
+    margin-right: 30px; }
+  .detial-search label {
+    float: left;
+    line-height: 34px; }
+  .detial-search select, .detial-search input {
+    width: 120px;
+    float: left; }
+  .detial-search .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center; }
+  .detial-search #detialStart, .detial-search #detialEnd {
+    width: 150px;
+    background: #fff; }
+  .detial-search .btn-con {
+    float: right;
+    margin-top: 2px; }
+    .detial-search .btn-con .btn {
+      float: left;
+      margin-right: 15px; }
+    .detial-search .btn-con .btn-default {
+      margin-right: 0px; }
+
+.detial-bill td.add {
+  color: #0c9b0d; }
+
+.detial-bill td.subtract {
+  color: #f00; }
+
+.detial-back {
+  display: block;
+  margin: 0 auto; }
 
 .table tr th, .table tr td {
   font-size: 12px; }

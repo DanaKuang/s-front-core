@@ -64,7 +64,8 @@
   float: right; }
 
 .form-group {
-  overflow: hidden; }
+  overflow: hidden;
+  padding: 0; }
 
 .batch-review {
   margin-bottom: 10px; }

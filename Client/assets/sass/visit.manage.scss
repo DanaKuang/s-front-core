@@ -59,11 +59,17 @@
 
 .btn-primary {
   width: auto;
+  height: 30px;
   border: none;
-  border-radius: 10px;
   line-height: 18px;
   padding: 6px 12px;
 }
+.btn-default {
+  height: 30px;
+  line-height: 18px;
+  padding: 6px 12px;
+}
+
 /*排序按钮*/
 .sort-btn-con {
   overflow: hidden;
@@ -177,7 +183,37 @@
   margin-bottom: 5px;
 }
 
-// 基本信息
+
+// 详情 start
+// 详情nav
+.detial-nav {
+  margin-bottom: 15px;
+  overflow: hidden;
+  ul {
+    background: #179bd6;
+    border-right: 2px solid #179bd6;
+    float: left;
+  }
+  li {
+    min-width: 100px;
+    height: 40px;
+    background: #fff;
+    border: 2px solid #179bd6;
+    border-right: none;
+    cursor: pointer;
+    color: #363636;
+    float: left;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0 20px;
+    &:hover, &.cur {
+      color: #169BD5;
+    }
+  }
+}
+
+// 1 基本信息
 .detial-info {
   ul {
     overflow: hidden;
@@ -249,6 +285,60 @@
     }
   }
 }
+
+// 搜索项
+.detial-search {
+  overflow: hidden;
+  .form-group {
+    float: left;
+    margin-right: 30px;
+  }
+  label {
+    float: left;
+    line-height: 34px;
+  }
+  select, input {
+    width: 120px;
+    float: left;
+  }
+  .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center;
+  }
+  #detialStart, #detialEnd {
+    width: 150px;
+    background: #fff;
+  }
+  .btn-con {
+    float: right;
+    margin-top: 2px;
+    .btn {
+      float: left;
+      margin-right: 15px;
+    }
+    .btn-default {
+      margin-right: 0px;
+    }
+  }
+}
+
+// 4 账单流水
+.detial-bill {
+  td.add {
+    color: #0c9b0d;
+  }
+  td.subtract {
+    color: #f00;
+  }
+}
+.detial-back {
+  display: block;
+  margin: 0 auto;
+}
+// 详情 end
+
 
 // 表格
 .table tr th, .table tr td {
