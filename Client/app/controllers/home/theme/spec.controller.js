@@ -27,7 +27,14 @@ define([], function () {
         "statTime":stattime,
         "statType":"day"
       };
-
+      //数据初始化；
+      var global = {}
+      global.initProvinceData = {
+        productSn:'',
+        statTime: stattime,
+        provinceName: '',
+        statType: 'day'
+      };
       //品牌
       (function(){
         $model.$getBrand().then(function(res){
@@ -51,9 +58,14 @@ define([], function () {
               $(".region.spec").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
           }
           Default.productSn = $(".region.spec").val();
+          global.initProvinceData.productSn = $(".region.spec").val();
           if(caller === 1) {
-            public (Default);            
+            public (Default);
+            
+
           }
+          
+          
         })
       };
       //周下拉列表
@@ -133,8 +145,11 @@ define([], function () {
           },0)
         }
         public(params);
-      };
+        
+                
 
+      };
+      
 
       //页面执行函数
       $scope.spec = {
@@ -149,6 +164,10 @@ define([], function () {
         "dayreduce" : "本日新增扫码用户数"
       };
       function public (param) {
+         
+        global.initProvinceData.productSn = param.productSn;
+        global.initProvinceData.statTime = param.statTime;
+        global.initProvinceData.statType = param.statType;
         (function () {
           $model.$specfication(param).then(function (res) {
             var data = res.data[0] || {};
@@ -223,7 +242,7 @@ define([], function () {
             for (x in obj) {
               for (var i = 0; i < res.length; i++) {
                 switch (x) {
-                  case "促销计划":
+                  case "扫码烟包数":
                     obj[x].data.push(res[i].scanCode);
                     break;
                   case "抽奖次数":
@@ -273,16 +292,9 @@ define([], function () {
           var mapEchart = echarts.init(document.getElementById('map-chart'));
           var mapConf = $model.$mapConf.data;
           mapConf.tooltip.formatter = function (params) {
-            //console.log(params);
             return "扫码烟包数" + '<br>' + params.name + ":" + (params.data.value || 0);
           }
           mapEchart.setOption(mapConf);
-          //扫码烟包数时间时间趋势； 
-          var districtChart = echarts.init(document.getElementById('time-chart'));
-          var districtOption = $model.$districtConf.data;
-          //省内各地市扫码烟包数排名；
-          var cityChart = echarts.init(document.getElementById('city-chart'));
-          var cityOption = $model.$cityConf.data;
           //地域地图显示；
           var reg = /省|市|区/;
           var mongoReg = /内蒙区/;
@@ -300,84 +312,72 @@ define([], function () {
             opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
             mapEchart.setOption(opts); 
           })
+
+
+          //扫码烟包数时间时间趋势； 
+          var districtChart = echarts.init(document.getElementById('time-chart'));
+          var districtOption = $model.$districtConf.data;
+
+          
+          //省内各地市扫码烟包数排名；
+          var cityChart = echarts.init(document.getElementById('city-chart'));
+          var cityOption = $model.$cityConf.data;
+          
            
           //扫码烟包数时间趋势；
-          var global = {};
-          global.initProvinceData = {
-            productSn:'',
-            statTime: '',
-            provinceName: '',
-            statType: ''
-          };
-          global.searchItem = function() {
-
+          if(global.initProvinceData.provinceName === "") {
+            global.initProvinceData.provinceName = "湖南省"
           }
-          global.initProvinceData = {
-            provinceName: sessionStorage.getItem("account") === 'henan' ? '河南省' : '湖南省',
-            statTime: global.statTime,
-            statType: global.statType
-          }
-          $model.$getDistrictTrend(param).then(function (res) {
-            global.initProvinceData.productSn = param.productSn;
-            global.initProvinceData.statTime = param.statTime;
-            global.initProvinceData.statType = param.statType;
-            global.initProvinceData.provinceName = param.provinceName;
-            
-            if(global.initProvinceData.provinceName === undefined) {
-              global.initProvinceData.provinceName = "湖南省";
-              $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
-                  var res = res.data || [];
-                  districtOption.series[0].data = [];          
-                  districtOption.xAxis.data = [];
-                  for(var i = 0;i<res.length;i++){
-                    districtOption.xAxis.data.push(res[i].statTime);
-                    districtOption.series[0].data.push(res[i].scanCode); 
-                  }
-                  districtChart.setOption(districtOption);
-              })
-            } 
-          })
-
-          $model.$getCityTrend(param).then(function (res) {
-            global.initProvinceData.productSn = param.productSn;
-            global.initProvinceData.statTime = param.statTime;
-            global.initProvinceData.statType = param.statType;
-            global.initProvinceData.provinceName = param.provinceName;
-            if(global.initProvinceData.provinceName === undefined) {
-              global.initProvinceData.provinceName = "湖南省";
-              $model.$getCityTrend(global.initProvinceData).then(function(res) {
-                var res = res.data || [];
-                
-                cityOption.series[0].data = [];          
-                cityOption.xAxis.data = [];
-                for(var i = 0;i<res.length;i++){
-                  cityOption.xAxis.data.push(res[i].cityName);
-                  cityOption.series[0].data.push(res[i].scanCode); 
-                }
-                //console.log(cityOptionz);
-                cityChart.setOption(cityOption);
-              })  
-
+          //console.log(global.initProvinceData);
+          $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
+            var res = res.data || [];
+            districtOption.series[0].data = [];          
+            districtOption.xAxis.data = [];
+            for(var i = 0;i<res.length;i++){
+              if(res[0].weekNo) {
+                districtOption.xAxis.data.push(res[i].weekNo);
+              }else{
+                districtOption.xAxis.data.push(res[i].statTime);
+              }
+              districtOption.series[0].data.push(res[i].scanCode); 
             }
-            
-            
+            districtChart.setOption(districtOption);
           })
+        $model.$getCityTrend(global.initProvinceData).then(function(res) {
+          var res = res.data || [];
           
+          cityOption.series[0].data = [];          
+          cityOption.xAxis.data = [];
+          for(var i = 0;i<res.length;i++){
+            cityOption.xAxis.data.push(res[i].cityName);
+            cityOption.series[0].data.push(res[i].scanCode); 
+          }
+          cityChart.setOption(cityOption);
+        })
+          mapEchart.off();
           mapEchart.on('click', function (e) {
+            var data = {
+              provinceName: "",
+              statTime: global.initProvinceData.statTime,
+              statType: global.initProvinceData.statType,
+              productSn: global.initProvinceData.productSn
+            }
             if (e.componentType === 'series') {
-            //     // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
-                var data = {
-                    provinceName: e.data.provinceName,
-                    statTime: global.initProvinceData.statTime,
-                    statType: global.initProvinceData.statType,
-                    productSn: global.initProvinceData.productSn
-                };
+            // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
+                
+                data.provinceName = e.data.provinceName;
+               console.log(data);
                 $model.$getDistrictTrend(data).then(function(res) {
+                  console.log(res.data);
                   var res = res.data || [];
                   districtOption.series[0].data = [];          
                   districtOption.xAxis.data = [];
                   for(var i = 0;i<res.length;i++){
-                    districtOption.xAxis.data.push(res[i].statTime);
+                    if(res[0].weekNo) {
+                      districtOption.xAxis.data.push(res[i].weekNo);
+                    }else{
+                      districtOption.xAxis.data.push(res[i].statTime);
+                    }
                     districtOption.series[0].data.push(res[i].scanCode); 
                   }
                   districtChart.setOption(districtOption);
@@ -391,7 +391,6 @@ define([], function () {
                     cityOption.xAxis.data.push(res[i].cityName);
                     cityOption.series[0].data.push(res[i].scanCode); 
                   }
-                  //console.log(cityOptionz);
                   cityChart.setOption(cityOption);
                 })
 
@@ -422,7 +421,7 @@ define([], function () {
           var jiangoption = _.cloneDeep(option);
           //自定义tooltip
           jiangoption.tooltip.formatter = function (params) {
-            //console.log(params);
+            console.log(params[0].data,params[1].data);
             return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
           }
           jiangoption.title.text = "现金红包";
@@ -432,6 +431,7 @@ define([], function () {
           jiangoption.series[1].data = [];          
           jiangoption.yAxis.data = [];
           shioption.series[0].data = [];
+          shioption.series[1].data = [];          
           shioption.yAxis.data = [];
           $model.$getMoney(param, 2).then(function (res) {
             var res = res.data || [];
@@ -440,11 +440,16 @@ define([], function () {
               jiangoption.series[0].data.push(res[i].awardPayPv);  
               jiangoption.yAxis.data.push(res[i].awardName)
             }
+            //console.log(jiangoption.series);
             myChart.setOption(jiangoption,true);
           })
+          shioption.tooltip.formatter = function (params) {
+            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          }
           $model.$getThing(param,1).then(function (res) {
             var res = res.data || [];
             for (var i = 0; i < res.length; i++) {
+              shioption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
               shioption.series[0].data.push(res[i].awardPayPv);
               shioption.yAxis.data.push(res[i].awardName);
             };

@@ -16,7 +16,7 @@ define([], function () {
 
         var PEOPLE_JSON_URL = '/statics/home/spec/peopleCharts.json'          //扫码人数时间趋势
         
-        var DEFAULT_JSON_URL = '/statics/home/region/planDefault.json';     //扫码次数时刻趋势折线图基本配置
+        var DEFAULT_JSON_URL = '/statics/home/spec/planDefault.json';     //扫码次数时刻趋势折线图基本配置
         var CITY_JSON_URL = '/statics/home/spec/city.json'           //各地市扫码次数
         var SCAN_JSON_URL = '/statics/home/spec/award1.json'         //抽奖次数时间趋势
         var MAP_JSON_URL = '/statics/home/spec/map.json'             //地图
