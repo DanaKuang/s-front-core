@@ -198,25 +198,23 @@ define([], function () {
             } else {
               $scope.isUpShelf = false;
             }
-
-            $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
-            $scope.vm.sortType = type;
-            getList(1, true);
+            $scope.ShelfId = id;
+            $scope.ShelfValue = value;
           }
 
           // 上下架弹窗  确认按钮点击
           $scope.shelfConfirm = function() {
             var data = {
-              sellerIds: $scope.selected,
-              authResult: $scope.reviewValue,
+              sellerId: $scope.ShelfId,
+              status: $scope.ShelfValue,
             }
 
-            $model.reviewAndPass(data).then(function(res) {
+            $model.modifyAuthOrg(data).then(function(res) {
               if(res.data.ok) {
                 // 审核成功后刷新列表
                 getList($scope.paginationConf.data.page.currentPageNumber);
                 // 隐藏弹窗
-                $('.review-modal').modal('hide');
+                $('.shelf-modal').modal('hide');
               } else {
                 alertMsg($('#newAlert'), 'danger', res.data.msg);
               }

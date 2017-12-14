@@ -84,9 +84,9 @@ define([], function () {
           }
 
           // 上下架
-          var GET_MANAGE_DETIAL = '/api/tztx/seller-manager/seller/select/detail';
-          $model.getManageDetial = function (data) {
-            return request.$Search(GET_MANAGE_DETIAL, data)
+          var GET_MANAGE_AUTHORG = '/api/tztx/seller-manager/seller/modifyAuthOrg';
+          $model.modifyAuthOrg = function (data) {
+            return request.$Search(GET_MANAGE_AUTHORG, data)
           }
           // *** 零售户管理 end
 

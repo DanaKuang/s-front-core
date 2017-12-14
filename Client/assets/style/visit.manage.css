@@ -77,7 +77,8 @@
 
 /* 管理新增 */
 .form-group {
-  overflow: hidden; }
+  overflow: hidden;
+  padding: 0; }
 
 .manage-new .btn-con .btn {
   margin: 20px 15px 10px 0; }
