@@ -30,7 +30,7 @@
                                         <div class="form-group col-sm-4">
                                             <label for="authStatus" class="control-label col-sm-4">审核状态</label>
                                             <div class="col-sm-8">
-                                                <select ng-model="vm.authStatus" id="authStatus" class="form-control">
+                                                <select ng-model="vm.authStatus" id="authStatus" class="form-control" ng-change="authStatusChange()">
                                                     <option value="">全部</option>
                                                     <option value="1">待审核</option>
                                                     <option value="2">审核通过</option>
@@ -72,7 +72,7 @@
                                             <div class="col-sm-8">
                                                 <select ng-model="vm.searchType" class="form-control col-sm-5" id="searchType">
                                                     <option value="3">烟草证号</option>
-                                                    <option value="1">联系人信息</option>
+                                                    <option value="1">联系人姓名</option>
                                                     <option value="2">联系人手机号</option>
                                                     <option value="4">门店名称</option>
                                                     <option value="5">业务员</option>
@@ -120,8 +120,8 @@
 
 
                                 <div class="panel-body">
-                                    <div ng-show="vm.authStatus == 1" class="batch-review">
-                                        <label><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()">全选</label>
+                                    <div ng-show="vm.authStatus == 1 || vm.authStatus == 3" class="batch-review">
+                                        <label><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()" ng-model="vm.allCheckbox">全选</label>
                                         <button ng-disabled="ifBatch" ng-click="reviewAndPass('', 1)" class="btn btn-primary batch-btn" data-toggle="modal" data-target=".review-modal">批量审核通过</button>
                                     </div>
 
@@ -148,14 +148,14 @@
                                         <tbody>
                                             <tr ng-repeat="(index, item) in vm.listData">
                                                 <td class="batch">
-                                                    <label><input ng-show="vm.authStatus == 1" type="checkbox" ng-click="updateSelection($event, item.sellerId)" ng-checked="isSelected(item.sellerId)">{{index + 1}}</label>
+                                                    <label><input ng-show="vm.authStatus == 1 || vm.authStatus == 3" type="checkbox" ng-click="updateSelection($event, item.sellerId)" ng-checked="isSelected(item.sellerId)">{{index + 1}}</label>
                                                 </td>
                                                 <td>
                                                     <div class="oper-btn-wrap">
                                                         <div class="operate-btn" ng-click="viewReviewManage(item.sellerId)">查看详情</div>
 
-                                                        <div ng-show="vm.authStatus == 1" class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">审核通过</div>
-                                                        <div ng-show="vm.authStatus == 1" class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">审核不通过</div>
+                                                        <div ng-show="vm.authStatus == 1 || vm.authStatus == 3" class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">审核通过</div>
+                                                        <div ng-show="vm.authStatus == 1 || vm.authStatus == 3" class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">审核不通过</div>
                                                     </div>
                                                 </td>
                                                 <td>{{item.licenceNo}}</td>

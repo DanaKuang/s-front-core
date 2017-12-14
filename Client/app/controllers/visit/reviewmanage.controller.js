@@ -25,6 +25,7 @@ define([], function () {
             appEndTime: '',
             sortType: 1,
             sortValue: 1,
+            listData: [],
             pageNo: 1,
             pageSize: 10,
             currentPage: 'index'
@@ -63,6 +64,7 @@ define([], function () {
 
             $model.getManageList(data).then(function(res) {
               $scope.vm.listData = res.data.list || [];
+
               // 是否刷新页码
               if(ispage) {
                 $scope.paginationConf = res;
@@ -146,6 +148,9 @@ define([], function () {
               addrArea: '',
               appStartTime: '',
               appEndTime: '',
+              sortType: 1,
+              sortValue: 1,
+              listData: [],
               pageNo: 1,
               pageSize: 10
             }
@@ -189,15 +194,14 @@ define([], function () {
           $scope.selectAll = function ($event) {
             var allCheckbox = $event.target;
             var action = (allCheckbox.checked ? 'add' : 'remove');
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < $scope.vm.listData.length; i++) {
               updateSelected(action, $scope.batchIds[i]);
             }
           };
           // 全选的的ng-checked
           $scope.isSelectedAll = function () {
-            return $scope.selected.length === 10;
+            return $scope.selected.length === $scope.vm.listData.length;
           };
-
 
           // 单个儿审核按钮点击
           $scope.reviewAndPass = function (id, value) {
@@ -247,6 +251,12 @@ define([], function () {
           // 输入不通过理由
           $scope.textareaChage = function() {
             $scope.textareaNum = $scope.vm.noPassReason.length;
+          }
+
+          // 审核状态change
+          $scope.authStatusChange = function () {
+            getList(1, true);
+            $scope.vm.allCheckbox = false;
           }
           // *** 批量审批 end
 
