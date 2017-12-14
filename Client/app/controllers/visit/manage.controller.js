@@ -191,7 +191,7 @@ define([], function () {
             }
           }, true)
 
-          // 上下架 fixme
+          // 上下架
           $scope.UpOffShelf = function (id, value) {
             if(value == 1) {
               $scope.isUpShelf = true;
@@ -225,6 +225,81 @@ define([], function () {
 
 
           // *** 详情 start
+          // 查看点击
+          $scope.viewManage = function(e, id) {
+            $scope.info.sellerId = id;
+            getDetialInfoList(id, 'nowPage');
+          }
+
+          // *** 基本信息 start ***
+          // 获取详情信息
+          function getDetialInfoList(id, from) {
+            // 当前页改为详情
+            $scope.vm.currentPage = 'detial';
+            $scope.detial.detialPage = 'info';
+            // 初始化 基本信息，这里注意，不能写成$scope.info={isEdit : true,licenceImg: ''}
+            $scope.info.isEdit = false;
+
+            // 当前页进来的就重置表单
+            if(from == 'nowPage') {
+              // 重置form状态
+              $scope.infoForm.$setPristine();
+              $scope.infoForm.$setUntouched();
+            }
+
+            $model.getManageDetialInfo({sellerId: id}).then(function(res) {
+              // 获取到的数据放入info里
+              $scope.info = Object.assign({}, $scope.info, res.data.data.sellerInfo);
+
+              // 这时加载市、区列表
+              // 市
+              $model.getManageCity({parentCode: $scope.info.addrProvince}).then(function (res) {
+                $scope.info.cityList = res.data;
+              });
+              // 区/县
+              $model.getManageCountry({parentCode: $scope.info.addrCity}).then(function (res) {
+                $scope.info.areaList = res.data;
+              });
+            })
+          }
+
+          // 基本信息 - 修改点击
+          $scope.info.edit = function() {
+            $scope.info.isEdit = true;
+
+            // 重置form状态
+            $scope.infoForm.$setPristine();
+            $scope.infoForm.$setUntouched();
+
+            // 这里用jQuery去设置，因为angular没办法。 fixme:以后可以再解决
+            $('#infoProvince').val($scope.info.addrProvince);
+            $('#infoCity').val($scope.info.addrCity);
+            $('#infoArea').val($scope.info.addrArea);
+          }
+
+          // 基本信息 - 保存点击
+          $scope.info.save = function(type) {
+            // 验证，id，点击类型
+            newAndEdit($scope.infoForm.$valid, type);
+          }
+
+          // 基本信息 - 取消点击
+          $scope.info.cancel = function(e, id) {
+            $scope.info.isEdit = false;
+          }
+
+          // 基本信息 - 返回列表点击
+          $scope.info.back = function(e, id) {
+            if($scope.fromPage == 'reviewManage') {
+              $location.path('view/visit/reviewmanage');
+            } else {
+              $scope.vm.currentPage = 'index';
+              $scope.paginationConf = $scope.indexPaginationConf;
+            }
+          }
+          // *** 基本信息 end
+
+
           // 详情 - 导航点击
           $scope.detialNav = function (type) {
             // 判断当前nav页
@@ -324,6 +399,7 @@ define([], function () {
             $scope.detial.startTime = '';
             $scope.detial.endTime = '';
           }
+
 
           // *** 店铺粉丝 start
           $scope.sellerfans = {
@@ -464,79 +540,7 @@ define([], function () {
           }
           // *** 入库明细 end
 
-
-          // 获取详情信息
-          function getDetialInfoList(id, from) {
-            // 当前页改为详情
-            $scope.vm.currentPage = 'detial';
-            $scope.detial.detialPage = 'info';
-            // 初始化 基本信息，这里注意，不能写成$scope.info={isEdit : true,licenceImg: ''}
-            $scope.info.isEdit = false;
-
-            // 当前页进来的就重置表单
-            if(from == 'nowPage') {
-              // 重置form状态
-              $scope.infoForm.$setPristine();
-              $scope.infoForm.$setUntouched();
-            }
-
-            $model.getManageDetialInfo({sellerId: id}).then(function(res) {
-              // 获取到的数据放入info里
-              $scope.info = Object.assign({}, $scope.info, res.data.data.sellerInfo);
-
-              // 这时加载市、区列表
-              // 市
-              $model.getManageCity({parentCode: $scope.info.addrProvince}).then(function (res) {
-                $scope.info.cityList = res.data;
-              });
-              // 区/县
-              $model.getManageCountry({parentCode: $scope.info.addrCity}).then(function (res) {
-                $scope.info.areaList = res.data;
-              });
-            })
-          }
-
-          // 查看点击
-          $scope.viewManage = function(e, id) {
-            $scope.info.sellerId = id;
-            getDetialInfoList(id, 'nowPage');
-          }
-
-          // 基本信息 - 修改点击
-          $scope.info.edit = function() {
-            $scope.info.isEdit = true;
-
-            // 重置form状态
-            $scope.infoForm.$setPristine();
-            $scope.infoForm.$setUntouched();
-
-            // 这里用jQuery去设置，因为angular没办法。 fixme:以后可以再解决
-            $('#infoProvince').val($scope.info.addrProvince);
-            $('#infoCity').val($scope.info.addrCity);
-            $('#infoArea').val($scope.info.addrArea);
-          }
-
-          // 基本信息 - 保存点击
-          $scope.info.save = function(type) {
-            // 验证，id，点击类型
-            newAndEdit($scope.infoForm.$valid, type);
-          }
-
-          // 基本信息 - 取消点击
-          $scope.info.cancel = function(e, id) {
-            $scope.info.isEdit = false;
-          }
-
-          // 基本信息 - 返回列表点击
-          $scope.info.back = function(e, id) {
-            if($scope.fromPage == 'reviewManage') {
-              $location.path('view/visit/reviewmanage');
-            } else {
-              $scope.vm.currentPage = 'index';
-              $scope.paginationConf = $scope.indexPaginationConf;
-            }
-          }
-          // *** 详情 end
+          // *** 详情 end ***
 
 
 
