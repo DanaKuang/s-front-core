@@ -134,8 +134,9 @@ define([], function () {
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
           realThing: 0,
-          status: $scope.statusVal || '', //活动状态
-          orderStatus: $scope.orderstatus || '',
+          // status: $scope.statusVal || '', //活动状态
+          status: $scope.orderstatus || '',
+          // orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : ($scope.startTime += ':00') : '',
           etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : ($scope.endTime += ':00') : ''
         }
@@ -208,8 +209,9 @@ define([], function () {
           areaCodes: $scope.allarea || [],
           keys: $scope.keysval || '',
           realThing: 0,
-          status: $scope.statusVal || '', //活动状态
-          orderStatus: $scope.orderstatus || '',
+          // status: $scope.statusVal || '', //活动状态
+          status: $scope.orderstatus || '',
+          // orderStatus: $scope.orderstatus || '',
           stime: $scope.startTime || '',
           etime: $scope.endTime || ''
         };
