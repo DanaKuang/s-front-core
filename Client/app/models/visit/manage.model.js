@@ -91,6 +91,12 @@ define([], function () {
           // *** 零售户管理 end
 
 
+          // *** 其他系统配置 start
+          var OTHER_SETTING = '/api/tztx/seller-manager/setting/sellerSysSetting';
+          $model.sellerSysSetting = function (data) {
+            return request.$Search(OTHER_SETTING, data, true)
+          }
+          // *** 其他系统配置 end
 
         }]
     };

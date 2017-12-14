@@ -1,0 +1,73 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date; 2017-12-14 重构零售户
+ * Description: 审核管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/visit.other.css"/>
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<div ng-controller="visitOtherCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title other">
+                        <div><span>其他系统设置</span></div>
+                    </div>
+                    <form name="form" novalidate>
+                        <div class="panel rate" id="manage-tap">
+                            <div class="panel-body ui-manage-panel other-con" id="panel-body">
+                                <ul>
+                                    <li class="form-group">
+                                        <h3>店铺-消费者关联有限时间：</h3>
+                                        <lable class="control-label title">是否有关联时间：</lable>
+                                        <div class="col-sm-8">
+                                            <label><input ng-model="vm.time" ng-checked="1" ng-value="true" name="time" type="radio" />是</label>
+                                            <label><input ng-model="vm.time" ng-value="0" name="time" type="radio" />否</label>
+                                            <input name="timeText" ng-model="vm.timeText" ng-show="vm.time == 1" class="form-control" type="text" required> 分钟
+                                            <!--验证-->
+                                            <div ng-show="form.$submitted || form.timeText.$touched">
+                                                <div ng-show="form.timeText.$error.required" class="wrong-tip">请输入关联时间</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="form-group">
+                                        <h3>二维码打印设置：</h3>
+                                        <lable class="control-label title">是否收费（含运费和税费）：</lable>
+                                        <div class="col-sm-8">
+                                            <label><input ng-model="vm.qr" ng-checked="1" ng-value="true" name="qr" type="radio" />是</label>
+                                            <label><input ng-model="vm.qr" ng-value="0" name="qr" type="radio" />否</label>
+                                            <input name="qrText" ng-model="vm.qrText" ng-show="vm.qr == 1" class="form-control" type="text" required> 元
+                                            <!--验证-->
+                                            <div ng-show="form.$submitted || form.qrText.$touched">
+                                                <div ng-show="form.qrText.$error.required" class="wrong-tip">请输入费用</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="form-group">
+                                        <h3>公众号是否显示领取标牌：</h3>
+                                        <lable class="control-label title">是否显示领取标牌：</lable>
+                                        <div class="col-sm-8">
+                                            <label><input ng-model="vm.sign" ng-checked="true" ng-value="true" name="sign" type="radio" />是</label>
+                                            <label><input ng-model="vm.sign" ng-value="false" name="sign" type="radio" />否</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btn-con">
+                            <button ng-click="vm.save()" type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jqmeter.min.js"></script>
+</div>
