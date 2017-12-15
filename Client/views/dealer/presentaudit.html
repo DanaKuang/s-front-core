@@ -22,19 +22,19 @@
 					<div class="panel-body">
 						<form name="form">
 							<div class="form-horizontal">
-								<div class="form-group col-sm-2">
+								<div class="form-group col-sm-3">
 									<label class="control-label col-sm-4">订单状态</label>
 									<div class="col-sm-4">
 										<select class="form-controlmdg input-sm select">
 											<option value="">全部</option>
-											<option value="1">申请中</option>
+											<option value="1" selected>申请中</option>
 											<option value="2">已到账</option>
 											<option value="3">申请失败</option>
 											<option value="4">审核通过</option>
 										</select>
 									</div>
 								</div>
-								<div class="form-group col-sm-4" style="margin-left:30px;">
+								<div class="form-group col-sm-4">
 									<label class="control-label col-sm-2">关键词</label>
 									<div class="col-sm-8">
 										<select class="input-sm col-sm-5" id="keyCode">
@@ -45,7 +45,7 @@
 										<input type="text" id="newCode" class="input-sm col-sm-7" placeholder="请输入关键字" ng-model="orderCode">
 									</div>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-5">
 									<label class="control-label col-sm-2">位置</label>
 									<div class="col-sm-8">
 										<select id="provinceId" ng-model="provinceCode" class="input-sm col-sm-4">
