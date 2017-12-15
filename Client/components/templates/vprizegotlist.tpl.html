@@ -20,7 +20,7 @@
 			  	<td>{{item.prizeWinner}}</td>
 			  	<td>{{item.activityName}}</td>
 			  	<td>{{item.prizeName}}</td>	
-			  	<td>{{item.awardName}}</td>
+			  	<td>{{item.awardType == 3 ? (item.awardName + '+' + item.awardScore + '积分') : item.awardName}}</td>
 			  	<td>{{item.unitFullName}}</td>
 			  	<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
 			  	<td>{{item.awardCity}}</td>
