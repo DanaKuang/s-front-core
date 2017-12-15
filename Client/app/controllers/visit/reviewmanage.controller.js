@@ -252,12 +252,6 @@ define([], function () {
           $scope.textareaChage = function() {
             $scope.textareaNum = $scope.vm.noPassReason.length;
           }
-
-          // 审核状态change
-          $scope.authStatusChange = function () {
-            getList(1, true);
-            $scope.vm.allCheckbox = false;
-          }
           // *** 批量审批 end
 
 

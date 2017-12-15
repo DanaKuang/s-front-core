@@ -92,9 +92,15 @@ define([], function () {
 
 
           // *** 其他系统配置 start
-          var OTHER_SETTING = '/api/tztx/seller-manager/setting/sellerSysSetting';
+          // 获取
+          var OTHER_GET_SETTING = '/api/tztx/seller-manager/setting/querySysSetting';
+          $model.querySysSetting = function (data) {
+            return request.$Search(OTHER_GET_SETTING, data, true)
+          }
+          // 保存
+          var OTHER_SAVE_SETTING = '/api/tztx/seller-manager/setting/sellerSysSetting';
           $model.sellerSysSetting = function (data) {
-            return request.$Search(OTHER_SETTING, data, true)
+            return request.$Search(OTHER_SAVE_SETTING, data, true)
           }
           // *** 其他系统配置 end
 
