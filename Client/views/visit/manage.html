@@ -237,20 +237,20 @@
                                                     <li class="">
                                                         <label>
                                                             <span class="title">扫码次数：</span>
-                                                            <span class="value">{{info.scanCount}}次</span>
+                                                            <span class="value">{{info.scanCount || 0}}次</span>
                                                         </label>
                                                     </li>
 
                                                     <li class="">
                                                         <label>
                                                             <span class="title">店铺粉丝：</span>
-                                                            <span class="value">{{info.fansCount}}人</span>
+                                                            <span class="value">{{info.fansCount || 0}}人</span>
                                                         </label>
                                                     </li>
                                                     <li class="">
                                                         <label>
                                                             <span class="title">积分：</span>
-                                                            <span class="value">{{info.score}}</span>
+                                                            <span class="value">{{info.score || 0}}</span>
                                                         </label>
                                                     </li>
                                                     <li>
@@ -522,11 +522,11 @@
                                             <!-- 入库明细 搜索项 -->
                                             <div ng-show="detial.detialPage == 'storage'" class="form-group">
                                                 <label class="control-label">奖品类型：</label>
-                                                <select class="form-control" ng-model="storage.type">
+                                                <select class="form-control" ng-model="storage.awardType">
                                                     <option value="" selected>全部</option>
-                                                    <option value="1">积分奖励</option>
-                                                    <option value="2">实物奖励</option>
-                                                    <option value="2">红包奖励</option>
+                                                    <option value="6">积分奖励</option>
+                                                    <option value="1">实物奖励</option>
+                                                    <option value="3">红包奖励</option>
                                                 </select>
                                             </div>
 
@@ -608,13 +608,13 @@
                                                 <tbody>
                                                 <tr ng-repeat="(index, item) in storage.listData">
                                                     <td>{{index+1}}</td>
-                                                    <td>{{item.openId}}</td>
-                                                    <td>{{item.nickname}}</td>
-                                                    <td>{{item.nickname}}</td>
-                                                    <td>{{item.nickname}}</td>
+                                                    <td>{{item.brandName}}</td>
+                                                    <td>{{item.snName}}</td>
+                                                    <td>{{item.awardName}}</td>
+                                                    <td>{{item.num}}</td>
 
-                                                    <td>{{item.unit == 1 ? '盒' : '条'}}</td>
-                                                    <td>{{item.fxAmount}}</td>
+                                                    <td>{{item.award}}</td>
+                                                    <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

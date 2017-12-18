@@ -5,12 +5,12 @@
  * Description: 审核管理
  */
 -->
-<link rel="stylesheet" href="statics/assets/style/form.css">
 <link rel="stylesheet" href="statics/assets/style/visit.reviewmanage.css"/>
+
 <!--分页样式-->
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
 
-<div ng-controller="visitReviewManageCtrl">
+<div ng-controller="visitOrderManageCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-manage-box">
@@ -127,39 +127,34 @@
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>序号</th>
+                                                <th></th>
                                                 <th>操作</th>
-                                                <th>烟草专卖号</th>
+                                                <th>零售户id</th>
                                                 <th>门店名称</th>
-                                                <th>经营人姓名</th>
-                                                <th>区域</th>
+                                                <th>订单顺序号</th>
 
-                                                <th>业态</th>
                                                 <th>联系人姓名</th>
                                                 <th>联系人电话</th>
-                                                <th>业务员</th>
+                                                <th>门店地址</th>
+                                                <th>费用</th>
                                                 <th>申请时间</th>
 
-                                                <th>状态</th>
+                                                <th>支付状态</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="(index, item) in vm.listData">
                                                 <td class="batch">
-                                                    <label><input type="checkbox" ng-click="updateSelection($event, item.sellerId)" ng-checked="isSelected(item.sellerId)">{{index + 1}}</label>
+                                                    <label>{{index + 1}}</label>
                                                 </td>
                                                 <td>
                                                     <div class="oper-btn-wrap">
-                                                        <div class="operate-btn" ng-click="viewReviewManage(item.sellerId)">查看详情</div>
-
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">审核通过</div>
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">审核不通过</div>
+                                                        <div class="operate-btn" ng-click="viewOrderManage(item.sellerId)">查看详情</div>
                                                     </div>
                                                 </td>
                                                 <td>{{item.licenceNo}}</td>
                                                 <td><div class="shop-name">{{item.shopName}}</div></td>
                                                 <td>{{item.ownerName}}</td>
-                                                <td>{{item.districtName}}</td>
 
                                                 <td>{{item.commercialName}}</td>
                                                 <td>{{item.contactName}}</td>
@@ -195,33 +190,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
         <p class="prompt"></p>
     </div>
-
-    <!-- 审核 -->
-    <div class="modal fade bs-example-modal-sm review-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><span id="passTitle"><span ng-if="isReview">审核通过</span><span ng-if="!isReview">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <form name="reviewForm" novalidate>
-                    <div class="modal-body">
-                        <span ng-if="isReview">您确定通过此零售户的审核？</span>
-                        <div ng-if="!isReview">
-                            <textarea class="form-control" name="noPassReason" cols="30" rows="5" maxlength="50" ng-model="vm.noPassReason" ng-change="textareaChage($event)" required></textarea>
-                            <p class="textarea-num"><span>{{textareaNum ? textareaNum : 0}}</span>/50</p>
-                            <!--验证-->
-                            <div ng-show="reviewForm.$submitted || reviewForm.noPassReason.$touched">
-                                <div ng-show="reviewForm.noPassReason.$error.required" class="wrong-tip">请输入不通过理由</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" ng-click="reviewConfirm()">确定</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    
 
     <script src="statics/assets/libs/jquery.page.js"></script>
     <script src="statics/assets/libs/jqmeter.min.js"></script>

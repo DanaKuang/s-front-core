@@ -215,6 +215,7 @@ define([], function () {
                 getList($scope.paginationConf.data.page.currentPageNumber);
                 // 隐藏弹窗
                 $('.shelf-modal').modal('hide');
+                alertMsg($('#newAlert'), 'success', '设置成功');
               } else {
                 alertMsg($('#newAlert'), 'danger', res.data.msg);
               }
@@ -517,7 +518,7 @@ define([], function () {
           function getDetialStorageList(page, ispage) {
             var data = {
               sellerId: $scope.info.sellerId,
-              type: $scope.storage.type || '', // 流水类型
+              awardType: $scope.storage.awardType || '', // 奖品类型
               startTime: (new Date($scope.detial.startTime)).getTime() || '',
               endTime: (new Date($scope.detial.endTime)).getTime() || '',
               pageNo: page || 1,

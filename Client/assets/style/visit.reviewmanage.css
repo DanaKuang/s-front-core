@@ -49,16 +49,17 @@
 .search-btn-con .reset {
   margin-left: 30px; }
 
-.btn-primary {
+.btn.btn-primary {
   width: auto;
+  height: 34px;
   border: none;
-  line-height: 18px;
+  line-height: 22px;
   padding: 6px 12px; }
 
-.btn-default {
+.btn.btn-default {
   width: auto;
-  height: 30px;
-  line-height: 16px;
+  height: 34px;
+  line-height: 22px;
   padding: 6px 12px; }
 
 .new-retailer-btn {
@@ -100,9 +101,6 @@
 .review-modal .btn {
   display: inline-block; }
 
-.review-modal .wrong-tip {
-  line-height: 1; }
-
 td.batch label {
   width: 50px;
   height: 20px;
@@ -138,5 +136,11 @@ tr .shop-name {
 .wrong-tip {
   color: #f00;
   font-size: 12px;
-  line-height: 34px;
+  margin-top: 5px;
   text-indent: 5px; }
+
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important; }
+
+.ng-submitted input.ng-invalid, .ng-submitted textarea.ng-invalid, .ng-submitted select.ng-invalid {
+  border-color: #FA787E !important; }

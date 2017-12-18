@@ -104,6 +104,53 @@ define([], function () {
           }
           // *** 其他系统配置 end
 
+
+          // *** 返佣管理 - 扫码返佣 start
+          // 品牌
+          var REBATE_GET_BRANDS = '/api/tztx/saas/saotx/common/queryBrandWithRight';
+          $model.rebateGetBrands = function (data) {
+            return request.$Search(REBATE_GET_BRANDS, data, true)
+          }
+          // 规格
+          var REBATE_GET_SPEC = '/api/tztx/saas/saotx/common/queryProduct';
+          $model.rebateGetSpec = function (data) {
+            return request.$Search(REBATE_GET_SPEC, data, true)
+          }
+          // // 地区
+          // var REBATE_GET_REGION = '/api/tztx/saas/saotx/common/queryBrandWithRight';
+          // $model.rebateGetRegion = function (data) {
+          //   return request.$Search(REBATE_GET_REGION, data, true)
+          // }
+          // 地区
+          var GET_TIER_AREA = '/api/tztx/saas/admin/user/queryRightRegion';
+          $model.getTierArea = function (data) {
+            return request.$Search(GET_TIER_AREA, data);
+          }
+          // 活动类型
+          var REBATE_GET_ACT_TYPE = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
+          $model.rebateGetActType = function (data) {
+            return request.$Search(REBATE_GET_ACT_TYPE, data, true)
+          }
+          // 活动状态
+          var REBATE_GET_ACT_STATUS = '/api/tztx/saas/saotx/common/queryDimDataStatus';
+          $model.rebateGetActStatus = function (data) {
+            return request.$Search(REBATE_GET_ACT_STATUS, data, true)
+          }
+
+          // 列表
+          var REBATE_GET_LIST = '/api/tztx/seller-manager/setting/activityRebateList';
+          $model.getRebateManageList = function (data) {
+            return request.$Search(REBATE_GET_LIST, data)
+          }
+
+          // 扫码返佣比例设置
+          var REBATE_SET = '/api/tztx/seller-manager/setting/setActivityRebate';
+          $model.setActivityRebate = function (data) {
+            return request.$Search(REBATE_SET, data)
+          }
+
+          // *** 返佣管理 - 扫码返佣 end
+
         }]
     };
     return visitManageModel;

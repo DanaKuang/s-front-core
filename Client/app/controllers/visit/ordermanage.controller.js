@@ -5,9 +5,9 @@
  */
 
 define([], function () {
-    var visitReviewManageCtrl = {
+    var visitOrderManageCtrl = {
         ServiceType: "controller",
-        ServiceName: "visitReviewManageCtrl",
+        ServiceName: "visitOrderManageCtrl",
         ViewModelName: 'visitManageModel',
         ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
 
@@ -219,9 +219,9 @@ define([], function () {
             $scope.reviewValue = value; // 要传的值，1通过，2不通过
             // 根据值去显示弹窗
             if(value == 1) {
-              $scope.isReview = true;
+              $scope.isOrder = true;
             } else {
-              $scope.isReview = false;
+              $scope.isOrder = false;
             }
           }
 
@@ -241,7 +241,6 @@ define([], function () {
                   getList($scope.paginationConf.data.page.currentPageNumber);
                   // 隐藏弹窗
                   $('.review-modal').modal('hide');
-                  alertMsg($('#newAlert'), 'success', '设置成功');
                 } else {
                   alertMsg($('#newAlert'), 'danger', res.data.msg);
                 }
@@ -257,7 +256,7 @@ define([], function () {
 
 
           // 查看点击
-          $scope.viewReviewManage = function(id) {
+          $scope.viewOrderManage = function(id) {
             sessionStorage.setItem('sellerId', id);
             $location.path('view/visit/manage');
           }
@@ -330,5 +329,5 @@ define([], function () {
 
         }]
     };
-    return visitReviewManageCtrl;
+    return visitOrderManageCtrl;
 })

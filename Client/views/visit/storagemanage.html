@@ -1,23 +1,22 @@
 <!--
 /**
  * Author: hanzha
- * Create Date; 2017-12-11 重构零售户
- * Description: 审核管理
+ * Create Date; 2017-12-15 重构零售户
+ * Description: 扫码返佣管理
  */
 -->
-<link rel="stylesheet" href="statics/assets/style/form.css">
 <link rel="stylesheet" href="statics/assets/style/visit.reviewmanage.css"/>
 <!--分页样式-->
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
 
-<div ng-controller="visitReviewManageCtrl">
+<div ng-controller="visitRebateManageCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-manage-box">
                 <div class="col-md-12">
                     <!--title-->
                     <div class="ui-panel-title manage">
-                        <div><span>审核管理</span></div>
+                        <div><span>扫码返佣管理</span></div>
                     </div>
 
                     <div class="panel rate" id="manage-tap">
@@ -129,16 +128,15 @@
                                             <tr>
                                                 <th>序号</th>
                                                 <th>操作</th>
-                                                <th>烟草专卖号</th>
-                                                <th>门店名称</th>
-                                                <th>经营人姓名</th>
-                                                <th>区域</th>
+                                                <th>品牌</th>
+                                                <th>规格</th>
+                                                <th>奖品类型</th>
 
-                                                <th>业态</th>
-                                                <th>联系人姓名</th>
-                                                <th>联系人电话</th>
-                                                <th>业务员</th>
-                                                <th>申请时间</th>
+                                                <th>扫码奖励/条</th>
+                                                <th>奖品数量</th>
+                                                <th>奖品剩余数量</th>
+                                                <th>有效时间</th>
+                                                <th>创建时间</th>
 
                                                 <th>状态</th>
                                             </tr>
@@ -146,14 +144,15 @@
                                         <tbody>
                                             <tr ng-repeat="(index, item) in vm.listData">
                                                 <td class="batch">
-                                                    <label><input type="checkbox" ng-click="updateSelection($event, item.sellerId)" ng-checked="isSelected(item.sellerId)">{{index + 1}}</label>
+                                                    <label>{{index + 1}}</label>
                                                 </td>
                                                 <td>
                                                     <div class="oper-btn-wrap">
-                                                        <div class="operate-btn" ng-click="viewReviewManage(item.sellerId)">查看详情</div>
+                                                        <div class="operate-btn" ng-click="viewRebateManage(item.sellerId)">查看详情</div>
 
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">审核通过</div>
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">审核不通过</div>
+                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">启用</div>
+                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">禁用</div>
+                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">修改</div>
                                                     </div>
                                                 </td>
                                                 <td>{{item.licenceNo}}</td>
@@ -200,12 +199,12 @@
     <div class="modal fade bs-example-modal-sm review-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <div class="modal-header"><span id="passTitle"><span ng-if="isReview">审核通过</span><span ng-if="!isReview">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-header"><span id="passTitle"><span ng-if="isRebate">审核通过</span><span ng-if="!isRebate">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <form name="reviewForm" novalidate>
                     <div class="modal-body">
-                        <span ng-if="isReview">您确定通过此零售户的审核？</span>
-                        <div ng-if="!isReview">
-                            <textarea class="form-control" name="noPassReason" cols="30" rows="5" maxlength="50" ng-model="vm.noPassReason" ng-change="textareaChage($event)" required></textarea>
+                        <span ng-if="isRebate">您确定通过此零售户的审核？</span>
+                        <div ng-if="!isRebate">
+                            <textarea name="noPassReason" cols="30" rows="5" maxlength="50" ng-model="vm.noPassReason" ng-change="textareaChage($event)" required></textarea>
                             <p class="textarea-num"><span>{{textareaNum ? textareaNum : 0}}</span>/50</p>
                             <!--验证-->
                             <div ng-show="reviewForm.$submitted || reviewForm.noPassReason.$touched">

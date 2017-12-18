@@ -286,14 +286,14 @@ visitManage:
     gatewaytype: 0
     staticfile: 'visit/ordermanage.html'
   - httpmethod: 'get'                       # 返佣管理 - 扫码入库
-    routepath: '/view/visit/storagemanage'
+    routepath: '/view/visit/rebate/storagemanage'
     description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/storagemanage.html'
   - httpmethod: 'get'                       # 返佣管理 - 扫码返佣
-    routepath: '/view/visit/rebatemanage'
+    routepath: '/view/visit/rebate/rebatemanage'
     description: 'manage'
     enableroute: 1
     responetype: 'html'

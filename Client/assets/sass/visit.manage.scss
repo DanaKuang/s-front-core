@@ -41,7 +41,7 @@
 
 .print .control-label {
   width: 110px;
-  margin-left: -17px; }
+  margin-left: -1px; }
 
 .panel-body {
   padding: 15px;
@@ -57,16 +57,16 @@
   margin-top: 10px; }
 
 
-.btn-primary {
+.btn.btn-primary {
   width: auto;
-  height: 30px;
+  height: 34px;
   border: none;
-  line-height: 18px;
+  line-height: 22px;
   padding: 6px 12px;
 }
-.btn-default {
-  height: 30px;
-  line-height: 18px;
+.btn.btn-default {
+  height: 34px;
+  line-height: 22px;
   padding: 6px 12px;
 }
 

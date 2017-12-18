@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/*12.15零售户重构*/
+
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+
+// 搜索
+.form-horizontal {
+  .form-group {
+    margin: 0;
+    padding: 0;
+  }
+  .control-label {
+    width: 90px;
+    float: left;
+    margin-right: 0px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  #durationStart, #durationEnd {
+    width: 45%;
+    background: #fff;
+    float: left;
+  }
+  .time {
+    width: 600px;
+  }
+  .time span {
+    width: 10%;
+    float: left;
+    line-height: 34px;
+    text-align: center;
+  }
+}
+
+
+
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+
+.search-btn-con {
+  .btn {
+    float: left;
+  }
+  .reset {
+    margin-left: 30px;
+  }
+}
+
+
+// 审核弹窗
+.rebate-modal {
+  input {
+    width: 90%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+  .btn {
+    display: inline-block;
+  }
+  .wrong-tip {
+    font-size: 12px;
+    line-height: 1;
+    margin-top: 5px;
+  }
+}
+
+td.batch {
+  label {
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+// 管理列表
+.operate-btn {
+  color: #3379b7;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 5px;
+}
+
+// 表格
+.table tr th, .table tr td {
+  font-size: 12px;
+}
+tr {
+  .activity-name {
+    width: 200px;
+    margin: 0 auto;
+  }
+  .time {
+    width: 150px;
+    margin: 0 auto;
+  }
+}
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px;
+}
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important;
+}
+.ng-submitted {
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    border-color: #FA787E !important;
+  }
+}
+
+// 下拉多选框设置
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+  display: block;
+}

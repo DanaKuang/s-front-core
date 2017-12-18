@@ -127,6 +127,15 @@
     text-indent: 5px;
   }
 
+  input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+    border-color: #FA787E !important;
+  }
+  .ng-submitted {
+    input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+      border-color: #FA787E !important;
+    }
+  }
+
   .modal {
     overflow-y: auto;
     .modal-dialog {
