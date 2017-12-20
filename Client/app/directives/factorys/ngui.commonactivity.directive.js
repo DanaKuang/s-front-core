@@ -34,6 +34,20 @@ define([], function () {
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['pageName']);
                 var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
+                var type = allconfigtemplateScope.conf.data[0].type || '0';
+                scope.actsrc = [
+                    '',
+                    'statics/assets/image/dazhuanpan.png',
+                    'statics/assets/image/guaguaka.png',
+                    'statics/assets/image/fanpai.png',
+                    '',
+                    'statics/assets/image/jiugonge.png',
+                    '',
+                    '',
+                    'statics/assets/image/fanpai.png',
+                    'statics/assets/image/dianyuanbao.png',
+                    'statics/assets/image/fanzhuanshi.png'
+                ][type.replace('act-','')] || 'statics/assets/image/fanpai.png';
             }, true);
 
         }
