@@ -6,12 +6,13 @@ define([], function() {
 		ServiceContent: ['$scope', 'setDateConf', function($scope, setDateConf) {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
+			var myChart2 = echarts.init(document.getElementById("sunPie"));
 			//获取时间当前年月
 			var date = new Date(); //获取系统当前时间
 			var year = date.getFullYear();
-			var month1 = date.getMonth() + 1;
+			var month1 = date.getMonth() == 12 ? 1 : date.getMonth()+1;
 			var month2 = date.getMonth();
-			var month3 = date.getMonth() - 1;
+			var month3 = date.getMonth() == 1 ? 12 : date.getMonth()-1;
 			var day = date.getDate() - 1;
 			month1 = (month1 < 10 ? "0" + month1 : month1);
 			month2 = (month2 < 10 ? "0" + month2 : month2);
@@ -323,8 +324,6 @@ define([], function() {
 
 				})();
 
-				
-			
 				//用户各规格扫码烟包数
 				function getSupplyData() {
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
@@ -349,61 +348,34 @@ define([], function() {
 				getSupplyData();
 				//各地用户扫码时段分析
 				(function() {
-
-					var myChart2 = echarts.init(document.getElementById("sunPie"));
-					var optionTwo = $model.$hourschart.data;
-
-					console.log(optionTwo)
+					optionTwo = myChart2.getOption();
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					var mobileNo = $('.input_text').val();
-					endTime = endTime;
 					var SaoHourFen = {
 						openId: openId,
 						mobileNo: mobileNo,
 						endTime: endTime
 					}
-					optionTwo.series.renderItem = function renderItem(params, api) {
-						var values = [api.value(0), api.value(1)];
-						var coord = api.coord(values);
-						var size = api.size([1, 1], values);
-						return {
-							type: 'sector',
-							shape: {
-								cx: params.coordSys.cx,
-								cy: params.coordSys.cy,
-								r0: coord[2] - size[0] / 2,
-								r: coord[2] + size[0] / 2,
-								startAngle: coord[3] - size[1] / 2,
-								endAngle: coord[3] + size[1] / 2
-							},
-							style: api.style({
-								fill: api.visual('color')
-							})
-						};
-					}
-					optionTwo.series.data = [];
+					optionTwo.series[0].data = [];
 					optionTwo.angleAxis.data = [];
 
 					$model.$getSaoHourFen(SaoHourFen).then(function(res) {
 						console.log(res);
 						var res = res.data || [];
 						for(var i = 0; i < res.length; i++) {
-							optionTwo.series.data.push(res[i].scanPv);
+							optionTwo.series[0].data.push(res[i].scanPv);
 							optionTwo.angleAxis.data.push(res[i].timeh);
 						}
-
-						optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
-							return Math.max(max, item);
-						}, -Infinity);
+						optionTwo.visualMap.max = _.max(optionTwo.series[0].data);
 						myChart2.setOption(optionTwo)
 					})
 
 				})();
 			}
-			
-			
-			
-			
+
+
+
+
 			//调取openId
 			function publicTwo(params) {
 				//用户基本信息
@@ -589,8 +561,6 @@ define([], function() {
 
 				})();
 
-				
-			
 				//用户各规格扫码烟包数
 				function getSupplyData() {
 					var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
@@ -615,11 +585,8 @@ define([], function() {
 				getSupplyData();
 				//各地用户扫码时段分析
 				(function() {
-
-					var myChart2 = echarts.init(document.getElementById("sunPie"));
 					var optionTwo = $model.$hourschart.data;
 
-					console.log(optionTwo)
 					var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
 					var mobileNo = "17702147500";
 					endTime = endTime;
@@ -628,7 +595,7 @@ define([], function() {
 						mobileNo: mobileNo,
 						endTime: endTime
 					}
-					optionTwo.series.renderItem = function renderItem(params, api) {
+					optionTwo.series[0].renderItem = function renderItem(params, api) {
 						var values = [api.value(0), api.value(1)];
 						var coord = api.coord(values);
 						var size = api.size([1, 1], values);
@@ -647,23 +614,17 @@ define([], function() {
 							})
 						};
 					}
-					optionTwo.series.data = [];
+					optionTwo.series[0].data = [];
 					optionTwo.angleAxis.data = [];
-
 					$model.$getSaoHourFen(SaoHourFen).then(function(res) {
-						console.log(res);
 						var res = res.data || [];
 						for(var i = 0; i < res.length; i++) {
-							optionTwo.series.data.push(res[i].scanPv);
+							optionTwo.series[0].data.push(res[i].scanPv);
 							optionTwo.angleAxis.data.push(res[i].timeh);
 						}
-
-						optionTwo.visualMap.max = echarts.util.reduce(optionTwo.series.data, function(max, item) {
-							return Math.max(max, item);
-						}, -Infinity);
+						optionTwo.visualMap.max = _.max(optionTwo.series[0].data);
 						myChart2.setOption(optionTwo)
 					})
-
 				})();
 			}
 		}]

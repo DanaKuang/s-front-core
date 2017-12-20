@@ -20,7 +20,7 @@
     },
     "calculable" : true,
     "series" : [{
-        "name":"半径模式",
+        "name":"",
         "type":"pie",
         "radius" : [20, 110],
         "center" : ["40%", "50%"],

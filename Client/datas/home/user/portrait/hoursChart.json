@@ -10,7 +10,7 @@
 	"axis":"angle"
 	}
 	},
-	
+
 	"visualMap": {
 		"type": "continuous",
 		"min": 0,
@@ -44,17 +44,16 @@
 			"show": "false"
 		}
 	},
-	"series": 
-		{
-			"name":"扫码次数之和",
-			"type": "custom",
-			"coordinateSystem": "polar",
-			"itemStyle": {
-				"normal": {
-					"color": "#d14a61"
-				}
-			},
-			"renderItem": "renderItem",
-			"data":[""]
-		}
+	"series": [{
+		"name":"扫码次数之和",
+		"type": "custom",
+		"coordinateSystem": "polar",
+		"itemStyle": {
+			"normal": {
+				"color": "#d14a61"
+			}
+		},
+		"renderItem": "renderItem",
+		"data":[""]
+	}]
 }
