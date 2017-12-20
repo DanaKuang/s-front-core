@@ -34,7 +34,14 @@ define([], function () {
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['pageName']);
                 var allconfigtemplateScope = angular.element('.all-template-config-wrap').scope();
                 scope.pageName = allconfigtemplateScope.pageName;
-                var type = allconfigtemplateScope.conf.data[0].type || '0';
+                if (!!allconfigtemplateScope.conf.data[0]) {
+                    var type = allconfigtemplateScope.conf.data[0].type || '0';
+                } else if (!!allconfigtemplateScope.conf.data.pageExt) {
+                    var type = allconfigtemplateScope.conf.data.pageExt.type || '0';
+                } else {
+                    var type = allconfigtemplateScope.conf.data.pageList[0].type || '0';
+                }
+
                 scope.actsrc = [
                     '',
                     'statics/assets/image/dazhuanpan.png',
