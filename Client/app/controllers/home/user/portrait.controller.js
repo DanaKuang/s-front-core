@@ -348,13 +348,35 @@ define([], function() {
 				getSupplyData();
 				//各地用户扫码时段分析
 				(function() {
-					optionTwo = myChart2.getOption();
+					var optionTwo = myChart2.getOption();
+					if (!optionTwo) {
+						optionTwo = $model.$hourschart.data;
+					}
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
 					var mobileNo = $('.input_text').val();
 					var SaoHourFen = {
 						openId: openId,
 						mobileNo: mobileNo,
 						endTime: endTime
+					}
+					optionTwo.series[0].renderItem = function renderItem(params, api) {
+						var values = [api.value(0), api.value(1)];
+						var coord = api.coord(values);
+						var size = api.size([1, 1], values);
+						return {
+							type: 'sector',
+							shape: {
+								cx: params.coordSys.cx,
+								cy: params.coordSys.cy,
+								r0: coord[2] - size[0] / 2,
+								r: coord[2] + size[0] / 2,
+								startAngle: coord[3] - size[1] / 2,
+								endAngle: coord[3] + size[1] / 2
+							},
+							style: api.style({
+								fill: "#a72e43"
+							})
+						};
 					}
 					optionTwo.series[0].data = [];
 					optionTwo.angleAxis.data = [];
@@ -585,7 +607,10 @@ define([], function() {
 				getSupplyData();
 				//各地用户扫码时段分析
 				(function() {
-					var optionTwo = $model.$hourschart.data;
+					var optionTwo = myChart2.getOption();
+					if (!optionTwo) {
+						optionTwo = $model.$hourschart.data;
+					}
 
 					var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
 					var mobileNo = "17702147500";
@@ -610,7 +635,7 @@ define([], function() {
 								endAngle: coord[3] + size[1] / 2
 							},
 							style: api.style({
-								fill: api.visual('color')
+								fill: "#a72e43"
 							})
 						};
 					}
