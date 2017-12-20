@@ -4,14 +4,14 @@ define([], function () {
       ServiceName: 'PortraitViewModel',
       ServiceContent: ['request', function (request) {
         this.$model = function () {
-        	
+
 //          console.log("portrait is under Model")
         var CITY_JSON_URL = '/statics/home/user/portrait/test.json';    //各市地扫码次数
         var HOURS_JSON_URL = '/statics/home/user/portrait/hours.json';     //扫码次数时刻趋势
-        var GUIJICHART_JSON_URL = '/statics/home/user/portrait/GuijiChart.json'; 
-        var HOURSCHART_JSON_URL = '/statics/home/user/portrait/hoursChart.json'; 
+        var GUIJICHART_JSON_URL = '/statics/home/user/portrait/GuijiChart.json';
+        var HOURSCHART_JSON_URL = '/statics/home/user/portrait/hoursChart.json';
         //扫码次数时刻趋势
-		var getPhoneNo= '/api/tztx/dataportal/consumer/getOpenIdBymobile'; //用户手机号查询 
+		var getPhoneNo= '/api/tztx/dataportal/consumer/getOpenIdBymobile'; //用户手机号查询
 		var getJiBenInfo='/api/tztx/dataportal/consumer/getUserBasicInfo';//用户基本信息
 		var getSaoPinFen='/api/tztx/dataportal/consumer/getUserScanFree';//用户扫码频度分析
 		var getSaoJieFen='/api/tztx/dataportal/consumer/getUserScandayBar';//用户扫码结构分析
@@ -23,12 +23,12 @@ define([], function () {
 	//用户各规格扫码烟包数
 		var getSaoHourFen='/api/tztx/dataportal/consumer/getUserScanHourPie';
 	//用户掃碼時段分析
-	
+
         this.$citychart = request.$Query(CITY_JSON_URL);
         this.$hours = request.$Query(HOURS_JSON_URL);
         this.$Guijichart = request.$Query(GUIJICHART_JSON_URL);
         this.$hourschart = request.$Query(HOURSCHART_JSON_URL);
-        
+
 		this.$getPhoneNo = function (params) {
           return request.$Search(getPhoneNo,params,true);
         }
@@ -53,10 +53,10 @@ define([], function () {
 		this.$getSaoHourFen = function (params) {
           return request.$Search(getSaoHourFen,params,true);
         }
-					
+
         };
       }]
     };
-  
+
     return portraitModel;
   });
