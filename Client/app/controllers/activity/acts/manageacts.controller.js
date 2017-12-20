@@ -21,7 +21,7 @@ define([], function () {
           return scope ? scope.conf ? scope.conf : scope.conf = {} : false
         }
 
-        // 初始化multiselect 
+        // 初始化multiselect
         $(document).ready(function () {
           $(".operation.multi .select").multiselect({
             nonSelectedText: '请选择',
@@ -38,7 +38,7 @@ define([], function () {
 
         // 初始化datetimepicker
         $("#durationStart").datetimepicker({
-          format: 'yyyy-mm-dd hh:ii', 
+          format: 'yyyy-mm-dd hh:ii',
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
@@ -53,7 +53,7 @@ define([], function () {
         })
 
         $("#durationEnd").datetimepicker({
-          format: 'yyyy-mm-dd hh:ii', 
+          format: 'yyyy-mm-dd hh:ii',
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
@@ -81,7 +81,7 @@ define([], function () {
             keys: $scope.keysval || '',
             stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
             etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 10
           }
         }
@@ -138,7 +138,7 @@ define([], function () {
         $scope.$on('typefromActSample', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = res.data;
-            getLaunchInfo();        
+            getLaunchInfo();
           })
         })
 
@@ -163,11 +163,11 @@ define([], function () {
             $scope.configtemplateConf = res.data;
           })
         })
-        
+
 
         // $model.step().then(function (res) {
         //   $scope.createConf = res.data;
-        // })    
+        // })
 
         // 操作面板，活动状态
         $model.getActivityStatus().then(function(res) {
@@ -218,7 +218,7 @@ define([], function () {
             })
           })
         })
-          
+
         // 停用活动
         $scope.$on('terminateActivity', function (e, v, f) {
           $('.end-activity-modal .btn-primary').on('click', function(){
@@ -248,7 +248,7 @@ define([], function () {
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
             })
           }
-          
+
         })
 
         // 查看活动
@@ -261,11 +261,11 @@ define([], function () {
         // 返回
         $scope.$on('popback', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
-            $scope.allConfigTemplateConf = null;       
+            $scope.allConfigTemplateConf = null;
           })
         })
 
-        // 
+        //
         function getLaunchInfo() {
           $(document).ready(function () {
             $('.multi .select').multiselect({
@@ -379,7 +379,7 @@ define([], function () {
               $('.draw-area').find('.btn-group').not('.edit').css('display', 'none');
               $('.select-area').find('.btn-group').not('.edit').css('display', 'none')
             }, 500)
-            
+
             // 获取已编辑的地区
             // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
           } else {
@@ -437,7 +437,7 @@ define([], function () {
             if (provinceArr.length != 0) {
               provinceArr.forEach(function (n ,index) {
                 var group = {
-                    label: n.shortName, 
+                    label: n.shortName,
                     value: n.code,
                     children: []
                 };
@@ -493,7 +493,7 @@ define([], function () {
             var fileSuccessData = res.data;
             var basicScope = angular.element('.configuration-image').scope();
             basicScope.attachCode = fileSuccessData.attachCode; //图片编码
-            basicScope.accessUrl = fileSuccessData.accessUrl; //图片保存地址    
+            basicScope.accessUrl = fileSuccessData.accessUrl; //图片保存地址
             if (basicScope.accessUrl) {
               $('.configuration-image').find('.wrong-tip').addClass('hidden');
             } else {
@@ -512,7 +512,7 @@ define([], function () {
           globalVariable.show_product_list_scope = fromActivityConfigtoChooseProduct.scope;
           delete fromActivityConfigtoChooseProduct.scope;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 4
           }
           var target = Object.assign({}, f, data);
@@ -537,7 +537,7 @@ define([], function () {
         $scope.$on('fromActivityConfigtoChooseHb', function (e, v, f) {
           fromActivityConfigtoChooseHb = f;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 5
           }
           var target = Object.assign({}, f, data);
@@ -562,7 +562,7 @@ define([], function () {
         $scope.$on('fromActivityConfigtoChooseJF', function (e, v, f) {
           fromActivityConfigtoChooseJF = f;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 6
           }
           var target = Object.assign({}, f, data);
@@ -585,7 +585,7 @@ define([], function () {
         $scope.$on('giftaddstockid', function (e,v,f) {
           globalVariable.giftaddstockid = f;
         })
-        
+
         $scope.confirmGiftStock = function () {
           if (globalVariable.giftaddstockid.firstornot) {
             // 特殊奖
@@ -603,7 +603,7 @@ define([], function () {
             $('.thanks-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val(add_val)
           }
           $('.modal-content .close').trigger('click');
-        } 
+        }
 
         // 新增红包库存
         var hbaddstockid = {};
@@ -651,7 +651,7 @@ define([], function () {
               var nowTotal = $('#packetToal').val();
               var addTotalMoney = parseInt(nowTotal) + parseInt($scope.hbnumber);
               $('#packetToal').val(addTotalMoney);
-              
+
               if(parseInt($scope.hbnumber) > 0){
                 if($('#ranAmont')[0].checked){
                   $('#prizeNum').removeAttr("disabled");
@@ -663,10 +663,10 @@ define([], function () {
               }
               $scope.hbnumber = '';
               $('.modal-content .close').trigger('click');
-              
+
             }
           }
-          
+
         }
 
         // 多个礼品显示配置
@@ -681,7 +681,7 @@ define([], function () {
             giftpackScope.conf.list.push(f);
           }
         })
-          
+
         // 新增活动
         $scope.$on('fromcommonactivity', function(e,v,f){
           $model.addNewActivity(f).then(function(res){
@@ -694,7 +694,7 @@ define([], function () {
               });
               $scope.iknow = function (e) {
                 $model.getTemplateSpecific(f).then(function(res){
-                  $scope.allConfigTemplateConf = null;       
+                  $scope.allConfigTemplateConf = null;
                 })
                 getList(true);
               }
@@ -715,9 +715,9 @@ define([], function () {
                   clearTimeout(successTimer);
               },3000);
               $model.getTemplateSpecific({}).then(function(res){
-                $scope.allConfigTemplateConf = null;      
+                $scope.allConfigTemplateConf = null;
               })
-              getList(true);              
+              getList(true);
             }else{
               alert(res.data.message);
             }
@@ -728,7 +728,7 @@ define([], function () {
         $scope.confirmCancel = function(){
             $('.cancel_box').modal('hide');
             $model.getTemplateSpecific({}).then(function(res){
-                $scope.allConfigTemplateConf = null;       
+                $scope.allConfigTemplateConf = null;
             })
         }
     	}]

@@ -22,26 +22,27 @@
 	width: 25%;
 	align-self: center;
 	min-height: 90px;
+    margin: 0 5px;
 }
 .create-activity-modal .flex-item:hover img {
-	width: 90%;
+    transform: scale(1.1);
 	cursor: pointer;
+    -webkit-transition: transform .3s;
+    -moz-transition: transform .3s;
+    -ms-transition: transform .3s;
+    transition: transform .3s;
 }
 .create-activity-modal .flex-item img {
-	margin-left: 50%;
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	-moz-transform: translateX(-50%) translateY(-50%);
-	-ms-transform: translateX(-50%) translateY(-50%);
-	transform: translateX(-50%) translateY(-50%);
-	-webkit-transition: width .3s;
-	-moz-transition: width .3s;
-	-ms-transition: width .3s;
-	transition: width .3s;
+	// margin-left: 50%;
+	// -webkit-transform: translateX(-50%) translateY(-50%);
+	// -moz-transform: translateX(-50%) translateY(-50%);
+	// -ms-transform: translateX(-50%) translateY(-50%);
+	// transform: translateX(-50%) translateY(-50%);
 }
 .create-activity-modal .flex-item p {
 	position: absolute;
 	left: 50%;
-	bottom: 0;
+	bottom: -30px;
 	width: 100%;
 	-webkit-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
@@ -137,7 +138,7 @@
 .select-duration .col-sm-1 {
 	padding: 7px 0 0;
 	margin-bottom: 0;
-	text-align: center; 
+	text-align: center;
 }
 .select-duration .col-sm-5 {
 	padding-right: 0;
@@ -148,7 +149,7 @@
 .select-duration-person .col-sm-1, .select-duration-person .col-sm-4 {
 	margin-bottom: 0;
 	padding: 7px 0 0;
-	text-align: center; 
+	text-align: center;
 }
 .select-duration-person .paddingright {
 	padding-right: 0;
