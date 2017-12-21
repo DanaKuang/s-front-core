@@ -130,13 +130,20 @@ td.batch {
   font-size: 12px;
 }
 tr {
-  .activity-name {
-    width: 200px;
+  td>div {
     margin: 0 auto;
   }
-  .time {
+  .activity-name {
     width: 150px;
-    margin: 0 auto;
+  }
+  .time {
+    width: 135px;
+  }
+  .ad-names {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

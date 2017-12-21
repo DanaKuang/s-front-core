@@ -100,13 +100,20 @@ td.batch label {
 .table tr th, .table tr td {
   font-size: 12px; }
 
-tr .activity-name {
-  width: 200px;
+tr td > div {
   margin: 0 auto; }
 
+tr .activity-name {
+  width: 150px; }
+
 tr .time {
-  width: 150px;
-  margin: 0 auto; }
+  width: 135px; }
+
+tr .ad-names {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 .wrong-tip {
   color: #f00;

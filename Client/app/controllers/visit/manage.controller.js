@@ -36,6 +36,9 @@ define([], function () {
             detialPage: 'info'
           };
 
+          // 新增
+          $scope.new = {};
+
           // 基本信息
           $scope.info = {
             // isEdit: false
@@ -136,30 +139,40 @@ define([], function () {
             $scope.provinceList = res.data;
             // 新增
             $scope.new.provinceList = res.data;
+            console.log($scope.new.provinceList)
             // 详情 - 基本信息
             $scope.info.provinceList = res.data;
           });
 
           // 省份change
           $scope.provinceChage = function (e) {
-            if($scope.vm.addrProvince != '') {
+            if($scope.vm.addrProvince) {
               // 市
               $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
                 $scope.cityList = res.data;
                 $scope.vm.addrCity = '';
+                $scope.areaList = [];
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.cityList = [];
+              $scope.vm.addrCity = '';
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
           // 城市change
           $scope.cityChage = function (e) {
-            if($scope.vm.addrCity != '') {
+            if($scope.vm.addrCity) {
               // 区/县
               $model.getManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
                 $scope.areaList = res.data;
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -306,6 +319,7 @@ define([], function () {
           // 基本信息 - 取消点击
           $scope.info.cancel = function() {
             $scope.info.isEdit = false;
+            getDetialInfoList($scope.info.sellerId, 'nowPage');
           }
 
           // 基本信息 - 返回列表点击
@@ -572,12 +586,31 @@ define([], function () {
 
 
           // **** 新增开始
-          $scope.new = {};
-
           // 新增点击
           $scope.newRetailerClick = function(e) {
+            // 清空数据
+            var data = {
+              sellerId: '',
+              licenceImg: '',
+              shopName: '',
+              ownerName: '',
+              phoneNo: '',
+
+              addrProvince: '',
+              addrCity: '',
+              addrArea: '',
+              addrDetail: '',
+              licenceNo: '',
+
+              district: '',
+              commercial: '',
+              salesManNames: '',
+              contactName: '',
+              contactPhone: '',
+            }
+            $scope.new = Object.assign({}, $scope.new, data);
+
             $scope.vm.currentPage = 'new';
-            $scope.new.licenceImg = ''
 
             // 重置form状态
             $scope.form.$setPristine();
@@ -739,49 +772,69 @@ define([], function () {
 
           // 新增 省份change
           $scope.new.provinceChage = function (e) {
-
-            if($scope.new.addrProvince != '') {
+            if($scope.new.addrProvince) {
               // 市
               $model.getManageCity({parentCode: $scope.new.addrProvince}).then(function (res) {
                 $scope.new.cityList = res.data;
                 $scope.new.addrCity = '';
+                $scope.new.areaList = [];
                 $scope.new.addrArea = '';
               });
+            } else {
+              $scope.new.cityList = [];
+              $scope.new.addrCity = '';
+              $scope.new.areaList = [];
+              $scope.new.addrArea = '';
             }
           }
 
           // 新增 城市change
           $scope.new.cityChage = function (e) {
-            if($scope.new.addrCity != '') {
+            if($scope.new.addrCity) {
               // 区/县
               $model.getManageCountry({parentCode: $scope.new.addrCity}).then(function (res) {
                 $scope.new.areaList = res.data;
                 $scope.new.addrArea = '';
               });
+            } else {
+              $scope.new.areaList = [];
+              $scope.new.addrArea = '';
             }
           }
 
 
           // info 省份change
           $scope.info.provinceChage = function (e) {
-            if($scope.info.addrProvince != '') {
+            // $scope.info.addrProvince不选时为undefined
+            if($scope.info.addrProvince) {
+              console.log(444)
+
               // 市
               $model.getManageCity({parentCode: $scope.info.addrProvince}).then(function (res) {
                 $scope.info.cityList = res.data;
                 $scope.info.addrCity = '';
                 $scope.info.addrArea = '';
               });
+            } else {
+              console.log(123)
+              $scope.info.cityList = [];
+              $scope.info.addrCity = '';
+              $scope.info.areaList = [];
+              $scope.info.addrArea = '';
             }
           }
 
           // info 城市change
           $scope.info.cityChage = function (e) {
-            if($scope.info.addrCity != '') {
+            if($scope.info.addrCity) {
               // 区/县
               $model.getManageCountry({parentCode: $scope.info.addrCity}).then(function (res) {
                 $scope.info.areaList = res.data;
                 $scope.info.addrArea = '';
               });
+            } else {
+              $scope.info.areaList = [];
+              $scope.info.addrArea = '';
             }
           }
 

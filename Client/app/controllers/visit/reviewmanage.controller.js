@@ -108,13 +108,18 @@ define([], function () {
 
           // 省份change
           $scope.provinceChage = function (e) {
-            if($scope.vm.addrProvince != '') {
+            if($scope.vm.addrProvince) {
               // 市
               $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
                 $scope.cityList = res.data;
                 $scope.vm.addrCity = '';
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.cityList = [];
+              $scope.vm.addrCity = '';
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -126,6 +131,9 @@ define([], function () {
                 $scope.areaList = res.data;
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 

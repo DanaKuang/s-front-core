@@ -307,7 +307,7 @@
                                                         </label>
                                                         <!--验证-->
                                                         <div ng-show="infoForm.$submitted || infoForm.infoShopName.$touched || infoForm.infoShopName.$dirty">
-                                                            <div ng-show="infoForm.infoShopName.$error.required || infoForm.infoShopName.$error.maxlength" class="wrong-tip">请输入门店名称，0-10字符</div>
+                                                            <div ng-show="infoForm.infoShopName.$error.required || infoForm.infoShopName.$error.maxlength" class="wrong-tip">请输入门店名称，1-10字符</div>
                                                         </div>
                                                     </li>
                                                     <li class="row">
@@ -324,24 +324,37 @@
 
                                                     <li class="row">
                                                         <label>
-                                                            <span class="title">位置：</span>
+                                                            <span class="title"><i>*</i>位置：</span>
                                                             <span ng-if="!info.isEdit" class="value">{{info.addrProvinceName + '-' + info.addrCityName + '-' + info.addrAreaNmae}}</span>
 
                                                             <div class="location" ng-show="info.isEdit" class="col-sm-10">
-                                                                <select id="infoProvince" ng-model="info.addrProvince" ng-change="info.provinceChage()" class="form-control">
+                                                                <select name="infoProvince" id="infoProvince" ng-model="info.addrProvince" ng-change="info.provinceChage()" class="form-control" required>
                                                                     <option value="">请选择省</option>
                                                                     <option ng-repeat="p in info.provinceList" value="{{p.code}}">{{p.name}}</option>
                                                                 </select>
 
-                                                                <select id="infoCity" ng-model="info.addrCity" ng-change="info.cityChage()" class="form-control">
+                                                                <select name="infoCity" id="infoCity" ng-model="info.addrCity" ng-change="info.cityChage()" class="form-control" required>
                                                                     <option value="">请选择市</option>
                                                                     <option ng-repeat="c in info.cityList" value="{{c.code}}">{{c.name}}</option>
                                                                 </select>
 
-                                                                <select id="infoArea" ng-model="info.addrArea" class="form-control">
+                                                                <select name="infoArea" id="infoArea" ng-model="info.addrArea" class="form-control" required>
                                                                     <option value="">请选择区/县</option>
                                                                     <option ng-repeat="a in info.areaList" value="{{a.code}}">{{a.name}}</option>
                                                                 </select>
+
+                                                                <!--验证-->
+                                                                <div ng-show="infoForm.$submitted || infoForm.infoProvince.$dirty || infoForm.infoProvince.$touched">
+                                                                    <div ng-show="infoForm.infoProvince.$error.required" class="wrong-tip">请选择省</div>
+                                                                </div>
+                                                                <!--验证-->
+                                                                <div ng-show="infoForm.$submitted || infoForm.infoCity.$dirty || infoForm.infoCity.$touched">
+                                                                    <div ng-show="infoForm.infoCity.$error.required" class="wrong-tip">请选择市</div>
+                                                                </div>
+                                                                <!--验证-->
+                                                                <div ng-show="infoForm.$submitted || infoForm.infoArea.$dirty || infoForm.infoArea.$touched">
+                                                                    <div ng-show="infoForm.infoArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                                                </div>
                                                             </div>
                                                         </label>
                                                     </li>
@@ -360,11 +373,11 @@
                                                         <label>
                                                             <span class="title"><i>*</i>烟草专卖证号：</span>
                                                             <span ng-if="!info.isEdit" class="value">{{info.licenceNo}}</span>
-                                                            <input name="infoLicense" ng-model="info.licenceNo" ng-if="info.isEdit" class="form-control" type="text" required/>
+                                                            <input name="infoLicense" ng-model="info.licenceNo" ng-if="info.isEdit" class="form-control" type="text" ng-pattern="/^\d{12}$/" required/>
                                                         </label>
                                                         <!--验证-->
                                                         <div ng-show="infoForm.$submitted || infoForm.infoLicense.$touched">
-                                                            <div ng-show="infoForm.infoLicense.$error.required" class="wrong-tip">请输入烟草专卖证号</div>
+                                                            <div ng-show="infoForm.infoLicense.$error.required || infoForm.infoLicense.$invalid" class="wrong-tip">请输入烟草专卖证号，12位数字</div>
                                                         </div>
                                                     </li>
 
@@ -442,7 +455,7 @@
                                                     </li>
                                                     <li class="row status">
                                                         <span class="title"><i>*</i>状态：</span>
-                                                        <span ng-if="!info.isEdit" class="value">{{info.statusName}}</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.status == 1 ? '上架中' : (info.status == 0 ? '下架中' : '')}}</span>
 
                                                         <label ng-if="info.isEdit"><input ng-model="info.status" ng-value="1" type="radio" name="infoUpDown" required/>上架</label>
                                                         <label ng-if="info.isEdit"><input ng-model="info.status" ng-value="0" type="radio" name="infoUpDown" required/>下架</label>
@@ -500,7 +513,7 @@
                                         <!-- 搜索项 -->
                                         <div class="detial-search">
                                             <!-- 日历 -->
-                                            <div ng-show="detial.detialPage != 'info'" class="form-group time">
+                                            <div ng-show="detial.detialPage != 'info' && detial.detialPage != 'sellerfans'" class="form-group time">
                                                 <label class="control-label">时间段：</label>
                                                 <input ng-model="detial.startTime" id="detialStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
                                                 <span class="to">至</span>
@@ -700,7 +713,7 @@
                         <input id="newShopName" name="newShopName" ng-model="new.shopName" class="form-control" type="text" ng-maxlength="10" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newShopName.$touched || form.newShopName.$dirty">
-                            <div ng-show="form.newShopName.$error.required || form.newShopName.$error.maxlength" class="wrong-tip">请输入门店名称，0-10字符</div>
+                            <div ng-show="form.newShopName.$error.required || form.newShopName.$error.maxlength" class="wrong-tip">请输入门店名称，1-10字符</div>
                         </div>
                     </div>
 
@@ -717,7 +730,7 @@
                     <div class="form-group">
                         <label for="newPhoneNo" class="control-label col-sm-2"><i>*</i>经营人电话：</label>
 
-                        <input id="newPhoneNo" name="newPhoneNo" ng-model="new.phoneNo" class="form-control" type="text" ng-pattern="/^1\d{10}$/" required>
+                        <input id="newPhoneNo" name="newPhoneNo" ng-model="new.phoneNo" class="form-control" type="text" ng-pattern="/^1[3-9][0-9]{9}$/" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newPhoneNo.$touched">
                             <div ng-show="form.newPhoneNo.$error.required || form.newPhoneNo.$invalid" class="wrong-tip">请输入正确格式的经营人电话</div>
@@ -757,10 +770,10 @@
                     <div class="form-group">
                         <label for="newLicense" class="control-label col-sm-2"><i>*</i>烟草专卖证号：</label>
 
-                        <input id="newLicense" name="newLicense" ng-model="new.licenceNo" class="form-control" type="text" required>
+                        <input id="newLicense" name="newLicense" ng-model="new.licenceNo" class="form-control" type="text" ng-pattern="/^\d{12}$/" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newLicense.$touched">
-                            <div ng-show="form.newLicense.$error.required" class="wrong-tip">请输入烟草专卖证号</div>
+                            <div ng-show="form.newLicense.$error.required || form.licenceNo.$invalid" class="wrong-tip">请输入烟草专卖证号，12位数字</div>
                         </div>
                     </div>
 
@@ -823,7 +836,7 @@
                     <div class="form-group">
                         <label for="newConcatPhone" class="control-label col-sm-2"><i>*</i>联系人电话：</label>
 
-                        <input id="newConcatPhone" name="newConcatPhone" ng-model="new.contactPhone" class="form-control" type="text" ng-pattern="/^1\d{10}$/" required>
+                        <input id="newConcatPhone" name="newConcatPhone" ng-model="new.contactPhone" class="form-control" type="text" ng-pattern="/^1[3-9][0-9]{9}$/" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newConcatPhone.$touched">
                             <div ng-show="form.newConcatPhone.$error.required || form.newConcatPhone.$invalid" class="wrong-tip">请输入正确格式的联系人电话</div>
