@@ -28,10 +28,10 @@
                                         <div class="col-sm-8">
                                             <label><input ng-model="vm.time" ng-checked="true" ng-value="1" name="time" type="radio" />是</label>
                                             <label><input ng-model="vm.time" ng-value="0" name="time" type="radio" />否</label>
-                                            <div ng-if="vm.time == 1"><input name="timeText" ng-model="vm.timeText" class="form-control" type="number" min="0" step="1" required>分钟</div>
+                                            <div ng-if="vm.time == 1"><input name="timeText" ng-model="vm.timeText" class="form-control" type="text" ng-pattern="/^[0-9]*$/" required>分钟</div>
                                             <!--验证-->
                                             <div ng-show="form.$submitted || form.timeText.$touched">
-                                                <div ng-show="form.timeText.$error.required" class="wrong-tip">请输入关联时间</div>
+                                                <div ng-show="form.timeText.$error.required || form.timeText.$invalid" class="wrong-tip">请输入正确格式的关联时间</div>
                                             </div>
                                         </div>
                                     </li>
@@ -41,10 +41,10 @@
                                         <div class="col-sm-8">
                                             <label><input ng-model="vm.qr" ng-checked="true" ng-value="1" name="qr" type="radio" />是</label>
                                             <label><input ng-model="vm.qr" ng-value="0" name="qr" type="radio" />否</label>
-                                            <div ng-if="vm.qr == 1"><input name="qrText" ng-model="vm.qrText" class="form-control" type="number" min="0" step="1" required>元</div>
+                                            <div ng-if="vm.qr == 1"><input name="qrText" ng-model="vm.qrText" class="form-control" type="text" ng-pattern="/^[0-9]*$/" required>元</div>
                                             <!--验证-->
                                             <div ng-show="form.$submitted || form.qrText.$touched">
-                                                <div ng-show="form.qrText.$error.required" class="wrong-tip">请输入费用</div>
+                                                <div ng-show="form.qrText.$error.required || form.qrText.$invalid" class="wrong-tip">请输入正确格式的费用</div>
                                             </div>
                                         </div>
                                     </li>
