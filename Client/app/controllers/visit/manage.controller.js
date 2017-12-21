@@ -28,7 +28,7 @@ define([], function () {
             sortValue: 1,
             pageNo: 1,
             pageSize: 10,
-            currentPage: 'index' // fixme
+            currentPage: 'index' //
           }
 
           // 详情
@@ -36,17 +36,33 @@ define([], function () {
             detialPage: 'info'
           };
 
-            // 基本信息
+          // 基本信息
           $scope.info = {
             // isEdit: false
           };
+
+          $scope.storage = {};
 
           // 判断是否为 审核管理 跳转过来的
           if(sessionStorage.sellerId) {
             getDetialInfoList(sessionStorage.sellerId);
 
-            sessionStorage.removeItem('sellerId') // 进入详情页后，移除sellerId，防止刷新再进入
+            sessionStorage.removeItem('sellerId'); // 进入详情页后，移除sellerId，防止刷新再进入
             $scope.fromPage = 'reviewManage'; // 在返回列表时，根据来源返回。
+          }
+
+          // 判断是否为 扫码入库奖励管理 跳转过来的
+          if(sessionStorage.storageId) {
+            console.log(1)
+            // 当前页改为详情
+            $scope.vm.currentPage = 'detial';
+            $scope.detial.detialPage = 'storage';
+
+            $scope.info.sellerId = sessionStorage.storageId;
+            getDetialStorageList(1, true);
+
+            sessionStorage.removeItem('storageId');
+            $scope.fromPage = 'storage';
           }
 
           // 获取table列表
@@ -177,19 +193,22 @@ define([], function () {
           }
 
           // 排序
+          $scope.vm.previousType = 1;
           $scope.sortBy = function (type) {
-            $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
+            // 设置当前点击的排序
             $scope.vm.sortType = type;
-            getList(1, true);
-          }
 
-          // 监听sorttype，如果变了，说明换了一个排序，那就初始value值为1（降序）.
-          $scope.$watch('vm.sortType', function(n, o) {
-            if (n !== o) {
+            // 获取 sortValue
+            if($scope.vm.previousType == type) {
+              $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
+            } else {
               $scope.vm.sortValue = 1;
-              getList(1, true); // fixme: 多调用了一次，这里怎么解决？？？
             }
-          }, true)
+
+            getList(1, true);
+            // 上一个值设置为当前
+            $scope.vm.previousType = type;
+          }
 
           // 上下架
           $scope.UpOffShelf = function (id, value) {
@@ -227,7 +246,7 @@ define([], function () {
 
           // *** 详情 start
           // 查看点击
-          $scope.viewManage = function(e, id) {
+          $scope.viewManage = function(id) {
             $scope.info.sellerId = id;
             getDetialInfoList(id, 'nowPage');
           }
@@ -285,14 +304,18 @@ define([], function () {
           }
 
           // 基本信息 - 取消点击
-          $scope.info.cancel = function(e, id) {
+          $scope.info.cancel = function() {
             $scope.info.isEdit = false;
           }
 
           // 基本信息 - 返回列表点击
-          $scope.info.back = function(e, id) {
+          $scope.info.back = function() {
             if($scope.fromPage == 'reviewManage') {
               $location.path('view/visit/reviewmanage');
+            } else if($scope.fromPage == 'storage') {
+              console.log(3)
+              $location.path('view/visit/rebate/storagemanage');
+              sessionStorage.setItem('fromPage', 'manage');
             } else {
               $scope.vm.currentPage = 'index';
               $scope.paginationConf = $scope.indexPaginationConf;
@@ -412,10 +435,11 @@ define([], function () {
             var data = {
               sellerId: $scope.info.sellerId,
               sortType: $scope.sellerfans.sortType || 1,
-              sortValue: $scope.sellerfans.sortValue || 1,
+              sortValue: $scope.sellerfans.sortValue,
               pageNo: page || 1,
               pageSize: 10
             }
+
             $model.getManageDetialSellerFans(data).then(function(res) {
               if(res.data.ok) {
                 $scope.sellerfans.listData = res.data.data.list;
@@ -432,19 +456,22 @@ define([], function () {
           }
 
           // 店铺粉丝 - 排序
+          $scope.sellerfans.previousType = 1;
           $scope.sellerfans.sortBy = function (type) {
-            $scope.sellerfans.sortValue = ($scope.sellerfans.sortValue == 1 ? 0 : 1); // 升序、降序
+            // 设置当前点击的排序
             $scope.sellerfans.sortType = type;
-            getDetialSellerfansList(1, true);
-          }
 
-          // 店铺粉丝 - 监听sorttype，如果变了，说明换了一个排序，那就初始value值为1（降序）.
-          $scope.$watch('sellerfans.sortType', function(n, o) {
-            if (n !== o) {
+            // 获取 sortValue
+            if($scope.sellerfans.previousType == type) {
+              $scope.sellerfans.sortValue = ($scope.sellerfans.sortValue == 1 ? 0 : 1); // 升序、降序
+            } else {
               $scope.sellerfans.sortValue = 1;
-              getDetialSellerfansList(1, true); // fixme: 多调用了一次，这里怎么解决？？？
             }
-          }, true)
+
+            getDetialSellerfansList(1, true);
+            // 上一个值设置为当前
+            $scope.sellerfans.previousType = type;
+          }
           // *** 店铺粉丝 end
 
 
@@ -512,10 +539,9 @@ define([], function () {
 
 
           // *** 入库明细 start
-          $scope.storage = {};
-
           // 入库明细 - 获取列表
           function getDetialStorageList(page, ispage) {
+            console.log(2)
             var data = {
               sellerId: $scope.info.sellerId,
               awardType: $scope.storage.awardType || '', // 奖品类型
@@ -680,11 +706,6 @@ define([], function () {
             $scope.vm.currentPage = 'index';
           }
           // **** 新增结束
-
-
-
-
-
 
 
 

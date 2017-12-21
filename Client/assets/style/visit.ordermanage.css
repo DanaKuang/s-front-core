@@ -46,6 +46,10 @@
   line-height: 34px;
   text-align: center; }
 
+.form-horizontal .keywords .form-control {
+  width: 45%;
+  margin-right: 5%; }
+
 .panel-body {
   padding: 15px;
   position: relative; }
@@ -72,14 +76,6 @@
   line-height: 1;
   margin-top: 5px; }
 
-td.batch label {
-  width: 50px;
-  height: 20px;
-  cursor: pointer; }
-  td.batch label input {
-    cursor: pointer;
-    margin-right: 10px; }
-
 #newAlert {
   width: 250px;
   min-height: 70px;
@@ -97,16 +93,50 @@ td.batch label {
   text-decoration: underline;
   margin-bottom: 5px; }
 
+.store-code {
+  float: left;
+  margin-bottom: 10px; }
+  .store-code label {
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    margin: 0; }
+    .store-code label input {
+      cursor: pointer;
+      margin-right: 10px; }
+
+.btn-con {
+  float: right; }
+  .btn-con .btn {
+    float: left;
+    margin-left: 15px; }
+  .btn-con .file-con {
+    float: left;
+    position: relative; }
+  .btn-con #importFile {
+    width: 110px;
+    height: 34px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    right: 0;
+    z-index: 2; }
+
 .table tr th, .table tr td {
   font-size: 12px; }
 
-tr .activity-name {
-  width: 200px;
+tr td > div {
   margin: 0 auto; }
 
+tr .oper-btn-wrap {
+  width: 60px; }
+
+tr .activity-name {
+  width: 150px; }
+
 tr .time {
-  width: 150px;
-  margin: 0 auto; }
+  width: 75px; }
 
 .wrong-tip {
   color: #f00;

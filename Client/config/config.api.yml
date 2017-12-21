@@ -1898,6 +1898,55 @@ visitManage:
     gatewaytype: 2
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/order/queryList'
+    authorized: 1
+    description: '订单管理 - 列表'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/order/exportOrders'
+    authorized: 1
+    description: '订单管理 - 导出'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/order/readOrderData'
+    authorized: 1
+    description: '订单管理 - 导入'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/scanInstoreRebateList'
+    authorized: 1
+    description: '扫码入库奖励管理 - 列表'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/instoreSettingDetail'
+    authorized: 1
+    description: '扫码入库奖励管理 - 详情头部'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/seller/sisSettingSellers'
+    authorized: 1
+    description: '扫码入库奖励管理 - 详情列表'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/modifyInstoreSettingStatus'
+    authorized: 1
+    description: '扫码入库奖励管理 - 启用、禁用'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/setting/activityRebateList'
     authorized: 1
     description: '扫码返佣管理 - 列表'

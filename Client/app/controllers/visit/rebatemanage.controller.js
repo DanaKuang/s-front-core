@@ -13,22 +13,9 @@ define([], function () {
 
           // 初始化一个对象，vm
           $scope.vm = {
-            authStatus: '', // 状态
-            commercial: '', // 业态
-            district: '', // 区域
-            searchType: 3, // 关键词类型
-            licenceNo: '',  // 烟草证号
-            addrProvince: '',
-            addrCity: '',
-            addrArea: '',
-            appStartTime: '',
-            appEndTime: '',
-            sortType: 1,
-            sortValue: 1,
             listData: [],
             pageNo: 1,
             pageSize: 10,
-            currentPage: 'index'
           }
 
           // 获取table列表

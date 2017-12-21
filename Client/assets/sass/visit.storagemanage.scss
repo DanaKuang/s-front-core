@@ -44,7 +44,7 @@
     float: left;
   }
   .time {
-    width: 600px;
+    width: 476px;
   }
   .time span {
     width: 10%;
@@ -130,15 +130,98 @@ td.batch {
   font-size: 12px;
 }
 tr {
+  td>div {
+    margin: 0 auto;
+  }
+  .oper-btn-wrap {
+    width: 60px;
+  }
   .activity-name {
     width: 200px;
-    margin: 0 auto;
   }
   .time {
-    width: 150px;
-    margin: 0 auto;
+    width: 130px;
+  }
+  .ctime {
+    width: 80px;
   }
 }
+
+// 详情head
+.detial-head {
+  font-size: 14px;
+  background: #eee;
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding-top: 10px;
+  .col-sm-3, .col-sm-6 {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px 0 0;
+    span {
+      color: #333;
+      float: left;
+      width: 100px;
+      text-align: right;
+    }
+  }
+}
+
+/*排序按钮*/
+.sort-btn-con {
+  overflow: hidden;
+  .btn-primary {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+// 搜索项
+.detial-search {
+  overflow: hidden;
+  .form-group {
+    float: left;
+  }
+  label {
+    float: left;
+    line-height: 34px;
+  }
+  select, input {
+    width: 150px;
+    float: left;
+    font-size: 12px;
+  }
+  .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center;
+  }
+  #detialStart, #detialEnd {
+    background: #fff;
+  }
+  .btn-con {
+    float: right;
+    margin-top: 2px;
+    .btn {
+      float: left;
+      margin-right: 15px;
+    }
+    .btn-default {
+      margin-right: 0px;
+    }
+  }
+}
+
+.back-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+
 
 // 验证
 .wrong-tip {
@@ -160,6 +243,7 @@ input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.n
 .form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
   display: block;
 }
+
 select {
   -webkit-appearance: menulist;
   appearance: menulist;

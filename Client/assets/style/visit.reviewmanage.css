@@ -62,6 +62,9 @@
   line-height: 22px;
   padding: 6px 12px; }
 
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px; }
+
 .new-retailer-btn {
   float: right; }
 
@@ -144,3 +147,7 @@ input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.n
 
 .ng-submitted input.ng-invalid, .ng-submitted textarea.ng-invalid, .ng-submitted select.ng-invalid {
   border-color: #FA787E !important; }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist; }
