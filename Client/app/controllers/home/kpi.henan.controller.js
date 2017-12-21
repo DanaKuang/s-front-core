@@ -136,19 +136,27 @@ define([], function () {
         var option = $model.$echartConf.data;
         var data = $model.$mapData.data || [];
         var convertData = function (data) {
-          return data.filter(function (d) {
-            return ([
-              '西安市',
-              '洛阳市',
-              '平顶山市',
-              '烟台市'
-            ].indexOf(d.city) !== -1) || (Number(d.scantimes) > 10);
-          }).map(function (d) {
-            return {
+          var res = [];
+          data.forEach(function (d) {
+            res.push({
               name: d.city,
               value: [d.longitude,d.latitude,d.scantimes]
-            }
+            });
           });
+          return res;
+          // return data.filter(function (d) {
+          //   return ([
+          //     '西安市',
+          //     '洛阳市',
+          //     '平顶山市',
+          //     '烟台市'
+          //   ].indexOf(d.city) !== -1) || (Number(d.scantimes) > 10);
+          // }).map(function (d) {
+          //   return {
+          //     name: d.city,
+          //     value: [d.longitude,d.latitude,d.scantimes]
+          //   }
+          // });
         };
 
         var sortData = convertData(data.sort(function (a, b) {
