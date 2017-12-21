@@ -14,7 +14,6 @@ define([], function () {
         var scope = function (selector) {
           return angular.element(selector).scope() ? angular.element(selector).scope() : null
         }
-
         // 通用方法 获取对应conf
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
@@ -138,6 +137,7 @@ define([], function () {
         $scope.$on('typefromActSample', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = res.data;
+            $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.account];
             getLaunchInfo();
           })
         })
@@ -234,6 +234,7 @@ define([], function () {
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
+                $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.account];
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
 
                 // 如果存在中奖地区
