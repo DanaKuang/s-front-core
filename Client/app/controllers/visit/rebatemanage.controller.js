@@ -157,7 +157,7 @@ define([], function () {
 
           // 重置
           $scope.reset = function () {
-            $scope.vm = {
+            var data = {
               brand: [], // 品牌编码
               spec: [], // 规格
               region: [], // 地域编码
@@ -169,6 +169,9 @@ define([], function () {
               pageNo: 1,
               pageSize: 10
             }
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+
             $('#brand').multiselect('refresh');
             $('#spec').multiselect('refresh');
             $('#region').multiselect('refresh');

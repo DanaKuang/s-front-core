@@ -145,7 +145,7 @@ define([], function () {
 
           // 重置
           $scope.reset = function () {
-            $scope.vm = {
+            var data = {
               authStatus: '', // 状态
               commercial: '', // 业态
               district: '', // 区域
@@ -162,7 +162,9 @@ define([], function () {
               pageNo: 1,
               pageSize: 10
             }
-            $scope.provinceList = '';
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+
             $scope.cityList = '';
             $scope.areaList = '';
             getList(1, true);
@@ -241,7 +243,7 @@ define([], function () {
                 authResult: $scope.reviewValue,
               }
               if($scope.reviewValue == 2) {
-                data.failReason = $scope.noPassReason;
+                data.failReason = $scope.vm.noPassReason;
               }
               $model.reviewAndPass(data).then(function(res) {
                 if(res.data.ok) {

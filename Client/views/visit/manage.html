@@ -30,7 +30,7 @@
                                 <div ng-show="vm.currentPage == 'index'" role="tabpanel" class="tab-pane active panel-body">
                                     <form class="form-horizontal form-inline">
                                         <div class="form-group col-sm-4">
-                                            <label for="status" class="control-label col-sm-4">审核状态</label>
+                                            <label for="status" class="control-label col-sm-4">状态</label>
                                             <div class="col-sm-8">
                                                 <select ng-model="vm.status" id="status" class="form-control">
                                                     <option value="">状态</option>
@@ -114,13 +114,11 @@
 
                                         <div class="form-group col-sm-5 print">
                                             <label class="control-label col-sm-2">是否打印店码</label>
-                                            <div class="col-sm-8">
-                                                <select class="form-control" ng-model="vm.isPrint">
-                                                    <option value="" selected>全部</option>
-                                                    <option value="0">是</option>
-                                                    <option value="1">否</option>
-                                                </select>
-                                            </div>
+                                            <select class="form-control" ng-model="vm.isPrint">
+                                                <option value="" selected>全部</option>
+                                                <option value="1">是</option>
+                                                <option value="0">否</option>
+                                            </select>
                                         </div>
 
                                         <div class="search-btn-con">
@@ -698,7 +696,7 @@
                                 <button class="btn btn-primary upload-btn">上传</button>
                                 <input onchange="angular.element(this).scope().new.uploadImage()" ng-model="new.licenceImg" id="newImgUpload" name="newPhoto" class="form-control new-photo" type="file" accept="image/*" required>
                             </div>
-                            <button ng-click="new.newPhotoDelete()" class="btn btn-primary delete-btn">删除</button>
+                            <button ng-click="new.newPhotoDelete()" class="btn btn-default delete-btn" type="button">删除</button>
 
                             <!--验证-->
                             <div ng-show="form.$submitted || form.newPhoto.$touched">
