@@ -76,3 +76,8 @@
     top: -11px;
   }
 }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}

@@ -1,22 +1,24 @@
 <!--
 /**
  * Author: hanzha
- * Create Date; 2017-12-15 重构零售户
- * Description: 扫码返佣管理
+ * Create Date; 2017-12-18 重构零售户
+ * Description: 扫码入库奖励管理
  */
 -->
-<link rel="stylesheet" href="statics/assets/style/visit.reviewmanage.css"/>
+<link rel="stylesheet" href="statics/assets/style/questionnaire.css">
+<link rel="stylesheet" href="statics/assets/style/form.css">
 <!--分页样式-->
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
+<link rel="stylesheet" href="statics/assets/style/visit.storagemanage.css"/>
 
-<div ng-controller="visitRebateManageCtrl">
+<div ng-controller="visitStorageManageCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-manage-box">
                 <div class="col-md-12">
                     <!--title-->
-                    <div class="ui-panel-title manage">
-                        <div><span>扫码返佣管理</span></div>
+                    <div class="ui-panel-title storagemanage">
+                        <div><span>扫码入库奖励管理</span></div>
                     </div>
 
                     <div class="panel rate" id="manage-tap">
@@ -24,91 +26,59 @@
 
                             <div class="tab-content">
                                 <!-- 搜索条件 -->
-                                <div role="tabpanel" class="tab-pane active panel-body">
+                                <div ng-show="vm.currentPage == 'index'" role="tabpanel" class="tab-pane active panel-body">
                                     <form class="form-horizontal form-inline">
                                         <div class="form-group col-sm-4">
-                                            <label for="authStatus" class="control-label col-sm-4">审核状态</label>
+                                            <label for="brand" class="control-label">品牌：</label>
                                             <div class="col-sm-8">
-                                                <select ng-model="vm.authStatus" id="authStatus" class="form-control">
+                                                <select ng-change="brandChage()" ng-model="vm.brand" id="brand" class="form-control select" multiple>
                                                     <option value="">全部</option>
-                                                    <option value="1">待审核</option>
-                                                    <option value="3">审核未通过</option>
+                                                    <option ng-repeat="item in brandList" value="{{item.brandCode}}">{{item.name}}</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-sm-4">
-                                            <label for="commercial" class="control-label col-sm-4">业态</label>
+                                            <label for="spec" class="control-label">规格：</label>
                                             <div class="col-sm-8">
-                                                <select ng-model="vm.commercial" id="commercial" class="form-control">
+                                                <select ng-model="vm.spec" id="spec" class="form-control select" multiple>
                                                     <option value="">全部</option>
-                                                    <option value="1">食杂店</option>
-                                                    <option value="2">便利店</option>
-                                                    <option value="3">超市</option>
-                                                    <option value="4">商场</option>
-                                                    <option value="5">烟酒商店</option>
-                                                    <option value="6">娱乐服务</option>
-                                                    <option value="7">其他</option>
+                                                    <option ng-repeat="item in specList" value="{{item.sn}}">{{item.name}}</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-sm-4">
-                                            <label for="district" class="control-label col-sm-4">区域</label>
+                                            <label for="actStatus" class="control-label">状态：</label>
                                             <div class="col-sm-8">
-                                                <select ng-model="vm.district" id="district" class="form-control">
+                                                <select ng-model="vm.actStatus" id="actStatus" class="form-control">
                                                     <option value="">全部</option>
-                                                    <option value="1">城镇</option>
-                                                    <option value="2">农村</option>
+                                                    <option ng-repeat="item in actStatusList" value="{{item.code}}">{{item.name}}</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-sm-4 keywords">
-                                            <label for="searchType" class="control-label col-sm-2">关键词</label>
+                                        <div class="form-group col-sm-4">
+                                            <label for="actType" class="control-label">奖品类型：</label>
                                             <div class="col-sm-8">
-                                                <select ng-model="vm.searchType" class="form-control col-sm-5" id="searchType">
-                                                    <option value="3">烟草证号</option>
-                                                    <option value="1">联系人姓名</option>
-                                                    <option value="2">联系人手机号</option>
-                                                    <option value="4">门店名称</option>
-                                                    <option value="5">业务员</option>
-                                                </select>
-                                                <input ng-model="vm.keywords" class="keywords-input form-control col-sm-5" type="text" placeholder="请输入关键词">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-sm-8 location">
-                                            <label for="provinceId" class="control-label col-sm-2">位置</label>
-                                            <div class="col-sm-10">
-                                                <select id="provinceId" ng-model="vm.addrProvince" ng-change="provinceChage($event)" class="form-control">
-                                                    <option value="">请选择省</option>
-                                                    <option ng-repeat="p in provinceList" value="{{p.code}}">{{p.name}}</option>
-                                                </select>
-
-                                                <select id="cityId" ng-model="vm.addrCity" ng-change="cityChage($event)" class="form-control">
-                                                    <option value="">请选择市</option>
-                                                    <option ng-repeat="c in cityList" value="{{c.code}}">{{c.name}}</option>
-                                                </select>
-
-                                                <select id="areaId" ng-model="vm.addrArea" class="form-control">
-                                                    <option value="">请选择区/县</option>
-                                                    <option ng-repeat="a in areaList" value="{{a.code}}">{{a.name}}</option>
+                                                <select ng-model="vm.actType" id="actType" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option ng-repeat="item in actTypeList" value="{{item.code}}">{{item.name}}</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-sm-8 time">
-                                            <label class="control-label col-sm-2">时间区间</label>
+                                        <div class="form-group time">
+                                            <label class="control-label">创建时间：</label>
 
-                                            <div class="col-sm-10">
-                                                <input ng-model="vm.appStartTime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                            <div class="col-sm-9">
+                                                <input ng-model="vm.startTime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
                                                 <span class="to">至</span>
-                                                <input ng-model="vm.appEndTime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                                <input ng-model="vm.endTime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-sm-4 search-btn-con">
+                                        <div class="form-group search-btn-con">
                                             <button type="button" class="search btn btn-primary" ng-click="search($event);">查询</button>
                                             <button type="button" class="reset btn btn-default" ng-click="reset($event);">重置</button>
                                         </div>
@@ -117,70 +87,148 @@
 
 
                                 <div class="panel-body">
-                                    <div class="batch-review">
-                                        <label><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()" ng-model="vm.allCheckbox">全选</label>
-                                        <button ng-disabled="ifBatch" ng-click="reviewAndPass('', 1)" class="btn btn-primary batch-btn" data-toggle="modal" data-target=".review-modal">批量审核通过</button>
-                                    </div>
-
                                     <!-- table -->
-                                    <table class="table table-bordered table-hover">
+                                    <table ng-show="vm.currentPage == 'index'" class="table table-bordered table-hover">
                                         <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作</th>
+                                            <th>品牌</th>
+                                            <th>规格</th>
+                                            <th>奖品类型</th>
+
+                                            <th>扫码奖励／条</th>
+                                            <th>奖品数量</th>
+                                            <th>奖品剩余数量</th>
+                                            <th>有效时间</th>
+                                            <th>创建时间</th>
+
+                                            <th>状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="(index, item) in vm.listData">
+                                            <td class="batch">
+                                                <label>{{index + 1}}</label>
+                                            </td>
+                                            <td>
+                                                <div class="oper-btn-wrap">
+                                                    <div class="operate-btn" ng-click="viewStorage(item.id, item.awardType)">查看详情</div>
+                                                    <div class="operate-btn" ng-click="newAndEditStorage(item.id, 'edit')">修改</div>
+                                                    <div class="operate-btn" ng-if="item.status == 0" ng-click="setEnabled(item.id, 1)" data-toggle="modal" data-target=".storage-modal">启用</div>
+                                                    <div class="operate-btn" ng-if="item.status == 1" ng-click="setEnabled(item.id, 0)" data-toggle="modal" data-target=".storage-modal">禁用</div>
+                                                </div>
+                                            </td>
+                                            <td>{{item.brandName}}</td>
+                                            <td>{{item.snName}}</td>
+                                            <td>{{item.awardTypeName}}</td>
+
+                                            <td>{{item.awardName}}</td>
+                                            <td>{{item.totalNum}}份</td>
+                                            <td>{{item.totalNum - item.usedNum}}份</td>
+                                            <td>
+                                                <div class="time">
+                                                    {{item.stime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                    <div>-</div>
+                                                    {{item.etime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="ctime">
+                                                    {{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </div>
+                                            </td>
+
+                                            <td>{{item.status == 0 ? '停用' : '启用'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- 详情 -->
+                                    <div ng-show="vm.currentPage == 'detial'">
+                                        <div class="detial-head">
+                                            <p class="col-sm-3"><span>品牌：</span>{{detial.brandName}}</p>
+                                            <p class="col-sm-3"><span>规格：</span>{{detial.snName}}</p>
+                                            <p class="col-sm-3"><span>奖励类型：</span>{{detial.awardType}}</p>
+                                            <p class="col-sm-3"><span>状态：</span><td>{{detial.status == 0 ? '停用' : '启用'}}</td></p>
+                                            <p class="col-sm-6"><span>有效时间：</span>{{detial.stimeStr}} - - {{detial.etimeStr}}</p>
+                                            <p class="col-sm-3"><span>创建时间：</span>{{detial.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                                            <p class="col-sm-3"><span>扫码奖励/条：</span>{{detial.awardName}}</p>
+                                            <p class="col-sm-3"><span>奖品数量：</span>{{detial.totalNum}}</p>
+                                            <p class="col-sm-3"><span>奖品剩余数量：</span>{{detial.totalNum - detial.usedNum}}</p>
+                                        </div>
+
+                                        <!-- 搜索项 -->
+                                        <div class="detial-search">
+                                            <!-- 账单流水 搜索项 -->
+                                            <div class="form-group col-sm-3">
+                                                <label class="control-label">关键词：</label>
+                                                <input ng-model="detial.shopName" class="form-control" placeholder="请输入门店名称" type="text">
+                                            </div>
+
+                                            <!-- 日历 -->
+                                            <div class="form-group time col-sm-6">
+                                                <label class="control-label">时间段：</label>
+                                                <input ng-model="detial.startTime" id="detialStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="detial.endTime" id="detialEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+
+                                            <!-- 搜索、重置 -->
+                                            <div class="btn-con col-sm-3">
+                                                <button type="button" class="seacher btn btn-primary" ng-click="detial.search();">查询</button>
+                                                <button type="button" class="reset btn btn-default" ng-click="detial.reset();">重置</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="sort-btn-con">
+                                            <button ng-click="detial.sortBy('ssia.ctime')" class="btn btn-primary">按扫码入库时间排序</button>
+                                            <button ng-click="detial.sortBy('ssia.num')" class="btn btn-primary">按扫码入库数量排序</button>
+                                        </div>
+
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
                                             <tr>
                                                 <th>序号</th>
                                                 <th>操作</th>
-                                                <th>品牌</th>
-                                                <th>规格</th>
-                                                <th>奖品类型</th>
+                                                <th>门店名称</th>
+                                                <th>联系人姓名</th>
+                                                <th>门店地址</th>
 
-                                                <th>扫码奖励/条</th>
-                                                <th>奖品数量</th>
-                                                <th>奖品剩余数量</th>
-                                                <th>有效时间</th>
-                                                <th>创建时间</th>
-
-                                                <th>状态</th>
+                                                <th>扫码数量</th>
+                                                <th>扫码入库时间</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="(index, item) in vm.listData">
-                                                <td class="batch">
-                                                    <label>{{index + 1}}</label>
-                                                </td>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="(index, item) in detial.listData">
+                                                <td>{{index+1}}</td>
                                                 <td>
                                                     <div class="oper-btn-wrap">
-                                                        <div class="operate-btn" ng-click="viewRebateManage(item.sellerId)">查看详情</div>
-
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">启用</div>
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">禁用</div>
-                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">修改</div>
+                                                        <div class="operate-btn" ng-click="detial.view(item.sellerId, item.settingId, item.awardType)">查看详情</div>
                                                     </div>
                                                 </td>
-                                                <td>{{item.licenceNo}}</td>
-                                                <td><div class="shop-name">{{item.shopName}}</div></td>
+                                                <td>{{item.shopName}}</td>
                                                 <td>{{item.ownerName}}</td>
-                                                <td>{{item.districtName}}</td>
+                                                <td>{{item.addrDetail}}</td>
 
-                                                <td>{{item.commercialName}}</td>
-                                                <td>{{item.contactName}}</td>
-                                                <td>{{item.contactPhone}}</td>
-                                                <td>{{item.salesmanName}}</td>
-                                                <td>{{item.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-
-                                                <td>{{item.authStatusName}}</td>
+                                                <td>{{item.batch}}</td>
+                                                <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                             </tr>
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                     <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
                                 </div>
                             </div>
 
-
                             <!-- 分页区 -->
-                            <div class="pagination-wrap" ng-class='{paginationDetial: isDetial}'>
+                            <div class="pagination-wrap">
                                 <!-- 分页指令 -->
                                 <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
                             </div>
+
+                            <button ng-show="vm.currentPage == 'detial'" ng-click="detial.back()" class="btn btn-primary back-btn">返回列表</button>
                         </div>
                     </div>
                 </div>
@@ -195,25 +243,17 @@
         <p class="prompt"></p>
     </div>
 
-    <!-- 审核 -->
-    <div class="modal fade bs-example-modal-sm review-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+    <!-- 比例 -->
+    <div class="modal fade bs-example-modal-sm storage-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <div class="modal-header"><span id="passTitle"><span ng-if="isRebate">审核通过</span><span ng-if="!isRebate">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <form name="reviewForm" novalidate>
+                <div class="modal-header"><p id="passTitle"><span ng-if="vm.isEnabled">启用：</span><span ng-if="!vm.isEnabled">禁用：</span></p><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <form name="storageForm" novalidate>
                     <div class="modal-body">
-                        <span ng-if="isRebate">您确定通过此零售户的审核？</span>
-                        <div ng-if="!isRebate">
-                            <textarea name="noPassReason" cols="30" rows="5" maxlength="50" ng-model="vm.noPassReason" ng-change="textareaChage($event)" required></textarea>
-                            <p class="textarea-num"><span>{{textareaNum ? textareaNum : 0}}</span>/50</p>
-                            <!--验证-->
-                            <div ng-show="reviewForm.$submitted || reviewForm.noPassReason.$touched">
-                                <div ng-show="reviewForm.noPassReason.$error.required" class="wrong-tip">请输入不通过理由</div>
-                            </div>
-                        </div>
+                        您确认要<span ng-if="vm.isEnabled">启用</span><span ng-if="!vm.isEnabled">禁用</span>此商品的扫码入库奖励?
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" ng-click="reviewConfirm()">确定</button>
+                        <button type="submit" class="btn btn-primary" ng-click="enabledConfirm()">确定</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     </div>
                 </form>

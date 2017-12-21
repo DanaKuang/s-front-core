@@ -38,7 +38,7 @@
   float: left; }
 
 .form-horizontal .time {
-  width: 600px; }
+  width: 476px; }
 
 .form-horizontal .time span {
   width: 10%;
@@ -100,12 +100,76 @@ td.batch label {
 .table tr th, .table tr td {
   font-size: 12px; }
 
-tr .activity-name {
-  width: 200px;
+tr td > div {
   margin: 0 auto; }
 
+tr .oper-btn-wrap {
+  width: 60px; }
+
+tr .activity-name {
+  width: 200px; }
+
 tr .time {
-  width: 150px;
+  width: 130px; }
+
+tr .ctime {
+  width: 80px; }
+
+.detial-head {
+  font-size: 14px;
+  background: #eee;
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding-top: 10px; }
+  .detial-head .col-sm-3, .detial-head .col-sm-6 {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px 0 0; }
+    .detial-head .col-sm-3 span, .detial-head .col-sm-6 span {
+      color: #333;
+      float: left;
+      width: 100px;
+      text-align: right; }
+
+/*排序按钮*/
+.sort-btn-con {
+  overflow: hidden; }
+  .sort-btn-con .btn-primary {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px; }
+
+.detial-search {
+  overflow: hidden; }
+  .detial-search .form-group {
+    float: left; }
+  .detial-search label {
+    float: left;
+    line-height: 34px; }
+  .detial-search select, .detial-search input {
+    width: 150px;
+    float: left;
+    font-size: 12px; }
+  .detial-search .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center; }
+  .detial-search #detialStart, .detial-search #detialEnd {
+    background: #fff; }
+  .detial-search .btn-con {
+    float: right;
+    margin-top: 2px; }
+    .detial-search .btn-con .btn {
+      float: left;
+      margin-right: 15px; }
+    .detial-search .btn-con .btn-default {
+      margin-right: 0px; }
+
+.back-btn {
+  display: block;
   margin: 0 auto; }
 
 .wrong-tip {

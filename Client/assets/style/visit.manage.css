@@ -282,12 +282,24 @@
 .table tr th, .table tr td {
   font-size: 12px; }
 
-tr .shop-name {
-  width: 100px;
+tr td > div {
   margin: 0 auto; }
+
+tr .oper-btn-wrap {
+  width: 60px; }
+
+tr .shop-name {
+  width: 70px; }
+
+tr .time {
+  width: 72px; }
 
 .wrong-tip {
   color: #f00;
   font-size: 12px;
   line-height: 34px;
   text-indent: 5px; }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist; }

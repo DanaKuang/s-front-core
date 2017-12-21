@@ -52,6 +52,12 @@
     line-height: 34px;
     text-align: center;
   }
+  .keywords {
+    .form-control {
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
 }
 
 
@@ -91,17 +97,6 @@
   }
 }
 
-td.batch {
-  label {
-    width: 50px;
-    height: 20px;
-    cursor: pointer;
-    input {
-      cursor: pointer;
-      margin-right: 10px;
-    }
-  }
-}
 
 // 提示
 #newAlert {
@@ -125,19 +120,63 @@ td.batch {
   margin-bottom: 5px;
 }
 
+// 仅显示店码订单
+.store-code {
+  float: left;
+  margin-bottom: 10px;
+  label {
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    margin: 0;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+.btn-con {
+  float: right;
+  .btn {
+    float: left;
+    margin-left: 15px;
+  }
+  .file-con {
+    float: left;
+    position: relative;
+  }
+  #importFile {
+    width: 110px;
+    height: 34px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+
 // 表格
 .table tr th, .table tr td {
   font-size: 12px;
 }
 tr {
-  .activity-name {
-    width: 200px;
+  td>div {
     margin: 0 auto;
+  }
+  .oper-btn-wrap {
+    width: 60px;
+  }
+  .activity-name {
+    width: 150px;
   }
   .time {
-    width: 150px;
-    margin: 0 auto;
+    width: 75px;
   }
+
 }
 
 // 验证

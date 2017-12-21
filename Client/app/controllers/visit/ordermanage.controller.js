@@ -5,329 +5,263 @@
  */
 
 define([], function () {
-    var visitOrderManageCtrl = {
-        ServiceType: "controller",
-        ServiceName: "visitOrderManageCtrl",
-        ViewModelName: 'visitManageModel',
-        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
+  var visitOrderManageCtrl = {
+    ServiceType: "controller",
+    ServiceName: "visitOrderManageCtrl",
+    ViewModelName: 'visitManageModel',
+    ServiceContent: ['$rootScope', '$scope', '$timeout', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $model, dateFormatFilter) {
 
-          // 初始化一个对象，vm
-          $scope.vm = {
-            authStatus: '', // 状态
-            commercial: '', // 业态
-            district: '', // 区域
-            searchType: 3, // 关键词类型
-            licenceNo: '',  // 烟草证号
-            addrProvince: '',
-            addrCity: '',
-            addrArea: '',
-            appStartTime: '',
-            appEndTime: '',
-            sortType: 1,
-            sortValue: 1,
-            listData: [],
-            pageNo: 1,
-            pageSize: 10,
-            currentPage: 'index'
+      // 初始化一个对象，vm
+      $scope.vm = {
+        status: '',
+        searchType: 1, // 关键词类型
+        keywords: '',
+        stime: '',
+        etime: '',
+        pageNo: 1,
+        pageSize: 10,
+        listData: [],
+      }
+      $scope.isChecked = false
+
+        // 获取table列表
+      function getList(page, ispage) {
+        var data = {
+          status: $scope.vm.status || '',
+          searchType: $scope.vm.searchType || '', // 关键词
+          keywords: $scope.vm.keywords || '', // 关键词
+          stime: $scope.vm.stime || '',
+          etime: $scope.vm.etime || '',
+          onlySellerQr: $scope.isChecked ? 1 : 0,
+          pageNo: page || 1,
+          pageSize: 10
+        };
+
+        $model.orderGetList(data).then(function(res) {
+          if(res.data.ok) {
+            $scope.vm.listData = res.data.data.list || [];
+
+            // 是否刷新页码
+            if(ispage) {
+              $scope.paginationConf = res.data;
+              // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+              $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+              $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+            }
+          } else {
+            alertMsg($('#newAlert'), 'danger', res.data.msg);
           }
+        })
+      }
 
-          // 获取table列表
-          function getList(page, ispage) {
-            var data = {
-              authStatus: $scope.vm.authStatus || '', // 状态
-              commercial: $scope.vm.commercial || '', // 业态
-              district: $scope.vm.district || '', // 区域
-              searchType: $scope.vm.searchType || '', // 关键词类型
-              addrProvince: $scope.vm.addrProvince || '',
-              addrCity: $scope.vm.addrCity || '',
-              addrArea: $scope.vm.addrArea || '',
-              appStartTime: $scope.vm.appStartTime || '',
-              appEndTime: $scope.vm.appEndTime || '',
-              sortType: $scope.vm.sortType || 1,
-              sortValue: $scope.vm.sortValue,
-              pageNo: page || 1,
-              pageSize: 10
-            };
+      // 刚进入页面
+      getList(1, true);
 
-            // 根据关键词搜索条件，传不同数据
-            if($scope.vm.searchType == '3') {
-              data.licenceNo = $scope.vm.keywords || ''; // 烟草证号
-            } else if($scope.vm.searchType == '1') {
-              data.ownerName = $scope.vm.keywords || ''; // 联系人信息
-            } else if($scope.vm.searchType == '2') {
-              data.phoneNo = $scope.vm.keywords || ''; // 联系人手机号
-            } else if($scope.vm.searchType == '4') {
-              data.shopName = $scope.vm.keywords || ''; // 门店名称
-            } else if($scope.vm.searchType == '5') {
-              data.salesmanName = $scope.vm.keywords || ''; // 业务员
-            }
+      // 搜索
+      $scope.search = function () {
+        getList(1, true);
+      }
 
-            $model.getManageList(data).then(function(res) {
-              $scope.vm.listData = res.data.list || [];
+      // 重置
+      $scope.reset = function () {
+        $scope.vm = {
+          status: '',
+          searchType: 1, // 关键词类型
+          keywords: '',
+          stime: '',
+          etime: '',
+          pageNo: 1,
+          pageSize: 10
+        }
+        $('#brand').multiselect('refresh');
+        $('#spec').multiselect('refresh');
+        $('#region').multiselect('refresh');
+        getList(1, true);
+      }
 
-              // 是否刷新页码
-              if(ispage) {
-                $scope.paginationConf = res;
-                // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
-                $scope.paginationConf.data.page.currentPageNumber =  res.data.page.pageNo; // 当前页
-                $scope.paginationConf.data.page.pageNumber =  res.data.page.pageCount; // 页数
-              }
+      // 仅显示店码订单
+      $scope.storeCodeClick = function () {
+        if($scope.isChecked) {
+          $scope.isChecked = false;
+        } else {
+          $scope.isChecked = true;
+        }
+        getList(1, true);
+      }
 
-              // 获取当前页的id，组成一个数组，多选时要用到
-              $scope.batchIds = [];
-              angular.forEach($scope.vm.listData, function(item, index) {
-                $scope.batchIds.push(item.sellerId);
-              })
-            })
-          }
+      // 导出待收货订单
+      $scope.export = function () {
+        var data = {
+          status: $scope.vm.status || '',
+          searchType: $scope.vm.searchType || '', // 关键词
+          keywords: $scope.vm.keywords || '', // 关键词
+          stime: $scope.vm.stime || '',
+          etime: $scope.vm.etime || '',
+          onlySellerQr: $scope.isChecked ? 1 : 0,
+          filename: '',
+        };
 
-          // 刚进入页面
-          getList(1, true);
-
-          // 监视paginationConf变化更新page
-          $scope.$watch('paginationConf', function () {
-            // 属性赋值
-            if ($scope.paginationConf && $scope.paginationConf.data) {
-              var page = $scope.paginationConf.data.page;
-              $scope.totalCount = page.count;
-              $scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
-              $scope.curPage = page.currentPageNumber; // 当前页
-              $scope.pageNumber = page.pageNumber; // 页数
-            }
-          }, true);
-
-          // 分页点击
-          $scope.$on('frompagechange', function (e, v, f) {
-            getList(f.currentPageNumber, true);
-          })
-
-          // 省
-          $model.getManageProvince().then(function (res) {
-            $scope.provinceList = res.data;
-          });
-
-          // 省份change
-          $scope.provinceChage = function (e) {
-            if($scope.vm.addrProvince != '') {
-              // 市
-              $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
-                $scope.cityList = res.data;
-                $scope.vm.addrCity = '';
-                $scope.vm.addrArea = '';
-              });
-            }
-          }
-
-          // 城市change
-          $scope.cityChage = function (e) {
-            if($scope.vm.addrCity != '') {
-              // 区/县
-              $model.getManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
-                $scope.areaList = res.data;
-                $scope.vm.addrArea = '';
-              });
-            }
-          }
-
-
-          // 搜索
-          $scope.search = function (e) {
-            getList(1, true);
-          }
-
-          // 重置
-          $scope.reset = function () {
-            $scope.vm = {
-              authStatus: '', // 状态
-              commercial: '', // 业态
-              district: '', // 区域
-              searchType: 3, // 关键词类型
-              licenceNo: '',  // 烟草证号
-              addrProvince: '',
-              addrCity: '',
-              addrArea: '',
-              appStartTime: '',
-              appEndTime: '',
-              sortType: 1,
-              sortValue: 1,
-              listData: [],
-              pageNo: 1,
-              pageSize: 10
-            }
-            $scope.provinceList = '';
-            $scope.cityList = '';
-            $scope.areaList = '';
-            getList(1, true);
-          }
-
-
-          // *** 批量审批 start
-          $scope.selected = []; // 当前选中的id组合
-          $scope.ifBatch = true; // 多选按钮disabled
-
-          // 单个儿checkbox的id数组是添加还是移除
-          var updateSelected = function (action, id) {
-            if (action == 'add' && $scope.selected.indexOf(id) == -1)
-              $scope.selected.push(id);
-
-            if (action == 'remove' && $scope.selected.indexOf(id) != -1)
-              $scope.selected.splice($scope.selected.indexOf(id), 1);
-
-            if($scope.selected.length <= 1)
-              $scope.ifBatch = true;
-            else
-              $scope.ifBatch = false;
-          };
-
-          // 单个儿ng-click
-          $scope.updateSelection = function ($event, id) {
-            var checkbox = $event.target;
-            var action = (checkbox.checked ? 'add' : 'remove');
-            updateSelected(action, id);
-          };
-          // 单个儿的ng-checked
-          $scope.isSelected = function (id) {
-            return $scope.selected.indexOf(id) >= 0;
-          };
-
-          // 全选ng-click
-          $scope.selectAll = function ($event) {
-            var allCheckbox = $event.target;
-            var action = (allCheckbox.checked ? 'add' : 'remove');
-            for (var i = 0; i < $scope.vm.listData.length; i++) {
-              updateSelected(action, $scope.batchIds[i]);
-            }
-          };
-          // 全选的的ng-checked
-          $scope.isSelectedAll = function () {
-            return $scope.selected.length === $scope.vm.listData.length;
-          };
-
-          // 单个儿审核按钮点击
-          $scope.reviewAndPass = function (id, value) {
-            // 重置验证
-            $scope.vm.noPassReason = '';
-            $scope.reviewForm.$setPristine();
-            $scope.reviewForm.$setUntouched();
-            $scope.textareaNum = 0;
-
-            if(id != '') {
-              $scope.selected = [id];
-              $scope.ifBatch = true;
-            }
-
-            $scope.reviewValue = value; // 要传的值，1通过，2不通过
-            // 根据值去显示弹窗
-            if(value == 1) {
-              $scope.isOrder = true;
+        var url = '/api/tztx/seller-manager/order/exportOrders';
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData();
+        for(var attr in data) {
+          formData.append(attr, data[attr]);
+        }
+        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        xhr.open('POST', url, true);
+        xhr.responseType = "blob";
+        xhr.responseType = "arraybuffer"
+        xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
+        xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
+        xhr.onload = function(res) {
+          if (this.status == 200) {
+            alertMsg($('#newAlert'), 'success', '导出成功');
+            var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+            var respHeader = xhr.getResponseHeader("Content-Disposition");
+            var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+            if (window.navigator.msSaveOrOpenBlob) {
+              navigator.msSaveBlob(blob, fileName);
             } else {
-              $scope.isOrder = false;
+              var link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = fileName;
+              link.click();
+              window.URL.revokeObjectURL(link.href);
             }
+          } else {
+            alertMsg($('#newAlert'), 'danger', res.data.msg);
           }
+        };
+        xhr.send(formData);
+      }
 
-          // 审核  确认按钮点击
-          $scope.reviewConfirm = function() {
-            if($scope.reviewForm.$valid) {
-              var data = {
-                sellerIds: $scope.selected,
-                authResult: $scope.reviewValue,
-              }
-              if($scope.reviewValue == 2) {
-                data.failReason = $scope.noPassReason;
-              }
-              $model.reviewAndPass(data).then(function(res) {
-                if(res.data.ok) {
-                  // 审核成功后刷新列表
-                  getList($scope.paginationConf.data.page.currentPageNumber);
-                  // 隐藏弹窗
-                  $('.review-modal').modal('hide');
-                } else {
-                  alertMsg($('#newAlert'), 'danger', res.data.msg);
-                }
-              })
+      // $scope.import = function () {
+      //   console.log(123)
+      // }
+
+      // 导入订单
+      $('#importFile').change(function(){
+        var importFile = $('#importFile')[0].files[0];
+        if(importFile != undefined){
+          var formData = new FormData();
+          formData.append('file',importFile);
+          $.ajax({
+            url: '/api/tztx/seller-manager/order/readOrderData',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+              ContentType: "multipart/form-data",
+              loginId : sessionStorage.access_loginId,
+              token : sessionStorage.access_token
             }
-          }
-
-          // 输入不通过理由
-          $scope.textareaChage = function() {
-            $scope.textareaNum = $scope.vm.noPassReason.length;
-          }
-          // *** 批量审批 end
-
-
-          // 查看点击
-          $scope.viewOrderManage = function(id) {
-            sessionStorage.setItem('sellerId', id);
-            $location.path('view/visit/manage');
-          }
-
-          // 弹窗框
-          var alertMsg = function(e, t, i) { // e为元素，t为类型，i为信息
-            var promptCon = e.clone();
-
-            if(t == 'success') { // 成功
-              e.addClass('alert-success');
-            } else if(t == 'warning') { // 警告
-              e.addClass('alert-warning');
-            } else if(t == 'danger') { // 错误
-              e.addClass('alert-danger');
-            }
-
-            e.find('.prompt').text(i || '请求错误请重试');
-            e.show().addClass('in');
-
-            // 克隆的再放进body
-            e.on('closed.bs.alert', function () {
-              $('body').append(promptCon);
-            })
-
-            // 3秒后隐藏
-            var alertHide = $timeout(function(){
-              e.alert('close')
-            }, 3000)
-
-            e.hover(function() {
-              $timeout.cancel(alertHide);
-            }, function() {
-              // 3秒后隐藏
-              var alertHide = $timeout(function(){
-                e.alert('close')
-              }, 3000)
-            })
-          }
-
-          // 时间设置
-          $("#durationStart").datetimepicker({
-            format: 'yyyy-mm-dd hh:ii:00',
-            language: 'zh-CN',
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1
-          }).on('change', function (e) {
-            var appStartTime = e.target.value;
-            var appEndTime = $scope.vm.appEndTime;
-            if (appEndTime < appStartTime) {
-              $scope.vm.appEndTime = '';
-              $scope.$apply();
-            }
+          }).done(function(res) {
+            getList(1, true);
+            alertMsg($('#newAlert'), 'success', '导入成功');
+            $scope.importTitle = '导入成功';
+          }).fail(function(res) {
+            alertMsg($('#newAlert'), 'danger', '导入失败');
           });
+        }
+      });
 
-          $("#durationEnd").datetimepicker({
-            format: 'yyyy-mm-dd hh:ii:00',
-            language: 'zh-CN',
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1
-          }).on('change', function (e) {
-            var appEndTime = e.target.value;
-            var appStartTime = $scope.vm.appStartTime;
-            if (appStartTime > appEndTime) {
-              $scope.vm.appStartTime = '';
-              $scope.$apply();
-            }
-          });
 
-        }]
-    };
-    return visitOrderManageCtrl;
+      // 查看详情
+      $scope.viewDetial = function () {
+        // 重置验证
+        $scope.vm.order = '';
+        $scope.orderForm.$setPristine();
+        $scope.orderForm.$setUntouched();
+      }
+
+
+
+      // 弹窗框
+      var alertMsg = function(e, t, i) { // e为元素，t为类型，i为信息
+        var promptCon = e.clone();
+
+        if(t == 'success') { // 成功
+          e.addClass('alert-success');
+        } else if(t == 'warning') { // 警告
+          e.addClass('alert-warning');
+        } else if(t == 'danger') { // 错误
+          e.addClass('alert-danger');
+        }
+
+        e.find('.prompt').text(i || '请求错误请重试');
+        e.show().addClass('in');
+
+        // 克隆的再放进body
+        e.on('closed.bs.alert', function () {
+          $('body').append(promptCon);
+        })
+
+        // 3秒后隐藏
+        var alertHide = $timeout(function(){
+          e.alert('close')
+        }, 3000)
+
+        e.hover(function() {
+          $timeout.cancel(alertHide);
+        }, function() {
+          // 3秒后隐藏
+          var alertHide = $timeout(function(){
+            e.alert('close')
+          }, 3000)
+        })
+      }
+
+      // 监视paginationConf变化更新page
+      $scope.$watch('paginationConf', function () {
+        // 属性赋值
+        if ($scope.paginationConf && $scope.paginationConf.data) {
+          var page = $scope.paginationConf.data.page;
+          $scope.totalCount = page.count;
+          $scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
+          $scope.curPage = page.currentPageNumber; // 当前页
+          $scope.pageNumber = page.pageNumber; // 页数
+        }
+      }, true);
+
+      // 分页点击
+      $scope.$on('frompagechange', function (e, v, f) {
+        getList(f.currentPageNumber, true);
+      })
+
+      // 时间设置
+      $("#durationStart").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:00',
+        language: 'zh-CN',
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1
+      }).on('change', function (e) {
+        var stime = e.target.value;
+        var etime = $scope.vm.etime;
+        if (etime < stime) {
+          $scope.vm.etime = '';
+          $scope.$apply();
+        }
+      });
+
+      $("#durationEnd").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:00',
+        language: 'zh-CN',
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1
+      }).on('change', function (e) {
+        var etime = e.target.value;
+        var stime = $scope.vm.stime;
+        if (stime > etime) {
+          $scope.vm.stime = '';
+          $scope.$apply();
+        }
+      });
+
+    }]
+  };
+  return visitOrderManageCtrl;
 })
