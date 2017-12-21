@@ -257,8 +257,6 @@ define([], function () {
           }
 
 
-
-
           // *** 详情 start
           // 查看点击
           $scope.viewManage = function(id) {

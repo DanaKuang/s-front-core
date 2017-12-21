@@ -163,12 +163,14 @@
   }
 
   .new-photo-con {
+    cursor: pointer;
     margin-bottom: 10px;
   }
   .new-photo {
     width: 124px;
     height: 124px;
   }
+
   .new-location {
     .col-sm-10 {
       width: 300px;
@@ -192,6 +194,23 @@
   .close {
     top: -11px;
   }
+}
+
+// 查看大图
+.img-modal, .new-img-modal {
+  .big-photo {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+}
+.img-modal.in .modal-dialog, .new-img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px;
 }
 
 // 管理列表
