@@ -131,9 +131,11 @@
     float: left;
     font-size: 12px;
   }
-  .upload-con {
-    margin-top: 2px;
-  }
+  //.upload-con {
+  //  width: 300px;
+  //  overflow: hidden;
+  //  float: left;
+  //}
   .upload-btn-con {
     width: 52px;
     height: 34px;
@@ -167,8 +169,8 @@
     margin-bottom: 10px;
   }
   .new-photo {
-    width: 124px;
-    height: 124px;
+    width: 125px;
+    display: block;
   }
 
   .new-location {
@@ -197,7 +199,7 @@
 }
 
 // 查看大图
-.img-modal, .new-img-modal {
+.img-modal {
   .big-photo {
     width: 100%;
     display: block;
@@ -207,11 +209,12 @@
     text-align: center;
   }
 }
-.img-modal.in .modal-dialog, .new-img-modal.in .modal-dialog {
+.img-modal.in .modal-dialog {
   transform: translateY(0%);
   top: 100px;
   margin-bottom: 100px;
 }
+
 
 // 管理列表
 .operate-btn {
@@ -257,7 +260,7 @@
     overflow: hidden;
   }
   li {
-    width: 315px;
+    width: 305px;
     line-height: 34px;
     font-size: 12px;
     float: left;
@@ -276,7 +279,7 @@
       }
     }
     .value {
-      width: 200px;
+      width: 190px;
       float: left;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -315,6 +318,19 @@
       margin-right: 5px;
     }
   }
+
+
+  .authStatus {
+    i {
+      color: #f00;
+      float: left;
+      margin-right: 5px;
+    }
+    .form-control {
+      width: 208px;
+    }
+  }
+
 
   .btn-con {
     margin-left: 115px;

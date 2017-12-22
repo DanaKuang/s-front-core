@@ -41,6 +41,7 @@ define([], function () {
 
           // 基本信息
           $scope.info = {
+            headImg: ''
             // isEdit: false
           };
 
@@ -591,7 +592,7 @@ define([], function () {
             // 清空数据
             var data = {
               sellerId: '',
-              licenceImg: '',
+              headImg: '',
               shopName: '',
               ownerName: '',
               phoneNo: '',
@@ -601,6 +602,7 @@ define([], function () {
               addrArea: '',
               addrDetail: '',
               licenceNo: '',
+              licenceImg: '',
 
               district: '',
               commercial: '',
@@ -618,9 +620,19 @@ define([], function () {
           }
 
           // 图片删除
-          $scope.new.newPhotoDelete = function() {
-            $scope.new.licenceImg = '';
-            $('#newImgUpload').val(''); // 搭配这个方法才行，不知道为什么？？？
+          $scope.photoDelete = function(ele) {
+            console.log(1)
+            if(ele == 'infoHeadImg') {
+              $scope.info.headImg = '';
+            } else if(ele == 'infoLicenceImg') {
+              $scope.info.licenceImg = '';
+            } else if(ele == 'newHeadImg') {
+              $scope.new.headImg = '';
+            } else if(ele == 'newLicenceImg') {
+              $scope.new.licenceImg = '';
+            }
+
+            $('#'+ele).attr('src','');
           }
 
           // 弹窗框
@@ -664,7 +676,7 @@ define([], function () {
               if(type == 'new') {
                 var data = {
                   sellerId: '', // 零售户编码
-                  licenceImg: $scope.new.licenceImg || '', // 许可证照片地址
+                  headImg: $scope.new.headImg || '', // 店铺图片
                   shopName: $scope.new.shopName || '', // 店铺名称
                   ownerName: $scope.new.ownerName || '', // 经营人姓名
                   phoneNo: $scope.new.phoneNo || '', // 店主联系电话
@@ -675,10 +687,12 @@ define([], function () {
                   addrDetail: $scope.new.addrDetail || '', // 门店所在地详细信息
                   licenceNo: $scope.new.licenceNo || '', // 许可证号
 
+                  licenceImg: $scope.new.licenceImg || '', // 许可证照片
                   district: $scope.new.district || '', // 区域
                   commercial: $scope.new.commercial || '', // 业态
                   salesManNames: $scope.new.salesManNames || '', // 业务员名称
                   contactName: $scope.new.contactName || '', // 联系人姓名
+
                   contactPhone: $scope.new.contactPhone || '', // 联系人手机号
 
                   qrStyle: 1, // 店码样式，默认传1
@@ -687,7 +701,7 @@ define([], function () {
               } else if(type == 'edit') {
                 var data = {
                   sellerId: $scope.info.sellerId || '', // 零售户编码
-                  licenceImg: $scope.info.licenceImg || '', // 许可证照片地址
+                  headImg: $scope.info.headImg || '', // 店铺图片
                   shopName: $scope.info.shopName || '', // 店铺名称
                   ownerName: $scope.info.ownerName || '', // 经营人姓名
                   phoneNo: $scope.info.phoneNo || '', // 店主联系电话
@@ -698,14 +712,24 @@ define([], function () {
                   addrDetail: $scope.info.addrDetail || '', // 门店所在地详细信息
                   licenceNo: $scope.info.licenceNo || '', // 许可证号
 
+                  licenceImg: $scope.info.licenceImg || '', // 许可证照片
                   district: $scope.info.district || '', // 区域
                   commercial: $scope.info.commercial || '', // 业态
                   salesManNames: $scope.info.salesManNames || '', // 业务员名称
                   contactName: $scope.info.contactName || '', // 联系人姓名
-                  contactPhone: $scope.info.contactPhone || '', // 联系人手机号
 
-                  status: $scope.info.status, // 状态
+                  contactPhone: $scope.info.contactPhone || '', // 联系人手机号
                 };
+
+                if($scope.fromPage == 'reviewManage') {
+                  // 审核管理里面传这两个字段
+                  data.authStatus = $scope.info.authStatus; // 审核状态
+                  if($scope.info.authStatus == 3) {
+                    data.authRejectDesc = $scope.info.authRejectDesc; // 审核不通过理由
+                  }
+                } else {
+                  data.status = $scope.info.status; // 状态
+                }
               }
 
               $model.newManageSave(data).then(function (res) {
@@ -741,6 +765,11 @@ define([], function () {
           // **** 新增结束
 
 
+          // 查看大图
+          $scope.viewImg = function(img) {
+            $scope.bigImg = img;
+          }
+          
 
           // 门店照片上传
           $scope.new.uploadImage = function(e) {
@@ -761,8 +790,18 @@ define([], function () {
                 token : sessionStorage.access_token
               }
             }).done(function (res) {
-              $scope.new.licenceImg = res.msg; //图片保存地址
-              $scope.info.licenceImg = res.msg; //图片保存地址
+              var time = new Date().getTime();
+              console.log(e)
+              if(e == 'info1') {
+                $scope.info.headImg = res.msg + '?' + time; //图片保存地址
+              } else if(e == 'info2') {
+                $scope.info.licenceImg = res.msg + '?' + time;
+              } else if(e == 'new1') {
+                $scope.new.headImg = res.msg + '?' + time;
+              } else if(e == 'new2') {
+                $scope.new.licenceImg = res.msg + '?' + time;
+              }
+
               $scope.$apply(); // 因为是异步的？所以这里需要$scope.$apply();
             }).fail(function (res) {
               alert('上传失败，请重试');
