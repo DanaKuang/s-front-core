@@ -202,7 +202,7 @@
 
                                     <!-- 详情 -->
                                     <div ng-show="vm.currentPage == 'detial'">
-                                        <div class="detial-nav">
+                                        <div class="detial-nav" ng-if="fromPage != 'reviewManage'">
                                             <ul>
                                                 <li ng-click="detialNav('info')" ng-class="detial.detialPage == 'info' ? 'cur' : ''">基本信息</li>
                                                 <li ng-click="detialNav('sellerfans')" ng-class="detial.detialPage == 'sellerfans' ? 'cur' : ''">店铺粉丝</li>
@@ -228,46 +228,46 @@
                                                             <span class="value">{{info.authPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
                                                         </label>
                                                     </li>
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">账户余额：</span>
                                                             <span class="value">¥{{info.wallet.balance}}</span>
                                                         </label>
                                                     </li>
 
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">是否打印二维码：</span>
                                                             <span ng-if="info.printQrCodeCount > 0" class="value">是</span>
                                                             <span ng-if="info.printQrCodeCount <= 0" class="value">否</span>
                                                         </label>
                                                     </li>
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">打印次数：</span>
                                                             <span class="value">{{info.printQrCodeCount && info.printQrCodeCount > 0 ? info.printQrCodeCount : 0 }}次</span>
                                                         </label>
                                                     </li>
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">扫码次数：</span>
                                                             <span class="value">{{info.scanCount || 0}}次</span>
                                                         </label>
                                                     </li>
 
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">店铺粉丝：</span>
                                                             <span class="value">{{info.fansCount || 0}}人</span>
                                                         </label>
                                                     </li>
-                                                    <li class="">
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
                                                         <label>
                                                             <span class="title">积分：</span>
                                                             <span class="value">{{info.score || 0}}</span>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li ng-if="fromPage != 'reviewManage'">
                                                         <label>
                                                             <span class="title">微信名：</span>
                                                             <span class="value">{{info.wxNickname}}</span>
@@ -280,21 +280,21 @@
 
                                                         <!--展示图片-->
                                                         <div class="new-photo-con">
-                                                            <img data-toggle="modal" data-target=".img-modal" class="new-photo" ng-src="{{info.licenceImg}}" alt="" />
+                                                            <img id="infoHeadImg" class="new-photo" ng-click="viewImg(info.headImg)" ng-src="{{info.headImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
                                                         </div>
 
                                                         <div class="info-btn-con" ng-if="info.isEdit">
                                                             <!-- 上传按钮 -->
                                                             <div class="upload-btn-con">
                                                                 <button class="btn btn-primary upload-btn">上传</button>
-                                                                <input name="infoPhoto" onchange="angular.element(this).scope().new.uploadImage()" ng-model="info.licenceImg" class="form-control new-photo" type="file" accept="image/*" required>
+                                                                <input name="infoHeadImg" onchange="angular.element(this).scope().new.uploadImage('info1')" ng-model="info.headImg" class="form-control new-photo" type="file" accept="image/*" required>
                                                             </div>
-                                                            <button ng-click="info.newPhotoDelete()" class="btn btn-primary delete-btn">删除</button>
+                                                            <button ng-click="photoDelete('infoHeadImg')" class="btn btn-primary delete-btn" type="button">删除</button>
                                                         </div>
 
                                                         <!--验证-->
-                                                        <div ng-show="infoForm.$submitted || infoForm.infoPhoto.$touched">
-                                                            <div ng-show="infoForm.infoPhoto.$error.required" class="wrong-tip">请上传门店照片</div>
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoHeadImg.$touched">
+                                                            <div ng-show="infoForm.infoHeadImg.$error.required" class="wrong-tip">请上传门店照片</div>
                                                         </div>
                                                     </li>
                                                     <li class="row">
@@ -379,6 +379,28 @@
                                                         </div>
                                                     </li>
 
+                                                    <li class="row manage-new">
+                                                        <span class="title"><i>*</i>烟草专卖证号照片：</span>
+
+                                                        <!--展示图片-->
+                                                        <div class="new-photo-con">
+                                                            <img id="infoLicenceImg" class="new-photo" ng-click="viewImg(info.licenceImg)" ng-src="{{info.licenceImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                                                        </div>
+
+                                                        <div class="info-btn-con" ng-if="info.isEdit">
+                                                            <!-- 上传按钮 -->
+                                                            <div class="upload-btn-con">
+                                                                <button class="btn btn-primary upload-btn">上传</button>
+                                                                <input name="infoLicenceImg" onchange="angular.element(this).scope().new.uploadImage('info2')" ng-model="info.licenceImg" class="form-control new-photo" type="file" accept="image/*" required>
+                                                            </div>
+                                                            <button ng-click="photoDelete('infoLicenceImg')" class="btn btn-primary delete-btn" type="button">删除</button>
+                                                        </div>
+
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoLicenceImg.$touched">
+                                                            <div ng-show="infoForm.infoLicenceImg.$error.required" class="wrong-tip">请上传烟草专卖证号照片</div>
+                                                        </div>
+                                                    </li>
                                                     <li class="row">
                                                         <label>
                                                             <span class="title"><i>*</i>区域：</span>
@@ -416,6 +438,7 @@
                                                             <div ng-show="infoForm.infoCommercial.$error.required" class="wrong-tip">请选择业态</div>
                                                         </div>
                                                     </li>
+
                                                     <li class="row">
                                                         <label>
                                                             <span class="title"><i>*</i>业务员姓名：</span>
@@ -428,7 +451,6 @@
                                                             <div ng-show="infoForm.infoSalesman.$error.required" class="wrong-tip">请输入业务员姓名</div>
                                                         </div>
                                                     </li>
-
                                                     <li class="row">
                                                         <label>
                                                             <span class="title"><i>*</i>联系人姓名：</span>
@@ -451,7 +473,8 @@
                                                             <div ng-show="infoForm.infoConcatPhone.$error.required || infoForm.infoConcatPhone.$invalid" class="wrong-tip">请输入正确格式的联系人电话</div>
                                                         </div>
                                                     </li>
-                                                    <li class="row status">
+
+                                                    <li ng-if="fromPage != 'reviewManage'" class="row status">
                                                         <span class="title"><i>*</i>状态：</span>
                                                         <span ng-if="!info.isEdit" class="value">{{info.status == 1 ? '上架中' : (info.status == 0 ? '下架中' : '')}}</span>
 
@@ -460,6 +483,26 @@
                                                         <!--验证-->
                                                         <div ng-show="infoForm.$submitted || infoForm.infoUpDown.$touched">
                                                             <div ng-show="infoForm.infoUpDown.$error.required" class="wrong-tip">请选择状态</div>
+                                                        </div>
+                                                    </li>
+
+                                                    <!-- 审核管理状态 -->
+                                                    <li ng-if="fromPage == 'reviewManage'" class="row status">
+                                                        <span class="title"><i>*</i>审核状态：</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.authStatus == 2 ? '审核通过' : (info.status == 3 ? '审核不通过' : '')}}</span>
+
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="2" type="radio" name="infoAuthStatus" required/>审核通过</label>
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="3" type="radio" name="infoAuthStatus" required/>审核不通过</label>
+                                                        <div ng-if="info.authStatus == 3" class="authStatus">
+                                                            <i>*</i><input name="authRejectDesc" ng-model="info.authRejectDesc" class="form-control" ng-if="info.isEdit" type="text" placeholder="请输入不通过理由" required>
+                                                        </div>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoAuthStatus.$touched">
+                                                            <div ng-show="infoForm.infoAuthStatus.$error.required" class="wrong-tip">请选择审核通过</div>
+                                                        </div>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.authRejectDesc.$touched">
+                                                            <div ng-show="infoForm.authRejectDesc.$error.required" class="wrong-tip">请输入不通过理由</div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -684,23 +727,23 @@
             <div class="panel-body panel manage-new">
                 <form name="form" novalidate>
                     <div class="form-group" >
-                        <label for="newImgUpload" class="control-label col-sm-2"><i>*</i>门店照片：</label>
+                        <label class="control-label col-sm-2"><i>*</i>门店照片：</label>
 
                         <div class="col-sm-6 upload-con">
                             <!--展示图片-->
-                            <div class="new-photo-con" ng-show="new.licenceImg != ''">
-                                <img data-toggle="modal" data-target=".new-img-modal" class="new-photo" ng-src="{{new.licenceImg}}" alt="" />
+                            <div class="new-photo-con" ng-show="new.headImg != ''">
+                                <img id="newHeadImg" ng-click="viewImg(new.headImg)" class="new-photo" ng-src="{{new.headImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
                             </div>
                             <!-- 上传按钮 -->
                             <div class="upload-btn-con">
                                 <button class="btn btn-primary upload-btn">上传</button>
-                                <input onchange="angular.element(this).scope().new.uploadImage()" ng-model="new.licenceImg" id="newImgUpload" name="newPhoto" class="form-control new-photo" type="file" accept="image/*" required>
+                                <input onchange="angular.element(this).scope().new.uploadImage('new1')" ng-model="new.headImg" name="newHeadImg" class="form-control new-photo" type="file" accept="image/*" required>
                             </div>
-                            <button ng-click="new.newPhotoDelete()" class="btn btn-default delete-btn" type="button">删除</button>
+                            <button ng-click="photoDelete('newHeadImg')" class="btn btn-default delete-btn" type="button">删除</button>
 
                             <!--验证-->
-                            <div ng-show="form.$submitted || form.newPhoto.$touched">
-                                <div ng-show="form.newPhoto.$error.required" class="wrong-tip">请上传门店照片</div>
+                            <div ng-show="form.$submitted || form.newHeadImg.$touched">
+                                <div ng-show="form.newHeadImg.$error.required" class="wrong-tip">请上传门店照片</div>
                             </div>
                         </div>
                     </div>
@@ -736,22 +779,35 @@
                     </div>
 
                     <div class="form-group new-location">
-                        <label class="control-label col-sm-2">位置：</label>
+                        <label class="control-label col-sm-2"><i>*</i>位置：</label>
                         <div class="col-sm-10">
-                            <select ng-model="new.addrProvince" ng-change="new.provinceChage($event)" class="form-control">
+                            <select name="newAddrProvince" ng-model="new.addrProvince" ng-change="new.provinceChage($event)" class="form-control" required>
                                 <option value="">请选择省</option>
                                 <option ng-repeat="p in new.provinceList" value="{{p.code}}">{{p.name}}</option>
                             </select>
 
-                            <select ng-model="new.addrCity" ng-change="new.cityChage($event)" class="form-control">
+                            <select name="newAddrCity" ng-model="new.addrCity" ng-change="new.cityChage($event)" class="form-control" required>
                                 <option value="">请选择市</option>
                                 <option ng-repeat="c in new.cityList" value="{{c.code}}">{{c.name}}</option>
                             </select>
 
-                            <select ng-model="new.addrArea" class="form-control">
+                            <select name="newAddrArea" ng-model="new.addrArea" class="form-control" required>
                                 <option value="">请选择区/县</option>
                                 <option ng-repeat="a in new.areaList" value="{{a.code}}">{{a.name}}</option>
                             </select>
+
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newAddrProvince.$dirty || form.newAddrProvince.$touched">
+                                <div ng-show="form.newAddrProvince.$error.required" class="wrong-tip">请选择省</div>
+                            </div>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newAddrCity.$dirty || form.newAddrCity.$touched">
+                                <div ng-show="form.newAddrCity.$error.required" class="wrong-tip">请选择市</div>
+                            </div>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newAddrArea.$dirty || form.newAddrArea.$touched">
+                                <div ng-show="form.newAddrArea.$error.required" class="wrong-tip">请选择区/县</div>
+                            </div>
                         </div>
                     </div>
 
@@ -771,7 +827,29 @@
                         <input id="newLicense" name="newLicense" ng-model="new.licenceNo" class="form-control" type="text" ng-pattern="/^\d{12}$/" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newLicense.$touched">
-                            <div ng-show="form.newLicense.$error.required || form.licenceNo.$invalid" class="wrong-tip">请输入烟草专卖证号，12位数字</div>
+                            <div ng-show="form.newLicense.$error.required || form.licenceNo.$invalid" class="wrong-tip">请输入12位数字的烟草专卖证号</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2"><i>*</i>烟草专卖证号照片：</label>
+
+                        <div class="col-sm-6 upload-con">
+                            <!--展示图片-->
+                            <div class="new-photo-con" ng-show="new.licenceImg != ''">
+                                <img id="newLicenceImg" ng-click="viewImg(new.licenceImg)" class="new-photo" ng-src="{{new.licenceImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                            </div>
+                            <!-- 上传按钮 -->
+                            <div class="upload-btn-con">
+                                <button class="btn btn-primary upload-btn">上传</button>
+                                <input onchange="angular.element(this).scope().new.uploadImage('new2')" ng-model="new.licenceImg" name="newLicenceImg" class="form-control new-photo" type="file" accept="image/*" required>
+                            </div>
+                            <button ng-click="photoDelete('newLicenceImg')" class="btn btn-default delete-btn" type="button">删除</button>
+
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newLicenceImg.$touched">
+                                <div ng-show="form.newLicenceImg.$error.required" class="wrong-tip">请上传烟草专卖证号照片</div>
+                            </div>
                         </div>
                     </div>
 
@@ -852,30 +930,13 @@
         </div>
     </div>
 
-
-
-    <!-- 详情查看大图 -->
+    <!-- 查看大图 -->
     <div class="modal fade bs-example-modal-lg img-modal" tabindex="-1" role="dialog" aria-labelledby="">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <div class="modal-body">
-                    <img class="big-photo" ng-src="{{info.licenceImg}}" alt="" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 新增查看大图 -->
-    <div class="modal fade bs-example-modal-lg new-img-modal" tabindex="-1" role="dialog" aria-labelledby="">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                <div class="modal-body">
-                    <img class="big-photo" ng-src="{{new.licenceImg}}" alt="" />
+                    <img class="big-photo" ng-src="{{bigImg}}" alt="" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>

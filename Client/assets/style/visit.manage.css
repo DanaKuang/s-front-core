@@ -106,9 +106,6 @@
   float: left;
   font-size: 12px; }
 
-.manage-new .upload-con {
-  margin-top: 2px; }
-
 .manage-new .upload-btn-con {
   width: 52px;
   height: 34px;
@@ -140,8 +137,8 @@
   margin-bottom: 10px; }
 
 .manage-new .new-photo {
-  width: 124px;
-  height: 124px; }
+  width: 125px;
+  display: block; }
 
 .manage-new .new-location .col-sm-10 {
   width: 300px;
@@ -163,15 +160,15 @@
   #newAlert .close {
     top: -11px; }
 
-.img-modal .big-photo, .new-img-modal .big-photo {
+.img-modal .big-photo {
   width: 100%;
   display: block;
   margin: 0 auto; }
 
-.img-modal .modal-footer, .new-img-modal .modal-footer {
+.img-modal .modal-footer {
   text-align: center; }
 
-.img-modal.in .modal-dialog, .new-img-modal.in .modal-dialog {
+.img-modal.in .modal-dialog {
   transform: translateY(0%);
   top: 100px;
   margin-bottom: 100px; }
@@ -209,7 +206,7 @@
   overflow: hidden; }
 
 .detial-info li {
-  width: 315px;
+  width: 305px;
   line-height: 34px;
   font-size: 12px;
   float: left;
@@ -225,7 +222,7 @@
     .detial-info li .title i {
       color: #f00; }
   .detial-info li .value {
-    width: 200px;
+    width: 190px;
     float: left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -255,6 +252,14 @@
 
 .detial-info .status input {
   margin-right: 5px; }
+
+.detial-info .authStatus i {
+  color: #f00;
+  float: left;
+  margin-right: 5px; }
+
+.detial-info .authStatus .form-control {
+  width: 208px; }
 
 .detial-info .btn-con {
   margin-left: 115px; }
