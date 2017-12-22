@@ -159,13 +159,18 @@ define([], function () {
           // });
         };
 
-        var sortData = convertData(data.sort(function (a, b) {
-            return b.scantimes - a.scantimes;
+        var top0_30 = convertData(data.filter(function (a) {
+            return a.type === '1';
         }));
-
-        var top0_30 = sortData.slice(0, 30);
-        var top30_60 = sortData.slice(30, 60);
-        var top60_90 = sortData.slice(60, 90);
+        var top30_60 = convertData(data.filter(function (a) {
+            return a.type === '2';
+        }));
+        var top60_90 = convertData(data.filter(function (a) {
+            return a.type === '3';
+        }));
+        var top90_ = convertData(data.filter(function (a) {
+            return a.type === '4';
+        }));
 
         // var symbolSize = function (val) {
         //     return 15;
@@ -176,7 +181,7 @@ define([], function () {
             return params.name + '扫码量: ' + params.value[2] + '次';
         }
         // 所有点
-        option.series[0].data = sortData;
+        option.series[0].data = top90_;
         // option.series[0].symbolSize = symbolSize
 
         // top 60-90点
