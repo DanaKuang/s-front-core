@@ -15,6 +15,7 @@
 
 .location .form-control {
   width: 30%;
+  float: left;
   margin-right: 2%; }
 
 .keywords select {
@@ -163,10 +164,19 @@ td.batch {
   font-size: 12px;
 }
 tr {
-  .shop-name {
-    width: 100px;
+  td>div {
     margin: 0 auto;
   }
+  .oper-btn-wrap {
+    width: 60px;
+  }
+  .shop-name {
+    width: 100px;
+  }
+}
+
+.modal-body {
+  margin-bottom: 10px;
 }
 
 // 验证

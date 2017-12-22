@@ -10,9 +10,15 @@
 .form-horizontal .form-control {
   width: 100%; }
 
+.form-horizontal .form-group {
+  margin: 0 auto; }
+
 .location .form-control {
   width: 30%;
-  margin-right: 2%; }
+  float: left; }
+
+.location #cityId {
+  margin: 0 5%; }
 
 .keywords select {
   width: 40% !important;
@@ -39,18 +45,15 @@
   width: 110px;
   margin-left: -1px; }
 
+.print .form-control {
+  width: 262px; }
+
 .panel-body {
   padding: 15px;
   position: relative; }
 
-.search-btn-con {
-  width: 90px;
-  position: absolute;
-  top: 45px;
-  right: 0; }
-
 .search-btn-con .reset {
-  margin-top: 10px; }
+  margin-left: 20px; }
 
 .btn.btn-primary {
   width: auto;
@@ -108,14 +111,14 @@
 
 .manage-new .upload-btn-con {
   width: 52px;
-  height: 30px;
+  height: 34px;
   float: left;
   margin-right: 20px;
   overflow: hidden;
   position: relative; }
   .manage-new .upload-btn-con .new-photo {
     width: 100%;
-    height: 30px;
+    height: 34px;
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -125,14 +128,15 @@
 
 .manage-new .upload-btn, .manage-new .delete-btn {
   width: 52px;
-  height: 30px;
+  height: 34px;
   float: left;
-  line-height: 18px; }
+  line-height: 22px; }
 
 .manage-new .col-sm-8 {
   padding: 0; }
 
 .manage-new .new-photo-con {
+  cursor: pointer;
   margin-bottom: 10px; }
 
 .manage-new .new-photo {
@@ -158,6 +162,19 @@
   display: none; }
   #newAlert .close {
     top: -11px; }
+
+.img-modal .big-photo, .new-img-modal .big-photo {
+  width: 100%;
+  display: block;
+  margin: 0 auto; }
+
+.img-modal .modal-footer, .new-img-modal .modal-footer {
+  text-align: center; }
+
+.img-modal.in .modal-dialog, .new-img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px; }
 
 .operate-btn {
   color: #3379b7;

@@ -146,7 +146,7 @@ define([], function () {
 
       // 重置
       $scope.reset = function () {
-        $scope.vm = {
+        var data = {
           brand: [], // 品牌编码
           spec: [], // 规格
           actType: '', // 类型
@@ -156,6 +156,9 @@ define([], function () {
           pageNo: 1,
           pageSize: 10
         }
+        // 获取到的数据放入vm里
+        $scope.vm = Object.assign({}, $scope.vm, data);
+
         $('#brand').multiselect('refresh');
         $('#spec').multiselect('refresh');
         getList(1, true);
@@ -305,7 +308,7 @@ define([], function () {
 
       // detial 重置
       $scope.detial.reset = function () {
-        $scope.detial = {
+        var data = {
           settingId: $scope.detial.settingId,
           shopName: '',
           startTime: '',
@@ -316,6 +319,9 @@ define([], function () {
           pageNo: 1,
           pageSize: 10
         }
+        // 获取到的数据放入detial里
+        $scope.detial = Object.assign({}, $scope.detial, data);
+
         getDetialInfoList(1, true);
 
         $scope.detial.startTime = '';

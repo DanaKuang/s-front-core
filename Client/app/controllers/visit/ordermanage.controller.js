@@ -64,7 +64,7 @@ define([], function () {
 
       // 重置
       $scope.reset = function () {
-        $scope.vm = {
+        var data = {
           status: '',
           searchType: 1, // 关键词类型
           keywords: '',
@@ -73,6 +73,9 @@ define([], function () {
           pageNo: 1,
           pageSize: 10
         }
+        // 获取到的数据放入vm里
+        $scope.vm = Object.assign({}, $scope.vm, data);
+
         $('#brand').multiselect('refresh');
         $('#spec').multiselect('refresh');
         $('#region').multiselect('refresh');

@@ -30,7 +30,7 @@
                                 <div ng-show="vm.currentPage == 'index'" role="tabpanel" class="tab-pane active panel-body">
                                     <form class="form-horizontal form-inline">
                                         <div class="form-group col-sm-4">
-                                            <label for="status" class="control-label col-sm-4">审核状态</label>
+                                            <label for="status" class="control-label col-sm-4">状态</label>
                                             <div class="col-sm-8">
                                                 <select ng-model="vm.status" id="status" class="form-control">
                                                     <option value="">状态</option>
@@ -114,13 +114,11 @@
 
                                         <div class="form-group col-sm-5 print">
                                             <label class="control-label col-sm-2">是否打印店码</label>
-                                            <div class="col-sm-8">
-                                                <select class="form-control" ng-model="vm.isPrint">
-                                                    <option value="" selected>全部</option>
-                                                    <option value="0">是</option>
-                                                    <option value="1">否</option>
-                                                </select>
-                                            </div>
+                                            <select class="form-control" ng-model="vm.isPrint">
+                                                <option value="" selected>全部</option>
+                                                <option value="1">是</option>
+                                                <option value="0">否</option>
+                                            </select>
                                         </div>
 
                                         <div class="search-btn-con">
@@ -282,7 +280,7 @@
 
                                                         <!--展示图片-->
                                                         <div class="new-photo-con">
-                                                            <img class="new-photo" ng-src="{{info.licenceImg}}" alt="" />
+                                                            <img data-toggle="modal" data-target=".img-modal" class="new-photo" ng-src="{{info.licenceImg}}" alt="" />
                                                         </div>
 
                                                         <div class="info-btn-con" ng-if="info.isEdit">
@@ -325,7 +323,7 @@
                                                     <li class="row">
                                                         <label>
                                                             <span class="title"><i>*</i>位置：</span>
-                                                            <span ng-if="!info.isEdit" class="value">{{info.addrProvinceName + '-' + info.addrCityName + '-' + info.addrAreaNmae}}</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.addrProvinceName + '-' + info.addrCityName + '-' + info.addrAreaName}}</span>
 
                                                             <div class="location" ng-show="info.isEdit" class="col-sm-10">
                                                                 <select name="infoProvince" id="infoProvince" ng-model="info.addrProvince" ng-change="info.provinceChage()" class="form-control" required>
@@ -691,14 +689,14 @@
                         <div class="col-sm-6 upload-con">
                             <!--展示图片-->
                             <div class="new-photo-con" ng-show="new.licenceImg != ''">
-                                <img class="new-photo" ng-src="{{new.licenceImg}}" alt="" />
+                                <img data-toggle="modal" data-target=".new-img-modal" class="new-photo" ng-src="{{new.licenceImg}}" alt="" />
                             </div>
                             <!-- 上传按钮 -->
                             <div class="upload-btn-con">
                                 <button class="btn btn-primary upload-btn">上传</button>
                                 <input onchange="angular.element(this).scope().new.uploadImage()" ng-model="new.licenceImg" id="newImgUpload" name="newPhoto" class="form-control new-photo" type="file" accept="image/*" required>
                             </div>
-                            <button ng-click="new.newPhotoDelete()" class="btn btn-primary delete-btn">删除</button>
+                            <button ng-click="new.newPhotoDelete()" class="btn btn-default delete-btn" type="button">删除</button>
 
                             <!--验证-->
                             <div ng-show="form.$submitted || form.newPhoto.$touched">
@@ -853,6 +851,39 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- 详情查看大图 -->
+    <div class="modal fade bs-example-modal-lg img-modal" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <img class="big-photo" ng-src="{{info.licenceImg}}" alt="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增查看大图 -->
+    <div class="modal fade bs-example-modal-lg new-img-modal" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <img class="big-photo" ng-src="{{new.licenceImg}}" alt="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- 上下架 -->
     <div class="modal fade bs-example-modal-sm shelf-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">

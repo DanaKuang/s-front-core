@@ -12,6 +12,7 @@
 
 .location .form-control {
   width: 30%;
+  float: left;
   margin-right: 2%; }
 
 .keywords select {
@@ -132,9 +133,17 @@ td.batch label {
 .table tr th, .table tr td {
   font-size: 12px; }
 
-tr .shop-name {
-  width: 100px;
+tr td > div {
   margin: 0 auto; }
+
+tr .oper-btn-wrap {
+  width: 60px; }
+
+tr .shop-name {
+  width: 100px; }
+
+.modal-body {
+  margin-bottom: 10px; }
 
 .wrong-tip {
   color: #f00;
