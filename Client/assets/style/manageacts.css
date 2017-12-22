@@ -44,7 +44,7 @@
 .create-activity-modal .flex-item p {
 	position: absolute;
 	left: 50%;
-	bottom: -30px;
+	bottom: -22px;
 	width: 100%;
 	-webkit-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
