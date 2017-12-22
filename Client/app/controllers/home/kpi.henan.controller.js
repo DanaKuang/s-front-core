@@ -168,9 +168,7 @@ define([], function () {
         var top60_90 = convertData(data.filter(function (a) {
             return a.type === '3';
         }));
-        var top90_ = convertData(data.filter(function (a) {
-            return a.type === '4';
-        }));
+        var top90_ = convertData(data);
 
         // var symbolSize = function (val) {
         //     return 15;
@@ -196,20 +194,26 @@ define([], function () {
         myChart.setOption(option);
 
         function getMapData () {
+          // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
-            var option = myChart.getOption();
-            sortData = convertData(data.sort(function (a, b) {
-                return b.scantimes - a.scantimes;
-            }));
-            top0_30 = sortData.slice(0, 30);
-            top30_60 = sortData.slice(30, 60);
-            top60_90 = sortData.slice(60, 90);
-            option.series[0].data = sortData;
-            option.series[1].data = top60_90;
-            option.series[2].data = top30_60;
-            option.series[3].data = top0_30;
-            myChart.setOption(option);
+            myChart.setOption({
+              series: [{
+                data: convertData(data)
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '3';
+                }))
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '2';
+                }))
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '1';
+                }))
+              }]
+            });
           });
         }
         getMapData();
