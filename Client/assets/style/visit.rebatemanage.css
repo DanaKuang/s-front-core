@@ -46,15 +46,12 @@
   line-height: 34px;
   text-align: center; }
 
-.panel-body {
-  padding: 15px;
-  position: relative; }
-
-.search-btn-con .btn {
-  float: left; }
-
-.search-btn-con .reset {
-  margin-left: 30px; }
+.search-btn-con {
+  margin-left: 152px; }
+  .search-btn-con .btn {
+    float: left; }
+  .search-btn-con .reset {
+    margin-left: 30px; }
 
 .rebate-modal input {
   width: 90%;
@@ -91,25 +88,31 @@ td.batch label {
   #newAlert .close {
     top: -11px; }
 
-.operate-btn {
-  color: #3379b7;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 5px; }
+.panel-body {
+  padding: 15px;
+  position: relative; }
+
+.scroll-con {
+  overflow-x: auto; }
 
 .table tr th, .table tr td {
-  font-size: 12px; }
+  font-size: 12px;
+  white-space: nowrap; }
 
-tr td > div {
+.table tr td > div {
   margin: 0 auto; }
 
-tr .activity-name {
-  width: 150px; }
+.table tr .oper-btn-wrap {
+  width: 100px; }
+  .table tr .oper-btn-wrap .operate-btn {
+    color: #3379b7;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 7px; }
+    .table tr .oper-btn-wrap .operate-btn:hover {
+      text-decoration: underline; }
 
-tr .time {
-  width: 135px; }
-
-tr .ad-names {
+.table tr .ad-names {
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;

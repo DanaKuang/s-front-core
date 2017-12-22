@@ -60,14 +60,8 @@
   }
 }
 
-
-
-.panel-body {
-  padding: 15px;
-  position: relative;
-}
-
 .search-btn-con {
+  margin-left: 64px;
   .btn {
     float: left;
   }
@@ -112,13 +106,6 @@
   }
 }
 
-// 管理列表
-.operate-btn {
-  color: #3379b7;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 5px;
-}
 
 // 仅显示店码订单
 .store-code {
@@ -159,24 +146,44 @@
 }
 
 
-// 表格
-.table tr th, .table tr td {
-  font-size: 12px;
+.panel-body {
+  padding: 15px;
+  position: relative;
 }
-tr {
-  td>div {
-    margin: 0 auto;
-  }
-  .oper-btn-wrap {
-    width: 60px;
-  }
-  .activity-name {
-    width: 150px;
-  }
-  .time {
-    width: 75px;
-  }
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
 
+    .oper-btn-wrap {
+      width: 100px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    //.activity-name {
+    //  width: 150px;
+    //}
+    //.time {
+    //  width: 75px;
+    //}
+  }
 }
 
 // 验证

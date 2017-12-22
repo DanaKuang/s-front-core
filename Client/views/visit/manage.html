@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                     <!--title-->
                     <div class="ui-panel-title manage">
-                        <button ng-click="newRetailerClick($event)" class="btn btn-primary btn-lg new-retailer-btn">+新建零售户</button>
+                        <button ng-if="fromPage != 'reviewManage'" ng-click="newRetailerClick($event)" class="btn btn-primary btn-lg new-retailer-btn">+新建零售户</button>
                         <div ng-show="vm.currentPage == 'index'"><i class="manage"></i><span>零售户管理</span></div>
                         <div ng-show="vm.currentPage == 'detial'"><i class="manage"></i><span>零售户详情</span></div>
                     </div>
@@ -36,6 +36,7 @@
                                                     <option value="">状态</option>
                                                     <option value="1">上架</option>
                                                     <option value="0">下架</option>
+                                                    <option value="4">待激活</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -129,7 +130,7 @@
                                 </div>
 
                                 <!-- table -->
-                                <div class="panel-body">
+                                <div class="panel-body scroll-con">
                                     <!-- 排序 -->
                                     <div ng-show="vm.currentPage == 'index'" class="sort-btn-con">
                                         <button ng-click="sortBy(1)" class="btn btn-primary">按入驻时间排序</button>
@@ -183,7 +184,7 @@
                                                 <td>{{item.commercialName}}</td>
                                                 <td>{{item.contactName}}</td>
                                                 <td>{{item.contactPhone}}</td>
-                                                <td>{{item.salesManNames}}</td>
+                                                <td><div class="sales-manNames">{{item.salesManNames}}</div></td>
 
                                                 <td>{{item.score}}</td>
                                                 <td><div class="time">{{item.authPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</div></td>
@@ -193,12 +194,11 @@
 
                                                 <td>{{item.fansCount}}</td>
                                                 <td>¥{{item.wallet.balance}}</td>
-                                                <td>{{item.authOrg.status == 1 ? '上架中' : '下架中'}}</td>
+
+                                                <td>{{item.authStatus == 4 ? '待激活' : (item.authOrg.status == 1 ? '上架中' : '下架中') }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
-
-
 
                                     <!-- 详情 -->
                                     <div ng-show="vm.currentPage == 'detial'">
@@ -476,10 +476,10 @@
 
                                                     <li ng-if="fromPage != 'reviewManage'" class="row status">
                                                         <span class="title"><i>*</i>状态：</span>
-                                                        <span ng-if="!info.isEdit" class="value">{{info.status == 1 ? '上架中' : (info.status == 0 ? '下架中' : '')}}</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.authOrg.status == 1 ? '上架中' : (info.authOrg.status == 0 ? '下架中' : '')}}</span>
 
-                                                        <label ng-if="info.isEdit"><input ng-model="info.status" ng-value="1" type="radio" name="infoUpDown" required/>上架</label>
-                                                        <label ng-if="info.isEdit"><input ng-model="info.status" ng-value="0" type="radio" name="infoUpDown" required/>下架</label>
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authOrg.status" ng-value="1" type="radio" name="infoUpDown" required/>上架</label>
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authOrg.status" ng-value="0" type="radio" name="infoUpDown" required/>下架</label>
                                                         <!--验证-->
                                                         <div ng-show="infoForm.$submitted || infoForm.infoUpDown.$touched">
                                                             <div ng-show="infoForm.infoUpDown.$error.required" class="wrong-tip">请选择状态</div>
@@ -489,20 +489,20 @@
                                                     <!-- 审核管理状态 -->
                                                     <li ng-if="fromPage == 'reviewManage'" class="row status">
                                                         <span class="title"><i>*</i>审核状态：</span>
-                                                        <span ng-if="!info.isEdit" class="value">{{info.authStatus == 2 ? '审核通过' : (info.status == 3 ? '审核不通过' : '')}}</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.authStatus == 2 ? '审核通过' : (info.authStatus == 3 ? '审核不通过，原因：' + info.failReason : '- -')}}</span>
 
                                                         <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="2" type="radio" name="infoAuthStatus" required/>审核通过</label>
                                                         <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="3" type="radio" name="infoAuthStatus" required/>审核不通过</label>
-                                                        <div ng-if="info.authStatus == 3" class="authStatus">
-                                                            <i>*</i><input name="authRejectDesc" ng-model="info.authRejectDesc" class="form-control" ng-if="info.isEdit" type="text" placeholder="请输入不通过理由" required>
+                                                        <div ng-if="info.authStatus == 3 && info.isEdit" class="authStatus">
+                                                            <i>*</i><input name="failReason" ng-model="info.failReason" class="form-control" type="text" placeholder="请输入不通过理由" required>
                                                         </div>
                                                         <!--验证-->
                                                         <div ng-show="infoForm.$submitted || infoForm.infoAuthStatus.$touched">
                                                             <div ng-show="infoForm.infoAuthStatus.$error.required" class="wrong-tip">请选择审核通过</div>
                                                         </div>
                                                         <!--验证-->
-                                                        <div ng-show="infoForm.$submitted || infoForm.authRejectDesc.$touched">
-                                                            <div ng-show="infoForm.authRejectDesc.$error.required" class="wrong-tip">请输入不通过理由</div>
+                                                        <div ng-show="infoForm.$submitted || infoForm.failReason.$touched">
+                                                            <div ng-show="infoForm.failReason.$error.required" class="wrong-tip">请输入不通过理由</div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -827,7 +827,7 @@
                         <input id="newLicense" name="newLicense" ng-model="new.licenceNo" class="form-control" type="text" ng-pattern="/^\d{12}$/" required>
                         <!--验证-->
                         <div ng-show="form.$submitted || form.newLicense.$touched">
-                            <div ng-show="form.newLicense.$error.required || form.licenceNo.$invalid" class="wrong-tip">请输入12位数字的烟草专卖证号</div>
+                            <div ng-show="form.newLicense.$error.required || form.newLicense.$invalid" class="wrong-tip">请输入12位数字的烟草专卖证号</div>
                         </div>
                     </div>
 

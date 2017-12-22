@@ -113,10 +113,11 @@ define([], function () {
 
           // 获取地区
           $model.getTierArea({parentCode: ''}).then(function (res) {
-            var areaData = [];
-            var regionList = res.data.data.datas;
-            if (regionList.length != 0) {
-              regionList.forEach(function (n ,index) {
+            $scope.areaData = [];
+            $scope.regionList = res.data.data.datas;
+
+            if ($scope.regionList.length != 0) {
+              $scope.regionList.forEach(function (n ,index) {
                 var group = {
                   label: n.shortName,
                   value: n.code,
@@ -132,8 +133,8 @@ define([], function () {
                       })
                     })
                   }
-                  areaData.push(group);
-                  $('#region').multiselect('dataprovider', areaData);
+                  $scope.areaData.push(group);
+                  $('#region').multiselect('dataprovider', $scope.areaData);
                 })
               })
             }
@@ -161,6 +162,7 @@ define([], function () {
               brand: [], // 品牌编码
               spec: [], // 规格
               region: [], // 地域编码
+              areaData: [],
               actType: '', // 类型
               actStatus: '',  // 状态
               keywords: '', // 关键词
@@ -171,10 +173,27 @@ define([], function () {
             }
             // 获取到的数据放入vm里
             $scope.vm = Object.assign({}, $scope.vm, data);
+            console.log($scope.vm)
 
-            $('#brand').multiselect('refresh');
-            $('#spec').multiselect('refresh');
-            $('#region').multiselect('refresh');
+            console.log($scope.vm.brand)
+            // debugger
+            $('#brand').multiselect('deselect', $scope.brandList.map(function (d) {
+              return d.value;
+            }));
+
+            $('#spec').multiselect('deselect', $scope.specList.map(function (d) {
+              return d.value;
+            }));
+
+            $('#region').multiselect('deselect', $scope.areaData.map(function (d) {
+              return d.value;
+            }));
+            $('#brand, #spec, #region').multiselect('refresh');
+            $scope.vm.brand = [];
+            $scope.vm.spec = [];
+            $scope.vm.region = [];
+
+            $('#brand, #spec, #region').multiselect('refresh');
             getList(1, true);
           }
 

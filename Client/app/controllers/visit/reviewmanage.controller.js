@@ -46,7 +46,8 @@ define([], function () {
               sortType: $scope.vm.sortType || 1,
               sortValue: $scope.vm.sortValue,
               pageNo: page || 1,
-              pageSize: 10
+              pageSize: 10,
+              isAuthMgr: 1
             };
 
             // 根据关键词搜索条件，传不同数据

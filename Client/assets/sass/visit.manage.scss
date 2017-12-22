@@ -60,15 +60,12 @@
   }
 }
 
-.panel-body {
-  padding: 15px;
-  position: relative; }
-
 .search-btn-con {
+  float: right;
+  margin-right: 34px;
   .reset {
     margin-left: 20px;
   }
-
 }
 
 .btn.btn-primary {
@@ -213,15 +210,6 @@
   transform: translateY(0%);
   top: 100px;
   margin-bottom: 100px;
-}
-
-
-// 管理列表
-.operate-btn {
-  color: #3379b7;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 5px;
 }
 
 
@@ -394,24 +382,48 @@
 // 详情 end
 
 
-// 表格
-.table tr th, .table tr td {
-  font-size: 12px;
+.panel-body {
+  padding: 15px;
+  position: relative;
 }
-tr {
-  td > div {
-    margin: 0 auto;
-  }
-  .oper-btn-wrap {
-    width: 60px;
-  }
-  .shop-name {
-    width: 70px;
-  }
-  .time {
-    width: 72px;
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 100px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.shop-name {
+    //  width: 70px;
+    //}
+    //.time {
+    //  width: 72px;
+    //}
+    //.sales-manNames {
+    //  width: 150px;
+    //}
   }
 }
+
 
 // 验证
 .wrong-tip {
