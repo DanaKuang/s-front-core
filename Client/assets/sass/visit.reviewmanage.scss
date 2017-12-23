@@ -41,9 +41,6 @@
   line-height: 34px;
   text-align: center; }
 
-.panel-body {
-  padding: 15px;
-  position: relative; }
 
 .search-btn-con {
   .btn {
@@ -151,27 +148,39 @@ td.batch {
   }
 }
 
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+.scroll-con {
+  overflow-x: auto;
+}
 // 管理列表
-.operate-btn {
-  color: #3379b7;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 5px;
-}
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
 
-// 表格
-.table tr th, .table tr td {
-  font-size: 12px;
-}
-tr {
-  td>div {
-    margin: 0 auto;
-  }
-  .oper-btn-wrap {
-    width: 60px;
-  }
-  .shop-name {
-    width: 100px;
+    .oper-btn-wrap {
+      width: 220px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.shop-name {
+    //  width: 100px;
+    //}
   }
 }
 

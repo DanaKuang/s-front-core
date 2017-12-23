@@ -55,13 +55,8 @@
 }
 
 
-
-.panel-body {
-  padding: 15px;
-  position: relative;
-}
-
 .search-btn-con {
+  margin-left: 152px;
   .btn {
     float: left;
   }
@@ -117,33 +112,49 @@ td.batch {
   }
 }
 
-// 管理列表
-.operate-btn {
-  color: #3379b7;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 5px;
-}
 
-// 表格
-.table tr th, .table tr td {
-  font-size: 12px;
+.panel-body {
+  padding: 15px;
+  position: relative;
 }
-tr {
-  td>div {
-    margin: 0 auto;
-  }
-  .activity-name {
-    width: 150px;
-  }
-  .time {
-    width: 135px;
-  }
-  .ad-names {
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 100px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.activity-name {
+    //  width: 150px;
+    //}
+    //.time {
+    //  width: 135px;
+    //}
+    .ad-names {
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
