@@ -35,7 +35,9 @@ define([], function () {
         o = Number(o); v = Number(v);
         result = o + v;
         if (result > 10000) {
-            result = ''+Math.round(result/10000)+'万';
+            result = Math.round(result/1000);
+            result /= 10;
+            result += "万";
         }
         return result;
       }
