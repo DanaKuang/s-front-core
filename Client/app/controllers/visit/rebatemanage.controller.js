@@ -173,21 +173,20 @@ define([], function () {
             }
             // 获取到的数据放入vm里
             $scope.vm = Object.assign({}, $scope.vm, data);
-            console.log($scope.vm)
 
-            console.log($scope.vm.brand)
             // debugger
-            $('#brand').multiselect('deselect', $scope.brandList.map(function (d) {
-              return d.value;
-            }));
-
-            $('#spec').multiselect('deselect', $scope.specList.map(function (d) {
-              return d.value;
-            }));
-
-            $('#region').multiselect('deselect', $scope.areaData.map(function (d) {
-              return d.value;
-            }));
+            // $('#brand').multiselect('deselect', $scope.brandList.map(function (d) {
+            //   return d.value;
+            // }));
+            //
+            // $('#spec').multiselect('deselect', $scope.specList.map(function (d) {
+            //   return d.value;
+            // }));
+            //
+            // $('#region').multiselect('deselect', $scope.areaData.map(function (d) {
+            //   return d.value;
+            // }));
+            $('#brand, #spec, #region').val(''); // 点击第二次才能清空，这里用jQuery去做一下。。
             $('#brand, #spec, #region').multiselect('refresh');
             $scope.vm.brand = [];
             $scope.vm.spec = [];

@@ -13,7 +13,7 @@ define([], function () {
 
           // 初始化一个对象，vm
           $scope.vm = {
-            status: '', // 状态
+            status: 1, // 状态，默认选择上架中
             commercial: '', // 业态
             district: '', // 区域
             searchType: 3, // 关键词类型
@@ -89,7 +89,7 @@ define([], function () {
             if($scope.vm.status == '4') {
               data.authStatus = $scope.vm.status || ''; // 审核状态
             } else {
-              data.status = $scope.vm.status || ''; // 状态
+              data.status = $scope.vm.status || 1; // 状态
             }
 
             // 根据关键词搜索条件，传不同数据
@@ -201,7 +201,7 @@ define([], function () {
           // 重置
           $scope.reset = function () {
             var data = {
-              status: '', // 状态
+              status: 1, // 状态
               commercial: '', // 业态
               district: '', // 区域
               searchType: 3, // 关键词类型
