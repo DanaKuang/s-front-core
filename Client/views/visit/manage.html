@@ -507,10 +507,10 @@
                                                 </ul>
 
                                                 <div class="btn-con">
-                                                    <button ng-if="info.isEdit == false" ng-click="info.edit()" class="btn btn-primary">修改基本信息</button>
+                                                    <button ng-if="info.isEdit == false" ng-click="info.edit()" class="btn btn-primary" type="button">修改基本信息</button>
                                                     <button ng-if="info.isEdit == true" ng-click="info.save('edit')" type="submit" class="btn btn-primary">保存</button>
-                                                    <button ng-if="info.isEdit == true" ng-click="info.cancel()" class="btn btn-primary">取消</button>
-                                                    <button ng-click="info.back()" class="btn btn-primary">返回列表</button>
+                                                    <button ng-if="info.isEdit == true" ng-click="info.cancel()" class="btn btn-primary" type="button">取消</button>
+                                                    <button ng-click="info.back()" class="btn btn-primary" type="button">返回列表</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -701,7 +701,7 @@
                                 <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
                             </div>
 
-                            <button ng-show="vm.currentPage == 'detial' && detial.detialPage != 'info'" ng-click="info.back()" class="btn btn-primary detial-back">返回列表</button>
+                            <button ng-show="vm.currentPage == 'detial' && detial.detialPage != 'info'" ng-click="info.back()" class="btn btn-primary detial-back" type="button">返回列表</button>
                         </div>
                     </div>
                 </div>

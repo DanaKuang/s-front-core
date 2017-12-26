@@ -97,6 +97,11 @@ define([], function () {
           $model.orderGetList = function (data) {
             return request.$Search(ORDER_GET_LIST, data)
           }
+          // 详情
+          var ORDER_GET_DETIAL = '/api/tztx/seller-manager/order/queryDetailByOrderid';
+          $model.queryDetailByOrderid = function (data) {
+            return request.$Search(ORDER_GET_DETIAL, data)
+          }
           // 导出
           var ORDER_EXPORT = '/api/tztx/seller-manager/order/exportOrders';
           $model.exportOrders = function (data) {
@@ -157,16 +162,10 @@ define([], function () {
             return request.$Search(REBATE_GET_SPEC, data, true)
           }
           // 地区
-          var GET_TIER_AREA = '/api/tztx/saas/admin/user/queryRightRegion';
-          $model.getTierArea = function (data) {
-            return request.$Search(GET_TIER_AREA, data);
-          }
-          // 地区2
-          var GET_TIER_AREA = '/api/tztx/seller-manager/region/queryAllRegion';
+          var GET_ALL_REGION = '/api/tztx/seller-manager/region/queryAllRegion';
           $model.queryAllRegion = function (data) {
-            return request.$Search(GET_TIER_AREA, data);
+            return request.$Search(GET_ALL_REGION, data);
           }
-
           // 活动类型
           var REBATE_GET_ACT_TYPE = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
           $model.rebateGetActType = function (data) {

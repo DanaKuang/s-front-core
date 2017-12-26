@@ -72,27 +72,6 @@
 }
 
 
-// 审核弹窗
-.rebate-modal {
-  input {
-    width: 90%;
-    display: inline-block;
-    margin-right: 5px;
-  }
-  .modal-footer {
-    text-align: center;
-  }
-  .btn {
-    display: inline-block;
-  }
-  .wrong-tip {
-    font-size: 12px;
-    line-height: 1;
-    margin-top: 5px;
-  }
-}
-
-
 // 提示
 #newAlert {
   width: 250px;
@@ -124,7 +103,7 @@
   }
 }
 
-.btn-con {
+.upload-btn-con {
   float: right;
   .btn {
     float: left;
@@ -185,6 +164,108 @@
     //  width: 75px;
     //}
   }
+}
+
+// 详情
+.order-detial {
+  h3 {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  ul {
+    overflow: hidden;
+  }
+
+  li {
+    width: 305px;
+    line-height: 34px;
+    font-size: 12px;
+    float: left;
+    margin: 0 15px 10px 0;
+    &.photo {
+      width: 100%;
+      img {
+        display: block;
+        width: 150px;
+        height: auto;
+      }
+    }
+
+    label {
+      float: left;
+      font-weight: normal;
+      margin-bottom: 0px;
+    }
+    .title {
+      width: 115px;
+      float: left;
+      font-weight: bold;
+      text-align: right;
+      i {
+        color: #f00;
+      }
+    }
+    .value {
+      width: 190px;
+      float: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .form-control {
+      width: 200px;
+      float: left;
+      font-size: 12px;
+    }
+
+    .location {
+      overflow: hidden;
+      .form-control {
+        width: 120px;
+        margin-right: 15px;
+      }
+      input.form-control {
+        width: 150px;
+      }
+      .location-val {
+        width: 120px;
+        height: 34px;
+        float: left;
+        margin-right: 15px;
+      }
+      .wrong-tip {
+        width: 120px;
+        float: left;
+      }
+    }
+    .info-btn-con {
+      margin-left: 115px;
+    }
+  }
+
+  .row {
+    width: 100%;
+    margin-top: 10px;
+    .value, .form-control {
+      width: 400px;
+    }
+  }
+
+  .btn-con {
+    margin-left: 115px;
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+
+  .tracking {
+    p {
+      float: left;
+    }
+  }
+
 }
 
 // 验证

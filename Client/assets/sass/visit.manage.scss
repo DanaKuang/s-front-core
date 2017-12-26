@@ -266,6 +266,7 @@
     .title {
       width: 115px;
       float: left;
+      font-weight: bold;
       text-align: right;
       i {
         color: #f00;
@@ -300,6 +301,11 @@
     overflow: hidden;
     .form-control {
       width: 30%;
+      margin-right: 3%;
+    }
+    .wrong-tip {
+      width: 30%;
+      float: left;
       margin-right: 3%;
     }
   }
