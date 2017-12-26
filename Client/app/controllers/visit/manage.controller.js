@@ -277,6 +277,7 @@ define([], function () {
           // 查看点击
           $scope.viewManage = function(id) {
             $scope.info.sellerId = id;
+            backTop();
 
             // 图片src设置为空
             $('#infoHeadImg, #infoLicenceImg, #newHeadImg, #newLicenceImg').attr('src','');
@@ -353,6 +354,7 @@ define([], function () {
               $scope.vm.currentPage = 'index';
               $scope.paginationConf = $scope.indexPaginationConf;
             }
+            backTop();
           }
           // *** 基本信息 end
 
@@ -448,8 +450,20 @@ define([], function () {
                 pageNo: 1,
                 pageSize: 10
               }
+              $scope.detial.startTime = '';
+              $scope.detial.endTime = '';
+
               getDetialBillList(1, true);
             } else if($scope.detial.detialPage == 'storage') { // 入库明细
+              $scope.storage = {
+                sellerId: $scope.info.sellerId,
+                awardType: '', // 类型
+                pageNo: 1,
+                pageSize: 10
+              }
+              $scope.detial.startTime = '';
+              $scope.detial.endTime = '';
+
               getDetialStorageList(1, true);
             }
 
@@ -548,8 +562,8 @@ define([], function () {
             var data = {
               sellerId: $scope.info.sellerId,
               type: $scope.bill.type || '', // 流水类型
-              startTime: (new Date($scope.detial.startTime)).getTime() || '',
-              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
               pageNo: page || 1,
               pageSize: 10
             }
@@ -754,6 +768,7 @@ define([], function () {
                 if(res.data.ok) {
                   if(type == 'new') {
                     var typeInfo = '新建成功'
+                    $scope.vm.currentPage = 'index';
                   } else {
                     var typeInfo = '保存成功'
                   }
@@ -783,6 +798,7 @@ define([], function () {
 
           $scope.new.back = function() {
             $scope.vm.currentPage = 'index';
+            backTop();
           }
           // **** 新增结束
 
@@ -791,7 +807,12 @@ define([], function () {
           $scope.viewImg = function(img) {
             $scope.bigImg = img;
           }
-          
+
+
+          // 返回顶部
+          var backTop = function() {
+            $('.ui-view-container').scrollTop(0);
+          }
 
           // 门店照片上传
           $scope.new.uploadImage = function(e) {

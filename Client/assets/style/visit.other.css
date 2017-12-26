@@ -1,5 +1,7 @@
-.ui-panel-title.other {
-  margin: 20px 0 15px 0; }
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden; }
 
 .other-con ul {
   overflow: hidden; }

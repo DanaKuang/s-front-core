@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="statics/assets/style/visit.rebatemanage.css"/>
 
 <div ng-controller="visitRebateManageCtrl">
-    <div class="animated fadeInRightBig">
+    <div ng-show="vm.currentPage == 'index'" class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-manage-box">
                 <div class="col-md-12">
@@ -31,7 +31,7 @@
                                         <div class="form-group col-sm-4">
                                             <label for="brand" class="control-label">品牌：</label>
                                             <div class="col-sm-8">
-                                                <select ng-change="brandChage()" ng-model="vm.brand" id="brand" class="form-control select" multiple>
+                                                <select ng-change="brandChage(vm.brand, 'spec')" ng-model="vm.brand" id="brand" class="form-control select" multiple>
                                                     <option value="">全部</option>
                                                     <option ng-repeat="item in brandList" value="{{item.brandCode}}">{{item.name}}</option>
                                                 </select>
@@ -164,7 +164,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- 提示框 -->
     <div id="newAlert" class="alert alert-dismissible fade" role="alert">

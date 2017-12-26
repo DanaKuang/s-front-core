@@ -12,12 +12,13 @@
 <link rel="stylesheet" href="statics/assets/style/visit.storagemanage.css"/>
 
 <div ng-controller="visitStorageManageCtrl">
-    <div class="animated fadeInRightBig">
+    <div ng-show="vm.currentPage != 'new' && vm.currentPage != 'edit'" class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-manage-box">
                 <div class="col-md-12">
                     <!--title-->
                     <div class="ui-panel-title storagemanage">
+                        <button ng-show="vm.currentPage == 'index'" ng-click="newRetailerClick($event)" class="btn btn-primary btn-lg new-btn">新建商品入库奖励</button>
                         <div><span>扫码入库奖励管理</span></div>
                     </div>
 
@@ -85,7 +86,6 @@
                                     </form>
                                 </div>
 
-
                                 <div class="panel-body scroll-con">
                                     <!-- table -->
                                     <table ng-show="vm.currentPage == 'index'" class="table table-bordered table-hover">
@@ -114,7 +114,7 @@
                                             <td>
                                                 <div class="oper-btn-wrap">
                                                     <div class="operate-btn" ng-click="viewStorage(item.id, item.awardType)">查看详情</div>
-                                                    <div class="operate-btn" ng-click="newAndEditStorage(item.id, 'edit')">修改</div>
+                                                    <div class="operate-btn" ng-click="editStorage(item.id)">修改</div>
                                                     <div class="operate-btn" ng-if="item.status == 0" ng-click="setEnabled(item.id, 1)" data-toggle="modal" data-target=".storage-modal">启用</div>
                                                     <div class="operate-btn" ng-if="item.status == 1" ng-click="setEnabled(item.id, 0)" data-toggle="modal" data-target=".storage-modal">禁用</div>
                                                 </div>
@@ -230,6 +230,161 @@
 
                             <button ng-show="vm.currentPage == 'detial'" ng-click="detial.back()" class="btn btn-primary back-btn">返回列表</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 新增 -->
+    <div ng-show="vm.currentPage == 'new' || vm.currentPage == 'edit'" class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <!--title-->
+            <div class="ui-panel-title manage">
+                <div ng-if="vm.currentPage == 'new'"><i class="manage"></i><span>新建商品入库奖励</span></div>
+                <div ng-if="vm.currentPage == 'edit'"><i class="manage"></i><span>查看商品入库奖励</span></div>
+            </div>
+
+            <div class="panel-body panel rebate-new">
+                <form name="newForm" novalidate>
+                    <h3>产品信息</h3>
+                    <div class="form-group brand">
+                        <label for="newBrand" class="control-label col-sm-2"><i>*</i>品牌：</label>
+
+                        <div class="col-sm-6">
+                            <select ng-disabled="new.hadSave" name="newBrand" ng-change="brandChage(new.brand, 'newSpec', 'new')" ng-model="new.brand" id="newBrand" class="form-control select" multiple required>
+                                <option value="">全部</option>
+                                <option ng-repeat="item in new.brandList" value="{{item.brandCode}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted || newForm.newBrand.$touched">
+                            <div ng-show="newForm.newBrand.$error.required" class="wrong-tip">请选择品牌</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group spec">
+                        <label for="newSpec" class="control-label col-sm-2"><i>*</i>规格：</label>
+
+                        <div class="col-sm-6">
+                            <select ng-disabled="new.hadSave" name="newSpec" ng-model="new.spec" id="newSpec" class="form-control select" multiple required>
+                                <option value="">全部</option>
+                                <option ng-repeat="item in new.specList" value="{{item.brandCode}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted || newForm.newSpec.$touched">
+                            <div ng-show="newForm.newSpec.$error.required" class="wrong-tip">请选择规格</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group time">
+                        <label class="control-label"><i>*</i>有效时间：</label>
+
+                        <div class="col-sm-6">
+                            <input ng-disabled="new.hadSave" name="newStart" ng-model="new.stime" id="newStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间" required>
+                            <span class="to">至</span>
+                            <input ng-disabled="new.hadSave" name="newEnd" ng-model="new.etime" id="newEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间" required>
+                        </div>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted || newForm.newStart.$touched">
+                            <div ng-show="newForm.newStart.$error.required" class="wrong-tip">请选择开始时间</div>
+                        </div>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted || newForm.newEnd.$touched">
+                            <div ng-show="newForm.newEnd.$error.required" class="wrong-tip">请选择结束时间</div>
+                        </div>
+                    </div>
+
+                    <h3>奖品设置</h3>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i>*</i>奖品类型：</label>
+                        <p class="text">积分</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i>*</i>选择积分：</label>
+                        <button ng-disabled="new.hadSave" ng-click="chooseScore()" class="choose-btn" type="button">+选择积分池</button>
+                        <span ng-show="new.poolId && new.poolId != ''" class="show-chosen">（已选择：积分{{new.poolId}}）</span>
+                        <input name="newPoolId" type="text" ng-hide="true" ng-model="new.poolId" required>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted">
+                            <div ng-show="newForm.newPoolId.$error.required" class="wrong-tip">请选择积分</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newAward" class="control-label col-sm-2"><i>*</i>扫码奖励：</label>
+                        <div class="col-sm-6">
+                            <input id="newAward" name="newAward" ng-model="new.award" class="form-control" type="number" step="1" min="0" ng-pattern="/^[0-9]*$/" required>
+                        </div>
+                        <span class="unit">分／条</span>
+                        <!--验证-->
+                        <div class="wrong-tip-con" ng-show="newForm.$submitted || newForm.newAward.$touched">
+                            <div ng-show="newForm.newAward.$error.required || newForm.newAward.$invalid" class="wrong-tip">请输入数字格式的奖励</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newAwardNum" class="control-label col-sm-2"><i>*</i>奖品数量：</label>
+                        <div class="col-sm-6">
+                            <input id="newAwardNum" name="newAwardNum" ng-model="new.awardNum" class="form-control" type="number" step="1" min="0" ng-pattern="/^[0-9]*$/" required>
+                        </div>
+                        <!--验证-->
+                        <div ng-show="newForm.$submitted || newForm.newAwardNum.$touched">
+                            <div ng-show="newForm.newAwardNum.$error.required || newForm.newAwardNum.$invalid" class="wrong-tip">请输入数字格式的奖品数量</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-offset-2 btn-con">
+                        <button ng-click="new.save()" class="btn btn-primary" type="submit">保存</button>
+                        <button ng-click="new.back()" class="btn btn-primary" type="button">返回列表</button>
+                        <button ng-show="vm.currentPage != 'new'" ng-click="new.save('saveAndBack')" class="btn btn-primary" type="submit">保存并退出</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 积分池模板 -->
+    <div class="modal fade create-jfProduct-modal" tabindex="-1" role="dialog" aria-l+abelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">选择积分<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+
+                <div class="modal-body">
+                    <!-- 选择红包列表 -->
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr class="table-head">
+                            <th>积分ID</th>
+                            <th>积分池名</th>
+                            <th>积分池</th>
+                            <th>适用品牌</th>
+                            <th>适用规格</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(idx, item) in jfChooseList">
+                            <td>{{item.id}}</td>
+                            <th>{{item.name}}</th>
+                            <td>{{item.poolNum}}</td>
+                            <td>{{item.brandNames}}</td>
+                            <td>{{item.unitNames}}</td>
+                            <td class="choose" ng-click="new.choose(item.id)">选择</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="total-page">总共{{paginationjfInnerConf.data.page.count}}条记录<span ng-if="totalCount != 0">，当前页共{{paginationjfInnerConf.data.page.count < paginationjfInnerConf.data.page.pageSize ? paginationjfInnerConf.data.page.count : paginationjfInnerConf.data.page.pageSize}}条记录</span></div>
+
+                    <!-- 分页区 -->
+                    <div class="pagination-wrap">
+                        <!-- 分页指令 -->
+                        <sa-pagination conf="paginationjfInnerConf" class="pagination"></sa-pagination>
                     </div>
                 </div>
             </div>

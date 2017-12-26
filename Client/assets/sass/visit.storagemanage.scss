@@ -1,8 +1,12 @@
 @charset "UTF-8";
 
 .ui-panel-title {
-  margin-top: 30px;
-  margin-bottom: 10px;
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+  .new-btn {
+    float: right;
+  }
 }
 
 /*12.15零售户重构*/
@@ -119,6 +123,7 @@ td.batch {
 .scroll-con {
   overflow-x: auto;
 }
+
 // 管理列表
 .table {
   tr {
@@ -153,6 +158,107 @@ td.batch {
     //}
   }
 }
+
+// 新增
+.rebate-new {
+  h3 {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .form-group {
+    width: 100%;
+    float: left;
+    line-height: 34px;
+    .text {
+      color: #4a5ff5;
+      font-size: 14px;
+      font-weight: bold;
+      float: left;
+      margin-left: 15px;
+    }
+    .unit {
+      margin-left: 10px;
+    }
+  }
+
+  .wrong-tip-con {
+    float: left;
+  }
+
+  .btn-con {
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+
+  .control-label {
+    width: 16.66666667%;
+    min-width: 125px;
+    float: left;
+    line-height: 34px;
+    text-align: right;
+    i {
+      color: #f00;
+    }
+  }
+
+  col-sm-offset-2 {
+    margin-left: 16.66666667%;
+  }
+
+  .col-sm-6 {
+    width: 300px;
+  }
+  .form-control {
+    float: left;
+    font-size: 12px;
+  }
+
+  .time {
+    .col-sm-6 {
+      width: 462px;
+    }
+    input {
+      width: 200px;
+      background: #fff;
+    }
+    .to {
+      width: 30px;
+      float: left;
+      line-height: 34px;
+      text-align: center;
+    }
+  }
+
+  // 选择按钮
+  .choose-btn {
+    height: 34px;
+    background: transparent;
+    border: 1px solid #6e80ff;
+    border-radius: 0;
+    cursor: pointer;
+    color: #6e80ff;
+    font-size: 12px;
+    float: left;
+    line-height: 34px;
+    margin-left: 15px;
+    padding: 0 7px;
+  }
+  .show-chosen {
+    color: indianred;
+  }
+}
+
+// 积分弹窗
+.create-jfProduct-modal {
+  .choose {
+    cursor: pointer;
+    color: #7c8af4;
+  }
+}
+
 
 // 详情head
 .detial-head {

@@ -271,6 +271,13 @@ define([], function () {
           $scope.viewReviewManage = function(id) {
             sessionStorage.setItem('sellerId', id);
             $location.path('view/visit/manage');
+            backTop();
+          }
+
+
+          // 返回顶部
+          var backTop = function() {
+            $('.ui-view-container').scrollTop(0);
           }
 
           // 弹窗框

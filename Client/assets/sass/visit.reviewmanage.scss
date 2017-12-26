@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-.ui-panel-title.manage {
-  margin: 20px 0 15px 0;
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
 }
-
 
 /*11.28零售户调改*/
 .form-horizontal .control-label {

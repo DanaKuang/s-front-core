@@ -126,11 +126,21 @@ define([], function () {
           $model.getStorageDetialList = function (data) {
             return request.$Search(STORAGE_GET_DETIAL_LIST, data)
           }
-
           // 启用、禁用
           var STORAGE_SET_ENABLED = '/api/tztx/seller-manager/setting/modifyInstoreSettingStatus';
           $model.setStorageEnabled = function (data) {
             return request.$Search(STORAGE_SET_ENABLED, data)
+          }
+          // new
+          var STORAGE_NEW = '/api/tztx/seller-manager/setting/souInstoreSetting';
+          $model.newStorage = function (data) {
+            return request.$Search(STORAGE_NEW, data)
+          }
+
+          // 积分
+          var GET_PRODUCT_CHOOSE_LIST = '/api/tztx/saas/saotx/product/queryMetraList';
+          $model.getProductChooseList = function (data) {
+            return request.$Search(GET_PRODUCT_CHOOSE_LIST, data);
           }
           // *** 扫码入库奖励管理 end
 

@@ -19,6 +19,16 @@ define([], function () {
         currentPage: 'index'
       }
 
+      $scope.new = {
+        brand: '',
+        spec: '',
+        poolId: '',
+        sellerId: '',
+        headImg: '',
+        shopName: '',
+        ownerName: '',
+      }
+
       $scope.detial = {
         sortColumn: 'ssia.ctime',
         sortType: 'desc'
@@ -26,7 +36,6 @@ define([], function () {
 
       // 判断是否为 管理返回 跳转过来的
       if(sessionStorage.fromPage) {
-        console.log(4)
         // 当前页改为详情
         $scope.vm.currentPage = 'detial';
 
@@ -99,22 +108,38 @@ define([], function () {
           v.value = v.brandCode;
         }));
         $('#brand').multiselect('refresh');
+
+        // new
+        $scope.new.brandList = res.data.data;
+        $('#newBrand').multiselect('dataprovider', _.forEach($scope.new.brandList, function(v){
+          v.label = v.name;
+          v.value = v.brandCode;
+        }));
+        $('#newBrand').multiselect('refresh');
       });
 
       // 品牌change
-      $scope.brandChage = function () {
-        if($scope.vm.brand != '') {
+      $scope.brandChage = function (v, ele, type) { // $scope.vm.brand, spec, $scope.specList
+        if(v != '') {
           // 规格select
-          $model.rebateGetSpec({brandCode: $scope.vm.brand}).then(function (res) {
-            $scope.specList = res.data.data;
-            $('#spec').multiselect('dataprovider', _.forEach($scope.specList, function(v){
+          $model.rebateGetSpec({brandCode: v}).then(function (res) {
+            if(type = 'new') {
+              $scope.specList = res.data.data;
+            } else {
+              $scope.newSpecList = res.data.data;
+            }
+            $('#'+ele).multiselect('dataprovider', _.forEach(res.data.data, function(v){
               v.label = v.allName;
               v.value = v.sn;
             }));
-            $('#spec').multiselect('refresh');
+            $('#'+ele).multiselect('refresh');
           });
         } else {
-          $scope.specList = [];
+          if(type = 'new') {
+            $scope.new.specList = [];
+          } else {
+            $scope.specList = [];
+          }
         }
       }
 
@@ -126,7 +151,15 @@ define([], function () {
           v.value = v.sn;
         }));
         $('#spec').multiselect('refresh');
+
+        $scope.new.specList = res.data.data;
+        $('#newSpec').multiselect('dataprovider', _.forEach($scope.new.specList, function(v){
+          v.label = v.allName;
+          v.value = v.sn;
+        }));
+        $('#newSpec').multiselect('refresh');
       });
+
       
       // 活动类型select
       $model.rebateGetActType().then(function (res) {
@@ -197,13 +230,177 @@ define([], function () {
         }
       }
 
-      // 新建、修改 fixme
-      $scope.newAndEditStorage = function (id, type) {
-        if(value == 'edit') {
 
-        } else {
+      // *** 新增start
+      // 新增点击
+      $scope.newRetailerClick = function(e) {
+        $scope.vm.currentPage = 'new';
+      }
 
+      // 返回
+      var back = function() {
+        $scope.vm.currentPage = 'index';
+        backTop();
+
+        // 清空数据
+        var data = {
+          sellerId: '',
+          headImg: '',
+          shopName: '',
+          ownerName: '',
+          poolId: '',
+          hadSave: false
         }
+        $scope.new = Object.assign({}, $scope.new, data);
+
+        // 重置form状态
+        $scope.newForm.$setPristine();
+        $scope.newForm.$setUntouched();
+      }
+      $scope.new.back = function() {
+        back();
+      }
+
+      var getScoreList = function(page) {
+        var data = {
+          metraType: 'integral',
+          brandCodes: $scope.new.brand,//
+          unitCodes: $scope.new.spec,
+          status: 1, //礼品、红包池状态。0-停用；1-正常,
+          hasLeft: true, //是否查询有库存的池数据。true-池剩余必须大于0；false或空参则忽略库存数量
+          currentPageNumber: page || 1,
+          pageSize: 6
+        }
+
+        $model.getProductChooseList(data).then(function (res) {
+          if(res.data.ret == '200000') {
+            $scope.jfChooseList = res.data.data.list;
+            $scope.paginationjfInnerConf = res.data;
+
+            // 新增保存成功后，直接返回列表。 如果是编辑，还停留在当前页面。并且有  保存并返回按钮。
+            if($scope.vm.currentPage == 'new') {
+              back();
+            } else {
+
+            }
+          } else {
+            alertMsg($('#newAlert'), 'danger', res.data.msg);
+          }
+        })
+      }
+
+      // 积分池列表
+      $scope.chooseScore = function() {
+        if($scope.new.brand == '' || $scope.new.spec == '') {
+          alertMsg($('#newAlert'), 'warning', '请先选择投放的品牌和规格');
+        } else {
+          $('.create-jfProduct-modal').modal('show');
+          getScoreList(1);
+        }
+      }
+
+      // 积分池列表翻页
+      $scope.$on('fromjfpagechange', function(e, v, f) {
+        getScoreList(f.currentPageNumber);
+      })
+
+      // 选择
+      $scope.new.choose = function (id) {
+        $scope.new.poolId = id;
+        $('.create-jfProduct-modal').modal('hide');
+      }
+
+      // new保存
+      $scope.new.save = function(type){
+        // 如果验证通过
+        if($scope.newForm.$valid) {
+          var data = {
+            brandCode: $scope.new.brand || '',
+            sn: $scope.new.spec || '',
+            stimeStr: $scope.new.stime || '',
+            etimeStr: $scope.new.etime || '',
+
+            awardType: 6, // 奖品类型	1-实物礼品；3-红包；6-积分
+            poolId: $scope.new.poolId || '', // 奖品物料池id
+            score: $scope.new.award == 0 ? 0 : ($scope.new.award || ''), // 积分值
+            totalNum: $scope.new.awardNum || '', // 奖品设置数量
+          }
+
+          if($scope.vm.currentPage == 'edit') {
+            data.id = $scope.new.id;
+          }
+
+          $model.newStorage(data).then(function(res) {
+            if(res.data.ok) {
+              if($scope.vm.currentPage == 'new') {
+                var typeInfo = '新建成功'
+              } else {
+                var typeInfo = '保存成功'
+              }
+
+              if(type == 'saveAndBack') {
+                back();
+              }
+
+              $scope.new.hadSave = true;
+
+              alertMsg($('#newAlert'), 'success', typeInfo);
+            } else {
+              alertMsg($('#newAlert'), 'danger', res.data.msg);
+            }
+          })
+        }
+      }
+      // *** 新增end
+
+
+      // 返回顶部
+      var backTop = function() {
+        $('.ui-view-container').scrollTop(0);
+      }
+
+      // 新建、修改 fixme
+      $scope.editStorage = function (id) {
+        $scope.vm.currentPage = 'edit';
+        backTop();
+
+        // 获取数据
+        $model.getStorageDetial({id: id}).then(function(res) {
+          if(res.data.ok) {
+            // 获取到的数据放入detial里
+            $scope.detial = Object.assign({}, $scope.detial, res.data.data);
+
+            // 设置数据
+            var data = {
+              id: id,
+              brand: $scope.detial.brandCode,
+              spec: $scope.detial.sn,
+              stime: $scope.detial.stimeStr,
+              etime: $scope.detial.etimeStr,
+              poolId: $scope.detial.poolId,
+              // awardType: $scope.detial.awardType,
+              award: $scope.detial.score,
+              awardNum: $scope.detial.totalNum,
+            }
+            console.log(data)
+            $scope.new = Object.assign({}, $scope.new, data);
+
+            // 这里用val来设置，因为scope下设置不管用
+            $('#newBrand').val($scope.detial.brandCode).multiselect('refresh');
+
+            // 规格select
+            $model.rebateGetSpec({brandCode: $scope.detial.brandCode}).then(function (res) {
+              $scope.new.specList = res.data.data;
+              $('#newSpec').multiselect('dataprovider', _.forEach($scope.new.specList, function(v){
+                v.label = v.allName;
+                v.value = v.sn;
+              }));
+              $('#newSpec').val($scope.detial.sn).multiselect('refresh');
+            });
+          } else {
+            alertMsg($('#newAlert'), 'danger', res.data.msg);
+          }
+        })
       }
 
 
@@ -213,10 +410,12 @@ define([], function () {
         $scope.vm.currentPage = 'detial';
         $scope.detial.settingId = id;
         $scope.detial.awardType = awardType;
+        backTop();
 
         getDetialInfo();
         getDetialInfoList(1, true);
       }
+
       // 获取详情信息
       function getDetialInfo() {
         // 当前页改为详情
@@ -287,20 +486,6 @@ define([], function () {
       }
 
 
-      // detial - 查看详情
-      $scope.detial.view = function(sellerId, settingId, awardType) {
-        sessionStorage.setItem('storageId', sellerId);
-        sessionStorage.setItem('settingId', settingId);
-        sessionStorage.setItem('awardType', awardType);
-        $location.path('view/visit/manage');
-      }
-
-      // detial - 返回列表点击
-      $scope.detial.back = function() {
-        $scope.vm.currentPage = 'index';
-        $scope.paginationConf = $scope.indexPaginationConf;
-      }
-
       // detial 搜索
       $scope.detial.search = function () {
         getDetialInfoList(1, true);
@@ -326,6 +511,22 @@ define([], function () {
 
         $scope.detial.startTime = '';
         $scope.detial.endTime = '';
+      }
+
+      // detial - 返回列表点击
+      $scope.detial.back = function() {
+        $scope.vm.currentPage = 'index';
+        $scope.paginationConf = $scope.indexPaginationConf;
+        backTop();
+      }
+
+      // detial - 查看详情
+      $scope.detial.view = function(sellerId, settingId, awardType) {
+        sessionStorage.setItem('storageId', sellerId);
+        sessionStorage.setItem('settingId', settingId);
+        sessionStorage.setItem('awardType', awardType);
+        $location.path('view/visit/manage');
+        backTop();
       }
 
 
@@ -440,6 +641,37 @@ define([], function () {
         var startTime = $scope.detial.startTime;
         if (startTime > endTime) {
           $scope.detial.startTime = '';
+          $scope.$apply();
+        }
+      });
+
+      // 时间设置
+      $("#newStart").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:00',
+        language: 'zh-CN',
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1
+      }).on('change', function (e) {
+        var appStartTime = e.target.value;
+        var appEndTime = $scope.new.etime;
+        if (appEndTime < appStartTime) {
+          $scope.new.etime = '';
+          $scope.$apply();
+        }
+      });
+
+      $("#newEnd").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:00',
+        language: 'zh-CN',
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1
+      }).on('change', function (e) {
+        var appEndTime = e.target.value;
+        var appStartTime = $scope.new.stime;
+        if (appStartTime > appEndTime) {
+          $scope.new.stime = '';
           $scope.$apply();
         }
       });

@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: "controller",
         ServiceName: "visitRebateManageCtrl",
         ViewModelName: 'visitManageModel',
-        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
+        ServiceContent: ['$rootScope', '$scope', '$timeout', 'visitManageModel', function ($rootScope, $scope, $timeout, $model) {
 
           // 初始化一个对象，vm
           $scope.vm = {
@@ -186,6 +186,7 @@ define([], function () {
             // $('#region').multiselect('deselect', $scope.areaData.map(function (d) {
             //   return d.value;
             // }));
+
             $('#brand, #spec, #region').val(''); // 点击第二次才能清空，这里用jQuery去做一下。。
             $('#brand, #spec, #region').multiselect('refresh');
             $scope.vm.brand = [];
@@ -227,6 +228,7 @@ define([], function () {
               })
             }
           }
+
 
           // 弹窗框
           var alertMsg = function(e, t, i) { // e为元素，t为类型，i为信息
@@ -310,7 +312,6 @@ define([], function () {
               $scope.$apply();
             }
           });
-
         }]
     };
     return visitRebateManageCtrl;

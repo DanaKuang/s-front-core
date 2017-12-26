@@ -1,6 +1,10 @@
 @charset "UTF-8";
-.ui-panel-title.manage {
-  margin: 20px 0 15px 0; }
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden; }
+  .ui-panel-title .new-btn {
+    float: right; }
 
 /*11.28零售户调改*/
 .form-horizontal .control-label {
@@ -35,8 +39,8 @@
   background: #fff;
   float: left; }
 
-.time .col-sm-10 span {
-  width: 5%;
+.time .col-sm-9 span {
+  width: 10%;
   float: left;
   line-height: 34px;
   text-align: center; }
@@ -46,7 +50,7 @@
   margin-left: -1px; }
 
 .print .form-control {
-  width: 262px; }
+  width: 120px; }
 
 .search-btn-con {
   float: right;

@@ -1947,6 +1947,13 @@ visitManage:
     gatewaytype: 2
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/seller-manager/setting/souInstoreSetting'
+    authorized: 1
+    description: '扫码入库奖励管理 - 新增、修改'
+    enableroute: 1
+    gatewaytype: 2
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/seller-manager/setting/activityRebateList'
     authorized: 1
     description: '扫码返佣管理 - 列表'
