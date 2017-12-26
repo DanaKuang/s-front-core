@@ -235,6 +235,36 @@ define([], function () {
       // 新增点击
       $scope.newRetailerClick = function(e) {
         $scope.vm.currentPage = 'new';
+
+        // 初始化数据
+        var data = {
+          brand: '',
+          spec: '',
+          specList: '',
+          stime: '',
+          etime: '',
+
+          poolId: '', // 奖品物料池id
+          award: '', // 积分值
+          awardNum: '', // 奖品设置数量
+          hadSave: false
+        }
+
+        $('#newBrand').val('').multiselect('refresh');
+
+        // 规格select
+        $model.rebateGetSpec().then(function (res) {
+          $scope.new.specList = res.data.data;
+          $('#newSpec').multiselect('dataprovider', _.forEach($scope.new.specList, function(v){
+            v.label = v.allName;
+            v.value = v.sn;
+          }));
+          $('#newSpec').multiselect('refresh');
+        });
+
+
+        // 获取到的数据放入new里
+        $scope.new = Object.assign({}, $scope.new, data);
       }
 
       // 返回
@@ -256,11 +286,16 @@ define([], function () {
         // 重置form状态
         $scope.newForm.$setPristine();
         $scope.newForm.$setUntouched();
+
+        if($scope.vm.currentPage == 'new') {
+          getList(1, true);
+        }
       }
       $scope.new.back = function() {
         back();
       }
 
+      // 积分池列表
       var getScoreList = function(page) {
         var data = {
           metraType: 'integral',
@@ -276,13 +311,6 @@ define([], function () {
           if(res.data.ret == '200000') {
             $scope.jfChooseList = res.data.data.list;
             $scope.paginationjfInnerConf = res.data;
-
-            // 新增保存成功后，直接返回列表。 如果是编辑，还停留在当前页面。并且有  保存并返回按钮。
-            if($scope.vm.currentPage == 'new') {
-              back();
-            } else {
-
-            }
           } else {
             alertMsg($('#newAlert'), 'danger', res.data.msg);
           }
@@ -338,8 +366,14 @@ define([], function () {
                 var typeInfo = '保存成功'
               }
 
-              if(type == 'saveAndBack') {
+              // 新增保存成功后，直接返回列表。 如果是编辑，还停留在当前页面。并且有  保存并返回按钮。
+              if($scope.vm.currentPage == 'new') {
                 back();
+              } else {
+                // 保存并退出
+                if(type == 'saveAndBack') {
+                  back();
+                }
               }
 
               $scope.new.hadSave = true;
@@ -382,7 +416,6 @@ define([], function () {
               award: $scope.detial.score,
               awardNum: $scope.detial.totalNum,
             }
-            console.log(data)
             $scope.new = Object.assign({}, $scope.new, data);
 
             // 这里用val来设置，因为scope下设置不管用

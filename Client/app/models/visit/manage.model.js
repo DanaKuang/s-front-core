@@ -161,6 +161,12 @@ define([], function () {
           $model.getTierArea = function (data) {
             return request.$Search(GET_TIER_AREA, data);
           }
+          // 地区2
+          var GET_TIER_AREA = '/api/tztx/seller-manager/region/queryAllRegion';
+          $model.queryAllRegion = function (data) {
+            return request.$Search(GET_TIER_AREA, data);
+          }
+
           // 活动类型
           var REBATE_GET_ACT_TYPE = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
           $model.rebateGetActType = function (data) {

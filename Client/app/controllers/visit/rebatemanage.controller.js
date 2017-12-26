@@ -112,33 +112,41 @@ define([], function () {
           });
 
           // 获取地区
-          $model.getTierArea({parentCode: ''}).then(function (res) {
-            $scope.areaData = [];
-            $scope.regionList = res.data.data.datas;
 
-            if ($scope.regionList.length != 0) {
-              $scope.regionList.forEach(function (n ,index) {
+          $model.queryAllRegion({parentCode: ''}).then(function (res) {
+            var areaData = [];
+            var provincesList = res.data.data.provinces;
+            var citiesList = res.data.data.cities;
+
+            if (provincesList.length != 0) {
+              provincesList.forEach(function (n ,index) {
                 var group = {
-                  label: n.shortName,
+                  label: n.name,
                   value: n.code,
                   children: []
                 };
-                $model.getTierArea({parentCode: n.code}).then(function(res) {
-                  var cityArr = res.data.data.datas;
-                  if (cityArr.length != 0) {
-                    cityArr.forEach(function (n, index) {
-                      group['children'].push({
-                        label: n.shortName,
-                        value: n.code
+
+                if (citiesList.length != 0) {
+                  // 找到省份对应的city列表
+                  $.each(citiesList, function(idx,value) {
+                    if(n.code == idx) {
+                      // value是当前值，是个数组，再遍历一下，然后添加到group里
+                      $.each(value, function(i,v) {
+                        group['children'].push({
+                          label: v.name,
+                          value: v.code
+                        })
                       })
-                    })
-                  }
-                  $scope.areaData.push(group);
-                  $('#region').multiselect('dataprovider', $scope.areaData);
-                })
+                    }
+                  })
+                }
+                areaData.push(group);
               })
+
+              $('#region').multiselect('dataprovider', areaData);
             }
           })
+
 
           // 活动类型select
           $model.rebateGetActType().then(function (res) {
