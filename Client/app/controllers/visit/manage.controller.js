@@ -820,35 +820,41 @@ define([], function () {
             var formData = new FormData();
             formData.append('file', files);
 
-            $.ajax({
-              url: '/api/tztx/seller-manager/file/upload',
-              type: 'POST',
-              cache: false,
-              data: formData,
-              processData: false,
-              contentType: false,
-              headers: {
-                ContentType: "multipart/form-data",
-                loginId : sessionStorage.access_loginId,
-                token : sessionStorage.access_token
-              }
-            }).done(function (res) {
-              var time = new Date().getTime();
-              if(e == 'info1') {
-                $scope.info.headImg = res.msg + '?' + time; //图片保存地址
-              } else if(e == 'info2') {
-                $scope.info.licenceImg = res.msg + '?' + time;
-              } else if(e == 'new1') {
-                $scope.new.headImg = res.msg + '?' + time;
-              } else if(e == 'new2') {
-                $scope.new.licenceImg = res.msg + '?' + time;
-              }
+            var filesSize = files.size
+            console.log(filesSize)
+            if(filesSize > 5*1024*1024) {
+              alertMsg($('#newAlert'), 'danger', '请上传小于5M的图片');
+            } else {
+              $.ajax({
+                url: '/api/tztx/seller-manager/file/upload',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                  ContentType: "multipart/form-data",
+                  loginId : sessionStorage.access_loginId,
+                  token : sessionStorage.access_token
+                }
+              }).done(function (res) {
+                var time = new Date().getTime();
+                if(e == 'info1') {
+                  $scope.info.headImg = res.msg + '?' + time; //图片保存地址
+                } else if(e == 'info2') {
+                  $scope.info.licenceImg = res.msg + '?' + time;
+                } else if(e == 'new1') {
+                  $scope.new.headImg = res.msg + '?' + time;
+                } else if(e == 'new2') {
+                  $scope.new.licenceImg = res.msg + '?' + time;
+                }
 
-              $scope.$apply(); // 因为是异步的？所以这里需要$scope.$apply();
-            }).fail(function (res) {
-              alert('上传失败，请重试');
-              return
-            })
+                $scope.$apply(); // 因为是异步的？所以这里需要$scope.$apply();
+              }).fail(function (res) {
+                alert('上传失败，请重试');
+                return
+              })
+            }
           }
 
           // 新增 省份change
