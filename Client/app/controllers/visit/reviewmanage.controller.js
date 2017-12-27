@@ -13,7 +13,7 @@ define([], function () {
 
           // 初始化一个对象，vm
           $scope.vm = {
-            authStatus: '', // 状态
+            authStatus: 1, // 状态
             commercial: '', // 业态
             district: '', // 区域
             searchType: 3, // 关键词类型
@@ -34,7 +34,7 @@ define([], function () {
           // 获取table列表
           function getList(page, ispage) {
             var data = {
-              authStatus: $scope.vm.authStatus || '', // 状态
+              authStatus: $scope.vm.authStatus || 1, // 状态
               commercial: $scope.vm.commercial || '', // 业态
               district: $scope.vm.district || '', // 区域
               searchType: $scope.vm.searchType || '', // 关键词类型
@@ -147,7 +147,7 @@ define([], function () {
           // 重置
           $scope.reset = function () {
             var data = {
-              authStatus: '', // 状态
+              authStatus: 1, // 状态
               commercial: '', // 业态
               district: '', // 区域
               searchType: 3, // 关键词类型

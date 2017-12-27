@@ -62,7 +62,7 @@
                                                 <select ng-model="vm.district" id="district" class="form-control">
                                                     <option value="">全部</option>
                                                     <option value="1">城镇</option>
-                                                    <option value="2">农村</option>
+                                                    <option value="2">乡村</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -408,7 +408,7 @@
                                                             <select ng-if="info.isEdit" ng-model="info.district" name="infoDistrict" class="form-control" required>
                                                                 <option value="">请选择</option>
                                                                 <option value="1">城镇</option>
-                                                                <option value="2">农村</option>
+                                                                <option value="2">乡村</option>
                                                             </select>
                                                         </label>
                                                         <!--验证-->
@@ -858,7 +858,7 @@
                             <select ng-model="new.district" name="newDistrict" id="newDistrict" class="form-control" required>
                                 <option value="">全部</option>
                                 <option value="1">城镇</option>
-                                <option value="2">农村</option>
+                                <option value="2">乡村</option>
                             </select>
                             <!--验证-->
                             <div ng-show="form.$submitted || form.newDistrict.$touched">
