@@ -669,7 +669,7 @@ body{
 .multiselect-container li label{
     font-size: 15px;
     color: #515151;
-    width: 180px;
+    width: 320px;
 }
 .multiselect{
     text-align: left;

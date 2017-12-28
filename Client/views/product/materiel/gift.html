@@ -200,7 +200,7 @@
                                 <span class="category_warn"></span>
                             </div>
                             <div>
-                                <label class="label_title" for="enableSupply">供应商<span>*</span></label><select id="enableSupply" ng-disabled="!addGift" ng-class="{true:'disabled_color'}[!addGift]">
+                                <label class="label_title" for="enableSupply">供应商<span>*</span></label><select id="enableSupply" style="width:364px;" ng-disabled="!addGift" ng-class="{true:'disabled_color'}[!addGift]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
                                             value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>
