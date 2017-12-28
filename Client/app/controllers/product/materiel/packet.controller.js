@@ -96,7 +96,7 @@ define([], function () {
                         selectAll:true,
                         selectAllText: '全部',
                         selectAllValue: 'all',
-                        buttonWidth: '180px'
+                        buttonWidth: '364px'
                     });
                 }
             });
@@ -195,7 +195,7 @@ define([], function () {
                     selectAll:true,
                     selectAllText: '全部',
                     selectAllValue: 'all',
-                    buttonWidth: '180px'
+                    buttonWidth: '364px'
                 });
             });
             //监听品牌选择信息
