@@ -57,10 +57,10 @@ define([], function () {
                             scope.confUrl = data.confUrl;
                             scope.activityCode = data.activity.activityCode;
                         }
-                        
+
                     }
                 }
-                
+
             }, true);
 
         }

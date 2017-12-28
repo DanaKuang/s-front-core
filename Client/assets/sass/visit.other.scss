@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
-.ui-panel-title.other {
-  margin: 20px 0 15px 0;
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
 }
 
 .other-con {
@@ -61,4 +63,23 @@
   color: #f00;
   font-size: 12px;
   line-height: 20px;
+}
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
 }

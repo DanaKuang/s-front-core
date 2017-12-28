@@ -89,6 +89,12 @@
   font-size: 12px;
   text-indent: 5px; }
 
+.dealer-review input.ng-touched.ng-invalid, .dealer-review textarea.ng-touched.ng-invalid, .dealer-review select.ng-touched.ng-invalid {
+  border-color: #FA787E !important; }
+
+.dealer-review .ng-submitted input.ng-invalid, .dealer-review .ng-submitted textarea.ng-invalid, .dealer-review .ng-submitted select.ng-invalid {
+  border-color: #FA787E !important; }
+
 .dealer-review .modal {
   overflow-y: auto; }
   .dealer-review .modal .modal-dialog {

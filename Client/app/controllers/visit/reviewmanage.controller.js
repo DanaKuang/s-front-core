@@ -13,7 +13,7 @@ define([], function () {
 
           // 初始化一个对象，vm
           $scope.vm = {
-            authStatus: '', // 状态
+            authStatus: 1, // 状态
             commercial: '', // 业态
             district: '', // 区域
             searchType: 3, // 关键词类型
@@ -34,7 +34,7 @@ define([], function () {
           // 获取table列表
           function getList(page, ispage) {
             var data = {
-              authStatus: $scope.vm.authStatus || '', // 状态
+              authStatus: $scope.vm.authStatus || 1, // 状态
               commercial: $scope.vm.commercial || '', // 业态
               district: $scope.vm.district || '', // 区域
               searchType: $scope.vm.searchType || '', // 关键词类型
@@ -46,7 +46,8 @@ define([], function () {
               sortType: $scope.vm.sortType || 1,
               sortValue: $scope.vm.sortValue,
               pageNo: page || 1,
-              pageSize: 10
+              pageSize: 10,
+              isAuthMgr: 1
             };
 
             // 根据关键词搜索条件，传不同数据
@@ -108,13 +109,18 @@ define([], function () {
 
           // 省份change
           $scope.provinceChage = function (e) {
-            if($scope.vm.addrProvince != '') {
+            if($scope.vm.addrProvince) {
               // 市
               $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
                 $scope.cityList = res.data;
                 $scope.vm.addrCity = '';
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.cityList = [];
+              $scope.vm.addrCity = '';
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -126,6 +132,9 @@ define([], function () {
                 $scope.areaList = res.data;
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -137,8 +146,8 @@ define([], function () {
 
           // 重置
           $scope.reset = function () {
-            $scope.vm = {
-              authStatus: '', // 状态
+            var data = {
+              authStatus: 1, // 状态
               commercial: '', // 业态
               district: '', // 区域
               searchType: 3, // 关键词类型
@@ -154,7 +163,9 @@ define([], function () {
               pageNo: 1,
               pageSize: 10
             }
-            $scope.provinceList = '';
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+
             $scope.cityList = '';
             $scope.areaList = '';
             getList(1, true);
@@ -233,7 +244,7 @@ define([], function () {
                 authResult: $scope.reviewValue,
               }
               if($scope.reviewValue == 2) {
-                data.failReason = $scope.noPassReason;
+                data.failReason = $scope.vm.noPassReason;
               }
               $model.reviewAndPass(data).then(function(res) {
                 if(res.data.ok) {
@@ -241,6 +252,7 @@ define([], function () {
                   getList($scope.paginationConf.data.page.currentPageNumber);
                   // 隐藏弹窗
                   $('.review-modal').modal('hide');
+                  alertMsg($('#newAlert'), 'success', '设置成功');
                 } else {
                   alertMsg($('#newAlert'), 'danger', res.data.msg);
                 }
@@ -252,12 +264,6 @@ define([], function () {
           $scope.textareaChage = function() {
             $scope.textareaNum = $scope.vm.noPassReason.length;
           }
-
-          // 审核状态change
-          $scope.authStatusChange = function () {
-            getList(1, true);
-            $scope.vm.allCheckbox = false;
-          }
           // *** 批量审批 end
 
 
@@ -265,6 +271,13 @@ define([], function () {
           $scope.viewReviewManage = function(id) {
             sessionStorage.setItem('sellerId', id);
             $location.path('view/visit/manage');
+            backTop();
+          }
+
+
+          // 返回顶部
+          var backTop = function() {
+            $('.ui-view-container').scrollTop(0);
           }
 
           // 弹窗框

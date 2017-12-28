@@ -1,0 +1,201 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date; 2017-12-15 重构零售户
+ * Description: 扫码返佣管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/questionnaire.css">
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<link rel="stylesheet" href="statics/assets/style/visit.rebatemanage.css"/>
+
+<div ng-controller="visitRebateManageCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title rebatemanage">
+                        <div><span>扫码返佣管理</span></div>
+                    </div>
+
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+
+                            <div class="tab-content">
+                                <!-- 搜索条件 -->
+                                <div role="tabpanel" class="tab-pane active panel-body">
+                                    <form class="form-horizontal form-inline">
+                                        <div class="form-group col-sm-4">
+                                            <label for="brand" class="control-label">品牌：</label>
+                                            <div class="col-sm-8">
+                                                <select ng-change="brandChage(vm.brand, 'spec')" ng-model="vm.brand" id="brand" class="form-control select" multiple>
+                                                    <option value="">全部</option>
+                                                    <option ng-repeat="item in brandList" value="{{item.brandCode}}">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="spec" class="control-label">规格：</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.spec" id="spec" class="form-control select" multiple>
+                                                    <option value="">全部</option>
+                                                    <option ng-repeat="item in specList" value="{{item.sn}}">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="region" class="control-label">地区：</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control area select" id="region" ng-model="vm.region" multiple></select>
+
+                                                <!--<select ng-model="vm.region" id="region" class="form-control area select" multiple>-->
+                                                    <!--<option value="">全部</option>-->
+                                                    <!--<option ng-repeat="item in regionList" value="{{item.brandCode}}">{{item.name}}</option>-->
+                                                <!--</select>-->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="actType" class="control-label">活动类型：</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.actType" id="actType" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option ng-repeat="item in actTypeList" value="{{item.code}}">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="actStatus" class="control-label">活动状态：</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.actStatus" id="actStatus" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option ng-repeat="item in actStatusList" value="{{item.code}}">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="keywords" class="control-label">关键词：</label>
+                                            <div class="col-sm-8">
+                                                <input id="keywords" ng-model="vm.keywords" class="keywords-input form-control" type="text" placeholder="请输入关键词">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group time">
+                                            <label class="control-label">活动时段：</label>
+
+                                            <div class="col-sm-9">
+                                                <input ng-model="vm.activityStime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="vm.activityEtime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group search-btn-con">
+                                            <button type="button" class="search btn btn-primary" ng-click="search();">查询</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="reset();">重置</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="scroll-con panel-body">
+                                    <!-- table -->
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>操作</th>
+                                                <th>返现比例</th>
+                                                <th>活动名称</th>
+                                                <th>规格</th>
+
+                                                <th>活动时间</th>
+                                                <th>投放地区</th>
+                                                <th>使用状态</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(index, item) in vm.listData">
+                                                <td class="batch">
+                                                    <label>{{index + 1}}</label>
+                                                </td>
+                                                <td>
+                                                    <div class="oper-btn-wrap">
+                                                        <div class="operate-btn" ng-click="setRebate(item.activityCode)" data-toggle="modal" data-target=".rebate-modal">设置返佣比例</div>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.rebate ? item.rebate+'%' : '- -'}}</td>
+                                                <td><div class="activity-name">{{item.activityName}}</div></td>
+                                                <td>{{item.snName}}</td>
+
+                                                <td>
+                                                    <div class="time">
+                                                        {{item.stime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                        <div>-</div>
+                                                        {{item.etime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                    </div>
+                                                </td>
+                                                <td><div class="ad-names" title="{{item.adNames}}">{{item.adNames}}</div></td>
+                                                <td>{{item.status == 0 ? '停用' : '启用'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+                                </div>
+                            </div>
+
+
+                            <!-- 分页区 -->
+                            <div class="pagination-wrap">
+                                <!-- 分页指令 -->
+                                <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="newAlert" class="alert alert-dismissible fade" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p class="prompt"></p>
+    </div>
+
+    <!-- 比例 -->
+    <div class="modal fade bs-example-modal-sm rebate-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle"><span>请输入客户返现比例：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <form name="rebateForm" novalidate>
+                    <div class="modal-body">
+                        <div>
+                            <input type="number" min="0" step="1" max="100" class="form-control" name="rebate" ng-model="vm.rebate" required>%
+                            <!--验证-->
+                            <div ng-show="rebateForm.$submitted || rebateForm.rebate.$touched">
+                                <div ng-show="rebateForm.rebate.$error.required" class="wrong-tip">请输入客户返现比例</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="rebateConfirm()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jqmeter.min.js"></script>
+</div>

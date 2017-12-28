@@ -35,7 +35,9 @@ define([], function () {
         o = Number(o); v = Number(v);
         result = o + v;
         if (result > 10000) {
-            result = ''+Math.round(result/10000)+'万';
+            result = Math.round(result/1000);
+            result /= 10;
+            result += "万";
         }
         return result;
       }
@@ -144,15 +146,31 @@ define([], function () {
             });
           });
           return res;
+          // return data.filter(function (d) {
+          //   return ([
+          //     '西安市',
+          //     '洛阳市',
+          //     '平顶山市',
+          //     '烟台市'
+          //   ].indexOf(d.city) !== -1) || (Number(d.scantimes) > 10);
+          // }).map(function (d) {
+          //   return {
+          //     name: d.city,
+          //     value: [d.longitude,d.latitude,d.scantimes]
+          //   }
+          // });
         };
 
-        var sortData = convertData(data.sort(function (a, b) {
-            return b.scantimes - a.scantimes;
+        var top0_30 = convertData(data.filter(function (a) {
+            return a.type === '1';
         }));
-
-        var top0_30 = sortData.slice(0, 30);
-        var top30_60 = sortData.slice(30, 60);
-        var top60_90 = sortData.slice(60, 90);
+        var top30_60 = convertData(data.filter(function (a) {
+            return a.type === '2';
+        }));
+        var top60_90 = convertData(data.filter(function (a) {
+            return a.type === '3';
+        }));
+        var top90_ = convertData(data);
 
         // var symbolSize = function (val) {
         //     return 15;
@@ -163,7 +181,7 @@ define([], function () {
             return params.name + '扫码量: ' + params.value[2] + '次';
         }
         // 所有点
-        option.series[0].data = sortData;
+        option.series[0].data = top90_;
         // option.series[0].symbolSize = symbolSize
 
         // top 60-90点
@@ -178,20 +196,26 @@ define([], function () {
         myChart.setOption(option);
 
         function getMapData () {
+          // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
-            var option = myChart.getOption();
-            sortData = convertData(data.sort(function (a, b) {
-                return b.scantimes - a.scantimes;
-            }));
-            top0_30 = sortData.slice(0, 30);
-            top30_60 = sortData.slice(30, 60);
-            top60_90 = sortData.slice(60, 90);
-            option.series[0].data = sortData;
-            option.series[1].data = top60_90;
-            option.series[2].data = top30_60;
-            option.series[3].data = top0_30;
-            myChart.setOption(option);
+            myChart.setOption({
+              series: [{
+                data: convertData(data)
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '3';
+                }))
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '2';
+                }))
+              }, {
+                data: convertData(data.filter(function (a) {
+                  return a.type === '1';
+                }))
+              }]
+            });
           });
         }
         getMapData();

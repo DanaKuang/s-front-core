@@ -1,0 +1,368 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date; 2017-12-15 重构零售户
+ * Description: 扫码返佣管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/questionnaire.css">
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<link rel="stylesheet" href="statics/assets/style/visit.ordermanage.css"/>
+
+<div ng-controller="visitOrderManageCtrl">
+    <div ng-show="vm.currentPage == 'index'" class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title ordermanage">
+                        <div><span>扫码返佣管理</span></div>
+                    </div>
+
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+
+                            <div class="tab-content">
+                                <!-- 搜索条件 -->
+                                <div role="tabpanel" class="tab-pane active panel-body">
+                                    <form class="form-horizontal form-inline">
+                                        <div class="form-group col-sm-4">
+                                            <label for="orderStatus" class="control-label">订单状态：</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.status" id="orderStatus" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option value="1">待支付</option>
+                                                    <option value="7">待发货</option>
+                                                    <option value="2">待收货</option>
+                                                    <option value="6">已完成</option>
+                                                    <option value="4">已取消</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group time">
+                                            <label class="control-label">活动时段：</label>
+
+                                            <div class="col-sm-9">
+                                                <input ng-model="vm.stime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="vm.etime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-8 keywords">
+                                            <label for="searchType" class="control-label col-sm-2">关键词</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.searchType" class="form-control col-sm-5" id="searchType">
+                                                    <option value="1">门店名称</option>
+                                                    <option value="3">联系人姓名</option>
+                                                    <option value="4">联系人手机号</option>
+                                                    <option value="2">烟草证号</option>
+                                                </select>
+                                                <input ng-model="vm.keywords" class="keywords-input form-control col-sm-5" type="text" placeholder="请输入关键词">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group search-btn-con">
+                                            <button type="button" class="search btn btn-primary" ng-click="search($event);">查询</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="reset($event);">重置</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="panel-body scroll-con">
+                                    <div class="store-code">
+                                        <label><input type="checkbox" ng-click="storeCodeClick()" ng-checked="isChecked">仅显示店码订单</label>
+                                    </div>
+
+                                    <div class="btn-con upload-btn-con">
+                                        <button type="button" class="btn btn-primary" ng-click="export();">导出待收货订单</button>
+                                        <div class="file-con">
+                                            <button type="button" class="btn btn-default">导入物流订单</button>
+                                            <input type="file" name="uploadfile" id="importFile">
+                                        </div>
+                                    </div>
+
+                                    <!-- table -->
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作</th>
+                                            <th>零售户id</th>
+                                            <th>门店名称</th>
+                                            <th>订单编号</th>
+
+                                            <th>联系人姓名</th>
+                                            <th>联系人电话</th>
+                                            <th>门店地址</th>
+                                            <th>费用</th>
+                                            <th>申请时间</th>
+
+                                            <th>支付状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="(index, item) in vm.listData">
+                                            <td class="batch">
+                                                <label>{{index + 1}}</label>
+                                            </td>
+                                            <td>
+                                                <div class="oper-btn-wrap">
+                                                    <div class="operate-btn" ng-click="viewDetial(item.orderid)">查看详情</div>
+                                                </div>
+                                            </td>
+                                            <td>{{item.sellerInfo.sellerId}}</td>
+                                            <td><div class="activity-name">{{item.sellerInfo.shopName}}</div></td>
+                                            <td>{{item.orderid}}</td>
+
+                                            <td>{{item.username}}</td>
+                                            <td>{{item.mobile}}</td>
+                                            <td>{{item.sellerInfo.addrDetail}}</td>
+                                            <td>{{item.totalFee == 0 ? '免费' : '¥'+item.totalFee}}</td>
+                                            <td>
+                                                <div class="time">
+                                                    {{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </div>
+                                            </td>
+
+                                            <td>{{item.payStatus == 0 ? '未支付' : '已支付'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+                                </div>
+                            </div>
+
+
+                            <!-- 分页区 -->
+                            <div class="pagination-wrap">
+                                <!-- 分页指令 -->
+                                <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 详情 -->
+    <div ng-show="vm.currentPage == 'detial'" class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <!--title-->
+            <div class="ui-panel-title manage">
+                <div><i class="manage"></i><span>订单详情</span></div>
+            </div>
+
+            <div class="panel-body panel order-detial">
+                <!-- 1 基本信息 -->
+                <form name="detialForm" novalidate>
+                    <h3>门店信息</h3>
+                    <ul>
+                        <li class="photo">
+                            <label>
+                                <span class="title">门店照片：</span>
+                                <img ng-src="{{sellerInfo.headImg}}" alt="">
+                            </label>
+                        </li>
+
+                        <li>
+                            <label>
+                                <span class="title">门店名称：</span>
+                                <span class="value">{{sellerInfo.shopName}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">经营人姓名：</span>
+                                <span class="value">{{sellerInfo.ownerName}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">微信名：</span>
+                                <span class="value">{{sellerInfo.wxNickname}}</span>
+                            </label>
+                        </li>
+
+                        <li class="">
+                            <label>
+                                <span class="title">烟草专卖证号：</span>
+                                <span class="value">{{sellerInfo.licenceNo}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">区域：</span>
+                                <span class="value">{{sellerInfo.districtName}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">业态：</span>
+                                <span class="value">{{sellerInfo.commercialName}}</span>
+                            </label>
+                        </li>
+
+                        <li class="">
+                            <label>
+                                <span class="title">联系人姓名：</span>
+                                <span class="value">{{sellerInfo.contactName}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">联系人电话：</span>
+                                <span class="value">{{sellerInfo.contactPhone}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">门店地址：</span>
+                                <span class="value">{{sellerInfo.addrDetail}}</span>
+                            </label>
+                        </li>
+
+                        <li class="">
+                            <label>
+                                <span class="title">订单号：</span>
+                                <span class="value">{{detial.orderid}}</span>
+                            </label>
+                        </li>
+                        <li class="">
+                            <label>
+                                <span class="title">费用：</span>
+                                <span class="value">￥{{detial.totalFee}}</span>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <h3>收货信息</h3>
+                    <ul>
+                        <li class="row">
+                            <label>
+                                <span class="title"><i>*</i>收货人姓名：</span>
+                                <input name="detialUsername" ng-model="detial.username" class="form-control" type="text" required/>
+                            </label>
+                            <!--验证-->
+                            <div ng-show="detialForm.$submitted || detialForm.detialUsername.$touched">
+                                <div ng-show="detialForm.detialUsername.$error.required" class="wrong-tip">请输入收货人姓名</div>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <label>
+                                <span class="title"><i>*</i>收货人电话：</span>
+                                <input name="detialMobile" ng-model="detial.mobile" class="form-control" type="text" ng-pattern="/^\d{12}$/" required/>
+                            </label>
+                            <!--验证-->
+                            <div ng-show="detialForm.$submitted || detialForm.detialMobile.$touched">
+                                <div ng-show="detialForm.detialMobile.$error.required || detialMobile.detialMobile.$invalid" class="wrong-tip">请输入正确格式的手机号码</div>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <label>
+                                <span class="title"><i>*</i>位置：</span>
+
+                                <div class="location" class="col-sm-10">
+                                    <select name="detialProvince" id="detialProvince" ng-model="sellerInfo.addrProvince" ng-change="provinceChage()" class="form-control" required>
+                                        <option value="">请选择省</option>
+                                        <option ng-repeat="p in detial.provinceList" value="{{p.code}}">{{p.name}}</option>
+                                    </select>
+
+                                    <select name="detialCity" id="detialCity" ng-model="sellerInfo.addrCity" ng-change="cityChage()" class="form-control" required>
+                                        <option value="">请选择市</option>
+                                        <option ng-repeat="c in detial.cityList" value="{{c.code}}">{{c.name}}</option>
+                                    </select>
+
+                                    <select name="detialArea" id="detialArea" ng-model="sellerInfo.addrArea" class="form-control" required>
+                                        <option value="">请选择区/县</option>
+                                        <option ng-repeat="a in detial.areaList" value="{{a.code}}">{{a.name}}</option>
+                                    </select>
+
+                                    <input name="detialAddress" ng-model="detial.address" class="form-control" placeholder="请输入详细地址" type="text" required/>
+
+
+                                    <div>
+                                        <!--验证-->
+                                        <div class="location-val">
+                                            <div ng-show="detialForm.$submitted || detialForm.detialProvince.$dirty || detialForm.detialProvince.$touched">
+                                                <div ng-show="detialForm.detialProvince.$error.required" class="wrong-tip">请选择省</div>
+                                            </div>
+                                        </div>
+
+                                        <!--验证-->
+                                        <div class="location-val">
+                                            <div ng-show="detialForm.$submitted || detialForm.detialCity.$dirty || detialForm.detialCity.$touched">
+                                                <div ng-show="detialForm.detialCity.$error.required" class="wrong-tip">请选择市</div>
+                                            </div>
+                                        </div>
+
+                                        <!--验证-->
+                                        <div class="location-val">
+                                            <div ng-show="detialForm.$submitted || detialForm.detialArea.$dirty || detialForm.detialArea.$touched">
+                                                <div ng-show="detialForm.detialArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                            </div>
+                                        </div>
+
+                                        <!--验证-->
+                                        <div class="location-val">
+                                            <div ng-show="detialForm.$submitted || detialForm.detialAddress.$touched">
+                                                <div ng-show="detialForm.detialAddress.$error.required" class="wrong-tip">请输入详细地址</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <!--<h3>订单跟踪</h3>-->
+                    <!--<ul class="tracking">-->
+                        <!--<li class="row">-->
+                            <!--<label>-->
+                                <!--<span class="title">下单时间：</span>-->
+                                <!--<p>{{detial.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+                            <!--</label>-->
+                            <!--<label>-->
+                                <!--<span class="title">订单状态：</span>-->
+                                <!--<p>{{detial.statusName}}</p>-->
+                            <!--</label>-->
+                        <!--</li>-->
+                        <!--<li class="row">-->
+                            <!--<label>-->
+                                <!--<span class="title">取消订单时间：</span>-->
+                                <!--<p>{{detial.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+                            <!--</label>-->
+                            <!--<label>-->
+                                <!--<span class="title">订单状态：</span>-->
+                                <!--<p>{{detial.statusName}}</p>-->
+                            <!--</label>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                    <div class="btn-con">
+                        <button ng-click="sellerInfo.cancel()" class="btn btn-primary">取消订单</button>
+                        <button ng-click="detial.save()" type="submit" class="btn btn-primary">保存</button>
+                        <button ng-click="detial.back()" class="btn btn-primary">返回列表</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 提示框 -->
+    <div id="newAlert" class="alert alert-dismissible fade" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p class="prompt"></p>
+    </div>
+
+    <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jqmeter.min.js"></script>
+</div>
