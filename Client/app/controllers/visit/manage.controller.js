@@ -59,6 +59,7 @@ define([], function () {
           if(sessionStorage.storageId) {
             // 当前页改为详情
             $scope.vm.currentPage = 'detial';
+            backTop();
             $scope.detial.detialPage = 'storage';
 
             $scope.info.sellerId = sessionStorage.storageId;
@@ -332,9 +333,9 @@ define([], function () {
           }
 
           // 基本信息 - 保存点击
-          $scope.info.save = function(type) {
+          $scope.info.save = function() {
             // 验证，id，点击类型
-            newAndEdit($scope.infoForm.$valid, type);
+            newAndEdit($scope.infoForm.$valid, 'edit');
           }
 
           // 基本信息 - 取消点击
@@ -347,6 +348,7 @@ define([], function () {
           $scope.info.back = function() {
             if($scope.fromPage == 'reviewManage') {
               $location.path('view/visit/reviewmanage');
+
             } else if($scope.fromPage == 'storage') {
               $location.path('view/visit/rebate/storagemanage');
               sessionStorage.setItem('fromPage', 'manage');
@@ -388,37 +390,6 @@ define([], function () {
             // 点击导航清空日历
             $scope.detial.startTime = ''
             $scope.detial.endTime = ''
-
-            // 时间设置
-            $("#detialStart").datetimepicker({
-              format: 'yyyy-mm-dd hh:ii:00',
-              language: 'zh-CN',
-              todayBtn:  1,
-              autoclose: 1,
-              todayHighlight: 1
-            }).on('change', function (e) {
-              var startTime = e.target.value;
-              var endTime = $scope.detial.endTime;
-              if (endTime < startTime) {
-                $scope.detial.endTime = '';
-                $scope.$apply();
-              }
-            });
-
-            $("#detialEnd").datetimepicker({
-              format: 'yyyy-mm-dd hh:ii:00',
-              language: 'zh-CN',
-              todayBtn:  1,
-              autoclose: 1,
-              todayHighlight: 1
-            }).on('change', function (e) {
-              var endTime = e.target.value;
-              var startTime = $scope.detial.startTime;
-              if (startTime > endTime) {
-                $scope.detial.startTime = '';
-                $scope.$apply();
-              }
-            });
           }
 
           // 搜索
@@ -645,6 +616,7 @@ define([], function () {
             $scope.new = Object.assign({}, $scope.new, data);
 
             $scope.vm.currentPage = 'new';
+            backTop();
 
             // 重置form状态
             $scope.form.$setPristine();
@@ -771,18 +743,12 @@ define([], function () {
                     $scope.vm.currentPage = 'index';
                   } else {
                     var typeInfo = '保存成功'
+                    $scope.info.isEdit = false;
+                    // 获取新数据
+                    getDetialInfoList($scope.info.sellerId, 'nowPage');
                   }
-                  $scope.info.isEdit = false;
                   alertMsg($('#newAlert'), 'success', typeInfo);
-
-                  if(clickType == 'saveAndBack') {
-                    $timeout(function(){
-                      $scope.vm.currentPage = 'index';
-                    }, 1000)
-                  }
-
-                  // 获取新数据
-                  getDetialInfoList($scope.info.sellerId, 'nowPage');
+                  backTop();
                 } else {
                   alertMsg($('#newAlert'), 'danger', res.data.msg);
                 }
@@ -791,9 +757,9 @@ define([], function () {
           }
 
           // 新增保存
-          $scope.new.save = function(type, clickType) {
+          $scope.new.save = function() {
             // 验证，id，点击类型
-            newAndEdit($scope.form.$valid, type, clickType);
+            newAndEdit($scope.form.$valid, 'new', 'save');
           }
 
           $scope.new.back = function() {
@@ -810,7 +776,7 @@ define([], function () {
 
 
           // 返回顶部
-          var backTop = function() {
+          backTop = function() {
             $('.ui-view-container').scrollTop(0);
           }
 
@@ -821,7 +787,6 @@ define([], function () {
             formData.append('file', files);
 
             var filesSize = files.size
-            console.log(filesSize)
             if(filesSize > 5*1024*1024) {
               alertMsg($('#newAlert'), 'danger', '请上传小于5M的图片');
             } else {
@@ -953,6 +918,37 @@ define([], function () {
             }
           });
 
+
+          // 详情时间设置
+          $("#detialStart").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var startTime = e.target.value;
+            var endTime = $scope.detial.endTime;
+            if (endTime < startTime) {
+              $scope.detial.endTime = '';
+              $scope.$apply();
+            }
+          });
+
+          $("#detialEnd").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var endTime = e.target.value;
+            var startTime = $scope.detial.startTime;
+            if (startTime > endTime) {
+              $scope.detial.startTime = '';
+              $scope.$apply();
+            }
+          });
 
         }]
     };

@@ -190,6 +190,7 @@
         display: block;
         width: 150px;
         height: auto;
+        cursor: pointer;
       }
     }
 
@@ -266,6 +267,24 @@
     }
   }
 
+}
+
+// 查看大图
+.img-modal {
+  .big-photo {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+}
+
+.img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px;
 }
 
 // 验证

@@ -28,7 +28,14 @@ define([], function () {
             listData: [],
             pageNo: 1,
             pageSize: 10,
-            currentPage: 'index'
+          }
+
+          // 返回后获取之前搜索数据
+          if(sessionStorage.reviewData) {
+            var data = $.parseJSON(sessionStorage.getItem('reviewData'));
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+            sessionStorage.removeItem('reviewData');
           }
 
           // 获取table列表
@@ -49,6 +56,7 @@ define([], function () {
               pageSize: 10,
               isAuthMgr: 1
             };
+            $scope.reviewData = data;
 
             // 根据关键词搜索条件，传不同数据
             if($scope.vm.searchType == '3') {
@@ -270,13 +278,14 @@ define([], function () {
           // 查看点击
           $scope.viewReviewManage = function(id) {
             sessionStorage.setItem('sellerId', id);
+            sessionStorage.setItem('reviewData', JSON.stringify($scope.reviewData));
             $location.path('view/visit/manage');
             backTop();
           }
 
 
           // 返回顶部
-          var backTop = function() {
+          backTop = function() {
             $('.ui-view-container').scrollTop(0);
           }
 

@@ -341,16 +341,22 @@
                                                                 </select>
 
                                                                 <!--验证-->
-                                                                <div ng-show="infoForm.$submitted || infoForm.infoProvince.$dirty || infoForm.infoProvince.$touched">
-                                                                    <div ng-show="infoForm.infoProvince.$error.required" class="wrong-tip">请选择省</div>
+                                                                <div class="location-val">
+                                                                    <!--验证-->
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoCity.$dirty || infoForm.infoCity.$touched">
+                                                                        <div ng-show="infoForm.infoCity.$error.required" class="wrong-tip">请选择市</div>
+                                                                    </div>
                                                                 </div>
-                                                                <!--验证-->
-                                                                <div ng-show="infoForm.$submitted || infoForm.infoCity.$dirty || infoForm.infoCity.$touched">
-                                                                    <div ng-show="infoForm.infoCity.$error.required" class="wrong-tip">请选择市</div>
+                                                                <div class="location-val">
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoProvince.$dirty || infoForm.infoProvince.$touched">
+                                                                        <div ng-show="infoForm.infoProvince.$error.required" class="wrong-tip">请选择省</div>
+                                                                    </div>
                                                                 </div>
-                                                                <!--验证-->
-                                                                <div ng-show="infoForm.$submitted || infoForm.infoArea.$dirty || infoForm.infoArea.$touched">
-                                                                    <div ng-show="infoForm.infoArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                                                <div class="location-val">
+                                                                    <!--验证-->
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoArea.$dirty || infoForm.infoArea.$touched">
+                                                                        <div ng-show="infoForm.infoArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </label>
@@ -508,7 +514,7 @@
 
                                                 <div class="btn-con">
                                                     <button ng-if="info.isEdit == false" ng-click="info.edit()" class="btn btn-primary" type="button">修改基本信息</button>
-                                                    <button ng-if="info.isEdit == true" ng-click="info.save('edit')" type="submit" class="btn btn-primary">保存</button>
+                                                    <button ng-if="info.isEdit == true" ng-click="info.save()" type="submit" class="btn btn-primary">保存</button>
                                                     <button ng-if="info.isEdit == true" ng-click="info.cancel()" class="btn btn-primary" type="button">取消</button>
                                                     <button ng-click="info.back()" class="btn btn-primary" type="button">返回列表</button>
                                                 </div>
@@ -796,16 +802,20 @@
                             </select>
 
                             <!--验证-->
-                            <div ng-show="form.$submitted || form.newAddrProvince.$dirty || form.newAddrProvince.$touched">
-                                <div ng-show="form.newAddrProvince.$error.required" class="wrong-tip">请选择省</div>
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrProvince.$dirty || form.newAddrProvince.$touched">
+                                    <div ng-show="form.newAddrProvince.$error.required" class="wrong-tip">请选择省</div>
+                                </div>
                             </div>
-                            <!--验证-->
-                            <div ng-show="form.$submitted || form.newAddrCity.$dirty || form.newAddrCity.$touched">
-                                <div ng-show="form.newAddrCity.$error.required" class="wrong-tip">请选择市</div>
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrCity.$dirty || form.newAddrCity.$touched">
+                                    <div ng-show="form.newAddrCity.$error.required" class="wrong-tip">请选择市</div>
+                                </div>
                             </div>
-                            <!--验证-->
-                            <div ng-show="form.$submitted || form.newAddrArea.$dirty || form.newAddrArea.$touched">
-                                <div ng-show="form.newAddrArea.$error.required" class="wrong-tip">请选择区/县</div>
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrArea.$dirty || form.newAddrArea.$touched">
+                                    <div ng-show="form.newAddrArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                </div>
                             </div>
                         </div>
                     </div>

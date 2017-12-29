@@ -29,6 +29,7 @@ define([], function () {
         addrProvince: '',
         addrCity: '',
         addrArea: '',
+        isCancel: false, // 非取消订单状态，input可编辑
       }
 
       $scope.sellerInfo = {
@@ -185,6 +186,7 @@ define([], function () {
       $scope.viewDetial = function (orderid) {
         backTop();
         $scope.vm.currentPage = 'detial';
+        $scope.detial.orderid = orderid;
         // 重置验证
         $scope.detialForm.$setPristine();
         $scope.detialForm.$setUntouched();
@@ -194,6 +196,13 @@ define([], function () {
           if(res.data.ok) {
             $scope.sellerInfo = Object.assign({}, $scope.sellerInfo, res.data.data.sellerInfo);
             $scope.detial = Object.assign({}, $scope.detial, res.data.data);
+
+            // 如果是取消订单状态，表单不可编辑
+            if($scope.detial.status == 4) {
+              $scope.detial.isCancel = true;
+            } else {
+              $scope.detial.isCancel = false;
+            }
 
             // 省
             $model.getManageProvince().then(function (res) {
@@ -230,15 +239,40 @@ define([], function () {
         })
       }
 
+      // 取消订单
+      $scope.detial.cancel = function() {
+        $model.cancelOrder({orderid: $scope.detial.orderid}).then(function(res) {
+          if(res.data.ok) {
+            alertMsg($('#newAlert'), 'success', '取消成功');
+            $scope.detial.isCancel = true; // 取消订单状态，input不可编辑
+            // 刷新列表，但不返回。
+            getList($scope.paginationConf.data.page.currentPageNumber, true);
+          } else {
+            alertMsg($('#newAlert'), 'danger', res.data.msg);
+          }
+        })
+      }
 
       // 保存
       $scope.detial.save = function() {
-
-        // fixme 未完成的有保存和取消订单。暂无接口
         if($scope.detialForm.$valid) {
           var data = {
-
+            orderid: $scope.detial.orderid, // 订单编号
+            username: $scope.detial.username, // 收货人名称
+            mobile: $scope.detial.mobile, // 收货人电话
+            province: $scope.sellerInfo.addrProvince, //
+            city: $scope.sellerInfo.addrCity, //
+            district: $scope.sellerInfo.addrArea, //
+            address: $scope.detial.address, // 详细地址
           }
+
+          $model.modifyOrder(data).then(function(res) {
+            if(res.data.ok) {
+              alertMsg($('#newAlert'), 'success', '保存成功');
+            } else {
+              alertMsg($('#newAlert'), 'danger', res.data.msg);
+            }
+          })
         }
       }
 
@@ -251,7 +285,7 @@ define([], function () {
 
 
       // 返回顶部
-      var backTop = function() {
+      backTop = function() {
         $('.ui-view-container').scrollTop(0);
       }
 

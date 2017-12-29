@@ -38,6 +38,7 @@ define([], function () {
       if(sessionStorage.fromPage) {
         // 当前页改为详情
         $scope.vm.currentPage = 'detial';
+        backTop();
 
         $scope.detial.settingId = sessionStorage.settingId;
         $scope.detial.awardType = sessionStorage.awardType;
@@ -48,6 +49,15 @@ define([], function () {
         sessionStorage.removeItem('fromPage');
         sessionStorage.removeItem('settingId');
         sessionStorage.removeItem('awardType');
+
+        // 返回后获取之前搜索数据
+        if(sessionStorage.storageDetialData) {
+          console.log(sessionStorage.storageDetialData)
+          var data = $.parseJSON(sessionStorage.getItem('storageDetialData'));;
+          // 获取到的数据放入vm里
+          $scope.detial = Object.assign({}, $scope.detial, data);
+          sessionStorage.removeItem('storageDetialData');
+        }
       }
 
       // 获取table列表
@@ -235,6 +245,7 @@ define([], function () {
       // 新增点击
       $scope.newRetailerClick = function(e) {
         $scope.vm.currentPage = 'new';
+        backTop();
 
         // 初始化数据
         var data = {
@@ -369,6 +380,7 @@ define([], function () {
               // 新增保存成功后，直接返回列表。 如果是编辑，还停留在当前页面。并且有  保存并返回按钮。
               if($scope.vm.currentPage == 'new') {
                 back();
+                getList(1, true);
               } else {
                 // 保存并退出
                 if(type == 'saveAndBack') {
@@ -389,7 +401,7 @@ define([], function () {
 
 
       // 返回顶部
-      var backTop = function() {
+      backTop = function() {
         $('.ui-view-container').scrollTop(0);
       }
 
@@ -453,6 +465,7 @@ define([], function () {
       function getDetialInfo() {
         // 当前页改为详情
         $scope.vm.currentPage = 'detial';
+        backTop();
 
         $model.getStorageDetial({id: $scope.detial.settingId}).then(function(res) {
           if(res.data.ok) {
@@ -480,6 +493,8 @@ define([], function () {
           pageNo: page || 1,
           pageSize: 10
         }
+        $scope.storageDetialData = data;
+        
         $model.getStorageDetialList(data).then(function(res) {
           if(res.data.ok) {
             // 获取到的数据放入detial里
@@ -558,6 +573,7 @@ define([], function () {
         sessionStorage.setItem('storageId', sellerId);
         sessionStorage.setItem('settingId', settingId);
         sessionStorage.setItem('awardType', awardType);
+        sessionStorage.setItem('storageDetialData', JSON.stringify($scope.storageDetialData));
         $location.path('view/visit/manage');
         backTop();
       }

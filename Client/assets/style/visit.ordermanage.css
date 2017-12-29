@@ -142,7 +142,8 @@
     .order-detial li.photo img {
       display: block;
       width: 150px;
-      height: auto; }
+      height: auto;
+      cursor: pointer; }
   .order-detial li label {
     float: left;
     font-weight: normal;
@@ -195,6 +196,19 @@
 
 .order-detial .tracking p {
   float: left; }
+
+.img-modal .big-photo {
+  width: 100%;
+  display: block;
+  margin: 0 auto; }
+
+.img-modal .modal-footer {
+  text-align: center; }
+
+.img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px; }
 
 .wrong-tip {
   color: #f00;

@@ -55,21 +55,8 @@
 .search-btn-con .reset {
   margin-left: 30px; }
 
-.rebate-modal input {
-  width: 90%;
-  display: inline-block;
-  margin-right: 5px; }
-
-.rebate-modal .modal-footer {
-  text-align: center; }
-
-.rebate-modal .btn {
-  display: inline-block; }
-
-.rebate-modal .wrong-tip {
-  font-size: 12px;
-  line-height: 1;
-  margin-top: 5px; }
+.storage-modal #passTitle {
+  float: left; }
 
 td.batch label {
   width: 50px;
