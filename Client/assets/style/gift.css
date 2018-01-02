@@ -363,7 +363,7 @@
 
 .form_sec div input[type='text']{
     border: 1px solid #D2D2D2;
-    width: 320px;
+    width: 364px;
     height: 35px;
     font-size: 15px;
     padding-left: 10px;
@@ -723,7 +723,7 @@ textarea {
 .multiselect-container li label{
     font-size: 15px;
     color: #515151;
-    width: 180px;
+    width: 364px;
 }
 .multiselect{
     text-align: left;

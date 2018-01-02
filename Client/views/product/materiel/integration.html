@@ -180,7 +180,7 @@
                             </div>
                             <div>
                                 <label class="label_title" for="supply">供应商<span>*</span></label>
-                                <select id="supply" ng-disabled = '!addPocket'  ng-class="{true:'disabled_color'}[!addPocket]">
+                                <select id="supply" ng-disabled = '!addPocket' style="width:320px;"  ng-class="{true:'disabled_color'}[!addPocket]">
                                     <option value="">请选择</option>
                                     <option ng-repeat="enableItem in enableSupplyList"
                                             value="{{enableItem.supplierCode}}">{{enableItem.name}}</option>

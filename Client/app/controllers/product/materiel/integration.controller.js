@@ -59,7 +59,6 @@ define([], function () {
             $scope.createPacket = function(){
                 $scope.addPocket = true;
                 $scope.showTables = !$scope.showTables;
-			console.log(222222222);
                 
                 //获取新建时启用状态的供应商列表
                 if($scope.addPocket){
@@ -68,7 +67,6 @@ define([], function () {
                         status : 1
                     };
                     $model.getSupplyList(createSupply).then(function(res){
-                    	console.log(222222222);
                         if(res.status == 200){
                             $scope.enableSupplyList = res.data.data.list;
                             $scope.$apply();
@@ -101,7 +99,7 @@ define([], function () {
                         selectAll:true,
                         selectAllText: '全部',
                         selectAllValue: 'all',
-                        buttonWidth: '180px'
+                        buttonWidth: '320px'
                     });
                 }
             });
@@ -207,7 +205,7 @@ define([], function () {
                     selectAll:true,
                     selectAllText: '全部',
                     selectAllValue: 'all',
-                    buttonWidth: '180px'
+                    buttonWidth: '320px'
                 });
             });
             //监听品牌选择信息
