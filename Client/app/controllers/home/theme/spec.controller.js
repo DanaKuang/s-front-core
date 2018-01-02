@@ -420,10 +420,10 @@ define([], function () {
           var option = $model.$fenbu.data;
           var jiangoption = _.cloneDeep(option);
           //自定义tooltip
-          jiangoption.tooltip.formatter = function (params) {
-            console.log(params[0].data,params[1].data);
-            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
-          }
+          // jiangoption.tooltip.formatter = function (params) {
+          //   console.log(params[0].data,params[1].data);
+          //   return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          // }
           jiangoption.title.text = "现金红包";
           var shioption = _.cloneDeep(option);
           shioption.title.text = "实物奖品";
@@ -436,20 +436,20 @@ define([], function () {
           $model.$getMoney(param, 2).then(function (res) {
             var res = res.data || [];
             for(var i=0;i<res.length;i++){
-              jiangoption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
+              jiangoption.series[1].data.push(res[i].drawResultPv);
               jiangoption.series[0].data.push(res[i].awardPayPv);  
               jiangoption.yAxis.data.push(res[i].awardName)
             }
             //console.log(jiangoption.series);
             myChart.setOption(jiangoption,true);
           })
-          shioption.tooltip.formatter = function (params) {
-            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
-          }
+          // shioption.tooltip.formatter = function (params) {
+          //   return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          // }
           $model.$getThing(param,1).then(function (res) {
             var res = res.data || [];
             for (var i = 0; i < res.length; i++) {
-              shioption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
+              shioption.series[1].data.push(res[i].drawResultPv);
               shioption.series[0].data.push(res[i].awardPayPv);
               shioption.yAxis.data.push(res[i].awardName);
             };
