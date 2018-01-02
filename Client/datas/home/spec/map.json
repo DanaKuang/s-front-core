@@ -2,10 +2,6 @@
   "tooltip": {
     "trigger": "item"
   },
-  "legend": {
-    "show":false,
-    "data":["扫码次数"]
-  },
   "visualMap": {
     "show":false,
     "min": 0,
@@ -18,13 +14,14 @@
       "color":["#58E1ff","#4d51ff"]
     }
   },
+
   "scaleLimit": {
     "min":1,
     "max":3
   },
   "series": [
     {
-      "name": "扫码次数",
+      "name": "扫码烟包数",
       "type": "map",
       "mapType": "china",
       "roam": true,
@@ -36,7 +33,9 @@
           "show": true
         }
       },
-      "data":[]
+      "data":[
+        {"name": "北京","value": 123 }
+      ]
     }
   ]
 }

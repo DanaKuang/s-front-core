@@ -1,0 +1,54 @@
+{
+    "grid":{
+        "left": 0,
+        "top":20,
+        "containLabel": true
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer" : {      
+            "type" : "shadow"       
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [],
+        "axisLabel":{
+            "interval": 0
+        }
+    },
+    "yAxis" : {
+        "type":"value",
+        "axisLabel": {
+            "show": false
+        }
+        
+    },
+    "series": [
+        {
+            "name": "历史扫码人数",
+            "type": "bar",
+            "stack": "扫码人数",
+            "barWidth": "45%",
+            "data": [],
+            "itemStyle":{
+                "normal":{
+                  "color":"#5d9cd2"
+                }
+            }
+        },
+        {
+            "name": "新增扫码人数",
+            "type": "bar",
+            "stack": "扫码人数",
+            "barWidth": "45%",
+            "data": [],
+            "itemStyle":{
+                "normal":{
+                  "color":"#ea7d3c"
+                }
+            }
+        }
+
+    ]
+}

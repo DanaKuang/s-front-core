@@ -1,0 +1,46 @@
+{
+    "grid": {
+        "left": "3%",
+        "right": "6%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "toolbox": {
+        "y": "6%",
+        "x": "95%"
+    },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": []
+    },
+    "yAxis": {
+        "type": "value",
+        "axisLabel": {
+            "show": false
+        }
+    },
+    "series": [
+        {
+            "type": "line",
+            "itemStyle": {
+                "normal": {
+                    "color": "#7ad7f6",
+                    "lineStyle": {
+                        "color": "#7ad7f6"
+                    }
+                }
+            },
+            "label": {
+              "normal": {
+                "show": true,
+                "position": "top",
+                "textStyle": {
+                    "color": "black"
+                }
+              }
+            },
+            "data":[]
+        }
+    ]
+}

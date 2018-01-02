@@ -1,0 +1,54 @@
+{
+    "grid":{
+      "left": 10,
+      "top":20,
+      "containLabel": true
+    },
+    "color": ["#3398DB"],
+    "xAxis" : [
+      {
+        "type" : "category",
+        "data" : [],
+        "axisTick": {
+          "alignWithLabel": true
+        }
+      }
+    ],
+    "dataZoom": [
+      {
+        "type": "inside",
+        "show": true,
+        "start":0,
+        "end": 100,
+        "zoomLock":true
+      }
+    ],
+    "yAxis" : {
+      "type" : "value",
+      "axisLabel": {
+        "show": false
+      }
+    },
+    "series" : [
+      {
+        "name":"city",
+        "type":"bar",
+        "barWidth": "45%",
+        "label":{
+          "normal":{
+            "show":true,
+            "position":"top",
+            "textStyle":{
+              "color":"black"
+            }
+          }
+        },
+        "itemStyle":{
+          "normal":{
+            "color":"#76D7F7"
+          }
+        },
+        "data":[]
+      }
+    ]
+  }
