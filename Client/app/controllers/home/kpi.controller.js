@@ -143,8 +143,8 @@ define([], function () {
             res.push({
               name: d.city,
               value: (LATLNG[d.cityCode] &&
-                LATLNG[d.cityCode].concat(d.scantimes)) ||
-                [d.longitude,d.latitude,d.scantimes]
+                [LATLNG[d.cityCode].lng, LATLNG[d.cityCode].lat, d.scantimes]) ||
+                [d.longitude, d.latitude, d.scantimes]
             });
           });
           return res;
