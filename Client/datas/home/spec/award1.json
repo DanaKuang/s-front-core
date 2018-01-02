@@ -1,6 +1,6 @@
 {
     "grid":{
-      "left":"30",
+      "left": 10,
       "top":20,
       "containLabel": true
     },
@@ -19,7 +19,7 @@
         "type": "inside",
         "show": true,
         "start":0,
-        "end": 3.2,
+        "end": 100,
         "zoomLock":true
       }
     ],

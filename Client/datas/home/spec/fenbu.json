@@ -35,7 +35,7 @@
     {
       "name":"领奖数量",
       "type": "bar",
-      "barWidth":15,
+      "barWidth":10,
       "data": [],
     
       "itemStyle":{
@@ -47,7 +47,7 @@
     {
       "name": "中奖数量",
       "type": "bar",
-      "barWidth":15,
+      "barWidth":10,
       "data": [],
       "itemStyle":{
         "normal":{
