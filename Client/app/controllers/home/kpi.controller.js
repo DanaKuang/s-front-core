@@ -134,15 +134,17 @@ define([], function () {
         window.onresize = myChart.resize
 
         var option = $model.$echartConf.data;
+        var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
-        var baseData = data; // 经纬度基准值
-
+        debugger
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
             res.push({
               name: d.city,
-              value: [d.longitude,d.latitude,d.scantimes]
+              value: (LATLNG[d.cityCode] &&
+                LATLNG[d.cityCode].concat(d.scantimes)) ||
+                [d.longitude,d.latitude,d.scantimes]
             });
           });
           return res;
@@ -182,11 +184,8 @@ define([], function () {
         function getMapData () {
           $model.getMapData().then(function (res) {
             var data = res.data || [];
-            // 扫码点数只增不减（理论上是,否则会有问题）
-            baseData = $.extend(data, baseData);
-
             var option = myChart.getOption();
-            sortData = convertData(baseData.sort(function (a, b) {
+            sortData = convertData(data.sort(function (a, b) {
                 return b.scantimes - a.scantimes;
             }));
             top0_30 = sortData.slice(0, 30);
