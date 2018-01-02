@@ -49,7 +49,7 @@
         "align": "center"
     }, {
         "name": "effectScanPv",
-        "label": "有效扫码数",
+        "label": "扫码烟包数",
         "sortable": true,
         "align": "center"
     }, {

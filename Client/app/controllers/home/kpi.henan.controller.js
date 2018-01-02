@@ -136,15 +136,17 @@ define([], function () {
         window.onresize = myChart.resize;
 
         var option = $model.$echartConf.data;
+        var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
-        var baseData = data; // 经纬度基准值
 
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
             res.push({
               name: d.city,
-              value: [d.longitude,d.latitude,d.scantimes]
+              value: (LATLNG[d.cityCode] &&
+                LATLNG[d.cityCode].concat(d.scantimes)) ||
+                [d.longitude,d.latitude,d.scantimes]
             });
           });
           return res;
@@ -201,29 +203,20 @@ define([], function () {
           // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
-            // 定位
-            data.forEach(function (d) {
-              var b = baseData.filter(function (f) {
-                return f.city === d.city;
-              });
-              d.latitude = (b[0] && b[0].latitude) || d.latitude;
-              d.longitude = (b[0] && b[0].longitude) || d.longitude;
-            });
-            baseData = data;
 
             myChart.setOption({
               series: [{
-                data: convertData(baseData)
+                data: convertData(data)
               }, {
-                data: convertData(baseData.filter(function (a) {
+                data: convertData(data.filter(function (a) {
                   return a.type === '3';
                 }))
               }, {
-                data: convertData(baseData.filter(function (a) {
+                data: convertData(data.filter(function (a) {
                   return a.type === '2';
                 }))
               }, {
-                data: convertData(baseData.filter(function (a) {
+                data: convertData(data.filter(function (a) {
                   return a.type === '1';
                 }))
               }]

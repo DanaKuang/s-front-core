@@ -39,7 +39,6 @@ define([], function () {
         //         city: "昨日芙蓉王湖南活动指标"
         //     }
         // }
-
         // 默认配置
         $scope.msConf = {
             pbArray: _.pluck($model.$brand.data, 'name'),
@@ -122,7 +121,7 @@ define([], function () {
             v == 0 ? initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: user === "hunan" ? "芙蓉王" : "黄金叶",
+                productBrand: $scope.msConf.pbArray[0] || "",
                 productName: "",
                 productPack: "",
                 saleZone: "",
@@ -131,7 +130,7 @@ define([], function () {
             }) : v == 1 ? initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: user === "hunan" ? "白沙" : "黄金叶",
+                productBrand: $scope.msConf.pbArray[0] || "",
                 productName: "",
                 productPack: "",
                 saleZone: user === "hunan" ? "堡垒型_A" : "华东分中心_DB",
@@ -140,7 +139,7 @@ define([], function () {
             }) : initSearchScope({
                 startTime: dayFilter.yesterday('date')+'_00',
                 endTime: dayFilter.today('date')+'_00',
-                productBrand: user === "hunan" ? "芙蓉王" : "黄金叶",
+                productBrand: $scope.msConf.pbArray[0] || "",
                 productName: "",
                 productPack: "",
                 saleZone: "",

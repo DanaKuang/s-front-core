@@ -64,7 +64,7 @@
         "align": "center"
     }, {
         "name": "rjyouxiaosaomacishu",
-        "label": "人均有效扫码次数",
+        "label": "人均扫码烟包数",
         "sortable": true,
         "align": "center"
     }, {
