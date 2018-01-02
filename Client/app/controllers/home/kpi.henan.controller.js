@@ -133,10 +133,12 @@ define([], function () {
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson)
         var myChart = echarts.init(document.getElementById('baiduMap'));
-        window.onresize = myChart.resize
+        window.onresize = myChart.resize;
 
         var option = $model.$echartConf.data;
         var data = $model.$mapData.data || [];
+        var baseData = data; // 经纬度基准值
+
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
@@ -199,19 +201,21 @@ define([], function () {
           // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
+            // 扫码点数只增不减（理论上是,否则会有问题）
+            baseData = $.extend(data, baseData);
             myChart.setOption({
               series: [{
-                data: convertData(data)
+                data: convertData(baseData)
               }, {
-                data: convertData(data.filter(function (a) {
+                data: convertData(baseData.filter(function (a) {
                   return a.type === '3';
                 }))
               }, {
-                data: convertData(data.filter(function (a) {
+                data: convertData(baseData.filter(function (a) {
                   return a.type === '2';
                 }))
               }, {
-                data: convertData(data.filter(function (a) {
+                data: convertData(baseData.filter(function (a) {
                   return a.type === '1';
                 }))
               }]
