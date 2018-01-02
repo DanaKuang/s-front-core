@@ -15,6 +15,7 @@ define([], function () {
         };
         var CHINA_JSON_URL = '/statics/home/kpi/china.json';           // 地图JSON
         var ECHART_JSON_CONF = '/statics/home/kpi/echartConf.json';    // echart配置
+        var LAT_LNG_CONF = '/statics/home/kpi/latlng.json';            // 经纬度静态json
 
         var SALES_JSON_CONF = '/statics/home/kpi/salesTblConf.json';   // table配置
         var FORMAT_JSON_CONF = '/statics/home/kpi/formatTblConf.json';
@@ -36,6 +37,7 @@ define([], function () {
 
         this.$chinaJson = request.$Query(CHINA_JSON_URL);
         this.$echartConf = request.$Query(ECHART_JSON_CONF);
+        this.$latlng = request.$Query(LAT_LNG_CONF);
 
         this.$salesConf = request.$Query(SALES_JSON_CONF);
         this.$formatConf = request.$Query(FORMAT_JSON_CONF);
