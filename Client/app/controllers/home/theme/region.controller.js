@@ -153,11 +153,11 @@ define([], function() {
 					$model.$getScanData(params).then(function(res) {
 						var data = res.data[0] || {};
 						firChart.series[0].data[0].value = data.scanPv / 10000;
-						firChart.series[0].max = (data.scanAvgPv * 2 / 10000).toFixed(1);
+						firChart.series[0].max = (data.scanAvgPv * 2 / 10000).toFixed(4);
 						secChart.series[0].data[0].value = data.scanCode / 10000;
-						secChart.series[0].max = (data.scanAvgCode * 2 / 10000).toFixed(1);
+						secChart.series[0].max = (data.scanAvgCode * 2 / 10000).toFixed(4);
 						thrChart.series[0].data[0].value = data.scanUv / 10000;
-						thrChart.series[0].max = (data.scanAvgUv * 2 / 10000).toFixed(1);
+						thrChart.series[0].max = (data.scanAvgUv * 2 / 10000).toFixed(4);
 						firstChart.setOption(firChart, true);
 						secondChart.setOption(secChart, true);
 						thirdChart.setOption(thrChart, true);

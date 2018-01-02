@@ -1,0 +1,313 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+/*12.15零售户重构*/
+
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px;
+}
+
+// 搜索
+.form-horizontal {
+  .form-group {
+    margin: 0;
+    padding: 0;
+  }
+  .control-label {
+    width: 90px;
+    float: left;
+    margin-right: 0px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  #durationStart, #durationEnd {
+    width: 45%;
+    background: #fff;
+    float: left;
+  }
+  .time {
+    width: 600px;
+  }
+  .time span {
+    width: 10%;
+    float: left;
+    line-height: 34px;
+    text-align: center;
+  }
+  .keywords {
+    .form-control {
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+}
+
+.search-btn-con {
+  margin-left: 64px;
+  .btn {
+    float: left;
+  }
+  .reset {
+    margin-left: 30px;
+  }
+}
+
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+
+// 仅显示店码订单
+.store-code {
+  float: left;
+  margin-bottom: 10px;
+  label {
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    margin: 0;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+.upload-btn-con {
+  float: right;
+  .btn {
+    float: left;
+    margin-left: 15px;
+  }
+  .file-con {
+    float: left;
+    position: relative;
+  }
+  #importFile {
+    width: 110px;
+    height: 34px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 100px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    //.activity-name {
+    //  width: 150px;
+    //}
+    //.time {
+    //  width: 75px;
+    //}
+  }
+}
+
+// 详情
+.order-detial {
+  h3 {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  ul {
+    overflow: hidden;
+  }
+
+  li {
+    width: 305px;
+    line-height: 34px;
+    font-size: 12px;
+    float: left;
+    margin: 0 15px 10px 0;
+    &.photo {
+      width: 100%;
+      img {
+        display: block;
+        width: 150px;
+        height: auto;
+        cursor: pointer;
+      }
+    }
+
+    label {
+      float: left;
+      font-weight: normal;
+      margin-bottom: 0px;
+    }
+    .title {
+      width: 115px;
+      float: left;
+      font-weight: bold;
+      text-align: right;
+      i {
+        color: #f00;
+      }
+    }
+    .value {
+      width: 190px;
+      float: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .form-control {
+      width: 200px;
+      float: left;
+      font-size: 12px;
+    }
+
+    .location {
+      overflow: hidden;
+      .form-control {
+        width: 120px;
+        margin-right: 15px;
+      }
+      input.form-control {
+        width: 150px;
+      }
+      .location-val {
+        width: 120px;
+        height: 34px;
+        float: left;
+        margin-right: 15px;
+      }
+      .wrong-tip {
+        width: 120px;
+        float: left;
+      }
+    }
+    .info-btn-con {
+      margin-left: 115px;
+    }
+  }
+
+  .row {
+    width: 100%;
+    margin-top: 10px;
+    .value, .form-control {
+      width: 400px;
+    }
+  }
+
+  .btn-con {
+    margin-left: 115px;
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+
+  .tracking {
+    p {
+      float: left;
+    }
+  }
+
+}
+
+// 查看大图
+.img-modal {
+  .big-photo {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+}
+
+.img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px;
+}
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px;
+}
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important;
+}
+.ng-submitted {
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    border-color: #FA787E !important;
+  }
+}
+
+// 下拉多选框设置
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+  display: block;
+}
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}

@@ -8,12 +8,12 @@ define([], function () {
     var visitReviewManageCtrl = {
         ServiceType: "controller",
         ServiceName: "visitReviewManageCtrl",
-        ViewModelName: 'visitReviewManageModel',
-        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitReviewManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
+        ViewModelName: 'visitManageModel',
+        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
 
           // 初始化一个对象，vm
           $scope.vm = {
-            authStatus: '', // 状态
+            authStatus: 1, // 状态
             commercial: '', // 业态
             district: '', // 区域
             searchType: 3, // 关键词类型
@@ -25,15 +25,23 @@ define([], function () {
             appEndTime: '',
             sortType: 1,
             sortValue: 1,
+            listData: [],
             pageNo: 1,
             pageSize: 10,
-            currentPage: 'index'
+          }
+
+          // 返回后获取之前搜索数据
+          if(sessionStorage.reviewData) {
+            var data = $.parseJSON(sessionStorage.getItem('reviewData'));
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+            sessionStorage.removeItem('reviewData');
           }
 
           // 获取table列表
           function getList(page, ispage) {
             var data = {
-              authStatus: $scope.vm.authStatus || '', // 状态
+              authStatus: $scope.vm.authStatus || 1, // 状态
               commercial: $scope.vm.commercial || '', // 业态
               district: $scope.vm.district || '', // 区域
               searchType: $scope.vm.searchType || '', // 关键词类型
@@ -45,8 +53,10 @@ define([], function () {
               sortType: $scope.vm.sortType || 1,
               sortValue: $scope.vm.sortValue,
               pageNo: page || 1,
-              pageSize: 10
+              pageSize: 10,
+              isAuthMgr: 1
             };
+            $scope.reviewData = data;
 
             // 根据关键词搜索条件，传不同数据
             if($scope.vm.searchType == '3') {
@@ -61,8 +71,9 @@ define([], function () {
               data.salesmanName = $scope.vm.keywords || ''; // 业务员
             }
 
-            $model.getReviewManageList(data).then(function(res) {
+            $model.getManageList(data).then(function(res) {
               $scope.vm.listData = res.data.list || [];
+
               // 是否刷新页码
               if(ispage) {
                 $scope.paginationConf = res;
@@ -100,19 +111,24 @@ define([], function () {
           })
 
           // 省
-          $model.getReviewManageProvince().then(function (res) {
+          $model.getManageProvince().then(function (res) {
             $scope.provinceList = res.data;
           });
 
           // 省份change
           $scope.provinceChage = function (e) {
-            if($scope.vm.addrProvince != '') {
+            if($scope.vm.addrProvince) {
               // 市
-              $model.getReviewManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
+              $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
                 $scope.cityList = res.data;
                 $scope.vm.addrCity = '';
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.cityList = [];
+              $scope.vm.addrCity = '';
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -120,10 +136,13 @@ define([], function () {
           $scope.cityChage = function (e) {
             if($scope.vm.addrCity != '') {
               // 区/县
-              $model.getReviewManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
+              $model.getManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
                 $scope.areaList = res.data;
                 $scope.vm.addrArea = '';
               });
+            } else {
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
           }
 
@@ -135,8 +154,8 @@ define([], function () {
 
           // 重置
           $scope.reset = function () {
-            $scope.vm = {
-              authStatus: '', // 状态
+            var data = {
+              authStatus: 1, // 状态
               commercial: '', // 业态
               district: '', // 区域
               searchType: 3, // 关键词类型
@@ -146,10 +165,15 @@ define([], function () {
               addrArea: '',
               appStartTime: '',
               appEndTime: '',
+              sortType: 1,
+              sortValue: 1,
+              listData: [],
               pageNo: 1,
               pageSize: 10
             }
-            $scope.provinceList = '';
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+
             $scope.cityList = '';
             $scope.areaList = '';
             getList(1, true);
@@ -189,15 +213,14 @@ define([], function () {
           $scope.selectAll = function ($event) {
             var allCheckbox = $event.target;
             var action = (allCheckbox.checked ? 'add' : 'remove');
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < $scope.vm.listData.length; i++) {
               updateSelected(action, $scope.batchIds[i]);
             }
           };
           // 全选的的ng-checked
           $scope.isSelectedAll = function () {
-            return $scope.selected.length === 10;
+            return $scope.selected.length === $scope.vm.listData.length;
           };
-
 
           // 单个儿审核按钮点击
           $scope.reviewAndPass = function (id, value) {
@@ -209,6 +232,7 @@ define([], function () {
 
             if(id != '') {
               $scope.selected = [id];
+              $scope.ifBatch = true;
             }
 
             $scope.reviewValue = value; // 要传的值，1通过，2不通过
@@ -228,7 +252,7 @@ define([], function () {
                 authResult: $scope.reviewValue,
               }
               if($scope.reviewValue == 2) {
-                data.failReason = $scope.noPassReason;
+                data.failReason = $scope.vm.noPassReason;
               }
               $model.reviewAndPass(data).then(function(res) {
                 if(res.data.ok) {
@@ -236,6 +260,7 @@ define([], function () {
                   getList($scope.paginationConf.data.page.currentPageNumber);
                   // 隐藏弹窗
                   $('.review-modal').modal('hide');
+                  alertMsg($('#newAlert'), 'success', '设置成功');
                 } else {
                   alertMsg($('#newAlert'), 'danger', res.data.msg);
                 }
@@ -253,7 +278,15 @@ define([], function () {
           // 查看点击
           $scope.viewReviewManage = function(id) {
             sessionStorage.setItem('sellerId', id);
+            sessionStorage.setItem('reviewData', JSON.stringify($scope.reviewData));
             $location.path('view/visit/manage');
+            backTop();
+          }
+
+
+          // 返回顶部
+          backTop = function() {
+            $('.ui-view-container').scrollTop(0);
           }
 
           // 弹窗框

@@ -9,6 +9,11 @@ define([], function () {
         ServiceType: 'service',
         ServiceName: 'manageactsModel',
         ServiceContent: ['request', function (request) {
+            // liubin 2017-12-21
+            this.$model = function () {
+                var IMG = '/statics/activity/actimg.json';
+                this.$IMG = request.$Query(IMG);
+            };
             //定义资源
             var $model = this;
 
@@ -76,7 +81,7 @@ define([], function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
             }
 
-            // 根据参数获取某种类型模板 
+            // 根据参数获取某种类型模板
             $model.getwhichsample = function (data) {
                 return request.$Search(GET_WHICH_SAMPLE, data)
             }

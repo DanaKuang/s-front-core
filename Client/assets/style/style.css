@@ -1239,8 +1239,8 @@ input[type="checkbox"]:checked + .checkbox{
     width: 220px;
 }
 .open .dropdown-menu{
-	oveflow-y:auto;
-	max-height:150px;
+	overflow-y:auto;
+	max-height:200px;
 }
 .report-search .multiselect{
     text-align: left;

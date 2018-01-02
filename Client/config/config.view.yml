@@ -278,23 +278,23 @@ visitManage:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/manage.html'
-  - httpmethod: 'get'                       # 零售户订单管理
+  - httpmethod: 'get'                       # 订单管理
     routepath: '/view/visit/ordermanage'
-    description: 'ordermanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/ordermanage.html'
-  - httpmethod: 'get'                       # 扫码入库奖励管理
+  - httpmethod: 'get'                       # 返佣管理 - 扫码入库
     routepath: '/view/visit/rebate/storagemanage'
-    description: 'storagemanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/storagemanage.html'
-  - httpmethod: 'get'                       # 扫码返佣管理
+  - httpmethod: 'get'                       # 返佣管理 - 扫码返佣
     routepath: '/view/visit/rebate/rebatemanage'
-    description: 'rebatemanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
@@ -305,7 +305,7 @@ visitManage:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/rebatemanage.html'
+    staticfile: 'visit/other.html'
 system:
   - httpmethod: 'get'                       # 修改密码
     routepath: '/view/system/password'

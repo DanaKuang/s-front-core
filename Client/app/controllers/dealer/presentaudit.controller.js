@@ -17,7 +17,8 @@ define([], function() {
             $scope.totalPage = 0;//总页数
             var initPage = {
                 page : $scope.pageNum,
-                pageSize : $scope.pageSize
+                pageSize : $scope.pageSize,
+                appStatus : 1 //提现状态默认为申请中
             };
             
             //设置input的默认时间

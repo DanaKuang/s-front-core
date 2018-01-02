@@ -1,0 +1,64 @@
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden; }
+
+.other-con ul {
+  overflow: hidden; }
+
+.other-con li {
+  border-bottom: 1px solid #666;
+  line-height: 34px;
+  overflow: hidden;
+  padding: 20px; }
+  .other-con li:last-child {
+    border: none; }
+  .other-con li h3 {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px; }
+  .other-con li .title {
+    color: #333;
+    font-size: 14px;
+    float: left;
+    margin-left: 50px; }
+  .other-con li .col-sm-8 {
+    height: 34px; }
+    .other-con li .col-sm-8 label {
+      float: left;
+      margin-right: 20px; }
+      .other-con li .col-sm-8 label input {
+        margin-right: 5px; }
+    .other-con li .col-sm-8 .form-control {
+      width: 200px;
+      float: left;
+      margin-right: 3px; }
+
+.btn-con {
+  margin-bottom: 20px; }
+  .btn-con .btn {
+    height: 30px;
+    display: block;
+    line-height: 18px;
+    margin: 0 auto;
+    padding: 6px 12px; }
+
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 20px; }
+
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none; }
+  #newAlert .close {
+    top: -11px; }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist; }

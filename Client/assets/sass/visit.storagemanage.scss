@@ -1,0 +1,350 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+  .new-btn {
+    float: right;
+  }
+}
+
+/*12.15零售户重构*/
+
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px;
+}
+
+// 搜索
+.form-horizontal {
+  .form-group {
+    margin: 0;
+    padding: 0;
+  }
+  .control-label {
+    width: 90px;
+    float: left;
+    margin-right: 0px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  #durationStart, #durationEnd {
+    width: 45%;
+    background: #fff;
+    float: left;
+  }
+  .time {
+    width: 476px;
+  }
+  .time span {
+    width: 10%;
+    float: left;
+    line-height: 34px;
+    text-align: center;
+  }
+}
+
+
+.search-btn-con {
+  .btn {
+    float: left;
+  }
+  .reset {
+    margin-left: 30px;
+  }
+}
+
+// 比例弹窗
+.storage-modal {
+  #passTitle {
+    float: left;
+  }
+}
+
+
+td.batch {
+  label {
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+.scroll-con {
+  overflow-x: auto;
+}
+
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 150px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.activity-name {
+    //  width: 200px;
+    //}
+    //.time {
+    //  width: 130px;
+    //}
+    //.ctime {
+    //  width: 80px;
+    //}
+  }
+}
+
+// 新增
+.rebate-new {
+  h3 {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .form-group {
+    width: 100%;
+    float: left;
+    line-height: 34px;
+    .text {
+      color: #4a5ff5;
+      font-size: 14px;
+      font-weight: bold;
+      float: left;
+      margin-left: 15px;
+    }
+    .unit {
+      margin-left: 10px;
+    }
+  }
+
+  .wrong-tip-con {
+    float: left;
+  }
+
+  .btn-con {
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+
+  .control-label {
+    width: 16.66666667%;
+    min-width: 125px;
+    float: left;
+    line-height: 34px;
+    text-align: right;
+    i {
+      color: #f00;
+    }
+  }
+
+  col-sm-offset-2 {
+    margin-left: 16.66666667%;
+  }
+
+  .col-sm-6 {
+    width: 300px;
+  }
+  .form-control {
+    float: left;
+    font-size: 12px;
+  }
+
+  .time {
+    .col-sm-6 {
+      width: 462px;
+    }
+    input {
+      width: 200px;
+      background: #fff;
+    }
+    .to {
+      width: 30px;
+      float: left;
+      line-height: 34px;
+      text-align: center;
+    }
+  }
+
+  // 选择按钮
+  .choose-btn {
+    height: 34px;
+    background: transparent;
+    border: 1px solid #6e80ff;
+    border-radius: 0;
+    cursor: pointer;
+    color: #6e80ff;
+    font-size: 12px;
+    float: left;
+    line-height: 34px;
+    margin-left: 15px;
+    padding: 0 7px;
+  }
+  .show-chosen {
+    color: indianred;
+  }
+}
+
+// 积分弹窗
+.create-jfProduct-modal {
+  .choose {
+    cursor: pointer;
+    color: #7c8af4;
+  }
+}
+
+
+// 详情head
+.detial-head {
+  font-size: 14px;
+  background: #eee;
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding-top: 10px;
+  .col-sm-3, .col-sm-6 {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px 0 0;
+    span {
+      color: #333;
+      float: left;
+      width: 100px;
+      text-align: right;
+    }
+  }
+}
+
+/*排序按钮*/
+.sort-btn-con {
+  overflow: hidden;
+  .btn-primary {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+// 搜索项
+.detial-search {
+  overflow: hidden;
+  .form-group {
+    float: left;
+  }
+  label {
+    float: left;
+    line-height: 34px;
+  }
+  select, input {
+    width: 150px;
+    float: left;
+    font-size: 12px;
+  }
+  .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center;
+  }
+  #detialStart, #detialEnd {
+    background: #fff;
+  }
+  .btn-con {
+    float: right;
+    margin-top: 2px;
+    .btn {
+      float: left;
+      margin-right: 15px;
+    }
+    .btn-default {
+      margin-right: 0px;
+    }
+  }
+}
+
+.back-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px;
+}
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important;
+}
+.ng-submitted {
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    border-color: #FA787E !important;
+  }
+}
+
+// 下拉多选框设置
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+  display: block;
+}
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
