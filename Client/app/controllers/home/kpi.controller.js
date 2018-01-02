@@ -135,6 +135,8 @@ define([], function () {
 
         var option = $model.$echartConf.data;
         var data = $model.$mapData.data || [];
+        var baseData = data; // 经纬度基准值
+
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
@@ -180,8 +182,11 @@ define([], function () {
         function getMapData () {
           $model.getMapData().then(function (res) {
             var data = res.data || [];
+            // 扫码点数只增不减（理论上是,否则会有问题）
+            baseData = $.extend(data, baseData);
+
             var option = myChart.getOption();
-            sortData = convertData(data.sort(function (a, b) {
+            sortData = convertData(baseData.sort(function (a, b) {
                 return b.scantimes - a.scantimes;
             }));
             top0_30 = sortData.slice(0, 30);
