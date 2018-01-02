@@ -80,10 +80,6 @@
                   <br />
                   <span class="weekactive">{{spec.weekactive}}：<i>{{spec.weekActive}}</i>人</span>
                 </div>
-              <div class="col-md-3">
-                <br />
-                <span class="reduce">{{spec.dayreduce}}：<i>{{spec.reduce}}</i>人</span><br />
-              </div>
             </div>
             <div class="region-hours-wrap">
               <div class="hours-title">
@@ -94,6 +90,15 @@
               </div>
               <div id="hours-chart"></div>
             </div>
+            <div class="region-hours-wrap spec-people-wrap">
+              <div class="hours-title">
+                <i></i>
+                <span>扫码人数时间趋势</span>
+                <span></span><br />
+                <span>（单位：次）</span>
+              </div>
+              <div id="people-chart"></div>
+            </div>
             <div class="region-hours-wrap spec-plan-wrap">
               <div class="hours-title">
                 <i></i>
@@ -103,9 +108,9 @@
               </div>
               <div class="region-select-wrap">
                 <div class="checkboxouter plan">
-                  <input type="checkbox" name="促销计划" checked/>
+                  <input type="checkbox" name="扫码烟包数" checked/>
                   <label class="checkbox"></label>
-                  <span>促销计划</span>
+                  <span>扫码烟包数</span>
                 </div>
                 <div class="checkboxouter plan">
                   <input type="checkbox" name="抽奖次数" checked/>
@@ -128,42 +133,29 @@
             <div class="region-hours-wrap spec-city-wrap">
               <div class="hours-title">
                 <i></i>
-                <span>各地市扫码次数</span>
-                <span></span><br />
+                <span>扫码地域分布</span>
+                <span></span><br/>
                 <span>（单位：次）</span>
               </div>
-              <div id="map-chart"></div>
-              <div id="city-chart"></div>
+              <div class="spec-city-container">
+                  <div class="spec-map-wrap">
+                    <span>分省分析</span>
+                    <div id="map-chart"></div>
+                  </div>
+                  <div class="spec-scan">
+                    <div class="spec-scan-num">
+                        <span>全省扫码烟包数时间趋势</span>
+                        <div id="time-chart"></div>
+                    </div>
+                    <div class="spec-scan-city">
+                      <span>省市各地市扫码烟包数排名</span>
+                      <div id="city-chart"></div>
+                    </div>
+                  </div>
+              </div>
             </div>
             <div class="region-hours-wrap spec-award-wrap">
-              <div class="hours-title">
-                <i></i>
-                <span>扫码趋势分析</span>
-                <span></span><br />
-                <span>（单位：次）</span>
-              </div>
-              <div class="region-select-wrap">
-                <div class="checkboxouter award">
-                  <input type="checkbox" name="扫码次数" checked/>
-                  <label class="checkbox"></label>
-                  <span>扫码次数</span>
-                </div>
-                <div class="checkboxouter award">
-                  <input type="checkbox" name="扫码烟包数" checked/>
-                  <label class="checkbox"></label>
-                  <span>扫码烟包数</span>
-                </div>
-                <div class="checkboxouter award">
-                  <input type="checkbox" name="抽奖次数" checked/>
-                  <label class="checkbox"></label>
-                  <span>抽奖次数</span>
-                </div>
-                <div class="checkboxouter award">
-                  <input type="checkbox" name="奖品领取" checked/>
-                  <label class="checkbox"></label>
-                  <span>奖品领取</span>
-                </div>
-              </div>
+              <span>全国地市扫码烟包数排名</span>
               <div id="award-chart"></div>
             </div>
             <div class="region-hours-wrap spec-pie-wrap">

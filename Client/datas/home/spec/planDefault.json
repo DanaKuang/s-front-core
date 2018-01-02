@@ -1,0 +1,82 @@
+{
+  "扫码烟包数": {
+    "name": "扫码烟包数",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#3fb6ed"
+      }
+    },
+    "data": []
+  },
+  "抽奖次数": {
+    "name": "抽奖次数",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#53bc9d"
+      }
+    },
+    "data":[]
+  },
+  "中奖数量": {
+    "name": "中奖数量",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#d2716e"
+      }
+    },
+    "data":[]
+  },
+  "领取数量": {
+    "name": "领取数量",
+    "type": "line",
+    "lineStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "label": {
+      "normal": {
+        "show": true
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#f8c654"
+      }
+    },
+    "data": []
+  }
+}
