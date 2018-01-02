@@ -14,6 +14,7 @@ define([], function() {
 			var month2 = date.getMonth();
 			var month3 = date.getMonth() == 1 ? 12 : date.getMonth()-1;
 			var day = date.getDate() - 1;
+			day = day <10? "0"+day : day;
 			month1 = (month1 < 10 ? "0" + month1 : month1);
 			month2 = (month2 < 10 ? "0" + month2 : month2);
 			month3 = (month3 < 10 ? "0" + month3 : month3);
@@ -21,9 +22,12 @@ define([], function() {
 			var mydate1 = (year.toString() + '年' + month1.toString() + "月");
 			var mydate2 = (year.toString() + '年' + month2.toString() + "月");
 			var mydate3 = (year.toString() + '年' + month3.toString() + "月");
-			$(".topTitle1").html(mydate1 + "(当月)扫码烟包数");
-			$(".topTitle2").html(mydate2 + "(上月)扫码烟包数");
-			$(".topTitle3").html(mydate3 + "(上上月)扫码烟包数");
+			// $(".topTitle1").html(mydate1 + "(当月)扫码烟包数");
+			// $(".topTitle2").html(mydate2 + "(上月)扫码烟包数");
+			// $(".topTitle3").html(mydate3 + "(上上月)扫码烟包数");
+			$(".topTitle1").html("(当月)扫码烟包数");
+			$(".topTitle2").html("(上月)扫码烟包数");
+			$(".topTitle3").html("(上上月)扫码烟包数");
 			//			15910352745
 
 			var mobileNo = window.sessionStorage.getItem("mobileNo");
@@ -64,7 +68,7 @@ define([], function() {
 				//查询
 				$scope.search = function() {
 					var openId = $('input:radio[name="saotianxia"]:checked').nextAll("span").eq(1).html();
-										console.log(openId)
+					//console.log(openId)
 					var mobileNo = $('.input_text').val();
 					var params = {
 						openId: openId,
@@ -81,7 +85,11 @@ define([], function() {
 
 			} else {
 				//初始页面加载
-				$('.input_text').val("17702147500");
+				if(sessionStorage.account === "hebei") {
+					$('.input_text').val("18601948480");
+				} else {
+					$('.input_text').val("17702147500");
+				}
 				var mpbileNo = "17702147500";
 				var openId = "osPmCv1yeLHfAOaFJcoMMgu-izJg";
 				var params = {
