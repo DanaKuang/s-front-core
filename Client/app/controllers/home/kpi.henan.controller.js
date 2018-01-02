@@ -201,8 +201,16 @@ define([], function () {
           // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
-            // 扫码点数只增不减（理论上是,否则会有问题）
-            baseData = $.extend(data, baseData);
+            // 定位
+            data.forEach(function (d) {
+              var b = baseData.filter(function (f) {
+                return f.city === d.city;
+              });
+              d.latitude = (b[0] && b[0].latitude) || d.latitude;
+              d.longitude = (b[0] && b[0].longitude) || d.longitude;
+            });
+            baseData = data;
+
             myChart.setOption({
               series: [{
                 data: convertData(baseData)
