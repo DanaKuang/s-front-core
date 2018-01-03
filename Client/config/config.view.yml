@@ -127,6 +127,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/retailer/detail.html'
+  - httpmethod: 'get'                       # 零售户分析
+    routepath: '/view/home/retailer/analysis'
+    description: 'retailer'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/retailer/analysis.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'
@@ -191,6 +198,20 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
+  - httpmethod: 'get'                       # 河北会员日活动设置
+    routepath: '/view/activity/acts/memberday/setting'
+    description: '河北会员日活动设置'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/setting.html'
+  - httpmethod: 'get'                       # 河北会员日中奖信息
+    routepath: '/view/activity/acts/memberday/detail'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/detail.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
