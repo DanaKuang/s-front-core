@@ -144,7 +144,7 @@
   display: block; }
 
 .manage-new .new-location .col-sm-10 {
-  width: 300px;
+  width: 315px;
   overflow: hidden;
   padding: 0; }
 
@@ -154,8 +154,8 @@
 
 .manage-new .new-location .location-val {
   width: 100px;
-  height: 34px;
   float: left;
+  line-height: 34px;
   margin-right: 5px; }
 
 .manage-new .new-location .wrong-tip {
@@ -256,8 +256,8 @@
     margin-right: 5px; }
   .detial-info .location .location-val {
     width: 100px;
-    height: 34px;
     float: left;
+    line-height: 34px;
     margin-right: 5px; }
   .detial-info .location .wrong-tip {
     width: 100px;
