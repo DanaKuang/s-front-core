@@ -136,15 +136,14 @@ define([], function () {
         var option = $model.$echartConf.data;
         var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
-        debugger
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
             res.push({
               name: d.city,
               value: (LATLNG[d.cityCode] &&
-                LATLNG[d.cityCode].concat(d.scantimes)) ||
-                [d.longitude,d.latitude,d.scantimes]
+                [LATLNG[d.cityCode].lng, LATLNG[d.cityCode].lat, d.scantimes]) ||
+                [d.longitude, d.latitude, d.scantimes]
             });
           });
           return res;
