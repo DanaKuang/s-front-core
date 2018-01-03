@@ -1,6 +1,6 @@
 {
     "grid":{
-        "left":"30",
+        "left": 0,
         "top":20,
         "containLabel": true
     },

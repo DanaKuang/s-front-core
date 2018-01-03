@@ -68,26 +68,13 @@
   }
 }
 
-
-// 审核弹窗
-.rebate-modal {
-  input {
-    width: 90%;
-    display: inline-block;
-    margin-right: 5px;
-  }
-  .modal-footer {
-    text-align: center;
-  }
-  .btn {
-    display: inline-block;
-  }
-  .wrong-tip {
-    font-size: 12px;
-    line-height: 1;
-    margin-top: 5px;
+// 比例弹窗
+.storage-modal {
+  #passTitle {
+    float: left;
   }
 }
+
 
 td.batch {
   label {

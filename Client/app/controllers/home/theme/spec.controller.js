@@ -35,6 +35,7 @@ define([], function () {
         provinceName: '',
         statType: 'day'
       };
+      
       //品牌
       (function(){
         $model.$getBrand().then(function(res){
@@ -164,7 +165,6 @@ define([], function () {
         "dayreduce" : "本日新增扫码用户数"
       };
       function public (param) {
-         
         global.initProvinceData.productSn = param.productSn;
         global.initProvinceData.statTime = param.statTime;
         global.initProvinceData.statType = param.statType;
@@ -292,6 +292,7 @@ define([], function () {
           var mapEchart = echarts.init(document.getElementById('map-chart'));
           var mapConf = $model.$mapConf.data;
           mapConf.tooltip.formatter = function (params) {
+            console.log(params);
             return "扫码烟包数" + '<br>' + params.name + ":" + (params.data.value || 0);
           }
           mapEchart.setOption(mapConf);
@@ -323,13 +324,30 @@ define([], function () {
           var cityChart = echarts.init(document.getElementById('city-chart'));
           var cityOption = $model.$cityConf.data;
           
-           
+           //console.log(global.initProvinceData);
           //扫码烟包数时间趋势；
-          if(global.initProvinceData.provinceName === "") {
-            global.initProvinceData.provinceName = "湖南省"
+          // if(sessionStorage.getItem('account')  === "hunan") {
+          //   global.initProvinceData.provinceName = "湖南省"
+          // }
+          // if(sessionStorage.)
+          var province = sessionStorage.getItem('account');
+          switch(province) {
+            case "hunan" :
+              global.initProvinceData.provinceName = "湖南省";
+              break;
+            case "hebei" :
+              global.initProvinceData.provinceName = "河北省";
+              break;
+            case "shankun" :
+              global.initProvinceData.provinceName = "山西省";
+              break; 
+            case "henan" :
+              global.initProvinceData.provinceName = "河南省";
+              break; 
+
           }
-          //console.log(global.initProvinceData);
           $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
+            
             var res = res.data || [];
             districtOption.series[0].data = [];          
             districtOption.xAxis.data = [];
@@ -345,6 +363,7 @@ define([], function () {
           })
         $model.$getCityTrend(global.initProvinceData).then(function(res) {
           var res = res.data || [];
+          console.log(res);
           
           cityOption.series[0].data = [];          
           cityOption.xAxis.data = [];
@@ -366,33 +385,68 @@ define([], function () {
             // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
                 
                 data.provinceName = e.data.provinceName;
-               console.log(data);
-                $model.$getDistrictTrend(data).then(function(res) {
-                  console.log(res.data);
-                  var res = res.data || [];
-                  districtOption.series[0].data = [];          
-                  districtOption.xAxis.data = [];
-                  for(var i = 0;i<res.length;i++){
-                    if(res[0].weekNo) {
-                      districtOption.xAxis.data.push(res[i].weekNo);
-                    }else{
-                      districtOption.xAxis.data.push(res[i].statTime);
+                if(data.provinceName !== undefined) {
+                  $model.$getDistrictTrend(data).then(function(res) {
+                    var res = res.data || [];
+                    districtOption.series[0].data = [];          
+                    districtOption.xAxis.data = [];
+                    for(var i = 0;i<res.length;i++){
+                      if(res[0].weekNo) {
+                        districtOption.xAxis.data.push(res[i].weekNo);
+                      }else{
+                        districtOption.xAxis.data.push(res[i].statTime);
+                      }
+                      districtOption.series[0].data.push(res[i].scanCode); 
                     }
-                    districtOption.series[0].data.push(res[i].scanCode); 
-                  }
-                  districtChart.setOption(districtOption);
-                })
-                $model.$getCityTrend(data).then(function(res) {
-                  var res = res.data || [];
-                  
-                  cityOption.series[0].data = [];          
-                  cityOption.xAxis.data = [];
-                  for(var i = 0;i<res.length;i++){
-                    cityOption.xAxis.data.push(res[i].cityName);
-                    cityOption.series[0].data.push(res[i].scanCode); 
-                  }
-                  cityChart.setOption(cityOption);
-                })
+                    districtChart.setOption(districtOption);
+                  })
+                  $model.$getCityTrend(data).then(function(res) {
+                    var res = res.data || [];
+                    console.log(res);
+                    if(res.length > 7) {
+                      cityOption.dataZoom[0].end = (7/res.length)*100;
+                    }else{
+                      cityOption.dataZoom[0].end = 100;
+                    }
+                    cityOption.series[0].data = [];          
+                    cityOption.xAxis.data = [];
+                    for(var i = 0;i<res.length;i++){
+                      cityOption.xAxis.data.push(res[i].cityName);
+                      cityOption.series[0].data.push(res[i].scanCode); 
+                    }
+                    cityChart.setOption(cityOption);
+                  })
+                }else {
+                  data.provinceName = "";
+                  data.statTime = "";
+                  data.statType = ""; 
+                  data.productSn ="";
+                  $model.$getDistrictTrend(data).then(function(res) {
+                    var res = res.data || [];
+                    districtOption.series[0].data = [];          
+                    districtOption.xAxis.data = [];
+                    for(var i = 0;i<res.length;i++){
+                      if(res[0].weekNo) {
+                        districtOption.xAxis.data.push(res[i].weekNo);
+                      }else{
+                        districtOption.xAxis.data.push(res[i].statTime);
+                      }
+                      districtOption.series[0].data.push(res[i].scanCode); 
+                    }
+                    districtChart.setOption(districtOption);
+                  })
+                  $model.$getCityTrend(data).then(function(res) {
+                    var res = res.data || [];
+                    
+                    cityOption.series[0].data = [];          
+                    cityOption.xAxis.data = [];
+                    for(var i = 0;i<res.length;i++){
+                      cityOption.xAxis.data.push(res[i].cityName);
+                      cityOption.series[0].data.push(res[i].scanCode); 
+                    }
+                    cityChart.setOption(cityOption);
+                  })
+                }
 
             }
             
@@ -404,6 +458,10 @@ define([], function () {
           var myChart = echarts.init(document.getElementById("award-chart"));
           var option = $model.$scan.data;
           $model.$getScan(param).then(function (res) {
+              if(res.data.length > 12) {
+                option.dataZoom[0].end = (12/res.data.length)*100;
+              }
+            
             option.xAxis[0].data = [];
             option.series[0].data = [];
             for (var i = 0; i < res.data.length; i++) {
@@ -420,10 +478,10 @@ define([], function () {
           var option = $model.$fenbu.data;
           var jiangoption = _.cloneDeep(option);
           //自定义tooltip
-          jiangoption.tooltip.formatter = function (params) {
-            console.log(params[0].data,params[1].data);
-            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
-          }
+          // jiangoption.tooltip.formatter = function (params) {
+          //   console.log(params[0].data,params[1].data);
+          //   return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          // }
           jiangoption.title.text = "现金红包";
           var shioption = _.cloneDeep(option);
           shioption.title.text = "实物奖品";
@@ -436,20 +494,20 @@ define([], function () {
           $model.$getMoney(param, 2).then(function (res) {
             var res = res.data || [];
             for(var i=0;i<res.length;i++){
-              jiangoption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
+              jiangoption.series[1].data.push(res[i].drawResultPv);
               jiangoption.series[0].data.push(res[i].awardPayPv);  
               jiangoption.yAxis.data.push(res[i].awardName)
             }
             //console.log(jiangoption.series);
             myChart.setOption(jiangoption,true);
           })
-          shioption.tooltip.formatter = function (params) {
-            return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
-          }
+          // shioption.tooltip.formatter = function (params) {
+          //   return params[0].name + "<br>" + "领奖数量:" + (params[0].data - params[1].data) + "<br>" + "中奖数量:" + params[0].data;
+          // }
           $model.$getThing(param,1).then(function (res) {
             var res = res.data || [];
             for (var i = 0; i < res.length; i++) {
-              shioption.series[1].data.push(res[i].drawResultPv-res[i].awardPayPv);
+              shioption.series[1].data.push(res[i].drawResultPv);
               shioption.series[0].data.push(res[i].awardPayPv);
               shioption.yAxis.data.push(res[i].awardName);
             };

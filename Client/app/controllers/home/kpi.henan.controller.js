@@ -133,16 +133,20 @@ define([], function () {
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson)
         var myChart = echarts.init(document.getElementById('baiduMap'));
-        window.onresize = myChart.resize
+        window.onresize = myChart.resize;
 
         var option = $model.$echartConf.data;
+        var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
+
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
             res.push({
               name: d.city,
-              value: [d.longitude,d.latitude,d.scantimes]
+              value: (LATLNG[d.cityCode] &&
+                [LATLNG[d.cityCode].lng, LATLNG[d.cityCode].lat, d.scantimes]) ||
+                [d.longitude, d.latitude, d.scantimes]
             });
           });
           return res;
@@ -199,6 +203,7 @@ define([], function () {
           // 这一块特别耗性能
           $model.getMapData().then(function (res) {
             var data = res.data || [];
+
             myChart.setOption({
               series: [{
                 data: convertData(data)

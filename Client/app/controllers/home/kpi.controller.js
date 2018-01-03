@@ -134,13 +134,16 @@ define([], function () {
         window.onresize = myChart.resize
 
         var option = $model.$echartConf.data;
+        var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {
             res.push({
               name: d.city,
-              value: [d.longitude,d.latitude,d.scantimes]
+              value: (LATLNG[d.cityCode] &&
+                [LATLNG[d.cityCode].lng, LATLNG[d.cityCode].lat, d.scantimes]) ||
+                [d.longitude, d.latitude, d.scantimes]
             });
           });
           return res;

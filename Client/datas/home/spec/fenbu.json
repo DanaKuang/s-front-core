@@ -2,8 +2,8 @@
   "title": {
     "text": ""
   },
-  "legend":{
-    "data": ["中奖数量","领奖数量"]
+  "legend": {
+    "data": ["领奖数量", "中奖数量"]
   },
   "tooltip": {
     "trigger": "axis",
@@ -35,8 +35,7 @@
     {
       "name":"领奖数量",
       "type": "bar",
-      "barWidth":20,
-      "stack": "红包",
+      "barWidth":10,
       "data": [],
     
       "itemStyle":{
@@ -48,8 +47,7 @@
     {
       "name": "中奖数量",
       "type": "bar",
-      "barWidth":20,
-      "stack": "红包",
+      "barWidth":10,
       "data": [],
       "itemStyle":{
         "normal":{

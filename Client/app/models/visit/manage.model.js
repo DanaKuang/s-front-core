@@ -102,6 +102,16 @@ define([], function () {
           $model.queryDetailByOrderid = function (data) {
             return request.$Search(ORDER_GET_DETIAL, data)
           }
+          // 取消订单
+          var ORDER_CANCEL = '/api/tztx/seller-manager/order/cancelOrder';
+          $model.cancelOrder = function (data) {
+            return request.$Search(ORDER_CANCEL, data)
+          }
+          // 修改订单收货信息
+          var ORDER_MODIFY = '/api/tztx/seller-manager/order/modifyOrder';
+          $model.modifyOrder = function (data) {
+            return request.$Search(ORDER_MODIFY, data)
+          }
           // 导出
           var ORDER_EXPORT = '/api/tztx/seller-manager/order/exportOrders';
           $model.exportOrders = function (data) {

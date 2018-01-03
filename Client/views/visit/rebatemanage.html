@@ -179,10 +179,10 @@
                 <form name="rebateForm" novalidate>
                     <div class="modal-body">
                         <div>
-                            <input type="number" min="0" step="1" max="100" class="form-control" name="rebate" ng-model="vm.rebate" required>%
+                            <input type="number" min="0" step="1" max="100" class="form-control" name="rebate" ng-model="vm.rebate" ng-pattern="/^100$|^(\d|[1-9]\d)$/" required>%
                             <!--验证-->
                             <div ng-show="rebateForm.$submitted || rebateForm.rebate.$touched">
-                                <div ng-show="rebateForm.rebate.$error.required" class="wrong-tip">请输入客户返现比例</div>
+                                <div ng-show="rebateForm.rebate.$error.required || rebateForm.rebate.$invalid" class="wrong-tip">请输入客户返现比例(0-100%)</div>
                             </div>
                         </div>
                     </div>

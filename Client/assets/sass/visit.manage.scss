@@ -177,13 +177,25 @@
 
   .new-location {
     .col-sm-10 {
-      width: 300px;
+      width: 315px;
       overflow: hidden;
       padding: 0;
     }
     select {
-      width: 32%;
-      margin-right: 1%; }
+      width: 100px;
+      margin-right: 5px;
+    }
+
+    .location-val {
+      width: 100px;
+      float: left;
+      line-height: 34px;
+      margin-right: 5px;
+    }
+    .wrong-tip {
+      width: 100px;
+      float: left;
+    }
   }
 }
 
@@ -300,11 +312,17 @@
     width: 400px;
     overflow: hidden;
     .form-control {
-      width: 30%;
-      margin-right: 3%;
+      width: 100px;
+      margin-right: 5px;
+    }
+    .location-val {
+      width: 100px;
+      float: left;
+      line-height: 34px;
+      margin-right: 5px;
     }
     .wrong-tip {
-      width: 30%;
+      width: 100px;
       float: left;
       margin-right: 3%;
     }

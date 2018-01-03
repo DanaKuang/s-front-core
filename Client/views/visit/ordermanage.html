@@ -102,7 +102,7 @@
                                             <th>费用</th>
                                             <th>申请时间</th>
 
-                                            <th>支付状态</th>
+                                            <th>订单状态</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -129,7 +129,7 @@
                                                 </div>
                                             </td>
 
-                                            <td>{{item.payStatus == 0 ? '未支付' : '已支付'}}</td>
+                                            <td>{{item.statusName}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -168,7 +168,7 @@
                         <li class="photo">
                             <label>
                                 <span class="title">门店照片：</span>
-                                <img ng-src="{{sellerInfo.headImg}}" alt="">
+                                <img ng-src="{{sellerInfo.headImg}}" data-toggle="modal" data-target=".img-modal" alt="">
                             </label>
                         </li>
 
@@ -248,7 +248,7 @@
                         <li class="row">
                             <label>
                                 <span class="title"><i>*</i>收货人姓名：</span>
-                                <input name="detialUsername" ng-model="detial.username" class="form-control" type="text" required/>
+                                <input ng-disabled="detial.isCancel" name="detialUsername" ng-model="detial.username" class="form-control" type="text" required/>
                             </label>
                             <!--验证-->
                             <div ng-show="detialForm.$submitted || detialForm.detialUsername.$touched">
@@ -258,7 +258,7 @@
                         <li class="row">
                             <label>
                                 <span class="title"><i>*</i>收货人电话：</span>
-                                <input name="detialMobile" ng-model="detial.mobile" class="form-control" type="text" ng-pattern="/^\d{12}$/" required/>
+                                <input ng-disabled="detial.isCancel" name="detialMobile" ng-model="detial.mobile" class="form-control" type="text" ng-pattern="/^\d{11}$/" required/>
                             </label>
                             <!--验证-->
                             <div ng-show="detialForm.$submitted || detialForm.detialMobile.$touched">
@@ -270,22 +270,22 @@
                                 <span class="title"><i>*</i>位置：</span>
 
                                 <div class="location" class="col-sm-10">
-                                    <select name="detialProvince" id="detialProvince" ng-model="sellerInfo.addrProvince" ng-change="provinceChage()" class="form-control" required>
+                                    <select ng-disabled="detial.isCancel" name="detialProvince" id="detialProvince" ng-model="sellerInfo.addrProvince" ng-change="provinceChage()" class="form-control" required>
                                         <option value="">请选择省</option>
                                         <option ng-repeat="p in detial.provinceList" value="{{p.code}}">{{p.name}}</option>
                                     </select>
 
-                                    <select name="detialCity" id="detialCity" ng-model="sellerInfo.addrCity" ng-change="cityChage()" class="form-control" required>
+                                    <select ng-disabled="detial.isCancel" name="detialCity" id="detialCity" ng-model="sellerInfo.addrCity" ng-change="cityChage()" class="form-control" required>
                                         <option value="">请选择市</option>
                                         <option ng-repeat="c in detial.cityList" value="{{c.code}}">{{c.name}}</option>
                                     </select>
 
-                                    <select name="detialArea" id="detialArea" ng-model="sellerInfo.addrArea" class="form-control" required>
+                                    <select ng-disabled="detial.isCancel" name="detialArea" id="detialArea" ng-model="sellerInfo.addrArea" class="form-control" required>
                                         <option value="">请选择区/县</option>
                                         <option ng-repeat="a in detial.areaList" value="{{a.code}}">{{a.name}}</option>
                                     </select>
 
-                                    <input name="detialAddress" ng-model="detial.address" class="form-control" placeholder="请输入详细地址" type="text" required/>
+                                    <input ng-disabled="detial.isCancel" name="detialAddress" ng-model="detial.address" class="form-control" placeholder="请输入详细地址" type="text" required/>
 
 
                                     <div>
@@ -347,9 +347,9 @@
                     <!--</ul>-->
 
                     <div class="btn-con">
-                        <button ng-click="sellerInfo.cancel()" class="btn btn-primary">取消订单</button>
-                        <button ng-click="detial.save()" type="submit" class="btn btn-primary">保存</button>
-                        <button ng-click="detial.back()" class="btn btn-primary">返回列表</button>
+                        <button ng-show="detial.status == 1" ng-click="detial.cancel()" class="btn btn-primary" type="button">取消订单</button>
+                        <button ng-click="detial.save()" class="btn btn-primary" type="submit">保存</button>
+                        <button ng-click="detial.back()" class="btn btn-primary" type="button">返回列表</button>
                     </div>
                 </form>
             </div>
@@ -361,6 +361,21 @@
     <div id="newAlert" class="alert alert-dismissible fade" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
         <p class="prompt"></p>
+    </div>
+
+    <!-- 查看大图 -->
+    <div class="modal fade bs-example-modal-lg img-modal" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <img class="big-photo" ng-src="{{sellerInfo.headImg}}" alt="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="statics/assets/libs/jquery.page.js"></script>
