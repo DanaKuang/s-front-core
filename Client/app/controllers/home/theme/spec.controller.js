@@ -333,11 +333,17 @@ define([], function () {
           var province = sessionStorage.getItem('account');
           switch(province) {
             case "hunan" :
-                global.initProvinceData.provinceName = "湖南省";
-                break;
+              global.initProvinceData.provinceName = "湖南省";
+              break;
             case "hebei" :
-                global.initProvinceData.provinceName = "河北省";
-                break;
+              global.initProvinceData.provinceName = "河北省";
+              break;
+            case "shankun" :
+              global.initProvinceData.provinceName = "山西省";
+              break; 
+            case "henan" :
+              global.initProvinceData.provinceName = "河南省";
+              break; 
 
           }
           $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
