@@ -1,0 +1,76 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-01-02
+ * Description: 河北会员日中奖详情
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/activity.detail.css">
+<div ng-controller="mdDetailCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-md-detail">
+                <!--title-->
+                <div class="ui-panel-title detail">
+                    <i class="detail"></i><span>砖石会员日奖品领奖明细</span>
+                </div>
+                <!--box-->
+                <div class="col-md-12">
+                    <div class="panel rate ui-search-panel">
+                        <div class="panel-body">
+                            <form class="form-inline col-md-12">
+                                <div class="form-inline">
+                                    <!--获奖状态-->
+                                    <div class="inline-block">
+                                        <label for="status">获奖状态&nbsp;&nbsp;</label>
+                                        <select class="form-control multiple" name="status" ng-model="status">
+                                            <option ng-repeat="st in stArr" value="{{st.name}}">{{st.name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--地区-->
+                                    <div class="inline-block">
+                                        <label for="region">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区&nbsp;&nbsp;</label>
+                                        <input type="text" name="region" ng-model="region" class="form-control input-sm">
+                                    </div>
+                                    <!--获奖时间-->
+                                    <div class="inline-block">
+                                        <label for="weekTime">获奖时间&nbsp;&nbsp;</label>
+                                        <input type="input" name="weekTime" ng-model="weekTime" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="form-inline">
+                                    <!--品牌-->
+                                    <div class="inline-block">
+                                        <label for="brandName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品牌&nbsp;&nbsp;</label>
+                                        <select class="form-control multiple" name="brandName" ng-model="brandName" multiple="multiple">
+                                            <option ng-repeat="bn in bnArr" value="{{bn.code}}">{{bn.name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--规格-->
+                                    <div class="inline-block">
+                                        <label for="productName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;规格&nbsp;&nbsp;</label>
+                                        <select class="form-control" ng-model="productName" name="productName">
+                                            <option ng-repeat="pn in pnArr" value="{{pn.code}}">{{pn.code}}</option>
+                                        </select>
+                                    </div>
+                                    <!--奖项-->
+                                    <div class="inline-block">
+                                        <label for="prize">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奖项&nbsp;&nbsp;</label>
+                                        <select class="form-control" ng-model="prize" name="prize">
+                                            <option ng-repeat="p in pArr" value="{{p.code}}">{{p.code}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-inline fr">
+                                    <button type="submit" class="btn btn-primary" ng-click="detailSearch()">搜索</button>
+                                    <button type="reset" class="btn btn-primary">重置</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
