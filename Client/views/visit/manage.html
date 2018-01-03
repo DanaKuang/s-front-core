@@ -458,25 +458,17 @@
                                                     </li>
                                                     <li class="row">
                                                         <label>
-                                                            <span class="title"><i>*</i>联系人姓名：</span>
+                                                            <span class="title">联系人姓名：</span>
                                                             <span ng-if="!info.isEdit" class="value">{{info.contactName}}</span>
-                                                            <input name="infoConcatName" ng-model="info.contactName" ng-if="info.isEdit" class="form-control" type="text" required/>
+                                                            <input name="infoConcatName" ng-model="info.contactName" ng-if="info.isEdit" class="form-control" type="text"/>
                                                         </label>
-                                                        <!--验证-->
-                                                        <div ng-show="infoForm.$submitted || infoForm.infoConcatName.$touched">
-                                                            <div ng-show="infoForm.infoConcatName.$error.required" class="wrong-tip">请输入联系人姓名</div>
-                                                        </div>
                                                     </li>
                                                     <li class="row">
                                                         <label>
-                                                            <span class="title"><i>*</i>联系人电话：</span>
+                                                            <span class="title">联系人电话：</span>
                                                             <span ng-if="!info.isEdit" class="value">{{info.contactPhone}}</span>
-                                                            <input name="infoConcatPhone" ng-model="info.contactPhone" ng-show="info.isEdit" class="form-control" type="text" required/>
+                                                            <input name="infoConcatPhone" ng-model="info.contactPhone" ng-show="info.isEdit" class="form-control" type="text"/>
                                                         </label>
-                                                        <!--验证-->
-                                                        <div ng-show="infoForm.$submitted || infoForm.infoConcatPhone.$touched">
-                                                            <div ng-show="infoForm.infoConcatPhone.$error.required || infoForm.infoConcatPhone.$invalid" class="wrong-tip">请输入正确格式的联系人电话</div>
-                                                        </div>
                                                     </li>
 
                                                     <li ng-if="fromPage != 'reviewManage'" class="row status">
@@ -909,23 +901,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="newConcatName" class="control-label col-sm-2"><i>*</i>联系人姓名：</label>
-
-                        <input id="newConcatName" name="newConcatName" ng-model="new.contactName" class="form-control" type="text" required>
-                        <!--验证-->
-                        <div ng-show="form.$submitted || form.newConcatName.$touched">
-                            <div ng-show="form.newConcatName.$error.required" class="wrong-tip">请输入联系人姓名</div>
-                        </div>
+                        <label for="newConcatName" class="control-label col-sm-2">联系人姓名：</label>
+                        <input id="newConcatName" name="newConcatName" ng-model="new.contactName" class="form-control" type="text">
                     </div>
 
                     <div class="form-group">
-                        <label for="newConcatPhone" class="control-label col-sm-2"><i>*</i>联系人电话：</label>
-
-                        <input id="newConcatPhone" name="newConcatPhone" ng-model="new.contactPhone" class="form-control" type="text" ng-pattern="/^1[3-9][0-9]{9}$/" required>
-                        <!--验证-->
-                        <div ng-show="form.$submitted || form.newConcatPhone.$touched">
-                            <div ng-show="form.newConcatPhone.$error.required || form.newConcatPhone.$invalid" class="wrong-tip">请输入正确格式的联系人电话</div>
-                        </div>
+                        <label for="newConcatPhone" class="control-label col-sm-2">联系人电话：</label>
+                        <input id="newConcatPhone" name="newConcatPhone" ng-model="new.contactPhone" class="form-control" type="text">
                     </div>
 
                     <div class="form-group col-sm-offset-2 btn-con">
