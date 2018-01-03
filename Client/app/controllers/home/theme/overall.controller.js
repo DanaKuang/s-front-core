@@ -293,7 +293,6 @@ define([], function () {
 
 
         mapEchart.on('click', function (e) {
-            alert(1);
             if (e.componentType === 'series') {
                 // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
                 var data = {
