@@ -1,0 +1,51 @@
+{
+    "tooltip" : {
+        "trigger": "item",
+        "formatter": "{a} <br/>{b} : {c} ({d}%)"
+    },
+    "legend": {
+        "orient": "vertical",
+        "x" : "right",
+        "padding": 5,
+        "y" : "center",
+        "data":[],
+        "textStyle":{
+            "fontSize":"40"
+        }
+    },
+        "show" : true,
+        "color":["#35A1EC","#5BB0F0","#72B9ED","#72B9ED","#85C5F1","#91CBF3","#AEDAF7","#C1E5FF"],
+    "toolbox": {
+        "show" : true
+    },
+    "calculable" : true,
+    "series" : [{
+        "name":"半径模式",
+        "type":"pie",
+        "radius" : [20, 110],
+        "center" : ["45%", "50%"],
+        "roseType" : "radius",
+        "label": {
+            "normal": {
+                "show": false,
+                "formatter":"{b}:{d}%",
+                "textStyle":{
+                "fontWeight":"normal",
+                "fontSize":"14"
+                }
+            },
+            "emphasis": {
+                "show": true
+            }
+        },
+        "lableLine": {
+            "normal": {
+                "show": false
+            },
+            "emphasis": {
+                "show": true
+            }
+        },
+        "data":[]
+    }]
+}

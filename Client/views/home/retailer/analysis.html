@@ -1,17 +1,209 @@
 <!--
 /**
- * Author: {author}
- * Create Date: {date}
- * Description: {desp}
+ * Author: chenliang
+ * Create Date: 2017-12-05
+ * Description: retailer
  */
 -->
 <!--style-->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.retailer.css">
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.analysis.css">
 <!--html-->
 <div class="animated fadeInRightBig" ng-controller="analysisCtrl">
     <div class="container-fluid">
         <div class="ui-retailer-box row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title retailer">
+                    <i class="retailer"></i>
+                    <span>零售户发展情况分析</span>
+                </div>
+                <!--search-->
+                <div class="ui-detail-search panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline col-md-12">
+                            <div class="ui-detail-screen">
+                                <!-- 筛选 -->
+                                <h4 class="inline-block">高级筛选&nbsp;
+                                    <span ng-click="showOrHidden">▼</span>
+                                </h4>
+                                <!-- 日期 -->
+                                <div class="inline-block fr">
+                                    <label>日期:&nbsp;</label>
+                                    <select class="form-control date input-sm" ng-model="type">
+                                        <option value="day">日</option>
+                                        <option value="week">周</option>
+                                        <option value="month">月</option>
+                                    </select>
+                                    <!-- day -->
+                                    <div class="inline-block" ng-show="type=='day'">
+                                        &nbsp;&nbsp;
+                                        <input type="input" name="startTime" class="form-control date input-sm" ng-model="startTime">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                        <input type="input" name="endTime" class="form-control date input-sm" ng-model="endTime">
+                                    </div>
+                                    <!--week-->
+                                    <div class="inline-block" ng-show="type=='week'">
+                                        <select class="form-control" name="weekStaTime" ng-model="weekStaTime">
+                                            <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
+                                        </select>&nbsp;&nbsp;至&nbsp;&nbsp;
+                                        <select class="form-control" name="weekEndTime" ng-model="weekEndTime">
+                                            <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
+                                        </select>
+                                    </div>
+                                    <!--month-->
+                                    <div class="inline-block" ng-show="type=='month'">
+                                        <input type="input" name="monStaTime" ng-model="monStaTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                        <input type="input" name="monEndTime" ng-model="monEndTime" class="form-control date input-sm">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 显示隐藏的盒子 -->
+                            <div class="ui-detail-body">
+                                <div class="inline-block col-md-2.9">
+                                    <label>业态 &nbsp;
+                                        <select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
+                                            <option ng-repeat="item in ShopDownBox" value="{{item.bizCode==-1?'':item.bizCode}}" ng-if="item.bizCode != -1">{{item.bizName}}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="inline-block col-md-2.9">
+                                    <label>省份 </label>
+                                    <select class="form-control date input-sm select" id="proviceId">
+                                        <option value="{{item.code}}" ng-repeat="item in UserProv" ng-selected="item.code==ProvByorgId.orgRegion">{{ item.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="inline-block col-md-2.9">
+                                    <label>地市等级&nbsp;</label>
+                                    <select name="data" class="form-control date input-sm select" id="levelOfCities">
+                                        <option value="{{item.cityClassName}}" ng-repeat="item in City">{{item.cityClassName}}</option>
+                                    </select>
+                                </div>
+                                <div class="inline-block col-md-2.9">
+                                    <label>地市&nbsp;</label>
+                                    <select name="data" class="form-control date input-sm select" id="prefecture">
+                                        <option value="{{item.cityId}}" ng-repeat="item in CityDown">{{item.cityName}}</option>
+                                        <!-- val写 cityId -->
+                                    </select>
+                                </div>
+                                <div class="fr my-btn">
+                                    <button type="submit" class="btn btn-info" ng-click="retailerSearch()" id="my-btn">查询</button>
+                                </div>
+                                <!-- 对比 -->
+                                <div class="ui-detail-comparison">
+                                    <div class="inline-block col-md-2.5" id="contrast-container">
+                                        <span>
+                                            <input type="checkbox" class="input_check" id="checkbox">
+                                            <label for="checkbox"></label>
+                                        </span>对比
+                                    </div>
 
+                                    <div class="my-hidden">
+                                        <div class="inline-block col-md-2.5">
+                                            <label>省份&nbsp;</label>
+                                            <select name="data" class="form-control date input-sm select" id="vsProvince">
+                                                <option value="{{item.code}}" ng-repeat="item in UserProv" ng-if="item.code == '000000' ? false : true">{{ item.name }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="inline-block col-md-2.5">
+                                            <label>地市等级&nbsp;</label>
+                                            <select name="data" class="form-control date input-sm select" id="vsLevelOfCities">
+                                                <option value="{{item.vsCityClassName}}" ng-repeat="item in VsCity">{{item.vsCityClassName}}</option>
+                                                <!-- val 写vscityClass -->
+                                            </select>
+                                        </div>
+                                        <div class="inline-block col-md-2.5">
+                                            <label>地市&nbsp;</label>
+                                            <select name="data" class="form-control date input-sm select" id="vsPrefecture">
+                                                <option value="{{item.vsCityId}}" ng-repeat="item in VsCityDown" track-by="item.vsCityId">{{item.vsCityName}}</option>
+                                                <!-- val写vsCityId -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <!--零售户业态分布-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">零售户业态分布</div>
+                        <div class="ui-min-height col-md-12">
+                            <!-- <div class="round"></div> -->
+                            <div class="col-md-6">
+                                <div id="caLMap" class="ui-map-box">
+                                    <!-- todo -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="caRMap" class="ui-map-box">
+                                    <!-- todo -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--零售户地域分布-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">
+                            <i class="sitePic"></i>&nbsp;零售户地域分布
+                            <span class="line"></span>
+                        </div>
+                        <div id="ttMap" class="ui-map-box col-md-12">
+                            <!-- todo -->
+                        </div>
+                    </div>
+
+                    <!--零售户发展时间趋势-->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">
+                            <i class="timePic"></i>&nbsp;零售户发展时间趋势
+                            <span class="line"></span>
+                        </div>
+                        <div id="timeTMap" class="ui-map-box col-md-12">
+                            <!-- todo -->
+                        </div>
+                    </div>
+
+                    <!-- 零售户关键指标查询 -->
+                    <div class="panel-body">
+                        <div class="title form-inline form-group col-md-12">零售户关键指标查询
+                            <a class="goDetailEnquiry fr" href="javascript:;" style="color:#747474">零售户明细查询&gt;&gt;</a>
+                        </div>
+                        <div id="timeTMap" class="ui-map-box">
+                            <div class=".table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>业态</th>
+                                            <th>省份</th>
+                                            <th>城市</th>
+                                            <th>零售户销量</th>
+                                            <th>店码扫描量</th>
+                                            <th>已归属烟码扫码量</th>
+                                            <th>扫码收益</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in ZeroShopkpiSelectTable">
+                                            <td>{{item.statTime}}</td>
+                                            <td>{{item.bizName}}</td>
+                                            <td>{{item.provinceName}}</td>
+                                            <td>{{item.cityName}}</td>
+                                            <td>{{item.sellerType}}</td>
+                                            <td>{{item.scanSellerNum}}</td>
+                                            <td>{{item.scanValidNum}}</td>
+                                            <td>{{item.scanShould}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
