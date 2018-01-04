@@ -43,12 +43,13 @@ define([], function () {
           for(var i=0;i<res.length;i++){
               $(".brand").append("<option value="+res[i].name+">"+res[i].name+"</option>")
           };
+          console.log($(".brand").val())
           getProduct({productBrand:$(".brand").val()},1)
         })
       })();
       //品牌与规格联动
       $(".brand").change(function(){
-        getProduct({productBrand:$(".brand").val()})
+        getProduct({productBrand:$(this).val()})
       })
       //规格下拉列表
       function getProduct(params,caller) {
@@ -71,7 +72,7 @@ define([], function () {
       };
       //周下拉列表
       (function () {
-        $model.$getWeeks().then(function (res) {
+        $model.$getWeeks().then(function (res) { 
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
             $(".week").append("<option value="+res[i].weekNo+">"+res[i].weekNo+"</option>")
@@ -362,9 +363,7 @@ define([], function () {
             districtChart.setOption(districtOption);
           })
         $model.$getCityTrend(global.initProvinceData).then(function(res) {
-          var res = res.data || [];
-          console.log(res);
-          
+          var res = res.data || [];      
           cityOption.series[0].data = [];          
           cityOption.xAxis.data = [];
           for(var i = 0;i<res.length;i++){
