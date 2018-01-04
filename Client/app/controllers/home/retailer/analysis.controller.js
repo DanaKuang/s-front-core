@@ -529,5 +529,3 @@ define([], function() {
 
     return analysisCtrl;
 });
-return analysisCtrl;
-});
