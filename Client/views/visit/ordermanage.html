@@ -102,7 +102,7 @@
                                             <th>费用</th>
                                             <th>申请时间</th>
 
-                                            <th>支付状态</th>
+                                            <th>订单状态</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -347,7 +347,7 @@
                     <!--</ul>-->
 
                     <div class="btn-con">
-                        <button ng-show="detial.status == 1" ng-click="detial.cancel()" class="btn btn-primary" type="button">取消订单</button>
+                        <button ng-show="detial.status == 1 && !detial.isCancel" ng-click="detial.cancel()" class="btn btn-primary" type="button">取消订单</button>
                         <button ng-click="detial.save()" class="btn btn-primary" type="submit">保存</button>
                         <button ng-click="detial.back()" class="btn btn-primary" type="button">返回列表</button>
                     </div>

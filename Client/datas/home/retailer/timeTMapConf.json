@@ -1,0 +1,66 @@
+{
+    "grid":{
+      "left":"30",
+      "top":20
+    },
+    "tooltip": {
+      "formatter":"{a}:{c}"
+    },
+    "xAxis": {
+      "type":"category",
+      "boundaryGap":false,
+      "data": [],
+      "axisLabel":{
+        "interval": 0
+      }
+    },
+    "yAxis": [
+     {
+      "axisLabel": {
+        "show": false
+    }
+     }
+    ],
+    "series": [
+      {
+        "name": "洛阳",
+        "type": "line",
+        "label":{
+          "normal":{
+            "show":false
+            }
+        },
+        "lineStyle":{
+          "normal":{
+            "color":"#80D3F6"
+          }
+        },
+        "itemStyle":{
+          "normal":{
+            "color":"#80D3F6"
+          }
+        },
+        "data": [1,3,4,5,6,7]
+      },
+      {
+        "name": "",
+        "type": "line",
+        "label":{
+          "normal":{
+            "show":false
+            }
+        },
+        "lineStyle":{
+          "normal":{
+            "color":"#80D3F6"
+          }
+        },
+        "itemStyle":{
+          "normal":{
+            "color":"#80D3F6"
+          }
+        },
+        "data": []
+      }
+    ]
+  }

@@ -203,29 +203,23 @@
               <!--<div id="city-chart"></div>-->
               <div style="width:100%;">
                 <div class="title_name">
-                  <!--<div class="col-md-2 col-sm-2" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty">城市</div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数<span class="sx-arrow-down"></span></div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数<span class="sx-arrow-down"></span></div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数<span class="sx-arrow-down"></span></div>
-                  </div>-->
                   <div style="width:16%;float:left;margin-right:5px;">
                     <div class="but_sty">城市</div>
                   </div>
                   <div style="width:26%;float:left;margin-right:5px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数<span class="sx-arrow-down"></span></div>
+                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数<span class="sx-arrow-up"></span>
+                      <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[pvOrder]"></span>
+                    </div>
                   </div>
                   <div style="width:26%;float:left;margin-right:5px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数<span class="sx-arrow-down"></span></div>
+                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数<span class="sx-arrow-up"></span>
+                      <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[codeOrder]"></span>
+                    </div>
                   </div>
                   <div style="width:26%;float:left;">
-                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数<span class="sx-arrow-down"></span></div>
+                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数<span class="sx-arrow-up"></span>
+                      <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[uvOrder]"></span>
+                    </div>
                   </div>
                 </div>
                 <ul class="view_times_main">
