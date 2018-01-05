@@ -1302,6 +1302,20 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizTheCall'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布 title 无对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSZeroBizTheCall'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布 title 对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 cigarettemanage:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/product/tobaccoList'

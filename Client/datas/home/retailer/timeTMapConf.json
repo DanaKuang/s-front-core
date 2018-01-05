@@ -1,8 +1,5 @@
 {
-    "grid":{
-      "left":"30",
-      "top":20
-    },
+   
     "tooltip": {
       "formatter":"{a}:{c}"
     },

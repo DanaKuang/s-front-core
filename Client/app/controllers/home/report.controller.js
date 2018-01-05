@@ -93,7 +93,7 @@ define([], function () {
                     $model.$userPro(params).then(function (res) {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
-                        gloabl.showall(res, "user_table", 13, "province", "city");
+                        gloabl.showall(res, "user_table", 15, "province", "city");
                     })
                 },
                 //日报
@@ -168,15 +168,18 @@ define([], function () {
                 },
                 //创建表格
                 "createtable": function (data, n, x, y) {
+                    console.log(data);
+                    console.log(n);
+                    console.log(x);
+                    console.log(y);
                     for (var i = 0; i < data.length; i++) {
-                        var rownum = parseInt(n) + i;
+                        var  rownum  = parseInt(n) + i;
                         var cityName = data[i][y];
                         if (i == 0) {
                             var tmpcell = document.getElementById("rowid" + rownum).insertCell(1);
                         } else {
                             var tmpcell = document.getElementById("rowid" + rownum).insertCell(0);
-                        }
-                        ;
+                        };
                         tmpcell.innerHTML = cityName;
                         for (var j = 1; j < x; j++) {
                             var a = 'c' + j;

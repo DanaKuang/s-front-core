@@ -26,6 +26,8 @@ define([], function () {
                 var GET_ZEROBIZL_DATA = "/api/tztx/dataportal/shopKeeper/getZeroBizDistributePie"  // 零售户业态发布-玫瑰图
                 var GET_ZEROBIZR_DATA = "/api/tztx/dataportal/shopKeeper/getZeroBizDistributeBar"  // 零售户业态发布-柱状图
                 var GET_ZEROBIZREGIONALBAR_DATA = "/api/tztx/dataportal/shopKeeper/getZeroBizRegionalBar"  // 零售户地域分布-无对比
+                var GET_ZEROBIZTHECALL= "/api/tztx/dataportal/shopKeeper/getZeroBizTheCall"  // 零售户地域分布-无对比上面的标题
+                var GET_VSZEROBIZTHECALL = "/api/tztx/dataportal/shopKeeper/getVSZeroBizTheCall"  // 零售户地域分布-对比上面的标题
                 var GET_VSZEROBIZREGIONALBAR_DATA = "/api/tztx/dataportal/shopKeeper/getVSZeroBizRegionalBar"  // 零售户地域分布-对比
                 var GET_ZEROBIZTIMELINE_DATA = "/api/tztx/dataportal/shopKeeper/getZeroBizTimeline"  // 零售户发展时间趋势-无对比
                 var GET_VSZEROBIZTIMELINE_DATA = "/api/tztx/dataportal/shopKeeper/getVSZeroBizTimeline"  // 零售户发展时间趋势-对比
@@ -81,6 +83,14 @@ define([], function () {
                 // 零售户关键指标查询
                 this.ZeroShopkpiSelectTable = function (params) {
                     return request.$Search(GET_ZEROSHOPKPISELECTABLE_DATA, params, true);
+                }
+                // 零售户地域分布 title 显示无对比
+                this.getZeroBizTheCall = function (params) {
+                    return request.$Search(GET_ZEROBIZTHECALL, params, true);
+                }
+                // 零售户地域分布 title 显示对比                
+                this.getVsZeroBizTheCall = function (params) {
+                    return request.$Search(GET_VSZEROBIZTHECALL, params, true);
                 }
             };
         }]
