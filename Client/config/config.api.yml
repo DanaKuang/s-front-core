@@ -1204,6 +1204,118 @@ retailer:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserProvByUserIdS'
+    authorized: 1
+    description: '零售户省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getShopDownBoxAll'
+    authorized: 1
+    description: '下拉框'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getUserProvByUserIdS'
+    authorized: 1
+    description: '零售户省份'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getCityClassDownBox'
+    authorized: 1
+    description: '根据省份获取地市等级'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getCityDownBox'
+    authorized: 1
+    description: '根据省份获取地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSCityClassDownBox'
+    authorized: 1
+    description: '获取对比地市等级'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSCityDownBox'
+    authorized: 1
+    description: '获取对比地市'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizDistributePie'
+    authorized: 1
+    description: '零售户发展情况分析-零售户业态分布-玫瑰图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizDistributeBar'
+    authorized: 1
+    description: '零售户发展情况分析-零售户业态分布-柱状图'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizRegionalBar'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布-柱状图-无对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSZeroBizRegionalBar'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布-柱状图-对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizTimeline'
+    authorized: 1
+    description: '零售户发展情况分析-零售户发展时间趋势-折线图-无对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSZeroBizTimeline'
+    authorized: 1
+    description: '零售户发展情况分析-零售户发展时间趋势-折线图-对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroShopkpiSelectTable'
+    authorized: 1
+    description: '零售户发展情况分析-零售户关键指标查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getZeroBizTheCall'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布 title 无对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/shopKeeper/getVSZeroBizTheCall'
+    authorized: 1
+    description: '零售户发展情况分析-零售户地域分布 title 对比'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 cigarettemanage:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/product/tobaccoList'

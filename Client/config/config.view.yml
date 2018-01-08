@@ -127,6 +127,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/retailer/detail.html'
+  - httpmethod: 'get'                       # 零售户分析
+    routepath: '/view/home/retailer/analysis'
+    description: 'retailer'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/retailer/analysis.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'
@@ -191,6 +198,20 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
+  - httpmethod: 'get'                       # 河北会员日活动设置
+    routepath: '/view/activity/acts/memberday/setting'
+    description: '河北会员日活动设置'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/setting.html'
+  - httpmethod: 'get'                       # 河北会员日中奖信息
+    routepath: '/view/activity/acts/memberday/detail'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/detail.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
@@ -264,41 +285,48 @@ product:
     gatewaytype: 0
     staticfile: 'product/cigamanage/cigarettemanage.html'
 visitManage:
+  - httpmethod: 'get'                       # 零售户审核管理
+    routepath: '/view/visit/reviewmanage'
+    description: 'reviewmanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/reviewmanage.html'
   - httpmethod: 'get'                       # 零售户管理
     routepath: '/view/visit/manage'
     description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/manage/manage.html'
-  - httpmethod: 'get'                       # 零售户奖励设置
-    routepath: '/view/visit/reward'
-    description: 'reward'
+    staticfile: 'visit/manage.html'
+  - httpmethod: 'get'                       # 订单管理
+    routepath: '/view/visit/ordermanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/reward/reward.html'
-  - httpmethod: 'get'                       # 零售户业绩
-    routepath: '/view/visit/achievement'
-    description: 'achievement'
+    staticfile: 'visit/ordermanage.html'
+  - httpmethod: 'get'                       # 返佣管理 - 扫码入库
+    routepath: '/view/visit/rebate/storagemanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/achievement/achievement.html'
-  - httpmethod: 'get'                       # 零售户获奖统计
-    routepath: '/view/visit/winCount'
-    description: 'winCount'
+    staticfile: 'visit/storagemanage.html'
+  - httpmethod: 'get'                       # 返佣管理 - 扫码返佣
+    routepath: '/view/visit/rebate/rebatemanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/winCount/winCount.html'
-  - httpmethod: 'get'                       # 零售户获奖统计
-    routepath: '/view/visit/detail'
-    description: 'detail'
+    staticfile: 'visit/rebatemanage.html'
+  - httpmethod: 'get'                       # 其他系统设置
+    routepath: '/view/visit/other'
+    description: 'other'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/detail/detail.html'
+    staticfile: 'visit/other.html'
 system:
   - httpmethod: 'get'                       # 修改密码
     routepath: '/view/system/password'

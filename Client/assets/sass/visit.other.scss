@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.other-con {
+  ul {
+    overflow: hidden;
+  }
+  li {
+    border-bottom: 1px solid #666;
+    line-height: 34px;
+    overflow: hidden;
+    padding: 20px;
+    &:last-child {
+      border: none;
+    }
+    h3 {
+      color: #000;
+      font-size: 16px;
+      line-height: 30px;
+    }
+    .title {
+      color: #333;
+      font-size: 14px;
+      float: left;
+      margin-left: 50px;
+    }
+    .col-sm-8 {
+      height: 34px;
+      label {
+        float: left;
+        margin-right: 20px;
+        input {
+          margin-right: 5px;
+        }
+      }
+      .form-control {
+        width: 200px;
+        float: left;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.btn-con {
+  margin-bottom: 20px;
+  .btn {
+    height: 30px;
+    display: block;
+    line-height: 18px;
+    margin: 0 auto;
+    padding: 6px 12px;
+  }
+}
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}

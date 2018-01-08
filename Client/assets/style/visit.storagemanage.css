@@ -1,0 +1,254 @@
+@charset "UTF-8";
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden; }
+  .ui-panel-title .new-btn {
+    float: right; }
+
+/*12.15零售户重构*/
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px; }
+
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px; }
+
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px; }
+
+.form-horizontal .form-group {
+  margin: 0;
+  padding: 0; }
+
+.form-horizontal .control-label {
+  width: 90px;
+  float: left;
+  margin-right: 0px; }
+
+.form-horizontal .form-control {
+  width: 100%; }
+
+.form-horizontal #durationStart, .form-horizontal #durationEnd {
+  width: 45%;
+  background: #fff;
+  float: left; }
+
+.form-horizontal .time {
+  width: 476px; }
+
+.form-horizontal .time span {
+  width: 10%;
+  float: left;
+  line-height: 34px;
+  text-align: center; }
+
+.search-btn-con .btn {
+  float: left; }
+
+.search-btn-con .reset {
+  margin-left: 30px; }
+
+.storage-modal #passTitle {
+  float: left; }
+
+td.batch label {
+  width: 50px;
+  height: 20px;
+  cursor: pointer; }
+  td.batch label input {
+    cursor: pointer;
+    margin-right: 10px; }
+
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none; }
+  #newAlert .close {
+    top: -11px; }
+
+.panel-body {
+  padding: 15px;
+  position: relative; }
+
+.scroll-con {
+  overflow-x: auto; }
+
+.table tr th, .table tr td {
+  font-size: 12px;
+  white-space: nowrap; }
+
+.table tr td > div {
+  margin: 0 auto; }
+
+.table tr .oper-btn-wrap {
+  width: 150px; }
+  .table tr .oper-btn-wrap .operate-btn {
+    color: #3379b7;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 7px; }
+    .table tr .oper-btn-wrap .operate-btn:hover {
+      text-decoration: underline; }
+
+.rebate-new h3 {
+  color: #000;
+  font-size: 16px;
+  line-height: 30px; }
+
+.rebate-new .form-group {
+  width: 100%;
+  float: left;
+  line-height: 34px; }
+  .rebate-new .form-group .text {
+    color: #4a5ff5;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    margin-left: 15px; }
+  .rebate-new .form-group .unit {
+    margin-left: 10px; }
+
+.rebate-new .wrong-tip-con {
+  float: left; }
+
+.rebate-new .btn-con .btn {
+  margin: 20px 15px 10px 0; }
+
+.rebate-new .control-label {
+  width: 16.66666667%;
+  min-width: 125px;
+  float: left;
+  line-height: 34px;
+  text-align: right; }
+  .rebate-new .control-label i {
+    color: #f00; }
+
+.rebate-new col-sm-offset-2 {
+  margin-left: 16.66666667%; }
+
+.rebate-new .col-sm-6 {
+  width: 300px; }
+
+.rebate-new .form-control {
+  float: left;
+  font-size: 12px; }
+
+.rebate-new .time .col-sm-6 {
+  width: 462px; }
+
+.rebate-new .time input {
+  width: 200px;
+  background: #fff; }
+
+.rebate-new .time .to {
+  width: 30px;
+  float: left;
+  line-height: 34px;
+  text-align: center; }
+
+.rebate-new .choose-btn {
+  height: 34px;
+  background: transparent;
+  border: 1px solid #6e80ff;
+  border-radius: 0;
+  cursor: pointer;
+  color: #6e80ff;
+  font-size: 12px;
+  float: left;
+  line-height: 34px;
+  margin-left: 15px;
+  padding: 0 7px; }
+
+.rebate-new .show-chosen {
+  color: indianred; }
+
+.create-jfProduct-modal .choose {
+  cursor: pointer;
+  color: #7c8af4; }
+
+.detial-head {
+  font-size: 14px;
+  background: #eee;
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding-top: 10px; }
+  .detial-head .col-sm-3, .detial-head .col-sm-6 {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px 0 0; }
+    .detial-head .col-sm-3 span, .detial-head .col-sm-6 span {
+      color: #333;
+      float: left;
+      width: 100px;
+      text-align: right; }
+
+/*排序按钮*/
+.sort-btn-con {
+  overflow: hidden; }
+  .sort-btn-con .btn-primary {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px; }
+
+.detial-search {
+  overflow: hidden; }
+  .detial-search .form-group {
+    float: left; }
+  .detial-search label {
+    float: left;
+    line-height: 34px; }
+  .detial-search select, .detial-search input {
+    width: 150px;
+    float: left;
+    font-size: 12px; }
+  .detial-search .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center; }
+  .detial-search #detialStart, .detial-search #detialEnd {
+    background: #fff; }
+  .detial-search .btn-con {
+    float: right;
+    margin-top: 2px; }
+    .detial-search .btn-con .btn {
+      float: left;
+      margin-right: 15px; }
+    .detial-search .btn-con .btn-default {
+      margin-right: 0px; }
+
+.back-btn {
+  display: block;
+  margin: 0 auto; }
+
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px; }
+
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important; }
+
+.ng-submitted input.ng-invalid, .ng-submitted textarea.ng-invalid, .ng-submitted select.ng-invalid {
+  border-color: #FA787E !important; }
+
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+  display: block; }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist; }
