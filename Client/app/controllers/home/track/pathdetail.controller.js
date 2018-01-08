@@ -47,7 +47,7 @@ define([], function () {
                 activityId: act_sn[0] || "",
                 cityName: $scope.cityName || "合计",
                 timeType: pScope.startTime == pScope.endTime ? "hour" : "day",
-                webId: pScope.pagename || "1000",
+                webId: pScope.pagename || pScope.pgArray[0].page_code || "",
                 startTime: pScope.startTime || "",
                 endTime: pScope.endTime || ""
             };
@@ -130,9 +130,9 @@ define([], function () {
                 }));
                 $pagename.multiselect('select', pScope.pagename || (pScope.pgArray[0] && pScope.pgArray[0].page_code) || "");
                 $pagename.multiselect('refresh');
+                // 默认值入口
+                pathSearch();
             });
-            // 默认值入口
-            pathSearch();
         });
 
         // 初始化页面流入流出
