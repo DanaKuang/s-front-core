@@ -139,6 +139,9 @@
       height: 30px;
       transform: translateY(8px);
   }
+  .panel-body .title {
+    text-align: left;
+  }
   .panel-body .title .timePic{
    display: inline-block;
    background: url(../image/hours.png) no-repeat center center; 

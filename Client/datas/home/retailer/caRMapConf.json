@@ -23,12 +23,19 @@
     ],
     "yAxis":[
         {
-            "type":"value",
+            "type":"value"  ,
             "axisLabel": {
                 "show": false
            }
         }
     ],
     "series":[
+        {
+            "name": "",
+            "type": "bar",
+            "data": [],
+            "barWidth": "100%",
+            "barGap":"40%"
+        }
     ]
 }
