@@ -3,7 +3,6 @@
  * Create Date: 2017-12-05
  * Description: retailer
  */
-
 define([], function () {
     var analysisCtrl = {
         ServiceType: 'controller',
@@ -374,7 +373,7 @@ define([], function () {
                 $('#checkbox').prop('checked') == false ?
                     getZeroBizTheCall(angular.extend({ // 零售户地域分布-无对比-title
                         bizCode: selectValueStr.join(',') || '',
-                        proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                        proviceId: $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
                         cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                
                         cityClass: $('#levelOfCities').val() || '',  // 地市等级 
                         isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
@@ -449,18 +448,19 @@ define([], function () {
                             "type": "bar",
                             "data": [],
                             "barWidth": "60%",
-                            "barGap":"10%"
+                            "barGap": "10%"
                         }) : '';
-                        caRMapConf.series[0].data.length =0;
-                        caRMapConf.series[1].data.length =0;
+                        caRMapConf.series[0].data.length = 0;
+                        caRMapConf.series[1].data.length = 0;
                         res.data.forEach(function (item) {
                             caRMapConf.series[0].data.push(item.arriveNum)
                             caRMapConf.series[1].data.push(item.vsarriveNum)
                         })
                         caRMapConf.series[0].name = res.data[0] && res.data[0].cityName;
                         caRMapConf.series[1].name = $('#vsPrefecture').siblings('.btn-group').children('button').attr('title'); /* res.data[1] && res.data[1].vscityName; */
-                        caREchart.setOption(caRMapConf,true);
+                        caREchart.setOption(caRMapConf, true);
                     } else { // 没有点击对比
+
                         caRMapConf.xAxis[0].data = [];
                         caRMapConf.series = [{
                             "name": "",
@@ -496,9 +496,50 @@ define([], function () {
                         ttMapConf.xAxis[0].data.push(item.cityName)
                         ttMapConf.series[0].data.push(item.arriveNum)
                     })
-                    ttMapConf.series[0].name = res.data[0] && res.data[0].cityName;
+                    // ttMapConf.series[0].name = res.data[0] && res.data[0].cityName;
                     ttEchart.setOption(ttMapConf, true)
                 });
+                // console.log(ttMapConf);
+                // $model.ZeroBizRegionalBar(params).then(function (res) {
+                //     res.data = res.data || {};
+                //     ttMapConf.xAxis[0].data = [];
+                //     ttMapConf.series[0].data = [];
+                //     ttMapConf.series = [{
+                //         "name": "",
+                //         "type": "bar",
+                //         "data": [],
+                //         "barGap": 0,
+                //         "barWidth": 70
+                //     }];
+                //     res.data.forEach(function (item,i) {
+                //         ttMapConf.xAxis[0].data.push(item.cityName)
+                //         ttMapConf.series[0].data.push(item.arriveNum)
+                //         ttMapConf.series[0].name = res.data[0] && res.data[0].cityName;                    
+                //     })
+                //     console.log(ttMapConf);
+                //     ttEchart.setOption(ttMapConf, true)                    
+                    // console.log(ttMapConf);
+                    // ttEchart.setOption({
+                    //     series: _.map(res.data, function (d) {
+                    //         return {
+                    //             name: d.cityName,
+                    //             type: "bar",
+                    //             data: _.map(res.data,function (d) {
+                    //                 return [].push(d.arriveNum)
+                    //             })
+                    //         }
+                    //     })
+                    //     // series: [{
+                    //     //     data: _.map(res.data, function (d) {
+                    //     //         console.log(d);
+                    //     //         return {
+                    //     //             name: d.cityName || "",
+                    //     //             value: d.arriveNum || 0,
+                    //     //         }
+                    //     //     })
+                    //     // }]
+                    // });
+                // });
             };
 
             // 零售户地域分布-对比
@@ -543,21 +584,36 @@ define([], function () {
             function ZeroBizTimeline(params) {
                 $model.ZeroBizTimeline(params).then(function (res) {
                     res.data = res.data || {};
-                    timeTMapConf.xAxis.data.length=0;
-                    timeTMapConf.series[0].data.length=0;
+                    timeTMapConf.series.length = 1;
+                    timeTMapConf.xAxis.data.length = 0;
+                    timeTMapConf.series[0].data.length = 0;
                     res.data.forEach(function (item) {
                         timeTMapConf.xAxis.data.push(item.statTime);
                         timeTMapConf.series[0].data.push(item.arriveNum);
                     })
                     timeTMapConf.series[0].name = res.data[0] && res.data[0].cityName;
-                    console.log(timeTMapConf);
-                    timeTEchart.setOption(timeTMapConf);
+                    timeTEchart.setOption(timeTMapConf, true);
                 });
             };
             // 零售户发展时间趋势-对比
             function VSZeroBizTimeline(params) {
                 $model.VSZeroBizTimeline(params).then(function (res) {
                     res.data = res.data || {};
+                    timeTMapConf.series.length < 2 ? timeTMapConf.series.push({
+                        "name": "",
+                        "type": "line",
+                        "label": {
+                            "normal": {
+                                "show": false
+                            }
+                        },
+                        "data": [],
+                        "itemStyle": {
+                            "normal": {
+                                "color": "#FF8B22"
+                            }
+                        }
+                    }) : '';
                     timeTMapConf.series[1].data = [];
                     res.data.forEach(function (item) {
                         timeTMapConf.series[1].data.push(item.arriveNum)
@@ -577,6 +633,5 @@ define([], function () {
             };
         }]
     };
-
     return analysisCtrl;
 });
