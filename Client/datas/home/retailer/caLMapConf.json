@@ -6,11 +6,11 @@
     "legend": {
         "orient": "vertical",
         "x" : "right",
-        "padding": 5,
+        "padding": 0,
         "y" : "center",
         "data":[],
         "textStyle":{
-            "fontSize":"40"
+            "fontSize":"20"
         }
     },
         "show" : true,
@@ -31,7 +31,7 @@
                 "formatter":"{b}:{d}%",
                 "textStyle":{
                 "fontWeight":"normal",
-                "fontSize":"14"
+                "fontSize":"12"
                 }
             },
             "emphasis": {

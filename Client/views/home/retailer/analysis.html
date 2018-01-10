@@ -49,6 +49,7 @@
                                         <select class="form-control" name="weekEndTime" ng-model="weekEndTime">
                                             <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
                                         </select>
+
                                     </div>
                                     <!--month-->
                                     <div class="inline-block" ng-show="type=='month'">
@@ -59,33 +60,33 @@
                             </div>
                             <!-- 显示隐藏的盒子 -->
                             <div class="ui-detail-body">
-                                <div class="inline-block col-md-2.9">
+                                <div class="inline-block col-md-2.1">
                                     <label>业态 &nbsp;
-                                        <select class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
+                                        <select id="selectSpeci" class="form-control input-sm select" ng-model="selectSpeci" multiple="multiple">
                                             <option ng-repeat="item in ShopDownBox" value="{{item.bizCode==-1?'':item.bizCode}}" ng-if="item.bizCode != -1">{{item.bizName}}</option>
                                         </select>
                                     </label>
                                 </div>
-                                <div class="inline-block col-md-2.9">
+                                <div class="inline-block col-md-2.1">
                                     <label>省份 </label>
                                     <select class="form-control date input-sm select" id="proviceId">
                                         <option value="{{item.code}}" ng-repeat="item in UserProv" ng-selected="item.code==ProvByorgId.orgRegion">{{ item.name }}</option>
                                     </select>
                                 </div>
-                                <div class="inline-block col-md-2.9">
+                                <div class="inline-block col-md-2.1">
                                     <label>地市等级&nbsp;</label>
                                     <select name="data" class="form-control date input-sm select" id="levelOfCities">
                                         <option value="{{item.cityClassName}}" ng-repeat="item in City">{{item.cityClassName}}</option>
                                     </select>
                                 </div>
-                                <div class="inline-block col-md-2.9">
+                                <div class="inline-block col-md-2.1">
                                     <label>地市&nbsp;</label>
                                     <select name="data" class="form-control date input-sm select" id="prefecture">
                                         <option value="{{item.cityId}}" ng-repeat="item in CityDown">{{item.cityName}}</option>
                                         <!-- val写 cityId -->
                                     </select>
                                 </div>
-                                <div class="fr my-btn">
+                                <div class="col-md-1.8 fr inline-block" >
                                     <button type="submit" class="btn btn-info" ng-click="retailerSearch()" id="my-btn">查询</button>
                                 </div>
                                 <!-- 对比 -->
@@ -101,7 +102,7 @@
                                         <div class="inline-block col-md-2.5">
                                             <label>省份&nbsp;</label>
                                             <select name="data" class="form-control date input-sm select" id="vsProvince">
-                                                <option value="{{item.code}}" ng-repeat="item in UserProv" ng-if="item.code == '000000' ? false : true">{{ item.name }}</option>
+                                                <option value="{{item.code}}" ng-repeat="item in UserProv" ng-if="item.code == '000000' ? false : true" ng-selected="item.code==ProvByorgId.orgRegion">{{ item.name }}</option>
                                             </select>
                                         </div>
                                         <div class="inline-block col-md-2.5">
@@ -150,6 +151,10 @@
                             <i class="sitePic"></i>&nbsp;零售户地域分布
                             <span class="line"></span>
                         </div>
+                        <div class="panel-body-title">
+                            <p class="normal">{{normal}}零售户：{{normalNum}}家</p>
+                            <p class="vs" ng-if="isFlag">{{vs}}零售户：{{vsNum}}家</p>
+                        </div>
                         <div id="ttMap" class="ui-map-box col-md-12">
                             <!-- todo -->
                         </div>
@@ -168,10 +173,11 @@
 
                     <!-- 零售户关键指标查询 -->
                     <div class="panel-body">
-                        <div class="title form-inline form-group col-md-12">零售户关键指标查询
-                            <a class="goDetailEnquiry fr" href="javascript:;" style="color:#747474">零售户明细查询&gt;&gt;</a>
+                        <div class="title form-inline form-group col-md-12 ">
+                            <span class="fl">零售户关键指标查询</span>
+                            <a class="goDetailEnquiry fr" href="../detail" style="color:#747474">零售户明细查询&gt;&gt;</a>
                         </div>
-                        <div id="timeTMap" class="ui-map-box">
+                        <div>
                             <div class=".table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead>
