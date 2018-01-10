@@ -13,7 +13,7 @@ define([], function () {
                 var GET_WEEK_DATA = "/api/tztx/dataportal/statistics/getWeeks";                 // 周
                 var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";        // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
-                var GET_TABLE_DATA = "/api/tztx/dataportal/shopKeeper/getRetailuserDetail";     // 表格数据
+                var GET_TABLE_DATA = "/api/tztx/saas/saotx/order/queryOrderList";               // 表格数据
 
                 // 周
                 this.$week = request.$Search(GET_WEEK_DATA, {}, true);

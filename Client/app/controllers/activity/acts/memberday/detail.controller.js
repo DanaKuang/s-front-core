@@ -55,6 +55,17 @@ define([], function () {
             // 初始化查询
             function initSearch () {
                 $model.getTableData({
+                    keys: '',
+                    stime: '',
+                    etime: '',
+                    status: '',
+                    brandCode: '',
+                    sn: '',
+                    areaCode: '',
+                    awardType: '',
+                    realThing: '',
+                    currentPageNumber: '',
+                    pageSize: ''
                 }).then(function (res) {
                     var data = res.data || [];
                     $scope.listArr = [];
