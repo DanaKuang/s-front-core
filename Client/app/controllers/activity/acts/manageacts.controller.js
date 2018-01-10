@@ -732,6 +732,7 @@ define([], function () {
                 $scope.allConfigTemplateConf = null;
             })
         }
+       
     	}]
   	}
   	return manageactsController

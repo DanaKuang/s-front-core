@@ -254,6 +254,73 @@ define([], function () {
                   $(e.target).siblings('.sendscore').addClass('hidden')
               }
           })
+
+         /* 特殊规则设置 */
+            var specialIconReduce = 1;
+           // 添加字体图标
+          $('.special-rules-info').on('click','.specialIncrease',function (e) {    
+              var html = '<div class="special-rules-item operation multi">'+
+                            '<span>用户第&nbsp;</span>'+
+                            '<input type="text" class="input">'+
+                            '<span>&nbsp;次抽奖必中&nbsp;</span>'+
+                            '<div class="special-select">'+
+                                '<select name="data" class="select">'+
+                                    '<option>空</option>'+
+                                    '<option value="1111" label="2222"></option>'+
+                                    '<option value="1111" label="2222"></option>'+
+                                    '<option value="1111" label="2222"></option>'+
+                                    '<option value="1111" label="2222"></option>'+
+                                '</select>'+
+                            '</div>'+
+                            '<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>'+
+                            '<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>'+
+                            '<div class="special-wrong">'+
+                                '<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>'+
+                            '</div>'+
+                        '</div>'
+              $('.special-rules-info').append(html);             
+                if(!$(e.target).siblings('.specialReduce').length){
+                    scope.specialIconReduce = false;
+                    $(e.target).before('<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>')
+                }
+                e.target.remove();
+              $(document).ready(function () {
+                $(".multi .select").multiselect({
+                  nonSelectedText: '请选择',
+                  nSelectedText: '已选择',
+                  includeSelectAllOption: true,
+                  selectAllText: '全部',
+                  allSelectedText: '全选',
+                  enableFiltering: true,
+                  maxHeight: '500px',
+                  numberDisplayed: 1
+                });
+              });
+              scope.specialIconReduce = true; // 就是为了一开始不让看见减号。之后就总见了。
+              scope.$apply();
+          })
+          // 减去字体图标
+          $('.special-rules-info').on('click','.specialReduce',function (e) {
+           $(e.target).parent('.special-rules-item').remove();              
+            if($('.special-rules-item').length==1){
+                console.log($('.special-rules-item').length);
+                if(!$('.special-rules-item').find('.specialIncrease').length){
+                    console.log('添加');
+                    $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                }
+                if($('.special-rules-item').find('.specialReduce').length){
+                    console.log('删除');
+                    $('.special-rules-item').find('.specialReduce').remove();
+                }
+                // $(e.target).remove();
+                // if(!$(e.target).siblings('.specialIncrease').length){
+                //     $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                // }
+            }
+           if($(e.target).siblings('.specialIncrease').length){
+            $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+           }
+          })
       }
       return defineObj;
   }

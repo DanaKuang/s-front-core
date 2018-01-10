@@ -410,7 +410,7 @@ define([], function () {
                 ZeroShopkpiSelectTable(angular.extend({ // 零售户关键指标查询
                     bizCode: selectValueStr.join(',') || '',
                     isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
-                    proviceId: $('#proviceId').val() == '000000' ? "" : $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                    proviceId: $('#proviceId').val() == '000000' ? "" : $('#proviceId').val() || $scope.ProvByorgId.orgRegion, // 省份
                     cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
                     cityClass: $('#levelOfCities').val() || '',  // 地市等级 
                     vsProviceId: $('#checkbox').prop('checked') == false ? '' : $('#vsProvince').val(), //对比省份

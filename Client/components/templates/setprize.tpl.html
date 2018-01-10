@@ -878,20 +878,20 @@
 		<span>用户习惯培养奖励设置</span>
 		<div class="special-rules-info" ng-show="specialShowOrHide">
 			<div class="special-rules-item operation multi">
-				<span>用户第&nbsp;</span>
+				<span>用户第</span>
 				<input type="text" class="input">
-				<span>&nbsp;次抽奖必中&nbsp;</span>
+				<span>次抽奖必中</span>
 				<div class="special-select">
 					<select name="data" class="select">
-						<option value="''">空</option>
+						<option value="">空</option>
 						<option value="1111" label="2222"></option>
 						<option value="1111" label="2222"></option>
 						<option value="1111" label="2222"></option>
 						<option value="1111" label="2222"></option>
 					</select>
 				</div>
-				<span class="glyphicon glyphicon-plus-sign special-icon" ng-click="specialIncrease"></span>
-				<span class="glyphicon glyphicon-minus-sign special-icon" ng-click="specialReduce" ng-if="specialIconSOH"></span>
+				<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease"></span>
+				<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ng-show="specialIconReduce"></span>
 				<div class="special-wrong ">
 					<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>
 				</div>
