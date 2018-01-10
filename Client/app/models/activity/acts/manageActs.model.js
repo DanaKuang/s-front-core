@@ -9,10 +9,19 @@ define([], function () {
         ServiceType: 'service',
         ServiceName: 'manageactsModel',
         ServiceContent: ['request', function (request) {
+            // liubin 2017-12-21
+            this.$model = function () {
+                var IMG = '/statics/activity/actimg.json';
+                this.$IMG = request.$Query(IMG);
+            };
             //定义资源
             var $model = this;
+
+            var STEP = '/statics/activity/step.json';
+
             // 模板列表
             var GET_ACT_SAMPLE_LIST = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
+            var GET_WHICH_SAMPLE = '/api/tztx/saas/saotx/activity/queryActTempByParams';
             // 活动列表
             var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
             // 活动状态
@@ -70,6 +79,15 @@ define([], function () {
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
+            }
+
+            // 根据参数获取某种类型模板
+            $model.getwhichsample = function (data) {
+                return request.$Search(GET_WHICH_SAMPLE, data)
+            }
+
+            $model.step = function () {
+                return request.$Query(STEP)
             }
 
             // 活动状态
@@ -170,7 +188,6 @@ define([], function () {
             $model.getPoolDetaiById = function (data) {
                 return request.$Search(GET_POOL_DETAIL, data);
             };
-
         }]
     }
     return manageactsModel

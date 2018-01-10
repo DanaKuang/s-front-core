@@ -1,728 +1,956 @@
 /**
- * Author: liubin
- * Create Date: 2017-09-28
+ * Author: hanzha
+ * Create Date: 2017-11-28
  * Description: [重构]
  */
 
 define([], function () {
-    var manageCtrl = {
+    var visitManageCtrl = {
         ServiceType: "controller",
-        ServiceName: "manageCtrl",
-        ViewModelName: 'manageViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
-            var $model = $scope.$model;
-            //设置input的默认时间
-            var allpage;
-            var stattime = dayFilter.beforenday('date', 10);
-            var endtime = dayFilter.today('date');
+        ServiceName: "visitManageCtrl",
+        ViewModelName: 'visitManageModel',
+        ServiceContent: ['$rootScope', '$scope', '$timeout', '$location', 'visitManageModel', 'dateFormatFilter', function ($rootScope, $scope, $timeout, $location, $model, dateFormatFilter) {
 
-            function strToTimestamp(s) {
-                s = s.replace(/-/g,"/");
-                var date = new Date(s );
-                return date.valueOf();
-            }
-            //时间戳变
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,4}$/,' ');
-            }
-            function openwin(){
-                window.open("","","width=200,height=200")
-            }
-            $("#timeStart1").val(stattime);
-            $("#timeStart2").val(stattime);
-            $("#timeEnd1").val(endtime);
-            $("#timeEnd2").val(endtime);
-            $("#timeStart").val(endtime);
-            $("#timeStart1").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#timeStart1").datetimepicker("setEndDate",$("#timeEnd1").val());
-            });
-            $("#timeEnd1").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeEnd1").datetimepicker("setStartDate",$("#timeStart1").val());
-            });
-            $("#timeStart2").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#timeStart2").datetimepicker("setEndDate",$("#timeEnd2").val());
-            });
-            $("#timeEnd2").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeEnd2").datetimepicker("setStartDate",$("#timeStart2").val());
-            });
-            //零售户管理-->零售户列表
-            $("#manage-list").off().on('click', function(){
-                var provinceId = $("#provinceId").val();
-                var cityId = $("#cityId").val();
-                var areaId = $("#areaId").val();
-                var timeStart1 = $("#timeStart1").val();
-                var timeEnd1 = $("#timeEnd1").val();
-                var authStatus = $("#authStatus").val();
-                var manageList = {
-                    search: $("#input1").val(),
-                    pageNum: 1,
-                    pageSize: 10,
-                    addrCity: cityId,
-                    addrArea:areaId,
-                    addrProvince: provinceId,
-                    authStatus:authStatus,
-                    appStartTime: strToTimestamp(timeStart1) || '',
-                    appEndTime: strToTimestamp(timeEnd1)+86400000 || ''
-                };
-                var arr=['食杂店', '便利店', '超市', '商场', '烟酒商店', '娱乐服务', '其他'];
-                $model.getTblData(manageList).then(function(res) {
-                    for(var i=0;i<res.data.data.length;i++){
-                        res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
-                        if(res.data.data[i].authStatus==1){
-                            res.data.data[i].authStatus = "待审核";
-                            res.data.data[i].isShow= false;
-                        }else if(res.data.data[i].authStatus==2){
-                            res.data.data[i].authStatus = "审核通过";
-                            res.data.data[i].isShow= true;
-                        }else if(res.data.data[i].authStatus==3){
-                            res.data.data[i].authStatus = "审核未通过";
-                            res.data.data[i].isShow= false;
-                        }
-                        var commercial = res.data.data[i].commercial;
-                        res.data.data[i].commercial = arr[commercial-1];
-                        var district= parseInt(res.data.data[i].district);
-                        if(district==1){
-                            district ="城镇";
-                        }else if(district==2){
-                            district ="乡村";
-                        }
-                        res.data.data[i].district =district;
-                    }
-                    $scope.listData = res.data.data || [];
-                    $scope.$apply();
-                    var pageCount = Math.ceil(res.data.totalNum/manageList.pageSize);
-                    $("#pageCount").text(res.data.totalNum);
-                    if(manageList.pageSize<=res.data.totalNum){
-                        $("#pageSize").text(manageList.pageSize);
-                    }else{
-                        $("#pageSize").text(res.data.totalNum);
-                    }
-                    $(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
-                        pageCount:pageCount,
-                        current: manageList.pageNum,
-                        backFn: function(p) {
-                            manageList.pageNum =p;
-                            $model.getTblData(manageList).then(function(res) {
-                                for(var i=0;i<res.data.data.length;i++){
-                                    res.data.data[i].applyTime=getLocalTime(res.data.data[i].applyTime);
-                                    if(res.data.data[i].authStatus==1){
-                                        res.data.data[i].authStatus = "待审核";
-                                        res.data.data[i].isShow= false;
-                                    }else if(res.data.data[i].authStatus==2){
-                                        res.data.data[i].authStatus = "审核通过";
-                                        res.data.data[i].isShow= true;
-                                    }else if(res.data.data[i].authStatus==3){
-                                        res.data.data[i].authStatus = "审核未通过";
-                                        res.data.data[i].isShow= false;
-                                    }
-                                    var commercial = res.data.data[i].commercial;
-                                    res.data.data[i].commercial = arr[commercial-1];
-                                    var district= parseInt(res.data.data[i].district);
-                                    if(district==1){
-                                        district ="城镇";
-                                    }else if(district==2){
-                                        district ="乡村";
-                                    }
-                                    res.data.data[i].district =district;
-                                }
-                                $scope.listData = res.data.data || [];
-                                $scope.$apply();
-                                $("#pageCount").text(res.data.totalNum);
+          // 初始化一个对象，vm
+          $scope.vm = {
+            status: 1, // 状态，默认选择上架中
+            commercial: '', // 业态
+            district: '', // 区域
+            searchType: 3, // 关键词类型
+            licenceNo: '',  // 烟草证号
+            addrProvince: '',
+            addrCity: '',
+            addrArea: '',
+            appStartTime: '',
+            appEndTime: '',
+            isPrint: '',
+            sortType: 1,
+            sortValue: 1,
+            pageNo: 1,
+            pageSize: 10,
+            currentPage: 'index' //
+          }
 
-                                if(manageList.pageSize<=res.data.totalNum){
-                                    if(manageList.pageNum==pageCount){
-                                        $("#pageSize").text(res.data.totalNum%manageList.pageSize);
-                                    }else{
-                                        $("#pageSize").text(manageList.pageSize);
-                                    }
+          // 详情
+          $scope.detial = {
+            detialPage: 'info'
+          };
 
-                                }else{
-                                    $("#pageSize").text(res.data.totalNum);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-            // 图片放大功能
-            $scope.showBig=function(licenceImg){
-                var img = new Image();
-                // 改变图片的src
-                img.src = licenceImg;
-                var Height=0.5*img.height
-                var Width=0.5*img.width
-                $("#bigImg").css({"height":Height+"px","width":Width+"px"});
-                $("#file-modal-content1").css({"height":Height+"px","width":Width+"px"});
-                $("#bigImg").attr('src',licenceImg);
-            }
-            $('#tab1[data-toggle="tab"]').on('show.bs.tab',function(e){
-                $("#manage-list").trigger('click');
-            });
-            $("#manage-list").trigger('click');
+          // 新增
+          $scope.new = {};
 
-            $scope.aaa = function(tr){
-                $("#sellerId").val(tr.sellerId);
+          // 基本信息
+          $scope.info = {
+            headImg: ''
+            // isEdit: false
+          };
 
-            }
-            //零用户管理->零售户二维码
-            $("#manage-erwei").off().on('click', function(){
-                var timeStart2 = $("#timeStart2").val();
-                var timeEnd2 = $("#timeEnd2").val();
-                var isDispatch = $("#send").val();
-                var manageErwei = {
-                    search: $("#input2").val(),
-                    pageNum: 1,
-                    pageSize: 10,
-                    isDispatch:isDispatch,
-                    // orderStatus:orderStatus,
-                    isPay:$("#is-pay").val(),
-                    startTime: strToTimestamp(timeStart2) || '',
-                    endTime: strToTimestamp(timeEnd2)+86400000 || ''
-                }
-                var authStatusArr=["","认证中","已认证","认证失败"];
-                var orderStatusArr=["","待支付","待处理","已发货","已收货","已取消","已处理"]
-                $model.getTbErwei(manageErwei).then(function(res) {
-                    for(var i=0;i<res.data.data.length;i++){
-                        res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-                        res.data.data[i].authStatus = authStatusArr[res.data.data[i].authStatus];
-                        res.data.data[i].orderStatus = orderStatusArr[res.data.data[i].orderStatus];
-                    }
-                    $scope.erweiData = res.data.data || [];
-                    $scope.$apply();
-                    var pageCount = Math.ceil(res.data.totalNum/manageErwei.pageSize);
-                    $("#pageCount").text(res.data.totalNum);
-                    if(manageErwei.pageSize<=res.data.totalNum){
-                        $("#pageSize").text(manageErwei.pageSize);
-                    }else{
-                        $("#pageSize").text(res.data.totalNum);
-                    }
-                    $(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
-                        pageCount:pageCount,
-                        current: manageErwei.pageNum,
-                        backFn: function(p) {
-                            manageErwei.pageNum =p;
-                            $model.getTbErwei(manageErwei).then(function(res) {
-                                for(var i=0;i<res.data.data.length;i++){
-                                    res.data.data[i].authStatus = authStatusArr[res.data.data[i].authStatus];
-                                    res.data.data[i].orderStatus = orderStatusArr[res.data.data[i].orderStatus];
-                                    res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-                                }
-                                $scope.erweiData = res.data.data || [];
-                                $scope.$apply();
-                                $("#pageCount").text(res.data.totalNum);
-                                if(manageErwei.pageSize<=res.data.totalNum){
-                                    if(manageErwei.pageNum==pageCount){
-                                        $("#pageSize").text(res.data.totalNum%manageErwei.pageSize);
-                                    }else{
-                                        $("#pageSize").text(manageErwei.pageSize);
-                                    }
+          $scope.storage = {};
 
-                                }else{
-                                    $("#pageSize").text(res.data.totalNum);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-            //页面加载的时候加载数据
-            $('#tab2[data-toggle="tab"]').on('show.bs.tab',function(e){
-                $("#manage-erwei").trigger('click');
-            });
-            $('#tabFx[data-toggle="tab"]').on('show.bs.tab',function(e){
-                $("#return").trigger("click");
-            });
-            $('#tabSao[data-toggle="tab"]').on('show.bs.tab',function(e){
-                $("#tabSao").trigger("click");
-            });
-            $('#tabTx[data-toggle="tab"]').on('show.bs.tab',function(e){
-                $("#tixian").trigger("click");
-            });
-            //点击切换页面
-            $scope.myVar = true;
-            $scope.showDetail = function(tr) {
-                $scope.myVar = !$scope.myVar;
-                $scope.sellerId =tr.sellerId;
-                $("#return").trigger("click");
-                var arr=['食杂店', '便利店', '超市', '商场', '烟酒商店', '娱乐服务', '其他'];
-                $model.getDetail({
-                    sellerId:tr.sellerId
-                }).then(function (res) {
-                    res.data.data.sellerInfo.applyTime = getLocalTime(res.data.data.sellerInfo.applyTime);
-                    res.data.data.sellerInfo.lastUpdateTime = getLocalTime(res.data.data.sellerInfo.lastUpdateTime);
-                    var authStatus= parseInt(res.data.data.sellerInfo.authStatus);
-                    var commercial= parseInt(res.data.data.sellerInfo.commercial);
-                    var district= parseInt(res.data.data.sellerInfo.district);
-                    if( authStatus== 1){
-                        authStatus = "待审核";
-                    }else if(authStatus == 2){
-                        authStatus = "审核通过";
-                    }else if(authStatus == 3){
-                        authStatus = "审核未通过";
-                    }
-                    if(district==1){
-                        district ="城镇";
-                    }else if(district==2){
-                        district ="乡村";
-                    }
-                    res.data.data.sellerInfo.commercial = arr[res.data.data.sellerInfo.commercial-1];
-                    res.data.data.sellerInfo.authStatus = authStatus;
-                    res.data.data.sellerInfo.district = district;
-                    $scope.sellerInfo = res.data.data.sellerInfo || [];
-                    $scope.walletInfo = res.data.data.walletInfo || [];
-                    $scope.wxinfo = res.data.data.wxinfo || [];
+          // 判断是否为 审核管理 跳转过来的
+          if(sessionStorage.sellerId) {
+            getDetialInfoList(sessionStorage.sellerId);
 
-                    $scope.$apply();
-                });
+            sessionStorage.removeItem('sellerId'); // 进入详情页后，移除sellerId，防止刷新再进入
+            $scope.fromPage = 'reviewManage'; // 在返回列表时，根据来源返回。
+          }
+
+          // 判断是否为 扫码入库奖励管理 跳转过来的
+          if(sessionStorage.storageId) {
+            // 当前页改为详情
+            $scope.vm.currentPage = 'detial';
+            backTop();
+            $scope.detial.detialPage = 'storage';
+
+            $scope.info.sellerId = sessionStorage.storageId;
+            getDetialStorageList(1, true);
+
+            sessionStorage.removeItem('storageId');
+            $scope.fromPage = 'storage';
+          }
+
+          // 获取table列表
+          function getList(page, ispage) {
+            var data = {
+              commercial: $scope.vm.commercial || '', // 业态
+              district: $scope.vm.district || '', // 区域
+              searchType: $scope.vm.searchType || '', // 关键词类型
+              addrProvince: $scope.vm.addrProvince || '',
+              addrCity: $scope.vm.addrCity || '',
+              addrArea: $scope.vm.addrArea || '',
+              appStartTime: $scope.vm.appStartTime || '',
+              appEndTime: $scope.vm.appEndTime || '',
+              isPrint: $scope.vm.isPrint || '',
+              sortType: $scope.vm.sortType || 1,
+              sortValue: $scope.vm.sortValue,
+              pageNo: page || 1,
+              pageSize: 10
             };
-            //商品详情-->审核通过
-            $scope.secondThough=function(){
-                alert("恭喜您审核已经通过");
-                $("#authStatus").text("审核通过");
-            }
-            ////商品详情-->审核驳回
-            $scope.secondBack=function(){
-                // $("#though-check").css("display","none");
-                $(".goods-back").attr({"data-toggle":"modal","data-target":"#myModal"});
-                $("#shen-though").css("display","none");
-                $("#shen-back").css("display","none");
-                $("#content-text").css("display","block");
-                $("#modal-content").css("height","280px");
-                $("#refuse-reason").css("height","186px");
-                $("#refuse-reason").change(function(){
-                    var mydate = new Date();
-                    var str = "" + mydate.getFullYear() + "年";
-                    str += (mydate.getMonth()+1) + "月";
-                    str += mydate.getDate() + "日";
-                    $("#reason-box").append("<p id='back-reason' 'class'='col-ms-12'><p>");
-                    $("#back-reason").append("<li>"+str+"&nbsp;&nbsp;&nbsp;&nbsp;"+$('#refuse-reason').val()+"</li>");
-                    if($("#back-reason").find("li").length>=3){
-                        $("#back-reason li:first").remove();
-                    }
-                })
-            }
-            // 省市区
-            $scope.province = $model.$province.data;
-            $("#provinceId").change(function (e) {
-                $model.getCity({
-                    parentCode: e.target.value || ''
-                }).then(function (res) {
-                    $scope.city = res.data;
-                    $scope.$apply();
-                });
-            });
-            $("#cityId").change(function (e) {
-                $model.getArea({
-                    parentCode: e.target.value || ''
-                }).then(function (res) {
-                    $scope.area = res.data;
-                    $scope.$apply();
-                });
-            });
-            //审核
-            $scope.shenThough = function(authResult){
-                $scope.authResult = 1;
-                $("#modal-content").css("height","124px");
-                $("#content-text").css("display","none");
-                var sellerId=$("#sellerId").val();
-                $model.getApproval({
-                    authResult: authResult,
-                    failReason: '',
-                    note: '',
-                    sellerId:sellerId
-                }).then(function (res) {
-                    $scope.approvalData = res.data.data || [];
-                    $scope.$apply();
-                    if(res.data.ok = true){
-                        $("#though-backDown").css("display","none");
-                        $("#though-check").css("display","block");
-                    }else {
-                        $("#though-check").css("display","none");
-                        $("#though-backDown").css("display","block");
-                    };
-                });
-            }
-            $scope.thoughClose=function(){
-                $("#though-check").css("display","none");
-                $("#modal-content").css("height","90px");
-            }
-            $scope.shenBack=function(){
-                $("#content-text").css("display","block");
-                $("#though-check").css("display","none");
-                $("#refuse-reason").css("height","186px")
-                $("#modal-content").css("height","325px");
 
+            if($scope.vm.status == '4') {
+              data.authStatus = $scope.vm.status || ''; // 审核状态
+            } else {
+              data.status = $scope.vm.status || 1; // 状态
             }
-            //点击提交按钮关闭文件上传模态框
-            $scope.fileButton =function(){
-                $('#myModalFile').modal('hide');
+
+            // 根据关键词搜索条件，传不同数据
+            if($scope.vm.searchType == '3') {
+              data.licenceNo = $scope.vm.keywords || ''; // 烟草证号
+            } else if($scope.vm.searchType == '1') {
+              data.ownerName = $scope.vm.keywords || ''; // 联系人信息
+            } else if($scope.vm.searchType == '2') {
+              data.phoneNo = $scope.vm.keywords || ''; // 联系人手机号
+            } else if($scope.vm.searchType == '4') {
+              data.shopName = $scope.vm.keywords || ''; // 门店名称
+            } else if($scope.vm.searchType == '5') {
+              data.salesmanName = $scope.vm.keywords || ''; // 业务员
             }
-            //点击下载按钮关闭文件上传模态框
-            $scope.downButton =function(){
-                $('#myModalDown').modal('hide');
+
+            $model.getManageList(data).then(function(res) {
+              $scope.vm.listData = res.data.list || [];
+              // 是否刷新页码
+              if(ispage) {
+                $scope.paginationConf = res;
+                // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                $scope.paginationConf.data.page.currentPageNumber =  res.data.page.pageNo; // 当前页
+                $scope.paginationConf.data.page.pageNumber =  res.data.page.pageCount; // 页数
+
+                $scope.indexPaginationConf = res;
+              }
+            })
+          }
+
+          // 刚进入页面
+          getList(1, true);
+
+          // 监视paginationConf变化更新page
+          $scope.$watch('paginationConf', function () {
+            // 属性赋值
+            if ($scope.paginationConf && $scope.paginationConf.data) {
+              var page = $scope.paginationConf.data.page;
+              $scope.totalCount = page.count;
+              $scope.size = page.count - page.start > page.pageSize ? page.pageSize : page.count - page.start;
+              $scope.curPage = page.currentPageNumber; // 当前页
+              $scope.pageNumber = page.pageNumber; // 页数
             }
-            //审核驳回理由
-            $scope.backReason=function(){
-                $scope.authResult = 2;
-                var sellerId=$("#sellerId").val();
-                var failReason=$("#refuse-reason").val();
-                $model.getApproval({
-                    authResult: 2,
-                    failReason: failReason,
-                    note: '',
-                    sellerId:sellerId
-                }).then(function (res) {
-                    $scope.approvalData = res.data.data || [];
-                    $scope.$apply();
-                });
-                $('#myModal').modal('hide');
-                $("#though-check").css("display","none");
-                $("#modal-content").css("height","90px");
+          }, true);
+
+          // 分页点击
+          $scope.$on('frompagechange', function (e, v, f) {
+            if($scope.vm.currentPage == 'detial') {
+              if($scope.detial.detialPage == 'sellerfans') {
+                getDetialSellerfansList(f.currentPageNumber, true);
+              } else if($scope.detial.detialPage == 'cashback') {
+                getDetialCashbackList(f.currentPageNumber, true);
+              } else if($scope.detial.detialPage == 'bill') {
+                getDetialBillList(f.currentPageNumber, true);
+              } else if($scope.detial.detialPage == 'storage') {
+                getDetialStorageList(f.currentPageNumber, true);
+              }
+            } else {
+              getList(f.currentPageNumber, true);
             }
-            // 零售户详情
-            //返回零售户列表
-            $scope.goBack = function(){
-                // window.history.back();
-                $scope.myVar = !$scope.myVar;
+          })
+
+          // 省
+          $model.getManageProvince().then(function (res) {
+            $scope.provinceList = res.data;
+            // 新增
+            $scope.new.provinceList = res.data;
+            // 详情 - 基本信息
+            $scope.info.provinceList = res.data;
+          });
+
+          // 省份change
+          $scope.provinceChage = function (e) {
+            if($scope.vm.addrProvince) {
+              // 市
+              $model.getManageCity({parentCode: $scope.vm.addrProvince}).then(function (res) {
+                $scope.cityList = res.data;
+                $scope.vm.addrCity = '';
+                $scope.areaList = [];
+                $scope.vm.addrArea = '';
+              });
+            } else {
+              $scope.cityList = [];
+              $scope.vm.addrCity = '';
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
             }
-            //设置input的默认时间
-            var stattime = dayFilter.beforenday('date', 10);
-            var endtime = dayFilter.today('date');
-            $("#timeStart111").val(stattime);
-            $("#timeStart222").val(stattime);
-            $("#timeStart333").val(stattime);
-            $("#timeEnd111").val(endtime);
-            $("#timeEnd222").val(endtime);
-            $("#timeEnd333").val(endtime);
-            $("#timeStart111").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#timeStart111").datetimepicker("setEndDate",$("#timeEnd111").val());
-            });
-            $("#timeEnd111").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeEnd111").datetimepicker("setStartDate",$("#timeStart111").val());
-            });
-            $("#timeStart222").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#timeStart222").datetimepicker("setEndDate",$("#timeEnd222").val());
-            });
-            $("#timeEnd222").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeEnd222").datetimepicker("setStartDate",$("#timeStart222").val());
-            });
-            $("#timeStart333").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#timeStart333").datetimepicker("setEndDate",$("#timeEnd333").val());
-            });
-            $("#timeEnd333").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeEnd333").datetimepicker("setStartDate",$("#timeStart333").val());
-            });
-            //扫码返现
-            $("#return").off().on('click', function(){
-                var unit = $("#manage-unit").val();
-                var isFx = $("#manage-isfx").val();
-                var startTime = strToTimestamp($("#timeStart111").val());
-                var endTime = strToTimestamp($("#timeEnd111").val())+86400000;
-                var returnNum = {
-                    pageNum: 1,
-                    pageSize: 10,
-                    isFx: isFx,
-                    startTime: startTime,
-                    endTime: endTime,
-                    sellerId:$scope.sellerId
+          }
+
+          // 城市change
+          $scope.cityChage = function (e) {
+            if($scope.vm.addrCity) {
+              // 区/县
+              $model.getManageCountry({parentCode: $scope.vm.addrCity}).then(function (res) {
+                $scope.areaList = res.data;
+                $scope.vm.addrArea = '';
+              });
+            } else {
+              $scope.areaList = [];
+              $scope.vm.addrArea = '';
+            }
+          }
+
+
+          // 搜索
+          $scope.search = function (e) {
+            getList(1, true);
+          }
+
+          // 重置
+          $scope.reset = function () {
+            var data = {
+              status: 1, // 状态
+              commercial: '', // 业态
+              district: '', // 区域
+              searchType: 3, // 关键词类型
+              licenceNo: '',  // 烟草证号
+              addrProvince: '',
+              addrCity: '',
+              addrArea: '',
+              appStartTime: '',
+              appEndTime: '',
+              isPrint: '',
+              pageNo: 1,
+              pageSize: 10
+            }
+            // 获取到的数据放入vm里
+            $scope.vm = Object.assign({}, $scope.vm, data);
+
+            $scope.cityList = '';
+            $scope.areaList = '';
+            getList(1, true);
+          }
+
+          // 排序
+          $scope.vm.previousType = 1;
+          $scope.sortBy = function (type) {
+            // 设置当前点击的排序
+            $scope.vm.sortType = type;
+
+            // 获取 sortValue
+            if($scope.vm.previousType == type) {
+              $scope.vm.sortValue = ($scope.vm.sortValue == 1 ? 0 : 1); // 升序、降序
+            } else {
+              $scope.vm.sortValue = 1;
+            }
+
+            getList(1, true);
+            // 上一个值设置为当前
+            $scope.vm.previousType = type;
+          }
+
+          // 上下架
+          $scope.UpOffShelf = function (id, value) {
+            if(value == 1) {
+              $scope.isUpShelf = true;
+            } else {
+              $scope.isUpShelf = false;
+            }
+            $scope.ShelfId = id;
+            $scope.ShelfValue = value;
+          }
+
+          // 上下架弹窗  确认按钮点击
+          $scope.shelfConfirm = function() {
+            var data = {
+              sellerId: $scope.ShelfId,
+              status: $scope.ShelfValue,
+            }
+
+            $model.modifyAuthOrg(data).then(function(res) {
+              if(res.data.ok) {
+                // 审核成功后刷新列表
+                getList($scope.paginationConf.data.page.currentPageNumber);
+                // 隐藏弹窗
+                $('.shelf-modal').modal('hide');
+                alertMsg($('#newAlert'), 'success', '设置成功');
+              } else {
+                alertMsg($('#newAlert'), 'danger', res.data.msg);
+              }
+            })
+          }
+
+
+          // *** 详情 start
+          // 查看点击
+          $scope.viewManage = function(id) {
+            $scope.info.sellerId = id;
+            backTop();
+
+            // 图片src设置为空
+            $('#infoHeadImg, #infoLicenceImg, #newHeadImg, #newLicenceImg').attr('src','');
+
+            getDetialInfoList(id, 'nowPage');
+          }
+
+          // *** 基本信息 start ***
+          // 获取详情信息
+          function getDetialInfoList(id, from) {
+            // 当前页改为详情
+            $scope.vm.currentPage = 'detial';
+            $scope.detial.detialPage = 'info';
+            // 初始化 基本信息，这里注意，不能写成$scope.info={isEdit : true,licenceImg: ''}
+            $scope.info.isEdit = false;
+
+            // 当前页进来的就重置表单
+            if(from == 'nowPage') {
+              // 重置form状态
+              $scope.infoForm.$setPristine();
+              $scope.infoForm.$setUntouched();
+            }
+
+            $model.getManageDetialInfo({sellerId: id}).then(function(res) {
+              // 获取到的数据放入info里
+              $scope.info = Object.assign({}, $scope.info, res.data.data.sellerInfo);
+
+              // 这时加载市、区列表
+              // 市
+              $model.getManageCity({parentCode: $scope.info.addrProvince}).then(function (res) {
+                $scope.info.cityList = res.data;
+              });
+              // 区/县
+              $model.getManageCountry({parentCode: $scope.info.addrCity}).then(function (res) {
+                $scope.info.areaList = res.data;
+              });
+            })
+          }
+
+          // 基本信息 - 修改点击
+          $scope.info.edit = function() {
+            $scope.info.isEdit = true;
+
+            // 重置form状态
+            $scope.infoForm.$setPristine();
+            $scope.infoForm.$setUntouched();
+
+            // 这里用jQuery去设置，因为angular没办法。 fixme:以后可以再解决
+            $('#infoProvince').val($scope.info.addrProvince);
+            $('#infoCity').val($scope.info.addrCity);
+            $('#infoArea').val($scope.info.addrArea);
+          }
+
+          // 基本信息 - 保存点击
+          $scope.info.save = function() {
+            // 验证，id，点击类型
+            newAndEdit($scope.infoForm.$valid, 'edit');
+          }
+
+          // 基本信息 - 取消点击
+          $scope.info.cancel = function() {
+            $scope.info.isEdit = false;
+            getDetialInfoList($scope.info.sellerId, 'nowPage');
+          }
+
+          // 基本信息 - 返回列表点击
+          $scope.info.back = function() {
+            if($scope.fromPage == 'reviewManage') {
+              $location.path('view/visit/reviewmanage');
+
+            } else if($scope.fromPage == 'storage') {
+              $location.path('view/visit/rebate/storagemanage');
+              sessionStorage.setItem('fromPage', 'manage');
+            } else {
+              $scope.vm.currentPage = 'index';
+              $scope.paginationConf = $scope.indexPaginationConf;
+            }
+            backTop();
+          }
+          // *** 基本信息 end
+
+
+          // 详情 - 导航点击
+          $scope.detialNav = function (type) {
+            // 判断当前nav页
+            if(type == 'info') { // 基本信息
+              $scope.detial.detialPage = 'info';
+              getDetialInfoList($scope.info.sellerId, 'nowPage');
+            } else if(type == 'sellerfans') { // 店铺粉丝
+              $scope.detial.detialPage = 'sellerfans';
+              // 重置
+              $scope.sellerfans.sortValue = 1;
+              $scope.sellerfans.sortValue = 1;
+              getDetialSellerfansList(1, true);
+            } else if(type == 'cashback') { // 扫码返现
+              $scope.detial.detialPage = 'cashback';
+              // 重置
+              $scope.cashback.unit = '';
+              $scope.cashback.isFx = '';
+              getDetialCashbackList(1, true);
+            } else if(type == 'bill') { // 账单流水
+              $scope.detial.detialPage = 'bill';
+              getDetialBillList(1, true);
+            } else if(type == 'storage') { // 入库明细
+              $scope.detial.detialPage = 'storage';
+              getDetialStorageList(1, true);
+            }
+
+            // 点击导航清空日历
+            $scope.detial.startTime = ''
+            $scope.detial.endTime = ''
+          }
+
+          // 搜索
+          $scope.detial.search = function () {
+            if($scope.detial.detialPage == 'cashback') { // 扫码返现
+              getDetialCashbackList(1, true);
+            } else if($scope.detial.detialPage == 'bill') { // 账单流水
+              getDetialBillList(1, true);
+            } else if($scope.detial.detialPage == 'storage') { // 入库明细
+              getDetialStorageList(1, true);
+            }
+          }
+
+          // 重置
+          $scope.detial.reset = function () {
+            if($scope.detial.detialPage == 'cashback') { // 扫码返现
+              $scope.cashback = {
+                sellerId: $scope.info.sellerId,
+                unit: '', // 条/盒
+                isFx: '', // 是否返现
+                pageNo: 1,
+                pageSize: 10
+              }
+              getDetialCashbackList(1, true);
+            } else if($scope.detial.detialPage == 'bill') { // 账单流水
+              $scope.bill = {
+                sellerId: $scope.info.sellerId,
+                type: '', // 流水类型
+                pageNo: 1,
+                pageSize: 10
+              }
+              $scope.detial.startTime = '';
+              $scope.detial.endTime = '';
+
+              getDetialBillList(1, true);
+            } else if($scope.detial.detialPage == 'storage') { // 入库明细
+              $scope.storage = {
+                sellerId: $scope.info.sellerId,
+                awardType: '', // 类型
+                pageNo: 1,
+                pageSize: 10
+              }
+              $scope.detial.startTime = '';
+              $scope.detial.endTime = '';
+
+              getDetialStorageList(1, true);
+            }
+
+            $scope.detial.startTime = '';
+            $scope.detial.endTime = '';
+          }
+
+
+          // *** 店铺粉丝 start
+          $scope.sellerfans = {
+            sortValue: 1,
+          };
+
+          // 店铺粉丝 - 获取列表
+          function getDetialSellerfansList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              sortType: $scope.sellerfans.sortType || 1,
+              sortValue: $scope.sellerfans.sortValue,
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialSellerFans(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.sellerfans.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+
+          // 店铺粉丝 - 排序
+          $scope.sellerfans.previousType = 1;
+          $scope.sellerfans.sortBy = function (type) {
+            // 设置当前点击的排序
+            $scope.sellerfans.sortType = type;
+
+            // 获取 sortValue
+            if($scope.sellerfans.previousType == type) {
+              $scope.sellerfans.sortValue = ($scope.sellerfans.sortValue == 1 ? 0 : 1); // 升序、降序
+            } else {
+              $scope.sellerfans.sortValue = 1;
+            }
+
+            getDetialSellerfansList(1, true);
+            // 上一个值设置为当前
+            $scope.sellerfans.previousType = type;
+          }
+          // *** 店铺粉丝 end
+
+
+          // *** 扫码返现 start
+          $scope.cashback = {};
+
+          // 扫码返现 - 获取列表
+          function getDetialCashbackList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              unit: $scope.cashback.unit || '', // 条/盒
+              isFx: $scope.cashback.isFx || '', // 是否返现
+              startTime: (new Date($scope.detial.startTime)).getTime() || '',
+              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialCashback(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.cashback.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 扫码返现 end
+
+
+          // *** 账单流水 start
+          $scope.bill = {};
+
+          // 账单流水 - 获取列表
+          function getDetialBillList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              type: $scope.bill.type || '', // 流水类型
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialBill(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.bill.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 账单流水 end
+
+
+          // *** 入库明细 start
+          // 入库明细 - 获取列表
+          function getDetialStorageList(page, ispage) {
+            var data = {
+              sellerId: $scope.info.sellerId,
+              awardType: $scope.storage.awardType || '', // 奖品类型
+              startTime: (new Date($scope.detial.startTime)).getTime() || '',
+              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              pageNo: page || 1,
+              pageSize: 10
+            }
+
+            $model.getManageDetialStorage(data).then(function(res) {
+              if(res.data.ok) {
+                $scope.storage.listData = res.data.data.list;
+                if(ispage) {
+                  $scope.paginationConf = res.data;
+                  // 因为接口文档定义的字段和原来写的字段不一致，所以这里改变下。
+                  $scope.paginationConf.data.page.currentPageNumber =  res.data.data.page.pageNo; // 当前页
+                  $scope.paginationConf.data.page.pageNumber =  res.data.data.page.pageCount; // 页数
+                }
+              } else {
+                alertMsg($('#newAlert', 'danger', res.data.msg))
+              }
+            })
+          }
+          // *** 入库明细 end
+
+          // *** 详情 end ***
+
+
+
+          // **** 新增开始
+          // 新增点击
+          $scope.newRetailerClick = function(e) {
+            // 清空数据
+            var data = {
+              sellerId: '',
+              headImg: '',
+              shopName: '',
+              ownerName: '',
+              phoneNo: '',
+
+              addrProvince: '',
+              addrCity: '',
+              addrArea: '',
+              addrDetail: '',
+              licenceNo: '',
+
+              licenceImg: '',
+              district: '',
+              commercial: '',
+              salesManNames: '',
+              contactName: '',
+
+              contactPhone: '',
+            }
+            $scope.new = Object.assign({}, $scope.new, data);
+
+            $scope.vm.currentPage = 'new';
+            backTop();
+
+            // 重置form状态
+            $scope.form.$setPristine();
+            $scope.form.$setUntouched();
+          }
+
+          // 图片删除
+          $scope.photoDelete = function(ele) {
+            if(ele == 'infoHeadImg') {
+              $scope.info.headImg = '';
+            } else if(ele == 'infoLicenceImg') {
+              $scope.info.licenceImg = '';
+            } else if(ele == 'newHeadImg') {
+              $scope.new.headImg = '';
+            } else if(ele == 'newLicenceImg') {
+              $scope.new.licenceImg = '';
+            }
+
+            $('#'+ele).attr('src','');
+          }
+
+          // 弹窗框
+          var alertMsg = function(e, t, i) { // e为元素，t为类型，i为信息
+            var promptCon = e.clone();
+
+            if(t == 'success') { // 成功
+              e.addClass('alert-success');
+            } else if(t == 'warning') { // 警告
+              e.addClass('alert-warning');
+            } else if(t == 'danger') { // 错误
+              e.addClass('alert-danger');
+            }
+
+            e.find('.prompt').text(i || '请求错误请重试');
+            e.show().addClass('in');
+
+            // 克隆的再放进body
+            e.on('closed.bs.alert', function () {
+              $('body').append(promptCon);
+            })
+
+            // 3秒后隐藏
+            var alertHide = $timeout(function(){
+              e.alert('close')
+            }, 3000)
+
+            e.hover(function() {
+              $timeout.cancel(alertHide);
+            }, function() {
+              // 3秒后隐藏
+              var alertHide = $timeout(function(){
+                e.alert('close')
+              }, 3000)
+            })
+          }
+
+          var newAndEdit = function(valid, type, clickType) {
+
+            // 如果验证通过
+            if(valid) {
+              if(type == 'new') {
+                var data = {
+                  sellerId: '', // 零售户编码
+                  headImg: $scope.new.headImg || '', // 店铺图片
+                  shopName: $scope.new.shopName || '', // 店铺名称
+                  ownerName: $scope.new.ownerName || '', // 经营人姓名
+                  phoneNo: $scope.new.phoneNo || '', // 店主联系电话
+
+                  addrProvince: $scope.new.addrProvince || '', // 省份编码
+                  addrCity: $scope.new.addrCity || '', // 地市编码
+                  addrArea: $scope.new.addrArea || '', // 区县编码
+                  addrDetail: $scope.new.addrDetail || '', // 门店所在地详细信息
+                  licenceNo: $scope.new.licenceNo || '', // 许可证号
+
+                  licenceImg: $scope.new.licenceImg || '', // 许可证照片
+                  district: $scope.new.district || '', // 区域
+                  commercial: $scope.new.commercial || '', // 业态
+                  salesManNames: $scope.new.salesManNames || '', // 业务员名称
+                  contactName: $scope.new.contactName || '', // 联系人姓名
+
+                  contactPhone: $scope.new.contactPhone || '', // 联系人手机号
+
+                  qrStyle: 1, // 店码样式，默认传1
+                  authStatus: 4, // 新增的零售户，默认审批通过，待激活状态
                 };
-                $model.getFxlist(returnNum).then(function(res) {
-                    //将时间戳变为日期
-                    for(var i=0;i<res.data.data.length;i++){
-                        res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-                        res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);
-                        var unit = res.data.data[i].unit;
-                        if(unit == 1){
-                            unit = "盒";
-                        }else if(unit==2){
-                            unit = "条";
-                        }
-                        res.data.data[i].unit = unit;
-                    }
-                    $scope.returnData = res.data.data || [];
-                    $scope.$apply();
-                    var pageCount = Math.ceil(res.data.totalNum/returnNum.pageSize);
-                    $("#pageAmout").text(res.data.totalNum);
-                    if(returnNum.pageSize<=res.data.totalNum){
-                        $("#pageSize1").text(returnNum.pageSize);
-                    }else{
-                        $("#pageSize1").text(res.data.totalNum);
-                    }
-                    $(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    //创建分页同时数据再次加载
+              } else if(type == 'edit') {
+                var data = {
+                  sellerId: $scope.info.sellerId || '', // 零售户编码
+                  headImg: $scope.info.headImg || '', // 店铺图片
+                  shopName: $scope.info.shopName || '', // 店铺名称
+                  ownerName: $scope.info.ownerName || '', // 经营人姓名
+                  phoneNo: $scope.info.phoneNo || '', // 店主联系电话
 
-                    $(".tcdPageCode").createPage({
-                        pageCount:pageCount,
-                        current: returnNum.pageNum,
-                        backFn: function(p) {
-                            returnNum.pageNum = p;
+                  addrProvince: $scope.info.addrProvince || '', // 省份编码
+                  addrCity: $scope.info.addrCity || '', // 地市编码
+                  addrArea: $scope.info.addrArea || '', // 区县编码
+                  addrDetail: $scope.info.addrDetail || '', // 门店所在地详细信息
+                  licenceNo: $scope.info.licenceNo || '', // 许可证号
 
-                            $model.getFxlist(returnNum).then(function(res) {
-                                for(var i=0;i<res.data.data.length;i++){
-                                    res.data.data[i].ctime=getLocalTime(res.data.data[i].ctime);
-                                    res.data.data[i].zjTime=getLocalTime(res.data.data[i].zjTime);
-                                    var unit = res.data.data[i].unit;
-                                    if(unit == 1){
-                                        unit = "盒";
-                                    }else if(unit==2){
-                                        unit = "条";
-                                    }
-                                    res.data.data[i].unit = unit;
-                                }
-                                $scope.returnData = res.data.data || [];
-                                $scope.$apply();
-                                $("#pageAmout").text(res.data.totalNum);
+                  licenceImg: $scope.info.licenceImg || '', // 许可证照片
+                  district: $scope.info.district || '', // 区域
+                  commercial: $scope.info.commercial || '', // 业态
+                  salesManNames: $scope.info.salesManNames || '', // 业务员名称
+                  contactName: $scope.info.contactName || '', // 联系人姓名
 
-                                if(returnNum.pageSize<=res.data.totalNum){
-                                    if(returnNum.pageNum==pageCount){
-                                        $("#pageSize1").text(res.data.totalNum%returnNum.pageSize);
-                                    }else{
-                                        $("#pageSize1").text(returnNum.pageSize);
-                                    }
+                  contactPhone: $scope.info.contactPhone || '', // 联系人手机号
+                };
 
-                                }else{
-                                    $("#pageSize1").text(res.data.totalNum);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-
-            //提现记录
-            $("#tixian").off().on('click', function(){
-                var timeEnd333=$("#timeEnd333").val();
-                var timeStart333=$("#timeStart333").val();
-                var tixianNum = {
-                    pageNum: 1,
-                    pageSize: 10,
-                    startTime: strToTimestamp(timeStart333),
-                    endTime: strToTimestamp(timeEnd333),
-                    sellerId:$scope.sellerId
-                }
-                $model.getTixian(tixianNum).then(function(res) {
-                    //将时间戳变为日期
-                    for(var i=0;i<res.data.data.length;i++){
-                        res.data.data[i].txTime=getLocalTime(res.data.data[i].txTime);
-                    }
-                    $scope.tixianData = res.data.data || [];
-                    $scope.$apply();
-                    var pageCount = Math.ceil(res.data.totalNum/tixianNum.pageSize);
-                    $("#pageAmout2").text(res.data.totalNum);
-                    if(tixianNum.pageSize<=res.data.totalNum){
-                        $("#pageSize3").text(tixianNum.pageSize);
-                    }else{
-                        $("#pageSize3").text(res.data.totalNum);
-                    }
-                    $(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
-                        pageCount:pageCount,
-                        current: tixianNum.pageNum,
-                        backFn: function(p) {
-                            tixianNum.pageNum = p;
-                            $model.getTixian(tixianNum).then(function(res) {
-                                for(var i=0;i<res.data.data.length;i++){
-                                    res.data.data[i].txTime=getLocalTime(res.data.data[i].txTime);
-                                }
-                                $scope.tixianData = res.data.data || [];
-                                $scope.$apply();
-                                $("#pageAmout2").text(res.data.totalNum);
-                                if(tixianNum.pageSize<=res.data.totalNum){
-                                    if(tixianNum.pageNum==pageCount){
-                                        $("#pageSize3").text(res.data.totalNum%tixianNum.pageSize);
-                                    }else{
-                                        $("#pageSize3").text(tixianNum.pageSize);
-                                    }
-
-                                }else{
-                                    $("#pageSize3").text(res.data.totalNum);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-            //扫码用户
-            $("#tabSao").off().on('click', function(){
-                var countNum = {
-                    pageNum: 1,
-                    pageSize: 10,
-                    sellerId:$scope.sellerId
-                }
-                $model.getCount(countNum).then(function(res) {
-                    for(var i=0;i<res.data.data.length;i++){
-                        res.data.data[i].lastScanTime=getLocalTime(res.data.data[i].lastScanTime);
-                    }
-                    $scope.countData = res.data.data || [];
-                    $scope.$apply();
-                    var pageCount = Math.ceil(res.data.totalNum/countNum.pageSize);
-                    $("#pageAmout1").text(res.data.totalNum);
-                    if(countNum.pageSize<=res.data.totalNum){
-                        $("#pageSize2").text(countNum.pageSize);
-                    }else{
-                        $("#pageSize2").text(res.data.totalNum);
-                    }
-                    $(".tcdPageCode").remove();
-                    $(".rf").append("<div class='tcdPageCode'></div>");
-                    $(".tcdPageCode").createPage({
-                        pageCount:pageCount,
-                        current: countNum.pageNum,
-                        backFn: function(p) {
-                            countNum.pageNum = p;
-                            $model.getCount(countNum).then(function(res) {
-                                $scope.countData = res.data.data || [];
-                                $scope.$apply();
-                                $("#pageAmout1").text(res.data.totalNum);
-                                if(countNum.pageSize<=res.data.totalNum){
-                                    if(countNum.pageNum==pageCount){
-                                        $("#pageSize2").text(res.data.totalNum%countNum.pageSize);
-                                    }else{
-                                        $("#pageSize2").text(countNum.pageSize);
-                                    }
-
-                                }else{
-                                    $("#pageSize2").text(res.data.totalNum);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-            // 订单下载模块
-            $("#timeStart").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeStart").datetimepicker("setEndDate",$("#timeEnd").val());
-            });
-            $scope.seacherbtn = function(){
-                var timeStart= $("#timeStart").val();
-                $("#third").show();
-                $(".down").text($("#timeStart").val()+"日订单下载");
-                $("#fileDownBox").css("height","180px");
-            }
-            //上传订单文件
-            $("#timeStart1111").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeStart1111").datetimepicker("setEndDate",$("#timeStart1111").val());
-            });
-            $("#timeStart2222").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
-                language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#timeStart2222").datetimepicker("setStartDate",$("#timeStart2222").val());
-            });
-            $('#jqmeter-container').jQMeter({
-                goal:'$100',
-                raised:'$70',
-                orientation:'vertical',
-                width:'460px',
-                height:'40px',
-                bgColor:'#ECEDF0',
-                barColor:'lightgreen'
-            });
-            // 二维码订单导出
-            $(".down").click(function (e) {
-                var startTime = strToTimestamp($("#timeStart").val())
-                var endTime = startTime+86400000;
-                var url = 'https://retailer.taozuike.com/seller-manager/export/print/qr';
-                startTime &&(url += '?startTime=' +startTime);
-                endTime && (url += '&endTime=' + endTime);
-                window.open(url);
-            });
-            //创建分页
-            function createPage3(n){
-                if (n === 1) {
-                    $(".tcdPageCode").remove();
+                if($scope.fromPage == 'reviewManage') {
+                  // 审核管理里面传这两个字段
+                  data.authStatus = $scope.info.authStatus; // 审核状态
+                  if($scope.info.authStatus == 3) {
+                    data.failReason = $scope.info.failReason; // 审核不通过理由
+                  }
                 } else {
-                    if ($(".tcdPageCode").createPage) {
-                        $(".tcdPageCode").remove();
-                        $(".rf").append("<div class='tcdPageCode'></div>");
-                    }
+                  data.status = $scope.info.authOrg.status; // 状态
                 }
-                $(".tcdPageCode").createPage({
-                    pageCount: n,
-                    current: Defalut3.page,
-                    backFn: function (page) {
-                        Defalut3.page = page;
-                        searchFun(Defalut3);
-                    }
-                });
+              }
+
+              $model.newManageSave(data).then(function (res) {
+                if(res.data.ok) {
+                  if(type == 'new') {
+                    var typeInfo = '新建成功'
+                    $scope.vm.currentPage = 'index';
+                  } else {
+                    var typeInfo = '保存成功'
+                    $scope.info.isEdit = false;
+                    // 获取新数据
+                    getDetialInfoList($scope.info.sellerId, 'nowPage');
+                  }
+                  alertMsg($('#newAlert'), 'success', typeInfo);
+                  backTop();
+                } else {
+                  alertMsg($('#newAlert'), 'danger', res.data.msg);
+                }
+              });
             }
+          }
+
+          // 新增保存
+          $scope.new.save = function() {
+            // 验证，id，点击类型
+            newAndEdit($scope.form.$valid, 'new', 'save');
+          }
+
+          $scope.new.back = function() {
+            $scope.vm.currentPage = 'index';
+            backTop();
+          }
+          // **** 新增结束
+
+
+          // 查看大图
+          $scope.viewImg = function(img) {
+            $scope.bigImg = img;
+          }
+
+
+          // 返回顶部
+          backTop = function() {
+            $('.ui-view-container').scrollTop(0);
+          }
+
+          // 门店照片上传
+          $scope.new.uploadImage = function(e) {
+            var files = event.target.files[0];
+            var formData = new FormData();
+            formData.append('file', files);
+
+            var filesSize = files.size
+            if(filesSize > 5*1024*1024) {
+              alertMsg($('#newAlert'), 'danger', '请上传小于5M的图片');
+            } else {
+              $.ajax({
+                url: '/api/tztx/seller-manager/file/upload',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                  ContentType: "multipart/form-data",
+                  loginId : sessionStorage.access_loginId,
+                  token : sessionStorage.access_token
+                }
+              }).done(function (res) {
+                var time = new Date().getTime();
+                if(e == 'info1') {
+                  $scope.info.headImg = res.msg + '?' + time; //图片保存地址
+                } else if(e == 'info2') {
+                  $scope.info.licenceImg = res.msg + '?' + time;
+                } else if(e == 'new1') {
+                  $scope.new.headImg = res.msg + '?' + time;
+                } else if(e == 'new2') {
+                  $scope.new.licenceImg = res.msg + '?' + time;
+                }
+
+                $scope.$apply(); // 因为是异步的？所以这里需要$scope.$apply();
+              }).fail(function (res) {
+                alert('上传失败，请重试');
+                return
+              })
+            }
+          }
+
+          // 新增 省份change
+          $scope.new.provinceChage = function (e) {
+            if($scope.new.addrProvince) {
+              // 市
+              $model.getManageCity({parentCode: $scope.new.addrProvince}).then(function (res) {
+                $scope.new.cityList = res.data;
+                $scope.new.addrCity = '';
+                $scope.new.areaList = [];
+                $scope.new.addrArea = '';
+              });
+            } else {
+              $scope.new.cityList = [];
+              $scope.new.addrCity = '';
+              $scope.new.areaList = [];
+              $scope.new.addrArea = '';
+            }
+          }
+
+          // 新增 城市change
+          $scope.new.cityChage = function (e) {
+            if($scope.new.addrCity) {
+              // 区/县
+              $model.getManageCountry({parentCode: $scope.new.addrCity}).then(function (res) {
+                $scope.new.areaList = res.data;
+                $scope.new.addrArea = '';
+              });
+            } else {
+              $scope.new.areaList = [];
+              $scope.new.addrArea = '';
+            }
+          }
+
+
+          // info 省份change
+          $scope.info.provinceChage = function (e) {
+            // $scope.info.addrProvince不选时为undefined
+            if($scope.info.addrProvince) {
+              // 市
+              $model.getManageCity({parentCode: $scope.info.addrProvince}).then(function (res) {
+                $scope.info.cityList = res.data;
+                $scope.info.addrCity = '';
+                $scope.info.addrArea = '';
+              });
+            } else {
+              $scope.info.cityList = [];
+              $scope.info.addrCity = '';
+              $scope.info.areaList = [];
+              $scope.info.addrArea = '';
+            }
+          }
+
+          // info 城市change
+          $scope.info.cityChage = function (e) {
+            if($scope.info.addrCity) {
+              // 区/县
+              $model.getManageCountry({parentCode: $scope.info.addrCity}).then(function (res) {
+                $scope.info.areaList = res.data;
+                $scope.info.addrArea = '';
+              });
+            } else {
+              $scope.info.areaList = [];
+              $scope.info.addrArea = '';
+            }
+          }
+
+          // 时间设置
+          $("#durationStart").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var appStartTime = e.target.value;
+            var appEndTime = $scope.vm.appEndTime;
+            if (appEndTime < appStartTime) {
+              $scope.vm.appEndTime = '';
+              $scope.$apply();
+            }
+          });
+
+          $("#durationEnd").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var appEndTime = e.target.value;
+            var appStartTime = $scope.vm.appStartTime;
+            if (appStartTime > appEndTime) {
+              $scope.vm.appStartTime = '';
+              $scope.$apply();
+            }
+          });
+
+
+          // 详情时间设置
+          $("#detialStart").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var startTime = e.target.value;
+            var endTime = $scope.detial.endTime;
+            if (endTime < startTime) {
+              $scope.detial.endTime = '';
+              $scope.$apply();
+            }
+          });
+
+          $("#detialEnd").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:00',
+            language: 'zh-CN',
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1
+          }).on('change', function (e) {
+            var endTime = e.target.value;
+            var startTime = $scope.detial.startTime;
+            if (startTime > endTime) {
+              $scope.detial.startTime = '';
+              $scope.$apply();
+            }
+          });
 
         }]
     };
-    return manageCtrl;
+    return visitManageCtrl;
 })

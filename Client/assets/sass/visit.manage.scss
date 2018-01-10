@@ -1,0 +1,467 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+  .new-btn {
+    float: right;
+  }
+}
+
+
+/*11.28零售户调改*/
+.form-horizontal {
+  .control-label {
+    width: 90px;
+    margin-right: 0px;
+  }
+  .form-control {
+    width: 100%;
+  }
+  .form-group {
+    margin: 0 auto;
+  }
+}
+
+.location {
+  .form-control {
+    width: 30%;
+    float: left;
+  }
+  #cityId {
+    margin: 0 5%;
+  }
+}
+
+.keywords select {
+  width: 40% !important;
+  margin-right: 1%;
+  font-size: 12px; }
+
+.keywords input {
+  width: 58% !important;
+  margin-right: 1%;
+  font-size: 12px; }
+
+#durationStart, #durationEnd {
+  width: 45%;
+  background: #fff;
+  float: left; }
+
+.time .col-sm-9 span {
+  width: 10%;
+  float: left;
+  line-height: 34px;
+  text-align: center; }
+
+.print {
+  .control-label {
+    width: 110px;
+    margin-left: -1px;
+  }
+  .form-control {
+    width: 120px;
+  }
+}
+
+.search-btn-con {
+  float: right;
+  margin-right: 34px;
+  .reset {
+    margin-left: 20px;
+  }
+}
+
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-default {
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px;
+}
+
+/*排序按钮*/
+.sort-btn-con {
+  overflow: hidden;
+  .btn-primary {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.new-retailer-btn {
+  float: right;
+}
+
+/* 管理新增 */
+.form-group {
+  overflow: hidden;
+  padding: 0;
+}
+
+.manage-new {
+  .btn-con {
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+  label {
+    width: 16.66666667%;
+    min-width: 125px;
+    float: left;
+    line-height: 34px;
+    text-align: right;
+    i {
+      color: #f00;
+    }
+  }
+  col-sm-offset-2 {
+    margin-left: 16.66666667%;
+  }
+  input, select {
+    width: 300px;
+    float: left;
+    font-size: 12px;
+  }
+  //.upload-con {
+  //  width: 300px;
+  //  overflow: hidden;
+  //  float: left;
+  //}
+  .upload-btn-con {
+    width: 52px;
+    height: 34px;
+    float: left;
+    margin-right: 20px;
+    overflow: hidden;
+    position: relative;
+    .new-photo {
+      width: 100%;
+      height: 34px;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      opacity: 0;
+    }
+  }
+  .upload-btn, .delete-btn {
+    width: 52px;
+    height: 34px;
+    float: left;
+    line-height: 22px;
+  }
+  .col-sm-8 {
+    padding: 0;
+  }
+
+  .new-photo-con {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  .new-photo {
+    width: 125px;
+    display: block;
+  }
+
+  .new-location {
+    .col-sm-10 {
+      width: 315px;
+      overflow: hidden;
+      padding: 0;
+    }
+    select {
+      width: 100px;
+      margin-right: 5px;
+    }
+
+    .location-val {
+      width: 100px;
+      float: left;
+      line-height: 34px;
+      margin-right: 5px;
+    }
+    .wrong-tip {
+      width: 100px;
+      float: left;
+    }
+  }
+}
+
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+// 查看大图
+.img-modal {
+  .big-photo {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+}
+.img-modal.in .modal-dialog {
+  transform: translateY(0%);
+  top: 100px;
+  margin-bottom: 100px;
+}
+
+
+// 详情 start
+// 详情nav
+.detial-nav {
+  margin-bottom: 15px;
+  overflow: hidden;
+  ul {
+    background: #179bd6;
+    border-right: 2px solid #179bd6;
+    float: left;
+  }
+  li {
+    min-width: 100px;
+    height: 40px;
+    background: #fff;
+    border: 2px solid #179bd6;
+    border-right: none;
+    cursor: pointer;
+    color: #363636;
+    float: left;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0 20px;
+    &:hover, &.cur {
+      color: #169BD5;
+    }
+  }
+}
+
+// 1 基本信息
+.detial-info {
+  ul {
+    overflow: hidden;
+  }
+  li {
+    width: 305px;
+    line-height: 34px;
+    font-size: 12px;
+    float: left;
+    margin: 0 15px 10px 0;
+    label {
+      float: left;
+      font-weight: normal;
+      margin-bottom: 0px;
+    }
+    .title {
+      width: 115px;
+      float: left;
+      font-weight: bold;
+      text-align: right;
+      i {
+        color: #f00;
+      }
+    }
+    .value {
+      width: 190px;
+      float: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .form-control {
+      width: 200px;
+      float: left;
+      font-size: 12px;
+    }
+
+    .info-btn-con {
+      margin-left: 115px;
+    }
+  }
+  .row {
+    width: 100%;
+    margin-top: 10px;
+    .value, .form-control {
+      width: 400px;
+    }
+  }
+  .location {
+    width: 400px;
+    overflow: hidden;
+    .form-control {
+      width: 100px;
+      margin-right: 5px;
+    }
+    .location-val {
+      width: 100px;
+      float: left;
+      line-height: 34px;
+      margin-right: 5px;
+    }
+    .wrong-tip {
+      width: 100px;
+      float: left;
+      margin-right: 3%;
+    }
+  }
+  .status {
+    label {
+      margin-right: 20px;
+    }
+    input {
+      margin-right: 5px;
+    }
+  }
+
+
+  .authStatus {
+    i {
+      color: #f00;
+      float: left;
+      margin-right: 5px;
+    }
+    .form-control {
+      width: 208px;
+    }
+  }
+
+
+  .btn-con {
+    margin-left: 115px;
+    .btn {
+      margin: 20px 15px 10px 0;
+    }
+  }
+}
+
+// 搜索项
+.detial-search {
+  overflow: hidden;
+  .form-group {
+    float: left;
+    margin-right: 30px;
+  }
+  label {
+    float: left;
+    line-height: 34px;
+  }
+  select, input {
+    width: 120px;
+    float: left;
+  }
+  .to {
+    float: left;
+    line-height: 34px;
+    width: 30px;
+    text-align: center;
+  }
+  #detialStart, #detialEnd {
+    width: 150px;
+    background: #fff;
+  }
+  .btn-con {
+    float: right;
+    margin-top: 2px;
+    .btn {
+      float: left;
+      margin-right: 15px;
+    }
+    .btn-default {
+      margin-right: 0px;
+    }
+  }
+}
+
+// 4 账单流水
+.detial-bill {
+  td.add {
+    color: #0c9b0d;
+  }
+  td.subtract {
+    color: #f00;
+  }
+}
+.detial-back {
+  display: block;
+  margin: 0 auto;
+}
+// 详情 end
+
+
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 100px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.shop-name {
+    //  width: 70px;
+    //}
+    //.time {
+    //  width: 72px;
+    //}
+    //.sales-manNames {
+    //  width: 150px;
+    //}
+  }
+}
+
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px;
+}
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}

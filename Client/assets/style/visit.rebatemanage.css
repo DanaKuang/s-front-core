@@ -1,0 +1,139 @@
+@charset "UTF-8";
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden; }
+
+/*12.15零售户重构*/
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px; }
+
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px; }
+
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px; }
+
+.form-horizontal .form-group {
+  margin: 0;
+  padding: 0; }
+
+.form-horizontal .control-label {
+  width: 90px;
+  float: left;
+  margin-right: 0px; }
+
+.form-horizontal .form-control {
+  width: 100%; }
+
+.form-horizontal #durationStart, .form-horizontal #durationEnd {
+  width: 45%;
+  background: #fff;
+  float: left; }
+
+.form-horizontal .time {
+  width: 600px; }
+
+.form-horizontal .time span {
+  width: 10%;
+  float: left;
+  line-height: 34px;
+  text-align: center; }
+
+.search-btn-con {
+  margin-left: 152px; }
+  .search-btn-con .btn {
+    float: left; }
+  .search-btn-con .reset {
+    margin-left: 30px; }
+
+.rebate-modal input {
+  width: 90%;
+  display: inline-block;
+  margin-right: 5px; }
+
+.rebate-modal .modal-footer {
+  text-align: center; }
+
+.rebate-modal .btn {
+  display: inline-block; }
+
+.rebate-modal .wrong-tip {
+  font-size: 12px;
+  line-height: 1;
+  margin-top: 5px; }
+
+td.batch label {
+  width: 50px;
+  height: 20px;
+  cursor: pointer; }
+  td.batch label input {
+    cursor: pointer;
+    margin-right: 10px; }
+
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none; }
+  #newAlert .close {
+    top: -11px; }
+
+.panel-body {
+  padding: 15px;
+  position: relative; }
+
+.scroll-con {
+  overflow-x: auto; }
+
+.table tr th, .table tr td {
+  font-size: 12px;
+  white-space: nowrap; }
+
+.table tr td > div {
+  margin: 0 auto; }
+
+.table tr .oper-btn-wrap {
+  width: 100px; }
+  .table tr .oper-btn-wrap .operate-btn {
+    color: #3379b7;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 7px; }
+    .table tr .oper-btn-wrap .operate-btn:hover {
+      text-decoration: underline; }
+
+.table tr .ad-names {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  line-height: 34px;
+  text-indent: 5px; }
+
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important; }
+
+.ng-submitted input.ng-invalid, .ng-submitted textarea.ng-invalid, .ng-submitted select.ng-invalid {
+  border-color: #FA787E !important; }
+
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+  display: block; }
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist; }

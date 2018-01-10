@@ -1,0 +1,958 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date; 2017-11-30 重构零售户
+ * Description: 零售户管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
+
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<div ng-controller="visitManageCtrl">
+    <div class="animated fadeInRightBig" ng-show="vm.currentPage != 'new'">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title manage">
+                        <button ng-if="fromPage != 'reviewManage'" ng-click="newRetailerClick($event)" class="btn btn-primary btn-lg new-retailer-btn">新建零售户</button>
+                        <div ng-show="vm.currentPage == 'index'"><i class="manage"></i><span>零售户管理</span></div>
+                        <div ng-show="vm.currentPage == 'detial'"><i class="manage"></i><span>零售户详情</span></div>
+                    </div>
+
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+
+                            <div class="tab-content">
+                                <!-- 搜索条件 -->
+                                <div ng-show="vm.currentPage == 'index'" role="tabpanel" class="tab-pane active panel-body">
+                                    <form class="form-horizontal form-inline">
+                                        <div class="form-group col-sm-4">
+                                            <label for="status" class="control-label col-sm-4">状态</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.status" id="status" class="form-control">
+                                                    <option value="1">上架</option>
+                                                    <option value="0">下架</option>
+                                                    <option value="4">待激活</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="commercial" class="control-label col-sm-4">业态</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.commercial" id="commercial" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option value="1">食杂店</option>
+                                                    <option value="2">便利店</option>
+                                                    <option value="3">超市</option>
+                                                    <option value="4">商场</option>
+                                                    <option value="5">烟酒商店</option>
+                                                    <option value="6">娱乐服务</option>
+                                                    <option value="7">其他</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="district" class="control-label col-sm-4">区域</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.district" id="district" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option value="1">城镇</option>
+                                                    <option value="2">乡村</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4 keywords">
+                                            <label for="searchType" class="control-label col-sm-2">关键词</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.searchType" class="form-control col-sm-5" id="searchType">
+                                                    <option value="3">烟草证号</option>
+                                                    <option value="1">联系人姓名</option>
+                                                    <option value="2">联系人手机号</option>
+                                                    <option value="4">门店名称</option>
+                                                    <option value="5">业务员</option>
+                                                </select>
+                                                <input ng-model="vm.keywords" class="keywords-input form-control col-sm-5" type="text" placeholder="请输入关键词">
+                                            </div>
+                                        </div>
+                                        <!--<input type="text" placeholder="烟草证号\经营人姓名\联系人姓名\联系人手机号" id="input1" class="form-control" style="width: 280px;">-->
+
+                                        <div class="form-group col-sm-8 location">
+                                            <label for="provinceId" class="control-label col-sm-2">位置</label>
+                                            <div class="col-sm-10">
+                                                <select id="provinceId" ng-model="vm.addrProvince" ng-change="provinceChage($event)" class="form-control">
+                                                    <option value="">请选择省</option>
+                                                    <option ng-repeat="p in provinceList" value="{{p.code}}">{{p.name}}</option>
+                                                </select>
+
+                                                <select id="cityId" ng-model="vm.addrCity" ng-change="cityChage($event)" class="form-control">
+                                                    <option value="">请选择市</option>
+                                                    <option ng-repeat="c in cityList" value="{{c.code}}">{{c.name}}</option>
+                                                </select>
+
+                                                <select id="areaId" ng-model="vm.addrArea" class="form-control">
+                                                    <option value="">请选择区/县</option>
+                                                    <option ng-repeat="a in areaList" value="{{a.code}}">{{a.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-6 time">
+                                            <label class="control-label col-sm-2">时间区间</label>
+
+                                            <div class="col-sm-9">
+                                                <input ng-model="vm.appStartTime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="vm.appEndTime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-3 print">
+                                            <label class="control-label col-sm-2">是否打印店码</label>
+                                            <select class="form-control" ng-model="vm.isPrint">
+                                                <option value="" selected>全部</option>
+                                                <option value="1">是</option>
+                                                <option value="0">否</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="search-btn-con">
+                                            <button type="button" class="seacher btn btn-primary" ng-click="search($event);">查询</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="reset($event);">重置</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- table -->
+                                <div class="panel-body scroll-con">
+                                    <!-- 排序 -->
+                                    <div ng-show="vm.currentPage == 'index'" class="sort-btn-con">
+                                        <button ng-click="sortBy(1)" class="btn btn-primary">按入驻时间排序</button>
+                                        <button ng-click="sortBy(2)" class="btn btn-primary">按粉丝数排序</button>
+                                        <button ng-click="sortBy(3)" class="btn btn-primary">按业绩排序</button>
+                                        <button ng-click="sortBy(5)" class="btn btn-primary">按积分排序</button>
+                                    </div>
+
+                                    <table ng-show="vm.currentPage == 'index'" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>操作</th>
+                                                <th>烟草专卖号</th>
+                                                <th>门店名称</th>
+                                                <th>经营人姓名</th>
+
+                                                <th>区域</th>
+                                                <th>业态</th>
+                                                <th>联系人姓名</th>
+                                                <th>联系人电话</th>
+                                                <th>业务员</th>
+
+                                                <th>积分</th>
+                                                <th>入驻时间</th>
+                                                <th>是否打印二维码</th>
+                                                <th>打印次数</th>
+                                                <th>扫码次数</th>
+
+                                                <th>店铺粉丝</th>
+                                                <th>账户余额</th>
+                                                <th>状态</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(index, item) in vm.listData">
+                                                <td>{{index + 1}}</td>
+                                                <td>
+                                                    <div ng-hide="item.authStatus == 4" class="oper-btn-wrap">
+                                                        <div class="operate-btn" ng-click="viewManage(item.sellerId)">查看详情</div>
+                                                        <!--1 启用状态  2 禁用状态-->
+                                                        <div ng-if="item.authOrg.status == 0" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 1)" data-toggle="modal" data-target=".shelf-modal">上架</div>
+                                                        <div ng-if="item.authOrg.status == 1" class="operate-btn" ng-click="UpOffShelf(item.sellerId, 0)" data-toggle="modal" data-target=".shelf-modal">下架</div>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.licenceNo}}</td>
+                                                <td><div class="shop-name">{{item.shopName}}</div></td>
+                                                <td>{{item.ownerName}}</td>
+
+                                                <td>{{item.districtName}}</td>
+                                                <td>{{item.commercialName}}</td>
+                                                <td>{{item.contactName}}</td>
+                                                <td>{{item.contactPhone}}</td>
+                                                <td><div class="sales-manNames">{{item.salesManNames}}</div></td>
+
+                                                <td>{{item.score}}</td>
+                                                <td><div class="time">{{item.authPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</div></td>
+                                                <td>{{item.printQrCodeCount > 0 ? '是' : '否'}}</td>
+                                                <td>{{item.printQrCodeCount}}</td>
+                                                <td>{{item.scanCount}}</td>
+
+                                                <td>{{item.fansCount}}</td>
+                                                <td>¥{{item.wallet.balance}}</td>
+
+                                                <td>{{item.authStatus == 4 ? '待激活' : (item.authOrg.status == 1 ? '上架中' : '下架中') }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- 详情 -->
+                                    <div ng-show="vm.currentPage == 'detial'">
+                                        <div class="detial-nav" ng-if="fromPage != 'reviewManage'">
+                                            <ul>
+                                                <li ng-click="detialNav('info')" ng-class="detial.detialPage == 'info' ? 'cur' : ''">基本信息</li>
+                                                <li ng-click="detialNav('sellerfans')" ng-class="detial.detialPage == 'sellerfans' ? 'cur' : ''">店铺粉丝</li>
+                                                <li ng-click="detialNav('cashback')" ng-class="detial.detialPage == 'cashback' ? 'cur' : ''">扫码返现</li>
+                                                <li ng-click="detialNav('bill')" ng-class="detial.detialPage == 'bill' ? 'cur' : ''">账单流水</li>
+                                                <li ng-click="detialNav('storage')" ng-class="detial.detialPage == 'storage' ? 'cur' : ''">入库明细</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- 1 基本信息 -->
+                                        <div ng-show="detial.detialPage == 'info'" class="detial-info">
+                                            <form name="infoForm" novalidate>
+                                                <ul>
+                                                    <li>
+                                                        <label>
+                                                            <span class="title">申请时间：</span>
+                                                            <span class="value">{{info.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="">
+                                                        <label>
+                                                            <span class="title">审核通过时间：</span>
+                                                            <span class="value">{{info.authPassTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                                        </label>
+                                                    </li>
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">账户余额：</span>
+                                                            <span class="value">¥{{info.wallet.balance}}</span>
+                                                        </label>
+                                                    </li>
+
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">是否打印二维码：</span>
+                                                            <span ng-if="info.printQrCodeCount > 0" class="value">是</span>
+                                                            <span ng-if="info.printQrCodeCount <= 0" class="value">否</span>
+                                                        </label>
+                                                    </li>
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">打印次数：</span>
+                                                            <span class="value">{{info.printQrCodeCount && info.printQrCodeCount > 0 ? info.printQrCodeCount : 0 }}次</span>
+                                                        </label>
+                                                    </li>
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">扫码次数：</span>
+                                                            <span class="value">{{info.scanCount || 0}}次</span>
+                                                        </label>
+                                                    </li>
+
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">店铺粉丝：</span>
+                                                            <span class="value">{{info.fansCount || 0}}人</span>
+                                                        </label>
+                                                    </li>
+                                                    <li ng-if="fromPage != 'reviewManage'" class="">
+                                                        <label>
+                                                            <span class="title">积分：</span>
+                                                            <span class="value">{{info.score || 0}}</span>
+                                                        </label>
+                                                    </li>
+                                                    <li ng-if="fromPage != 'reviewManage'">
+                                                        <label>
+                                                            <span class="title">微信名：</span>
+                                                            <span class="value">{{info.wxNickname}}</span>
+                                                        </label>
+                                                    </li>
+
+                                                    <!-- 可编辑区域 -->
+                                                    <li class="row manage-new">
+                                                        <span class="title"><i>*</i>门店照片：</span>
+
+                                                        <!--展示图片-->
+                                                        <div class="new-photo-con">
+                                                            <img id="infoHeadImg" class="new-photo" ng-click="viewImg(info.headImg)" ng-src="{{info.headImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                                                        </div>
+
+                                                        <div class="info-btn-con" ng-if="info.isEdit">
+                                                            <!-- 上传按钮 -->
+                                                            <div class="upload-btn-con">
+                                                                <button class="btn btn-primary upload-btn">上传</button>
+                                                                <input name="infoHeadImg" onchange="angular.element(this).scope().new.uploadImage('info1')" ng-model="info.headImg" class="form-control new-photo" type="file" accept="image/*" required>
+                                                            </div>
+                                                            <button ng-click="photoDelete('infoHeadImg')" class="btn btn-primary delete-btn" type="button">删除</button>
+                                                        </div>
+
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoHeadImg.$touched">
+                                                            <div ng-show="infoForm.infoHeadImg.$error.required" class="wrong-tip">请上传门店照片</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>门店名称：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.shopName}}</span>
+                                                            <input name="infoShopName" ng-model="info.shopName" ng-if="info.isEdit" ng-maxlength="10" class="form-control" type="text" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoShopName.$touched || infoForm.infoShopName.$dirty">
+                                                            <div ng-show="infoForm.infoShopName.$error.required || infoForm.infoShopName.$error.maxlength" class="wrong-tip">请输入门店名称，1-10字符</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>经营人姓名：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.ownerName}}</span>
+                                                            <input name="infoOwnerName" ng-model="info.ownerName" ng-if="info.isEdit" class="form-control" type="text" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoOwnerName.$touched">
+                                                            <div ng-show="infoForm.infoOwnerName.$error.required" class="wrong-tip">请输入经营人姓名</div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>位置：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.addrProvinceName + '-' + info.addrCityName + '-' + info.addrAreaName}}</span>
+
+                                                            <div class="location" ng-show="info.isEdit" class="col-sm-10">
+                                                                <select name="infoProvince" id="infoProvince" ng-model="info.addrProvince" ng-change="info.provinceChage()" class="form-control" required>
+                                                                    <option value="">请选择省</option>
+                                                                    <option ng-repeat="p in info.provinceList" value="{{p.code}}">{{p.name}}</option>
+                                                                </select>
+
+                                                                <select name="infoCity" id="infoCity" ng-model="info.addrCity" ng-change="info.cityChage()" class="form-control" required>
+                                                                    <option value="">请选择市</option>
+                                                                    <option ng-repeat="c in info.cityList" value="{{c.code}}">{{c.name}}</option>
+                                                                </select>
+
+                                                                <select name="infoArea" id="infoArea" ng-model="info.addrArea" class="form-control" required>
+                                                                    <option value="">请选择区/县</option>
+                                                                    <option ng-repeat="a in info.areaList" value="{{a.code}}">{{a.name}}</option>
+                                                                </select>
+
+                                                                <!--验证-->
+                                                                <div class="location-val">
+                                                                    <!--验证-->
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoCity.$dirty || infoForm.infoCity.$touched">
+                                                                        <div ng-show="infoForm.infoCity.$error.required" class="wrong-tip">请选择市</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="location-val">
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoProvince.$dirty || infoForm.infoProvince.$touched">
+                                                                        <div ng-show="infoForm.infoProvince.$error.required" class="wrong-tip">请选择省</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="location-val">
+                                                                    <!--验证-->
+                                                                    <div ng-show="infoForm.$submitted || infoForm.infoArea.$dirty || infoForm.infoArea.$touched">
+                                                                        <div ng-show="infoForm.infoArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>门店地址：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.addrDetail}}</span>
+                                                            <input name="infoStoreAdr" ng-model="info.addrDetail" ng-if="info.isEdit" class="form-control" type="text" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoStoreAdr.$touched">
+                                                            <div ng-show="infoForm.infoStoreAdr.$error.required" class="wrong-tip">请输入门店地址</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>烟草专卖证号：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.licenceNo}}</span>
+                                                            <input name="infoLicense" ng-model="info.licenceNo" ng-if="info.isEdit" class="form-control" type="text" ng-pattern="/^\d{12}$/" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoLicense.$touched">
+                                                            <div ng-show="infoForm.infoLicense.$error.required || infoForm.infoLicense.$invalid" class="wrong-tip">请输入烟草专卖证号，12位数字</div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="row manage-new">
+                                                        <span class="title"><i>*</i>烟草专卖证号照片：</span>
+
+                                                        <!--展示图片-->
+                                                        <div class="new-photo-con">
+                                                            <img id="infoLicenceImg" class="new-photo" ng-click="viewImg(info.licenceImg)" ng-src="{{info.licenceImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                                                        </div>
+
+                                                        <div class="info-btn-con" ng-if="info.isEdit">
+                                                            <!-- 上传按钮 -->
+                                                            <div class="upload-btn-con">
+                                                                <button class="btn btn-primary upload-btn">上传</button>
+                                                                <input name="infoLicenceImg" onchange="angular.element(this).scope().new.uploadImage('info2')" ng-model="info.licenceImg" class="form-control new-photo" type="file" accept="image/*" required>
+                                                            </div>
+                                                            <button ng-click="photoDelete('infoLicenceImg')" class="btn btn-primary delete-btn" type="button">删除</button>
+                                                        </div>
+
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoLicenceImg.$touched">
+                                                            <div ng-show="infoForm.infoLicenceImg.$error.required" class="wrong-tip">请上传烟草专卖证号照片</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>区域：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.districtName}}</span>
+
+                                                            <select ng-if="info.isEdit" ng-model="info.district" name="infoDistrict" class="form-control" required>
+                                                                <option value="">请选择</option>
+                                                                <option value="1">城镇</option>
+                                                                <option value="2">乡村</option>
+                                                            </select>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoDistrict.$touched">
+                                                            <div ng-show="infoForm.infoDistrict.$error.required" class="wrong-tip">请选择区域</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>业态：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.commercialName}}</span>
+
+                                                            <select ng-if="info.isEdit" ng-model="info.commercial" name="infoCommercial" class="form-control" required>
+                                                                <option value="">请选择</option>
+                                                                <option value="1">食杂店</option>
+                                                                <option value="2">便利店</option>
+                                                                <option value="3">超市</option>
+                                                                <option value="4">商场</option>
+                                                                <option value="5">烟酒商店</option>
+                                                                <option value="6">娱乐服务</option>
+                                                                <option value="7">其他</option>
+                                                            </select>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoCommercial.$touched">
+                                                            <div ng-show="infoForm.infoCommercial.$error.required" class="wrong-tip">请选择业态</div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>业务员姓名：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.salesManNames}}</span>
+
+                                                            <input ng-if="info.isEdit" ng-model="info.salesManNames" name="infoSalesman" class="form-control" type="text" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoSalesman.$touched">
+                                                            <div ng-show="infoForm.infoSalesman.$error.required" class="wrong-tip">请输入业务员姓名</div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title">联系人姓名：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.contactName}}</span>
+                                                            <input name="infoConcatName" ng-model="info.contactName" ng-if="info.isEdit" class="form-control" type="text"/>
+                                                        </label>
+                                                    </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title">联系人电话：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.contactPhone}}</span>
+                                                            <input name="infoConcatPhone" ng-model="info.contactPhone" ng-show="info.isEdit" class="form-control" type="text"/>
+                                                        </label>
+                                                    </li>
+
+                                                    <li ng-if="fromPage != 'reviewManage'" class="row status">
+                                                        <span class="title"><i>*</i>状态：</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.authOrg.status == 1 ? '上架中' : (info.authOrg.status == 0 ? '下架中' : '')}}</span>
+
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authOrg.status" ng-value="1" type="radio" name="infoUpDown" required/>上架</label>
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authOrg.status" ng-value="0" type="radio" name="infoUpDown" required/>下架</label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoUpDown.$touched">
+                                                            <div ng-show="infoForm.infoUpDown.$error.required" class="wrong-tip">请选择状态</div>
+                                                        </div>
+                                                    </li>
+
+                                                    <!-- 审核管理状态 -->
+                                                    <li ng-if="fromPage == 'reviewManage'" class="row status">
+                                                        <span class="title"><i>*</i>审核状态：</span>
+                                                        <span ng-if="!info.isEdit" class="value">{{info.authStatus == 2 ? '审核通过' : (info.authStatus == 3 ? '审核不通过，原因：' + info.failReason : '- -')}}</span>
+
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="2" type="radio" name="infoAuthStatus" required/>审核通过</label>
+                                                        <label ng-if="info.isEdit"><input ng-model="info.authStatus" ng-value="3" type="radio" name="infoAuthStatus" required/>审核不通过</label>
+                                                        <div ng-if="info.authStatus == 3 && info.isEdit" class="authStatus">
+                                                            <i>*</i><input name="failReason" ng-model="info.failReason" class="form-control" type="text" placeholder="请输入不通过理由" required>
+                                                        </div>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoAuthStatus.$touched">
+                                                            <div ng-show="infoForm.infoAuthStatus.$error.required" class="wrong-tip">请选择审核通过</div>
+                                                        </div>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.failReason.$touched">
+                                                            <div ng-show="infoForm.failReason.$error.required" class="wrong-tip">请输入不通过理由</div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                                <div class="btn-con">
+                                                    <button ng-if="info.isEdit == false" ng-click="info.edit()" class="btn btn-primary" type="button">修改基本信息</button>
+                                                    <button ng-if="info.isEdit == true" ng-click="info.save()" type="submit" class="btn btn-primary">保存</button>
+                                                    <button ng-if="info.isEdit == true" ng-click="info.cancel()" class="btn btn-primary" type="button">取消</button>
+                                                    <button ng-click="info.back()" class="btn btn-primary" type="button">返回列表</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- 2 店铺粉丝 -->
+                                        <div ng-show="detial.detialPage == 'sellerfans'" class="detial-sellerfans">
+                                            <!-- 排序 -->
+                                            <div class="sort-btn-con">
+                                                <button ng-click="sellerfans.sortBy(1)" class="btn btn-primary">按最后扫码时间排序</button>
+                                                <button ng-click="sellerfans.sortBy(2)" class="btn btn-primary">按扫码次数排序</button>
+                                                <button ng-click="sellerfans.sortBy(3)" class="btn btn-primary">按扫店码次数排序</button>
+                                            </div>
+
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>微信openld</th>
+                                                        <th>昵称</th>
+                                                        <th>扫店码次数</th>
+                                                        <th>扫烟码次数</th>
+
+                                                        <th>最后一次扫店码时间</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="(index, item) in sellerfans.listData">
+                                                        <td>{{index+1}}</td>
+                                                        <td>{{item.openId}}</td>
+                                                        <td>{{item.nickname}}</td>
+                                                        <td>{{item.scanSellerCount}}</td>
+                                                        <td>{{item.scanProdCount}}</td>
+
+                                                        <td>{{item.lastScanSeller | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 搜索项 -->
+                                        <div class="detial-search">
+                                            <!-- 日历 -->
+                                            <div ng-show="detial.detialPage != 'info' && detial.detialPage != 'sellerfans'" class="form-group time">
+                                                <label class="control-label">时间段：</label>
+                                                <input ng-model="detial.startTime" id="detialStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="detial.endTime" id="detialEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+
+                                            <!-- 扫码返现 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'cashback'" class="form-group">
+                                                <label class="control-label">扫码单位：</label>
+                                                <select class="form-control" ng-model="cashback.unit">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">条</option>
+                                                    <option value="2">盒</option>
+                                                </select>
+                                            </div>
+                                            <div ng-show="detial.detialPage == 'cashback'" class="form-group">
+                                                <label class="control-label">有无返还：</label>
+                                                <select class="form-control" ng-model="cashback.isFx">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">有</option>
+                                                    <option value="0">无</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 账单流水 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'bill'" class="form-group">
+                                                <label class="control-label">交易类型：</label>
+                                                <select class="form-control" ng-model="bill.type">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="1">扫码返现</option>
+                                                    <option value="2">提现</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 入库明细 搜索项 -->
+                                            <div ng-show="detial.detialPage == 'storage'" class="form-group">
+                                                <label class="control-label">奖品类型：</label>
+                                                <select class="form-control" ng-model="storage.awardType">
+                                                    <option value="" selected>全部</option>
+                                                    <option value="6">积分奖励</option>
+                                                    <option value="1">实物奖励</option>
+                                                    <option value="3">红包奖励</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- 搜索、重置 -->
+                                            <div ng-show="detial.detialPage == 'cashback' || detial.detialPage == 'bill' || detial.detialPage == 'storage'" class="btn-con">
+                                                <button type="button" class="seacher btn btn-primary" ng-click="detial.search();">查询</button>
+                                                <button type="button" class="reset btn btn-default" ng-click="detial.reset();">重置</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- 3 扫码返现 -->
+                                        <div ng-show="detial.detialPage == 'cashback'" class="detial-cashback">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>微信openld</th>
+                                                    <th>昵称</th>
+                                                    <th>扫店码时间</th>
+                                                    <th>扫烟码时间</th>
+
+                                                    <th>扫码单位</th>
+                                                    <th>返回金额</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in cashback.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.openId}}</td>
+                                                    <td>{{item.nickname}}</td>
+                                                    <td>{{item.scanSellerTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    <td>{{item.zjTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                                                    <td>{{item.unit == 1 ? '盒' : '条'}}</td>
+                                                    <td>{{item.fxAmount}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 4 账单流水 -->
+                                        <div ng-show="detial.detialPage == 'bill'" class="detial-bill">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>交易类型</th>
+                                                    <th>金额</th>
+                                                    <th>交易时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in bill.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.type == 1 ? '扫码返现' : '提现'}}</td>
+                                                    <td ng-if="item.type == 1" class="add">+￥{{item.amount}}</td>
+                                                    <td ng-if="item.type == 2" class="subtract">-￥{{item.amount}}</td>
+                                                    <td>{{item.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 5 入库明细 -->
+                                        <div ng-show="detial.detialPage == 'storage'" class="detial-storage">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>品牌</th>
+                                                    <th>规格</th>
+                                                    <th>奖品类型</th>
+                                                    <th>单次入库数量</th>
+
+                                                    <th>单次扫码奖励</th>
+                                                    <th>入库时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(index, item) in storage.listData">
+                                                    <td>{{index+1}}</td>
+                                                    <td>{{item.brandName}}</td>
+                                                    <td>{{item.snName}}</td>
+                                                    <td>{{item.awardName}}</td>
+                                                    <td>{{item.num}}</td>
+
+                                                    <td>{{item.award}}</td>
+                                                    <td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="vm.currentPage == 'index' || detial.detialPage != 'info'" class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+                                </div>
+                            </div>
+
+
+                            <!-- 分页区 -->
+                            <div ng-show="vm.currentPage == 'index' || detial.detialPage != 'info'" class="pagination-wrap" ng-class='{paginationDetial: isDetial}'>
+                                <!-- 分页指令 -->
+                                <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                            </div>
+
+                            <button ng-show="vm.currentPage == 'detial' && detial.detialPage != 'info'" ng-click="info.back()" class="btn btn-primary detial-back" type="button">返回列表</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="newAlert" class="alert alert-dismissible fade" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p class="prompt"></p>
+    </div>
+
+    <!-- 新增 -->
+    <div class="animated fadeInRightBig" ng-show="vm.currentPage == 'new'">
+        <div class="container-fluid">
+            <!--title-->
+            <div class="ui-panel-title manage">
+                <div><i class="manage"></i><span>新建零售户</span></div>
+            </div>
+
+            <div class="panel-body panel manage-new">
+                <form name="form" novalidate>
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2"><i>*</i>门店照片：</label>
+
+                        <div class="col-sm-6 upload-con">
+                            <!--展示图片-->
+                            <div class="new-photo-con" ng-show="new.headImg != ''">
+                                <img id="newHeadImg" ng-click="viewImg(new.headImg)" class="new-photo" ng-src="{{new.headImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                            </div>
+                            <!-- 上传按钮 -->
+                            <div class="upload-btn-con">
+                                <button class="btn btn-primary upload-btn">上传</button>
+                                <input onchange="angular.element(this).scope().new.uploadImage('new1')" ng-model="new.headImg" name="newHeadImg" class="form-control new-photo" type="file" accept="image/*" required>
+                            </div>
+                            <button ng-click="photoDelete('newHeadImg')" class="btn btn-default delete-btn" type="button">删除</button>
+
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newHeadImg.$touched">
+                                <div ng-show="form.newHeadImg.$error.required" class="wrong-tip">请上传门店照片</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newShopName" class="control-label col-sm-2"><i>*</i>门店名称：</label>
+
+                        <input id="newShopName" name="newShopName" ng-model="new.shopName" class="form-control" type="text" ng-maxlength="10" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.newShopName.$touched || form.newShopName.$dirty">
+                            <div ng-show="form.newShopName.$error.required || form.newShopName.$error.maxlength" class="wrong-tip">请输入门店名称，1-10字符</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newOwnerName" class="control-label col-sm-2"><i>*</i>经营人姓名：</label>
+
+                        <input id="newOwnerName" name="newOwnerName" ng-model="new.ownerName" class="form-control" type="text" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.newOwnerName.$touched">
+                            <div ng-show="form.newOwnerName.$error.required" class="wrong-tip">请输入经营人姓名</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPhoneNo" class="control-label col-sm-2"><i>*</i>经营人电话：</label>
+
+                        <input id="newPhoneNo" name="newPhoneNo" ng-model="new.phoneNo" class="form-control" type="text" ng-pattern="/^1[3-9][0-9]{9}$/" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.newPhoneNo.$touched">
+                            <div ng-show="form.newPhoneNo.$error.required || form.newPhoneNo.$invalid" class="wrong-tip">请输入正确格式的经营人电话</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group new-location">
+                        <label class="control-label col-sm-2"><i>*</i>位置：</label>
+                        <div class="col-sm-10">
+                            <select name="newAddrProvince" ng-model="new.addrProvince" ng-change="new.provinceChage($event)" class="form-control" required>
+                                <option value="">请选择省</option>
+                                <option ng-repeat="p in new.provinceList" value="{{p.code}}">{{p.name}}</option>
+                            </select>
+
+                            <select name="newAddrCity" ng-model="new.addrCity" ng-change="new.cityChage($event)" class="form-control" required>
+                                <option value="">请选择市</option>
+                                <option ng-repeat="c in new.cityList" value="{{c.code}}">{{c.name}}</option>
+                            </select>
+
+                            <select name="newAddrArea" ng-model="new.addrArea" class="form-control" required>
+                                <option value="">请选择区/县</option>
+                                <option ng-repeat="a in new.areaList" value="{{a.code}}">{{a.name}}</option>
+                            </select>
+
+                            <!--验证-->
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrProvince.$dirty || form.newAddrProvince.$touched">
+                                    <div ng-show="form.newAddrProvince.$error.required" class="wrong-tip">请选择省</div>
+                                </div>
+                            </div>
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrCity.$dirty || form.newAddrCity.$touched">
+                                    <div ng-show="form.newAddrCity.$error.required" class="wrong-tip">请选择市</div>
+                                </div>
+                            </div>
+                            <div class="location-val">
+                                <div ng-show="form.$submitted || form.newAddrArea.$dirty || form.newAddrArea.$touched">
+                                    <div ng-show="form.newAddrArea.$error.required" class="wrong-tip">请选择区/县</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newStoreAdr" class="control-label col-sm-2"><i>*</i>门店地址：</label>
+
+                        <input id="newStoreAdr" name="newStoreAdr" ng-model="new.addrDetail" class="form-control" type="text" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.newStoreAdr.$touched">
+                            <div ng-show="form.newStoreAdr.$error.required" class="wrong-tip">请输入门店地址</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newLicense" class="control-label col-sm-2"><i>*</i>烟草专卖证号：</label>
+
+                        <input id="newLicense" name="newLicense" ng-model="new.licenceNo" class="form-control" type="text" ng-pattern="/^\d{12}$/" required>
+                        <!--验证-->
+                        <div ng-show="form.$submitted || form.newLicense.$touched">
+                            <div ng-show="form.newLicense.$error.required || form.newLicense.$invalid" class="wrong-tip">请输入12位数字的烟草专卖证号</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2"><i>*</i>烟草专卖证号照片：</label>
+
+                        <div class="col-sm-6 upload-con">
+                            <!--展示图片-->
+                            <div class="new-photo-con" ng-show="new.licenceImg != ''">
+                                <img id="newLicenceImg" ng-click="viewImg(new.licenceImg)" class="new-photo" ng-src="{{new.licenceImg}}" data-toggle="modal" data-target=".img-modal" alt="" />
+                            </div>
+                            <!-- 上传按钮 -->
+                            <div class="upload-btn-con">
+                                <button class="btn btn-primary upload-btn">上传</button>
+                                <input onchange="angular.element(this).scope().new.uploadImage('new2')" ng-model="new.licenceImg" name="newLicenceImg" class="form-control new-photo" type="file" accept="image/*" required>
+                            </div>
+                            <button ng-click="photoDelete('newLicenceImg')" class="btn btn-default delete-btn" type="button">删除</button>
+
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newLicenceImg.$touched">
+                                <div ng-show="form.newLicenceImg.$error.required" class="wrong-tip">请上传烟草专卖证号照片</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newDistrict" class="control-label col-sm-2"><i>*</i>区域：</label>
+                        <div class="col-sm-8">
+                            <select ng-model="new.district" name="newDistrict" id="newDistrict" class="form-control" required>
+                                <option value="">全部</option>
+                                <option value="1">城镇</option>
+                                <option value="2">乡村</option>
+                            </select>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newDistrict.$touched">
+                                <div ng-show="form.newDistrict.$error.required" class="wrong-tip">请选择区域</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newCommercial" class="control-label col-sm-2"><i>*</i>业态：</label>
+                        <div class="col-sm-8">
+                            <select ng-model="new.commercial" name="newCommercial" id="newCommercial" class="form-control" required>
+                                <option value="">全部</option>
+                                <option value="1">食杂店</option>
+                                <option value="2">便利店</option>
+                                <option value="3">超市</option>
+                                <option value="4">商场</option>
+                                <option value="5">烟酒商店</option>
+                                <option value="6">娱乐服务</option>
+                                <option value="7">其他</option>
+                            </select>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newCommercial.$touched">
+                                <div ng-show="form.newCommercial.$error.required" class="wrong-tip">请选择业态</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newSalesman" class="control-label col-sm-2"><i>*</i>业务员姓名：</label>
+                        <div class="col-sm-8">
+                            <input ng-model="new.salesManNames" name="newSalesman" class="form-control" id="newSalesman" type="text" required/>
+                            <!--验证-->
+                            <div ng-show="form.$submitted || form.newSalesman.$touched">
+                                <div ng-show="form.newSalesman.$error.required" class="wrong-tip">请输入业务员姓名</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newConcatName" class="control-label col-sm-2">联系人姓名：</label>
+                        <input id="newConcatName" name="newConcatName" ng-model="new.contactName" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newConcatPhone" class="control-label col-sm-2">联系人电话：</label>
+                        <input id="newConcatPhone" name="newConcatPhone" ng-model="new.contactPhone" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group col-sm-offset-2 btn-con">
+                        <button ng-click="new.save('new', 'save')" class="btn btn-primary" type="submit">保存</button>
+                        <!--ng-disabled="myForm.$invalid"-->
+                        <button ng-click="new.back()" class="btn btn-primary" type="button">返回列表</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看大图 -->
+    <div class="modal fade bs-example-modal-lg img-modal" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id=""><span>查看大图：</span><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <img class="big-photo" ng-src="{{bigImg}}" alt="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 上下架 -->
+    <div class="modal fade bs-example-modal-sm shelf-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle"><span ng-if="isUpShelf">上架</span><span ng-if="!isUpShelf">下架</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <span ng-if="isUpShelf">您确认要上架此零售户？</span>
+                    <span ng-if="!isUpShelf">您确认要下架此零售户？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="shelfConfirm()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jqmeter.min.js"></script>
+</div>

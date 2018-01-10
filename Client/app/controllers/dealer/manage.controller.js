@@ -105,6 +105,7 @@ define([], function () {
           // 是否刷新页码
           if(ispage) {
             $scope.paginationConf = res.data;
+            $scope.indexPaginationConf = res.data; // 记录下来首页的分页数据，因为详情页的分页数据会覆盖它。
           }
         })
       }
@@ -402,7 +403,7 @@ define([], function () {
         } else {
           // 当前页改为详情
           $scope.isDetial = false;
-          getList(1, true);
+          $scope.paginationConf = $scope.indexPaginationConf;
         }
       })
     }]
