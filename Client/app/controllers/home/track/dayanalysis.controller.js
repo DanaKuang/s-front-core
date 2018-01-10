@@ -12,8 +12,13 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
             var echarts = require('echarts');
             var $model = $scope.$model;
-            var DEFPROVINCE = $model.$defPro.data.orgId || "hunanzhongyan";
-            DEFPROVINCE = DEFPROVINCE === "hunanzhongyan" ? "湖南" : "河南";
+            var DEFPROVINCE = $model.$defPro.data[0].orgId || "hunanzhongyan";
+            // 不够再加
+            DEFPROVINCE = ['湖南','河南','河北'][[
+                'hunanzhongyan',
+                'henanzhongyan',
+                'hebeizhongyan'
+            ].indexOf(DEFPROVINCE)] || "湖南";
 
             // 百度地图json
             var chinaJson = $model.$chinaJson.data;
