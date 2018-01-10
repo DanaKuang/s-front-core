@@ -346,7 +346,7 @@ define([], function () {
 
                 initRightPie(angular.extend({   // 零售户业态分布（右侧柱状图）
                     bizCode: selectValueStr.join(',') || '',  // 获取的业态
-                    proviceId: $('#proviceId').val() == '000000' ? "" : $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                    proviceId: $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
                     isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
                     cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                  
                     cityClass: $('#levelOfCities').val() || '',  // 地市等级 
