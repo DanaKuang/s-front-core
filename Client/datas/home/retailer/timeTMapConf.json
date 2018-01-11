@@ -3,6 +3,7 @@
       "formatter":"{a}:{c}"
     },
     "xAxis": {
+      "maxInterval":12,
       "type":"category",
       "boundaryGap":false,
       "data": [],
@@ -53,6 +54,6 @@
       "show" : true,  
       "realtime" : true,  
       "start" : 0,  
-      "end" : 5
+      "end" : 50
   }
   }

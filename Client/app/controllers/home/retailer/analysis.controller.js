@@ -8,7 +8,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'analysisCtrl',
         ViewModelName: 'analysisViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter', function ($scope, dateFormatFilter, dayFilter) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter','$location', function ($scope, dateFormatFilter, dayFilter,$location) {
             //  点击三角切换显示隐藏 
             var flag = true;
             $('.ui-detail-search .ui-detail-screen h4 span').on('click', function () {
@@ -35,21 +35,18 @@ define([], function () {
             var caLEchart = echarts.init(document.getElementById('caLMap'));
             var caLMapConf = $model.$caLMapConf.data;
             caLEchart.setOption(caLMapConf);
-
             // 业态分布（柱状图）
             var caREchart = echarts.init(document.getElementById('caRMap'));
             var caRMapConf = $model.$caRMapConf.data;
-            caREchart.setOption(caRMapConf);
 
             //  地域分布 (柱形图)
             var ttEchart = echarts.init(document.getElementById('ttMap'));
             var ttMapConf = $model.$ttMapConf.data;
-            ttEchart.setOption(ttMapConf);
 
             //  发展时间趋势 (折线图)
             var timeTEchart = echarts.init(document.getElementById('timeTMap'));
             var timeTMapConf = $model.$timeTMapConf.data;
-            timeTEchart.setOption(timeTMapConf);
+
 
             $scope.ShopDownBox = $model.$ShopDownBox.data || []; // 业态下拉框
             $scope.ProvByorgId = $model.$ProvByorgId.data[0] || []; // 用户默认省份
@@ -267,9 +264,12 @@ define([], function () {
                 normal: "",     // 城市名称
                 normalNum: "", // 数量
                 vs: "",       // 对比的城市名称
-                vsNum: ""    // 对比的数量
+                vsNum: "",    // 对比的数量
+                go:go //去零售户明细查询
             });
-
+             function go() {
+                $location.path('view/home/retailer/detail');
+            };
             // 初始化查询
             var flag = true;
             function initSearch(n) {
@@ -474,17 +474,19 @@ define([], function () {
                 $model.ZeroBizR(params).then(function (res) {
                     res.data = res.data || [];
                     if (params.isFlag == 'Y') { // 点击了对比的
-                        // {arriveNum: "2", bizName: "商场", cityName: "郑州市", vsCityName: "洛阳市", vsarriveNum: "2", vsbizName: "商场"}
                         caRMapConf.series.length < 2 ? caRMapConf.series.push({
                             "name": "",
                             "type": "bar",
                             "data": [],
-                            "barWidth": "50%",
+                            "barWidth": "40%",
                             "barGap": "10%"
-                        }) : '';
+                        }):'';
                         caRMapConf.series[0].data.length = 0;
                         caRMapConf.series[1].data.length = 0;
                         res.data.forEach(function (item) {
+                            if(caRMapConf.xAxis[0].data.length<res.data.length){
+                                caRMapConf.xAxis[0].data.push(item.bizName)
+                            }
                             caRMapConf.series[0].data.push(item.arriveNum)
                             caRMapConf.series[1].data.push(item.vsarriveNum)
                         })
@@ -498,7 +500,7 @@ define([], function () {
                             "name": "",
                             "type": "bar",
                             "data": [],
-                            "barWidth": "50%",
+                            "barWidth": "40%",
                             "barGap": "10%"
                         }];
                         res.data.forEach(function (item) {
@@ -577,23 +579,23 @@ define([], function () {
             // 零售户地域分布-对比
             function VSZeroBizRegionalBar(params) {
                 $model.VSZeroBizRegionalBar(params).then(function (res) {
-                    if(!res.data.length){
-                        ttMapConf.series.splice(1,1);
-                    }
-                    ttMapConf.series.length < 2 ? ttMapConf.series.push({
-                        "name": "",
-                        "type": "bar",
-                        "data": [],
-                        "barGap": 0,
-                        "barWidth": 70
-                    }) : '';
+                    // ttMapConf = ttMapConf.getOption();                   
+                     if(ttMapConf.series.length < 2){
+                        ttMapConf.series.push({
+                            "name": "",
+                            "type": "bar",
+                            "data": [],
+                            "barGap": 0,
+                            "barWidth": 70
+                        });
+                    };
                     ttMapConf.series[1].data = [];
                     res.data.forEach(function (item) {
                         ttMapConf.series[1].data.push(item.arriveNum)
-                    })
+                    });
                     // ttMapConf.series[0].name = res.data[0] && res.data[0].cityName; // 把上次的作比较的市传过来
                     ttMapConf.series[1].name = res.data[0] && res.data[0].cityName;
-                    ttEchart.setOption(ttMapConf, true)
+                    ttEchart.setOption(ttMapConf);
                 });
             };
             // 零售户地域分布无对比的 title 
@@ -619,42 +621,45 @@ define([], function () {
             function ZeroBizTimeline(params) {
                 $model.ZeroBizTimeline(params).then(function (res) {
                     res.data = res.data || {};
-                    timeTMapConf.series.length = 1;
-                    timeTMapConf.xAxis.data.length = 0;
-                    timeTMapConf.series[0].data.length = 0;
+                    timeTMapConf.series[1] && timeTMapConf.series.splice(1,1);  
+                    timeTMapConf.xAxis.data = [];
+                    timeTMapConf.series[0].data = [];
                     res.data.forEach(function (item) {
                         timeTMapConf.xAxis.data.push(item.statTime);
                         timeTMapConf.series[0].data.push(item.arriveNum);
                     })
                     timeTMapConf.series[0].name = res.data[0] && res.data[0].cityName;
-                    timeTEchart.setOption(timeTMapConf, true);
+                    timeTEchart.setOption(timeTMapConf,true);   
                 });
             };
             // 零售户发展时间趋势-对比
             function VSZeroBizTimeline(params) {
                 $model.VSZeroBizTimeline(params).then(function (res) {
                     res.data = res.data || {};
-                    timeTMapConf.series.length < 2 ? timeTMapConf.series.push({
-                        "name": "",
-                        "type": "line",
-                        "label": {
-                            "normal": {
-                                "show": false
-                            }
-                        },
-                        "data": [],
-                        "itemStyle": {
-                            "normal": {
-                                "color": "#FF8B22"
-                            }
-                        }
-                    }) : '';
-                    timeTMapConf.series[1].data.length = 0;
+                    timeTMapConf = timeTEchart.getOption();
+                    if(timeTMapConf.series.length < 2){
+                        timeTMapConf.series.push({
+                            "name": "",
+                            "type": "line",
+                            "label": {
+                                "normal": {
+                                    "show": false
+                                }
+                            },
+                            "data": [],
+                            "itemStyle": {
+                                "normal": {
+                                    "color": "#FF8B22"
+                                }
+                            }   
+                        });
+                    };
+                    timeTMapConf.series[1].data = [];
                     res.data.forEach(function (item) {
-                        timeTMapConf.series[1].data.push(item.arriveNum)
-                    })
+                        timeTMapConf.series[1].data.push(item.arriveNum);
+                    });
                     timeTMapConf.series[1].name = res.data[0] && res.data[0].cityName;
-                    timeTEchart.setOption(timeTMapConf)
+                    timeTEchart.setOption(timeTMapConf);
                 });
             };
 
