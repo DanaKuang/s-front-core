@@ -30,12 +30,6 @@
         }
     ],
     "series":[
-        {
-            "name": "",
-            "type": "bar",
-            "data": [],
-            "barWidth": "100%",
-            "barGap":"40%"
-        }
+        
     ]
 }
