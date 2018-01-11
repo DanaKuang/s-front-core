@@ -153,3 +153,9 @@
 #md_third .md-content p {
   font-size: 16px;
   margin: 15px 0; }
+
+#md_third .btn-primary {
+  padding: 0 12px;
+  text-align: center;
+  height: 30px;
+  margin: 15px; }

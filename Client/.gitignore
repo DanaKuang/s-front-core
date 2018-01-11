@@ -6,3 +6,4 @@ npm-debug.log
 yarn-error.log
 备份/
 .project
+package-lock.json
