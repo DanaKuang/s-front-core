@@ -1,15 +1,15 @@
 /**
- * Author: liubin
+ * Author: linyongjin
  * Create Date: 2017-07-04
  * Description: report
  */
 
 define([], function() {
-	var formarReportController = {
+	var skReportCtrl = {
 		ServiceType: 'controller',
-		ServiceName: 'formarReportCtrl',
+		ServiceName: 'skReportCtrl',
 		ViewModelName: 'formarReportViewModel',
-		ServiceContent: ['$scope', 'setDateConf', 'dayFilter', function($scope, setDateConf, dayFilter) {
+		ServiceContent: ['$scope', 'formarReportViewModel','setDateConf', 'dayFilter', function($scope, $model, setDateConf, dayFilter) {
 			var $model = $scope.$model;
 			setDateConf.init($(".agree-date"), "day");
 			//设置input的默认时间
@@ -95,21 +95,21 @@ define([], function() {
 						$scope.brandList = res.data || [];
 						$scope.$apply();
 
-						var curBrandName = $scope.brandList[0].name;
+                        var curBrandName = $scope.brandList[0].name;
 
 						$model.$getSpecifData({
 							productBrand: curBrandName
 						}).then(function(res) {
 							$scope.speciftList = res.data || [];
-							$scope.$apply();
-							$scope.obj = {
-								"dt": stattime,
-								"productBrand": curBrandName,
-								"productSn": $scope.speciftList[0].sn,
-								"provinceName": "",
-								"cityName": ""
-							};
-							gloabl.winUser($scope.obj);
+                            $scope.$apply();
+                            $scope.obj = {
+                                "dt": stattime,
+                                "productBrand": curBrandName,
+                                "productSn": $scope.speciftList[0].sn,
+                                "provinceName": "",
+                                "cityName": ""
+                            };
+                            gloabl.winUser($scope.obj);
 							//							if($scope.speciftList.length > 0) {
 							curSpeciftStr = $scope.speciftList[0].name;
 							//							}
@@ -576,5 +576,5 @@ define([], function() {
 		}]
 	};
 
-	return formarReportController;
+	return skReportCtrl;
 });
