@@ -18,17 +18,17 @@ define([], function () {
 
             var f_def = {
                 copyOfPageCode: 'huiyuanri',
-                activityCode: '',
-                activityName: '',
+                activityCode: DETAIL.activity.activityCode || '',
+                activityName: DETAIL.activity.activityName || '',
                 activityForm: 'act-12',
-                pageCode: '',
+                pageCode: DETAIL.activity.pageCode || '',
                 status: 1,
-                attach: '',
-                activityEntrance: '',
-                activityEntranceAttach: '',
-                idx: 0,
-                activityDec: '',
-                activityRuleHtml: ''
+                attach: DETAIL.activity.attach || '',
+                activityEntrance: DETAIL.activity.activityEntrance || '',
+                activityEntranceAttach: DETAIL.activity.activityEntranceAttach || '',
+                idx: DETAIL.activity.idx || 0,
+                activityDec: DETAIL.activity.activityDec || '',
+                activityRuleHtml: DETAIL.activity.activityRuleHtml || ''
             };
             var s_def = {
                 sns: '',
@@ -95,8 +95,8 @@ define([], function () {
                     prizeName: '一等奖',
                     details: [{
                         awardType: 3,
-                        bigred: 0,
-                        minred: 0
+                        bigred: DETAIL.activity.activityAwards[0].details[0].bigred || 0,
+                        minred: DETAIL.activity.activityAwards[0].details[0].minred || 0,
                     }]
                 }, {
                     idx: 2,
@@ -104,8 +104,8 @@ define([], function () {
                     prizeName: '二等奖',
                     details: [{
                         awardType: 3,
-                        bigred: 0,
-                        minred: 0
+                        bigred: DETAIL.activity.activityAwards[1].details[0].bigred || 0,
+                        minred: DETAIL.activity.activityAwards[1].details[0].minred || 0
                     }]
                 }, {
                     idx: 3,
@@ -113,8 +113,8 @@ define([], function () {
                     prizeName: '三等奖',
                     details: [{
                         awardType: 3,
-                        bigred: 0,
-                        minred: 0
+                        bigred: DETAIL.activity.activityAwards[2].details[0].bigred || 0,
+                        minred: DETAIL.activity.activityAwards[2].details[0].minred || 0
                     }]
                 }]
             };
