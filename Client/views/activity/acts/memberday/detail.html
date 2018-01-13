@@ -74,7 +74,6 @@
                                             <th>活动名称</th>
                                             <th>所领奖项</th>
                                             <th>奖项内容</th>
-                                            <th>关联规格</th>
                                             <th>零售户地址</th>
                                             <th>获奖时间</th>
                                             <th>获奖地区</th>
@@ -85,14 +84,13 @@
                                         <tr ng-repeat="item in listArr">
                                             <td ng-click="showDetail(item.orderid)" class="underline">{{item.orderid}}</td>
                                             <td>{{item.nickname}}</td>
-                                            <td>{{item.activityname}}</td>
-                                            <td>{{item.prize}}</td>
-                                            <td>{{item.prizename}}</td>
-                                            <td>{{item.productname}}</td>
-                                            <td>{{item.address}}</td>
-                                            <td>{{item.createtime}}</td>
-                                            <td>{{item.origin}}</td>
-                                            <td>{{item.status}}</td>
+                                            <td>{{item.activityName}}</td>
+                                            <td>{{item.prizeName}}</td>
+                                            <td>{{item.minred}}</td>
+                                            <td>{{item.salerAddress}}</td>
+                                            <td>{{item.ctime}}</td>
+                                            <td>{{item.salerProvince}}</td>
+                                            <td>{{item.statusName}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

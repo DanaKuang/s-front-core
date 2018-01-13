@@ -57,8 +57,8 @@ define([], function () {
                     currentPageNumber: 1,
                     pageSize: 10
                 }).then(function (res) {
-                    var data = res.data || [];
-                    $scope.listArr = data;
+                    var data = res.data.data || [];
+                    $scope.listArr = data.list || [];
                     $scope.$apply();
                 });
             }
