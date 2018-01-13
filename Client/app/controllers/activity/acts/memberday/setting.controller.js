@@ -132,6 +132,11 @@ define([], function () {
                     'activityRuleHtml'
                 ]);
 
+                s_def.sns = DETAIL.activity.sn.split(',');
+                s_def.areaCodes = DETAIL.activity.areaCode.split(',');
+                s_def.stime = df.datetime(DETAIL.activity.stime);
+                s_def.etime = df.datetime(DETAIL.activity.etime);
+
                 t_def.activityAwards[0].details[0].bigred = DETAIL.activity.activityAwards[0].details[0].bigred;
                 t_def.activityAwards[0].details[0].minred = DETAIL.activity.activityAwards[0].details[0].minred;
 
@@ -336,7 +341,8 @@ define([], function () {
                 format: "yyyy-mm-dd hh:ii:ss",
                 autoclose: true,
                 todayBtn: true,
-                minView: 4,
+                minView: 0,
+                maxView: 4,
                 startDate: ""
             }).on('change', function (e) {
                 var st = $scope.s.stime || '';
