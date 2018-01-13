@@ -112,6 +112,9 @@
 }
 
 /* 特殊规则设置 start*/
+.special-rules{
+	margin-bottom: 10px;
+}
 .special-rules-info{
 	margin-left: 50px;
 	border:1px solid #ccc;

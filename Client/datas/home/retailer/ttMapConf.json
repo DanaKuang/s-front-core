@@ -24,13 +24,9 @@
         {
             "name":"",
             "type":"bar",
-            "data":[]
+            "data":[],
+            "barGap": 0,
+            "barWidth": 70
         }
-    ],
-    "dataZoom" : {  
-        "show" : true,  
-        "realtime" : true,  
-        "start" : 0,  
-        "end" : 10
-    }
+    ]
 }

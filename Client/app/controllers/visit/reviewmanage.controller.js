@@ -258,6 +258,7 @@ define([], function () {
                 if(res.data.ok) {
                   // 审核成功后刷新列表
                   getList($scope.paginationConf.data.page.currentPageNumber);
+                  $scope.selected = []; // 清空选中
                   // 隐藏弹窗
                   $('.review-modal').modal('hide');
                   alertMsg($('#newAlert'), 'success', '设置成功');
