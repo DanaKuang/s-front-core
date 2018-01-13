@@ -1570,6 +1570,34 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/queryMemberAwards'
+    authorized: 1
+    description: '会员日获奖详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/queryMatypes'
+    authorized: 1
+    description: '会员日获奖详情 下拉框'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/queryMemberAct'
+    authorized: 1
+    description: '会员日配置详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/common/queryTreeRegion'
+    authorized: 1
+    description: '获取地区'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'

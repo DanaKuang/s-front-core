@@ -25,6 +25,8 @@
                             <form class="form-horizontal">
                                 <!--活动类型-->
                                 <input type="hidden" name="activityForm" ng-model="f.activityForm">
+                                <!--活动code-->
+                                <input type="hidden" name="activityCode" ng-model="f.activityCode">
                                 <!--页面编码-->
                                 <input type="hidden" name="pageCode" ng-model="f.pageCode">
                                 <!--活动状态-->
@@ -40,7 +42,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">规范性文件及说明<span class="red">*</span></label>
                                     <div class="col-sm-9 file-upload">
-                                        <input type="file" name="attach" class="form-control input-sm">
+                                        <input type="file" name="attach" class="form-control input-sm" onchange="angular.element(this).scope().f_uploadFile()">
                                         <input type="text" name="attach" class="form-control input-sm" required="required" ng-model="f.attach" disabled="disabled">
                                         <div class="input-sm">请选择上传文件</div>
                                     </div>
@@ -66,7 +68,7 @@
                                         <!--大图-->
                                         <div class="md-banner">
                                             <img ng-src="{{f.activityEntrance||'/statics/assets/image/img-upload.png'}}">
-                                            <input type="file" onchange="angular.element(this).scope().f_uploadFile()">
+                                            <input type="file" onchange="angular.element(this).scope().f_uploadImg()">
                                             <p>640*320像素,支持png、jpg格式,小于2M</p>
                                         </div>
                                     </div>
@@ -121,25 +123,22 @@
                                 <!--选择规格-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择规格<span class="red">*</span></label>
-                                    <div class="col-sm-3">
-                                        <select ng-model="s.sns" class="form-control input-sm">
-                                            <option value="">请选择</option>
-                                            <option ng-value="p.brandCode" ng-repeat="p in s_pnArr">{{p.name}}</option>
+                                    <div class="col-sm-3 multi">
+                                        <select ng-model="s.sns" name="sns" class="form-control input-sm"  multiple="multiple">
+                                            <option ng-value="p.sn" ng-repeat="p in s_pnArr">{{p.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <!--选择地区-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择地区<span class="red">*</span></label>
-                                    <div class="col-sm-2">
-                                        <select name="province" class="form-control input-sm" required="required" ng-model="s_province" ng-change="s_getCity(s_province)">
-                                            <option value="">请选择</option>
+                                    <div class="col-sm-2 multi">
+                                        <select name="province" class="form-control input-sm" required="required" ng-model="s_province" ng-change="s_getCity(s_province)" multiple="multiple">
                                             <option ng-value="p.code" ng-repeat="p in s_proArr">{{p.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <select name="city" class="form-control input-sm" required="required" ng-model="s.areaCodes">
-                                            <option value="">请选择</option>
+                                    <div class="col-sm-2 multi">
+                                        <select name="areaCodes" class="form-control input-sm" required="required" ng-model="s.areaCodes" multiple="multiple">
                                             <option ng-value="c.code" ng-repeat="c in s_ctArr">{{c.name}}</option>
                                         </select>
                                     </div>
@@ -148,11 +147,11 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动日期<span class="red">*</span></label>
                                     <div class="col-sm-2">
-                                        <input type="text" ng-model="s.stime" class="form-control input-sm date">
+                                        <input type="text" ng-model="s.stime" class="form-control input-sm datetime">
                                     </div>
                                     <div class="input-sm plr fl tc w15">至</div>
                                     <div class="col-sm-2">
-                                        <input type="text" ng-model="s.etime" class="form-control input-sm date">
+                                        <input type="text" ng-model="s.etime" class="form-control input-sm datetime">
                                     </div>
                                 </div>
                                 <!--幸运值累积时段-->
@@ -168,26 +167,26 @@
                                         <input type="number" name="memberdayRules[0].luckyNum" ng-model="s.memberdayRules[0].luckyNum" class="form-control input-sm">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[0].sweek" name="memberdayRules[0].sweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" name="memberdayRules[0].stime" ng-model="s.memberdayRules[0].stime" class="form-control input-sm time">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[0].eweek" name="memberdayRules[0].eweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[0].etime" class="form-control input-sm time" name="memberdayRules[0].etime">
@@ -206,26 +205,26 @@
                                         <input type="number" name="memberdayRules[1].luckyNum" ng-model="s.memberdayRules[1].luckyNum" class="form-control input-sm">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[1].sweek" name="memberdayRules[1].sweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[1].stime" class="form-control input-sm time" name="memberdayRules[1].stime">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[1].eweek" name="memberdayRules[1].eweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[1].etime" class="form-control input-sm time" name="memberdayRules[1].etime">
@@ -244,26 +243,26 @@
                                         <input type="number" name="memberdayRules[2].luckyNum" ng-model="s.memberdayRules[2].luckyNum" class="form-control input-sm">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[2].sweek" name="memberdayRules[2].sweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[2].stime" class="form-control input-sm time" name="memberdayRules[2].stime">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[2].eweek" name="memberdayRules[2].eweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[2].etime" class="form-control input-sm time" name="memberdayRules[2].etime">
@@ -282,26 +281,26 @@
                                         <input type="number" name="memberdayRules[3].luckyNum" ng-model="s.memberdayRules[3].luckyNum" class="form-control input-sm">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[3].sweek" name="memberdayRules[3].sweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[3].stime" class="form-control input-sm time" name="memberdayRules[3].stime">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[3].eweek" name="memberdayRules[3].eweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[3].etime" class="form-control input-sm time" name="memberdayRules[3].etime">
@@ -320,26 +319,26 @@
                                         <input type="number" name="memberdayRules[4].luckyNum" ng-model="s.memberdayRules[4].luckyNum" class="form-control input-sm">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[4].sweek" name="memberdayRules[4].sweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s.memberdayRules[4].stime" class="form-control input-sm time" name="memberdayRules[4].stime">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[4].eweek" name="memberdayRules[4].eweek">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" name="memberdayRules[4].etime" ng-model="s.memberdayRules[4].etime" class="form-control input-sm time">
@@ -366,26 +365,26 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">兑换开放时段<span class="red">*</span></label>
                                     <select class="form-control input-sm fl week ml15">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s_startTime" class="form-control input-sm time">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week">
-                                        <option value="0">每周日</option>
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
                                         <input type="text" ng-model="s_endTime" class="form-control input-sm time">
@@ -394,17 +393,17 @@
                                 <!--开奖时间-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">开奖时间<span class="red">*</span></label>
-                                    <select class="form-control input-sm fl ml15 week">
-                                        <option value="0">每周日</option>
+                                    <select class="form-control input-sm fl ml15 week" ng-model="s_memberdayProps_week">
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
                                         <option value="4">每周四</option>
                                         <option value="5">每周五</option>
                                         <option value="6">每周六</option>
+                                        <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
-                                        <input type="text" ng-model="s_startTime" class="form-control input-sm date">
+                                        <input type="text" ng-model="s_memberdayProps_time" class="form-control input-sm time">
                                     </div>
                                 </div>
                                 <!--特殊规则-->
@@ -416,7 +415,7 @@
                                         </label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="number" name="lucky" ng-model="lucky" class="form-control input-sm">
+                                        <input type="number" name="memberdayProps[1].propValue" ng-model="s.memberdayProps[1].propValue" class="form-control input-sm">
                                     </div>
                                     <div class="input-sm fl plr tc">周之内同一用户不能再次中奖</div>
                                 </div>
@@ -443,37 +442,26 @@
                             <!--内容-->
                             <div class="md-content">
                                 <p>奖项设置明细</p>
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>奖项名称</th>
-                                            <th>图片</th>
-                                            <th>中奖人数</th>
-                                            <th>奖项内容</th>
-                                            <th>状态</th>
-                                            <th>投放金额</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="p in t_prizes">
-                                            <td>{{$index+1}}</td>
-                                            <td>{{p.name}}</td>
-                                            <td>{{p.pic}}</td>
-                                            <td>{{p.member}}</td>
-                                            <td>{{p.content}}</td>
-                                            <td>{{p.status}}</td>
-                                            <td>{{p.money}}</td>
-                                            <td class="tbl-opt">
-                                                <button type="button" ng-click="t_edit(p.id)">编辑</button>
-                                                <button type="button" ng-click="t_enable(p.id)">启用</button>
-                                                <button type="button" ng-click="t_disable(p.id)">停用</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button type="button" class="btn btn-default" ng-click="t_add()">新增奖项</button>
+                                <form class="form-horizontal">
+                                    <div ng-repeat="act in t.activityAwards">
+                                        <!--奖项名称-->
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">奖项名称<span class="red">*</span></label>
+                                            <div class="col-sm-3">
+                                                <input type="hidden" name="idx" class="form-control input-sm" ng-model="act.idx">
+                                                <input type="text" name="prizeName" class="form-control input-sm" ng-model="act.prizeName" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <!--选择红包-->
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">红包金额<span class="red">*</span></label>
+                                            <div class="col-sm-3">
+                                                <input type="number" name="details[0].minred" class="input-sm" ng-model="act.details[0].minred" ng-change="act.details[0].bigred=act.details[0].minred">元
+                                                <input type="hidden" name="details[0].bigred" ng-model="act.details[0].bigred" ng-bind="act.details[0].minred">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="form-group tc">
                                 <button class="btn btn-primary" type="button" ng-click="t_save()">保存</button>
@@ -485,4 +473,5 @@
             </div>
         </div>
     </div>
+
 </div>

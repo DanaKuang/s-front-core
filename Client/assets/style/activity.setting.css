@@ -47,6 +47,11 @@
 .week {
   width: 60px; }
 
+.red {
+  position: absolute;
+  color: red;
+  margin: 0 5px; }
+
 .ui-md-setting {
   margin-top: 15px; }
   .ui-md-setting .md-nav {
@@ -71,10 +76,6 @@
       border-top: 1px solid #ddd;
       width: 150px;
       margin: 15px 0; }
-  .ui-md-setting .red {
-    position: absolute;
-    color: red;
-    margin: 0 5px; }
 
 #md_first form .btn-primary,
 #md_first form .btn-default {
@@ -118,7 +119,7 @@
   margin-right: 0; }
 
 #md_first form .file-upload input {
-  width: 300px;
+  width: 600px;
   float: left; }
 
 #md_first form .file-upload input[type='file'] {
@@ -138,8 +139,8 @@
 #md_second form .checkbox > label {
   margin-right: 10px; }
 
-#md_second form .btn-primary,
-#md_second form .btn-default {
+#md_second form .tc .btn-primary,
+#md_second form .tc .btn-default {
   padding: 0 12px;
   text-align: center;
   height: 30px;
@@ -159,3 +160,32 @@
   text-align: center;
   height: 30px;
   margin: 15px; }
+
+#md_third input[type="checkbox"] {
+  margin: 2px 0 0;
+  margin-left: -20px; }
+
+#md_third .checkbox > label {
+  margin-right: 10px; }
+
+#md_third .md-select {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  float: left;
+  text-align: center;
+  border: 1px solid #ddd; }
+  #md_third .md-select button {
+    width: 100%;
+    height: 100%; }
+
+#md_third .border0 {
+  border: 0; }
+
+#md_third .md-integralpool {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #ddd;
+  float: left; }

@@ -14,8 +14,11 @@ define([], function () {
             // 品牌
             var brandArr = $model.$brand.data.data || [];
             var proArr = $model.$province.data.data || [];
+            var DETAIL = $model.$detail.data.data || {};
 
             var f_def = {
+                copyOfPageCode: 'huiyuanri',
+                activityCode: '',
                 activityName: '',
                 activityForm: 'act-12',
                 pageCode: '',
@@ -36,58 +39,84 @@ define([], function () {
                     ruleType: 1,
                     isuse: 0,
                     luckyNum: 0,
-                    sweek: 0,
+                    sweek: 1,
                     stime: '',
-                    eweek: 0,
+                    eweek: 1,
                     etime: ''
                 }, {
                     ruleType: 2,
                     isuse: 0,
                     luckyNum: 0,
-                    sweek: 0,
+                    sweek: 1,
                     stime: '',
-                    eweek: 0,
+                    eweek: 1,
                     etime: ''
                 }, {
                     ruleType: 3,
                     isuse: 0,
                     luckyNum: 0,
-                    sweek: 0,
+                    sweek: 1,
                     stime: '',
-                    eweek: 0,
+                    eweek: 1,
                     etime: ''
                 }, {
                     ruleType: 4,
                     isuse: 0,
                     luckyNum: 0,
-                    sweek: 0,
+                    sweek: 1,
                     stime: '',
-                    eweek: 0,
+                    eweek: 1,
                     etime: ''
                 }, {
                     ruleType: 4,
                     isuse: 0,
                     luckyNum: 0,
-                    sweek: 0,
+                    sweek: 1,
                     stime: '',
-                    eweek: 0,
+                    eweek: 1,
                     etime: ''
+                }],
+                memberdayProps: [{
+                    id: '',
+                    activityCode: '',
+                    propKey: 'DRAW_AWARD_TIME',
+                    propValue: ''
+                }, {
+                    id: '',
+                    activityCode: '',
+                    propKey: 'REAWARD_DURATION',
+                    propValue: ''
                 }]
             };
             var t_def = {
-                t_prizes: [{
-                    id: 1,
-                    name: '测试',
-                    pic: '测试',
-                    member: '测试',
-                    content: '测试',
-                    status: '测试',
-                    money: '测试'
-                }],
-                t_add: t_add,
-                t_edit: t_edit,
-                t_enable: t_enable,
-                t_disable: t_disable
+                activityAwards: [{
+                    idx: 1,
+                    special: 0,
+                    prizeName: '一等奖',
+                    details: [{
+                        awardType: 3,
+                        bigred: 0,
+                        minred: 0
+                    }]
+                }, {
+                    idx: 2,
+                    special: 0,
+                    prizeName: '二等奖',
+                    details: [{
+                        awardType: 3,
+                        bigred: 0,
+                        minred: 0
+                    }]
+                }, {
+                    idx: 3,
+                    special: 0,
+                    prizeName: '三等奖',
+                    details: [{
+                        awardType: 3,
+                        bigred: 0,
+                        minred: 0
+                    }]
+                }]
             };
 
             $scope.f = angular.extend({}, f_def);
@@ -95,8 +124,8 @@ define([], function () {
             $scope.t = angular.extend({}, t_def);
 
             $scope = angular.extend($scope, {
+                f_uploadImg: f_uploadImg,
                 f_uploadFile: f_uploadFile,
-                filename: '',
                 f_next: f_next,
                 f_back: f_back,
                 step: 0
@@ -109,15 +138,32 @@ define([], function () {
                 s_province: '',
                 s_ctArr: [],
                 s_getCity: getCity,
+                s_memberdayProps_week: '',
+                s_memberdayProps_time: '',
                 s_next: s_next,
                 s_back: s_back
             }, {
-                t_save: t_save,
-                t_back: t_back
+                t_save: t_save
             });
 
-            // 上传图片
+            // 上传文件
             function f_uploadFile () {
+                var e = event.target;
+                var f = e.files[0];
+                var fd = new FormData();
+                fd.append('file', f);
+                $model.upload(fd).then(function (res) {
+                    if (res.ret === '200000') {
+                        $scope.f.attach = res.data.accessUrl;
+                        $scope.$apply();
+                    } else {
+                        alert('文件上传失败！');
+                    }
+                });
+            }
+
+            // 上传图片
+            function f_uploadImg () {
                 var e = event.target;
                 var f = e.files[0];
                 if (!~f.type.indexOf('image')) {
@@ -161,37 +207,22 @@ define([], function () {
             // 第三步 保存
             function t_save () {
                 console.log($scope);
-                debugger
-                window.location.reload();
-            }
-            // 第三步 返回
-            function t_back () {
-                $scope.t = angular.extend({}, t_def);
-                $scope.step = 1;
-            }
+                $scope.s.memberdayRules[0].isuse += 0;
+                $scope.s.memberdayRules[1].isuse += 0;
+                $scope.s.memberdayRules[2].isuse += 0;
+                $scope.s.memberdayRules[3].isuse += 0;
+                $scope.s.memberdayRules[4].isuse += 0;
 
-
-            // 新增
-            function t_add () {
-                alert('新增');
-            }
-
-            // 编辑
-            function t_edit (id) {
-                if (!id) return;
-                alert('编辑');
-            }
-
-            // 启用
-            function t_enable (id) {
-                if (!id) return;
-                alert('启用');
-            }
-
-            // 停用
-            function t_disable (id) {
-                if (!id) return;
-                alert('停用');
+                $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
+                $model.update(angular.extend(
+                    $scope.f, $scope.s, $scope.t
+                )).then(function (res) {
+                    if (res.data.ret === '200000') {
+                        alert('保存成功！');
+                        debugger
+                        // window.location.reload();
+                    }
+                });
             }
 
             // 品牌选择
@@ -240,6 +271,13 @@ define([], function () {
                         }).then(function (res) {
                             $scope.s_pnArr = res.data.data || [];
                             $scope.$apply();
+                            $("[name='sns']").multiselect('dataprovider', _.map(res.data.data, function(val) {
+                                return {
+                                    label: val.name,
+                                    value: val.sn
+                                }
+                            }));
+                            $("[name='sns']").multiselect('refresh');
                         });
                     }
                 }
@@ -253,12 +291,37 @@ define([], function () {
                     }).then(function (res) {
                         $scope.s_ctArr = res.data.data || [];
                         $scope.$apply();
+                        $("[name='areaCodes']").multiselect('dataprovider', _.map(res.data.data, function(val) {
+                            return {
+                                label: val.name,
+                                value: val.code
+                            }
+                        }));
+                        $("[name='sns']").multiselect('refresh');
                     });
                 } else {
                     $scope.ctArr = [];
                     $scope.$apply();
+                    $("[name='areaCodes']").multiselect('dataprovider', []);
+                    $("[name='areaCodes']").multiselect('refresh');
                 }
             }
+
+            // 年月日时分秒
+            $("#md_second .datetime").datetimepicker({
+                language: "zh-CN",
+                format: "yyyy-mm-dd hh:ii:ss",
+                autoclose: true,
+                todayBtn: true,
+                minView: 4,
+                startDate: ""
+            }).on('change', function (e) {
+                var st = $scope.s.stime || '';
+                var et = $scope.s.etime || '';
+                if (et < st) {
+                    $scope.s.etime = st;
+                }
+            });
 
             // 日期初始化
             $("#md_second .date").datetimepicker({
@@ -268,12 +331,6 @@ define([], function () {
                 todayBtn: true,
                 minView: 2,
                 startDate: ""
-            }).on('change', function (e) {
-                var st = $scope.s_startTime || '';
-                var et = $scope.s_endTime || '';
-                if (et < st) {
-                    $scope.s_endTime = st;
-                }
             });
             // 时分格式化
             $("#md_second .time").datetimepicker({
@@ -286,12 +343,17 @@ define([], function () {
                 maxView: 1,
                 minView: 0,
                 startDate: ""
-            }).on('change', function (e) {
-                var st = $scope.s_startTime || '';
-                var et = $scope.s_endTime || '';
-                if (et < st) {
-                    $scope.s_endTime = st;
-                }
+            });
+
+            // 初始化多选
+            $(document).ready(function () {
+                $(".multi select").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    enableFiltering: true,
+                    filterPlaceholder: '查询'
+                });
             });
 
         }]
