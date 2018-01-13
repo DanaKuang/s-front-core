@@ -40,9 +40,21 @@ define([], function () {
                 pArr: TYPE,
                 prize: TYPE[0].prize_name,
                 listArr: [],
+                curPage: 1,
                 detailSearch: initSearch,
                 export: exportFn
             });
+
+            // 上一页
+            $scope.prev = function () {
+                if ($scope.curPage == 1) return;
+                initSearch(--$scope.curPage);
+            };
+            // 下一页
+            $scope.next = function () {
+                if (!$scope.listArr.length) return;
+                initSearch(++$scope.curPage);
+            };
 
             // 初始化查询
             function initSearch () {
@@ -54,7 +66,7 @@ define([], function () {
                     areaCode: $scope.region,
                     prize: $scope.prize || '',
                     realThing: 1,
-                    currentPageNumber: 1,
+                    currentPageNumber: $scope.curPage,
                     pageSize: 10
                 }).then(function (res) {
                     var data = res.data.data || [];
@@ -72,8 +84,8 @@ define([], function () {
                     areaCodes: $scope.region || [],
                     realThing: 1,
                     status: $scope.status || '',
-                    stime: weekTime[0] || '',
-                    etime: weekTime[1] || ''
+                    stime: weekTime[0]+' 00:00:00',
+                    etime: weekTime[1]+' 00:00:00'
                 };
                 var url = "/api/tztx/saas/saotx/order/exportOrder";
                 var xhr = new XMLHttpRequest();

@@ -94,6 +94,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <!-- 翻页 -->
+                                <div class="float-right fr">
+                                    <!-- 分页指令 -->
+                                    <div class="prev page-btn btn btn-default" ng-class="{'disabled': curPage == 1}" style="margin-right: 10px;" ng-click="prev()">上一页</div><div class="next next-btn btn btn-default" ng-class="{'disabled': listArr.length == 0}" ng-click="next()">下一页</div>
+                                </div>
                             </div>
                         </div>
                     </div>
