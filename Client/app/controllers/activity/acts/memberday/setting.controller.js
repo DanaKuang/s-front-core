@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'mdSettingCtrl',
         ViewModelName: 'mdSettingModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, df) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'util', function ($scope, df, u) {
             var $model = $scope.$model;
             // 品牌
             var brandArr = $model.$brand.data.data || [];
@@ -18,17 +18,17 @@ define([], function () {
 
             var f_def = {
                 copyOfPageCode: 'huiyuanri',
-                activityCode: DETAIL.activity.activityCode || '',
-                activityName: DETAIL.activity.activityName || '',
+                activityCode: '',
+                activityName: '',
                 activityForm: 'act-12',
-                pageCode: DETAIL.activity.pageCode || '',
+                pageCode: '',
                 status: 1,
-                attach: DETAIL.activity.attach || '',
-                activityEntrance: DETAIL.activity.activityEntrance || '',
-                activityEntranceAttach: DETAIL.activity.activityEntranceAttach || '',
-                idx: DETAIL.activity.idx || 0,
-                activityDec: DETAIL.activity.activityDec || '',
-                activityRuleHtml: DETAIL.activity.activityRuleHtml || ''
+                attach: '',
+                activityEntrance: '',
+                activityEntranceAttach: '',
+                idx: 0,
+                activityDec: '',
+                activityRuleHtml: ''
             };
             var s_def = {
                 sns: '',
@@ -95,8 +95,8 @@ define([], function () {
                     prizeName: '一等奖',
                     details: [{
                         awardType: 3,
-                        bigred: DETAIL.activity.activityAwards[0].details[0].bigred || 0,
-                        minred: DETAIL.activity.activityAwards[0].details[0].minred || 0,
+                        bigred: 0,
+                        minred: 0,
                     }]
                 }, {
                     idx: 2,
@@ -104,8 +104,8 @@ define([], function () {
                     prizeName: '二等奖',
                     details: [{
                         awardType: 3,
-                        bigred: DETAIL.activity.activityAwards[1].details[0].bigred || 0,
-                        minred: DETAIL.activity.activityAwards[1].details[0].minred || 0
+                        bigred: 0,
+                        minred: 0
                     }]
                 }, {
                     idx: 3,
@@ -113,11 +113,34 @@ define([], function () {
                     prizeName: '三等奖',
                     details: [{
                         awardType: 3,
-                        bigred: DETAIL.activity.activityAwards[2].details[0].bigred || 0,
-                        minred: DETAIL.activity.activityAwards[2].details[0].minred || 0
+                        bigred: 0,
+                        minred: 0
                     }]
                 }]
             };
+            // 编辑
+            if (DETAIL.activity) {
+                u.uiExtend(f_def, DETAIL.activity, [
+                    'activityCode',
+                    'activityName',
+                    'pageCode',
+                    'attach',
+                    'activityEntrance',
+                    'activityEntranceAttach',
+                    'idx',
+                    'activityDec',
+                    'activityRuleHtml'
+                ]);
+
+                t_def.activityAwards[0].details[0].bigred = DETAIL.activity.activityAwards[0].details[0].bigred;
+                t_def.activityAwards[0].details[0].minred = DETAIL.activity.activityAwards[0].details[0].minred;
+
+                t_def.activityAwards[1].details[0].bigred = DETAIL.activity.activityAwards[1].details[0].bigred;
+                t_def.activityAwards[1].details[0].minred = DETAIL.activity.activityAwards[1].details[0].minred;
+
+                t_def.activityAwards[2].details[0].bigred = DETAIL.activity.activityAwards[2].details[0].bigred;
+                t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
+            }
 
             $scope.f = angular.extend({}, f_def);
             $scope.s = angular.extend({}, s_def);
