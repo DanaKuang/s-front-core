@@ -251,6 +251,7 @@ define([], function() {
 					var data = [];
 					var dataY = [];
 					optionFour.xAxis.data = [];
+					optionFour.yAxis.data = [];
 					optionFour.series.data = [];
 
 					//						console.log(optionFour)
