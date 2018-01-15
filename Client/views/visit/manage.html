@@ -318,6 +318,17 @@
                                                             <div ng-show="infoForm.infoOwnerName.$error.required" class="wrong-tip">请输入经营人姓名</div>
                                                         </div>
                                                     </li>
+                                                    <li class="row">
+                                                        <label>
+                                                            <span class="title"><i>*</i>经营人电话：</span>
+                                                            <span ng-if="!info.isEdit" class="value">{{info.phoneNo}}</span>
+                                                            <input name="infoPhoneNo" ng-model="info.phoneNo" ng-if="info.isEdit" class="form-control" type="text" ng-pattern="/^1[3-9][0-9]{9}$/" required/>
+                                                        </label>
+                                                        <!--验证-->
+                                                        <div ng-show="infoForm.$submitted || infoForm.infoPhoneNo.$touched">
+                                                            <div ng-show="infoForm.infoPhoneNo.$error.required || infoForm.infoPhoneNo.$invalid" class="wrong-tip">请输入正确格式的经营人电话</div>
+                                                        </div>
+                                                    </li>
 
                                                     <li class="row">
                                                         <label>

@@ -23,12 +23,13 @@
     ],
     "yAxis":[
         {
-            "type":"value",
+            "type":"value"  ,
             "axisLabel": {
                 "show": false
            }
         }
     ],
     "series":[
+        
     ]
 }

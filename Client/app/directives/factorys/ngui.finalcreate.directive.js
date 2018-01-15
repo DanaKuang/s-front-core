@@ -64,7 +64,7 @@ define([], function () {
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
                 scopeVariable._setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
                 scopeVariable._drawPrizeScope = angular.element('.draw-prize').scope(); // 彩蛋的 中奖设置
-
+                
                 scopeVariable.activityAwards = [];
                 scopeVariable.specialerror = false;
                 scopeVariable.commonerror = false;
@@ -352,7 +352,8 @@ define([], function () {
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,
-                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
+                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2,
+                    input:$('.special-rules .special-rules-info .special-rules-item .input')
                 }
 
                 finalcheck(fromSonScope)
@@ -418,6 +419,49 @@ define([], function () {
                             // 结束时间没选
                             scopeVariable.finalerror = true;
                             $('.select-duration .wrong-tip').removeClass('hidden');
+                        }
+
+                        if(s=='input'){
+                            // 特殊规则设置
+                            var arr = [];  // 装输入框的值
+                            for (var j = 0; j < fromSonScope[s].length; j++) {
+                               arr.push($(fromSonScope[s][j]).val())
+                            };
+                            
+                           for (var i = 0; i < fromSonScope[s].length; i++) {                        
+                                if($(fromSonScope[s][i]).val().trim()=='' || !/^[0-9]*[1-9][0-9]*$/.test($(fromSonScope[s][i]).val())){
+                                    // 次数为空或者次数不是正整数。
+                                    scopeVariable.finalerror = true;
+                                    $(fromSonScope[s][i]).siblings('.special-wrong').children('.wrong-tip').html('次数只可以为正整数！');
+                                    $(fromSonScope[s][i]).siblings('.special-wrong').removeClass('hidden');  
+                                }else{
+                                    var tmp = []; // 只为 isTrue 标识符；
+                                    var repeatArr = []; // 装重复数据的数组              
+                                    var isTrue = false; // 标识符
+                                    arr.some(function (item) { //只为标识服务 （都是循环浪费性能）
+                                        if(arr.indexOf(item) !== arr.lastIndexOf(item) && tmp.indexOf(item) === -1) {
+                                        tmp.push(item);
+                                        isTrue = true;
+                                        return true;
+                                        };
+                                    });
+                                    if(isTrue){
+                                        // 有重复数据。
+                                        arr.forEach(function (item,i) {
+                                            if(arr.indexOf(item) !== arr.lastIndexOf(item) && repeatArr.indexOf(item) === -1) {
+                                                repeatArr.push(item);
+                                                scopeVariable.finalerror = true;
+                                                $(fromSonScope[s][i]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                                                $(fromSonScope[s][i]).siblings('.special-wrong').removeClass('hidden');
+                                            }   
+                                        })    
+                                    }else{
+                                        // 无重复数据。
+                                        $(fromSonScope[s][i]).siblings('.special-wrong').addClass('hidden');  
+                                        scopeVariable.finalerror = false;     
+                                    }
+                                }
+                            }
                         }
                     }
                 }

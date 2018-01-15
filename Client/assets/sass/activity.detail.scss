@@ -1,0 +1,70 @@
+/**
+ * Author: liubin
+ * Create Date: 2018-01-02
+ * Description: 河北会员日中奖详情
+ */
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.ui-md-detail {
+    .ui-panel-title {
+        position: relative;
+        margin: 20px 0 5px 0;
+        font-size: 16px;
+    }
+    .inline-block {
+        width: 220px;
+    }
+    .ui-table-title {
+        margin-bottom: 15px;
+        button {
+            border-radius: 5px;
+            padding: 0 12px;
+        }
+    }
+    .ui-search-panel form {
+        >div {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        select {
+            min-width: 100px;
+            height: 30px;
+            padding: 0;
+        }
+        .large {
+            min-width: 350px;
+        }
+        button {
+            margin-left: 15px;
+        }
+        .multiselect {
+            height: 30px;
+            padding: 4px 12px;
+            min-width: 150px;
+        }
+        .multiselect-container {
+            max-height: 200px;
+            overflow: auto;
+        }
+        .btn-primary {
+            width: 90px;
+            border-radius: 5px;
+            padding: 0;
+        }
+    }
+    .underline {
+        color: #1584e4;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+.modal-body form {
+    div.control-label {
+        text-align: left !important;
+    }
+}

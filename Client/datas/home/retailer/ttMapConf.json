@@ -24,7 +24,9 @@
         {
             "name":"",
             "type":"bar",
-            "data":[]
+            "data":[],
+            "barGap": 0,
+            "barWidth": 70
         }
     ]
 }
