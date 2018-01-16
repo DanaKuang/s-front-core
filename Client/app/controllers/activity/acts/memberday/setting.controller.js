@@ -132,6 +132,44 @@ define([], function () {
                     'activityRuleHtml'
                 ]);
 
+                _.each(s_def.memberdayRules, function (md, idx) {
+                    u.uiExtend(md, DETAIL.activity.memberdayRules[idx], [
+                        'activityCode',
+                        'etime',
+                        'eweek',
+                        'id',
+                        'isuse',
+                        'luckyNum',
+                        'ruleType',
+                        'stime',
+                        'sweek'
+                    ]);
+                });
+
+                if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
+                    u.uiExtend(s_def.memberdayProps[0], DETAIL.activity.memberdayProps[0], [
+                        'activityCode',
+                        'id',
+                        'propValue'
+                    ]);
+                    u.uiExtend(s_def.memberdayProps[1], DETAIL.activity.memberdayProps[1], [
+                        'activityCode',
+                        'id',
+                        'propValue'
+                    ]);
+                } else {
+                    u.uiExtend(s_def.memberdayProps[0], DETAIL.activity.memberdayProps[1], [
+                        'activityCode',
+                        'id',
+                        'propValue'
+                    ]);
+                    u.uiExtend(s_def.memberdayProps[1], DETAIL.activity.memberdayProps[0], [
+                        'activityCode',
+                        'id',
+                        'propValue'
+                    ]);
+                }
+
                 s_def.sns = DETAIL.activity.sn.split(',');
                 s_def.areaCodes = DETAIL.activity.areaCode.split(',');
                 s_def.stime = df.datetime(DETAIL.activity.stime);
@@ -146,6 +184,8 @@ define([], function () {
                 t_def.activityAwards[2].details[0].bigred = DETAIL.activity.activityAwards[2].details[0].bigred;
                 t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
             }
+
+            var s_memberdayProps = s_def.memberdayProps[0].propValue;
 
             $scope.f = angular.extend({}, f_def);
             $scope.s = angular.extend({}, s_def);
@@ -166,8 +206,8 @@ define([], function () {
                 s_province: '',
                 s_ctArr: [],
                 s_getCity: getCity,
-                s_memberdayProps_week: '',
-                s_memberdayProps_time: '',
+                s_memberdayProps_week: s_memberdayProps.split('@')[0],
+                s_memberdayProps_time: s_memberdayProps.split('@')[1],
                 s_next: s_next,
                 s_back: s_back
             }, {
@@ -247,7 +287,6 @@ define([], function () {
                 )).then(function (res) {
                     if (res.data.ret === '200000') {
                         alert('保存成功！');
-                        debugger
                         // window.location.reload();
                     }
                 });
