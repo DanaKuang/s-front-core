@@ -60,9 +60,19 @@ define([], function () {
                     eweek: 1,
                     etime: ''
                 }, {
-                    ruleType: 4,
+                    ruleType: 1,
                     isuse: 0,
                     luckyNum: 0,
+                    scoreNum: 0,
+                    sweek: 1,
+                    stime: '',
+                    eweek: 1,
+                    etime: ''
+                }, {
+                    ruleType: 1,
+                    isuse: 0,
+                    luckyNum: 0,
+                    scoreNum: 0,
                     sweek: 1,
                     stime: '',
                     eweek: 1,
@@ -71,6 +81,7 @@ define([], function () {
                     ruleType: 4,
                     isuse: 0,
                     luckyNum: 0,
+                    scoreNum: 0,
                     sweek: 1,
                     stime: '',
                     eweek: 1,
@@ -269,7 +280,7 @@ define([], function () {
             }
             // 第二步 返回
             function s_back () {
-                $scope.s = angular.extend({}, s_def);
+                // $scope.s = angular.extend({}, s_def);
                 $scope.step = 0;
             }
             // 第三步 保存
