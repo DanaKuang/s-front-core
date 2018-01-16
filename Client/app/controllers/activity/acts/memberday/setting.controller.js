@@ -374,45 +374,6 @@ define([], function () {
                 }
             }
 
-            // 年月日时分秒
-            $("#md_second .datetime").datetimepicker({
-                language: "zh-CN",
-                format: "yyyy-mm-dd hh:ii:ss",
-                autoclose: true,
-                todayBtn: true,
-                minView: 0,
-                maxView: 4,
-                startDate: ""
-            }).on('change', function (e) {
-                var st = $scope.s.stime || '';
-                var et = $scope.s.etime || '';
-                if (et < st) {
-                    $scope.s.etime = st;
-                }
-            });
-
-            // 日期初始化
-            $("#md_second .date").datetimepicker({
-                language: "zh-CN",
-                format: "yyyy-mm-dd",
-                autoclose: true,
-                todayBtn: true,
-                minView: 2,
-                startDate: ""
-            });
-            // 时分格式化
-            $("#md_second .time").datetimepicker({
-                language: "zh-CN",
-                format: "hh:ii",
-                autoclose: true,
-                todayBtn: true,
-                minuteStep: 2,
-                startView: 1,
-                maxView: 1,
-                minView: 0,
-                startDate: ""
-            });
-
             // 初始化多选
             $(document).ready(function () {
                 $(".multi select").multiselect({
@@ -421,6 +382,45 @@ define([], function () {
                     nSelectedText: '已选择',
                     enableFiltering: true,
                     filterPlaceholder: '查询'
+                });
+
+                // 年月日时分秒
+                $("#md_second .datetime").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii:ss",
+                    autoclose: true,
+                    todayBtn: true,
+                    minView: 0,
+                    maxView: 4,
+                    startDate: ""
+                }).on('change', function (e) {
+                    var st = $scope.s.stime || '';
+                    var et = $scope.s.etime || '';
+                    if (et < st) {
+                        $scope.s.etime = st;
+                    }
+                });
+
+                // 日期初始化
+                $("#md_second .date").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                    todayBtn: true,
+                    minView: 2,
+                    startDate: ""
+                });
+                // 时分格式化
+                $("#md_second .time").datetimepicker({
+                    language: "zh-CN",
+                    format: "hh:ii",
+                    autoclose: true,
+                    todayBtn: true,
+                    minuteStep: 2,
+                    startView: 1,
+                    maxView: 1,
+                    minView: 0,
+                    startDate: ""
                 });
             });
 
