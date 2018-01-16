@@ -29,7 +29,7 @@ define([], function () {
                 });
                 // 根据品牌获取规格
                 this.getProduct = function (params) {
-                    return request.$Search(GET_PRODUCT_DATA, params, true);
+                    return request.$Search(GET_PRODUCT_DATA, params);
                 };
                 // 根据省获取市
                 this.getCity = function (params) {
