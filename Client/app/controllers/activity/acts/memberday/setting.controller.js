@@ -150,6 +150,7 @@ define([], function () {
                         'stime',
                         'sweek'
                     ]);
+                    md.isuse = !!md.isuse;
                 });
 
                 if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
@@ -215,7 +216,7 @@ define([], function () {
                 s_getCity: getCity,
                 s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
                 s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
-                s_memberdayProps_issue: Number(s_memberdayProps_1.split('@')[0]),
+                s_memberdayProps_isuse: !!Number(s_memberdayProps_1.split('@')[0]),
                 s_memberdayProps_wweek: s_memberdayProps_1.split('@')[1],
                 s_next: s_next,
                 s_back: s_back
@@ -290,7 +291,7 @@ define([], function () {
                 $scope.s.memberdayRules[4].isuse += 0;
 
                 $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
-                $scope.s.memberdayProps[1].propValue = ''+$scope.s_memberdayProps_issue+'@'+$scope.s_memberdayProps_wweek;
+                $scope.s.memberdayProps[1].propValue = ''+(0+$scope.s_memberdayProps_isuse)+'@'+$scope.s_memberdayProps_wweek;
                 $model.update(angular.extend(
                     $scope.f, $scope.s, $scope.t
                 )).then(function (res) {
