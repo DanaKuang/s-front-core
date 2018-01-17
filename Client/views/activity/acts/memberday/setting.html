@@ -204,6 +204,11 @@
                                 <!--兑换规则-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">兑换规则<span class="red">*</span></label>
+                                    <div class="col-sm-1 checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-checked="s.memberdayRules[4].isuse" ng-model="s.memberdayRules[4].isuse" name="memberdayRules[4].isuse">启用
+                                        </label>
+                                    </div>
                                     <div class="col-sm-1">
                                         <input type="number" name="memberdayRules[4].luckyNum" ng-model="s.memberdayRules[4].luckyNum" class="form-control input-sm">
                                     </div>
@@ -216,7 +221,7 @@
                                 <!--兑换开放时段-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">兑换开放时段<span class="red">*</span></label>
-                                    <select class="form-control input-sm fl week ml15" name="memberdayRules[4].sweek" ng-model="s.memberdayRules[4].sweek">
+                                    <select class="form-control input-sm fl plr week ml15" name="memberdayRules[4].sweek" ng-model="s.memberdayRules[4].sweek">
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
@@ -245,7 +250,7 @@
                                 <!--开奖时间-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">开奖时间<span class="red">*</span></label>
-                                    <select class="form-control input-sm fl ml15 week" ng-model="s_memberdayProps_week">
+                                    <select class="form-control input-sm fl plr ml15 week" ng-model="s_memberdayProps_week">
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>

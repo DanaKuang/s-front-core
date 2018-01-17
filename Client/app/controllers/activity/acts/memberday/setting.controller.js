@@ -85,7 +85,7 @@ define([], function () {
                     id: '',
                     activityCode: '',
                     propKey: 'DRAW_AWARD_TIME',
-                    propValue: ''
+                    propValue: '1@20:30'
                 }, {
                     id: '',
                     activityCode: '',
@@ -275,7 +275,6 @@ define([], function () {
             }
             // 第二步 返回
             function s_back () {
-                // $scope.s = angular.extend({}, s_def);
                 $scope.step = 0;
             }
             // 第三步 保存
