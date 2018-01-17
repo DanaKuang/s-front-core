@@ -430,7 +430,8 @@ define([], function () {
                     startView: 1,
                     maxView: 1,
                     minView: 0,
-                    startDate: ""
+                    startDate: df.date(+new Date)+' 00:00:00',
+                    endDate: df.date(+new Date)+' 23:59:59'
                 });
             });
 
