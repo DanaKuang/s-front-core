@@ -191,7 +191,8 @@ define([], function () {
                 t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
             }
 
-            var s_memberdayProps = s_def.memberdayProps[0].propValue;
+            var s_memberdayProps_0 = s_def.memberdayProps[0].propValue;
+            var s_memberdayProps_1 = s_def.memberdayProps[1].propValue;
 
             $scope.f = angular.extend({}, f_def);
             $scope.s = angular.extend({}, s_def);
@@ -212,8 +213,10 @@ define([], function () {
                 s_province: '',
                 s_ctArr: [],
                 s_getCity: getCity,
-                s_memberdayProps_week: s_memberdayProps.split('@')[0],
-                s_memberdayProps_time: s_memberdayProps.split('@')[1],
+                s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
+                s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
+                s_memberdayProps_issue: Number(s_memberdayProps_1.split('@')[0]),
+                s_memberdayProps_wweek: s_memberdayProps_1.split('@')[1],
                 s_next: s_next,
                 s_back: s_back
             }, {
@@ -287,6 +290,7 @@ define([], function () {
                 $scope.s.memberdayRules[4].isuse += 0;
 
                 $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
+                $scope.s.memberdayProps[1].propValue = ''+$scope.s_memberdayProps_issue+'@'+$scope.s_memberdayProps_wweek;
                 $model.update(angular.extend(
                     $scope.f, $scope.s, $scope.t
                 )).then(function (res) {
