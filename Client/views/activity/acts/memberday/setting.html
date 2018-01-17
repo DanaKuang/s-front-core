@@ -162,15 +162,15 @@
                                             <input type="checkbox" ng-checked="md.isuse" ng-model="md.isuse" name="memberdayRules[{{$index}}].isuse">启用
                                         </label>
                                     </div>
-                                    <select class="form-control input-sm fl plr w200" ng-model="md.ruleType" name="memberdayRules[{{$index}}].ruleType" disabled="disabled" ng-if="$index<5">
-                                        <option value="1">扫码可获得幸运值</option>
-                                        <option value="2">好友点击分享链接可获得幸运值</option>
-                                        <option value="3">好友评论可获得幸运值</option>
-                                        <option value="4">扫码可获得荷石币</option>
+                                    <select class="form-control input-sm fl plr w150" ng-model="md.ruleType" name="memberdayRules[{{$index}}].ruleType" disabled="disabled" ng-if="$index<5">
+                                        <option value="1">扫码</option>
+                                        <option value="2">好友点击分享链接</option>
+                                        <option value="3">好友评论</option>
                                     </select>
+                                    <div class="input-sm plr fl tc" ng-if="$index<5">{{md.luckyNum!==undefined?'可获得幸运值':'可获得荷石币'}}</div>
                                     <div class="col-sm-1" ng-if="$index<5">
-                                        <input type="number" name="memberdayRules[{{$index}}].luckyNum" ng-model="md.luckyNum" class="form-control input-sm" ng-if="!md.scoreNum">
-                                        <input type="number" name="memberdayRules[{{$index}}].scoreNum" ng-model="md.scoreNum" class="form-control input-sm" ng-if="md.scoreNum">
+                                        <input type="number" name="memberdayRules[{{$index}}].luckyNum" ng-model="md.luckyNum" class="form-control input-sm" ng-if="md.luckyNum!==undefined">
+                                        <input type="number" name="memberdayRules[{{$index}}].scoreNum" ng-model="md.scoreNum" class="form-control input-sm" ng-if="md.scoreNum!==undefined">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="md.sweek" name="memberdayRules[{{$index}}].sweek" ng-if="$index<5">
                                         <option value="1">每周一</option>

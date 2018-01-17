@@ -62,7 +62,6 @@ define([], function () {
                 }, {
                     ruleType: 1,
                     isuse: 0,
-                    luckyNum: 0,
                     scoreNum: 0,
                     sweek: 1,
                     stime: '',
@@ -71,7 +70,6 @@ define([], function () {
                 }, {
                     ruleType: 1,
                     isuse: 0,
-                    luckyNum: 0,
                     scoreNum: 0,
                     sweek: 1,
                     stime: '',
@@ -151,6 +149,7 @@ define([], function () {
                         'id',
                         'isuse',
                         'luckyNum',
+                        'scoreNum',
                         'ruleType',
                         'stime',
                         'sweek'
