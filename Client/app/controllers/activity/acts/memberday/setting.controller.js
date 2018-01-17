@@ -203,7 +203,6 @@ define([], function () {
                 f_uploadImg: f_uploadImg,
                 f_uploadFile: f_uploadFile,
                 f_next: f_next,
-                f_back: f_back,
                 step: 0
             }, {
                 s_brandCode: [],
@@ -268,10 +267,6 @@ define([], function () {
             // 第一步 下一步
             function f_next () {
                 $scope.step = 1;
-            }
-            // 第一步 返回
-            function f_back () {
-                window.location.reload();
             }
             // 第二步 下一步
             function s_next () {
@@ -408,6 +403,7 @@ define([], function () {
                     var et = $scope.s.etime || '';
                     if (et < st) {
                         $scope.s.etime = st;
+                        $scope.$apply();
                     }
                 });
 
@@ -426,7 +422,7 @@ define([], function () {
                     format: "hh:ii",
                     autoclose: true,
                     todayBtn: true,
-                    minuteStep: 2,
+                    minuteStep: 1,
                     startView: 1,
                     maxView: 1,
                     minView: 0,
