@@ -52,7 +52,7 @@ define([], function () {
                     stime: weekTime[0],
                     etime: weekTime[1],
                     status: $scope.status,
-                    areaCode: $scope.region,
+                    areaCodes: $scope.region,
                     idx: $scope.idx || '',
                     currentPageNumber: $scope.curPage,
                     pageSize: 10
@@ -70,7 +70,7 @@ define([], function () {
 
                 // 导出奖品明细
                 var data = {
-                    areaCodes: $scope.region || [],
+                    areaCodes: $scope.region || "",
                     status: $scope.status,
                     idx: $scope.idx,
                     stime: weekTime[0]+' 00:00:00',
