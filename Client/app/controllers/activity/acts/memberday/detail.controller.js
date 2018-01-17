@@ -31,7 +31,7 @@ define([], function () {
 
             // 默认值
             $scope = angular.extend($scope, {
-                stArr: [{name:'作废',code:0},{name:'生效',code:1},{name:'已收货',code:2}],
+                stArr: [{name:'作废',code:0},{name:'生效',code:1}],
                 status: 0,
                 regionArr: regionArr,
                 region: '',
