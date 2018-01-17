@@ -45,17 +45,6 @@ define([], function () {
                 export: exportFn
             });
 
-            // 上一页
-            $scope.prev = function () {
-                if ($scope.curPage == 1) return;
-                initSearch(--$scope.curPage);
-            };
-            // 下一页
-            $scope.next = function () {
-                if (!$scope.listArr.length) return;
-                initSearch(++$scope.curPage);
-            };
-
             // 初始化查询
             function initSearch () {
                 var weekTime = $scope.weekTime.slice($scope.weekTime.indexOf('(')+1,$scope.weekTime.indexOf(')')).replace(/\./g,'-').split('~');
@@ -71,6 +60,7 @@ define([], function () {
                 }).then(function (res) {
                     var data = res.data.data || [];
                     $scope.listArr = data.list || [];
+                    $scope.paginationConf = res.data;
                     $scope.$apply();
                 });
             }

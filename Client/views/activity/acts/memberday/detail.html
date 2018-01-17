@@ -7,6 +7,7 @@
 -->
 <!--style-->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/activity.detail.css">
+<link rel="stylesheet" type="text/css" href="statics/assets/style/pagination.css">
 <div ng-controller="mdDetailCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
@@ -95,9 +96,9 @@
                                     </tbody>
                                 </table>
                                 <!-- 翻页 -->
-                                <div class="float-right fr">
+                                <div class="pagination-wrap">
                                     <!-- 分页指令 -->
-                                    <div class="prev page-btn btn btn-default" ng-class="{'disabled': curPage == 1}" style="margin-right: 10px;" ng-click="prev()">上一页</div><div class="next next-btn btn btn-default" ng-class="{'disabled': listArr.length == 0}" ng-click="next()">下一页</div>
+                                    <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
                                 </div>
                             </div>
                         </div>
