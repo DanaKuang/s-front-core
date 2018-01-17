@@ -38,6 +38,7 @@ define([], function () {
                 memberdayRules: [{
                     ruleType: 1,
                     isuse: 0,
+                    scoreNum: 0,
                     luckyNum: 0,
                     sweek: 1,
                     stime: '',
@@ -46,6 +47,7 @@ define([], function () {
                 }, {
                     ruleType: 2,
                     isuse: 0,
+                    scoreNum: 0,
                     luckyNum: 0,
                     sweek: 1,
                     stime: '',
@@ -54,6 +56,7 @@ define([], function () {
                 }, {
                     ruleType: 3,
                     isuse: 0,
+                    scoreNum: 0,
                     luckyNum: 0,
                     sweek: 1,
                     stime: '',
@@ -63,14 +66,7 @@ define([], function () {
                     ruleType: 1,
                     isuse: 0,
                     scoreNum: 0,
-                    sweek: 1,
-                    stime: '',
-                    eweek: 1,
-                    etime: ''
-                }, {
-                    ruleType: 1,
-                    isuse: 0,
-                    scoreNum: 0,
+                    luckyNum: 0,
                     sweek: 1,
                     stime: '',
                     eweek: 1,
