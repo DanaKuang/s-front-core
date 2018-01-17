@@ -38,7 +38,7 @@ define([], function () {
                 weekArr: weekArr,
                 weekTime: weekArr[0].weekNo || '',
                 pArr: TYPE,
-                prizeName: TYPE[0].prize_name,
+                idx: TYPE[0].idx,
                 listArr: [],
                 curPage: 1,
                 detailSearch: initSearch,
@@ -53,8 +53,7 @@ define([], function () {
                     etime: weekTime[1],
                     status: $scope.status,
                     areaCode: $scope.region,
-                    prizeName: $scope.prizeName || '',
-                    realThing: 1,
+                    idx: $scope.idx || '',
                     currentPageNumber: $scope.curPage,
                     pageSize: 10
                 }).then(function (res) {
@@ -72,8 +71,8 @@ define([], function () {
                 // 导出奖品明细
                 var data = {
                     areaCodes: $scope.region || [],
-                    realThing: 1,
-                    status: $scope.status || '',
+                    status: $scope.status,
+                    idx: $scope.idx,
                     stime: weekTime[0]+' 00:00:00',
                     etime: weekTime[1]+' 00:00:00'
                 };
