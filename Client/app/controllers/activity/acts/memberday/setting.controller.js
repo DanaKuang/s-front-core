@@ -85,7 +85,7 @@ define([], function () {
                     id: '',
                     activityCode: '',
                     propKey: 'DRAW_AWARD_TIME',
-                    propValue: ''
+                    propValue: '1@20:30'
                 }, {
                     id: '',
                     activityCode: '',
@@ -150,6 +150,7 @@ define([], function () {
                         'stime',
                         'sweek'
                     ]);
+                    md.isuse = !!md.isuse;
                 });
 
                 if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
@@ -191,7 +192,8 @@ define([], function () {
                 t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
             }
 
-            var s_memberdayProps = s_def.memberdayProps[0].propValue;
+            var s_memberdayProps_0 = s_def.memberdayProps[0].propValue;
+            var s_memberdayProps_1 = s_def.memberdayProps[1].propValue;
 
             $scope.f = angular.extend({}, f_def);
             $scope.s = angular.extend({}, s_def);
@@ -201,7 +203,6 @@ define([], function () {
                 f_uploadImg: f_uploadImg,
                 f_uploadFile: f_uploadFile,
                 f_next: f_next,
-                f_back: f_back,
                 step: 0
             }, {
                 s_brandCode: [],
@@ -212,8 +213,10 @@ define([], function () {
                 s_province: '',
                 s_ctArr: [],
                 s_getCity: getCity,
-                s_memberdayProps_week: s_memberdayProps.split('@')[0],
-                s_memberdayProps_time: s_memberdayProps.split('@')[1],
+                s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
+                s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
+                s_memberdayProps_isuse: !!Number(s_memberdayProps_1.split('@')[0]),
+                s_memberdayProps_wweek: s_memberdayProps_1.split('@')[1],
                 s_next: s_next,
                 s_back: s_back
             }, {
@@ -265,17 +268,12 @@ define([], function () {
             function f_next () {
                 $scope.step = 1;
             }
-            // 第一步 返回
-            function f_back () {
-                window.location.reload();
-            }
             // 第二步 下一步
             function s_next () {
                 $scope.step = 2;
             }
             // 第二步 返回
             function s_back () {
-                // $scope.s = angular.extend({}, s_def);
                 $scope.step = 0;
             }
             // 第三步 保存
@@ -288,6 +286,7 @@ define([], function () {
                 $scope.s.memberdayRules[4].isuse += 0;
 
                 $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
+                $scope.s.memberdayProps[1].propValue = ''+(0+$scope.s_memberdayProps_isuse)+'@'+$scope.s_memberdayProps_wweek;
                 $model.update(angular.extend(
                     $scope.f, $scope.s, $scope.t
                 )).then(function (res) {
@@ -404,6 +403,7 @@ define([], function () {
                     var et = $scope.s.etime || '';
                     if (et < st) {
                         $scope.s.etime = st;
+                        $scope.$apply();
                     }
                 });
 
@@ -422,11 +422,12 @@ define([], function () {
                     format: "hh:ii",
                     autoclose: true,
                     todayBtn: true,
-                    minuteStep: 2,
+                    minuteStep: 1,
                     startView: 1,
                     maxView: 1,
                     minView: 0,
-                    startDate: ""
+                    startDate: df.date(+new Date)+' 00:00:00',
+                    endDate: df.date(+new Date)+' 23:59:59'
                 });
             });
 

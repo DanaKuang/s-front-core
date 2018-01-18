@@ -31,30 +31,19 @@ define([], function () {
 
             // 默认值
             $scope = angular.extend($scope, {
-                stArr: [{name:'作废',code:0},{name:'生效',code:1},{name:'已收货',code:2}],
+                stArr: [{name:'作废',code:0},{name:'生效',code:1}],
                 status: 0,
                 regionArr: regionArr,
                 region: '',
                 weekArr: weekArr,
                 weekTime: weekArr[0].weekNo || '',
                 pArr: TYPE,
-                prize: TYPE[0].prize_name,
+                idx: TYPE[0].idx,
                 listArr: [],
                 curPage: 1,
                 detailSearch: initSearch,
                 export: exportFn
             });
-
-            // 上一页
-            $scope.prev = function () {
-                if ($scope.curPage == 1) return;
-                initSearch(--$scope.curPage);
-            };
-            // 下一页
-            $scope.next = function () {
-                if (!$scope.listArr.length) return;
-                initSearch(++$scope.curPage);
-            };
 
             // 初始化查询
             function initSearch () {
@@ -62,15 +51,15 @@ define([], function () {
                 $model.getTableData({
                     stime: weekTime[0],
                     etime: weekTime[1],
-                    status: $scope.status || '',
-                    areaCode: $scope.region,
-                    prize: $scope.prize || '',
-                    realThing: 1,
+                    status: $scope.status,
+                    areaCodes: $scope.region,
+                    idx: $scope.idx || '',
                     currentPageNumber: $scope.curPage,
                     pageSize: 10
                 }).then(function (res) {
                     var data = res.data.data || [];
                     $scope.listArr = data.list || [];
+                    $scope.paginationConf = res.data;
                     $scope.$apply();
                 });
             }
@@ -81,13 +70,13 @@ define([], function () {
 
                 // 导出奖品明细
                 var data = {
-                    areaCodes: $scope.region || [],
-                    realThing: 1,
-                    status: $scope.status || '',
+                    areaCodes: $scope.region || "",
+                    status: $scope.status,
+                    idx: $scope.idx,
                     stime: weekTime[0]+' 00:00:00',
                     etime: weekTime[1]+' 00:00:00'
                 };
-                var url = "/api/tztx/saas/saotx/order/exportOrder";
+                var url = "/api/tztx/saas/saotx/activity/exportMemberAwards";
                 var xhr = new XMLHttpRequest();
                 var formData = new FormData();
                 for(var attr in data) {

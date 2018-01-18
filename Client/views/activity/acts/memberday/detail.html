@@ -7,6 +7,7 @@
 -->
 <!--style-->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/activity.detail.css">
+<link rel="stylesheet" type="text/css" href="statics/assets/style/pagination.css">
 <div ng-controller="mdDetailCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
@@ -31,7 +32,7 @@
                                     <!--地区-->
                                     <div class="inline-block">
                                         <label for="region">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区&nbsp;&nbsp;</label>
-                                        <select class="form-control" name="region" ng-model="region">
+                                        <select class="form-control" name="region" ng-model="region" multiple="multiple">
                                             <option ng-repeat="re in regionArr" value="{{re.code}}">{{re.name}}</option>
                                         </select>
                                     </div>
@@ -46,9 +47,9 @@
                                 <div class="form-inline">
                                     <!--奖项-->
                                     <div class="inline-block large">
-                                        <label for="prize">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奖项&nbsp;&nbsp;</label>
-                                        <select class="form-control" ng-model="prize" name="prize">
-                                            <option ng-repeat="p in pArr" value="{{p.prize_name}}">{{p.prize_name}}</option>
+                                        <label for="idx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奖项&nbsp;&nbsp;</label>
+                                        <select class="form-control" ng-model="idx" name="idx">
+                                            <option ng-repeat="p in pArr" value="{{p.idx}}">{{p.prize_name}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -82,7 +83,7 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in listArr">
-                                            <td ng-click="showDetail(item.orderid)" class="underline">{{item.orderid}}</td>
+                                            <td class="underline">{{item.id}}</td>
                                             <td>{{item.nickname}}</td>
                                             <td>{{item.activityName}}</td>
                                             <td>{{item.prizeName}}</td>
@@ -95,9 +96,9 @@
                                     </tbody>
                                 </table>
                                 <!-- 翻页 -->
-                                <div class="float-right fr">
+                                <div class="pagination-wrap">
                                     <!-- 分页指令 -->
-                                    <div class="prev page-btn btn btn-default" ng-class="{'disabled': curPage == 1}" style="margin-right: 10px;" ng-click="prev()">上一页</div><div class="next next-btn btn btn-default" ng-class="{'disabled': listArr.length == 0}" ng-click="next()">下一页</div>
+                                    <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
                                 </div>
                             </div>
                         </div>
