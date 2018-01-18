@@ -874,29 +874,41 @@
 	<!-- 特殊规则设置 -->
 	<div class="special-rules">
 		<h6>特殊规则设置</h6>
-		<input type="checkbox" ng-model="specialShowOrHide">
+		<input type="checkbox" ng-model="specialShowOrHide"  id="checkbox" ng-disabled="activity.mustwin.length" ng-checked="activity.mustwin.length">
 		<span>用户习惯培养奖励设置</span>
-		<div class="special-rules-info" ng-show="specialShowOrHide">
-			<div class="special-rules-item operation multi">
-				<span>用户第</span>
-				<input type="text" class="input">
-				<span>次抽奖必中</span>
-				<div class="special-select">
-					<select name="data" class="select">
-						<option value="">空</option>
-						<option value="1111" label="2222"></option>
-						<option value="1111" label="2222"></option>
-						<option value="1111" label="2222"></option>
-						<option value="1111" label="2222"></option>
-					</select>
-				</div>
-				<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease"></span>
-				<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ng-show="specialIconReduce"></span>
-				<div class="special-wrong hidden">
-					<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>
-				</div>
-			</div>
-			<!-- todo -->
+		<div class="edit-part" ng-if="dcList.COMMON">
+				<div class="special-rules-info" ng-show="activity.mustwin.length">
+						<div class="special-rules-item operation" ng-repeat="n in activity.mustwin">
+							<span>用户第</span>
+							<input type="text" class="input" value="{{n.nums}}" disabled="disabled">	
+							<span>次抽奖必中</span>
+							<!-- <div class="special-select">
+								<select name="data" class="select my-select" label="{{n.prizeName}}"></select>
+							</div> -->
+							<input type="text" disabled="disabled" value="{{n.prizeName}}" style="border-radius:3px;width:188px;height:27px">
+							<!-- <div class="special-wrong hidden">
+								<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>
+							</div> -->
+						</div>
+						<!-- todo -->
+					</div>
+		</div>
+		<div class="create-part" ng-if="!dcList.COMMON">
+				<div class="special-rules-info" ng-show="specialShowOrHide">
+						<div class="special-rules-item operation">
+							<span>用户第</span>
+							<input type="text" class="input">
+							<span>次抽奖必中</span>
+							<div class="special-select">
+								<select name="data" class="select my-select"></select>
+							</div>	
+							<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease"></span>
+							<div class="special-wrong hidden">
+								<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>
+							</div>
+						</div>
+						<!-- todo -->
+					</div>
 		</div>
 	</div>
 

@@ -132,7 +132,7 @@
 }
 .special-rules-info .special-select{
 	position: relative;
-	width: 30%;
+	width: 34%;
 	display: inline-block;
 }
 .special-rules-info .special-icon{
@@ -141,7 +141,7 @@
 	margin-left: 4px;
 }
 .special-rules-info .special-rules-item .input{
-	height: 26px;
+	height: 29px;
 	border-radius: 3px;
 }
 .special-rules-info .special-wrong{
