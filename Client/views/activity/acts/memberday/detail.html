@@ -32,7 +32,7 @@
                                     <!--地区-->
                                     <div class="inline-block">
                                         <label for="region">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区&nbsp;&nbsp;</label>
-                                        <select class="form-control" name="region" ng-model="region">
+                                        <select class="form-control" name="region" ng-model="region" multiple="multiple">
                                             <option ng-repeat="re in regionArr" value="{{re.code}}">{{re.name}}</option>
                                         </select>
                                     </div>

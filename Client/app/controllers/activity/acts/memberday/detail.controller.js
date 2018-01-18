@@ -34,7 +34,7 @@ define([], function () {
                 stArr: [{name:'作废',code:0},{name:'生效',code:1}],
                 status: 0,
                 regionArr: regionArr,
-                region: '110100',
+                region: '',
                 weekArr: weekArr,
                 weekTime: weekArr[0].weekNo || '',
                 pArr: TYPE,
@@ -76,7 +76,7 @@ define([], function () {
                     stime: weekTime[0]+' 00:00:00',
                     etime: weekTime[1]+' 00:00:00'
                 };
-                var url = "/api/tztx/saas/saotx/order/exportOrder";
+                var url = "/api/tztx/saas/saotx/activity/exportMemberAwards";
                 var xhr = new XMLHttpRequest();
                 var formData = new FormData();
                 for(var attr in data) {

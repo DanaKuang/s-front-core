@@ -1598,6 +1598,13 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/exportMemberAwards'
+    authorized: 1
+    description: '会员日详情导出'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'
