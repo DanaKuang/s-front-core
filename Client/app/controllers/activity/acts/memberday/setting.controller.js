@@ -403,7 +403,9 @@ define([], function () {
                     var et = $scope.s.etime || '';
                     if (et < st) {
                         $scope.s.etime = st;
-                        $scope.$apply();
+                        setTimeout(function () {
+                            $('[name="s.etime"]').val(st);
+                        }, 0)
                     }
                 });
 

@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-inline fr">
                                     <button type="submit" class="btn btn-primary" ng-click="detailSearch()">搜索</button>
-                                    <button type="reset" class="btn btn-primary">重置</button>
+                                    <button type="button" ng-click="detailReset()" class="btn btn-primary">重置</button>
                                 </div>
                             </form>
                         </div>
@@ -87,7 +87,7 @@
                                             <td>{{item.nickname}}</td>
                                             <td>{{item.activityName}}</td>
                                             <td>{{item.prizeName}}</td>
-                                            <td>{{item.minred}}</td>
+                                            <td>{{item.minred}}元</td>
                                             <td>{{item.salerAddress}}</td>
                                             <td>{{item.ctime}}</td>
                                             <td>{{item.salerProvince}}</td>

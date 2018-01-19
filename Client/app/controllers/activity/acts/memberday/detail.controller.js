@@ -42,13 +42,30 @@ define([], function () {
                 listArr: [],
                 curPage: 1,
                 detailSearch: initSearch,
+                detailReset: detailReset,
                 export: exportFn
             });
 
+            // 重置
+            function detailReset () {
+                $("[name='status']").multiselect('select', 0);
+                $("[name='region']").multiselect('deselect', $scope.region);
+                $("[name='weekTime']").multiselect('select', weekArr[0].weekNo);
+                $("[name='idx']").multiselect('select', TYPE[0].idx);
+                $(".ui-search-panel select").multiselect('refresh');
+                $acope = angular.extend($scope, {
+                    status: 0,
+                    region: '',
+                    weekTime: weekArr[0].weekNo || '',
+                    idx: TYPE[0].idx,
+                    curPage: 1
+                });
+            }
+
             // 初始化查询
-            function initSearch () {
+            function initSearch (page) {
                 var weekTime = $scope.weekTime.slice($scope.weekTime.indexOf('(')+1,$scope.weekTime.indexOf(')')).replace(/\./g,'-').split('~');
-                $model.getTableData({
+                $model.getTableData(angular.extend({
                     stime: weekTime[0],
                     etime: weekTime[1],
                     status: $scope.status,
@@ -56,13 +73,18 @@ define([], function () {
                     idx: $scope.idx || '',
                     currentPageNumber: $scope.curPage,
                     pageSize: 10
-                }).then(function (res) {
+                }, page || {})).then(function (res) {
                     var data = res.data.data || [];
                     $scope.listArr = data.list || [];
                     $scope.paginationConf = res.data;
                     $scope.$apply();
                 });
             }
+
+            // 翻页
+            $scope.$on('frompagechange', function (scope, event, page) {
+                initSearch(page);
+            });
 
             // 导出
             function exportFn () {
