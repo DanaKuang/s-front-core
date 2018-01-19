@@ -42,8 +42,25 @@ define([], function () {
                 listArr: [],
                 curPage: 1,
                 detailSearch: initSearch,
+                detailReset: detailReset,
                 export: exportFn
             });
+
+            // 重置
+            function detailReset () {
+                $("[name='status']").multiselect('select', 0);
+                $("[name='region']").multiselect('deselect', $scope.region);
+                $("[name='weekTime']").multiselect('select', weekArr[0].weekNo);
+                $("[name='idx']").multiselect('select', TYPE[0].idx);
+                $(".ui-search-panel select").multiselect('refresh');
+                $acope = angular.extend($scope, {
+                    status: 0,
+                    region: '',
+                    weekTime: weekArr[0].weekNo || '',
+                    idx: TYPE[0].idx,
+                    curPage: 1
+                });
+            }
 
             // 初始化查询
             function initSearch (page) {
