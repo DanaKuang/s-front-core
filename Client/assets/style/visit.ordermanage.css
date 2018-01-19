@@ -52,6 +52,7 @@
   margin-right: 5%; }
 
 .search-btn-con {
+  width: 150px;
   margin-left: 64px; }
   .search-btn-con .btn {
     float: left; }

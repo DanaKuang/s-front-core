@@ -48,6 +48,7 @@
   text-align: center; }
 
 .search-btn-con {
+  width: 150px;
   margin-left: 152px; }
   .search-btn-con .btn {
     float: left; }
