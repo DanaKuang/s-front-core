@@ -18,6 +18,10 @@ define([], function () {
                 var GET_PAGEOUT_DATA = "/api/tztx/dataportal/actAnalysis/getRedirectPageData";  // 获取页面流出数据
                 var GET_PAGEEVENT_DATA = "/api/tztx/dataportal/actAnalysis/getEventData";       // 获取页面事件数据
                 var GET_PAGEID_DATA = "/api/tztx/dataportal/actAnalysis/getPageByActivityId";   // 获取活动页面
+                var GET_PRODUCT_BYSN = "/api/tztx/dataportal/public/getPorductDetailBySn"         //获取产品信息
+                var GET_ACTIVITY_BYSN = "/api/tztx/dataportal/public/getActivityListBySn"         //获取活动信息
+                var GET_AD_BYSN = "/api/tztx/dataportal/public/getADListBySn"         //获取活动信息
+
                 // 获取活动下拉框
                 this.$activity = request.$Search(GET_ACTIVITY_DATA, {}, true);
 
@@ -43,6 +47,15 @@ define([], function () {
                 this.getPageEvent = function (params) {
                     return request.$Search(GET_PAGEEVENT_DATA, params, true);
                 };
+                this.getProductBySn = function(params) {
+                    return request.$Search(GET_PRODUCT_BYSN,params,true);
+                }
+                this.getActivityBySn = function(params) {
+                    return request.$Search(GET_ACTIVITY_BYSN,params,true);
+                }
+                this.getADBySn = function(params) {
+                    return request.$Search(GET_AD_BYSN,params,true);
+                }
             };
         }]
     };

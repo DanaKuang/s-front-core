@@ -1126,6 +1126,27 @@ track:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getPorductDetailBySn'
+    authorized: 1
+    description: '获取产品信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getActivityListBySn'
+    authorized: 1
+    description: '获取活动信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/public/getADListBySn'
+    authorized: 1
+    description: '获取卡卷信息'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 retailer:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/shopKeeper/getShopTotalFamily'
