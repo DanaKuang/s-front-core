@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">排序优先级<span class="red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="number" name="idx" class="form-control input-sm" required="required" ng-model="f.idx" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="idx" class="form-control input-sm" required="required" ng-model="f.idx" min="0" max="500" onkeyup="this.value=this.value.replace(/\D/g,'')">
                                     </div>
                                 </div>
                                 <!--活动描述-->
@@ -312,7 +312,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">红包金额<span class="red">*</span></label>
                                             <div class="col-sm-3">
-                                                <input type="number" name="details[0].minred" class="input-sm" ng-model="act.details[0].minred" ng-change="act.details[0].bigred=act.details[0].minred">元
+                                                <input type="number" name="details[0].minred" class="input-sm" ng-model="act.details[0].minred" ng-change="act.details[0].bigred=act.details[0].minred" min="1" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" step="0.01" onblur="this.value=Number(this.value).toFixed(2)">元
                                                 <input type="hidden" name="details[0].bigred" ng-model="act.details[0].bigred" ng-bind="act.details[0].minred">
                                             </div>
                                         </div>
