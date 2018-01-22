@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'mdSettingCtrl',
         ViewModelName: 'mdSettingModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', 'util', function ($scope, df, u) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'util', 'dayFilter', function ($scope, df, u, dayf) {
             var $model = $scope.$model;
             // 品牌
             var brandArr = $model.$brand.data.data || [];
@@ -47,8 +47,8 @@ define([], function () {
             var s_def = {
                 sns: '',
                 areaCodes: '',
-                stime: '',
-                etime: '',
+                stime: dayf.today('datetime'),
+                etime: dayf.tomorrow('datetime'),
                 memberdayRules: [{
                     ruleType: 1,
                     isuse: 0,
