@@ -13,8 +13,22 @@ define([], function () {
             var $model = $scope.$model;
             // 品牌
             var brandArr = $model.$brand.data.data || [];
-            var proArr = $model.$province.data.data || [];
             var DETAIL = $model.$detail.data.data || {};
+            var regionArr = $model.$area.data.data || [];
+            var s_pnArr = [];
+
+            regionArr.forEach(function (r) {
+                r.label = r.name;
+                r.value = r.code;
+                if (r.childrens && r.childrens.length) {
+                    r.childrens.forEach(function (c) {
+                        c.label = c.name;
+                        c.value = c.code;
+                        delete c.childrens;
+                    });
+                }
+                r.children = r.childrens || [];
+            });
 
             var f_def = {
                 copyOfPageCode: 'huiyuanri',
@@ -137,6 +151,13 @@ define([], function () {
                     'activityRuleHtml'
                 ]);
 
+                // 勾选
+                setTimeout(function () {
+                    DETAIL.activity.brandCode.split(',').forEach(function (id) {
+                        $('#'+id).trigger('click');
+                    });
+                }, 0);
+
                 _.each(s_def.memberdayRules, function (md, idx) {
                     u.uiExtend(md, DETAIL.activity.memberdayRules[idx], [
                         'activityCode',
@@ -176,7 +197,6 @@ define([], function () {
                         'propValue'
                     ]);
                 }
-
                 s_def.sns = DETAIL.activity.sn.split(',');
                 s_def.areaCodes = DETAIL.activity.areaCode.split(',');
                 s_def.stime = df.datetime(DETAIL.activity.stime);
@@ -207,12 +227,10 @@ define([], function () {
             }, {
                 s_brandCode: [],
                 s_bnArr: brandArr,
+                s_brand_valide: false,
                 s_brandChange: brandChange,
                 s_pnArr: [],
-                s_proArr: proArr,
-                s_province: '',
-                s_ctArr: [],
-                s_getCity: getCity,
+                s_rgArr: regionArr,
                 s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
                 s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
                 s_memberdayProps_isuse: !!Number(s_memberdayProps_1.split('@')[0]),
@@ -337,7 +355,9 @@ define([], function () {
                 if (n !== o) {
                     if (!n.length) {
                         $scope.pnArr = [];
+                        $scope.s_brand_valide = true;
                     } else {
+                        $scope.s_brand_valide = false;
                         $model.getProduct({
                             productBrand: n.join(',')
                         }).then(function (res) {
@@ -349,35 +369,12 @@ define([], function () {
                                     value: val.sn
                                 }
                             }));
+                            $("[name='sns']").multiselect('select', $scope.s.sns);
                             $("[name='sns']").multiselect('refresh');
                         });
                     }
                 }
             });
-
-            // 获取市
-            function getCity (code) {
-                if (!!code) {
-                    $model.getCity({
-                        parentCode: code
-                    }).then(function (res) {
-                        $scope.s_ctArr = res.data.data || [];
-                        $scope.$apply();
-                        $("[name='areaCodes']").multiselect('dataprovider', _.map(res.data.data, function(val) {
-                            return {
-                                label: val.name,
-                                value: val.code
-                            }
-                        }));
-                        $("[name='sns']").multiselect('refresh');
-                    });
-                } else {
-                    $scope.ctArr = [];
-                    $scope.$apply();
-                    $("[name='areaCodes']").multiselect('dataprovider', []);
-                    $("[name='areaCodes']").multiselect('refresh');
-                }
-            }
 
             // 初始化多选
             $(document).ready(function () {
@@ -385,9 +382,19 @@ define([], function () {
                     nonSelectedText: '请选择',
                     allSelectedText: '全部',
                     nSelectedText: '已选择',
-                    enableFiltering: true,
                     filterPlaceholder: '查询'
                 });
+                $("#region select").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    enableFiltering: true,
+                    buttonWidth: '200px',
+                    filterPlaceholder: '查询',
+                    enableClickableOptGroups: true,
+                    enableCollapsibleOptGroups: true
+                }).multiselect('dataprovider', regionArr)
+                  .multiselect('select', $scope.s.areaCodes);
 
                 // 年月日时分秒
                 $("#md_second .datetime").datetimepicker({
@@ -422,6 +429,19 @@ define([], function () {
                 $("#md_second .time").datetimepicker({
                     language: "zh-CN",
                     format: "hh:ii",
+                    autoclose: true,
+                    todayBtn: true,
+                    minuteStep: 1,
+                    startView: 1,
+                    maxView: 1,
+                    minView: 0,
+                    startDate: df.date(+new Date)+' 00:00:00',
+                    endDate: df.date(+new Date)+' 23:59:59'
+                });
+                // 时分格式化
+                $("#md_second .time-second").datetimepicker({
+                    language: "zh-CN",
+                    format: "hh:ii:ss",
                     autoclose: true,
                     todayBtn: true,
                     minuteStep: 1,

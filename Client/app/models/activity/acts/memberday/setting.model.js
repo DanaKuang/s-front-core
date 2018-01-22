@@ -12,8 +12,7 @@ define([], function () {
             this.$model = function () {
                 var GET_BRAND_DATA = "/api/tztx/saas/saotx/common/queryBrandWithRight";         // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/saas/saotx/common/queryProduct";              // 获取规格
-                var GET_CITY_DATA = "/api/tztx/saas/saotx/common/queryRegionByParentCode";      // 获取市
-                var GET_PROVINCE_DATA = "/api/tztx/saas/saotx/common/queryRegionByParentCode";  // 获取省
+                var GET_TIER_AREA = '/api/tztx/saas/saotx/common/queryTreeRegion';
                 var UPDATE_DATA = "/api/tztx/saas/saotx/activity/saveOrUpdate";                 // 更新数据
                 var EDIT_URL_DATA = "/api/tztx/saas/saotx/activity/activityDetail";             // 编辑信息
                 var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/attach/commonAliUpload';            // 文件上传
@@ -21,8 +20,8 @@ define([], function () {
 
                 // 获取品牌
                 this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
-                // 获取省
-                this.$province = request.$Search(GET_PROVINCE_DATA, {}, true);
+                // 地区
+                this.$area = request.$Search(GET_TIER_AREA, {}, true);
                 // 详情
                 this.$detail = request.$Search(GET_DETAIL_DATA, {
                     actForm: 'act-12'
@@ -30,10 +29,6 @@ define([], function () {
                 // 根据品牌获取规格
                 this.getProduct = function (params) {
                     return request.$Search(GET_PRODUCT_DATA, params);
-                };
-                // 根据省获取市
-                this.getCity = function (params) {
-                  return request.$Search(GET_CITY_DATA, params);
                 };
                 // 保存更新
                 this.update = function (params) {
