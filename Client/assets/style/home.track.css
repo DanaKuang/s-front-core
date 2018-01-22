@@ -43,6 +43,7 @@
     width: 150px;
     height: 30px;
     padding: 4px 12px;
+
 }
 .ui-form-search select {
     width: 150px !important;
@@ -310,9 +311,6 @@ button.multiselect {
     transform: translateX(-50%);
     left: 50%;
 }
-
-
-
 
 
 

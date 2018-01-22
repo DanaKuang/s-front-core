@@ -12,6 +12,7 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
         var pageUrl = 'https://hmtx.cc/nscan_data.html?sn=';
+        $scope.account = sessionStorage.account;
 
         // 后端数据
         // var brand_back_data = $model.$brand.data || [];
@@ -57,6 +58,7 @@ define([], function () {
 
             // 图片
             $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
+            weiopDetail({"sn":act_sn[1]});
         }
 
         // 初始化select
@@ -73,6 +75,7 @@ define([], function () {
                     var act_sn = opt[0].value || event.target.value || "";
                     act_sn = act_sn.split('_');
                     $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
+                    weiopDetail({"sn":act_sn[1]});
                     $model.getActPage({
                         activityId: act_sn[0]
                     }).then(function (res) {
@@ -175,6 +178,24 @@ define([], function () {
                 $scope.targetData = a_f.pvFilter(res.data) || [];
                 $scope.$apply();
             });
+        }
+
+        // weiop
+        function weiopDetail(params) {
+            $model.getProductBySn(params).then(function(res) {
+                $scope.getProduct = res.data;
+                $scope.$apply();
+            })
+            $model.getActivityBySn(params).then(function(res) {
+                console.log(res);
+                $scope.getActivity = res.data;
+                $scope.$apply();
+            })
+            $model.getADBySn(params).then(function(res) {
+                console.log(res);
+                $scope.getAD = res.data;
+                $scope.$apply();
+            })
         }
     }]
   };
