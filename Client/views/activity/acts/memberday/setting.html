@@ -22,7 +22,7 @@
                                 <div>奖品设置</div>
                             </div>
                             <!--内容-->
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" name="setp_1" novalidate>
                                 <!--活动类型-->
                                 <input type="hidden" name="activityForm" ng-model="f.activityForm">
                                 <!--活动code-->
@@ -34,8 +34,9 @@
                                 <!--活动名称-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动名称<span class="red">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="{{setp_1.activityName.$error.required?'has-error col-sm-9':'col-sm-9'}}">
                                         <input type="text" name="activityName" class="form-control input-sm" required="required" ng-model="f.activityName">
+                                        <span class="help-block" ng-show="setp_1.activityName.$error.required">请输入活动名称</span>
                                     </div>
                                 </div>
                                 <!--规范性文件及说明-->
@@ -50,15 +51,17 @@
                                 <!--排序优先级-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">排序优先级<span class="red">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="{{setp_1.idx.$error.required?'has-error col-sm-9':'col-sm-9'}}">
                                         <input type="number" name="idx" class="form-control input-sm" required="required" ng-model="f.idx" min="0" max="500" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(this.value>500){this.value=500}">
+                                        <span class="help-block" ng-show="setp_1.idx.$error.required">请输入排序优先级</span>
                                     </div>
                                 </div>
                                 <!--活动描述-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动描述<span class="red">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="{{setp_1.activityDec.$error.required?'has-error col-sm-9':'col-sm-9'}}">
                                         <textarea name="activityDec" class="form-control input-sm" required="required" ng-model="f.activityDec"></textarea>
+                                        <span class="help-block" ng-show="setp_1.activityDec.$error.required">请输入活动描述</span>
                                     </div>
                                 </div>
                                 <!--Banner图片-->
@@ -67,7 +70,7 @@
                                     <div class="col-sm-9">
                                         <!--大图-->
                                         <div class="md-banner">
-                                            <img ng-src="{{f.activityEntrance||'/statics/assets/image/img-upload.png'}}">
+                                            <img ng-src="{{f.activityEntrance||'/statics/assets/image/img-upload.png'}}" required="required">
                                             <input type="file" onchange="angular.element(this).scope().f_uploadImg()">
                                             <p>640*320像素,支持png、jpg格式,小于2M</p>
                                         </div>
@@ -76,12 +79,13 @@
                                 <!--活动规则-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动规则<span class="red">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="{{setp_1.activityRuleHtml.$error.required?'has-error col-sm-9':'col-sm-9'}}">
                                         <textarea name="activityRuleHtml" class="form-control" required="required" ng-model="f.activityRuleHtml"></textarea>
+                                        <span class="help-block" ng-show="setp_1.activityRuleHtml.$error.required">请输入活动规则</span>
                                     </div>
                                 </div>
                                 <div class="form-group" style="text-align:center;">
-                                    <button class="btn btn-primary" type="button" ng-click="f_next()">下一步</button>
+                                    <button class="btn btn-primary" type="submit" ng-click="f_next()" ng-disabled="setp_1.activityName.$dirty && setp_1.activityName.$invalid && setp_1.idx.$dirty && setp_1.idx.$invalid && setp_1.activityDec.$dirty && setp_1.activityDec.$invalid && setp_1.activityRuleHtml.$dirty && setp_1.activityRuleHtml.$invalid">下一步</button>
                                 </div>
                                 <!--end-->
                             </form>
