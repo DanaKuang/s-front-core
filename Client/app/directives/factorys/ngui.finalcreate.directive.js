@@ -64,7 +64,7 @@ define([], function () {
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
                 scopeVariable._setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
                 scopeVariable._drawPrizeScope = angular.element('.draw-prize').scope(); // 彩蛋的 中奖设置
-
+                
                 scopeVariable.activityAwards = [];
                 scopeVariable.specialerror = false;
                 scopeVariable.commonerror = false;
@@ -324,7 +324,15 @@ define([], function () {
                         item.children('.wrong-tip').removeClass('hidden');
                     }
                 }
-
+                /* 特殊规则设置参数配置 */
+                var mustwin = [];
+                for (var j = 0; j < $('.special-rules .special-rules-info .special-rules-item').length; j++) {
+                    var ele = $('.special-rules .special-rules-info .special-rules-item')[j];
+                    mustwin.push({
+                        nums: $(ele).find('.input').val(),
+                        prizeName:$(ele).find('.my-select').val()
+                    });
+                }
                 // 最后整合成提交对象
                 var fromSonScope = {
                     copyOfPageCode: angular.element('.all-template-config-wrap').scope().pageCode,
@@ -352,7 +360,8 @@ define([], function () {
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,
-                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
+                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2,
+                    mustwin:$('#checkbox').prop('checked')?mustwin:null
                 }
 
                 finalcheck(fromSonScope)
@@ -421,7 +430,78 @@ define([], function () {
                         }
                     }
                 }
-
+                
+                // 特殊规则校验 (复选框选中才去校验)
+                if ($('#checkbox').prop('checked')) {
+                    var input = $('.special-rules .special-rules-info .special-rules-item .input');
+                    var arr = [];  // 装输入框的值
+                    var repeatArr = []; // 装重复数据的数组 
+                    for (var j = 0; j < input.length; j++) {
+                        arr.push($(input[j]).val())
+                    };
+                    arr.forEach(function (item, i) {
+                        if (arr.indexOf(item) !== arr.lastIndexOf(item) && repeatArr.indexOf(item) === -1 && item != '') {
+                            repeatArr.push(item);
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                            $(input[i + 1]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        if (item == '') {
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以为空');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        if (!/^[+]{0,1}(\d+)$/.test(item) || $(input[i]).val() == 0) {
+                            // 次数为空或者次数不是正整数。
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数只可以为正整数！');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        $(input[i]).on('input', function () {
+                            arr = [];
+                            repeatArr = []; // 装重复数据的数组                                         
+                            for (var j = 0; j < input.length; j++) {
+                                arr.push($(input[j]).val())
+                            };
+                            var that = this;
+                            arr.forEach(function (item) {
+                                if (arr.indexOf(item) !== arr.lastIndexOf(item) && repeatArr.indexOf(item) === -1 && item != '') {
+                                    repeatArr.push(item);
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if (!/^[+]{0,1}(\d+)$/.test($(that).val()) || $(that).val() == 0) {
+                                    // 次数为空或者次数不是正整数。
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数只可以为正整数！');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if ($(that) == '') {
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数不可以为空');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if ($(that).val() != '' && /^[+]{0,1}(\d+)$/.test($(that).val()) && $(that).val() != 0 && !repeatArr.length) {
+                                    scopeVariable.finalerror = false;
+                                    $(that).siblings('.special-wrong').addClass('hidden');
+                                }
+                            })
+                        })
+                    })
+                    var select = $('.my-select');
+                    for (var i = 0; i < select.length; i++) {
+                        if (!$(select[i]).val()) {//证明有select没有选择值是null
+                            scopeVariable.finalerror = true;
+                            $(select[i]).parent().siblings('.special-wrong').removeClass('hidden').find('.wrong-tip').html('奖项不可为空！');
+                        };
+                        $(select[i]).on('change', function () {
+                            scopeVariable.finalerror = false;
+                            $(this).parent().siblings('.special-wrong').addClass('hidden');
+                        })
+                    };
+                }
                  // 提交
                 if (scopeVariable._setPrizeScope.myVar) {
                     if (!scopeVariable.specialerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
