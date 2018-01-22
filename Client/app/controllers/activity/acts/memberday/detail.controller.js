@@ -76,15 +76,15 @@ define([], function () {
                 }, page || {})).then(function (res) {
                     var data = res.data.data || [];
                     $scope.listArr = data.list || [];
-                    $scope.paginationConf = res.data;
+                    // $scope.paginationConf = res.data;
                     $scope.$apply();
                 });
             }
 
             // 翻页
-            $scope.$on('frompagechange', function (scope, event, page) {
-                initSearch(page);
-            });
+            // $scope.$on('frompagechange', function (scope, event, page) {
+            //     initSearch(page);
+            // });
 
             // 导出
             function exportFn () {
