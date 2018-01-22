@@ -360,7 +360,7 @@ define([], function () {
                     } else {
                         $scope.s_brand_valide = false;
                         $model.getProduct({
-                            productBrand: n.join(',')
+                            brandCode: n.join(',')
                         }).then(function (res) {
                             $scope.s_pnArr = res.data.data || [];
                             $scope.$apply();
