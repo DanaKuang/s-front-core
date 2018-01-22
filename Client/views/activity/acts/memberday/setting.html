@@ -128,9 +128,10 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择规格<span class="red">*</span></label>
                                     <div class="col-sm-3 multi">
-                                        <select ng-model="s.sns" name="sns" class="form-control input-sm"  multiple="multiple">
+                                        <select ng-model="s.sns" name="sns" class="form-control input-sm"  multiple="multiple" required="required">
                                             <option ng-value="p.sn" ng-repeat="p in s_pnArr">{{p.name}}</option>
                                         </select>
+                                        <p class="{{setp_2.sns.$error.required?'has-error':''}}"><span class="help-block" ng-show="setp_2.sns.$error.required">请选择规格</span></p>
                                     </div>
                                 </div>
                                 <!--选择地区-->
@@ -140,6 +141,7 @@
                                         <select name="areaCodes" class="form-control input-sm" required="required" ng-model="s.areaCodes" multiple="multiple">
                                             <option ng-value="c.code" ng-repeat="c in s_rgArr">{{c.name}}</option>
                                         </select>
+                                        <p class="{{setp_2.areaCodes.$error.required?'has-error':''}}"><span class="help-block" ng-show="setp_2.areaCodes.$error.required">请选择地区</span></p>
                                     </div>
                                 </div>
                                 <!--活动日期-->
@@ -168,11 +170,11 @@
                                     </select>
                                     <div class="input-sm plr fl tc" ng-if="$index<4">可获得幸运值</div>
                                     <div class="col-sm-1" ng-if="$index<4">
-                                        <input type="number" name="memberdayRules[{{$index}}].luckyNum" ng-model="md.luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="memberdayRules[{{$index}}].luckyNum" ng-model="md.luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm plr fl tc" ng-if="$index<4">可获得荷石币</div>
                                     <div class="col-sm-1" ng-if="$index<4">
-                                        <input type="number" name="memberdayRules[{{$index}}].scoreNum" ng-model="md.scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="memberdayRules[{{$index}}].scoreNum" ng-model="md.scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <select class="form-control input-sm fl plr week" ng-model="md.sweek" name="memberdayRules[{{$index}}].sweek" ng-if="$index<4">
                                         <option value="1">每周一</option>
@@ -184,7 +186,7 @@
                                         <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-1" ng-if="$index<4">
-                                        <input type="text" name="memberdayRules[{{$index}}].stime" ng-model="md.stime" class="form-control input-sm time">
+                                        <input type="text" name="memberdayRules[{{$index}}].stime" ng-model="md.stime" class="form-control input-sm time" readonly="readonly">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15" ng-if="$index<4">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="md.eweek" name="memberdayRules[{{$index}}].eweek" ng-if="$index<4">
@@ -197,7 +199,7 @@
                                         <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-1" ng-if="$index<4">
-                                        <input type="text" ng-model="md.etime" class="form-control input-sm time" name="memberdayRules[{{$index}}].etime">
+                                        <input type="text" ng-model="md.etime" class="form-control input-sm time" name="memberdayRules[{{$index}}].etime" readonly="readonly">
                                     </div>
                                 </div>
                                 <!--兑换规则-->
@@ -209,11 +211,11 @@
                                         </label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="number" name="memberdayRules[4].luckyNum" ng-model="s.memberdayRules[4].luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="memberdayRules[4].luckyNum" ng-model="s.memberdayRules[4].luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">幸运值可兑换</div>
                                     <div class="col-sm-1">
-                                        <input type="number" name="memberdayRules[4].scoreNum" ng-model="s.memberdayRules[4].scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="memberdayRules[4].scoreNum" ng-model="s.memberdayRules[4].scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">荷石币</div>
                                 </div>
@@ -230,7 +232,7 @@
                                         <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-1">
-                                       <input type="text" ng-model="s.memberdayRules[4].stime" class="form-control input-sm time" name="memberdayRules[5].stime">
+                                       <input type="text" ng-model="s.memberdayRules[4].stime" class="form-control input-sm time" name="memberdayRules[5].stime" readonly="readonly">
                                     </div>
                                     <div class="input-sm plr fl tc mr15 w15">至</div>
                                     <select class="form-control input-sm fl plr week" ng-model="s.memberdayRules[4].eweek" name="memberdayRules[4].eweek">
@@ -243,7 +245,7 @@
                                         <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-1">
-                                        <input type="text" ng-model="s.memberdayRules[4].etime" name="memberdayRules[4].etime" class="form-control input-sm time">
+                                        <input type="text" ng-model="s.memberdayRules[4].etime" name="memberdayRules[4].etime" class="form-control input-sm time" readonly="readonly">
                                     </div>
                                 </div>
                                 <!--开奖时间-->
@@ -259,7 +261,7 @@
                                         <option value="7">每周日</option>
                                     </select>
                                     <div class="col-sm-2">
-                                        <input type="text" ng-model="s_memberdayProps_time" class="form-control input-sm time-second">
+                                        <input type="text" ng-model="s_memberdayProps_time" class="form-control input-sm time-second" readonly="readonly">
                                     </div>
                                 </div>
                                 <!--特殊规则-->
@@ -271,13 +273,13 @@
                                         </label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="text" name="s_memberdayProps_wweek" ng-model="s_memberdayProps_wweek" class="form-control input-sm">
+                                        <input type="text" name="s_memberdayProps_wweek" ng-model="s_memberdayProps_wweek" class="form-control input-sm" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">周之内同一用户不能再次中奖</div>
                                 </div>
                                 <!--按钮-->
                                 <div class="form-group tc">
-                                    <button class="btn btn-primary" type="button" ng-click="s_next()">下一步</button>
+                                    <button class="btn btn-primary" type="button" ng-click="s_next()" ng-disabled="setp_2.sns.$error.required||setp_2.areaCodes.$error.required">下一步</button>
                                     <button class="btn btn-default" type="button" ng-click="s_back()">返回</button>
                                 </div>
                                 <!--end-->
