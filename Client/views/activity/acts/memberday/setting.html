@@ -274,7 +274,7 @@
                                         </label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="text" name="s_memberdayProps_wweek" ng-model="s_memberdayProps_wweek" class="form-control input-sm" onblur="if(!this.value){this.value=0}">
+                                        <input type="text" name="s_memberdayProps_wweek" ng-model="s_memberdayProps_wweek" class="form-control input-sm" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">周之内同一用户不能再次中奖</div>
                                 </div>
@@ -315,7 +315,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">红包金额<span class="red">*</span></label>
                                             <div class="col-sm-3">
-                                                <input type="number" name="details[0].minred" class="input-sm" ng-model="act.details[0].minred" ng-change="act.details[0].bigred=act.details[0].minred" min="1" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" step="0.01" onblur="this.value=Number(this.value).toFixed(2)">元
+                                                <input type="number" name="details[0].minred" class="input-sm" ng-model="act.details[0].minred" ng-change="act.details[0].bigred=act.details[0].minred" min="1" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" step="0.01" onblur="if(this.value<1){this.value=1.00}this.value=Number(this.value).toFixed(2)">元
                                                 <input type="hidden" name="details[0].bigred" ng-model="act.details[0].bigred" ng-bind="act.details[0].minred">
                                             </div>
                                         </div>
