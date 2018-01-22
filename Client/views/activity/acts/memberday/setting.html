@@ -34,18 +34,19 @@
                                 <!--活动名称-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动名称<span class="red">*</span></label>
-                                    <div class="{{setp_1.activityName.$error.required?'has-error col-sm-9':'col-sm-9'}}">
-                                        <input type="text" name="activityName" class="form-control input-sm" required="required" ng-model="f.activityName">
-                                        <span class="help-block" ng-show="setp_1.activityName.$error.required">请输入活动名称</span>
+                                    <div class="{{setp_1.activityName.$error.required||setp_1.activityName.$invalid?'has-error col-sm-9':'col-sm-9'}}">
+                                        <input type="text" name="activityName" class="form-control input-sm" required="required" ng-model="f.activityName" minlength="5" maxlength="30">
+                                        <span class="help-block" ng-show="setp_1.activityName.$error.required||setp_1.activityName.$invalid">请输入活动名称，5~30字</span>
                                     </div>
                                 </div>
                                 <!--规范性文件及说明-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">规范性文件及说明<span class="red">*</span></label>
-                                    <div class="col-sm-9 file-upload">
+                                    <div class="col-sm-9 file-upload {{setp_1.attach.$error.required?'has-error':''}}">
                                         <input type="file" name="attach" class="form-control input-sm" onchange="angular.element(this).scope().f_uploadFile()">
                                         <input type="text" name="attach" class="form-control input-sm" required="required" ng-model="f.attach" disabled="disabled">
                                         <div class="input-sm">请选择上传文件</div>
+                                        <div><span class="help-block" ng-show="setp_1.attach.$error.required">请上传规范性文件及说明文件</span></div>
                                     </div>
                                 </div>
                                 <!--排序优先级-->
@@ -59,9 +60,9 @@
                                 <!--活动描述-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动描述<span class="red">*</span></label>
-                                    <div class="{{setp_1.activityDec.$error.required?'has-error col-sm-9':'col-sm-9'}}">
-                                        <textarea name="activityDec" class="form-control input-sm" required="required" ng-model="f.activityDec"></textarea>
-                                        <span class="help-block" ng-show="setp_1.activityDec.$error.required">请输入活动描述</span>
+                                    <div class="{{setp_1.activityDec.$error.required||setp_1.activityDec.$invalid?'has-error col-sm-9':'col-sm-9'}}">
+                                        <textarea name="activityDec" class="form-control input-sm" required="required" ng-model="f.activityDec" maxlength="50" minlength="1"></textarea>
+                                        <span class="help-block" ng-show="setp_1.activityDec.$invalid||setp_1.activityDec.$error.required">请输入活动描述，1～50个字</span>
                                     </div>
                                 </div>
                                 <!--Banner图片-->
@@ -79,13 +80,13 @@
                                 <!--活动规则-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">活动规则<span class="red">*</span></label>
-                                    <div class="{{setp_1.activityRuleHtml.$error.required?'has-error col-sm-9':'col-sm-9'}}">
-                                        <textarea name="activityRuleHtml" class="form-control" required="required" ng-model="f.activityRuleHtml"></textarea>
-                                        <span class="help-block" ng-show="setp_1.activityRuleHtml.$error.required">请输入活动规则</span>
+                                    <div class="{{setp_1.activityRuleHtml.$error.required||setp_1.activityRuleHtml.$invalid?'has-error col-sm-9':'col-sm-9'}}">
+                                        <textarea name="activityRuleHtml" class="form-control" required="required" ng-model="f.activityRuleHtml" maxlength="300" minlength="5"></textarea>
+                                        <span class="help-block" ng-show="setp_1.activityRuleHtml.$invalid||setp_1.activityRuleHtml.$error.required">请输入活动规则，5～300个字</span>
                                     </div>
                                 </div>
                                 <div class="form-group" style="text-align:center;">
-                                    <button class="btn btn-primary" type="submit" ng-click="f_next()" ng-disabled="setp_1.activityName.$error.required || setp_1.idx.$error.required || setp_1.activityDec.$error.required || setp_1.activityRuleHtml.$error.required">下一步</button>
+                                    <button class="btn btn-primary" type="submit" ng-click="f_next()" ng-disabled="setp_1.activityName.$invalid || setp_1.activityName.$error.required || setp_1.attach.$error.required || setp_1.idx.$error.required || setp_1.activityDec.$invalid || setp_1.activityDec.$error.required || setp_1.activityRuleHtml.$invalid || setp_1.activityRuleHtml.$error.required">下一步</button>
                                 </div>
                                 <!--end-->
                             </form>

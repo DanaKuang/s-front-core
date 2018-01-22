@@ -250,6 +250,7 @@ define([], function () {
                 $model.upload(fd).then(function (res) {
                     if (res.ret === '200000') {
                         $scope.f.attach = res.data.accessUrl;
+                        $scope.f.attachCode = res.data.attachCode;
                         $scope.$apply();
                     } else {
                         alert('文件上传失败！');
