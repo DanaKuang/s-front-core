@@ -13,13 +13,13 @@
 	overflow: hidden;
 }
 .sample-list {
-	// display: flex;
+	/* // display: flex; */
 	align-items: center;
-	// min-height: 200px;
+	/* // min-height: 200px; */
 }
 .create-activity-modal .flex-item {
 	position: relative;
-	// width: 25%;
+	/* // width: 25%; */
     width: 80px;
 	align-self: center;
 	height: 90px;
@@ -35,11 +35,11 @@
     transition: transform .3s;
 }
 .create-activity-modal .flex-item img {
-	// margin-left: 50%;
+	/* // margin-left: 50%;
 	// -webkit-transform: translateX(-50%) translateY(-50%);
 	// -moz-transform: translateX(-50%) translateY(-50%);
 	// -ms-transform: translateX(-50%) translateY(-50%);
-	// transform: translateX(-50%) translateY(-50%);
+	// transform: translateX(-50%) translateY(-50%); */
 }
 .create-activity-modal .flex-item p {
 	position: absolute;
@@ -110,6 +110,50 @@
 .thanks-draw h6 {
 	margin-top: 40px;
 }
+
+/* 特殊规则设置 start*/
+.special-rules{
+	margin-bottom: 10px;
+}
+.special-rules-info{
+	margin-left: 50px;
+	border:1px solid #ccc;
+	padding-bottom: 35px;
+	margin-bottom: 30px;
+	margin-top: 15px;
+}
+.special-rules-item{
+	margin-left: 25px;
+	margin-top: 35px;
+	height: 31px;
+}
+.fl{
+	float: left;
+}
+.special-rules-info .special-select{
+	position: relative;
+	width: 34%;
+	display: inline-block;
+}
+.special-rules-info .special-icon{
+	font-size: 18px;
+	vertical-align: middle;
+	margin-left: 4px;
+}
+.special-rules-info .special-rules-item .input{
+	height: 29px;
+	border-radius: 3px;
+}
+.special-rules-info .special-wrong{
+transform: translateY(-100%) translateX(100%)	;
+}
+.special-rules-info .special-tip{
+	display: inline-block;
+}
+/* 特殊规则设置 end */
+
+
+
 .configuration-item {
 	position: relative;
 	margin-bottom: 15px;
