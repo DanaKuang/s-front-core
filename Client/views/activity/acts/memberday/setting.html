@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">排序优先级<span class="red">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="number" name="idx" class="form-control input-sm" required="required" ng-model="f.idx" min="0" max="500" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="number" name="idx" class="form-control input-sm" required="required" ng-model="f.idx" min="0" max="500" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(this.value>500){this.value=500}">
                                     </div>
                                 </div>
                                 <!--活动描述-->
