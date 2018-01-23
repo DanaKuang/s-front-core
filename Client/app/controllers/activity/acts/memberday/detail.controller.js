@@ -95,8 +95,8 @@ define([], function () {
                     areaCodes: $scope.region || "",
                     status: $scope.status,
                     idx: $scope.idx,
-                    stime: weekTime[0]+' 00:00:00',
-                    etime: weekTime[1]+' 00:00:00'
+                    stime: weekTime[0],
+                    etime: weekTime[1]
                 };
                 var url = "/api/tztx/saas/saotx/activity/exportMemberAwards";
                 var xhr = new XMLHttpRequest();
