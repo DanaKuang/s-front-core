@@ -83,14 +83,14 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in listArr">
-                                            <td class="underline">{{item.id}}</td>
+                                            <td>{{item.id}}</td>
                                             <td>{{item.nickname}}</td>
                                             <td>{{item.activityName}}</td>
                                             <td>{{item.prizeName}}</td>
                                             <td>{{item.minred}}元</td>
                                             <td>{{item.salerAddress}}</td>
                                             <td>{{item.ctime}}</td>
-                                            <td>{{item.salerProvince}}</td>
+                                            <td>{{item.salerProvince==item.salerCity?item.salerProvince:item.salerProvince+item.salerCity}}</td>
                                             <td>{{item.statusName}}</td>
                                         </tr>
                                     </tbody>
