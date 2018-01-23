@@ -354,9 +354,13 @@ define([], function () {
             // 规格动态选择
             $scope.$watch('s_brandCode', function (n, o , scope) {
                 if (n !== o) {
+                    var $sns = $("[name='sns']");
                     if (!n.length) {
                         $scope.pnArr = [];
                         $scope.s_brand_valide = true;
+                        $sns.multiselect('dataprovider', []);
+                        $scope.s.sns = [];
+                        $sns.multiselect('refresh');
                     } else {
                         $scope.s_brand_valide = false;
                         $model.getProduct({
@@ -364,14 +368,14 @@ define([], function () {
                         }).then(function (res) {
                             $scope.s_pnArr = res.data.data || [];
                             $scope.$apply();
-                            $("[name='sns']").multiselect('dataprovider', _.map(res.data.data, function(val) {
+                            $sns.multiselect('dataprovider', _.map(res.data.data, function(val) {
                                 return {
                                     label: val.name,
                                     value: val.sn
                                 }
                             }));
-                            $("[name='sns']").multiselect('select', $scope.s.sns);
-                            $("[name='sns']").multiselect('refresh');
+                            $sns.multiselect('select', $scope.s.sns);
+                            $sns.multiselect('refresh');
                         });
                     }
                 }
