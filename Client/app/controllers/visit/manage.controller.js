@@ -502,8 +502,8 @@ define([], function () {
               sellerId: $scope.info.sellerId,
               unit: $scope.cashback.unit || '', // 条/盒
               isFx: $scope.cashback.isFx || '', // 是否返现
-              startTime: (new Date($scope.detial.startTime)).getTime() || '',
-              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
               pageNo: page || 1,
               pageSize: 10
             }
@@ -562,8 +562,8 @@ define([], function () {
             var data = {
               sellerId: $scope.info.sellerId,
               awardType: $scope.storage.awardType || '', // 奖品类型
-              startTime: (new Date($scope.detial.startTime)).getTime() || '',
-              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
               pageNo: page || 1,
               pageSize: 10
             }
