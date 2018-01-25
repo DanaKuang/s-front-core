@@ -363,6 +363,10 @@ define([], function () {
 
           // 详情 - 导航点击
           $scope.detialNav = function (type) {
+            // 点击导航清空日历
+            $scope.detial.startTime = ''
+            $scope.detial.endTime = ''
+            
             // 判断当前nav页
             if(type == 'info') { // 基本信息
               $scope.detial.detialPage = 'info';
@@ -386,10 +390,6 @@ define([], function () {
               $scope.detial.detialPage = 'storage';
               getDetialStorageList(1, true);
             }
-
-            // 点击导航清空日历
-            $scope.detial.startTime = ''
-            $scope.detial.endTime = ''
           }
 
           // 搜索
