@@ -363,6 +363,10 @@ define([], function () {
 
           // 详情 - 导航点击
           $scope.detialNav = function (type) {
+            // 点击导航清空日历
+            $scope.detial.startTime = ''
+            $scope.detial.endTime = ''
+            
             // 判断当前nav页
             if(type == 'info') { // 基本信息
               $scope.detial.detialPage = 'info';
@@ -386,10 +390,6 @@ define([], function () {
               $scope.detial.detialPage = 'storage';
               getDetialStorageList(1, true);
             }
-
-            // 点击导航清空日历
-            $scope.detial.startTime = ''
-            $scope.detial.endTime = ''
           }
 
           // 搜索
@@ -502,8 +502,8 @@ define([], function () {
               sellerId: $scope.info.sellerId,
               unit: $scope.cashback.unit || '', // 条/盒
               isFx: $scope.cashback.isFx || '', // 是否返现
-              startTime: (new Date($scope.detial.startTime)).getTime() || '',
-              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
               pageNo: page || 1,
               pageSize: 10
             }
@@ -562,8 +562,8 @@ define([], function () {
             var data = {
               sellerId: $scope.info.sellerId,
               awardType: $scope.storage.awardType || '', // 奖品类型
-              startTime: (new Date($scope.detial.startTime)).getTime() || '',
-              endTime: (new Date($scope.detial.endTime)).getTime() || '',
+              startTime: $scope.detial.startTime || '',
+              endTime: $scope.detial.endTime || '',
               pageNo: page || 1,
               pageSize: 10
             }
