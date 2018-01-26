@@ -54,6 +54,17 @@
                                             <label><input ng-model="vm.sign" ng-value="0" name="sign" type="radio" />否</label>
                                         </div>
                                     </li>
+                                    <li class="form-group">
+                                        <h3>提现申请阀值设置：</h3>
+                                        <lable class="control-label title">提现需申请阀值金额：</lable>
+                                        <div class="col-sm-8">
+                                            <label><input type="text" name="amountLimit" ng-model="vm.amountLimit" class="form-control" ng-pattern="/^[1-9]\d*$/" required/></label>
+                                            <!--验证-->
+                                            <div ng-show="form.$submitted || form.amountLimit.$touched" style="padding-top:8px;">
+                                                <div ng-show="form.timeText.$error.required || form.amountLimit.$invalid" class="wrong-tip">请输入正确格式的阀值金额</div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

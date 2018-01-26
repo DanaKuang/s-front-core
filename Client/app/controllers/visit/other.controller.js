@@ -26,6 +26,7 @@ define([], function () {
               qr: res.data.data.SELLER_QRPRINT_CHARGE_ISSET || 1,
               qrText: res.data.data.SELLER_QRPRINT_CHARGE_STANDARD || '',
               sign: res.data.data.SELLER_QRPRINT_SHOW_ISSET || 1,
+              amountLimit: res.data.data.SELLER_TX_AMOUNT_AUTH || ''
             }
           })
 
@@ -37,7 +38,8 @@ define([], function () {
                   SELLER_CONSUMER_THRESHOLD : $scope.vm.timeText || '', // 有效返利时间
                   SELLER_QRPRINT_CHARGE_ISSET: $scope.vm.qr, // 打印二维码时是否收费
                   SELLER_QRPRINT_CHARGE_STANDARD: $scope.vm.qrText || '',
-                  SELLER_QRPRINT_SHOW_ISSET: $scope.vm.sign // 是否展示“领取标牌”
+                  SELLER_QRPRINT_SHOW_ISSET: $scope.vm.sign, // 是否展示“领取标牌”
+                  SELLER_TX_AMOUNT_AUTH: $scope.vm.amountLimit // 提现阀值
                 }
               }
 
