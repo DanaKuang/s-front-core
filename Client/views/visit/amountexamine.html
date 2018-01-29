@@ -22,7 +22,7 @@
 					<div class="panel-body">
 						<form name="form">
 							<div class="form-horizontal">
-								<div class="form-group col-sm-3">
+								<div class="form-group col-sm-5">
 									<label class="control-label col-sm-4">订单状态</label>
 									<div class="col-sm-4">
 										<select class="form-controlmdg input-sm select" ng-model="selectStatus">
@@ -33,7 +33,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="form-group col-sm-7">
+								<div class="form-group col-sm-5">
 									<label class="control-label col-sm-2">关键词</label>
 									<div class="col-sm-8">
 										<select class="input-sm col-sm-4" id="keyCode" ng-model="keyType">
@@ -44,7 +44,7 @@
 										<input type="text" id="newCode" class="input-sm col-sm-6" placeholder="请输入关键字" ng-model="keyWords">
 									</div>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-5">
 									<label class="control-label col-sm-3">位置</label>
 									<div class="col-sm-8" style="margin-left:-5px;">
 										<select id="provinceId" ng-model="provinceCode" class="input-sm col-sm-4">
@@ -64,7 +64,7 @@
 								</div>
 							</div>
 							<div class="form-horizontal">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-5">
 									<label class="control-label col-sm-2">时间段</label>
 									<div class="col-sm-4" style="margin-left:-13px;">
 										<input id="durationStart" size="16" style="width:100%;" type="text" placeholder="年-月-日(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="startTime">
@@ -107,7 +107,7 @@
 										<span ng-if="item.status == 1" ng-click="auditPass(item.id)">审核通过</span>&nbsp;&nbsp;
 										<span ng-if="item.status != 1" style="color:#666;">审核不通过</span>
 										<span ng-if="item.status == 1" ng-click="auditNoPass(item.id)">审核不通过</span><br/>
-										<span ng-click='showDealerDetail(item.salerId)'>查看详情</span>
+										<span ng-click='showDealerDetail(item.sellerId)'>查看详情</span>
 									</td>
 									<td>{{item.sellerInfo.shopName}}</td>
 									<td>{{item.sellerInfo.ownerName}}</td>

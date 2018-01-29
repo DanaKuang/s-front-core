@@ -191,10 +191,10 @@ define([], function() {
             }
 
             //显示详情
-            $scope.showDealerDetail = function(salerId){
-                sessionStorage.setItem('salerId',salerId);
+            $scope.showDealerDetail = function(retailId){
+                sessionStorage.setItem('retailId',retailId);
                 // window.location.href = '/#/view/dealer/manage';
-                $location.path('view/dealer/manage');
+                $location.path('view/visit/manage');
             }
 
             //审核通过
