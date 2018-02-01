@@ -105,8 +105,8 @@ define([], function() {
                             // areaName = $('#areaId').find("option:selected").text();
                             curPageData.addrArea = $('#areaId').val();//区县id
                         }
-                        var durationStart = $('#durationStart').val();
-                        var durationEnd = $('#durationEnd').val();
+                        var durationStart = $('#durationStart').val()+ ' 00:00:00';
+                        var durationEnd = $('#durationEnd').val()+ ' 23:59:59';
 
                         curPageData.status = statusChange;//提现状态                   
                         curPageData.stime = durationStart;//开始时间
@@ -156,10 +156,10 @@ define([], function() {
                     pageSize: $scope.pageSize
                 }
                 if($scope.startTime){
-                    searchData.stime = durationStart; //开始时间
+                    searchData.stime = durationStart + ' 00:00:00'; //开始时间
                 }
                 if($scope.endTime){
-                    searchData.etime = durationEnd; //结束时间
+                    searchData.etime = durationEnd + ' 23:59:59'; //结束时间
                 }
                 if($scope.provinceCode != '' && $scope.provinceCode != undefined){
                     searchData.addrProvince = $('#provinceId').val();//省份id
