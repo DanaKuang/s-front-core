@@ -24,8 +24,8 @@ define([], function() {
 			//页面默认加载配置
 			$scope.obj = {
 				"dt": stattime,
-				"productBrand": "黄金叶",
-				"productSn": "6901028165242",
+				"productBrand": "",
+				"productSn": "",
 				"provinceName": "",
 				"cityName": ""
 			};
@@ -60,7 +60,6 @@ define([], function() {
 //						gloabl.getTitleHtml();
 						gloabl.getBrand();
 						gloabl.getProviceName();
-						gloabl.winUser($scope.obj);
 						break;
 					case 2:
 						$scope.saoobj.dt = stattime;
@@ -103,6 +102,14 @@ define([], function() {
 						}).then(function(res) {
 							$scope.speciftList = res.data || [];
 							$scope.$apply();
+							$scope.obj = {
+								"dt": stattime,
+								"productBrand": curBrandName,
+								"productSn": $scope.speciftList[0].sn,
+								"provinceName": "",
+								"cityName": ""
+							};
+							gloabl.winUser($scope.obj);
 							//							if($scope.speciftList.length > 0) {
 							curSpeciftStr = $scope.speciftList[0].name;
 							//							}
@@ -490,7 +497,8 @@ define([], function() {
 						"productSn": $scope.summar.productSn,
 
 					}
-					var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					// var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					var url = '/api/tztx/dataportal/henanreport/importRedPacketReportData';
 					// var statTime = $scope.summar.statTime;
 					// window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
 				} else if(a === 4) {
