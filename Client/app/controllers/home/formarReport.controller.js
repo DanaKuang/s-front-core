@@ -497,7 +497,8 @@ define([], function() {
 						"productSn": $scope.summar.productSn,
 
 					}
-					var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					// var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					var url = '/api/tztx/dataportal/henanreport/importRedPacketReportData';
 					// var statTime = $scope.summar.statTime;
 					// window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
 				} else if(a === 4) {
