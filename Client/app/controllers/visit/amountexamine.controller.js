@@ -209,7 +209,9 @@ define([], function() {
                 sessionStorage.setItem('retailId',retailId);
                 // window.location.href = '/#/view/dealer/manage';
                 // $location.path('view/visit/manage');
+                $("[data-target='selleramountexamine']").parent().removeClass('active');
                 $("[data-target='sellermanage']").trigger('click');
+                $("[data-target='sellermanage']").parent().addClass('active');
             }
 
             //审核通过
