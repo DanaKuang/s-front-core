@@ -25,8 +25,8 @@ define([], function() {
             };
             
             //设置input的默认时间
-            var stattime = dayFilter.beforenday('date', 10);
-            var endtime = dayFilter.today('date');
+            // var stattime = dayFilter.beforenday('date', 10);
+            // var endtime = dayFilter.today('date');
 
             function strToTimestamp(s) {
                 s = s.replace(/-/g,"/");
@@ -34,25 +34,39 @@ define([], function() {
                 return date.valueOf();
             }
             
-            $("#durationStart").val(stattime);
-            $("#durationEnd").val(endtime); 
+            // $("#durationStart").val(stattime);
+            // $("#durationEnd").val(endtime); 
             $("#durationStart").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
+                format: 'yyyy-mm-dd hh:ii:00',
+                // minView:'month',
                 language: 'zh-CN',
-                autoclose:true
-            }).on("click",function(){
-                $("#durationStart").datetimepicker("setEndDate",$("#durationEnd").val());
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1
+            }).on("change",function(e){
+                var appStartTime = e.target.value;
+                var appEndTime = $("#durationEnd").val() || '';
+                if (appEndTime < appStartTime) {
+                    $("#durationEnd").val('');
+                }
             });
             $("#durationEnd").datetimepicker({
-                format: 'yyyy-mm-dd',
-                minView:'month',
+                format: 'yyyy-mm-dd hh:ii:00',
+                // minView:'month',
                 language: 'zh-CN',
-                autoclose:true,
-                endDate:new Date()
-            }).on("click",function(){
-                $("#durationEnd").datetimepicker("setStartDate",$("#durationStart").val());
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1
+                // endDate:new Date()
+            }).on("change",function(e){
+                var appEndTime = e.target.value;
+                console.log(appEndTime);
+                var appStartTime = $("#durationStart").val() || '';
+                if (appEndTime < appStartTime) {
+                    $("#durationStart").val('');
+                }
             });
+
 
             // 省市区
             $model.getProvinceList().then(function(res){
@@ -105,8 +119,8 @@ define([], function() {
                             // areaName = $('#areaId').find("option:selected").text();
                             curPageData.addrArea = $('#areaId').val();//区县id
                         }
-                        var durationStart = $('#durationStart').val()+ ' 00:00:00';
-                        var durationEnd = $('#durationEnd').val()+ ' 23:59:59';
+                        var durationStart = $('#durationStart').val()+ ':00';
+                        var durationEnd = $('#durationEnd').val()+ ':00';
 
                         curPageData.status = statusChange;//提现状态                   
                         curPageData.stime = durationStart;//开始时间
@@ -156,10 +170,10 @@ define([], function() {
                     pageSize: $scope.pageSize
                 }
                 if($scope.startTime){
-                    searchData.stime = durationStart + ' 00:00:00'; //开始时间
+                    searchData.stime = durationStart + ':00'; //开始时间
                 }
                 if($scope.endTime){
-                    searchData.etime = durationEnd + ' 23:59:59'; //结束时间
+                    searchData.etime = durationEnd + ':00'; //结束时间
                 }
                 if($scope.provinceCode != '' && $scope.provinceCode != undefined){
                     searchData.addrProvince = $('#provinceId').val();//省份id
