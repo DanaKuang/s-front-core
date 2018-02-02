@@ -1,0 +1,187 @@
+<!--
+/**
+ * Author: zhaobaoli
+ * Create Date; 2018-1-25
+ * Description: 提现审核
+ */
+-->
+
+<link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
+<link rel="stylesheet" type="text/css" href="statics/assets/style/dealerordermanage.css">
+<link rel="stylesheet" href="statics/assets/style/gift.css">
+<div ng-controller="amountexmineCtrl">
+	<div class="animated fadeInRightBig">
+		<div class="container-fluid">
+			<div class="col-md-12" style="padding:0;">
+				<!--title-->
+				<div class="ui-panel-title">
+					<span>提现审核</span>
+				</div>
+				<!--搜索区-->
+				<div class="panel rate">
+					<div class="panel-body">
+						<form name="form">
+							<div class="form-horizontal">
+								<div class="form-group col-sm-5">
+									<label class="control-label col-sm-4">订单状态</label>
+									<div class="col-sm-4">
+										<select class="form-controlmdg input-sm select" ng-model="selectStatus">
+											<option value="">全部</option>
+											<option value="1">未审核</option>
+											<option value="2">已到账</option>
+											<option value="3">申请失败</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group col-sm-5">
+									<label class="control-label col-sm-2">关键词</label>
+									<div class="col-sm-8">
+										<select class="input-sm col-sm-4" id="keyCode" ng-model="keyType">
+											<option value="2">联系人电话</option>
+											<option value="4">门店名称</option>
+											<option value="1">联系人姓名</option>
+										</select>
+										<input type="text" id="newCode" class="input-sm col-sm-6" placeholder="请输入关键字" ng-model="keyWords">
+									</div>
+								</div>
+								<div class="form-group col-sm-5">
+									<label class="control-label col-sm-3">位置</label>
+									<div class="col-sm-8" style="margin-left:-5px;">
+										<select id="provinceId" ng-model="provinceCode" class="input-sm col-sm-4">
+											<option value="">请选择</option>
+											<option ng-repeat="p in province" value="{{p.code}}">{{p.name}}</option>
+										</select>
+										<select id="cityId" ng-model="cityCode"  class="input-sm col-sm-4" >
+											<option value="">请选择</option>
+											<option ng-repeat="c in city" value="{{c.code}}">{{c.name}}</option>
+										</select>
+
+										<select id="areaId" ng-model="areaCode"  class="input-sm col-sm-4" >
+											<option value="">请选择</option>
+											<option ng-repeat="a in area" value="{{a.code}}">{{a.name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-horizontal">
+								<div class="form-group col-sm-5">
+									<label class="control-label col-sm-2">时间段</label>
+									<div class="col-sm-4" style="margin-left:-13px;">
+										<input id="durationStart" size="16" style="width:100%;" type="text" placeholder="开始时间" readonly class="form-control input-sm form_datetime" ng-model="startTime">
+									</div>
+									<div class="control-label col-sm-1" style="width:20px;">至</div>
+									<div class="col-sm-4">
+										<input id="durationEnd" size="16" style="width:100%;" type="text" readonly placeholder="结束时间" class="form-control input-sm form_datetime" ng-model="endTime">
+									</div>
+								</div>
+							</div>
+							<div class="form-inline col-sm-12">
+								<button class="btn btn-primary search" style="margin-right:30px;" ng-click="search()">查询</button>
+								<button class="btn btn-primary reset" ng-click="reset()">重置</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="panel rate">
+					<div class="panel-body">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr class="table-head">
+									<th>序号</th>
+									<th>操作</th>
+									<th>门店名称</th>
+									<th>联系人姓名</th>
+									<th>联系人电话</th>
+									<th>账户余额</th>
+									<th>提现金额</th>
+									<th>申请时间</th>
+									<th>到账时间</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in drawsList" ng-if="drawsList.length > 0">
+									<td>{{(pageNo-1)*pageSize+($index+1)}}</td>
+									<td class="seeInfo">
+										<span ng-if="item.status != 1" style="color:#666;">审核通过</span>
+										<span ng-if="item.status == 1" ng-click="auditPass(item.id)">审核通过</span>&nbsp;&nbsp;
+										<span ng-if="item.status != 1" style="color:#666;">审核不通过</span>
+										<span ng-if="item.status == 1" ng-click="auditNoPass(item.id)">审核不通过</span><br/>
+										<span ng-click='showDealerDetail(item.sellerId)'>查看详情</span>
+									</td>
+									<td>{{item.sellerInfo.shopName}}</td>
+									<td>{{item.sellerInfo.ownerName}}</td>
+									<td>{{item.sellerInfo.phoneNo}}</td>
+									<td>￥{{item.balance}}</td>
+									<td style="color:red;">￥{{item.txAmount}}</td>
+                                    <td>{{item.txTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td ng-if="item.optFinishTime != null && item.optFinishTime != '' && item.isFinish == 1">{{item.optFinishTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+									<td ng-if="item.optFinishTime == null || item.optFinishTime == '' || item.isFinish != 1">-</td>
+                                    <td ng-if="item.status == 1">未审核</td>
+                                    <td ng-if="item.status == 2">已到账</td>
+                                    <td ng-if="item.status == 3">申请失败</td>
+								</tr>
+								<tr ng-if="drawsList.length == 0">
+									<td colspan="10">未搜索到符合条件的相关信息</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="footer_sec clearfix" ng-if="drawsList.length > 0">
+                            <div class="total_info lf">
+                                总共<span>{{totalCount}}</span>条记录，当前页共
+                                <span>{{drawsList.length}}</span>
+                                条记录
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--审核通过弹框-->
+    <div class="modal fade audit_pass_box" tabindex="-1" role="dialog" aria-labelledby="audit_pass_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="audit_pass_btn">审核通过</div>
+                    </div>
+                    <div class="box_cont">您确定为此用户转账？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmPass()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--审核不通过弹框-->
+    <div class="modal fade audit_no_pass_box" tabindex="-1" role="dialog" aria-labelledby="audit_no_pass_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" ng-click="cancelBox()" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="audit_no_pass_btn">请输入不通过审核理由</div>
+                    </div>
+                    <div class="clearfix">
+						<textarea name="" id="aduitNoPass" placeholder="最多50字" maxlength="50" ng-model="aduitNoPassPerson"></textarea>
+					</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmNoPass()">确定</div>
+                        <div class="box_btn_cancel rf" ng-click="cancelBox()">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="statics/assets/libs/jquery.page.js"></script>
+</div>

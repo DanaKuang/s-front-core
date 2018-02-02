@@ -214,6 +214,30 @@ define([], function () {
           }
           // *** 其他系统配置 end
 
+          //*** 提现审核 start
+          var AMOUNT_EXAMINE_LINT = '/api/tztx/seller-manager/seller/txList'; //获取提现审核列表
+          $model.amountExamineList = function (data) {
+            return request.$Search(AMOUNT_EXAMINE_LINT, data, false)
+          }
+          var PROVINCE_LIST = '/api/tztx/dataportal/fxback/getProvince';//省份
+          $model.getProvinceList = function () {
+            return request.$Search(PROVINCE_LIST, {}, true)
+          }
+          var CITY_LIST = '/api/tztx/dataportal/fxback/getCity';//地市
+          $model.getCityList = function (data) {
+            return request.$Search(CITY_LIST, data, true)
+          }
+          var AREA_LIST= '/api/tztx/dataportal/fxback/getCountry';//区县
+          $model.getAreaList = function (data) {
+            return request.$Search(AREA_LIST, data, true)
+          }
+          var TX_STATUS = '/api/tztx/seller-manager/seller/txAuth'; //修改提现审核状态
+          $model.setTxStatus = function (data) {
+            return request.$Search(TX_STATUS, data, false)
+          }
+
+          //*** 提现审核 end
+
 
         }]
     };

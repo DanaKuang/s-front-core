@@ -334,6 +334,13 @@ visitManage:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/other.html'
+  - httpmethod: 'get'                       #提现审核
+    routepath: '/view/visit/amountexamine'
+    description: 'amountexamine'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/amountexamine.html'
 system:
   - httpmethod: 'get'                       # 修改密码
     routepath: '/view/system/password'

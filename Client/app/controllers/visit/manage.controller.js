@@ -69,6 +69,12 @@ define([], function () {
             $scope.fromPage = 'storage';
           }
 
+          // 判断是否为 零售户提现管理 跳转过来的
+          if(sessionStorage.retailId) {
+            getDetialInfoList(sessionStorage.retailId);
+            sessionStorage.removeItem('retailId'); // 进入详情页后，移除retailId，防止刷新再进入
+          }
+
           // 获取table列表
           function getList(page, ispage) {
             var data = {
