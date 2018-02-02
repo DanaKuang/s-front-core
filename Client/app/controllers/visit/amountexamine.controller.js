@@ -208,7 +208,8 @@ define([], function() {
             $scope.showDealerDetail = function(retailId){
                 sessionStorage.setItem('retailId',retailId);
                 // window.location.href = '/#/view/dealer/manage';
-                $location.path('view/visit/manage');
+                // $location.path('view/visit/manage');
+                $("[data-target='sellermanage']").trigger('click');
             }
 
             //审核通过
