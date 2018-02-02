@@ -123,9 +123,9 @@ define([], function() {
                         if(durationStart){
                             curPageData.stime = durationStart + ':00';//开始时间
                         }
-                        var durationEnd = $('#durationEnd').val() + ':00';
+                        var durationEnd = $('#durationEnd').val();
                         if(durationEnd){
-                            curPageData.etime =  durationEnd;//结束时间
+                            curPageData.etime =  durationEnd + ':00';//结束时间
                         }
                         curPageData.status = statusChange;//提现状态                   
                         if($scope.keyType != '' && $scope.keyType != null){
