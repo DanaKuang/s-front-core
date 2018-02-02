@@ -119,12 +119,15 @@ define([], function() {
                             // areaName = $('#areaId').find("option:selected").text();
                             curPageData.addrArea = $('#areaId').val();//区县id
                         }
-                        var durationStart = $('#durationStart').val()+ ':00';
-                        var durationEnd = $('#durationEnd').val()+ ':00';
-
+                        var durationStart = $('#durationStart').val();
+                        if(durationStart){
+                            curPageData.stime = durationStart + ':00';//开始时间
+                        }
+                        var durationEnd = $('#durationEnd').val() + ':00';
+                        if(durationEnd){
+                            curPageData.etime =  durationEnd;//结束时间
+                        }
                         curPageData.status = statusChange;//提现状态                   
-                        curPageData.stime = durationStart;//开始时间
-                        curPageData.etime =  durationEnd;//结束时间
                         if($scope.keyType != '' && $scope.keyType != null){
                             curPageData.searchType = $scope.keyType;
                             curPageData.keywords = $scope.keyWords;
