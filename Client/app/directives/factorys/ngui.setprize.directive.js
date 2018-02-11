@@ -201,7 +201,10 @@ define([], function () {
               var drawPrizeWrap_index = $(e.target).parents('.edit-part').index();
               var item_index = $(e.target).parents('.prize-img-preview-wrap-repeat').index();
               var hasClassornot = $(e.target).parents('.hasdetails').length > 0 ? 'dcMoreExt' : 'dcExt';
-              var firstornot = $(e.target).parents('.first-draw').length > 0 ? true : false
+              var firstornot = $(e.target).parents('.first-draw').length > 0 ? true : false;
+              var giftType = $(e.target).parents('.prize-img-preview-wrap').data('gifttype');
+              var poolId = $(e.target).parents('.prize-img-preview-wrap').data('id');
+              var specialCode = $(e.target).parents('.prize-img-preview-wrap').data('type'); //奖池类型
               // 把红包id传到controller
               var data = {
                 activityCode: that_scope.activityCode,
@@ -209,23 +212,43 @@ define([], function () {
                 ori: hasClassornot,
                 index: drawPrizeWrap_index,
                 item_index: item_index,
-                firstornot: firstornot
+                firstornot: firstornot,
+                giftType: giftType,
+                poolId: poolId,
+                specialCode : specialCode
               };
               scope.$emit('giftaddstockid', event, data)
           })
 
           // 红包增库
-          $('#setprize').on('click', '.add-hb-stock', function(e){
+          $('#setprize').on('click', '.add-hb-stock,.add-hb-stock-num', function(e){
               // 把礼品id传到controller
               var id = $(e.target).parents('.draw-prize-wrap').data('id');
               var drawPrizeWrap_index = $(e.target).parents('.draw-prize-wrap').index();
+              var poolId = $(e.target).parents('.radio-res').data('poolid');
+              var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
               // 把红包id传到controller
               var data = {
                   id: id, 
-                  index: drawPrizeWrap_index
+                  index: drawPrizeWrap_index,
+                  poolId: poolId,
+                  specialCode: specialCode
               };
               scope.$emit('hbaddstockid', event, data)
           })
+
+          //积分数量增库notminusnotzero
+          $('#setprize').on('click', '.add-points-stock', function(e){
+            // 把礼品id传到controller
+            var poolId = $(e.target).parents('.radio-res').data('poolid');
+            var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
+            // 把红包id传到controller
+            var data = {
+                poolId: poolId,
+                specialCode: specialCode
+            };
+            scope.$emit('pointAddStock', event, data)
+        })
 
           $('#setprize').on('keyup', '.decimal', function (event) {
               decimalFormat.decimalnumber(event);

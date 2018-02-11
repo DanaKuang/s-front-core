@@ -14,7 +14,7 @@ define([], function () {
       ServiceContent: ['$filter', function ($filter) {
       	function decimalnumber () {
       		var $target = $(event.target);
-      		var numReg = /^[1-9]{1}\d*\.\d{1,}$|^0\.\d{1,}$|^\d+$|^\d+\.$/;
+          var numReg = /^[1-9]{1}\d*\.\d{1,}$|^0\.\d{1,}$|^\d+$|^\d+\.$/;
       		//匹配正整数和浮点数
       		var val = $target.val();
 	        if (numReg.test(val)) {
@@ -24,7 +24,11 @@ define([], function () {
 	            } else if (val > 100) {
 								event.target.value = 100;
 	            } else {
-	            	event.target.value = val;
+                var varStr = val.indexOf('.');
+                if(varStr > -1){
+                  var valArr = val.split(".");
+                  event.target.value = valArr[0] + '.' + valArr[1].slice(0, 2);
+                } 
 	            }
 	          }
 	        } else {

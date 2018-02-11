@@ -47,7 +47,7 @@ define([], function () {
                 var activity = that_scope.conf.data.activity;
                 scope.confUrl = that_scope.conf.data.confUrl;
                 scope.activity = activity;
-                scope.nameVaule = activity.activityName;
+                scope.nameValue = activity.activityName;
                 scope.points = activity.idx || 1;
                 scope.descValue = activity.activityDec;
                 scope.introValue = activity.activityDoc;

@@ -76,6 +76,15 @@ define([], function () {
             //根据红包id获取红包详情
             var GET_POOL_DETAIL = '/api/tztx/saas/saotx/poolRedpack/queryDetail';
 
+            //获取实物礼品剩余最大增库量
+            var GET_MAX_POOL_GIFT= '/api/tztx/saas/saotx/poolGift/queryDetail';
+
+            //获取红包剩余最大增库量
+            var GET_MAX_RED_PACK= '/api/tztx/saas/saotx/poolRedpack/queryDetail';
+
+            //获取积分剩余最大增库量
+            var GET_MAX_POOL_INTEGRAL= '/api/tztx/saas/saotx/poolIntegral/queryDetail';
+
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
@@ -187,6 +196,21 @@ define([], function () {
             //获取调红包详情
             $model.getPoolDetaiById = function (data) {
                 return request.$Search(GET_POOL_DETAIL, data);
+            };
+
+            //获取实物礼品剩余最大增库量
+            $model.getMaxPoolGift = function (data) {
+                return request.$Search(GET_MAX_POOL_GIFT, data, false);
+            };
+
+            //获取红包剩余最大增库量
+            $model.getMaxRedPack = function (data) {
+                return request.$Search(GET_MAX_RED_PACK, data, false);
+            };
+
+            //获取积分剩余最大增库量
+            $model.getMaxPoolIntegral = function (data) {
+                return request.$Search(GET_MAX_POOL_INTEGRAL, data, false);
             };
         }]
     }

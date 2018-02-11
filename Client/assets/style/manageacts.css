@@ -740,7 +740,7 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 	margin-right: 5px!important;
 }
 .first-draw-prize-wrap .hb .money {
-	width: 260px!important;
+	/* width: 260px!important; */
 }
 
 /*multi-select */
@@ -815,6 +815,12 @@ input[type="radio"]~label, input[type="checkbox"]~label {
 .add-hbstock-pop .modal-body .input-wrap:after {
 	position: absolute;
 	content: '元';
+	right: 22px;
+	top: 10px;
+}
+.add-hbstock-pop-num .modal-body .input-wrap:after,.add-points-pop .modal-body .input-wrap:after{
+	position: absolute;
+	content: '个';
 	right: 22px;
 	top: 10px;
 }

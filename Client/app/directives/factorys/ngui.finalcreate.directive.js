@@ -158,7 +158,7 @@ define([], function () {
                             var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .create-part').children();
                         }
                     }
-
+                    
                     var prizeDomList_len = prizeDomList.length;
                     var prizeDomList_arr = Array.apply(0, Array(prizeDomList_len)).map(function(item, index){
                         return index
@@ -241,7 +241,6 @@ define([], function () {
                     } else {
                         ActivityPageAward.multiChoose = 0;
                     }
-
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
                         var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
