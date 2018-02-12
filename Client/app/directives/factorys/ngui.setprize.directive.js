@@ -331,7 +331,7 @@ define([], function () {
                   '<div class="special-wrong hidden">' +
                   '<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>' +
                   '</div>' +
-                  '</div>'
+                  '</div>';
               $(this).parent().after(html);
               if (!$(this).siblings('.specialReduce').length) {
                   $(this).before('<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>')
@@ -376,21 +376,24 @@ define([], function () {
 
           // 减去字体图标
           $('body').on('click', '.specialReduce', function () {
-              $(this).parent('.special-rules-item').remove();
-              if ($('.special-rules-item').length == 1) {
+            $(this).parent('.special-rules-item').remove();
+              if ($('.special-rules-item').length == '1') {
                   if (!$('.special-rules-item').find('.specialIncrease').length) {
                       $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
-                  }
+                      console.log('加加');
+                  };
                   if ($('.special-rules-item').find('.specialReduce').length) {
+                      console.log('姗姗');
                       $('.special-rules-item').find('.specialReduce').remove();
                   }
-                  // $(e.target).remove();
-                  // if(!$(e.target).siblings('.specialIncrease').length){
-                  //     $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
-                  // }
-              };
-              if ($(this).siblings('.specialIncrease').length) {
-                  $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+                //   $(e.target).remove();
+                //   if(!$(e.target).siblings('.specialIncrease').length){
+                //       $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                //   }
+              }else{
+                if(!$('.special-rules-item:last-child').find('.specialIncrease').length){
+                    $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+                }
               }
           });
       }
