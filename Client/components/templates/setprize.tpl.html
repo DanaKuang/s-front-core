@@ -10,7 +10,7 @@
 				<!-- FIRST_LOTTERY_BE_WON -->
 				<div class="edit-part" ng-if="dcList.FIRST_LOTTERY_BE_WON && dcList.FIRST_LOTTERY_BE_WON.length > 0" ng-repeat="(idx, n) in dcList.FIRST_LOTTERY_BE_WON">
 					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}"
-					 data-integral-pool="{{n.integralPool}}">
+					 data-integral-pool="{{n.integralPool}}" data-dataid="{{n.id}}">
 						<div class="prize-config border-box">
 							<div class="configuration-item">
 								<b>*</b>
@@ -73,7 +73,8 @@
 											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -2px; width: 340px;">
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-id="{{n.poolId}}" data-poolid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}">
+														<div class="prize-img-preview-wrap" data-id="{{n.poolId}}" data-poolid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" 
+															data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{n.awardPicUrl}}" alt="">
@@ -117,7 +118,7 @@
 								</div>
 
 								<!-- 微信红包 -->
-								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}">
+								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
@@ -181,7 +182,7 @@
 								</div>
 
 								<!-- 积分 -->
-								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}">
+								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<label for="">选择积分</label>
@@ -360,7 +361,7 @@
 			<div class="ready-set">
 				<div class="edit-part" ng-if="dcList.COMMON && dcList.COMMON.length > 0" ng-repeat="(idx, n) in dcList.COMMON">
 					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}"
-					 data-integral-pool="{{n.integralPool}}">
+					 data-integral-pool="{{n.integralPool}}" data-dataid="{{n.id}}">
 						<div class="prize-config border-box">
 							<div class="configuration-item chance-wrap">
 								<b>*</b>
@@ -400,7 +401,7 @@
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
 														<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-poolid="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}">
+														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}" data-dataid="{{item.id}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{item.awardPicUrl}}" alt="">
@@ -430,7 +431,7 @@
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat">
 														<div class="prize-img-preview-wrap" data-id="{{n.poolId}}" data-poolid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" 
-															data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}">
+															data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{n.awardPicUrl}}" alt="">
@@ -456,77 +457,7 @@
 											</div>
 										</div>
 									</div>
-									<!-- 常规奖池初始数量 
-									<div class="configuration-item">
-										<label for="">初始数量</label>
-										<div ng-if="n.details">
-											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
-														<div class="prize-img-preview-wrap" data-dataid="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}">
-															<div class="number-wrap">
-																<input type="text" class="initial" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div ng-if="!n.details">
-											<div class="giftpack" style="overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-dataid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}">
-															<div class="number-wrap">
-																<input type="text" class="initial" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>-->
-
-									<!-- 常规奖池剩余数量 
-									<div class="configuration-item">
-										<label for="">剩余数量</label>
-										<div ng-if="n.details">
-											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
-														<div class="prize-img-preview-wrap" data-dataid="{{item.poolId}}" data-potid="{{n.id}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}">
-															<div class="number-wrap">
-																<input type="text" class="surplus" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div ng-if="!n.details">
-											<div class="giftpack" style="overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-dataid="{{n.poolId}}" data-potid="{{n.id}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}">
-															<div class="number-wrap">
-																<input type="text" class="surplus" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>-->
-
+									
 									<div class="configuration-item">
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox" ng-checked="n.giveScore" ng-disabled="disabled">
@@ -544,7 +475,7 @@
 								</div>
 
 								<!-- 微信红包 -->
-								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}">
+								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
@@ -608,7 +539,7 @@
 								</div>
 
 								<!-- 积分 -->
-								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}">
+								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<label for="">选择积分</label>
@@ -794,7 +725,7 @@
 			<div class="ready-set">
 				<div class="edit-part" ng-if="dcList.INVOLVE" ng-repeat="(idx, n) in dcList.INVOLVE">
 					<div class="draw-prize-wrap" data-id="{{n.poolId}}" data-gift-pic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gift-type="{{n.awardType}}"
-					 data-integral-pool="{{n.integralPool}}">
+						data-integral-pool="{{n.integralPool}}" data-dataid="{{n.id}}">
 						<div class="prize-config border-box">
 							<div class="configuration-item">
 								<b>*</b>
@@ -809,7 +740,7 @@
 								</div>
 								<div class="radio-group">
 									<div class="circle-tick" ng-class="{'active': n.awardType == 6}">
-										<i class="circle"></i>积分44444</div>
+										<i class="circle"></i>积分</div>
 								</div>
 							</div>
 							<div class="radio-res-wrap">
@@ -824,7 +755,7 @@
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
 														<div class="prize-img-preview-wrap" data-id="{{item.poolId}}" data-poolid="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}">
+														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}" data-dataid="{{item.id}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{item.awardPicUrl}}" alt="">
@@ -854,7 +785,7 @@
 												<div class="already-choose-wrap">
 													<div class="prize-img-preview-wrap-repeat">
 														<div class="prize-img-preview-wrap" data-id="{{n.poolId}}" data-poolid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" 
-															data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}">
+															data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 															<div class="gift-delete" ng-click="close()">✕</div>
 															<div class="prize-img-preview">
 																<img ng-src="{{n.awardPicUrl}}" alt="">
@@ -880,76 +811,7 @@
 											</div>
 										</div>
 									</div>
-									<!-- 参与奖初始数量 
-									<div class="configuration-item">
-										<label for="">初始数量</label>
-										<div ng-if="n.details">
-											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
-														<div class="prize-img-preview-wrap" data-dataid="{{item.poolId}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}">
-															<div class="number-wrap">
-																<input type="text" class="initial" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div ng-if="!n.details">
-											<div class="giftpack" style="overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-dataid="{{n.poolId}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}">
-															<div class="number-wrap">
-																<input type="text" class="initial" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>-->
 									
-									<!-- 参与奖剩余数量 
-									<div class="configuration-item">
-										<label for="">剩余数量</label>
-										<div ng-if="n.details">
-											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat" ng-repeat="(idx, item) in n.details">
-														<div class="prize-img-preview-wrap" data-dataid="{{item.poolId}}" data-potid="{{n.id}}" data-giftpic="{{item.awardPicUrl}}" data-name="{{item.awardName}}"
-														 data-gifttype="{{item.awardType}}" data-type="{{n.specialCode}}">
-															<div class="number-wrap">
-																<input type="text" class="surplus" placeholder="奖品数量" value="{{item.totalNum}}" class="number" ng-keyup="notminusnotzero($event)" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div ng-if="!n.details">
-											<div class="giftpack" style="display: inline-block; overflow: hidden; margin-left: 66px; margin-top: -30px; width: 340px;">
-												<div class="already-choose-wrap">
-													<div class="prize-img-preview-wrap-repeat">
-														<div class="prize-img-preview-wrap" data-dataid="{{n.poolId}}" data-potid="{{n.id}}" data-giftpic="{{n.awardPicUrl}}" data-name="{{n.awardName}}" data-gifttype="{{n.awardType}}" data-type="{{n.specialCode}}">
-															<div class="number-wrap">
-																<input type="text" class="surplus" placeholder="奖品数量" class="number" ng-keyup="notminusnotzero($event)" value="{{n.totalNum}}" maxlength="10"
-																 ng-disabled="disabled">
-															</div>
-															<button class="btn btn-default add-inventory add-gift-stock" data-toggle="modal" data-target=".add-giftstock-pop">增库</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>-->
 									<div class="configuration-item">
 										<div class="present-integral">
 											<input type="checkbox" class="tickcheckbox" ng-checked="n.giveScore" ng-disabled="disabled">
@@ -967,7 +829,7 @@
 								</div>
 
 								<!-- 积分 -->
-								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}">
+								<div class="jf radio-res" ng-class="{'hidden': n.awardType != 6}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<label for="">选择积分</label>

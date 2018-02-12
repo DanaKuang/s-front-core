@@ -198,10 +198,10 @@ define([], function () {
                             // 参与奖
                             ActivityPageAward.special = -1;
                         }
-
                         ActivityPageAward.probability = ActivityPageAward.special == 1 ? '100%' : item.find('.chance').val() || ''; //特殊奖品没有概率设置
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.details = []; //具体奖品数组
+                        ActivityPageAward.id = item.attr('data-dataid') || '';  //奖池id
 
                         // 分---礼品 & 红包、积分
                         if (radio_res_item.hasClass('gift')) {
@@ -229,6 +229,7 @@ define([], function () {
                                 }
                             }
                         }
+                        
                         scopeVariable.activityAwards.push(ActivityPageAward);
                     })
                 }
@@ -249,6 +250,7 @@ define([], function () {
                         ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
                         ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
                         ActivityPageAward.details[index].awardNums = n.find('.number').val();
+                        ActivityPageAward.details[index].id = n[0].dataset.dataid || '';
                     })
 
                     checkerroreouspart(ActivityPageAward, type, item)
@@ -322,6 +324,7 @@ define([], function () {
                         scopeVariable.commonerror = true;
                         item.children('.wrong-tip').removeClass('hidden');
                     }
+
                 }
                 /* 特殊规则设置参数配置 */
                 var mustwin = [];

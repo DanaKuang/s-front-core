@@ -227,12 +227,14 @@ define([], function () {
               var drawPrizeWrap_index = $(e.target).parents('.draw-prize-wrap').index();
               var poolId = $(e.target).parents('.radio-res').data('poolid');
               var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
+              var dataId = $(e.target).parents('.radio-res').data('dataid');
               // 把红包id传到controller
               var data = {
                   id: id, 
                   index: drawPrizeWrap_index,
                   poolId: poolId,
-                  specialCode: specialCode
+                  specialCode: specialCode,
+                  dataId: dataId
               };
               scope.$emit('hbaddstockid', event, data)
           })
@@ -242,10 +244,12 @@ define([], function () {
             // 把礼品id传到controller
             var poolId = $(e.target).parents('.radio-res').data('poolid');
             var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
+            var dataId = $(e.target).parents('.radio-res').data('dataid');
             // 把红包id传到controller
             var data = {
                 poolId: poolId,
-                specialCode: specialCode
+                specialCode: specialCode,
+                dataId: dataId
             };
             scope.$emit('pointAddStock', event, data)
         })
