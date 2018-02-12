@@ -804,25 +804,25 @@ define([], function () {
             switch(hbaddstockid.specialCode){
               case 'FIRST_LOTTERY_BE_WON':
                 //初始化金额
-                var initMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.number').val();
+                var initMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val();
                 //剩余金额
-                var surplusMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-number').val();
+                var surplusMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val();
                 var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
-                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.number').val(addMoneyNum);
-                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-number').val(addSurplusMoneyNum);
+                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
                 $('[ng-model="hbnumberNum"]').val('');
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
               case 'COMMON':
                 //初始化金额
-                var initMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.number').val();
+                var initMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val();
                 //剩余金额
-                var surplusMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-number').val();
+                var surplusMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val();
                 var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
-                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.number').val(addMoneyNum);
-                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-number').val(addSurplusMoneyNum);
+                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
                 $('[ng-model="hbnumberNum"]').val(''); 
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
@@ -846,39 +846,39 @@ define([], function () {
             switch(pointAddStock.specialCode){
               case 'FIRST_LOTTERY_BE_WON':
                 //初始化积分数量
-                var initPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val();
+                var initPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val();
+                var surplusPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val(addPointsNum);
-                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val(addSurplusPointsNum);
+                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
               case 'COMMON':
                 //初始化积分数量
-                var initPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val();
+                var initPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val();
+                var surplusPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val(addPointsNum);
-                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val(addSurplusPointsNum);
+                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val(''); 
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
               case 'INVOLVE':
                 //初始化积分数量
-                var initPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val();
+                var initPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val();
+                var surplusPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.number').val(addPointsNum);
-                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-number').val(addSurplusPointsNum);
+                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val(''); 
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');

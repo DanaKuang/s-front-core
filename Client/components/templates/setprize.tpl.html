@@ -160,10 +160,10 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
 										<label for="">初始数量</label>
-										<input style="width:90px;" type="text" class="number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="number input-sm init-money-num" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 										 	value="{{n.redNum}}">
 										<label for="" style="margin-left: 10px;display: inline-block;width: 52px;">剩余数量:</label>
-										<input style="width:90px;" type="text" class="surplus-number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="surplus-money-num input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 											value="{{n.redNum - n.redNumStock}}">
 										<button class="btn btn-default add-inventory add-hb-stock-num" data-toggle="modal" data-target=".add-hbstock-pop-num">增库</button>
 										<div class="present-integral">
@@ -203,10 +203,10 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">初始数量</label>
-										<input style="width:90px;" type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}"
+										<input style="width:90px;" type="text" class="number input-sm init-points-num" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}"
 										 ng-disabled="disabled">
 										<label for="" style="margin-left: 10px;display: inline-block;width: 52px;">剩余数量:</label>
-										<input style="width:90px;" type="text" class="surplus-number input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="surplus-points-num input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 											value="{{n.totalNum - n.stockNum}}">
 										<button class="btn btn-default add-inventory add-points-stock" data-toggle="modal" data-target=".add-points-pop">增库</button>
 									</div>
@@ -475,7 +475,8 @@
 								</div>
 
 								<!-- 微信红包 -->
-								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" data-dataid="{{n.id}}">
+								<div class="hb radio-res" ng-class="{'hidden': n.awardType != 3}" ng-if data-poolid="{{n.poolId}}" data-type="{{n.specialCode}}" 
+									data-dataid="{{n.id}}">
 									<div class="configuration-item">
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack hidden">请点击选择相应的红包</small>
@@ -517,10 +518,10 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-redpack-num hidden">请填写发放的红包个数</small>
 										<label for="">初始数量</label>
-										<input style="width:90px;" type="text" class="number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="number input-sm init-money-num " placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 										 	value="{{n.redNum}}">
 										<label for="" style="margin-left: 10px;display: inline-block;width: 52px;">剩余数量:</label>
-										<input style="width:90px;" type="text" class="surplus-number input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="surplus-money-num input-sm" placeholder="请填写红包个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 											value="{{n.redNum - n.redNumStock}}">
 										<button class="btn btn-default add-inventory add-hb-stock-num" data-toggle="modal" data-target=".add-hbstock-pop-num">增库</button>
 										<div class="present-integral">
@@ -560,10 +561,10 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">初始数量</label>
-										<input style="width:90px;" type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}"
+										<input style="width:90px;" type="text" class="number input-sm init-points-num" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" value="{{n.totalNum}}"
 										 ng-disabled="disabled">
 										 <label for="" style="margin-left: 10px;display: inline-block;width: 52px;">剩余数量:</label>
-										 <input style="width:90px;" type="text" class="surplus-number input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										 <input style="width:90px;" type="text" class="surplus-points-num input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 											 value="{{n.totalNum - n.stockNum}}">
 										 <button class="btn btn-default add-inventory add-points-stock" data-toggle="modal" data-target=".add-points-pop">增库</button>
 									</div>
@@ -850,10 +851,10 @@
 										<b>*</b>
 										<small class="wrong-tip wrong-tip-score-num hidden">请填写积分奖品发放的个数</small>
 										<label for="">初始数量</label>
-										<input style="width:90px;" type="text" class="number input-sm" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										<input style="width:90px;" type="text" class="number input-sm init-points-num" placeholder="请输入数字" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 										 value="{{n.totalNum}}">
 										 <label for="" style="margin-left: 10px;display: inline-block;width: 52px;">剩余数量:</label>
-										 <input style="width:90px;" type="text" class="surplus-number input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
+										 <input style="width:90px;" type="text" class="surplus-points-num input-sm" placeholder="请填写积分个数" ng-keyup="notminusnotzero($event)" maxlength="10" ng-disabled="disabled"
 											 value="{{n.totalNum - n.stockNum}}">
 										 <button class="btn btn-default add-inventory add-points-stock" data-toggle="modal" data-target=".add-points-pop">增库</button>
 									</div>
