@@ -205,6 +205,7 @@ define([], function () {
               var giftType = $(e.target).parents('.prize-img-preview-wrap').data('gifttype');
               var poolId = $(e.target).parents('.prize-img-preview-wrap').data('id');
               var specialCode = $(e.target).parents('.prize-img-preview-wrap').data('type'); //奖池类型
+              var potId = $(e.target).parents('.draw-prize-wrap').data('dataid'); //奖池id
               // 把红包id传到controller
               var data = {
                 activityCode: that_scope.activityCode,
@@ -215,7 +216,8 @@ define([], function () {
                 firstornot: firstornot,
                 giftType: giftType,
                 poolId: poolId,
-                specialCode : specialCode
+                specialCode : specialCode,
+                potId : potId
               };
               scope.$emit('giftaddstockid', event, data)
           })
@@ -384,10 +386,8 @@ define([], function () {
               if ($('.special-rules-item').length == '1') {
                   if (!$('.special-rules-item').find('.specialIncrease').length) {
                       $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
-                      console.log('加加');
                   };
                   if ($('.special-rules-item').find('.specialReduce').length) {
-                      console.log('姗姗');
                       $('.special-rules-item').find('.specialReduce').remove();
                   }
                 //   $(e.target).remove();

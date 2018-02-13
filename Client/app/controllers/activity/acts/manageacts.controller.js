@@ -611,14 +611,18 @@ define([], function () {
                   $('#addGiftNum').html('超过数量最大限制，请调整').show();
                   return;
                 }else{
+                  //初始化数量对象
+                  var initialObj = $('#first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
                   //初始化数量
-                  var initialVal = $('#first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val();
+                  var initialVal = initialObj.val();
                   //剩余数量
-                  var surplusVal = $('#first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val();
+                  var surplusVal = surplusObj.val();
                   var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
                   var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
-                  $('#first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val(addInitVal);
-                  $('#first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val(addSurplusVal);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
                   $('[ng-model="giftnumber"]').val('');
                   $('#addGiftNum').hide(); 
                   $('.add-giftstock-pop').modal('hide');
@@ -629,14 +633,18 @@ define([], function () {
                   $('#addGiftNum').html('超过数量最大限制，请调整').show();
                   return;
                 }else{
+                  //初始化数量对象
+                  var initialObj = $('#none_first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#none_first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
                   //初始化数量
-                  var initialVal = $('#none_first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val();
+                  var initialVal = initialObj.val();
                   //剩余数量
-                  var surplusVal = $('#none_first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val();
+                  var surplusVal = surplusObj.val();
                   var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
                   var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
-                  $('#none_first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val(addInitVal);
-                  $('#none_first_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val(addSurplusVal);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
                   $('[ng-model="giftnumber"]').val('');
                   $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
@@ -647,14 +655,18 @@ define([], function () {
                   $('#addGiftNum').html('超过数量最大限制，请调整').show();
                   return;
                 }else{
+                  //初始化数量对象
+                  var initialObj = $('#involve_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#involve_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
                   //初始化数量
-                  var initialVal = $('#involve_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val();
+                  var initialVal = initialObj.val();
                   //剩余数量
-                  var surplusVal = $('#involve_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val();
+                  var surplusVal = surplusObj.val();
                   var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
                   var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
-                  $('#involve_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial').val(addInitVal);
-                  $('#involve_draw').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus').val(addSurplusVal);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
                   $('[ng-model="giftnumber"]').val(''); 
                   $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
@@ -729,26 +741,26 @@ define([], function () {
               switch(hbaddstockid.specialCode){
                 case 'FIRST_LOTTERY_BE_WON':
                   //初始化金额
-                  var initMoney = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.money').val();
+                  var initMoney = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val();
                   //剩余金额
-                  var surplusMoney = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money').val();
+                  var surplusMoney = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val();
                   var addMoney = parseFloat(initMoney) + parseFloat($scope.hbnumber);
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
-                  $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.money').val(addMoney);
-                  $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money').val(addSurplusMoney);
+                  $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
+                  $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
                   $('[ng-model="hbnumber"]').val(''); 
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
                   break;
                 case 'COMMON':
                   //初始化金额
-                  var initMoney = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.money').val();
+                  var initMoney = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val();
                   //剩余金额
-                  var surplusMoney = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money').val();
+                  var surplusMoney = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val();
                   var addMoney = parseFloat(initMoney) + parseFloat($scope.hbnumber);
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
-                  $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.money').val(addMoney);
-                  $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money').val(addSurplusMoney);
+                  $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
+                  $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
                   $('[ng-model="hbnumber"]').val(''); 
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
@@ -804,25 +816,25 @@ define([], function () {
             switch(hbaddstockid.specialCode){
               case 'FIRST_LOTTERY_BE_WON':
                 //初始化金额
-                var initMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val();
+                var initMoneyNum = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val();
                 //剩余金额
-                var surplusMoneyNum = $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val();
+                var surplusMoneyNum = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val();
                 var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
-                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val(addMoneyNum);
-                $('#first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
+                $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
                 $('[ng-model="hbnumberNum"]').val('');
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
               case 'COMMON':
                 //初始化金额
-                var initMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val();
+                var initMoneyNum = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val();
                 //剩余金额
-                var surplusMoneyNum = $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val();
+                var surplusMoneyNum = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val();
                 var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
-                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.init-money-num').val(addMoneyNum);
-                $('#none_first_draw').find('[data-poolid="'+ hbaddstockid.poolId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
+                $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
                 $('[ng-model="hbnumberNum"]').val(''); 
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
@@ -846,39 +858,39 @@ define([], function () {
             switch(pointAddStock.specialCode){
               case 'FIRST_LOTTERY_BE_WON':
                 //初始化积分数量
-                var initPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
+                var initPointsNum = $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
+                var surplusPointsNum = $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
-                $('#first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
               case 'COMMON':
                 //初始化积分数量
-                var initPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
+                var initPointsNum = $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
+                var surplusPointsNum = $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
-                $('#none_first_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val(''); 
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
               case 'INVOLVE':
                 //初始化积分数量
-                var initPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val();
+                var initPointsNum = $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
                 //剩余积分数量
-                var surplusPointsNum = $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val();
+                var surplusPointsNum = $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
                 var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
-                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.init-points-num').val(addPointsNum);
-                $('#involve_draw').find('[data-poolid="'+ pointAddStock.poolId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
                 $('[ng-model="pointsNumber"]').val(''); 
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
