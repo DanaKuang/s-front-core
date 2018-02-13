@@ -1626,6 +1626,27 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolGift/queryDetail'
+    authorized: 1
+    description: '活动礼品增库详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolRedpack/queryDetail'
+    authorized: 1
+    description: '红包增库详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/poolIntegral/queryDetail'
+    authorized: 1
+    description: '积分增库详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'

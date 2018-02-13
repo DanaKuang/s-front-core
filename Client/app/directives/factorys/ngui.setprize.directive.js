@@ -41,6 +41,7 @@ define([], function () {
             var dcList = that_scope.conf.data.dcList;
             scope.dcList = that_scope.conf.data.dcList;
             scope.disabled = true;
+            scope.activity = that_scope.conf.data.activity;
             if (scope.dcList.FIRST_LOTTERY_BE_WON && scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
               scope.myVar = true;
             }
@@ -200,7 +201,11 @@ define([], function () {
               var drawPrizeWrap_index = $(e.target).parents('.edit-part').index();
               var item_index = $(e.target).parents('.prize-img-preview-wrap-repeat').index();
               var hasClassornot = $(e.target).parents('.hasdetails').length > 0 ? 'dcMoreExt' : 'dcExt';
-              var firstornot = $(e.target).parents('.first-draw').length > 0 ? true : false
+              var firstornot = $(e.target).parents('.first-draw').length > 0 ? true : false;
+              var giftType = $(e.target).parents('.prize-img-preview-wrap').data('gifttype');
+              var poolId = $(e.target).parents('.prize-img-preview-wrap').data('id');
+              var specialCode = $(e.target).parents('.prize-img-preview-wrap').data('type'); //奖池类型
+              var potId = $(e.target).parents('.draw-prize-wrap').data('dataid'); //奖池id
               // 把红包id传到controller
               var data = {
                 activityCode: that_scope.activityCode,
@@ -208,23 +213,48 @@ define([], function () {
                 ori: hasClassornot,
                 index: drawPrizeWrap_index,
                 item_index: item_index,
-                firstornot: firstornot
+                firstornot: firstornot,
+                giftType: giftType,
+                poolId: poolId,
+                specialCode : specialCode,
+                potId : potId
               };
               scope.$emit('giftaddstockid', event, data)
           })
 
           // 红包增库
-          $('#setprize').on('click', '.add-hb-stock', function(e){
+          $('#setprize').on('click', '.add-hb-stock,.add-hb-stock-num', function(e){
               // 把礼品id传到controller
               var id = $(e.target).parents('.draw-prize-wrap').data('id');
               var drawPrizeWrap_index = $(e.target).parents('.draw-prize-wrap').index();
+              var poolId = $(e.target).parents('.radio-res').data('poolid');
+              var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
+              var dataId = $(e.target).parents('.radio-res').data('dataid');
               // 把红包id传到controller
               var data = {
                   id: id, 
-                  index: drawPrizeWrap_index
+                  index: drawPrizeWrap_index,
+                  poolId: poolId,
+                  specialCode: specialCode,
+                  dataId: dataId
               };
               scope.$emit('hbaddstockid', event, data)
           })
+
+          //积分数量增库notminusnotzero
+          $('#setprize').on('click', '.add-points-stock', function(e){
+            // 把礼品id传到controller
+            var poolId = $(e.target).parents('.radio-res').data('poolid');
+            var specialCode = $(e.target).parents('.radio-res').data('type'); //奖池类型
+            var dataId = $(e.target).parents('.radio-res').data('dataid');
+            // 把红包id传到controller
+            var data = {
+                poolId: poolId,
+                specialCode: specialCode,
+                dataId: dataId
+            };
+            scope.$emit('pointAddStock', event, data)
+        })
 
           $('#setprize').on('keyup', '.decimal', function (event) {
               decimalFormat.decimalnumber(event);
@@ -254,6 +284,122 @@ define([], function () {
                   $(e.target).siblings('.sendscore').addClass('hidden')
               }
           })
+
+         /* 特殊规则设置 */
+            // 默认初始化自己的文本框加上点击事件。
+          $(document).ready(function () {
+              $(".my-select").multiselect({
+                  nonSelectedText: '请选择',
+                  nSelectedText: '已选择',
+                  includeSelectAllOption: true,
+                  selectAllText: '全部',
+                  allSelectedText: '全选',
+                  enableFiltering: true,
+                  numberDisplayed: 1,
+                  onDropdownShow: function () { // 就是点击下拉框调用
+                      var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
+                      // 拿奖项名称的数据
+                      var resultArray = [];
+                      for (var i = 0; i < eleArray.length; i++) {
+                          if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
+                              resultArray.push({
+                                  name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                  value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                              });
+                          }
+                      };
+                      if (resultArray.length >= 3) {
+                          $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
+                      } else {
+                          $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
+                      };
+                      $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                          v.label = v.name;
+                          v.value = v.value;
+                      }));
+                      $(this.$select).multiselect('refresh');
+                  }
+              });
+          });
+
+          // 添加字体图标
+          $('body').on('click', '.specialIncrease', function () {
+              var html = '<div class="special-rules-item operation multi">' +
+                  '<span>用户第&nbsp;</span>' +
+                  '<input type="text" class="input">' +
+                  '<span>&nbsp;次抽奖必中&nbsp;</span>' +
+                  '<div class="special-select">' +
+                  '<select name="data" class="select my-select">' +
+                  '</select>' +
+                  '</div>' +
+                  '<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>' +
+                  '<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>' +
+                  '<div class="special-wrong hidden">' +
+                  '<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>' +
+                  '</div>' +
+                  '</div>';
+              $(this).parent().after(html);
+              if (!$(this).siblings('.specialReduce').length) {
+                  $(this).before('<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>')
+              };
+              $(this).remove();
+              $(document).ready(function () {
+                  $(".multi .select").multiselect({
+                      nonSelectedText: '请选择',
+                      nSelectedText: '已选择',
+                      includeSelectAllOption: true,
+                      selectAllText: '全部',
+                      allSelectedText: '全选',
+                      enableFiltering: true,
+                      numberDisplayed: 1,
+                      selectedList: '',
+                      onDropdownShow: function (e) { // 就是点击下拉框调用
+                          var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
+                          // 拿奖项名称的数据
+                          var resultArray = [];
+                          for (var i = 0; i < eleArray.length; i++) {
+                              if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
+                                  resultArray.push({
+                                      name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                      value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                  });
+                              }
+                          };
+                          if (resultArray.length >= 3) {
+                              $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
+                          } else {
+                              $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
+                          };
+                          $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                              v.label = v.name;
+                              v.value = v.value;
+                          }));
+                          $(this.$select).multiselect('refresh');
+                      }
+                  });
+              });
+          });
+
+          // 减去字体图标
+          $('body').on('click', '.specialReduce', function () {
+            $(this).parent('.special-rules-item').remove();
+              if ($('.special-rules-item').length == '1') {
+                  if (!$('.special-rules-item').find('.specialIncrease').length) {
+                      $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                  };
+                  if ($('.special-rules-item').find('.specialReduce').length) {
+                      $('.special-rules-item').find('.specialReduce').remove();
+                  }
+                //   $(e.target).remove();
+                //   if(!$(e.target).siblings('.specialIncrease').length){
+                //       $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                //   }
+              }else{
+                if(!$('.special-rules-item:last-child').find('.specialIncrease').length){
+                    $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+                }
+              }
+          });
       }
       return defineObj;
   }
