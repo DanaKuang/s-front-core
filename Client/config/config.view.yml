@@ -176,6 +176,20 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/materiel/gift.html'
+  - httpmethod: 'get'                       # 盗扫明细查询
+    routepath: '/view/home/operateTools/sweepDetail'
+    description: 'sweepDetail'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/operateTools/sweepDetail.html'
+  - httpmethod: 'get'                       # 用户标签 标签组合管理
+    routepath: '/view/home/usertag/assemble'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/usertag/assemble.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
@@ -398,11 +412,3 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/style/style.html'
-operateTools:
-  - httpmethod: 'get'                       # 盗扫明细查询
-    routepath: '/view/home/operateTools/sweepDetail'
-    description: 'sweepDetail'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'home/operateTools/sweepDetail.html'

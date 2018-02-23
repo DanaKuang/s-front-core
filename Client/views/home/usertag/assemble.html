@@ -1,0 +1,142 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-02-22
+ * Description: 标签组合管理
+ */
+-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.assemble.css">
+<div ng-controller="assembleCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="ui-content-box row">
+                <!--标签组合管理-->
+                <div class="col-md-12">
+                    <div class="ui-panel-title assemble">
+                        <i class="assemble"></i><span>标签组合管理</span>
+                    </div>
+                    <div class="ui-panel-box panel rate">
+                        <div class="panel-body">
+                            <!--搜索-->
+                            <form class="form-inline form-assemble">
+                                <div class="form-group">
+                                    <label for="assemble">标签组合名称：</label>
+                                    <input type="text" name="assemble" placeholder="模糊搜索" ng-model="assemble" class="form-control input-sm">
+                                </div>
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </form>
+                            <!--表格-->
+                            <table class="table table-hover table-striped table-assemble">
+                                <thead>
+                                    <tr>
+                                        <th>标签组合名称</th>
+                                        <th>标签组合属性</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="tr in tData">
+                                        <td>{{tr.name}}</td>
+                                        <td>{{tr.type}}</td>
+                                        <td class="opts">
+                                            <div ng-click="build(tr.id)">生成用户清单</div>
+                                            <div ng-click="edit(tr.id)">修改标签组合</div>
+                                            <div ng-click="del(tr.id)">删除标签组合</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--生成清单-->
+    <div class="modal fade in" id="id_build" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">生成用户清单</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <!--用户清单名称-->
+                        <div class="form-group">
+                            <label for="f.name" class="control-label col-md-3">用户清单名称</label>
+                            <div class="col-md-8">
+                                <input type="text" name="f.name" ng-model="f.name" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <!--数据开始月份-->
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3">数据开始月份</label>
+                            <div class="col-md-3">
+                                <input type="text" name="f.stime" ng-model="f.stime" class="date form-control input-sm">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="f.etime" ng-model="f.etime" class="date form-control input-sm">
+                            </div>
+                        </div>
+                        <!--清单保存周期-->
+                        <div class="form-group">
+                            <label for="f.type" class="control-label col-md-3">清单保存周期</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-sm" ng-model="f.type">
+                                    <option value="1">一个月</option>
+                                    <option value="3">三个月</option>
+                                    <option value="6">半年</option>
+                                    <option value="0">永久</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--用户清单描述-->
+                        <div class="form-group">
+                            <label for="f.detail" class="control-label col-md-3">用户清单描述</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="3" ng-model="f.detail"></textarea>
+                            </div>
+                        </div>
+                        <!--选择输出属性-->
+                        <div class="form-group">
+                            <label for="f.props" class="control-label col-md-3">选择输出属性</label>
+                            <div class="col-md-8 checkbox">
+                                <label for="">
+                                    <input type="checkbox">地域
+                                </label>
+                                <label for="">
+                                    <input type="checkbox">昵称
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" ng-click="f.save()">保存</button>
+                    <button class="btn btn-primary" type="reset" ng-click="f.reset()">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--确认弹窗-->
+    <div class="modal fade in" id="id_alert" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">提示</h4>
+                </div>
+                <div class="modal-body">确定要删除这条记录吗？</div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="reset" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" type="submit" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
