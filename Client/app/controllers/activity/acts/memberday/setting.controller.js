@@ -159,7 +159,9 @@ define([], function () {
                 }, 0);
 
                 _.each(s_def.memberdayRules, function (md, idx) {
-                    u.uiExtend(md, DETAIL.activity.memberdayRules[idx], [
+                    u.uiExtend(md, DETAIL.activity.memberdayRules.sort(function (a, b) {
+                        return a.ruleType - b.ruleType;
+                    })[idx], [
                         'activityCode',
                         'etime',
                         'eweek',
@@ -172,10 +174,6 @@ define([], function () {
                         'sweek'
                     ]);
                     md.isuse = !!md.isuse;
-                });
-                // 根据ruleType排序
-                s_def.memberdayRules = s_def.memberdayRules.sort(function (a, b) {
-                    return a.ruleType - b.ruleType;
                 });
 
                 if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
