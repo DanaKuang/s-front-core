@@ -173,6 +173,10 @@ define([], function () {
                     ]);
                     md.isuse = !!md.isuse;
                 });
+                // 根据ruleType排序
+                s_def.memberdayRules = s_def.memberdayRules.sort(function (a, b) {
+                    return a.ruleType - b.ruleType;
+                });
 
                 if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
                     u.uiExtend(s_def.memberdayProps[0], DETAIL.activity.memberdayProps[0], [
