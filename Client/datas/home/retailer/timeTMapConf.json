@@ -8,7 +8,8 @@
       "boundaryGap":false,
       "data": [],
       "axisLabel":{
-        "interval": 0
+        "interval": 0,
+        "rotate":36
       }
     },
     "yAxis": [
@@ -51,9 +52,10 @@
       }
     ],
     "dataZoom" : {  
+      "type": "inside",
       "show" : true,  
       "realtime" : true,  
-      "start" : 0,  
-      "end" : 50
+      "start" : 0,
+      "endValue":11
   }
   }

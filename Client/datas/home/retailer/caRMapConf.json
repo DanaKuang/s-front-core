@@ -1,5 +1,8 @@
 {   
     "color":["#76D7F7","#FF8B22"],
+    "textStyle":{
+        "align":"left"
+    },
     "dataZoom": [
         {
         "type": "inside",

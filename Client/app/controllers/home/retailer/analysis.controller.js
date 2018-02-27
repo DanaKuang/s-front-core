@@ -59,11 +59,26 @@ define([], function () {
                     $("#levelOfCities").siblings('div').children('button').attr('disabled', 'disabled');
                     $('#prefecture').siblings('div').children('button').children('span').html('全部');
                     $('#levelOfCities').siblings('div').children('button').children('span').html('全部');
+                    // 处理对比按钮
+                    $('#contrast-container .input_check+label').off('click').css('cursor','not-allowed');
+                    $('.ui-detail-comparison').css('cursor','not-allowed');
+                    $('#checkbox').prop('checked',false);
+                    $('#checkbox').hide();
+                    $('#checkbox').attr('type','input');
+                    $('#checkbox').siblings('label').hasClass('color') && $('#checkbox').siblings('label').removeClass('color');
+                    $('.my-hidden').hide();
                     $('#levelOfCities').val("");
                     $('#prefecture').val("");
                 } else {
                     $("#prefecture").siblings('div').children('button').removeAttr('disabled');
                     $("#levelOfCities").siblings('div').children('button').removeAttr('disabled');
+                    $('#contrast-container .input_check+label').on('click',function () {
+                        $('#contrast-container').siblings('div').toggle();
+                        $(this).toggleClass('color');
+                    }).css('cursor','pointer');
+                    $('.ui-detail-comparison').css('cursor','pointer');
+                    $('#checkbox').attr('type','checkbox');
+                    $('#checkbox').show();
                     initFrame(); // 地市等级和地市
                 }
             });
@@ -434,7 +449,7 @@ define([], function () {
                             "type": "bar",
                             "data": [],
                             "barWidth": "40%",
-                            "barGap": "10%"
+                            "barGap": "10%",
                         }):'';
                         caRMapConf.series[0].data.length = 0;
                         caRMapConf.series[1].data.length = 0;
