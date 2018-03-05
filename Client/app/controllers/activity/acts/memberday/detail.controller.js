@@ -72,7 +72,7 @@ define([], function () {
                     areaCodes: $scope.region,
                     idx: $scope.idx || '',
                     currentPageNumber: $scope.curPage,
-                    pageSize: 10
+                    pageSize: 100
                 }, page || {})).then(function (res) {
                     var data = res.data.data || [];
                     $scope.listArr = data.list || [];
