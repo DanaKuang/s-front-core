@@ -24,6 +24,8 @@ define([], function () {
             appStartTime: '',
             appEndTime: '',
             isPrint: '',
+            isSdytSeller: '',
+            isHenan: false,
             sortType: 1,
             sortValue: 1,
             pageNo: 1,
@@ -46,6 +48,11 @@ define([], function () {
           };
 
           $scope.storage = {};
+
+          // 判断是否河南，如果是，显示零售户筛选条件
+          if(sessionStorage.account == 'henan') {
+            $scope.vm.isHenan = true;
+          }
 
           // 判断是否为 审核管理 跳转过来的
           if(sessionStorage.sellerId) {
@@ -87,6 +94,7 @@ define([], function () {
               appStartTime: $scope.vm.appStartTime || '',
               appEndTime: $scope.vm.appEndTime || '',
               isPrint: $scope.vm.isPrint || '',
+              isSdytSeller: $scope.vm.isSdytSeller || '',
               sortType: $scope.vm.sortType || 1,
               sortValue: $scope.vm.sortValue,
               pageNo: page || 1,
@@ -219,6 +227,7 @@ define([], function () {
               appStartTime: '',
               appEndTime: '',
               isPrint: '',
+              isSdytSeller: '',
               pageNo: 1,
               pageSize: 10
             }
