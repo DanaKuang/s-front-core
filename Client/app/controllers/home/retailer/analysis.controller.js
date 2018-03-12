@@ -258,7 +258,7 @@ define([], function () {
             $scope.weekStaTime = weekArray[0].weekNo || "";
             $scope.weekEndTime = weekArray[0].weekNo || "";
             // 查询
-            var provinceNam = '';
+            var provinceName = '';
             $scope.UserProv.forEach(function (element) {
                 if (element.code == $scope.ProvByorgId.orgRegion) {
                     provinceName = element.name;
