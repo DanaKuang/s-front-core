@@ -233,6 +233,20 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/memberday/detail.html'
+  - httpmethod: 'get'                       # 毛五活动管理
+    routepath: '/view/activity/acts/sauce/actmanage'
+    description: '毛五活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/actmanage.html'
+  - httpmethod: 'get'                       # 毛五订单管理
+    routepath: '/view/activity/acts/sauce/ordermanage'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/ordermanage.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'

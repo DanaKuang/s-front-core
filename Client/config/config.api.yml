@@ -2453,3 +2453,88 @@ adsEnse:                                      # 广告位管理，命名只要�
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+maowuAct:                                      # 毛五活动管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/list'
+    authorized: 1
+    description: '活动管理-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/exportDrawDatas'
+    authorized: 1
+    description: '导出活动中奖名单明细'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/list'
+    authorized: 1
+    description: '订单管理列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/export/undeliveredOrder'
+    authorized: 1
+    description: '导出未发货订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/fileAddress'
+    authorized: 1
+    description: '导入物流单号'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/detail'
+    authorized: 1
+    description: '获取订单详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/saveOrUpdate'
+    authorized: 1
+    description: '新增或编辑习酱活动'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/listDraw'
+    authorized: 1
+    description: '获取活动领奖明细列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/listLevel'
+    authorized: 1
+    description: '获取活动配置奖项等级'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/detail'
+    authorized: 1
+    description: '获取活动活动详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/import/OrdersTracking'
+    authorized: 1
+    description: '导入物流订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/modify/addressInfo'
+    authorized: 1
+    description: '修改物流收货地址'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
