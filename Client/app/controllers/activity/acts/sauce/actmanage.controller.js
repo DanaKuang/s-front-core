@@ -360,7 +360,7 @@ define([], function() {
                     $scope.actObj.endTimeStr = $scope.actObj.endTimeStr + ':00';
                     $scope.warnInfo.timeWarn = false;
                 }
-                for(let i = 0,l = $scope.actObj.awards.length;i<l;i++){
+                for(var i = 0,l = $scope.actObj.awards.length;i<l;i++){
                     switch($scope.actObj.awards[i].productLevel){
                         case "1" :
                             $scope.actObj.awards[i].levelName = '一等奖';
@@ -379,7 +379,7 @@ define([], function() {
                             break;
                         default:
                     }
-                    for(let key in $scope.actObj.awards[i]){ //检查每个奖池信息是否完善
+                    for(var key in $scope.actObj.awards[i]){ //检查每个奖池信息是否完善
                         switch(key){
                             case 'productLevel':
                             case 'levelName':
