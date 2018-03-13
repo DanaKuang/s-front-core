@@ -198,7 +198,13 @@ define([], function () {
                             // 参与奖
                             ActivityPageAward.special = -1;
                         }
-                        ActivityPageAward.probability = ActivityPageAward.special == 1 ? '100%' : item.find('.chance').val() || ''; //特殊奖品没有概率设置
+                        //ActivityPageAward.probability = ActivityPageAward.special == 1 ? '100%' : item.find('.chance').val() || ''; //特殊奖品没有概率设置
+                        if(ActivityPageAward.special == 1){ //特殊奖品没有概率设置
+                            ActivityPageAward.probability = '100%';
+                        }else{
+                            var curPro = item.find('.chance').val();
+                            ActivityPageAward.probability = parseFloat(curPro).toFixed(2) || '';
+                        }
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.details = []; //具体奖品数组
                         ActivityPageAward.id = item.attr('data-dataid') || '';  //奖池id
