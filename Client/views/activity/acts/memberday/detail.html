@@ -79,6 +79,7 @@
                                             <th>获奖时间</th>
                                             <th>获奖地区</th>
                                             <th>获奖状态</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,6 +93,7 @@
                                             <td>{{item.ctime}}</td>
                                             <td>{{item.salerCityName}}</td>
                                             <td>{{item.statusName}}</td>
+                                            <td><a href="javascript:void(0)" ng-click="sendMessage(item)">发送提醒</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

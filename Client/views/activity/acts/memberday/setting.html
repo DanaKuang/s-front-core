@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!--第一步-->
-                <div class="ui-md-setting col-md-12" id="md_first" ng-show="step==0">
+                <div class="ui-md-setting col-md-12" id="md_first" ng-hide="step!=0">
                     <div class="panel rate">
                         <div class="panel-body">
                             <!--导航-->
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <!--第二步-->
-                <div class="ui-md-setting col-md-12" id="md_second" ng-show="step==1">
+                <div class="ui-md-setting col-md-12" id="md_second" ng-hide="step!=1">
                     <div class="panel rate">
                         <div class="panel-body">
                             <!--导航-->
@@ -278,6 +278,25 @@
                                     </div>
                                     <div class="input-sm fl plr tc">周之内同一用户不能再次中奖</div>
                                 </div>
+                                <!--地区黑名单-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">中奖区县黑名单</label>
+                                    <div class="col-sm-1 checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-checked="s_hisuse" ng-model="s_hisuse">启用
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3" id="hregion">
+                                        <select name="s.areaBlackCityCodes" class="form-control input-sm" ng-model="s.areaBlackCityCodes" multiple="multiple">
+                                            <option ng-value="hc.code" ng-repeat="hc in s_hrgArr">{{hc.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3" id="harea">
+                                        <select name="s.areaBlackVillCodes" class="form-control input-sm" ng-model="s.areaBlackVillCodes" multiple="multiple">
+                                            <option ng-value="ha.code" ng-repeat="ha in s_hacArr">{{ha.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <!--按钮-->
                                 <div class="form-group tc">
                                     <button class="btn btn-primary" type="button" ng-click="s_next()" ng-disabled="setp_2.sns.$error.required||setp_2.areaCodes.$error.required">下一步</button>
@@ -289,7 +308,7 @@
                     </div>
                 </div>
                 <!--第三步-->
-                <div class="ui-md-setting col-md-12" id="md_third" ng-show="step==2">
+                <div class="ui-md-setting col-md-12" id="md_third" ng-hide="step!=2">
                     <div class="panel rate">
                         <div class="panel-body">
                             <!--导航-->

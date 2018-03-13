@@ -50,6 +50,13 @@ public:                                             ## 公共接口 [勿动]
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/outer/queryAllRegionDatas'
+    authorized: 1
+    description: '获取所有省市区数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 login:                                      # 登录
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/admin/login/verification'

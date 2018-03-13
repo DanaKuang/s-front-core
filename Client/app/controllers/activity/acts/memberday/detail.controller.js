@@ -43,8 +43,15 @@ define([], function () {
                 curPage: 1,
                 detailSearch: initSearch,
                 detailReset: detailReset,
-                export: exportFn
+                export: exportFn,
+                sendMessage: sendMessage
             });
+
+            // 发送消息
+            function sendMessage (item) {
+                if (!item.id) return;
+                alert(item.id);
+            }
 
             // 重置
             function detailReset () {

@@ -15,6 +15,7 @@ define([], function () {
             var brandArr = $model.$brand.data.data || [];
             var DETAIL = $model.$detail.data.data || {};
             var regionArr = $model.$area.data.data || [];
+            var hAreaArr = $model.$allArea.data.data || [];
             var s_pnArr = [];
 
             regionArr.forEach(function (r) {
@@ -105,6 +106,11 @@ define([], function () {
                     activityCode: '',
                     propKey: 'REAWARD_DURATION',
                     propValue: ''
+                }, {
+                    id: '',
+                    activityCode: '',
+                    propKey: 'MEMBERDAY_BLACKLIST',
+                    propValue: ''
                 }]
             };
             var t_def = {
@@ -176,31 +182,35 @@ define([], function () {
                     md.isuse = !!md.isuse;
                 });
 
-                if (DETAIL.activity.memberdayProps[0].propKey === "DRAW_AWARD_TIME") {
-                    u.uiExtend(s_def.memberdayProps[0], DETAIL.activity.memberdayProps[0], [
-                        'activityCode',
-                        'id',
-                        'propValue'
-                    ]);
-                    u.uiExtend(s_def.memberdayProps[1], DETAIL.activity.memberdayProps[1], [
-                        'activityCode',
-                        'id',
-                        'propValue'
-                    ]);
-                } else {
-                    u.uiExtend(s_def.memberdayProps[0], DETAIL.activity.memberdayProps[1], [
-                        'activityCode',
-                        'id',
-                        'propValue'
-                    ]);
-                    u.uiExtend(s_def.memberdayProps[1], DETAIL.activity.memberdayProps[0], [
-                        'activityCode',
-                        'id',
-                        'propValue'
-                    ]);
-                }
+                DETAIL.activity.memberdayProps.forEach(function (mp) {
+                    switch(mp.propKey) {
+                        case 'DRAW_AWARD_TIME':
+                            u.uiExtend(s_def.memberdayProps[0], mp, [
+                                'activityCode',
+                                'id',
+                                'propValue'
+                            ]);
+                            break;
+                        case 'REAWARD_DURATION':
+                            u.uiExtend(s_def.memberdayProps[1], mp, [
+                                'activityCode',
+                                'id',
+                                'propValue'
+                            ]);
+                            break;
+                        case 'MEMBERDAY_BLACKLIST':
+                            u.uiExtend(s_def.memberdayProps[2], mp, [
+                                'activityCode',
+                                'id',
+                                'propValue'
+                            ]);
+                            break;
+                    }
+                });
                 s_def.sns = DETAIL.activity.sn.split(',');
                 s_def.areaCodes = DETAIL.activity.areaCode.split(',');
+                s_def.areaBlackCityCodes = DETAIL.activity.areaBlackCityCodes.split(',');
+                s_def.areaBlackVillCodes = DETAIL.activity.areaBlackVillCodes.split(',');
                 s_def.stime = df.datetime(DETAIL.activity.stime);
                 s_def.etime = df.datetime(DETAIL.activity.etime);
 
@@ -216,6 +226,7 @@ define([], function () {
 
             var s_memberdayProps_0 = s_def.memberdayProps[0].propValue;
             var s_memberdayProps_1 = s_def.memberdayProps[1].propValue;
+            var s_memberdayProps_2 = s_def.memberdayProps[2] || {};
 
             $scope.f = angular.extend({}, f_def);
             $scope.s = angular.extend({}, s_def);
@@ -233,6 +244,9 @@ define([], function () {
                 s_brandChange: brandChange,
                 s_pnArr: [],
                 s_rgArr: regionArr,
+                s_hrgArr: regionArr,
+                s_hisuse: !!s_memberdayProps_2.propValue,
+                s_hacArr: [],
                 s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
                 s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
                 s_memberdayProps_isuse: !!Number(s_memberdayProps_1.split('@')[0]),
@@ -308,8 +322,13 @@ define([], function () {
 
                 $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
                 $scope.s.memberdayProps[1].propValue = ''+(0+$scope.s_memberdayProps_isuse)+'@'+$scope.s_memberdayProps_wweek;
+                $scope.s.memberdayProps[2].propValue = 0 + $scope.s_hisuse;
+
                 $model.update(angular.extend(
-                    $scope.f, $scope.s, $scope.t
+                    $scope.f, $scope.s, $scope.t, {
+                        areaBlackCityCodes: !!$scope.s.areaBlackVillCodes.length ? $scope.s.areaBlackCityCodes.join(',') : '',
+                        areaBlackVillCodes: $scope.s.areaBlackVillCodes.join(',') || ''
+                    }
                 )).then(function (res) {
                     if (res.data.ret === '200000') {
                         alert('保存成功！');
@@ -383,6 +402,23 @@ define([], function () {
                 }
             });
 
+            // 黑名单显示
+            $scope.$watch('s.areaBlackCityCodes', function (n, o, scope) {
+                if (n !== o) {
+                    var s_hacArr = [];
+                    n.forEach(function (f) {
+                        s_hacArr = s_hacArr.concat(hAreaArr.areas[f] || []);
+                    });
+                    s_hacArr.forEach(function (r) {
+                        r.label = r.name;
+                        r.value = r.code;
+                    });
+                    scope.s_hacArr = s_hacArr;
+                    $("#harea select").multiselect('dataprovider', scope.s_hacArr);
+                    $("#harea select").multiselect('select', scope.s.areaBlackVillCodes);
+                }
+            });
+
             // 初始化多选
             $(document).ready(function () {
                 $(".multi select").multiselect({
@@ -402,6 +438,26 @@ define([], function () {
                     enableCollapsibleOptGroups: true
                 }).multiselect('dataprovider', regionArr)
                   .multiselect('select', $scope.s.areaCodes);
+
+                $("#hregion select").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    enableFiltering: true,
+                    buttonWidth: '200px',
+                    filterPlaceholder: '查询',
+                    enableClickableOptGroups: true,
+                    enableCollapsibleOptGroups: true
+                }).multiselect('dataprovider', regionArr)
+                  .multiselect('select', $scope.s.areaBlackCityCodes);
+
+                // 黑名单
+                $("#harea select").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择',
+                    buttonWidth: '200px'
+                });
 
                 // 年月日时分秒
                 $("#md_second .datetime").datetimepicker({
@@ -458,6 +514,9 @@ define([], function () {
                     startDate: df.date(+new Date)+' 00:00:00',
                     endDate: df.date(+new Date)+' 23:59:59'
                 });
+                setTimeout(function () {
+                    $("#hareaLine").tooltip();
+                }, 500);
             });
 
         }]
