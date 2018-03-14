@@ -403,21 +403,25 @@ define([], function () {
             });
 
             // 黑名单显示
-            $scope.$watch('s.areaBlackCityCodes', function (n, o, scope) {
+            $scope.$watch('s.areaBlackCityCodes', function (n, o) {
                 if (n !== o) {
-                    var s_hacArr = [];
-                    n.forEach(function (f) {
-                        s_hacArr = s_hacArr.concat(hAreaArr.areas[f] || []);
-                    });
-                    s_hacArr.forEach(function (r) {
-                        r.label = r.name;
-                        r.value = r.code;
-                    });
-                    scope.s_hacArr = s_hacArr;
-                    $("#harea select").multiselect('dataprovider', scope.s_hacArr);
-                    $("#harea select").multiselect('select', scope.s.areaBlackVillCodes);
+                    initAreaBlackVill(n);
                 }
             });
+
+            function initAreaBlackVill(n) {
+                var s_hacArr = [];
+                n.forEach(function (f) {
+                    s_hacArr = s_hacArr.concat(hAreaArr.areas[f] || []);
+                });
+                s_hacArr.forEach(function (r) {
+                    r.label = r.name;
+                    r.value = r.code;
+                });
+                $scope.s_hacArr = s_hacArr;
+                $("#harea select").multiselect('dataprovider', $scope.s_hacArr);
+                $("#harea select").multiselect('select', $scope.s.areaBlackVillCodes);
+            }
 
             // 初始化多选
             $(document).ready(function () {
@@ -458,6 +462,9 @@ define([], function () {
                     nSelectedText: '已选择',
                     buttonWidth: '200px'
                 });
+                if (!!$scope.s.areaBlackCityCodes.length) {
+                    initAreaBlackVill($scope.s.areaBlackCityCodes);
+                }
 
                 // 年月日时分秒
                 $("#md_second .datetime").datetimepicker({
