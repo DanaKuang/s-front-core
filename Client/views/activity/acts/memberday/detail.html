@@ -93,7 +93,8 @@
                                             <td>{{item.ctime}}</td>
                                             <td>{{item.salerCityName}}</td>
                                             <td>{{item.statusName}}</td>
-                                            <td><a href="javascript:void(0)" ng-click="sendMessage(item)">发送提醒</a></td>
+                                            <td ng-if="item.canSend"><a href="javascript:void(0)" ng-click="sendMessage(item)">发送提醒</a></td>
+                                            <td ng-if="!item.canSend">发送提醒</td>
                                         </tr>
                                     </tbody>
                                 </table>

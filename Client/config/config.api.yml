@@ -57,6 +57,13 @@ public:                                             ## 公共接口 [勿动]
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/newSystemTime'
+    authorized: 1
+    description: '获取服务器时间'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 login:                                      # 登录
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/admin/login/verification'
@@ -716,7 +723,7 @@ report:
     description: '河北周报_获取红包次数和其他'
     enableroute: 1
     gatewaytype: 0
-    responetype: 'json' 
+    responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getTagName'
     authorized: 1
@@ -1672,6 +1679,13 @@ manageacts:
     routepath: '/api/tztx/saas/saotx/activity/exportMemberAwards'
     authorized: 1
     description: '会员日详情导出'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/sendMemberMessage'
+    authorized: 1
+    description: '会员日消息发送'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
