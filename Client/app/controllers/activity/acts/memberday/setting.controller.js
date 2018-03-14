@@ -299,17 +299,23 @@ define([], function () {
                 });
             }
 
-            // 第一步 下一步
-            function f_next () {
-                $scope.step = 1;
-            }
             // 第二步 下一步
-            function s_next () {
-                $scope.step = 2;
+            function f_next () {
+                $("#md_first").fadeOut('fast');
+                $("#md_second").fadeIn('fast');
+                $("#md_third").fadeOut('fast');
             }
-            // 第二步 返回
+            // 第三步 下一步
+            function s_next () {
+                $("#md_first").fadeOut('fast');
+                $("#md_second").fadeOut('fast');
+                $("#md_third").fadeIn('fast');
+            }
+            // 第一步 返回
             function s_back () {
-                $scope.step = 0;
+                $("#md_first").fadeIn('fast');
+                $("#md_second").fadeOut('fast');
+                $("#md_third").fadeOut('fast');
             }
             // 第三步 保存
             function t_save () {
@@ -521,9 +527,9 @@ define([], function () {
                     startDate: df.date(+new Date)+' 00:00:00',
                     endDate: df.date(+new Date)+' 23:59:59'
                 });
-                setTimeout(function () {
-                    $("#hareaLine").tooltip();
-                }, 500);
+
+                // 显示第一栏
+                $("#md_first").show();
             });
 
         }]
