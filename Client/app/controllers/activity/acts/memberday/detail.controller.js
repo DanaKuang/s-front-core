@@ -55,7 +55,8 @@ define([], function () {
                     awardName: item.awardName || '',
                     openId: item.openId || '',
                     minred: item.minred || '',
-                    ctime: item.ctime || ''
+                    ctime: item.ctime || '',
+                    appId: item.appId || ''
                 }).then(function (res) {
                     res = res.data || {};
                     if (res.ret === '200000') {
