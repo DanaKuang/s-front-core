@@ -12,22 +12,19 @@ define([], function () {
         ServiceContent: ['$scope', 'setDateConf','dayFilter', function ($scope, setDateConf,dayFilter) {
             var $model = $scope.$model;
             setDateConf.init($(".agree-date"), "day");
+            setDateConf.init($(".agree-month"), "month");
             //设置input的默认时间
             var stattime = dayFilter.yesterday("date");
+            var amonth = (new Date().getMonth() + 1)<10 ? '0'+ (new Date().getMonth() + 1):(new Date().getMonth() + 1);
+            var statmonth = new Date().getFullYear() + "-" + amonth;
+            
             $(".date-wrap").find("input").val(stattime);
+            $(".month-wrap").find("input").val(statmonth);
             var curTableIndex = '';
             var curWeekStr = '';
             var curSpeciftStr = '';
-            //页面默认加载配置
-            // $scope.obj = {
-            //     "statTime": stattime,
-            //     "activityName": "盒-芙蓉王（硬细支）",
-            //     "productSn": "",
-            // };
-            // $scope.saoobj = {
-            //     "statTime": stattime,
-            //     "activityName": "芙蓉王（硬细支）"
-            // };
+            
+            
             $scope.weekScanData = {
                 'statTime' : "",
                 'productSn' : "",
@@ -50,6 +47,13 @@ define([], function () {
                         gloabl.getBrand(2);
                         curTableIndex = 2;
                         gloabl.getWeeks(2);
+                        break;
+                    case 3 :
+                        gloabl.getBrand(3);
+                        break;
+                    case 4 :
+                        gloabl.getBrand(4);
+                        break;
                     default :      
                 }
             }
@@ -188,7 +192,6 @@ define([], function () {
                                     selectAllValue: 'all',
                                     buttonWidth: '180px'
                                 }); 
-                                console.log($scope.brandList);
                                 if($scope.brandList.length > 0) {
                                     var brandStrArr = [];
                                     for(var i=0; i<$scope.brandList.length; i++){
@@ -213,7 +216,6 @@ define([], function () {
                                         selectAllValue: 'all',
                                         buttonWidth: '180px'
                                     }); 
-                                    // console.log($('#brands').multiselect().val("转世"));
                                     $('#redweekspecifts').multiselect().val($scope.speciftList[0].productName).multiselect("refresh");
                                     if($scope.speciftList.length > 0){
                                         var speciftStrArr = [];
@@ -222,6 +224,124 @@ define([], function () {
                                         }
                                         $('#redweekspecifts').multiselect().val(speciftStrArr).multiselect("refresh");
                                         curSpeciftStr = "全部";
+                                    }
+                                });
+                                
+                            })
+                            break;
+                        case 3 : 
+                            $model.$getBrandData().then(function (res) {
+                                $scope.brandList = res.data || [];
+                                $scope.$apply();  
+                                var curBrandName = "";
+                                $("select#monthbrands").multiselect({
+                                    nonSelectedText: '请选择',
+                                    allSelectedText: '全部',
+                                    nSelectedText: '已选择',
+                                    selectAll:true,
+                                    selectAllText: '全部',
+                                    selectAllValue: 'all',
+                                    buttonWidth: '180px'
+                                }); 
+                                if($scope.brandList.length > 0) {
+                                    var brandStrArr = [];
+                                    for(var i=0; i<$scope.brandList.length; i++){
+                                        brandStrArr.push($scope.brandList[i].productBrand);
+                                    }
+                                    $('#monthbrands').multiselect().val(brandStrArr).multiselect("refresh");
+                                }
+                               
+                                
+                                curBrandName = $('#monthbrands').multiselect().val().toString();
+                                $model.$getSpecifData({productBrand: curBrandName}).then(function(res){
+                                    $scope.speciftList = res.data || [];
+                                    
+                                    $scope.$apply();
+                                    $("select#smonthspecifts").multiselect({
+                                        nonSelectedText: '请选择',
+                                        allSelectedText: '全部',
+                                        nSelectedText: '已选择',
+                                        selectAll:true,
+                                        selectAllText: '全部',
+                                        selectAllValue: 'all',
+                                        buttonWidth: '180px'
+                                    }); 
+                                    // console.log($('#brands').multiselect().val("转世"));
+                                    $('#monthspecifts').multiselect().val($scope.speciftList[0].productName).multiselect("refresh");
+                                    if($scope.speciftList.length > 0){
+                                        var speciftStrArr = [];
+                                        for(var i=0; i<$scope.speciftList.length; i++){
+                                            speciftStrArr.push($scope.speciftList[i].productSn);
+                                        }
+                                        $('#monthspecifts').multiselect().val(speciftStrArr).multiselect("refresh");
+                                        curSpeciftStr = "全部";
+                                        var scanDataObj = {
+                                            'statTime' : $('#dataMonth').val()+"-01",
+                                            'productSn' : $('#monthspecifts').multiselect().val().toString(),
+                                            'productBrand': $('#monthbrands').multiselect().val().toString(),
+                                            'staType': "month"
+                                        }
+                                        gloabl.getMonthScanWinData(scanDataObj);
+
+                                    }
+                                });
+                                
+                            })
+                            break;
+                        case 4 :
+                            $model.$getBrandData().then(function (res) {
+                                $scope.brandList = res.data || [];
+                                $scope.$apply();  
+                                var curBrandName = "";
+                                $("select#redmonthbrands").multiselect({
+                                    nonSelectedText: '请选择',
+                                    allSelectedText: '全部',
+                                    nSelectedText: '已选择',
+                                    selectAll:true,
+                                    selectAllText: '全部',
+                                    selectAllValue: 'all',
+                                    buttonWidth: '180px'
+                                }); 
+                                if($scope.brandList.length > 0) {
+                                    var brandStrArr = [];
+                                    for(var i=0; i<$scope.brandList.length; i++){
+                                        brandStrArr.push($scope.brandList[i].productBrand);
+                                    }
+                                    $('#redmonthbrands').multiselect().val(brandStrArr).multiselect("refresh");
+                                }
+                                // console.log($('#brands').multiselect().val("转世"));
+                                
+                                curBrandName = $('#redmonthbrands').multiselect().val().toString();
+                                $model.$getSpecifData({productBrand: curBrandName}).then(function(res){
+                                    $scope.speciftList = res.data || [];
+                                    
+                                    $scope.$apply();
+                                    $("select#redmonthspecifts").multiselect({
+                                        nonSelectedText: '请选择',
+                                        allSelectedText: '全部',
+                                        nSelectedText: '已选择',
+                                        selectAll:true,
+                                        selectAllText: '全部',
+                                        selectAllValue: 'all',
+                                        buttonWidth: '180px'
+                                    }); 
+                                    // console.log($('#brands').multiselect().val("转世"));
+                                    $('#redmonthspecifts').multiselect().val($scope.speciftList[0].productName).multiselect("refresh");
+                                    if($scope.speciftList.length > 0){
+                                        var speciftStrArr = [];
+                                        for(var i=0; i<$scope.speciftList.length; i++){
+                                            speciftStrArr.push($scope.speciftList[i].productSn);
+                                        }
+                                        $('#redmonthspecifts').multiselect().val(speciftStrArr).multiselect("refresh");
+                                        curSpeciftStr = "全部";
+                                        var redDataObj = {
+                                            'statTime' : $('#redMonth').val()+"-01",
+                                            'productSn' : $('#redmonthspecifts').multiselect().val().toString(),
+                                            'productBrand': $('#redmonthbrands').multiselect().val().toString(),
+                                            'staType': "month"
+                                        }
+                                        gloabl.getMonthRedWinData(redDataObj);
+
                                     }
                                 });
                                 
@@ -307,7 +427,44 @@ define([], function () {
                             $("#redWeekDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
                         }
                     })
+                },
+                'getMonthScanWinData' : function (timesObj) {
+                    $model.$getMonthScanData(timesObj).then(function (res) {
+                        console.log(res);
+                        var res = res.data || [];
+                        
+                        //表标题显示
+                        //console.log($("#proviceDataSpecift").val())
+                        $('#monthScanDataTitle').html('扫码月报数据汇总('+$("#dataMonth").val()+')');
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                $("#monthScanWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 + "</td><td>" + res[i].col7 + "</td><td>" + res[i].col8 + "</td><td>"+res[i].col9+"</td><td>"+res[i].col10+"</td><td>"+res[i].col11+"</td></tr>");
+                                
+                            }
+                        }else{
+                            $("#monthScanWin").append("<tr><td colspan='12'>暂无符合条件的数据</td></tr>");
+                        }
+                    });
+                },
+                //月投入红包量；
+                'getMonthRedWinData' :  function (timesObj) {
+                    $model.$getMonthRedWinData(timesObj).then(function (res) {
+                        console.log(res);
+                        var res = res.data || [];
+                        $(".report-table").find("tbody").html("");
+                        
+                        $('#monthRedDataTitle').html('扫码月报数据汇总('+$("#redMonth").val()+')');
+                        if(res.length > 0){
+                            for (var i = 0; i < res.length; i++) {
+                                $("#monthRedWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 +"</td></tr>");
+                                
+                            }
+                        }else{
+                            $("#monthRedWin").append("<tr><td colspan='7'>暂无符合条件的数据</td></tr>");
+                        }
+                    });
                 }
+
             }
             //点击按钮的返回
             $scope.goback = function () {
@@ -327,7 +484,6 @@ define([], function () {
 
             //查询按钮
             $scope.search = function ($event) {
-                //console.log($('#brands').multiselect().val());
                 var that = $event.target;
                 switch(arguments[1]){
                     case 1:
@@ -378,7 +534,27 @@ define([], function () {
                         console.log(redWinDataObj);
                         gloabl.getWeekRedWinData(redWinDataObj);
                         break;
-
+                    case 3:
+                        
+                        var scanWinDataObj = {
+                            'statTime' : $('#dataMonth').val()+"-01",
+                            'productSn' : $('#monthspecifts').multiselect().val().toString(),
+                            'productBrand': $('#monthbrands').multiselect().val().toString(),
+                            'staType': "month"
+                        }
+                        console.log(scanWinDataObj);
+                        gloabl.getMonthScanWinData(scanWinDataObj);
+                        break;
+                    case 4:
+                        var redWinDataObj = {
+                            'statTime' : $('#redMonth').val()+"-01",
+                            'productSn' : $('#redmonthspecifts').multiselect().val().toString(),
+                            'productBrand': $('#redmonthbrands').multiselect().val().toString(),
+                            'staType': "month"
+                        }
+                        console.log(redWinDataObj);
+                        gloabl.getMonthRedWinData(redWinDataObj);
+                        break;
                     default :
                 }
             }
@@ -394,10 +570,11 @@ define([], function () {
                 if (a === 1) {
                     var data = {
                         'statTime' : $('#proviceDataWeeks').val(),
-                        'productSn' : $('#proviceDataSpecift').val(),
-                        'productBrand': $("#proviceDataBrand").val(),
+                        'productSn' : $('#specifts').multiselect().val().toString(),
+                        'productBrand': $('#brands').multiselect().val().toString(),
                         'staType': "week"
                     }
+                    console.log(data);
                     if(curSpeciftStr != '' && curWeekStr != ''){
                         // console.log(curSpeciftStr + ':' + curWeekStr);
                         data.tableTitle = curSpeciftStr +'扫码数据汇总('+ curWeekStr + ')';
@@ -415,6 +592,27 @@ define([], function () {
                         data.tableTitle = '扫码活动红包投入数据周报('+ curWeekStr + ')';
                     }
                     var url = "/api/tztx/dataportal/fixatreport/getRptScanRedDateWeekExcel";
+                }else if (a === 3) {
+                    var data = {
+                        'statTime' : $('#dataMonth').val()+"-01",
+                        'productSn' : $('#monthspecifts').multiselect().val().toString(),
+                        'productBrand': $('#monthbrands').multiselect().val().toString(),
+                        'staType': "month"
+                    }
+                    data.tableTitle = '扫码数据汇总';
+                    
+                    var url = "/api/tztx/dataportal/fixatreport/getRptScanNumDateMonthExcel";
+                }else if(a === 4) {
+                    var data = {
+                        'statTime' : $('#redMonth').val()+"-01",
+                        'productSn' : $('#redmonthspecifts').multiselect().val().toString(),
+                        'productBrand': $('#redmonthbrands').multiselect().val().toString(),
+                        'staType': "month"
+                    }
+                    console.log(data);
+                    data.tableTitle = '扫码活动红包投入数据月报';
+                    
+                    var url = "/api/tztx/dataportal/fixatreport/getRptScanRedDateMonthExcel";
                 }
                 var xhr = new XMLHttpRequest();
                 var formData = new FormData();
@@ -475,6 +673,39 @@ define([], function () {
                         
                     }));
                     $("#redweekspecifts").multiselect('refresh');
+                    $scope.$apply();
+                });
+            });
+            //监听月报品牌变化；
+            $('#monthbrands').change(function(){
+                var curBrandValue = $(this).val().toString();
+                console.log(curBrandValue);
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    console.log($scope.speciftList);
+                    $("#monthspecifts").multiselect('dataprovider', _.forEach($scope.speciftList, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                        v.label = v.productName;
+                        v.value = v.productSn;
+                        
+                    }));
+                    $("#monthspecifts").multiselect('refresh');
+                    $scope.$apply();
+                });
+            });
+
+            //监听月报品牌变化；
+            $('#redmonthbrands').change(function(){
+                var curBrandValue = $(this).val().toString();
+                console.log(curBrandValue);
+                $model.$getSpecifData({productBrand:curBrandValue}).then(function(res){
+                    $scope.speciftList = res.data || [];
+                    console.log($scope.speciftList);
+                    $("#redmonthspecifts").multiselect('dataprovider', _.forEach($scope.speciftList, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                        v.label = v.productName;
+                        v.value = v.productSn;
+                        
+                    }));
+                    $("#redmonthspecifts").multiselect('refresh');
                     $scope.$apply();
                 });
             });
