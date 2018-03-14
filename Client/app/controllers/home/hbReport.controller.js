@@ -430,19 +430,21 @@ define([], function () {
                 },
                 'getMonthScanWinData' : function (timesObj) {
                     $model.$getMonthScanData(timesObj).then(function (res) {
-                        console.log(res);
                         var res = res.data || [];
-                        
-                        //表标题显示
-                        //console.log($("#proviceDataSpecift").val())
+                        $(".report-table").find("tbody").html("");
                         $('#monthScanDataTitle').html('扫码月报数据汇总('+$("#dataMonth").val()+')');
+                        var str="";
                         if(res.length > 0){
+                            console.log(111111);
+                            console.log(res);
                             for (var i = 0; i < res.length; i++) {
+                                
                                 $("#monthScanWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 + "</td><td>" + res[i].col7 + "</td><td>" + res[i].col8 + "</td><td>"+res[i].col9+"</td><td>"+res[i].col10+"</td><td>"+res[i].col11+"</td></tr>");
                                 
                             }
+
                         }else{
-                            $("#monthScanWin").append("<tr><td colspan='12'>暂无符合条件的数据</td></tr>");
+                            $("#monthScanWin").html("<tr><td colspan='12'>暂无符合条件的数据</td></tr>");
                         }
                     });
                 },
@@ -542,7 +544,6 @@ define([], function () {
                             'productBrand': $('#monthbrands').multiselect().val().toString(),
                             'staType': "month"
                         }
-                        console.log(scanWinDataObj);
                         gloabl.getMonthScanWinData(scanWinDataObj);
                         break;
                     case 4:
