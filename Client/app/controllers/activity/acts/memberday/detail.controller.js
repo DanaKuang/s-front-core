@@ -57,6 +57,7 @@ define([], function () {
                     minred: item.minred || '',
                     ctime: item.ctime || ''
                 }).then(function (res) {
+                    res = res.data || {};
                     if (res.ret === '200000') {
                         alert('发送成功！');
                     }
@@ -81,6 +82,7 @@ define([], function () {
 
             // 日期判断
             function canSendFilter (d) {
+                SERVERT = +new Date($scope.nowTime) || SERVERT;
                 var nowWeek = $scope.weekArr[0].weekNo || "";// 本周
                 var befWeek = $scope.weekArr[1].weekNo || "";// 上周
                 befWeek = befWeek.slice(befWeek.indexOf('(')+1,befWeek.indexOf(')')).replace(/\./g,'-').split('~');
@@ -96,7 +98,7 @@ define([], function () {
                     }
                 }
                 // 当前时间在本周一00:00--本周二20:30
-                if (SERVERT > (+new Date(nowWeek[0]+' 23:59:59'))) {
+                if (SERVERT > (+new Date(nowWeek[0]+' 00:00:00'))) {
                     if (SERVERT - (+new Date(nowWeek[0]+' 00:00:00')) < (24*60*60*1000+20.5*60*60*1000)) {
                         if (d.term === befWeek[0]) {
                             return true;
@@ -188,6 +190,14 @@ define([], function () {
                 });
                 $region.multiselect('dataprovider', regionArr);
                 initSearch();
+
+
+                $(".date").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii:ss",
+                    autoclose: true,
+                    todayBtn: true
+                });
             });
         }]
     };
