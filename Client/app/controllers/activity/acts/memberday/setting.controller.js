@@ -209,8 +209,8 @@ define([], function () {
                 });
                 s_def.sns = DETAIL.activity.sn.split(',');
                 s_def.areaCodes = DETAIL.activity.areaCode.split(',');
-                s_def.areaBlackCityCodes = DETAIL.activity.areaBlackCityCodes.split(',');
-                s_def.areaBlackVillCodes = DETAIL.activity.areaBlackVillCodes.split(',');
+                s_def.areaBlackCityCodes = _.union(DETAIL.activity.areaBlackCityCodes.split(','));
+                s_def.areaBlackVillCodes = _.union(DETAIL.activity.areaBlackVillCodes.split(','));
                 s_def.stime = df.datetime(DETAIL.activity.stime);
                 s_def.etime = df.datetime(DETAIL.activity.etime);
 
@@ -245,7 +245,7 @@ define([], function () {
                 s_pnArr: [],
                 s_rgArr: regionArr,
                 s_hrgArr: regionArr,
-                s_hisuse: !!s_memberdayProps_2.propValue,
+                s_hisuse: !!Number(s_memberdayProps_2.propValue),
                 s_hacArr: [],
                 s_memberdayProps_week: s_memberdayProps_0.split('@')[0],
                 s_memberdayProps_time: s_memberdayProps_0.split('@')[1],
