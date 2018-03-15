@@ -257,7 +257,7 @@ define([], function () {
                                     $scope.speciftList = res.data || [];
                                     
                                     $scope.$apply();
-                                    $("select#smonthspecifts").multiselect({
+                                    $("select#monthspecifts").multiselect({
                                         nonSelectedText: '请选择',
                                         allSelectedText: '全部',
                                         nSelectedText: '已选择',
