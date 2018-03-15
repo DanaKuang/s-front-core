@@ -86,8 +86,17 @@ define([], function () {
                 SERVERT = +new Date($scope.nowTime) || SERVERT;
                 var nowWeek = $scope.weekArr[0].weekNo || "";// 本周
                 var befWeek = $scope.weekArr[1].weekNo || "";// 上周
+
+                $scope.weekArr.forEach(function (w, i) {
+                    var weeks = w.weekNo.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+                    if (SERVERT > +new Date(weeks[0]+' 00:00:00') && SERVERT < +new Date(weeks[1]+' 23:59:59')) {
+                        nowWeek = $scope.weekArr[i].weekNo;
+                        befWeek = $scope.weekArr[i+1].weekNo;
+                    }
+                });
                 befWeek = befWeek.slice(befWeek.indexOf('(')+1,befWeek.indexOf(')')).replace(/\./g,'-').split('~');
                 nowWeek = nowWeek.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+
 
                 // 判断本周是否开奖
                 // 当前时间在周六20:30--周日23:59
