@@ -88,7 +88,7 @@ define([], function () {
                                             }
                                             //console.log(startTimeObj);
                                             if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
-                                                gloabl.getProvData(startTimeObj);
+                                                gloabl.getWeekScanWinData(startTimeObj);
                                             }
                                         });
                                     }
@@ -112,7 +112,7 @@ define([], function () {
                                             }
                                             console.log(startTimeObj);
                                             if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
-                                                gloabl.getRedData(startTimeObj);
+                                                gloabl.getWeekRedWinData(startTimeObj);
                                             }
                                         });
                                     }
@@ -139,7 +139,6 @@ define([], function () {
                                     selectAllValue: 'all',
                                     buttonWidth: '180px'
                                 }); 
-                                console.log($scope.brandList);
                                 if($scope.brandList.length > 0) {
                                     var brandStrArr = [];
                                     for(var i=0; i<$scope.brandList.length; i++){
@@ -150,7 +149,6 @@ define([], function () {
                                 // console.log($('#brands').multiselect().val("转世"));
                                 
                                 curBrandName = $('#brands').multiselect().val().toString();
-                                console.log($('#brands').multiselect().val());
                                 $model.$getSpecifData({productBrand: curBrandName}).then(function(res){
                                     $scope.speciftList = res.data || [];
                                     
@@ -352,12 +350,11 @@ define([], function () {
                 },
                 'getWeekScanWinData' : function(timesObj){
                     $model.$getWeekScanData(timesObj).then(function (res) {
-                        console.log(res);
+                        
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
                         //表标题显示
-                        //console.log($("#proviceDataSpecift").val())
-                        $('#provDataTitle').html(curSpeciftStr +'扫码数据汇总('+ curWeekStr + ')');
+                        $('#weekDataTitle').html('扫码数据周报('+ curWeekStr + ')');
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
                                 $("#weekScanWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 + "</td><td>" + res[i].col7 + "</td><td>" + res[i].col8 + "</td><td>"+res[i].col9+"</td><td>"+res[i].col10+"</td><td>"+res[i].col11+"</td></tr>");
@@ -376,8 +373,8 @@ define([], function () {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
                         //表标题显示
-                        //console.log($("#proviceDataSpecift").val())
-                        $('#redWeekDataTitle').html('扫码活动红包投入数据周报('+ curWeekStr + ')');
+                        console.log($('#redDataWeeks').find("option:selected").text())
+                        $('#redWeekDataTitle').html('扫码活动红包投入数据周报('+ $('#redDataWeeks').find("option:selected").text() + ')');
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
                                 var curNum = i+1;
@@ -388,51 +385,11 @@ define([], function () {
                         }
                     })
                 } ,
-                //初始化数据；
-                'getProvData' : function(timesObj){
-                    console.log(timesObj);
-                    $model.$getProvData(timesObj).then(function (res) {
-                        console.log(res);
-                        var res = res.data || [];
-                        $(".report-table").find("tbody").html("");
-                        //表标题显示
-                        //console.log($("#proviceDataSpecift").val())
-                        $('#provDataTitle').html(curSpeciftStr +'扫码数据汇总('+ curWeekStr + ')');
-                        if(res.length > 0){
-                            for (var i = 0; i < res.length; i++) {
-                                var curNum = i+1;
-                                $("#weekScanWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 + "</td><td>" + res[i].col7 + "</td><td>" + res[i].col8 + "</td><td>"+res[i].col9+"</td><td>"+res[i].col10+"</td><td>"+res[i].col11+"</td></tr>");
-                            }
-                        }else{
-                            $("#weekScanWin").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
-                        }
-                    })
-                },
-                //初始化红包数据；
-                'getRedData' : function(timesObj) {
-                    console.log(timesObj);
-                    $model.$getWeekRedWinData(timesObj).then(function (res) {
-                        console.log(res);
-                        var res = res.data || [];
-                        $(".report-table").find("tbody").html("");
-                        //表标题显示
-                        //console.log($("#proviceDataSpecift").val())
-                        $('#redWeekDataTitle').html('扫码活动红包投入数据周报('+ curWeekStr + ')');
-                        if(res.length > 0){
-                            for (var i = 0; i < res.length; i++) {
-                                var curNum = i+1;
-                                $("#redWeekDataDetail").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 + "</td></tr>");
-                            }
-                        }else{
-                            $("#redWeekDataDetail").append("<tr><td colspan='15'>暂无符合条件的数据</td></tr>");
-                        }
-                    })
-                },
                 'getMonthScanWinData' : function (timesObj) {
                     $model.$getMonthScanData(timesObj).then(function (res) {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
-                        $('#monthScanDataTitle').html('扫码月报数据汇总('+$("#dataMonth").val()+')');
+                        $('#monthScanDataTitle').html('扫码数据月报('+$("#dataMonth").val()+')');
                         var str="";
                         if(res.length > 0){
                             console.log(111111);
@@ -455,7 +412,7 @@ define([], function () {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
                         
-                        $('#monthRedDataTitle').html('扫码月报数据汇总('+$("#redMonth").val()+')');
+                        $('#monthRedDataTitle').html('扫码活动红包投入数据月报('+$("#redMonth").val()+')');
                         if(res.length > 0){
                             for (var i = 0; i < res.length; i++) {
                                 $("#monthRedWin").append("<tr><td>" + res[i].col0 + "</td><td>" + res[i].col1 + "</td><td>" + res[i].col2 + "</td><td>" + res[i].col3 + "</td><td>" + res[i].col4 + "</td><td>" + res[i].col5 + "</td><td>" + res[i].col6 +"</td></tr>");
@@ -493,20 +450,15 @@ define([], function () {
                         //console.log(provWeekObj.val());
                         if(provWeekObj.val() != ''){
                             curWeekStr = provWeekObj.find("option:selected").text();
-                           // console.log(curWeekStr)
                         }
                         var provSpeciftObj = $('#proviceDataSpecift');
-                        console.log(provSpeciftObj.val());
                         if(provSpeciftObj.val() != ''){
                             curSpeciftStr = provSpeciftObj.find("option:selected").text();
-                            //console.log(curSpeciftStr);
                         }
-
-                        //$('#curSpeciftStr').html()
                         var cashWinDataObj = {
                             'statTime' : $('#proviceDataWeeks').val(),
-                            'productSn' : $('#specifts').multiselect().val().toString(),
-                            'productBrand': $('#brands').multiselect().val().toString(),
+                            'productSn' : $('#specifts').multiselect().val().toString()?$('#specifts').multiselect().val().toString():"请选择",
+                            'productBrand': $('#brands').multiselect().val().toString()?$('#brands').multiselect().val().toString():"请选择",
                             'staType': "week"
                         }
                         console.log(cashWinDataObj);
@@ -518,6 +470,7 @@ define([], function () {
                         if(provWeekObj.val() != ''){
                             curWeekStr = provWeekObj.find("option:selected").text();
                            // console.log(curWeekStr)
+                           
                         }
                         var provSpeciftObj = $('#proviceDataSpecift');
                         //console.log(provSpeciftObj.val());
@@ -529,8 +482,8 @@ define([], function () {
                         //$('#curSpeciftStr').html()
                         var redWinDataObj = {
                             'statTime' : $('#redDataWeeks').val(),
-                            'productSn' : $('#redweekspecifts').multiselect().val().toString(),
-                            'productBrand': $('#redweekbrands').multiselect().val().toString(),
+                            'productSn' : $('#redweekspecifts').multiselect().val().toString()?('#redweekspecifts').multiselect().val().toString():"请选择",
+                            'productBrand': $('#redweekbrands').multiselect().val().toString()?$('#redweekbrands').multiselect().val().toString():"请选择",
                             'staType': "week"
                         }
                         console.log(redWinDataObj);
@@ -540,8 +493,8 @@ define([], function () {
                         
                         var scanWinDataObj = {
                             'statTime' : $('#dataMonth').val()+"-01",
-                            'productSn' : $('#monthspecifts').multiselect().val().toString(),
-                            'productBrand': $('#monthbrands').multiselect().val().toString(),
+                            'productSn' : $('#monthspecifts').multiselect().val().toString()?('#monthspecifts').multiselect().val().toString():"请选择",
+                            'productBrand': $('#monthbrands').multiselect().val().toString()?$('#monthbrands').multiselect().val().toString():"请选择",
                             'staType': "month"
                         }
                         gloabl.getMonthScanWinData(scanWinDataObj);
@@ -549,8 +502,8 @@ define([], function () {
                     case 4:
                         var redWinDataObj = {
                             'statTime' : $('#redMonth').val()+"-01",
-                            'productSn' : $('#redmonthspecifts').multiselect().val().toString(),
-                            'productBrand': $('#redmonthbrands').multiselect().val().toString(),
+                            'productSn' : $('#redmonthspecifts').multiselect().val().toString()?$('#redmonthspecifts').multiselect().val().toString():"请选择",
+                            'productBrand': $('#redmonthbrands').multiselect().val().toString()?$('#redmonthbrands').multiselect().val().toString():"请选择",
                             'staType': "month"
                         }
                         console.log(redWinDataObj);
