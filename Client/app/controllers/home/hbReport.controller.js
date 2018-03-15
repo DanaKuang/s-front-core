@@ -479,10 +479,9 @@ define([], function () {
                             //console.log(curSpeciftStr);
                         }
 
-                        //$('#curSpeciftStr').html()
                         var redWinDataObj = {
                             'statTime' : $('#redDataWeeks').val(),
-                            'productSn' : $('#redweekspecifts').multiselect().val().toString()?('#redweekspecifts').multiselect().val().toString():"请选择",
+                            'productSn' : $('#redweekspecifts').multiselect().val().toString()? $('#redweekspecifts').multiselect().val().toString():"请选择",
                             'productBrand': $('#redweekbrands').multiselect().val().toString()?$('#redweekbrands').multiselect().val().toString():"请选择",
                             'staType': "week"
                         }
