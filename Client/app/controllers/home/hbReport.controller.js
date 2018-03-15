@@ -489,10 +489,10 @@ define([], function () {
                         gloabl.getWeekRedWinData(redWinDataObj);
                         break;
                     case 3:
-                        
+                        //console.log($('#monthspecifts').multiselect().val().toString())
                         var scanWinDataObj = {
                             'statTime' : $('#dataMonth').val()+"-01",
-                            'productSn' : $('#monthspecifts').multiselect().val().toString()?('#monthspecifts').multiselect().val().toString():"请选择",
+                            'productSn' : $('#monthspecifts').multiselect().val().toString()?$('#monthspecifts').multiselect().val().toString():"请选择",
                             'productBrand': $('#monthbrands').multiselect().val().toString()?$('#monthbrands').multiselect().val().toString():"请选择",
                             'staType': "month"
                         }
@@ -505,7 +505,7 @@ define([], function () {
                             'productBrand': $('#redmonthbrands').multiselect().val().toString()?$('#redmonthbrands').multiselect().val().toString():"请选择",
                             'staType': "month"
                         }
-                        console.log(redWinDataObj);
+                        //console.log(redWinDataObj);
                         gloabl.getMonthRedWinData(redWinDataObj);
                         break;
                     default :
