@@ -14,7 +14,11 @@ define([], function () {
                 var GET_TABLE_DATA = "/api/tztx/saas/saotx/activity/queryMemberAwards";     // 表格数据
                 var GET_DROPDOWN_DATA = "/api/tztx/saas/saotx/activity/queryMatypes";       // 下拉
                 var GET_TIER_AREA = '/api/tztx/saas/saotx/common/queryTreeRegion';          // 地区
+                var SEND_MESSAGE_DATA = '/api/tztx/saas/saotx/activity/sendMemberMessage';  // 发送消息
+                var GET_SERVER_TIME = '/api/tztx/saas/saotx/activity/newSystemTime';        // 获取服务器时间
 
+                // 服务器时间
+                this.$sTime = request.$Search(GET_SERVER_TIME, {});
                 // 周
                 this.$week = request.$Search(GET_WEEK_DATA, {}, true);
                 // 奖品类型
@@ -24,6 +28,10 @@ define([], function () {
                 // 表格数据
                 this.getTableData = function (params) {
                     return request.$Search(GET_TABLE_DATA, params);
+                };
+                // 发送消息
+                this.sendMsg = function (params) {
+                    return request.$Search(SEND_MESSAGE_DATA, params);
                 };
             };
         }]

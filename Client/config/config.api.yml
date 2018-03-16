@@ -50,6 +50,20 @@ public:                                             ## 公共接口 [勿动]
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/outer/queryAllRegionDatas'
+    authorized: 1
+    description: '获取所有省市区数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/newSystemTime'
+    authorized: 1
+    description: '获取服务器时间'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 login:                                      # 登录
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/admin/login/verification'
@@ -683,6 +697,34 @@ report:
     gatewaytype: 0
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getProductBrandDown'
+    authorized: 1
+    description: '河北获取品牌'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getProductSnDown'
+    authorized: 1
+    description: '河北获取规格'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/rptScanNumDateWeek'
+    authorized: 1
+    description: '河北周报扫码次数和包数接口'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/rptScanRedDateWeek'
+    authorized: 1
+    description: '河北周报_获取红包次数和其他'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getTagName'
     authorized: 1
     description: '获取包数及周期'
@@ -742,6 +784,48 @@ report:
     routepath: '/api/tztx/dataportal/fixatreport/impExcelWeekScanProvData'
     authorized: 1
     description: '周报_扫码数据分省统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getRptScanNumDateWeekExcel'
+    authorized: 1
+    description: '河北周报_扫码数据分省统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getRptScanRedDateWeekExcel'
+    authorized: 1
+    description: '河北周报_扫码活动红包投入数据周报统计下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/rptScanNumDateMonth'
+    authorized: 1
+    description: '河北月报_扫码数据'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getRptScanNumDateMonthExcel'
+    authorized: 1
+    description: '河北月报_下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/rptScanRedDateMonth'
+    authorized: 1
+    description: '河北月报_扫码活动红包投入数据查询'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'  
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getRptScanRedDateMonthExcel'
+    authorized: 1
+    description: '河北周报_扫码活动红包投入数据下载'
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
@@ -1627,6 +1711,13 @@ manageacts:
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/activity/sendMemberMessage'
+    authorized: 1
+    description: '会员日消息发送'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/poolGift/queryDetail'
     authorized: 1
     description: '活动礼品增库详情'
@@ -2450,6 +2541,91 @@ adsEnse:                                      # 广告位管理，命名只要�
     routepath: '/api/tztx/saas/saotx/ad/queryListAllNoPage'
     authorized: 1
     description: '广告位-广告列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+maowuAct:                                      # 毛五活动管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/list'
+    authorized: 1
+    description: '活动管理-列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/exportDrawDatas'
+    authorized: 1
+    description: '导出活动中奖名单明细'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/list'
+    authorized: 1
+    description: '订单管理列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/export/undeliveredOrder'
+    authorized: 1
+    description: '导出未发货订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/fileAddress'
+    authorized: 1
+    description: '导入物流单号'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/detail'
+    authorized: 1
+    description: '获取订单详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/saveOrUpdate'
+    authorized: 1
+    description: '新增或编辑习酱活动'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/listDraw'
+    authorized: 1
+    description: '获取活动领奖明细列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/award/listLevel'
+    authorized: 1
+    description: '获取活动配置奖项等级'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/activity/detail'
+    authorized: 1
+    description: '获取活动活动详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/import/OrdersTracking'
+    authorized: 1
+    description: '导入物流订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/xj/order/modify/addressInfo'
+    authorized: 1
+    description: '修改物流收货地址'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'

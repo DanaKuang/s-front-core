@@ -15,6 +15,7 @@ define([], function () {
             var regionArr = $model.$area.data.data || [];
             var weekArr = $model.$week.data || [];
             var TYPE = $model.$type.data.data || [];
+            var SERVERT = $model.$sTime.data.data || +new Date;
 
             regionArr.forEach(function (r) {
                 r.label = r.name;
@@ -43,8 +44,26 @@ define([], function () {
                 curPage: 1,
                 detailSearch: initSearch,
                 detailReset: detailReset,
-                export: exportFn
+                export: exportFn,
+                sendMessage: sendMessage
             });
+
+            // 发送消息
+            function sendMessage (item) {
+                if (!item.id) return;
+                $model.sendMsg({
+                    awardName: item.awardName || '',
+                    openId: item.openId || '',
+                    minred: item.minred || '',
+                    ctime: item.ctime || '',
+                    appId: item.appId || ''
+                }).then(function (res) {
+                    res = res.data || {};
+                    if (res.ret === '200000') {
+                        alert('发送成功！');
+                    }
+                });
+            }
 
             // 重置
             function detailReset () {
@@ -62,6 +81,43 @@ define([], function () {
                 });
             }
 
+            // 日期判断
+            function canSendFilter (d) {
+                SERVERT = +new Date($scope.nowTime) || SERVERT;
+                var nowWeek = $scope.weekArr[0].weekNo || "";// 本周
+                var befWeek = $scope.weekArr[1].weekNo || "";// 上周
+
+                $scope.weekArr.forEach(function (w, i) {
+                    var weeks = w.weekNo.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+                    if (SERVERT > +new Date(weeks[0]+' 00:00:00') && SERVERT < +new Date(weeks[1]+' 23:59:59')) {
+                        nowWeek = $scope.weekArr[i].weekNo;
+                        befWeek = $scope.weekArr[i+1].weekNo;
+                    }
+                });
+                befWeek = befWeek.slice(befWeek.indexOf('(')+1,befWeek.indexOf(')')).replace(/\./g,'-').split('~');
+                nowWeek = nowWeek.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+
+
+                // 判断本周是否开奖
+                // 当前时间在周六20:30--周日23:59
+                if (+new Date(nowWeek[1]+' 23:59:59') > SERVERT) {
+                    if (+new Date(nowWeek[1]+' 23:59:59') - SERVERT < (24*60*60*1000+3.5*60*60*1000)) {
+                        if (d.term === nowWeek[0]) {
+                            return true;
+                        }
+                    }
+                }
+                // 当前时间在本周一00:00--本周二20:30
+                if (SERVERT > (+new Date(nowWeek[0]+' 00:00:00'))) {
+                    if (SERVERT - (+new Date(nowWeek[0]+' 00:00:00')) < (24*60*60*1000+20.5*60*60*1000)) {
+                        if (d.term === befWeek[0]) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
             // 初始化查询
             function initSearch (page) {
                 var weekTime = $scope.weekTime.slice($scope.weekTime.indexOf('(')+1,$scope.weekTime.indexOf(')')).replace(/\./g,'-').split('~');
@@ -74,7 +130,10 @@ define([], function () {
                     currentPageNumber: $scope.curPage,
                     pageSize: 100
                 }, page || {})).then(function (res) {
-                    var data = res.data.data || [];
+                    var data = res.data.data || {};
+                    data.list&&data.list.forEach(function (l) {
+                        l.canSend = canSendFilter(l);
+                    });
                     $scope.listArr = data.list || [];
                     // $scope.paginationConf = res.data;
                     $scope.$apply();
@@ -141,6 +200,14 @@ define([], function () {
                 });
                 $region.multiselect('dataprovider', regionArr);
                 initSearch();
+
+
+                $(".date").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii:ss",
+                    autoclose: true,
+                    todayBtn: true
+                });
             });
         }]
     };

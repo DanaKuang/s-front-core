@@ -13,6 +13,7 @@ define([], function () {
                 var GET_BRAND_DATA = "/api/tztx/saas/saotx/common/queryBrandWithRight";         // 获取品牌
                 var GET_PRODUCT_DATA = "/api/tztx/saas/saotx/common/queryProduct";              // 获取规格
                 var GET_TIER_AREA = '/api/tztx/saas/saotx/common/queryTreeRegion';
+                var GET_ALLREG_DATA = '/api/tztx/saas/saotx/outer/queryAllRegionDatas';
                 var UPDATE_DATA = "/api/tztx/saas/saotx/activity/saveOrUpdate";                 // 更新数据
                 var EDIT_URL_DATA = "/api/tztx/saas/saotx/activity/activityDetail";             // 编辑信息
                 var UPLOAD_FILE_ALY = '/api/tztx/saas/saotx/attach/commonAliUpload';            // 文件上传
@@ -26,6 +27,8 @@ define([], function () {
                 this.$detail = request.$Search(GET_DETAIL_DATA, {
                     actForm: 'act-12'
                 });
+                // 全部地区
+                this.$allArea = request.$Search(GET_ALLREG_DATA, {}, true);
                 // 根据品牌获取规格
                 this.getProduct = function (params) {
                     return request.$Search(GET_PRODUCT_DATA, params);
