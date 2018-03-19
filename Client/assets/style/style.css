@@ -455,6 +455,28 @@ body {
   color: #8a8a8a;
 }
 
+/**消息弹窗*/
+#common_alert {
+  position: fixed;
+  top: 80px;
+  overflow: hidden;
+  min-width: 250px;
+  height: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  z-index: 1000;
+}
+#common_alert li {
+  position: absolute;
+  /* box-shadow: 5px 5px 5px rgba(0, 0, 0, .3); */
+  top: -80px;
+  min-width: 250px;
+  opacity: .3;
+}
+#common_alert li .close {
+  line-height: 0.8;
+}
 /*================================begin region==========================*/
 .region-margin, .overall {
     margin-top: 25px;
@@ -788,35 +810,35 @@ input[type="checkbox"]:checked + .checkbox{
     margin-left: 3px;
 }*/
 .sx-arrow-up{
-    font-size: 0;  
-    line-height: 0;  
-    border-width: 10px;  
-    border-color: #FFFFFF;  
-    border-top-width: 0;  
-    border-style: dashed; 
+    font-size: 0;
+    line-height: 0;
+    border-width: 10px;
+    border-color: #FFFFFF;
+    border-top-width: 0;
+    border-style: dashed;
     border-left-width: 6px;
-    border-right-width: 6px; 
-    border-bottom-style: solid;  
-    border-left-color: transparent;  
-    border-right-color: transparent; 
+    border-right-width: 6px;
+    border-bottom-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
     top: 5px;
     margin-left: 4px;
 }
-.sx-arrow-down {  
-    font-size: 0;  
-    line-height: 0;  
-    border-width: 10px;  
-    border-color: #FFFFFF;  
-    border-bottom-width: 0;  
-    border-style: dashed;  
+.sx-arrow-down {
+    font-size: 0;
+    line-height: 0;
+    border-width: 10px;
+    border-color: #FFFFFF;
+    border-bottom-width: 0;
+    border-style: dashed;
     border-left-width: 6px;
-    border-right-width: 6px; 
-    border-top-style: solid;  
-    border-left-color: transparent;  
-    border-right-color: transparent;  
+    border-right-width: 6px;
+    border-top-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
@@ -824,17 +846,17 @@ input[type="checkbox"]:checked + .checkbox{
     margin-left: 4px;
 }
 .sx-arrow-select-down{
-    font-size: 0;  
-    line-height: 0;  
-    border-width: 10px;  
-    border-color: #444444;  
-    border-bottom-width: 0;  
-    border-style: dashed;  
+    font-size: 0;
+    line-height: 0;
+    border-width: 10px;
+    border-color: #444444;
+    border-bottom-width: 0;
+    border-style: dashed;
     border-left-width: 6px;
-    border-right-width: 6px; 
-    border-top-style: solid;  
-    border-left-color: transparent;  
-    border-right-color: transparent;  
+    border-right-width: 6px;
+    border-top-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
@@ -1361,12 +1383,3 @@ input[type="checkbox"]:checked + .checkbox{
   font-size:14px;
 }
 /*==============================end sweepDetail================================*/
-
-
-
-
-
-
-
-
-

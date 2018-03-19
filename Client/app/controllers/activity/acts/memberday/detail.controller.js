@@ -110,7 +110,7 @@ define([], function () {
                 // 当前时间在周六20:30--周日23:59
                 if (+new Date(nowWeek[1]+' 23:59:59') > SERVERT) {
                     if (+new Date(nowWeek[1]+' 23:59:59') - SERVERT < (24*60*60*1000+3.5*60*60*1000)) {
-                        if (d.term === nowWeek[0]) {
+                        if (!d.salerAddress && d.term === nowWeek[0]) {
                             return true;
                         }
                     }
@@ -118,7 +118,7 @@ define([], function () {
                 // 当前时间在本周一00:00--本周二20:30
                 if (SERVERT > (+new Date(nowWeek[0]+' 00:00:00'))) {
                     if (SERVERT - (+new Date(nowWeek[0]+' 00:00:00')) < (24*60*60*1000+20.5*60*60*1000)) {
-                        if (d.term === befWeek[0]) {
+                        if (!d.salerAddress && d.term === befWeek[0]) {
                             return true;
                         }
                     }
