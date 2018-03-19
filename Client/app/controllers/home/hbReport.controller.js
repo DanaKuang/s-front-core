@@ -82,14 +82,16 @@ define([], function () {
                                             //console.log(speciftList);
                                             if(speciftList.length > 0){
                                                 
-                                                startTimeObj.productSn = "";
-                                                startTimeObj.productBrand = ""
-                                                startTimeObj.staType = "week";
+                                                var startTimeObj = {
+                                                    'statTime' : $('#proviceDataWeeks').val(),
+                                                    'productSn' : $('#specifts').multiselect().val().toString()?$('#specifts').multiselect().val().toString():"请选择",
+                                                    'productBrand': $('#brands').multiselect().val().toString()?$('#brands').multiselect().val().toString():"请选择",
+                                                    'staType': "week"
+                                                }
                                             }
-                                            //console.log(startTimeObj);
-                                            if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
+                                            
                                                 gloabl.getWeekScanWinData(startTimeObj);
-                                            }
+                                            
                                         });
                                     }
                                 })
@@ -106,14 +108,15 @@ define([], function () {
                                             //console.log(speciftList);
                                             if(speciftList.length > 0){
                                                 
-                                                startTimeObj.productSn = "";
-                                                startTimeObj.productBrand = ""
-                                                startTimeObj.staType = "week";
+                                                var startRedWinDataObj = {
+                                                    'statTime' : $('#redDataWeeks').val(),
+                                                    'productSn' : $('#redweekspecifts').multiselect().val().toString()? $('#redweekspecifts').multiselect().val().toString():"请选择",
+                                                    'productBrand': $('#redweekbrands').multiselect().val().toString()?$('#redweekbrands').multiselect().val().toString():"请选择",
+                                                    'staType': "week"
+                                                }
                                             }
-                                            console.log(startTimeObj);
-                                            if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
-                                                gloabl.getWeekRedWinData(startTimeObj);
-                                            }
+                                            gloabl.getWeekRedWinData(startRedWinDataObj);
+                                            
                                         });
                                     }
                                 })
