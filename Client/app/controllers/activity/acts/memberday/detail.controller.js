@@ -17,7 +17,7 @@ define([], function () {
             var TYPE = $model.$type.data.data || [];
             var SERVERT = $model.$sTime.data.data || +new Date;
 
-            var weekArr = ws.getWeekArr(+new Date, 10);
+            var weekArr = ws.getWeekArr(SERVERT, 10);
 
             weekArr = weekArr.map(function (week) {
                 return {
