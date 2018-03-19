@@ -37,14 +37,14 @@ define([], function () {
 
             function show ($alert) {
                 $($alert).animate({
-                    right: "+=250",
+                    top: "+=80",
                     opacity: 1
                 }, 200);
             }
 
             function hide ($alert) {
                 $($alert).animate({
-                    top: "-=50",
+                    top: "-=80",
                     opacity: 0.3
                 }, 200, function () {
                     $alert.remove();

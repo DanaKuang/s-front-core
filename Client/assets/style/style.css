@@ -461,14 +461,21 @@ body {
   top: 80px;
   overflow: hidden;
   min-width: 250px;
-  right: 10px;
+  height: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 5px;
+  z-index: 1000;
 }
 #common_alert li {
-  position: relative;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
-  right: -250px;
+  position: absolute;
+  /* box-shadow: 5px 5px 5px rgba(0, 0, 0, .3); */
+  top: -80px;
+  min-width: 250px;
   opacity: .3;
+}
+#common_alert li .close {
+  line-height: 0.8;
 }
 /*================================begin region==========================*/
 .region-margin, .overall {
@@ -1376,12 +1383,3 @@ input[type="checkbox"]:checked + .checkbox{
   font-size:14px;
 }
 /*==============================end sweepDetail================================*/
-
-
-
-
-
-
-
-
-
