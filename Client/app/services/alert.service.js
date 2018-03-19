@@ -54,7 +54,7 @@ define([], function () {
             // 入口
             this.alert = function (txt, type) {
                 var $alert = new newTmpl(type, txt);
-                $('#common_alert').append($alert);
+                $('#common_alert').prepend($alert);
                 show($alert);
                 setTimeout(function () {
                     hide($alert);
