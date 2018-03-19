@@ -9,13 +9,22 @@ define([], function () {
         ServiceType: 'controller',
         ServiceName: 'mdDetailCtrl',
         ViewModelName: 'mdDetailModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, df) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'weekService', function ($scope, df, ws) {
             var $model = $scope.$model;
 
             var regionArr = $model.$area.data.data || [];
-            var weekArr = $model.$week.data || [];
+            // var weekArr = $model.$week.data || [];
             var TYPE = $model.$type.data.data || [];
             var SERVERT = $model.$sTime.data.data || +new Date;
+
+            var weekArr = ws.getWeekArr(+new Date, 10);
+
+            weekArr = weekArr.map(function (week) {
+                return {
+                    weekId: '2018'+week.weekTime,
+                    weekNo: '2018年第'+week.weekTime+'周('+df.date(week.startTime)+'~'+df.date(week.endTime)+')'
+                }
+            });
 
             regionArr.forEach(function (r) {
                 r.label = r.name;
@@ -87,14 +96,14 @@ define([], function () {
                 var befWeek = $scope.weekArr[1].weekNo || "";// 上周
 
                 $scope.weekArr.forEach(function (w, i) {
-                    var weeks = w.weekNo.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+                    var weeks = w.weekNo.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).split('~');
                     if (SERVERT > +new Date(weeks[0]+' 00:00:00') && SERVERT < +new Date(weeks[1]+' 23:59:59')) {
                         nowWeek = $scope.weekArr[i].weekNo;
                         befWeek = $scope.weekArr[i+1].weekNo;
                     }
                 });
-                befWeek = befWeek.slice(befWeek.indexOf('(')+1,befWeek.indexOf(')')).replace(/\./g,'-').split('~');
-                nowWeek = nowWeek.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).replace(/\./g,'-').split('~');
+                befWeek = befWeek.slice(befWeek.indexOf('(')+1,befWeek.indexOf(')')).split('~');
+                nowWeek = nowWeek.slice(nowWeek.indexOf('(')+1,nowWeek.indexOf(')')).split('~');
 
 
                 // 判断本周是否开奖
