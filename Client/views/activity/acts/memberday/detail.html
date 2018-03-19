@@ -52,15 +52,6 @@
                                             <option ng-repeat="p in pArr" value="{{p.idx}}">{{p.prize_name}}</option>
                                         </select>
                                     </div>
-
-                                    <!--测试时间-->
-                                    <div class="inline-block large">
-                                        <label for="nowTime" class="control-label col-md-3">当前时间&nbsp;&nbsp;</label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="nowTime" ng-model="nowTime" class="form-control input-sm date">
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="form-inline fr">
                                     <button type="submit" class="btn btn-primary" ng-click="detailSearch()">搜索</button>
