@@ -319,6 +319,7 @@
 	color: #fff;
 	margin-right: 18px;
 }
+
 .add_prize{
 	margin-left: 20px;
 }
@@ -464,4 +465,47 @@
 .box_btn{
 	box-sizing: border-box;
 	border-top: 1px solid #CECECE;
+}
+/* 业绩排名 */
+.cre_ach_title{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: space-around;
+	background-color: #D6D7D8;
+}
+.cre_ach_title div{
+	width: 33.33%;
+	height: auto;
+	line-height:40px;
+	text-align: center; 
+}
+.cre_ach_info{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: space-around;
+}
+.cre_ach_info input{
+	width: 33.33%;
+	height: auto;
+	line-height:40px;
+	text-align: center;
+}
+.ach_info_box{
+	position: relative;
+}
+.ach_info_warn{
+	position: absolute;
+    top: 12px;
+    left: 710px;
+	width: 100px;
+	color: #f00;
+	font-size: 14px;
+}
+.title_box{
+	margin-left: 73px;
+}
+.pad_cont{
+	margin-left: 35px;
 }
