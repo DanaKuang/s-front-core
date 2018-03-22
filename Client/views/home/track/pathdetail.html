@@ -85,7 +85,7 @@
                         <div class="ui-min-height col-md-4" style="position: relative;height: 570px;">
                             <iframe id="id_page_iframe" height="570" width="322" sandbox="allow-same-origin allow-scripts" frameborder="0" style="border:1px solid #ddd;" ng-if="account === 'hunan' || account ==='administrator'"></iframe>
                             <!-- weiop坑爹的东西 -->
-                            <div ng-if = "account !== 'hunan'" class="weiop-wrap">
+                            <div ng-if = "account !== 'hunan'&&account !== 'administrator'" class="weiop-wrap">
                                 <!-- 河北的产品信息 -->
                                 <div class="product-wrap border-box" ng-if = "account ==='hebei'">
                                     <div class="fl product-details">
@@ -139,7 +139,7 @@
                                     <i></i>
                                 </div>
                                 <!-- 活动bannner -->
-                                <div class="vip-wrap" ng-if = "getActivity.length !== 0">
+                                <div class="vip-wrap" ng-if = "getActivity.length !== 0 && account !== 'administrator'">
                                     <div class="vip-header border-box" ng-if = "account === 'hebei'">
                                         <img src="statics/assets/image/hebei/vip.png"  class="vip-icon"/>
                                         <span>验真抓好礼</span>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                                 <!-- 卡卷 -->
-                                <div class="vip-wrap" ng-if = "getAD.length !== 0">
+                                <div class="vip-wrap" ng-if = "getAD.length !== 0 && account === 'administrator'">
                                         <div class="vip-header border-box" ng-if = "account === 'henan'">
                                             <img src="statics/assets/image/henan/home_icon_gift.png"  class="vip-icon"/>
                                             <span>卡卷领取</span>
