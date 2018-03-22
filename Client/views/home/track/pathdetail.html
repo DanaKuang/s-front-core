@@ -83,7 +83,7 @@
                             <div style="margin-right:10px;float:left;" class="ui-title">事件点击统计</div><hr>
                         </div>
                         <div class="ui-min-height col-md-4" style="position: relative;height: 570px;">
-                            <iframe id="id_page_iframe" height="570" width="322" sandbox="allow-same-origin allow-scripts" frameborder="0" style="border:1px solid #ddd;" ng-if="account === 'hunan'"></iframe>
+                            <iframe id="id_page_iframe" height="570" width="322" sandbox="allow-same-origin allow-scripts" frameborder="0" style="border:1px solid #ddd;" ng-if="account === 'hunan' || account ==='administrator'"></iframe>
                             <!-- weiop坑爹的东西 -->
                             <div ng-if = "account !== 'hunan'" class="weiop-wrap">
                                 <!-- 河北的产品信息 -->
@@ -132,7 +132,7 @@
                                         <p>厂<i></i>家：{{getProduct.orgName}}</p>
                                         </div>
                                 </div>
-                                <div class="retailer-scan border-box" ng-if = "account !== 'hunan' && account !== 'hebei'">
+                                <div class="retailer-scan border-box" ng-if = "account !== 'hunan' && account !== 'hebei'&&account !== 'administrator'">
                                     <img src="statics/assets/image/henan/icon_activity.png" ng-if = "account === 'henan' "/>
                                     <img src="statics/assets/image/shankun/icon_activity.png" ng-if = "account === 'shankun' "/>
                                     <span>扫描零售店码，增加活动中奖概率</span>
