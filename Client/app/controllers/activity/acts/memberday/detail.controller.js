@@ -92,6 +92,9 @@ define([], function () {
 
             // 日期判断
             function canSendFilter (d) {
+                // 方便测试
+                SERVERT = +new Date($scope.nowTime) || SERVERT;
+
                 var nowWeek = $scope.weekArr[0].weekNo || "";// 本周
                 var befWeek = $scope.weekArr[1].weekNo || "";// 上周
 
