@@ -1,19 +1,18 @@
-<div class="launchinfo multi form-horizontal">
-	<div class="select-brand configuration-item form-group col-md-5">
+<div class="launchinfo form-horizontal">
+	<div class="form-group col-md-5 select-brand configuration-item" ng-class="{'has-error': parentForm.brand.$dirty && (parentForm.brand.$error.required || parentForm.brand.$invalid), 'has-success': parentForm.brand.$dirty && parentForm.brand.$valid}">
 		<label class="control-label col-sm-2">选择品牌</label>
 		<div class="col-sm-9">
-			<select name="selectbrand" class="select form-control input-sm" ng-model="selectBrandVal" value="{{selectBrandVal}}">
+			<select name="brand" class="form-control input-sm select" ng-model="selectBrandVal" required>
+				<option value="">请选择</option>
 				<option ng-repeat="item in brand" value="{{item.brandCode}}" required>{{item.name}}</option>
 			</select>
 		</div>
-		<div ng-show="parentForm.$submitted || parentForm.selectbrand.$touched">
-			<div ng-show="!parentForm.selectbrand.$viewValue" class="wrong-tip">请选择投放品牌</div>
-		</div>
 	</div>
-	<div class="select-specification configuration-item form-group col-md-5">
+	<div class="form-group col-md-5 select-specification configuration-item" ng-class="{'has-error': parentForm.speci.$dirty && (parentForm.speci.$error.required || parentForm.speci.$invalid), 'has-success': parentForm.speci.$dirty && parentForm.speci.$valid}">
 		<label class="control-label col-sm-2">选择规格</label>
 		<div class="col-sm-9">
-			<select name="selectspeci" ng-model="selectSpecificationVal" value="{{selectSpecificationVal}}" class="select form-control input-sm" required>
+			<select name="speci" ng-model="selectSpecificationVal" class="select form-control input-sm" required>
+				<option value="">请选择</option>
 				<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
 			</select>
 		</div>
@@ -21,7 +20,7 @@
 			<div ng-show="!parentForm.selectspeci.$viewValue" class="wrong-tip">请选择投放规格</div>
 		</div>
 	</div>
-	<div class="select-area configuration-item col-md-5 form-group">
+	<div class="select-area multi configuration-item col-md-5 form-group">
 		<label class="control-label col-sm-2">投放地区</label>
 		<div class="col-sm-9">
 			<select name="selectarea" ng-model="selectAreaVal" value="{{selectAreaVal}}" multiple="multiple" class="select form-control input-sm" required ng-hide="edit"></select>

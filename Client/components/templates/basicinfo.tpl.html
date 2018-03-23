@@ -1,117 +1,70 @@
 <div>
-	<!-- 编辑状态 -->
-	<div class="basicinfo form-horizontal" ng-if="disabled">
-		<div class="activity-name configuration-item form-group col-md-5">
-			<label class="control-label col-sm-2">活动名称</label>
+	<div class="basicinfo form-horizontal">
+		<!-- 活动名称 -->
+		<div class="form-group col-md-5 has-feedback activity-name configuration-item" ng-class="{'has-error': parentForm.name.$dirty && (parentForm.name.$error.required || parentForm.name.$invalid), 'has-success': parentForm.name.$dirty && parentForm.name.$valid}">
+			<label for="" class="control-label col-sm-2">活动名称</label>
 			<div class="col-sm-9">
-				<input class="form-control input-sm" type="text" name="nameValue" ng-model="activity.activityName" ng-readonly="disabled" required>
+				<input class="form-control input-sm" type="text" name="name" id="" ng-model="nameValue" placeholder="请输入活动名称，不能少于5个字，最多30个字" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]{5,30}$/" required ng-readonly="disabled">
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': parentForm.name.$dirty && parentForm.name.$valid}" aria-hidden="true"></span>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': parentForm.name.$dirty && parentForm.name.$invalid}" aria-hidden="true"></span>
 			</div>
 		</div>
-		<div class="activity-intro configuration-item form-group col-md-5">
-		 	<label class="control-label col-sm-2">活动描述</label>
+
+		<!-- 活动描述 -->
+		<div class="form-group col-md-5 has-feedback activity-intro configuration-item" ng-class="{'has-error': parentForm.desc.$dirty && (parentForm.desc.$error.required || parentForm.desc.$invalid), 'has-success': parentForm.desc.$dirty && parentForm.desc.$valid}">
+		 	<label for="" class="control-label col-sm-2">活动描述</label>
 		 	<div class="col-sm-9">
-		 		<input class="form-control input-sm" type="text" name="descValue" ng-model="activity.activityDec" ng-readonly="disabled" required>
+		 		<input class="form-control input-sm" type="text" name="desc"  ng-model="descValue" placeholder="请输入活动描述，50个字以内" minlength="1" maxlength="50" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]{1,50}$/" required>
+		 		<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': parentForm.desc.$dirty && parentForm.desc.$valid}" aria-hidden="true"></span>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': parentForm.desc.$dirty && parentForm.desc.$invalid}" aria-hidden="true"></span>
 		 	</div>
 		</div>
-		<div class="file-instructions configuration-item form-group col-md-5">
-			<label class="normfile control-label col-sm-2">规范性文件及说明</label>
+
+		<!-- 彩蛋、节假日没有优先级这一项 -->
+		<div ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')" class="form-group col-md-5 activity-priority configuration-item" ng-class="{'has-error': parentForm.points.$dirty && (parentForm.points.$error.required || parentForm.points.$invalid), 'has-success': parentForm.points.$dirty && parentForm.points.$valid}">
+			<label for="" class="control-label col-sm-2 priority">优先级</label>
+			<div class="col-sm-9">
+				<input class="form-control input-sm" type="text" name="points" ng-pattern="/^(?:[1-9]\d?|[1-4]\d{2}|500)$/" ng-model="points" placeholder="请指明活动优先级，用数字表示，最大值为500" required>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': parentForm.points.$dirty && parentForm.points.$valid}" aria-hidden="true"></span>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': parentForm.points.$dirty && parentForm.points.$invalid}" aria-hidden="true"></span>
+			</div>
+		</div>
+
+		<!-- 活动规则 -->
+		<div class="form-group col-md-5 has-feedback activity-desc configuration-item" ng-class="{'has-error': parentForm.rules.$dirty && (parentForm.rules.$error.required || parentForm.rules.$invalid), 'has-success': parentForm.rules.$dirty && parentForm.rules.$valid}">
+			<label for="" class="control-label col-sm-2">活动规则</label>
+			<div class="col-sm-9">
+				<textarea class="form-control input-sm border-box" name="rules" ng-model="introValue" placeholder="请输入活动规则, 5~300字" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]{5,300}$/" minlength="5" maxlength="300" required></textarea>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': parentForm.rules.$dirty && parentForm.rules.$valid}" aria-hidden="true"></span>
+				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': parentForm.rules.$dirty && parentForm.rules.$invalid}" aria-hidden="true"></span>
+			</div>
+		</div>
+
+		<!-- 规范性文件说明 -->
+		<div class="form-group col-md-5 file-instructions configuration-item">
+			<label class="control-label col-sm-2 normfile">规范性文件及说明</label>
 			<div class="col-sm-9">
 				<input class="form-control input-sm" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
 			</div>
 		</div>
-		<!-- 彩蛋、节假日没有优先级这一项 -->
-		<div class="activity-priority configuration-item form-group col-md-5" ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
-			<label class="priority control-label col-sm-2">活动优先级</label>
-			<div class="col-sm-9">
-				<input class="form-control input-sm" type="number" name="points" ng-model="activity.idx" ng-readonly="disabled" required>
-			</div>
-		</div>
-		<div class="configuration-item activity-desc form-group col-md-5">
-			<label class="control-label col-sm-2">活动规则</label>
-			<div class="col-sm-9">
-				<textarea class="border-box form-control input-sm" name="introValue" ng-model="activity.activityDoc" ng-readonly="disabled" required></textarea>
-			</div>
-		</div>
-		<div class="configuration-item configuration-image form-group col-md-5">
-			<label class="activityfileimage control-label col-sm-2">活动图片</label>
-			<div class="col-sm-9">
-				<input style="position:absolute;clip:rect(0 0 0 0);" type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" ng-disabled="disabled" required>
-				<span>{{accessUrl}}</span>
-			</div>
-		</div>
-		<!-- 节假日 活动链接 -->
-<!-- 		<div class="url-name configuration-item form-group col-md-5" ng-if="confUrl === 'holiday'">
-			<label class="control-label col-sm-2">活动链接</label>
-			<div class="col-sm-9">
-				<input class="input-sm form-control" type="url" ng-model="urlVaule" placeholder="请输入活动链接" ng-readonly="disabled">
-			</div>
-		</div> -->
-		<!-- 彩蛋、节假日 （弹窗图设置、弹窗文案设置）-->
-<!-- 		<div class="popimage configuration-item form-group col-md-5" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label class="popimagefile control-label col-sm-2">弹窗图</label>
-			<div class="col-sm-9">
-				<input class="form-control input-sm" type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
-			</div>
-		</div> -->
-<!-- 		<div class="poptext configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday' || confUrl === 'unexpected'">
-			<label class="poptextfile control-label col-sm-2">弹窗文案</label>
-			<div class="col-sm-9">
-				<input class="form-control input-sm" type="file" onchange="angular.element(this).scope().change()"  ng-disabled="disabled">
-			</div>
-		</div> -->
-	</div>
-	<!-- 新建状态 -->
-	<div class="basicinfo form-horizontal" ng-if="!disabled">
-		<div class="activity-name configuration-item form-group col-md-5">
-			<label class="control-label col-sm-2">活动名称</label>
-			<div class="col-sm-9">
-				<input class="form-control input-sm" type="text" name="nameValue" ng-model="nameValue" placeholder="请输入活动名称，不能少于5个字，最多30个字" minlength="5" maxlength="30" ng-readonly="disabled" required>
-			</div>
-			<div ng-show="parentForm.$submitted || parentForm.nameValue.$touched">
-				<div ng-show="parentForm.nameValue.$error.required || parentForm.nameValue.$error.minlength || parentForm.nameValue.$error.maxlength" class="wrong-tip">请输入活动名称，5~30字</div>
-			</div>
-		</div>
-		<div class="activity-intro configuration-item form-group col-md-5">
-		 	<label class="control-label col-sm-2">活动描述</label>
-		 	<div class="col-sm-9">
-		 		<input class="form-control input-sm" type="text" name="descValue" ng-model="descValue" placeholder="请输入活动描述，50个字以内" minlength="1" maxlength="50" ng-readonly="disabled" required>
-		 	</div>
-			<div ng-show="parentForm.$submitted || parentForm.descValue.$touched">
-				<div ng-show="parentForm.descValue.$error.required || parentForm.descValue.$error.minlength || parentForm.descValue.$error.maxlength" class="wrong-tip">请输入活动描述，1~50字</div>
-			</div>
-		</div>
-		<!-- 彩蛋、节假日没有优先级这一项 -->
-		<div class="activity-priority configuration-item form-group col-md-5" ng-show="(confUrl !== 'holiday') && (confUrl !== 'unexpected')">
-			<label class="control-label col-sm-2 priority">优先级</label>
-			<div class="col-sm-9">
-				<input class="form-control input-sm" type="text" name="points" ng-pattern="/^(?:[1-9]\d?|[1-4]\d{2}|500)$/" ng-model="points" placeholder="请指明活动优先级，用数字表示，最大值为500" required>
-			</div>
-			<div ng-show="parentForm.$submitted || parentForm.points.$touched">
-				<div ng-show="parentForm.points.$error.required || parentForm.points.$invalid" class="wrong-tip">请用数字标明优先级，不得大于500</div>
-			</div>
-		</div>
-		<div class="configuration-item activity-desc form-group col-md-5">
-			<label class="control-label col-sm-2">活动规则</label>
-			<div class="col-sm-9">
-				<textarea class="border-box form-control input-sm" name="introValue" ng-model="introValue" placeholder="请输入活动规则" ng-readonly="disabled" minlength="5" maxlength="300" required></textarea>
-			</div>
-			<div ng-show="parentForm.$submitted || parentForm.introValue.$touched">
-				<div ng-show="parentForm.introValue.$error.required || parentForm.introValue.$error.minlength || parentForm.introValue.$error.maxlength" class="wrong-tip">请输入活动规则，5~300字</div>
-			</div>
-		</div>
-		<div class="configuration-item configuration-image form-group col-md-5">
+
+		<!-- 活动图片 -->
+		<div class="form-group col-md-5 configuration-item configuration-image">
 			<label class="activityfileimage col-sm-2 control-label">活动图片</label>
 			<div class="col-sm-9">
 				<input type="file" name="activityfile" class="form-control input-sm uploadimage" onchange="angular.element(this).scope().change()" accept="image/png, image/jpeg, image/gif" ng-disabled="disabled" required>
+				<span>{{accessUrl}}</span>
 			</div>
 			<div class="wrong-tip hidden">请上传活动图片</div>
 		</div>
-		<div class="file-instructions configuration-item form-group col-md-5">
+	</div>
+
+<!-- 		<div class="file-instructions configuration-item form-group col-md-5">
 			<label class="control-label col-sm-2 normfile">文件说明</label>
 			<div class="col-sm-9">
 				<input class="form-control input-sm" type="file" multiple onchange="angular.element(this).scope().change()" ng-disabled="disabled">
 			</div>
-		</div>
+		</div> -->
 		<!-- 节假日 活动链接 -->
 <!-- 		<div class="url-name configuration-item col-md-5 form-group" ng-if="confUrl === 'holiday'">
 			<label class="control-label col-sm-2">活动链接</label>
@@ -132,5 +85,4 @@
 				<input class="form-control" type="file" onchange="angular.element(this).scope().change()" ng-disabled="disabled">
 			</div>
 		</div> -->
-	</div>
 </div>

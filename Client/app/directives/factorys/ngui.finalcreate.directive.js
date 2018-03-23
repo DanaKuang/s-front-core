@@ -532,7 +532,8 @@ define([], function () {
                         }
                     }
                 }
-            } 
+            }  
+
         }
 
         return defineObj;

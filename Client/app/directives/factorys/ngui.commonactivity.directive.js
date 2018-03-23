@@ -43,7 +43,6 @@ define([], function () {
                 }
                 scope.actsrc = allconfigtemplateScope.conf.IMG[type.replace('act-','')] || 'statics/assets/image/fanpai.png';
             }, true);
-
         }
 
         return defineObj;

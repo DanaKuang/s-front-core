@@ -10,10 +10,8 @@ define([], function () {
     var launchinfoFn = function ($rootScope, $http, $compile, $timeout, util) {
         var defaults = { //默认配置
             tpl: '/launchinfo.tpl.html',
-            selectBrandVal: '',
-            selectSpecificationVal: '',
             hours: _.map(Array(24),function(v, i){return i;}),
-            parentForm: {}
+            parentForm: angular.element('.css-form').scope() && angular.element('.css-form').scope().form || {}
         };
         var defineObj = { //指令定义对象
             restrict: 'AE',
@@ -36,6 +34,7 @@ define([], function () {
             scope.$watch('conf', function () {
                 // 属性赋值
                 util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['selectBrandVal', 'selectSpecificationVal', 'hours', 'adcodenames']);
+                scope.parentForm = angular.element('.css-form').scope().form;
             }, true);
 
             $('input[name="startTime"]').datetimepicker({
@@ -111,7 +110,6 @@ define([], function () {
                 var selectDurationEnd = new Date(activity.etime).toLocaleString();
                 scope.endTime = adjustafternoon(selectDurationEnd);
             } else {
-                scope.parentForm = angular.element('.css-form').scope().form;
                 scope.$watch('selectBrandVal', function (n, o, s) {
                     if (n !== '') {
                         var brandListArrObj = {};

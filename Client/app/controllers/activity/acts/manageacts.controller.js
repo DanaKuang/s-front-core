@@ -150,20 +150,19 @@ define([], function () {
         });
 
         // ------------------ 2.0分界线 ------------------
-        $model.getActSampleList().then(function (res) {
-          $scope.chooseConf = res.data;
-          $model.getwhichsample({type: ''}).then(function (res) {
-            // 获取全部类型
-            scope('.showtemplate').type = res.data.data.list;
-          })
-        });
+        // $model.getActSampleList().then(function (res) {
+        //   $scope.chooseConf = res.data;
+        //   $model.getwhichsample({type: ''}).then(function (res) {
+        //     // 获取全部类型
+        //     scope('.showtemplate').type = res.data.data.list;
+        //   })
+        // });
 
-        $scope.$on('choosetype', function (e, v, f) {
-          $model.getTemplateSpecific(f).then(function(res){
-            $scope.configtemplateConf = res.data;
-          })
-        })
-
+        // $scope.$on('choosetype', function (e, v, f) {
+        //   $model.getTemplateSpecific(f).then(function(res){
+        //     $scope.configtemplateConf = res.data;
+        //   })
+        // })
 
         // $model.step().then(function (res) {
         //   $scope.createConf = res.data;
@@ -293,19 +292,12 @@ define([], function () {
               numberDisplayed: 1
             });
           });
+
           // 不需要根据供应商获取品牌信息
           $scope.$on('clickbrandval', function (e, v, f) {
             $model.getBrandList().then(function (res) {
               var selectCompanyScope = angular.element('.select-brand').scope();
               selectCompanyScope.brand = res.data.data;
-              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.name;
-                  v.value = v.brandCode;
-              }));
-              $('[ng-model="selectBrandVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectBrandVal"]').find('option:first').val();
-              selectCompanyScope.selectBrandVal = default_val;
             })
           })
 
@@ -314,14 +306,6 @@ define([], function () {
             $model.getProductList(f).then(function (res) {
               var selectBrandScope = angular.element('.select-specification').scope();
               selectBrandScope.specification = res.data.data;
-              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.allName;
-                  v.value = v.sn;
-              }));
-              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectSpecificationVal"]').find('option:first').val();
-              selectBrandScope.selectSpecificationVal = default_val;
             })
           })
         }
