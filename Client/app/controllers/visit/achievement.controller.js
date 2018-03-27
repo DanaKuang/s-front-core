@@ -109,6 +109,7 @@ define([], function() {
                 if($scope.showAchList){
                     $scope.achStatus = '';
                     $scope.periodName = '';
+                    $scope.achType = '';
                     getAchList(initPage);
                 }
                 if($scope.showAchDetail){
@@ -287,6 +288,8 @@ define([], function() {
                 $scope.createAch = false; //新建业绩或编辑业绩
                 $scope.creatAchStatus = true;
                 $scope.showAchDetail = false; //默认隐藏业绩排名详情
+                $scope.isSendCase = false; //默认不能派发现金奖项
+                $scope.sendTemplateBox = false; //发送模板信息
             }
             $scope.editAchivity = function(achId){ //编辑业绩配置
                 if(achId){

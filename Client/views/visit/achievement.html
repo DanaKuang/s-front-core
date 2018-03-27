@@ -111,15 +111,15 @@
             <div class="col-md-12">
                 <!--title-->
                 <div class="ui-panel-title">
-                    <span ng-if="creatAchStatus">新建业绩</span>
-                    <span ng-if="!creatAchStatus">编辑业绩</span>
+                    <span ng-if="creatAchStatus">新建</span>
+                    <span ng-if="!creatAchStatus">编辑</span>
                     <button type="button" class="btn btn-primary back-btn rf" id="goBack" ng-click="backAchList()">返回</button>
                 </div>
                 <div class="panel rate">
                     <div class="panel-body" >
                         <!--基本信息-->
                         <div class="shrInfo">
-                            <h3 class="infoTopH3">基本信息</h3>
+                            <h3 class="infoTopH3">其他设置</h3>
                             <form action="" class="form">
                                 <div class="input_div">
                                     <label class="font_14 laber_title" for="">活动名称：</label>
@@ -167,7 +167,7 @@
                         
                         <!--奖池设置-->
                         <div class="shrInfo">
-                            <h3 class="infoTopH3">奖池设置</h3>
+                            <h3 class="infoTopH3">奖品设置</h3>
                             <form action="" class="form box_border posion_r" style="padding:0;" > <!-- ng-repeat="awardItem in actObj.awards track by $index" -->
                                 <div class="cre_ach_title">
                                     <div>名次</div>
@@ -178,7 +178,7 @@
                                     <div class="cre_ach_info">
                                         <input type="text" ng-model="awardItem.rankStr">
                                         <input type="text" ng-model="awardItem.awardName">
-                                        <input type="text" ng-model="awardItem.awardPrice">
+                                        <input type="number" ng-model="awardItem.awardPrice">
                                     </div>
                                     <span class="ach_info_warn" ng-if="awardItem.awardWarn">请完善奖池配置</span>  
                                 </div>
