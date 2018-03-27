@@ -182,6 +182,16 @@ define([], function() {
                     $scope.$apply();
                 }
             });
+            $scope.clearNoNum = function(obj,attr){ //验证市场价格
+                //先把非数字的都替换掉，除了数字和.
+                obj[attr] = obj[attr].replace(/[^\d.]/g,"");
+                //必须保证第一个为数字而不是.
+                obj[attr] = obj[attr].replace(/^\./g,"");
+                //保证只有出现一个.而没有多个.
+                obj[attr] = obj[attr].replace(/\.{2,}/g,"");
+                //保证.只出现一次，而不能出现两次以上
+                obj[attr] = obj[attr].replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+            }
             $scope.addAwardItem = function(){ //添加奖项配置
                 if($scope.achObj.awards.length < 10){
                     var awardItemObj = { //奖项初始化参数
@@ -290,6 +300,7 @@ define([], function() {
                 $scope.showAchDetail = false; //默认隐藏业绩排名详情
                 $scope.isSendCase = false; //默认不能派发现金奖项
                 $scope.sendTemplateBox = false; //发送模板信息
+                getAchList(initPage); //业绩列表信息
             }
             $scope.editAchivity = function(achId){ //编辑业绩配置
                 if(achId){
@@ -499,6 +510,14 @@ define([], function() {
                         $('.send_tem_box').modal('hide');
                         $scope.sendTemplateBox = false; //发送模板信息
                         $scope.showAchDetail = true;
+                        var reflectRankData = { 
+                            pageNo : 1,
+                            pageSize : $scope.pageSize,
+                            periodId : $scope.periodId //业绩ID
+                            //shopName : $scope.shopName, //店铺名称
+                            //rankSection : $scope.rankSection//名次区间
+                        };
+                        getPeriodResultList(reflectRankData);
                     }else{
                         alert(res.data.msg);
                     }

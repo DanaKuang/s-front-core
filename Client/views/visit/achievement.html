@@ -178,7 +178,7 @@
                                     <div class="cre_ach_info">
                                         <input type="text" ng-model="awardItem.rankStr">
                                         <input type="text" ng-model="awardItem.awardName">
-                                        <input type="number" ng-model="awardItem.awardPrice">
+                                        <input type="text" ng-model="awardItem.awardPrice" ng-keyup="clearNoNum(awardItem,'awardPrice')">
                                     </div>
                                     <span class="ach_info_warn" ng-if="awardItem.awardWarn">请完善奖池配置</span>  
                                 </div>
