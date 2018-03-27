@@ -44,7 +44,7 @@ define([], function() {
                                 periodName : $scope.periodName ? $scope.periodName : '', //活动名称
                                 achievementType : $scope.achType ? $scope.achType : '' //活动类型
                             };
-                            getAchList(curActPageData);
+                            getAchList(curAchPageData);
                         }
                         if($scope.showAchDetail){ //业绩名次排名查询
                             var searchRankData = { 
