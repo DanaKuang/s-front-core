@@ -434,6 +434,13 @@ define([], function() {
                 $model.payAchievement({periodId:$scope.periodId}).then(function (res) { //查看是否可派发现金奖项
                     if(res.data.ok){
                         $('.send_case_box').modal('hide');
+                        var reflectRankData = { 
+                            pageNo : 1,
+                            pageSize : $scope.pageSize,
+                            periodId : $scope.periodId //业绩ID
+                        };
+                        getPeriodResultList(reflectRankData);
+                        alert('派发现金成功');
                     }else{
                         alert(res.data.msg);
                     }
