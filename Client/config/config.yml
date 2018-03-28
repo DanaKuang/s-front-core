@@ -10,7 +10,7 @@ def:                                             # 默认环境配置
   viewroot: '^/view'                             # 视图配置
   staticroot: '^/statics'                        # 静态资源请求根目录
   autoOpenBrower: 0                              # 是否自动打开浏览器
-  easyMonitor: 0                                 # 是否开启前端性能监控
+  easyMonitor: 1                                 # 是否开启前端性能监控
   proxyturnto: 0                                 # 是否开启代理模式
   proxyTarget:
     host: 'proxy.hmtx.cc'                        # 代理地址
