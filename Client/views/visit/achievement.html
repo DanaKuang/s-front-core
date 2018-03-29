@@ -158,11 +158,11 @@
                                 </div>-->
                                 <div class="input_div clearfix">
                                     <label class="font_14 laber_title lf" style="vertical-align:top;" for="">活动时间：</label>
-                                    <div class="lf" style="width:175px;margin-left:4px;">
+                                    <div class="lf" style="width:275px;margin-left:4px;">
 										<input id="stimeStr" size="16" type="text" placeholder="年-月-日 时:分(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="achObj.stimeStr">
 									</div>
-									<div class="act_time lf" style="">至</div>
-									<div class="lf" style="width:175px;">
+									<div class="act_time lf">至</div>
+									<div class="lf" style="width:275px;">
 										<input id="etimeStr" size="16" type="text" readonly placeholder="年-月-日 时:分(结束时间)" class="form-control input-sm form_datetime" ng-model="achObj.etimeStr">
                                     </div>
                                     <span class="warn_color" style="line-height:30px;" ng-if="warnInfo.achTimeWarn">活动时间不能为空</span>
@@ -252,7 +252,7 @@
 
                 <!--导出-->
                 <div class="operBtnWrap" style="margin-bottom:10px;margin-right:20px;">
-                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendTemplateInfo()">发送模板消息</button>
+                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[canSendTemplate]" ng-click="sendTemplateInfo()">发送模板消息</button>
                     <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendCashRank()" style="margin: 0 15px;">派发现金奖项</button>
                     <button class="btn btn-primary" ng-click="exportAwardList()">导出中奖名单</button>
                 </div>

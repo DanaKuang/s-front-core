@@ -267,6 +267,11 @@ define([], function () {
           $model.sendWechatTemplate = function (data) {
             return request.$Search(sendWechatTemplateUrl, data, true)
           }
+          var canJudgePayUrl = '/api/tztx/seller-manager/achieve/judgePay'; //是否可派发奖金
+          $model.canJudgePay = function (data) {
+            return request.$Search(canJudgePayUrl, data, true)
+          }
+
 
           //*** 业绩设置 start 
 
