@@ -207,7 +207,8 @@
 .act_time{
 	width:20px;
 	line-height:30px;
-	margin:0 12px;
+	margin:0 15px;
+	text-align: center;
 }
 .shrInfo_input{
 	height:30px;
@@ -237,7 +238,7 @@
 	margin:20px 0 ;
 }
 .input_radio{
-	vertical-align: sub;
+	vertical-align: text-bottom;
 	font-size: 14px;
 }
 .input_div .input_radio:last-child{
