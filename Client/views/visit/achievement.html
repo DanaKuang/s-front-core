@@ -252,7 +252,7 @@
 
                 <!--导出-->
                 <div class="operBtnWrap" style="margin-bottom:10px;margin-right:20px;">
-                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendTemplateInfo()">发送模板消息</button>
+                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[canSendTemplate]" ng-click="sendTemplateInfo()">发送模板消息</button>
                     <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendCashRank()" style="margin: 0 15px;">派发现金奖项</button>
                     <button class="btn btn-primary" ng-click="exportAwardList()">导出中奖名单</button>
                 </div>

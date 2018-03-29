@@ -29,6 +29,7 @@ define([], function() {
             $scope.showAchDetail = false; //默认隐藏业绩排名详情
             $scope.isSendCase = false; //默认不能派发现金奖项
             $scope.sendTemplateBox = false; //发送模板信息
+            $scope.canSendTemplate = false; //是否可发送模板信息
 
             //创建分页工具
             function createPageTools(pageData){
@@ -374,12 +375,12 @@ define([], function() {
                     $model.getAchDetil(achObj).then(function (res) { //获取业绩设置详情
                         if(res.data.ok){
                             var detailObj = res.data.data;
-                            // var entTimes = detailObj.etime;
-                            // var curTimes = new Date().getTime();
-                            // if(curTimes > entTimes){
-                            //     $scope.isSendCase = true;
-                            //     $scope.$apply();
-                            // }
+                            var entTimes = detailObj.etime;
+                            var curTimes = new Date().getTime();
+                            if(curTimes > entTimes){
+                                $scope.canSendTemplate = true;
+                                $scope.$apply();
+                            }
                         }
                     })
                     $model.canJudgePay(achObj).then(function (res) { //查看是否可派发现金奖项
@@ -470,7 +471,7 @@ define([], function() {
                 bottomWarn : false //底部描述警告 
             }
             $scope.sendTemplateInfo = function(){ //发送模板消息
-                if($scope.isSendCase){
+                if($scope.canSendTemplate){
                     $scope.sendTemplateBox = true; //发送模板信息
                     $scope.showAchDetail = false;
                 }
