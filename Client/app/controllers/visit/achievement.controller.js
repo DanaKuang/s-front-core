@@ -380,6 +380,9 @@ define([], function() {
                             if(curTimes > entTimes){
                                 $scope.canSendTemplate = true;
                                 $scope.$apply();
+                            }else{
+                                $scope.canSendTemplate = false;
+                                $scope.$apply();
                             }
                         }
                     })
