@@ -1,0 +1,417 @@
+<!--
+/**
+ * Author:zhaobaoli
+ * Create Date; 2018-3-4
+ * Description: 零售户业绩设置
+ */
+-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/dealerordermanage.css">
+<link rel="stylesheet" href="statics/assets/style/gift.css">
+<div ng-controller="achievementCtrl">
+    <!-- 业绩排名列表 -->
+	<div class="animated fadeInRightBig" ng-show="showAchList">
+		<div class="container-fluid">
+			<div class="col-md-12" style="padding:0;">
+				<!--title-->
+				<div class="ui-panel-title">
+					<span>业绩排名</span>
+				</div>
+				<!--搜索区-->
+				<div class="panel rate">
+					<div class="panel-body ">
+						<form name="form">
+							<div class="form-horizontal">
+                                <div class="form-group col-sm-3">
+                                    <label class="control-label col-sm-4" style="width:120px;">活动名称：</label>
+                                    <input class="input-sm col-sm-6" placeholder="请输入活动名称" type="text" ng-model="periodName">
+                                </div>
+								<div class="form-group col-sm-3" style="margin-left:15px;">
+									<label class="control-label col-sm-4">状态：</label>
+									<div class="col-sm-3">
+										<select class="form-controlmdg input-sm select" ng-model="achStatus">
+											<option value="">全部</option>
+                                            <option value="2">待上线</option>
+                                            <option value="1">进行中</option>
+                                            <option value="0">已结束</option>
+										</select>
+									</div>
+                                </div>
+                                <div class="form-group col-sm-3" style="margin-left:-30px;">
+                                    <label class="control-label col-sm-4" style="width:120px;">活动类型：</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-controlmdg input-sm select" style="width:110px;" ng-model="achType">
+                                            <option value="">全部</option>
+                                            <option value="1">累计排行榜</option>
+                                            <option value="2">拉新排行榜</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3" style="margin-left:45px;">
+                                <button class="btn btn-primary search" style="margin-right:30px;" ng-click="searchAch()">查询</button>
+                                <button class="btn btn-primary reset" ng-click="resetAct()">重置</button>
+                            </div>
+						</form>
+					</div>
+				</div>
+
+				<!--导出-->
+				<div class="operBtnWrap" style="margin-bottom:10px;margin-right:20px;">
+					<button class="push-out btn btn-primary" ng-click="creatAch()">新建</button>
+				</div>
+				<div class="panel rate">
+					<div class="panel-body">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr class="table-head">
+									<th>序号</th>
+									<th>操作</th>
+                                    <th>活动名称</th>
+                                    <th>活动类型</th>
+                                    <th>状态</th>
+                                    <th>活动时间</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="achItem in achDataList" ng-if="achDataList.length > 0">
+									<td>{{(pageNo-1)*pageSize+($index+1)}}</td>
+									<td>
+                                        <span class="seeInfo" style="padding-right:10px;" ng-click="getAchDetail(achItem.id)">查看排名</span>
+                                        <span class="seeInfo" ng-click="editAchivity(achItem.id)">编辑</span>
+                                    </td>
+                                    <td>{{achItem.periodName}}</td>
+                                    <td>{{achItem.achievementTypeName}}</td>
+									<td>{{achItem.statusName}}</td>
+                                    <td>{{achItem.stimeStr}} -- {{achItem.etimeStr}}</td>
+								</tr>
+								<tr ng-if="achDataList.length == 0">
+									<td colspan="6">未搜索到符合条件的相关信息</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="footer_sec clearfix" ng-if="achDataList.length > 0">
+                            <div class="total_info lf">
+                                总共<span>{{totalCount}}</span>条记录，当前页共
+                                <span>{{achDataList.length}}</span>
+                                条记录
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 新建活动 -->
+    <div  id="detailsPage" ng-show="createAch" class="fadeInRightBig">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <span ng-if="creatAchStatus">新建</span>
+                    <span ng-if="!creatAchStatus">编辑</span>
+                    <button type="button" class="btn btn-primary back-btn rf" id="goBack" ng-click="backAchList()">返回</button>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body" >
+                        <!--基本信息-->
+                        <div class="shrInfo">
+                            <h3 class="infoTopH3">其他设置</h3>
+                            <form action="" class="form">
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" for="">活动名称：</label>
+                                    <input class="shrInfo_input" type="text" ng-model="achObj.periodName" placeholder="请输入活动名称"/>
+                                    <span class="warn_color" ng-if="warnInfo.achNameWarn">活动名称不能为空</span>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" for="">活动类型：</label>
+                                    <div style="display:inline-block;">
+                                        <input type="radio" name="sendType" class="input_radio" ng-value='1' 
+                                            ng-model="achObj.achievementType" ng-checked="achObj.achievementType == 1"/>累计排行榜
+                                        <input type="radio" name="sendType" class="input_radio" ng-value='2' 
+                                            ng-model="achObj.achievementType" ng-checked="achObj.achievementType == 2"/>拉新排行榜
+                                    </div>
+                                    
+                                    <div class="title_box" style="color:#aaa;">
+                                        <p>提示：累积排行榜为零售户在活动时间内所有店铺粉丝的扫烟包量；</p>
+                                        <p class="pad_cont">拉新排行榜为零售户在活动时间内新增粉丝的扫码烟包量，不含活动之前粉丝的扫码烟包数。</p>
+                                    </div>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" style="vertical-align:top;" for="">活动规则：</label>
+                                    <textarea class="shrInfo_textarea" style="font-size:12px;" ng-model="achObj.ruleHtml" type="text" placeholder="请输入活动规则"></textarea>
+                                    <span class="warn_color textarea_warn" ng-if="warnInfo.achRuleWarn">活动规则不能为空</span>
+                                </div>
+                                <!--<div class="col-sm-8" style="position: relative;">
+									<label class="col-sm-3 font_14 laber_title_time" style="margin-left:-30px;line-height:30px;">活动时间：</label>
+									<div class="col-sm-4" style="margin-left:-65px;">
+										<input id="stimeStr" size="16" type="text" placeholder="年-月-日 时:分(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="achObj.stimeStr">
+									</div>
+									<div class="col-sm-1 act_time" style="margin: 0 7px;">至</div>
+									<div class="col-sm-4">
+										<input id="etimeStr" size="16" type="text" readonly placeholder="年-月-日 时:分(结束时间)" class="form-control input-sm form_datetime" ng-model="achObj.etimeStr">
+                                    </div>
+                                    <span class="warn_color" style="line-height:30px;" ng-if="warnInfo.achTimeWarn">活动时间不能为空</span>
+                                </div>-->
+                                <div class="input_div clearfix">
+                                    <label class="font_14 laber_title lf" style="vertical-align:top;" for="">活动时间：</label>
+                                    <div class="lf" style="width:175px;margin-left:4px;">
+										<input id="stimeStr" size="16" type="text" placeholder="年-月-日 时:分(开始时间)" readonly class="form-control input-sm form_datetime" ng-model="achObj.stimeStr">
+									</div>
+									<div class="act_time lf" style="">至</div>
+									<div class="lf" style="width:175px;">
+										<input id="etimeStr" size="16" type="text" readonly placeholder="年-月-日 时:分(结束时间)" class="form-control input-sm form_datetime" ng-model="achObj.etimeStr">
+                                    </div>
+                                    <span class="warn_color" style="line-height:30px;" ng-if="warnInfo.achTimeWarn">活动时间不能为空</span>
+                                </div>
+                                <div class="input_div" style="margin-left:-42px;">
+                                    <label class="font_14 laber_title" for="">微信消息模板ID：</label>
+                                    <input class="shrInfo_input" type="text" ng-model="achObj.templateId" placeholder="请输入微信消息模板ID"/>
+                                    <span class="warn_color" ng-if="warnInfo.achWXTempWarn">微信消息模板ID不能为空</span>
+                                    <div style="margin-left:115px;margin-top:10px;color:#aaa;">
+                                        <p>提示：微信消息模板ID为对应公众号给零售户发送消息模板的ID，通过后台向零售户发送微信模板消息，公号必须添加此模板。</p>
+                                        <p style="margin-left:36px;">建议使用模板：cmtrt_o4nyw5XZXxuCLUstPtNei2DzvYk-4uGZX5ldo</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!--奖池设置-->
+                        <div class="shrInfo">
+                            <h3 class="infoTopH3">奖品设置</h3>
+                            <form action="" class="form box_border posion_r" style="padding:0;" > <!-- ng-repeat="awardItem in actObj.awards track by $index" -->
+                                <div class="cre_ach_title">
+                                    <div>名次</div>
+                                    <div>奖品</div>
+                                    <div>市场价（元）</div>
+                                </div>
+                                <div class="ach_info_box" ng-repeat="awardItem in achObj.awards track by $index">
+                                    <div class="cre_ach_info">
+                                        <input type="text" ng-model="awardItem.rankStr">
+                                        <input type="text" ng-model="awardItem.awardName">
+                                        <input type="text" ng-model="awardItem.awardPrice" ng-keyup="clearNoNum(awardItem,'awardPrice')">
+                                    </div>
+                                    <span class="ach_info_warn" ng-if="awardItem.awardWarn">请完善奖池配置</span>  
+                                </div>
+                                
+                            </form>
+                            <div class="show_box clearfix">
+                                <div class="add_prize add_award rf" ng-click="addAwardItem()">+新增奖项</div>
+                                <div class="del_prize add_award rf" ng-show="showDelAwardBtn" ng-click="delAwardItem()">删除</div>
+                            </div>
+                            <div class="opera_box" style="margin-top:30px;">
+                                <div style="width:80px;" class="add_prize" ng-click="saveOrUpdate()">确定</div>
+                                <div style="width:80px;margin-right:150px;" class="del_prize" ng-click="backAchList()">取消</div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看排名列表 -->
+	<div class="animated fadeInRightBig" ng-show="showAchDetail">
+        <div class="container-fluid">
+            <div class="col-md-12" style="padding:0;">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <span>查看排名</span>
+                    <button type="button" class="btn btn-primary back-btn rf" ng-click="backAchList()">返回</button>
+                </div>
+                <!--搜索区-->
+                <div class="panel rate">
+                    <div class="panel-body ">
+                        <form name="form">
+                            <div class="form-horizontal">
+                                <div class="form-group col-sm-3">
+                                    <label class="control-label col-sm-4">名次：</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-controlmdg input-sm select" ng-model="rankSection">
+                                            <option value="">全部</option>
+                                            <option value="{{rankItem.rankSection}}" ng-repeat="rankItem in rankList">{{rankItem.rankSection}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-5">
+                                    <label class="control-label col-sm-4" style="width:120px;">关键词：</label>
+                                    <input class="input-sm col-sm-6" placeholder="请输入门店名称" type="text" ng-model="shopName">
+                                </div>
+								
+                                <div class="form-group col-sm-3">
+                                    <button class="btn btn-primary search" style="margin-right:30px;" ng-click="searchAch()">查询</button>
+                                    <button class="btn btn-primary reset" ng-click="resetAct()">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--导出-->
+                <div class="operBtnWrap" style="margin-bottom:10px;margin-right:20px;">
+                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendTemplateInfo()">发送模板消息</button>
+                    <button class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[isSendCase]" ng-click="sendCashRank()" style="margin: 0 15px;">派发现金奖项</button>
+                    <button class="btn btn-primary" ng-click="exportAwardList()">导出中奖名单</button>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr class="table-head">
+                                    <th>序号</th>
+                                    <th>操作</th>
+                                    <th>名次</th>
+                                    <th>门店名称</th>
+                                    <th>联系人</th>
+                                    <th>联系人电话</th>
+                                    <th>许可证号</th>
+                                    <th>门店地区</th>
+                                    <th>门店地址</th>
+                                    <th>扫码业绩</th>
+                                    <th>奖品</th>
+                                    <th>市场价</th>
+                                    <th>派奖状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rankDataItem in rankDataList" ng-if="rankDataList.length > 0">
+                                    <td>{{(pageNo-1)*pageSize+($index+1)}}</td>
+                                    <td><span class="seeInfo" ng-click="showDealerDetail(rankDataItem.sellerId)">查看详情</span></td>
+                                    <td>{{rankDataItem.idx}}</td>
+                                    <td>{{rankDataItem.shopName}}</td>
+                                    <td>{{rankDataItem.ownerName}}</td>
+                                    <td>{{rankDataItem.phoneNo}}</td>
+                                    <td>{{rankDataItem.licenceNo}}</td>
+                                    <td>{{rankDataItem.addrProvinceName}} - {{rankDataItem.addrCityName}} - {{rankDataItem.addrAreaName}}</td>
+                                    <td>{{rankDataItem.addrDetail}}</td>
+                                    <td>{{rankDataItem.achieveNum}}</td>
+                                    <td>{{rankDataItem.awardName}}</td>
+                                    <td>￥{{rankDataItem.price}}</td>
+                                    <td>{{rankDataItem.payStatusName}}</td>
+                                </tr>
+                                <tr ng-if="rankDataList.length == 0">
+                                    <td colspan="13">未搜索到符合条件的相关信息</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="footer_sec clearfix" ng-if="rankDataList.length > 0">
+                            <div class="total_info lf">
+                                总共<span>{{totalCount}}</span>条记录，当前页共
+                                <span>{{rankDataList.length}}</span>
+                                条记录
+                            </div>
+                            <div class="page_sec rf">
+                                <div class="tcdPageCode"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 发送模板消息 -->
+    <div ng-show="sendTemplateBox" class="fadeInRightBig">
+        <div class="row">
+            <div class="col-md-12">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <span>发送模板信息</span>
+                    <button type="button" class="btn btn-primary back-btn rf" id="goBack" ng-click="backAchRank()">返回</button>
+                </div>
+                <div class="panel rate">
+                    <div class="panel-body" >
+                        <!--完成活动提醒-->
+                        <div class="shrInfo">
+                            <h3 class="infoTopH3">完成活动提醒</h3>
+                            <form action="" class="form">
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" style="vertical-align:top;" for="">顶部描述：</label>
+                                    <textarea class="shrInfo_textarea" style="font-size:12px;" ng-model="sendInfoObj.topDescribe" type="text" placeholder="请输入顶部描述"></textarea>
+                                    <span class="warn_color textarea_warn" ng-if="sendWarnInfo.topWarn">顶部描述不能为空</span>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" for="">活动名称：</label>
+                                    <input class="shrInfo_input" type="text" ng-model="sendInfoObj.actName" placeholder="请输入活动名称"/>
+                                    <span class="warn_color" ng-if="sendWarnInfo.actNameWarn">活动名称不能为空</span>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" for="">完成时间：</label>
+                                    <input class="shrInfo_input" type="text" ng-model="sendInfoObj.sendTime" 
+                                        placeholder="例如：2018年1月1日-2018年1月31日"/>
+                                    <span class="warn_color" ng-if="sendWarnInfo.sendTimeWarn">活动时间不能为空</span>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" style="vertical-align:top;" for="">底部描述：</label>
+                                    <textarea class="shrInfo_textarea" style="font-size:12px;" ng-model="sendInfoObj.bottomDescribe" type="text" placeholder="请输入底部描述"></textarea>
+                                    <span class="warn_color textarea_warn" ng-if="sendWarnInfo.bottomWarn">底部描述不能为空</span>
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14 laber_title" for="">发送范围：</label>
+                                    <input type="radio" name="sendType" class="input_radio" ng-value='1' 
+                                        ng-model="sendInfoObj.sendRange" ng-checked="sendInfoObj.sendRange == 1"/>所有零售户
+                                    <input type="radio" name="sendType" class="input_radio" ng-value='2' 
+                                        ng-model="sendInfoObj.sendRange" ng-checked="sendInfoObj.sendRange == 2"/>中奖零售户
+                                </div>
+                                <div class="input_div">
+                                    <label class="font_14" for="">链接地址：</label>
+                                    <input class="shrInfo_input" type="text" ng-model="sendInfoObj.templateUrl" placeholder="请输入链接地址"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="opera_box" style="margin-top:30px;">
+                            <div style="width:80px;" class="add_prize" ng-click="comSendInfo()">确定</div>
+                            <div style="width:80px;margin-right:150px;" class="del_prize" ng-click="backAchRank()">取消</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!--派发奖金弹框-->
+    <div class="modal fade send_case_box" tabindex="-1" role="dialog" aria-labelledby="send_case_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="send_case_btn">派发奖金</div>
+                    </div>
+                    <div class="box_cont">您确定为中奖用户派发奖金？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmSendCase()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--发送模板消息-->
+    <div class="modal fade send_tem_box" tabindex="-1" role="dialog" aria-labelledby="send_tem_btn">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="box_sec">
+                    <div class="box_tit">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-title" id="send_tem_btn">发送模板消息</div>
+                    </div>
+                    <div class="box_cont">您确定发送模板消息？</div>
+                    <div class="box_btn clearfix">
+                        <div class="box_btn_conf lf" ng-click="confirmSendTem()">确定</div>
+                        <div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="statics/assets/libs/jquery.page.js"></script>
+</div>

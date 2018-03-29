@@ -154,7 +154,13 @@ home:                                       # 首页
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'home/skReport/skReport.html'
+  - httpmethod: 'get'                       # 河北报表导出
+    routepath: '/view/home/hbReport'
+    description: 'hbReport'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/hbReport/hbReport.html'
   - httpmethod: 'get'                       # 履约报表
     routepath: '/view/home/agree'
     description: 'agree'
@@ -176,6 +182,20 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/materiel/gift.html'
+  - httpmethod: 'get'                       # 盗扫明细查询
+    routepath: '/view/home/operateTools/sweepDetail'
+    description: 'sweepDetail'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/operateTools/sweepDetail.html'
+  - httpmethod: 'get'                       # 用户标签 标签组合管理
+    routepath: '/view/home/usertag/assemble'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/usertag/assemble.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
@@ -219,6 +239,20 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/memberday/detail.html'
+  - httpmethod: 'get'                       # 毛五活动管理
+    routepath: '/view/activity/acts/sauce/actmanage'
+    description: '毛五活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/actmanage.html'
+  - httpmethod: 'get'                       # 毛五订单管理
+    routepath: '/view/activity/acts/sauce/ordermanage'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/ordermanage.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
@@ -341,6 +375,13 @@ visitManage:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'visit/amountexamine.html'
+  - httpmethod: 'get'                       #提现审核
+    routepath: '/view/visit/achievement'
+    description: 'achievement'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/achievement.html'
 system:
   - httpmethod: 'get'                       # 修改密码
     routepath: '/view/system/password'
@@ -398,11 +439,3 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/style/style.html'
-operateTools:
-  - httpmethod: 'get'                       # 盗扫明细查询
-    routepath: '/view/home/operateTools/sweepDetail'
-    description: 'sweepDetail'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'home/operateTools/sweepDetail.html'

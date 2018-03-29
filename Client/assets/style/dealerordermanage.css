@@ -21,7 +21,17 @@
 	display: flex;
 	justify-content: center;
 }
-
+.form-group {
+    overflow: hidden;
+	padding: 0;
+}
+.resion select{
+	width: 131px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #d2d2d2;
+    padding: 0 10px;
+}
 
 /*导出*/
 
@@ -55,6 +65,15 @@
     width: 80px;
     padding: 0;
     margin: 0 0 0 5px;
+}
+.warn_color{
+	color: #f00;
+	/* display: none; */
+}
+.textarea_warn{
+	position: absolute;
+	top: 40px;
+	left: 475px;
 }
 /*表单*/
 
@@ -90,7 +109,6 @@
 	width:90%;
 	margin:0 auto;
 	padding:10px;
-	
 }
 .spanAllTitle{
 	font-size:14px;
@@ -111,18 +129,21 @@
 	justify-content: flex-start;
 	margin:20px 0;
 }
-.ul2 li:nth-child(2){
-	margin-left:115px;
+.ul2 li{
+	width: 50%;
 }
+/* .ul2 li:nth-child(2){
+	margin-left:115px;
+} */
 .shrInfo{
-	height:200px;
+	/* height:200px; */
 	width:98%;
 	/*background:#D0E9C6;*/
-	margin:20px auto;
+	margin:10px auto;
 }
-#form{
+.form{
 	width:80%;
-	height:150px;
+	/* height:150px; */
 	/*background:#003399;*/
 	margin-left:95px;
 	display:flex;
@@ -130,11 +151,76 @@
 	justify-content: space-around;
 	/*align-items: center;*/
 }
+.form .input_div,.take_div{
+	margin-top: 8px;
+	position: relative;
+}
+.box_border{
+	width: 700px;
+	border: 1px solid #ddd;
+	padding: 10px 0 15px 25px;
+	margin-bottom: 20px;
+}
+.font_14{
+	font-size: 14px;
+}
+.laber_title:before{
+	content: '*';
+    position: absolute;
+	/* right: 0; */
+	left: -10px;
+    /* top: 3px; */
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.laber_title_time:before{
+	content: '*';
+    position: absolute;
+	/* right: 0; */
+	left: 3px;
+    top: 3px;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.close_prize{
+	position: absolute;
+    top: 5px;
+	right: 10px;
+	font-size: 26px;
+	color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+.close_prize:hover{
+	color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+.posion_r{
+	position: relative;
+}
+.act_time{
+	width:20px;
+	line-height:30px;
+	margin:0 15px;
+	text-align: center;
+}
 .shrInfo_input{
 	height:30px;
 	width:400px;
 	border:1px solid #d2d2d2;
 	padding:0 10px;
+}
+.shrInfo_textarea{
+	height:100px;
+	width:400px;
+	border:1px solid #d2d2d2;
+	padding:5px 10px;
 }
 .orderTracking{
 	width:98%;
@@ -150,6 +236,105 @@
 	/*display:flex;
 	justify-content: space-between;*/
 	margin:20px 0 ;
+}
+.input_radio{
+	vertical-align: text-bottom;
+	font-size: 14px;
+}
+.input_div .input_radio:last-child{
+	margin-left: 30px;
+}
+.imgBox{
+	width: 160px;
+	display: inline-block;
+}
+.img_show{
+	width: 160;
+	height: 120px;
+}
+.img_show img{
+	width: 160;
+	height: 120px;
+}
+.img_btn{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 10px;
+	position: relative;
+}
+.img_btn div{
+	width:70px;
+	height:30px; 
+	font-size: 14px;
+	line-height: 30px;
+	border-radius:8px;
+	text-align: center;
+}
+.upload_input{
+	position: absolute;
+    width: 70px;
+    height: 30px;
+    opacity: 0;
+    left: 0;
+	top: 0;
+	z-index: 100;
+}
+.perfect_award_warn{
+	position: absolute;
+	top: 25px;
+	left: 580px;
+	color: #f00;
+	font-size: 14px;
+}
+.show_box{
+	width: 700px;
+	margin-left: 100px;
+}
+.opera_box{
+	width: 700px;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 0 130px;
+}
+.opera_box div{
+	width:120px;
+	height:30px; 
+	font-size: 14px;
+	line-height: 30px;
+	border-radius:8px;
+	text-align: center;
+}
+.add_award{
+	width: 120px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 8px;
+}
+.opera_box div:hover,.add_award:hover{
+	cursor: pointer;
+}
+.upload_btn,.add_prize{
+	background:rgba(22, 155, 213, 1);
+	color: #fff;
+	margin-right: 18px;
+}
+
+.add_prize{
+	margin-left: 20px;
+}
+.del_btn,.del_prize{
+	background:#fff ;
+	color: rgba(22, 155, 213, 1);
+	border: 1px solid rgba(22, 155, 213, 1);
+}
+.title_content{
+	line-height: 25px;
+	padding-top: 25px;
+}
+.text_indent{
+	text-indent: 36px;
 }
 .btnCancel{
 	width:98%;
@@ -211,6 +396,9 @@
 .total_info {
     font-size: 11px;
     color: #8A8A8A;
+}
+.back-btn{
+	margin: -10px 30px 0 0;
 }
 /*分页样式*/
 .tcdPageCode {
@@ -278,4 +466,47 @@
 .box_btn{
 	box-sizing: border-box;
 	border-top: 1px solid #CECECE;
+}
+/* 业绩排名 */
+.cre_ach_title{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: space-around;
+	background-color: #D6D7D8;
+}
+.cre_ach_title div{
+	width: 33.33%;
+	height: auto;
+	line-height:40px;
+	text-align: center; 
+}
+.cre_ach_info{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: space-around;
+}
+.cre_ach_info input{
+	width: 33.33%;
+	height: auto;
+	line-height:40px;
+	text-align: center;
+}
+.ach_info_box{
+	position: relative;
+}
+.ach_info_warn{
+	position: absolute;
+    top: 12px;
+    left: 710px;
+	width: 100px;
+	color: #f00;
+	font-size: 14px;
+}
+.title_box{
+	margin-left: 73px;
+}
+.pad_cont{
+	margin-left: 35px;
 }

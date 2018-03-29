@@ -237,7 +237,38 @@ define([], function () {
           }
 
           //*** 提现审核 end
+          
+          //*** 业绩设置 start 
+          var achieveListUrl = '/api/tztx/seller-manager/achieve/queryList'; //获取业绩列表
+          $model.getAchieveList= function (data) {
+            return request.$Search(achieveListUrl, data, true)
+          }
+          var saveOrUpdateAchUrl = '/api/tztx/seller-manager/achieve/saveOrModify'; //保存或修改业绩配置
+          $model.saveOrUpdateAch= function (data) {
+            return request.$Search(saveOrUpdateAchUrl, data, true)
+          }
+          var getAchDetilUrl = '/api/tztx/seller-manager/achieve/configDetail'; //获取业绩设置详情
+          $model.getAchDetil= function (data) {
+            return request.$Search(getAchDetilUrl, data, true)
+          }
+          var getPeriodResultListUrl = '/api/tztx/seller-manager/achieve/periodResultList'; //获取业绩排名详情
+          $model.getPeriodResultList= function (data) {
+            return request.$Search(getPeriodResultListUrl, data, true)
+          }
+          var getQueryAwardListUrl = '/api/tztx/seller-manager/achieve/queryAwardList'; //获取业绩排名名次
+          $model.getQueryAwardList= function (data) {
+            return request.$Search(getQueryAwardListUrl, data, true)
+          }
+          var payAchievementUrl = '/api/tztx/seller-manager/achieve/payAchievement'; //派发奖金到中奖用户
+          $model.payAchievement = function (data) {
+            return request.$Search(payAchievementUrl, data, true)
+          }
+          var sendWechatTemplateUrl = '/api/tztx/seller-manager/achieve/sendWechatTemplate'; //发送模板消息
+          $model.sendWechatTemplate = function (data) {
+            return request.$Search(sendWechatTemplateUrl, data, true)
+          }
 
+          //*** 业绩设置 start 
 
         }]
     };
