@@ -371,15 +371,24 @@ define([], function() {
                         periodId : achId
                     };
                     getPeriodResultList(achObj);
-                    $model.getAchDetil(achObj).then(function (res) { //查看是否可派发现金奖项
+                    $model.getAchDetil(achObj).then(function (res) { //获取业绩设置详情
                         if(res.data.ok){
                             var detailObj = res.data.data;
-                            var entTimes = detailObj.etime;
-                            var curTimes = new Date().getTime();
-                            if(curTimes > entTimes){
-                                $scope.isSendCase = true;
-                                $scope.$apply();
-                            }
+                            // var entTimes = detailObj.etime;
+                            // var curTimes = new Date().getTime();
+                            // if(curTimes > entTimes){
+                            //     $scope.isSendCase = true;
+                            //     $scope.$apply();
+                            // }
+                        }
+                    })
+                    $model.canJudgePay(achObj).then(function (res) { //查看是否可派发现金奖项
+                        if(res.data.ok){
+                            $scope.isSendCase = true;
+                            $scope.$apply();
+                        }else{
+                            $scope.isSendCase = false;
+                            $scope.$apply();
                         }
                     })
                     $scope.showAchList = false; //显示业绩列表
