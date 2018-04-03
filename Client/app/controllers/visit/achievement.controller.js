@@ -30,6 +30,7 @@ define([], function() {
             $scope.isSendCase = false; //默认不能派发现金奖项
             $scope.sendTemplateBox = false; //发送模板信息
             $scope.canSendTemplate = false; //是否可发送模板信息
+            $scope.sendTemplateState = true; //发送模板状态
 
             //创建分页工具
             function createPageTools(pageData){
@@ -511,37 +512,41 @@ define([], function() {
                 $('.send_tem_box').modal('show');
             }
             $scope.confirmSendTem = function(){ //确定发送模板消息
-                var sendTemInfo = {
-                    wxTemplateParams : {
-                        first : $scope.sendInfoObj.topDescribe,
-                        keyword1 : $scope.sendInfoObj.actName,
-                        keyword2 : $scope.sendInfoObj.sendTime,
-                        remark : $scope.sendInfoObj.bottomDescribe,
-                        templateUrl : $scope.sendInfoObj.templateUrl,
-                        
-                    },
-                    achieveParams:{
-                        sendScope : $scope.sendInfoObj.sendRange,
-                        periodId : $scope.periodId
-                    } 
-                }
-                $model.sendWechatTemplate(sendTemInfo).then(function (res) { //发送模板消息
-                    if(res.data.ok){
-                        $('.send_tem_box').modal('hide');
-                        $scope.sendTemplateBox = false; //发送模板信息
-                        $scope.showAchDetail = true;
-                        var reflectRankData = { 
-                            pageNo : 1,
-                            pageSize : $scope.pageSize,
-                            periodId : $scope.periodId //业绩ID
-                            //shopName : $scope.shopName, //店铺名称
-                            //rankSection : $scope.rankSection//名次区间
-                        };
-                        getPeriodResultList(reflectRankData);
-                    }else{
-                        alert(res.data.msg);
+                if($scope.sendTemplateState){
+                    $scope.sendTemplateState = false;
+                    var sendTemInfo = {
+                        wxTemplateParams : {
+                            first : $scope.sendInfoObj.topDescribe,
+                            keyword1 : $scope.sendInfoObj.actName,
+                            keyword2 : $scope.sendInfoObj.sendTime,
+                            remark : $scope.sendInfoObj.bottomDescribe,
+                            templateUrl : $scope.sendInfoObj.templateUrl
+                        },
+                        achieveParams:{
+                            sendScope : $scope.sendInfoObj.sendRange,
+                            periodId : $scope.periodId
+                        } 
                     }
-                })
+                    $model.sendWechatTemplate(sendTemInfo).then(function (res) { //发送模板消息
+                        if(res.data.ok){
+                            $('.send_tem_box').modal('hide');
+                            $scope.sendTemplateBox = false; //发送模板信息
+                            $scope.showAchDetail = true;
+                            $scope.sendTemplateState = true;
+                            var reflectRankData = { 
+                                pageNo : 1,
+                                pageSize : $scope.pageSize,
+                                periodId : $scope.periodId //业绩ID
+                                //shopName : $scope.shopName, //店铺名称
+                                //rankSection : $scope.rankSection//名次区间
+                            };
+                            getPeriodResultList(reflectRankData);
+                        }else{
+                            alert(res.data.msg);
+                            $scope.sendTemplateState = true;
+                        }
+                    })
+                }
             }
             $scope.showDealerDetail = function(retailId){
                 sessionStorage.setItem('retailId',retailId);
