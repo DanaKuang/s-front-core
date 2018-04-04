@@ -466,6 +466,7 @@ body {
   transform: translateX(-50%);
   border-radius: 5px;
   z-index: 1000;
+  display: none;
 }
 #common_alert li {
   position: absolute;

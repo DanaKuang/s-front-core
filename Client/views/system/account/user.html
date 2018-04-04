@@ -5,11 +5,85 @@
  * Description: user
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/account.user.css">
 <div ng-controller="userCtrl">
     <div class="animated fadeInRightBig">
-        <div class="container-fluid">
-            <div class="row">
-
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--面包屑-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>成员管理</span>
+                    <button type="button" class="btn btn-default" ng-click="add()">+新增成员</button>
+                </div>
+                <!--搜索栏-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_user_form" autocomplete="off">
+                            <!--成员筛选-->
+                            <div class="form-group">
+                                <label for="" class="control-label">成员筛选</label>
+                                <input type="text" name="user" placeholder="ID/姓名/单位/手机号" ng-model="user" class="form-control input-sm">
+                            </div>
+                            <!--角色-->
+                            <div class="form-group">
+                                <label for="" class="control-label">角色</label>
+                                <select class="form-control input-sm" ng-model="role">
+                                    <option value="">全部</option>
+                                </select>
+                            </div>
+                            <!--状态-->
+                            <div class="form-group">
+                                <label for="" class="control-label">状态</label>
+                                <select class="form-control input-sm" ng-model="status">
+                                    <option value="">全部</option>
+                                    <option value="1">已启用</option>
+                                    <option value="0">已停用</option>
+                                </select>
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button type="reset" class="btn btn-primary">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--人员表格-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <span ng-click="import()" class="table-ctrl span-hover">批量导入成员信息></span>
+                            <span ng-click="export()" class="table-ctrl span-hover">批量导出成员信息></span>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>姓名</th>
+                                    <th>角色</th>
+                                    <th>单位</th>
+                                    <th>手机号</th>
+                                    <th>状态</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span class="opt-btn span-hover" ng-click="edit()">编辑</span>
+                                        <span class="opt-btn span-hover" ng-click="ctrl()">停用</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

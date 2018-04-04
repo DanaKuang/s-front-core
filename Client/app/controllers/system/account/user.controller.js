@@ -1,7 +1,7 @@
 /**
- * Author: {author}
- * Create Date: 2017-10-16
- * Description: user
+ * Author: 刘彬
+ * Create Date: 2018-04-04
+ * Description: 成员管理
  */
 define([], function() {
     var userCtrl = {
@@ -10,6 +10,16 @@ define([], function() {
         ViewModelName: 'userViewModel',
         ServiceContent: ['$scope', function($scope) {
             // TODO...
+
+
+
+            $(document).ready(function () {
+                $("#id_user_form select").multiselect({
+                    nonSelectedText: '请选择',
+                    allSelectedText: '全部',
+                    nSelectedText: '已选择'
+                });
+            });
         }]
     };
 
