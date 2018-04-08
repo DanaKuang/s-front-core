@@ -5,120 +5,122 @@
  * Description: visit
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/home.visit.css">
 <div ng-controller="VisitCtrl">
-<div class="animated fadeInRightBig">
-  <div class="container-fluid region-margin">
-    <div class="row">
-      <div class="col-md-12 visit_wrap">
-        <!--title-->
-        <div class="ui-panel-title report">
-          <i class="report-icon"></i><span>回访报表</span>
-        </div>
-        <!--box-->
-        <div class="panel rate">
-          <div class="panel-body">
-            <div class="res_search">
-              <div class="visit_award form-inline">
-                <label>奖品：</label>
-                <input type="text" placeholder="" class="form-control input-sm">
-              </div>
-              <div class="visit_city form-inline">
-                <label>城市：</label>
-                <input type="text" placeholder="" class="form-control input-sm" >
-              </div>
-              <div class="visit_mobile form-inline">
-                <label>手机号：</label>
-                <input type="text" placeholder="" class="form-control input-sm">
-              </div>
-              <div class="visit_order form-inline">
-                <label>订单号：</label>
-                <input type="text" placeholder="" class="form-control input-sm">
-              </div>
-              <div class="visit_brand">
-                <label>品牌：</label>
-                <select id="visit_brand">
-                  <option value="">全部</option>
-                </select>
-              </div>
-              <div class="visit_product">
-                <label>规格：</label>
-                <select id="visit_product">
-                </select>
-              </div>
-              <div class="visit_label">
-                  <label>标签：</label>
-                  <select id="visit_label">
-                    <option value="" selected>全部</option>
-                    <option value="1">待核实</option>
-                    <option value="2">已核实</option>
-                    <option value="3">不属实</option>
-                    <option value="4">联系不上</option>
-                  </select>
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid region-margin">
+            <div class="row">
+                <div class="col-md-12 visit_wrap">
+                    <!--title-->
+                    <div class="ui-panel-title report">
+                        <i class="report-icon"></i><span>回访报表</span>
+                    </div>
+                    <!--box-->
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <form class="form-inline ui-visit-form">
+                                <div class="form-group visit_award">
+                                    <label class="control-label" for="award">奖品</label>
+                                    <input type="text" name="award" class="form-control input-sm">
+                                </div>
+                                <div class="form-group visit_city">
+                                    <label class="control-label" for="city">城市</label>
+                                    <input type="text" name="city" class="form-control input-sm" >
+                                </div>
+                                <div class="form-group visit_mobile">
+                                    <label class="control-label" for="mobile">手机号</label>
+                                    <input type="text" name="mobile" class="form-control input-sm">
+                                </div>
+                                <div class="form-group visit_order">
+                                    <label class="control-label" for="order">订单号</label>
+                                    <input type="text" name="order" class="form-control input-sm">
+                                </div>
+                                <div class="form-group visit_brand">
+                                    <label class="control-label" for="brand">品牌</label>
+                                    <select id="visit_brand" name="brand" class="form-control input-sm">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                                <div class="form-group visit_product">
+                                    <label class="control-label" for="product">规格</label>
+                                    <select id="visit_product" name="product" class="form-control input-sm">
+                                    </select>
+                                </div>
+                                <div class="form-group visit_label">
+                                    <label class="control-label" for="label">标签</label>
+                                    <select id="visit_label" name="label" class="form-control input-sm">
+                                        <option value="" selected>全部</option>
+                                        <option value="1">待核实</option>
+                                        <option value="2">已核实</option>
+                                        <option value="3">不属实</option>
+                                        <option value="4">联系不上</option>
+                                    </select>
+                                </div>
+                                <div class="form-group agree-date visit_start">
+                                    <label class="control-label" for="start">开始时间</label>
+                                    <input type="text" name="start" value="" readonly class="form-control input-sm date" />
+                                </div>
+                                <div class="form-group agree-date visit_end">
+                                    <label class="control-label" for="end">结束时间</label>
+                                    <input type="text" name="end" value="" readonly class="form-control input-sm date" />
+                                </div>
+                                <div class="form-group ui-btn-ctrl">
+                                    <button class="btn btn-primary search_btn visit_btn" type="submit" ng-click="search($event)">搜索</button>
+                                    <button class="btn btn-primary" type="reset">重置</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered visit_table">
+                                <thead>
+                                    <tr>
+                                        <th>手机号</th>
+                                        <th>订单号</th>
+                                        <th>微信昵称</th>
+                                        <th>领奖时间</th>
+                                        <th>城市</th>
+                                        <th>奖品（金额）</th>
+                                        <th>标签</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="footer_sec clearfix">
+                                <!--<div class="total_info lf">-->
+                                <!--总共<span>205</span>条记录，当前页共<span>10条记录</span>-->
+                                <!--</div>-->
+                                <div class="page_sec rf">
+                                    <div class="tcdPageCode"></div>
+                                </div>
+                                <span class="visit-account">总计:{{count}}条</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              <div class="agree-date visit_start">
-                <label>开始时间：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" />
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-              </div>
-              <div class="agree-date visit_end">
-                <label>结束时间：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" />
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-              </div>
-              <div class="search_btn visit_btn" ng-click="search($event)">查询</div>
             </div>
-            <table class="table visit_table">
-              <thead style="border: 1px solid #A0A0A0">
-              <tr>
-                <th>手机号</th>
-                <th>订单号</th>
-                <th>微信昵称</th>
-                <th>领奖时间</th>
-                <th>城市</th>
-                <th>奖品（金额）</th>
-                <th>标签</th>
-              </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-            <div class="footer_sec clearfix">
-              <!--<div class="total_info lf">-->
-              <!--总共<span>205</span>条记录，当前页共<span>10条记录</span>-->
-              <!--</div>-->
-              <div class="page_sec rf">
-                <div class="tcdPageCode"></div>
-              </div>
-              <span class="visit-account">总计:{{count}}条</span>                                          
+        </div>
+    </div>
+    <!--模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">操作提示！！！</h4>
+                </div>
+                <div class="modal-body">
+                    您确认是否需要更改此用户状态？
+                    <span style="color: red">(一经确认无法修改)</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="sure()">确定</button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <script src="statics/assets/libs/jquery.page.js"></script>
-</div>
-  <!--模态框-->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">操作提示！！！</h4>
-        </div>
-        <div class="modal-body">
-          您确认是否需要更改此用户状态？
-          <span style="color: red">(一经确认无法修改)</span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
-          <button type="button" class="btn btn-primary" ng-click="sure()">确定</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script src="statics/assets/libs/jquery.page.js"></script>
 </div>

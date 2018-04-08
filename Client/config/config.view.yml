@@ -196,6 +196,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/usertag/assemble.html'
+  - httpmethod: 'get'                       # 异常码管理
+    routepath: '/view/home/code'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/code.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'

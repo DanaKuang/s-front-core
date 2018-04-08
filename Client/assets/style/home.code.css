@@ -1,0 +1,43 @@
+.ui-home-code {
+  margin-top: 15px; }
+  .ui-home-code .margin-top {
+    margin-top: 15px; }
+  .ui-home-code .ui-panel-title button {
+    position: absolute;
+    right: 0;
+    height: 24px;
+    padding: 0 12px; }
+  .ui-home-code .ui-btn-ctrl {
+    display: block !important;
+    text-align: right;
+    margin-right: 0 !important; }
+  .ui-home-code #id_code_form select {
+    min-width: 147px; }
+  .ui-home-code #id_code_form .control-label {
+    min-width: 70px;
+    text-align: right; }
+  .ui-home-code #id_code_form .form-group {
+    margin-right: 15px; }
+  .ui-home-code #id_code_form .multiselect.btn {
+    min-width: 147px;
+    height: 30px;
+    padding: 4px 12px; }
+  .ui-home-code #id_code_form .ui-btn-ctrl button {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+  .ui-home-code .table-ctrl {
+    font-size: 14px;
+    float: right;
+    margin: 0 15px 15px 0;
+    border-bottom: 1px solid #999; }
+  .ui-home-code .span-hover:hover {
+    color: #333;
+    cursor: pointer; }
+  .ui-home-code .opt-btn {
+    margin: 5px; }
