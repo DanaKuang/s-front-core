@@ -154,6 +154,7 @@ home:                                       # 首页
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
+    staticfile: 'home/skReport/skReport.html'
   - httpmethod: 'get'                       # 河北报表导出
     routepath: '/view/home/hbReport'
     description: 'hbReport'
