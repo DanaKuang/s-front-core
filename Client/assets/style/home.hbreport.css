@@ -12,7 +12,7 @@
   text-align: right; }
 
 .ui-hbreport-form .multiselect.btn {
-  min-width: 147px;
+  width: 147px;
   height: 30px;
   padding: 4px 12px; }
 
@@ -20,7 +20,10 @@
   background: #fff; }
 
 .ui-hbreport-form select {
-  min-width: 147px !important; }
+  width: 147px !important; }
+
+.ui-hbreport-form .form-control {
+  width: 147px !important; }
 
 .ui-hbreport-form .ui-btn-ctrl {
   display: block !important;

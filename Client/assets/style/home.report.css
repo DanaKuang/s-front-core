@@ -25,6 +25,9 @@
 .ui-report-form select {
   width: 147px !important; }
 
+.ui-report-form .form-control {
+  width: 147px !important; }
+
 .ui-report-form .ui-btn-ctrl {
   display: block !important;
   text-align: right;

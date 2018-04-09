@@ -136,6 +136,10 @@
 .ui-detail-form select {
   width: 147px !important; }
 
+.ui-overview-form .form-control,
+.ui-detail-form .form-control {
+  width: 147px !important; }
+
 .ui-overview-form .ui-btn-ctrl,
 .ui-detail-form .ui-btn-ctrl {
   display: block !important;

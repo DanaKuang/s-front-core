@@ -15,7 +15,7 @@
         text-align: right;
     }
     .multiselect.btn {
-        min-width: 147px;
+        width: 147px;
         height: 30px;
         padding: 4px 12px;
     }
@@ -23,7 +23,10 @@
         background: #fff;
     }
     select {
-        min-width: 147px !important;
+        width: 147px !important;
+    }
+    .form-control {
+        width: 147px !important;
     }
     .ui-btn-ctrl {
         display: block !important;

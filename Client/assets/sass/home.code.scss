@@ -19,7 +19,10 @@
     }
     #id_code_form {
         select {
-            min-width: 147px;
+            width: 147px;
+        }
+        .form-control {
+            width: 147px !important;
         }
         .control-label {
             min-width: 70px;
@@ -29,7 +32,7 @@
             margin-right: 15px;
         }
         .multiselect.btn {
-            min-width: 147px;
+            width: 147px;
             height: 30px;
             padding: 4px 12px;
         }

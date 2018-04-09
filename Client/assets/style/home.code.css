@@ -12,14 +12,16 @@
     text-align: right;
     margin-right: 0 !important; }
   .ui-home-code #id_code_form select {
-    min-width: 147px; }
+    width: 147px; }
+  .ui-home-code #id_code_form .form-control {
+    width: 147px !important; }
   .ui-home-code #id_code_form .control-label {
     min-width: 70px;
     text-align: right; }
   .ui-home-code #id_code_form .form-group {
     margin-right: 15px; }
   .ui-home-code #id_code_form .multiselect.btn {
-    min-width: 147px;
+    width: 147px;
     height: 30px;
     padding: 4px 12px; }
   .ui-home-code #id_code_form .ui-btn-ctrl button {

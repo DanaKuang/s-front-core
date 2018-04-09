@@ -5,7 +5,7 @@
   text-align: right; }
 
 .ui-region-form .multiselect.btn {
-  min-width: 147px;
+  width: 147px;
   height: 30px;
   padding: 4px 12px; }
 
@@ -13,7 +13,10 @@
   background: #fff; }
 
 .ui-region-form select {
-  min-width: 147px !important; }
+  width: 147px !important; }
+
+.ui-region-form .form-control {
+  width: 147px !important; }
 
 .ui-region-form .ui-btn-ctrl {
   display: block !important;

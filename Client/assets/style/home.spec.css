@@ -13,7 +13,10 @@
   background: #fff; }
 
 .ui-spec-form select {
-  min-width: 147px !important; }
+  width: 147px !important; }
+
+.ui-spec-form .form-control {
+  width: 147px !important; }
 
 .ui-spec-form .ui-btn-ctrl {
   display: block !important;

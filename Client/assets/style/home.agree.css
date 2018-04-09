@@ -25,6 +25,9 @@
 .ui-agree-form select {
   width: 147px !important; }
 
+.ui-agree-form .form-control {
+  width: 147px !important; }
+
 .ui-agree-form .ui-btn-ctrl {
   display: block !important;
   text-align: right;

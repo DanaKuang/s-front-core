@@ -19,6 +19,9 @@
 .ui-visit-form .date {
   background: #fff; }
 
+.ui-visit-form .form-control {
+  width: 147px !important; }
+
 .ui-visit-form select {
   width: 147px !important; }
 
