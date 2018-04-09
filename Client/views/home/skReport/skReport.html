@@ -1,5 +1,5 @@
 <!---->
-
+<link rel="stylesheet" href="statics/assets/style/home.skreport.css">
 <div class="animated fadeInRightBig" ng-controller="skReportCtrl">
     <div class="container-fluid region-margin">
       <div class="row">
@@ -78,82 +78,89 @@
           <!--box-->
           <div class="panel rate">
             <div class="panel-body">
-              <div class="report-search">
-                <div class="agree-date">
-                  <label>查询日期：</label>
-                  <div class="ui-total-date input-append date-wrap">
-                    <input id="inputOne" size="16" type="text" value="" readonly class="form-control date" />
-                    <span class="add-on"><i class="icon-th"></i></span>
-                  </div>
+              <form class="form-inline ui-skreport-form">
+                <div class="form-group agree-date">
+                  <label class="control-label">查询日期</label>
+                  <input id="inputOne" type="text" value="" readonly class="form-control input-sm date" />
                 </div>
-                <div class="agree-date">
-                  <label>品牌：</label>
-                  <select id="proviceDataBrand">
+                <div class="form-group agree-date">
+                  <label class="control-label">品牌</label>
+                  <select id="proviceDataBrand" class="form-control input-sm">
                       <!--<option value="">请选择</option>-->
                       <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
                   </select>
                 </div>
-                <div class="agree-date mengdeguo">
-                  <label>规格：</label>
-                  <select id="proviceDataSpecift">
+                <div class="form-group agree-date mengdeguo">
+                  <label class="control-label">规格</label>
+                  <select id="proviceDataSpecift" class="form-control input-sm">
                       <!--<option value="">请选择</option>-->
                       <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.name}}" data-sn="{{speciftItem.sn}}">{{speciftItem.name}}</option>
                   </select>
                 </div>
-                <div class="brand_names">
-                <label  for="proviceName">省份:&nbsp;&nbsp;</label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" style="width:240px;"  value="{{selectAllBrands}}">
-                        <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
-                                  </select>
+                <div class="form-group brand_names">
+                  <label  for="proviceName" class="control-label">省份</label>
+                  <select id="proviceName" multiple="multiple" ng-model="selectAllBrands" class="form-control input-sm" value="{{selectAllBrands}}">
+                    <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                  </select>
                 </div>
-                <div class="specift_names">
-                                  <label  class="label_title" for="applySpecift">地市:&nbsp;&nbsp; </label><select style="width:240px;" id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
-                                      <!--<option value="">请选择</option>-->
-                                      <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
-                                  </select>
-                              </div>
-                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,1)">
-                  查询
-                </button>
-                <button class="btn btn-sm btn-default btn_style" ng-click="down(1)">
-                  下载
-                </button>
+                <div class="form-group specift_names">
+                    <label class="control-label label_title" for="applySpecift">地市</label>
+                    <select id="applySpecift" multiple="multiple" class="form-control input-sm multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                        <!--<option value="">请选择</option>-->
+                        <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
+                    </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,1)">
+                    查询
+                  </button>
+                  <button class="btn btn-primary" type="button" ng-click="down(1)">
+                    下载
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <p style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;" id="titlePOne"></p>
+              <div class="ui-scroll-table">
+                <table class="table table-hover table-bordered" style="min-width:1600px;">
+                  <thead>
+                  <!--<tr>
+                    <th colspan="2" rowspan="2">{{obj.activityName}}</th>
+                    <th colspan="10">{{obj.statTime}}</th>
+                  </tr>-->
+                  <!--<tr>
+                    <th colspan="10" style="background: white">中奖情况</th>
+                  </tr>-->
+                  <tr>
+                    <th>省份</th>
+                    <th>地市</th>
+                    <th>扫码次数</th>
+                    <th>扫码烟包数</th>
+                    <th>扫码人数</th>
+                    <th>本年累计扫码次数</th>
+                    <th>本年累计扫码包数</th>
+                    <th>本年累计扫码人数</th>
+                    <th>抽奖次数</th>
+                    <th>中奖次数(包含实物和红包)</th>
+                    <th>扫码中奖率(中奖次数/扫码烟包数)</th>
+                    <th>中奖人数</th>
+                    <th>红包发放金额</th>
+                    <th>本年累计发放金额</th>
+                  </tr>
+                  </thead>
+                  <tbody id="win_table"></tbody>
+                </table>
               </div>
-              <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePOne"></p>
-              <table class="table">
-                <thead style="border-top: 1px solid #A0A0A0;">
-                <!--<tr>
-                  <th colspan="2" rowspan="2">{{obj.activityName}}</th>
-                  <th colspan="10">{{obj.statTime}}</th>
-                </tr>-->
-                <!--<tr>
-                  <th colspan="10" style="background: white">中奖情况</th>
-                </tr>-->
-                <tr>
-                  <th>省份</th>
-                  <th>地市</th>
-                  <th>扫码次数</th>
-                  <th>扫码烟包数</th>
-                  <th>扫码人数</th>
-                  <th>本年累计扫码次数</th>
-                  <th>本年累计扫码包数</th>
-                  <th>本年累计扫码人数</th>
-                  <th>抽奖次数</th>
-                  <th>中奖次数(包含实物和红包)</th>
-                  <th>扫码中奖率(中奖次数/扫码烟包数)</th>
-                  <th>中奖人数</th>
-                  <th>红包发放金额</th>
-                  <th>本年累计发放金额</th>
-                </tr>
-                </thead>
-                <tbody id="win_table"></tbody>
-              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
+
+
     <!--二:活动中奖统计日报-->
     <div class="container-fluid region-margin report-table" style="display: none">
       <div class="row">
@@ -212,8 +219,8 @@
         </div>
       </div>
     </div>
-    
-    
+
+
     <!--三现金红包中奖统计日报-->
     <div class="container-fluid region-margin report-table" style="display: none">
       <div class="row">
@@ -236,8 +243,8 @@
                     <span class="add-on"><i class="icon-th"></i></span>
                   </div>
                 </div>
-                
-                
+
+
                 <div class="agree-date">
                   <label>品牌：</label>
                   <select id="moneyDataBrand">
@@ -291,7 +298,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--四河南实物奖品中奖统计日报-->
     <div class="container-fluid region-margin report-table" style="display: none">
       <div class="row">
@@ -326,7 +333,7 @@
                       <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
                   </select>
                 </div>
-                
+
               </div>
               <div style="width:100%;overflow:hidden;margin-left:25px;">
                 <div class="report-gui" style="float:left;">
