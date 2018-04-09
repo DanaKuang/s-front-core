@@ -19,35 +19,39 @@
 						<i class="hot"></i>
 						<span>KPI指标总览</span>
 					</div>
-					<div class="panel">
+					<div class="panel rate">
 						<div class="panel-body">
-							<form novalidate name="form" role="form" class="col-md-12">
-								<div class="form-inline operation">
-									<div class="col-sm-1">
-										<select name="singleSelect" id="" class="input-sm form-control" ng-model="singleSelect.unit">
-											<option value="day">日</option>
-											<option value="week">周</option>
-											<option value="month">月</option>
-										</select>
-									</div>
-									<div class="col-sm-3">
-										<!-- 日 -->
-										<label for="day" class="day" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" ng-model="day"></label>
+							<form novalidate name="form" role="form" class="form-inline ui-overall-form" autocomplete="off">
+								<div class="form-group">
+									<label class="control-label" for="">类型</label>
+									<select name="singleSelect" id="" class="input-sm form-control" ng-model="singleSelect.unit">
+										<option value="day">日</option>
+										<option value="week">周</option>
+										<option value="month">月</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="">查询时间</label>
 
-										<!-- 周 -->
-										<label for="" class="week" ng-show="singleSelect.unit == 'week'"><select name="week" id="" class="input-sm form-control" ng-model="week">
-											<option ng-repeat="item in allweek" value="{{item.weekId}}">{{item.weekNo}}</option>
-										</select></label>
-										
-										<!-- 月 -->
-										<label for="" class="month" ng-show="singleSelect.unit == 'month'"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" ng-model="month"></label>
-									</div>
-									<div class="col-sm-1">
-										<button type="submit" class="btn btn-primary input-sm" ng-click="search($event)">查询</button>
-									</div>
+									<!-- 日 -->
+									<div class="day inline-block" ng-show="singleSelect.unit == 'day'"><input name="day" type="text" class="input-sm form-control form_datetime" readonly id="day" ng-model="day"></div>
+
+									<!-- 周 -->
+									<select ng-show="singleSelect.unit == 'week'" name="week" id="" class="input-sm form-control" ng-model="week">
+										<option ng-repeat="item in allweek" value="{{item.weekId}}">{{item.weekNo}}</option>
+									</select>
+
+									<!-- 月 -->
+									<div ng-show="singleSelect.unit == 'month'" class="month inline-block"><input name="month" type="text" class="input-sm form-control form_datetime" readonly id="month" ng-model="month"></div>
+								</div>
+								<div class="form-group ui-btn-ctrl">
+									<button type="submit" class="btn btn-primary input-sm" ng-click="search($event)">查询</button>
 								</div>
 							</form>
-							
+						</div>
+					</div>
+					<div class="panel rate">
+						<div class="panel-body">
 							<div class="chart-all col-md-12">
 								<!-- 扫码次数趋势分析 -->
 								<div class="chart-wrap">
@@ -69,7 +73,7 @@
 									<!-- 柱状图 -->
 									<div class="chart col-md-7" id="districtChart" style="height: 300px;"></div>
 								</div>
-								
+
 								<!-- 各规格扫码次数分析 -->
 								<div class="chart-wrap all-specification">
 									<h5>各规格扫码次数分析<br>（单位：次）<hr></h5>
@@ -82,7 +86,7 @@
 									<p class="absolute">本{{singleSelect.unit == 'day' ? '日' : singleSelect.unit == 'week' ? '周' : '月'}}扫码人数：{{changeuv}}人 （本年度累计扫码人数：{{yearuv}}）</p>
 									<div class="chart" id="userChart" style="height: 260px"></div>
 								</div>
-								
+
 								<!-- 扫码烟包数分析 -->
 								<div class="chart-wrap packandbar-analysis">
 									<h5>扫码烟包数分析<br>（单位：个）<hr></h5>

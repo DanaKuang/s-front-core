@@ -42,9 +42,9 @@ local:                                           # 测试环境配置
     host: '127.0.0.1'                            # IP地址
   gateway:                                       # 配置请求IP地址
     - port: 80                                   # 请求端口号
-      host: 'datatest.taozuike.com'              # 请求IP地址
+      host: 'cs-data.saotianxia.com.cn'          # 请求IP地址
     - port: 80                                   # 请求端口号  80, 8080
-      host: 'portal.v2.taozuike.com'             # 请求IP地址 portal.v2.taozuike.com ，172.16.1.109
+      host: 'cs-saas.saotianxia.com.cn'          # 请求IP地址 172.16.1.109
     - port: 80                                   # 请求端口号
       host: 'cs-retailer.saotianxia.com.cn'      # 零售户 请求IP地址
   rootfilter: '/(dataportal|saas)'               # 接口过滤/(dataportal|saas),/(dataportal)

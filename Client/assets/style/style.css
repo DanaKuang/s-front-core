@@ -72,17 +72,17 @@ body {
   background-color: #ecedf0;
 }
 .ui-navbar-header {
-  background-color: #444871;
+  background-color: #525eb4;
   color: #fff;
   text-align: center;
   width: 200px;
   height: 50px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
   padding-left: 20px;
 }
 .ui-navbar-bgcolor {
-  background-color: #3e4162;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  background-color: #3c457c;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
 }
 .ui-navbar-logo {
   padding: 10px 0;
@@ -184,7 +184,7 @@ body {
   height: 100%;
   border-left: 1px solid #ddd;
   background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
 }
 .ui-navbar-left >ul {
   margin-top: 20px;
@@ -444,14 +444,14 @@ body {
   float: left;
 }
 .panel:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 1, .3);
+  box-shadow: 0 0 3px rgba(0, 0, 1, .3);
 }
 /** 自己写样式 */
 .ui-panel-title {
   position: relative;
   margin-bottom: 2px;
   padding-left: 30px;
-  font-size: 18px;
+  font-size: 16px;
   color: #8a8a8a;
 }
 
@@ -480,7 +480,7 @@ body {
 }
 /*================================begin region==========================*/
 .region-margin, .overall {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .region-describle {
@@ -763,12 +763,12 @@ input[type="checkbox"]:checked + .checkbox{
 }
 .but_sty{
   text-align: center;
-  height: 35px;
-  line-height: 35px;
+  height: 30px;
+  line-height: 30px;
   border-radius: 5px;
   /*border: 1px solid #000;  */
   background: linear-gradient(to bottom,#f1f1f1,#bbb);
-  font-size: 15px;
+  font-size: 14px;
   position: relative;
 }
 .btn_pointer{
@@ -813,55 +813,55 @@ input[type="checkbox"]:checked + .checkbox{
 .sx-arrow-up{
     font-size: 0;
     line-height: 0;
-    border-width: 10px;
+    border-width: 6px;
     border-color: #FFFFFF;
     border-top-width: 0;
     border-style: dashed;
-    border-left-width: 6px;
-    border-right-width: 6px;
+    border-left-width: 4px;
+    border-right-width: 4px;
     border-bottom-style: solid;
     border-left-color: transparent;
     border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
-    top: 5px;
+    top: 8px;
     margin-left: 4px;
 }
 .sx-arrow-down {
     font-size: 0;
     line-height: 0;
-    border-width: 10px;
+    border-width: 6px;
     border-color: #FFFFFF;
     border-bottom-width: 0;
     border-style: dashed;
-    border-left-width: 6px;
-    border-right-width: 6px;
+    border-left-width: 4px;
+    border-right-width: 4px;
     border-top-style: solid;
     border-left-color: transparent;
     border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
-    top: 20px;
+    top: 16px;
     margin-left: 4px;
 }
 .sx-arrow-select-down{
     font-size: 0;
     line-height: 0;
-    border-width: 10px;
+    border-width: 6px;
     border-color: #444444;
     border-bottom-width: 0;
     border-style: dashed;
-    border-left-width: 6px;
-    border-right-width: 6px;
+    border-left-width: 4px;
+    border-right-width: 4px;
     border-top-style: solid;
     border-left-color: transparent;
     border-right-color: transparent;
     width:0;
     height:0;
     position: absolute;
-    top: 20px;
+    top: 16px;
     margin-left: 4px;
 }
 
@@ -975,12 +975,12 @@ input[type="checkbox"]:checked + .checkbox{
 .ui-panel-title .report-icon {
   position: absolute;
   left: 21px;
-  top: 5px;
+  top: 2px;
   /*// content: url('../image/report-icon.jpg');*/
   background: url('../image/report-icon.jpg') no-repeat;
   background-size: cover;
-  height: 17px;
-  width: 17px;
+  height: 18px;
+  width: 18px;
 }
 .ui-navbar-left li.active .fa-report {
   /*// content: url('../image/i-report-act.png');*/

@@ -14,9 +14,18 @@
     margin: 0;
     padding: 0;
   }
-  #my-btn{
-      padding: 4px 40px;
-      border-radius: 35px;
+  #my-btn,
+  #my-btn:hover,
+  #my-btn:active,
+  #my-btn:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed;
   }
   /* base end*/
   .ui-detail-search .ui-detail-screen{
@@ -34,7 +43,7 @@
   cursor: pointer;
   }
   /* 对比的复选框 */
-  
+
   #contrast-container span{
     position: relative;
   }
@@ -51,7 +60,7 @@
     position: absolute;
     visibility: hidden;
   }
-  
+
   #contrast-container .input_check+label {
     display: inline-block;
     width: 14px;
@@ -60,7 +69,7 @@
     border-radius: 50%;
     cursor: pointer;
   }
-  
+
   #contrast-container .input_check:checked+label:after {
     content: "";
     position: absolute;
@@ -77,7 +86,7 @@
     transform: rotate(-45deg);
   }
   .ui-detail-search .ui-detail-body{
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: left;
   }
   .round{
@@ -98,9 +107,9 @@
   .ui-detail-search .ui-detail-body div+div{
     /* margin-left: 15px; */
   }
-  .ui-detail-comparison{ 
-   margin-left: 0 !important;
-   margin-top: 20px;
+  .ui-detail-comparison{
+   /* margin-left: 0 !important; */
+   /* margin-top: 20px; */
    line-height: 40px;
    cursor: pointer;
   }
@@ -111,12 +120,12 @@
     float: left;
     display: none;
   }
-  .ui-detail-comparison input{ 
+  .ui-detail-comparison input{
    vertical-align: text-bottom;
    cursor: pointer;
-   background:none;  
-   outline:none;  
-   border:0px; 
+   background:none;
+   outline:none;
+   border:0px;
   }
   /* 零售户地域分布 */
   .panel-body{
@@ -135,7 +144,7 @@
   }
   .panel-body .title .sitePic{
       display: inline-block;
-      background: url(../image/city.png) no-repeat center center; 
+      background: url(../image/city.png) no-repeat center center;
       background-size: 20px 20px;
       width: 30px;
       height: 30px;
@@ -146,13 +155,13 @@
   }
   .panel-body .title .timePic{
    display: inline-block;
-   background: url(../image/hours.png) no-repeat center center; 
+   background: url(../image/hours.png) no-repeat center center;
    background-size: 20px 20px;
    width: 30px;
    height: 30px;
    transform: translateY(8px);
   }
-  .panel-body-title{ 
+  .panel-body-title{
     display: inline-block;
     text-align: left;
   }

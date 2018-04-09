@@ -15,16 +15,15 @@
                     <i class="group"></i><span>用户群体分析</span>
                 </div>
                 <!--box-->
-                <div class="panel rate group-panel-top">
-                    <div class="panel-body group-month-search">
-                        <div class="group-month">
-                            <label>月份: &nbsp;&nbsp;</label>
-                            <div class="input-append date-wrap">
-                                <input size="16" type="text" name="searchTime" value="" class="form-control date" readonly />
-                                <!-- <span class="glyphicon glyphicon-th"></span> -->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline ui-group-form">
+                            <div class="form-group group-month">
+                                <label class="control-label" for="">月份</label>
+                                <input type="text" name="searchTime" value="" class="form-control input-sm date" readonly />
+                                <button type="submit" class="btn btn-primary inline-block" ng-click="daySearch($event)">搜索</button>
                             </div>
-                            <button type="submit" class="btn btn-primary inline-block" ng-click="daySearch($event)">查询</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="panel rate group-pannel-middle">
@@ -39,7 +38,7 @@
                             <div id="group-smoke-pie-wrap">
                                 <div id="group-smoke-pie"></div>
                             </div>
-                            <table class="group-smoke-table table">
+                            <table class="group-smoke-table table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th>类别</th>
@@ -60,9 +59,9 @@
                         </div>
                         <div class="group-brand form-inline">
                             <span>品牌规格 ：</span>
-                            <select class="form-control" ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
+                            <select class="form-control input-sm" ng-model = "Brand" ng-options="brand.name for brand in brands" ng-change="BrandChange()">
                             </select>
-                            <select class="form-control" ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
+                            <select class="form-control input-sm" ng-model = "Product" ng-options="product.name for product in Products" ng-change="ProductChange()">
                             </select>
                         </div>
                         <div class="scan-frequency">
@@ -80,7 +79,7 @@
                         </div>
                         <div class="user-top-ten">
                             <div class="group-title">当月扫码次数排名前十</div>
-                            <table class="table top-ten-table">
+                            <table class="table top-ten-table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th>排名</th>
@@ -88,10 +87,10 @@
                                         <th>昵称</th>
                                         <th>手机号</th>
                                         <th>扫码次数</th>
-                                        <th>扫码<br />烟包数</th>
+                                        <th>扫码烟包数</th>
                                         <th>中奖次数</th>
-                                        <th>中奖现金<br />总金额</th>
-                                        <th>中奖实物<br />个数</th>
+                                        <th>中奖现金总金额</th>
+                                        <th>中奖实物个数</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
@@ -107,6 +106,9 @@
                                         <td>{{x.drawCash}}</td>
                                         <td>{{x.drawObPv}}</td>
                                         <td onclick = "sessionStorage.mobileNo = $(this).attr('value'); $('[data-hash=\'#/view/home/user/portrait\']').trigger('click')" value = "{{x.mobileNo}}">点击查看用户详情</td>
+                                    </tr>
+                                    <tr ng-if='!topTenTable.length'>
+                                        <td colspan='10'>暂无符合条件的数据</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -12,8 +12,8 @@ define([], function () {
     ServiceContent: ['$scope','$timeout', 'setDateConf','dayFilter', function ($scope,$timeout,setDateConf,dayFilter) {
       var echarts = require('echarts');
       var $model = $scope.$model;
-      setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
-      setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
+      setDateConf.init($(".ui-spec-form:nth-of-type(1)"), 'day');
+      setDateConf.init($(".ui-spec-form:nth-of-type(3)"), 'month');
       // var Dates = new Date(new Date()-24*60*60*1000);
       var amonth = (new Date().getMonth() + 1)<10 ? '0'+ (new Date().getMonth() + 1):(new Date().getMonth() + 1);
       // var aday = Dates.getDate()<10 ? '0' + Dates.getDate() : Dates.getDate();
@@ -35,7 +35,7 @@ define([], function () {
         provinceName: '',
         statType: 'day'
       };
-      
+
       //品牌
       (function(){
         $model.$getBrand().then(function(res){
@@ -63,16 +63,16 @@ define([], function () {
           global.initProvinceData.productSn = $(".region.spec").val();
           if(caller === 1) {
             public (Default);
-            
+
 
           }
-          
-          
+
+
         })
       };
       //周下拉列表
       (function () {
-        $model.$getWeeks().then(function (res) { 
+        $model.$getWeeks().then(function (res) {
           var res = res.data || [];
           for(var i=0;i<res.length;i++){
             $(".week").append("<option value="+res[i].weekNo+">"+res[i].weekNo+"</option>")
@@ -82,8 +82,8 @@ define([], function () {
       //选择周，月，日
       $(".ui-search").change(function () {
         var Value = $(this).siblings(".region").val();
-        $(".region-search-r").each(function (i) {
-          $(".region-search-r").eq(i).hide();
+        $(".ui-spec-form").each(function (i) {
+          $(".ui-spec-form").eq(i).hide();
         });
         $(".ui-search option").each(function (i) {
           $(".ui-search option").eq(i).attr("selected",false);
@@ -94,28 +94,30 @@ define([], function () {
         })
         if($(this).val()==="month"){
           $("#month").attr("selected","selected");
-          $(".region-search-r").eq(2).show();
+          $(".ui-spec-form").eq(2).show();
         }else if($(this).val() === "day"){
           $("#day").attr("selected","selected");
-          $(".region-search-r").eq(0).show();
+          $(".ui-spec-form").eq(0).show();
         }else{
           $("#week").attr("selected","selected");
-          $(".region-search-r").eq(1).show();
+          $(".ui-spec-form").eq(1).show();
         }
       });
 
       //查询
       $scope.search = function($event){
         var that = $event.target;
+        var $form = $(that).closest('form');
         var reg = /(省|市|区)/;
         var params = {
-          "productSn":$(that).siblings(".region").val().replace(reg,""),
-          "statTime":$(that).siblings(). hasClass("date-wrap") ?
-              ($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val())
-              : $(that).siblings(".week").val().substr(10,10).replace(/\./g,"-"),
-          "statType":$(that).siblings(".ui-search").val()
+          "productSn":$($form).find(".region").val() || "",
+          "statTime":$($form).find('.date').length ? $($form).find('.date').val() : $($form).find(".week").val().substr(10,10).replace(/\./g,"-"),
+          "statType":$($form).find(".ui-search").val()
         };
-        if($(that).siblings(".ui-search").val() === "day") {
+
+        params.productSn = params.productSn.replace(reg,"");
+
+        if(params.statType === "day") {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本日扫码次数",
@@ -125,33 +127,29 @@ define([], function () {
               "dayreduce" : "本日新增扫码用户数"
             }
           },0)
-        }else if($(that).siblings(".ui-search").val() === "week") {
+        }else if(params.statType === "week") {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本周扫码次数",
               "dayactive" : "本周连续月活用户",
-              "weekactive":"本周连续周活用户",              
+              "weekactive":"本周连续周活用户",
               "daybag" : "本周扫码烟包数",
               "dayreduce" : "本周新增扫码用户数"
             }
           },0)
-        }else if($(that).siblings(".ui-search").val() === "month") {
+        }else if(params.statType === "month") {
           $timeout(function () {
             $scope.spec = {
               "daycount" : "本月扫码次数",
               "dayactive" : "本月连续月活用户",
-              "weekactive":"本月连续周活用户",              
+              "weekactive":"本月连续周活用户",
               "daybag" : "本月扫码烟包数",
               "dayreduce" : "本月新增扫码用户数"
             }
           },0)
         }
         public(params);
-        
-                
-
       };
-      
 
       //页面执行函数
       $scope.spec = {
@@ -161,7 +159,7 @@ define([], function () {
         "reduce": 0,
         "daycount" : "本日扫码次数",
         "dayactive" : "本日连续月活用户",
-        "weekactive":"本日连续周活用户",                      
+        "weekactive":"本日连续周活用户",
         "daybag" : "本日扫码烟包数",
         "dayreduce" : "本日新增扫码用户数"
       };
@@ -174,7 +172,7 @@ define([], function () {
             var data = res.data[0] || {};
             $(".region-margin .count i").html(data.scanPv || 0);
             $(".region-margin .active i").html(data.activeUv || 0);
-            $(".region-margin .weekactive i").html(data.weekActiveUv || 0);            
+            $(".region-margin .weekactive i").html(data.weekActiveUv || 0);
             $(".region-margin .bag i").html(data.scanCode || 0);
             $(".region-margin .reduce i").html(data.scanAddUv || 0);
             $(".region-margin .img").attr("src",data.image || "")
@@ -207,17 +205,17 @@ define([], function () {
             //console.log(param)
             var res = res.data || [];
             option.series[0].data = [];
-            option.series[1].data = [];           
+            option.series[1].data = [];
             option.xAxis.data = [];
            for(var i = 0;i<res.length;i++){
              //console.log(res[i]);
              option.series[1].data.push(res[i].scanAddUv);
-             option.series[0].data.push(res[i].scanHistoryUv);  
+             option.series[0].data.push(res[i].scanHistoryUv);
               if(param.statType === "day") {
                 option.xAxis.data.push(res[i].statTime.replace(/-/g,"/"));
               }else if(param.statType === "month"){
                 option.xAxis.data.push(res[i].statTime.replace(/-/g,""));
-                
+
               } else{
                 option.xAxis.data.push(res[i].weekNo);
               }
@@ -300,31 +298,31 @@ define([], function () {
           //地域地图显示；
           var reg = /省|市|区/;
           var mongoReg = /内蒙区/;
-                     
+
           $model.$getProvincialAnalysis(param).then(function (res) {
             var opts = mapEchart.getOption();
             var data = res.data || [];
             opts.series[1].data = _.each(data, function (d) {
               if (d.provinceName != '全国') {
                  d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
-                  d.value = d.scanCode; 
-                  
+                  d.value = d.scanCode;
+
               }
             }) || [];
             opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
-            mapEchart.setOption(opts); 
+            mapEchart.setOption(opts);
           })
 
 
-          //扫码烟包数时间时间趋势； 
+          //扫码烟包数时间时间趋势；
           var districtChart = echarts.init(document.getElementById('time-chart'));
           var districtOption = $model.$districtConf.data;
 
-          
+
           //省内各地市扫码烟包数排名；
           var cityChart = echarts.init(document.getElementById('city-chart'));
           var cityOption = $model.$cityConf.data;
-          
+
            //console.log(global.initProvinceData);
           //扫码烟包数时间趋势；
           // if(sessionStorage.getItem('account')  === "hunan") {
@@ -341,16 +339,16 @@ define([], function () {
               break;
             case "shankun" :
               global.initProvinceData.provinceName = "山西省";
-              break; 
+              break;
             case "henan" :
               global.initProvinceData.provinceName = "河南省";
-              break; 
+              break;
 
           }
           $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
-            
+
             var res = res.data || [];
-            districtOption.series[0].data = [];          
+            districtOption.series[0].data = [];
             districtOption.xAxis.data = [];
             for(var i = 0;i<res.length;i++){
               if(res[0].weekNo) {
@@ -358,17 +356,17 @@ define([], function () {
               }else{
                 districtOption.xAxis.data.push(res[i].statTime);
               }
-              districtOption.series[0].data.push(res[i].scanCode); 
+              districtOption.series[0].data.push(res[i].scanCode);
             }
             districtChart.setOption(districtOption);
           })
         $model.$getCityTrend(global.initProvinceData).then(function(res) {
-          var res = res.data || [];      
-          cityOption.series[0].data = [];          
+          var res = res.data || [];
+          cityOption.series[0].data = [];
           cityOption.xAxis.data = [];
           for(var i = 0;i<res.length;i++){
             cityOption.xAxis.data.push(res[i].cityName);
-            cityOption.series[0].data.push(res[i].scanCode); 
+            cityOption.series[0].data.push(res[i].scanCode);
           }
           cityChart.setOption(cityOption);
         })
@@ -382,12 +380,12 @@ define([], function () {
             }
             if (e.componentType === 'series') {
             // {provinceName: "湖南省", statTime: "2017-10-24", statType: "day"}
-                
+
                 data.provinceName = e.data.provinceName;
                 if(data.provinceName !== undefined) {
                   $model.$getDistrictTrend(data).then(function(res) {
                     var res = res.data || [];
-                    districtOption.series[0].data = [];          
+                    districtOption.series[0].data = [];
                     districtOption.xAxis.data = [];
                     for(var i = 0;i<res.length;i++){
                       if(res[0].weekNo) {
@@ -395,7 +393,7 @@ define([], function () {
                       }else{
                         districtOption.xAxis.data.push(res[i].statTime);
                       }
-                      districtOption.series[0].data.push(res[i].scanCode); 
+                      districtOption.series[0].data.push(res[i].scanCode);
                     }
                     districtChart.setOption(districtOption);
                   })
@@ -407,22 +405,22 @@ define([], function () {
                     }else{
                       cityOption.dataZoom[0].end = 100;
                     }
-                    cityOption.series[0].data = [];          
+                    cityOption.series[0].data = [];
                     cityOption.xAxis.data = [];
                     for(var i = 0;i<res.length;i++){
                       cityOption.xAxis.data.push(res[i].cityName);
-                      cityOption.series[0].data.push(res[i].scanCode); 
+                      cityOption.series[0].data.push(res[i].scanCode);
                     }
                     cityChart.setOption(cityOption);
                   })
                 }else {
                   data.provinceName = "";
                   data.statTime = "";
-                  data.statType = ""; 
+                  data.statType = "";
                   data.productSn ="";
                   $model.$getDistrictTrend(data).then(function(res) {
                     var res = res.data || [];
-                    districtOption.series[0].data = [];          
+                    districtOption.series[0].data = [];
                     districtOption.xAxis.data = [];
                     for(var i = 0;i<res.length;i++){
                       if(res[0].weekNo) {
@@ -430,27 +428,27 @@ define([], function () {
                       }else{
                         districtOption.xAxis.data.push(res[i].statTime);
                       }
-                      districtOption.series[0].data.push(res[i].scanCode); 
+                      districtOption.series[0].data.push(res[i].scanCode);
                     }
                     districtChart.setOption(districtOption);
                   })
                   $model.$getCityTrend(data).then(function(res) {
                     var res = res.data || [];
-                    
-                    cityOption.series[0].data = [];          
+
+                    cityOption.series[0].data = [];
                     cityOption.xAxis.data = [];
                     for(var i = 0;i<res.length;i++){
                       cityOption.xAxis.data.push(res[i].cityName);
-                      cityOption.series[0].data.push(res[i].scanCode); 
+                      cityOption.series[0].data.push(res[i].scanCode);
                     }
                     cityChart.setOption(cityOption);
                   })
                 }
 
             }
-            
+
         });
-         
+
         })();
         //全国地市扫码烟包数排名；
         (function () {
@@ -460,7 +458,7 @@ define([], function () {
               if(res.data.length > 12) {
                 option.dataZoom[0].end = (12/res.data.length)*100;
               }
-            
+
             option.xAxis[0].data = [];
             option.series[0].data = [];
             for (var i = 0; i < res.data.length; i++) {
@@ -485,16 +483,16 @@ define([], function () {
           var shioption = _.cloneDeep(option);
           shioption.title.text = "实物奖品";
           jiangoption.series[0].data = [];
-          jiangoption.series[1].data = [];          
+          jiangoption.series[1].data = [];
           jiangoption.yAxis.data = [];
           shioption.series[0].data = [];
-          shioption.series[1].data = [];          
+          shioption.series[1].data = [];
           shioption.yAxis.data = [];
           $model.$getMoney(param, 2).then(function (res) {
             var res = res.data || [];
             for(var i=0;i<res.length;i++){
               jiangoption.series[1].data.push(res[i].drawResultPv);
-              jiangoption.series[0].data.push(res[i].awardPayPv);  
+              jiangoption.series[0].data.push(res[i].awardPayPv);
               jiangoption.yAxis.data.push(res[i].awardName)
             }
             //console.log(jiangoption.series);

@@ -29,19 +29,20 @@ define([], function () {
       }
       reHeight();
       window.onresize = function() {
-        reHeight();        
+        reHeight();
       }
       $scope.daySearch = function ($event) {
-        var that = $event.target;        
+        var that = $event.target;
+        var $form = $(that).closest('form');
         defaultMonth = {
-          "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()
+          "statDate" :$($form).find(".date").val()
         };
         defaultBrand = {
-          "statDate" :$(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val(),
+          "statDate" :$($form).find(".date").val(),
           "productSn":$scope.Product.sn
         }
-        Global(defaultMonth);   
-        GlobalBrand(defaultBrand);                
+        Global(defaultMonth);
+        GlobalBrand(defaultBrand);
 
       };
       $scope.monScanUvConf = {
@@ -53,7 +54,7 @@ define([], function () {
       $scope.monScanNewUv = {
         Arr: []
       };
-      
+
       //品牌与规格联动
       $scope.brands = $model.$getUserBrand.data;
       $scope.Brand = $scope.brands[0];
@@ -65,10 +66,10 @@ define([], function () {
         $model.$getProduct(productBrand).then(function(res){
           $scope.Products = res.data;
           $scope.Product = $scope.Products[0];
-          $scope.$apply();          
+          $scope.$apply();
           //加载规格时，去渲染屏幕
           defaultBrand.productSn = $scope.Product.sn;
-          GlobalBrand(defaultBrand);                  
+          GlobalBrand(defaultBrand);
           if (caller) {
             $scope.ProductChange();
           }
@@ -78,7 +79,7 @@ define([], function () {
       //规格发生改变时
       $scope.ProductChange = function () {
         defaultBrand.productSn = $scope.Product.sn;
-        GlobalBrand(defaultBrand);        
+        GlobalBrand(defaultBrand);
       }
       //页面初始加载的时候传个参数
       $scope.BrandChange(1);
@@ -147,46 +148,46 @@ define([], function () {
       function GlobalBrand(params) {
         //不同扫码频次用户分布
         var frequencyChartLeft = echarts.init(document.getElementById("frequency-chart-left"));
-        var frequencyChartRight = echarts.init(document.getElementById("frequency-chart-right"));   
-        var frequencyDataLeft = _.cloneDeep($model.$frequency.data); 
+        var frequencyChartRight = echarts.init(document.getElementById("frequency-chart-right"));
+        var frequencyDataLeft = _.cloneDeep($model.$frequency.data);
         frequencyDataLeft.yAxis.name = "近三个月扫码烟包数";
-        var frequencyDataRight = _.cloneDeep($model.$frequency.data);    
-        frequencyDataRight.yAxis.name = "当月扫码烟包数"     
+        var frequencyDataRight = _.cloneDeep($model.$frequency.data);
+        frequencyDataRight.yAxis.name = "当月扫码烟包数"
         $model.$getThrMonScanSmokeBar(params).then(function(res) {
           var res = res.data || [];
           frequencyDataLeft.yAxis.data = [];
-          frequencyDataLeft.series[0].data = [];          
+          frequencyDataLeft.series[0].data = [];
           $(res).each(function(index,n){
             frequencyDataLeft.yAxis.data.push(n.scanPvname);
-            frequencyDataLeft.series[0].data.push(n.mon3addEffScanPv); 
+            frequencyDataLeft.series[0].data.push(n.mon3addEffScanPv);
           })
           frequencyChartLeft.setOption(frequencyDataLeft,true)
         })
         $model.$getMonScanSmokeBar(params).then(function(res) {
           var res = res.data || [];
           frequencyDataRight.yAxis.data = [];
-          frequencyDataRight.series[0].data = [];          
+          frequencyDataRight.series[0].data = [];
           $(res).each(function(index,n){
             frequencyDataRight.yAxis.data.push(n.scanPvname);
-            frequencyDataRight.series[0].data.push(n.monaddEffScanPv); 
+            frequencyDataRight.series[0].data.push(n.monaddEffScanPv);
           })
           frequencyChartRight.setOption(frequencyDataRight,true)
         })
-        
+
         //用户发展日趋势
         var userChartTrend = echarts.init(document.getElementById("user-chart-trend"));
         var userDayJson = $model.$dayTrend.data;
         $model.$getDayTrendScan(params).then(function(res){
           var res = res.data || [];
-          userDayJson.xAxis[0].data = [];      
+          userDayJson.xAxis[0].data = [];
           $(userDayJson.series).each(function(index,n){
             n.data = [];
-          });    
+          });
           $(res).each(function(index,n) {
             userDayJson.xAxis[0].data.push(n.statDate);
             userDayJson.series[0].data.push(n.scanUv);
-            userDayJson.series[1].data.push(n.scanNewUv); 
-            userDayJson.series[2].data.push(n.day3EffScanAvgUV);                        
+            userDayJson.series[1].data.push(n.scanNewUv);
+            userDayJson.series[2].data.push(n.day3EffScanAvgUV);
           })
           userChartTrend.setOption(userDayJson,true)
         })
@@ -207,12 +208,12 @@ define([], function () {
           userMonthJson.xAxis[0].data = [];
           $(userMonthJson.series).each(function(index,n){
             n.data = [];
-          });   
+          });
           $(res).each(function(index,n) {
             userMonthJson.xAxis[0].data.push(n.statDate);
             userMonthJson.series[0].data.push(n.scanUv);
-            userMonthJson.series[1].data.push(n.scanNewUv); 
-            userMonthJson.series[2].data.push(n.day3EffScanAvgUV);     
+            userMonthJson.series[1].data.push(n.scanNewUv);
+            userMonthJson.series[2].data.push(n.day3EffScanAvgUV);
           })
           userMonthTrend.setOption(userMonthJson,true)
         })
