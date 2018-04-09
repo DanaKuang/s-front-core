@@ -15,11 +15,11 @@ define([], function() {
 			//设置input的默认时间
 			var stattime = dayFilter.yesterday("date");
 			$scope.goodsWinDate = stattime;
-			$(".date-wrap").find("input").val(stattime);
+			$(".agree-date .date").val(stattime);
 			var curTableIndex = '';
 			var curWeekStr = '';
 			var curSpeciftStr = '';
-			
+
 			//			var guiGeBihend= '';
 			//页面默认加载配置
 			$scope.obj = {
@@ -74,7 +74,7 @@ define([], function() {
 						$scope.winDataObj.dt = stattime;
 						$scope.goodsWinDate = stattime;
 						gloabl.getActivityName();
-						gloabl.getWeekScanWinData($scope.winDataObj);						
+						gloabl.getWeekScanWinData($scope.winDataObj);
 						break;
 					case 5:
 						$scope.cashWinDataObj.dt = stattime;
@@ -168,7 +168,7 @@ define([], function() {
 						}
 						$scope.saoobj.activityName = $(".report-gui").find("select").val();
 						gloabl.userPro($scope.saoobj);
-						
+
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
 						//						gloabl.userPro($scope.saoobj);
 					})
@@ -253,7 +253,6 @@ define([], function() {
 								nSelectedText: '已选择',
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '240px',
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
@@ -271,7 +270,6 @@ define([], function() {
 							nSelectedText: '已选择',
 							selectAllText: '全部',
 							selectAllValue: 'all',
-							buttonWidth: '240px',
 							maxHeight: '200px',
 							numberDisplayed: 1
 						});
@@ -399,19 +397,19 @@ define([], function() {
 				$('#cycleTime').multiselect().val([]).multiselect("refresh");
 				$('#cashWinSpecift').val('');
 				$('#entityWinSpecift').val('');
-				
+
 			}
 
 			//查询按钮
 			$scope.search = function($event) {
 				var that = $event.target;
+				var $form = $(that).closest('form');
 
 				switch(arguments[1]) {
 					case 1:
 						$scope.obj = {
 							"productBrand": $("#proviceDataBrand").val(),
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"dt": $($form).find(".date").val(),
 							"productSn": $(".mengdeguo").find("select option:selected").attr("data-sn"),
 							"provinceName": $("#proviceName").val().join(),
 							"cityName": $("#applySpecift").val().join()
@@ -421,16 +419,13 @@ define([], function() {
 					case 2:
 						$scope.saoobj = {
 							"activityName": $(that).siblings(".report-gui").find("select").val(),
-
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"dt": $($form).find(".date").val(),
 						}
 						gloabl.userPro($scope.saoobj);
 						break;
 					case 3:
 						$scope.summar = {
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"dt": $($form).find(".date").val(),
 							"productBrand": $("#moneyDataBrand").val(),
 							"productSn": $(".mengdeguoTwo").find("select option:selected").attr("data-sn")
 							//								"productSn":"6901028165235"
@@ -555,7 +550,7 @@ define([], function() {
 				};
 				xhr.send(formData);
 			}
-			//监听品牌变化			
+			//监听品牌变化
 			$('#moneyDataBrand').change(function() {
 				var curBrandValue = $(this).val();
 				$model.$getSpecifData({

@@ -1,5 +1,5 @@
 <!---->
-
+<link rel="stylesheet" href="statics/assets/style/home.foreport.css">
 <div class="animated fadeInRightBig" ng-controller="formarReportCtrl">
   <div class="container-fluid region-margin">
     <div class="row">
@@ -78,82 +78,88 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input id="inputOne" size="16" type="text" value="" readonly class="form-control date" />
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input id="inputOne" type="text" value="" readonly class="form-control input-sm date" />
               </div>
-              <div class="agree-date">
-                <label>品牌：</label>
-                <select id="proviceDataBrand">
+              <div class="form-group agree-date">
+                <label class="control-label">品牌</label>
+                <select id="proviceDataBrand" class="form-control input-sm">
                     <!--<option value="">请选择</option>-->
                     <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
                 </select>
               </div>
-              <div class="agree-date mengdeguo">
-                <label>规格：</label>
-                <select id="proviceDataSpecift">
+              <div class="form-group agree-date mengdeguo">
+                <label class="control-label">规格</label>
+                <select id="proviceDataSpecift" class="form-control input-sm">
                     <!--<option value="">请选择</option>-->
                     <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.name}}" data-sn="{{speciftItem.sn}}">{{speciftItem.name}}</option>
                 </select>
               </div>
-              <div class="brand_names">
-              <label  for="proviceName">省份:&nbsp;&nbsp;</label><select id="proviceName" multiple="multiple" ng-model="selectAllBrands" style="width:240px;"  value="{{selectAllBrands}}">
-                      <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
-                                </select>
+              <div class="form-group brand_names">
+                <label for="proviceName" class="control-label">省份</label>
+                <select id="proviceName" multiple="multiple" ng-model="selectAllBrands" value="{{selectAllBrands}}" class="form-control input-sm">
+                  <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                </select>
               </div>
-              <div class="specift_names">
-                                <label  class="label_title" for="applySpecift">地市:&nbsp;&nbsp; </label><select style="width:240px;" id="applySpecift" multiple="multiple" class="multi" ng-model="selectSpeci" value="{{selectSpeci}}">
-                                    <!--<option value="">请选择</option>-->
-                                    <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
-                                </select>
-                            </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,1)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(1)">
-                下载
-              </button>
+              <div class="form-group specift_names">
+                <label  class="control-label label_title" for="applySpecift">地市</label>
+                <select id="applySpecift" multiple="multiple" class="form-control input-sm multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                  <!--<option value="">请选择</option>-->
+                  <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
+                </select>
+              </div>
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,1)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(1)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <p style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;" id="titlePOne"></p>
+            <div class="ui-scroll-table">
+              <table class="table table-hover table-bordered" style="min-width:1600px;">
+                <thead>
+                <!--<tr>
+                  <th colspan="2" rowspan="2">{{obj.activityName}}</th>
+                  <th colspan="10">{{obj.statTime}}</th>
+                </tr>-->
+                <!--<tr>
+                  <th colspan="10" style="background: white">中奖情况</th>
+                </tr>-->
+                <tr>
+                  <th>省份</th>
+                  <th>地市</th>
+                  <th>扫码次数</th>
+                  <th>扫码烟包数</th>
+                  <th>扫码人数</th>
+                  <th>本年累计扫码次数</th>
+                  <th>本年累计扫码包数</th>
+                  <th>本年累计扫码人数</th>
+                  <th>抽奖次数</th>
+                  <th>中奖次数(包含实物和红包)</th>
+                  <th>扫码中奖率(中奖次数/扫码烟包数)</th>
+                  <th>中奖人数</th>
+                  <th>红包发放金额</th>
+                  <th>本年累计发放金额</th>
+                </tr>
+                </thead>
+                <tbody id="win_table"></tbody>
+              </table>
             </div>
-            <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePOne"></p>
-            <table class="table">
-              <thead style="border-top: 1px solid #A0A0A0;">
-              <!--<tr>
-                <th colspan="2" rowspan="2">{{obj.activityName}}</th>
-                <th colspan="10">{{obj.statTime}}</th>
-              </tr>-->
-              <!--<tr>
-                <th colspan="10" style="background: white">中奖情况</th>
-              </tr>-->
-              <tr>
-                <th>省份</th>
-                <th>地市</th>
-                <th>扫码次数</th>
-                <th>扫码烟包数</th>
-                <th>扫码人数</th>
-                <th>本年累计扫码次数</th>
-                <th>本年累计扫码包数</th>
-                <th>本年累计扫码人数</th>
-                <th>抽奖次数</th>
-                <th>中奖次数(包含实物和红包)</th>
-                <th>扫码中奖率(中奖次数/扫码烟包数)</th>
-                <th>中奖人数</th>
-                <th>红包发放金额</th>
-                <th>本年累计发放金额</th>
-              </tr>
-              </thead>
-              <tbody id="win_table"></tbody>
-            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  
+
   <!--二:活动中奖统计日报-->
   <div class="container-fluid region-margin report-table" style="display: none">
     <div class="row">
@@ -168,31 +174,34 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input id="inputTwo" size="16" type="text" value="" readonly class="form-control date" />
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input id="inputTwo" type="text" value="" readonly class="form-control input-sm date" />
               </div>
-              <div class="report-gui">
-                <label>活动名称：</label>
-                <select id="activityNameMdg">
+              <div class="form-group report-gui">
+                <label class="control-label">活动名称</label>
+                <select id="activityNameMdg" class="form-control input-sm">
                   <!--<option value="条">条</option>-->
                   <!--<option value="包">包</option>-->
                 </select>
               </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,2)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(2)">
-                下载
-              </button>
-            </div>
-            <table class="table">
-            	<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePTwo"></p>
-              <thead style="border-top: 1px solid #A0A0A0;">
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,2)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(2)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <table class="table table-hover table-bordered">
+            	<p style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;" id="titlePTwo"></p>
+              <thead>
               <tr>
                 <th>省份</th>
                 <th>地市</th>
@@ -212,8 +221,7 @@
       </div>
     </div>
   </div>
-  
-  
+
   <!--三现金红包中奖统计日报-->
   <div class="container-fluid region-margin report-table" style="display: none">
     <div class="row">
@@ -228,40 +236,41 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date summarDt"/>
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input size="16" type="text" value="" readonly class="form-control input-sm date summarDt"/>
               </div>
-              
-              
-              <div class="agree-date">
-                <label>品牌：</label>
-                <select id="moneyDataBrand">
+              <div class="form-group agree-date">
+                <label class="control-label">品牌</label>
+                <select id="moneyDataBrand" class="form-control input-sm">
                     <!--<option value="">请选择</option>-->
                     <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
                 </select>
               </div>
-              <div class="agree-date mengdeguoTwo">
-                <label>规格：</label>
-                <select id="moneyDataSpecift">
+              <div class="form-group agree-date mengdeguoTwo">
+                <label class="control-label">规格</label>
+                <select id="moneyDataSpecift" class="form-control input-sm">
                     <!--<option value="">请选择</option>-->
                     <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.name}}" data-sn="{{speciftItem.sn}}">{{speciftItem.name}}</option>
                 </select>
               </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,3)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(3)">
-                下载
-              </button>
-            </div>
-            <table class="table">
-            	<p class="titleTop" style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;"></p>
-              <thead style="border-top:1px solid #a0a0a0">
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,3)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(3)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <p class="titleTop" style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;"></p>
+            <table class="table table-hover table-bordered">
+              <thead>
               <!--<tr>
                 <th rowspan="3">品牌</th>
                 <th colspan="7">{{summar.statTime}}</th>
@@ -291,7 +300,7 @@
       </div>
     </div>
   </div>
-  
+
   <!--四河南实物奖品中奖统计日报-->
   <div class="container-fluid region-margin report-table" style="display: none">
     <div class="row">
@@ -306,43 +315,43 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input id="goodsDate" size="16" type="text" value="" readonly class="form-control date"/>
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input id="goodsDate" type="text" value="" readonly class="form-control input-sm date"/>
               </div>
-              <div class="formarReport-gui">
-                <label>活动名称：</label>
-								<select id="activityName" multiple="multiple" ng-model="selectActivityName" value="{{selectActivityName}}">
+              <div class="form-group formarReport-gui">
+                <label class="control-label">活动名称</label>
+								<select id="activityName" multiple="multiple" ng-model="selectActivityName" value="{{selectActivityName}}" class="form-control input-sm">
                     <option ng-repeat="brandItem in selectActivityNameList" value="{{brandItem.activityName}}">{{brandItem.activityName}}</option>
                 </select>
               </div>
-              <div class="formarReport-gui">
-                <label>地市：</label>
-                <select id="activityCityName" multiple="multiple" ng-model="selectActivityCityName" value="{{selectActivityCityName}}">
+              <div class="form-group formarReport-gui">
+                <label class="control-label">地市</label>
+                <select id="activityCityName" multiple="multiple" ng-model="selectActivityCityName" value="{{selectActivityCityName}}" class="form-control input-sm">
                     <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
                 </select>
               </div>
-              
-            </div>
-            <div style="width:100%;overflow:hidden;margin-left:25px;">
-              <div class="report-gui" style="float:left;">
-                <label style="font-size:14px;">奖品：</label>
-                <input id="inputSou" type="text" style="width:240px;height:30px;padding: 4px 12px;"/>
+              <div class="form-group report-gui">
+                <label class="control-label">奖品：</label>
+                <input id="inputSou" type="text" class="form-control input-sm" />
               </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,4)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(4)">
-                下载
-              </button>
-            </div>
-            <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="goodsTitle">实物中奖情况（{{goodsWinDate}}）</p>
-            <table class="table">
-              <thead style="border-top:1px solid #a0a0a0">
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,4)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(4)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <p style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;" id="goodsTitle">实物中奖情况（{{goodsWinDate}}）</p>
+            <table class="table table-hover table-bordered">
+              <thead>
               <tr>
                 <!--<th rowspan="3">品牌</th>
                 <th colspan="7">{{summar.statTime}}</th>
@@ -377,24 +386,27 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" id="jifenData"/>
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input type="text" value="" readonly class="form-control input-sm date" id="jifenData"/>
               </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,5)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(5)">
-                下载
-              </button>
-            </div>
-            <table class="table">
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,5)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(5)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <table class="table table-hover table-bordered">
             	<!--<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;">活动积分情况</p>-->
-              <thead style="border-top:1px solid #a0a0a0">
+              <thead>
               <tr>
                 <th colspan="15" id="provDataTitle">活动积分情况</th>
               </tr>
@@ -427,23 +439,26 @@
         <!--box-->
         <div class="panel rate">
           <div class="panel-body">
-            <div class="report-search">
-              <div class="agree-date">
-                <label>查询日期：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" id="cashWinWeeks"/>
-                  <span class="add-on"><i class="icon-th"></i></span>
-                </div>
+            <form class="form-inline ui-foreport-form">
+              <div class="form-group agree-date">
+                <label class="control-label">查询日期</label>
+                <input type="text" value="" readonly class="form-control input-sm date" id="cashWinWeeks"/>
               </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="search($event,6)">
-                查询
-              </button>
-              <button class="btn btn-sm btn-default btn_style" ng-click="down(6)">
-                下载
-              </button>
-            </div>
-            <table class="table">
-              <thead style="border-top:1px solid #a0a0a0">
+              <div class="form-group ui-btn-ctrl">
+                <button class="btn btn-primary" type="button" ng-click="search($event,6)">
+                  查询
+                </button>
+                <button class="btn btn-primary" type="button" ng-click="down(6)">
+                  下载
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
+            <table class="table table-hover table-bordered">
+              <thead>
               <tr>
                 <th>资源名称</th>
                 <th>地市</th>
