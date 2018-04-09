@@ -23,7 +23,10 @@
   .ui-home-code #id_code_form .multiselect.btn {
     width: 147px;
     height: 30px;
-    padding: 4px 12px; }
+    padding: 4px 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
   .ui-home-code #id_code_form .ui-btn-ctrl button {
     width: 100px;
     margin-left: 30px;

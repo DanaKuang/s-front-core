@@ -14,7 +14,10 @@
 .ui-visit-form .multiselect.btn {
   width: 147px;
   height: 30px;
-  padding: 4px 12px; }
+  padding: 4px 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
 
 .ui-visit-form .date {
   background: #fff; }

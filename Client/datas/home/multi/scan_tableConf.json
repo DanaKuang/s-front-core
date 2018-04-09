@@ -2,7 +2,7 @@
     "caption": "",
     "id": "scantable",
     "tableCls": "table-bordered",
-    "width": "2000",
+    "width": "1800",
     "columns": [{
         "name": "startTime",
         "label": "开始时间",

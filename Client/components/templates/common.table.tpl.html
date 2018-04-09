@@ -1,1 +1,15 @@
-<div><table class="table table-bordered table-hover" id="common_table" ng-style="{width:width}""><thead><tr><th ng-repeat="col in columns" ng-class="{hide:col.hide}" ng-style="{width: col.width}" colspan="{{col.colspan}}" rowspan="{{col.rowspan}}">{{col.label}}</th></tr></thead><tbody><tr ng-repeat="row in rows"><td ng-repeat="col in columns">{{row[col.name]}}</td></tr></tbody></table></div>
+<div>
+    <table class="table table-bordered table-hover" id="common_table" ng-style="{width:width}"">
+        <thead>
+            <tr>
+                <th ng-repeat="col in columns" ng-class="{hide:col.hide}" ng-style="{width: col.width}" colspan="{{col.colspan}}" rowspan="{{col.rowspan}}">{{col.label}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in rows">
+                <td ng-repeat="col in columns">{{row[col.name]}}</td>
+            </tr>
+            <tr ng-if="!rows.length"><td colspan='{{columns.length}}'>暂无符合条件的数据</td></tr>
+        </tbody>
+    </table>
+</div>

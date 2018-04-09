@@ -210,9 +210,10 @@
     width: calc(100% - 40px);
 }
 .ui-list-content p {
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; */
+    padding-right: 50px;
 }
 .ui-multi-select {
     position: relative;
