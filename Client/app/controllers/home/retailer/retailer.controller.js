@@ -41,7 +41,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dayFilter.yesterday('date')
             }).on('change', function (e) {
                 var st = e.target.value || '';
                 var et = $scope.endTime || '';
@@ -55,7 +55,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dayFilter.yesterday('date')
             }).on('change', function (e) {
                 var et = e.target.value || '';
                 var st = $scope.startTime || '';

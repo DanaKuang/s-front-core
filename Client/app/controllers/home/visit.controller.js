@@ -12,7 +12,20 @@ define([], function () {
         ServiceContent: ['$scope', 'setDateConf', '$timeout','dayFilter',function ($scope, setDateConf, $timeout,dayFilter) {
             setDateConf.init($(".agree-date"), 'day');
             var stattime = dayFilter.yesterday("date");
-            $(".date-wrap").find("input").val(stattime);
+
+            var $start = $(".visit_start input");
+            var $end = $(".visit_end input");
+            $($start).change(function (v) {
+                if (v.target.value > $($end).val()) {
+                    $($end).val(v.target.value)
+                }
+            }).val(stattime);
+            $($end).change(function (v) {
+                if (v.target.value < $($start).val()) {
+                    $($start).val(v.target.value)
+                }
+            }).val(stattime);
+
             var $model = $scope.$model;
             //页面默认加载配置
             var deafaultCou = {
