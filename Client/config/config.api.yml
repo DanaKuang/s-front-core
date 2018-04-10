@@ -821,7 +821,7 @@ report:
     description: '河北月报_扫码活动红包投入数据查询'
     enableroute: 1
     gatewaytype: 0
-    responetype: 'json'  
+    responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fixatreport/getRptScanRedDateMonthExcel'
     authorized: 1
@@ -2492,6 +2492,21 @@ operateTools:
     description: '盗扫明细查询'
     enableroute: 1
     gatewaytype: 0
+    responetype: 'json'
+fackCode:
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/fake/export'
+    authorized: 1
+    description: '导出假码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/fake/list'
+    authorized: 1
+    description: '假码列表'
+    enableroute: 1
+    gatewaytype: 1
     responetype: 'json'
 adsSource:                                      # 广告资源管理，命名只要不跟上面重复即可
   - httpmethod: 'post'

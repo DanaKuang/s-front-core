@@ -9,7 +9,7 @@ define([], function () {
         ServiceName: 'analysisCtrl',
         ViewModelName: 'analysisViewModel',
         ServiceContent: ['$scope', 'dateFormatFilter', 'dayFilter','$location', function ($scope, dateFormatFilter, dayFilter,$location) {
-            //  点击三角切换显示隐藏 
+            //  点击三角切换显示隐藏
             var flag = true;
             $('.ui-detail-search .ui-detail-screen h4 span').on('click', function () {
                 $(this).parent().parent().siblings('div').toggle();
@@ -22,7 +22,7 @@ define([], function () {
                 }
             })
 
-            // 点击对比切换显示隐藏 
+            // 点击对比切换显示隐藏
             $('#contrast-container .input_check+label').on('click', function () {
                 $('#contrast-container').siblings('div').toggle();
                 $(this).toggleClass('color');
@@ -320,7 +320,7 @@ define([], function () {
                             endTime: $scope.endTime || ""
                         }, params));
 
-                // 初始化multiselect 
+                // 初始化multiselect
                 $(document).ready(function () {
                     $(".select").multiselect({
                         nonSelectedText: '请选择',
@@ -347,15 +347,15 @@ define([], function () {
                     });
                     $('[ng-model="selectSpeci"]').val(ids);
                 };
-                var selectValueStr = []; // 取出选中的值  
+                var selectValueStr = []; // 取出选中的值
                 $("#selectSpeci option:selected").each(function () {
                     selectValueStr.push($(this).val());
                 });
                 // 初始化图表 */
                 initLeftPie(angular.extend({ // 零售户业态分布（左侧玫瑰图）
                     proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
-                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                                    
-                    cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                    cityClass: $('#levelOfCities').val() || '',  // 地市等级
                 }, params));
 
 
@@ -363,8 +363,8 @@ define([], function () {
                     bizCode: selectValueStr.join(',') || '',  // 获取的业态
                     proviceId: $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
                     isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
-                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                  
-                    cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                    cityClass: $('#levelOfCities').val() || '',  // 地市等级
                     vsProviceId: $('#checkbox').prop('checked') == false ? '' : $('#vsProvince').val(), //对比省份
                     vscityClass: $('#checkbox').prop('checked') == false ? '' : $('#vsLevelOfCities').val(), //对比地市等级
                     vsCityId: $('#checkbox').prop('checked') == false ? '' : $('#vsPrefecture').val(), //对比地市
@@ -382,16 +382,16 @@ define([], function () {
                     getZeroBizTheCall(angular.extend({ // 零售户地域分布-无对比-title
                         bizCode: selectValueStr.join(',') || '',
                         proviceId: $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
-                        cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                
-                        cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                        cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                        cityClass: $('#levelOfCities').val() || '',  // 地市等级
                         isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
                     }, params));
                 }else{
                     getZeroBizTheCall(angular.extend({ // 零售户地域分布-无对比-title
                         bizCode: selectValueStr.join(',') || '',
                         proviceId: $('#proviceId').val() || $scope.ProvByorgId.orgRegion,
-                        cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                
-                        cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                        cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                        cityClass: $('#levelOfCities').val() || '',  // 地市等级
                         isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
                     }, params));
                     getVsZeroBizTheCall(angular.extend({ // 零售户地域分布-对比-title
@@ -407,15 +407,15 @@ define([], function () {
                 if($('#checkbox').prop('checked') == false){
                     ZeroBizTimelineOrVSZeroBizTimeline(0,selectValueStr,params)
                 }else{
-                    ZeroBizTimelineOrVSZeroBizTimeline(1,selectValueStr,params)                   
+                    ZeroBizTimelineOrVSZeroBizTimeline(1,selectValueStr,params)
                 };
- 
+
                 ZeroShopkpiSelectTable(angular.extend({ // 零售户关键指标查询
                     bizCode: selectValueStr.join(',') || '',
                     isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
-                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,                    
+                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
                     cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
-                    cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                    cityClass: $('#levelOfCities').val() || '',  // 地市等级
                     vsProviceId: $('#checkbox').prop('checked') == false ? '' : $('#vsProvince').val(), //对比省份
                     vscityClass: $('#checkbox').prop('checked') == false ? '' : $('#vsLevelOfCities').val(), //对比地市等级
                     vsCityId: $('#checkbox').prop('checked') == false ? '' : $('#vsPrefecture').val(), //对比地市
@@ -487,14 +487,14 @@ define([], function () {
             function ZeroBizRegionalBarOrVSZeroBizRegionalBar(n,selectValueStr,params) {
                 // 零售户地域分布-无对比
                 var data = angular.extend({ // 零售户地域分布-无对比
-                    bizCode: selectValueStr.join(',') || '',  // 获取的业态                        
-                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,                        
-                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                                                
-                    cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                    bizCode: selectValueStr.join(',') || '',  // 获取的业态
+                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                    cityClass: $('#levelOfCities').val() || '',  // 地市等级
                     isFlag: $('#checkbox').prop('checked') == false ? 'N' : 'Y',
                 }, params);
                 $model.ZeroBizRegionalBar(data).then(function (res) {
-                    // ttMapConf = ttEchart.getOption();        
+                    // ttMapConf = ttEchart.getOption();
                     res.data = res.data || {};
                     ttMapConf.series[1] && ttMapConf.series.splice(1, 1);
                     ttMapConf.xAxis[0].data = [];
@@ -533,13 +533,13 @@ define([], function () {
                             });
                             // ttMapConf.series[0].name = res.data[0] && res.data[0].cityName; // 把上次的作比较的市传过来
                             ttMapConf.series[1].name = res.data[0] && res.data[0].cityName;
-                            ttEchart.setOption(ttMapConf,true);                                                                                             
+                            ttEchart.setOption(ttMapConf,true);
                         });
-                    };                                                                 
+                    };
                 });
             };
-          
-            // 零售户地域分布无对比的 title 
+
+            // 零售户地域分布无对比的 title
             function getZeroBizTheCall(params) {
                 $model.getZeroBizTheCall(params).then(function (res) {
                     if (res.status == 200) {
@@ -549,7 +549,7 @@ define([], function () {
                     }
                 });
             };
-            // 零售户地域分布对比的 title 
+            // 零售户地域分布对比的 title
             function getVsZeroBizTheCall(params) {
                 $model.getVsZeroBizTheCall(params).then(function (res) {
                     if (res.status == 200) {
@@ -563,9 +563,9 @@ define([], function () {
             function ZeroBizTimelineOrVSZeroBizTimeline(n,selectValueStr,params) {
                 var data = angular.extend({ // 零售户发展时间趋势-无对比
                     bizCode: selectValueStr.join(',') || '',
-                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,                        
-                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                        
-                    cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                    proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                    cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                    cityClass: $('#levelOfCities').val() || '',  // 地市等级
                     vsProviceId: $('#checkbox').prop('checked') == false ? '' : $('#vsProvince').val(), //对比省份
                     vsCityId: $('#checkbox').prop('checked') == false ? '' : $('#vsPrefecture').val(), //对比地市
                     vscityClass: $('#checkbox').prop('checked') == false ? '' : $('#vsLevelOfCities').val(), //对比地市等级
@@ -573,7 +573,7 @@ define([], function () {
                 }, params);
                 $model.ZeroBizTimeline(data).then(function (res) {
                     res.data = res.data || {};
-                    timeTMapConf.series[1] && timeTMapConf.series.splice(1,1);  
+                    timeTMapConf.series[1] && timeTMapConf.series.splice(1,1);
                     timeTMapConf.xAxis.data = [];
                     timeTMapConf.series[0].data = [];
                     res.data.forEach(function (item) {
@@ -585,9 +585,9 @@ define([], function () {
                     if(n){
                         var data = angular.extend({ // 零售户发展时间趋势-对比
                             bizCode: selectValueStr.join(',') || '',
-                            proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,                        
-                            cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市                        
-                            cityClass: $('#levelOfCities').val() || '',  // 地市等级 
+                            proviceId:$('#proviceId').val() || $scope.ProvByorgId.orgRegion,
+                            cityId: $('#prefecture').val() == '-1' ? "" : $('#prefecture').val() == null ? "" : $('#prefecture').val(), // 地市
+                            cityClass: $('#levelOfCities').val() || '',  // 地市等级
                             vsProviceId: $('#checkbox').prop('checked') == false ? '' : $('#vsProvince').val(), //对比省份
                             vsCityId: $('#checkbox').prop('checked') == false ? '' : $('#vsPrefecture').val(), //对比地市
                             vscityClass: $('#checkbox').prop('checked') == false ? '' : $('#vsLevelOfCities').val(), //对比地市等级
@@ -610,7 +610,7 @@ define([], function () {
                                         "normal": {
                                             "color": "#FF8B22"
                                         }
-                                    }   
+                                    }
                                 });
                             };
                             timeTMapConf.series[1].data = [];

@@ -608,7 +608,7 @@ define([], function () {
                   initialObj.val(addInitVal);
                   surplusObj.val(addSurplusVal);
                   $('[ng-model="giftnumber"]').val('');
-                  $('#addGiftNum').hide(); 
+                  $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
                 }
                 break;
@@ -651,7 +651,7 @@ define([], function () {
                   var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
                   initialObj.val(addInitVal);
                   surplusObj.val(addSurplusVal);
-                  $('[ng-model="giftnumber"]').val(''); 
+                  $('[ng-model="giftnumber"]').val('');
                   $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
                 }
@@ -659,7 +659,7 @@ define([], function () {
               default :
             }
           }
-          
+
           /**if (globalVariable.giftaddstockid.firstornot) {
             // 特殊奖
             var the_drawprizewrap_val = $('.first-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val();
@@ -732,7 +732,7 @@ define([], function () {
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
                   $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
                   $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
-                  $('[ng-model="hbnumber"]').val(''); 
+                  $('[ng-model="hbnumber"]').val('');
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
                   break;
@@ -745,13 +745,13 @@ define([], function () {
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
                   $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
                   $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
-                  $('[ng-model="hbnumber"]').val(''); 
+                  $('[ng-model="hbnumber"]').val('');
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
                   break;
                 default:
               }
-              
+
               //原来的增加红包的代码
               // $model.addhbstock(data).then(function(res) {
               //   var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
@@ -759,7 +759,7 @@ define([], function () {
               //   $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
               //   $('.modal-content .close').trigger('click');
               // })
-              
+
             }
           }else{
             if($scope.hbnumber > $scope.poolDetailMoney){
@@ -819,7 +819,7 @@ define([], function () {
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
                 $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
                 $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
-                $('[ng-model="hbnumberNum"]').val(''); 
+                $('[ng-model="hbnumberNum"]').val('');
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
               default:
@@ -862,7 +862,7 @@ define([], function () {
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
                 $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
                 $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
-                $('[ng-model="pointsNumber"]').val(''); 
+                $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
@@ -875,7 +875,7 @@ define([], function () {
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
                 $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
                 $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
-                $('[ng-model="pointsNumber"]').val(''); 
+                $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
@@ -886,28 +886,28 @@ define([], function () {
 
         //关闭礼品数量增库弹框
         $scope.closeAddGiftBox = function(){
-          $('[ng-model="giftnumber"]').val(''); 
+          $('[ng-model="giftnumber"]').val('');
           $('#addGiftNum').hide();
           $('.add-giftstock-pop').modal('hide');
         }
 
         //关闭微信红包金额增库弹框
         $scope.closeAddHbMoneyBox = function(){
-          $('[ng-model="hbnumber"]').val(''); 
+          $('[ng-model="hbnumber"]').val('');
           $('#poolDetail').hide();
           $('.add-hbstock-pop').modal('hide');
         }
 
         //关闭微信红包数量增库弹框
         $scope.closeAddHbNumBox = function(){
-          $('[ng-model="hbnumberNum"]').val(''); 
+          $('[ng-model="hbnumberNum"]').val('');
           $('#hbNumberErr').hide();
           $('.add-hbstock-pop-num').modal('hide');
         }
 
         //关闭积分增库弹框
         $scope.closeAddPointsBox = function(){
-          $('[ng-model="pointsNumber"]').val(''); 
+          $('[ng-model="pointsNumber"]').val('');
           $('#pointsNumErr').hide();
           $('.add-points-pop').modal('hide');
         }
@@ -974,7 +974,7 @@ define([], function () {
                 $scope.allConfigTemplateConf = null;
             })
         }
-       
+
     	}]
   	}
   	return manageactsController

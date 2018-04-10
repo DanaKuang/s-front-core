@@ -36,13 +36,13 @@
     padding: 4px 12px;
     background: #44c1ed;
     border-color: #44c1ed; }
-  .ui-home-code .table-ctrl {
-    font-size: 14px;
-    float: right;
-    margin: 0 15px 15px 0;
-    border-bottom: 1px solid #999; }
-  .ui-home-code .span-hover:hover {
-    color: #333;
-    cursor: pointer; }
-  .ui-home-code .opt-btn {
-    margin: 5px; }
+  .ui-home-code .ui-export,
+  .ui-home-code .ui-export:hover,
+  .ui-home-code .ui-export:active,
+  .ui-home-code .ui-export:focus {
+    width: 120px;
+    height: 30px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed;
+    margin-bottom: 15px; }

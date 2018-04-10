@@ -52,17 +52,15 @@
             }
         }
     }
-    .table-ctrl {
-        font-size: 14px;
-        float: right;
-        margin: 0 15px 15px 0;
-        border-bottom: 1px solid #999;
-    }
-    .span-hover:hover {
-        color: #333;
-        cursor: pointer;
-    }
-    .opt-btn {
-        margin: 5px;
+    .ui-export,
+    .ui-export:hover,
+    .ui-export:active,
+    .ui-export:focus {
+        width: 120px;
+        height: 30px;
+        padding: 4px 12px;
+        background: #44c1ed;
+        border-color: #44c1ed;
+        margin-bottom: 15px;
     }
 }
