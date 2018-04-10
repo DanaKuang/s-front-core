@@ -55,10 +55,11 @@ define([], function () {
                 $model.getFackList(params|| getParams()).then(function (res) {
                     res = res.data || {};
                     if (res.ret === '200000') {
-                        res.data.list.forEach(function (l) {
+                        var ret = res.data.list || [];
+                        ret.forEach(function (l) {
                             l.rptTime = df.datetime(l.rptTime);
                         }) || [];
-                        $scope.tableArr = res.data.list;
+                        $scope.tableArr = ret;
                         $scope.paginationConf = res;
                         $scope.$apply();
                     } else {
@@ -178,6 +179,9 @@ define([], function () {
                         $scope.$apply();
                     }
                 });
+
+                // 刚进入页面查询一下
+                searchFn();
             });
 
         }]
