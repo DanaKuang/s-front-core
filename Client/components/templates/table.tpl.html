@@ -16,7 +16,6 @@
             <tr ng-repeat="row in rows">
                 <td ng-repeat="col in columns.child track by $index">{{row[col.name]}}</td>
             </tr>
-            <tr ng-if="!rows.length"><td colspan='{{columns.length}}'>暂无符合条件的数据</td></tr>
         </tbody>
     </table>
 </div>
