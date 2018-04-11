@@ -1,3 +1,10 @@
+@media screen and (min-width: 1300px) {
+  div.ui-map-box {
+    height: 350px; } }
+
+div.ui-map-box {
+  height: 280px; }
+
 .operation .col-sm-1,
 .operation .col-sm-3,
 .operation .col-sm-3 {

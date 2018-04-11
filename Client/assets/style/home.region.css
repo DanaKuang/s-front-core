@@ -1,3 +1,10 @@
+@media screen and (min-width: 1300px) {
+  div.ui-map-box {
+    height: 350px; } }
+
+div.ui-map-box {
+  height: 280px; }
+
 .ui-region-form .form-group {
   margin-right: 15px; }
 

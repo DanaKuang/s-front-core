@@ -23,6 +23,11 @@ define([], function () {
             'shankunzhongyan'
         ].indexOf(DEFPROVINCE)] || "湖南";
 
+        // 添加hover效果
+        $(".week").hover(function (e) {
+            e.currentTarget.title = $(e.currentTarget).find(':selected').text();
+        });
+
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson);
         // 1. 扫码次数趋势分析

@@ -27,6 +27,12 @@ define([], function () {
         "statTime":stattime,
         "statType":"day"
       };
+
+      // 添加hover效果
+      $(".week").hover(function (e) {
+        e.currentTarget.title = e.currentTarget.value;
+      });
+
       //数据初始化；
       var global = {}
       global.initProvinceData = {

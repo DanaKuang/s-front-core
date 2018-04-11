@@ -36,8 +36,16 @@ define([], function () {
             });
 
             function getParams () {
+                var bArr = [];
+                if ($scope.brandCode) {
+                    bArr = brandArr.map(function (b) {
+                        if (!!~$scope.brandCode.indexOf(b.name)) {
+                            return b.brandCode;
+                        }
+                    });
+                }
                 return {
-                    brandCode: $scope.brandCode && $scope.brandCode.join(',') || '',
+                    brandCode: bArr.join(',') || '',
                     sn: $scope.sn && $scope.sn.join(',') || '',
                     rptName: $scope.rptName || '',
                     phone: $scope.phone || '',
@@ -89,6 +97,9 @@ define([], function () {
                 $("#id_brand").multiselect('refresh');
                 $("#id_sn").multiselect('dataprovider', []);
                 $("#id_sn").multiselect('refresh');
+
+                // 重置完之后search一下
+                searchFn();
             }
 
             // 导出

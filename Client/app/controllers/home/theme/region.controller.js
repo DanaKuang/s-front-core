@@ -19,6 +19,11 @@ define([], function() {
 			var regionMonth = new Date().getFullYear() + "-" + amonth;
 			$(".region-day").find("input").val(stattime);
 			$(".region-month").find("input").val(regionMonth);
+
+			// 添加hover效果
+			$(".week").hover(function (e) {
+				e.currentTarget.title = e.currentTarget.value;
+			});
 			//设置默认值
 			var Default = {};
 			//省份下拉列表

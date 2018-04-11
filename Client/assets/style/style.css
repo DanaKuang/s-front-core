@@ -715,11 +715,6 @@ body {
   background-color: #ccc;
 }
 
-#hours-chart,#plan-chart,#bag-chart,#name-chart,#city-chart,#map-chart,
-#award-chart,#date-chart,#people-chart {
-  width: 100%;
-  height: 222px;
-}
 .region-select-wrap{
   margin-top: 10px;
   overflow: hidden;
