@@ -19,21 +19,24 @@
                 <!--search-->
                 <div class="ui-retailer-search panel rate">
                     <div class="panel-body">
-                        <form class="form-inline col-md-12">
-                            <div class="inline-block">
-                                <select class="form-control" ng-model="type">
+                        <form class="form-inline ui-overview-form">
+                            <div class="form-group">
+                                <label class="control-label" for="type">类型</label>
+                                <select class="form-control input-sm" ng-model="type">
                                     <option value="day">日</option>
                                     <option value="week">周</option>
                                     <option value="month">月</option>
                                 </select>
                             </div>
                             <!--day-->
-                            <div class="inline-block" ng-show="type=='day'">
+                            <div class="form-group" ng-show="type=='day'">
+                                <label class="control-label" for="">查询日期</label>
                                 <input type="input" name="startTime" ng-model="startTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
                                 <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
                             </div>
                             <!--week-->
                             <div class="inline-block" ng-show="type=='week'">
+                                <label class="control-label" for="">查询日期</label>
                                 <select class="form-control" name="weekStaTime" ng-model="weekStaTime">
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>
                                 </select>&nbsp;&nbsp;至&nbsp;&nbsp;
@@ -42,11 +45,14 @@
                                 </select>
                             </div>
                             <!--month-->
-                            <div class="inline-block" ng-show="type=='month'">
+                            <div class="form-group" ng-show="type=='month'">
+                                <label class="control-label" for="">查询日期</label>
                                 <input type="input" name="monStaTime" ng-model="monStaTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
                                 <input type="input" name="monEndTime" ng-model="monEndTime" class="form-control date input-sm">
                             </div>
-                            <button type="submit" class="btn btn-primary" ng-click="retailerSearch()">查询</button>
+                            <div class="form-group ui-btn-ctrl">
+                                <button type="submit" class="btn btn-primary" ng-click="retailerSearch()">查询</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -58,7 +64,8 @@
                                 <div class="box"><em>{{addUser}}</em>家<br>累计零售户</div>
                                 <img src="statics/assets/image/i-total.png">
                             </div>
-                            <div>
+                            <!--需求变更 2018-03-28 liubin -->
+                            <div style="display: none;">
                                 <div class="box"><em>{{joinUser}}</em>家<br>参与活动零售户</div>
                                 <img src="statics/assets/image/i-join.png">
                             </div>

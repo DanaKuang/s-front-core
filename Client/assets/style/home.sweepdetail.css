@@ -1,0 +1,33 @@
+.ui-btn-ctrl {
+  display: block !important;
+  text-align: right;
+  margin-right: 0px !important; }
+  .ui-btn-ctrl button.btn-primary,
+  .ui-btn-ctrl button.btn-primary:hover,
+  .ui-btn-ctrl button.btn-primary:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+
+.ui-sweepdetail-form .form-group {
+  margin-right: 30px; }
+
+#dayTime {
+  font-size: 12px;
+  background: #fff;
+  color: unset; }
+
+#hoursSeg {
+  height: 30px;
+  color: unset; }
+
+.ui-panel-title .report-icon {
+  left: 0; }
+
+.ui-panel-title.report {
+  padding-left: 20px; }

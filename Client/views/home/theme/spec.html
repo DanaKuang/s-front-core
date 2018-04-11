@@ -5,7 +5,7 @@
  * Description: theme
  */
 -->
-
+<link rel="stylesheet" href="statics/assets/style/home.spec.css">
 <div class="animated fadeInRightBig" ng-controller="SpecCtrl">
   <div class="container-fluid region-margin">
     <div class="row">
@@ -18,55 +18,93 @@
         <div class="panel rate">
           <div class="panel-body">
             <!--搜索-->
-            <div class="region-search-r spec-search">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day" id="day" selected>日</option>
-                <option value="week">周</option>
-                <option value="month">月</option>
-              </select>
+            <form class="form-inline ui-spec-form spec-search" autocomplete="off">
+              <div class="form-group">
+                <label class="control-label" for="">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day" id="day" selected>日</option>
+                  <option value="week">周</option>
+                  <option value="month">月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <div class="ui-total-date input-append date-wrap spec-day">
-                <input size="16" type="text" value="" readonly class="form-control date" />
+              <div class="form-group input-append date-wrap spec-day">
+                <label class="control-label">查询时间</label>
+                <input type="text" value="" readonly class="form-control input-sm date" />
                 <span class="add-on"><i class="icon-th"></i></span>
               </div>
-              <select class="brand" autocomplete="off"></select>
-              <select class="region spec" autocomplete="off">
-              </select>
+              <div class="form-group">
+                <label class="control-label">品牌</label>
+                <select class="form-control input-sm brand" autocomplete="off"></select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">规格</label>
+                <select class="form-control input-sm region spec" autocomplete="off"></select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
-            <div class="region-search-r spec-search" style="display: none">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day" >日</option>
-                <option value="week" id="week" selected>周</option>
-                <option value="month">月</option>
-              </select>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+            <form class="form-inline ui-spec-form spec-search" autocomplete="off" style="display: none">
+              <div class="form-group">
+                <label class="control-label" for="">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day" >日</option>
+                  <option value="week" id="week" selected>周</option>
+                  <option value="month">月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <select class="week">
-              </select>
-              <select class="brand" autocomplete="off"></select>
-              <select class="region spec"  autocomplete="off">
-              </select>
+              <div class="form-group">
+                <label class="control-label">查询时间</label>
+                <select class="form-control input-sm week"></select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">品牌</label>
+                <select class="form-control input-sm brand" autocomplete="off"></select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">规格</label>
+                <select class="form-control input-sm region spec"  autocomplete="off"></select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
-            <div class="region-search-r spec-search" style="display: none">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day">日</option>
-                <option value="week">周</option>
-                <option value="month" id="month" selected>月</option>
-              </select>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+            <form class="form-inline ui-spec-form spec-search" autocomplete="off" style="display: none">
+              <div class="form-group">
+                <label class="control-label" for="">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day">日</option>
+                  <option value="week">周</option>
+                  <option value="month" id="month" selected>月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <div class="ui-total-date input-append spec-month date-wrap">
-                <input size="16" type="text" value="" readonly class="form-control date" />
+              <div class="form-group input-append spec-month date-wrap">
+                <label class="control-label">查询时间</label>
+                <input type="text" value="" readonly class="form-control input-sm date" />
                 <span class="add-on"><i class="icon-th"></i></span>
               </div>
-              <select class="brand" autocomplete="off"></select>
-              <select class="region spec" autocomplete="off">
-              </select>
+              <div class="form-group">
+                <label class="control-label">品牌</label>
+                <select class="form-control input-sm brand" autocomplete="off"></select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">规格</label>
+                <select class="form-control input-sm region spec" autocomplete="off"></select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
             <div class="spec-wrap">
               <div class="col-md-3">
                 <img src="" class="img" />
@@ -88,7 +126,7 @@
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
-              <div id="hours-chart"></div>
+              <div id="hours-chart" class="ui-map-box col-md-12"></div>
             </div>
             <div class="region-hours-wrap spec-people-wrap">
               <div class="hours-title">
@@ -97,7 +135,7 @@
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
-              <div id="people-chart"></div>
+              <div id="people-chart" class="ui-map-box col-md-12"></div>
             </div>
             <div class="region-hours-wrap spec-plan-wrap">
               <div class="hours-title">
@@ -128,7 +166,7 @@
                   <span>领取数量</span>
                 </div>
               </div>
-              <div id="plan-chart"></div>
+              <div id="plan-chart" class="ui-map-box col-md-12"></div>
             </div>
             <div class="region-hours-wrap spec-city-wrap">
               <div class="hours-title">
@@ -140,23 +178,23 @@
               <div class="spec-city-container">
                   <div class="spec-map-wrap">
                     <span>分省分析</span>
-                    <div id="map-chart"></div>
+                    <div id="map-chart" class="ui-map-box"></div>
                   </div>
                   <div class="spec-scan">
                     <div class="spec-scan-num">
                         <span>全省扫码烟包数时间趋势</span>
-                        <div id="time-chart"></div>
+                        <div id="time-chart" class="ui-map-box"></div>
                     </div>
                     <div class="spec-scan-city">
                       <span>省市各地市扫码烟包数排名</span>
-                      <div id="city-chart"></div>
+                      <div id="city-chart" class="ui-map-box"></div>
                     </div>
                   </div>
               </div>
             </div>
             <div class="region-hours-wrap spec-award-wrap">
               <span>全国地市扫码烟包数排名</span>
-              <div id="award-chart"></div>
+              <div id="award-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap spec-pie-wrap">
               <div class="hours-title">
@@ -166,10 +204,10 @@
                 <span>（单位：个）</span>
               </div>
               <div class="col-md-6">
-                <div id="pie1-chart"></div>
+                <div id="pie1-chart" class="ui-map-box"></div>
               </div>
               <div class="col-md-6">
-                <div id="pie2-chart"></div>
+                <div id="pie2-chart" class="ui-map-box"></div>
               </div>
             </div>
             <!--<div class="region-hours-wrap spec-pie-wrap">-->

@@ -46,6 +46,7 @@ define([], function () {
             scope.$watch('scope.form', function (n, o, s) {
                 if (n != o) {
                     scope.form = n;
+                    console.log(n)
                 }
             })
 

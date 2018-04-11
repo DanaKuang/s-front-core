@@ -150,20 +150,19 @@ define([], function () {
         });
 
         // ------------------ 2.0分界线 ------------------
-        $model.getActSampleList().then(function (res) {
-          $scope.chooseConf = res.data;
-          $model.getwhichsample({type: ''}).then(function (res) {
-            // 获取全部类型
-            scope('.showtemplate').type = res.data.data.list;
-          })
-        });
+        // $model.getActSampleList().then(function (res) {
+        //   $scope.chooseConf = res.data;
+        //   $model.getwhichsample({type: ''}).then(function (res) {
+        //     // 获取全部类型
+        //     scope('.showtemplate').type = res.data.data.list;
+        //   })
+        // });
 
-        $scope.$on('choosetype', function (e, v, f) {
-          $model.getTemplateSpecific(f).then(function(res){
-            $scope.configtemplateConf = res.data;
-          })
-        })
-
+        // $scope.$on('choosetype', function (e, v, f) {
+        //   $model.getTemplateSpecific(f).then(function(res){
+        //     $scope.configtemplateConf = res.data;
+        //   })
+        // })
 
         // $model.step().then(function (res) {
         //   $scope.createConf = res.data;
@@ -293,19 +292,12 @@ define([], function () {
               numberDisplayed: 1
             });
           });
+
           // 不需要根据供应商获取品牌信息
           $scope.$on('clickbrandval', function (e, v, f) {
             $model.getBrandList().then(function (res) {
               var selectCompanyScope = angular.element('.select-brand').scope();
               selectCompanyScope.brand = res.data.data;
-              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.name;
-                  v.value = v.brandCode;
-              }));
-              $('[ng-model="selectBrandVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectBrandVal"]').find('option:first').val();
-              selectCompanyScope.selectBrandVal = default_val;
             })
           })
 
@@ -314,14 +306,6 @@ define([], function () {
             $model.getProductList(f).then(function (res) {
               var selectBrandScope = angular.element('.select-specification').scope();
               selectBrandScope.specification = res.data.data;
-              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.allName;
-                  v.value = v.sn;
-              }));
-              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectSpecificationVal"]').find('option:first').val();
-              selectBrandScope.selectSpecificationVal = default_val;
             })
           })
         }
@@ -624,7 +608,7 @@ define([], function () {
                   initialObj.val(addInitVal);
                   surplusObj.val(addSurplusVal);
                   $('[ng-model="giftnumber"]').val('');
-                  $('#addGiftNum').hide(); 
+                  $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
                 }
                 break;
@@ -667,7 +651,7 @@ define([], function () {
                   var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
                   initialObj.val(addInitVal);
                   surplusObj.val(addSurplusVal);
-                  $('[ng-model="giftnumber"]').val(''); 
+                  $('[ng-model="giftnumber"]').val('');
                   $('#addGiftNum').hide();
                   $('.add-giftstock-pop').modal('hide');
                 }
@@ -675,7 +659,7 @@ define([], function () {
               default :
             }
           }
-          
+
           /**if (globalVariable.giftaddstockid.firstornot) {
             // 特殊奖
             var the_drawprizewrap_val = $('.first-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val();
@@ -748,7 +732,7 @@ define([], function () {
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
                   $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
                   $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
-                  $('[ng-model="hbnumber"]').val(''); 
+                  $('[ng-model="hbnumber"]').val('');
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
                   break;
@@ -761,13 +745,13 @@ define([], function () {
                   var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
                   $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
                   $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
-                  $('[ng-model="hbnumber"]').val(''); 
+                  $('[ng-model="hbnumber"]').val('');
                   $('#poolDetail').html('').hide();
                   $('.add-hbstock-pop').modal('hide');
                   break;
                 default:
               }
-              
+
               //原来的增加红包的代码
               // $model.addhbstock(data).then(function(res) {
               //   var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
@@ -775,7 +759,7 @@ define([], function () {
               //   $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
               //   $('.modal-content .close').trigger('click');
               // })
-              
+
             }
           }else{
             if($scope.hbnumber > $scope.poolDetailMoney){
@@ -835,7 +819,7 @@ define([], function () {
                 var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
                 $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
                 $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
-                $('[ng-model="hbnumberNum"]').val(''); 
+                $('[ng-model="hbnumberNum"]').val('');
                 $('.add-hbstock-pop-num').modal('hide');
                 break;
               default:
@@ -878,7 +862,7 @@ define([], function () {
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
                 $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
                 $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
-                $('[ng-model="pointsNumber"]').val(''); 
+                $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
@@ -891,7 +875,7 @@ define([], function () {
                 var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
                 $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
                 $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
-                $('[ng-model="pointsNumber"]').val(''); 
+                $('[ng-model="pointsNumber"]').val('');
                 $('#pointsNumErr').hide();
                 $('.add-points-pop').modal('hide');
                 break;
@@ -902,28 +886,28 @@ define([], function () {
 
         //关闭礼品数量增库弹框
         $scope.closeAddGiftBox = function(){
-          $('[ng-model="giftnumber"]').val(''); 
+          $('[ng-model="giftnumber"]').val('');
           $('#addGiftNum').hide();
           $('.add-giftstock-pop').modal('hide');
         }
 
         //关闭微信红包金额增库弹框
         $scope.closeAddHbMoneyBox = function(){
-          $('[ng-model="hbnumber"]').val(''); 
+          $('[ng-model="hbnumber"]').val('');
           $('#poolDetail').hide();
           $('.add-hbstock-pop').modal('hide');
         }
 
         //关闭微信红包数量增库弹框
         $scope.closeAddHbNumBox = function(){
-          $('[ng-model="hbnumberNum"]').val(''); 
+          $('[ng-model="hbnumberNum"]').val('');
           $('#hbNumberErr').hide();
           $('.add-hbstock-pop-num').modal('hide');
         }
 
         //关闭积分增库弹框
         $scope.closeAddPointsBox = function(){
-          $('[ng-model="pointsNumber"]').val(''); 
+          $('[ng-model="pointsNumber"]').val('');
           $('#pointsNumErr').hide();
           $('.add-points-pop').modal('hide');
         }
@@ -990,7 +974,7 @@ define([], function () {
                 $scope.allConfigTemplateConf = null;
             })
         }
-       
+
     	}]
   	}
   	return manageactsController

@@ -1,7 +1,7 @@
 $color:#3d467d;
 $borderColor:#A0A0A0;
 .group-panel-top , .group-pannel-middle {
-    padding:0 40px;    
+    // padding:0 40px;
 }
 .group-panel-top {
     margin-bottom: 12px;
@@ -23,7 +23,7 @@ $borderColor:#A0A0A0;
                 display: inline-block;
                 position: relative;
                 .form-control {
-                    background-color: #ffffff;                    
+                    background-color: #ffffff;
                 }
                 // .glyphicon.glyphicon-th {
                 //     position: absolute;
@@ -41,7 +41,25 @@ $borderColor:#A0A0A0;
                 line-height: 1;
             }
         }
-    }    
+    }
+}
+form {
+    .date {
+        background-color: #fff !important;
+    }
+    .btn.btn-primary,
+    .btn.btn-primary:hover,
+    .btn.btn-primary:active,
+    .btn.btn-primary:focus {
+        width: 100px;
+        margin-left: 30px;
+        margin-right: 0px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 4px 12px;
+        background: #44c1ed;
+        border-color: #44c1ed;
+    }
 }
 .group-pannel-middle {
     overflow-x: hidden;
@@ -55,7 +73,7 @@ $borderColor:#A0A0A0;
         > div {
             width: 270px;
             height: 90px;
-            border: 1px solid #d2d2d2;            
+            border: 1px solid #d2d2d2;
             box-shadow: 5px 5px 5px rgba(0,0,0,.2);
             p {
                 line-height: 17px;
@@ -73,7 +91,7 @@ $borderColor:#A0A0A0;
     .group-title {
         color: $color;
         font-size: 14px;
-        margin-bottom: 28px;   
+        margin-bottom: 28px;
     }
     .smoke-spread {
         overflow: hidden;
@@ -95,18 +113,18 @@ $borderColor:#A0A0A0;
             line-height: 1!important;
         }
         .group-smoke-table thead tr th {
-            border-top:1px solid $borderColor!important;
-            border-bottom:1px solid $borderColor!important;
+            // border-top:1px solid $borderColor!important;
+            // border-bottom:1px solid $borderColor!important;
         }
         .group-smoke-table tbody tr .color {
             color:#ff8b23;
         }
     }
     .group-brand {
-        width: 110%;
+        // width: 110%;
         position: relative;
-        left: -50px;
-        padding-left: 40px;
+        // left: -50px;
+        // padding-left: 40px;
         border-bottom:1px solid $borderColor;
         line-height: 45px;
         span,select {
@@ -118,13 +136,13 @@ $borderColor:#A0A0A0;
         }
     }
     .scan-frequency {
-        padding-top:30px; 
+        padding-top:30px;
         overflow: hidden;
         #frequency-chart-left , #frequency-chart-right {
             width: 50%;
             height: 250px;
             float: left
-        } 
+        }
     }
     .user-day-trend {
         padding-top: 30px;
@@ -140,12 +158,12 @@ $borderColor:#A0A0A0;
     }
     .user-top-ten {
         .top-ten-table {
-            thead tr  th {
-                line-height: 1 !important;
-                vertical-align: middle;
-                border-top:1px solid $borderColor;
-                border-bottom:1px solid $borderColor; 
-            }
+            // thead tr  th {
+            //     line-height: 1 !important;
+            //     vertical-align: middle;
+            //     border-top:1px solid $borderColor;
+            //     border-bottom:1px solid $borderColor;
+            // }
             tbody tr td:last-child {
                 text-decoration: underline;
                 cursor: pointer;

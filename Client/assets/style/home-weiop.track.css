@@ -1,0 +1,209 @@
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.border-box {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+.weiop-wrap {
+  width: 322px;
+  height: 570px;
+  border: 1px solid red;
+  padding-bottom: 49px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #eee; }
+
+.weiop-tabs {
+  width: 322px;
+  height: 49px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99; }
+  .weiop-tabs a {
+    display: block;
+    text-align: center; }
+    .weiop-tabs a img {
+      display: block;
+      width: 22px;
+      height: 22px;
+      margin: 0 auto 10px; }
+
+.weiop-tabs-hebei {
+  background-color: #33302d; }
+  .weiop-tabs-hebei a {
+    color: #c8c8c8; }
+  .weiop-tabs-hebei .tab-active {
+    color: #ff7a00; }
+
+.weiop-tabs-henan {
+  background: linear-gradient(to top, #e9cfb1, #f0ddc3); }
+  .weiop-tabs-henan a {
+    color: #af8360; }
+  .weiop-tabs-henan .tab-active {
+    color: #6a3314; }
+
+.weiop-tabs-shankun {
+  background: white; }
+  .weiop-tabs-shankun a {
+    color: #cccccc; }
+  .weiop-tabs-shankun .tab-active {
+    color: #921d54; }
+
+.retailer-scan {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  padding-left: 14px;
+  position: relative;
+  background-color: white;
+  margin-bottom: 10px; }
+  .retailer-scan img {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 18px; }
+  .retailer-scan span {
+    color: black;
+    font-size: 13px; }
+  .retailer-scan i {
+    display: block;
+    width: 8px;
+    height: 14px;
+    background: url("../image/hebei/arrow-left.png") no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%); }
+
+.product-wrap {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  padding: 20px 10px 10px 10px;
+  margin-bottom: 10px; }
+  .product-wrap .product-details .details-header {
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 16px; }
+    .product-wrap .product-details .details-header span {
+      text-align: center;
+      display: inline-block; }
+    .product-wrap .product-details .details-header span:nth-of-type(1) {
+      color: #010101;
+      font-size: 12px;
+      margin-right: 10px;
+      font-weight: bolder;
+      vertical-align: middle; }
+    .product-wrap .product-details .details-header span:nth-of-type(2) {
+      width: 40px;
+      height: 19px;
+      line-height: 19px;
+      border: 1px solid #333333;
+      border-radius: 3px;
+      vertical-align: -2px; }
+      .product-wrap .product-details .details-header span:nth-of-type(2) a {
+        color: #333333; }
+  .product-wrap .product-details > p {
+    font-size: 12px;
+    margin-bottom: 10px; }
+    .product-wrap .product-details > p span {
+      color: #ff5e15; }
+    .product-wrap .product-details > p i {
+      display: inline-block;
+      width: 2em; }
+  .product-wrap .tobacco {
+    width: 79px; }
+    .product-wrap .tobacco img {
+      width: 100%; }
+
+.product-henan-wrap {
+  background: url("../image/henan/index_bg.png") center no-repeat;
+  background-size: cover; }
+
+.product-shankun-wrap {
+  background: url("../image/shankun/index_bg.png") center no-repeat;
+  background-size: cover; }
+
+.active-banner {
+  width: 100%; }
+  .active-banner div {
+    margin-bottom: 9px; }
+    .active-banner div img {
+      width: 100%;
+      height: 140px; }
+
+.vip-wrap {
+  width: 100%; }
+  .vip-wrap .vip-header {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 7px;
+    background-color: white;
+    position: relative; }
+    .vip-wrap .vip-header .vip-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 12px;
+      vertical-align: -2px; }
+    .vip-wrap .vip-header span {
+      font-size: 14px; }
+    .vip-wrap .vip-header .vip-gif {
+      width: 150px;
+      height: 20px;
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%); }
+  .vip-wrap .vip-banner-wrap {
+    width: 100%;
+    margin-bottom: 20px; }
+
+.please-scan-wrap.please-scan-hebei-wrap {
+  background: url("../image/hebei/scan-bg.png") center no-repeat; }
+  .please-scan-wrap.please-scan-hebei-wrap p {
+    color: #383838; }
+    .please-scan-wrap.please-scan-hebei-wrap p span {
+      color: #fff; }
+
+.please-scan-wrap.please-scan-henan-wrap {
+  background: url("../image/henan/home_bg_scan.png") center no-repeat; }
+  .please-scan-wrap.please-scan-henan-wrap p {
+    color: #904C29; }
+    .please-scan-wrap.please-scan-henan-wrap p span {
+      color: red; }
+
+.please-scan-wrap.please-scan-shankun-wrap img {
+  width: 100%;
+  height: inherit; }
+
+.please-scan-wrap {
+  width: 100%;
+  height: 216px;
+  padding-top: 58px;
+  background-size: cover;
+  text-align: center; }
+  .please-scan-wrap img {
+    width: 120px;
+    height: 120px; }
+  .please-scan-wrap p {
+    padding-top: 19px;
+    font-size: 12px; }

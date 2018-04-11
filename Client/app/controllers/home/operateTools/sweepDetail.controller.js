@@ -25,6 +25,7 @@ define([], function () {
             $scope.pageSize = 15; //每页显示多少条
             $scope.currentPageNumber = 1; //当前页数
             $scope.totalPage = 0;//总页数
+            $scope.sweepDetailData = [];
             var initPage = {
                 "page" : $scope.currentPageNumber,
                 "pageSize" : $scope.pageSize
@@ -62,7 +63,7 @@ define([], function () {
                     }
                     $('#sweepDetailTable').show();
                     $scope.sweepDetailData = res;
-                    $scope.$apply();                    
+                    $scope.$apply();
 
                     // $("#sweep_table").html("");
                     // $('#sweepDetailTable').show();
@@ -73,7 +74,7 @@ define([], function () {
                     // }else{
                     //     $("#sweep_table").append("<tr><td colspan='6'>暂无符合条件的数据</td></tr>");
                     // }
-                    
+
                 })
             }
 
@@ -107,15 +108,15 @@ define([], function () {
                     $(".footer_sec").append("<div class='tcdPageCode'></div>");
                     $scope.$apply();
                     createPageTools(curPageObj);
-                    $scope.$apply();                    
-                    
+                    $scope.$apply();
+
                 })
             }
 
             //点击按钮的返回
             $scope.goback = function () {
                 $('#codeDataTable').hide();
-                $('#sweepDataTable').show();     
+                $('#sweepDataTable').show();
             }
 
             //创建分页工具

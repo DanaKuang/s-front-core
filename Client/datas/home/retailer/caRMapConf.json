@@ -1,0 +1,38 @@
+{   
+    "color":["#76D7F7","#FF8B22"],
+    "textStyle":{
+        "align":"left"
+    },
+    "dataZoom": [
+        {
+        "type": "inside",
+        "show": true,
+        "xAxisIndex": [0],
+        "start": 0,
+        "end": 100
+        }
+        ],
+    "tooltip":{
+        "trigger":"axis"
+    },
+    "xAxis":[
+        {
+            "type":"category",
+            "data":[],
+            "axisTick":{
+                "alignWithLabel":true
+            }
+        }
+    ],
+    "yAxis":[
+        {
+            "type":"value"  ,
+            "axisLabel": {
+                "show": false
+           }
+        }
+    ],
+    "series":[
+        
+    ]
+}

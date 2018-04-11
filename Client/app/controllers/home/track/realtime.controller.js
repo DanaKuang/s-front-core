@@ -15,10 +15,11 @@ define([], function () {
 
         var DEFPROVINCE = sessionStorage.getItem("account") || "hunan";
         // 不够再加
-        DEFPROVINCE = ['湖南','河南','河北'][[
+        DEFPROVINCE = ['湖南','河南','河北','山西'][[
             'hunan',
             'henan',
-            'hebei'
+            'hebei',
+            'shankun'
         ].indexOf(DEFPROVINCE)] || "湖南";
 
         var chinaJson = $model.$chinaJson.data;

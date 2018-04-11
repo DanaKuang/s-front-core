@@ -12,14 +12,35 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
         var $model = $scope.$model;
         var pageUrl = 'https://hmtx.cc/nscan_data.html?sn=';
+        $scope.account = sessionStorage.account;
 
         // 后端数据
         // var brand_back_data = $model.$brand.data || [];
         // brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
         var act_back_data = $model.$activity.data || [];
+
+
+        var activityId = "";
+
+        if (sessionStorage.tempActivityId) {
+            var actArr = act_back_data.filter(function (a) {
+                if (a.activityId === sessionStorage.tempActivityId) {
+                    return true;
+                }
+            });
+            if (actArr.length) {
+                activityId = actArr[0].activityId + '_' + actArr[0].sn;
+            }
+            // 用后即删
+            sessionStorage.removeItem("tempActivityId");
+        }
+
         _.each(act_back_data, function (d) {
             d.activityId += '_'+d.sn;
         });
+
+        activityId = activityId || act_back_data[0].activityId || "";
+
         act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 
         // 默认配置
@@ -30,7 +51,7 @@ define([], function () {
             // productBrand: brand_back_data[0].productBrand || "",
             // pnArray: [],
             acArray: act_back_data,
-            activityId: act_back_data[0].activityId || "",
+            activityId: activityId,
             pgArray: [],
             pagename: "",
             pathSearch: pathSearch
@@ -57,6 +78,7 @@ define([], function () {
 
             // 图片
             $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
+            weiopDetail({"sn":act_sn[1]});
         }
 
         // 初始化select
@@ -73,6 +95,7 @@ define([], function () {
                     var act_sn = opt[0].value || event.target.value || "";
                     act_sn = act_sn.split('_');
                     $("#id_page_iframe").attr('src', pageUrl+act_sn[1]);
+                    weiopDetail({"sn":act_sn[1]});
                     $model.getActPage({
                         activityId: act_sn[0]
                     }).then(function (res) {
@@ -175,6 +198,24 @@ define([], function () {
                 $scope.targetData = a_f.pvFilter(res.data) || [];
                 $scope.$apply();
             });
+        }
+
+        // weiop
+        function weiopDetail(params) {
+            $model.getProductBySn(params).then(function(res) {
+                $scope.getProduct = res.data;
+                $scope.$apply();
+            })
+            $model.getActivityBySn(params).then(function(res) {
+                console.log(res);
+                $scope.getActivity = res.data;
+                $scope.$apply();
+            })
+            $model.getADBySn(params).then(function(res) {
+                console.log(res);
+                $scope.getAD = res.data;
+                $scope.$apply();
+            })
         }
     }]
   };

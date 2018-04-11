@@ -14,10 +14,11 @@ define([], function () {
             var $model = $scope.$model;
             var DEFPROVINCE = $model.$defPro.data[0].orgId || "hunanzhongyan";
             // 不够再加
-            DEFPROVINCE = ['湖南','河南','河北'][[
+            DEFPROVINCE = ['湖南','河南','河北','山西'][[
                 'hunanzhongyan',
                 'henanzhongyan',
-                'hebeizhongyan'
+                'hebeizhongyan',
+                'shankunzhongyan'
             ].indexOf(DEFPROVINCE)] || "湖南";
 
             // 百度地图json
@@ -349,6 +350,13 @@ define([], function () {
                     $scope.$apply();
                 });
             }
+
+            // 页面跳转
+            window.jumpUrl = function () {
+                var sScope = angular.element('.ui-daily-search').scope();
+                sessionStorage.tempActivityId = sScope.activity || "";
+                $('[data-hash=\'#/view/home/pathdetail\']').trigger('click');
+            };
         }]
     };
 

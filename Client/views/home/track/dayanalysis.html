@@ -6,7 +6,7 @@
  */
 -->
 <!--style-->
-<link rel="stylesheet" type="text/css" href="statics/assets/style/home.track.css">
+<link rel="stylesheet" href="statics/assets/style/home.track.css">
 <!--html-->
 <div class="animated fadeInRightBig" ng-controller="dayanalysisCtrl">
     <div class="container-fluid">
@@ -76,7 +76,7 @@
                     <!--浏览轨迹-->
                     <div class="panel-body">
                         <div class="form-inline col-md-10">浏览轨迹</div>
-                        <div class="form-inline col-md-2" onclick="$('[data-hash=\'#/view/home/pathdetail\']').trigger('click')">更多路径转化信息>></div>
+                        <div class="form-inline col-md-2" onclick="jumpUrl()" style="cursor: pointer;font-size: 14px;">更多路径转化信息>></div>
                         <!--转化-->
                         <div class="ui-min-height col-md-12">
                             <div class="ui-transform-box">

@@ -100,7 +100,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dff.date(+new Date)
             }).on('change', function (e) {
                 var startTime = e.target.value;
                 var endTime = scope.endTime;
@@ -115,7 +115,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dff.date(+new Date)
             }).on('change', function (e) {
                 var endTime = e.target.value;
                 var startTime = scope.startTime;

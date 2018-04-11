@@ -1,0 +1,54 @@
+.ui-foreport-form .form-group {
+  margin-right: 15px; }
+
+.ui-foreport-form .control-label {
+  width: 60px;
+  text-align: right; }
+
+.ui-foreport-form .multiselect.btn {
+  min-width: 147px;
+  height: 30px;
+  padding: 4px 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.ui-foreport-form .date {
+  background: #fff; }
+
+.ui-foreport-form select {
+  width: 147px !important; }
+
+.ui-foreport-form .form-control {
+  width: 147px !important; }
+
+.ui-foreport-form .ui-btn-ctrl {
+  display: block !important;
+  text-align: right;
+  margin-right: 0px !important; }
+  .ui-foreport-form .ui-btn-ctrl button.btn-primary,
+  .ui-foreport-form .ui-btn-ctrl button.btn-primary:hover,
+  .ui-foreport-form .ui-btn-ctrl button.btn-primary:active,
+  .ui-foreport-form .ui-btn-ctrl button.btn-primary:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+  .ui-foreport-form .ui-btn-ctrl button.gray_btn.btn-primary,
+  .ui-foreport-form .ui-btn-ctrl button.gray_btn.btn-primary:hover,
+  .ui-foreport-form .ui-btn-ctrl button.gray_btn.btn-primary:active,
+  .ui-foreport-form .ui-btn-ctrl button.gray_btn.btn-primary:focus {
+    border-color: #f0f0f0; }
+
+.ui-panel-title .report-icon {
+  left: 0; }
+
+.ui-panel-title.report {
+  padding-left: 20px; }
+
+.ui-scroll-table {
+  overflow: auto; }

@@ -46,7 +46,7 @@ define([], function () {
             scope.cancelActivityBuild = function() {
                 var r = confirm('确定要取消吗？')
                 if (r == true) {
-                    scope.$emit('popback', event, {}); 
+                    scope.$emit('popback', event, {});
                 } else {
                     return
                 }
@@ -64,12 +64,12 @@ define([], function () {
                 scopeVariable._launchScope = angular.element('.select-brand').scope(); //投放设置
                 scopeVariable._setPrizeScope = angular.element('.ready-set').scope(); // 奖项设置
                 scopeVariable._drawPrizeScope = angular.element('.draw-prize').scope(); // 彩蛋的 中奖设置
-                
+
                 scopeVariable.activityAwards = [];
                 scopeVariable.specialerror = false;
                 scopeVariable.commonerror = false;
                 scopeVariable.finalerror = false;
-            
+
                 // 彩蛋奖品
                 if (scopeVariable._drawPrizeScope) {
                     var caidanerror = false;
@@ -135,7 +135,7 @@ define([], function () {
                     setPrize('common')
                 }
 
-                // 特殊 & 普通奖项设置fn 
+                // 特殊 & 普通奖项设置fn
                 function setPrize(tag, editornot) {
                     if (editornot) {
                         if (tag === 'special') {
@@ -158,7 +158,7 @@ define([], function () {
                             var prizeDomList = $('.thanks-draw-wrap').find('.ready-set .create-part').children();
                         }
                     }
-                    
+
                     var prizeDomList_len = prizeDomList.length;
                     var prizeDomList_arr = Array.apply(0, Array(prizeDomList_len)).map(function(item, index){
                         return index
@@ -229,7 +229,7 @@ define([], function () {
                                 }
                             }
                         }
-                        
+
                         scopeVariable.activityAwards.push(ActivityPageAward);
                     })
                 }
@@ -245,7 +245,7 @@ define([], function () {
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
                         var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
-                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; 
+                        ActivityPageAward.details[index].poolId = n[0].dataset.id || '';
                         ActivityPageAward.details[index].awardName = n[0].dataset.name || '';
                         ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
                         ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
@@ -260,7 +260,7 @@ define([], function () {
                 function processSingleArr(ActivityPageAward, item, radio_res_item) {
                     var type = 'notgift';
                     // 红包 和 积分
-                    ActivityPageAward.multiChoose = 0; 
+                    ActivityPageAward.multiChoose = 0;
                     ActivityPageAward.details[0] = {};
                     ActivityPageAward.details[0].awardName = item[0].dataset.name || '';
                     ActivityPageAward.details[0].awardPicUrl = '';
@@ -278,7 +278,7 @@ define([], function () {
                         } else {
                             ActivityPageAward.details[0].minred = ActivityPageAward.details[0].bigred = radio_res_item.find('.fixed').val();
                         }
-                    } 
+                    }
                     if (radio_res_item.hasClass('jf')) {
                         ActivityPageAward.score = radio_res_item.find('.score').val() || 0;
                         ActivityPageAward.details[0].awardType = 6;
@@ -349,9 +349,9 @@ define([], function () {
                     idx: scopeVariable._basicScope.points || 502,
                     name: scopeVariable._basicScope.nameValue || '',
                     attachUrl: '',
-                    score: scopeVariable._participateScope.nameIntegral || 0,
-                    limitPer: scopeVariable._participateScope.namePerPersonDay || 0,
-                    limitAll: scopeVariable._participateScope.namePerPerson || 0,
+                    score: scopeVariable._participateScope && scopeVariable._participateScope.nameIntegral || 0,
+                    limitPer: scopeVariable._participateScope && scopeVariable._participateScope.namePerPersonDay || 0,
+                    limitAll: scopeVariable._participateScope && scopeVariable._participateScope.namePerPerson || 0,
                     supplier: scopeVariable._launchScope.selectCompanyVal || '',
                     brandCode: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activityBrandsList.join('') : scopeVariable._launchScope.selectBrandVal || '',
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
@@ -365,6 +365,8 @@ define([], function () {
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2,
                     mustwin:$('#checkbox').prop('checked')?mustwin:null
                 }
+
+                console.log(fromSonScope)
 
                 finalcheck(fromSonScope)
                 // final校验
@@ -402,7 +404,7 @@ define([], function () {
                                 $('.activity-priority .wrong-tip').removeClass('hidden');
                             }
                         }
-                        
+
                         if (s == 'areaCode' && fromSonScope[s].length == 0) {
                             // 地区没选
                             scopeVariable.finalerror = true;
@@ -432,12 +434,12 @@ define([], function () {
                         }
                     }
                 }
-                
+
                 // 特殊规则校验 (复选框选中才去校验)
                 if ($('#checkbox').prop('checked')) {
                     var input = $('.special-rules .special-rules-info .special-rules-item .input');
                     var arr = [];  // 装输入框的值
-                    var repeatArr = []; // 装重复数据的数组 
+                    var repeatArr = []; // 装重复数据的数组
                     for (var j = 0; j < input.length; j++) {
                         arr.push($(input[j]).val())
                     };
@@ -462,7 +464,7 @@ define([], function () {
                         };
                         $(input[i]).on('input', function () {
                             arr = [];
-                            repeatArr = []; // 装重复数据的数组                                         
+                            repeatArr = []; // 装重复数据的数组
                             for (var j = 0; j < input.length; j++) {
                                 arr.push($(input[j]).val())
                             };
@@ -526,7 +528,7 @@ define([], function () {
                         }
                     }
                 }
-            } 
+            }
         }
 
         return defineObj;

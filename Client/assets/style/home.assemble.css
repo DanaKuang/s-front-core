@@ -1,0 +1,86 @@
+@charset "UTF-8";
+/**
+ * Author: liubin
+ * Create Date: 2018-02-22
+ * Description: 标签组合管理
+ */
+.ui-panel-title {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+.form-assemble {
+  margin-top: 20px;
+  margin-bottom: 30px; }
+  .form-assemble .form-group {
+    margin-bottom: 0 !important; }
+    .form-assemble .form-group input {
+      width: 250px; }
+  .form-assemble .btn-primary {
+    width: 100px;
+    padding: 0;
+    background: #7c8af4;
+    border-color: #7c8af4;
+    margin-left: 30px; }
+  .form-assemble .btn-primary:hover,
+  .form-assemble .btn-primary:focus {
+    background: #5f6ddc;
+    border-color: #5f6ddc; }
+
+.table-assemble thead tr > th {
+  border: 0;
+  border-top: 1px solid #ddd !important;
+  border-bottom: 1px solid #ddd;
+  background: #f9faff; }
+
+.table-assemble tbody tr:nth-child(odd) th, .table-assemble tbody tr:nth-child(odd) td {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  background: #fff; }
+
+.table-assemble tbody tr:nth-child(even) th, .table-assemble tbody tr:nth-child(even) td {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  background: #f9faff; }
+
+.table-assemble .opts {
+  width: 305px; }
+  .table-assemble .opts div {
+    width: 86px;
+    text-align: center;
+    float: left;
+    color: #7c8af4;
+    margin: 0 5px;
+    border-bottom: 1px solid #7c8af4;
+    cursor: pointer; }
+
+#id_alert .modal-dialog {
+  width: 400px; }
+
+#id_alert .close {
+  right: 10px; }
+
+#id_alert .modal-body {
+  text-align: center;
+  font-size: 18px; }
+
+#id_alert .modal-footer button {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+#id_build .modal-body .checkbox label {
+  line-height: 20px;
+  margin: 0 10px 0 0; }
+
+#id_build .modal-footer {
+  text-align: center; }
+  #id_build .modal-footer .btn-primary {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: #7c8af4;
+    border-color: #7c8af4;
+    width: 100px;
+    margin: 0 10px; }
+  #id_build .modal-footer .btn-primary:hover,
+  #id_build .modal-footer .btn-primary:focus {
+    background: #5f6ddc;
+    border-color: #5f6ddc; }

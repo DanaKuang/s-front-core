@@ -1,0 +1,184 @@
+<!--
+/**
+ * Author: {author}
+ * Create Date; 2017-11-6
+ * Description: labelManage
+ */
+-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.labelmanage.css">
+<div ng-controller="labelmanageCtrl">
+	<div class="animated fadeInRightBig">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="ui-panel-title">
+						<span>用户标签管理</span>
+					</div>
+					<!--box-->
+					<div class="panel rate group-panel-top">
+						<div class="panel-body">
+							<!--top-->
+							<div class="title_top">
+								<div class="operationMenu">
+									<span class="nthChildOne">操作:</span>
+									<span class="nthChildTwo" ng-click="changeKuoHao()">()</span>
+									<!--<span class="nthChildThree">)</span>-->
+									<div style="margin:0 20px;cursor: pointer;">
+										<input style="cursor: pointer;" type="radio" checked="checked" name="pay" id="p_yes" class="rdo" />
+										<label class="qieAll" style="cursor: pointer;" for="p_yes">&nbsp;(全部)&nbsp;&nbsp;且</label>
+									</div>
+									<div style="margin-right:20px;cursor: pointer;">
+
+										<input style="cursor: pointer;" type="radio" name="pay" id="p_no" class="rdo" />
+										<label class="huoAll" style="cursor: pointer;" for="p_no">&nbsp;(全部)&nbsp;&nbsp;或</label>
+									</div>
+									<div style="cursor: pointer;">
+
+										<input style="cursor: pointer;" type="radio" name="pay" id="p_else" class="rdo" />
+										<label class="removeAll" style="cursor: pointer;" for="p_else">&nbsp;(全部)&nbsp;&nbsp;删除</label>
+									</div>
+								</div>
+								<div class="middle">
+									
+									<!--<div ng-show='!showKuoHao' class='zuoKuoHao'></div>
+									<div style = "width:100px;height:20px;float:left;" class="boxGu">
+									<div class='aui_title'>
+									你好
+										<a href='javascript:;' class='aui_close'>×</a>
+									</div>
+									</div>
+									<div ng-show='!showKuoHao' class='youKuoHao'></div>
+									
+									<div ng-show='!showKuoHao' class='zuoKuoHao'></div>
+									<div style = "width:100px;height:20px;float:left;" class="boxGu">
+									<div class='aui_title'>
+									大黑牛
+										<a href='javascript:;' class='aui_close'>×</a>
+									</div>
+									</div>
+									<div ng-show='!showKuoHao' class='youKuoHao'></div>
+									
+									<div ng-show='!showKuoHao' class='zuoKuoHao'></div>
+									<div style = "width:100px;height:20px;float:left;" class="boxGu">
+									<div class='aui_title'>
+									老母猪
+										<a href='javascript:;' class='aui_close'>×</a>
+									</div>
+									</div>
+									<div ng-show='!showKuoHao' class='youKuoHao'></div>-->
+									
+								</div>
+								<div class="tabName">
+									<span>标签名称</span>
+									<input type="text" class="tabName_text" />
+								</div>
+								<div class="descriptionBus">
+									<span>业务描述</span>
+									<textarea name="" class="descriptionBus_text" rows="" cols=""></textarea>
+								</div>
+								<div class="opera_sec">
+									<div class="opera_confirm" my-drag ng-click="saveGiftData()">保存</div>
+									<div class="opera_cancel" ng-click="cancelCreateGift()">取消</div>
+								</div>
+							</div>
+
+							<!--content-->
+							<div class="content_topTitle">
+								<div class="jiBenAttribute" ng-class="{true:'select_active',false:'no_active'}[showLabelList]" ng-click="changeShowStateFist(idFirst)">基本属性</div>
+								<div class="userAttribute" ng-class="{true:'select_active',false:'no_active'}[!showLabelList]" ng-click="changeShowStateSecond(idSecond)">用户行为属性</div>
+							</div>
+							<div id="tableFirst" class="table">
+								<div class="firstMenu">
+									<span class="propertys">属性</span>
+									<div class="substance firstSubstance">
+										<!--<span ng-class="{active:firstLabelItem.labelLevel1Id == index}" class="firstMenu_span" ng-repeat="firstLabelItem in firstLabelList" ng-click="changeShowSecondLabel(firstLabelItem.labelLevel1Id)">{{firstLabelItem.labelLevel1Name}}</span>-->
+									</div>
+								</div>
+								<div id="content_box_one" class="content_box" style="overflow: hidden;">
+								</div>
+								<div id="zoneCity" class="content_box">
+									<div class="secondMenu">
+										<span class="propertys">大区</span>
+										<div class="substance daQuList">
+											<!--<span ng-click="appendSomthing(getSaleZoneLabelItem.zoneName)" data-code="getSaleZoneLabelItem.zoneCode" class="secondMenu_span" ng-repeat="getSaleZoneLabelItem in getSaleZoneLabelList">{{getSaleZoneLabelItem.zoneName}}</span>-->
+
+										</div>
+									</div>
+									<div class="threeMenu">
+										<span class="propertys">省</span>
+										<div class="substance provinceList">
+											<!--<span class="threeMenu_span" ng-click="appendSomthing(getProvinceLabelItem.provinceName)" ng-repeat="getProvinceLabelItem in getProvinceLabelList">{{getProvinceLabelItem.provinceName}}</span>-->
+
+										</div>
+									</div>
+									<div class="fourMenu">
+										<span class="propertys">市</span>
+										<div class="substance" ng-init="Array =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">
+											<span class="fourMenu_span" ng-repeat='a in Array' ng-click="selectCityName(a)">{{a}}</span>
+
+										</div>
+									</div>
+									<div id="cityItems" class="cityNameList">
+										<!--<span class="cityNameList_span" ng-repeat="getCitysByProvinceLabelItem in getCitysByProvinceLabelList" >{{getCitysByProvinceLabelItem.cityName}}、</span>-->
+
+									</div>
+								</div>
+							</div>
+							<div id="tableSecond" class="table">
+								<div class="firstMenu">
+									<span class="propertys">属性</span>
+									<div class="substance">
+										<span ng-class="{active:secondLabelItem.labelLevel1Id == index}" class="firstMenu_span" ng-repeat="secondLabelItem in secondLabelList" ng-click="changeShowSecondLabelTwo(secondLabelItem.labelLevel1Id)">{{secondLabelItem.labelLevel1Name}}</span>
+
+									</div>
+								</div>
+
+								<div id="content_box_two" class="content_box">
+
+								</div>
+								<div id="vipSao" class="content_box">
+									<div style='overflow: hidden;' class="secondMenu" ng-repeat="vipSaoLabelItem in vipSaoLabelList">
+										<span class="propertys" ng-click='changeShowThirdLabel(vipSaoLabelItem.labelLevel2Id)'>{{vipSaoLabelItem.labelLevel2Name}}</span>
+										<div class="substance vipSaoList">
+											<!--<span class="secondMenu_spans" ng-repeat="getaaaLabelItem in getaaaLabelList">{{getaaaLabelItem.labelLevel3Name}}</span>-->
+
+										</div>
+									</div>
+								</div>
+								<div id="vipXiao" class="content_box">
+									<div style='overflow: hidden;' class="secondMenu" ng-repeat="vipSaoLabelItemTwo in vipSaoLabelListTwo">
+										<span class="propertys" ng-click='changeShowThirdLabel(vipSaoLabelItemTwo.labelLevel2Id)'>{{vipSaoLabelItemTwo.labelLevel2Name}}</span>
+										<div class="substance vipXiaoList">
+											<!--<span class="secondMenu_spans" ng-repeat="getaaaLabelItemTwo in getaaaLabelListTwo">{{getaaaLabelItemTwo.labelLevel3Name}}</span>-->
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--取消时弹框-->
+	<div class="modal fade cancel_box" tabindex="-1" role="dialog" aria-labelledby="cancel_btn">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="box_sec">
+					<div class="box_tit">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+						<div class="modal-titles" style="text-align:center;" id="cancel_btn">标签操作</div>
+					</div>
+					<div class="box_cont"></div>
+					<div class="box_btn clearfix">
+						<div class="box_btn_conf lf" ng-click="confirmCancel()">确定</div>
+						<div class="box_btn_cancel rf" data-dismiss="modal">取消</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

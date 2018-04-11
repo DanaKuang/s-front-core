@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/**
+ * Author: liubin
+ * Create Date: 2018-04-08
+ * Description: 扫天下公共UI样式
+ */
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.tc {
+  text-align: center; }

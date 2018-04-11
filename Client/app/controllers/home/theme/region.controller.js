@@ -12,13 +12,18 @@ define([], function() {
 		ServiceContent: ['$scope', 'setDateConf', 'dayFilter', function($scope, setDateConf, dayFilter) {
 			var echarts = require('echarts');
 			var $model = $scope.$model;
-			setDateConf.init($(".region-search-r:nth-of-type(1)"), 'day');
-			setDateConf.init($(".region-search-r:nth-of-type(3)"), 'month');
+			setDateConf.init($(".ui-region-form:nth-of-type(1)"), 'day');
+			setDateConf.init($(".ui-region-form:nth-of-type(3)"), 'month');
 			var amonth = (new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1);
 			var stattime = dayFilter.yesterday("date");
 			var regionMonth = new Date().getFullYear() + "-" + amonth;
 			$(".region-day").find("input").val(stattime);
 			$(".region-month").find("input").val(regionMonth);
+
+			// 添加hover效果
+			$(".week").hover(function (e) {
+				e.currentTarget.title = e.currentTarget.value;
+			});
 			//设置默认值
 			var Default = {};
 			//省份下拉列表
@@ -28,12 +33,12 @@ define([], function() {
 					for(var i = 0; i < res.length; i++) {
 						if(res[i].code === $model.$DefaultProvince.data[0].orgRegion) {
 							// console.log($model.$DefaultProvince)
-							$(".region-search-r .region").append("<option value=" + res[i].name + " selected>" + res[i].name + "</option>")
+							$(".ui-region-form .region").append("<option value=" + res[i].name + " selected>" + res[i].name + "</option>")
 						} else {
-							$(".region-search-r .region").append("<option value=" + res[i].name + ">" + res[i].name + "</option>");
+							$(".ui-region-form .region").append("<option value=" + res[i].name + ">" + res[i].name + "</option>");
 						}
 					}
-					var curBrandName = $(".region-search-r .region").val();
+					var curBrandName = $(".ui-region-form .region").val();
 					$model.$getCityName({
 						provinceName: curBrandName
 					}).then(function(res) {
@@ -44,7 +49,7 @@ define([], function() {
 					});
 					//页面加载
 					Default = {
-						"provinceName": $(".region-search-r .region").val(),
+						"provinceName": $(".ui-region-form .region").val(),
 						"statTime": stattime,
 						"statType": "day",
 						"cityName": ''
@@ -54,7 +59,7 @@ define([], function() {
 			})();
 
 			//地市下拉列表
-			$('.region-search-r .region').change(function() {
+			$('.ui-region-form .region').change(function() {
 				var params = {
 					provinceName: $(this).val()
 				}
@@ -80,24 +85,24 @@ define([], function() {
 			$(".ui-search").change(function() {
 				var Value = $(this).siblings(".region").val();
 				var cityValue = $(this).siblings(".regions").val();
-				$(".region-search-r").each(function(i) {
-					$(".region-search-r").eq(i).hide();
+				$(".ui-region-form").each(function(i) {
+					$(".ui-region-form").eq(i).hide();
 				});
 				$(".ui-search option").each(function(i) {
 					$(".ui-search option").eq(i).attr("selected", false);
 				})
-				
+
 				if($(this).val() === "month") {
 					$("#month").attr("selected", "selected");
-					$(".region-search-r").eq(2).show();
+					$(".ui-region-form").eq(2).show();
 					$(".region-describle").text("仪表盘中间值确定方式：往前推两月（不包括本月）的均值")
 				} else if($(this).val() === "day") {
 					$("#day").attr("selected", "selected");
-					$(".region-search-r").eq(0).show();
+					$(".ui-region-form").eq(0).show();
 					$(".region-describle").text("仪表盘中间值确定方式：往前推7天（包括当天）的均值")
 				} else {
 					$("#week").attr("selected", "selected");
-					$(".region-search-r").eq(1).show();
+					$(".ui-region-form").eq(1).show();
 					$(".region-describle").text("仪表盘中间值确定方式：往前推四周（不包括本周）的均值")
 				}
 				$(".region option").each(function(i) {
@@ -112,13 +117,13 @@ define([], function() {
 			//查询
 			$scope.search = function($event) {
 				var that = $event.target;
+				var $form = $(that).closest('form');
 				// var reg = /(省|市|区)/;
 				var params = {
-					"provinceName": $(that).siblings(".region").val(),
-					"cityName": $(that).siblings('.regions').val() == '全部' ? '' : $(that).siblings(".regions").val(),
-					"statTime": $(that).siblings().hasClass("date-wrap") ?
-						($(that).siblings(".date-wrap").data().date ? $(that).siblings(".date-wrap").data().date : $(that).siblings(".date-wrap").find("input").val()) : $(that).siblings(".week").val().substr(10, 10).replace(/\./g, "-"),
-					"statType": $(that).siblings(".ui-search").val()
+					"provinceName": $($form).find(".region").val() || "",
+					"cityName": $($form).find('.regions').val() == '全部' ? '' : $($form).find('.regions').val(),
+					"statTime": $($form).find(".date").length ? $($form).find(".date").val() : $($form).find(".week").val().substr(10, 10).replace(/\./g, "-"),
+					"statType": $($form).find(".ui-search").val() || ""
 				}
 				public(params);
 			};
@@ -253,7 +258,7 @@ define([], function() {
 								}
 							}
 						}
-						
+
 						for(var i = 0; i < res.length; i++) {
 							//判断是周还是日月
 							var x = res[i].statTime || res[i].weekNo;

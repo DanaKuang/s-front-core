@@ -19,45 +19,45 @@
                 <!--search-->
                 <div class="ui-detail-search panel rate">
                     <div class="panel-body">
-                        <form class="form-inline col-md-12">
-                            <div class="form-inline">
-                                <!--日期-->
-                                <div class="inline-block">
-                                    <label>日期</label>
-                                    <input type="input" name="beginTime" ng-model="beginTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
-                                    <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
-                                </div>
-                                <!--品牌-->
-                                <div class="inline-block">
-                                    <label for="">品牌</label>
-                                    <select class="form-control multiple" name="productBrand" ng-model="productBrand">
-                                        <option ng-repeat="pb in pbArray" value="{{pb.name}}">{{pb.name}}</option>
-                                    </select>
-                                </div>
-                                <!--规格-->
-                                <div class="inline-block">
-                                    <label for="">规格</label>
-                                    <select class="form-control multiple" name="productSn" ng-model="productSn" multiple="multiple">
-                                        <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productSn}}</option>
-                                    </select>
-                                </div>
-                                <!--城市-->
-                                <div class="inline-block">
-                                    <label for="">城市</label>
-                                    <input type="text" name="cityName" ng-model="cityName" class="form-control input-sm">
-                                </div>
-                                <!--业态-->
-                                <div class="inline-block">
-                                    <label for="">业态</label>
-                                    <select class="form-control" ng-model="bizCode" name="bizCode">
-                                        <option ng-repeat="code in bizArr" value="{{code.bizCode}}">{{code.bizName}}</option>
-                                    </select>
-                                </div>
-                                <!--零售户名称-->
-                                <div class="inline-block">
-                                    <label for="">零售户名称</label>
-                                    <input type="text" name="shopName" ng-model="shopName" class="form-control input-sm">
-                                </div>
+                        <form class="form-inline ui-detail-form">
+                            <!--品牌-->
+                            <div class="form-group">
+                                <label class="control-label" for="">品牌</label>
+                                <select class="form-control input-sm multiple" name="productBrand" ng-model="productBrand">
+                                    <option ng-repeat="pb in pbArray" value="{{pb.name}}">{{pb.name}}</option>
+                                </select>
+                            </div>
+                            <!--规格-->
+                            <div class="form-group">
+                                <label class="control-label" for="">规格</label>
+                                <select class="form-control input-sm multiple" name="productSn" ng-model="productSn" multiple="multiple">
+                                    <option ng-repeat="pn in pnArray" value="{{pn.sn}}">{{pn.productSn}}</option>
+                                </select>
+                            </div>
+                            <!--城市-->
+                            <div class="form-group">
+                                <label class="control-label" for="">城市</label>
+                                <input type="text" name="cityName" ng-model="cityName" class="form-control input-sm">
+                            </div>
+                            <!--业态-->
+                            <div class="form-group">
+                                <label class="control-label" for="">业态</label>
+                                <select class="form-control input-sm" ng-model="bizCode" name="bizCode">
+                                    <option ng-repeat="code in bizArr" value="{{code.bizCode}}">{{code.bizName}}</option>
+                                </select>
+                            </div>
+                            <!--零售户名称-->
+                            <div class="form-group">
+                                <label class="control-label" for="">零售户名称</label>
+                                <input type="text" name="shopName" ng-model="shopName" class="form-control input-sm">
+                            </div>
+                            <!--日期-->
+                            <div class="form-group">
+                                <label class="control-label" for="">日期</label>
+                                <input type="input" name="beginTime" ng-model="beginTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
+                            </div>
+                            <div class="form-group ui-btn-ctrl">
                                 <button type="submit" class="btn btn-primary" ng-click="detailSearch()">查询</button>
                             </div>
                         </form>
@@ -97,6 +97,9 @@
                                         <td>{{item.repeatCustomer}}</td>
                                         <td>{{item.scanCodeNum}}</td>
                                         <td>{{item.scanSellerNum}}</td>
+                                    </tr>
+                                    <tr ng-if='!listArr.length'>
+                                        <td colspan='11'>暂无符合条件的数据</td>
                                     </tr>
                                 </tbody>
                             </table>

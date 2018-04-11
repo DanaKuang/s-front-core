@@ -40,9 +40,6 @@ tr td {
   tr td img {
     max-height: 4em; }
 
-.form-control {
-  width: 100% !important; }
-
 .form_datetime {
   background: transparent !important; }
 
