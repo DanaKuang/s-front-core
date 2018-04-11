@@ -14,6 +14,15 @@ define([], function () {
         var $model = $scope.$model;
         var echarts = require('echarts');
 
+        // 不够再加
+        var DEFPROVINCE = sessionStorage.orgCode || "hunanzhongyan";
+        DEFPROVINCE = ['湖南','河南','河北','山西'][[
+            'hunanzhongyan',
+            'henanzhongyan',
+            'hebeizhongyan',
+            'shankunzhongyan'
+        ].indexOf(DEFPROVINCE)] || "湖南";
+
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson);
         // 1. 扫码次数趋势分析
@@ -125,7 +134,7 @@ define([], function () {
             console.log(searchItem);
             // 初始地图及起右边柱状图
             global.initProvinceData = {
-                provinceName: sessionStorage.getItem("account") === 'henan' ? '河南省' : '湖南省',
+                provinceName: DEFPROVINCE + '省',
                 statTime: global.searchItem().statTime,
                 statType: global.searchItem().statType
             }
@@ -303,7 +312,7 @@ define([], function () {
             global.districtAxis = [];
             global.districtAxisY = [];
             if (bool) {
-                districtOption.title.text = sessionStorage.getItem("account") === 'henan' ? '河南省的各地扫码次数' : '湖南省的各地扫码次数';
+                districtOption.title.text = DEFPROVINCE + '的各地扫码次数';
             } else {
                 districtOption.title.text = e.name + '的各地扫码次数';
             }

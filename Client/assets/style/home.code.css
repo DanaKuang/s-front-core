@@ -16,7 +16,7 @@
   .ui-home-code #id_code_form .form-control {
     width: 147px !important; }
   .ui-home-code #id_code_form .control-label {
-    min-width: 70px;
+    width: 70px;
     text-align: right; }
   .ui-home-code #id_code_form .form-group {
     margin-right: 15px; }
