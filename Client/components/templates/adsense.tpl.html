@@ -24,7 +24,7 @@
 					<td>{{item.adName}}</td>
 					<td>{{item.orgName}}</td>
 					<td>{{item.name}}</td>
-					<td>{{item.ctime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{item.etime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{item.stime | date:'yyyy-MM-dd HH:mm:ss'}} <br> -- <br> {{item.etime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
 					<td>{{item.adType == 1 ? '外链宣传' : '虚拟卡券'}}</td>
 					<td>{{item.adType == 1 ? '- -' : (item.cardNumSurplus ? item.cardNumSurplus : '- -')}}</td>
 					<td>{{!item.status ? '已停用' : item.status == 1 ? '已启用' : '待启用'}}</td>

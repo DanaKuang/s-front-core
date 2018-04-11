@@ -1,8 +1,8 @@
 <div>
     <form class="ui-path-search">
         <div class="form-inline col-md-12">
-            <div class="inline-block">
-                <label>日期</label>
+            <div class="form-group">
+                <label class="control-label" for="">日期</label>
                 <input type="input" name="startTime" ng-model="startTime" class="form-control date input-sm">&nbsp;&nbsp;至&nbsp;&nbsp;
                 <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
             </div>
@@ -20,19 +20,19 @@
                 </select>
             </div>
             -->
-            <div class="inline-block">
-                <label for="">活动名称</label>
+            <div class="form-group">
+                <label class="control-label" for="">活动名称</label>
                 <select class="form-control multiple" name="activityId" ng-model="activityId">
                     <option ng-repeat="ac in acArray" value="{{ac.activityId}}">{{ac.activityName}}</option>
                 </select>
             </div>
-            <div class="inline-block">
-                <label for="">页面名称</label>
+            <div class="form-group">
+                <label class="control-label" for="">页面名称</label>
                 <select class="form-control multiple-radio" name="pagename" ng-model="pagename">
                     <option ng-repeat="pg in pgArray" value="{{pg.page_code}}">{{pg.page_name}}</option>
                 </select>
             </div>
-            <div class="inline-block">
+            <div class="form-group ui-btn-ctrl">
                 <button type="submit" class="btn btn-primary" ng-click="pathSearch()">查询</button>
             </div>
         </div>
