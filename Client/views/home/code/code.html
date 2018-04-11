@@ -1,0 +1,126 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-04-04
+ * Description:
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.code.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<!--html-->
+<div class="animated fadeInRightBig" ng-controller="CodeCtrl">
+    <div class="container-fluid row">
+        <div class="ui-home-code margin-top col-md-12">
+            <!--title-->
+            <div class="ui-panel-title">
+                <i class="code"></i><span>异常码管理</span>
+            </div>
+            <!--查询-->
+            <div class="panel rate">
+                <div class="panel-body">
+                    <form class="form-inline" id="id_code_form" autocomplete="off">
+                        <!--品牌选择-->
+                        <div class="form-group">
+                            <label class="control-label" for="brandCode">品牌选择</label>
+                            <select class="form-control input-sm" name="brandCode" ng-model="brandCode" id="id_brand" multiple="multiple">
+                                <option ng-repeat="b in brandArr" ng-value="b.name">{{b.name}}</option>
+                            </select>
+                        </div>
+                        <!--规格选择-->
+                        <div class="form-group">
+                            <label for="sn" class="control-label">规格选择</label>
+                            <select class="form-control input-sm" name="sn" ng-model="sn" id="id_sn" multiple="multiple">
+                                <option ng-repeat="s in snArr" ng-value="s.sn">{{s.productName}}</option>
+                            </select>
+                        </div>
+                        <!--用户姓名-->
+                        <div class="form-group">
+                            <label for="rptName" class="control-label">用户姓名</label>
+                            <input type="text" name="rptName" ng-model="rptName" class="form-control input-sm">
+                        </div>
+                        <!--用户手机号-->
+                        <div class="form-group">
+                            <label for="phone" class="control-label">用户手机号</label>
+                            <input type="text" name="phone" ng-model="phone" class="form-control input-sm">
+                        </div>
+                        <!--所在地-->
+                        <div class="form-group">
+                            <label for="cityName" class="control-label">所在地</label>
+                            <input type="text" name="cityName" ng-model="cityName" class="form-control input-sm">
+                        </div>
+                        <!--CODE-->
+                        <div class="form-group">
+                            <label for="code" class="control-label">CODE</label>
+                            <input type="text" name="code" ng-model="code" class="form-control input-sm">
+                        </div>
+                        <!--举报时间-->
+                        <div class="form-group">
+                            <label for="" class="control-label">举报时间</label>
+                            <input type="text" name="stime" ng-model="stime" class="form-control input-sm">
+                            至
+                            <input type="text" name="etime" ng-model="etime" class="form-control input-sm">
+                        </div>
+                        <!--按钮-->
+                        <div class="ui-btn-ctrl form-group">
+                            <button type="submit" class="btn btn-primary" ng-click="search()">搜索</button>
+                            <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--内容-->
+            <div class="panel rate">
+                <div class="panel-body">
+                    <button type="button" class="btn btn-primary ui-export" ng-click="export()">导出搜索结果</button>
+                    <div style="overflow-x: auto;">
+                        <table class="table-hover table table-bordered" style="min-width:1400px;">
+                            <thead>
+                                <tr>
+                                    <th>类型</th>
+                                    <th>二维码图片</th>
+                                    <th>验证码图片</th>
+                                    <th>正确验证码</th>
+                                    <th>CODE</th>
+                                    <th>品牌</th>
+                                    <th>规格</th>
+                                    <th>首扫时间</th>
+                                    <th>扫码次数</th>
+                                    <th>所在地</th>
+                                    <th>举报用户姓名</th>
+                                    <th>举报用户手机号</th>
+                                    <th>举报时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="t in tableArr">
+                                    <td>{{t.codeTypeName}}</td>
+                                    <td><img src="{{t.rptCodeImg||''}}" style="width:60px;"></td>
+                                    <td><img src="{{t.rptVerifyImg||''}}" style="width:60px;"></td>
+                                    <td>{{t.verifyCode}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.brandName}}</td>
+                                    <td>{{t.unitName}}</td>
+                                    <td>{{t.firstScanTime}}</td>
+                                    <td>{{t.scanCount}}次</td>
+                                    <td>{{t.areaCity}}</td>
+                                    <td>{{t.rptName}}</td>
+                                    <td>{{t.rptPhone}}</td>
+                                    <td>{{t.rptTime}}</td>
+                                </tr>
+                                <tr ng-if='!tableArr.length'>
+                                    <td colspan='13'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 分页区 -->
+                    <div class="pagination-wrap">
+                        <!-- 分页指令 -->
+                        <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
