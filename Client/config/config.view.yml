@@ -197,6 +197,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/usertag/assemble.html'
+  - httpmethod: 'get'                       # 异常码管理
+    routepath: '/view/home/code'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/code.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
@@ -385,12 +392,12 @@ visitManage:
     staticfile: 'visit/achievement.html'
 system:
   - httpmethod: 'get'                       # 修改密码
-    routepath: '/view/system/password'
+    routepath: '/view/system/pwd'
     description: 'password'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/account/password.html'
+    staticfile: 'system/account/pwd.html'
   - httpmethod: 'get'                       # 角色管理
     routepath: '/view/system/role'
     description: 'role'
@@ -405,6 +412,13 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/account/user.html'
+  - httpmethod: 'get'                       # 日志记录
+    routepath: '/view/system/logs'
+    description: 'logs'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/account/logs.html'
   - httpmethod: 'get'                       # 广告位管理
     routepath: '/view/system/adsense'
     description: 'adsense'
