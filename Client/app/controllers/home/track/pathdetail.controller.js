@@ -18,9 +18,29 @@ define([], function () {
         // var brand_back_data = $model.$brand.data || [];
         // brand_back_data = brand_back_data.length ? brand_back_data : [{productBrand: ""}];
         var act_back_data = $model.$activity.data || [];
+
+
+        var activityId = "";
+
+        if (sessionStorage.tempActivityId) {
+            var actArr = act_back_data.filter(function (a) {
+                if (a.activityId === sessionStorage.tempActivityId) {
+                    return true;
+                }
+            });
+            if (actArr.length) {
+                activityId = actArr[0].activityId + '_' + actArr[0].sn;
+            }
+            // 用后即删
+            sessionStorage.removeItem("tempActivityId");
+        }
+
         _.each(act_back_data, function (d) {
             d.activityId += '_'+d.sn;
         });
+
+        activityId = activityId || act_back_data[0].activityId || "";
+
         act_back_data = act_back_data.length ? act_back_data : [{activityName: "无数据", activityId: ""}];
 
         // 默认配置
@@ -31,7 +51,7 @@ define([], function () {
             // productBrand: brand_back_data[0].productBrand || "",
             // pnArray: [],
             acArray: act_back_data,
-            activityId: act_back_data[0].activityId || "",
+            activityId: activityId,
             pgArray: [],
             pagename: "",
             pathSearch: pathSearch

@@ -350,6 +350,13 @@ define([], function () {
                     $scope.$apply();
                 });
             }
+
+            // 页面跳转
+            window.jumpUrl = function () {
+                var sScope = angular.element('.ui-daily-search').scope();
+                sessionStorage.tempActivityId = sScope.activity || "";
+                $('[data-hash=\'#/view/home/pathdetail\']').trigger('click');
+            };
         }]
     };
 
