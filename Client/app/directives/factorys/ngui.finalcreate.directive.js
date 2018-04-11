@@ -366,6 +366,8 @@ define([], function () {
                     mustwin:$('#checkbox').prop('checked')?mustwin:null
                 }
 
+                console.log(fromSonScope)
+
                 finalcheck(fromSonScope)
                 // final校验
                 function finalcheck(fromSonScope) {

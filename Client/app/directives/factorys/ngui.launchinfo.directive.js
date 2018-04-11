@@ -110,6 +110,8 @@ define([], function () {
                 var selectDurationEnd = new Date(activity.etime).toLocaleString();
                 scope.endTime = adjustafternoon(selectDurationEnd);
             } else {
+                scope.$emit('clickbrandval', event, {})
+
                 scope.$watch('selectBrandVal', function (n, o, s) {
                     if (n !== '') {
                         var brandListArrObj = {};
@@ -141,14 +143,6 @@ define([], function () {
             }
 
             scope.whichday = $('.remark').find('input[type="radio"]:checked').val();
-
-            $('.select-brand').one('click', function() {
-                if (!scope.disabled) {
-                    scope.$emit('clickbrandval', event, {})
-                } else {
-                    return
-                }
-            })
 
             // 点击选择地区
             $('.select-area').one('click', function () {

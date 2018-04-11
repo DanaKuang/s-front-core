@@ -2,7 +2,7 @@
 	<div class="form-group col-md-5 select-brand configuration-item" ng-class="{'has-error': parentForm.brand.$dirty && (parentForm.brand.$error.required || parentForm.brand.$invalid), 'has-success': parentForm.brand.$dirty && parentForm.brand.$valid}">
 		<label class="control-label col-sm-2">选择品牌</label>
 		<div class="col-sm-9">
-			<select name="brand" class="form-control input-sm select" ng-model="selectBrandVal" required>
+			<select name="brand" class="form-control input-sm select" ng-model="selectBrandVal" ng-disabled="disabled" required>
 				<option value="">请选择</option>
 				<option ng-repeat="item in brand" value="{{item.brandCode}}" required>{{item.name}}</option>
 			</select>
@@ -11,7 +11,7 @@
 	<div class="form-group col-md-5 select-specification configuration-item" ng-class="{'has-error': parentForm.speci.$dirty && (parentForm.speci.$error.required || parentForm.speci.$invalid), 'has-success': parentForm.speci.$dirty && parentForm.speci.$valid}">
 		<label class="control-label col-sm-2">选择规格</label>
 		<div class="col-sm-9">
-			<select name="speci" ng-model="selectSpecificationVal" class="select form-control input-sm" required>
+			<select name="speci" ng-model="selectSpecificationVal" class="select form-control input-sm" ng-disabled="disabled" required>
 				<option value="">请选择</option>
 				<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
 			</select>
@@ -37,19 +37,19 @@
 		<label class="control-label col-sm-2">投放时间</label>
 		<div class="col-sm-9">
 			<div class="col-sm-5">
-				<input type="text" name="startTime" ng-model="startTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分-秒" readonly="disabled" ng-disabled="disabled" required>
+				<input type="text" name="startTime" ng-model="startTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分-秒" required>
 			</div>
 			<div class="col-sm-1">至</div>
 			<div class="col-sm-5">
-				<input type="text" name="endTime" ng-model="endTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分-秒" readonly="disabled" ng-disabled="disabled" required>
+				<input type="text" name="endTime" ng-model="endTime" class="date form_datetime form-control input-sm" addsecond placeholder="年-月-日 时-分-秒" required>
 			</div>
 			<div ng-show="parentForm.$submitted || parentForm.startTime.$touched || parentForm.endTime.$touched">
 				<div ng-show="parentForm.startTime.$error.required || parentForm.endTime.$error.required" class="wrong-tip">请选择完整的投放时间</div>
 			</div>
 			<div class="remark col-sm-12">
-				<input class="weekday" type="radio" name="timeduartion" value='1' ng-model="whichday" ng-disabled="disabled"><label for="">仅选择此时段<strong>工作日</strong></label>
-				<input class="weekend" type="radio" name="timeduartion" value='2' ng-model="whichday" ng-disabled="disabled"><label for="">仅选择此时段<strong>节假日</strong></label>
-				<input class="both" type="radio" name="timeduartion" value='3' ng-model="whichday" ng-disabled="disabled" checked><label for="">均包括</label>
+				<input class="weekday" type="radio" name="timeduartion" value='1' ng-model="whichday"><label for="">仅选择此时段<strong>工作日</strong></label>
+				<input class="weekend" type="radio" name="timeduartion" value='2' ng-model="whichday"><label for="">仅选择此时段<strong>节假日</strong></label>
+				<input class="both" type="radio" name="timeduartion" value='3' ng-model="whichday" checked><label for="">均包括</label>
 			</div>
 		</div>
 	</div>
