@@ -168,6 +168,9 @@
         alert('用户密码不能为空!');
         return;
       }
+      // md5加密
+      // postData.pwd = $.md5(postData.pwd);
+
       // if (!postData.code) {
       //   alert('验证码不能为空!');
       //   return;
