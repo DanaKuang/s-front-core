@@ -53,6 +53,7 @@ define([], function () {
                 if(scope.startTime === scope.endTime) {
                     if (e.currentTarget.value > $($endHour).val()) {
                         $($endHour).val(e.currentTarget.value);
+                        $($endHour).trigger('change');
                     }
                 }
             });
@@ -61,6 +62,7 @@ define([], function () {
                 if(scope.startTime === scope.endTime) {
                     if (e.currentTarget.value < $($staHour).val()) {
                         $($staHour).val(e.currentTarget.value);
+                        $($staHour).trigger('change');
                     }
                 }
             });
