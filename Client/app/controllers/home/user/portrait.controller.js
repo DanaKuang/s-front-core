@@ -631,7 +631,6 @@ define([], function() {
 					}
 					var G = 1;
 					optionTwo.series[0].renderItem = function renderItem(params, api) {
-						debugger
 						var values = [api.value(0), api.value(1)];
 						var coord = api.coord(values);
 						var size = api.size([1, 1], values);
