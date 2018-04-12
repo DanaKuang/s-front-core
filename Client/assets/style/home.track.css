@@ -30,7 +30,6 @@
   color: #3d467d; }
 
 .ui-form-search {
-  height: 35px;
   font-size: 12px; }
 
 .ui-form-search button.multiselect {
@@ -115,7 +114,8 @@
   margin: 10px 20px 10px 0; }
 
 .ui-daily-search label {
-  margin-right: 15px; }
+  width: 60px;
+  text-align: right; }
 
 .ui-content-daily .panel-body > div:first-child {
   font-size: 18px;
@@ -126,7 +126,8 @@
   margin-right: 15px; }
 
 .ui-path-search label {
-  margin-right: 15px; }
+  width: 60px;
+  text-align: right; }
 
 .ui-form-select select.multiple {
   width: calc(100% - 70px) !important; }
