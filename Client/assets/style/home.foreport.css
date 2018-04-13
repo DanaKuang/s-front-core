@@ -6,7 +6,7 @@
   text-align: right; }
 
 .ui-foreport-form .multiselect.btn {
-  min-width: 147px;
+  width: 147px !important;
   height: 30px;
   padding: 4px 12px;
   text-overflow: ellipsis;
