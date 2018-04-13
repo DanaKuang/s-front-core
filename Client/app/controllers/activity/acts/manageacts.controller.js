@@ -248,7 +248,6 @@ define([], function () {
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
             })
           }
-
         })
 
         // 查看活动
@@ -265,7 +264,6 @@ define([], function () {
           })
         })
 
-        //
         function getLaunchInfo() {
           $(document).ready(function () {
             $('.multi .select').multiselect({

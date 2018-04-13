@@ -4,7 +4,7 @@
 		<div class="form-group col-md-5 has-feedback activity-name configuration-item" ng-class="{'has-error': parentForm.name.$dirty && (parentForm.name.$error.required || parentForm.name.$invalid), 'has-success': parentForm.name.$dirty && parentForm.name.$valid}">
 			<label for="" class="control-label col-sm-2">活动名称</label>
 			<div class="col-sm-9">
-				<input class="form-control input-sm" type="text" name="name" id="" ng-model="nameValue" placeholder="请输入活动名称，不能少于5个字，最多30个字" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]{5,30}$/" required ng-readonly="disabled">
+				<input class="form-control input-sm" type="text" name="name" id="" ng-model="nameValue" placeholder="请输入活动名称，不能少于5个字，最多30个字" required ng-readonly="disabled">
 				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': parentForm.name.$dirty && parentForm.name.$valid}" aria-hidden="true"></span>
 				<span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': parentForm.name.$dirty && parentForm.name.$invalid}" aria-hidden="true"></span>
 			</div>
