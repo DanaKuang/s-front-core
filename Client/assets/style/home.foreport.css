@@ -13,6 +13,9 @@
   overflow: hidden;
   white-space: nowrap; }
 
+.ui-foreport-form .formarReport-gui .btn-group {
+  width: 147px !important; }
+
 .ui-foreport-form .date {
   background: #fff; }
 
