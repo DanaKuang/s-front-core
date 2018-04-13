@@ -24,8 +24,8 @@ define([], function () {
         ].indexOf(DEFPROVINCE)] || "湖南";
 
         // 添加hover效果
-        $(".week").hover(function (e) {
-            e.currentTarget.title = $(e.currentTarget).find(':selected').text();
+        $("select").hover(function (e) {
+            e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
         });
 
         var chinaJson = $model.$chinaJson.data;
