@@ -7,12 +7,17 @@
         text-align: right;
     }
     .multiselect.btn {
-        min-width: 147px;
+        width: 147px !important;
         height: 30px;
         padding: 4px 12px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+    }
+    .formarReport-gui {
+        .btn-group {
+            width: 147px !important;
+        }
     }
     .date {
         background: #fff;

@@ -13,7 +13,7 @@
 		<div class="col-sm-9">
 			<select name="speci" ng-model="selectSpecificationVal" class="select form-control input-sm" ng-disabled="disabled" required>
 				<option value="">请选择</option>
-				<option ng-repeat="item in specification" value="{{item.sn}}">{{item.name}}</option>
+				<option ng-repeat="item in specification" value="{{item.sn}}">{{item.allName}}</option>
 			</select>
 		</div>
 		<div ng-show="parentForm.$submitted || parentForm.selectspeci.$touched">

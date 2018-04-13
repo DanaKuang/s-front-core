@@ -230,6 +230,11 @@ define([], function () {
             }
             globalFn.getFeed(def);
             globalFn.feedBack(deafaultCou);
+
+            // 添加hover效果
+            $("select").hover(function (e) {
+                e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+            });
         }]
     };
 

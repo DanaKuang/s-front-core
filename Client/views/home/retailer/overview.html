@@ -35,7 +35,7 @@
                                 <input type="input" name="endTime" ng-model="endTime" class="form-control date input-sm">
                             </div>
                             <!--week-->
-                            <div class="inline-block" ng-show="type=='week'">
+                            <div class="form-group" ng-show="type=='week'">
                                 <label class="control-label" for="">查询日期</label>
                                 <select class="form-control" name="weekStaTime" ng-model="weekStaTime">
                                     <option ng-repeat="w in weekArray" value="{{w.weekNo}}">{{w.weekNo}}</option>

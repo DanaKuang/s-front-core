@@ -111,7 +111,6 @@ define([], function () {
                 scope.endTime = adjustafternoon(selectDurationEnd);
             } else {
                 scope.$emit('clickbrandval', event, {})
-
                 scope.$watch('selectBrandVal', function (n, o, s) {
                     if (n !== '') {
                         var brandListArrObj = {};

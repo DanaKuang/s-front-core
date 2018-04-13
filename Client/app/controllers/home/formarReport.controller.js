@@ -273,6 +273,10 @@ define([], function() {
 							maxHeight: '200px',
 							numberDisplayed: 1
 						});
+						// 添加hover效果
+				        $("select").hover(function (e) {
+				            e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+				        });
 					});
 
 					//监听省份选择信息

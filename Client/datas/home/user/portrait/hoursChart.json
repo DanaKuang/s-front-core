@@ -50,7 +50,7 @@
 		"coordinateSystem": "polar",
 		"itemStyle": {
 			"normal": {
-				"color": "#d14a61"
+				"color": ""
 			}
 		},
 		"renderItem": "renderItem",

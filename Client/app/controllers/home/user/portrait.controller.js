@@ -163,9 +163,9 @@ define([], function() {
 						$scope.itemList = res.data[0];
 						$scope.$apply();
 						$(".userSpan").html("(用户微信ID:&nbsp;&nbsp;" + openId + ")")
-						if(res.data[0].woas == 0) {
+						if(res.data[0] && res.data[0].woas == 0) {
 							$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;否")
-						} else if(res.data[0].woas == 1) {
+						} else if(res.data[0] && res.data[0].woas == 1) {
 							$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;是")
 						}
 					})
@@ -423,9 +423,9 @@ define([], function() {
 						$scope.itemList = res.data[0];
 						$scope.$apply();
 						$(".userSpan").html("(用户微信ID:&nbsp;&nbsp;" + openId + ")")
-						if(res.data[0].woas == 0) {
+						if(res.data[0] && res.data[0].woas == 0) {
 							$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;否")
-						} else if(res.data[0].woas == 1) {
+						} else if(res.data[0] && res.data[0].woas == 1) {
 							$(".questionOneAnswer").html("&nbsp;&nbsp;&nbsp;&nbsp;是")
 						}
 					})
@@ -629,6 +629,7 @@ define([], function() {
 						mobileNo: mobileNo,
 						endTime: endTime
 					}
+					var G = 1;
 					optionTwo.series[0].renderItem = function renderItem(params, api) {
 						var values = [api.value(0), api.value(1)];
 						var coord = api.coord(values);
@@ -644,7 +645,7 @@ define([], function() {
 								endAngle: coord[3] + size[1] / 2
 							},
 							style: api.style({
-								fill: "#a72e43"
+								fill: "rgba(82, 94, 180, "+(G++/24).toFixed(2)+")"
 							})
 						};
 					}
