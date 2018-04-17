@@ -28,7 +28,8 @@
     "bootstrap-multiselect": "^0.9.13",
     "angular-file-upload": "^2.5.0",
     "nprogress": "^0.2.0",
-    "require-css": "^0.1.10"
+    "require-css": "^0.1.10",
+    "zTree": "^3.5.33"
   },
   "repository": {
     "type": "git",

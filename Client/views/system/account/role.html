@@ -5,11 +5,130 @@
  * Description: role
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/system.role.css">
 <div ng-controller="roleCtrl">
     <div class="animated fadeInRightBig">
-        <div class="container-fluid">
-            <div class="row">
-
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--面包屑-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>角色管理</span>
+                    <button type="button" class="btn btn-default" ng-click="addEdit()">+新增角色</button>
+                </div>
+                <!--搜索栏-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_role_form" autocomplete="off">
+                            <!--角色-->
+                            <div class="form-group">
+                                <label for="" class="control-label">角色</label>
+                                <select class="form-control input-sm" ng-model="role">
+                                    <option value="">全部</option>
+                                </select>
+                            </div>
+                            <!--状态-->
+                            <div class="form-group">
+                                <label for="" class="control-label">状态</label>
+                                <select class="form-control input-sm" ng-model="status">
+                                    <option value="">全部</option>
+                                    <option value="1">已启用</option>
+                                    <option value="0">已停用</option>
+                                </select>
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button type="reset" class="btn btn-primary">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--人员表格-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>角色</th>
+                                    <th>状态</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span class="opt-btn span-hover" ng-click="addEdit()">编辑</span>
+                                        <span class="opt-btn span-hover" ng-click="stop()">停用</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增、编辑-->
+    <div class="modal fade in" id="id_role_modal" tabindex="-1" role="dialog" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">账号>角色管理>新增角色</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate autocomplete="off">
+                        <!--角色名称-->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">角色名称</label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.name.$error.required}">
+                                    <input type="text" name="name" ng-model="name" class="form-control input-sm" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.name.$error.required">角色名称</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--权限选择-->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">权限选择</label>
+                                <div class="col-md-9">
+                                    tree
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确定</button>
+                            <button type="reset" class="btn btn-primary">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--消息提示-->
+    <div class="modal fade in" tabindex="-1" data-keyboard="false" role="dialog" id="id_tip_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">操作提示</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="center">停用后，此用户将不能登陆此平台</div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">确定</button>
+                        <button type="reset" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

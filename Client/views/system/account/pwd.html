@@ -5,7 +5,7 @@
  * Description: 修改密码
  */
 -->
-<link rel="stylesheet" type="text/css" href="statics/assets/style/account.changepwd.css">
+<link rel="stylesheet" href="statics/assets/style/system.pwd.css">
 <div ng-controller="changePwdCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid row">
@@ -44,8 +44,11 @@
                             </div>
                             <!--确认按钮-->
                             <div class="btn-option col-md-12 form-group">
-                                <button type="button" class="btn btn-primary fix-btn" ng-click="changepwd();">确认</button>
-                                <button type="button" class="btn btn-primary fix-btn" ng-click="closepage();">取消</button>
+                                <label class="control-label col-md-2"></label>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary fix-btn" ng-click="changepwd();">确认</button>
+                                    <button type="button" class="btn btn-primary fix-btn" ng-click="closepage();">取消</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -63,7 +66,7 @@
                     </button>
                     <h4 class="modal-title text-header" style="border-top-right-radius:15px;border-top-left-radius:15px;">提示</h4>
                 </div>
-                <div class="modal-body" style="height:60px;line-height:50px;text-align:center;font-size:18px;">
+                <div class="modal-body" style="height:60px;line-height:50px;text-align:center;font-size:16px;">
                   密码修改成功,请退出重新登陆!
                 </div>
             </div>

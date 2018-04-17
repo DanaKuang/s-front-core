@@ -52,6 +52,10 @@ requirejs.config({
       SAO_CDN_URL + 'js/angular-file-upload.min',
       'bower_components/angular-file-upload/dist/angular-file-upload.min'
     ],
+    zTree: [
+      SAO_CDN_URL + 'js/jquery.ztree.all.min',
+      'bower_components/zTree/js/jquery.ztree.all'
+    ],
     nprogress: [
       SAO_CDN_URL + 'js/nprogress',
       'bower_components/nprogress/nprogress'
@@ -98,6 +102,9 @@ requirejs.config({
     angularFileUpload: {
       deps: ['angular']
     },
+    zTree: {
+      deps: ['jquery']
+    },
     nprogress: {
       deps: [
         'jquery',
@@ -122,6 +129,7 @@ requirejs.config({
     'angular',
     'angularAnimate',
     'angularFileUpload',
+    'zTree',
     'nprogress'
   ],
   callback: function() {

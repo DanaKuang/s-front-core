@@ -52,24 +52,23 @@ define([], function () {
                         account: $scope.account,
                         newPwd: $scope.newPwd
                     }).then(function (res) {
-                        console.log(res);
                         var data = res.data || {};
-                        if (data.ret === '500500') {
-                            console.log('失败');
-                            $("#tipsModalId .modal-body").html(data.message);
-                        } else {
+                        if (data.ret === '200000') {
                             $(".icon-close").hide();
                             $("#tipsModalId .modal-body").html('密码修改成功,请重新登陆!');
                             setTimeout(function () {
                                 auth.logout();
                             }, 3000);
+                        } else {
+                            console.log('接口异常！！！');
+                            $("#tipsModalId .modal-body").html(data.message);
                         }
                         $("#tipsModalId").modal('show');
                     });
                 },
                 closepage: function () {
                     //取消按钮
-                    history.go(-1);
+                    history.go(0);
                 }
             };
             //默认值

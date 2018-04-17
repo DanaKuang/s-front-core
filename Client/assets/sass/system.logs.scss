@@ -2,11 +2,18 @@
     margin-top: 15px;
 }
 .ui-panel-title {
-    button {
+    height: 30px;
+    button.btn-default,
+    button.btn-default:hover,
+    button.btn-default:active,
+    button.btn-default:focus {
         position: absolute;
         right: 0;
         height: 24px;
         padding: 0 12px;
+        background-color: #44c1ed;
+        border-color: #44c1ed;
+        color: #fff;
     }
 }
 
@@ -16,40 +23,31 @@
     margin-right: 0 !important;
 }
 
-#id_user_form {
+#id_logs_form {
     .form-group {
         margin-right: 15px;
     }
-    .multiselect.btn {
+    select {
         width: 150px;
         height: 30px;
         padding: 4px 12px;
     }
     .ui-btn-ctrl {
-        button {
+        display: block !important;
+        text-align: right;
+        margin-right: 0px !important;
+        button.btn-primary,
+        button.btn-primary:hover,
+        button.btn-primary:active,
+        button.btn-primary:focus {
             width: 100px;
             margin-left: 30px;
             margin-right: 0px;
             height: 30px;
             border-radius: 15px;
             padding: 4px 12px;
+            background: #44c1ed;
+            border-color: #44c1ed;
         }
     }
 }
-.table-ctrl {
-    font-size: 14px;
-    float: right;
-    margin: 0 15px 15px 0;
-    border-bottom: 1px solid #999;
-}
-.span-hover:hover {
-    color: #333;
-    cursor: pointer;
-}
-.opt-btn {
-    margin: 5px;
-}
-
-
-
-
