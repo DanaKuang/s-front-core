@@ -418,7 +418,7 @@ system:
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/logs/log.html'
+    staticfile: 'system/log/log.html'
   - httpmethod: 'get'                       # 广告位管理
     routepath: '/view/system/adsense'
     description: 'adsense'
