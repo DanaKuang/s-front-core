@@ -17,37 +17,39 @@
                 <!--panel-->
                 <div class="panel rate">
                     <div class="panel-body">
-                        <form class="form-horizontal" autocomplete="off">
+                        <form class="form-horizontal" autocomplete="off" name="pwdForm" ng-submit="changePwd(pwdForm.$valid)">
                             <!--原密码-->
                             <div class="margin-top col-md-12 form-group">
                                 <label class="control-label col-md-2">原密码</label>
-                                <div class="col-md-4" ng-class="{'has-error':oldpwd}">
-                                    <input type="password" name="oldpwd" class="form-control input-sm" ng-model="account" ng-blur="checkold(account);">
-                                    <p class="help-block" style="display:{{oldpwd?'block':'none';}}">原密码输入不符</p>
+                                <div class="col-md-4" ng-class="{'has-error': pwdForm.$submitted && pwdForm.oldPwd.$error.required && pwdForm.oldPwd.$invalid}">
+                                    <input type="password" name="oldPwd" class="form-control input-sm" ng-model="oldPwd" required>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.oldPwd.$error.required">原密码不能为空</p>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.oldPwd.$invalid">原密码输入不正确</p>
                                 </div>
                             </div>
                             <!--新密码-->
                             <div class="margin-top col-md-12 form-group">
                                 <label class="control-label col-md-2">新密码</label>
-                                <div class="col-md-4" ng-class="{'has-error':newpwd}">
-                                    <input type="password" name="newpwd" class="form-control input-sm" ng-model="newPwd" ng-blur="checkpwd(newPwd);">
-                                    <p class="help-block" style="display: {{newpwd?'block':'none';}}">4-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                <div class="col-md-4" ng-class="{'has-error': (pwdForm.$submitted && pwdForm.newPwd.$error.required) || (!pwdForm.newPwd.$error.required && pwdForm.newPwd.$invalid) }">
+                                    <input type="password" name="newPwd" class="form-control input-sm" ng-model="newPwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{4,16}$/" required>
+                                    <p class="help-block" ng-show="pwdForm.newPwd.$invalid && !pwdForm.newPwd.$error.required">4-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.newPwd.$error.required">新密码不能为空</p>
                                 </div>
                             </div>
                             <!--确认新密码-->
                             <div class="margin-top col-md-12 form-group">
                                 <label class="control-label col-md-2">确认新密码</label>
-                                <div class="col-md-4" ng-class="{'has-error':nr}">
-                                    <input type="password" name="renewpwd" class="form-control input-sm" ng-model="reNewPwd" ng-blur="checkrepwd(reNewPwd);">
-                                    <p class="help-block" style="display:{{nr?'block':'none';}}">两次密码输入不一致</p>
+                                <div class="col-md-4" ng-class="{'has-error': newPwd != reNewPwd && !pwdForm.reNewPwd.$error.required}">
+                                    <input type="password" name="reNewPwd" class="form-control input-sm" ng-model="reNewPwd" required>
+                                    <p class="help-block" ng-show="newPwd != reNewPwd && !pwdForm.reNewPwd.$error.required">两次密码输入不一致</p>
                                 </div>
                             </div>
                             <!--确认按钮-->
                             <div class="btn-option col-md-12 form-group">
                                 <label class="control-label col-md-2"></label>
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary fix-btn" ng-click="changepwd();">确认</button>
-                                    <button type="button" class="btn btn-primary fix-btn" ng-click="closepage();">取消</button>
+                                    <button type="submit" class="btn btn-primary fix-btn" ng-disabled="pwdForm.oldPwd.$error.required && pwdForm.newPwd.$valid && newPwd != reNewPwd">确认</button>
+                                    <button type="reset" class="btn btn-primary fix-btn" ng-click="closePage();">取消</button>
                                 </div>
                             </div>
                         </form>
