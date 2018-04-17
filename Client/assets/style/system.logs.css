@@ -23,10 +23,14 @@
 #id_logs_form .form-group {
   margin-right: 15px; }
 
-#id_logs_form select {
+#id_logs_form select, #id_logs_form input {
   width: 150px;
   height: 30px;
   padding: 4px 12px; }
+
+#id_logs_form .control-label {
+  width: 60px;
+  text-align: right; }
 
 #id_logs_form .ui-btn-ctrl {
   display: block !important;

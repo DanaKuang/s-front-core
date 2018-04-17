@@ -27,10 +27,14 @@
     .form-group {
         margin-right: 15px;
     }
-    select {
+    select,input {
         width: 150px;
         height: 30px;
         padding: 4px 12px;
+    }
+    .control-label {
+        width: 60px;
+        text-align: right;
     }
     .ui-btn-ctrl {
         display: block !important;

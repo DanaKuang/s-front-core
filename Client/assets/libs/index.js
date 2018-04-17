@@ -103,7 +103,10 @@ requirejs.config({
       deps: ['angular']
     },
     zTree: {
-      deps: ['jquery']
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/zTreeStyle/zTreeStyle'
+      ]
     },
     nprogress: {
       deps: [
