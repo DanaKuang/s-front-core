@@ -1921,6 +1921,49 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+card:
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/saotx/jcard/list'
+    authorized: 1
+    description: '集卡卡片列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json' 
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/cardDetail'
+    authorized: 1
+    description: '修改卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/saveOrModify'
+    authorized: 1
+    description: '新增修改卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/saotx/jcard/modifyNum'
+    authorized: 1
+    description: '修改卡片数量'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/modifyNum'
+    authorized: 1
+    description: '修改数量'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/remove'
+    authorized: 1
+    description: '删除卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 group:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getScanNumberUsers'

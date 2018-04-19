@@ -261,6 +261,13 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/sauce/ordermanage.html'
+  - httpmethod: 'get'                       # 卡片管理
+    routepath: '/view/activity/acts/card/cardmanagement'
+    description: '河南卡片管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/card/cardmanagement.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
