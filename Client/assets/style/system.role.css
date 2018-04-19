@@ -28,6 +28,11 @@
   height: 30px;
   padding: 4px 12px; }
 
+#id_role_form select {
+  width: 150px;
+  height: 30px;
+  padding: 4px 12px; }
+
 #id_role_form .ui-btn-ctrl {
   display: block !important;
   text-align: right;

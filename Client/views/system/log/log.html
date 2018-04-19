@@ -22,15 +22,17 @@
                             <!--公司名称-->
                             <div class="form-group">
                                 <label for="company" class="control-label">公司名称</label>
-                                <select type="text" name="company" ng-model="company" class="form-control input-sm">
+                                <select type="text" name="orgCode" ng-model="orgCode" class="form-control input-sm">
                                     <option value="">全部</option>
+                                    <option ng-repeat="o in orgArr" ng-value="o.orgCode">{{o.orgName}}</option>
                                 </select>
                             </div>
                             <!--操作类型-->
                             <div class="form-group">
                                 <label for="type" class="control-label">操作类型</label>
-                                <select class="form-control input-sm" name="type" ng-model="type">
+                                <select class="form-control input-sm" name="loggerType" ng-model="loggerType">
                                     <option value="">全部</option>
+                                    <option ng-repeat="t in typeArr" ng-value="t.typeKey">{{t.typeVal}}</option>
                                 </select>
                             </div>
                             <!--时间-->
@@ -42,12 +44,12 @@
                             </div>
                             <!--用户名-->
                             <div class="form-group">
-                                <label for="user" class="control-label">用户名</label>
-                                <input type="text" name="user" ng-model="user" class="form-control input-sm">
+                                <label for="userName" class="control-label">用户名</label>
+                                <input type="text" name="userName" ng-model="userName" class="form-control input-sm">
                             </div>
                             <!--按钮-->
                             <div class="ui-btn-ctrl form-group">
-                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button type="submit" class="btn btn-primary" ng-click="search()">搜索</button>
                                 <button type="reset" class="btn btn-primary">重置</button>
                             </div>
                         </form>
@@ -64,17 +66,20 @@
                                     <th>时间</th>
                                     <th>IP</th>
                                     <th>操作类型</th>
-                                    <th width="400">操作详情</th>
+                                    <th width="300">操作详情</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr ng-repeat="tab in tableArr">
+                                    <td>{{tab.orgName}}</td>
+                                    <td>{{tab.operUsername}}</td>
+                                    <td>{{tab.operTime}}</td>
+                                    <td>{{tab.clientIp}}</td>
+                                    <td>{{tab.operName}}</td>
+                                    <td>{{tab.operContent}}</td>
+                                </tr>
+                                <tr ng-if='!tableArr.length'>
+                                    <td colspan='6'>暂无符合条件的数据</td>
                                 </tr>
                             </tbody>
                         </table>

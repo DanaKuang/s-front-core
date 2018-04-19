@@ -16,6 +16,14 @@ define([], function() {
             //      $scope.navConf = res.data;
             // });
 
+            var COMPANY = {
+                "saotianxia": "扫天下（北京）信息技术有限公司",
+                "hebeizhongyan": "河北中烟工业有限责任公司",
+                "henanzhongyan": "河北中烟工业有限责任公司",
+                "shankunzhongyan": "山西昆烟工业有限责任公司",
+                "hunanzhongyan": "湖南中烟工业有限责任公司"
+            };
+
             // 获取数据
             $model.getNav().then(function(nav) {
                 $model.getUser().then(function (user) {
@@ -24,6 +32,7 @@ define([], function() {
                     sessionStorage.setItem("orgCode", user.orgCode)
                     sessionStorage.setItem("account", user.account);
                     sessionStorage.setItem("checkperson", user.account);
+                    sessionStorage.setItem("company", COMPANY[user.orgCode])
                     $scope.navConf = {
                         nav: menuFilter.nav(nav.data),
                         account: user.name || ""

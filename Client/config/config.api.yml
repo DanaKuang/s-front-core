@@ -2471,13 +2471,77 @@ visitManage:
     enableroute: 1
     gatewaytype: 2
     responetype: 'json'
-account:
+system:
   - httpmethod: 'post'
     routepath: '/api/tztx/admin/user/modifyPwd'
     authorized: 1
     description: '修改密码'
     enableroute: 1
     gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/queryList'
+    authorized: 1
+    description: '获取用户列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/saveOrUpdate'
+    authorized: 1
+    description: '新增、编辑用户列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/queryUser'
+    authorized: 1
+    description: '查询单条数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleList'
+    authorized: 1
+    description: '权限列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/logger/list'
+    authorized: 1
+    description: '日志表格'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/logger/types'
+    authorized: 1
+    description: '操作类型'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/queryListAllOrg'
+    authorized: 1
+    description: '公司列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleDetail'
+    authorized: 1
+    description: '角色 单条'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleSaveOrUpdate'
+    authorized: 1
+    description: '角色修改'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 operateTools:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fixatreport/getDetailHome'

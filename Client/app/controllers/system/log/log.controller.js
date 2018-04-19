@@ -12,13 +12,26 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, df) {
             var $model = $scope.$model;
 
+            var orgArr = $model.$org.data.data || [];
+            var typeObj = $model.$type.data.data || {};
+            var typeArr = [];
+
+            _.forIn(typeObj, function (v, k) {
+                typeArr.push({
+                    typeKey: k,
+                    typeVal: v
+                });
+            });
+
             // 属性扩展
             $scope = angular.extend($scope, {
-                company: '',
-                user: '',
-                type: '',
+                orgCode: '',
+                userName: '',
+                loggerType: '',
                 stime: '',
                 etime: '',
+                orgArr: orgArr,
+                typeArr: typeArr,
                 paginationConf: '',
                 search: searchFn,
                 reset: resetFn
@@ -27,9 +40,9 @@ define([], function () {
             // 获取参数
             function getParams () {
                 return {
-                    company: $scope.company || '',
-                    user: $scope.user || '',
-                    type: $scope.type || '',
+                    orgCode: $scope.orgCode || '',
+                    userName: $scope.userName || '',
+                    loggerType: $scope.loggerType || '',
                     stime: $scope.stime || '',
                     etime: $scope.etime || '',
                     currentPageNumber: 1,
@@ -43,9 +56,12 @@ define([], function () {
                     res = res.data || {};
                     if (res.ret === '200000') {
                         var ret = res.data.list || [];
-                        ret.forEach(function (l) {
-                            l.rptTime = df.datetime(l.rptTime);
-                        }) || [];
+                        ret.forEach(function (r) {
+                            r.operTime = df.datetime(r.operTime);
+                            r.orgName = orgArr.filter(function (o) {
+                                return o.orgCode === r.orgCode;
+                            })[0].orgName || "";
+                        });
                         $scope.tableArr = ret;
                         $scope.paginationConf = res;
                         $scope.$apply();
@@ -63,9 +79,9 @@ define([], function () {
             // 重置函数
             function resetFn () {
                 $scope = angular.extend($scope, {
-                    company: '',
-                    user: '',
-                    type: '',
+                    orgCode: '',
+                    userName: '',
+                    loggerType: '',
                     stime: '',
                     etime: ''
                 });
@@ -84,7 +100,7 @@ define([], function () {
                     autoclose: true,
                     todayBtn: true,
                     minView: 0,
-                    startDate: ""
+                    endDate: df.datetime(+new Date)
                 }).on('change', function (e) {
                     var st = e.target.value || '';
                     var et = $scope.etime || '';
@@ -99,7 +115,7 @@ define([], function () {
                     autoclose: true,
                     todayBtn: true,
                     minView: 0,
-                    startDate: ""
+                    endDate: df.datetime(+new Date)
                 }).on('change', function (e) {
                     var et = e.target.value || '';
                     var st = $scope.stime || '';
@@ -110,7 +126,7 @@ define([], function () {
                 });
 
                 // 刚进入页面查询一下
-                // searchFn();
+                searchFn();
 
                 // 添加hover效果
                 $("select").hover(function (e) {

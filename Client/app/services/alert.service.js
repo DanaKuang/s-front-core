@@ -60,13 +60,13 @@ define([], function () {
                     hide($alert);
                 }, 5000);
             };
-            this.success = function () {
+            this.success = function (txt) {
                 this.alert(txt, 'success');
             };
-            this.warning = function () {
+            this.warning = function (txt) {
                 this.alert(txt, 'warning');
             };
-            this.error = function () {
+            this.error = function (txt) {
                 this.alert(txt, 'error');
             };
         }]
