@@ -41,10 +41,8 @@ define([], function () {
                     var Data = res.data || {};
                     if (Data.ret === '200000') {
                         var list = Data.data.list;
-                        if (list.length > 0) {
-                            $scope.list = list;
-                            $scope.$apply()
-                        }
+                        $scope.list = list; 
+                        $scope.$apply()
                     } else {
                         alert(Data.message)
                     }
