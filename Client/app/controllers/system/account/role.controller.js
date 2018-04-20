@@ -17,7 +17,7 @@ define([], function() {
             // 默认初始化数据
             var defData = {
                 search: {
-                    roles: '',
+                    roleCode: '',
                     status: ''
                 },
                 tip: {
@@ -33,7 +33,8 @@ define([], function() {
                 opts: optsFn,
                 initSearch: initSearch,
                 paginationConf: '',
-                confim: confimFn
+                confim: confimFn,
+                reset: resetFn
             };
 
             // 初始化页面数据
@@ -132,6 +133,14 @@ define([], function() {
                     },
                     callback: { }
                 }, nodes);
+            }
+
+            // 重置函数
+            function resetFn () {
+                $scope.search = { roleCode: '', status: '' };
+
+                // 重置完之后search一下
+                searchFn();
             }
 
             $(document).ready(function () {

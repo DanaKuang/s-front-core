@@ -23,7 +23,7 @@
                             <!--角色-->
                             <div class="form-group">
                                 <label for="" class="control-label">角色</label>
-                                <select class="form-control input-sm" ng-model="search.roles">
+                                <select class="form-control input-sm" ng-model="search.roleCode">
                                     <option value="">全部</option>
                                     <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
                                 </select>
@@ -40,7 +40,7 @@
                             <!--按钮-->
                             <div class="ui-btn-ctrl form-group">
                                 <button type="submit" class="btn btn-primary" ng-click="initSearch()">搜索</button>
-                                <button type="reset" class="btn btn-primary">重置</button>
+                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
                             </div>
                         </form>
                     </div>
