@@ -103,8 +103,7 @@ define([], function() {
                     roles: $scope.roles || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
-                    pwd: !$scope.id ? $.md5($scope.pwd) : "",
-                    account: sessionStorage.account || ""
+                    pwd: !$scope.id ? $.md5($scope.pwd) : ""
                 }).then(function (res) {
                     res = res.data || {};
                     if (res.ret === '200000') {
