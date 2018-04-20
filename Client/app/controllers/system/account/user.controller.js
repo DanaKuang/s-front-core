@@ -58,7 +58,8 @@ define([], function() {
                                 name: res.data.name || "",
                                 roles: res.data.rolesCode || "",
                                 mobile: res.data.mobile || "",
-                                email: res.data.detail && res.data.detail.email || ""
+                                email: res.data.detail && res.data.detail.email || "",
+                                pwd: res.data.pwd || ""
                             });
                             $scope.$apply();
                             $("#id_user_modal").modal('show');
@@ -103,7 +104,7 @@ define([], function() {
                     roles: $scope.roles || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
-                    pwd: !$scope.id ? $.md5($scope.pwd) : ""
+                    pwd: !$scope.id ? $.md5($scope.pwd || $('[name="pwd"]').val()) : ""
                 }).then(function (res) {
                     res = res.data || {};
                     if (res.ret === '200000') {

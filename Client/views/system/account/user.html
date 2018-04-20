@@ -150,7 +150,7 @@
                             </div>
                         </div>
                         <!--新密码-->
-                        <div class="form-group" ng-show="!id">
+                        <div class="form-group" ng-if="!id">
                             <div class="col-md-12">
                                 <label class="control-label col-md-2">密码<span class="red">*</span></label>
                                 <div class="col-md-9" ng-class="{'has-error': (userForm.$submitted && userForm.pwd.$error.required) || (!userForm.pwd.$error.required && userForm.pwd.$invalid) }">
