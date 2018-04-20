@@ -140,7 +140,7 @@ define([], function() {
                 $scope.search = { roleCode: '', status: '' };
 
                 // 重置完之后search一下
-                searchFn();
+                initSearch();
             }
 
             $(document).ready(function () {

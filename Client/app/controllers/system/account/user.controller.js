@@ -36,7 +36,8 @@ define([], function() {
                 opts: optsFn,
                 initSearch: initSearch,
                 resetFrom: resetFromFn,
-                paginationConf: ""
+                paginationConf: "",
+                reset: resetFn
             };
 
             // 初始化页面数据
@@ -152,6 +153,14 @@ define([], function() {
                 });
                 form.$setPristine();
                 // $scope.$apply();
+            }
+
+            // 重置函数
+            function resetFn () {
+                $scope.search = { keys: '', roles: '', status: '' };
+
+                // 重置完之后search一下
+                initSearch();
             }
 
             // 翻页
