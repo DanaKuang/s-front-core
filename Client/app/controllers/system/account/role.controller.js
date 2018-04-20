@@ -97,7 +97,11 @@ define([], function() {
                     res = res.data || {};
                     if (res.ret === '200000') {
                         $("#id_role_modal").modal('hide');
-                        $scope.roleName = "";
+                        $scope = angular.extend($scope, {
+                            roleName: '',
+                            roleCode: '',
+                            id: ''
+                        });
                         alt.success("操作成功！");
                         initSearch();
                     } else {
