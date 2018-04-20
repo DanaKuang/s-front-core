@@ -26,7 +26,7 @@ define([], function() {
                 },
                 id: '',
                 name: '',
-                rolesCode: '',
+                roles: '',
                 company: sessionStorage.company || "",
                 mobile: '',
                 email: '',
@@ -56,7 +56,7 @@ define([], function() {
                             $scope = angular.extend($scope, {
                                 id: res.data.id || "",
                                 name: res.data.name || "",
-                                role: res.data.rolesCode || "",
+                                roles: res.data.rolesCode || "",
                                 mobile: res.data.mobile || "",
                                 email: res.data.detail && res.data.detail.email || ""
                             });
@@ -100,7 +100,7 @@ define([], function() {
                 valid && $model.postData({
                     id: $scope.id || "",
                     name: $scope.name || "",
-                    rolesCode: $scope.rolesCode || "",
+                    roles: $scope.roles || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
                     pwd: !$scope.id ? $.md5($scope.pwd) : "",
@@ -150,7 +150,7 @@ define([], function() {
                 $scope = angular.extend($scope, {
                     id: '',
                     name: '',
-                    rolesCode: '',
+                    roles: '',
                     mobile: '',
                     email: ''
                 });
