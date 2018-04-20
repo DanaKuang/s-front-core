@@ -166,7 +166,7 @@
                                 <div class="col-md-9 form-inline">
                                     <select class="form-control input-sm" name="roleCode" ng-model="roleCode" required>
                                         <option value="">请选择</option>
-                                        <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
+                                        <option ng-repeat="r in roleArr" value="{{r.roleCode}}">{{r.roleName}}</option>
                                     </select>
                                     <div ng-class="{'has-error': userForm.$submitted && userForm.roleCode.$error.required}">
                                         <p class="help-block" ng-show="userForm.$submitted && userForm.roleCode.$error.required">角色不能为空</p>
