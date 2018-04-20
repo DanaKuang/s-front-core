@@ -80,7 +80,7 @@
                                     <td>{{['未启用','已启用','已锁定'][col.status]}}</td>
                                     <td>
                                         <span class="opt-btn span-hover" ng-click="addEdit(col.account)" ng-if="col.status==1">编辑</span>
-                                        <span class="opt-btn span-hover" ng-click="opts(col.id, col.status)">['启用','停用','启用'][col.status]</span>
+                                        <span class="opt-btn span-hover" ng-click="opts(col.id, col.status)">{{['启用','停用','启用'][col.status]}}</span>
                                     </td>
                                 </tr>
                                 <tr ng-if='!tabArr.length'>
