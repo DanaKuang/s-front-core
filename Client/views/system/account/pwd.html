@@ -31,8 +31,8 @@
                             <div class="margin-top col-md-12 form-group">
                                 <label class="control-label col-md-2">新密码<span style="color: red;">*</span></label>
                                 <div class="col-md-4" ng-class="{'has-error': (pwdForm.$submitted && pwdForm.newPwd.$error.required) || (!pwdForm.newPwd.$error.required && pwdForm.newPwd.$invalid) }">
-                                    <input type="password" name="newPwd" class="form-control input-sm" ng-model="newPwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{6,16}$/" required>
-                                    <p class="help-block" ng-show="pwdForm.newPwd.$invalid && !pwdForm.newPwd.$error.required">6-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                    <input type="password" name="newPwd" class="form-control input-sm" ng-model="newPwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{8,16}$/" required>
+                                    <p class="help-block" ng-show="pwdForm.newPwd.$invalid && !pwdForm.newPwd.$error.required">8-16位字符(至少包含字母、数字、符号中的两种形式)</p>
                                     <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.newPwd.$error.required">新密码不能为空</p>
                                 </div>
                             </div>

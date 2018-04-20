@@ -154,8 +154,8 @@
                             <div class="col-md-12">
                                 <label class="control-label col-md-2">密码<span class="red">*</span></label>
                                 <div class="col-md-9" ng-class="{'has-error': (userForm.$submitted && userForm.pwd.$error.required) || (!userForm.pwd.$error.required && userForm.pwd.$invalid) }">
-                                    <input type="password" name="pwd" class="form-control input-sm" ng-model="pwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{6,16}$/" required>
-                                    <p class="help-block" ng-show="userForm.pwd.$invalid && !userForm.pwd.$error.required">6-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                    <input type="password" name="pwd" class="form-control input-sm" ng-model="pwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{8,16}$/" required>
+                                    <p class="help-block" ng-show="userForm.pwd.$invalid && !userForm.pwd.$error.required">8-16位字符(至少包含字母、数字、符号中的两种形式)</p>
                                     <p class="help-block" ng-show="userForm.$submitted && userForm.pwd.$error.required">密码不能为空</p>
                                 </div>
                             </div>

@@ -156,6 +156,7 @@ define([], function() {
                     email: '',
                     pwd: ''
                 });
+                $('[name="pwd"]').val('');
                 form.$setPristine();
                 // $scope.$apply();
             }
