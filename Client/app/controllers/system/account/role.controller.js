@@ -48,6 +48,8 @@ define([], function() {
                     res = res.data || {};
                     if (res.ret === '200000') {
                         $scope.roleName = res.data.roleName || "";
+                        $scope.roleCode = res.data.roleCode || "";
+                        $scope.id = res.data.id || "";
                         initTree(res.data.nodes || []);
                         $scope.$apply();
                         $("#id_role_modal").modal('show');
