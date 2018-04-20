@@ -74,6 +74,7 @@ define([], function() {
                         $("#id_tip_modal").modal('hide');
                         alt.success("操作成功！");
                     } else {
+                        alt.error(res.message || '操作失败！');
                         console.log('接口异常！！！');
                     }
                 });
@@ -97,6 +98,7 @@ define([], function() {
                         alt.success("操作成功！");
                         initSearch();
                     } else {
+                        alt.error(res.message || '操作失败！');
                         console.log('接口异常！！！');
                     }
                 });
