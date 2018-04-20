@@ -27,17 +27,19 @@
       </div>
       <!--验证码-->
       <div class="ui-label ui-code">
-        <div id="drag"></div>
+        <input type="text" name="verifyCode" placeholder="验证码">
+        <img src="/api/tztx/saas/admin/login/verifyCode?" onclick="this.src+='1'">
+        <div id="drag" style="display: none;"></div>
       </div>
       <!--记住用户名-->
       <div class="ui-label ui-checkbox">
         <label for="remmber">
           <input type="checkbox" name="remmber" />记住用户名
         </label>
-        <a href="/find" target="_blank">忘记密码</a>
+        <a href="/find" target="_blank" style="display: none;">忘记密码</a>
       </div>
       <!--登陆-->
-      <button type="button" name="login" disabled>登 录</button>
+      <button type="button" name="login">登 录</button>
     </div>
   </div>
   <!--js-->

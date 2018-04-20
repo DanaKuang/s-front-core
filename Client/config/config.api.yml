@@ -79,6 +79,13 @@ login:                                      # 登录
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/admin/login/verifyCode'
+    authorized: 1
+    description: '验证码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 menu:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/menu/user_list_moudle'
@@ -1928,7 +1935,7 @@ card:
     description: '集卡卡片列表'
     enableroute: 1
     gatewaytype: 1
-    responetype: 'json' 
+    responetype: 'json'
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/jcard/cardDetail'
     authorized: 1
