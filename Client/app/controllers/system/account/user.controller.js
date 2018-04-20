@@ -30,6 +30,7 @@ define([], function() {
                 company: sessionStorage.company || "",
                 mobile: '',
                 email: '',
+                pwd: '',
                 roleArr: roleArr,
                 submitForm: submitForm,
                 addEdit: addEdit,
@@ -87,6 +88,7 @@ define([], function() {
                     if (res.ret === '200000') {
                         initSearch();
                         $("#id_tip_modal").modal('hide');
+                        alt.success("操作成功！");
                     } else {
                         console.log('接口异常！！！');
                     }
@@ -101,6 +103,7 @@ define([], function() {
                     rolesCode: $scope.rolesCode || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
+                    pwd: !$scope.id ? $.md5($scope.pwd) : "",
                     account: sessionStorage.account || ""
                 }).then(function (res) {
                     res = res.data || {};

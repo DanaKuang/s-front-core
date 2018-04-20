@@ -8,7 +8,7 @@ define([], function() {
         ServiceType: "controller",
         ServiceName: "roleCtrl",
         ViewModelName: 'roleViewModel',
-        ServiceContent: ['$scope', function($scope) {
+        ServiceContent: ['$scope', 'alertService', function($scope, alt) {
             // TODO...
             var $model = $scope.$model;
             var roleArr = $model.$role.data.data.list || [];
@@ -72,6 +72,7 @@ define([], function() {
                     if (res.ret === '200000') {
                         initSearch();
                         $("#id_tip_modal").modal('hide');
+                        alt.success("操作成功！");
                     } else {
                         console.log('接口异常！！！');
                     }
@@ -93,6 +94,7 @@ define([], function() {
                     if (res.ret === '200000') {
                         $("#id_role_modal").modal('hide');
                         $scope.roleName = "";
+                        alt.success("操作成功！");
                         initSearch();
                     } else {
                         console.log('接口异常！！！');
