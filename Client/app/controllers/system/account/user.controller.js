@@ -152,7 +152,8 @@ define([], function() {
                     name: '',
                     roles: '',
                     mobile: '',
-                    email: ''
+                    email: '',
+                    pwd: ''
                 });
                 form.$setPristine();
                 // $scope.$apply();
