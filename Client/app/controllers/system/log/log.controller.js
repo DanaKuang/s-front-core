@@ -58,9 +58,14 @@ define([], function () {
                         var ret = res.data.list || [];
                         ret.forEach(function (r) {
                             r.operTime = df.datetime(r.operTime);
-                            r.orgName = orgArr.filter(function (o) {
+                            var filArr = orgArr.filter(function (o) {
                                 return o.orgCode === r.orgCode;
-                            })[0].orgName || "";
+                            });
+                            if (filArr.length) {
+                                r.orgName = filArr[0].orgName || "";
+                            } else {
+                                r.orgName = "";
+                            }
                         });
                         $scope.tableArr = ret;
                         $scope.paginationConf = res;

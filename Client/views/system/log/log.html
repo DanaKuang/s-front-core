@@ -61,11 +61,11 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>公司名称</th>
-                                    <th>用户名</th>
-                                    <th>时间</th>
-                                    <th>IP</th>
-                                    <th>操作类型</th>
+                                    <th width="100">公司名称</th>
+                                    <th width="80">用户名</th>
+                                    <th width="150">时间</th>
+                                    <th width="80">IP</th>
+                                    <th width="80">操作类型</th>
                                     <th width="300">操作详情</th>
                                 </tr>
                             </thead>
@@ -76,7 +76,9 @@
                                     <td>{{tab.operTime}}</td>
                                     <td>{{tab.clientIp}}</td>
                                     <td>{{tab.operName}}</td>
-                                    <td>{{tab.operContent}}</td>
+                                    <td><div style="width: 300px;word-wrap: break-word;">
+                                        {{tab.operContent}}
+                                    </div></td>
                                 </tr>
                                 <tr ng-if='!tableArr.length'>
                                     <td colspan='6'>暂无符合条件的数据</td>

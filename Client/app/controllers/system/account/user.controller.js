@@ -71,7 +71,7 @@ define([], function() {
             }
 
             // 停用数据
-            function stop (id, status) {
+            function optsFn (id, status) {
                 $scope.tip = { id: id, status: status };
                 $("#id_tip_modal").modal('show');
             }
