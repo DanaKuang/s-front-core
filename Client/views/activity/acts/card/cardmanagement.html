@@ -76,7 +76,7 @@
                         <div class="form-group has-feedback" ng-class="{'has-error': form.cardNum.$dirty && (form.cardNum.$error.required || form.cardNum.$invalid), 'has-success': form.cardNum.$valid}">
                             <label for="" class="control-label col-md-2 col-xs-6 required">卡片数量</label>
                             <div class="col-md-8 col-xs-6">
-                                <input type="text" name="cardNum" class="form-control input-sm" ng-model="kp_data.cardNum" ng-pattern="/^\d{1,11}$/" placeholder="请输入数字" required>
+                                <input type="text" name="cardNum" class="form-control input-sm" ng-model="kp_data.cardNum" ng-pattern="/^\d{1,11}$/" placeholder="请输入数字" ng-disabled="disabled" required>
                                 <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': form.cardNum.$dirty && form.cardNum.$valid}" aria-hidden="true"></span>
                                 <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove': form.cardNum.$dirty && form.cardNum.$invalid}" aria-hidden="true"></span>
                             </div>

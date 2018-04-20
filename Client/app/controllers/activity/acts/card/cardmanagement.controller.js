@@ -32,7 +32,8 @@ define([], function () {
                 changeTotal: '',
                 changeUsed: '',
                 modifyNumAction: modifyNumAction,
-                deleteNum: deleteNum
+                deleteNum: deleteNum,
+                disabled: false
             });
 
             showlist()
@@ -81,6 +82,7 @@ define([], function () {
                     var Data = res.data || {};
                     if (Data.ret === '200000') {
                         $scope.kp_data = Data.data;
+                        $scope.disabled = true;
                         $scope.$apply();
                         $('#modal').modal('show')
                     } else {
