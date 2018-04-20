@@ -49,6 +49,7 @@ define([], function() {
                     if (res.ret === '200000') {
                         $scope.roleName = res.data.roleName || "";
                         initTree(res.data.nodes || []);
+                        $scope.$apply();
                         $("#id_role_modal").modal('show');
                     } else {
                         console.log('接口异常!!!');
