@@ -77,7 +77,7 @@
                                     <td>{{col.roleName}}</td>
                                     <td>{{col.orgName}}</td>
                                     <td>{{col.mobile}}</td>
-                                    <td>{{['未启用','已启用','已锁定'][col.status]}}</td>
+                                    <td>{{['已停用','已启用','已锁定'][col.status]}}</td>
                                     <td>
                                         <span class="opt-btn span-hover" ng-click="addEdit(col.account)" ng-if="col.status==1">编辑</span>
                                         <span class="opt-btn span-hover" ng-click="opts(col.id, col.status)">{{['启用','停用','启用'][col.status]}}</span>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="center">
-                        {{tip.status ? '停用后，此类用户将不能登陆此平台' : '启用后，此类用户将可以登陆此平台'}}
+                        {{tip.status ? '停用后，此用户将不能登陆此平台' : '启用后，此用户将可以登陆此平台'}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" ng-click="confim(tip.id, tip.status)">确定</button>

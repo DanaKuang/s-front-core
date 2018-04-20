@@ -61,7 +61,7 @@
                                 <tr ng-repeat="tab in tableArr">
                                     <td>{{tab.id}}</td>
                                     <td>{{tab.roleName}}</td>
-                                    <td>{{['未启用','已启用'][tab.status]}}</td>
+                                    <td>{{['已停用','已启用'][tab.status]}}</td>
                                     <td>
                                         <span class="opt-btn span-hover" ng-click="addEdit(tab.roleCode)" ng-if="tab.status">编辑</span>
                                         <span class="opt-btn span-hover" ng-click="opts(tab.id, tab.status)">{{['启用','停用'][tab.status]}}</span>
