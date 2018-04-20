@@ -46,7 +46,7 @@ define([], function () {
                     stime: $scope.stime || '',
                     etime: $scope.etime || '',
                     currentPageNumber: 1,
-                    pageSize: 10
+                    pageSize: 50
                 }
             }
 
