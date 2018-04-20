@@ -17,7 +17,7 @@ define([], function() {
             var defData = {
                 search: {
                     keys: '',
-                    roles: '',
+                    roleCode: '',
                     status: ''
                 },
                 tip: {
@@ -26,7 +26,7 @@ define([], function() {
                 },
                 id: '',
                 name: '',
-                roles: '',
+                roleCode: '',
                 company: sessionStorage.company || "",
                 mobile: '',
                 email: '',
@@ -56,7 +56,7 @@ define([], function() {
                             $scope = angular.extend($scope, {
                                 id: res.data.id || "",
                                 name: res.data.name || "",
-                                roles: res.data.rolesCode || "",
+                                roleCode: res.data.roleCode || "",
                                 mobile: res.data.mobile || "",
                                 email: res.data.detail && res.data.detail.email || "",
                                 pwd: res.data.pwd || ""
@@ -102,7 +102,7 @@ define([], function() {
                 valid && $model.postData({
                     id: $scope.id || "",
                     name: $scope.name || "",
-                    roles: $scope.roles || "",
+                    roleCode: $scope.roleCode || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
                     pwd: !$scope.id ? $.md5($scope.pwd || $('[name="pwd"]').val()) : ""
@@ -151,7 +151,7 @@ define([], function() {
                 $scope = angular.extend($scope, {
                     id: '',
                     name: '',
-                    roles: '',
+                    roleCode: '',
                     mobile: '',
                     email: '',
                     pwd: ''
@@ -163,7 +163,7 @@ define([], function() {
 
             // 重置函数
             function resetFn () {
-                $scope.search = { keys: '', roles: '', status: '' };
+                $scope.search = { keys: '', roleCode: '', status: '' };
 
                 // 重置完之后search一下
                 initSearch();

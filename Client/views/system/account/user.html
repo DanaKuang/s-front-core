@@ -28,7 +28,7 @@
                             <!--角色-->
                             <div class="form-group">
                                 <label for="" class="control-label">角色</label>
-                                <select class="form-control input-sm" ng-model="search.roles">
+                                <select class="form-control input-sm" ng-model="search.roleCode">
                                     <option value="">全部</option>
                                     <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
                                 </select>
@@ -74,7 +74,7 @@
                                 <tr ng-repeat="col in tabArr">
                                     <td>{{col.id}}</td>
                                     <td>{{col.name}}</td>
-                                    <td>{{col.rolesName}}</td>
+                                    <td>{{col.roleName}}</td>
                                     <td>{{col.orgName}}</td>
                                     <td>{{col.mobile}}</td>
                                     <td>{{['未启用','已启用','已锁定'][col.status]}}</td>
@@ -164,12 +164,12 @@
                             <div class="col-md-12">
                                 <label class="control-label col-md-2">角色<span class="red">*</span></label>
                                 <div class="col-md-9 form-inline">
-                                    <select class="form-control input-sm" name="roles" ng-model="roles" required>
+                                    <select class="form-control input-sm" name="roleCode" ng-model="roleCode" required>
                                         <option value="">请选择</option>
                                         <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
                                     </select>
-                                    <div ng-class="{'has-error': userForm.$submitted && userForm.roles.$error.required}">
-                                        <p class="help-block" ng-show="userForm.$submitted && userForm.roles.$error.required">角色不能为空</p>
+                                    <div ng-class="{'has-error': userForm.$submitted && userForm.roleCode.$error.required}">
+                                        <p class="help-block" ng-show="userForm.$submitted && userForm.roleCode.$error.required">角色不能为空</p>
                                     </div>
                                     <p>可查看、操作物料管理与活动管理模块</p>
                                 </div>
