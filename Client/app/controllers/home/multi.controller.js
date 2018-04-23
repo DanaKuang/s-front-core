@@ -12,7 +12,7 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'multiFilter', 'dayFilter', function ($scope, dateFormatFilter, multiFilter, dayFilter) {
         var $model = $scope.$model;
         var user = sessionStorage.getItem("account") || "hunan";
-
+        var SaleZone = $model.$getZone.data || [];
         // modal
         $scope.tempModalConf = $model.$modals.data.tempModal;
         $scope.histModalConf = $model.$modals.data.histModal;
@@ -46,7 +46,7 @@ define([], function () {
             ppArray: ['盒','条'],
             prNArray: [],
             cnArray: [],
-            szArray: _.each($model.$getZone.data, function (data) {
+            szArray: _.each(SaleZone, function (data) {
                 data.k = data.code;
                 data.v = data.name;
             }),
@@ -158,7 +158,7 @@ define([], function () {
             var pScope = angular.element('#packetTarget #common_table').scope();
             var rScope = angular.element('#realTarget #common_table').scope();
             var sZFilter = {};
-            _.each($model.$getZone.data, function (v) {
+            _.each(SaleZone, function (v) {
                 sZFilter[v.zoneCode] = v.zoneName;
             });
             var staticParam = {
@@ -261,7 +261,17 @@ define([], function () {
                 userId: "hunan",
                 opType: "1"
             }).then(function (res) {
-                $scope.tempListConf.list = res.data || [];
+                var data = res.data || [];
+                _.each(data, function (d) {
+                    var f = true;
+                    for (var i=0,len=SaleZone.length;i<len&&f;i++) {
+                        if (d.saleZone == SaleZone[i].code) {
+                            f = false;
+                            d.saleZoneName = SaleZone[i].name || "";
+                        }
+                    }
+                })
+                $scope.tempListConf.list = data || [];
                 $scope.$apply();
             }).then(function () {
                 angular.element('#tempModalId .ui-list-data')
