@@ -154,6 +154,11 @@ define([], function() {
                 initSearch();
             }
 
+            // 翻页
+            $scope.$on('frompagechange', function (e,v,f) {
+                initSearch(f);
+            });
+
             $(document).ready(function () {
                 // 查询
                 initSearch();
