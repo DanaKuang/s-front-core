@@ -264,13 +264,18 @@ define([], function () {
                 var data = res.data || [];
                 _.each(data, function (d) {
                     var f = true;
-                    for (var i=0,len=SaleZone.length;i<len&&f;i++) {
-                        if (d.saleZone == SaleZone[i].code) {
-                            f = false;
-                            d.saleZoneName = SaleZone[i].name || "";
+                    var saZone = d.saleZone.split(',');
+                    var saleZoneName = [];
+                    _.each(saZone, function (sa) {
+                        for (var i=0,len=SaleZone.length;i<len&&f;i++) {
+                            if (sa == SaleZone[i].code) {
+                                f = false;
+                                saleZoneName.push(SaleZone[i].name || "");
+                            }
                         }
-                    }
-                })
+                    });
+                    d.saleZoneName = saleZoneName.join(',');
+                });
                 $scope.tempListConf.list = data || [];
                 $scope.$apply();
             }).then(function () {
