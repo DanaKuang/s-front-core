@@ -25,6 +25,7 @@ define([], function() {
                     status: ''
                 },
                 id: '',
+                account: '',
                 name: '',
                 roleCode: '',
                 company: sessionStorage.company || "",
@@ -55,6 +56,7 @@ define([], function() {
                         if (res.ret === '200000') {
                             $scope = angular.extend($scope, {
                                 id: res.data.id || "",
+                                account: res.data.account || "",
                                 name: res.data.name || "",
                                 roleCode: res.data.roleCode || "",
                                 mobile: res.data.mobile || "",
@@ -102,6 +104,7 @@ define([], function() {
                 valid && $model.postData({
                     id: $scope.id || "",
                     name: $scope.name || "",
+                    account: $scope.account || "",
                     roleCode: $scope.roleCode || "",
                     mobile: $scope.mobile || "",
                     detail: { email: $scope.email || "" },
@@ -150,6 +153,7 @@ define([], function() {
             function resetFromFn (form) {
                 $scope = angular.extend($scope, {
                     id: '',
+                    account: '',
                     name: '',
                     roleCode: '',
                     mobile: '',

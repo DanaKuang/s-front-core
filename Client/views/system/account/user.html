@@ -110,12 +110,21 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" name="userForm" ng-submit="submitForm(userForm.$valid, userForm)" novalidate autocomplete="off">
+                        <input type="hidden" name="id" ng-model="id">
                         <div class="form-group">
-                            <input type="hidden" name="id" ng-model="id">
                             <div class="col-md-12">
                                 <label class="control-label col-md-2">帐户<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.account.$error.required}">
+                                    <input type="text" name="account" ng-model="account" class="form-control input-sm" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.account.$error.required">姓名不能为空</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">昵称<span class="red">*</span></label>
                                 <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.name.$error.required}">
-                                    <input type="text" name="name" ng-model="name" class="form-control input-sm" required>
+                                    <input type="text" name="name" ng-model="name" class="form-control input-sm" placeholder="登录名" required>
                                     <p class="help-block" ng-show="userForm.$submitted && userForm.name.$error.required">姓名不能为空</p>
                                 </div>
                             </div>
