@@ -123,9 +123,9 @@
         if (pwd != rwd) return;
         $.ajax({
             url: '/api/tztx/saas/admin/login/findPwd',
-            data: { oldPwd: '', account: acc, newPwd: $.md5(pwd), mobile: tel},
+            data: JSON.stringify({ oldPwd: '', account: acc, newPwd: $.md5(pwd), mobile: tel}),
             type: 'POST',
-            dataType: 'json'
+            contentType: 'application/json'
         }).then(function (res) {
             if (res.ret == '200000') {
                 alert(res.message || "密码修改成功，请重新登陆！");
