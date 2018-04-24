@@ -88,7 +88,7 @@
         PASSWORD.forEach(function (p) {
             p.test(val) && flag++;
         });
-        if (flag < 2 || val.length < 6 || val.length > 14) {
+        if (flag < 2 || val.length < 8 || val.length > 16) {
             !$pwd.parent().hasClass('has-error') &&
             $pwd.parent().addClass('has-error');
         } else {
@@ -123,8 +123,9 @@
         if (pwd != rwd) return;
         $.ajax({
             url: '/api/tztx/saas/admin/login/findPwd',
-            data: { oldPwd: '', account: $.md5(acc), newPwd: $.md5(pwd), mobile: tel},
-            type: 'POST'
+            data: { oldPwd: '', account: acc, newPwd: $.md5(pwd), mobile: tel},
+            type: 'POST',
+            dataType: 'json'
         }).then(function (res) {
             if (res.ret == '200000') {
                 alert(res.message || "密码修改成功，请重新登陆！");
