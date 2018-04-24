@@ -40,6 +40,12 @@ define([], function () {
         sessionStorage.removeItem('access_loginId');
         location.href = "/login";
       }
+      // 跳转到修改密码
+      this.changepwd = function () {
+        sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('access_loginId');
+        location.href = "/find";
+      }
     }]
   };
 

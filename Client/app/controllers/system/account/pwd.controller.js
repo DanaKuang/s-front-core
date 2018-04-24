@@ -24,9 +24,9 @@ define([], function () {
                 if ($scope.newPwd !== $scope.reNewPwd) return;
 
                 $model.changePwd({
-                    oldPwd: $scope.oldPwd || "",
+                    oldPwd: $.md5($scope.oldPwd) || "",
                     account: sessionStorage.account || "",
-                    newPwd: $scope.newPwd || ""
+                    newPwd: $.md5($scope.newPwd) || ""
                 }).then(function (res) {
                     var data = res.data || {};
                     if (data.ret === '200000') {

@@ -61,6 +61,10 @@ define([], function () {
                                         alert(code.message || "此帐号已在其他地方登录，您已被迫下线！");
                                         authorization.logout();
                                         break;
+                                    case '100409':
+                                        alert(code.message || "密码时限超出，请修改密码！");
+                                        authorization.changepwd();
+                                        break;
                                 }
                                 return res;
                             });

@@ -12,6 +12,7 @@
     var $tel = $('[name="telphone"]');
     var $rwd = $('[name="rePassword"]');
     var $cod = $('[name="validatecode"]');
+    var $acc = $('[name="account"]');
     var TELPHONE = /^1[3,4,5,7,8,9]{1}\d{9}$/;
     var PASSWORD = [/[A-Za-z]/g, /[0-9]/g, /_/g];
 
@@ -33,6 +34,9 @@
 
     // 验证码按钮
     $(".ui-validate").click(function () {
+        var tel = $tel.val();
+        if (!tel) return;
+        if ($tel.parent().hasClass('has-error')) return;
         var that = this;
         var tip = '重新获取(60s)';
         $(that).html(tip).prop('disabled', true);
@@ -46,12 +50,33 @@
             }
             $(that).html('重新获取('+times+'s)');
         }, 1000);
+        $.ajax({
+            url: '/api/tztx/saas/admin/login/getDynamicCode',
+            data: { oc: 1, mobile: tel },
+            type: 'POST'
+        });
     });
 
     // 下一步
     $("button.first").off().click(function (e) {
-        $(".first").hide();
-        $(".second").show();
+        var tel = $tel.val();
+        var cod = $cod.val();
+        if (!tel) return;
+        if (!cod) return;
+        if ($tel.parent().hasClass('has-error')) return;
+        $.ajax({
+            url: '/api/tztx/saas/admin/login/checkDynamicCode',
+            data: { mobile: tel, code: cod },
+            type: 'POST'
+        }).then(function (res) {
+            if (res.ret == '200000') {
+                $(".first").hide();
+                $(".second").show();
+            } else {
+                alert(res.message || "验证码不正确！");
+            }
+        });
+
     });
 
     // 密码
@@ -82,5 +107,32 @@
         } else {
             $rwd.parent().removeClass('has-error');
         }
+    });
+
+    // 确定
+    $("button.second").off().click(function (e) {
+        var pwd = $pwd.val();
+        var rwd = $rwd.val();
+        var acc = $acc.val();
+        var tel = $tel.val();
+        if (!acc) return;
+        if (!pwd) return;
+        if (!rwd) return;
+        if ($pwd.parent().hasClass('has-error')) return;
+        if ($rwd.parent().hasClass('has-error')) return;
+        if (pwd != rwd) return;
+        $.ajax({
+            url: '/api/tztx/saas/admin/login/findPwd',
+            data: { oldPwd: '', account: $.md5(acc), newPwd: $.md5(pwd), mobile: tel},
+            type: 'POST'
+        }).then(function (res) {
+            if (res.ret == '200000') {
+                alert(res.message || "密码修改成功，请重新登陆！");
+                window.location.href = "/login";
+            } else {
+                alert(res.message || "找回密码失败！");
+            }
+        });
+
     });
 })(jQuery);

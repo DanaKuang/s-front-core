@@ -86,6 +86,27 @@ login:                                      # 登录
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/getDynamicCode'
+    authorized: 1
+    description: '获取手机验证码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/checkDynamicCode'
+    authorized: 1
+    description: '校验验证码是否正确'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/findPwd'
+    authorized: 1
+    description: '修改密码登陆'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 menu:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/menu/user_list_moudle'
@@ -2523,7 +2544,7 @@ visitManage:
     responetype: 'json'
 system:
   - httpmethod: 'post'
-    routepath: '/api/tztx/admin/user/modifyPwd'
+    routepath: '/api/tztx/saas/admin/user/modifyPwd'
     authorized: 1
     description: '修改密码'
     enableroute: 1
