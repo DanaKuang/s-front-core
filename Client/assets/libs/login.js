@@ -185,11 +185,14 @@
         data: postData,
         success: function (res) {
           console.log(res);
-          if (res.message == 'success') {
+          if (res.ret == '200000') {
             var data = res.data || {};
             sessionStorage.setItem('access_token', data.token);
             sessionStorage.setItem('access_loginId', data.loginId);
             location.href = "/";
+          } else if (res.ret == '100409') {
+            alert(res.message);
+            location.href = "/find";
           } else {
             alert(res.message);
             vCode.trigger('click');
