@@ -83,6 +83,7 @@ define([], function () {
                     $model.delFack({
                         id: id
                     }).then(function (res) {
+                        res = res.data || {};
                         if (res.ret == '200000') {
                             alt.success("删除成功！");
                             $("#tipsModalId").modal('hide');
