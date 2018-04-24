@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: "controller",
         ServiceName: "CodeCtrl",
         ViewModelName: 'codeViewModel',
-        ServiceContent: ['$scope', 'dateFormatFilter', function ($scope, df) {
+        ServiceContent: ['$scope', 'dateFormatFilter', 'alertService', function ($scope, df, alt) {
             var $model = $scope.$model;
 
             var brandArr = $model.$brand.data || [];
@@ -32,7 +32,8 @@ define([], function () {
                 paginationConf: '',
                 search: searchFn,
                 reset: resetFn,
-                export: exportFn
+                export: exportFn,
+                del: delFn
             });
 
             function getParams () {
@@ -74,6 +75,24 @@ define([], function () {
                         console.log('接口异常啦！！！');
                     }
                 });
+            }
+
+            // 删除
+            function delFn (id) {
+                $("#tipsModalId .confirm").off().on('click', function () {
+                    $model.delFack({
+                        id: id
+                    }).then(function (res) {
+                        if (res.ret == '200000') {
+                            alt.success("删除成功！");
+                            $("#tipsModalId").modal('hide');
+                            searchFn();
+                        } else {
+                            alt.error("删除失败！");
+                        }
+                    });
+                });
+                $("#tipsModalId").modal('show');
             }
 
             // 翻页

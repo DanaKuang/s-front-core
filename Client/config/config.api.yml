@@ -2630,14 +2630,21 @@ operateTools:
     responetype: 'json'
 fackCode:
   - httpmethod: 'post'
-    routepath: '/api/tztx/saotx/fake/export'
+    routepath: '/api/tztx/saas/saotx/fake/export'
     authorized: 1
     description: '导出假码'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saotx/fake/list'
+    routepath: '/api/tztx/saas/saotx/fake/list'
+    authorized: 1
+    description: '假码列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/fake/remove'
     authorized: 1
     description: '假码列表'
     enableroute: 1

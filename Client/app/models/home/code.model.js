@@ -14,8 +14,9 @@ define([], function () {
             // 查询
             var GET_BRAND_DATA = "/api/tztx/dataportal/public/getUserBrandByUserId";        // 获取品牌
             var GET_PRODUCT_DATA = "/api/tztx/dataportal/actAnalysis/getActyProductDownBox";// 获取规格
-            var GET_FACK_LIST = "/api/tztx/saotx/fake/list"                                 // 获取假码列表
-            var EXPORT_FACK_LIST = "/api/tztx/saotx/fake/export";                           // 导出列表数据
+            var GET_FACK_LIST = "/api/tztx/saas/saotx/fake/list"                            // 获取假码列表
+            var EXPORT_FACK_LIST = "/api/tztx/saas/saotx/fake/export";                      // 导出列表数据
+            var DEL_FUCK_DATA = "/api/tztx/saas/saotx/fake/remove";                         // 删除某一条记录
 
             // 品牌
             this.$brand = request.$Search(GET_BRAND_DATA, {}, true);
@@ -28,6 +29,11 @@ define([], function () {
             // 获取假码表格数据
             this.getFackList = function (params) {
                 return request.$Search(GET_FACK_LIST, params);
+            };
+
+            // 删除
+            this.delFack = function (params) {
+                return request.$Search(DEL_FUCK_DATA, params);
             };
 
             // 导出

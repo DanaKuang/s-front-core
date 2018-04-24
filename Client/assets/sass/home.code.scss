@@ -64,3 +64,23 @@
         margin-bottom: 15px;
     }
 }
+
+#tipsModalId {
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        width: 80px;
+        height: 30px;
+        border-radius: 5px;
+        padding: 4px 12px;
+        background: #44c1ed;
+        border-color: #44c1ed;
+    }
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        border-color: #f0f0f0;
+    }
+}
