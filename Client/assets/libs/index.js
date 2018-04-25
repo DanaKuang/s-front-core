@@ -20,6 +20,9 @@ requirejs.config({
       SAO_CDN_URL + 'js/jquery.min',
       'bower_components/jquery/dist/jquery'
     ],
+    md5: [
+      'https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5'
+    ],
     lodash: [
       SAO_CDN_URL + 'js/lodash.min',
       'bower_components/lodash/lodash'
@@ -60,11 +63,21 @@ requirejs.config({
       SAO_CDN_URL + 'js/nprogress',
       'bower_components/nprogress/nprogress'
     ],
+    Fingerprint: [
+      SAO_CDN_URL + 'js/fingerprint',
+      'bower_components/fingerprint/fingerprint'
+    ],
     app: 'app/app'
   },
   shim: {
     jquery: {
       exports: '$'
+    },
+    md5: {
+      exports: '$.md5',
+      deps: [
+        'jquery'
+      ]
     },
     lodash: {
       exports: '_'
@@ -114,6 +127,9 @@ requirejs.config({
         'css!' + SAO_CDN_URL + 'css/nprogress'
       ]
     },
+    Fingerprint: {
+      deps: ['jquery']
+    },
     app: {
       deps: [
         'datetimepicker',
@@ -124,6 +140,7 @@ requirejs.config({
   },
   deps: [
     'jquery',
+    'md5',
     'lodash',
     'bootstrap',
     'datetimepicker',
@@ -133,7 +150,8 @@ requirejs.config({
     'angularAnimate',
     'angularFileUpload',
     'zTree',
-    'nprogress'
+    'nprogress',
+    'Fingerprint'
   ],
   callback: function() {
     // debugger

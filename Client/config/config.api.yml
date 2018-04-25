@@ -107,6 +107,13 @@ login:                                      # 登录
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/logout'
+    authorized: 1
+    description: '登出'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 menu:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/menu/user_list_moudle'

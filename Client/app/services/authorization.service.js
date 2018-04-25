@@ -9,6 +9,10 @@ define([], function () {
     ServiceType: "service",
     ServiceName: "authorization",
     ServiceContent: ['$http', function ($http) {
+
+      var Fingerprint = require('Fingerprint');
+
+      document.cookie = 'JSESSIONID='+ $.md5(new Fingerprint().get().toString());
       // 入口函数
       this.done = function () {
         console.log('authorization....');
@@ -35,10 +39,16 @@ define([], function () {
 
       };
       // 跳转到登陆
-      this.logout = function () {
+      this.logout = function (active) {
         sessionStorage.removeItem('access_token');
         sessionStorage.removeItem('access_loginId');
-        location.href = "/login";
+        if (active) {
+          $http.post('/api/tztx/saas/admin/login/logout').then(function () {
+            location.href = "/login";
+          });
+        } else {
+          location.href = "/login";
+        }
       }
       // 跳转到修改密码
       this.changepwd = function () {
