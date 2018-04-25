@@ -10,9 +10,6 @@ define([], function () {
     ServiceName: "authorization",
     ServiceContent: ['$http', function ($http) {
 
-      var Fingerprint = require('Fingerprint');
-
-      document.cookie = 'JSESSIONID='+ $.md5(new Fingerprint().get().toString());
       // 入口函数
       this.done = function () {
         console.log('authorization....');

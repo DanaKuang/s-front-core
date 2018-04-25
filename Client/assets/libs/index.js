@@ -63,10 +63,6 @@ requirejs.config({
       SAO_CDN_URL + 'js/nprogress',
       'bower_components/nprogress/nprogress'
     ],
-    Fingerprint: [
-      SAO_CDN_URL + 'js/fingerprint',
-      'bower_components/fingerprint/fingerprint'
-    ],
     app: 'app/app'
   },
   shim: {
@@ -127,9 +123,6 @@ requirejs.config({
         'css!' + SAO_CDN_URL + 'css/nprogress'
       ]
     },
-    Fingerprint: {
-      deps: ['jquery']
-    },
     app: {
       deps: [
         'datetimepicker',
@@ -150,8 +143,7 @@ requirejs.config({
     'angularAnimate',
     'angularFileUpload',
     'zTree',
-    'nprogress',
-    'Fingerprint'
+    'nprogress'
   ],
   callback: function() {
     // debugger
