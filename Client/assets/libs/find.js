@@ -127,6 +127,7 @@
             type: 'POST',
             contentType: 'application/json'
         }).then(function (res) {
+            res = res.data || {};
             if (res.ret == '200000') {
                 alert(res.message || "密码修改成功，请重新登陆！");
                 window.location.href = "/login";
