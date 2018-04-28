@@ -162,6 +162,7 @@ define([], function () {
             function cancel() {
                 $scope.kp_data = {};
                 resetForm()
+                $scope.disabled = false;
                 $('#modal').modal('hide');
             }
 
