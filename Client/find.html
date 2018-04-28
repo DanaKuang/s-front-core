@@ -55,15 +55,22 @@
                     <!--下一步-->
                     <button class="btn ui-button first" type="button">下一步</button>
                     <!--新密码-->
-                    <div class="col-md-12 form-group second">
+                    <div class="col-md-12 form-group second" style="display: none;">
+                        <label class="control-label col-md-3">用户名</label>
+                        <div class="col-md-8">
+                            <input type="text" name="account" class="form-control">
+                        </div>
+                    </div>
+                    <!--新密码-->
+                    <div class="col-md-12 form-group second" style="display: none;">
                         <label class="control-label col-md-3">新密码</label>
                         <div class="col-md-8">
                             <input type="password" name="password" class="form-control">
-                            <p class="help-block">6-14位字符(至少包含字母、数字、下划线中的两种)</p>
+                            <p class="help-block">8-16位字符(至少包含字母、数字、下划线中的两种)</p>
                         </div>
                     </div>
                     <!--确认密码-->
-                    <div class="col-md-12 form-group second">
+                    <div class="col-md-12 form-group second" style="display: none;">
                         <label class="control-label col-md-3">确认密码</label>
                         <div class="col-md-8">
                             <input type="password" name="rePassword" class="form-control">
@@ -71,13 +78,14 @@
                         </div>
                     </div>
                     <!--下一步-->
-                    <button class="btn ui-button second" type="button">完成</button>
+                    <button class="btn ui-button second" style="display: none;" type="button">完成</button>
                 </form>
             </div>
         </div>
     </div>
     <!--js-->
     <script type="text/javascript" src="/statics/bower_components/jquery/dist/jquery.js"></script>
+    <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
     <script type="text/javascript" src="statics/assets/libs/find.js"></script>
 </body>
 </html>

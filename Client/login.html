@@ -27,7 +27,9 @@
       </div>
       <!--验证码-->
       <div class="ui-label ui-code">
-        <div id="drag"></div>
+        <input type="text" name="verifyCode" placeholder="验证码">
+        <img src="/api/tztx/saas/admin/login/verifyCode?" onclick="this.src+='1'">
+        <div id="drag" style="display: none;"></div>
       </div>
       <!--记住用户名-->
       <div class="ui-label ui-checkbox">
@@ -37,12 +39,13 @@
         <a href="/find" target="_blank">忘记密码</a>
       </div>
       <!--登陆-->
-      <button type="button" name="login" disabled>登 录</button>
+      <button type="button" name="login">登 录</button>
     </div>
   </div>
   <!--js-->
   <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/jquery.min.js"></script>
   <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/fingerprint.js"></script>
   <script src="/statics/assets/libs/login.js"></script>
 </body>
 </html>

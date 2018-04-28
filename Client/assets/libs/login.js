@@ -130,14 +130,18 @@
     var $code = $('[name="code"]');
     var $remm = $('[name="remmber"]');
     var $logi = $('[name="login"]');
+    var vCode = $('[name="verifyCode"]');
 
     // 退出清空session记录
     sessionStorage.removeItem('menuIdx');
     sessionStorage.removeItem('hash');
+    document.cookie = 'CLIENTSESSIONID='+ $.md5(new Fingerprint().get().toString()+';path=/');
+
     // 绑定事件及初始化
     $name.val(localStorage.getItem('username') || "");
     $word.val("");
     $code.val("");
+    vCode.val("");
     $remm[0].checked = false;
     $logi.off();
     $remm.off();
@@ -159,6 +163,7 @@
       postData.account = $name.val() || "";
       postData.pwd = $word.val() || "";
       // postData.code = $code.val() || "";
+      postData.verifyCode = vCode.val() || "";
 
       if (!postData.account) {
         alert('用户名不能为空!');
@@ -168,13 +173,13 @@
         alert('用户密码不能为空!');
         return;
       }
+      if (!postData.verifyCode) {
+        alert('验证码不能为空!');
+        return;
+      }
       // md5加密
-      // postData.pwd = $.md5(postData.pwd);
+      postData.pwd = $.md5(postData.pwd);
 
-      // if (!postData.code) {
-      //   alert('验证码不能为空!');
-      //   return;
-      // }
       // ajax
       $.ajax({
         url: '/api/tztx/saas/admin/login/verification',
@@ -182,13 +187,17 @@
         data: postData,
         success: function (res) {
           console.log(res);
-          if (res.message == 'success') {
+          if (res.ret == '200000') {
             var data = res.data || {};
             sessionStorage.setItem('access_token', data.token);
             sessionStorage.setItem('access_loginId', data.loginId);
             location.href = "/";
+          } else if (res.ret == '100409') {
+            alert(res.message);
+            location.href = "/find";
           } else {
             alert(res.message);
+            vCode.trigger('click');
           }
         }
       });

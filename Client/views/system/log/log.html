@@ -1,0 +1,98 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date; 2018-04-16
+ * Description: logs
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/system.logs.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<div ng-controller="logsCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid row">
+            <div class="margin-top col-md-12">
+                <!--面包屑-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>系统日志管理</span>
+                </div>
+                <!--搜索栏-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_logs_form" autocomplete="off">
+                            <!--公司名称-->
+                            <div class="form-group">
+                                <label for="company" class="control-label">公司名称</label>
+                                <select type="text" name="orgCode" ng-model="orgCode" class="form-control input-sm">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="o in orgArr" ng-value="o.orgCode">{{o.orgName}}</option>
+                                </select>
+                            </div>
+                            <!--操作类型-->
+                            <div class="form-group">
+                                <label for="type" class="control-label">操作类型</label>
+                                <select class="form-control input-sm" name="loggerType" ng-model="loggerType">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="t in typeArr" ng-value="t.typeKey">{{t.typeVal}}</option>
+                                </select>
+                            </div>
+                            <!--时间-->
+                            <div class="form-group">
+                                <label for="type" class="control-label">时间</label>
+                                <input type="text" name="stime" ng-model="stime" class="form-control input-sm date">
+                                至
+                                <input type="text" name="etime" ng-model="etime" class="form-control input-sm date">
+                            </div>
+                            <!--用户名-->
+                            <div class="form-group">
+                                <label for="userName" class="control-label">用户名</label>
+                                <input type="text" name="userName" ng-model="userName" class="form-control input-sm">
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary" ng-click="search()">搜索</button>
+                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--人员表格-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="100">公司名称</th>
+                                    <th width="80">用户名</th>
+                                    <th width="150">时间</th>
+                                    <th width="80">IP</th>
+                                    <th width="80">操作类型</th>
+                                    <th width="300">操作详情</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="tab in tableArr">
+                                    <td>{{tab.orgName}}</td>
+                                    <td>{{tab.operUsername}}</td>
+                                    <td>{{tab.operTime}}</td>
+                                    <td>{{tab.clientIp}}</td>
+                                    <td>{{tab.operName}}</td>
+                                    <td><div style="width: 300px;word-wrap: break-word;">
+                                        {{tab.operContent}}
+                                    </div></td>
+                                </tr>
+                                <tr ng-if='!tableArr.length'>
+                                    <td colspan='6'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 分页区 -->
+                        <div class="pagination-wrap">
+                            <!-- 分页指令 -->
+                            <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

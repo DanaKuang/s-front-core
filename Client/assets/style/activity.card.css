@@ -1,0 +1,69 @@
+@charset "UTF-8";
+.table {
+  margin-top: 20px !important; }
+  .table span {
+    margin: 0 10px;
+    color: #1b5c94;
+    transition: all .3s; }
+    .table span:hover {
+      cursor: pointer;
+      font-weight: bold; }
+
+form {
+  width: 60%;
+  margin: 0 auto; }
+  form .form-group {
+    width: 100%; }
+    form .form-group .control-label.required {
+      position: relative; }
+      form .form-group .control-label.required:after {
+        content: '*';
+        position: absolute;
+        right: 0;
+        color: red;
+        font-size: 18px; }
+    form .form-group input[type=radio] {
+      margin-top: 2px !important; }
+    form .form-group input, form .form-group textarea {
+      width: 100% !important; }
+    form .form-group textarea {
+      resize: none;
+      height: 80px; }
+    form .form-group .add-pic-wrap, form .form-group .show-pic, form .form-group .readd {
+      position: relative;
+      display: inline-block; }
+    form .form-group .show-pic {
+      border: 1px solid #ccc;
+      max-height: 100px; }
+    form .form-group .add-pic, form .form-group .add {
+      border: 1px solid #ccc;
+      width: 100px !important;
+      height: 100px;
+      line-height: 86px;
+      font-size: 76px;
+      font-weight: 100;
+      color: #ccc;
+      text-align: center; }
+    form .form-group input[type="file"] {
+      position: absolute;
+      top: 0;
+      opacity: 0; }
+    form .form-group .readd {
+      margin-top: 10px;
+      width: 70px;
+      height: 30px;
+      border: 1px solid #ccc;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 3px;
+      cursor: pointer; }
+    form .form-group .supplements {
+      position: relative;
+      min-height: 45px; }
+      form .form-group .supplements:after {
+        content: '备注：此卡片只有在用户集齐前面卡片时，才能放出，此卡只能设置一张';
+        position: absolute;
+        bottom: -2px;
+        left: 16px;
+        width: 120%;
+        color: #999; }

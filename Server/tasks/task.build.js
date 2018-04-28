@@ -348,7 +348,7 @@ module.exports = function (callback) {
      .then(fifthStep)
      .then(sixthStep)
      .then(seventhStep)
-     .then(eighthStep)
+     // .then(eighthStep)
      .then(ninthStep)
      .then(tenthStep)
      .then(eleventhStep)

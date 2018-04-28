@@ -48,6 +48,9 @@ define([], function () {
                 sessionStorage.menuCode = tab.menu.menuCode || '';
                 var $li = $($event.target).closest('li');
                 var tabs = scope.tabs || [];
+                if (!tab.nodeList.length) {
+                    scope.activeHash = '';
+                }
                 _.each(tabs, function (t) {
                     if (t.menu.menuCode === tab.menu.menuCode) {
                         if (t.nodeList.length) {

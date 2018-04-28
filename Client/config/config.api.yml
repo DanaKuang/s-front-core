@@ -79,6 +79,41 @@ login:                                      # 登录
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/admin/login/verifyCode'
+    authorized: 1
+    description: '验证码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/getDynamicCode'
+    authorized: 1
+    description: '获取手机验证码'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/checkDynamicCode'
+    authorized: 1
+    description: '校验验证码是否正确'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/findPwd'
+    authorized: 1
+    description: '修改密码登陆'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/login/logout'
+    authorized: 1
+    description: '登出'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 menu:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/menu/user_list_moudle'
@@ -1921,6 +1956,49 @@ supply:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+card:
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/saotx/jcard/list'
+    authorized: 1
+    description: '集卡卡片列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/cardDetail'
+    authorized: 1
+    description: '修改卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/saveOrModify'
+    authorized: 1
+    description: '新增修改卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'get'
+    routepath: '/api/tztx/saas/saotx/jcard/modifyNum'
+    authorized: 1
+    description: '修改卡片数量'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/modifyNum'
+    authorized: 1
+    description: '修改数量'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/jcard/remove'
+    authorized: 1
+    description: '删除卡片'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 group:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/consumer/getScanNumberUsers'
@@ -2471,13 +2549,77 @@ visitManage:
     enableroute: 1
     gatewaytype: 2
     responetype: 'json'
-account:
+system:
   - httpmethod: 'post'
-    routepath: '/api/tztx/admin/user/modifyPwd'
+    routepath: '/api/tztx/saas/admin/user/modifyPwd'
     authorized: 1
     description: '修改密码'
     enableroute: 1
     gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/queryList'
+    authorized: 1
+    description: '获取用户列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/saveOrUpdate'
+    authorized: 1
+    description: '新增、编辑用户列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/user/queryUser'
+    authorized: 1
+    description: '查询单条数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleList'
+    authorized: 1
+    description: '权限列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/logger/list'
+    authorized: 1
+    description: '日志表格'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/logger/types'
+    authorized: 1
+    description: '操作类型'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/queryListAllOrg'
+    authorized: 1
+    description: '公司列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleDetail'
+    authorized: 1
+    description: '角色 单条'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/admin/sys/roleSaveOrUpdate'
+    authorized: 1
+    description: '角色修改'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 operateTools:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/fixatreport/getDetailHome'
@@ -2495,14 +2637,21 @@ operateTools:
     responetype: 'json'
 fackCode:
   - httpmethod: 'post'
-    routepath: '/api/tztx/saotx/fake/export'
+    routepath: '/api/tztx/saas/saotx/fake/export'
     authorized: 1
     description: '导出假码'
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
   - httpmethod: 'post'
-    routepath: '/api/tztx/saotx/fake/list'
+    routepath: '/api/tztx/saas/saotx/fake/list'
+    authorized: 1
+    description: '假码列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/fake/remove'
     authorized: 1
     description: '假码列表'
     enableroute: 1

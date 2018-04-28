@@ -4,8 +4,8 @@
  * Description: 修改密码
  */
 define([], function () {
-    var passwordViewModel = {
-        ServiceName: 'passwordViewModel',
+    var pwdViewModel = {
+        ServiceName: 'changePwdViewModel',
         ServiceType: 'service',
         ServiceContent: ['request', function (request) {
             this.$model = function () {
@@ -17,5 +17,5 @@ define([], function () {
             }
         }]
     };
-    return passwordViewModel;
+    return pwdViewModel;
 });

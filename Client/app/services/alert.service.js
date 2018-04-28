@@ -27,7 +27,7 @@ define([], function () {
                         TypeTmpl += '<strong>警告！</strong>'+txt+'</li>'
                         break;
                     case 'error':
-                        TypeTmpl += '<li class="alert alert-error">';
+                        TypeTmpl += '<li class="alert alert-danger">';
                         TypeTmpl += '<strong>错误！</strong>'+txt+'</li>'
                         break;
                 }
@@ -36,6 +36,7 @@ define([], function () {
 
 
             function show ($alert) {
+                $('#common_alert').show();
                 $($alert).animate({
                     top: "+=80",
                     opacity: 1
@@ -48,6 +49,9 @@ define([], function () {
                     opacity: 0.3
                 }, 200, function () {
                     $alert.remove();
+                    if (!$('#common_alert').html()) {
+                        $('#common_alert').hide();
+                    }
                 });
             }
 
@@ -60,13 +64,13 @@ define([], function () {
                     hide($alert);
                 }, 5000);
             };
-            this.success = function () {
+            this.success = function (txt) {
                 this.alert(txt, 'success');
             };
-            this.warning = function () {
+            this.warning = function (txt) {
                 this.alert(txt, 'warning');
             };
-            this.error = function () {
+            this.error = function (txt) {
                 this.alert(txt, 'error');
             };
         }]
