@@ -370,7 +370,9 @@ define([], function() {
                         }
                     })
                     var achObj = {
-                        periodId : achId
+                        periodId : achId,
+                        pageNo : 1,
+                        pageSize : $scope.pageSize
                     };
                     getPeriodResultList(achObj);
                     $model.getAchDetil(achObj).then(function (res) { //获取业绩设置详情
