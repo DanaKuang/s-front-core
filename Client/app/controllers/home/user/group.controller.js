@@ -179,6 +179,15 @@ define([], function () {
         var userDayJson = $model.$dayTrend.data;
         $model.$getDayTrendScan(params).then(function(res){
           var res = res.data || [];
+          if (res.length>=8) {
+            userMonthJson.dataZoom.push({
+              "type": "inside",
+              "show": true,
+              "start":0,
+              "end": 30,
+              "zoomLock":true
+            })
+          }
           userDayJson.xAxis[0].data = [];
           $(userDayJson.series).each(function(index,n){
             n.data = [];
@@ -189,7 +198,7 @@ define([], function () {
             userDayJson.series[1].data.push(n.scanNewUv);
             userDayJson.series[2].data.push(n.day3EffScanAvgUV);
           })
-          userChartTrend.setOption(userDayJson,true)
+          userChartTrend.setOption(userDayJson)
         })
         //用户发展月趋势
         var userMonthTrend = echarts.init(document.getElementById("user-month-trend"));
