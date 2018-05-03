@@ -207,7 +207,7 @@ define([], function () {
           }
           userMonthJson.xAxis[0].data = [];
           userMonthJson.series.forEach(function(n){
-            n.data = [];
+            n.data = [0];
           });
           res.forEach(function(n) {
             userMonthJson.xAxis[0].data.push(n.statDate);

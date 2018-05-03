@@ -31,7 +31,7 @@ define([], function() {
 			};
 			$scope.saoobj = {
 				"dt": stattime,
-				"activityName": ""
+				"activityId": ""
 			};
 			$scope.summar = {
 				"dt": stattime,
@@ -142,7 +142,7 @@ define([], function() {
 					$model.$getUserPro(params).then(function(res) {
 						var res = res.data || [];
 						$("#user_table").html("");
-						var guiGeBihendTwo = $("#activityNameMdg").val();
+						var guiGeBihendTwo = $("#activityNameMdg")[0].selectedOptions[0].innerHTML;
 						var inputTwo = $("#inputTwo").val();
 						$("#titlePTwo").html('活动名称&nbsp;&nbsp;' + guiGeBihendTwo + '&nbsp;&nbsp;' + '(' + inputTwo + ')')
 						if(res.length > 0) {
@@ -161,12 +161,12 @@ define([], function() {
 						var res = res.data || [];
 						for(var i = 0; i < res.length; i++) {
 							if(res[i].activityName === '“爱尚”翻牌子，爱上赢红包') {
-								$(".report-gui").find("select").append("<option value=" + res[i].activityName + " selected>" + res[i].activityName + "</option>")
+								$(".report-gui").find("select").append("<option value=" + res[i].activityId + " selected>" + res[i].activityName + "</option>")
 							} else {
-								$(".report-gui").find("select").append("<option value=" + res[i].activityName + ">" + res[i].activityName + "</option>")
+								$(".report-gui").find("select").append("<option value=" + res[i].activityId + ">" + res[i].activityName + "</option>")
 							}
 						}
-						$scope.saoobj.activityName = $(".report-gui").find("select").val();
+						$scope.saoobj.activityId = $(".report-gui").find("select").val();
 						gloabl.userPro($scope.saoobj);
 
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
@@ -422,7 +422,7 @@ define([], function() {
 						break;
 					case 2:
 						$scope.saoobj = {
-							"activityName": $(that).siblings(".report-gui").find("select").val(),
+							"activityId": $($form).find("select").val(),
 							"dt": $($form).find(".date").val(),
 						}
 						gloabl.userPro($scope.saoobj);
@@ -440,7 +440,7 @@ define([], function() {
 						$scope.goodsWinDate = $('#goodsDate').val();
 						$scope.winDataObj = {
 							'dt' : $('#goodsDate').val(),
-							'activityName': $("#activityName").val().join(),
+							'activityId': $("#activityName").val().join(),
 							'cityName': $("#activityCityName").val().join(),
 							'awardName': $("#inputSou").val()
 						}
@@ -486,7 +486,7 @@ define([], function() {
 				} else if(a === 2) {
 					var data = {
 						"dt": $scope.saoobj.dt,
-						"activityName": $scope.saoobj.activityName
+						"activityId": $scope.saoobj.activityId
 					}
 					var url = "/api/tztx/dataportal/henanreport/importActReportData";
 				} else if(a === 3) {
@@ -503,7 +503,7 @@ define([], function() {
 				} else if(a === 4) {
 					var data = {
 						'dt' : $scope.goodsWinDate,
-						'activityName': $scope.winDataObj.activityName,
+						'activityId': $scope.winDataObj.activityId,
 						'cityName': $scope.winDataObj.cityName,
 						'awardName': $scope.winDataObj.awardName
 					}
