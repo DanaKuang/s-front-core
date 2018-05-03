@@ -128,7 +128,7 @@ define([], function () {
         $model.$getSmokeTypePie(data).then(function (res) {
           var res = res.data;
           pieOPtion.series[0].data = [];
-          $(res).each(function(index,n) {
+          res.forEach(function(n) {
             pieOPtion.legend.data.push(n.smokeTypeName);
             pieOPtion.series[0].data.push({
               "value":n.monaddScanUv,
@@ -157,7 +157,7 @@ define([], function () {
           var res = res.data || [];
           frequencyDataLeft.yAxis.data = [];
           frequencyDataLeft.series[0].data = [];
-          $(res).each(function(index,n){
+          res.forEach(function(n){
             frequencyDataLeft.yAxis.data.push(n.scanPvname);
             frequencyDataLeft.series[0].data.push(n.mon3addEffScanPv);
           })
@@ -167,7 +167,7 @@ define([], function () {
           var res = res.data || [];
           frequencyDataRight.yAxis.data = [];
           frequencyDataRight.series[0].data = [];
-          $(res).each(function(index,n){
+          res.forEach(function(n){
             frequencyDataRight.yAxis.data.push(n.scanPvname);
             frequencyDataRight.series[0].data.push(n.monaddEffScanPv);
           })
@@ -180,10 +180,10 @@ define([], function () {
         $model.$getDayTrendScan(params).then(function(res){
           var res = res.data || [];
           userDayJson.xAxis[0].data = [];
-          $(userDayJson.series).each(function(index,n){
+          userDayJson.series.forEach(function(n){
             n.data = [];
-          });
-          $(res).each(function(index,n) {
+          })
+          res.forEach(function(n) {
             userDayJson.xAxis[0].data.push(n.statDate);
             userDayJson.series[0].data.push(n.scanUv);
             userDayJson.series[1].data.push(n.scanNewUv);
@@ -206,10 +206,10 @@ define([], function () {
             })
           }
           userMonthJson.xAxis[0].data = [];
-          $(userMonthJson.series).each(function(index,n){
+          userMonthJson.series.forEach(function(n){
             n.data = [];
           });
-          $(res).each(function(index,n) {
+          res.forEach(function(n) {
             userMonthJson.xAxis[0].data.push(n.statDate);
             userMonthJson.series[0].data.push(n.scanUv);
             userMonthJson.series[1].data.push(n.scanNewUv);
