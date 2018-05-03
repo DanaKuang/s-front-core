@@ -3,6 +3,7 @@ def:                                             # 默认环境配置
   homepage: 'index.html'                         # 首页
   loginpage: 'login.html'                        # 登陆
   findpage: 'find.html'                          # 找回密码
+  chromepage: 'update.html'                      # 浏览器升级
   viewpath: 'views'                              # 页面路径
   viewengine: 'html'                             # 文件格式
   favicon: 'favicon.ico'                         # favicon

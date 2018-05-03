@@ -23,11 +23,18 @@ login:                                      # 登录
     staticfile: 'login.html'
   - httpmethod: 'get'                       # 找回密码
     routepath: '/find'
-    description: '登陆页面'
+    description: '找回密码'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'find.html'
+  - httpmethod: 'get'                       # 找回密码
+    routepath: '/update'
+    description: '浏览器版本升级'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'update.html'
 home:                                       # 首页
   - httpmethod: 'get'                       # KPI
     routepath: '/view/home/kpi'
