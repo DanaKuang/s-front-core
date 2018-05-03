@@ -89,7 +89,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="footer_sec clearfix" ng-if="achDataList.length > 0">
+						<div class="footer_sec clearfix" ng-if="achDataList.length > 0 && showAchList">
                             <div class="total_info lf">
                                 总共<span>{{totalCount}}</span>条记录，当前页共
                                 <span>{{achDataList.length}}</span>
@@ -297,7 +297,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="footer_sec clearfix" ng-if="rankDataList.length > 0">
+                        <div class="footer_sec clearfix" ng-if="rankDataList.length > 0 && showAchDetail">
                             <div class="total_info lf">
                                 总共<span>{{totalCount}}</span>条记录，当前页共
                                 <span>{{rankDataList.length}}</span>
