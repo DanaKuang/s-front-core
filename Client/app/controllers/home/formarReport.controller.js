@@ -46,7 +46,7 @@ define([], function() {
 			};
 			$scope.winDataObj = {
 				'dt' : $scope.goodsWinDate,
-				'activityName': $("#activityName").val().join(),
+				'activityId': $("#activityName").val().join(),
 				'cityName': $("#activityCityName").val().join(),
 				'awardName': $("#inputSou").val()
 			}
