@@ -128,7 +128,7 @@ define([], function () {
         $model.$getSmokeTypePie(data).then(function (res) {
           var res = res.data;
           pieOPtion.series[0].data = [];
-          res.forEach(function(n) {
+          $(res).each(function(index,n) {
             pieOPtion.legend.data.push(n.smokeTypeName);
             pieOPtion.series[0].data.push({
               "value":n.monaddScanUv,
@@ -157,7 +157,7 @@ define([], function () {
           var res = res.data || [];
           frequencyDataLeft.yAxis.data = [];
           frequencyDataLeft.series[0].data = [];
-          res.forEach(function(n){
+          $(res).each(function(index,n){
             frequencyDataLeft.yAxis.data.push(n.scanPvname);
             frequencyDataLeft.series[0].data.push(n.mon3addEffScanPv);
           })
@@ -167,7 +167,7 @@ define([], function () {
           var res = res.data || [];
           frequencyDataRight.yAxis.data = [];
           frequencyDataRight.series[0].data = [];
-          res.forEach(function(n){
+          $(res).each(function(index,n){
             frequencyDataRight.yAxis.data.push(n.scanPvname);
             frequencyDataRight.series[0].data.push(n.monaddEffScanPv);
           })
@@ -179,17 +179,26 @@ define([], function () {
         var userDayJson = $model.$dayTrend.data;
         $model.$getDayTrendScan(params).then(function(res){
           var res = res.data || [];
+          if (res.length>=8) {
+            userMonthJson.dataZoom.push({
+              "type": "inside",
+              "show": true,
+              "start":0,
+              "end": 30,
+              "zoomLock":true
+            })
+          }
           userDayJson.xAxis[0].data = [];
-          userDayJson.series.forEach(function(n){
+          $(userDayJson.series).each(function(index,n){
             n.data = [];
-          })
-          res.forEach(function(n) {
+          });
+          $(res).each(function(index,n) {
             userDayJson.xAxis[0].data.push(n.statDate);
             userDayJson.series[0].data.push(n.scanUv);
             userDayJson.series[1].data.push(n.scanNewUv);
             userDayJson.series[2].data.push(n.day3EffScanAvgUV);
           })
-          userChartTrend.setOption(userDayJson,true)
+          userChartTrend.setOption(userDayJson)
         })
         //用户发展月趋势
         var userMonthTrend = echarts.init(document.getElementById("user-month-trend"));
@@ -206,10 +215,10 @@ define([], function () {
             })
           }
           userMonthJson.xAxis[0].data = [];
-          userMonthJson.series.forEach(function(n){
-            n.data = [0];
+          $(userMonthJson.series).each(function(index,n){
+            n.data = [];
           });
-          res.forEach(function(n) {
+          $(res).each(function(index,n) {
             userMonthJson.xAxis[0].data.push(n.statDate);
             userMonthJson.series[0].data.push(n.scanUv);
             userMonthJson.series[1].data.push(n.scanNewUv);
