@@ -12,12 +12,6 @@
   <meta name="robots" content="all" />
   <link rel="stylesheet" href="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/css/font-awesome.min.css">
   <link rel="stylesheet" href="/statics/assets/style/login.css">
-  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/jquery.min.js"></script>
-  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
-  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/fingerprint.js"></script>
-  <script type="text/javascript">
-    document.cookie = 'CLIENTSESSIONID='+ $.md5(new Fingerprint().get().toString()+';path=/');
-  </script>
 </head>
 <body>
   <div class="ui-wrapper">
@@ -34,7 +28,7 @@
       <!--验证码-->
       <div class="ui-label ui-code">
         <input type="text" name="verifyCode" placeholder="验证码">
-        <img src="/api/tztx/saas/admin/login/verifyCode?" onclick="this.src+='1'">
+        <img src="" onclick="this.src+='1'" id="verifyCode">
         <div id="drag" style="display: none;"></div>
       </div>
       <!--记住用户名-->
@@ -48,6 +42,9 @@
       <button type="button" name="login">登 录</button>
     </div>
   </div>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/jquery.min.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/fingerprint.js"></script>
   <script src="/statics/assets/libs/login.js"></script>
 </body>
 </html>
