@@ -182,6 +182,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.scanConf.rows = sScope.rows = res.data || [];
                     sScope.$apply();
@@ -201,6 +206,11 @@ define([], function () {
                         s.zhongjiangmian = transNum(s.zhongjiangmian);
                         s.rjzhongjiangcishu = transNum(s.rjzhongjiangcishu);
                         s.rjcuxiaochengben = transNum(s.rjcuxiaochengben);
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.targetConf.rows = tScope.rows = res.data || [];
                     tScope.$apply();
@@ -211,6 +221,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.realConf.rows = rScope.rows = res.data || [];
                     rScope.$apply();
@@ -221,6 +236,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.packetConf.rows = pScope.rows = res.data || [];
                     pScope.$apply();
