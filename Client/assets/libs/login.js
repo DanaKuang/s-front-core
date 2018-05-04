@@ -135,7 +135,9 @@
     // 退出清空session记录
     sessionStorage.removeItem('menuIdx');
     sessionStorage.removeItem('hash');
+    document.cookie = 'CLIENTSESSIONID='+ $.md5(new Fingerprint().get().toString()+';path=/');
 
+    $("#verifyCode").attr('src', '/api/tztx/saas/admin/login/verifyCode?');
     // 绑定事件及初始化
     $name.val(localStorage.getItem('username') || "");
     $word.val("");
