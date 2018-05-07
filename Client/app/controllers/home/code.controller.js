@@ -98,7 +98,7 @@ define([], function () {
 
             // 翻页
             $scope.$on('frompagechange', function (e,v,f) {
-                searchFn(false, angular.extend({}, getParams(), f));
+                searchFn(angular.extend({}, getParams(), f));
             });
 
             // 重置函数
