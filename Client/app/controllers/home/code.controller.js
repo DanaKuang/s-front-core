@@ -71,6 +71,12 @@ define([], function () {
                         $scope.tableArr = ret;
                         $scope.paginationConf = res;
                         $scope.$apply();
+                        $(".img-hover").each(function (e) {
+                            $(this).popover({
+                                html: true,
+                                content: "<img src='"+this.src+"' style='width:200px;'/>"
+                            })
+                        });
                     } else {
                         console.log('接口异常啦！！！');
                     }
