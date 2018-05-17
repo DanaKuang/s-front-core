@@ -1,0 +1,138 @@
+@charset "UTF-8";
+/**
+ * Author: liubin
+ * Create Date: 2018-05-11
+ * Description: 竞猜活动
+ */
+.ui-activity-quiz {
+  margin-top: 15px; }
+  .ui-activity-quiz .tr {
+    text-align: right; }
+  .ui-activity-quiz .margin-top {
+    margin-top: 15px; }
+  .ui-activity-quiz .ui-panel-title {
+    height: 30px; }
+    .ui-activity-quiz .ui-panel-title button.btn-default,
+    .ui-activity-quiz .ui-panel-title button.btn-default:hover,
+    .ui-activity-quiz .ui-panel-title button.btn-default:active,
+    .ui-activity-quiz .ui-panel-title button.btn-default:focus {
+      position: absolute;
+      right: 15px;
+      height: 24px;
+      padding: 0 12px;
+      background-color: #44c1ed;
+      border-color: #44c1ed;
+      color: #fff; }
+  .ui-activity-quiz .ui-btn-ctrl {
+    display: block !important;
+    text-align: right;
+    margin-right: 0 !important; }
+  .ui-activity-quiz #id_quiz_form select {
+    width: 147px;
+    height: 30px;
+    padding: 4px 12px; }
+  .ui-activity-quiz #id_quiz_form .form-control {
+    width: 147px !important; }
+  .ui-activity-quiz #id_quiz_form .form-group {
+    margin-right: 15px; }
+  .ui-activity-quiz #id_quiz_form .multiselect.btn {
+    width: 147px;
+    height: 30px;
+    padding: 4px 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  .ui-activity-quiz #id_quiz_form .ui-btn-ctrl button {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+
+.ui-detail-box .opts {
+  display: flex;
+  justify-content: space-around;
+  border: 0;
+  border-top: 1px solid #ddd; }
+  .ui-detail-box .opts div {
+    cursor: pointer; }
+  .ui-detail-box .opts div:hover {
+    text-decoration: underline;
+    color: #44c1ed; }
+
+#add_edit_form .txt,
+#id_inject_num .txt {
+  height: 30px;
+  line-height: 30px; }
+
+#add_edit_form .red,
+#id_inject_num .red {
+  color: red; }
+
+#add_edit_form button.btn-primary,
+#add_edit_form button.btn-primary:hover,
+#add_edit_form button.btn-primary:active,
+#add_edit_form button.btn-primary:focus,
+#id_inject_num button.btn-primary,
+#id_inject_num button.btn-primary:hover,
+#id_inject_num button.btn-primary:active,
+#id_inject_num button.btn-primary:focus {
+  padding: 0 12px;
+  background-color: #44c1ed;
+  border-color: #44c1ed;
+  color: #fff; }
+
+#add_edit_form .dropdown-menu,
+#id_inject_num .dropdown-menu {
+  left: 15px;
+  text-align: center; }
+  #add_edit_form .dropdown-menu li,
+  #id_inject_num .dropdown-menu li {
+    cursor: pointer; }
+    #add_edit_form .dropdown-menu li img,
+    #id_inject_num .dropdown-menu li img {
+      width: 50px; }
+
+#id_tips_form .modal-body,
+#id_rate_change .modal-body,
+#id_draw_match .modal-body {
+  text-align: center;
+  font-size: 14px; }
+
+#id_tips_form button.btn-primary,
+#id_tips_form button.btn-primary:hover,
+#id_tips_form button.btn-primary:active,
+#id_tips_form button.btn-primary:focus,
+#id_rate_change button.btn-primary,
+#id_rate_change button.btn-primary:hover,
+#id_rate_change button.btn-primary:active,
+#id_rate_change button.btn-primary:focus,
+#id_draw_match button.btn-primary,
+#id_draw_match button.btn-primary:hover,
+#id_draw_match button.btn-primary:active,
+#id_draw_match button.btn-primary:focus {
+  padding: 0 12px;
+  background-color: #44c1ed;
+  border-color: #44c1ed;
+  color: #fff; }
+
+#id_tips_form .progress,
+#id_rate_change .progress,
+#id_draw_match .progress {
+  position: relative;
+  height: 30px;
+  width: 350px;
+  text-align: right;
+  line-height: 30px; }
+
+#id_tips_form .bar,
+#id_rate_change .bar,
+#id_draw_match .bar {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ccc; }

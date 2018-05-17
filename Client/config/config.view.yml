@@ -275,6 +275,13 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/card/cardmanagement.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/quiz/*'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/quiz.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'

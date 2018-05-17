@@ -1773,6 +1773,76 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/listMatch'
+    authorized: 1
+    description: '世界杯列表查询'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/topIdx'
+    authorized: 1
+    description: '主推'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/hideMatch'
+    authorized: 1
+    description: '隐藏'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/startMatchBet'
+    authorized: 1
+    description: '开始投注'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/matchDetail'
+    authorized: 1
+    description: '详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/drawMatch'
+    authorized: 1
+    description: '开奖'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/searchMatchDatas'
+    authorized: 1
+    description: '日志导出'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/rate'
+    authorized: 1
+    description: '赔率计算'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/inject'
+    authorized: 1
+    description: '金币注入'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/searchTeam'
+    authorized: 1
+    description: '金币注入'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'
