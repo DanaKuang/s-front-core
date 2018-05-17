@@ -9,7 +9,7 @@ define([], function () {
         ServiceType: 'service',
         ServiceContent: ['request', function (request) {
             this.$model = function () {
-                var CHANGE_PWD_API = '/api/tztx/admin/user/modifyPwd';
+                var CHANGE_PWD_API = '/api/tztx/saas/admin/user/modifyPwd';
                 // 修改密码
                 this.changePwd = function (params) {
                     return request.$Search(CHANGE_PWD_API, params, true);

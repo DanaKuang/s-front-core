@@ -37,7 +37,7 @@ define([], function () {
                         }, 3000);
                     } else {
                         console.log('接口异常！！！');
-                        $("#tipsModalId .modal-body").html(data.message);
+                        $("#tipsModalId .modal-body").html(data.message || "修改密码失败!");
                     }
                     $("#tipsModalId").modal('show');
                 });
