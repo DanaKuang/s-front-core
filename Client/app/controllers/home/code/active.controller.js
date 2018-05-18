@@ -20,7 +20,6 @@ define([], function () {
                 tableArr: [],
                 paginationConf: '',
                 search: searchFn,
-                reset: resetFn,
                 activeFn: activeFn
             });
 
@@ -58,15 +57,6 @@ define([], function () {
                     } else {
                         alt.error("激活失败！");
                     }
-                });
-            }
-
-            // 重置函数
-            function resetFn () {
-                $scope = angular.extend($scope, {
-                    code: '',
-                    verifycode: '',
-                    type: '1'
                 });
             }
 

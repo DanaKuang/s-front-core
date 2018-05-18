@@ -42,7 +42,6 @@
                             <!--按钮-->
                             <div class="ui-btn-ctrl form-group">
                                 <button type="submit" class="btn btn-primary" ng-click="search()">搜索</button>
-                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
                             </div>
                         </form>
                     </div>
@@ -71,7 +70,8 @@
                                 <tbody>
                                     <tr ng-repeat="t in tableArr">
                                         <td>
-                                            <a href="javascript:void(0)" ng-click="activeFn()">激活</a>
+                                            <a ng-if="t.lableStatus == 0" href="javascript:void(0)" ng-click="activeFn()">激活</a>
+                                            <span ng-if="t.lableStatus == 1">激活</span>
                                         </td>
                                         <td>{{['未激活','已激活'][t.lableStatus]}}</td>
                                         <td>{{['','内码','外码'][t.type]}}</td>
