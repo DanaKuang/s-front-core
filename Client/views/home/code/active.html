@@ -1,0 +1,99 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-04-04
+ * Description:
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home.active.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<!--html-->
+<div ng-controller="ActiveCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid row">
+            <div class="ui-home-active margin-top col-md-12">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <i class="active"></i><span>异常码管理</span>
+                </div>
+                <!--查询-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_active_form" autocomplete="off">
+                            <!--CODE-->
+                            <div class="form-group">
+                                <label for="code" class="control-label">CODE</label>
+                                <input type="text" name="code" ng-model="code" class="form-control input-sm">
+                            </div>
+                            <!--SN/验证码-->
+                            <div class="form-group">
+                                <label for="verifycode" class="control-label">SN/验证码</label>
+                                <input type="text" name="verifycode" ng-model="verifycode" class="form-control input-sm">
+                            </div>
+                            <!--类型-->
+                            <div class="form-group">
+                                <label for="code" class="control-label">类型</label>
+                                <select name="type" class="form-control input-sm" ng-model="type">
+                                    <option value="1">内码</option>
+                                    <option value="2">外码</option>
+                                </select>
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary" ng-click="search()">搜索</button>
+                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--内容-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div style="overflow-x: auto;">
+                            <table class="table-hover table table-bordered" style="min-width:1400px;">
+                                <thead>
+                                    <tr>
+                                        <th>操作</th>
+                                        <th>状态</th>
+                                        <th>类型</th>
+                                        <th>CODE</th>
+                                        <th>验证码</th>
+                                        <th>SN</th>
+                                        <th>内部批次号</th>
+                                        <th>印刷厂返回子批次号</th>
+                                        <th>规格</th>
+                                        <th>扫码次数</th>
+                                        <th>生成时间</th>
+                                        <th>首扫时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="t in tableArr">
+                                        <td>
+                                            <a href="javascript:void(0)" ng-click="activeFn()">激活</a>
+                                        </td>
+                                        <td>{{['未激活','已激活'][t.lableStatus]}}</td>
+                                        <td>{{['','内码','外码'][t.type]}}</td>
+                                        <td>{{t.code}}</td>
+                                        <td>{{t.verifycode}}</td>
+                                        <td>{{t.sn}}</td>
+                                        <td>{{t.batch}}</td>
+                                        <td>{{t.subbatch}}</td>
+                                        <td>{{t.productname}}</td>
+                                        <td>{{t.count}}次</td>
+                                        <td>{{t.lastcreatetime}}</td>
+                                        <td>{{t.firstscantime}}</td>
+                                    </tr>
+                                    <tr ng-if='!tableArr.length'>
+                                        <td colspan='12'>暂无符合条件的数据</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

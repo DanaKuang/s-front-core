@@ -2734,6 +2734,20 @@ fackCode:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/codeActivate/queryCode'
+    authorized: 1
+    description: '异常码列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/codeActivate/updateDate'
+    authorized: 1
+    description: '异常码激活'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 adsSource:                                      # 广告资源管理，命名只要不跟上面重复即可
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/ad/queryList'

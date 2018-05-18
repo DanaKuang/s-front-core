@@ -211,6 +211,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/code/code.html'
+  - httpmethod: 'get'                       # 异常码激活
+    routepath: '/view/home/active'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/active.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
