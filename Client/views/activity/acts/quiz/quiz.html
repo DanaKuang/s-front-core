@@ -136,7 +136,7 @@
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.guestTeamName'].$error.required}">
                                 <input type="text" name="form.guestTeamName" ng-model="form.guestTeamName" placeholder="请输入客队名" class="form-control input-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-change="getTeamFn('guestTeamArr')" required>
                                 <ul class="dropdown-menu" id="guest_team">
-                                    <li ng-repeat="g in guestTeamArr" data-image="{{h.teamPicture}}" data-code="{{h.teamCode}}">{{g.teamName}}</li>
+                                    <li ng-repeat="g in guestTeamArr" data-image="{{g.teamPicture}}" data-code="{{g.teamCode}}">{{g.teamName}}</li>
                                     <li ng-if="!form.guestTeamName && !guestTeamArr.length"><img src="http://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/loading.gif" ></li>
                                     <span ng-if="form.guestTeamName && !guestTeamArr.length">没有此条记录！</span>
                                 </ul>
@@ -146,14 +146,16 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">主队队标<span class="red">*</span></label>
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.hostTeamPic'].$error.required}">
-                                <input type="file" name="form.hostTeamPic" ng-model="form.hostTeamPic" class="form-control input-sm" ng-if="!form.hostTeamPic" required>
-                                <img ng-if="form.hostTeamPic" src="{{form.hostTeamPic}}">
+                                <input type="file" name="form.hostTeamPic" ng-model="form.hostTeamPic" class="form-control input-sm" onchange="angular.element(this).scope().uploadImg('hostTeamPic')" required>
+                                <img ng-if="form.hostTeamPic" ng-src="{{form.hostTeamPic}}" class="team-img">
+                                <img ng-if="!form.hostTeamPic" src="/statics/assets/image/img-upload.png" class="team-img">
                                 <p class="help-block" ng-show="formName.$submitted && formName['form.hostTeamPic'].$error.required">请上传主队队标</p>
                             </div>
                             <label class="control-label col-md-2">客队队标<span class="red">*</span></label>
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.guestTeamPic'].$error.required}">
-                                <input type="file" name="form.guestTeamPic" ng-model="form.guestTeamPic" class="form-control input-sm" ng-if="!form.guestTeamPic" ng-change="uploadImg()" required>
-                                <img ng-if="form.guestTeamPic" src="{{form.guestTeamPic}}">
+                                <input type="file" name="form.guestTeamPic" ng-model="form.guestTeamPic" class="form-control input-sm" onchange="angular.element(this).scope().uploadImg('guestTeamPic')" required>
+                                <img ng-if="form.guestTeamPic" ng-src="{{form.guestTeamPic}}" class="team-img">
+                                <img ng-if="!form.guestTeamPic" src="/statics/assets/image/img-upload.png" class="team-img">
                                 <p class="help-block" ng-show="formName.$submitted && formName['form.guestTeamPic'].$error.required">请上传客队队标</p>
                             </div>
                         </div>
@@ -177,7 +179,7 @@
                             </div>
                             <label class="control-label col-md-2">投注上限</label>
                             <div class="col-md-3">
-                                <input type="text" name="form.betLimit" ng-model="form.betLimit" placeholder="请输入投注上限" class="form-control input-sm">
+                                <input type="number" step="1" min="0" name="form.betLimit" ng-model="form.betLimit" placeholder="请输入投注上限" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
@@ -199,7 +201,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2">
-                                <input type="checkbox" ng-ckecked="rateCheck" ng-click="rateCheck = !rateCheck"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台抽成
+                                <input type="checkbox" ng-checked="rateCheck" ng-click="rateCheck = !rateCheck"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台抽成
                             </label>
                             <div class="col-md-3 form-inline" ng-show="rateCheck">
                                 <input type="number" name="form.rake" step="1" min="0" ng-model="form.rake" class="form-control input-sm">&nbsp;%
@@ -207,8 +209,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="formName.$submitted && formName.$valid">确定</button>
+                            <button type="reset" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                     </form>
                 </div>

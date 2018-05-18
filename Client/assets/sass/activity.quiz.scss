@@ -92,6 +92,18 @@
     .red {
         color: red;
     }
+    input[type="file"] {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        z-index: 101;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .team-img {
+        width: 100px;
+        height: 100px;
+    }
     button.btn-primary,
     button.btn-primary:hover,
     button.btn-primary:active,

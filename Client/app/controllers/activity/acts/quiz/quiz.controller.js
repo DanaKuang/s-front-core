@@ -16,6 +16,23 @@ define([], function () {
 
             var $model = $scope.$model;
 
+            var formDef = {
+                form: {
+                    id: '',
+                    betStatus: '1',
+                    hostTeamName: '',
+                    guestTeamName: '',
+                    hostTeamPic: '',
+                    guestTeamPic: '',
+                    stimeStr: '',
+                    betEtimeStr: '',
+                    matchName: '',
+                    betLimit: 0,
+                    hostWinInject: 0,
+                    tieInject: 0,
+                    guestWinInject: 0
+                }
+            };
 
             // 默认值
             $scope = angular.extend($scope, {
@@ -30,22 +47,8 @@ define([], function () {
                 injectCheck: false,
                 rateCheck: false,
                 getTeamFn: getTeamFn,
-                form: {
-                    id: '',
-                    betStatus: '',
-                    hostTeamName: '',
-                    guestTeamName: '',
-                    hostTeamPic: '',
-                    guestTeamPic: '',
-                    stimeStr: '',
-                    betEtimeStr: '',
-                    matchName: '',
-                    betLimit: '',
-
-                    hostWinInject: 0,
-                    tieInject: 0,
-                    guestWinInject: 0
-                },
+                uploadImg: uploadImg,
+                form: {},
                 paginationConf: '',
                 logs: logs,
                 addAct: addAct,
@@ -62,7 +65,7 @@ define([], function () {
                 injectApiNum: injectApiNum,
                 drawApiMatch: drawApiMatch,
                 startMatchBet: startMatchBet
-            });
+            }, formDef);
 
             // 获取team列表
             function getTeamFn (name) {
@@ -79,17 +82,106 @@ define([], function () {
 
             // 新增
             function addAct () {
+                $scope.form = angular.extend({}, formDef.form);
+                $("[name='form.hostTeamPic']").val('');
+                $("[name='form.guestTeamPic']").val('');
                 $("#add_edit_form").modal('show');
             }
 
+            // 监控状态变化
+            $scope.$watch('form.betStatus', function (n,o,s) {
+                if (n != o) {
+                    if (n == 2) {
+                        s.form.tieInject = 0;
+                    }
+                }
+            });
+
+            // 监控状态变化
+            $scope.$watch('injectCheck', function (n,o,s) {
+                if (n != o) {
+                    if (n == false) {
+                        s.form.hostWinInject = 0;
+                        s.form.tieInject = 0;
+                        s.form.guestWinInject = 0;
+                    }
+                }
+            });
+
+            // 监控状态变化
+            $scope.$watch('rateCheck', function (n,o,s) {
+                if (n != o) {
+                    if (n == false) {
+                        s.form.rake = 0;
+                    }
+                }
+            });
+
             // 编辑
-            function editAct () {
-                $("#add_edit_form").modal('show');
+            function editAct (item) {
+                $model.detailMatch({
+                    id: item.id
+                }).then(function (res) {
+                    res = res.data || {};
+                    if (res.ret == '200000') {
+                        $scope.form = _.pick(angular.extend({}, formDef.form, res.data),
+                            'id',
+                            'betStatus',
+                            'hostTeamName',
+                            'guestTeamName',
+                            'hostTeamPic',
+                            'guestTeamPic',
+                            'stimeStr',
+                            'betEtimeStr',
+                            'matchName',
+                            'betLimit',
+                            'hostWinInject',
+                            'tieInject',
+                            'guestWinInject',
+                            'rake'
+                        );
+                        $scope.rateCheck = !!$scope.form.rake;
+                        $scope.injectCheck = !!($scope.form.hostWinInject || $scope.form.tieInject || $scope.form.guestWinInject);
+                        $scope.$apply();
+                        $("[name='form.hostTeamPic']").val('');
+                        $("[name='form.guestTeamPic']").val('');
+                        $("#add_edit_form").modal('show');
+                    }
+                });
             }
 
             // 更新保存
             function submitForm (form) {
-                debugger
+                if (!form.$valid) return;
+                $model.update(angular.extend($scope.form, {
+                    activityCode: actCode
+                })).then(function (res) {
+                    res = res.data || {};
+                    if (res.ret == '200000') {
+                        form.$submitted = false;
+                        $("#add_edit_form").modal('hide');
+                        alt.success("成功！");
+                        initSearch();
+                    } else {
+                        alt.error(res.message || "接口异常！");
+                    }
+                });
+            }
+
+            // 图片上传
+            function uploadImg (name) {
+                var file = event.target.files[0];
+                var data = new FormData();
+                data.append('file', file);
+                $model.upload(data).then(function (res) {
+                    if (res.ret == '200000') {
+                        $scope.form[name] = res.data.accessUrl;
+                        $scope.$apply();
+                        alt.success('上传成功！');
+                    } else {
+                        alt.error('上传失败！');
+                    }
+                });
             }
 
             // 主推
@@ -295,7 +387,6 @@ define([], function () {
                 // 初始化查询
                 initSearch();
 
-
                 $(".date").datetimepicker({
                     language: "zh-CN",
                     format: "yyyy-mm-dd hh:ii:ss",
@@ -306,13 +397,19 @@ define([], function () {
                 // input搜索输入
                 $("#host_team").on('click', 'li', function (e) {
                     $scope.form.hostTeamName = $(e.currentTarget).text();
-                    $scope.form.hostTeamPic = $(e.currentTarget).attr('data-image');
+                    var img = $(e.currentTarget).attr('data-image');
+                    if (!!img) {
+                        $scope.form.hostTeamPic = img;
+                    }
                     $scope.$apply();
                 });
                 // input搜索输入
                 $("#guest_team").on('click', 'li', function (e) {
                     $scope.form.guestTeamName = $(e.currentTarget).text();
-                    $scope.form.guestTeamPic = $(e.currentTarget).attr('data-image');
+                    var img = $(e.currentTarget).attr('data-image');
+                    if (!!img) {
+                        $scope.form.guestTeamPic = img;
+                    }
                     $scope.$apply();
                 });
             });

@@ -72,6 +72,20 @@
 #id_inject_num .red {
   color: red; }
 
+#add_edit_form input[type="file"],
+#id_inject_num input[type="file"] {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 101;
+  opacity: 0;
+  cursor: pointer; }
+
+#add_edit_form .team-img,
+#id_inject_num .team-img {
+  width: 100px;
+  height: 100px; }
+
 #add_edit_form button.btn-primary,
 #add_edit_form button.btn-primary:hover,
 #add_edit_form button.btn-primary:active,

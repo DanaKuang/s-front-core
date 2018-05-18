@@ -1843,6 +1843,13 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/worldcup/saveOrModifyMatch'
+    authorized: 1
+    description: '金币注入'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'

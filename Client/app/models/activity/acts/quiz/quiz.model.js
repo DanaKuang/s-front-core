@@ -21,6 +21,7 @@ define([], function () {
                 var POST_INJECT_MATCH = "/api/tztx/saas/saotx/worldcup/inject";         // 金币注入
                 var POST_TEAM_NAME = "/api/tztx/saas/saotx/worldcup/searchTeam";        // 球队关键字查询
                 var UPLOAD_IMG_FILE = "/api/tztx/saas/saotx/attach/commonAliUpload";    // 图片上传
+                var UPDATA_MATCH = "/api/tztx/saas/saotx/worldcup/saveOrModifyMatch";   // 更新列表字段
 
                 // 表格数据
                 this.getTableData = function (params) {
@@ -67,9 +68,27 @@ define([], function () {
                     return request.$Search(POST_TEAM_NAME, params);
                 };
 
+                // 更新列表字段
+                this.update = function (params) {
+                    return request.$Search(UPDATA_MATCH, params);
+                };
+
                 // 图片上传
                 this.upload = function (params) {
-                    return request.$Search(UPLOAD_IMG_FILE, params);
+                    return $.ajax({
+                        url: UPLOAD_IMG_FILE,
+                        type: 'POST',
+                        data: params,
+                        headers: {
+                            ContentType: "multipart/form-data",
+                            token: sessionStorage.getItem('access_token'),
+                            loginId: sessionStorage.getItem('access_loginId')
+                        },
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json'
+                    })
                 };
 
                 // 日志导出
