@@ -135,17 +135,16 @@
                                         </div>
                                     </form>
                                 </div>
-
+                                <!-- 排序 -->
+                                <div ng-show="vm.currentPage == 'index'" class="sort-btn-con">
+                                    <button ng-click="sortBy(1)" class="btn btn-primary">按入驻时间排序</button>
+                                    <button ng-click="sortBy(2)" class="btn btn-primary">按粉丝数排序</button>
+                                    <button ng-click="sortBy(3)" class="btn btn-primary">按业绩排序</button>
+                                    <button ng-click="sortBy(5)" class="btn btn-primary">按积分排序</button>
+                                    <button ng-click="exportFn(1,false,true)" class="btn btn-primary" style="margin: 0;float: right;">导出零售户</button>
+                                </div>
                                 <!-- table -->
                                 <div class="panel-body scroll-con">
-                                    <!-- 排序 -->
-                                    <div ng-show="vm.currentPage == 'index'" class="sort-btn-con">
-                                        <button ng-click="sortBy(1)" class="btn btn-primary">按入驻时间排序</button>
-                                        <button ng-click="sortBy(2)" class="btn btn-primary">按粉丝数排序</button>
-                                        <button ng-click="sortBy(3)" class="btn btn-primary">按业绩排序</button>
-                                        <button ng-click="sortBy(5)" class="btn btn-primary">按积分排序</button>
-                                        <button ng-click="exportFn(1,false,true)" class="btn btn-primary">导出零售户</button>
-                                    </div>
 
                                     <table ng-show="vm.currentPage == 'index'" class="table table-bordered table-hover">
                                         <thead>
