@@ -88,6 +88,38 @@ define([], function () {
           $model.modifyAuthOrg = function (data) {
             return request.$Search(GET_MANAGE_AUTHORG, data)
           }
+
+          // 导出 刘彬 2018/05/21
+          var EXPORT_MANAGE_LIST = '/api/tztx/seller-manager/seller/exportDatas';
+          $model.exportManage = function (params) {
+              var xhr = new XMLHttpRequest();
+              var formData = new FormData();
+              for(var attr in params) {
+                  formData.append(attr, params[attr]);
+              }
+              xhr.overrideMimeType("text/plain; charset=x-user-defined");
+              xhr.open('POST', EXPORT_MANAGE_LIST, true);
+              xhr.responseType = "arraybuffer";
+              xhr.setRequestHeader("token", sessionStorage.getItem('access_token'));
+              xhr.setRequestHeader("loginId", sessionStorage.getItem('access_loginId'));
+              xhr.onload = function(res) {
+                  if (this.status == 200) {
+                      var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                      var respHeader = xhr.getResponseHeader("Content-Disposition");
+                      var fileName = decodeURI(respHeader.match(/filename=(.*?)(;|$)/)[1]);
+                      if (window.navigator.msSaveOrOpenBlob) {
+                          navigator.msSaveBlob(blob, fileName);
+                      } else {
+                          var link = document.createElement('a');
+                          link.href = window.URL.createObjectURL(blob);
+                          link.download = fileName;
+                          link.click();
+                          window.URL.revokeObjectURL(link.href);
+                      }
+                  }
+              }
+              return xhr.send(formData);
+          }
           // *** 零售户管理 end
 
 
@@ -237,8 +269,8 @@ define([], function () {
           }
 
           //*** 提现审核 end
-          
-          //*** 业绩设置 start 
+
+          //*** 业绩设置 start
           var achieveListUrl = '/api/tztx/seller-manager/achieve/queryList'; //获取业绩列表
           $model.getAchieveList= function (data) {
             return request.$Search(achieveListUrl, data, true)
@@ -273,7 +305,7 @@ define([], function () {
           }
 
 
-          //*** 业绩设置 start 
+          //*** 业绩设置 start
 
         }]
     };
