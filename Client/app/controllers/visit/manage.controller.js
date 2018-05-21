@@ -120,6 +120,9 @@ define([], function () {
               data.salesmanName = $scope.vm.keywords || ''; // 业务员
             }
 
+            // 导出 liubin 2018/05/21
+            if (arguments[2]) return $model.exportManage(data);
+
             $model.getManageList(data).then(function(res) {
               $scope.vm.listData = res.data.list || [];
               // 是否刷新页码
@@ -257,6 +260,9 @@ define([], function () {
             $scope.vm.previousType = type;
           }
 
+          // 导出 刘彬 2018/05/21
+          $scope.exportFn = getList;
+
           // 上下架
           $scope.UpOffShelf = function (id, value) {
             if(value == 1) {
@@ -381,7 +387,7 @@ define([], function () {
             // 点击导航清空日历
             $scope.detial.startTime = ''
             $scope.detial.endTime = ''
-            
+
             // 判断当前nav页
             if(type == 'info') { // 基本信息
               $scope.detial.detialPage = 'info';
