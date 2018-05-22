@@ -40,10 +40,11 @@ define([], function () {
                         $scope.tableArr = [ret];
                         ret.lastcreatetime = df.datetime(ret.lastcreatetime);
                         ret.firstscantime = df.datetime(ret.firstscantime);
-                        $scope.$apply();
                     } else {
+                        $scope.tableArr = [];
                         alt.error(res.message || "接口异常！");
                     }
+                    $scope.$apply();
                 });
             }
 
