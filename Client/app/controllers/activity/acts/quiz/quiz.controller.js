@@ -234,6 +234,9 @@ define([], function () {
                         $scope.guestRate = res.data.rateResult.guestRate;
                         $scope.betStatus = res.data.betStatus;
                         $scope.$apply();
+                        if ($("#id_draw_match input:checked")[0]) {
+                            $("#id_draw_match input:checked")[0].checked = false;
+                        }
                         $("#id_draw_match").modal('show');
                     }
                 });
@@ -344,13 +347,19 @@ define([], function () {
 
             // 开奖接口
             function drawApiMatch () {
+                var val = $("#id_draw_match input:checked").val();
+                if (!val) {
+                    alt.error('请选择比赛结果！');
+                    return;
+                }
                 $model.drawMatch({
                     matchId: $scope.matchId,
-                    resultType: $("#id_draw_match input:checked").val()
+                    resultType: val
                 }).then(function (res) {
                     res = res.data || {};
                     if (res.ret == '200000') {
                         alt.success(res.data);
+                        $("#id_draw_match").modal('hide');
                         initSearch();
                     } else {
                         alt.error(res.message);
