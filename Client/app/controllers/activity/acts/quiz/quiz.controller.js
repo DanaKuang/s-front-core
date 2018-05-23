@@ -286,13 +286,14 @@ define([], function () {
 
             // 重置
             function detailReset () {
-                $acope = angular.extend($scope, {
-                    status: 0,
+                angular.extend($scope, {
+                    status: '',
                     stime: '',
                     etime: '',
                     likeName: '',
                     curPage: 1
                 });
+                initSearch();
             }
 
             // 注入金币弹窗
@@ -360,8 +361,8 @@ define([], function () {
             function initSearch (page) {
                 $model.getTableData(angular.extend({
                     activityCode: actCode,
-                    stime: $scope.stime || "",
-                    etime: $scope.etime || "",
+                    stime: $scope.stime ? ($scope.stime+':00') : "",
+                    etime: $scope.etime ? ($scope.etime+':00') : "",
                     status: $scope.status || "",
                     likeName: $scope.likeName || "",
                     currentPageNumber: $scope.curPage,
@@ -389,7 +390,7 @@ define([], function () {
 
                 $(".date").datetimepicker({
                     language: "zh-CN",
-                    format: "yyyy-mm-dd hh:ii:ss",
+                    format: "yyyy-mm-dd hh:ii",
                     autoclose: true,
                     todayBtn: true
                 });

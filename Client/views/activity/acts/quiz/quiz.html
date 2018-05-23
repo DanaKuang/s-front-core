@@ -25,13 +25,13 @@
                                 <!--比赛时间-->
                                 <div class="form-group">
                                     <label for="">比赛时间&nbsp;&nbsp;</label>
-                                    <input type="text" name="stime" ng-model="stime" class="form-control input-sm date">&nbsp;&nbsp;至&nbsp;&nbsp;
-                                    <input type="text" name="etime" ng-model="etime" class="form-control input-sm date">
+                                    <input id="stime" type="text" name="stime" ng-model="stime" class="form-control input-sm date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                    <input id="etime" type="text" name="etime" ng-model="etime" class="form-control input-sm date">
                                 </div>
                                 <!--队名-->
                                 <div class="form-group">
-                                    <label for="teamName" class="control-label">队名&nbsp;&nbsp;</label>
-                                    <input type="text" name="teamName" ng-model="teamName" class="form-control input-sm">
+                                    <label for="likeName" class="control-label">队名&nbsp;&nbsp;</label>
+                                    <input type="text" name="likeName" ng-model="likeName" class="form-control input-sm">
                                 </div>
                                 <!--状态-->
                                 <div class="form-group">
@@ -41,7 +41,7 @@
                                         <option value="-1">主推</option>
                                         <option value="0">隐藏</option>
                                         <option value="1">投注未开始</option>
-                                        <option value="2">可投注</option>
+                                        <option value="2">可投注(主推)</option>
                                         <option value="3">开奖中</option>
                                         <option value="4">已开奖</option>
                                     </select>
