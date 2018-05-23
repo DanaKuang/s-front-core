@@ -10,6 +10,7 @@ define([], function () {
         ServiceName: 'quizModel',
         ServiceContent: ['request', function (request) {
             this.$model = function () {
+                var isHuNan = sessionStorage.orgCode === 'hunanzhongyan' ? true : false;// 是否是湖南
                 var GET_TABLE_DATA = "/api/tztx/saas/saotx/worldcup/listMatch";         // 表格数据
                 var POST_TOP_IDX = "/api/tztx/saas/saotx/worldcup/topIdx";              // 主推
                 var POST_HIDE_MATCH = "/api/tztx/saas/saotx/worldcup/hideMatch";        // 隐藏

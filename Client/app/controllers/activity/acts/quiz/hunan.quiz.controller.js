@@ -5,15 +5,11 @@
  */
 
 define([], function () {
-    var quizCtrl = {
+    var hunanQuizCtrl = {
         ServiceType: 'controller',
-        ServiceName: 'quizCtrl',
+        ServiceName: 'hunanQuizCtrl',
         ViewModelName: 'quizModel',
-        ServiceContent: ['$scope', 'alertService', function ($scope, alt) {
-            // 获取actCode
-            var url = location.href;
-            var actCode = url.split('/').pop();
-
+        ServiceContent: ['$scope', 'alertService', 'dateFormatFilter', function ($scope, alt, dff) {
             var $model = $scope.$model;
 
             var formDef = {
@@ -43,8 +39,7 @@ define([], function () {
                 listArr: [],
                 hostTeamArr: [],
                 guestTeamArr: [],
-                currentPageNumber: 1,
-                pageSize: 10,
+                curPage: 1,
                 injectCheck: false,
                 rateCheck: false,
                 getTeamFn: getTeamFn,
@@ -154,9 +149,7 @@ define([], function () {
             // 更新保存
             function submitForm (form) {
                 if (!form.$valid) return;
-                $model.update(angular.extend($scope.form, {
-                    activityCode: actCode
-                })).then(function (res) {
+                $model.update(angular.extend($scope.form)).then(function (res) {
                     res = res.data || {};
                     if (res.ret == '200000') {
                         form.$submitted = false;
@@ -360,15 +353,13 @@ define([], function () {
 
             // 初始化查询
             function initSearch (page) {
-                angular.extend($scope, page || {})
                 $model.getTableData(angular.extend({
-                    activityCode: actCode,
                     stime: $scope.stime ? ($scope.stime+':00') : "",
                     etime: $scope.etime ? ($scope.etime+':00') : "",
                     status: $scope.status || "",
                     likeName: $scope.likeName || "",
-                    currentPageNumber: $scope.currentPageNumber,
-                    pageSize: $scope.pageSize
+                    currentPageNumber: $scope.curPage,
+                    pageSize: 50
                 }, page || {})).then(function (res) {
                     var res = res.data || {};
                     if (res.ret === '200000') {
@@ -419,5 +410,5 @@ define([], function () {
         }]
     };
 
-    return quizCtrl;
+    return hunanQuizCtrl;
 });

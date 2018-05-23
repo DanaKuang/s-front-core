@@ -289,6 +289,13 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/quiz/quiz.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/hunan-quiz'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/hunan-quiz.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'

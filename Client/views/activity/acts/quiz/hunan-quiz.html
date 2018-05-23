@@ -8,7 +8,7 @@
 <!--style-->
 <link rel="stylesheet" href="statics/assets/style/activity.quiz.css">
 <link rel="stylesheet" href="statics/assets/style/pagination.css">
-<div ng-controller="quizCtrl">
+<div ng-controller="hunanQuizCtrl">
     <div class="animated fadeInRightBig">
         <div class="container-fluid">
             <div class="row ui-activity-quiz">
@@ -70,7 +70,7 @@
                                     <tbody>
                                         <tr ng-repeat="item in listArr">
                                             <td class="opts">
-                                                <div ng-click="hideMatch(item)" ng-show="item.status != 2 && item.status != 0">隐藏</div>
+                                                <div ng-click="hideMatch(item)" ng-show="item.status != 2">隐藏</div>
                                                 <div ng-click="topIdx(item)">主推</div>
                                                 <div ng-click="startMatchBet(item)">开放投注</div>
                                                 <div ng-click="editAct(item)">编辑</div>
