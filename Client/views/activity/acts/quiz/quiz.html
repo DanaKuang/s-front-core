@@ -76,7 +76,7 @@
                                                 <div ng-click="editAct(item)">编辑</div>
                                                 <div ng-click="rateChange(item)">赔率管理</div>
                                                 <div ng-click="logs(item)" ng-show="item.status == 4">日志</div>
-                                                <div ng-click="drawMatch(item)">开奖</div>
+                                                <div ng-show="item.status != 3 && item.status != 4" ng-click="drawMatch(item)">开奖</div>
                                             </td>
                                             <td>{{item.statusName}}</td>
                                             <td>{{item.stimeStr}}</td>
