@@ -28,12 +28,12 @@ define([], function() {
         ServiceContent: [function() {
             var NProgress = require('nprogress');
             this.show = function() {
-                console.log("TODO: 动态在document body 加载progress");
+                // console.log("TODO: 动态在document body 加载progress");
                 NProgress.start();
             };
 
             this.hide = function() {
-                console.log("TODO: 动态在document body 移除progress");
+                // console.log("TODO: 动态在document body 移除progress");
                 NProgress.done();
             };
         }]

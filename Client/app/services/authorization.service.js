@@ -12,7 +12,6 @@ define([], function () {
 
       // 入口函数
       this.done = function () {
-        console.log('authorization....');
         angular
           .bootstrap(document, ['tztx.saas'])
           .invoke(['mark', function(mark) {

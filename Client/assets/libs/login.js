@@ -4,6 +4,8 @@
  */
 (function ($) {
 
+  console && console.log && console.log('%c', 'padding:100px 100px;background:url(https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/login.gif) no-repeat;');
+
   // login对象
   var login = {
     particles: [],
@@ -124,7 +126,6 @@
   }
   // 初始化登陆页
   login.init = function() {
-    console.log('login init...');
     var $name = $('[name="username"]');
     var $word = $('[name="password"]');
     var $code = $('[name="code"]');
