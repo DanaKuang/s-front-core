@@ -47,7 +47,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group ui-btn-ctrl">
-                                    <button type="submit" class="btn btn-primary" ng-click="detailSearch()">搜索</button>
+                                    <button type="submit" class="btn btn-primary" ng-click="detailSearch({currentPageNumber:1})">搜索</button>
                                     <button type="button" ng-click="detailReset()" class="btn btn-primary">重置</button>
                                 </div>
                             </form>
@@ -323,7 +323,7 @@
                             <label class="control-label col-md-2">选择赛果</label>
                             <div class="col-md-8 checkbox">
                                 <label><input type="radio" value="1" name="rGroups">主胜</label>
-                                <label><input type="radio" value="2" name="rGroups" ng-if="betStatus == 1">平局</label>
+                                <label ng-if="betStatus == 1"><input type="radio" value="2" name="rGroups">平局</label>
                                 <label><input type="radio" value="3" name="rGroups">主负</label>
                             </div>
                         </div>
