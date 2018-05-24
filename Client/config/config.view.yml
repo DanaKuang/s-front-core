@@ -23,11 +23,18 @@ login:                                      # 登录
     staticfile: 'login.html'
   - httpmethod: 'get'                       # 找回密码
     routepath: '/find'
-    description: '登陆页面'
+    description: '找回密码'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'find.html'
+  - httpmethod: 'get'                       # 找回密码
+    routepath: '/update'
+    description: '浏览器版本升级'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'update.html'
 home:                                       # 首页
   - httpmethod: 'get'                       # KPI
     routepath: '/view/home/kpi'
@@ -204,6 +211,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/code/code.html'
+  - httpmethod: 'get'                       # 异常码激活
+    routepath: '/view/home/active'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/active.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
@@ -268,6 +282,20 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/card/cardmanagement.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/quiz/*'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/quiz.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/hunan-quiz'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/hunan-quiz.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
