@@ -207,7 +207,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">主胜</label>
                             <div class="col-md-7 progress">
-                                {{hostWinPool}}金叶币
+                                {{hostWinPool}}金币
                                 <div class="bar" style="width: {{100*hostWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
                             </div>
                             <div class="col-md-2">
@@ -217,7 +217,7 @@
                         <div class="form-group" ng-if="betStatus == 1">
                             <label class="control-label col-md-2">平局</label>
                             <div class="col-md-7 progress">
-                                {{tiePool}}金叶币
+                                {{tiePool}}金币
                                 <div class="bar" style="width: {{100*tiePool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
                             </div>
                             <div class="col-md-2">
@@ -227,7 +227,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">主负</label>
                             <div class="col-md-7 progress">
-                                {{guestWinPool}}金叶币
+                                {{guestWinPool}}金币
                                 <div class="bar" style="width: {{100*guestWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
                             </div>
                             <div class="col-md-2">
