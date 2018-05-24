@@ -9,20 +9,34 @@ define([], function () {
         ServiceType: 'service',
         ServiceName: 'quizModel',
         ServiceContent: ['request', function (request) {
+
             this.$model = function () {
-                var isHuNan = sessionStorage.orgCode === 'hunanzhongyan' ? true : false;// 是否是湖南
-                var GET_TABLE_DATA = "/api/tztx/saas/saotx/worldcup/listMatch";         // 表格数据
-                var POST_TOP_IDX = "/api/tztx/saas/saotx/worldcup/topIdx";              // 主推
-                var POST_HIDE_MATCH = "/api/tztx/saas/saotx/worldcup/hideMatch";        // 隐藏
-                var POST_START_MATCH = "/api/tztx/saas/saotx/worldcup/startMatchBet";   // 开始投注
-                var POST_DETAIL_MATCH = "/api/tztx/saas/saotx/worldcup/matchDetail";    // 详情
-                var POST_DRAW_MATCH = "/api/tztx/saas/saotx/worldcup/drawMatch";        // 开奖
-                var POST_LOGS_EXPORT = "/api/tztx/saas/saotx/worldcup/searchMatchDatas";// 日志导出
-                var POST_RATE_MATCH = "/api/tztx/saas/saotx/worldcup/rate";             // 赔率计算
-                var POST_INJECT_MATCH = "/api/tztx/saas/saotx/worldcup/inject";         // 金币注入
-                var POST_TEAM_NAME = "/api/tztx/saas/saotx/worldcup/searchTeam";        // 球队关键字查询
-                var UPLOAD_IMG_FILE = "/api/tztx/saas/saotx/attach/commonAliUpload";    // 图片上传
-                var UPDATA_MATCH = "/api/tztx/saas/saotx/worldcup/saveOrModifyMatch";   // 更新列表字段
+
+                var hnUrl = sessionStorage.orgCode === 'hunanzhongyan' ? 'orange/' : '';      // 是否是湖南
+
+                var GET_TABLE_DATA = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/listMatch";      // 表格数据
+
+                var POST_TOP_IDX = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/topIdx";           // 主推
+
+                var POST_HIDE_MATCH = "/api/tztx/saas/saotx/worldcup/hideMatch";              // 隐藏
+
+                var POST_START_MATCH = "/api/tztx/saas/saotx/worldcup/startMatchBet";         // 开始投注
+
+                var POST_DETAIL_MATCH = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/matchDetail"; // 详情
+
+                var POST_DRAW_MATCH = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/drawMatch";     // 开奖
+
+                var POST_LOGS_EXPORT = "/api/tztx/saas/saotx/worldcup/searchMatchDatas";      // 日志导出
+
+                var POST_RATE_MATCH = "/api/tztx/saas/saotx/worldcup/rate";                   // 赔率计算
+
+                var POST_INJECT_MATCH = "/api/tztx/saas/saotx/worldcup/inject";               // 金币注入
+
+                var POST_TEAM_NAME = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/searchTeam";     // 球队关键字查询
+
+                var UPLOAD_IMG_FILE = "/api/tztx/saas/saotx/attach/commonAliUpload";          // 图片上传
+
+                var UPDATA_MATCH = "/api/tztx/saas/saotx/"+hnUrl+"worldcup/saveOrModifyMatch";// 更新列表字段
 
                 // 表格数据
                 this.getTableData = function (params) {
@@ -49,7 +63,7 @@ define([], function () {
                     return request.$Search(POST_DETAIL_MATCH, params);
                 };
 
-                // 详情
+                // 开奖
                 this.drawMatch = function (params) {
                     return request.$Search(POST_DRAW_MATCH, params);
                 };

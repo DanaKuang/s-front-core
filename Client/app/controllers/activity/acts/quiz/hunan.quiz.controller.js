@@ -10,6 +10,7 @@ define([], function () {
         ServiceName: 'hunanQuizCtrl',
         ViewModelName: 'quizModel',
         ServiceContent: ['$scope', 'alertService', 'dateFormatFilter', function ($scope, alt, dff) {
+
             var $model = $scope.$model;
 
             var formDef = {
@@ -22,11 +23,7 @@ define([], function () {
                     guestTeamPic: '',
                     stimeStr: '',
                     betEtimeStr: '',
-                    matchName: '',
-                    betLimit: 0,
-                    hostWinInject: 0,
-                    tieInject: 0,
-                    guestWinInject: 0
+                    betStimeStr: ''
                 }
             };
 
@@ -39,28 +36,20 @@ define([], function () {
                 listArr: [],
                 hostTeamArr: [],
                 guestTeamArr: [],
-                curPage: 1,
-                injectCheck: false,
-                rateCheck: false,
-                getTeamFn: getTeamFn,
-                uploadImg: uploadImg,
-                form: {},
+                pageSize: 10,
+                currentPageNumber: 1,
                 paginationConf: '',
-                logs: logs,
+                form: {},
                 addAct: addAct,
                 topIdx: topIdx,
                 editAct: editAct,
-                hideMatch: hideMatch,
-                injectNum: injectNum,
+                getTeamFn: getTeamFn,
+                uploadImg: uploadImg,
                 drawMatch: drawMatch,
                 submitForm: submitForm,
-                showInject: showInject,
-                rateChange: rateChange,
                 detailReset: detailReset,
                 detailSearch: initSearch,
-                injectApiNum: injectApiNum,
-                drawApiMatch: drawApiMatch,
-                startMatchBet: startMatchBet
+                drawApiMatch: drawApiMatch
             }, formDef);
 
             // 获取team列表
@@ -84,35 +73,6 @@ define([], function () {
                 $("#add_edit_form").modal('show');
             }
 
-            // 监控状态变化
-            $scope.$watch('form.betStatus', function (n,o,s) {
-                if (n != o) {
-                    if (n == 2) {
-                        s.form.tieInject = 0;
-                    }
-                }
-            });
-
-            // 监控状态变化
-            $scope.$watch('injectCheck', function (n,o,s) {
-                if (n != o) {
-                    if (n == false) {
-                        s.form.hostWinInject = 0;
-                        s.form.tieInject = 0;
-                        s.form.guestWinInject = 0;
-                    }
-                }
-            });
-
-            // 监控状态变化
-            $scope.$watch('rateCheck', function (n,o,s) {
-                if (n != o) {
-                    if (n == false) {
-                        s.form.rake = 0;
-                    }
-                }
-            });
-
             // 编辑
             function editAct (item) {
                 $model.detailMatch({
@@ -129,15 +89,8 @@ define([], function () {
                             'guestTeamPic',
                             'stimeStr',
                             'betEtimeStr',
-                            'matchName',
-                            'betLimit',
-                            'hostWinInject',
-                            'tieInject',
-                            'guestWinInject',
-                            'rake'
+                            'betStimeStr'
                         );
-                        $scope.rateCheck = !!$scope.form.rake;
-                        $scope.injectCheck = !!($scope.form.hostWinInject || $scope.form.tieInject || $scope.form.guestWinInject);
                         $scope.$apply();
                         $("[name='form.hostTeamPic']").val('');
                         $("[name='form.guestTeamPic']").val('');
@@ -149,12 +102,12 @@ define([], function () {
             // 更新保存
             function submitForm (form) {
                 if (!form.$valid) return;
-                $model.update(angular.extend($scope.form)).then(function (res) {
+                $model.update($scope.form).then(function (res) {
                     res = res.data || {};
                     if (res.ret == '200000') {
                         form.$submitted = false;
                         $("#add_edit_form").modal('hide');
-                        alt.success("成功！");
+                        alt.success($scope.form.id ? "更新成功！" : "新建成功！");
                         initSearch();
                     } else {
                         alt.error(res.message || "接口异常！");
@@ -193,22 +146,7 @@ define([], function () {
                 })
             }
 
-            // 隐藏
-            function hideMatch (item) {
-                $model.hideMatch({
-                    id: item.id
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        $("#id_tips_form .modal-body").html("隐藏成功！");
-                    } else {
-                        $("#id_tips_form .modal-body").html(res.message);
-                    }
-                    $("#id_tips_form").modal('show');
-                });
-            }
-
-            // 开奖
+            // 编辑详情
             function drawMatch (item) {
                 $model.detailMatch({
                     id: item.id
@@ -227,54 +165,11 @@ define([], function () {
                         $scope.guestRate = res.data.rateResult.guestRate;
                         $scope.betStatus = res.data.betStatus;
                         $scope.$apply();
+                        if ($("#id_draw_match input:checked")[0]) {
+                            $("#id_draw_match input:checked")[0].checked = false;
+                        }
                         $("#id_draw_match").modal('show');
                     }
-                });
-            }
-
-            // 赔率管理
-            function rateChange (item) {
-                $model.detailMatch({
-                    id: item.id
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        $scope.matchId = res.data.id || "";
-                        $scope.guestTeamName = res.data.guestTeamName || "";
-                        $scope.hostTeamName = res.data.hostTeamName || "";
-                        $scope.stimeStr = res.data.stimeStr || "";
-                        $scope.hostWinPool = res.data.hostWinPool || 0;
-                        $scope.tiePool = res.data.tiePool || 0;
-                        $scope.guestWinPool = res.data.guestWinPool || 0;
-                        $scope.hostRate = res.data.rateResult.hostRate;
-                        $scope.tieRate = res.data.rateResult.tieRate;
-                        $scope.guestRate = res.data.rateResult.guestRate;
-                        $scope.betStatus = res.data.betStatus;
-                        $scope.$apply();
-                        $("#id_rate_change").modal('show');
-                    }
-                });
-            }
-
-            // 开始投注
-            function startMatchBet (item) {
-                $model.startMatch({
-                    id: item.id
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        $("#id_tips_form .modal-body").html("设置成功，此场次已开放投注！");
-                    } else {
-                        $("#id_tips_form .modal-body").html(res.message);
-                    }
-                    $("#id_tips_form").modal('show');
-                });
-            }
-
-            // 日志
-            function logs (item) {
-                $model.expLogs({
-                    id: item.id
                 });
             }
 
@@ -290,60 +185,21 @@ define([], function () {
                 initSearch();
             }
 
-            // 注入金币弹窗
-            function showInject (name) {
-                $("#id_inject_num input").val("");
-                $("#id_inject_num").data('key', name);
-                $("#id_inject_num").modal('show');
-            }
-
-            // 注入金叶币
-            function injectNum () {
-                var key = $("#id_inject_num").data('key');
-                var num = $("#id_inject_num input").val();
-                $scope[key] += 10*num;
-                $model.rate({
-                    tiePool: $scope.tiePool,
-                    guestWinPool: $scope.guestWinPool,
-                    hostWinPool: $scope.hostWinPool
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        $scope.tieRate = res.data.tieRate;
-                        $scope.hostRate = res.data.hostRate;
-                        $scope.guestRate = res.data.guestRate;
-                        $scope.$apply();
-                    }
-                });
-            }
-
-            // 金叶币接口注入
-            function injectApiNum () {
-                $model.inject({
-                    matchId: $scope.matchId,
-                    tieInject: $scope.tiePool,
-                    hostWinInject: $scope.hostWinPool,
-                    guestWinInject: $scope.guestWinPool
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        alt.success("注入成功！");
-                        initSearch();
-                    } else {
-                        alt.error(res.message);
-                    }
-                });
-            }
-
             // 开奖接口
             function drawApiMatch () {
+                var val = $("#id_draw_match input:checked").val();
+                if (!val) {
+                    alt.error('请选择比赛结果！');
+                    return;
+                }
                 $model.drawMatch({
                     matchId: $scope.matchId,
-                    resultType: $("#id_draw_match input:checked").val()
+                    resultType: val
                 }).then(function (res) {
                     res = res.data || {};
                     if (res.ret == '200000') {
                         alt.success(res.data);
+                        $("#id_draw_match").modal('hide');
                         initSearch();
                     } else {
                         alt.error(res.message);
@@ -353,13 +209,14 @@ define([], function () {
 
             // 初始化查询
             function initSearch (page) {
+                angular.extend($scope, page || {})
                 $model.getTableData(angular.extend({
-                    stime: $scope.stime ? ($scope.stime+':00') : "",
-                    etime: $scope.etime ? ($scope.etime+':00') : "",
+                    stime: $scope.stime || "",
+                    etime: $scope.etime || "",
                     status: $scope.status || "",
                     likeName: $scope.likeName || "",
-                    currentPageNumber: $scope.curPage,
-                    pageSize: 50
+                    currentPageNumber: $scope.currentPageNumber,
+                    pageSize: $scope.pageSize
                 }, page || {})).then(function (res) {
                     var res = res.data || {};
                     if (res.ret === '200000') {

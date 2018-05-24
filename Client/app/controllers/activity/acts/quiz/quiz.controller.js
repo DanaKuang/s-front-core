@@ -372,8 +372,8 @@ define([], function () {
                 angular.extend($scope, page || {})
                 $model.getTableData(angular.extend({
                     activityCode: actCode,
-                    stime: $scope.stime ? ($scope.stime+':00') : "",
-                    etime: $scope.etime ? ($scope.etime+':00') : "",
+                    stime: $scope.stime || "",
+                    etime: $scope.etime || "",
                     status: $scope.status || "",
                     likeName: $scope.likeName || "",
                     currentPageNumber: $scope.currentPageNumber,
