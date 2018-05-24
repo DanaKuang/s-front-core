@@ -352,19 +352,26 @@ define([], function () {
                     alt.error('请选择比赛结果！');
                     return;
                 }
-                $model.drawMatch({
-                    matchId: $scope.matchId,
-                    resultType: val
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        alt.success(res.data);
-                        $("#id_draw_match").modal('hide');
-                        initSearch();
-                    } else {
-                        alt.error(res.message);
-                    }
-                });
+                $("#result").html(['','主胜','平局','主负'][val]);
+                $("#id_confirm_form").modal('show')
+                    .find('.btn-primary')
+                    .off()
+                    .on('click', function () {
+                        $model.drawMatch({
+                            matchId: $scope.matchId,
+                            resultType: val
+                        }).then(function (res) {
+                            res = res.data || {};
+                            if (res.ret == '200000') {
+                                alt.success(res.data);
+                                $("#id_confirm_form").modal('hide');
+                                $("#id_draw_match").modal('hide');
+                                initSearch();
+                            } else {
+                                alt.error(res.message);
+                            }
+                        });
+                })
             }
 
             // 初始化查询

@@ -21,6 +21,7 @@ define([], function () {
                     guestTeamName: '',
                     hostTeamPic: '',
                     guestTeamPic: '',
+                    matchName: '',
                     stimeStr: '',
                     betEtimeStr: '',
                     betStimeStr: ''
@@ -88,6 +89,7 @@ define([], function () {
                             'hostTeamPic',
                             'guestTeamPic',
                             'stimeStr',
+                            'matchName',
                             'betEtimeStr',
                             'betStimeStr'
                         );
@@ -192,19 +194,26 @@ define([], function () {
                     alt.error('请选择比赛结果！');
                     return;
                 }
-                $model.drawMatch({
-                    matchId: $scope.matchId,
-                    resultType: val
-                }).then(function (res) {
-                    res = res.data || {};
-                    if (res.ret == '200000') {
-                        alt.success(res.data);
-                        $("#id_draw_match").modal('hide');
-                        initSearch();
-                    } else {
-                        alt.error(res.message);
-                    }
-                });
+                $("#result").html(['','主胜','平局','主负'][val]);
+                $("#id_confirm_form").modal('show')
+                    .find('.btn-primary')
+                    .off()
+                    .on('click', function () {
+                        $model.drawMatch({
+                            matchId: $scope.matchId,
+                            resultType: val
+                        }).then(function (res) {
+                            res = res.data || {};
+                            if (res.ret == '200000') {
+                                alt.success(res.data);
+                                $("#id_confirm_form").modal('hide');
+                                $("#id_draw_match").modal('hide');
+                                initSearch();
+                            } else {
+                                alt.error(res.message);
+                            }
+                        });
+                })
             }
 
             // 初始化查询
@@ -238,12 +247,49 @@ define([], function () {
                 // 初始化查询
                 initSearch();
 
-                $(".date").datetimepicker({
+                $("[name='etime'], [name='stime']").datetimepicker({
                     language: "zh-CN",
                     format: "yyyy-mm-dd hh:ii",
                     autoclose: true,
                     todayBtn: true
                 });
+
+                $("#betStimeStr").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii",
+                    autoclose: true,
+                    todayBtn: true
+                }).change(function (e) {
+                    if (e.target.value) {
+                        $('#betEtimeStr').datetimepicker('setStartDate', e.target.value);
+                    }
+                });
+
+                $("#betEtimeStr").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii",
+                    autoclose: true,
+                    todayBtn: true
+                }).change(function (e) {
+                    if (e.target.value) {
+                        $('#betStimeStr').datetimepicker('setEndDate', e.target.value);
+                        $('#stimeStr').datetimepicker('setStartDate', e.target.value);
+                    }
+                });
+
+                $("#stimeStr").datetimepicker({
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd hh:ii",
+                    autoclose: true,
+                    todayBtn: true
+                }).change(function (e) {
+                    if (e.target.value) {
+                        $('#betEtimeStr').datetimepicker('setEndDate', e.target.value);
+                        $('#betStimeStr').datetimepicker('setStartDate', e.target.value);
+                    }
+                });
+
+
 
                 // input搜索输入
                 $("#host_team").on('click', 'li', function (e) {

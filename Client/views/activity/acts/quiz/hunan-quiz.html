@@ -39,9 +39,9 @@
                                     <select class="form-control" name="status" ng-model="status">
                                         <option value="">请选择</option>
                                         <option value="-1">主推</option>
-                                        <option value="0">隐藏</option>
                                         <option value="1">投注未开始</option>
                                         <option value="2">可投注(主推)</option>
+                                        <option value="-2">投注已截止</option>
                                         <option value="3">开奖中</option>
                                         <option value="4">已开奖</option>
                                     </select>
@@ -158,19 +158,24 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">投注开始时间<span class="red">*</span></label>
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.betStimeStr'].$error.required}">
-                                <input type="text" name="form.betStimeStr" ng-model="form.betEtimeStr" placeholder="投注开始时间" class="form-control input-sm date" required>
+                                <input id="betStimeStr" type="text" name="form.betStimeStr" ng-model="form.betStimeStr" placeholder="投注开始时间" class="form-control input-sm date" required>
                                 <p class="help-block" ng-show="formName.$submitted && formName['form.betStimeStr'].$error.required">请选择投注开始时间</p>
                             </div>
                             <label class="control-label col-md-2">投注截止时间<span class="red">*</span></label>
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.betEtimeStr'].$error.required}">
-                                <input type="text" name="form.betEtimeStr" ng-model="form.betEtimeStr" placeholder="投注截止时间" class="form-control input-sm date" required>
+                                <input id="betEtimeStr" type="text" name="form.betEtimeStr" ng-model="form.betEtimeStr" placeholder="投注截止时间" class="form-control input-sm date" required>
                                 <p class="help-block" ng-show="formName.$submitted && formName['form.betEtimeStr'].$error.required">请选择投注截止时间</p>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-md-2">标题名<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.matchName'].$error.required}">
+                                <input type="text" name="form.matchName" ng-model="form.matchName" placeholder="请输入标题名" class="form-control input-sm" required>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.matchName'].$error.required">请输入标题名</p>
+                            </div>
                             <label class="control-label col-md-2">比赛开始时间<span class="red">*</span></label>
                             <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.stimeStr'].$error.required}">
-                                <input type="text" name="form.stimeStr" ng-model="form.stimeStr" placeholder="比赛开始时间" class="form-control input-sm date" required>
+                                <input id="stimeStr" type="text" name="form.stimeStr" ng-model="form.stimeStr" placeholder="比赛开始时间" class="form-control input-sm date" required>
                                 <p class="help-block" ng-show="formName.$submitted && formName['form.stimeStr'].$error.required">请选择比赛开始时间</p>
                             </div>
                         </div>
@@ -262,6 +267,27 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="detailSearch()" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认弹窗弹窗 -->
+    <div id="id_confirm_form" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>选择比赛结果为 <span id="result"></span></p>
+                    <p>是否确认并开奖？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
                 </div>
             </div>
         </div>

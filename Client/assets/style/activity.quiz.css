@@ -112,7 +112,8 @@
 
 #id_tips_form .modal-body,
 #id_rate_change .modal-body,
-#id_draw_match .modal-body {
+#id_draw_match .modal-body,
+#id_confirm_form .modal-body {
   text-align: center;
   font-size: 14px; }
 
@@ -127,7 +128,11 @@
 #id_draw_match button.btn-primary,
 #id_draw_match button.btn-primary:hover,
 #id_draw_match button.btn-primary:active,
-#id_draw_match button.btn-primary:focus {
+#id_draw_match button.btn-primary:focus,
+#id_confirm_form button.btn-primary,
+#id_confirm_form button.btn-primary:hover,
+#id_confirm_form button.btn-primary:active,
+#id_confirm_form button.btn-primary:focus {
   padding: 0 12px;
   background-color: #44c1ed;
   border-color: #44c1ed;
@@ -135,7 +140,8 @@
 
 #id_tips_form .progress,
 #id_rate_change .progress,
-#id_draw_match .progress {
+#id_draw_match .progress,
+#id_confirm_form .progress {
   position: relative;
   height: 30px;
   width: 350px;
@@ -144,7 +150,8 @@
 
 #id_tips_form .bar,
 #id_rate_change .bar,
-#id_draw_match .bar {
+#id_draw_match .bar,
+#id_confirm_form .bar {
   height: 100%;
   position: absolute;
   top: 0;
