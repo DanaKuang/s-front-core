@@ -4,6 +4,8 @@
  */
 (function ($) {
 
+  console && console.info && console.info('既然你发现了，那我就不妨直说：\n没错！你就是我们需要找的人才！\n加入我们吧！\n地址：望京soho塔1B座12层。\n扫天下 长期招聘，简历发送至:%c liubin@saotx.cn', 'color:#e42121;');
+  console && console.info && console.info('%c', 'padding:49.5px 150px;background:url(https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/zhaopin.gif);border-radius:5px;');
   // login对象
   var login = {
     particles: [],
@@ -124,7 +126,6 @@
   }
   // 初始化登陆页
   login.init = function() {
-    console.log('login init...');
     var $name = $('[name="username"]');
     var $word = $('[name="password"]');
     var $code = $('[name="code"]');
