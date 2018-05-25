@@ -363,7 +363,8 @@ define([], function () {
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,
                     status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2,
-                    mustwin:$('#checkbox').prop('checked')?mustwin:null
+                    mustwin:$('#checkbox').prop('checked')?mustwin:null,
+                    scantimeLimit: scopeVariable._setPrizeScope.scantimeLimit || ''
                 }
 
                 console.log(fromSonScope)

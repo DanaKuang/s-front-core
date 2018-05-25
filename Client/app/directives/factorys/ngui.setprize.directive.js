@@ -7,7 +7,7 @@
 define([], function () {
   var setprize = angular.module('ngui.setprize', []);
 
-  var setprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat) {
+  var setprizeFn = function ($rootScope, $http, $compile, $timeout, util, numberFormat, hbpriceFormat, decimalFormat, dff) {
       var defaults = { //默认配置
           tpl: '/setprize.tpl.html',
           chooseNum: 0,
@@ -28,11 +28,11 @@ define([], function () {
       };
 
       function linkFn (scope, element, attrs) {
-          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks']);
+          util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks', 'scantimeLimit']);
           // 监视conf变化更新 basicinfo
           scope.$watch('conf', function () {
               // 属性赋值
-              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks']);
+              util.uiExtend(scope, defaults, attrs, (scope.conf || {}), ['chooseNum', 'firstornot', 'thanksornot', 'myVar', 'myThanks', 'scantimeLimit']);
           }, true);
 
           var that_scope = angular.element('.all-template-config-wrap').scope();
@@ -42,6 +42,7 @@ define([], function () {
             scope.dcList = that_scope.conf.data.dcList;
             scope.disabled = true;
             scope.activity = that_scope.conf.data.activity;
+            scope.scantimeLimit = dff.datetime(scope.activity.scantimeLimit);
             if (scope.dcList.FIRST_LOTTERY_BE_WON && scope.dcList.FIRST_LOTTERY_BE_WON.length > 0) {
               scope.myVar = true;
             }
@@ -76,7 +77,7 @@ define([], function () {
               } else {
                   alert('请先选择投放的品牌和规格！')
               }
-              
+
           })
 
           // 红包模板列表
@@ -195,6 +196,22 @@ define([], function () {
               }
           }
 
+          // 展示首扫时间
+          scope.showScantimeLimit = function () {
+            if (scope.scantimeLimit) {
+              scope.scantimeLimit = '';
+            } else {
+              scope.scantimeLimit = dff.datetime(+new Date);
+            }
+          }
+
+          $("[name='scantimeLimit']").datetimepicker({
+            language: "zh-CN",
+            format: "yyyy-mm-dd hh:ii:ss",
+            autoclose: true,
+            todayBtn: true
+          });
+
           // 礼品增库
           $('#setprize').on('click', '.add-gift-stock', function(e){
               var id = $(e.target).parents('.prize-img-preview-wrap').data('dataid');
@@ -232,7 +249,7 @@ define([], function () {
               var dataId = $(e.target).parents('.radio-res').data('dataid');
               // 把红包id传到controller
               var data = {
-                  id: id, 
+                  id: id,
                   index: drawPrizeWrap_index,
                   poolId: poolId,
                   specialCode: specialCode,
@@ -254,155 +271,155 @@ define([], function () {
                 dataId: dataId
             };
             scope.$emit('pointAddStock', event, data)
-        })
-
-          $('#setprize').on('keyup', '.decimal', function (event) {
-              decimalFormat.decimalnumber(event);
           })
 
-          $('#setprize').on('keyup', '.hbdecimal', function (event) {
-              hbpriceFormat.hbpricenumber(event);
-          })
+            $('#setprize').on('keyup', '.decimal', function (event) {
+                decimalFormat.decimalnumber(event);
+            })
 
-          $('#setprize').on('blur', '.decimal, .hbdecimal', function (event) {
-              if (event.target.value) {
-                  event.target.value = parseFloat(event.target.value);
-              } else {
-                  event.target.value == ''
-              }
-          })
+            $('#setprize').on('keyup', '.hbdecimal', function (event) {
+                hbpriceFormat.hbpricenumber(event);
+            })
 
-          scope.notminusnotzero = function (event) {
-              numberFormat.notminusnotzero(event)
-          }
-
-          // 勾选积分池
-          $('#setprize').on('click', '.tickcheckbox', function (e) {
-              if ($(e.target).prop('checked')) {
-                  $(e.target).siblings('.sendscore').removeClass('hidden')
-              } else {
-                  $(e.target).siblings('.sendscore').addClass('hidden')
-              }
-          })
-
-         /* 特殊规则设置 */
-            // 默认初始化自己的文本框加上点击事件。
-          $(document).ready(function () {
-              $(".my-select").multiselect({
-                  nonSelectedText: '请选择',
-                  nSelectedText: '已选择',
-                  includeSelectAllOption: true,
-                  selectAllText: '全部',
-                  allSelectedText: '全选',
-                  enableFiltering: true,
-                  numberDisplayed: 1,
-                  onDropdownShow: function () { // 就是点击下拉框调用
-                      var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
-                      // 拿奖项名称的数据
-                      var resultArray = [];
-                      for (var i = 0; i < eleArray.length; i++) {
-                          if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
-                              resultArray.push({
-                                  name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
-                                  value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
-                              });
-                          }
-                      };
-                      if (resultArray.length >= 3) {
-                          $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
-                      } else {
-                          $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
-                      };
-                      $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
-                          v.label = v.name;
-                          v.value = v.value;
-                      }));
-                      $(this.$select).multiselect('refresh');
-                  }
-              });
-          });
-
-          // 添加字体图标
-          $('body').on('click', '.specialIncrease', function () {
-              var html = '<div class="special-rules-item operation multi">' +
-                  '<span>用户第&nbsp;</span>' +
-                  '<input type="text" class="input">' +
-                  '<span>&nbsp;次抽奖必中&nbsp;</span>' +
-                  '<div class="special-select">' +
-                  '<select name="data" class="select my-select">' +
-                  '</select>' +
-                  '</div>' +
-                  '<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>' +
-                  '<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>' +
-                  '<div class="special-wrong hidden">' +
-                  '<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>' +
-                  '</div>' +
-                  '</div>';
-              $(this).parent().after(html);
-              if (!$(this).siblings('.specialReduce').length) {
-                  $(this).before('<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>')
-              };
-              $(this).remove();
-              $(document).ready(function () {
-                  $(".multi .select").multiselect({
-                      nonSelectedText: '请选择',
-                      nSelectedText: '已选择',
-                      includeSelectAllOption: true,
-                      selectAllText: '全部',
-                      allSelectedText: '全选',
-                      enableFiltering: true,
-                      numberDisplayed: 1,
-                      selectedList: '',
-                      onDropdownShow: function (e) { // 就是点击下拉框调用
-                          var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
-                          // 拿奖项名称的数据
-                          var resultArray = [];
-                          for (var i = 0; i < eleArray.length; i++) {
-                              if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
-                                  resultArray.push({
-                                      name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
-                                      value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
-                                  });
-                              }
-                          };
-                          if (resultArray.length >= 3) {
-                              $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
-                          } else {
-                              $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
-                          };
-                          $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
-                              v.label = v.name;
-                              v.value = v.value;
-                          }));
-                          $(this.$select).multiselect('refresh');
-                      }
-                  });
-              });
-          });
-
-          // 减去字体图标
-          $('body').on('click', '.specialReduce', function () {
-            $(this).parent('.special-rules-item').remove();
-              if ($('.special-rules-item').length == '1') {
-                  if (!$('.special-rules-item').find('.specialIncrease').length) {
-                      $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
-                  };
-                  if ($('.special-rules-item').find('.specialReduce').length) {
-                      $('.special-rules-item').find('.specialReduce').remove();
-                  }
-                //   $(e.target).remove();
-                //   if(!$(e.target).siblings('.specialIncrease').length){
-                //       $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
-                //   }
-              }else{
-                if(!$('.special-rules-item:last-child').find('.specialIncrease').length){
-                    $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+            $('#setprize').on('blur', '.decimal, .hbdecimal', function (event) {
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value);
+                } else {
+                    event.target.value == ''
                 }
-              }
-          });
+            })
+
+            scope.notminusnotzero = function (event) {
+                numberFormat.notminusnotzero(event)
+            }
+
+            // 勾选积分池
+            $('#setprize').on('click', '.tickcheckbox', function (e) {
+                if ($(e.target).prop('checked')) {
+                    $(e.target).siblings('.sendscore').removeClass('hidden')
+                } else {
+                    $(e.target).siblings('.sendscore').addClass('hidden')
+                }
+            })
+
+           /* 特殊规则设置 */
+              // 默认初始化自己的文本框加上点击事件。
+            $(document).ready(function () {
+                $(".my-select").multiselect({
+                    nonSelectedText: '请选择',
+                    nSelectedText: '已选择',
+                    includeSelectAllOption: true,
+                    selectAllText: '全部',
+                    allSelectedText: '全选',
+                    enableFiltering: true,
+                    numberDisplayed: 1,
+                    onDropdownShow: function () { // 就是点击下拉框调用
+                        var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
+                        // 拿奖项名称的数据
+                        var resultArray = [];
+                        for (var i = 0; i < eleArray.length; i++) {
+                            if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
+                                resultArray.push({
+                                    name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                    value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                });
+                            }
+                        };
+                        if (resultArray.length >= 3) {
+                            $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
+                        } else {
+                            $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
+                        };
+                        $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                            v.label = v.name;
+                            v.value = v.value;
+                        }));
+                        $(this.$select).multiselect('refresh');
+                    }
+                });
+            });
+
+            // 添加字体图标
+            $('body').on('click', '.specialIncrease', function () {
+                var html = '<div class="special-rules-item operation multi">' +
+                    '<span>用户第&nbsp;</span>' +
+                    '<input type="text" class="input">' +
+                    '<span>&nbsp;次抽奖必中&nbsp;</span>' +
+                    '<div class="special-select">' +
+                    '<select name="data" class="select my-select">' +
+                    '</select>' +
+                    '</div>' +
+                    '<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>' +
+                    '<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>' +
+                    '<div class="special-wrong hidden">' +
+                    '<div class="wrong-tip special-tip">请完善该奖项信息，确保红星标识处已填写！</div>' +
+                    '</div>' +
+                    '</div>';
+                $(this).parent().after(html);
+                if (!$(this).siblings('.specialReduce').length) {
+                    $(this).before('<span class="glyphicon glyphicon-minus-sign special-icon specialReduce" ></span>')
+                };
+                $(this).remove();
+                $(document).ready(function () {
+                    $(".multi .select").multiselect({
+                        nonSelectedText: '请选择',
+                        nSelectedText: '已选择',
+                        includeSelectAllOption: true,
+                        selectAllText: '全部',
+                        allSelectedText: '全选',
+                        enableFiltering: true,
+                        numberDisplayed: 1,
+                        selectedList: '',
+                        onDropdownShow: function (e) { // 就是点击下拉框调用
+                            var eleArray = $('.non-first-draw.gotoset .non-first-draw-wrap .create-part.ng-scope .draw-prize-wrap');
+                            // 拿奖项名称的数据
+                            var resultArray = [];
+                            for (var i = 0; i < eleArray.length; i++) {
+                                if ($(eleArray[i]).find('.configuration-item').find('.prizename').val().trim() != '') {
+                                    resultArray.push({
+                                        name: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                        value: $(eleArray[i]).find('.configuration-item').find('.prizename').val(),
+                                    });
+                                }
+                            };
+                            if (resultArray.length >= 3) {
+                                $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '130px');
+                            } else {
+                                $('.special-rules-item .multiselect-container.dropdown-menu').css('height', '');
+                            };
+                            $(this.$select).multiselect('dataprovider', _.forEach(resultArray, function (v) { // 这里有个小坑：循环的必须是数组包含对象他自己会在你的对象里塞个字段label
+                                v.label = v.name;
+                                v.value = v.value;
+                            }));
+                            $(this.$select).multiselect('refresh');
+                        }
+                    });
+                });
+            });
+
+            // 减去字体图标
+            $('body').on('click', '.specialReduce', function () {
+              $(this).parent('.special-rules-item').remove();
+                if ($('.special-rules-item').length == '1') {
+                    if (!$('.special-rules-item').find('.specialIncrease').length) {
+                        $('.special-rules-item').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                    };
+                    if ($('.special-rules-item').find('.specialReduce').length) {
+                        $('.special-rules-item').find('.specialReduce').remove();
+                    }
+                  //   $(e.target).remove();
+                  //   if(!$(e.target).siblings('.specialIncrease').length){
+                  //       $(e.target).before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>')
+                  //   }
+                }else{
+                  if(!$('.special-rules-item:last-child').find('.specialIncrease').length){
+                      $('.special-rules-item:last-child').find('.specialReduce').before('<span class="glyphicon glyphicon-plus-sign special-icon specialIncrease" ></span>');
+                  }
+                }
+            });
       }
       return defineObj;
   }
 
-  setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', setprizeFn]);
+  setprize.directive('saSetprize', ['$rootScope', '$http', '$compile', '$timeout', 'util', 'numberFormat', 'hbpriceFormat', 'decimalFormat', 'dateFormatFilter', setprizeFn]);
 })
