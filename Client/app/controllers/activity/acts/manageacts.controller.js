@@ -137,7 +137,7 @@ define([], function () {
         $scope.$on('typefromActSample', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = res.data;
-            $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.account];
+            $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.orgCode];
             getLaunchInfo();
           })
         })
@@ -233,7 +233,7 @@ define([], function () {
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
-                $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.account];
+                $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.orgCode];
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
 
                 // 如果存在中奖地区

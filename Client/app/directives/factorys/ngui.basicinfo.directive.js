@@ -62,12 +62,12 @@ define([], function () {
                 scope.confUrl = that_scope.confUrl;
                 scope.pageName = that_scope.pageName;
 
-                $("textarea[maxlength]").bind('input propertychange', function() {  
-                    var maxLength = $(this).attr('maxlength');  
-                    if ($(this).val().length > maxLength) {  
+                $("textarea[maxlength]").bind('input propertychange', function() {
+                    var maxLength = $(this).attr('maxlength');
+                    if ($(this).val().length > maxLength) {
                         $(this).val($(this).val().substring(0, maxLength));
-                    }  
-                })  
+                    }
+                })
             }
 
             scope.change = function() {
