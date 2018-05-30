@@ -57,6 +57,7 @@ function setEnv (options) {
   config.homepage = path.join(config.apppath, config.homepage);
   config.loginpage = path.join(config.apppath, config.loginpage);
   config.findpage = path.join(config.apppath, config.findpage);
+  config.chromepage = path.join(config.apppath, config.chromepage);
   config.viewpath = path.join(config.apppath, config.viewpath);
   config.favicon = path.join(config.apppath, config.favicon);
   config.log4js.filename = config.log4js.logpath + '/' + config.log4js.logfile;

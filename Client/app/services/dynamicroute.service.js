@@ -64,7 +64,6 @@ define([], function () {
                   function() {
                       $event.preventDefault();
                       location.href = "/login";
-                      console.log('页面没有授权...');
                   }
               );
 
@@ -103,7 +102,6 @@ define([], function () {
           });
           //监听路由开始解析事件，弹出加载提示信息
           $rootScope.$on('$routeChangeStart', function(evt, current, previous) {
-              console.log('route change start.');
               // 清空定时器对象
               window.IntervalArr &&
               window.IntervalArr.forEach(function (int) {
@@ -115,15 +113,15 @@ define([], function () {
           });
           // 监听路由解析完成事件
           $rootScope.$on('$routeChangeSuccess', function(evt, current, previous) {
-              console.log('route change success.');
+              // console.log('route change success.');
           });
           //监听路由解析失败事件，隐藏加载提示信息
           $rootScope.$on('$routeChangeError', function(evt, current, previous, respone) {
-              console.log('route change error.');
+              // console.log('route change error.');
           });
           // 监听视图加载完成事件，隐藏加载提示信息
           $rootScope.$on('$viewContentLoaded', function(evt) {
-              console.log('view content loaded.');
+              // console.log('view content loaded.');
           });
       }]
   };

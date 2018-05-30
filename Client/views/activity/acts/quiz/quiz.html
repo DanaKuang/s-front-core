@@ -1,0 +1,407 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-05-11
+ * Description: 竞猜活动列表
+ */
+-->
+<!--style-->
+<link rel="stylesheet" href="statics/assets/style/activity.quiz.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+<div ng-controller="quizCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-activity-quiz">
+                <!--title-->
+                <div class="ui-panel-title detail">
+                    <i class="detail"></i><span>竞猜活动</span>
+                    <button type="button" class="btn btn-default" ng-click="addAct()">+新增活动</button>
+                </div>
+                <!--box-->
+                <div class="col-md-12">
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <form class="form-inline col-md-12" id="id_quiz_form">
+                                <!--比赛时间-->
+                                <div class="form-group">
+                                    <label for="">比赛时间&nbsp;&nbsp;</label>
+                                    <input id="stime" type="text" name="stime" ng-model="stime" class="form-control input-sm date">&nbsp;&nbsp;至&nbsp;&nbsp;
+                                    <input id="etime" type="text" name="etime" ng-model="etime" class="form-control input-sm date">
+                                </div>
+                                <!--队名-->
+                                <div class="form-group">
+                                    <label for="likeName" class="control-label">队名&nbsp;&nbsp;</label>
+                                    <input type="text" name="likeName" ng-model="likeName" class="form-control input-sm">
+                                </div>
+                                <!--状态-->
+                                <div class="form-group">
+                                    <label for="status">状态&nbsp;&nbsp;</label>
+                                    <select class="form-control" name="status" ng-model="status">
+                                        <option value="">请选择</option>
+                                        <option value="-1">主推</option>
+                                        <option value="0">隐藏</option>
+                                        <option value="1">投注未开始</option>
+                                        <option value="2">可投注(主推)</option>
+                                        <option value="3">开奖中</option>
+                                        <option value="4">已开奖</option>
+                                    </select>
+                                </div>
+                                <div class="form-group ui-btn-ctrl">
+                                    <button type="submit" class="btn btn-primary" ng-click="detailSearch({currentPageNumber:1})">搜索</button>
+                                    <button type="button" ng-click="detailReset()" class="btn btn-primary">重置</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--table-->
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <div class="ui-detail-box">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="400">操作</th>
+                                            <th>状态</th>
+                                            <th>比赛时间</th>
+                                            <th>对阵</th>
+                                            <th>标题名</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in listArr">
+                                            <td class="opts">
+                                                <div ng-click="hideMatch(item)" ng-show="item.status != 2 && item.status != 0">隐藏</div>
+                                                <div ng-click="topIdx(item)">主推</div>
+                                                <div ng-click="startMatchBet(item)">开放投注</div>
+                                                <div ng-click="editAct(item)">编辑</div>
+                                                <div ng-click="rateChange(item)">赔率管理</div>
+                                                <div ng-click="logs(item)" ng-show="item.status == 4">日志</div>
+                                                <div ng-show="item.status != 3 && item.status != 4" ng-click="drawMatch(item)">开奖</div>
+                                            </td>
+                                            <td>{{item.statusName}}</td>
+                                            <td>{{item.stimeStr}}</td>
+                                            <td>{{item.hostTeamName}}vs{{item.guestTeamName}}</td>
+                                            <td>{{item.matchName}}</td>
+                                        </tr>
+                                        <tr ng-if='!listArr.length'>
+                                            <td colspan='5'>暂无符合条件的数据</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 翻页 -->
+                                <div class="pagination-wrap">
+                                    <!-- 分页指令 -->
+                                    <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form表单页 -->
+    <div id="add_edit_form" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">{{form.id?'编辑':'新增'}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal"  ng-submit="submitForm(formName)" name="formName" autocomplete="off" novalidate>
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-2 tr">投注类型<span class="red">*</span></label>
+                            <div class="col-md-8 checkbox">
+                                <label><input type="radio" name="radioGroup" ng-checked="form.betStatus == 1" ng-click="form.betStatus = 1">&nbsp;&nbsp;胜平负</label>
+                                <label><input type="radio" name="radioGroup" ng-checked="form.betStatus == 2" ng-click="form.betStatus = 2">&nbsp;&nbsp;胜负</label>
+                                <p class="help-block" ng-show="formName.$submitted && !form.betStatus">请选择投注类型</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主队名<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.hostTeamName'].$error.required}">
+                                <input type="text" name="form.hostTeamName" ng-model="form.hostTeamName" placeholder="请输入主队名" class="form-control input-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-change="getTeamFn('hostTeamArr')" required>
+                                <ul class="dropdown-menu" id="host_team">
+                                    <li ng-repeat="h in hostTeamArr" data-image="{{h.teamPicture}}" data-code="{{h.teamCode}}">{{h.teamName}}</li>
+                                    <li ng-if="!form.hostTeamName && !hostTeamArr.length"><img src="http://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/loading.gif" ></li>
+                                    <span ng-if="form.hostTeamName && !hostTeamArr.length">没有此条记录！</span>
+                                </ul>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.hostTeamName'].$error.required">请输入主队名称</p>
+                            </div>
+                            <label class="control-label col-md-2">客队名<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.guestTeamName'].$error.required}">
+                                <input type="text" name="form.guestTeamName" ng-model="form.guestTeamName" placeholder="请输入客队名" class="form-control input-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-change="getTeamFn('guestTeamArr')" required>
+                                <ul class="dropdown-menu" id="guest_team">
+                                    <li ng-repeat="g in guestTeamArr" data-image="{{g.teamPicture}}" data-code="{{g.teamCode}}">{{g.teamName}}</li>
+                                    <li ng-if="!form.guestTeamName && !guestTeamArr.length"><img src="http://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/loading.gif" ></li>
+                                    <span ng-if="form.guestTeamName && !guestTeamArr.length">没有此条记录！</span>
+                                </ul>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.guestTeamName'].$error.required">请输入客队名称</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主队队标<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.hostTeamPic'].$error.required}">
+                                <input type="file" name="form.hostTeamPic" ng-model="form.hostTeamPic" class="form-control input-sm" onchange="angular.element(this).scope().uploadImg('hostTeamPic')" required>
+                                <img ng-if="form.hostTeamPic" ng-src="{{form.hostTeamPic}}" class="team-img">
+                                <img ng-if="!form.hostTeamPic" src="/statics/assets/image/img-upload.png" class="team-img">
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.hostTeamPic'].$error.required">请上传主队队标</p>
+                            </div>
+                            <label class="control-label col-md-2">客队队标<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.guestTeamPic'].$error.required}">
+                                <input type="file" name="form.guestTeamPic" ng-model="form.guestTeamPic" class="form-control input-sm" onchange="angular.element(this).scope().uploadImg('guestTeamPic')" required>
+                                <img ng-if="form.guestTeamPic" ng-src="{{form.guestTeamPic}}" class="team-img">
+                                <img ng-if="!form.guestTeamPic" src="/statics/assets/image/img-upload.png" class="team-img">
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.guestTeamPic'].$error.required">请上传客队队标</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">比赛开始时间<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.stimeStr'].$error.required}">
+                                <input type="text" name="form.stimeStr" ng-model="form.stimeStr" placeholder="比赛开始时间" class="form-control input-sm date" required>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.stimeStr'].$error.required">请选择比赛开始时间</p>
+                            </div>
+                            <label class="control-label col-md-2">投注结束时间<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.betEtimeStr'].$error.required}">
+                                <input type="text" name="form.betEtimeStr" ng-model="form.betEtimeStr" placeholder="比赛结束时间" class="form-control input-sm date" required>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.betEtimeStr'].$error.required">请选择投注结束时间</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">标题名<span class="red">*</span></label>
+                            <div class="col-md-3" ng-class="{'has-error': formName.$submitted && formName['form.matchName'].$error.required}">
+                                <input type="text" name="form.matchName" ng-model="form.matchName" placeholder="请输入标题名" class="form-control input-sm" required>
+                                <p class="help-block" ng-show="formName.$submitted && formName['form.matchName'].$error.required">请输入标题名</p>
+                            </div>
+                            <label class="control-label col-md-2">投注上限</label>
+                            <div class="col-md-3">
+                                <input type="number" step="1" min="0" name="form.betLimit" ng-model="form.betLimit" placeholder="请输入投注上限" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                <input type="checkbox" ng-checked="injectCheck" ng-click="injectCheck = !injectCheck"/>&nbsp;&nbsp;初始投注池
+                            </label>
+                            <div class="col-md-3 form-inline" ng-show="injectCheck">
+                                <input type="number" step="1" min="0" name="form.hostWinInject" ng-model="form.hostWinInject" class="form-control input-sm col-md-2">
+                                <label class="control-label col-md-1">胜</label>
+                            </div>
+                            <div class="col-md-3 form-inline" ng-show="injectCheck && form.betStatus == 1">
+                                <input type="number" step="1" min="0" name="form.tieInject" ng-model="form.tieInject" class="form-control input-sm col-md-2">
+                                <label class="control-label col-md-1">平</label>
+                            </div>
+                            <div class="col-md-3 form-inline" ng-show="injectCheck">
+                                <input type="number" step="1" min="0" name="form.guestWinInject" ng-model="form.guestWinInject" class="form-control input-sm col-md-2">
+                                <label class="control-label col-md-1">负</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                <input type="checkbox" ng-checked="rateCheck" ng-click="rateCheck = !rateCheck"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台抽成
+                            </label>
+                            <div class="col-md-3 form-inline" ng-show="rateCheck">
+                                <input type="number" name="form.rake" step="1" min="0" ng-model="form.rake" class="form-control input-sm">&nbsp;%
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formName.$submitted && formName.$valid">确定</button>
+                            <button type="reset" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注入弹窗 -->
+    <div id="id_rate_change" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">实时投注情况</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <h3>{{hostTeamName}}vs{{guestTeamName}}</h3>
+                        <p>{{stimeStr}}</p>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主胜</label>
+                            <div class="col-md-7 progress">
+                                {{hostWinPool}}金叶币
+                                <div class="bar" style="width: {{100*hostWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" ng-click="showInject('hostWinPool')">注入</button>
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{hostRate}}倍</div>
+                        </div>
+                        <div class="form-group" ng-if="betStatus == 1">
+                            <label class="control-label col-md-2">平局</label>
+                            <div class="col-md-7 progress">
+                                {{tiePool}}金叶币
+                                <div class="bar" style="width: {{100*tiePool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" ng-click="showInject('tiePool')">注入</button>
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{tieRate}}倍</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主负</label>
+                            <div class="col-md-7 progress">
+                                {{guestWinPool}}金叶币
+                                <div class="bar" style="width: {{100*guestWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" ng-click="showInject('guestWinPool')">注入</button>
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{guestRate}}倍</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="injectApiNum()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 开奖 -->
+    <div id="id_draw_match" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">开奖</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <h3>{{hostTeamName}}vs{{guestTeamName}}</h3>
+                        <p>{{stimeStr}}</p>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主胜</label>
+                            <div class="col-md-7 progress">
+                                {{hostWinPool}}金叶币
+                                <div class="bar" style="width: {{100*hostWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{hostRate}}倍</div>
+                        </div>
+                        <div class="form-group" ng-if="betStatus == 1">
+                            <label class="control-label col-md-2">平局</label>
+                            <div class="col-md-7 progress">
+                                {{tiePool}}金叶币
+                                <div class="bar" style="width: {{100*tiePool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{tieRate}}倍</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">主负</label>
+                            <div class="col-md-7 progress">
+                                {{guestWinPool}}金叶币
+                                <div class="bar" style="width: {{100*guestWinPool/(hostWinPool+guestWinPool+tiePool+0.01)}}%"></div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-4">实时赔率&nbsp;&nbsp;{{guestRate}}倍</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">选择赛果</label>
+                            <div class="col-md-8 checkbox">
+                                <label><input type="radio" value="1" name="rGroups">主胜</label>
+                                <label ng-if="betStatus == 1"><input type="radio" value="2" name="rGroups">平局</label>
+                                <label><input type="radio" value="3" name="rGroups">主负</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="drawApiMatch()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注入 -->
+    <div id="id_inject_num" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">投注</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="number" name="num" min="0" step="1" placeholder="0金叶币" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-6 txt">x10金叶币</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="injectNum()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- tips弹窗 -->
+    <div id="id_tips_form" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">提示</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="detailSearch()" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认弹窗弹窗 -->
+    <div id="id_confirm_form" class="modal fade in" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>选择比赛结果为 <span id="result"></span></p>
+                    <p>是否确认并开奖？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

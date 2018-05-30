@@ -38,5 +38,9 @@ module.exports.register = function (express, config) {
   router.get('/find', function(req, res) {
       res.render(config.findpage);
   });
+  //浏览器升级
+  router.get('/update', function(req, res) {
+      res.render(config.chromepage);
+  });
   return router;
 }

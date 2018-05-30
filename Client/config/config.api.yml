@@ -1850,6 +1850,48 @@ manageacts:
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/listMatch'
+    authorized: 1
+    description: '湖南世界杯 表格数据'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/drawMatch'
+    authorized: 1
+    description: '湖南世界杯 开奖'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/topIdx'
+    authorized: 1
+    description: '湖南世界杯 主推'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/matchDetail'
+    authorized: 1
+    description: '湖南世界杯 详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/searchTeam'
+    authorized: 1
+    description: '湖南世界杯 球队关键字查询'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/orange/worldcup/saveOrModifyMatch'
+    authorized: 1
+    description: '湖南世界杯 更新'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
 supply:
   - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/supplier/queryList'

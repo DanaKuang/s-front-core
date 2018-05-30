@@ -21,7 +21,7 @@
 		</div>
 
 		<!-- 彩蛋、节假日没有优先级这一项 -->
-		<div ng-if="(confUrl !== 'holiday') && (confUrl !== 'unexpected')" class="form-group col-md-5 activity-priority configuration-item" ng-class="{'has-error': parentForm.points.$dirty && (parentForm.points.$error.required || parentForm.points.$invalid), 'has-success': parentForm.points.$dirty && parentForm.points.$valid}">
+		<div ng-show="(confUrl !== 'holiday') && (confUrl !== 'unexpected')" class="form-group col-md-5 activity-priority configuration-item" ng-class="{'has-error': parentForm.points.$dirty && (parentForm.points.$error.required || parentForm.points.$invalid), 'has-success': parentForm.points.$dirty && parentForm.points.$valid}">
 			<label for="" class="control-label col-sm-2 priority">优先级</label>
 			<div class="col-sm-9">
 				<input class="form-control input-sm" type="text" name="points" ng-pattern="/^(?:[1-9]\d?|[1-4]\d{2}|500)$/" ng-model="points" placeholder="请指明活动优先级，用数字表示，最大值为500" required>

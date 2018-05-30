@@ -11,7 +11,6 @@ define([], function () {
     ServiceContent: ['request', function (request) {
       this.$model = function () {
 
-        console.log("supply model");
         var supplyListUrl = '/api/tztx/saas/saotx/supplier/queryList';  //获取供应商列表
         var brandListUrl = '/api/tztx/saas/saotx/common/queryBrandWithRight';  //获取品牌
         var savePacketUrl = '/api/tztx/saas/saotx/poolIntegral/saveOrUpdate';  //新增或修改积分池对象数据

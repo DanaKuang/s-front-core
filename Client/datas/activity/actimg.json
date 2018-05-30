@@ -1,5 +1,5 @@
 {
-    "hebei": [
+    "hebeizhongyan": [
         "",
         "statics/assets/image/hebei/dazhuanpan.png",
         "statics/assets/image/hebei/guaguaka.png",
@@ -12,7 +12,7 @@
         "statics/assets/image/hebei/dianyuanbao.png",
         "statics/assets/image/hebei/fanzhuanshi.png"
     ],
-    "henan": [
+    "henanzhongyan": [
         "",
         "statics/assets/image/henan/fanpai.png",
         "statics/assets/image/henan/fanpai.png",
@@ -25,7 +25,20 @@
         "statics/assets/image/henan/fanpai.png",
         "statics/assets/image/henan/fanpai.png"
     ],
-    "hunan": [
+    "hunanzhongyan": [
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "",
+        "statics/assets/image/fanpai.png",
+        "",
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png"
+    ],
+    "shanxikunyan": [
         "",
         "statics/assets/image/fanpai.png",
         "statics/assets/image/fanpai.png",
