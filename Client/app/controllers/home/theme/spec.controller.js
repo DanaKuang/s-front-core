@@ -349,19 +349,12 @@ define([], function () {
             case "shankunzhongyan" :
               global.initProvinceData.provinceName = "山西省";
               break;
-<<<<<<< HEAD
             case "henanzhongyan" :
               global.initProvinceData.provinceName = "河南省";
               break;
               case "hebeihehua" :
               global.initProvinceData.provinceName = "河北省";
               break;
-
-=======
-            case "henan" :
-              global.initProvinceData.provinceName = "河南省";
-              break;
->>>>>>> 8b0ef8db231e793cf4880aed34ed05b8d2b8f795
 
           }
           $model.$getDistrictTrend(global.initProvinceData).then(function (res) {
