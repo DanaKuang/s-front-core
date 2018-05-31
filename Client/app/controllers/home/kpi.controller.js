@@ -136,7 +136,6 @@ define([], function () {
         var option = $model.$echartConf.data;
         var LATLNG = $model.$latlng.data || {};
         var data = $model.$mapData.data || [];
-        debugger
         var convertData = function (data) {
           var res = [];
           data.forEach(function (d) {

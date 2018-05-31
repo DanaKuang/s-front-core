@@ -18,7 +18,7 @@ define([], function () {
       var $model = $scope.$model;
       $scope.bool = false;
       //页面默认配置
-      var countDeafault = {
+      var countdef = {
         // "startTime":stattime,
         // "endTime":stattime,
         // "reportId":"1",
@@ -29,13 +29,13 @@ define([], function () {
         "checkPerson": "",
         "checkStatus": $(".res_status select").val()
       }
-      var Deafault = _.cloneDeep(countDeafault);
-      Deafault.page = 1;
-      Deafault.pageSize = 10;
+      var def = _.cloneDeep(countdef);
+      def.page = 1;
+      def.pageSize = 10;
       var allpage; //计算总页数
       $("#agree_brand").change(function() {
-        global.getProduct({productBrand:$("#agree_brand").val()})
-      })      
+        globalFn.getProduct({productBrand:$("#agree_brand").val()})
+      })
       // var prizeCount = {
       //   "startTime":stattime,
       //   "endTime":stattime,
@@ -52,17 +52,17 @@ define([], function () {
       // $scope.Tabs = function (boolean) {
       //   $scope.bool = boolean;
       //   if($scope.bool) {
-      //     global.other(Deafault);
-      //     global.othersCou(countDeafault);
+      //     globalFn.other(def);
+      //     globalFn.othersCou(countdef);
       //   } else {
-      //     global.getPrize(prize);
-      //     // global.getBrand();
-      //     global.prizeCou(prizeCount);
+      //     globalFn.getPrize(prize);
+      //     // globalFn.getBrand();
+      //     globalFn.prizeCou(prizeCount);
       //   }
       // };
 
       //执行的函数
-      var global = {
+      var globalFn = {
         //异业
         // "other" : function (params) {
         //   $model.$others(params).then(function (res) {
@@ -113,29 +113,29 @@ define([], function () {
         // "othersCou": function (params) {
         //   $model.$othersCount(params).then(function (res) {
         //     allpage = Math.ceil(res.data.Count/10);
-        //     global.createPage();
+        //     globalFn.createPage();
         //   })
         // },
         //计算履约报表页数
         "getPerformAppointCount": function (params) {
           $model.$getPerformAppointCount(params).then(function (res) {
-            $scope.count = res.data.Count;            
+            $scope.count = res.data.Count;
             allpage = Math.ceil(res.data.Count/10);
-            global.createPage();
+            globalFn.createPage();
           })
         },
         //计算奖金总页数
         // "prizeCou": function (params) {
         //   $model.$prizeCount(params).then(function (res) {
         //     allpage = Math.ceil(res.data.Count/10);
-        //     global.createPage();
+        //     globalFn.createPage();
         //   })
         // },
         //计算奖品分发的总页数
         // "prizeCount": function (params) {
         //   $model.$prizeCount(params).then(function (res) {
         //     allpage = Math.ceil(res.data.Count/10);
-        //     global.createPage();
+        //     globalFn.createPage();
         //   })
         // },
         //品牌列表
@@ -145,7 +145,7 @@ define([], function () {
             for(var i=0;i<res.length;i++){
                 $("#agree_brand").append("<option value="+res[i].name+">"+res[i].name+"</option>")
             };
-            global.getProduct({productBrand:$("#agree_brand").val()});            
+            globalFn.getProduct({productBrand:$("#agree_brand").val()});
           })
         },
         //规格列表
@@ -153,7 +153,7 @@ define([], function () {
           $model.$getProduct(params).then(function (res) {
             var res = res.data || [];
             $("#agree_product").html("");
-            $("#agree_product").append("<option value=''>全部</option>");                    
+            $("#agree_product").append("<option value=''>全部</option>");
             for(var i=0;i<res.length;i++){
                 $("#agree_product").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
             };
@@ -164,12 +164,12 @@ define([], function () {
           $model.$getAwardType().then(function(res){
             var res = res.data || [];
             $(res).each(function(index,n){
-              $(".res_award select").append("<option value="+n.awardTypeId+">"+n.awardTypeName+"</option>")              
+              $(".res_award select").append("<option value="+n.awardTypeId+">"+n.awardTypeName+"</option>")
             })
-            Deafault.awardType = $(".res_award select").val();
-            countDeafault.awardType = $(".res_award select").val();
-            global.getPerformAppoint(Deafault);
-            global.getPerformAppointCount(countDeafault);
+            def.awardType = $(".res_award select").val();
+            countdef.awardType = $(".res_award select").val();
+            globalFn.getPerformAppoint(def);
+            globalFn.getPerformAppointCount(countdef);
           })
         },
         //创建分页
@@ -185,8 +185,8 @@ define([], function () {
               pageCount:allpage,
               current:1,
               backFn:function(page){
-                  Deafault.page = page;
-                  global.getPerformAppoint(Deafault);
+                  def.page = page;
+                  globalFn.getPerformAppoint(def);
               }
             });
           }
@@ -195,9 +195,9 @@ define([], function () {
       $(".res_btn").click(function () {
         if(!$(this).hasClass("gray_btn")) {
           $(this).addClass("gray_btn");
-          countDeafault = {};
-          Deafault = {};
-          countDeafault = {
+          countdef = {};
+          def = {};
+          countdef = {
             "productBrand": $(".agree_brand select").val(),
             "productSn": $(".agree_product select").val(),
             "awardType": $(".res_award select").val(),
@@ -205,11 +205,11 @@ define([], function () {
             "checkPerson": $(".res_person input").val(),
             "checkStatus": $(".res_status select").val()
           }
-          Deafault = _.cloneDeep(countDeafault);
-          Deafault.page = 1;
-          Deafault.pageSize = 10;
-          global.getPerformAppoint(Deafault);
-          global.getPerformAppointCount(countDeafault);
+          def = _.cloneDeep(countdef);
+          def.page = 1;
+          def.pageSize = 10;
+          globalFn.getPerformAppoint(def);
+          globalFn.getPerformAppointCount(countdef);
         }
         // console.log(options);
       })
@@ -231,13 +231,18 @@ define([], function () {
       //     prize = _.cloneDeep(prizeCount);
       //     prize.page = 1;
       //     prize.pageSize = 10;
-      //     global.getPrize(prize);
-      //     global.prizeCou(prizeCount);
+      //     globalFn.getPrize(prize);
+      //     globalFn.prizeCou(prizeCount);
       //   }
       // })
-            
-      global.getBrand();
-      global.getAwardType();
+
+      globalFn.getBrand();
+      globalFn.getAwardType();
+
+      // 添加hover效果
+      $("select").hover(function (e) {
+          e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+      });
 
     }]
   };

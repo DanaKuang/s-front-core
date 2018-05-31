@@ -1,0 +1,159 @@
+/**
+ * Author: liubin
+ * Create Date: 2018-05-11
+ * Description: 竞猜活动
+ */
+.ui-activity-quiz {
+    .tr {
+        text-align: right;
+    }
+    margin-top: 15px;
+    .margin-top {
+        margin-top: 15px;
+    }
+    .ui-panel-title {
+        height: 30px;
+        button.btn-default,
+        button.btn-default:hover,
+        button.btn-default:active,
+        button.btn-default:focus {
+            position: absolute;
+            right: 15px;
+            height: 24px;
+            padding: 0 12px;
+            background-color: #44c1ed;
+            border-color: #44c1ed;
+            color: #fff;
+        }
+    }
+
+    .ui-btn-ctrl {
+        display: block !important;
+        text-align: right;
+        margin-right: 0 !important;
+    }
+    #id_quiz_form {
+        select {
+            width: 147px;
+            height: 30px;
+            padding: 4px 12px;
+        }
+        .form-control {
+            width: 147px !important;
+        }
+        .form-group {
+            margin-right: 15px;
+        }
+        .multiselect.btn {
+            width: 147px;
+            height: 30px;
+            padding: 4px 12px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ui-btn-ctrl {
+            button {
+                width: 100px;
+                margin-left: 30px;
+                margin-right: 0px;
+                height: 30px;
+                border-radius: 15px;
+                padding: 4px 12px;
+                background: #44c1ed;
+                border-color: #44c1ed;
+            }
+        }
+    }
+}
+
+.ui-detail-box {
+    .opts {
+        display: flex;
+        justify-content: space-around;
+        border: 0;
+        border-top: 1px solid #ddd;
+        div {
+            cursor: pointer;
+        }
+        div:hover {
+            text-decoration: underline;
+            color: #44c1ed;
+        }
+    }
+}
+
+#add_edit_form,
+#id_inject_num {
+    .txt {
+        height: 30px;
+        line-height: 30px;
+    }
+    .red {
+        color: red;
+    }
+    input[type="file"] {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        z-index: 101;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .team-img {
+        width: 100px;
+        height: 100px;
+    }
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        padding: 0 12px;
+        background-color: #44c1ed;
+        border-color: #44c1ed;
+        color: #fff;
+    }
+    .dropdown-menu {
+        left: 15px;
+        text-align: center;
+        li {
+            cursor: pointer;
+            img {
+                width: 50px;
+            }
+        }
+    }
+}
+
+#id_tips_form,
+#id_rate_change,
+#id_draw_match,
+#id_confirm_form {
+    .modal-body {
+        text-align: center;
+        font-size: 14px;
+    }
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        padding: 0 12px;
+        background-color: #44c1ed;
+        border-color: #44c1ed;
+        color: #fff;
+    }
+    .progress {
+        position: relative;
+        height: 30px;
+        width: 350px;
+        text-align: right;
+        line-height: 30px;
+    }
+    .bar {
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #ccc;
+    }
+}

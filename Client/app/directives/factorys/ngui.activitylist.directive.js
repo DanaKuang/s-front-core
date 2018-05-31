@@ -70,7 +70,7 @@ define([], function () {
             scope.editActivity = function (e) {
                 var sendData = {
                     activityCode : e.target.dataset.activitycode,
-                    activityForm : e.target.dataset.activityform 
+                    activityForm : e.target.dataset.activityform
                 }
                 scope.$emit('editActivity', event, sendData)
             }
@@ -83,6 +83,11 @@ define([], function () {
             scope.turnToReal = function () {
                 angular.element(".ui-navbar-header").scope().changeNav(null, {menuCode: 'index'});
                 sessionStorage.setItem('menuCode', 'realtime');
+            }
+
+            // 管理世界杯活动
+            scope.activityCtrl =  function (item) {
+                location.href = "/#/view/activity/acts/quiz/" + item.activityCode;
             }
         }
         return defineObj;

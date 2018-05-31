@@ -238,25 +238,30 @@
 	<div class="modal fade add-giftstock-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">
 	    <div class="modal-content">
-	    	<div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+	    	<div class="modal-header">增库<button type="button" class="close" aria-label="Close" ng-click="closeAddGiftBox()">
+					<span aria-hidden="true">×</span></button>
+				</div>
 		    <div class="modal-body">
 		    	<div class="input-wrap">
 		    		<label for="">增库数量</label><input type="number" ng-model="giftnumber">
-		    	</div>
+					</div>
+					<div class="pool_warn" id='addGiftNum'></div>
 		    </div>
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		    	<button type="button" class="btn btn-default" ng-click="closeAddGiftBox()">取消</button>
         	<button type="button" class="btn btn-primary" ng-click="confirmGiftStock($event)">确定</button>
 		    </div>
 	    </div>
 	  </div>
 	</div>
 
-	<!-- 红包增库 -->
+	<!-- 红包金额增库 -->
 	<div class="modal fade add-hbstock-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">
 	    <div class="modal-content">
-	    	<div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+	    	<div class="modal-header">增库<button type="button" class="close" aria-label="Close" ng-click="closeAddHbMoneyBox()">
+					<span aria-hidden="true">×</span></button>
+				</div>
 		    <div class="modal-body">
 		    	<div class="input-wrap">
 		    		<label for="">增加金额</label><input type="number" ng-model="hbnumber">
@@ -264,8 +269,50 @@
 		    	<div class="pool_warn" id='poolDetail'></div>
 		    </div>
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		    	<button type="button" class="btn btn-default" ng-click="closeAddHbMoneyBox()">取消</button>
         	<button type="button" class="btn btn-primary" ng-click="confirmHbStock($event)">确定</button>
+		    </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- 红包数量增库 -->
+	<div class="modal fade add-hbstock-pop-num add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">增库<button type="button" class="close" aria-label="Close" ng-click="closeAddHbNumBox()">
+					<span aria-hidden="true">×</span></button>
+				</div>
+		    <div class="modal-body">
+		    	<div class="input-wrap">
+		    		<label for="">增加数量</label><input type="number" ng-model="hbnumberNum">
+		    	</div>
+		    	<div class="pool_warn" id='hbNumberErr'></div>
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" ng-click="closeAddHbNumBox()">取消</button>
+        	<button type="button" class="btn btn-primary" ng-click="confirmHbStockNum($event)">确定</button>
+		    </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- 积分数量增库 -->
+	<div class="modal fade add-points-pop add-stock-pop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">增库<button type="button" class="close" aria-label="Close" ng-click="closeAddPointsBox()">
+					<span aria-hidden="true">×</span></button>
+				</div>
+		    <div class="modal-body">
+		    	<div class="input-wrap">
+		    		<label for="">增加数量</label><input type="number" ng-model="pointsNumber">
+		    	</div>
+		    	<div class="pool_warn" id='pointsNumErr'></div>
+		    </div>
+		    <div class="modal-footer">
+		    	<button type="button" class="btn btn-default" ng-click="closeAddPointsBox()">取消</button>
+        	<button type="button" class="btn btn-primary" ng-click="confirmPointsStockNum($event)">确定</button>
 		    </div>
 	    </div>
 	  </div>

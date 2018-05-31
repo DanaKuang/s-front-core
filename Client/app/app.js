@@ -11,7 +11,6 @@ require([
   "directives/_directives.min.js",
   "controllers/_controllers.min.js"
 ], function (controller, directive, service, filter) {
-  console.log('************* saas project loading... *************');
 
   /**
    * cm controller.min

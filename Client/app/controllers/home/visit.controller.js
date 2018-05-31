@@ -12,7 +12,20 @@ define([], function () {
         ServiceContent: ['$scope', 'setDateConf', '$timeout','dayFilter',function ($scope, setDateConf, $timeout,dayFilter) {
             setDateConf.init($(".agree-date"), 'day');
             var stattime = dayFilter.yesterday("date");
-            $(".date-wrap").find("input").val(stattime);
+
+            var $start = $(".visit_start input");
+            var $end = $(".visit_end input");
+            $($start).change(function (v) {
+                if (v.target.value > $($end).val()) {
+                    $($end).val(v.target.value)
+                }
+            }).val(stattime);
+            $($end).change(function (v) {
+                if (v.target.value < $($start).val()) {
+                    $($start).val(v.target.value)
+                }
+            }).val(stattime);
+
             var $model = $scope.$model;
             //页面默认加载配置
             var deafaultCou = {
@@ -26,9 +39,9 @@ define([], function () {
                 "endTime":stattime,
                 "orderId":""
             };
-            var Deafault = _.cloneDeep(deafaultCou);
-            Deafault.page = 1;
-            Deafault.pageSize = 10;
+            var def = _.cloneDeep(deafaultCou);
+            def.page = 1;
+            def.pageSize = 10;
             var allpage;  //计算总页数
             var up = {};  //更新数据
 
@@ -51,7 +64,7 @@ define([], function () {
                 $model.$getProduct(params).then(function (res) {
                     var res = res.data || [];
                     $("#visit_product").html("");
-                    $("#visit_product").append("<option value=''>全部</option>");                    
+                    $("#visit_product").append("<option value=''>全部</option>");
                     for(var i=0;i<res.length;i++){
                         $("#visit_product").append("<option value="+res[i].sn+">"+res[i].name+"</option>")
                     };
@@ -61,7 +74,7 @@ define([], function () {
             $(".visit_table tbody").on("click", "span", function (e) {
                 $(".visit-list").hide();
                 $(this).siblings(".visit-list").show();
-                e.stopPropagation();                
+                e.stopPropagation();
             });
             //更新
             $(".visit_table tbody").on("click", "li", function () {
@@ -82,11 +95,11 @@ define([], function () {
                 };
                 // console.log(up);
                 $(".visit-list").hide();
-                //global.getFeed(Deafault);
+                //globalFn.getFeed(def);
             });
 
             $(document).bind('click',function(e){
-                $(".visit-list").hide();                
+                $(".visit-list").hide();
             })
 
             //模态框点击
@@ -99,7 +112,7 @@ define([], function () {
             }
             $scope.sure = function () {
                 $("#myModal").modal("hide");
-                global.update(up);
+                globalFn.update(up);
             }
 
             //回复状态点击
@@ -114,30 +127,28 @@ define([], function () {
                 if (!$(that).hasClass("gray_btn")) {
                     $(that).addClass("gray_btn");
                     deafaultCou = {};
-                    Deafault = {};
+                    def = {};
                     deafaultCou = {
-                        "startTime": $(".visit_start").find(".date-wrap").data().date ?
-                            $(".visit_start").find(".date-wrap").data().date : $(that).siblings(".visit_start").find("input").val(),
+                        "startTime": $(".visit_start .date").val(),
                         "awardName": $(".visit_award input").val(),
                         "cityName": $(".visit_city input").val(),
-                        "endTime": $(".visit_end").find(".date-wrap").data().date ?
-                            $(".visit_end").find(".date-wrap").data().date : $(that).siblings(".visit_end").find("input").val(),
-                        "mobileNo":$(".visit_mobile input").val(),
-                        "checkStatus":$("#visit_label").val(),
-                        "productSn":$("#visit_product").val(),
-                        "productBrand":$("#visit_brand").val(),
-                        "orderId":$(".visit_order input").val()
+                        "endTime": $(".visit_end .date").val(),
+                        "mobileNo": $(".visit_mobile input").val(),
+                        "checkStatus": $("#visit_label").val(),
+                        "productSn": $("#visit_product").val(),
+                        "productBrand": $("#visit_brand").val(),
+                        "orderId": $(".visit_order input").val()
 
                     };
-                    Deafault = _.cloneDeep(deafaultCou)
-                    Deafault.page = 1;
-                    Deafault.pageSize = 10;
-                    global.getFeed(Deafault);
-                    global.feedBack(deafaultCou);
+                    def = _.cloneDeep(deafaultCou)
+                    def.page = 1;
+                    def.pageSize = 10;
+                    globalFn.getFeed(def);
+                    globalFn.feedBack(deafaultCou);
                 }
             }
 
-            var global = {
+            var globalFn = {
                 //回访记录
                 "getFeed": function (params) {
                     $model.$getFeed(params).then(function (res) {
@@ -172,7 +183,12 @@ define([], function () {
                                 res[i].awardName + "</td> <td data-id=" + res[i].id + "> " +
                                 feedback +
                                 " <span class='" + Class + "'></span> <ul class='visit-list'><li data-toggle='modal' data-target='#myModal'>已核实</li> <li data-toggle='modal' data-target='#myModal'>不属实</li> <li data-toggle='modal' data-target='#myModal'>联系不上</li></ul></td></tr>");
-                        };
+                        }
+
+                        if (!res.length) {
+                            template.push("<tr><td colspan='7'>暂无符合条件的数据</td></tr>" );
+                        }
+
                         $(".visit_table tbody").append(template.join(" "))
                         $(".visit_btn").removeClass("gray_btn");
                     })
@@ -183,13 +199,13 @@ define([], function () {
                         $scope.count = res.data.Count;
                         $scope.$apply();
                         allpage = Math.ceil(res.data.Count / 10);
-                        global.createPage();
+                        globalFn.createPage();
                     })
                 },
                 //更新回访记录
                 "update": function (params) {
                     $model.$update(params).then(function () {
-                        global.getFeed(Deafault)
+                        globalFn.getFeed(def)
                     })
                 },
                 //创建分页
@@ -205,15 +221,20 @@ define([], function () {
                             pageCount: allpage,
                             current: 1,
                             backFn: function (page) {
-                                Deafault.page = page;
-                                global.getFeed(Deafault);
+                                def.page = page;
+                                globalFn.getFeed(def);
                             }
                         });
                     }
                 }
             }
-            global.getFeed(Deafault);
-            global.feedBack(deafaultCou);
+            globalFn.getFeed(def);
+            globalFn.feedBack(deafaultCou);
+
+            // 添加hover效果
+            $("select").hover(function (e) {
+                e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+            });
         }]
     };
 

@@ -23,11 +23,18 @@ login:                                      # 登录
     staticfile: 'login.html'
   - httpmethod: 'get'                       # 找回密码
     routepath: '/find'
-    description: '登陆页面'
+    description: '找回密码'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'find.html'
+  - httpmethod: 'get'                       # 找回密码
+    routepath: '/update'
+    description: '浏览器版本升级'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'update.html'
 home:                                       # 首页
   - httpmethod: 'get'                       # KPI
     routepath: '/view/home/kpi'
@@ -127,6 +134,13 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/retailer/detail.html'
+  - httpmethod: 'get'                       # 零售户分析
+    routepath: '/view/home/retailer/analysis'
+    description: 'retailer'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/retailer/analysis.html'
   - httpmethod: 'get'                       # 报表导出
     routepath: '/view/home/report'
     description: 'report'
@@ -141,6 +155,20 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/formarReport/formarReport.html'
+  - httpmethod: 'get'                       # 山昆报表导出
+    routepath: '/view/home/skReport'
+    description: 'report'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/skReport/skReport.html'
+  - httpmethod: 'get'                       # 河北报表导出
+    routepath: '/view/home/hbReport'
+    description: 'hbReport'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/hbReport/hbReport.html'
   - httpmethod: 'get'                       # 履约报表
     routepath: '/view/home/agree'
     description: 'agree'
@@ -162,6 +190,34 @@ home:                                       # 首页
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'home/materiel/gift.html'
+  - httpmethod: 'get'                       # 盗扫明细查询
+    routepath: '/view/home/operateTools/sweepDetail'
+    description: 'sweepDetail'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/operateTools/sweepDetail.html'
+  - httpmethod: 'get'                       # 用户标签 标签组合管理
+    routepath: '/view/home/usertag/assemble'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/usertag/assemble.html'
+  - httpmethod: 'get'                       # 异常码管理
+    routepath: '/view/home/code'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/code.html'
+  - httpmethod: 'get'                       # 异常码激活
+    routepath: '/view/home/active'
+    description: 'usertag'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'home/code/active.html'
 activity:
   - httpmethod: 'get'                       # 活动管理
     routepath: '/view/activity/acts/manageacts'
@@ -191,6 +247,55 @@ activity:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'activity/acts/integralHistory.html'
+  - httpmethod: 'get'                       # 河北会员日活动设置
+    routepath: '/view/activity/acts/memberday/setting'
+    description: '河北会员日活动设置'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/setting.html'
+  - httpmethod: 'get'                       # 河北会员日中奖信息
+    routepath: '/view/activity/acts/memberday/detail'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/memberday/detail.html'
+  - httpmethod: 'get'                       # 毛五活动管理
+    routepath: '/view/activity/acts/sauce/actmanage'
+    description: '毛五活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/actmanage.html'
+  - httpmethod: 'get'                       # 毛五订单管理
+    routepath: '/view/activity/acts/sauce/ordermanage'
+    description: '河北会员日中奖信息'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/sauce/ordermanage.html'
+  - httpmethod: 'get'                       # 卡片管理
+    routepath: '/view/activity/acts/card/cardmanagement'
+    description: '河南卡片管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/card/cardmanagement.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/quiz/*'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/quiz.html'
+  - httpmethod: 'get'                       # 竞猜活动管理
+    routepath: '/view/activity/acts/hunan-quiz'
+    description: '世界杯活动管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'activity/acts/quiz/hunan-quiz.html'
 dealer:
   - httpmethod: 'get'                       # 经销商审核
     routepath: '/view/dealer/review'
@@ -264,49 +369,70 @@ product:
     gatewaytype: 0
     staticfile: 'product/cigamanage/cigarettemanage.html'
 visitManage:
+  - httpmethod: 'get'                       # 零售户审核管理
+    routepath: '/view/visit/reviewmanage'
+    description: 'reviewmanage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/reviewmanage.html'
   - httpmethod: 'get'                       # 零售户管理
     routepath: '/view/visit/manage'
     description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/manage/manage.html'
-  - httpmethod: 'get'                       # 零售户奖励设置
-    routepath: '/view/visit/reward'
-    description: 'reward'
+    staticfile: 'visit/manage.html'
+  - httpmethod: 'get'                       # 订单管理
+    routepath: '/view/visit/ordermanage'
+    description: 'manage'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/reward/reward.html'
-  - httpmethod: 'get'                       # 零售户业绩
+    staticfile: 'visit/ordermanage.html'
+  - httpmethod: 'get'                       # 返佣管理 - 扫码入库
+    routepath: '/view/visit/rebate/storagemanage'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/storagemanage.html'
+  - httpmethod: 'get'                       # 返佣管理 - 扫码返佣
+    routepath: '/view/visit/rebate/rebatemanage'
+    description: 'manage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/rebatemanage.html'
+  - httpmethod: 'get'                       # 其他系统设置
+    routepath: '/view/visit/other'
+    description: 'other'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/other.html'
+  - httpmethod: 'get'                       #提现审核
+    routepath: '/view/visit/amountexamine'
+    description: 'amountexamine'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'visit/amountexamine.html'
+  - httpmethod: 'get'                       #提现审核
     routepath: '/view/visit/achievement'
     description: 'achievement'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'visit/achievement/achievement.html'
-  - httpmethod: 'get'                       # 零售户获奖统计
-    routepath: '/view/visit/winCount'
-    description: 'winCount'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'visit/winCount/winCount.html'
-  - httpmethod: 'get'                       # 零售户获奖统计
-    routepath: '/view/visit/detail'
-    description: 'detail'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'visit/detail/detail.html'
+    staticfile: 'visit/achievement.html'
 system:
   - httpmethod: 'get'                       # 修改密码
-    routepath: '/view/system/password'
+    routepath: '/view/system/pwd'
     description: 'password'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'system/account/password.html'
+    staticfile: 'system/account/pwd.html'
   - httpmethod: 'get'                       # 角色管理
     routepath: '/view/system/role'
     description: 'role'
@@ -321,6 +447,13 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/account/user.html'
+  - httpmethod: 'get'                       # 日志记录
+    routepath: '/view/system/logs'
+    description: 'logs'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'system/log/log.html'
   - httpmethod: 'get'                       # 广告位管理
     routepath: '/view/system/adsense'
     description: 'adsense'
@@ -356,11 +489,3 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/style/style.html'
-operateTools:
-  - httpmethod: 'get'                       # 盗扫明细查询
-    routepath: '/view/home/operateTools/sweepDetail'
-    description: 'sweepDetail'
-    enableroute: 1
-    responetype: 'html'
-    gatewaytype: 0
-    staticfile: 'home/operateTools/sweepDetail.html'

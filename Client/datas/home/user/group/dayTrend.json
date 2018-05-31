@@ -2,14 +2,14 @@
     "color":["#3EDBF8","#FF8100","#FFCC24"],
     "tooltip" : {
         "trigger": "axis",
-        "axisPointer" : {            
-            "type" : "line"       
+        "axisPointer" : {
+            "type" : "line"
         }
     },
      "legend": {
           "data":["本日扫码用户","本日新增扫码用户","近三日扫码用户平均值"],
           "right":0,
-          "selectedMode": false          
+          "selectedMode": false
     },
     "grid": {
         "left": "0%",
@@ -17,15 +17,6 @@
         "bottom": "2%",
         "containLabel": true
     },
-    "dataZoom": [
-        {
-          "type": "inside",
-          "show": true,
-          "start":0,
-          "end": 30,
-          "zoomLock":true
-        }
-      ],
     "xAxis" : [
         {
             "type" : "category",

@@ -1,0 +1,122 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2018-01-02
+ * Description: 河北会员日中奖详情
+ */
+-->
+<!--style-->
+<link rel="stylesheet" type="text/css" href="statics/assets/style/activity.detail.css">
+<link rel="stylesheet" type="text/css" href="statics/assets/style/pagination.css">
+<div ng-controller="mdDetailCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-md-detail">
+                <!--title-->
+                <div class="ui-panel-title detail">
+                    <i class="detail"></i><span>钻石会员日奖品领奖明细</span>
+                </div>
+                <!--box-->
+                <div class="col-md-12">
+                    <div class="panel rate ui-search-panel">
+                        <div class="panel-body">
+                            <form class="form-inline col-md-12">
+                                <div class="form-inline">
+                                    <!--获奖状态-->
+                                    <div class="inline-block">
+                                        <label for="status">获奖状态&nbsp;&nbsp;</label>
+                                        <select class="form-control" name="status" ng-model="status">
+                                            <option ng-repeat="st in stArr" value="{{st.code}}">{{st.name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--地区-->
+                                    <div class="inline-block">
+                                        <label for="region">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区&nbsp;&nbsp;</label>
+                                        <select class="form-control" name="region" ng-model="region" multiple="multiple">
+                                            <option ng-repeat="re in regionArr" value="{{re.code}}">{{re.name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--获奖时间-->
+                                    <div class="inline-block large">
+                                        <label for="weekTime">获奖时间&nbsp;&nbsp;</label>
+                                        <select class="form-control" name="weekTime" ng-model="weekTime">
+                                            <option ng-repeat="wa in weekArr" value="{{wa.weekNo}}">{{wa.weekNo}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-inline">
+                                    <!--奖项-->
+                                    <div class="inline-block large">
+                                        <label for="idx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;奖项&nbsp;&nbsp;</label>
+                                        <select class="form-control" ng-model="idx" name="idx">
+                                            <option ng-repeat="p in pArr" value="{{p.idx}}">{{p.prize_name}}</option>
+                                        </select>
+                                    </div>
+
+                                    <!--测试时间-->
+                                    <div class="inline-block large" style="display: none;">
+                                        <label for="nowTime" class="control-label col-md-3">当前时间&nbsp;&nbsp;</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="nowTime" ng-model="nowTime" class="form-control input-sm date">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-inline fr">
+                                    <button type="submit" class="btn btn-primary" ng-click="detailSearch()">搜索</button>
+                                    <button type="button" ng-click="detailReset()" class="btn btn-primary">重置</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--table-->
+                    <div class="panel rate">
+                        <div class="panel-body">
+                            <div class="ui-table-title">
+                                <button type="button" class="btn btn-primary" ng-click="export()">导出搜索结果</button>
+                            </div>
+                            <div class="ui-detail-box">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>订单号</th>
+                                            <th>中奖人</th>
+                                            <th>活动名称</th>
+                                            <th>所领奖项</th>
+                                            <th>奖项内容</th>
+                                            <th>零售户地址</th>
+                                            <th>获奖时间</th>
+                                            <th>获奖地区</th>
+                                            <th>获奖状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in listArr">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.nickname}}</td>
+                                            <td>{{item.activityName}}</td>
+                                            <td>{{item.prizeName}}</td>
+                                            <td>{{item.minred}}元</td>
+                                            <td>{{item.salerAddress}}</td>
+                                            <td>{{item.ctime}}</td>
+                                            <td>{{item.salerCityName}}</td>
+                                            <td>{{item.statusName}}</td>
+                                            <td ng-if="item.canSend"><a href="javascript:void(0)" ng-click="sendMessage(item)">发送提醒</a></td>
+                                            <td ng-if="!item.canSend">发送提醒</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 翻页 -->
+                                <!-- <div class="pagination-wrap"> -->
+                                    <!-- 分页指令 -->
+                                    <!-- <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

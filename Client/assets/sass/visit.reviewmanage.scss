@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+.ui-panel-title {
+  line-height: 34px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+/*11.28零售户调改*/
+.form-horizontal .control-label {
+  width: 90px;
+  margin-right: 0px; }
+
+.form-horizontal .form-control {
+  width: 100%; }
+
+.location .form-control {
+  width: 30%;
+  float: left;
+  margin-right: 2%; }
+
+.keywords select {
+  width: 49% !important;
+  margin-right: 1%;
+  font-size: 12px; }
+
+.keywords input {
+  width: 49% !important;
+  margin-right: 1%;
+  font-size: 12px;
+  padding: 6px;
+}
+
+#durationStart, #durationEnd {
+  width: 45%;
+  background: #fff;
+  float: left; }
+
+.time .col-sm-10 span {
+  width: 5%;
+  float: left;
+  line-height: 34px;
+  text-align: center; }
+
+
+.search-btn-con {
+  .btn {
+    float: left;
+  }
+  .search {
+    margin-left: 76px;
+  }
+  .reset {
+    margin-left: 30px;
+  }
+}
+
+
+.btn.btn-primary {
+  width: auto;
+  height: 34px;
+  border: none;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-default {
+  width: auto;
+  height: 34px;
+  line-height: 22px;
+  padding: 6px 12px;
+}
+.btn.btn-primary, .btn.btn-primary:focus {
+  height: 34px;
+}
+
+.new-retailer-btn {
+  float: right;
+}
+
+.form-group {
+  overflow: hidden;
+  padding: 0;
+}
+
+// 批量审批
+.batch-review {
+  margin-bottom: 10px;
+  label {
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    margin: 0;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+  .batch-btn {
+    margin-left: 20px;
+  }
+}
+
+// 审核弹窗
+.review-modal {
+  textarea {
+    width: 100%;
+    height: 80px;
+    display: block;
+    resize: none;
+    padding: 5px;
+  }
+  .textarea-num {
+    position: absolute;
+    right: 15px;
+    top: 100px;
+    text-align: right;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+  .btn {
+    display: inline-block;
+  }
+}
+
+td.batch {
+  label {
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+// 提示
+#newAlert {
+  width: 250px;
+  min-height: 70px;
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 9999;
+  display: none;
+  .close {
+    top: -11px;
+  }
+}
+
+.panel-body {
+  padding: 15px;
+  position: relative;
+}
+.scroll-con {
+  overflow-x: auto;
+}
+// 管理列表
+.table {
+  tr {
+    th, td {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    td > div {
+      margin: 0 auto;
+    }
+
+    .oper-btn-wrap {
+      width: 220px;
+      .operate-btn {
+        color: #3379b7;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0px 7px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    //.shop-name {
+    //  width: 100px;
+    //}
+  }
+}
+
+.modal-body {
+  margin-bottom: 10px;
+}
+
+// 验证
+.wrong-tip {
+  color: #f00;
+  font-size: 12px;
+  margin-top: 5px;
+  text-indent: 5px;
+}
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+  border-color: #FA787E !important;
+}
+.ng-submitted {
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    border-color: #FA787E !important;
+  }
+}
+
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}

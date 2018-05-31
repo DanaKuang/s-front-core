@@ -1,0 +1,32 @@
+{
+    "color":["#76D7F7","#FF8B22"],
+    "tooltip" : {
+        "trigger": "axis"
+    },
+    "xAxis" : [
+        {
+            "type" : "category",
+            "data" : [],
+            "axisTick": {
+                "alignWithLabel": true
+            }
+        }
+    ],
+    "yAxis" : [
+        {
+            "type" : "value",
+            "axisLabel": {
+                "show": false
+           }
+        }
+    ],
+    "series" : [
+        {
+            "name":"",
+            "type":"bar",
+            "data":[],
+            "barGap": 0,
+            "barWidth": 70
+        }
+    ]
+}

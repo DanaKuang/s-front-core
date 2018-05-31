@@ -46,7 +46,7 @@ define([], function () {
             scope.cancelActivityBuild = function() {
                 var r = confirm('确定要取消吗？')
                 if (r == true) {
-                    scope.$emit('popback', event, {}); 
+                    scope.$emit('popback', event, {});
                 } else {
                     return
                 }
@@ -69,7 +69,7 @@ define([], function () {
                 scopeVariable.specialerror = false;
                 scopeVariable.commonerror = false;
                 scopeVariable.finalerror = false;
-            
+
                 // 彩蛋奖品
                 if (scopeVariable._drawPrizeScope) {
                     var caidanerror = false;
@@ -135,7 +135,7 @@ define([], function () {
                     setPrize('common')
                 }
 
-                // 特殊 & 普通奖项设置fn 
+                // 特殊 & 普通奖项设置fn
                 function setPrize(tag, editornot) {
                     if (editornot) {
                         if (tag === 'special') {
@@ -198,10 +198,10 @@ define([], function () {
                             // 参与奖
                             ActivityPageAward.special = -1;
                         }
-
                         ActivityPageAward.probability = ActivityPageAward.special == 1 ? '100%' : item.find('.chance').val() || ''; //特殊奖品没有概率设置
                         ActivityPageAward.prizeName = item.find('.prizename').val() || '';
                         ActivityPageAward.details = []; //具体奖品数组
+                        ActivityPageAward.id = item.attr('data-dataid') || '';  //奖池id
 
                         // 分---礼品 & 红包、积分
                         if (radio_res_item.hasClass('gift')) {
@@ -229,6 +229,7 @@ define([], function () {
                                 }
                             }
                         }
+
                         scopeVariable.activityAwards.push(ActivityPageAward);
                     })
                 }
@@ -241,15 +242,15 @@ define([], function () {
                     } else {
                         ActivityPageAward.multiChoose = 0;
                     }
-
                     giftDomList_arr.forEach(function (n, index) {
                         ActivityPageAward.details[index] = {};
                         var n = giftDomList.eq(index).find('.prize-img-preview-wrap');
-                        ActivityPageAward.details[index].poolId = n[0].dataset.id || ''; 
+                        ActivityPageAward.details[index].poolId = n[0].dataset.id || '';
                         ActivityPageAward.details[index].awardName = n[0].dataset.name || '';
                         ActivityPageAward.details[index].awardPicUrl = n[0].dataset.giftpic || '';
                         ActivityPageAward.details[index].awardType = n[0].dataset.gifttype;
                         ActivityPageAward.details[index].awardNums = n.find('.number').val();
+                        ActivityPageAward.details[index].id = n[0].dataset.dataid || '';
                     })
 
                     checkerroreouspart(ActivityPageAward, type, item)
@@ -259,7 +260,7 @@ define([], function () {
                 function processSingleArr(ActivityPageAward, item, radio_res_item) {
                     var type = 'notgift';
                     // 红包 和 积分
-                    ActivityPageAward.multiChoose = 0; 
+                    ActivityPageAward.multiChoose = 0;
                     ActivityPageAward.details[0] = {};
                     ActivityPageAward.details[0].awardName = item[0].dataset.name || '';
                     ActivityPageAward.details[0].awardPicUrl = '';
@@ -277,7 +278,7 @@ define([], function () {
                         } else {
                             ActivityPageAward.details[0].minred = ActivityPageAward.details[0].bigred = radio_res_item.find('.fixed').val();
                         }
-                    } 
+                    }
                     if (radio_res_item.hasClass('jf')) {
                         ActivityPageAward.score = radio_res_item.find('.score').val() || 0;
                         ActivityPageAward.details[0].awardType = 6;
@@ -323,8 +324,17 @@ define([], function () {
                         scopeVariable.commonerror = true;
                         item.children('.wrong-tip').removeClass('hidden');
                     }
-                }
 
+                }
+                /* 特殊规则设置参数配置 */
+                var mustwin = [];
+                for (var j = 0; j < $('.special-rules .special-rules-info .special-rules-item').length; j++) {
+                    var ele = $('.special-rules .special-rules-info .special-rules-item')[j];
+                    mustwin.push({
+                        nums: $(ele).find('.input').val(),
+                        prizeName:$(ele).find('.my-select').val()
+                    });
+                }
                 // 最后整合成提交对象
                 var fromSonScope = {
                     copyOfPageCode: angular.element('.all-template-config-wrap').scope().pageCode,
@@ -339,9 +349,9 @@ define([], function () {
                     idx: scopeVariable._basicScope.points || 502,
                     name: scopeVariable._basicScope.nameValue || '',
                     attachUrl: '',
-                    score: scopeVariable._participateScope.nameIntegral || 0,
-                    limitPer: scopeVariable._participateScope.namePerPersonDay || 0,
-                    limitAll: scopeVariable._participateScope.namePerPerson || 0,
+                    score: scopeVariable._participateScope && scopeVariable._participateScope.nameIntegral || 0,
+                    limitPer: scopeVariable._participateScope && scopeVariable._participateScope.namePerPersonDay || 0,
+                    limitAll: scopeVariable._participateScope && scopeVariable._participateScope.namePerPerson || 0,
                     supplier: scopeVariable._launchScope.selectCompanyVal || '',
                     brandCode: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activityBrandsList.join('') : scopeVariable._launchScope.selectBrandVal || '',
                     sn: scopeVariable._launchScope.activity ? scopeVariable._launchScope.activity.activitySnSList[0].sn : scopeVariable._launchScope.selectSpecificationVal || '',
@@ -352,8 +362,12 @@ define([], function () {
                     specialCode: 'FIRST_LOTTERY_BE_WON',
                     activityAwards: scopeVariable.activityAwards,
                     caidanConfig: scopeVariable._drawPrizeScope ? caidanAward : null,
-                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2
+                    status: that_scope.activityCode ? that_scope.conf.data.activity.status : $('.online').prop('checked') ? 1 : 2,
+                    mustwin:$('#checkbox').prop('checked')?mustwin:null,
+                    scantimeLimit: scopeVariable._setPrizeScope.scantimeLimit || ''
                 }
+
+                console.log(fromSonScope)
 
                 finalcheck(fromSonScope)
                 // final校验
@@ -391,7 +405,7 @@ define([], function () {
                                 $('.activity-priority .wrong-tip').removeClass('hidden');
                             }
                         }
-                        
+
                         if (s == 'areaCode' && fromSonScope[s].length == 0) {
                             // 地区没选
                             scopeVariable.finalerror = true;
@@ -422,6 +436,77 @@ define([], function () {
                     }
                 }
 
+                // 特殊规则校验 (复选框选中才去校验)
+                if ($('#checkbox').prop('checked')) {
+                    var input = $('.special-rules .special-rules-info .special-rules-item .input');
+                    var arr = [];  // 装输入框的值
+                    var repeatArr = []; // 装重复数据的数组
+                    for (var j = 0; j < input.length; j++) {
+                        arr.push($(input[j]).val())
+                    };
+                    arr.forEach(function (item, i) {
+                        if (arr.indexOf(item) !== arr.lastIndexOf(item) && repeatArr.indexOf(item) === -1 && item != '') {
+                            repeatArr.push(item);
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                            $(input[i + 1]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        if (item == '') {
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数不可以为空');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        if (!/^[+]{0,1}(\d+)$/.test(item) || $(input[i]).val() == 0) {
+                            // 次数为空或者次数不是正整数。
+                            scopeVariable.finalerror = true;
+                            $(input[i]).siblings('.special-wrong').children('.wrong-tip').html('次数只可以为正整数！');
+                            $(input[i]).siblings('.special-wrong').removeClass('hidden');
+                        };
+                        $(input[i]).on('input', function () {
+                            arr = [];
+                            repeatArr = []; // 装重复数据的数组
+                            for (var j = 0; j < input.length; j++) {
+                                arr.push($(input[j]).val())
+                            };
+                            var that = this;
+                            arr.forEach(function (item) {
+                                if (arr.indexOf(item) !== arr.lastIndexOf(item) && repeatArr.indexOf(item) === -1 && item != '') {
+                                    repeatArr.push(item);
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数不可以重复');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if (!/^[+]{0,1}(\d+)$/.test($(that).val()) || $(that).val() == 0) {
+                                    // 次数为空或者次数不是正整数。
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数只可以为正整数！');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if ($(that) == '') {
+                                    scopeVariable.finalerror = true;
+                                    $(that).siblings('.special-wrong').children('.wrong-tip').html('次数不可以为空');
+                                    $(that).siblings('.special-wrong').removeClass('hidden');
+                                };
+                                if ($(that).val() != '' && /^[+]{0,1}(\d+)$/.test($(that).val()) && $(that).val() != 0 && !repeatArr.length) {
+                                    scopeVariable.finalerror = false;
+                                    $(that).siblings('.special-wrong').addClass('hidden');
+                                }
+                            })
+                        })
+                    })
+                    var select = $('.my-select');
+                    for (var i = 0; i < select.length; i++) {
+                        if (!$(select[i]).val()) {//证明有select没有选择值是null
+                            scopeVariable.finalerror = true;
+                            $(select[i]).parent().siblings('.special-wrong').removeClass('hidden').find('.wrong-tip').html('奖项不可为空！');
+                        };
+                        $(select[i]).on('change', function () {
+                            scopeVariable.finalerror = false;
+                            $(this).parent().siblings('.special-wrong').addClass('hidden');
+                        })
+                    };
+                }
                  // 提交
                 if (scopeVariable._setPrizeScope.myVar) {
                     if (!scopeVariable.specialerror && !scopeVariable.commonerror && !scopeVariable.finalerror) {
@@ -444,7 +529,7 @@ define([], function () {
                         }
                     }
                 }
-            } 
+            }
         }
 
         return defineObj;

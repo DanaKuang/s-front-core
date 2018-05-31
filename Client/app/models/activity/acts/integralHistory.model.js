@@ -10,7 +10,6 @@ define([], function () {
     ServiceName: 'integralHistoryModel',
     ServiceContent: ['request', function (request) {
       this.$model = function () {
-        console.log('integralHistory model is under control.');
       };
     }]
   };

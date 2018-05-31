@@ -1,0 +1,51 @@
+.ui-panel-title .report-icon {
+  left: 0; }
+
+.ui-panel-title.report {
+  padding-left: 20px; }
+
+.ui-visit-form .form-group {
+  margin-right: 15px; }
+
+.ui-visit-form .control-label {
+  width: 50px;
+  text-align: right; }
+
+.ui-visit-form .multiselect.btn {
+  width: 147px;
+  height: 30px;
+  padding: 4px 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.ui-visit-form .date {
+  background: #fff; }
+
+.ui-visit-form .form-control {
+  width: 147px !important; }
+
+.ui-visit-form select {
+  width: 147px !important; }
+
+.ui-visit-form .ui-btn-ctrl {
+  display: block !important;
+  text-align: right;
+  margin-right: 0px !important; }
+  .ui-visit-form .ui-btn-ctrl button.btn-primary,
+  .ui-visit-form .ui-btn-ctrl button.btn-primary:hover,
+  .ui-visit-form .ui-btn-ctrl button.btn-primary:active,
+  .ui-visit-form .ui-btn-ctrl button.btn-primary:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+  .ui-visit-form .ui-btn-ctrl button.gray_btn.btn-primary,
+  .ui-visit-form .ui-btn-ctrl button.gray_btn.btn-primary:hover,
+  .ui-visit-form .ui-btn-ctrl button.gray_btn.btn-primary:active,
+  .ui-visit-form .ui-btn-ctrl button.gray_btn.btn-primary:focus {
+    border-color: #f0f0f0; }

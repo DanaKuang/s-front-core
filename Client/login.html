@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta charset="utf-8" />
-    <title>登录</title>
-    <meta http-equiv="Content-Type" content="application/json; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="keywords" content="企业,大数据,二维码,移动营销,营销,数据统计,扫天下" />
-    <meta name="description" content="扫天下,一站式营销解决方案" />
-    <meta http-equiv="pargma" content="no-cache" />
-    <meta name="author" content="扫天下" />
-    <meta name="robots" content="all" />
-    <link rel="stylesheet" type="text/css" href="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/statics/assets/style/login.css">
+  <meta charset="utf-8" />
+  <title>登录</title>
+  <meta http-equiv="Content-Type" content="application/json; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="keywords" content="企业,大数据,二维码,移动营销,营销,数据统计,扫天下" />
+  <meta name="description" content="扫天下,一站式营销解决方案" />
+  <meta http-equiv="pargma" content="no-cache" />
+  <meta name="author" content="扫天下" />
+  <meta name="robots" content="all" />
+  <link rel="stylesheet" href="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/statics/assets/style/login.css">
 </head>
 <body>
   <div class="ui-wrapper">
@@ -27,7 +27,9 @@
       </div>
       <!--验证码-->
       <div class="ui-label ui-code">
-        <div id="drag"></div>
+        <input type="text" name="verifyCode" placeholder="验证码">
+        <img src="" onclick="this.src+='1'" id="verifyCode">
+        <div id="drag" style="display: none;"></div>
       </div>
       <!--记住用户名-->
       <div class="ui-label ui-checkbox">
@@ -37,11 +39,12 @@
         <a href="/find" target="_blank">忘记密码</a>
       </div>
       <!--登陆-->
-      <button type="button" name="login" disabled>登 录</button>
+      <button type="button" name="login">登 录</button>
     </div>
   </div>
-  <!--js-->
-  <script type="text/javascript" src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/statics/assets/libs/login.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/jquery.min.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
+  <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/js/fingerprint.js"></script>
+  <script src="/statics/assets/libs/login.js"></script>
 </body>
 </html>

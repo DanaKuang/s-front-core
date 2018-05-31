@@ -4,6 +4,8 @@
  */
 (function ($) {
 
+  console && console.info && console.info('既然你发现了，那我就不妨直说：\n没错！你就是我们需要找的人才！\n加入我们吧！\n地址：望京soho塔1B座12层。\n扫天下 长期招聘，简历发送至:%c liubin@saotx.cn', 'color:#e42121;');
+  console && console.info && console.info('%c', 'padding:49.5px 150px;background:url(https://weiopn.oss-cn-beijing.aliyuncs.com/pc_data_front/img/zhaopin.gif);border-radius:5px;');
   // login对象
   var login = {
     particles: [],
@@ -124,20 +126,24 @@
   }
   // 初始化登陆页
   login.init = function() {
-    console.log('login init...');
     var $name = $('[name="username"]');
     var $word = $('[name="password"]');
     var $code = $('[name="code"]');
     var $remm = $('[name="remmber"]');
     var $logi = $('[name="login"]');
+    var vCode = $('[name="verifyCode"]');
 
     // 退出清空session记录
     sessionStorage.removeItem('menuIdx');
     sessionStorage.removeItem('hash');
+    document.cookie = 'CLIENTSESSIONID='+ $.md5(new Fingerprint().get().toString()+';path=/');
+
+    $("#verifyCode").attr('src', '/api/tztx/saas/admin/login/verifyCode?');
     // 绑定事件及初始化
     $name.val(localStorage.getItem('username') || "");
     $word.val("");
     $code.val("");
+    vCode.val("");
     $remm[0].checked = false;
     $logi.off();
     $remm.off();
@@ -159,6 +165,7 @@
       postData.account = $name.val() || "";
       postData.pwd = $word.val() || "";
       // postData.code = $code.val() || "";
+      postData.verifyCode = vCode.val() || "";
 
       if (!postData.account) {
         alert('用户名不能为空!');
@@ -168,10 +175,13 @@
         alert('用户密码不能为空!');
         return;
       }
-      // if (!postData.code) {
-      //   alert('验证码不能为空!');
-      //   return;
-      // }
+      if (!postData.verifyCode) {
+        alert('验证码不能为空!');
+        return;
+      }
+      // md5加密
+      postData.pwd = $.md5(postData.pwd);
+
       // ajax
       $.ajax({
         url: '/api/tztx/saas/admin/login/verification',
@@ -179,13 +189,17 @@
         data: postData,
         success: function (res) {
           console.log(res);
-          if (res.message == 'success') {
+          if (res.ret == '200000') {
             var data = res.data || {};
             sessionStorage.setItem('access_token', data.token);
             sessionStorage.setItem('access_loginId', data.loginId);
             location.href = "/";
+          } else if (res.ret == '100409') {
+            alert(res.message);
+            location.href = "/find";
           } else {
             alert(res.message);
+            vCode.trigger('click');
           }
         }
       });

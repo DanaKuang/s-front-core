@@ -5,11 +5,144 @@
  * Description: role
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/system.role.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
 <div ng-controller="roleCtrl">
     <div class="animated fadeInRightBig">
-        <div class="container-fluid">
-            <div class="row">
-
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--面包屑-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>角色管理</span>
+                    <button type="button" class="btn btn-default" ng-click="addEdit()">+新增角色</button>
+                </div>
+                <!--搜索栏-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_role_form" autocomplete="off">
+                            <!--角色-->
+                            <div class="form-group">
+                                <label for="" class="control-label">角色</label>
+                                <select class="form-control input-sm" ng-model="search.roleCode">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
+                                </select>
+                            </div>
+                            <!--状态-->
+                            <div class="form-group">
+                                <label for="" class="control-label">状态</label>
+                                <select class="form-control input-sm" ng-model="search.status">
+                                    <option value="">全部</option>
+                                    <option value="1">已启用</option>
+                                    <option value="0">已停用</option>
+                                </select>
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary" ng-click="initSearch()">搜索</button>
+                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--人员表格-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>角色</th>
+                                    <th>状态</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="tab in tableArr">
+                                    <td>{{tab.id}}</td>
+                                    <td>{{tab.roleName}}</td>
+                                    <td>{{['已停用','已启用'][tab.status]}}</td>
+                                    <td>
+                                        <span class="opt-btn span-hover" ng-click="addEdit(tab.roleCode)" ng-if="tab.status">编辑</span>
+                                        <span class="opt-btn span-hover" ng-click="opts(tab.id, tab.status)">{{['启用','停用'][tab.status]}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-if='!tableArr.length'>
+                                    <td colspan='4'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 分页区 -->
+                        <div class="pagination-wrap">
+                            <!-- 分页指令 -->
+                            <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增、编辑-->
+    <div class="modal fade in" id="id_role_modal" tabindex="-1" role="dialog" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="initSearch()">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">角色管理>{{id?'编辑':'新增'}}角色</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate autocomplete="off">
+                        <!--角色名称-->
+                        <div class="form-group">
+                            <input type="hidden" name="id" ng-model="id">
+                            <input type="hidden" name="roleCode" ng-model="roleCode">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">角色名称</label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.roleName.$error.required}">
+                                    <input type="text" name="roleName" ng-model="roleName" class="form-control input-sm" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.roleName.$error.required">角色名称</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--权限选择-->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">权限选择</label>
+                                <div class="col-md-9" style="max-height: 300px;overflow: auto;">
+                                    <ul id="id_role_tree" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确定</button>
+                            <button type="reset" class="btn btn-primary" ng-click="initSearch()" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--消息提示-->
+    <div class="modal fade in" tabindex="-1" data-keyboard="false" role="dialog" id="id_tip_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">操作提示</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="center">
+                        {{tip.status ? '停用后，此类用户将不能登陆此平台' : '启用后，此类用户将可以登陆此平台'}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="confim(tip.id, tip.status)">确定</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

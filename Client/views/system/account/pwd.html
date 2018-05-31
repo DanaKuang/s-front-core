@@ -1,0 +1,78 @@
+<!--
+/**
+ * Author: liubin
+ * Create Date: 2017-10-11
+ * Description: 修改密码
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/system.pwd.css">
+<div ng-controller="changePwdCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--title-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>修改密码</span>
+                </div>
+                <!--panel-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-horizontal" autocomplete="off" name="pwdForm" ng-submit="changePwd(pwdForm.$valid)">
+                            <!--原密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">原密码<span style="color: red;">*</span></label>
+                                <div class="col-md-4" ng-class="{'has-error': pwdForm.$submitted && pwdForm.oldPwd.$error.required && pwdForm.oldPwd.$invalid}">
+                                    <input type="password" name="oldPwd" class="form-control input-sm" ng-model="oldPwd" required>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.oldPwd.$error.required">原密码不能为空</p>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.oldPwd.$invalid">原密码输入不正确</p>
+                                </div>
+                            </div>
+                            <!--新密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">新密码<span style="color: red;">*</span></label>
+                                <div class="col-md-4" ng-class="{'has-error': (pwdForm.$submitted && pwdForm.newPwd.$error.required) || (!pwdForm.newPwd.$error.required && pwdForm.newPwd.$invalid) }">
+                                    <input type="password" name="newPwd" class="form-control input-sm" ng-model="newPwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{8,16}$/" required>
+                                    <p class="help-block" ng-show="pwdForm.newPwd.$invalid && !pwdForm.newPwd.$error.required">8-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                    <p class="help-block" ng-show="pwdForm.$submitted && pwdForm.newPwd.$error.required">新密码不能为空</p>
+                                </div>
+                            </div>
+                            <!--确认新密码-->
+                            <div class="margin-top col-md-12 form-group">
+                                <label class="control-label col-md-2">确认新密码<span style="color: red;">*</span></label>
+                                <div class="col-md-4" ng-class="{'has-error': newPwd != reNewPwd && !pwdForm.reNewPwd.$error.required}">
+                                    <input type="password" name="reNewPwd" class="form-control input-sm" ng-model="reNewPwd" required>
+                                    <p class="help-block" ng-show="newPwd != reNewPwd && !pwdForm.reNewPwd.$error.required">两次密码输入不一致</p>
+                                </div>
+                            </div>
+                            <!--确认按钮-->
+                            <div class="btn-option col-md-12 form-group">
+                                <label class="control-label col-md-2"></label>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary fix-btn" ng-disabled="pwdForm.oldPwd.$error.required && pwdForm.newPwd.$valid && newPwd != reNewPwd">确认</button>
+                                    <button type="reset" class="btn btn-primary fix-btn" ng-click="closePage();">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹窗提醒-->
+    <div class="modal fade in" id="tipsModalId" role="dialog" tabindex="-1" data-keyboard="false">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content" style="border-radius: 15px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="right:10px">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title text-header" style="border-top-right-radius:15px;border-top-left-radius:15px;">提示</h4>
+                </div>
+                <div class="modal-body" style="height:60px;line-height:50px;text-align:center;font-size:16px;">
+                  密码修改成功,请退出重新登陆!
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5.js"></script>
+</div>

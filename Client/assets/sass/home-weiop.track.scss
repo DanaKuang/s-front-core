@@ -1,0 +1,255 @@
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.border-box {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.weiop-wrap {
+    width: 322px;
+    height: 570px;
+    border: 1px solid red;
+    padding-bottom: 49px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 80;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #eee;
+}
+
+.weiop-tabs {
+    width: 322px;
+    height: 49px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    a {
+        display: block;
+        text-align: center;
+        img {
+            display: block;
+            width: 22px;
+            height: 22px;
+            margin: 0 auto 10px;
+        }
+    }
+}
+
+.weiop-tabs-hebei {
+    background-color: rgba(51,48,45,1);
+    a {
+        color: rgba(200,200,200,1);
+    }
+    .tab-active {
+        color: rgba(255,122,0,1);
+    }
+}
+
+.weiop-tabs-henan {
+    background: linear-gradient(to top,#e9cfb1,#f0ddc3);
+    a {
+        color: #af8360;
+    }
+    .tab-active {
+        color: #6a3314;
+    }
+}
+
+.weiop-tabs-shankun {
+    background: rgba(255,255,255,1);
+    a {
+        color: rgba(204,204,204,1)
+    }
+    .tab-active {
+        color: rgba(146,29,84,1)
+    }
+}
+
+.retailer-scan {
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    padding-left: 14px;
+    position: relative;
+    background-color: rgba(255,255,255,1);
+    margin-bottom: 10px;
+    img {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        margin-right: 18px;
+    }
+    span {
+        color: rgba(0,0,0,1);
+        font-size: 13px;
+    }
+    i {
+        display: block;
+        width: 8px;
+        height: 14px;
+        background: url("../image/hebei/arrow-left.png") no-repeat;
+        background-size: cover;
+        position: absolute;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+    }
+}
+.product-wrap {
+    width: 100%;
+    height: 150px;
+    background-color: rgba(255,255,255,1);
+    padding: 20px 10px 10px 10px;
+    margin-bottom: 10px;
+    .product-details {
+        .details-header {
+            height:20px;
+            line-height: 20px;
+            margin-bottom: 16px;
+            span {
+                text-align: center;
+                display: inline-block;
+            }
+            span:nth-of-type(1) {
+                color: rgba(1,1,1,1);
+                font-size: 12px;
+                margin-right: 10px;
+                font-weight: bolder;
+                vertical-align: middle;
+            }
+            span:nth-of-type(2) {
+                width:40px;
+                height:19px;
+                line-height: 19px;
+                border: 1px solid #333333;
+                border-radius: 3px;
+                vertical-align: -2px;
+                a {
+                    color: rgba(51,51,51,1);
+                }
+            }
+        }
+        > p {
+            font-size: 12px;
+            margin-bottom: 10px;
+            span {
+                color: rgba(255,94,21,1);
+            }
+            i {
+                display: inline-block;
+                width: 2em;
+            }
+        }
+    }
+    .tobacco {
+        width: 79px;
+        img {
+            width: 100%;
+        }
+    }
+}
+.product-henan-wrap {
+    background: url('../image/henan/index_bg.png') center no-repeat;
+    background-size: cover;
+}
+.product-shankun-wrap {
+    background: url('../image/shankun/index_bg.png') center no-repeat;
+    background-size: cover;
+}
+.active-banner {
+    width: 100%;
+    div {
+        // height: 292px;
+        // background-color: #fff;
+        margin-bottom: 9px;
+        img {
+            width: 100%;
+            height: 140px;
+        }
+    }
+}
+.vip-wrap {
+    width: 100%;
+    .vip-header {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        padding-left: 7px;
+        background-color: rgba(255,255,255,1);
+        position: relative;
+        .vip-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            vertical-align: -2px;
+        }
+        span {
+            font-size: 14px;
+        }
+        .vip-gif {
+            width: 150px;
+            height: 20px;
+            position: absolute;
+            right: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+        }
+    }
+    .vip-banner-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+.please-scan-wrap.please-scan-hebei-wrap {
+    background: url("../image/hebei/scan-bg.png") center no-repeat;
+    p {
+        color: rgba(56,56,56,1);
+        span {
+            color: #fff;
+        }
+    }
+}
+.please-scan-wrap.please-scan-henan-wrap {
+    background: url("../image/henan/home_bg_scan.png") center no-repeat;
+    p {
+        color: #904C29;
+        span {
+            color: red;
+        }
+    }
+}
+.please-scan-wrap.please-scan-shankun-wrap {
+    img {
+        width: 100%;
+        height: inherit;
+    }
+}
+.please-scan-wrap {
+    width: 100%;
+    height: 216px;
+    padding-top: 58px;
+    background-size: cover;
+    text-align: center;
+    img {
+        width: 120px;
+        height : 120px;
+    }
+    p {
+        padding-top: 19px;
+        font-size: 12px;
+    }
+}

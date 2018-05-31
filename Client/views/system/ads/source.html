@@ -1,0 +1,159 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date: 2017-09-14
+ * Description: 广告管理
+ */
+-->
+<!--搜索条件区域、表格、弹窗样式初始化-->
+<link rel="stylesheet" href="statics/assets/style/panel.css">
+<!--当前页样式-->
+<link rel="stylesheet" href="statics/assets/style/ads.source.css">
+<!--表单样式初始化-->
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<!--一个页面一个controller，一个页面对应一个controller文件-->
+<div ng-controller="adssourceCtrl" class="ads-source">
+    <!--加个类，动画-->
+    <div class="animated fadeInRight">
+        <!--bootstrap容器-->
+        <div class="container-fluid">
+            <div class="ui-content-box row">
+                <div class="col-md-12">
+                    <div class="ui-panel-title">
+                        <button type="submit" id="createActivity" class="btn btn-primary float-right btn-lg" ng-click="newAdsClick($event)" data-toggle="modal" data-target=".create-ads-modal">+新建广告</button>
+                        <div class="lft">
+                            <i class="hot"></i>
+                            <span>广告资源管理</span>
+                        </div>
+                    </div>
+
+                    <div class="ui-panel-box panel">
+                        <!-- 操作区 -->
+                        <div class="panel-body operation multi">
+                            <!-- 筛选条件 -->
+                            <form class="form-horizontal">
+                                <!--中-->
+                                <div class="form-group col-md-4">
+                                    <div class="category t">
+                                        <label for="status" class="control-label col-sm-4">使用状态</label>
+                                        <div class="col-sm-7">
+                                            <select class="form-control" id="status" ng-model="selectStatus">
+                                                <option value="">全部</option>
+                                                <option ng-repeat="item in adsStatusList" value="{{item.code}}">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="norms b">
+                                        <label for="keywords" class="control-label col-sm-4">关键字</label>
+                                        <div class="col-sm-7">
+                                            <input class="keywords-input form-control" type="text" id="keywords" placeholder="请填写" ng-model="keysVal" value="{{keysVal}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- 搜索按钮 -->
+                            <div class="btn-con">
+                                <button type="submit" id="search" class="btn btn-primary search btn-lg" ng-click="search($event)">搜索</button>
+                                <button ng-click="reset()" type="submit" id="reset" class="btn btn-primary reset btn-lg">重置</button>
+                            </div>
+                        </div>
+
+                        <!-- 列表展示区 -->
+                        <!--自定义指令的属性在指令的scope下； 而值adssourceConf是controller的scope下-->
+                        <sa-adssource conf="adssourceConf"></sa-adssource>
+
+                        <!-- 分页区 -->
+                        <div class="pagination-wrap">
+                            <!-- 分页指令 -->
+                            <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框和animated同级-->
+
+
+    <!-- 容纳所有配置弹窗的div -->
+    <!--<sa-allConfigTemplate conf="allConfigTemplateConf"></sa-allConfigTemplate>-->
+
+    <!-- 新建、编辑 模态框 -->
+    <div class="modal fade create-ads-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="myLargeModalLabel">
+                    <span ng-if="modalType">新建广告</span>
+                    <span ng-if="!modalType">编辑广告</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <!-- 广告模板 conf="createActModalConf"是干嘛的？？？，这里的conf只是一个自定义变量，放在directive的scope下，$scope.conf -->
+                <sa-adsnew conf="editAdsModalConf" type="new"></sa-adsnew>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择礼品模板 -->
+    <div class="modal fade create-adsgift-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">选择礼品<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+
+                    <!-- 选择礼品列表 -->
+                    <sa-adsgift conf="adsgiftConf"></sa-adsgift>
+
+                    <!-- 分页区 -->
+                    <div class="pagination-wrap">
+                        <!-- 分页指令 -->
+                        <sa-pagination conf="paginationInnerConf" class="pagination"></sa-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 启用广告 -->
+    <div class="modal fade bs-example-modal-sm start-ads-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">提示：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p ng-if="isStart">确定要启用该广告资源吗？</p>
+                    <p ng-if="!isStart">确定要终止该广告资源吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="isConfirm()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 增库 -->
+    <div class="modal fade bs-example-modal-sm add-stock-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">增库<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <label>增加数量</label><input type="number" step="1" min="0" ng-model="addStockNumber" ng-keyup="addStockInputChange()">
+                    <p ng-if="addStockIntro" class="add-stock-intro">请输入大于0的正整数</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="addStockConfirm()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

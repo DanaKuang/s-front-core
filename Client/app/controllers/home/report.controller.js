@@ -14,7 +14,7 @@ define([], function () {
             setDateConf.init($(".agree-date"), "day");
             //设置input的默认时间
             var stattime = dayFilter.yesterday("date");
-            $(".date-wrap").find("input").val(stattime);
+            $(".agree-date").find("input").val(stattime);
             var curTableIndex = '';
             var curWeekStr = '';
             var curSpeciftStr = '';
@@ -43,40 +43,40 @@ define([], function () {
                 //     gloabl.summaryData($scope.summar);
                 // }
                 switch(index){
-                    case 1 : 
+                    case 1 :
                         gloabl.getProduct();
                         break;
-                    case 2 : 
+                    case 2 :
                         gloabl.getProductNo();
                         break;
-                    case 3 : 
+                    case 3 :
                         gloabl.summaryData($scope.summar);
                         break;
-                    case 4 : 
+                    case 4 :
                         gloabl.getBrand();
                         gloabl.getWeeks(4);
                         gloabl.getPack(4);
                         gloabl.getTimes();
                         break;
-                    case 5 : 
+                    case 5 :
                         gloabl.getBrand();
                         curTableIndex = 5;
                         gloabl.getWeeks(5);
                         break;
-                    case 6 : 
+                    case 6 :
                         gloabl.getBrand();
                         curTableIndex = 6;
                         gloabl.getWeeks(6);
                         gloabl.getPack(6);
                         break;
-                    case 7 : 
+                    case 7 :
                         gloabl.getBrand();
                         curTableIndex = 7;
                         gloabl.getWeeks(7);
                         gloabl.getPack(7);
                         break;
-                    default : 
-                        
+                    default :
+
                 }
             }
             var gloabl = {
@@ -93,7 +93,7 @@ define([], function () {
                     $model.$userPro(params).then(function (res) {
                         var res = res.data || [];
                         $(".report-table").find("tbody").html("");
-                        gloabl.showall(res, "user_table", 13, "province", "city");
+                        gloabl.showall(res, "user_table", 15, "province", "city");
                     })
                 },
                 //日报
@@ -168,15 +168,18 @@ define([], function () {
                 },
                 //创建表格
                 "createtable": function (data, n, x, y) {
+                    console.log(data);
+                    console.log(n);
+                    console.log(x);
+                    console.log(y);
                     for (var i = 0; i < data.length; i++) {
-                        var rownum = parseInt(n) + i;
+                        var  rownum  = parseInt(n) + i;
                         var cityName = data[i][y];
                         if (i == 0) {
                             var tmpcell = document.getElementById("rowid" + rownum).insertCell(1);
                         } else {
                             var tmpcell = document.getElementById("rowid" + rownum).insertCell(0);
-                        }
-                        ;
+                        };
                         tmpcell.innerHTML = cityName;
                         for (var j = 1; j < x; j++) {
                             var a = 'c' + j;
@@ -245,12 +248,12 @@ define([], function () {
                                                         $('#cycleTime').multiselect().val(statisTimeArr).multiselect("refresh");
                                                         var statisTimeStr = statisTimeArr.join(',');
                                                         startTimeObj.cycle = statisTimeStr;
-                                                    }                                                    
+                                                    }
                                                     if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
                                                         gloabl.getWeekScanWinData(startTimeObj);
                                                     }
-                                                })          
-                                            })  
+                                                })
+                                            })
                                         });
                                     }
                                 })
@@ -270,7 +273,7 @@ define([], function () {
                                                 var firstSpeciftSn = speciftList[0].name;
                                                 startTimeObj.productSn = firstSpeciftSn;
                                             }
-                                            
+
                                             if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
                                                 gloabl.getProvData(startTimeObj);
                                             }
@@ -295,9 +298,9 @@ define([], function () {
                                                 }
                                                 if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
                                                     gloabl.getWeekCashWinData(startTimeObj);
-                                                }               
+                                                }
                                             })
-                                            
+
                                         });
                                     }
                                 })
@@ -322,7 +325,7 @@ define([], function () {
                                                 }
                                                 if(startTimeObj.statTime != null && startTimeObj.statTime != undefined){
                                                     gloabl.getWeekEntityWinData(startTimeObj);
-                                                }               
+                                                }
                                             })
                                         });
                                     }
@@ -332,16 +335,16 @@ define([], function () {
                                 // }
                                 break;
                             default:
-                        }                 
-                
+                        }
+
                     })
                 },
                 "getBrand":  function () {
                     $model.$getBrandData().then(function (res) {
                         $scope.brandList = res.data || [];
-                        $scope.$apply();  
+                        $scope.$apply();
                         var curBrandName = $scope.brandList[0].name;
-                        
+
                         $model.$getSpecifData({productBrand:curBrandName}).then(function(res){
                             $scope.speciftList = res.data || [];
                             $scope.$apply();
@@ -349,13 +352,13 @@ define([], function () {
                                 curSpeciftStr = $scope.speciftList[0].name
                             }
                         });
-                        
+
                     })
                 },
                 "getPack":  function (typeNum) {
                     $model.$getPackAndTimeData({"pageName":"report"}).then(function (res) {
                         $scope.packsList = res.data || [];
-                        $scope.$apply(); 
+                        $scope.$apply();
                         if(typeNum == 4){
                             $("select#packs").multiselect({
                                 nonSelectedText: '请选择',
@@ -365,9 +368,9 @@ define([], function () {
                                 selectAllText: '全部',
                                 selectAllValue: 'all',
                                 buttonWidth: '180px'
-                            }); 
+                            });
                         }
-                                     
+
                     })
                 },
                 "getTimes":  function () {
@@ -382,8 +385,8 @@ define([], function () {
                             selectAllText: '全部',
                             selectAllValue: 'all',
                             buttonWidth: '180px'
-                        });                      
-                        
+                        });
+
                     })
                 },
                 'getWeekScanWinData' : function(timesObj){
@@ -397,7 +400,7 @@ define([], function () {
                         }else{
                             $("#weekScanWin").append("<tr><td colspan='9'>暂无符合条件的数据</td></tr>");
                         }
-                        
+
                     })
                 },
                 'getWeekCashWinData' : function(timesObj){
@@ -411,7 +414,7 @@ define([], function () {
                         }else{
                             $("#weekCashWin").append("<tr><td colspan='11'>暂无符合条件的数据</td></tr>");
                         }
-                        
+
                     })
                 },
                 'getWeekEntityWinData' : function(timesObj){
@@ -425,7 +428,7 @@ define([], function () {
                         }else{
                             $("#weekEntityWin").append("<tr><td colspan='8'>暂无符合条件的数据</td></tr>");
                         }
-                        
+
                     })
                 },
                 'getProvData' : function(timesObj){
@@ -464,11 +467,12 @@ define([], function () {
             //查询按钮
             $scope.search = function ($event) {
                 var that = $event.target;
+                var $form = $(that).closest('form');
                 // if (arguments[1] === 1) {
                 //     $scope.obj = {
                 //         "activityName": $(that).siblings(".report-gui").find("select").val(),
-                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //         "statTime": $(that).siblings(".agree-date").find(".agree-date").data().date ?
+                //             $(that).siblings(".agree-date").find(".agree-date").data().date : $(that).siblings(".agree-date").find("input").val(),
                 //         "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
                 //     }
                 //     //console.log($scope.obj);
@@ -476,39 +480,38 @@ define([], function () {
                 // } else if (arguments[1] === 2) {
                 //     $scope.saoobj = {
                 //         "activityName": $(that).siblings(".report-gui").find("select").val(),
-                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //         "statTime": $(that).siblings(".agree-date").find(".agree-date").data().date ?
+                //             $(that).siblings(".agree-date").find(".agree-date").data().date : $(that).siblings(".agree-date").find("input").val(),
                 //     }
                 //     gloabl.userPro($scope.saoobj);
                 // } else if (arguments[1] === 3) {
                 //     $scope.summar = {
-                //         "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                //             $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                //         "statTime": $(that).siblings(".agree-date").find(".agree-date").data().date ?
+                //             $(that).siblings(".agree-date").find(".agree-date").data().date : $(that).siblings(".agree-date").find("input").val(),
                 //     }
                 //     gloabl.summaryData($scope.summar)
                 // }
+                    debugger
+
                 switch(arguments[1]){
                     case 1:
                         $scope.obj = {
-                            "activityName": $(that).siblings(".report-gui").find("select").val(),
-                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                                $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
-                            "productSn": $(that).siblings(".report-gui").find("select option:selected").attr("data-sn")
+                            "activityName": $($form).find(".report-gui select").val(),
+                            "statTime": $($form).find(".agree-date .date").val(),
+                            "productSn": $($form).find(".report-gui select option:selected").attr("data-sn")
                         }
                         gloabl.winUser($scope.obj);
                         break;
                     case 2:
                         $scope.saoobj = {
-                            "activityName": $(that).siblings(".report-gui").find("select").val(),
-                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                                $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                            "activityName": $($form).find(".report-gui select").val(),
+                            "statTime": $($form).find(".agree-date .date").val(),
                         }
                         gloabl.userPro($scope.saoobj);
                         break;
                     case 3:
                         $scope.summar = {
-                            "statTime": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-                            $(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+                            "statTime": $($form).find(".agree-date .date").val(),
                         }
                         gloabl.summaryData($scope.summar);
                         break;
@@ -520,20 +523,20 @@ define([], function () {
                         if(packArr.length > 0){
                             packStr = packArr.join(',');
                         }
-                        
+
                         var cycleTimeArr = $('#cycleTime').val();
                         var cycleTimeStr = '请选择统计周期';
                         if(cycleTimeArr.length > 0){
                             cycleTimeStr = cycleTimeArr.join(',');
                         }
-                        
+
                         var winDataObj = {
                             'statTime' : weekStr,
                             'productSn' : $('#specift').val(),
                             'unit' : packStr,
                             'cycle' : cycleTimeStr
                         }
-                        
+
                         gloabl.getWeekScanWinData(winDataObj);
                         break;
                     case 5:
@@ -545,7 +548,7 @@ define([], function () {
                         if(provSpeciftObj.val() != ''){
                             curSpeciftStr = provSpeciftObj.find("option:selected").text();
                         }
-                        
+
                         var cashWinDataObj = {
                             'statTime' : $('#proviceDataWeeks').val(),
                             'productSn' : $('#proviceDataSpecift').val()
@@ -606,7 +609,7 @@ define([], function () {
                     var data = {
                         "statTime":$scope.summar.statTime
                     }
-                    var url ="/fixatreport/importExcelDailySummData";                    
+                    var url ="/fixatreport/importExcelDailySummData";
                     // var statTime = $scope.summar.statTime;
                     // window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
                 } else if (a === 4){
@@ -705,6 +708,11 @@ define([], function () {
                     $scope.speciftList = res.data || [];
                     $scope.$apply();
                 });
+            });
+
+            // 添加hover效果
+            $("select").hover(function (e) {
+                e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
             });
         }]
     };

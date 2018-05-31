@@ -10,6 +10,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var server = require('../server');
 var colors = require('colors/safe');
+var easyMonitor = require('easy-monitor');
 var livereload = require('gulp-livereload');
 var autoOpenBrowser = process.argv[2] !== 'restart';
 
@@ -43,7 +44,12 @@ var second = function() {
     // 是否启用性能监控
     var openMonitor = function (opts) {
         if (opts.easyMonitor) {
-            require('easy-monitor')("saas service platform");
+            easyMonitor({
+                project_name: 'saas service platform',
+                http: {
+                    prefix: '/monitor'
+                }
+            });
         }
         return function(req, res, next) {
             next();

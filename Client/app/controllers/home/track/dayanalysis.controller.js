@@ -12,8 +12,14 @@ define([], function () {
         ServiceContent: ['$scope', 'dateFormatFilter', 'analysisFilter', function ($scope, dateFormatFilter, a_f) {
             var echarts = require('echarts');
             var $model = $scope.$model;
-            var DEFPROVINCE = $model.$defPro.data.orgId || "hunanzhongyan";
-            DEFPROVINCE = DEFPROVINCE === "hunanzhongyan" ? "湖南" : "河南";
+            var DEFPROVINCE = $model.$defPro.data[0].orgId || "hunanzhongyan";
+            // 不够再加
+            DEFPROVINCE = ['湖南','河南','河北','山西'][[
+                'hunanzhongyan',
+                'henanzhongyan',
+                'hebeizhongyan',
+                'shankunzhongyan'
+            ].indexOf(DEFPROVINCE)] || "湖南";
 
             // 百度地图json
             var chinaJson = $model.$chinaJson.data;
@@ -344,6 +350,13 @@ define([], function () {
                     $scope.$apply();
                 });
             }
+
+            // 页面跳转
+            window.jumpUrl = function () {
+                var sScope = angular.element('.ui-daily-search').scope();
+                sessionStorage.tempActivityId = sScope.activity || "";
+                $('[data-hash=\'#/view/home/pathdetail\']').trigger('click');
+            };
         }]
     };
 

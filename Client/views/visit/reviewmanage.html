@@ -1,0 +1,227 @@
+<!--
+/**
+ * Author: hanzha
+ * Create Date; 2017-12-11 重构零售户
+ * Description: 审核管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/form.css">
+<link rel="stylesheet" href="statics/assets/style/visit.reviewmanage.css"/>
+<!--分页样式-->
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
+
+<div ng-controller="visitReviewManageCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title manage">
+                        <div><span>审核管理</span></div>
+                    </div>
+
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+
+                            <div class="tab-content">
+                                <!-- 搜索条件 -->
+                                <div role="tabpanel" class="tab-pane active panel-body">
+                                    <form class="form-horizontal form-inline">
+                                        <div class="form-group col-sm-4">
+                                            <label for="authStatus" class="control-label col-sm-4">审核状态</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.authStatus" id="authStatus" class="form-control">
+                                                    <option value="1">待审核</option>
+                                                    <option value="3">审核未通过</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="commercial" class="control-label col-sm-4">业态</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.commercial" id="commercial" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option value="1">食杂店</option>
+                                                    <option value="2">便利店</option>
+                                                    <option value="3">超市</option>
+                                                    <option value="4">商场</option>
+                                                    <option value="5">烟酒商店</option>
+                                                    <option value="6">娱乐服务</option>
+                                                    <option value="7">其他</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="district" class="control-label col-sm-4">区域</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.district" id="district" class="form-control">
+                                                    <option value="">全部</option>
+                                                    <option value="1">城镇</option>
+                                                    <option value="2">乡村</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4 keywords">
+                                            <label for="searchType" class="control-label col-sm-2">关键词</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.searchType" class="form-control col-sm-5" id="searchType">
+                                                    <option value="3">烟草证号</option>
+                                                    <option value="1">联系人姓名</option>
+                                                    <option value="2">联系人手机号</option>
+                                                    <option value="4">门店名称</option>
+                                                    <option value="5">业务员</option>
+                                                </select>
+                                                <input ng-model="vm.keywords" class="keywords-input form-control col-sm-5" type="text" placeholder="请输入关键词">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-8 location">
+                                            <label for="provinceId" class="control-label col-sm-2">位置</label>
+                                            <div class="col-sm-10">
+                                                <select id="provinceId" ng-model="vm.addrProvince" ng-change="provinceChage($event)" class="form-control">
+                                                    <option value="">请选择省</option>
+                                                    <option ng-repeat="p in provinceList" value="{{p.code}}">{{p.name}}</option>
+                                                </select>
+
+                                                <select id="cityId" ng-model="vm.addrCity" ng-change="cityChage($event)" class="form-control">
+                                                    <option value="">请选择市</option>
+                                                    <option ng-repeat="c in cityList" value="{{c.code}}">{{c.name}}</option>
+                                                </select>
+
+                                                <select id="areaId" ng-model="vm.addrArea" class="form-control">
+                                                    <option value="">请选择区/县</option>
+                                                    <option ng-repeat="a in areaList" value="{{a.code}}">{{a.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-8 time">
+                                            <label class="control-label col-sm-2">时间区间</label>
+
+                                            <div class="col-sm-10">
+                                                <input ng-model="vm.appStartTime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="vm.appEndTime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4 search-btn-con">
+                                            <button type="button" class="search btn btn-primary" ng-click="search($event);">查询</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="reset($event);">重置</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="panel-body scroll-con">
+                                    <div class="batch-review">
+                                        <label><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()" ng-model="vm.allCheckbox">全选</label>
+                                        <button ng-disabled="ifBatch" ng-click="reviewAndPass('', 1)" class="btn btn-primary batch-btn" data-toggle="modal" data-target=".review-modal">批量审核通过</button>
+                                    </div>
+
+                                    <!-- table -->
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>操作</th>
+                                                <th>烟草专卖号</th>
+                                                <th>门店名称</th>
+                                                <th>经营人姓名</th>
+
+                                                <th>区域</th>
+                                                <th>业态</th>
+                                                <th>联系人姓名</th>
+                                                <th>联系人电话</th>
+                                                <th>业务员</th>
+
+                                                <th>申请时间</th>
+                                                <th>状态</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(index, item) in vm.listData">
+                                                <td class="batch">
+                                                    <label><input type="checkbox" ng-click="updateSelection($event, item.sellerId)" ng-checked="isSelected(item.sellerId)">{{index + 1}}</label>
+                                                </td>
+                                                <td>
+                                                    <div class="oper-btn-wrap">
+                                                        <div class="operate-btn" ng-click="viewReviewManage(item.sellerId)">查看详情</div>
+
+                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 1)" data-toggle="modal" data-target=".review-modal">审核通过</div>
+                                                        <div class="operate-btn" ng-click="reviewAndPass(item.sellerId, 2)" data-toggle="modal" data-target=".review-modal">审核不通过</div>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.licenceNo}}</td>
+                                                <td><div class="shop-name">{{item.shopName}}</div></td>
+                                                <td>{{item.ownerName}}</td>
+
+                                                <td>{{item.districtName}}</td>
+                                                <td>{{item.commercialName}}</td>
+                                                <td>{{item.contactName}}</td>
+                                                <td>{{item.contactPhone}}</td>
+                                                <td>{{item.salesManNames}}</td>
+
+                                                <td>{{item.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                <td>{{item.authStatusName}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="total-page">总共{{totalCount}}条记录<span ng-if="totalCount != 0">，当前页共{{size}}条记录</span></div>
+                                </div>
+                            </div>
+
+
+                            <!-- 分页区 -->
+                            <div class="pagination-wrap" ng-class='{paginationDetial: isDetial}'>
+                                <!-- 分页指令 -->
+                                <sa-pagination id="pagination" conf="paginationConf" curPage="currentPageNumber" class="pagination"></sa-pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 提示框 -->
+    <div id="newAlert" class="alert alert-dismissible fade" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p class="prompt"></p>
+    </div>
+
+    <!-- 审核 -->
+    <div class="modal fade bs-example-modal-sm review-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle"><span ng-if="isReview">审核通过</span><span ng-if="!isReview">请输入不通过理由</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <form name="reviewForm" novalidate>
+                    <div class="modal-body">
+                        <span ng-if="isReview">您确定通过此零售户的审核？</span>
+                        <div ng-if="!isReview">
+                            <textarea class="form-control" name="noPassReason" cols="30" rows="5" maxlength="50" ng-model="vm.noPassReason" ng-change="textareaChage($event)" required></textarea>
+                            <p class="textarea-num"><span>{{textareaNum ? textareaNum : 0}}</span>/50</p>
+                            <!--验证-->
+                            <div ng-show="reviewForm.$submitted || reviewForm.noPassReason.$touched">
+                                <div ng-show="reviewForm.noPassReason.$error.required" class="wrong-tip">请输入不通过理由</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="reviewConfirm()">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jqmeter.min.js"></script>
+</div>

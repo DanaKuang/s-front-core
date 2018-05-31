@@ -1,0 +1,352 @@
+<!---->
+<link rel="stylesheet" href="statics/assets/style/home.hbreport.css">
+<div class="animated fadeInRightBig" ng-controller="hbReportCtrl">
+    <div class="container-fluid region-margin">
+      <div class="row">
+        <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>固定报表列表</span>
+        </div>
+        <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report_wrap">
+                <ul>
+                  <li>
+                    <span>序号</span>
+                    <span>
+                      列表名称</span>
+                  </li>
+                  <li>
+                    <span>1</span>
+                    <span ng-click="tabs(1)">
+                      <u>扫码数据周报</u>
+                    </span>
+                  </li>
+                  <li>
+                    <span>2</span>
+                    <span ng-click="tabs(2)">
+                      <u>红包投入数据周报</u>
+                    </span>
+                  </li>
+                  <li>
+                    <span>3</span>
+                    <span ng-click="tabs(3)">
+                      <u>扫码数据月报</u>
+                    </span>
+                  </li>
+                  <li>
+                    <span>4</span>
+                    <span ng-click="tabs(4)">
+                      <u>红包投入数据月报</u>
+                    </span>
+                  </li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--扫码数据周报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>扫码数据周报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-hbreport-form">
+                <div class="form-group agree-date">
+                  <label class="control-label">查询时间</label>
+                  <select id="proviceDataWeeks" class="form-control input-sm">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                  </select>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label reset_height">品牌</label>
+                    <select id="brands" multiple="multiple" ng-model="selectSpacks" value="{{selectBrands}}" class="form-control input-sm">
+                        <option ng-repeat="brandItem in brandList" value="{{brandItem.productBrand}}">{{brandItem.productBrandName}}</option>
+                    </select>
+                </div>
+                <div class="form-group agree-date">
+                  <label class="control-label reset_height">规格</label>
+                  <select id="specifts" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.productSn}}">{{speciftItem.productName}}</option>
+                  </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,1)">查询</button>
+                  <button class="btn btn-primary" type="button" ng-click="down(1)">下载</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="ui-scroll-table">
+                <table class="table table-hover table-bordered" style="min-width:1600px;">
+                  <thead>
+                  <tr>
+                    <th colspan="15" id="weekDataTitle"></th>
+                  </tr>
+                  <tr>
+                    <th>规格</th>
+                    <th>销区</th>
+                    <th>省份</th>
+                    <th>地市</th>
+                    <th>本周通过GPS定位的扫码量</th>
+                    <th>本周扫码量</th>
+                    <th>上周扫码量</th>
+                    <th>截至本周末历史累计扫码量</th>
+                    <th>本周通过GPS定位的扫码烟包数</th>
+                    <th>本周扫码烟包数</th>
+                    <th>上周扫码烟包数</th>
+                    <th>截至本周末历史累计扫码烟包数</th>
+                  </tr>
+                  </thead>
+                  <tbody id="weekScanWin">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--红包投入数据周报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>扫码活动红包投入数据周报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-hbreport-form">
+                <div class="form-group agree-date">
+                  <label class="control-label">查询时间</label>
+                  <select id="redDataWeeks" class="form-control input-sm">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                  </select>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label">品牌</label>
+                    <select id="redweekbrands" multiple="multiple" ng-model="selectSpacks" value="{{selectBrands}}" class="form-control input-sm">
+                        <option ng-repeat="brandItem in brandList" value="{{brandItem.productBrand}}">{{brandItem.productBrandName}}</option>
+                    </select>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label">规格</label>
+                    <select id="redweekspecifts" multiple="multiple" class="form-control input-sm">
+                        <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.productSn}}">{{speciftItem.productName}}</option>
+
+                    </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,2)">
+                    查询
+                  </button>
+                  <button class="btn btn-primary" type="button" ng-click="down(2)">
+                    下载
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <table class="table table-hover table-bordered">
+                <thead style="border-top:1px solid #a0a0a0">
+                <tr>
+                  <!--<th colspan="15">白沙（天天向上）扫码数据汇总（8.7~8.13）</th>-->
+                  <th colspan="7" id="redWeekDataTitle"></th>
+                </tr>
+                <tr>
+                  <th>规格</th>
+                  <th>销区</th>
+                  <th>省份</th>
+                  <th>地市</th>
+                  <th>本周红包投入（元）</th>
+                  <th>上周红包投入（元）</th>
+                  <th>截至本周末历史累计红包投入（元）</th>
+                </tr>
+                </thead>
+                <tbody id="redWeekDataDetail">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--扫码数月报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>扫码数据月报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-hbreport-form">
+                <div class="form-group agree-month">
+                  <label class="control-label">查询时间</label>
+                  <input type="text" value="" readonly class="form-control input-sm date month-wrap" id="dataMonth"/>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label">品牌</label>
+                    <select id="monthbrands" multiple="multiple" ng-model="selectSpacks" value="{{selectBrands}}" class="form-control input-sm">
+                        <option ng-repeat="brandItem in brandList" value="{{brandItem.productBrand}}">{{brandItem.productBrandName}}</option>
+                    </select>
+                </div>
+                <div class="form-group agree-date">
+                  <label class="control-label">规格</label>
+                  <select id="monthspecifts" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.productSn}}">{{speciftItem.productName}}</option>
+
+                  </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,3)">
+                    查询
+                  </button>
+                  <button class="btn btn-primary" type="button" ng-click="down(3)">
+                    下载
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="ui-scroll-table">
+                <table class="table table-hover table-bordered" style="min-width:1400px;">
+                  <thead>
+                  <tr>
+                    <!--<th colspan="15">白沙（天天向上）扫码数据汇总（8.7~8.13）</th>-->
+                    <th colspan="12" id="monthScanDataTitle"></th>
+                  </tr>
+                  <!-- <tr>
+                    <th rowspan="2" style="vertical-align:middle;">排序</th>
+                  </tr> -->
+                  <tr>
+                    <th>规格</th>
+                    <th>销区</th>
+                    <th>省份</th>
+                    <th>地市</th>
+                    <th>本月通过GPS定位的扫码量</th>
+                    <th>本月扫码量</th>
+                    <th>上月扫码量</th>
+                    <th>截至本月末历史累计扫码量</th>
+                    <th>本月通过GPS定位的扫码烟包数</th>
+                    <th>本月扫码烟包数</th>
+                    <th>上月扫码烟包数</th>
+                    <th>截至本月末历史累计扫码烟包数</th>
+                  </tr>
+
+                  </thead>
+                  <tbody id="monthScanWin">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--红包投入数据月报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>扫码活动红包投入数据月报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-hbreport-form">
+                <div class="form-group agree-month">
+                  <label class="control-label">查询时间</label>
+                  <input type="text" value="" readonly class="form-control input-sm date month-wrap" id="redMonth"/>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label">品牌</label>
+                    <select id="redmonthbrands" multiple="multiple" ng-model="selectSpacks" value="{{selectBrands}}" class="form-control input-sm">
+                        <option ng-repeat="brandItem in brandList" value="{{brandItem.productBrand}}">{{brandItem.productBrandName}}</option>
+                    </select>
+                </div>
+                <div class="form-group agree-date">
+                  <label class="control-label">规格</label>
+                  <select id="redmonthspecifts" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.productSn}}">{{speciftItem.productName}}</option>
+                  </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,4)">
+                    查询
+                  </button>
+                  <button class="btn btn-primary" type="button" ng-click="down(4)">
+                    下载
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                  <!--<th colspan="15">白沙（天天向上）扫码数据汇总（8.7~8.13）</th>-->
+                  <th colspan="7" id="monthRedDataTitle"></th>
+                </tr>
+                <!-- <tr>
+                  <th rowspan="2" style="vertical-align:middle;">排序</th>
+                </tr> -->
+                <tr>
+                  <th>规格</th>
+                  <th>销区</th>
+                  <th>省份</th>
+                  <th>地市</th>
+                  <th>本月红包投入（元）</th>
+                  <th>上月红包投入（元）</th>
+                  <th>截至本月末历史累计红包投入（元）</th>
+                </tr>
+                </thead>
+                <tbody id="monthRedWin">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

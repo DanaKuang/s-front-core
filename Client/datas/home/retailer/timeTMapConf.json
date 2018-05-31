@@ -1,0 +1,61 @@
+{
+    "tooltip": {
+      "formatter":"{a}:{c}"
+    },
+    "xAxis": {
+      "maxInterval":12,
+      "type":"category",
+      "boundaryGap":false,
+      "data": [],
+      "axisLabel":{
+        "interval": 0,
+        "rotate":36
+      }
+    },
+    "yAxis": [
+     {
+      "axisLabel": {
+        "show": false
+    }
+     }
+    ],
+    "series": [
+      {
+        "name": "洛阳",
+        "type": "line",
+        "label":{
+          "normal":{
+            "show":false
+            }
+        },
+        "data": [],
+        "itemStyle":{
+          "normal":{
+            "color":"#76D7F7"
+          }
+        }
+      },
+      {
+        "name": "",
+        "type": "line",
+        "label":{
+          "normal":{
+            "show":false
+            }
+        },
+        "data": [],
+        "itemStyle":{
+          "normal":{
+            "color":"#FF8B22"
+          }
+        }
+      }
+    ],
+    "dataZoom" : {  
+      "type": "inside",
+      "show" : true,  
+      "realtime" : true,  
+      "start" : 0,
+      "endValue":11
+  }
+  }

@@ -1,0 +1,469 @@
+<!---->
+<link rel="stylesheet" href="statics/assets/style/home.skreport.css">
+<div class="animated fadeInRightBig" ng-controller="skReportCtrl">
+    <div class="container-fluid region-margin">
+      <div class="row">
+        <div class="col-md-12">
+        <div class="ui-panel-title report">
+          <i class="report-icon"></i><span>固定报表列表</span>
+        </div>
+        <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report_wrap">
+                <ul>
+                  <li>
+                    <span>序号</span>
+                    <span>
+                      列表名称</span>
+                  </li>
+                  <li>
+                    <span>1</span>
+                    <span ng-click="tabs(1)">
+                      <u>KPI数据分省统计日报</u></span>
+                  </li>
+                  <li ng-if="false">
+                    <span>2</span>
+                    <span ng-click="tabs(2)">
+                      <u>活动中奖统计日报</u>
+                    </span>
+                  </li>
+                  <li ng-if="false">
+                    <span>3</span>
+                    <span ng-click="tabs(3)">
+                      <u>现金红包中奖统计日报</u>
+                    </span>
+                  </li>
+                  <li ng-if="false">
+                    <span>4</span>
+                    <span ng-click="tabs(4)">
+                      <u>实物奖品中奖统计日报</u>
+                    </span>
+                  </li>
+                  <li ng-if="false">
+                    <span>5</span>
+                    <span ng-click="tabs(5)">
+                      <u>积分操作情况统计日报</u>
+                    </span>
+                  </li>
+                  <li ng-if="false">
+                    <span>6</span>
+                    <span ng-click="tabs(6)">
+                      <u>积分兑换明细日报</u>
+                    </span>
+                  </li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--KPI数据分省统计日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>KPI数据分省统计日报</span>
+            <div ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-skreport-form">
+                <div class="form-group agree-date">
+                  <label class="control-label">查询日期</label>
+                  <input id="inputOne" type="text" value="" readonly class="form-control input-sm date" />
+                </div>
+                <div class="form-group agree-date">
+                  <label class="control-label">品牌</label>
+                  <select id="proviceDataBrand" class="form-control input-sm">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group agree-date mengdeguo">
+                  <label class="control-label">规格</label>
+                  <select id="proviceDataSpecift" class="form-control input-sm">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.name}}" data-sn="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group brand_names">
+                  <label  for="proviceName" class="control-label">省份</label>
+                  <select id="proviceName" multiple="multiple" ng-model="selectAllBrands" class="form-control input-sm" value="{{selectAllBrands}}">
+                    <option ng-repeat="brandItem in brandListsss" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group specift_names">
+                    <label class="control-label label_title" for="applySpecift">地市</label>
+                    <select id="applySpecift" multiple="multiple" class="form-control input-sm multi" ng-model="selectSpeci" value="{{selectSpeci}}">
+                        <!--<option value="">请选择</option>-->
+                        <option ng-repeat="speciftItem in speciftListsss" value="{{speciftItem.cityName}}">{{speciftItem.cityName}}</option>
+                    </select>
+                </div>
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,1)">
+                    查询
+                  </button>
+                  <button class="btn btn-primary" type="button" ng-click="down(1)">
+                    下载
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <p style="clear:both;font-size:16px;color:#333;text-align:center;font-weight:400;" id="titlePOne"></p>
+              <div class="ui-scroll-table">
+                <table class="table table-hover table-bordered" style="min-width:1600px;">
+                  <thead>
+                  <!--<tr>
+                    <th colspan="2" rowspan="2">{{obj.activityName}}</th>
+                    <th colspan="10">{{obj.statTime}}</th>
+                  </tr>-->
+                  <!--<tr>
+                    <th colspan="10" style="background: white">中奖情况</th>
+                  </tr>-->
+                  <tr>
+                    <th>省份</th>
+                    <th>地市</th>
+                    <th>扫码次数</th>
+                    <th>扫码烟包数</th>
+                    <th>扫码人数</th>
+                    <th>本年累计扫码次数</th>
+                    <th>本年累计扫码包数</th>
+                    <th>本年累计扫码人数</th>
+                    <th>抽奖次数</th>
+                    <th>中奖次数(包含实物和红包)</th>
+                    <th>扫码中奖率(中奖次数/扫码烟包数)</th>
+                    <th>中奖人数</th>
+                    <th>红包发放金额</th>
+                    <th>本年累计发放金额</th>
+                  </tr>
+                  </thead>
+                  <tbody id="win_table"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--二:活动中奖统计日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>活动中奖统计日报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report-search">
+                <div class="agree-date">
+                  <label>查询日期：</label>
+                  <div class="ui-total-date input-append date-wrap">
+                    <input id="inputTwo" size="16" type="text" value="" readonly class="form-control date" />
+                    <span class="add-on"><i class="icon-th"></i></span>
+                  </div>
+                </div>
+                <div class="report-gui">
+                  <label>活动名称：</label>
+                  <select id="activityNameMdg">
+                    <!--<option value="条">条</option>-->
+                    <!--<option value="包">包</option>-->
+                  </select>
+                </div>
+                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,2)">
+                  查询
+                </button>
+                <button class="btn btn-sm btn-default btn_style" ng-click="down(2)">
+                  下载
+                </button>
+              </div>
+              <table class="table">
+                  <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="titlePTwo"></p>
+                <thead style="border-top: 1px solid #A0A0A0;">
+                <tr>
+                  <th>省份</th>
+                  <th>地市</th>
+                  <th>参与活动次数</th>
+                  <th>中奖次数</th>
+                  <th>活动中奖率(中奖次数/参与活动次数)</th>
+                  <th>累计参与活动次数</th>
+                  <th>累计中奖次数</th>
+                  <th>平均中奖率</th>
+                </tr>
+                </thead>
+                <tbody id="user_table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--三现金红包中奖统计日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>现金红包中奖统计日报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report-search">
+                <div class="agree-date">
+                  <label>查询日期：</label>
+                  <div class="ui-total-date input-append date-wrap">
+                    <input size="16" type="text" value="" readonly class="form-control date summarDt"/>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                  </div>
+                </div>
+
+
+                <div class="agree-date">
+                  <label>品牌：</label>
+                  <select id="moneyDataBrand">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                  </select>
+                </div>
+                <div class="agree-date mengdeguoTwo">
+                  <label>规格：</label>
+                  <select id="moneyDataSpecift">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.name}}" data-sn="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                  </select>
+                </div>
+                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,3)">
+                  查询
+                </button>
+                <button class="btn btn-sm btn-default btn_style" ng-click="down(3)">
+                  下载
+                </button>
+              </div>
+              <table class="table">
+                  <p class="titleTop" style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;"></p>
+                <thead style="border-top:1px solid #a0a0a0">
+                <!--<tr>
+                  <th rowspan="3">品牌</th>
+                  <th colspan="7">{{summar.statTime}}</th>
+                  <th colspan="6">{{summar.statTime}}</th>
+                  <th colspan="7">{{summar.statTime}}</th>
+                </tr>
+                <tr>
+                  <th colspan="7" style="background: white">扫码情况</th>
+                  <th colspan="6" style="background: white">现金红包（单位：个）</th>
+                  <th colspan="8" style="background: white">实物红包（单位：个）</th>
+                </tr>-->
+                <tr>
+                  <th>地市</th>
+                  <th>奖品名称</th>
+                  <th>单价</th>
+                  <th>本期中奖数量</th>
+                  <th>本期中奖金额</th>
+                  <th>本年累计中奖数量</th>
+                  <th>本年累计中奖金额</th>
+                </tr>
+                </thead>
+                <tbody id="summary_table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--四河南实物奖品中奖统计日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>实物奖品中奖统计日报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report-search">
+                <div class="agree-date">
+                  <label>查询日期：</label>
+                  <div class="ui-total-date input-append date-wrap">
+                    <input id="goodsDate" size="16" type="text" value="" readonly class="form-control date"/>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                  </div>
+                </div>
+                <div class="formarReport-gui">
+                  <label>活动名称：</label>
+                                  <select id="activityName" multiple="multiple" ng-model="selectActivityName" value="{{selectActivityName}}">
+                      <option ng-repeat="brandItem in selectActivityNameList" value="{{brandItem.activityName}}">{{brandItem.activityName}}</option>
+                  </select>
+                </div>
+                <div class="formarReport-gui">
+                  <label>地市：</label>
+                  <select id="activityCityName" multiple="multiple" ng-model="selectActivityCityName" value="{{selectActivityCityName}}">
+                      <option ng-repeat="brandItem in selectActivityCityNameList" value="{{brandItem.cityName}}">{{brandItem.cityName}}</option>
+                  </select>
+                </div>
+
+              </div>
+              <div style="width:100%;overflow:hidden;margin-left:25px;">
+                <div class="report-gui" style="float:left;">
+                  <label style="font-size:14px;">奖品：</label>
+                  <input id="inputSou" type="text" style="width:240px;height:30px;padding: 4px 12px;"/>
+                </div>
+                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,4)">
+                  查询
+                </button>
+                <button class="btn btn-sm btn-default btn_style" ng-click="down(4)">
+                  下载
+                </button>
+              </div>
+              <p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;" id="goodsTitle">实物中奖情况（{{goodsWinDate}}）</p>
+              <table class="table">
+                <thead style="border-top:1px solid #a0a0a0">
+                <tr>
+                  <!--<th rowspan="3">品牌</th>
+                  <th colspan="7">{{summar.statTime}}</th>
+                  <th colspan="6">{{summar.statTime}}</th>
+                  <th colspan="7">{{summar.statTime}}</th>-->
+                  <th>活动名称</th>
+                  <th>地市</th>
+                  <th>奖品</th>
+                  <th>本期中奖数量</th>
+                  <th>本年累计中奖数量</th>
+                </tr>
+                </thead>
+                <tbody id="weekScanWin">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--五-河南积分操作情况统计日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>积分操作情况统计日报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report-search">
+                <div class="agree-date">
+                  <label>查询日期：</label>
+                  <div class="ui-total-date input-append date-wrap">
+                    <input size="16" type="text" value="" readonly class="form-control date" id="jifenData"/>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,5)">
+                  查询
+                </button>
+                <button class="btn btn-sm btn-default btn_style" ng-click="down(5)">
+                  下载
+                </button>
+              </div>
+              <table class="table">
+                  <!--<p style="clear:both;font-size:16px;color:#000;text-align:center;font-weight:600;">活动积分情况</p>-->
+                <thead style="border-top:1px solid #a0a0a0">
+                <tr>
+                  <th colspan="15" id="provDataTitle">活动积分情况</th>
+                </tr>
+                <tr>
+                  <th>地市</th>
+                  <th>积分操作</th>
+                  <th>当日积分值</th>
+                  <th>累计积分值</th>
+                </tr>
+                </thead>
+                <tbody id="provDataDetail">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--六_积分兑换明细日报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>积分兑换明细日报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="report-search">
+                <div class="agree-date">
+                  <label>查询日期：</label>
+                  <div class="ui-total-date input-append date-wrap">
+                    <input size="16" type="text" value="" readonly class="form-control date" id="cashWinWeeks"/>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-default btn_style" ng-click="search($event,6)">
+                  查询
+                </button>
+                <button class="btn btn-sm btn-default btn_style" ng-click="down(6)">
+                  下载
+                </button>
+              </div>
+              <table class="table">
+                <thead style="border-top:1px solid #a0a0a0">
+                <tr>
+                  <th>资源名称</th>
+                  <th>地市</th>
+                  <th>本期兑奖数量</th>
+                  <th>本年累计兑奖数量</th>
+                </tr>
+                </thead>
+                <tbody id="weekCashWin">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

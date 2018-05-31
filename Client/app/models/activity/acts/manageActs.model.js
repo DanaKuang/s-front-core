@@ -9,10 +9,19 @@ define([], function () {
         ServiceType: 'service',
         ServiceName: 'manageactsModel',
         ServiceContent: ['request', function (request) {
+            // liubin 2017-12-21
+            this.$model = function () {
+                var IMG = '/statics/activity/actimg.json';
+                this.$IMG = request.$Query(IMG);
+            };
             //定义资源
             var $model = this;
+
+            var STEP = '/statics/activity/step.json';
+
             // 模板列表
             var GET_ACT_SAMPLE_LIST = '/api/tztx/saas/saotx/common/queryDimActivatyForm';
+            var GET_WHICH_SAMPLE = '/api/tztx/saas/saotx/activity/queryActTempByParams';
             // 活动列表
             var GET_ACTIVITY_LIST = '/api/tztx/saas/saotx/activity/list';
             // 活动状态
@@ -67,9 +76,27 @@ define([], function () {
             //根据红包id获取红包详情
             var GET_POOL_DETAIL = '/api/tztx/saas/saotx/poolRedpack/queryDetail';
 
+            //获取实物礼品剩余最大增库量
+            var GET_MAX_POOL_GIFT= '/api/tztx/saas/saotx/poolGift/queryDetail';
+
+            //获取红包剩余最大增库量
+            var GET_MAX_RED_PACK= '/api/tztx/saas/saotx/poolRedpack/queryDetail';
+
+            //获取积分剩余最大增库量
+            var GET_MAX_POOL_INTEGRAL= '/api/tztx/saas/saotx/poolIntegral/queryDetail';
+
             // 模板列表
             $model.getActSampleList = function () {
                 return request.$Search(GET_ACT_SAMPLE_LIST)
+            }
+
+            // 根据参数获取某种类型模板
+            $model.getwhichsample = function (data) {
+                return request.$Search(GET_WHICH_SAMPLE, data)
+            }
+
+            $model.step = function () {
+                return request.$Query(STEP)
             }
 
             // 活动状态
@@ -171,6 +198,20 @@ define([], function () {
                 return request.$Search(GET_POOL_DETAIL, data);
             };
 
+            //获取实物礼品剩余最大增库量
+            $model.getMaxPoolGift = function (data) {
+                return request.$Search(GET_MAX_POOL_GIFT, data, false);
+            };
+
+            //获取红包剩余最大增库量
+            $model.getMaxRedPack = function (data) {
+                return request.$Search(GET_MAX_RED_PACK, data, false);
+            };
+
+            //获取积分剩余最大增库量
+            $model.getMaxPoolIntegral = function (data) {
+                return request.$Search(GET_MAX_POOL_INTEGRAL, data, false);
+            };
         }]
     }
     return manageactsModel

@@ -5,11 +5,213 @@
  * Description: user
  */
 -->
+<link rel="stylesheet" href="statics/assets/style/system.user.css">
+<link rel="stylesheet" href="statics/assets/style/pagination.css">
 <div ng-controller="userCtrl">
     <div class="animated fadeInRightBig">
-        <div class="container-fluid">
-            <div class="row">
-
+        <div class="container-fluid row">
+            <div class="ui-acc-cpwd margin-top col-md-12">
+                <!--面包屑-->
+                <div class="ui-panel-title">
+                    <i class="title"></i><span>成员管理</span>
+                    <button type="button" class="btn btn-default" ng-click="addEdit()">+新增成员</button>
+                </div>
+                <!--搜索栏-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline" id="id_user_form" autocomplete="off" ng-submit="initSearch()">
+                            <!--成员筛选-->
+                            <div class="form-group">
+                                <label for="keys" class="control-label">成员筛选</label>
+                                <input type="text" name="search.keys" placeholder="ID/姓名/单位/手机号" ng-model="search.keys" class="form-control input-sm">
+                            </div>
+                            <!--角色-->
+                            <div class="form-group">
+                                <label for="" class="control-label">角色</label>
+                                <select class="form-control input-sm" ng-model="search.roleCode">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="r in roleArr" ng-value="r.roleCode">{{r.roleName}}</option>
+                                </select>
+                            </div>
+                            <!--状态-->
+                            <div class="form-group">
+                                <label for="" class="control-label">状态</label>
+                                <select class="form-control input-sm" ng-model="search.status">
+                                    <option value="">全部</option>
+                                    <option value="1">已启用</option>
+                                    <option value="0">已停用</option>
+                                    <option value="2">已锁定</option>
+                                </select>
+                            </div>
+                            <!--按钮-->
+                            <div class="ui-btn-ctrl form-group">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button type="reset" class="btn btn-primary" ng-click="reset()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--人员表格-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <!-- <div class="form-group">
+                            <span ng-click="import()" class="table-ctrl span-hover">批量导入成员信息></span>
+                            <span ng-click="export()" class="table-ctrl span-hover">批量导出成员信息></span>
+                        </div> -->
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>姓名</th>
+                                    <th>角色</th>
+                                    <th>单位</th>
+                                    <th>手机号</th>
+                                    <th>状态</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="col in tabArr">
+                                    <td>{{col.id}}</td>
+                                    <td>{{col.name}}</td>
+                                    <td>{{col.roleName}}</td>
+                                    <td>{{col.orgName}}</td>
+                                    <td>{{col.mobile}}</td>
+                                    <td>{{['已停用','已启用','已锁定'][col.status]}}</td>
+                                    <td>
+                                        <span class="opt-btn span-hover" ng-click="addEdit(col.account)" ng-if="col.status==1">编辑</span>
+                                        <span class="opt-btn span-hover" ng-click="opts(col.id, col.status)">{{['启用','停用','启用'][col.status]}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-if='!tabArr.length'>
+                                    <td colspan='7'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 分页区 -->
+                        <div class="pagination-wrap">
+                            <!-- 分页指令 -->
+                            <sa-pagination id="pagination" conf="paginationConf" class="pagination"></sa-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增、编辑-->
+    <div class="modal fade in" id="id_user_modal" tabindex="-1" role="dialog" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="resetFrom(userForm)">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">账号>{{id?'编辑':'新增'}}成员</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="userForm" ng-submit="submitForm(userForm.$valid, userForm)" novalidate autocomplete="off">
+                        <input type="hidden" name="id" ng-model="id">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">帐户<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.account.$error.required}">
+                                    <input type="text" name="account" ng-model="account" class="form-control input-sm" placeholder="登录名" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.account.$error.required">姓名不能为空</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">昵称<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.name.$error.required}">
+                                    <input type="text" name="name" ng-model="name" class="form-control input-sm" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.name.$error.required">姓名不能为空</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">公司<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && userForm.company.$error.required}">
+                                    <input type="text" name="company" ng-model="company" class="form-control input-sm" required disabled>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.company.$error.required">公司不能为空</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">手机号<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && (userForm.mobile.$error.required || userForm.mobile.$invalid)}">
+                                    <input type="text" name="mobile" ng-model="mobile" class="form-control input-sm" ng-pattern="/^1[0-9]{10}$/" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.mobile.$error.required">手机号不能为空</p>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.mobile.$invalid && !userForm.mobile.$error.required">手机号格式不正确</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">邮箱<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': userForm.$submitted && (userForm.email.$error.required || userForm.email.$invalid)}">
+                                    <input type="email" name="email" ng-model="email" class="form-control input-sm" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" required>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.email.$error.required">邮箱不能为空</p>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.email.$invalid && !userForm.email.$error.required">邮箱格式不正确</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--新密码-->
+                        <div class="form-group" ng-if="!id">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">密码<span class="red">*</span></label>
+                                <div class="col-md-9" ng-class="{'has-error': (userForm.$submitted && userForm.pwd.$error.required) || (!userForm.pwd.$error.required && userForm.pwd.$invalid) }">
+                                    <input type="password" name="pwd" class="form-control input-sm" ng-model="pwd" ng-pattern="/(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%\^&*?]{8,16}$/" required>
+                                    <p class="help-block" ng-show="userForm.pwd.$invalid && !userForm.pwd.$error.required">8-16位字符(至少包含字母、数字、符号中的两种形式)</p>
+                                    <p class="help-block" ng-show="userForm.$submitted && userForm.pwd.$error.required">密码不能为空</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label col-md-2">角色<span class="red">*</span></label>
+                                <div class="col-md-9 form-inline">
+                                    <select class="form-control input-sm" name="roleCode" ng-model="roleCode" required>
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="r in roleArr" value="{{r.roleCode}}">{{r.roleName}}</option>
+                                    </select>
+                                    <div ng-class="{'has-error': userForm.$submitted && userForm.roleCode.$error.required}">
+                                        <p class="help-block" ng-show="userForm.$submitted && userForm.roleCode.$error.required">角色不能为空</p>
+                                    </div>
+                                    <p>可查看、操作物料管理与活动管理模块</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确定</button>
+                            <button type="reset" class="btn btn-primary" data-dismiss="modal" ng-click="resetFrom(userForm)">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--消息提示-->
+    <div class="modal fade in" tabindex="-1" data-keyboard="false" role="dialog" id="id_tip_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <div aria-hidden="true" class="icon-close">x</div>
+                    </button>
+                    <h4 class="modal-title">操作提示</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="center">
+                        {{tip.status ? '停用后，此用户将不能登陆此平台' : '启用后，此用户将可以登陆此平台'}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="confim(tip.id, tip.status)">确定</button>
+                        <button type="reset" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

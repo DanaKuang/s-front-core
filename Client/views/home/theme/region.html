@@ -5,7 +5,7 @@
  * Description: theme
  */
 -->
-
+<link rel="stylesheet" href="statics/assets/style/home.region.css">
 <div class="animated fadeInRightBig" ng-controller="RegionCtrl">
   <div class="container-fluid region-margin">
     <div class="row">
@@ -18,68 +18,110 @@
         <div class="panel rate">
           <div class="panel-body">
             <!--搜索-->
-            <div class="region-search-r">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day" id="day" selected>日</option>
-                <option value="week">周</option>
-                <option value="month">月</option>
-              </select>
+            <form class="form-inline ui-region-form" autocomplete="off">
+              <div class="form-group">
+                <label class="control-label" for="">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day" id="day" selected>日</option>
+                  <option value="week">周</option>
+                  <option value="month">月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <div class="ui-total-date input-append region-day date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" />
+              <div class="form-group input-append region-day date-wrap">
+                  <label class="control-label">查询时间</label>
+                  <input type="text" value="" readonly class="form-control input-sm date" />
                   <span class="add-on"><i class="icon-th"></i></span>
               </div>
-              <select class="region" autocomplete="off">
-                <option value="全国">全国</option>
-                <!--<option></option>-->
-              </select>
-              <select class="regions">
-              	<option value="全部">全部</option>
-                <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
-              </select>
+              <div class="form-group">
+                <label class="control-label">省份</label>
+                <select class="form-control input-sm region" autocomplete="off">
+                  <option value="全国">全国</option>
+                  <!--<option></option>-->
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">城市</label>
+                <select class="form-control input-sm regions">
+                  <option value="全部">全部</option>
+                  <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
+                </select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
-            <div class="region-search-r" style="display: none">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day" >日</option>
-                <option value="week" id="week" selected>周</option>
-                <option value="month">月</option>
-              </select>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+            <form class="form-inline ui-region-form" autocomplete="off" style="display: none">
+              <div class="form-group">
+                <label class="control-label">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day" >日</option>
+                  <option value="week" id="week" selected>周</option>
+                  <option value="month">月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <select class="week">
-              </select>
-              <select class="region"  autocomplete="off">
-                <option value="全国">全国</option>
-              </select>
-              <select class="regions">
-              	<option value="全部">全部</option>
-                <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
-              </select>
+              <div class="form-group">
+                <label class="control-label">查询日期</label>
+                <select class="form-control input-sm week">
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">省份</label>
+                <select class="form-control input-sm region"  autocomplete="off">
+                  <option value="全国">全国</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">城市</label>
+                <select class="form-control input-sm regions">
+                  <option value="全部">全部</option>
+                  <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
+                </select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
-            <div class="region-search-r" style="display: none">
-              <select class="ui-search" placeholder="请选择">
-                <option value="day">日</option>
-                <option value="week">周</option>
-                <option value="month" id="month" selected>月</option>
-              </select>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+            <form class="form-inline ui-region-form" autocomplete="off" style="display: none">
+              <div class="form-group">
+                <label class="control-label">类型</label>
+                <select class="form-control input-sm ui-search" placeholder="请选择">
+                  <option value="day">日</option>
+                  <option value="week">周</option>
+                  <option value="month" id="month" selected>月</option>
+                </select>
+              </div>
               <!--月、周、日-->
-              <div class="ui-total-date input-append date-wrap region-month">
-                <input size="16" type="text" value={{month}} readonly class="form-control date" />
+              <div class="form-group input-append date-wrap region-month">
+                <label class="control-label">查询时间</label>
+                <input type="text" value={{month}} readonly class="form-control input-sm date" />
                 <span class="add-on"><i class="icon-th"></i></span>
               </div>
-              <select class="region" autocomplete="off">
-                <option value="全国">全国</option>
-              </select>
-              <select class="regions">
-              	<option value="全部">全部</option>
-                <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
-              </select>
+              <div class="form-group">
+                <label class="control-label">省份</label>
+                <select class="form-control input-sm region" autocomplete="off">
+                  <option value="全国">全国</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">城市</label>
+                <select class="form-control input-sm regions">
+                  <option value="全部">全部</option>
+                  <option value="{{cityNameItem.cityName}}" ng-repeat="cityNameItem in secondCategoryList">{{cityNameItem.cityName}}</option>
+                </select>
+              </div>
               <!--search-->
-              <button type="button" class="btn btn-sm btn-default" ng-click="search($event);">搜索</button>
-            </div>
+              <div class="form-group ui-btn-ctrl">
+                <button type="button" class="btn btn-primary" ng-click="search($event);">搜索</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel rate">
+          <div class="panel-body">
             <div class="region-describle">仪表盘中间值确定方式：往前推7天（包括当天）的均值</div>
             <div class="region-gauge">
               <div class="col-md-4">
@@ -99,7 +141,7 @@
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
-              <div id="hours-chart"></div>
+              <div id="hours-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap region-plan-wrap">
               <div class="hours-title">
@@ -130,7 +172,7 @@
                   <span>领取数量</span>
                 </div>-->
               </div>
-              <div id="date-chart"></div>
+              <div id="date-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap region-plan-wrap">
               <div class="hours-title">
@@ -161,7 +203,7 @@
                   <span>领取数量</span>
                 </div>
               </div>
-              <div id="plan-chart"></div>
+              <div id="plan-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap region-bag-wrap">
               <div class="hours-title">
@@ -182,7 +224,7 @@
                   <span>条</span>
                 </div>
               </div>
-              <div id="bag-chart"></div>
+              <div id="bag-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap region-name-wrap">
               <div class="hours-title">
@@ -191,7 +233,7 @@
                 <span></span><br />
                 <span>（单位：次）</span>
               </div>
-              <div id="name-chart"></div>
+              <div id="name-chart" class="ui-map-box"></div>
             </div>
             <div class="region-hours-wrap region-city-wrap">
               <div class="hours-title">
@@ -203,43 +245,34 @@
               <!--<div id="city-chart"></div>-->
               <div style="width:100%;">
                 <div class="title_name">
-                  <!--<div class="col-md-2 col-sm-2" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty">城市</div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数<span class="sx-arrow-down"></span></div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数<span class="sx-arrow-down"></span></div>
-                  </div>
-                  <div class="col-md-3 col-sm-3" style="margin-left:-12px;margin-right:-12px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数<span class="sx-arrow-down"></span></div>
-                  </div>-->
                   <div style="width:16%;float:left;margin-right:5px;">
                     <div class="but_sty">城市</div>
                   </div>
                   <div style="width:26%;float:left;margin-right:5px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数<span class="sx-arrow-up"></span>
+                    <div class="but_sty btn_pointer" ng-click="orderByPv()">扫码次数
+                      <!-- <span class="sx-arrow-up"></span> -->
                       <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[pvOrder]"></span>
                     </div>
                   </div>
                   <div style="width:26%;float:left;margin-right:5px;">
-                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数<span class="sx-arrow-up"></span>
+                    <div class="but_sty btn_pointer" ng-click="orderByCode()">扫码烟包数
+                      <!-- <span class="sx-arrow-up"></span> -->
                       <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[codeOrder]"></span>
                     </div>
                   </div>
                   <div style="width:26%;float:left;">
-                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数<span class="sx-arrow-up"></span>
+                    <div class="but_sty btn_pointer" ng-click="orderByUv()">扫码人数
+                      <!-- <span class="sx-arrow-up"></span> -->
                       <span ng-class="{true:'sx-arrow-select-down',false:'sx-arrow-down'}[uvOrder]"></span>
                     </div>
                   </div>
                 </div>
                 <ul class="view_times_main">
                   <li ng-if="resData.length > 0" ng-repeat="cityCodeItem in resData">
-                    <div class="col-md-2 col-sm-2">
+                    <div style="width:16%;float:left;margin-right:5px;">
                       <div style="text-align:center;">{{cityCodeItem.cityName}}</div>
                     </div>
-                    <div class="col-md-3 col-sm-3" style="margin-left:5px;margin-right:5px;">
+                    <div style="width:26%;float:left;padding:0 15px;">
                       <div class="progress" style="height:15px;">
                         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
                           aria-valuemin="0" aria-valuemax="100" style="line-height:15px;width:{{cityCodeItem.scanPv/maxPv*100}}%;">
@@ -247,7 +280,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3 col-sm-3" style="margin-left:10px;margin-right:5px;">
+                    <div style="width:26%;float:left;margin:0 5px;padding: 0 15px;">
                       <div class="progress" style="height:15px;">
                         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
                           aria-valuemin="0" aria-valuemax="100" style="line-height:15px;width:{{cityCodeItem.scanCode/maxCode*100}}%;">
@@ -255,7 +288,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3 col-sm-3" style="margin-left:10px;margin-right:5px;">
+                    <div style="width:26%;float:left;margin:0 5px;padding: 0 15px;">
                       <div class="progress" style="height:15px;">
                         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
                           aria-valuemin="0" aria-valuemax="100" style="line-height:15px;width:{{cityCodeItem.scanUv/maxUv*100}}%;">
@@ -264,10 +297,10 @@
                       </div>
                     </div>
                   </li>
-                  
+
                 </ul>
               </div>
-              
+
             </div>
           </div>
         </div>

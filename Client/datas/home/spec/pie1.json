@@ -1,4 +1,13 @@
 {
+  "noDataLoadingOption": {
+    "text": "暂无数据",
+    "effect": "bubble",
+    "effectOption": {
+        "effect": {
+            "n": 0
+        }
+    }
+  },
   "title": {
     "text": "现金\n红包",
     "x": "center",

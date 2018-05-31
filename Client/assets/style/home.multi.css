@@ -16,7 +16,7 @@
 }
 .ui-content-multi >.panel p i {
     position: absolute;
-    // content: url('../image/i-down.png');
+    /* content: url('../image/i-down.png'); */
     background: url('../image/i-down.png') no-repeat;
     background-size: cover;
     width: 10px;
@@ -28,7 +28,7 @@
 }
 .ui-content-multi >.panel p.active i {
     position: absolute;
-    // content: url('../image/i-down.png');
+    /* content: url('../image/i-down.png'); */
     background: url('../image/i-down.png') no-repeat;
     background-size: cover;
     width: 10px;
@@ -66,22 +66,19 @@
     width: 100%;
     margin: 10px auto 0;
 }
-.ui-btn-group button {
-    position: relative;
-    height: 30px;
-    width: 90px;
-    background: #44c2ed;
-    color: #fff;
-    border-color: #44c2ed;
-    border-radius: 15px;
-    padding: 0;
-}
+.ui-btn-group button,
 .ui-btn-group button:hover,
-.ui-btn-group button:focus,
-.ui-btn-group button:active {
-    background: #44c2ed !important;
-    color: #fff !important;
-    border-color: #44c2ed !important;
+.ui-btn-group button:active,
+.ui-btn-group button:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed;
+    color: #fff;
 }
 .ui-search-block {
     position: relative;
@@ -119,8 +116,8 @@
     width: 100px;
 }
 .ui-search-block >div {
-    // width: 200px;
-    // margin-right: 50px;
+    /* width: 200px; */
+    /* margin-right: 50px; */
     display: inline-block;
 }
 .ui-search-block .result {
@@ -213,9 +210,10 @@
     width: calc(100% - 40px);
 }
 .ui-list-content p {
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; */
+    padding-right: 50px;
 }
 .ui-multi-select {
     position: relative;
@@ -262,7 +260,7 @@ button.multiselect {
     margin: 0 8px 10px;
 }
 .ui-result-list li>i.close {
-    // content: url('../image/i-remove.png');
+    /* content: url('../image/i-remove.png'); */
     background: url('../image/i-remove.png') no-repeat;
     background-size: cover;
     position: absolute;

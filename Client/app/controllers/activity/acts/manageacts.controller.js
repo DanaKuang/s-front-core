@@ -14,14 +14,13 @@ define([], function () {
         var scope = function (selector) {
           return angular.element(selector).scope() ? angular.element(selector).scope() : null
         }
-
         // 通用方法 获取对应conf
         var scope_conf = function (selector) {
           var scope = angular.element(selector).scope();
           return scope ? scope.conf ? scope.conf : scope.conf = {} : false
         }
 
-        // 初始化multiselect 
+        // 初始化multiselect
         $(document).ready(function () {
           $(".operation.multi .select").multiselect({
             nonSelectedText: '请选择',
@@ -38,7 +37,7 @@ define([], function () {
 
         // 初始化datetimepicker
         $("#durationStart").datetimepicker({
-          format: 'yyyy-mm-dd hh:ii', 
+          format: 'yyyy-mm-dd hh:ii',
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
@@ -53,7 +52,7 @@ define([], function () {
         })
 
         $("#durationEnd").datetimepicker({
-          format: 'yyyy-mm-dd hh:ii', 
+          format: 'yyyy-mm-dd hh:ii',
           language: 'zh-CN',
           todayBtn:  1,
           autoclose: 1,
@@ -81,7 +80,7 @@ define([], function () {
             keys: $scope.keysval || '',
             stime: $scope.startTime ? $scope.startTime.match(/:/g).length > 1 ? $scope.startTime.replace($scope.startTime.substr($scope.startTime.lastIndexOf(':') + 1), '00') : $scope.startTime += ':00' : '' || '',
             etime: $scope.endTime ? $scope.endTime.match(/:/g).length > 1 ? $scope.endTime.replace($scope.endTime.substr($scope.endTime.lastIndexOf(':') + 1), '00') : $scope.endTime += ':00' : '' || '',
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 10
           }
         }
@@ -138,7 +137,8 @@ define([], function () {
         $scope.$on('typefromActSample', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
             $scope.allConfigTemplateConf = res.data;
-            getLaunchInfo();        
+            $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.orgCode];
+            getLaunchInfo();
           })
         })
 
@@ -150,24 +150,23 @@ define([], function () {
         });
 
         // ------------------ 2.0分界线 ------------------
-        $model.getActSampleList().then(function (res) {
-          $scope.chooseConf = res.data;
-          $model.getwhichsample({type: ''}).then(function (res) {
-            // 获取全部类型
-            scope('.showtemplate').type = res.data.data.list;
-          })
-        });
+        // $model.getActSampleList().then(function (res) {
+        //   $scope.chooseConf = res.data;
+        //   $model.getwhichsample({type: ''}).then(function (res) {
+        //     // 获取全部类型
+        //     scope('.showtemplate').type = res.data.data.list;
+        //   })
+        // });
 
-        $scope.$on('choosetype', function (e, v, f) {
-          $model.getTemplateSpecific(f).then(function(res){
-            $scope.configtemplateConf = res.data;
-          })
-        })
-        
+        // $scope.$on('choosetype', function (e, v, f) {
+        //   $model.getTemplateSpecific(f).then(function(res){
+        //     $scope.configtemplateConf = res.data;
+        //   })
+        // })
 
         // $model.step().then(function (res) {
         //   $scope.createConf = res.data;
-        // })    
+        // })
 
         // 操作面板，活动状态
         $model.getActivityStatus().then(function(res) {
@@ -182,8 +181,8 @@ define([], function () {
               v.value = v.brandCode;
           }));
           $('[ng-model="selectAllBrands"]').multiselect('refresh');
-          var default_val = $('[ng-model="selectAllBrands"]').find('option:first').val();
-          $scope.selectAllBrands = default_val;
+          // var default_val = $('[ng-model="selectAllBrands"]').find('option:first').val();
+          // $scope.selectAllBrands = default_val;
         })
 
         // 操作面板，根据品牌获取规格
@@ -218,7 +217,7 @@ define([], function () {
             })
           })
         })
-          
+
         // 停用活动
         $scope.$on('terminateActivity', function (e, v, f) {
           $('.end-activity-modal .btn-primary').on('click', function(){
@@ -234,6 +233,7 @@ define([], function () {
           if(f.activityForm != 'act-4'){
               $model.editActivity({'activityCode': f.activityCode}).then(function(res){
                 $scope.allConfigTemplateConf = res.data;
+                $scope.allConfigTemplateConf.IMG = $scope.$model.$IMG.data[sessionStorage.orgCode];
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
 
                 // 如果存在中奖地区
@@ -248,7 +248,6 @@ define([], function () {
                 getAlreadySelectedLaunchInfo(res.data.data.activity);
             })
           }
-          
         })
 
         // 查看活动
@@ -261,11 +260,10 @@ define([], function () {
         // 返回
         $scope.$on('popback', function (e,v,f) {
           $model.getTemplateSpecific(f).then(function(res){
-            $scope.allConfigTemplateConf = null;       
+            $scope.allConfigTemplateConf = null;
           })
         })
 
-        // 
         function getLaunchInfo() {
           $(document).ready(function () {
             $('.multi .select').multiselect({
@@ -292,19 +290,12 @@ define([], function () {
               numberDisplayed: 1
             });
           });
+
           // 不需要根据供应商获取品牌信息
           $scope.$on('clickbrandval', function (e, v, f) {
             $model.getBrandList().then(function (res) {
               var selectCompanyScope = angular.element('.select-brand').scope();
               selectCompanyScope.brand = res.data.data;
-              $('[ng-model="selectBrandVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.name;
-                  v.value = v.brandCode;
-              }));
-              $('[ng-model="selectBrandVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectBrandVal"]').find('option:first').val();
-              selectCompanyScope.selectBrandVal = default_val;
             })
           })
 
@@ -313,14 +304,6 @@ define([], function () {
             $model.getProductList(f).then(function (res) {
               var selectBrandScope = angular.element('.select-specification').scope();
               selectBrandScope.specification = res.data.data;
-              $('[ng-model="selectSpecificationVal"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
-                  v.label = v.allName;
-                  v.value = v.sn;
-              }));
-              $('[ng-model="selectSpecificationVal"]').multiselect('refresh');
-              // 给一个默认的初始值
-              var default_val = $('[ng-model="selectSpecificationVal"]').find('option:first').val();
-              selectBrandScope.selectSpecificationVal = default_val;
             })
           })
         }
@@ -379,7 +362,7 @@ define([], function () {
               $('.draw-area').find('.btn-group').not('.edit').css('display', 'none');
               $('.select-area').find('.btn-group').not('.edit').css('display', 'none')
             }, 500)
-            
+
             // 获取已编辑的地区
             // getArea({parentCode: 0}, '[ng-model="selectAreaVal"]', true, selectedData.activityAreaList)
           } else {
@@ -437,7 +420,7 @@ define([], function () {
             if (provinceArr.length != 0) {
               provinceArr.forEach(function (n ,index) {
                 var group = {
-                    label: n.shortName, 
+                    label: n.shortName,
                     value: n.code,
                     children: []
                 };
@@ -493,7 +476,7 @@ define([], function () {
             var fileSuccessData = res.data;
             var basicScope = angular.element('.configuration-image').scope();
             basicScope.attachCode = fileSuccessData.attachCode; //图片编码
-            basicScope.accessUrl = fileSuccessData.accessUrl; //图片保存地址    
+            basicScope.accessUrl = fileSuccessData.accessUrl; //图片保存地址
             if (basicScope.accessUrl) {
               $('.configuration-image').find('.wrong-tip').addClass('hidden');
             } else {
@@ -512,7 +495,7 @@ define([], function () {
           globalVariable.show_product_list_scope = fromActivityConfigtoChooseProduct.scope;
           delete fromActivityConfigtoChooseProduct.scope;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 4
           }
           var target = Object.assign({}, f, data);
@@ -537,7 +520,7 @@ define([], function () {
         $scope.$on('fromActivityConfigtoChooseHb', function (e, v, f) {
           fromActivityConfigtoChooseHb = f;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 5
           }
           var target = Object.assign({}, f, data);
@@ -562,7 +545,7 @@ define([], function () {
         $scope.$on('fromActivityConfigtoChooseJF', function (e, v, f) {
           fromActivityConfigtoChooseJF = f;
           var data = {
-            currentPageNumber: 1, 
+            currentPageNumber: 1,
             pageSize: 6
           }
           var target = Object.assign({}, f, data);
@@ -581,13 +564,101 @@ define([], function () {
           })
         })
 
+        var gitSurplusNum = 0; //礼品增库时剩余最大数量
         // 新增礼品库存
         $scope.$on('giftaddstockid', function (e,v,f) {
           globalVariable.giftaddstockid = f;
+          var queryData = {
+            id : globalVariable.giftaddstockid.poolId
+          }
+          //globalVariable.giftaddstockid.giftType  3-红包  6-积分  其他为实物礼品
+          $model.getMaxPoolGift(queryData).then(function (res) {
+            if(res.data.ret == 200000){
+              var giftObj = res.data.data;
+              gitSurplusNum = parseInt(giftObj.stock);
+              $('[ng-model="giftnumber"]').attr('placeholder','增库最大数量为：'+ giftObj.stock +'');
+            }
+          })
         })
-        
+
         $scope.confirmGiftStock = function () {
-          if (globalVariable.giftaddstockid.firstornot) {
+          var giftNum = parseInt($('[ng-model="giftnumber"]').val());
+          if(parseInt(giftNum) <= 0){
+            $('#addGiftNum').html('请输入大于0的正整数').show();
+            return;
+          }else{
+            switch(globalVariable.giftaddstockid.specialCode){
+              case 'FIRST_LOTTERY_BE_WON':
+                if(giftNum > gitSurplusNum){
+                  $('#addGiftNum').html('超过数量最大限制，请调整').show();
+                  return;
+                }else{
+                  //初始化数量对象
+                  var initialObj = $('#first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
+                  //初始化数量
+                  var initialVal = initialObj.val();
+                  //剩余数量
+                  var surplusVal = surplusObj.val();
+                  var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
+                  var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
+                  $('[ng-model="giftnumber"]').val('');
+                  $('#addGiftNum').hide();
+                  $('.add-giftstock-pop').modal('hide');
+                }
+                break;
+              case 'COMMON':
+                if(giftNum > gitSurplusNum){
+                  $('#addGiftNum').html('超过数量最大限制，请调整').show();
+                  return;
+                }else{
+                  //初始化数量对象
+                  var initialObj = $('#none_first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#none_first_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
+                  //初始化数量
+                  var initialVal = initialObj.val();
+                  //剩余数量
+                  var surplusVal = surplusObj.val();
+                  var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
+                  var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
+                  $('[ng-model="giftnumber"]').val('');
+                  $('#addGiftNum').hide();
+                  $('.add-giftstock-pop').modal('hide');
+                }
+                break;
+              case 'INVOLVE':
+                if(giftNum > gitSurplusNum){
+                  $('#addGiftNum').html('超过数量最大限制，请调整').show();
+                  return;
+                }else{
+                  //初始化数量对象
+                  var initialObj = $('#involve_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.initial');
+                  //剩余数量对象
+                  var surplusObj = $('#involve_draw').find('[data-dataid="'+ globalVariable.giftaddstockid.potId +'"]').find('[data-poolid="'+ globalVariable.giftaddstockid.poolId +'"]').find('.surplus');
+                  //初始化数量
+                  var initialVal = initialObj.val();
+                  //剩余数量
+                  var surplusVal = surplusObj.val();
+                  var addInitVal = parseFloat(initialVal) + parseFloat(giftNum);
+                  var addSurplusVal = parseFloat(surplusVal) + parseFloat(giftNum);
+                  initialObj.val(addInitVal);
+                  surplusObj.val(addSurplusVal);
+                  $('[ng-model="giftnumber"]').val('');
+                  $('#addGiftNum').hide();
+                  $('.add-giftstock-pop').modal('hide');
+                }
+                break;
+              default :
+            }
+          }
+
+          /**if (globalVariable.giftaddstockid.firstornot) {
             // 特殊奖
             var the_drawprizewrap_val = $('.first-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val();
 
@@ -602,8 +673,8 @@ define([], function () {
 
             $('.thanks-draw .edit-part').eq(globalVariable.giftaddstockid.index).find('.prize-img-preview-wrap-repeat').eq(globalVariable.giftaddstockid.item_index).find('.number').val(add_val)
           }
-          $('.modal-content .close').trigger('click');
-        } 
+          $('.modal-content .close').trigger('click'); */
+        }
 
         // 新增红包库存
         var hbaddstockid = {};
@@ -618,27 +689,76 @@ define([], function () {
             })
           }else{
             $('#poolDetail').html('').hide();
+            //不是调查问卷活动的红包
+            $model.getMaxRedPack({id:f.poolId}).then(function(res) {
+              if(res.data.ret == '200000'){
+                var poolDetailObj = res.data.data;
+                $scope.poolDetailMoney = poolDetailObj.moneyPool;
+                $('[ng-model="hbnumber"]').attr('placeholder','红包池剩余额度：'+ poolDetailObj.moneyPool +'');
+              }
+            })
           }
           hbaddstockid = f;
         })
+
         $scope.confirmHbStock = function () {
           var addNum = {addNum: $scope.hbnumber};
           if(hbaddstockid.activityForm != 'act-4'){
-            var data = {
-              addNum: $scope.hbnumber,
-              id: hbaddstockid.id
-            };
-            if (!hbaddstockid.id) {
-              alert('请先选择红包');
-              $('.modal-content .close').trigger('click');
-              return
+            if($scope.hbnumber > $scope.poolDetailMoney){
+              $('#poolDetail').html('增库额度超出红包剩余额度，请重新输入增库金额').show();
+              return;
+            }else if(parseFloat($scope.hbnumber) <= 0){
+              $('#poolDetail').html('请输入大于0的数').show();
+              return;
+            }else{
+              var data = {
+                addNum: $scope.hbnumber,
+                id: hbaddstockid.id
+              };
+              // if (!hbaddstockid.id) {
+              //   alert('请先选择红包');
+              //   $('.modal-content .close').trigger('click');
+              //   return
+              // }
+              switch(hbaddstockid.specialCode){
+                case 'FIRST_LOTTERY_BE_WON':
+                  //初始化金额
+                  var initMoney = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val();
+                  //剩余金额
+                  var surplusMoney = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val();
+                  var addMoney = parseFloat(initMoney) + parseFloat($scope.hbnumber);
+                  var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
+                  $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
+                  $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
+                  $('[ng-model="hbnumber"]').val('');
+                  $('#poolDetail').html('').hide();
+                  $('.add-hbstock-pop').modal('hide');
+                  break;
+                case 'COMMON':
+                  //初始化金额
+                  var initMoney = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val();
+                  //剩余金额
+                  var surplusMoney = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val();
+                  var addMoney = parseFloat(initMoney) + parseFloat($scope.hbnumber);
+                  var addSurplusMoney = parseFloat(surplusMoney) + parseFloat($scope.hbnumber);
+                  $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.money').val(addMoney);
+                  $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money').val(addSurplusMoney);
+                  $('[ng-model="hbnumber"]').val('');
+                  $('#poolDetail').html('').hide();
+                  $('.add-hbstock-pop').modal('hide');
+                  break;
+                default:
+              }
+
+              //原来的增加红包的代码
+              // $model.addhbstock(data).then(function(res) {
+              //   var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
+              //   var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
+              //   $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
+              //   $('.modal-content .close').trigger('click');
+              // })
+
             }
-            $model.addhbstock(data).then(function(res) {
-              var the_drawprizewrap_val = $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val();
-              var add_val = parseFloat(the_drawprizewrap_val) + parseFloat($('[ng-model="hbnumber"]').val());
-              $('.first-draw .ready-set').find('.draw-prize-wrap').eq(hbaddstockid.index).find('.money').val(add_val);
-              $('.modal-content .close').trigger('click');
-            })
           }else{
             if($scope.hbnumber > $scope.poolDetailMoney){
               $('#poolDetail').html('增库额度超出红包剩余额度，请重新输入增库金额').show();
@@ -651,7 +771,7 @@ define([], function () {
               var nowTotal = $('#packetToal').val();
               var addTotalMoney = parseInt(nowTotal) + parseInt($scope.hbnumber);
               $('#packetToal').val(addTotalMoney);
-              
+
               if(parseInt($scope.hbnumber) > 0){
                 if($('#ranAmont')[0].checked){
                   $('#prizeNum').removeAttr("disabled");
@@ -662,11 +782,132 @@ define([], function () {
                 }
               }
               $scope.hbnumber = '';
-              $('.modal-content .close').trigger('click');
-              
+              // $('.modal-content .close').trigger('click');
+              $('.add-hbstock-pop').modal('hide');
+
             }
           }
-          
+        }
+
+        //红包数量增加
+        $scope.confirmHbStockNum = function(){
+          if(parseInt($scope.hbnumberNum) <= 0){
+            $('#hbNumberErr').html('请输入大于0的正整数').show();
+            return;
+          }else{
+            switch(hbaddstockid.specialCode){
+              case 'FIRST_LOTTERY_BE_WON':
+                //初始化金额
+                var initMoneyNum = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val();
+                //剩余金额
+                var surplusMoneyNum = $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val();
+                var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
+                var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
+                $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
+                $('[ng-model="hbnumberNum"]').val('');
+                $('.add-hbstock-pop-num').modal('hide');
+                break;
+              case 'COMMON':
+                //初始化金额
+                var initMoneyNum = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val();
+                //剩余金额
+                var surplusMoneyNum = $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val();
+                var addMoneyNum = parseFloat(initMoneyNum) + parseFloat($scope.hbnumberNum);
+                var addSurplusMoneyNum = parseFloat(surplusMoneyNum) + parseFloat($scope.hbnumberNum);
+                $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.init-money-num').val(addMoneyNum);
+                $('#none_first_draw').find('[data-dataid="'+ hbaddstockid.dataId +'"]').find('.surplus-money-num').val(addSurplusMoneyNum);
+                $('[ng-model="hbnumberNum"]').val('');
+                $('.add-hbstock-pop-num').modal('hide');
+                break;
+              default:
+            }
+          }
+        }
+
+        //积分数量增库pointAddStock
+        var pointAddStock = {};
+        $scope.$on('pointAddStock', function (e,v,f) {
+          pointAddStock = f;
+        })
+
+        //确定积分数量增库 pointsNumErr
+        $scope.confirmPointsStockNum = function(){
+          if(parseInt($scope.pointsNumber) <= 0){
+            $('#pointsNumErr').html('请输入大于0的整数').show();
+            return;
+          }else{
+            switch(pointAddStock.specialCode){
+              case 'FIRST_LOTTERY_BE_WON':
+                //初始化积分数量
+                var initPointsNum = $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
+                //剩余积分数量
+                var surplusPointsNum = $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
+                var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
+                var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
+                $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('[ng-model="pointsNumber"]').val('');
+                $('#pointsNumErr').hide();
+                $('.add-points-pop').modal('hide');
+                break;
+              case 'COMMON':
+                //初始化积分数量
+                var initPointsNum = $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
+                //剩余积分数量
+                var surplusPointsNum = $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
+                var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
+                var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
+                $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#none_first_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('[ng-model="pointsNumber"]').val('');
+                $('#pointsNumErr').hide();
+                $('.add-points-pop').modal('hide');
+                break;
+              case 'INVOLVE':
+                //初始化积分数量
+                var initPointsNum = $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val();
+                //剩余积分数量
+                var surplusPointsNum = $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val();
+                var addPointsNum = parseFloat(initPointsNum) + parseFloat($scope.pointsNumber);
+                var addSurplusPointsNum = parseFloat(surplusPointsNum) + parseFloat($scope.pointsNumber);
+                $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.init-points-num').val(addPointsNum);
+                $('#involve_draw').find('[data-dataid="'+ pointAddStock.dataId +'"]').find('.surplus-points-num').val(addSurplusPointsNum);
+                $('[ng-model="pointsNumber"]').val('');
+                $('#pointsNumErr').hide();
+                $('.add-points-pop').modal('hide');
+                break;
+              default:
+            }
+          }
+        }
+
+        //关闭礼品数量增库弹框
+        $scope.closeAddGiftBox = function(){
+          $('[ng-model="giftnumber"]').val('');
+          $('#addGiftNum').hide();
+          $('.add-giftstock-pop').modal('hide');
+        }
+
+        //关闭微信红包金额增库弹框
+        $scope.closeAddHbMoneyBox = function(){
+          $('[ng-model="hbnumber"]').val('');
+          $('#poolDetail').hide();
+          $('.add-hbstock-pop').modal('hide');
+        }
+
+        //关闭微信红包数量增库弹框
+        $scope.closeAddHbNumBox = function(){
+          $('[ng-model="hbnumberNum"]').val('');
+          $('#hbNumberErr').hide();
+          $('.add-hbstock-pop-num').modal('hide');
+        }
+
+        //关闭积分增库弹框
+        $scope.closeAddPointsBox = function(){
+          $('[ng-model="pointsNumber"]').val('');
+          $('#pointsNumErr').hide();
+          $('.add-points-pop').modal('hide');
         }
 
         // 多个礼品显示配置
@@ -681,7 +922,7 @@ define([], function () {
             giftpackScope.conf.list.push(f);
           }
         })
-          
+
         // 新增活动
         $scope.$on('fromcommonactivity', function(e,v,f){
           $model.addNewActivity(f).then(function(res){
@@ -694,7 +935,7 @@ define([], function () {
               });
               $scope.iknow = function (e) {
                 $model.getTemplateSpecific(f).then(function(res){
-                  $scope.allConfigTemplateConf = null;       
+                  $scope.allConfigTemplateConf = null;
                 })
                 getList(true);
               }
@@ -715,9 +956,9 @@ define([], function () {
                   clearTimeout(successTimer);
               },3000);
               $model.getTemplateSpecific({}).then(function(res){
-                $scope.allConfigTemplateConf = null;      
+                $scope.allConfigTemplateConf = null;
               })
-              getList(true);              
+              getList(true);
             }else{
               alert(res.data.message);
             }
@@ -728,9 +969,10 @@ define([], function () {
         $scope.confirmCancel = function(){
             $('.cancel_box').modal('hide');
             $model.getTemplateSpecific({}).then(function(res){
-                $scope.allConfigTemplateConf = null;       
+                $scope.allConfigTemplateConf = null;
             })
         }
+
     	}]
   	}
   	return manageactsController

@@ -1,0 +1,85 @@
+.table {
+	margin-top: 20px!important;
+	span {
+		margin: 0 10px;
+		color: #1b5c94;
+		transition: all .3s;
+		&:hover {
+			cursor: pointer;
+			font-weight: bold;
+		}
+	}
+}
+
+form {
+	width: 60%;
+	margin: 0 auto;
+	.form-group {
+		width: 100%;
+		.control-label.required {
+			position: relative;
+			&:after {
+				content: '*';
+				position: absolute;
+				right: 0;
+				color: red;
+				font-size: 18px;
+			}
+		}
+		input[type=radio] {
+			margin-top: 2px!important;
+		}
+		input, textarea {
+			width: 100%!important;
+		}
+		textarea {
+			resize: none;
+			height: 80px;
+		}
+		.add-pic-wrap, .show-pic, .readd {
+			position: relative;
+			display: inline-block;
+		}
+		.show-pic {
+			border: 1px solid #ccc;
+			max-height: 100px;
+		}
+		.add-pic, .add {
+			border: 1px solid #ccc;
+			width: 100px!important;
+			height: 100px;
+			line-height: 86px;
+			font-size: 76px;
+			font-weight: 100;
+			color: #ccc;
+			text-align: center;
+		}
+		input[type="file"] {
+			position: absolute;
+			top: 0;
+			opacity: 0;
+		}
+		.readd {
+			margin-top: 10px;
+			width: 70px;
+			height: 30px;
+			border: 1px solid #ccc;
+			text-align: center;
+			line-height: 30px;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		.supplements {
+			position: relative;
+			min-height: 45px;
+			&:after {
+				content: '备注：此卡片只有在用户集齐前面卡片时，才能放出，此卡只能设置一张';
+				position: absolute;
+				bottom: -2px;
+				left: 16px;
+				width: 120%;
+				color: #999;
+			}
+		}
+	}
+}

@@ -11,7 +11,6 @@ define([], function () {
     ServiceContent: ['request', function (request) {
       this.$model = function () {
 
-        console.log("supply model");
         var commentUrl = '/api/tztx/saas/saotx/common/querySupplierCompliance';  //合规评估维度值
         var supListUrl = '/api/tztx/saas/saotx/supplier/queryList';  //供应商管理列表
         var savaOrUpdateUrl = '/api/tztx/saas/saotx/supplier/saveOrUpdate'; //供应商新增或修改
@@ -20,7 +19,7 @@ define([], function () {
         var querySupplierUrl = '/api/tztx/saas/saotx/supplier/querySupplierByCode';//根据供应商编码查询供应商的详细数据
         var dataStatusUrl  = '/api/tztx/saas/saotx/common/queryDimDataStatus'; //获取数据状态
 
-        
+
         this.getComment = function () {
           return request.$Query(commentUrl);
         };

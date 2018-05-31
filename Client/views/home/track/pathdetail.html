@@ -7,6 +7,7 @@
 -->
 <!--style-->
 <link rel="stylesheet" type="text/css" href="statics/assets/style/home.track.css">
+<link rel="stylesheet" type="text/css" href="statics/assets/style/home-weiop.track.css">
 <!--html-->
 <div class="animated fadeInRightBig" ng-controller="pathdetialCtrl">
     <div class="container-fluid">
@@ -81,8 +82,192 @@
                         <div class="form-inline col-md-12">
                             <div style="margin-right:10px;float:left;" class="ui-title">事件点击统计</div><hr>
                         </div>
-                        <div class="ui-min-height col-md-4">
-                            <iframe id="id_page_iframe" height="570" width="322" sandbox="allow-same-origin allow-scripts" frameborder="0" style="border:1px solid #ddd;"></iframe>
+                        <div class="ui-min-height col-md-4" style="position: relative;height: 570px;">
+                            <iframe id="id_page_iframe" height="570" width="322" sandbox="allow-same-origin allow-scripts" frameborder="0" style="border:1px solid #ddd;" ng-if="account === 'hunan' || account ==='administrator'"></iframe>
+                            <!-- weiop坑爹的东西 -->
+                            <div ng-if = "account !== 'hunan'&&account !== 'administrator'" class="weiop-wrap">
+                                <!-- 河北的产品信息 -->
+                                <div class="product-wrap border-box" ng-if = "account ==='hebei'">
+                                    <div class="fl product-details">
+                                        <div class="details-header">
+                                            <span>{{getProduct.name}}</span>
+                                            <span><a href="javascript:;">详情</a></span>
+                                        </div>
+                                    <p>规<i></i>格：{{getProduct.unitType}}</p>
+                                    <p>焦油含量：{{getProduct.oil}}mg</p>
+                                    <p>厂<i></i>家：{{getProduct.orgName}}</p>
+                                    </div>
+                                    <div class="fr tobacco">
+                                        <img src={{getProduct.smallPic}} />
+                                    </div>
+                                </div>
+                                <!-- 河南的产品信息 -->
+                                <div class="product-wrap product-henan-wrap border-box" ng-if = "account === 'henan'">
+                                        <div class="fl tobacco">
+                                                <img src={{getProduct.smallPic}} />
+                                            </div>
+                                        <div class="fl product-details">
+                                            <div class="details-header">
+                                                <span>{{getProduct.name}}</span>
+                                                <span><a href="javascript:;">详情</a></span>
+                                            </div>
+                                        <p>规<i></i>格：{{getProduct.unitType}}</p>
+                                        <p>焦油含量：{{getProduct.oil}}mg</p>
+                                        <p>厂<i></i>家：{{getProduct.orgName}}</p>
+                                        </div>
+
+                                </div>
+                                <!-- 山昆的产品信息 -->
+                                <div class="product-wrap product-shankun-wrap border-box" ng-if = "account === 'shankun'">
+                                        <div class="fl tobacco">
+                                                <img src={{getProduct.smallPic}} />
+                                            </div>
+                                        <div class="fl product-details">
+                                            <div class="details-header">
+                                                <span>{{getProduct.name}}</span>
+                                                <span><a href="javascript:;">详情</a></span>
+                                            </div>
+                                        <p>规<i></i>格：{{getProduct.unitType}}</p>
+                                        <p>焦油含量：{{getProduct.oil}}mg</p>
+                                        <p>厂<i></i>家：{{getProduct.orgName}}</p>
+                                        </div>
+                                </div>
+                                <div class="retailer-scan border-box" ng-if = "account !== 'hunan' && account !== 'hebei'&&account !== 'administrator'">
+                                    <img src="statics/assets/image/henan/icon_activity.png" ng-if = "account === 'henan' "/>
+                                    <img src="statics/assets/image/shankun/icon_activity.png" ng-if = "account === 'shankun' "/>
+                                    <span>扫描零售店码，增加活动中奖概率</span>
+                                    <i></i>
+                                </div>
+                                <!-- 活动bannner -->
+                                <div class="vip-wrap" ng-if = "getActivity.length !== 0 && account !== 'administrator'">
+                                    <div class="vip-header border-box" ng-if = "account === 'hebei'">
+                                        <img src="statics/assets/image/hebei/vip.png"  class="vip-icon"/>
+                                        <span>验真抓好礼</span>
+                                        <img src="statics/assets/image/hebei/clickhere.gif" class="vip-gif">
+                                    </div>
+                                    <div class="vip-header border-box" ng-if = "account === 'henan'">
+                                        <img src="statics/assets/image/henan/home_icon_true.png"  class="vip-icon"/>
+                                        <span>扫码验真（砸金蛋、领鼓励金）双重奖励</span>
+                                    </div>
+                                    <div class="vip-header border-box" ng-if = "account === 'shankun'">
+                                        <img src="statics/assets/image/shankun/home_icon_true.png"  class="vip-icon"/>
+                                        <span>扫码验真（砸金蛋、领鼓励金）双重奖励</span>
+                                    </div>
+                                    <div class="active-banner">
+                                        <div ng-repeat="item in getActivity">
+                                            <img src = "{{item.actEntran}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 卡卷 -->
+                                <div class="vip-wrap" ng-if = "getAD.length !== 0 && account === 'administrator'">
+                                        <div class="vip-header border-box" ng-if = "account === 'henan'">
+                                            <img src="statics/assets/image/henan/home_icon_gift.png"  class="vip-icon"/>
+                                            <span>卡卷领取</span>
+                                        </div>
+                                        <div class="vip-header border-box" ng-if = "account === 'shankun'">
+                                                <img src="statics/assets/image/shankun/home_icon_gift.png"  class="vip-icon"/>
+                                                <span>卡卷领取</span>
+                                            </div>
+                                        <div class="active-banner">
+                                            <div ng-repeat="item in getAD">
+                                                <img src = "{{item.adPic}}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="please-scan-wrap border-box please-scan-hebei-wrap" ng-if = "account === 'hebei'">
+                                    <img src="statics/assets/image/hebei/scan.png"/>
+                                    <p>关注公众号<span>“河北中烟”</span>，获取更多惊喜</p>
+                                </div>
+                                <div class="please-scan-wrap border-box please-scan-henan-wrap" ng-if = "account === 'henan'">
+                                    <img src="statics/assets/image/henan/index_scan.png"/>
+                                    <p>关注微信公众号<span>“天之叶”</span>，获取更多服务</p>
+                                </div>
+                                <div class="please-scan-wrap border-box please-scan-shankun-wrap" ng-if = "account === 'shankun'">
+                                    <img src="statics/assets/image/shankun/footer-scan.png"/>
+                                </div>
+                            </div>
+                            <!-- weiop hebei tabs -->
+                            <div class="weiop-tabs weiop-tabs-hebei" ng-if= "account === 'hebei'">
+                                <div>
+                                    <a href="javascript:;">
+                                        <img src="statics/assets/image/hebei/tab_scan_light.png"  />
+                                        <p class="tabs-active">扫码验真</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="javascript:;">
+                                        <img src="statics/assets/image/hebei/tab_activity_dark.png"  />
+                                        <p>活动中心</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="javascript:;">
+                                        <img src="statics/assets/image/hebei/tab_integral_dark.png"  />
+                                        <p>积分商城</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="javascript:;">
+                                        <img src="statics/assets/image/hebei/tab_my_dark.png"  />
+                                        <p>个人中心</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- weiop henan tabs -->
+                            <div class="weiop-tabs weiop-tabs-henan" ng-if= "account === 'henan'">
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/henan/tab_scan_light.png"  />
+                                            <p class="tabs-active">扫码验真</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/henan/tab_activity_dark.png"  />
+                                            <p>活动中心</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/henan/tab_integral_dark.png"  />
+                                            <p>积分商城</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/henan/tab_my_dark.png"  />
+                                            <p>个人中心</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            <!-- weiop shankun tabs -->
+                            <div class="weiop-tabs weiop-tabs-shankun" ng-if= "account === 'shankun'">
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/shankun/tab_scan_light.png"  />
+                                            <p class="tabs-active">扫码验真</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/shankun/tab_activity_dark.png"  />
+                                            <p>活动中心</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/shankun/tab_integral_dark.png"  />
+                                            <p>积分商城</p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="javascript:;">
+                                            <img src="statics/assets/image/shankun/tab_my_dark.png"  />
+                                            <p>个人中心</p>
+                                        </a>
+                                    </div>
+                                </div>
                         </div>
                         <div class="ui-min-height col-md-8">
                             <div class="form-group col-md-9 ui-target-date"><label>日期:</label>&nbsp;&nbsp;{{startTime}}&nbsp;——&nbsp;{{endTime}}</div>

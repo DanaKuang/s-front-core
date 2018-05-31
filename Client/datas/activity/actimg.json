@@ -1,0 +1,54 @@
+{
+    "hebeizhongyan": [
+        "",
+        "statics/assets/image/hebei/dazhuanpan.png",
+        "statics/assets/image/hebei/guaguaka.png",
+        "statics/assets/image/hebei/fanpai.png",
+        "",
+        "statics/assets/image/hebei/jiugonge.png",
+        "",
+        "",
+        "statics/assets/image/hebei/fanpai.png",
+        "statics/assets/image/hebei/dianyuanbao.png",
+        "statics/assets/image/hebei/fanzhuanshi.png"
+    ],
+    "henanzhongyan": [
+        "",
+        "statics/assets/image/henan/fanpai.png",
+        "statics/assets/image/henan/fanpai.png",
+        "statics/assets/image/henan/fanpai.png",
+        "",
+        "statics/assets/image/henan/fanpai.png",
+        "",
+        "",
+        "statics/assets/image/henan/fanpai.png",
+        "statics/assets/image/henan/fanpai.png",
+        "statics/assets/image/henan/fanpai.png"
+    ],
+    "hunanzhongyan": [
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "",
+        "statics/assets/image/fanpai.png",
+        "",
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png"
+    ],
+    "shanxikunyan": [
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "",
+        "statics/assets/image/fanpai.png",
+        "",
+        "",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png",
+        "statics/assets/image/fanpai.png"
+    ]
+}

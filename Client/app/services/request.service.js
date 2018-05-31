@@ -53,9 +53,18 @@ define([], function () {
                             .error(fail || function() {})
                             .then(function(res) {
                                 var code = res.data || {};
-                                // session过期或错误
-                                if (code.ret === '100405') {
-                                    authorization.logout();
+                                switch (code.ret) {
+                                    case '100405':
+                                        authorization.logout();
+                                        break;
+                                    case '100408':
+                                        alert(code.message || "此帐号已在其他地方登录，您已被迫下线！");
+                                        authorization.logout();
+                                        break;
+                                    case '100409':
+                                        alert(code.message || "密码时限超出，请修改密码！");
+                                        authorization.changepwd();
+                                        break;
                                 }
                                 return res;
                             });

@@ -20,6 +20,9 @@ requirejs.config({
       SAO_CDN_URL + 'js/jquery.min',
       'bower_components/jquery/dist/jquery'
     ],
+    md5: [
+      'https://weiopn.oss-cn-beijing.aliyuncs.com/common/md5'
+    ],
     lodash: [
       SAO_CDN_URL + 'js/lodash.min',
       'bower_components/lodash/lodash'
@@ -52,6 +55,10 @@ requirejs.config({
       SAO_CDN_URL + 'js/angular-file-upload.min',
       'bower_components/angular-file-upload/dist/angular-file-upload.min'
     ],
+    zTree: [
+      SAO_CDN_URL + 'js/jquery.ztree.all.min',
+      'bower_components/zTree/js/jquery.ztree.all'
+    ],
     nprogress: [
       SAO_CDN_URL + 'js/nprogress',
       'bower_components/nprogress/nprogress'
@@ -61,6 +68,12 @@ requirejs.config({
   shim: {
     jquery: {
       exports: '$'
+    },
+    md5: {
+      exports: '$.md5',
+      deps: [
+        'jquery'
+      ]
     },
     lodash: {
       exports: '_'
@@ -98,6 +111,12 @@ requirejs.config({
     angularFileUpload: {
       deps: ['angular']
     },
+    zTree: {
+      deps: [
+        'jquery',
+        'css!' + SAO_CDN_URL + 'css/zTreeStyle/zTreeStyle'
+      ]
+    },
     nprogress: {
       deps: [
         'jquery',
@@ -114,6 +133,7 @@ requirejs.config({
   },
   deps: [
     'jquery',
+    'md5',
     'lodash',
     'bootstrap',
     'datetimepicker',
@@ -122,6 +142,7 @@ requirejs.config({
     'angular',
     'angularAnimate',
     'angularFileUpload',
+    'zTree',
     'nprogress'
   ],
   callback: function() {

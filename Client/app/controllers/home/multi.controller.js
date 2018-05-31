@@ -12,7 +12,7 @@ define([], function () {
     ServiceContent: ['$scope', 'dateFormatFilter', 'multiFilter', 'dayFilter', function ($scope, dateFormatFilter, multiFilter, dayFilter) {
         var $model = $scope.$model;
         var user = sessionStorage.getItem("account") || "hunan";
-
+        var SaleZone = $model.$getZone.data || [];
         // modal
         $scope.tempModalConf = $model.$modals.data.tempModal;
         $scope.histModalConf = $model.$modals.data.histModal;
@@ -46,7 +46,7 @@ define([], function () {
             ppArray: ['盒','条'],
             prNArray: [],
             cnArray: [],
-            szArray: _.each($model.$getZone.data, function (data) {
+            szArray: _.each(SaleZone, function (data) {
                 data.k = data.code;
                 data.v = data.name;
             }),
@@ -158,7 +158,7 @@ define([], function () {
             var pScope = angular.element('#packetTarget #common_table').scope();
             var rScope = angular.element('#realTarget #common_table').scope();
             var sZFilter = {};
-            _.each($model.$getZone.data, function (v) {
+            _.each(SaleZone, function (v) {
                 sZFilter[v.zoneCode] = v.zoneName;
             });
             var staticParam = {
@@ -182,6 +182,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.scanConf.rows = sScope.rows = res.data || [];
                     sScope.$apply();
@@ -201,6 +206,11 @@ define([], function () {
                         s.zhongjiangmian = transNum(s.zhongjiangmian);
                         s.rjzhongjiangcishu = transNum(s.rjzhongjiangcishu);
                         s.rjcuxiaochengben = transNum(s.rjcuxiaochengben);
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.targetConf.rows = tScope.rows = res.data || [];
                     tScope.$apply();
@@ -211,6 +221,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.realConf.rows = rScope.rows = res.data || [];
                     rScope.$apply();
@@ -221,6 +236,11 @@ define([], function () {
                 .then(function (res) {
                     _.each(res.data, function (s) {
                         s.saleZone = sZFilter[s.saleZone] || s.saleZone;
+
+                        s.startTime = s.startTime.replace('_', ' ');
+                        s.startTime += ':00:00';
+                        s.endTime = s.endTime.replace('_', ' ');
+                        s.endTime += ':00:00';
                     });
                     $scope.packetConf.rows = pScope.rows = res.data || [];
                     pScope.$apply();
@@ -261,7 +281,22 @@ define([], function () {
                 userId: "hunan",
                 opType: "1"
             }).then(function (res) {
-                $scope.tempListConf.list = res.data || [];
+                var data = res.data || [];
+                _.each(data, function (d) {
+                    var f = true;
+                    var saZone = d.saleZone.split(',');
+                    var saleZoneName = [];
+                    _.each(saZone, function (sa) {
+                        for (var i=0,len=SaleZone.length;i<len&&f;i++) {
+                            if (sa == SaleZone[i].code) {
+                                f = false;
+                                saleZoneName.push(SaleZone[i].name || "");
+                            }
+                        }
+                    });
+                    d.saleZoneName = saleZoneName.join(',');
+                });
+                $scope.tempListConf.list = data || [];
                 $scope.$apply();
             }).then(function () {
                 angular.element('#tempModalId .ui-list-data')
@@ -282,7 +317,22 @@ define([], function () {
                 userId: user,
                 opType: "2"
             }).then(function (res) {
-                $scope.histListConf.list = res.data || [];
+                var data = res.data || [];
+                _.each(data, function (d) {
+                    var f = true;
+                    var saZone = d.saleZone.split(',');
+                    var saleZoneName = [];
+                    _.each(saZone, function (sa) {
+                        for (var i=0,len=SaleZone.length;i<len&&f;i++) {
+                            if (sa == SaleZone[i].code) {
+                                f = false;
+                                saleZoneName.push(SaleZone[i].name || "");
+                            }
+                        }
+                    });
+                    d.saleZoneName = saleZoneName.join(',');
+                });
+                $scope.histListConf.list = data || [];
                 $scope.$apply();
             }).then(function () {
                 angular.element('#histModalId .ui-list-data')

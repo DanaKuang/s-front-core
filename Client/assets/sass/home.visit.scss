@@ -1,0 +1,58 @@
+.ui-panel-title {
+    .report-icon {
+        left: 0;
+    }
+    &.report {
+        padding-left: 20px;
+    }
+}
+.ui-visit-form {
+    .form-group {
+        margin-right: 15px;
+    }
+    .control-label {
+        width: 50px;
+        text-align: right;
+    }
+    .multiselect.btn {
+        width: 147px;
+        height: 30px;
+        padding: 4px 12px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .date {
+        background: #fff;
+    }
+    .form-control {
+        width: 147px !important;
+    }
+    select {
+        width: 147px !important;
+    }
+    .ui-btn-ctrl {
+        display: block !important;
+        text-align: right;
+        margin-right: 0px !important;
+        button.btn-primary,
+        button.btn-primary:hover,
+        button.btn-primary:active,
+        button.btn-primary:focus {
+            width: 100px;
+            margin-left: 30px;
+            margin-right: 0px;
+            height: 30px;
+            border-radius: 15px;
+            padding: 4px 12px;
+            background: #44c1ed;
+            border-color: #44c1ed;
+        }
+        button.gray_btn.btn-primary,
+        button.gray_btn.btn-primary:hover,
+        button.gray_btn.btn-primary:active,
+        button.gray_btn.btn-primary:focus {
+            border-color: #f0f0f0;
+        }
+    }
+}

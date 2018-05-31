@@ -14,6 +14,20 @@ define([], function () {
         var $model = $scope.$model;
         var echarts = require('echarts');
 
+        // 不够再加
+        var DEFPROVINCE = sessionStorage.orgCode || "hunanzhongyan";
+        DEFPROVINCE = ['湖南','河南','河北','山西'][[
+            'hunanzhongyan',
+            'henanzhongyan',
+            'hebeizhongyan',
+            'shankunzhongyan'
+        ].indexOf(DEFPROVINCE)] || "湖南";
+
+        // 添加hover效果
+        $("select").hover(function (e) {
+            e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+        });
+
         var chinaJson = $model.$chinaJson.data;
         echarts.registerMap('china', chinaJson);
         // 1. 扫码次数趋势分析
@@ -28,7 +42,7 @@ define([], function () {
             return params.name + '<br>' + 'PV:' + (params.data.value || 0);
         }
         mapEchart.setOption(mapConf);
-    
+
         // 3. 点击地图，各省份扫码次数
         var districtChart = echarts.init(document.getElementById('districtChart'));
         var districtOption = $model.$districtConf.data;
@@ -49,9 +63,9 @@ define([], function () {
         var promotionChartOption = $model.$resultConf.data;
 
         // datetimepicker初始化
+
         setDateConf.init($('.day'), 'day')
         setDateConf.init($('.month'), 'month')
-
         // 全部变量、属性
         var global = {};
         $scope.checkbox = {};
@@ -91,7 +105,6 @@ define([], function () {
         // 当日、当月的显示
         $scope.day = dayFilter.yesterday('date'); //默认选择昨天
         $scope.month = [new Date().getFullYear(), new Date().getMonth() + 1].join('-');
-        
 
         // 选择周的处理，确保只请求一次
         $scope.$watch('singleSelect.unit', function (n, o, s) {
@@ -123,15 +136,17 @@ define([], function () {
         $scope.search = function () {
             init();
             var searchItem = global.searchItem();
-
+            console.log(searchItem);
             // 初始地图及起右边柱状图
             global.initProvinceData = {
-                provinceName: sessionStorage.getItem("account") === 'henan' ? '河南省' : '湖南省',
+                provinceName: DEFPROVINCE + '省',
                 statTime: global.searchItem().statTime,
                 statType: global.searchItem().statType
             }
 
             $model.province(global.initProvinceData).then(function(res) {
+                console.log(global.initProvinceData)
+                console.log(res);
                 provinceData('undefined', res, true);
             })
 
@@ -161,7 +176,7 @@ define([], function () {
                     promotionChartOption.series[1].data = global.draw_y;
                     promotionChartOption.series[2].data = global.drawResult_y;
                     promotionChartOption.series[3].data = global.awardPay_y;
-                   
+
                     promotionChart.setOption(promotionChartOption)
                 }
             })
@@ -186,18 +201,22 @@ define([], function () {
             var reg = /省|市|区/;
             var mongoReg = /内蒙区/;
             $model.zone(nationwideData).then(function (res) {
+                //console.log(nationwideData);
                 var opts = mapEchart.getOption();
                 var data = res.data || [];
                 opts.series[1].data = _.each(data, function (d) {
+                    //console.log(d);
                     if (d.provinceName != '全国') {
                        d.name = mongoReg.test(d.provinceName) ? '内蒙古' : reg.test(d.provinceName.substr(d.provinceName.length-1)) ? d.provinceName.substr(0, d.provinceName.length - 1) : d.provinceName;
-                        d.value = d.scanPv; 
+                        d.value = d.scanPv;
                     }
                 }) || [];
-                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {return v.value}).value || 5000;
+                opts.visualMap[0].max = _.max(opts.series[1].data, function (v) {
+                    //console.log(v)
+                    return v.value
+                }).value || 5000;
                 mapEchart.setOption(opts);
             })
-
             // 各规格扫码数分析
             $model.various(searchItem).then(function (res) {
                 var data = res.data;
@@ -245,7 +264,7 @@ define([], function () {
 
         // 进入页面就要执行一次默认查询
         $scope.search();
-        
+
         // 烟包数分析 条、盒勾选
         var packorbar = [];
         $scope.updatepackorbar = function (val, num) {
@@ -298,7 +317,7 @@ define([], function () {
             global.districtAxis = [];
             global.districtAxisY = [];
             if (bool) {
-                districtOption.title.text = sessionStorage.getItem("account") === 'henan' ? '河南省的各地扫码次数' : '湖南省的各地扫码次数';
+                districtOption.title.text = DEFPROVINCE + '的各地扫码次数';
             } else {
                 districtOption.title.text = e.name + '的各地扫码次数';
             }

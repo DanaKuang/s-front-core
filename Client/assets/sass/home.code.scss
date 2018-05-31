@@ -1,0 +1,86 @@
+.ui-home-code {
+    margin-top: 15px;
+    .margin-top {
+        margin-top: 15px;
+    }
+    .ui-panel-title {
+        button {
+            position: absolute;
+            right: 0;
+            height: 24px;
+            padding: 0 12px;
+        }
+    }
+
+    .ui-btn-ctrl {
+        display: block !important;
+        text-align: right;
+        margin-right: 0 !important;
+    }
+    #id_code_form {
+        select {
+            width: 147px;
+        }
+        .form-control {
+            width: 147px !important;
+        }
+        .control-label {
+            width: 70px;
+            text-align: right;
+        }
+        .form-group {
+            margin-right: 15px;
+        }
+        .multiselect.btn {
+            width: 147px;
+            height: 30px;
+            padding: 4px 12px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ui-btn-ctrl {
+            button {
+                width: 100px;
+                margin-left: 30px;
+                margin-right: 0px;
+                height: 30px;
+                border-radius: 15px;
+                padding: 4px 12px;
+                background: #44c1ed;
+                border-color: #44c1ed;
+            }
+        }
+    }
+    .ui-export,
+    .ui-export:hover,
+    .ui-export:active,
+    .ui-export:focus {
+        width: 120px;
+        height: 30px;
+        padding: 4px 12px;
+        background: #44c1ed;
+        border-color: #44c1ed;
+        margin-bottom: 15px;
+    }
+}
+
+#tipsModalId {
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        width: 80px;
+        height: 30px;
+        border-radius: 5px;
+        padding: 4px 12px;
+        background: #44c1ed;
+        border-color: #44c1ed;
+    }
+    button.btn-primary,
+    button.btn-primary:hover,
+    button.btn-primary:active,
+    button.btn-primary:focus {
+        border-color: #f0f0f0;
+    }
+}

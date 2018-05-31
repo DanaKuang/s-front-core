@@ -1,0 +1,57 @@
+.ui-panel-title .report-icon {
+  left: 0; }
+
+.ui-panel-title.report {
+  padding-left: 20px; }
+
+.ui-panel-title.agree_top {
+  margin-top: 15px; }
+
+.ui-report-form .form-group {
+  margin-right: 15px; }
+
+.ui-report-form .control-label {
+  width: 50px;
+  text-align: right; }
+
+.ui-report-form .multiselect.btn {
+  width: 147px;
+  height: 30px;
+  padding: 4px 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.ui-report-form .date {
+  background: #fff; }
+
+.ui-report-form select {
+  width: 147px !important; }
+
+.ui-report-form .form-control {
+  width: 147px !important; }
+
+.ui-report-form .ui-btn-ctrl {
+  display: block !important;
+  text-align: right;
+  margin-right: 0px !important; }
+  .ui-report-form .ui-btn-ctrl button.btn-primary,
+  .ui-report-form .ui-btn-ctrl button.btn-primary:hover,
+  .ui-report-form .ui-btn-ctrl button.btn-primary:active,
+  .ui-report-form .ui-btn-ctrl button.btn-primary:focus {
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed; }
+  .ui-report-form .ui-btn-ctrl button.gray_btn.btn-primary,
+  .ui-report-form .ui-btn-ctrl button.gray_btn.btn-primary:hover,
+  .ui-report-form .ui-btn-ctrl button.gray_btn.btn-primary:active,
+  .ui-report-form .ui-btn-ctrl button.gray_btn.btn-primary:focus {
+    border-color: #f0f0f0; }
+
+.ui-scroll-table {
+  overflow: auto; }

@@ -15,23 +15,23 @@ define([], function() {
 			//设置input的默认时间
 			var stattime = dayFilter.yesterday("date");
 			$scope.goodsWinDate = stattime;
-			$(".date-wrap").find("input").val(stattime);
+			$(".agree-date .date").val(stattime);
 			var curTableIndex = '';
 			var curWeekStr = '';
 			var curSpeciftStr = '';
-			
+
 			//			var guiGeBihend= '';
 			//页面默认加载配置
 			$scope.obj = {
 				"dt": stattime,
-				"productBrand": "黄金叶",
-				"productSn": "6901028165242",
+				"productBrand": "",
+				"productSn": "",
 				"provinceName": "",
 				"cityName": ""
 			};
 			$scope.saoobj = {
 				"dt": stattime,
-				"activityName": ""
+				"activityId": ""
 			};
 			$scope.summar = {
 				"dt": stattime,
@@ -46,7 +46,7 @@ define([], function() {
 			};
 			$scope.winDataObj = {
 				'dt' : $scope.goodsWinDate,
-				'activityName': $("#activityName").val().join(),
+				'activityId': $("#activityName").val().join(),
 				'cityName': $("#activityCityName").val().join(),
 				'awardName': $("#inputSou").val()
 			}
@@ -60,7 +60,6 @@ define([], function() {
 //						gloabl.getTitleHtml();
 						gloabl.getBrand();
 						gloabl.getProviceName();
-						gloabl.winUser($scope.obj);
 						break;
 					case 2:
 						$scope.saoobj.dt = stattime;
@@ -75,7 +74,7 @@ define([], function() {
 						$scope.winDataObj.dt = stattime;
 						$scope.goodsWinDate = stattime;
 						gloabl.getActivityName();
-						gloabl.getWeekScanWinData($scope.winDataObj);						
+						gloabl.getWeekScanWinData($scope.winDataObj);
 						break;
 					case 5:
 						$scope.cashWinDataObj.dt = stattime;
@@ -103,6 +102,14 @@ define([], function() {
 						}).then(function(res) {
 							$scope.speciftList = res.data || [];
 							$scope.$apply();
+							$scope.obj = {
+								"dt": stattime,
+								"productBrand": curBrandName,
+								"productSn": $scope.speciftList[0].sn,
+								"provinceName": "",
+								"cityName": ""
+							};
+							gloabl.winUser($scope.obj);
 							//							if($scope.speciftList.length > 0) {
 							curSpeciftStr = $scope.speciftList[0].name;
 							//							}
@@ -135,7 +142,7 @@ define([], function() {
 					$model.$getUserPro(params).then(function(res) {
 						var res = res.data || [];
 						$("#user_table").html("");
-						var guiGeBihendTwo = $("#activityNameMdg").val();
+						var guiGeBihendTwo = $("#activityNameMdg")[0].selectedOptions[0].innerHTML;
 						var inputTwo = $("#inputTwo").val();
 						$("#titlePTwo").html('活动名称&nbsp;&nbsp;' + guiGeBihendTwo + '&nbsp;&nbsp;' + '(' + inputTwo + ')')
 						if(res.length > 0) {
@@ -154,14 +161,14 @@ define([], function() {
 						var res = res.data || [];
 						for(var i = 0; i < res.length; i++) {
 							if(res[i].activityName === '“爱尚”翻牌子，爱上赢红包') {
-								$(".report-gui").find("select").append("<option value=" + res[i].activityName + " selected>" + res[i].activityName + "</option>")
+								$(".report-gui").find("select").append("<option value=" + res[i].activityId + " selected>" + res[i].activityName + "</option>")
 							} else {
-								$(".report-gui").find("select").append("<option value=" + res[i].activityName + ">" + res[i].activityName + "</option>")
+								$(".report-gui").find("select").append("<option value=" + res[i].activityId + ">" + res[i].activityName + "</option>")
 							}
 						}
-						$scope.saoobj.activityName = $(".report-gui").find("select").val();
+						$scope.saoobj.activityId = $(".report-gui").find("select").val();
 						gloabl.userPro($scope.saoobj);
-						
+
 						//						$scope.saoobj.productBrand = $(".report-gui").find("select").val();
 						//						gloabl.userPro($scope.saoobj);
 					})
@@ -246,7 +253,6 @@ define([], function() {
 								nSelectedText: '已选择',
 								selectAllText: '全部',
 								selectAllValue: 'all',
-								buttonWidth: '240px',
 								maxHeight: '200px',
 								numberDisplayed: 1
 							});
@@ -264,10 +270,13 @@ define([], function() {
 							nSelectedText: '已选择',
 							selectAllText: '全部',
 							selectAllValue: 'all',
-							buttonWidth: '240px',
 							maxHeight: '200px',
 							numberDisplayed: 1
 						});
+						// 添加hover效果
+				        $("select").hover(function (e) {
+				            e.currentTarget.title = e.currentTarget.selectedOptions[0].innerText;
+				        });
 					});
 
 					//监听省份选择信息
@@ -392,19 +401,19 @@ define([], function() {
 				$('#cycleTime').multiselect().val([]).multiselect("refresh");
 				$('#cashWinSpecift').val('');
 				$('#entityWinSpecift').val('');
-				
+
 			}
 
 			//查询按钮
 			$scope.search = function($event) {
 				var that = $event.target;
+				var $form = $(that).closest('form');
 
 				switch(arguments[1]) {
 					case 1:
 						$scope.obj = {
 							"productBrand": $("#proviceDataBrand").val(),
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"dt": $($form).find(".date").val(),
 							"productSn": $(".mengdeguo").find("select option:selected").attr("data-sn"),
 							"provinceName": $("#proviceName").val().join(),
 							"cityName": $("#applySpecift").val().join()
@@ -413,17 +422,14 @@ define([], function() {
 						break;
 					case 2:
 						$scope.saoobj = {
-							"activityName": $(that).siblings(".report-gui").find("select").val(),
-
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"activityId": $($form).find("select").val(),
+							"dt": $($form).find(".date").val(),
 						}
 						gloabl.userPro($scope.saoobj);
 						break;
 					case 3:
 						$scope.summar = {
-							"dt": $(that).siblings(".agree-date").find(".date-wrap").data().date ?
-								$(that).siblings(".agree-date").find(".date-wrap").data().date : $(that).siblings(".agree-date").find("input").val(),
+							"dt": $($form).find(".date").val(),
 							"productBrand": $("#moneyDataBrand").val(),
 							"productSn": $(".mengdeguoTwo").find("select option:selected").attr("data-sn")
 							//								"productSn":"6901028165235"
@@ -434,7 +440,7 @@ define([], function() {
 						$scope.goodsWinDate = $('#goodsDate').val();
 						$scope.winDataObj = {
 							'dt' : $('#goodsDate').val(),
-							'activityName': $("#activityName").val().join(),
+							'activityId': $("#activityName").val().join(),
 							'cityName': $("#activityCityName").val().join(),
 							'awardName': $("#inputSou").val()
 						}
@@ -480,7 +486,7 @@ define([], function() {
 				} else if(a === 2) {
 					var data = {
 						"dt": $scope.saoobj.dt,
-						"activityName": $scope.saoobj.activityName
+						"activityId": $scope.saoobj.activityId
 					}
 					var url = "/api/tztx/dataportal/henanreport/importActReportData";
 				} else if(a === 3) {
@@ -490,13 +496,14 @@ define([], function() {
 						"productSn": $scope.summar.productSn,
 
 					}
-					var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					// var url = "/api/tztx/dataportal/henanreport/importRedPackeyoutReportData";
+					var url = '/api/tztx/dataportal/henanreport/importRedPacketReportData';
 					// var statTime = $scope.summar.statTime;
 					// window.location.href = '/fixatreport/importExcelDailySummData?staTime=' + statTime
 				} else if(a === 4) {
 					var data = {
 						'dt' : $scope.goodsWinDate,
-						'activityName': $scope.winDataObj.activityName,
+						'activityId': $scope.winDataObj.activityId,
 						'cityName': $scope.winDataObj.cityName,
 						'awardName': $scope.winDataObj.awardName
 					}
@@ -547,7 +554,7 @@ define([], function() {
 				};
 				xhr.send(formData);
 			}
-			//监听品牌变化			
+			//监听品牌变化
 			$('#moneyDataBrand').change(function() {
 				var curBrandValue = $(this).val();
 				$model.$getSpecifData({

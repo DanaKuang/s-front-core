@@ -23,8 +23,7 @@ define([], function () {
                 'todayBtn': true,
                 'minView': minView,
                 'startView': startView,
-                'endDate': dateFormatFilter.date(new Date()),
-                'pickerPosition': "bottom-left"
+                'endDate': dateFormatFilter.date(new Date())
             });
             return this;
         };

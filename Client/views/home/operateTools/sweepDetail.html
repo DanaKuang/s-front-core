@@ -1,121 +1,119 @@
-
+<link rel="stylesheet" href="statics/assets/style/home.sweepdetail.css">
 <div class="animated fadeInRightBig" ng-controller="SweepDetailCtrl">
-  <div class="container-fluid region-margin" id='sweepDataTable'>
-    <div class="row">
-      <div class="col-md-12">
-      <div class="ui-panel-title report">
-        <i class="report-icon"></i><span>盗扫明细查询</span>
-      </div>
-      <!--box-->
-        <div class="panel rate">
-          <div class="panel-body">
-            <div class="report-search">
-              <div>
-                <label>user_id：</label>
-                <div class="ui-total-date input-append date-wrap" style="color:#000;font-size:14px;">
-                  <input size="16" type="text" value="" id="userId"/>
+    <div class="container-fluid region-margin" id='sweepDataTable'>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ui-panel-title report">
+                    <i class="report-icon"></i><span>盗扫明细查询</span>
                 </div>
-              </div>
-              <div>
-                <label>SN：</label>
-                <div class="ui-total-date input-append date-wrap" style="color:#000;font-size:14px;">
-                  <input size="16" type="text" value="" id="snId"/>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <form class="form-inline ui-sweepdetail-form" autocomplete="off">
+                            <div class="form-group">
+                                <label class="control-label" for="userId">user_id</label>
+                                <input size="16" type="text" value="" id="userId" class="form-control input-sm"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="snId">SN</label>
+                                <input size="16" type="text" value="" id="snId" class="form-control input-sm" />
+                            </div>
+                            <div class="form-group agree-date">
+                                <label class="control-label" for="dayTime">扫码时间</label>
+                                <input size="16" type="text" value="" readonly class="form-control input-sm date" id="dayTime"/>
+                                <select name="" id="hoursSeg" class="form-control input-sm">
+                                    <option ng-repeat="hourItem in hoursArr" value="{{hourItem}}">{{hourItem}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group ui-btn-ctrl">
+                                <button class="btn btn-primary" type="submit" ng-click="sweepSearch()">搜索</button>
+                                <button class="btn btn-primary" type="reset">重置</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
-              <div class="agree-date">
-                <label>扫码时间：</label>
-                <div class="ui-total-date input-append date-wrap">
-                  <input size="16" type="text" value="" readonly class="form-control date" id="dayTime"/>
-                  <span class="add-on"><i class="icon-th"></i></span>
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <table class="table table-hover table-bordered" id="sweepDetailTable">
+                            <thead>
+                                <tr>
+                                    <th>操作</th>
+                                    <th>烟码CODE</th>
+                                    <th>规格</th>
+                                    <th>用户ID</th>
+                                    <th>SN</th>
+                                    <th>扫码时间点</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sweep_table">
+                                <tr ng-if='sweepDetailData.length > 0' ng-repeat="sweepItem in sweepDetailData">
+                                    <td class="code_detail" ng-click="searchDetailByCode(sweepItem.code,sweepItem.showCode)">查询CODE相关扫码明细</td>
+                                    <td>{{sweepItem.showCode}}</td>
+                                    <td>{{sweepItem.memo}}</td>
+                                    <td>{{sweepItem.userid}}</td>
+                                    <td>{{sweepItem.productSn}}</td>
+                                    <td>{{sweepItem.ctime}}</td>
+                                </tr>
+                                <tr ng-if='sweepDetailData.length == 0'>
+                                    <td colspan='6'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <select name="" id="hoursSeg">
-                  <option ng-repeat="hourItem in hoursArr" value="{{hourItem}}">{{hourItem}}</option>
-                </select>
-              </div>
-              <button class="btn btn-sm btn-default btn_style" ng-click="sweepSearch()">
-                查询
-              </button>
             </div>
-            <table class="table" id="sweepDetailTable" style="display: none">
-              <thead style="border-top: 1px solid #A0A0A0;">              
-              <tr>
-                <th>操作</th>
-                <th>烟码CODE</th>
-                <th>规格</th>
-                <th>用户ID</th>
-                <th>SN</th>
-                <th>扫码时间点</th>
-              </tr>
-              </thead>
-              <tbody id="sweep_table">
-                <tr ng-if='sweepDetailData.length > 0' ng-repeat="sweepItem in sweepDetailData">
-                  <td class="code_detail" ng-click="searchDetailByCode(sweepItem.code,sweepItem.showCode)">查询CODE相关扫码明细</td>
-                  <td>{{sweepItem.showCode}}</td>
-                  <td>{{sweepItem.memo}}</td>
-                  <td>{{sweepItem.userid}}</td>
-                  <td>{{sweepItem.productSn}}</td>
-                  <td>{{sweepItem.ctime}}</td>
-                </tr>
-                <tr ng-if='sweepDetailData.length == 0'>
-                  <td colspan='6'>暂无符合条件的数据</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="container-fluid region-margin report-table" id='codeDataTable' style="display: none">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="ui-panel-title report">
-          <i class="report-icon"></i><span>CODE扫码记录明细</span>
-          <div ng-click = "goback()">
-            <span></span>
-            返回
-          </div>
-        </div>
-        <!--box-->
-        <div class="panel rate">
-          <div class="panel-body">
-            <div class="code_detail_title">
-              烟码：{{showCodeStr}}  扫码记录
+    <div class="container-fluid region-margin report-table" id='codeDataTable' style="display: none">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ui-panel-title report">
+                    <i class="report-icon"></i><span>CODE扫码记录明细</span>
+                    <div ng-click = "goback()">
+                        <span></span>
+                        返回
+                    </div>
+                </div>
+                <!--box-->
+                <div class="panel rate">
+                    <div class="panel-body">
+                        <div class="code_detail_title">
+                          烟码：{{showCodeStr}}  扫码记录
+                        </div>
+                        <table class="table">
+                            <thead style="border-top: 1px solid #A0A0A0;">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>手机号</th>
+                                    <th>省份</th>
+                                    <th>地市</th>
+                                    <th>批次</th>
+                                    <th>SN</th>
+                                    <th>扫码时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if='codeDetailData.length > 0' ng-repeat="codeItem in codeDetailData">
+                                    <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
+                                    <td>{{codeItem.mobile}}</td>
+                                    <td>{{codeItem.region}}</td>
+                                    <td>{{codeItem.city}}</td>
+                                    <td>{{codeItem.batch}}</td>
+                                    <td>{{codeItem.productSn}}</td>
+                                    <td>{{codeItem.ctime}}</td>
+                                </tr>
+                                <tr ng-if='codeDetailData.length == 0'>
+                                  <td colspan='7'>暂无符合条件的数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="footer_sec" id="codeDetailFooter">
+                            <div class="tcdPageCode"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table class="table">
-              <thead style="border-top: 1px solid #A0A0A0;">
-              <tr>
-                <th>序号</th>
-                <th>手机号</th>
-                <th>省份</th>
-                <th>地市</th>
-                <th>批次</th>
-                <th>SN</th>
-                <th>扫码时间</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr ng-if='codeDetailData.length > 0' ng-repeat="codeItem in codeDetailData">
-                  <td>{{(currentPageNumber-1)*pageSize+($index+1)}}</td>
-                  <td>{{codeItem.mobile}}</td>
-                  <td>{{codeItem.region}}</td>
-                  <td>{{codeItem.city}}</td>
-                  <td>{{codeItem.batch}}</td>
-                  <td>{{codeItem.productSn}}</td>
-                  <td>{{codeItem.ctime}}</td>
-                </tr>
-                <tr ng-if='codeDetailData.length == 0'>
-                  <td colspan='7'>暂无符合条件的数据</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="footer_sec" id="codeDetailFooter">
-                <div class="tcdPageCode"></div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <script src="statics/assets/libs/jquery.page.js"></script>
+    <script src="statics/assets/libs/jquery.page.js"></script>
 </div>

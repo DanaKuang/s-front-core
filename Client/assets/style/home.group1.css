@@ -1,6 +1,3 @@
-.group-panel-top, .group-pannel-middle {
-  padding: 0 40px; }
-
 .group-panel-top {
   margin-bottom: 12px; }
   .group-panel-top .group-month-search {
@@ -20,6 +17,22 @@
     .group-panel-top .group-month-search .group-month .inline-block {
       margin-left: 35px;
       line-height: 1; }
+
+form .date {
+  background-color: #fff !important; }
+
+form .btn.btn-primary,
+form .btn.btn-primary:hover,
+form .btn.btn-primary:active,
+form .btn.btn-primary:focus {
+  width: 100px;
+  margin-left: 30px;
+  margin-right: 0px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 4px 12px;
+  background: #44c1ed;
+  border-color: #44c1ed; }
 
 .group-pannel-middle {
   overflow-x: hidden;
@@ -62,16 +75,10 @@
       z-index: 30; }
     .group-pannel-middle .smoke-spread .group-smoke-table thead tr th, .group-pannel-middle .smoke-spread .group-smoke-table tbody tr td {
       line-height: 1 !important; }
-    .group-pannel-middle .smoke-spread .group-smoke-table thead tr th {
-      border-top: 1px solid #A0A0A0 !important;
-      border-bottom: 1px solid #A0A0A0 !important; }
     .group-pannel-middle .smoke-spread .group-smoke-table tbody tr .color {
       color: #ff8b23; }
   .group-pannel-middle .group-brand {
-    width: 110%;
     position: relative;
-    left: -50px;
-    padding-left: 40px;
     border-bottom: 1px solid #A0A0A0;
     line-height: 45px; }
     .group-pannel-middle .group-brand span, .group-pannel-middle .group-brand select {
@@ -94,11 +101,6 @@
     padding-top: 30px; }
     .group-pannel-middle .user-month-trend #user-month-trend {
       height: 200px; }
-  .group-pannel-middle .user-top-ten .top-ten-table thead tr th {
-    line-height: 1 !important;
-    vertical-align: middle;
-    border-top: 1px solid #A0A0A0;
-    border-bottom: 1px solid #A0A0A0; }
   .group-pannel-middle .user-top-ten .top-ten-table tbody tr td:last-child {
     text-decoration: underline;
     cursor: pointer; }

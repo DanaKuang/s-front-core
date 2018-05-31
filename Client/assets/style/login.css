@@ -127,16 +127,17 @@ input::-webkit-input-placeholder {
 .ui-code input {
     position: relative;
     float: left;
-    width: 40%;
+    width: 56%;
     height: 100%;
 }
 .ui-code img {
     position: relative;
-    float: left;
+    float: right;
     margin-left: 15px;
     width: 30%;
     height: 100%;
     background: #fff;
+    cursor: pointer;
 }
 .ui-code button {
     position: relative;

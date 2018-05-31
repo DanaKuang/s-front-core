@@ -8,28 +8,23 @@
     content: "";
 }
 .rate{
-	
+
 }
 .group-panel-top{
-	padding:30px 0;
+	/* padding:30px 0; */
 }
 .group-month{
 	display:flex;
 	align-items: center;
 }
-.input_text{
-	padding:0;
-	height:23px;
-	line-height:23px;
-}
 .portrait_p{
 	color:#707070;
 	float: left;
-	margin:0 13px 0 35px;
+	margin:0 13px 0 15px;
 	font-size:13px;
 }
 .portrait{
-	position: absolute;	
+	position: absolute;
     left: 10px;
     top: 7px;
 	width:14px;
@@ -38,19 +33,24 @@
 	background-size:cover;
 }
 .input_text{
-	width:141px;
-	height:20px;
+	width: 141px;
+	height: 30px;
 	float: left;
-	border:1px solid #e6e6e6;
+	border: 1px solid #e6e6e6;
 }
-.chaXunBtn{
-	display: block;
-	width:80px;
-	float: left;
-	margin-left:34px;
-	border-radius:15px;
+.chaXunBtn.btn-primary,
+.chaXunBtn.btn-primary:hover,
+.chaXunBtn.btn-primary:active,
+.chaXunBtn.btn-primary:focus {
+	width: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 4px 12px;
+    background: #44c1ed;
+    border-color: #44c1ed;
 }
-
 
 /*content*/
 .portrait_userInfo{
@@ -130,7 +130,7 @@
 	height:220px;
 	width:862px;
 	/*background:green;*/
-	
+
 	margin:0 auto ;
 }
 /*用户扫码时段分析*/
@@ -146,14 +146,14 @@
 	height:220px;
 	/*background:green;*/
 	margin-left:50px;
-	
+
 }
 /*用户扫码轨迹*/
 #saoGuiJi{
 	height:360px;
 	width:862px;
 	/*background:green;*/
-	
+
 	margin:0 auto ;
 }
 .SaoMFoot{
@@ -179,13 +179,13 @@
 	/*height:220px;*/
 	width:862px;
 	/*background:red;*/
-	
+
 	margin:20px auto ;
 }
 .EverySao tr{
 	width:100%;
 	height:36px;
-	
+
 }
 .EverySao tr td{
 	width:25%;
@@ -194,7 +194,7 @@
 }
 
 table, th, td{
-  border:1px solid #a0a0a0;
+  /* border:1px solid #a0a0a0; */
   text-align: center;
   }
   /*弹窗*/

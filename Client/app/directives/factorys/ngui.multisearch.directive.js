@@ -43,8 +43,29 @@ define([], function () {
         // link
         function linkFn (scope, element, attrs) {
             var $staTime = $("[name='startTime']");
+            var $staHour = $("[name='startHour']");
             var $endTime = $("[name='endTime']");
+            var $endHour = $("[name='endHour']");
             var $li = $(".ui-result-list");
+
+            // 小时限制 开始时间
+            $($staHour).change(function (e) {
+                if(scope.startTime === scope.endTime) {
+                    if (e.currentTarget.value > $($endHour).val()) {
+                        $($endHour).val(e.currentTarget.value);
+                        $($endHour).trigger('change');
+                    }
+                }
+            });
+            // 小时限制 结束时间
+            $($endHour).change(function (e) {
+                if(scope.startTime === scope.endTime) {
+                    if (e.currentTarget.value < $($staHour).val()) {
+                        $($staHour).val(e.currentTarget.value);
+                        $($staHour).trigger('change');
+                    }
+                }
+            });
 
             util.uiExtend(scope, defaults, attrs, (scope.conf || {}),
                 [
@@ -100,7 +121,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dff.date(+new Date)
             }).on('change', function (e) {
                 var startTime = e.target.value;
                 var endTime = scope.endTime;
@@ -115,7 +136,7 @@ define([], function () {
                 autoclose: true,
                 todayBtn: true,
                 minView: 2,
-                startDate: ""
+                endDate: dff.date(+new Date)
             }).on('change', function (e) {
                 var endTime = e.target.value;
                 var startTime = scope.startTime;
