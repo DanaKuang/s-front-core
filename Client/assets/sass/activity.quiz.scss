@@ -148,6 +148,10 @@
         width: 350px;
         text-align: right;
         line-height: 30px;
+        span {
+            position: relative;
+            z-index: 2;
+        }
     }
     .bar {
         height: 100%;

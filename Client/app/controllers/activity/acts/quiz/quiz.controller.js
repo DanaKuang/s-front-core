@@ -158,8 +158,9 @@ define([], function () {
                     activityCode: actCode
                 })).then(function (res) {
                     res = res.data || {};
+                    form.$submitted = false;
+                    $scope.$apply();
                     if (res.ret == '200000') {
-                        form.$submitted = false;
                         $("#add_edit_form").modal('hide');
                         alt.success("成功！");
                         initSearch();
@@ -412,6 +413,29 @@ define([], function () {
                     autoclose: true,
                     todayBtn: true
                 });
+                // 结束时间不能修改，根据开始时间+30分钟即可。
+                $('.start-time').change(function() {
+                    var stime = (new Date($('.start-time').val())).getTime();
+                    var etime = new Date(stime).Format("yyyy-MM-dd hh:mm"); // stime-30*60*1000
+                    $scope.form.betEtimeStr = etime;
+                    $('.end-time').val(etime)
+                })
+                // 处理时间
+                Date.prototype.Format = function (fmt) { //author: meizz
+                    var o = {
+                        "M+": this.getMonth() + 1, //月份
+                        "d+": this.getDate(), //日
+                        "h+": this.getHours(), //小时
+                        "m+": this.getMinutes(), //分
+                        "s+": this.getSeconds(), //秒
+                        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                        "S": this.getMilliseconds() //毫秒
+                    };
+                    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                    for (var k in o)
+                        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                    return fmt;
+                };
 
                 // input搜索输入
                 $("#host_team").on('click', 'li', function (e) {
