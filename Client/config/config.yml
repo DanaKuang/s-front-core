@@ -78,9 +78,9 @@ dev:                                             # 线上环境
       host: '127.0.0.1'                          # 请求IP地址
     - port: 9096                                 # 请求端口号
       host:                                      # 请求IP地址
-        - '172.17.15.160'                        # 后端集群
-        - '172.17.15.164'                        # 后端集群
-  rootfilter: '/(dataportal|saas)'               # 接口过滤
+        - '127.0.0.1'                            # 后端集群
+        - '127.0.0.1'                            # 后端集群
+  rootfilter: '/(dataportal)'                    # 接口过滤
   showerror: 1                                   # 控制异常信息抛出
   debugger: 1                                    # 是否控制台打印信息
   viewcache: 0                                   # 控制视图缓存
