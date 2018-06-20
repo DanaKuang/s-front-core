@@ -12,24 +12,24 @@ module.exports = function () {
     var colors = require('colors/safe');
     var exec = require('child_process').exec;
     var ips = [{
-        host: '123.56.29.106',
+        host: '39.107.89.72', //123.56.29.106
         post: 22,
         user: 'root',
         dist: '/root',
-        privateKey: '/Users/admin/.ssh/id_rsa'
+        privateKey: '/Users/kuang/.ssh/id_rsa'
     }];
     var SERVER = {
-        172: {
+        prod1: {
             type: 'dev',
-            host: '172.17.15.172',
+            host: '172.16.1.81', //172.17.15.172
             port: 22,
             user: '',
             dist: '/opt/webapps',
             privateKey: ''
         },
-        173: {
+        prod2: {
             type: 'dev',
-            host: '172.17.15.173',
+            host: '172.16.1.82',//172.17.15.173
             port: 22,
             user: '',
             dist: '/opt/webapps',
