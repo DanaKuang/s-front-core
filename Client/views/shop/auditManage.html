@@ -1,0 +1,181 @@
+<!--
+/**
+ * Author: zhaobaoli
+ * Create Date; 2018-06-20 
+ * Description: 审核管理
+ */
+-->
+<link rel="stylesheet" href="statics/assets/style/visit.manage.css"/>
+
+<div ng-controller="auditManageCtrl">
+    <div class="animated fadeInRightBig">
+        <div class="container-fluid">
+            <div class="row ui-manage-box">
+                <div class="col-md-12">
+                    <!--title-->
+                    <div class="ui-panel-title manage">
+                        <div><i class="manage"></i><span>审核管理</span></div>
+                    </div>
+
+                    <div class="panel rate" id="manage-tap">
+                        <div class="panel-body ui-manage-panel" id="panel-body">
+
+                            <div class="tab-content">
+                                <!-- 搜索条件 -->
+                                <div role="tabpanel" class="tab-pane active panel-body">
+                                    <form class="form-horizontal form-inline">
+                                        <div class="form-group col-sm-4">
+                                            <label for="status" class="control-label col-sm-4">审核状态</label>
+                                            <div class="col-sm-8">
+                                                <select ng-model="vm.status" id="status" class="form-control" ><!-- ng-change="changeStatus($event)" -->
+                                                    <option value="">全部</option>
+                                                    <option value="0">未审核</option>
+                                                    <option value="1">审核通过</option>
+                                                    <option value="2">审核不通过</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-6 time">
+                                            <label class="control-label col-sm-2">时间区间</label>
+
+                                            <div class="col-sm-9">
+                                                <input ng-model="vm.appStartTime" id="durationStart" class="form_datetime dateTime form-control" readonly placeholder="开始时间">
+                                                <span class="to">至</span>
+                                                <input ng-model="vm.appEndTime" id="durationEnd" class="form_datetime dateTime form-control" readonly placeholder="结束时间">
+                                            </div>
+                                        </div>
+          
+
+                                        <div class="form-group col-sm-2 search-btn-con">
+                                            <button type="button" class="seacher btn btn-primary" ng-click="search($event);">查询</button>
+                                            <button type="button" class="reset btn btn-default" ng-click="resetSelect($event);">重置</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- 排序 -->
+                                <div class="sort-btn-con">
+                                    <div class="checkbox" style="margin-right: 2% ;line-height:20px;float:left;">
+                                        <label>
+                                            <input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()" ng-model="vm.allCheckbox"> 全选
+                                        </label>
+                                    </div>
+                                    <button ng-click="auditBatch('much')" data-toggle="modal" data-target=".remove-modal" 
+                                        ng-disabled="ifBatch || vm.unAudit" class="btn btn-primary" style="margin-right: 2% ;line-height:20px;">批量通过</button>
+                                    
+                                </div>
+                                <!-- table -->
+                                <div class="panel-body scroll-con">
+
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>操作</th>
+                                                <th>审核状态</th>
+                                                <th>订单号</th>
+                                                <th>商品名称</th>
+                                                <th>兑换币</th>
+                                                <th>下单人opid</th>
+                                                <th>收货人姓名</th>
+                                                <th>收货人电话</th>
+                                                <th>收货地址</th>
+                                                <th>下单时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-if="vm.buildOrderList.length > 0" ng-repeat="item in vm.buildOrderList">
+                                                <td>
+                                                    <div class="checkbox" style="line-height: 22px;">
+                                                        <label>
+                                                            <input type="checkbox" ng-click="updateSelection($event, item.id)" ng-checked="isSelected(item.id)">{{(vm.pageNo-1)*vm.pageSize+($index+1)}}
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="oper-btn-wrap" style="width:180px;">
+                                                        <!--1 启用状态  2 禁用状态-->
+                                                        <div ng-style="{color: (item.jdOrderStatus!= 0) ? '#777' : '#3379b7'}" class="operate-btn" ng-click="adthOrNo(item.id,true,item.jdOrderStatus)">审核通过</div><!--data-toggle="modal" data-target=".shelf-modal" -->
+                                                        <div ng-style="{color: (item.jdOrderStatus!= 0) ? '#777' : '#3379b7'}" class="operate-btn" ng-click="adthOrNo(item.id,false,item.jdOrderStatus)">审核不通过</div>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.jdOrderStatusName}}</td>
+                                                <td>{{item.orderid}}</td>
+                                                <td>{{item.product.awardName}}</td>
+                                                <td><div class="shop-name">{{item.score}}</div></td>
+                                                <td>{{item.openid}}</td>
+                                                <td>{{item.username}}</td>
+                                                <td>{{item.mobile}}</td>
+                                                <td>{{item.provincename}}{{item.cityname}}{{item.countryname}}{{item.address}}</td>
+                                                <td>{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                            </tr>
+                                            <tr ng-if="vm.buildOrderList.length == 0">
+                                                <td colspan="11">未搜索到符合条件的相关信息</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="footer_sec clearfix" ng-if="vm.buildOrderList.length > 0">
+                                        <div class="total_info lf">
+                                            总共<span>{{vm.totalCount}}</span>条记录，当前页共
+                                            <span>{{vm.buildOrderList.length}}</span>
+                                            条记录
+                                        </div>
+                                        <div class="page_sec rf">
+                                            <div class="tcdPageCode"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="newAlert" class="alert alert-dismissible fade" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p class="prompt"></p>
+    </div>
+
+    <!-- 单个订单审核 -->
+    <div class="modal fade bs-example-modal-sm shelf-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitle">
+                    <span ng-if="isUpShelf">审核通过</span><span ng-if="!isUpShelf">审核不通过</span></span>：<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <span ng-if="isUpShelf">您确定要审核通过此订单？</span>
+                    <span ng-if="!isUpShelf">您确定审核不通过此订单？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="shelfConfirm()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量审核通过 -->
+    <div class="modal fade bs-example-modal-sm remove-modal" tabindex="-1" role="dialog" aria-labelledby="passTitle">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><span id="passTitleRemove">
+                    <span>审核通过</span></span>：
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span>您确定要审核通过此批量订单？</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="authConfirm()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="statics/assets/libs/jquery.page.js"></script>
+</div>

@@ -2996,3 +2996,318 @@ maowuAct:                                      # 毛五活动管理，命名只�
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
+shop:                                      # 积分商城管理，命名只要不跟上面重复即可
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/queryIntegralMoney'
+    authorized: 1
+    description: '查询积分商城积分与现金值比例设置'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/setIntegralMoney'
+    authorized: 1
+    description: '积分商城积分与现金值比例设置'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/statusMap'
+    authorized: 1
+    description: '商品状态集合'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/statusTypeMap'
+    authorized: 1
+    description: '分类管理一级查询的分类状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/giftTypeMap'
+    authorized: 1
+    description: '商品类型集合'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/cate/list'
+    authorized: 1
+    description: '查询分类集合'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/cate/disable'
+    authorized: 1
+    description: '禁用分类'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/cate/used'
+    authorized: 1
+    description: '启用分类'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/cate/remove'
+    authorized: 1
+    description: '删除分类'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/cate/detail'
+    authorized: 1
+    description: '分类详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/cate/saveOrModify'
+    authorized: 1
+    description: '新建一级分类/修改一级分类'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/selfOrderList'
+    authorized: 1
+    description: '自建商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/listZJ'
+    authorized: 1
+    description: '获取自建订单列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/JDOrderList'
+    authorized: 1
+    description: '京东商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/saveOrModifyZJ'
+    authorized: 1
+    description: '新增或修改自建商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/statusMap'
+    authorized: 1
+    description: '商品状态集合'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/detail'
+    authorized: 1
+    description: '获取商品详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/selfOrderDetail'
+    authorized: 1
+    description: '自建订单详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/online'
+    authorized: 1
+    description: '上架商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/modifyReceiptInfo'
+    authorized: 1
+    description: '修改订单收获地址'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/offline'
+    authorized: 1
+    description: '下架商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/remove'
+    authorized: 1
+    description: '删除商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/modifyReceiptInfo'
+    authorized: 1
+    description: '修改订单收获地址'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/product/removeBatch'
+    authorized: 1
+    description: '删除批次商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/banner/list'
+    authorized: 1
+    description: '获取banner位数据列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/bannerTypeMap'
+    authorized: 1
+    description: '获取banner类型维值'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/cate/list'
+    authorized: 1
+    description: '获取分类类型维值'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/banner/saveOrModify'
+    authorized: 1
+    description: '保存或修改'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/banner/detail'
+    authorized: 1
+    description: '编辑banner'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/banner/remove'
+    authorized: 1
+    description: '删除banner'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/recommend/list'
+    authorized: 1
+    description: 'banner推荐位管理列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/recommend/detail'
+    authorized: 1
+    description: 'banner推荐位详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/recommend/saveOrModify'
+    authorized: 1
+    description: 'banner推荐位保存'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/recommend/remove'
+    authorized: 1
+    description: 'banner推荐位删除'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/keyWordMap'
+    authorized: 1
+    description: '订单管理关键字'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/orderStatusMap'
+    authorized: 1
+    description: '订单状态集合'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'  
+    routepath: '/api/tztx/saas/saotx/mall/product/listJD'
+    authorized: 1
+    description: '获取京东商品列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post' 
+    routepath: '/api/tztx/saotx/mall/order/export/selfUndeliveredOrder'
+    authorized: 1
+    description: '导出自建商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post' 
+    routepath: '/api/tztx/saas/saotx/mall/product/queryJDSKU'
+    authorized: 1
+    description: '根据SKU获取京东商品详情'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/modifyReceiptInfo'
+    authorized: 1
+    description: '修改自建商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+    routepath: '/api/tztx/saas/saotx/mall/product/saveOrModifyJD'
+    authorized: 1
+    description: '新增或修改京东商品'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/importZJOrders'
+    authorized: 1
+    description: '导入自建商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saas/saotx/mall/order/authList'
+    authorized: 1
+    description: '获取京东审核订单列表'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/saotx/mall/order/export/jDUndeliveredOrder'
+    authorized: 1
+    description: '导入自建商品订单'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'
+  - httpmethod: 'post'  
+    routepath: '/api/tztx/saas/saotx/mall/order/authOrder'
+    authorized: 1
+    description: '修改京东订单审核状态'
+    enableroute: 1
+    gatewaytype: 1
+    responetype: 'json'

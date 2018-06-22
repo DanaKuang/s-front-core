@@ -489,3 +489,81 @@ system:
     responetype: 'html'
     gatewaytype: 0
     staticfile: 'system/style/style.html'
+shop:
+  - httpmethod: 'get'                       # 积分商城系统配置
+    routepath: '/view/shop/system/systemLayout'
+    description: 'systemLayout'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/system/systemLayout.html'
+  - httpmethod: 'get'                       # 商品管理-自建商品管理
+    routepath: '/view/shop/commodityManage/buildProduct'
+    description: 'buildProduct'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/productManage/ownProduct.html'
+  - httpmethod: 'get'                       # 商品管理-京东商品管理
+    routepath: '/view/shop/commodityManage/jdProduct'
+    description: 'jdProduct'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/productManage/jdProduct.html'
+  - httpmethod: 'get'                       # 分类管理配置
+    routepath: '/view/shop/sortManage'
+    description: 'sortManage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/sortManage/sortManage.html'
+  - httpmethod: 'get'                       # 分类管理查看详情配置
+    routepath: '/views/shop/sortManage/secondSortManage'
+    description: 'secondSortManage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/sortManage/secondSortManage.html'
+  - httpmethod: 'get'                       # 自建订单管理配置
+    routepath: '/view/shop/orderManage/buildOrderManage'
+    description: 'buildOrderManage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/orderManage/buildOrderManage.html'
+  - httpmethod: 'get'                       # 京东订单管理配置
+    routepath: '/view/shop/orderManage/jdOrderManage'
+    description: 'jdOrderManage'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/orderManage/jdOrderManage.html'
+  - httpmethod: 'get'                       # 积分商城banner位管理
+    routepath: '/view/shop/bannerManage'
+    description: '积分商城banner位管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/bannermanage.html'
+  - httpmethod: 'get'                       # 积分商城推荐位管理
+    routepath: '/view/shop/recommendManage'
+    description: '积分商城推荐位管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/recommendmanage.html'
+  - httpmethod: 'get'                       # 推荐位广告摆放模板设置
+    routepath: '/view/shop/bannersetout'
+    description: '推荐位广告摆放模板设置'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/bannersetout.html'
+  - httpmethod: 'get'                       # 积分商城审核管理
+    routepath: '/view/shop/auditManage'
+    description: '积分商城审核管理'
+    enableroute: 1
+    responetype: 'html'
+    gatewaytype: 0
+    staticfile: 'shop/auditManage.html'  
