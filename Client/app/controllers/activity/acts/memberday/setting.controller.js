@@ -114,34 +114,7 @@ define([], function () {
                 }]
             };
             var t_def = {
-                activityAwards: [{
-                    idx: 1,
-                    special: 0,
-                    prizeName: '一等奖',
-                    details: [{
-                        awardType: 3,
-                        bigred: 0,
-                        minred: 0,
-                    }]
-                }, {
-                    idx: 2,
-                    special: 0,
-                    prizeName: '二等奖',
-                    details: [{
-                        awardType: 3,
-                        bigred: 0,
-                        minred: 0
-                    }]
-                }, {
-                    idx: 3,
-                    special: 0,
-                    prizeName: '三等奖',
-                    details: [{
-                        awardType: 3,
-                        bigred: 0,
-                        minred: 0
-                    }]
-                }]
+                activityAwards: []
             };
             // 编辑
             if (DETAIL.activity) {
@@ -214,14 +187,37 @@ define([], function () {
                 s_def.stime = df.datetime(DETAIL.activity.stime);
                 s_def.etime = df.datetime(DETAIL.activity.etime);
 
-                t_def.activityAwards[0].details[0].bigred = DETAIL.activity.activityAwards[0].details[0].bigred;
-                t_def.activityAwards[0].details[0].minred = DETAIL.activity.activityAwards[0].details[0].minred;
+                // adjust 2018.06.08
+                DETAIL.activity.activityAwards.forEach(function (n, i) {
+                    t_def.activityAwards[i] = {};
+                    if (i == 0) {
+                        t_def.activityAwards[i].prizeName = '超级扫码奖'
+                    } else if (i == 1) {
+                        t_def.activityAwards[i].prizeName = '超级贡献奖'
+                    } else if (i == 2) {
+                        t_def.activityAwards[i].prizeName = '三等奖'
+                    } else if (i == 3) {
+                        t_def.activityAwards[i].prizeName = '四等奖'
+                    }
 
-                t_def.activityAwards[1].details[0].bigred = DETAIL.activity.activityAwards[1].details[0].bigred;
-                t_def.activityAwards[1].details[0].minred = DETAIL.activity.activityAwards[1].details[0].minred;
+                    t_def.activityAwards[i].idx = i + 1;
+                    t_def.activityAwards[i].special = 0;
+                    t_def.activityAwards[i].details = [{
+                        awardType: 3,
+                        bigred: n.details[0].bigred,
+                        minred: n.details[0].minred
+                    }];
+                })
 
-                t_def.activityAwards[2].details[0].bigred = DETAIL.activity.activityAwards[2].details[0].bigred;
-                t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
+                // 刘智障的坑
+                // t_def.activityAwards[0].details[0].bigred = DETAIL.activity.activityAwards[0].details[0].bigred;
+                // t_def.activityAwards[0].details[0].minred = DETAIL.activity.activityAwards[0].details[0].minred;
+
+                // t_def.activityAwards[1].details[0].bigred = DETAIL.activity.activityAwards[1].details[0].bigred;
+                // t_def.activityAwards[1].details[0].minred = DETAIL.activity.activityAwards[1].details[0].minred;
+
+                // t_def.activityAwards[2].details[0].bigred = DETAIL.activity.activityAwards[2].details[0].bigred;
+                // t_def.activityAwards[2].details[0].minred = DETAIL.activity.activityAwards[2].details[0].minred;
             }
 
             var s_memberdayProps_0 = s_def.memberdayProps[0].propValue;
