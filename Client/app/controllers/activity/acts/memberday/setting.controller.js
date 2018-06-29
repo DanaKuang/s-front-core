@@ -58,25 +58,9 @@ define([], function () {
                     sweek: 1,
                     stime: '',
                     eweek: 1,
-                    etime: ''
-                }, {
-                    ruleType: 2,
-                    isuse: 0,
-                    scoreNum: 0,
-                    luckyNum: 0,
-                    sweek: 1,
-                    stime: '',
-                    eweek: 1,
-                    etime: ''
-                }, {
-                    ruleType: 3,
-                    isuse: 0,
-                    scoreNum: 0,
-                    luckyNum: 0,
-                    sweek: 1,
-                    stime: '',
-                    eweek: 1,
-                    etime: ''
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule1'
                 }, {
                     ruleType: 1,
                     isuse: 0,
@@ -85,7 +69,42 @@ define([], function () {
                     sweek: 1,
                     stime: '',
                     eweek: 1,
-                    etime: ''
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule2'
+                }, {
+                    ruleType: 1,
+                    isuse: 0,
+                    scoreNum: 0,
+                    luckyNum: 0,
+                    sweek: 1,
+                    stime: '',
+                    eweek: 1,
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule3'
+                }, {
+                    ruleType: 2,
+                    isuse: 0,
+                    scoreNum: 0,
+                    luckyNum: 0,
+                    sweek: 1,
+                    stime: '',
+                    eweek: 1,
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule4'
+                }, {
+                    ruleType: 3,
+                    isuse: 0,
+                    luckyNum: 0,
+                    scoreNum: 0,
+                    sweek: 1,
+                    stime: '',
+                    eweek: 1,
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule5'
                 }, {
                     ruleType: 4,
                     isuse: 0,
@@ -94,7 +113,9 @@ define([], function () {
                     sweek: 1,
                     stime: '',
                     eweek: 1,
-                    etime: ''
+                    etime: '',
+                    sn : '',
+                    mySnName : 'rule6'
                 }],
                 memberdayProps: [{
                     id: '',
@@ -136,7 +157,6 @@ define([], function () {
                         $('#'+id).trigger('click');
                     });
                 }, 0);
-
                 _.each(s_def.memberdayRules, function (md, idx) {
                     u.uiExtend(md, DETAIL.activity.memberdayRules.sort(function (a, b) {
                         return a.ruleType - b.ruleType;
@@ -150,7 +170,8 @@ define([], function () {
                         'scoreNum',
                         'ruleType',
                         'stime',
-                        'sweek'
+                        'sweek',
+                        'sn'
                     ]);
                     md.isuse = !!md.isuse;
                 });
@@ -315,17 +336,24 @@ define([], function () {
             }
             // 第三步 保存
             function t_save () {
-                console.log($scope);
                 $scope.s.memberdayRules[0].isuse += 0;
                 $scope.s.memberdayRules[1].isuse += 0;
                 $scope.s.memberdayRules[2].isuse += 0;
                 $scope.s.memberdayRules[3].isuse += 0;
                 $scope.s.memberdayRules[4].isuse += 0;
+                $scope.s.memberdayRules[5].isuse += 0;
+                
+                //幸运值累积规则
+                for(var j=0;j< $scope.s.memberdayRules.length;j++){
+                    var curSnArr = $('[name="'+ $scope.s.memberdayRules[j].mySnName +'"]').val();
+                    if(curSnArr != undefined){
+                        $scope.s.memberdayRules[j].sn = curSnArr.join(',');
+                    }
+                }
 
                 $scope.s.memberdayProps[0].propValue = ''+$scope.s_memberdayProps_week+'@'+$scope.s_memberdayProps_time;
                 $scope.s.memberdayProps[1].propValue = ''+(0+$scope.s_memberdayProps_isuse)+'@'+$scope.s_memberdayProps_wweek;
                 $scope.s.memberdayProps[2].propValue = 0 + $scope.s_hisuse;
-
                 $model.update(angular.extend(
                     $scope.f, $scope.s, $scope.t, {
                         areaBlackCityCodes: !!$scope.s.areaBlackVillCodes.length ? $scope.s.areaBlackCityCodes.join(',') : '',
@@ -390,15 +418,33 @@ define([], function () {
                             brandCode: n.join(',')
                         }).then(function (res) {
                             $scope.s_pnArr = res.data.data || [];
+                            $scope.rule_pnArr = res.data.data || [];
                             $scope.$apply();
                             $sns.multiselect('dataprovider', _.map(res.data.data, function(val) {
                                 return {
-                                    label: val.name,
+                                    label: val.allName,
                                     value: val.sn
                                 }
                             }));
-                            $sns.multiselect('select', $scope.s.sns);
-                            $sns.multiselect('refresh');
+                            // $sns.multiselect('select', $scope.s.sns);
+                            // $sns.multiselect('refresh');
+                            $sns.multiselect().val($scope.s.sns).multiselect('refresh');
+
+                            for(var i=0;i<s_def.memberdayRules.length;i++){
+                                $('[name="'+ s_def.memberdayRules[i].mySnName +'"]').multiselect('dataprovider', _.forEach(res.data.data, function(v){
+                                    v.label = v.allName;
+                                    v.value = v.sn;
+                                }));
+                                $('[name="'+ s_def.memberdayRules[i].mySnName +'"]').multiselect("destroy").multiselect({
+                                    numberDisplayed: 0
+                                })
+                                if(s_def.memberdayRules[i].sn != undefined && s_def.memberdayRules[i].sn != null){
+                                    var curSnVal = s_def.memberdayRules[i].sn.split(',');
+                                    $('[name="'+ s_def.memberdayRules[i].mySnName +'"]').val(curSnVal).multiselect('refresh');
+                                }
+                                
+                            }
+
                         });
                     }
                 }
@@ -423,6 +469,21 @@ define([], function () {
                 $scope.s_hacArr = s_hacArr;
                 $("#harea select").multiselect('dataprovider', $scope.s_hacArr);
                 $("#harea select").multiselect('select', $scope.s.areaBlackVillCodes);
+                
+                var curHacArr = [];
+                if($scope.s_hacArr.length > 0){
+                    for(var j=0;j<$scope.s_hacArr.length;j++){
+                        curHacArr.push($scope.s_hacArr[j].code);
+                    }
+                }
+                if($scope.s.areaBlackVillCodes.length > 0){
+                    for(var i=0;i<$scope.s.areaBlackVillCodes.length;i++){
+                        if(curHacArr.indexOf($scope.s.areaBlackVillCodes[i]) < 0){
+                            $scope.s.areaBlackVillCodes.splice(i,1);
+                            i--;
+                        }
+                    }
+                }
             }
 
             // 初始化多选

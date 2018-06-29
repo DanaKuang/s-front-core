@@ -130,7 +130,7 @@
                                     <label class="col-sm-2 control-label">选择规格<span class="red">*</span></label>
                                     <div class="col-sm-3 multi">
                                         <select ng-model="s.sns" name="sns" class="form-control input-sm"  multiple="multiple" required="required">
-                                            <option ng-value="p.sn" ng-repeat="p in s_pnArr">{{p.name}}</option>
+                                            <option ng-value="p.sn" ng-repeat="p in s_pnArr">{{p.allName}}</option>
                                         </select>
                                         <p class="{{setp_2.sns.$error.required?'has-error':''}}"><span class="help-block" ng-show="setp_2.sns.$error.required">请选择规格</span></p>
                                     </div>
@@ -158,26 +158,32 @@
                                 </div>
                                 <!--幸运值累积规则-->
                                 <div class="form-group" ng-repeat="md in s.memberdayRules">
-                                    <label class="col-sm-2 control-label" ng-if="$index<4">{{!!$index?'':'幸运值累积规则'}}<span class="{{!!$index?'none':'red'}}">*</span></label>
-                                    <div class="col-sm-1 checkbox" ng-if="$index<4">
+                                    <label class="col-sm-2 control-label" ng-if="$index<5">{{!!$index?'':'幸运值累积规则'}}<span class="{{!!$index?'none':'red'}}">*</span></label>
+                                    <div class="col-sm-1 multi" ng-if="$index<5">
+                                        <select name="{{md.mySnName}}" class="form-control input-sm"  multiple="multiple" required="required">
+                                            <option ng-value="r.sn" ng-repeat="r in rule_pnArr">{{r.allName}}</option>
+                                        </select>
+                                        <!-- <p class="{{setp_2.md.mySnName.$error.required?'has-error':''}}"><span class="help-block" ng-show="setp_2.md.mySnName.$error.required">请选择规格</span></p> -->
+                                    </div>
+                                    <div class="col-sm-1 checkbox" ng-if="$index<5" style="margin: 0 -20px 0 20px;">
                                         <label>
                                             <input type="checkbox" ng-checked="md.isuse" ng-model="md.isuse" name="memberdayRules[{{$index}}].isuse">启用
                                         </label>
                                     </div>
-                                    <select class="form-control input-sm fl plr w120" ng-model="md.ruleType" name="memberdayRules[{{$index}}].ruleType" disabled="disabled" ng-if="$index<4">
+                                    <select class="form-control input-sm fl plr w120" style="width: 80px;" ng-model="md.ruleType" name="memberdayRules[{{$index}}].ruleType" disabled="disabled" ng-if="$index<5">
                                         <option value="1">扫码</option>
                                         <option value="2">好友点击分享链接</option>
                                         <option value="3">好友评论</option>
                                     </select>
-                                    <div class="input-sm plr fl tc" ng-if="$index<4">可获得幸运值</div>
-                                    <div class="col-sm-1" ng-if="$index<4">
+                                    <div class="input-sm plr fl tc" ng-if="$index<5">可得幸运值</div>
+                                    <div class="col-sm-1" ng-if="$index<5">
                                         <input type="number" name="memberdayRules[{{$index}}].luckyNum" ng-model="md.luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
-                                    <div class="input-sm plr fl tc" ng-if="$index<4">可获得荷石币</div>
-                                    <div class="col-sm-1" ng-if="$index<4">
+                                    <div class="input-sm plr fl tc" ng-if="$index<5">可得荷石币</div>
+                                    <div class="col-sm-1" ng-if="$index<5">
                                         <input type="number" name="memberdayRules[{{$index}}].scoreNum" ng-model="md.scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
-                                    <select class="form-control input-sm fl plr week" ng-model="md.sweek" name="memberdayRules[{{$index}}].sweek" ng-if="$index<4">
+                                    <select class="form-control input-sm fl plr week" ng-model="md.sweek" name="memberdayRules[{{$index}}].sweek" ng-if="$index<5">
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
@@ -186,11 +192,11 @@
                                         <option value="6">每周六</option>
                                         <option value="7">每周日</option>
                                     </select>
-                                    <div class="col-sm-1" ng-if="$index<4">
+                                    <div class="col-sm-1" ng-if="$index<5">
                                         <input type="text" name="memberdayRules[{{$index}}].stime" ng-model="md.stime" class="form-control input-sm time">
                                     </div>
-                                    <div class="input-sm plr fl tc mr15 w15" ng-if="$index<4">至</div>
-                                    <select class="form-control input-sm fl plr week" ng-model="md.eweek" name="memberdayRules[{{$index}}].eweek" ng-if="$index<4">
+                                    <div class="input-sm plr fl tc mr15 w15" ng-if="$index<5">至</div>
+                                    <select class="form-control input-sm fl plr week" ng-model="md.eweek" name="memberdayRules[{{$index}}].eweek" ng-if="$index<5">
                                         <option value="1">每周一</option>
                                         <option value="2">每周二</option>
                                         <option value="3">每周三</option>
@@ -199,7 +205,7 @@
                                         <option value="6">每周六</option>
                                         <option value="7">每周日</option>
                                     </select>
-                                    <div class="col-sm-1" ng-if="$index<4">
+                                    <div class="col-sm-1" ng-if="$index<5">
                                         <input type="text" ng-model="md.etime" class="form-control input-sm time" name="memberdayRules[{{$index}}].etime">
                                     </div>
                                 </div>
@@ -208,15 +214,15 @@
                                     <label class="col-sm-2 control-label">兑换规则<span class="red">*</span></label>
                                     <div class="col-sm-1 checkbox">
                                         <label>
-                                            <input type="checkbox" ng-checked="s.memberdayRules[4].isuse" ng-model="s.memberdayRules[4].isuse" name="memberdayRules[4].isuse">启用
+                                            <input type="checkbox" ng-checked="s.memberdayRules[5].isuse" ng-model="s.memberdayRules[5].isuse" name="memberdayRules[5].isuse">启用
                                         </label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="number" name="memberdayRules[4].luckyNum" ng-model="s.memberdayRules[4].luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
+                                        <input type="number" name="memberdayRules[5].luckyNum" ng-model="s.memberdayRules[5].luckyNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">幸运值可兑换</div>
                                     <div class="col-sm-1">
-                                        <input type="number" name="memberdayRules[4].scoreNum" ng-model="s.memberdayRules[4].scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
+                                        <input type="number" name="memberdayRules[5].scoreNum" ng-model="s.memberdayRules[5].scoreNum" class="form-control input-sm" min="0" onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="if(!this.value){this.value=0}">
                                     </div>
                                     <div class="input-sm fl plr tc">荷石币</div>
                                 </div>
