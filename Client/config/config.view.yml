@@ -44,12 +44,12 @@ home:                                       # 首页
     gatewaytype: 0
     staticfile: 'home/kpi/kpi.html'
   - httpmethod: 'get'                       # KPI
-    routepath: '/view/home/henan-kpi'
+    routepath: '/view/home/kpi-view'
     description: 'kpi'
     enableroute: 1
     responetype: 'html'
     gatewaytype: 0
-    staticfile: 'home/kpi/kpi-henan.html'
+    staticfile: 'home/kpi/kpi-view.html'
   - httpmethod: 'get'                       # KPI总指标
     routepath: '/view/home/theme/overall'
     description: 'theme'
