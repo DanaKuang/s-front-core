@@ -34,12 +34,28 @@
         "roam": true,
         "label": {
             "normal": {
-                "show": true,
+                "show": false,
                 "textStyle": {
                     "color": "rgba(0,0,0,0.4)"
                 }
             }
         },
+        "regions": [{
+            "name": "南海诸岛", 
+            "value": 0, 
+            "itemStyle": 
+                {"normal":
+                    {                       
+                        "opacity": 0,
+                        "label": {
+                            "show": false,
+                            "emphasis": {
+                                "show": false
+                            }
+                        }                        
+                    }
+                }
+        }],
         "itemStyle": {
             "normal":{
                 "borderColor": "rgba(0, 0, 0, 0.2)"

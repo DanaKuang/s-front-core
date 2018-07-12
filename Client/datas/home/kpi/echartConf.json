@@ -28,6 +28,18 @@
                 "show": false
             }
         },
+        "regions": [{
+            "name": "南海诸岛", 
+            "value": 0, 
+            "itemStyle": 
+                {"normal": 
+                    {"opacity": 0,
+                        "label": {
+                            "show": false
+                        }
+                    }
+                }
+        }],
         "center": [115.480656, 35.23375],
         "roam": true,
         "itemStyle": {
