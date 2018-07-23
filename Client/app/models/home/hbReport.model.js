@@ -33,6 +33,13 @@ define([], function () {
           var getWeekRedWinUrl = '/api/tztx/dataportal/fixatreport/rptScanRedDateWeek'; //河北周报—现金红包中奖情况统计
           var getWeekEntityWinUrl = '/api/tztx/dataportal/fixatreport/getWeekEntityWinData'; //周报—现金红包中奖情况统计
           var getProvDataUrl = '/api/tztx/dataportal/fixatreport/rptScanNumDateWeek'; //周报_扫码数据分省统计
+          var getScanActWeekUrl = '/api/tztx/dataportal/fixatreport/getWeekGpsScanData'; //区县扫码活跃度周报
+          var getScanActMonthUrl = '/api/tztx/dataportal/fixatreport/getMonthGpsScanData'; //区县扫码活跃度月报
+
+          var getBrandListUrl = "/api/tztx/dataportal/public/getUserBrandByUserId";   // 品牌接口        
+          var getProductListUrl = '/api/tztx/dataportal/statistics/getProduct';       //规格接口
+          var getProvinceDataUrl = "/api/tztx/dataportal/public/getUserProvByUserId";  // 获取省
+          var getCityDataUrl = "/api/tztx/dataportal/statistics/getCitysByProvince";   // 获取市
   
           this.$winUser = function (params) {
             return request.$Search(winUser,params,true);
@@ -81,6 +88,26 @@ define([], function () {
           }
           this.$getProvData = function(params){
             return request.$Search(getProvDataUrl,params,true);
+          }
+          this.$getScanActWeekData = function(params){
+            return request.$Search(getScanActWeekUrl,params,true);
+          }
+          this.$getScanActMonthData = function(params){
+            return request.$Search(getScanActMonthUrl,params,true);
+          }
+
+          this.$getBrandList = function() {
+            return request.$Search(getBrandListUrl,{},true);
+          },
+          this.$getProductList = function(params){
+            return request.$Search(getProductListUrl,params,true);
+          }
+
+          this.$getProvinceData = function() {
+            return request.$Search(getProvinceDataUrl,{},true);
+          },
+          this.$getCityData = function(params){
+            return request.$Search(getCityDataUrl,params,true);
           }
         };
       }]

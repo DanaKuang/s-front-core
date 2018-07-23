@@ -41,8 +41,18 @@
                       <u>红包投入数据月报</u>
                     </span>
                   </li>
-                  <li></li>
-                  <li></li>
+                  <li>
+                    <span>5</span>
+                    <span ng-click="tabs(5)">
+                      <u>区县扫码活跃度周报</u>
+                    </span>
+                  </li>
+                  <li>
+                    <span>6</span>
+                    <span ng-click="tabs(6)">
+                      <u>区县扫码活跃度月报</u>
+                    </span>
+                  </li>
                   <li></li>
                   <li></li>
                   <li></li>
@@ -349,4 +359,211 @@
         </div>
       </div>
     </div>
+    <!--区县扫码活跃度周报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ui-panel-title report">
+            <i class="report-icon"></i><span>区县扫码活跃度周报</span>
+            <div  ng-click = "goback()">
+              <span></span>
+              返回
+            </div>
+          </div>
+          <!--box-->
+          <div class="panel rate">
+            <div class="panel-body">
+              <form class="form-inline ui-hbreport-form">
+                <div class="form-group agree-date">
+                  <label class="control-label">查询时间</label>
+                  <select id="scanActWeeks" class="form-control input-sm">
+                      <!--<option value="">请选择</option>-->
+                      <option ng-repeat="weekItem in weeksList" value="{{weekItem.weekId}}">{{weekItem.weekNo}}</option>
+                  </select>
+                </div>
+                <div class="form-group agree-date">
+                    <label class="control-label reset_height">品牌</label>
+                    <!-- <select id="scanActWeekBrands" class="form-control input-sm" value="slectWeekBrand" ng-model="weekBrandVal" ng-change="selectWeekBrand()"> -->
+                        <select id="scanActWeekBrands" multiple="multiple" class="form-control input-sm">  
+                      <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                    </select>
+                </div>
+                <!-- <div class="form-group agree-date">
+                  <label class="control-label reset_height">规格</label>
+                  <select id="scanActsWeekSecifts" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="speciftItem in speciftList" value="{{speciftItem.sn}}">{{speciftItem.name}}</option>
+                  </select>
+                </div> -->
+                <div class="form-group agree-date">
+                  <label class="control-label reset_height">省</label>
+                  <select id="scanWeekPro" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="weekProItem in scanWeekProList" value="{{weekProItem.code}}">{{weekProItem.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group agree-date">
+                  <label class="control-label reset_height">市</label>
+                  <select id="scanWeekCity" multiple="multiple" class="form-control input-sm">
+                      <option ng-repeat="weekCityItem in scanWeekcityList" value="{{weekCityItem.cityId}}">{{weekCityItem.cityName}}</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group" style="height:30px;line-height:30px;margin-left:1%;">
+                  <label class="radio-inline" width="60px" style="font-size: 15px;">
+                    <input type="radio" value="w4" name="scanWeek" style="top:5px;" ng-model="scanWeekStatus" ng-checked="scanWeekStatus == 'w4'">全部
+                  </label>
+                  <label class="radio-inline" width="60px" style="font-size: 15px;">
+                    <input type="radio" value="w5" name="scanWeek" style="top:5px;" ng-model="scanWeekStatus" 
+                      ng-checked="scanWeekStatus == 'w5'" ng-disabled="selectActWeeekBrand">品牌
+                  </label>
+                </div> -->
+                <div class="form-group ui-btn-ctrl">
+                  <button class="btn btn-primary" type="button" ng-click="search($event,5)">查询</button>
+                  <button class="btn btn-primary" type="button" ng-click="down(5)">下载</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel rate">
+            <div class="panel-body">
+              <div class="ui-scroll-table">
+                <table class="table table-hover table-bordered" style="min-width:1600px;">
+                  <thead>
+                  <tr>
+                    <th colspan="12" id="scanActWeekTitle"></th>
+                  </tr>
+                  <tr>
+                    <th>品牌</th>
+                    <th>区县</th>
+                    <th>扫码次数</th>
+                    <th>扫码人数</th>
+                    <th>扫码烟包数</th>
+                    <th>所在地市</th>
+                    <th>所在省</th>
+                    <th>所在地市扫码次数</th>
+                    <th>所在地市扫码人数</th>
+                    <th>所在地市扫码烟包数</th>
+                    <th>区县扫码活跃度</th>
+                  </tr>
+                  </thead>
+                  <tbody id="scanActWeekData">
+                    <tr ng-if="scanActWeekList.length > 0" ng-repeat="scanWeekItem in scanActWeekList">
+                      <td>{{scanWeekItem.brandName}}</td>
+                      <td>{{scanWeekItem.districtName}}</td>
+                      <td>{{scanWeekItem.scanNumP}}</td>
+                      <td>{{scanWeekItem.scanOpenidP}}</td>
+                      <td>{{scanWeekItem.scanNumP}}</td>
+                      <td>{{scanWeekItem.cityName}}</td>
+                      <td>{{scanWeekItem.provinceName}}</td>
+                      <td>{{scanWeekItem.scanNum}}</td>
+                      <td>{{scanWeekItem.scanOpenid}}</td>
+                      <td>{{scanWeekItem.scanCode}}</td>
+                      <td>{{scanWeekItem.toScanCodes}}</td>
+                    </tr>
+                    <tr ng-if="scanActWeekList.length == 0"><td colspan="11">未搜索到符合条件的相关信息</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--区县扫码活跃度月报-->
+    <div class="container-fluid region-margin report-table" style="display: none">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ui-panel-title report">
+              <i class="report-icon"></i><span>区县扫码活跃度月报</span>
+              <div  ng-click = "goback()">
+                <span></span>
+                返回
+              </div>
+            </div>
+            <!--box-->
+            <div class="panel rate">
+              <div class="panel-body">
+                <form class="form-inline ui-hbreport-form">
+                  <div class="form-group agree-month">
+                    <label class="control-label">查询时间</label>
+                    <input type="text" value="" readonly class="form-control input-sm date month-wrap" id="scanMonth"/>
+                  </div>
+                  <div class="form-group agree-date">
+                      <label class="control-label reset_height">品牌</label>
+                      <!-- <select id="scanActWeekBrands" class="form-control input-sm" value="slectWeekBrand" ng-model="weekBrandVal" ng-change="selectWeekBrand()"> -->
+                          <select id="scanActMonthBrands" multiple="multiple" class="form-control input-sm">  
+                        <option ng-repeat="brandItem in brandList" value="{{brandItem.name}}">{{brandItem.name}}</option>
+                      </select>
+                  </div>
+                  <div class="form-group agree-date">
+                    <label class="control-label reset_height">省</label>
+                    <select id="scanMonthPro" multiple="multiple" class="form-control input-sm">
+                        <option ng-repeat="monthProItem in scanMonthProList" value="{{monthProItem.code}}">{{monthProItem.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group agree-date">
+                    <label class="control-label reset_height">市</label>
+                    <select id="scanMonthCity" multiple="multiple" class="form-control input-sm">
+                        <option ng-repeat="monthCityItem in scanMonthcityList" value="{{monthCityItem.cityId}}">{{monthCityItem.cityName}}</option>
+                    </select>
+                  </div>
+                  <!-- <div class="form-group" style="height:30px;line-height:30px;margin-left:1%;">
+                    <label class="radio-inline" width="60px" style="font-size: 15px;">
+                      <input type="radio" value="m4" name="scanMonth" style="top:5px;" ng-model="scanMonthStatus" ng-checked="scanMonthStatus == 'm4'">全部
+                    </label>
+                    <label class="radio-inline" width="60px" style="font-size: 15px;">
+                      <input type="radio" value="m5" name="scanMonth" style="top:5px;" ng-model="scanMonthStatus" 
+                        ng-checked="scanMonthStatus == 'm5'" ng-disabled="selectActMonthBrand">品牌
+                    </label>
+                  </div> -->
+                  <div class="form-group ui-btn-ctrl">
+                    <button class="btn btn-primary" type="button" ng-click="search($event,6)">查询</button>
+                    <button class="btn btn-primary" type="button" ng-click="down(6)">下载</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="panel rate">
+              <div class="panel-body">
+                <div class="ui-scroll-table">
+                  <table class="table table-hover table-bordered" style="min-width:1600px;">
+                    <thead>
+                    <tr>
+                      <th colspan="12" id="scanActMonthTitle"></th>
+                    </tr>
+                    <tr>
+                      <th>品牌</th>
+                      <th>区县</th>
+                      <th>扫码次数</th>
+                      <th>扫码人数</th>
+                      <th>扫码烟包数</th>
+                      <th>所在地市</th>
+                      <th>所在省</th>
+                      <th>所在地市扫码次数</th>
+                      <th>所在地市扫码人数</th>
+                      <th>所在地市扫码烟包数</th>
+                      <th>区县扫码活跃度</th>
+                    </tr>
+                    </thead>
+                    <tbody id="scanActWeekData">
+                      <tr ng-if="scanActMonthList.length > 0" ng-repeat="scanMonthItem in scanActMonthList">
+                        <td>{{scanMonthItem.brandName}}</td>
+                        <td>{{scanMonthItem.districtName}}</td>
+                        <td>{{scanMonthItem.scanNumP}}</td>
+                        <td>{{scanMonthItem.scanOpenidP}}</td>
+                        <td>{{scanMonthItem.scanNumP}}</td>
+                        <td>{{scanMonthItem.cityName}}</td>
+                        <td>{{scanMonthItem.provinceName}}</td>
+                        <td>{{scanMonthItem.scanNum}}</td>
+                        <td>{{scanMonthItem.scanOpenid}}</td>
+                        <td>{{scanMonthItem.scanCode}}</td>
+                        <td>{{scanMonthItem.toScanCodes}}</td>
+                      </tr>
+                      <tr ng-if="scanActMonthList.length == 0"><td colspan="12">未搜索到符合条件的相关信息</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>

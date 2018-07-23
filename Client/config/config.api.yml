@@ -864,6 +864,34 @@ report:
     enableroute: 1
     gatewaytype: 0
     responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekGpsScanData'
+    authorized: 1
+    description: '河北周报_区县扫码活跃度'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getWeekGpsScanDataExcel'
+    authorized: 1
+    description: '河北周报_区县扫码活跃度数据下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getMonthGpsScanData'
+    authorized: 1
+    description: '河北月报_区县扫码活跃度'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
+  - httpmethod: 'post'
+    routepath: '/api/tztx/dataportal/fixatreport/getMonthGpsScanDataExcel'
+    authorized: 1
+    description: '河北月报_区县扫码活跃度数据下载'
+    enableroute: 1
+    gatewaytype: 0
+    responetype: 'json'
 multi:
   - httpmethod: 'post'
     routepath: '/api/tztx/dataportal/statistics/getQueryRecord'
@@ -3304,7 +3332,7 @@ shop:                                      # 积分商城管理，命名只要�
     enableroute: 1
     gatewaytype: 1
     responetype: 'json'
-  - httpmethod: 'post'  
+  - httpmethod: 'post'
     routepath: '/api/tztx/saas/saotx/mall/order/authOrder'
     authorized: 1
     description: '修改京东订单审核状态'
